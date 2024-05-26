@@ -118,7 +118,8 @@ export default ({ mode }) => {
 
     build: {
       // chunkSizeWarningLimit: 1000,
-      outDir: './build/context/dist',
+      outDir: '../../build/context/dist',
+      emptyOutDir: true,
       cssCodeSplit: true, // 如果设置为false，整个项目中的所有 CSS 将被提取到一个 CSS 文件中
       rollupOptions: {
         output: {
