@@ -1,9 +1,9 @@
 services:
   ui:
-    image: herodotus/herodotus-cloud-ui:v3.2.0.0
+    image: herodotus/herodotus-cloud-ui:v3.3.0.0
     container_name: herodotus-cloud-ui
     environment:
-      HERODOTUS_SERVER_PROJECT: herodotus
+      HERODOTUS_SERVER_PROJECT: ''
       HERODOTUS_SERVER_ADDR: 192.168.101.10:8847
       HERODOTUS_PROJECT_NAME: Dante-Cloud
       HERODOTUS_OAUTH2_CLIENT_ID: 14a9cf797931430896ad13a6b1855611

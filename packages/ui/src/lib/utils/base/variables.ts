@@ -55,7 +55,7 @@ class EnvironmentVariable {
 
   public getProject(): string {
     const project = window.APPLICATION_ENVIRONMENT_VARIABLES_PROJECT;
-    if (project === '' || project === 'dante' || project === 'herodotus') {
+    if (project === '' || project === 'dante' || project === 'herodotus' || project === 'athena') {
       return project;
     } else {
       return EnvironmentVariable.PROJECT;
