@@ -14,7 +14,7 @@ ENV HERODOTUS_OAUTH2_REDIRECT_URI='http://192.168.101.10:3000/authorization-code
 COPY dist/  /etc/nginx/html/ui
 COPY favicon.ico  /etc/nginx/html/ui
 COPY template.conf /etc/nginx/templates/default.conf.template
-COPY entrypoint.sh /herodotus-entrypoint.sh
+COPY helloworld.sh /usr/local/helloworld.sh
 
-CMD /herodotus-entrypoint.sh && /docker-entrypoint.sh nginx -g 'daemon off;'
+CMD /usr/local/helloworld.sh && /docker-entrypoint.sh nginx -g 'daemon off;'
 
