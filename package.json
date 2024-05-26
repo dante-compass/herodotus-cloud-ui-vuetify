@@ -6,7 +6,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "commit": "git add . && git status && git-cz",
-    "push": "pnpm run commit && git push --set-upstream origin master",
+    "push": "pnpm run commit && git push --set-upstream origin develop",
     "dev": "pnpm run --filter=@dante/ui dev",
     "prod": "pnpm run --filter=@dante/ui prod",
     "report": "pnpm run --filter=@dante/ui report",
