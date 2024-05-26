@@ -1,0 +1,1 @@
+var s=(r=>(r.DEFAULT="defaults",r.CLASSIC="classic",r.TRANSVERSE="transverse",r.COLUMNS="transverse",r))(s||{}),S=(r=>(r.DARK="dark",r.LIGHT="light",r.SYSTEM="system",r))(S||{});export{s as L,S as T};
