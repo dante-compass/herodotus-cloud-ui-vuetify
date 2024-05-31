@@ -7,9 +7,7 @@
           <q-card>
             <q-toolbar class="text-primary">
               <q-btn round class="q-ma-md">
-                <q-avatar size="40px">
-                  <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
-                </q-avatar>
+                <q-avatar size="40px" icon="mdi-google-nearby"></q-avatar>
               </q-btn>
               <q-separator vertical inset />
               <q-toolbar-title class="q-ml-md">欢迎使用 {{ projectName }}</q-toolbar-title>
