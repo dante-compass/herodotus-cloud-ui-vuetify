@@ -7,15 +7,15 @@
 <p align="center">
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.2.4-blue.svg?logo=spring" alt="Spring Authorization Server 1.2.4"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-3.3.0-blue.svg?logo=spring" alt="Spring Boot 3.3.0"></a>
-    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2023.0.1-blue.svg?logo=spring" alt="Spring Cloud 2023.0.1"></a>
+    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2023.0.2-blue.svg?logo=spring" alt="Spring Cloud 2023.0.2"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.1.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.1.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.13.1--2022.0.4-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.13.1-2022.0.4"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.3.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.3.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.3.0.1-red.svg?logo=spring" alt="Version 3.3.0.1"></a>
-    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.0.1-red.svg?logo=spring" alt="Dante Engine 3.3.0.1"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.0.1-red.svg?logo=spring" alt="Dante OSS 3.3.0.1"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.3.0.2-red.svg?logo=spring" alt="Version 3.3.0.2"></a>
+    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.0.2-red.svg?logo=spring" alt="Dante Engine 3.3.0.2"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.0.2-red.svg?logo=spring" alt="Dante OSS 3.3.0.2"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -150,7 +150,7 @@ Dante Cloud (但丁，原 Eurynome Cloud) 是以**「高质量代码、低安全
 | 组件                          | 版本            |
 | ----------------------------- | --------------- |
 | `Spring Boot`                 | 3.3.0           |
-| `Spring Cloud`                | 2023.0.1        |
+| `Spring Cloud`                | 2023.0.2        |
 | `Spring Cloud Alibaba`        | 2023.0.1.0      |
 | `Spring Cloud Tencent`        | 1.13.1-2022.0.4 |
 | `Spring Authorization Server` | 1.2.4           |
@@ -206,9 +206,9 @@ Dante Cloud (但丁，原 Eurynome Cloud) 是以**「高质量代码、低安全
 
 | 分支名称               | 对应 Spring 生态版本                     | 对应 JDK 版本 | 用途                    | 现状                                                                                           |
 | ---------------------- | ---------------------------------------- | ------------- | ----------------------- | ---------------------------------------------------------------------------------------------- |
-| master                 | Spring Boot 3.2 和 Spring Cloud 2023.0.1 | JDK 17        | 主要发布分支            | 可使用，但 Spring Cloud Alibaba、Tencent 等生态并未发布正式适配版，请谨慎选择使用              |
-| develop                | Spring Boot 3.2 和 Spring Cloud 2023.0.1 | JDK 17        | Development 分支        | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支。开发分支不保证可用               |
-| reactive-develop       | Spring Boot 3.2 和 Spring Cloud 2023.0.1 | JDK 21        | 响应式 Development 分支 | 下一代响应式微服务版本开发分支。开发分支不保证可用                                             |
+| master                 | Spring Boot 3.2 和 Spring Cloud 2023.0.2 | JDK 17        | 主要发布分支            | 可使用，但 Spring Cloud Alibaba、Tencent 等生态并未发布正式适配版，请谨慎选择使用              |
+| develop                | Spring Boot 3.2 和 Spring Cloud 2023.0.2 | JDK 17        | Development 分支        | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支。开发分支不保证可用               |
+| reactive-develop       | Spring Boot 3.2 和 Spring Cloud 2023.0.2 | JDK 21        | 响应式 Development 分支 | 下一代响应式微服务版本开发分支。开发分支不保证可用                                             |
 | 3.1.X                  | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17        | 历史代码，不再维护      | 基于 Spring Boot 3.1 时代开发的代码分支，稳定可用，不再维护                                    |
 | 2.7.X                  | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8         | 历史代码，不再维护      | 基于 Spring Boot 2.7 时代开发的代码分支，稳定可用，不再维护                                    |
 | spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8         | 历史代码，不再维护      | 基于原 Spring Security OAuth2 实现的微服务，稳定可用，因相关组件均不在维护，所以该版本不再维护 |
@@ -346,7 +346,8 @@ Dante Cloud 技术内幕高阶文档专栏（Cookbook）
 |  7   |   jacsty   | 2023-01-31 |  8   | hubert_rust  | 2023-03-16 |  9   |    Zkey Z    | 2023-03-18 |
 |  10  |  志国欧巴  | 2023-03-27 |  11  |   michael    | 2023-04-07 |  12  |  大叔丨小巷  | 2023-04-11 |
 |  13  |  sun_left  | 2023-04-19 |  14  | time 丶 sand | 2023-07-06 |  15  | 印第安老斑鸠 | 2023-09-09 |
-|  16  |   一阵风   | 2023-12-10 |  17  |     Jack     | 2024-03-01 |  18  |              |            |
+|  16  |   一阵风   | 2023-12-10 |  17  |     Jack     | 2024-03-01 |  18  |  onehelper   | 2024-05-24 |
+|  19  |    宁哥    | 2024-05-29 |  20  |              |            |  21  |              |            |
 
 ### 开源项目
 
