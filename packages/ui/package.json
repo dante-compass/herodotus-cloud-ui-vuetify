@@ -1,6 +1,6 @@
 {
-  "name": "@dante/ui",
-  "version": "3.3.0.2",
+  "name": "@herodotus/ui",
+  "version": "3.3.0.3",
   "description": "",
   "keywords": [],
   "author": "",
@@ -45,6 +45,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "20.12.13"
+    "@types/node": "20.14.1"
   }
 }
