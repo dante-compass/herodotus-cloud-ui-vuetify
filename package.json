@@ -1,15 +1,15 @@
 {
   "name": "herodotus-cloud-ui",
   "private": true,
-  "version": "3.3.0.3",
+  "version": "3.3.0.4",
   "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "commit": "git add . && git status && git-cz",
     "push": "pnpm run commit && git push --set-upstream origin develop",
-    "dev": "pnpm run --filter=@herodotus/ui dev",
-    "prod": "pnpm run --filter=@herodotus/ui prod",
-    "report": "pnpm run --filter=@herodotus/ui report",
+    "dev": "pnpm run --filter=@dante/ui dev",
+    "prod": "pnpm run --filter=@dante/ui prod",
+    "report": "pnpm run --filter=@dante/ui report",
     "shared:build": "pnpm -r --filter=@herodotus/* run build"
   },
   "config": {
@@ -41,7 +41,7 @@
     "@changesets/cli": "^2.27.5",
     "@quasar/vite-plugin": "^1.7.0",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^20.14.1",
+    "@types/node": "^20.14.2",
     "@types/qs": "^6.9.15",
     "@typescript-eslint/eslint-plugin": "^7.12.0",
     "@typescript-eslint/parser": "^7.12.0",
