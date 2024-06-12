@@ -12,6 +12,7 @@ import {
 
 export default function useWebSocketMessage() {
   const isUseWebSocket = variables.isUseWebSocket();
+  const isReactiveProject = variables.isReactiveProject();
   const stompWebSocketStore = useStompWebSocketStore();
   const webfluxWebSocketStore = useWebFluxWebSocketStore();
   const rsocketWebSocketStore = useRSocketWebSocketStore();
@@ -54,15 +55,23 @@ export default function useWebSocketMessage() {
     }
   };
 
-  const connect = (category = MessageChannelEnum.RSOCKET) => {
+  const connect = () => {
     if (isUseWebSocket) {
-      messageChannel(category, true);
+      if (isReactiveProject) {
+        messageChannel(MessageChannelEnum.RSOCKET, true);
+      } else {
+        messageChannel(MessageChannelEnum.STOMP, true);
+      }
     }
   };
 
-  const disconnect = (category = MessageChannelEnum.RSOCKET) => {
+  const disconnect = () => {
     if (isUseWebSocket) {
-      messageChannel(category, false);
+      if (isReactiveProject) {
+        messageChannel(MessageChannelEnum.RSOCKET, false);
+      } else {
+        messageChannel(MessageChannelEnum.STOMP, false);
+      }
     }
   };
 

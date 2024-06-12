@@ -4,7 +4,8 @@ import type { NotificationEntity, NotificationConditions, Sort, Page } from '/@/
 
 import { NotificationCategoryEnum } from '/@/lib/enums';
 import { api, moment } from '/@/lib/utils';
-import { useAuthenticationStore, useNotificationStore } from '/@/stores';
+import { useAuthenticationStore } from '/@/stores';
+import { useNotificationStore } from '../stores';
 
 export default function useNotifications(category: NotificationCategoryEnum) {
   const firstPageNumber = 1;

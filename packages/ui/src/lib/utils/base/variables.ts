@@ -62,6 +62,18 @@ class EnvironmentVariable {
     }
   }
 
+  public isReactiveProject(): boolean {
+    const project = this.getProject();
+
+    if (project) {
+      if (project === 'dante' || project === 'herodotus') {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   public getSecretKey(): string {
     return EnvironmentVariable.SECRET_KEY;
   }
