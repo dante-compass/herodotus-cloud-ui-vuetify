@@ -1,0 +1,1 @@
+import{d as o}from"../modules/npm-@vue-runtime-core-BfUBTFmP.js";const t=o({name:"HAuthorizeHeader",emits:["save","clear"],setup(a,{emit:e}){return{onSave:()=>{e("save")},onClear:()=>{e("clear")}}}});export{t as _};
