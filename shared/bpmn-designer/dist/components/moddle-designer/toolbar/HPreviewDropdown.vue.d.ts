@@ -1,4 +1,3 @@
-/// <reference types="sweetalert2" />
 declare const _default: import('vue').DefineComponent<{}, {
     isOpen: import('vue').Ref<boolean>;
     data: import('vue').Ref<string>;

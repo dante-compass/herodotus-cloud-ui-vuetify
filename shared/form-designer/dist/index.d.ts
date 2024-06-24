@@ -5,6 +5,6 @@ export { HDynamicForms };
 export * from './lib';
 export * from './declarations';
 declare const _default: {
-    install: (app: App<any>) => void;
+    install: (app: App) => void;
 };
 export default _default;

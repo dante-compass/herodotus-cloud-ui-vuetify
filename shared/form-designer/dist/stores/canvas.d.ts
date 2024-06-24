@@ -2,7 +2,7 @@ import { Element, Schema, ElementConfig, DynamicFormEntity, Sheet, ConditionVari
 
 export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDesignerCanvas", {
     isClosed: boolean;
-    canvasElements: Element[];
+    canvasElements: Array<Element>;
     sheet: Sheet;
     selectedElement: Element;
     id: string;
@@ -25,7 +25,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string | undefined;
+                text?: string;
             };
         }[];
         sheet: {
@@ -51,7 +51,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string | undefined;
+                text?: string;
             };
         };
         id: string;
@@ -59,7 +59,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
         activityName: string;
     } & import('pinia').PiniaCustomStateProperties<{
         isClosed: boolean;
-        canvasElements: Element[];
+        canvasElements: Array<Element>;
         sheet: Sheet;
         selectedElement: Element;
         id: string;
@@ -82,7 +82,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string | undefined;
+                text?: string;
             };
         }[];
         sheet: {
@@ -108,7 +108,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string | undefined;
+                text?: string;
             };
         };
         id: string;
@@ -116,7 +116,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
         activityName: string;
     } & import('pinia').PiniaCustomStateProperties<{
         isClosed: boolean;
-        canvasElements: Element[];
+        canvasElements: Array<Element>;
         sheet: Sheet;
         selectedElement: Element;
         id: string;
@@ -139,7 +139,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string | undefined;
+                text?: string;
             };
         }[];
         sheet: {
@@ -165,7 +165,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string | undefined;
+                text?: string;
             };
         };
         id: string;
@@ -173,7 +173,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
         activityName: string;
     } & import('pinia').PiniaCustomStateProperties<{
         isClosed: boolean;
-        canvasElements: Element[];
+        canvasElements: Array<Element>;
         sheet: Sheet;
         selectedElement: Element;
         id: string;
@@ -193,7 +193,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
             attrs: Record<string, any>;
             models: Record<string, import('@herodotus/form-apis').VModel>;
             children?: any[] | undefined;
-            text?: string | undefined;
+            text?: string;
         };
     }[];
     currentSchema(): Schema;

@@ -1,5 +1,5 @@
 declare const _default: import('vue').DefineComponent<{}, {
-    onZoomReset: (newScale: number | 'fit-viewport' | undefined) => void;
+    onZoomReset: (newScale: number | "fit-viewport" | undefined) => void;
     onZoomMinus: (step?: number) => void;
     onZoomPlus: (step?: number) => void;
     percentage: import('vue').ComputedRef<string>;

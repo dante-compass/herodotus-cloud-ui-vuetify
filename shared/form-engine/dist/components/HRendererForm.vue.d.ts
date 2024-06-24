@@ -8,7 +8,7 @@ declare const _default: import('vue').DefineComponent<{
         required: true;
     };
     elements: {
-        type: PropType<Element[]>;
+        type: PropType<Array<Element>>;
         required: true;
     };
 }, {
@@ -22,7 +22,7 @@ declare const _default: import('vue').DefineComponent<{
         required: true;
     };
     elements: {
-        type: PropType<Element[]>;
+        type: PropType<Array<Element>>;
         required: true;
     };
 }>> & {
