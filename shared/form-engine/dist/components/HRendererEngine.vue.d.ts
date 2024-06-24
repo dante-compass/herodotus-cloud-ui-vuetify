@@ -6,7 +6,7 @@ declare const _default: import('vue').DefineComponent<{
         type: (ObjectConstructor | StringConstructor | NumberConstructor | ArrayConstructor)[];
     };
     schemas: {
-        type: PropType<Schema[]>;
+        type: PropType<Array<Schema>>;
         default: () => never[];
     };
 }, () => any, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, import('vue').EmitsOptions, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
@@ -14,7 +14,7 @@ declare const _default: import('vue').DefineComponent<{
         type: (ObjectConstructor | StringConstructor | NumberConstructor | ArrayConstructor)[];
     };
     schemas: {
-        type: PropType<Schema[]>;
+        type: PropType<Array<Schema>>;
         default: () => never[];
     };
 }>>, {

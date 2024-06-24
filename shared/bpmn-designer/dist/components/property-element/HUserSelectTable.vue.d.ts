@@ -3,8 +3,8 @@ import { UserEntity } from '../../declarations';
 
 declare const _default: import('vue').DefineComponent<{
     modelValue: {
-        type: PropType<UserEntity[]>;
-        default: () => UserEntity[];
+        type: PropType<Array<UserEntity>>;
+        default: () => Array<UserEntity>;
     };
     selection: {
         type: PropType<"single" | "multiple">;
@@ -28,24 +28,24 @@ declare const _default: import('vue').DefineComponent<{
         name: string;
         label: string;
         field: string | ((row: any) => any);
-        required?: boolean | undefined;
-        align?: "left" | "right" | "center" | undefined;
-        sortable?: boolean | undefined;
-        sort?: ((a: any, b: any, rowA: any, rowB: any) => number) | undefined;
-        rawSort?: ((a: any, b: any, rowA: any, rowB: any) => number) | undefined;
-        sortOrder?: "ad" | "da" | undefined;
-        format?: ((val: any, row: any) => any) | undefined;
-        style?: string | ((row: any) => string) | undefined;
-        classes?: string | ((row: any) => string) | undefined;
-        headerStyle?: string | undefined;
-        headerClasses?: string | undefined;
+        required?: boolean;
+        align?: "left" | "right" | "center";
+        sortable?: boolean;
+        sort?: (a: any, b: any, rowA: any, rowB: any) => number;
+        rawSort?: (a: any, b: any, rowA: any, rowB: any) => number;
+        sortOrder?: "ad" | "da";
+        format?: (val: any, row: any) => any;
+        style?: string | ((row: any) => string);
+        classes?: string | ((row: any) => string);
+        headerStyle?: string;
+        headerClasses?: string;
     }[];
     findItems: import('../../declarations').QTableOnRequestProps;
     onClear: () => void;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {
-        type: PropType<UserEntity[]>;
-        default: () => UserEntity[];
+        type: PropType<Array<UserEntity>>;
+        default: () => Array<UserEntity>;
     };
     selection: {
         type: PropType<"single" | "multiple">;

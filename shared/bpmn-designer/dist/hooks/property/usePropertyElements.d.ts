@@ -7,7 +7,7 @@ export default function usePropertyElements(): {
     getCanvas: () => Canvas;
     getBpmnFactory: () => BpmnFactory;
     getRelevantBusinessObject: (element: Element) => any;
-    createModdleElement: (type: string, properties: Record<string, any>, parent?: any) => ModdleElement;
+    createModdleElement: (type: string, properties: Record<string, any>, parent?: Element | ModdleElement) => ModdleElement;
     hasExtensionElements: (element: Element) => boolean;
     getExtensionElements: (element: Element) => ModdleElement;
     getExtensionElementsValues: (extensionElements: ModdleElement) => Array<ModdleElement>;

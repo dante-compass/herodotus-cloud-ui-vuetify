@@ -5,6 +5,6 @@ export * from './lib/core';
 export * from './lib/logic';
 export * from './lib/utils';
 declare const _default: {
-    install: (app: App<any>) => void;
+    install: (app: App) => void;
 };
 export default _default;

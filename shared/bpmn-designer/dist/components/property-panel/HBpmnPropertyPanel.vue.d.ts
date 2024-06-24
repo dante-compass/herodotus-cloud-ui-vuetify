@@ -36,9 +36,9 @@ declare const _default: import('vue').DefineComponent<{
             get?: ((element: ModdleElement) => any) | undefined;
             set?: ((element: ModdleElement, values?: {
                 [k: string]: any;
-            } | undefined) => any) | undefined;
+            }) => any) | undefined;
         }[];
-        enabled?: ((element: any) => boolean) | undefined;
+        enabled?: (element: Base | ModdleElement) => boolean;
     }[]>;
     parsePropertyPanelName: (id: string) => string;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{

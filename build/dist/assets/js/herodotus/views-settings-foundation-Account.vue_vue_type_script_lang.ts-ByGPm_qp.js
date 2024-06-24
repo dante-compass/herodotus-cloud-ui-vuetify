@@ -1,1 +1,0 @@
-import{d as o}from"../modules/npm-@vue-runtime-core-BfUBTFmP.js";import{r as t}from"../modules/npm-@vue-reactivity-DLmzv2iE.js";const s=o({name:"FoundationAccount",setup(n){return{tab:t("account")}}});export{s as _};
