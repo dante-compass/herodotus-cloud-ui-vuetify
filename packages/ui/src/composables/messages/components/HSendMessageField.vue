@@ -16,7 +16,7 @@ import { defineComponent, ref } from 'vue';
 import type { DialogueDetailEntity } from '/@/lib/declarations';
 
 import { lodash } from '/@/lib/utils';
-import { useWebSocketStore } from '/@/stores';
+import { useWebSocketMessage } from '../hooks';
 
 export default defineComponent({
   name: 'HSendMessageField',
@@ -33,7 +33,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const text = ref('');
 
-    const webSocketStore = useWebSocketStore();
+    const { sendToUser } = useWebSocketMessage();
 
     const sendMessage = () => {
       const data = {
@@ -44,7 +44,7 @@ export default defineComponent({
         dialogueId: props.dialogueId
       } as DialogueDetailEntity;
 
-      webSocketStore.sendToUser(data);
+      sendToUser(data);
     };
 
     const isDisabled = computed(() => {

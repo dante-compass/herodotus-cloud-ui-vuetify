@@ -6943,12 +6943,13 @@ function shouldMoveToPlane(businessObject, plane) {
 var LOW_PRIORITY$q = 250;
 var ARROW_DOWN_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.81801948,3.50735931 L10.4996894,9.1896894 L10.5,4 L12,4 L12,12 L4,12 L4,10.5 L9.6896894,10.4996894 L3.75735931,4.56801948 C3.46446609,4.27512627 3.46446609,3.80025253 3.75735931,3.50735931 C4.05025253,3.21446609 4.52512627,3.21446609 4.81801948,3.50735931 Z"/></svg>';
 var EMPTY_MARKER = "bjs-drilldown-empty";
-function DrilldownOverlayBehavior(canvas, eventBus, elementRegistry, overlays) {
+function DrilldownOverlayBehavior(canvas, eventBus, elementRegistry, overlays, translate2) {
   CommandInterceptor.call(this, eventBus);
   this._canvas = canvas;
   this._eventBus = eventBus;
   this._elementRegistry = elementRegistry;
   this._overlays = overlays;
+  this._translate = translate2;
   var self2 = this;
   this.executed("shape.toggleCollapse", LOW_PRIORITY$q, function(context) {
     var shape = context.shape;
@@ -7028,12 +7029,13 @@ DrilldownOverlayBehavior.prototype._updateOverlayVisibility = function(element) 
   classes$1(overlay.html).toggle(EMPTY_MARKER, !hasFlowElements2);
 };
 DrilldownOverlayBehavior.prototype._addOverlay = function(element) {
-  var canvas = this._canvas, overlays = this._overlays;
+  var canvas = this._canvas, overlays = this._overlays, bo = getBusinessObject(element);
   var existingOverlays = overlays.get({ element, type: "drilldown" });
   if (existingOverlays.length) {
     this._removeOverlay(element);
   }
-  var button = domify$1('<button class="bjs-drilldown">' + ARROW_DOWN_SVG + "</button>");
+  var button = domify$1('<button type="button" class="bjs-drilldown">' + ARROW_DOWN_SVG + "</button>"), elementName = bo.get("name") || bo.get("id"), title = this._translate("Open {element}", { element: elementName });
+  button.setAttribute("title", title);
   button.addEventListener("click", function() {
     canvas.setRootElement(canvas.findRoot(getPlaneIdFromShape(element)));
   });
@@ -7057,7 +7059,8 @@ DrilldownOverlayBehavior.$inject = [
   "canvas",
   "eventBus",
   "elementRegistry",
-  "overlays"
+  "overlays",
+  "translate"
 ];
 const DrilldownModdule = {
   __depends__: [OverlaysModule, ChangeSupportModule, RootElementsModule],
@@ -9250,7 +9253,6 @@ function PopupMenuItem(props) {
       onMouseEnter=${onMouseEnter}
       onMouseLeave=${onMouseLeave}
       onDragStart=${(event2) => onAction(event2, entry, "dragstart")}
-      aria-role="button"
       draggable=${true}
     >
       <div class="djs-popup-entry-content">

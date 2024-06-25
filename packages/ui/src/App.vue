@@ -6,7 +6,7 @@
 import { defineComponent, watch, nextTick, provide, ref, onMounted, onUnmounted } from 'vue';
 import { useQuasar } from 'quasar';
 import { echarts } from '/@/plugins';
-import { useSettingsStore, useAuthenticationStore, useWebSocketStore } from '/@/stores';
+import { useSettingsStore, useAuthenticationStore } from '/@/stores';
 import { variables } from '/@/lib/utils';
 import { refreshTabInjectionKey, echartsInjectionKey } from '/@/lib/symbol';
 import { useWebSocketMessage } from '/@/composables';

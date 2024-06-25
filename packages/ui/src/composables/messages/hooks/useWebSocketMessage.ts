@@ -1,5 +1,6 @@
-import { variables } from '/@/lib/utils';
+import type { DialogueDetailEntity } from '/@/lib/declarations';
 
+import { variables } from '/@/lib/utils';
 import { MessageChannelEnum } from '../enums';
 
 import {
@@ -75,9 +76,27 @@ export default function useWebSocketMessage() {
     }
   };
 
+  const sendNotice = (content: string) => {
+    if (isReactiveProject) {
+      rsocketWebSocketStore.sendNotice(content);
+    } else {
+      stompWebSocketStore.sendNotice(content);
+    }
+  };
+
+  const sendToUser = (detail: DialogueDetailEntity) => {
+    if (isReactiveProject) {
+      rsocketWebSocketStore.sendToUser(detail);
+    } else {
+      stompWebSocketStore.sendToUser(detail);
+    }
+  };
+
   return {
     connect,
     disconnect,
-    messageChannel
+    messageChannel,
+    sendNotice,
+    sendToUser
   };
 }

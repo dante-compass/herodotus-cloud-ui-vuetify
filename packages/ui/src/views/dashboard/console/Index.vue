@@ -107,7 +107,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
 
-import { useConstantsStore, useWebSocketStore } from '/@/stores';
+import { useConstantsStore } from '/@/stores';
 import { useRealTimeInformation } from '/@/composables';
 
 import {
