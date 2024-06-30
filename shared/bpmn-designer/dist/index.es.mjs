@@ -13,7 +13,7 @@ import TokenSimulationModule from "bpmn-js-token-simulation";
 import BpmnLintModule from "bpmn-js-bpmnlint";
 import MinimapModule from "diagram-js-minimap";
 import GridModule from "diagram-js-grid";
-import Ids from "ids";
+import Ids$1 from "ids";
 import Diagram from "diagram-js";
 import BpmnModdle from "bpmn-moddle";
 import { HTextField, HSelect } from "@herodotus/components";
@@ -2373,7 +2373,7 @@ function BaseModeler(options) {
 e$3(BaseModeler, BaseViewer);
 BaseModeler.prototype._createModdle = function(options) {
   var moddle = BaseViewer.prototype._createModdle.call(this, options);
-  moddle.ids = new Ids([32, 36, 1]);
+  moddle.ids = new Ids$1([32, 36, 1]);
   return moddle;
 };
 BaseModeler.prototype._collectIds = function(definitions, elementsById) {
@@ -2759,7 +2759,7 @@ function rotate(gfx, angle) {
   rotate2.setRotate(angle, 0, 0);
   transform$1(gfx, rotate2);
 }
-var markerIds = new Ids();
+var markerIds = new Ids$1();
 var ELEMENT_LABEL_DISTANCE$1 = 10, INNER_OUTER_DIST = 3, PARTICIPANT_STROKE_WIDTH = 1.5, TASK_BORDER_RADIUS = 10;
 var DEFAULT_OPACITY = 0.95, FULL_OPACITY = 1, LOW_OPACITY = 0.25;
 function BpmnRenderer(config2, eventBus, styles, pathMap, canvas, textRenderer, priority) {
@@ -8397,22 +8397,84 @@ const AlignElementsModule$1 = {
   __init__: ["alignElements"],
   alignElements: ["type", AlignElements$1]
 };
+const Ids = new IdGenerator();
+function Scheduler(eventBus) {
+  this._scheduled = {};
+  eventBus.on("diagram.destroy", () => {
+    Object.keys(this._scheduled).forEach((id) => {
+      this.cancel(id);
+    });
+  });
+}
+Scheduler.$inject = ["eventBus"];
+Scheduler.prototype.schedule = function(taskFn, id = Ids.next()) {
+  this.cancel(id);
+  const newScheduled = this._schedule(taskFn, id);
+  this._scheduled[id] = newScheduled;
+  return newScheduled.promise;
+};
+Scheduler.prototype._schedule = function(taskFn, id) {
+  const {
+    promise,
+    resolve,
+    reject
+  } = defer();
+  const executionId = requestAnimationFrame(() => {
+    try {
+      resolve(taskFn());
+    } catch (error2) {
+      reject(error2);
+    }
+  });
+  return {
+    executionId,
+    promise
+  };
+};
+Scheduler.prototype.cancel = function(id) {
+  const scheduled = this._scheduled[id];
+  if (scheduled) {
+    this._cancel(scheduled);
+    this._scheduled[id] = null;
+  }
+};
+Scheduler.prototype._cancel = function(scheduled) {
+  cancelAnimationFrame(scheduled.executionId);
+};
+function defer() {
+  let resolve;
+  let reject;
+  const promise = new Promise((_resolve, _reject) => {
+    resolve = _resolve;
+    reject = _reject;
+  });
+  return {
+    promise,
+    resolve,
+    reject
+  };
+}
+const SchedulerModule = {
+  scheduler: ["type", Scheduler]
+};
 var MARKER_HIDDEN$1 = "djs-element-hidden";
 var entrySelector = ".entry";
 var DEFAULT_PRIORITY$2 = 1e3;
 var CONTEXT_PAD_MARGIN = 8;
 var HOVER_DELAY = 300;
-function ContextPad(canvas, elementRegistry, eventBus) {
+function ContextPad(canvas, elementRegistry, eventBus, scheduler) {
   this._canvas = canvas;
   this._elementRegistry = elementRegistry;
   this._eventBus = eventBus;
+  this._scheduler = scheduler;
   this._current = null;
   this._init();
 }
 ContextPad.$inject = [
   "canvas",
   "elementRegistry",
-  "eventBus"
+  "eventBus",
+  "scheduler"
 ];
 ContextPad.prototype._init = function() {
   var self2 = this;
@@ -8430,10 +8492,10 @@ ContextPad.prototype._init = function() {
     if (!current) {
       return;
     }
-    var { target } = current;
+    var target = current.target;
     var targets = isArray$3(target) ? target : [target];
     var targetsChanged = targets.filter(function(element) {
-      return includes$8(elements, element);
+      return elements.includes(element);
     });
     if (targetsChanged.length) {
       self2.close();
@@ -8445,16 +8507,25 @@ ContextPad.prototype._init = function() {
       }
     }
   });
-  this._eventBus.on("canvas.viewbox.changed", () => {
-    this._updatePosition();
+  this._eventBus.on("canvas.viewbox.changed", function() {
+    self2._updatePosition();
   });
   this._eventBus.on("element.marker.update", function(event2) {
+    if (!self2.isOpen()) {
+      return;
+    }
+    var element = event2.element;
+    var current = self2._current;
+    var targets = isArray$3(current.target) ? current.target : [current.target];
+    if (!targets.includes(element)) {
+      return;
+    }
     self2._updateVisibility();
   });
   this._container = this._createContainer();
 };
 ContextPad.prototype._createContainer = function() {
-  const container = domify$1('<div class="djs-context-pad-parent"></div>');
+  var container = domify$1('<div class="djs-context-pad-parent"></div>');
   this._canvas.getContainer().appendChild(container);
   return container;
 };
@@ -8487,6 +8558,7 @@ ContextPad.prototype.getEntries = function(target) {
   return entries;
 };
 ContextPad.prototype.trigger = function(action, event2, autoActivate) {
+  var self2 = this;
   var entry, originalEvent, button = event2.delegateTarget || event2.target;
   if (!button) {
     return event2.preventDefault();
@@ -8494,8 +8566,8 @@ ContextPad.prototype.trigger = function(action, event2, autoActivate) {
   entry = attr$1(button, "data-action");
   originalEvent = event2.originalEvent || event2;
   if (action === "mouseover") {
-    this._timeout = setTimeout(() => {
-      this._mouseout = this.triggerEntry(entry, "hover", originalEvent, autoActivate);
+    this._timeout = setTimeout(function() {
+      self2._mouseout = self2.triggerEntry(entry, "hover", originalEvent, autoActivate);
     }, HOVER_DELAY);
     return;
   } else if (action === "mouseout") {
@@ -8641,7 +8713,7 @@ ContextPad.prototype.isOpen = function(target) {
   }
   if (isArray$3(target)) {
     return target.length === currentTarget.length && every$1(target, function(element) {
-      return includes$8(currentTarget, element);
+      return currentTarget.includes(element);
     });
   } else {
     return currentTarget === target;
@@ -8667,9 +8739,9 @@ ContextPad.prototype.hide = function() {
 };
 ContextPad.prototype._getPosition = function(target) {
   if (!isArray$3(target) && isConnection(target)) {
-    const viewbox = this._canvas.viewbox();
-    const lastWaypoint = getLastWaypoint(target);
-    const x2 = lastWaypoint.x * viewbox.scale - viewbox.x * viewbox.scale, y2 = lastWaypoint.y * viewbox.scale - viewbox.y * viewbox.scale;
+    var viewbox = this._canvas.viewbox();
+    var lastWaypoint = getLastWaypoint(target);
+    var x2 = lastWaypoint.x * viewbox.scale - viewbox.x * viewbox.scale, y2 = lastWaypoint.y * viewbox.scale - viewbox.y * viewbox.scale;
     return {
       left: x2 + CONTEXT_PAD_MARGIN * this._canvas.zoom(),
       top: y2
@@ -8706,27 +8778,31 @@ ContextPad.prototype._updatePosition = function() {
   }
 };
 ContextPad.prototype._updateVisibility = function() {
-  if (!this.isOpen()) {
-    return;
-  }
-  var self2 = this;
-  var target = this._current.target;
-  var targets = isArray$3(target) ? target : [target];
-  var isHidden2 = targets.some(function(target2) {
-    return self2._canvas.hasMarker(target2, MARKER_HIDDEN$1);
-  });
-  if (isHidden2) {
-    self2.hide();
-  } else {
-    self2.show();
-  }
+  const updateFn = () => {
+    if (!this.isOpen()) {
+      return;
+    }
+    var self2 = this;
+    var target = this._current.target;
+    var targets = isArray$3(target) ? target : [target];
+    var isHidden2 = targets.some(function(target2) {
+      return self2._canvas.hasMarker(target2, MARKER_HIDDEN$1);
+    });
+    if (isHidden2) {
+      self2.hide();
+    } else {
+      self2.show();
+    }
+  };
+  this._scheduler.schedule(updateFn, "ContextPad#_updateVisibility");
 };
 ContextPad.prototype._getTargetBounds = function(target) {
+  var self2 = this;
   var elements = isArray$3(target) ? target : [target];
-  var elementsGfx = elements.map((element) => {
-    return this._canvas.getGraphics(element);
+  var elementsGfx = elements.map(function(element) {
+    return self2._canvas.getGraphics(element);
   });
-  return elementsGfx.reduce((bounds, elementGfx) => {
+  return elementsGfx.reduce(function(bounds, elementGfx) {
     const elementBounds = elementGfx.getBoundingClientRect();
     bounds.top = Math.min(bounds.top, elementBounds.top);
     bounds.right = Math.max(bounds.right, elementBounds.right);
@@ -8751,9 +8827,6 @@ function addClasses$1(element, classNames) {
     classes2.add(cls);
   });
 }
-function includes$8(array, item) {
-  return array.indexOf(item) !== -1;
-}
 function getLastWaypoint(connection) {
   return connection.waypoints[connection.waypoints.length - 1];
 }
@@ -8767,6 +8840,7 @@ function targetsEqual(target, otherTarget) {
 const ContextPadModule$1 = {
   __depends__: [
     InteractionEventsModule$1,
+    SchedulerModule,
     OverlaysModule
   ],
   contextPad: ["type", ContextPad]
