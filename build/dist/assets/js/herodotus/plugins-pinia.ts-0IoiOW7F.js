@@ -1,0 +1,1 @@
+import{c as s}from"../modules/npm-pinia-C_4WoYyL.js";import{c as a}from"../modules/npm-pinia-plugin-persistedstate-DR0jeGHJ.js";const e=s();e.use(a({storage:localStorage,serializer:{serialize:JSON.stringify,deserialize:JSON.parse}}));const o=r=>{r.use(e)};export{o as s};

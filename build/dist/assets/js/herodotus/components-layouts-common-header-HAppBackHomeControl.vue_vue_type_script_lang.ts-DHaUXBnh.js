@@ -1,1 +1,0 @@
-import{P as o}from"./lib-enums-base.ts-BUkemwHh.js";import{d as t}from"../modules/npm-@vue-runtime-core-CRHtaPSE.js";const p=t({name:"HAppBackHomeControl",setup(m){return{homePath:o.HOME}}});export{p as _};

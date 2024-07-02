@@ -1,0 +1,1 @@
+import{d as o}from"../modules/npm-@vue-runtime-core-DkLTseJr.js";import{r as n}from"../modules/npm-@vue-reactivity-C4GaEiDs.js";const s=o({name:"FoundationProfile",setup(r){return{tab:n("baseinfo")}}});export{s as _};

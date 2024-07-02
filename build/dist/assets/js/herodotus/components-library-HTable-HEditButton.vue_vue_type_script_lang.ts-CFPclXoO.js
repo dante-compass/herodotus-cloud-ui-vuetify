@@ -1,0 +1,1 @@
+import{_ as n}from"./components-library-HTable-HDenseIconButton.vue-4VsnbZ5H.js";import{d as o}from"../modules/npm-@vue-runtime-core-DkLTseJr.js";const m=o({name:"HEditButton",components:{HDenseIconButton:n}});export{m as _};

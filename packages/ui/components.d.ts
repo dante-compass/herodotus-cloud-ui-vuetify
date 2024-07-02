@@ -56,8 +56,6 @@ declare module 'vue' {
     HOrganizationSelect: typeof import('./src/components/widgets/manage/HOrganizationSelect.vue')['default']
     HOrganizationTree: typeof import('./src/components/widgets/manage/HOrganizationTree.vue')['default']
     HReservedColumn: typeof import('./src/components/library/HTable/HReservedColumn.vue')['default']
-    HSendMessageField: typeof import('./src/components/widgets/manage/HSendMessageField.vue')['default']
-    HSendMessageToUser: typeof import('./src/components/widgets/manage/HSendMessageToUser.vue')['default']
     HServerCondition: typeof import('./src/components/widgets/condition/HServerCondition.vue')['default']
     HSettingContainer: typeof import('./src/components/layouts/settings/HSettingContainer.vue')['default']
     HSettingMenu: typeof import('./src/components/layouts/settings/HSettingMenu.vue')['default']
