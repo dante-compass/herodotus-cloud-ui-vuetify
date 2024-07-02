@@ -60,14 +60,9 @@ import { api } from '/@/lib/utils';
 import { useAuthenticationStore } from '/@/stores';
 import { useTable } from '/@/hooks';
 
-import {
-  HChangePassword,
-  HDeleteButton,
-  HEditButton,
-  HDenseIconButton,
-  HTable,
-  HSendMessageToUser
-} from '/@/components';
+import { HChangePassword, HDeleteButton, HEditButton, HDenseIconButton, HTable } from '/@/components';
+
+import { HSendMessageToUser } from '/@/composables';
 
 export default defineComponent({
   name: ComponentNameEnum.SYS_USER,

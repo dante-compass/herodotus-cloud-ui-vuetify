@@ -42,7 +42,8 @@ import { defineComponent } from 'vue';
 
 import type { DialogueDetailEntity, DialogueDetailConditions } from '/@/lib/declarations';
 
-import { HDetailContainer, HUserAvatar, HSendMessageField } from '/@/components';
+import { HDetailContainer, HUserAvatar } from '/@/components';
+import { HSendMessageField } from '/@/composables';
 import { api, moment } from '/@/lib/utils';
 import { useTableItem, useTable, useEditFinish } from '/@/hooks';
 

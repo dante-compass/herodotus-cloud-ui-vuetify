@@ -1,1 +1,0 @@
-import{b1 as s,b2 as n,b3 as i,b4 as r,b5 as o,b6 as e}from"../modules/npm-quasar-DT1-2GB3.js";import"../modules/npm-@quasar-extras-m4OLOzYY.js";const g=a=>{a.use(s,{plugins:{Loading:n,AppFullscreen:i,Notify:r},lang:o,iconSet:e,config:{loading:{spinnerColor:"primary",spinnerSize:100}}})};export{g as s};

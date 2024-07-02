@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import type { WebSocketOperations } from '/@/lib/declarations';
+import type { WebSocketOperations, DialogueDetailEntity, Entity } from '/@/lib/declarations';
 
 import { api } from '/@/lib/utils';
 
@@ -211,14 +211,14 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
       this.init();
     },
 
-    createPayload(data: string, destination: string): Payload {
+    createPayload(data: Entity, destination: string): Payload {
       return {
         data: Buffer.from(JSON.stringify(data)),
         metadata: this.createMetadata(destination)
       };
     },
 
-    fireAndForget(data: string, destination: string): void {
+    fireAndForget(data: Entity, destination: string): void {
       this.rsocket.fireAndForget(this.createPayload(data, destination), {
         onError: this.onError,
         onComplete: this.onComplete
@@ -252,6 +252,12 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
         request: this.onRequest,
         cancel: this.onCancel
       });
+    },
+
+    sendNotice(content: string): void {},
+
+    sendToUser(detail: DialogueDetailEntity) {
+      this.fireAndForget(detail, 'personal');
     }
   }
 });
