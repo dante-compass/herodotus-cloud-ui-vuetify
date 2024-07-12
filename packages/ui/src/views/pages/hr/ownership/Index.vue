@@ -125,7 +125,7 @@ export default defineComponent({
       const { page, rowsPerPage, sortBy, descending } = props.pagination;
       pagination.value.page = page;
       pagination.value.rowsPerPage = rowsPerPage;
-      pagination.value.sortBy = sortBy;
+      pagination.value.sortBy = sortBy as string;
       pagination.value.descending = descending;
       fetchAssignedByPage(pagination.value.page, pagination.value.rowsPerPage, departmentId.value);
     };

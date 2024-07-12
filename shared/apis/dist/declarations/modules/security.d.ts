@@ -1,4 +1,4 @@
-import { BaseSysEntity, Conditions, EmptyObject } from '../base';
+import { BaseSysEntity, Conditions, EmptyObject, Entity } from '../base';
 import { SysEmployeeEntity } from './hr';
 
 export interface SysPermissionEntity extends BaseSysEntity {
@@ -63,6 +63,18 @@ export interface SysTenantDataSourceEntity extends BaseSysEntity {
     url: string;
     initialize: boolean;
 }
+export interface AccessSourceEntity extends Entity {
+    id: string;
+    source: string;
+    description: string;
+    authorizeUrl: string;
+    oauth2: boolean;
+    bound: boolean;
+    socialId: string;
+    detail: string;
+    avatar: string;
+    bindingTime: Date;
+}
 export interface SysPermissionConditions extends Conditions {
 }
 export interface SysRoleConditions extends Conditions {
@@ -80,6 +92,9 @@ export interface SysElementConditions extends Conditions {
 export interface SysTenantDataSourceConditions extends Conditions {
     tenantId: string;
 }
+export interface AccessSourceConditions extends Conditions {
+    userId: string;
+}
 export type SysPermissionProps = keyof SysPermissionEntity;
 export type SysRoleProps = keyof SysRoleEntity;
 export type SysUserProps = keyof SysUserEntity;
@@ -87,3 +102,4 @@ export type SysAttributeProps = keyof SysAttributeEntity;
 export type SysDefaultRoleProps = keyof SysDefaultRoleEntity;
 export type SysElementProps = keyof SysElementEntity;
 export type SysTenantDataSourceProps = keyof SysTenantDataSourceEntity;
+export type AccessSourceProps = keyof AccessSourceEntity;

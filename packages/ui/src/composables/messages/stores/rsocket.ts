@@ -125,7 +125,7 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
             console.log('[RSocket] responder data', data);
             console.log('[RSocket] responder responderStream', responderStream);
             if (operation.pullNotifications) {
-              operation.pullNotifications(data);
+              operation.pullNotifications();
             }
 
             if (operation.syncOnlineUserCount) {

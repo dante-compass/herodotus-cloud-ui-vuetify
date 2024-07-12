@@ -6,7 +6,8 @@ import type {
   SysDefaultRoleEntity,
   SysElementEntity,
   SysTenantDataSourceEntity,
-  AxiosHttpResult
+  AxiosHttpResult,
+  AccessSourceEntity
 } from '/@/declarations';
 
 import { ContentTypeEnum } from '/@/enums';
@@ -190,6 +191,25 @@ class SysTenantDataSourceService extends BaseService<SysTenantDataSourceEntity> 
   }
 }
 
+class SocialBindingService extends BaseService<AccessSourceEntity> {
+  private static instance: SocialBindingService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): SocialBindingService {
+    if (this.instance == null) {
+      this.instance = new SocialBindingService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getUpms() + '/security/social/binding';
+  }
+}
+
 export {
   SysPermissionService,
   SysRoleService,
@@ -197,5 +217,6 @@ export {
   SysAttributeService,
   SysDefaultRoleService,
   SysElementService,
-  SysTenantDataSourceService
+  SysTenantDataSourceService,
+  SocialBindingService
 };

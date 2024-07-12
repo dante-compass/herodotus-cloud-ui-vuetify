@@ -21,7 +21,7 @@ export default function useWebSocketMessage() {
   const realtimeStore = useRealTimeInformationStore();
 
   const webSocketOperations = {
-    pullNotifications: (data: string) => {
+    pullNotifications: () => {
       notificationStore.pullAllNotification();
     },
     syncOnlineUserCount: (data: string) => {
@@ -48,7 +48,7 @@ export default function useWebSocketMessage() {
         break;
       default:
         if (isConnected) {
-          stompWebSocketStore.connect();
+          stompWebSocketStore.connect(webSocketOperations);
         } else {
           stompWebSocketStore.disconnect();
         }

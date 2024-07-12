@@ -4,7 +4,7 @@ export interface WebSocketOperations {
    * @param data 预留参数，备用。
    * @returns void
    */
-  pullNotifications?: (data: string) => void;
+  pullNotifications?: () => void;
   /**
    * 同步实时在线用户数量
    * @param data 后端返回给前端的数据
