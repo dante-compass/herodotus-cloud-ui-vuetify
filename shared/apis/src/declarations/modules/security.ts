@@ -78,6 +78,9 @@ export interface AccessSourceEntity extends Entity {
   oauth2: boolean;
   bound: boolean;
   socialId: string;
+  detail: string;
+  avatar: string;
+  bindingTime: Date;
 }
 
 export interface SysPermissionConditions extends Conditions {}

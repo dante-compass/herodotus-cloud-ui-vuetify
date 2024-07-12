@@ -34,6 +34,11 @@
               <h-binding-status-column :bound="props.row.bound"></h-binding-status-column>
             </q-td>
           </template>
+          <template #body-cell-detail="props">
+            <q-td key="detail" :props="props">
+              <h-binding-detail-column :item="props.row"></h-binding-detail-column>
+            </q-td>
+          </template>
           <template #body-cell-actions="props">
             <q-td key="actions" :props="props">
               <h-binding-button :item="props.row"></h-binding-button>
@@ -61,17 +66,18 @@ import type {
 } from '/@/lib/declarations';
 
 import { ComponentNameEnum } from '/@/lib/enums';
-import { api, getSocialLogo } from '/@/lib/utils';
+import { api, getSocialLogo, moment } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 import { useAuthenticationStore } from '/@/stores';
 
-import { HBindingButton, HBindingStatusColumn } from './components';
+import { HBindingButton, HBindingDetailColumn, HBindingStatusColumn } from './components';
 
 export default defineComponent({
   name: 'FoundationAccount',
 
   components: {
     HBindingButton,
+    HBindingDetailColumn,
     HBindingStatusColumn
   },
 
@@ -92,10 +98,17 @@ export default defineComponent({
         label: '序号',
         field: 'index'
       },
-      { name: 'source', field: 'source', align: 'center', label: '账号' },
-      { name: 'description', field: 'description', align: 'center', label: '绑定账号信息' },
+      { name: 'source', field: 'source', align: 'center', label: 'Logo' },
+      { name: 'description', field: 'description', align: 'center', label: '绑定账号' },
+      { name: 'detail', field: 'detail', align: 'center', label: '详情' },
+      {
+        name: 'bindingTime',
+        field: 'bindingTime',
+        align: 'center',
+        label: '绑定时间',
+        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : '')
+      },
       { name: 'bound', field: 'bound', align: 'center', label: '状态' },
-      { name: 'status', field: 'status', align: 'center', label: '状态' },
       { name: 'actions', field: 'actions', align: 'center', label: '操作' }
     ];
 
@@ -112,6 +125,7 @@ export default defineComponent({
     watch(tableRows, newValue => {
       if (newValue) {
         newValue.forEach((row, index) => {
+          //@ts-ignore
           row.index = index + 1;
         });
       }

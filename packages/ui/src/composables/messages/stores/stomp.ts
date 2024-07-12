@@ -1,18 +1,29 @@
 import { defineStore } from 'pinia';
 import { Client } from '@stomp/stompjs';
 
-import type { DialogueDetailEntity } from '/@/lib/declarations';
-import { api, toast, lodash, variables } from '/@/lib/utils';
+import type { DialogueDetailEntity, WebSocketOperations } from '/@/lib/declarations';
+import { api, lodash, variables } from '/@/lib/utils';
 import { useAuthenticationStore } from '/@/stores';
-import { useNotificationStore } from './notification';
 
 export const useStompWebSocketStore = defineStore('StompWebSocket', {
   state: () => ({
     client: {} as Client,
-    onlineCount: 0
+    operation: {} as WebSocketOperations
   }),
 
   actions: {
+    pullNotifications(): void {
+      if (this.operation && this.operation.pullNotifications) {
+        this.operation.pullNotifications();
+      }
+    },
+
+    syncOnlineUserCount(data: number): void {
+      if (this.operation && this.operation.syncOnlineUserCount) {
+        this.operation.syncOnlineUserCount(String(data));
+      }
+    },
+
     getWebSocketAddress(): string {
       const store = useAuthenticationStore();
       return `ws://${location.host}/socket` + api.getConfig().getMsg(false) + '/stomp/ws?openid=' + store.userId;
@@ -62,30 +73,31 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
     },
 
     subscribe(): void {
-      const notification = useNotificationStore();
       this.client.onConnect = frame => {
-        console.log('WebSocket connnected: ' + frame.headers['message']);
+        console.log('WebSocket connected: ' + frame.headers['message']);
         this.client.subscribe('/broadcast/notice', res => {
           console.log(res);
-          toast.info(res.body);
-          notification.pullAllNotification();
+          // toast.info(res.body);
+          this.pullNotifications();
         });
 
         this.client.subscribe('/broadcast/online', res => {
-          toast.info(res.body);
-          this.onlineCount = res.body as unknown as number;
+          // toast.info(res.body);
+          const count = res.body as unknown as number;
+          this.syncOnlineUserCount(count);
         });
 
         this.client.subscribe('/user/personal/message', res => {
-          console.log(res);
-          toast.info(res.body);
-          notification.pullAllNotification();
+          // console.log(res);
+          // toast.info(res.body);
+          this.pullNotifications();
         });
 
         this.pullStat();
-        notification.pullAllNotification();
+        this.pullNotifications();
       };
     },
+
     sendNotice(content: string): void {
       this.client.publish({
         destination: '/app/public/notice',
@@ -102,7 +114,8 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
       });
     },
 
-    connect(): void {
+    connect(webSocketOperations: WebSocketOperations): void {
+      this.operation = webSocketOperations;
       if (variables.isUseWebSocket()) {
         const store = useAuthenticationStore();
         if (store.token) {
@@ -122,15 +135,13 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
     },
 
     pullStat(): void {
-      if (this.onlineCount === 0) {
-        api
-          .webSocketMessage()
-          .fetchAllStat()
-          .then(result => {
-            const data = result.data as Record<string, any>;
-            this.onlineCount = data.onlineCount;
-          });
-      }
+      api
+        .webSocketMessage()
+        .fetchAllStat()
+        .then(result => {
+          const data = result.data as Record<string, any>;
+          this.syncOnlineUserCount(data.onlineCount);
+        });
     }
   }
 });

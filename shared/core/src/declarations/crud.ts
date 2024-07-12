@@ -1,7 +1,7 @@
 import { StatusEnum } from '/@/enums';
 
 export interface Entity {
-  index: number;
+
 }
 
 export interface Conditions {}

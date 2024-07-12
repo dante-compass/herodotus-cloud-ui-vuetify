@@ -1,4 +1,5 @@
-import HBindingStatusColumn from './HBindingStatusColumn.vue';
 import HBindingButton from './HBindingButton.vue';
+import HBindingStatusColumn from './HBindingStatusColumn.vue';
+import HBindingDetailColumn from './HBindingDetailColumn.vue';
 
-export { HBindingStatusColumn, HBindingButton };
+export { HBindingStatusColumn, HBindingButton, HBindingDetailColumn };
