@@ -33466,7 +33466,7 @@ function expandOrCloneMode(mode) {
   }
   return mode;
 }
-var version = "11.9.0";
+var version = "11.10.0";
 class HTMLInjectionError extends Error {
   constructor(reason, html) {
     super(reason);
@@ -34359,6 +34359,7 @@ function json(hljs) {
   };
   return {
     name: "JSON",
+    aliases: ["jsonc"],
     keywords: {
       literal: LITERALS
     },

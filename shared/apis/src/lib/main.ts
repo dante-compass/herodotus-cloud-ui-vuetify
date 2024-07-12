@@ -25,6 +25,7 @@ import {
   SysDefaultRoleService,
   SysElementService,
   SysTenantDataSourceService,
+  SocialBindingService,
   ExtendedTaskService
 } from './modules';
 
@@ -155,6 +156,10 @@ class ApiResources {
 
   public sysTenantDataSource(): SysTenantDataSourceService {
     return SysTenantDataSourceService.getInstance(this.config);
+  }
+
+  public socialBinding(): SocialBindingService {
+    return SocialBindingService.getInstance(this.config);
   }
 
   public dialogueContact(): DialogueContactService {

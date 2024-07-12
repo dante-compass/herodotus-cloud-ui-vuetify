@@ -50,5 +50,6 @@ export enum ComponentNameEnum {
   WORKFLOW_PROCESS_APPROVE = 'WorkflowProcessApprove',
   SYS_TENANT_DATA_SOURCE = 'SysTenantDataSource',
   OSS_BUCKET = 'OssBucket',
-  OSS_OBJECT = 'OssObject'
+  OSS_OBJECT = 'OssObject',
+  SOCIAL_BINDING = 'SocialBinding'
 }

@@ -47,7 +47,8 @@ export default function <E extends Entity, C extends Conditions>(
     showLoading();
     baseService
       .fetchAll({
-        ...sort
+        ...sort,
+        ...conditions.value
       })
       .then(result => {
         const data = result.data as Array<E>;

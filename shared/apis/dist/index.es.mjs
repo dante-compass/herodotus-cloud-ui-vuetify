@@ -592,6 +592,22 @@ const _SysTenantDataSourceService = class _SysTenantDataSourceService extends Ba
 };
 __publicField(_SysTenantDataSourceService, "instance");
 let SysTenantDataSourceService = _SysTenantDataSourceService;
+const _SocialBindingService = class _SocialBindingService extends BaseService {
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _SocialBindingService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getUpms() + "/security/social/binding";
+  }
+};
+__publicField(_SocialBindingService, "instance");
+let SocialBindingService = _SocialBindingService;
 const _ExtendedTaskService = class _ExtendedTaskService extends BaseService {
   constructor(config) {
     super(config);
@@ -1007,6 +1023,9 @@ const _ApiResources = class _ApiResources {
   sysTenantDataSource() {
     return SysTenantDataSourceService.getInstance(this.config);
   }
+  socialBinding() {
+    return SocialBindingService.getInstance(this.config);
+  }
   dialogueContact() {
     return DialogueContactService.getInstance(this.config);
   }
@@ -1057,6 +1076,7 @@ export {
   OAuth2ScopeService,
   OpenApiService,
   Service,
+  SocialBindingService,
   SocialSourceEnum,
   StatusEnum,
   SupplierType,

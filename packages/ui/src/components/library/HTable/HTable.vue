@@ -4,6 +4,7 @@
     :separator="settings.display.table.separator"
     :dense="settings.display.table.dense"
     :rows-per-page-options="rowsPerPageOptions"
+    :rows="rows"
     v-bind="$attrs">
     <template v-for="slotName in Object.keys($slots)" v-slot:[slotName]="props">
       <slot :name="slotName" v-bind="props" />
@@ -38,6 +39,8 @@
 <script lang="ts">
 import { defineComponent, computed, ref, Ref } from 'vue';
 
+import type { Entity } from '/@/lib/declarations';
+
 import { useSettingsStore } from '/@/stores';
 
 import HTableAction from './HTableAction.vue';
@@ -56,6 +59,7 @@ export default defineComponent({
   emits: ['update:pageNumber'],
 
   props: {
+    rows: { type: Array as PropType<Array<Entity>>, required: true },
     pageNumber: { type: Number, default: 0 },
     totalPages: { type: Number },
     loading: { type: Boolean, default: false },
