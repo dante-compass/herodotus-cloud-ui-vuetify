@@ -81,10 +81,10 @@ declare const _default: import('vue').DefineComponent<{
         default: boolean;
     };
 }>>, {
-    align: "center" | "none" | "start" | "end";
     column: boolean;
-    justify: "center" | "between" | "around" | "evenly" | "none" | "end";
+    justify: "none" | "center" | "end" | "around" | "between" | "evenly";
     self: boolean;
+    align: "none" | "start" | "center" | "end";
     gutter: "xs" | "sm" | "md" | "lg" | "xl" | "none";
     gutterCol: boolean;
     horizontal: boolean;

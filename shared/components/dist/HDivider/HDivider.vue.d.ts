@@ -31,8 +31,8 @@ declare const _default: import('vue').DefineComponent<{
     };
     label: StringConstructor;
 }>>, {
+    wider: "start" | "center" | "end";
     offset: number;
-    wider: "center" | "start" | "end";
     weight: "bold" | "thin" | "light" | "regular" | "medium" | "bolder";
 }, {}>;
 export default _default;
