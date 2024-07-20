@@ -72,8 +72,8 @@ declare const _default: import('vue').DefineComponent<{
         default: number;
     };
 }>>, {
-    mode: "two" | "three";
-    wider: "default" | "start" | "center" | "end";
     offset: number;
+    mode: "two" | "three";
+    wider: "default" | "center" | "start" | "end";
 }, {}>;
 export default _default;
