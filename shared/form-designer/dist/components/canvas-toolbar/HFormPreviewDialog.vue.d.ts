@@ -7,7 +7,7 @@ declare const _default: import('vue').DefineComponent<{
     };
 }, {
     isOpen: import('vue').WritableComputedRef<boolean>;
-    state: Ref<Record<string, any>>;
+    state: Ref<Record<string, any>, Record<string, any>>;
     canvasElements: {
         id: string;
         config: {
@@ -22,7 +22,7 @@ declare const _default: import('vue').DefineComponent<{
             attrs: Record<string, any>;
             models: Record<string, import('@herodotus/form-apis').VModel>;
             children?: any[] | undefined;
-            text?: string;
+            text?: string | undefined;
         };
     }[];
     onClose: () => void;

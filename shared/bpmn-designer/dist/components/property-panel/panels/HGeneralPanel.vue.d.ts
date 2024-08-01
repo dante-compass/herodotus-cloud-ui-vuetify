@@ -1,9 +1,9 @@
 declare const _default: import('vue').DefineComponent<{}, {
     isProcessElement: import('vue').ComputedRef<boolean>;
-    elementId: import('vue').Ref<string>;
-    elementName: import('vue').Ref<string>;
-    versionTag: import('vue').Ref<string>;
-    isExecutable: import('vue').Ref<boolean>;
+    elementId: import('vue').Ref<string, string>;
+    elementName: import('vue').Ref<string, string>;
+    versionTag: import('vue').Ref<string, string>;
+    isExecutable: import('vue').Ref<boolean, boolean>;
     updateName: (value: string | number | null) => void;
     updateId: (value: string | number | null) => void;
     updateVersionTag: (value: string | number | null) => void;

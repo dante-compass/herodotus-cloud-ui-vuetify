@@ -11,7 +11,7 @@ declare const _default: import('vue').DefineComponent<{
         required: true;
     };
 }, {
-    isHover: import('vue').Ref<boolean>;
+    isHover: import('vue').Ref<boolean, boolean>;
     schemas: import('vue').ComputedRef<import('../../declarations').Schema[]>;
     isSelected: import('vue').ComputedRef<boolean>;
     onDelete: () => void;

@@ -1,4 +1,4 @@
-import { AxiosHttpResult, AxiosProgressEvent, BucketDomain, CreateBucketArguments, DeleteBucketArguments, ListObjectsArguments, ObjectListingDomain, ListObjectsV2Arguments, ObjectListingV2Domain, DeleteObjectArguments, DeleteObjectsArguments, DeleteObjectDomain, PutObjectDomain, ObjectStreamDownloadArguments, CreateMultipartUploadArguments, CreateMultipartUploadBusiness, CompleteMultipartUploadArguments, CompleteMultipartUploadDomain } from '../../declarations';
+import { AxiosHttpResult, AxiosProgressEvent, ObjectStreamDownloadArguments, PutObjectDomain, CreateMultipartUploadArguments, CreateMultipartUploadBusiness, CompleteMultipartUploadArguments, CompleteMultipartUploadDomain, CreateBucketArgument, DeleteBucketArgument, DeleteObjectArgument, DeleteObjectsArgument, ListObjectsV2Argument, CreateBucketResult, DeleteBucketResult, DeleteObjectResult, DeleteObjectsResult, ListObjectsV2Result, ListBucketsResult } from '../../declarations';
 import { Service, HttpConfig } from '../base';
 
 declare class BucketService extends Service {
@@ -7,24 +7,20 @@ declare class BucketService extends Service {
     static getInstance(config: HttpConfig): BucketService;
     getBaseAddress(): string;
     private getListAddress;
-    private getExistsAddress;
-    doesBucketExist(bucketName: string): Promise<AxiosHttpResult<boolean>>;
-    listBuckets(): Promise<AxiosHttpResult<Array<BucketDomain>>>;
-    createBucket(request: CreateBucketArguments): Promise<AxiosHttpResult<boolean>>;
-    deleteBucket(request: DeleteBucketArguments): Promise<AxiosHttpResult<boolean>>;
+    listBuckets(): Promise<AxiosHttpResult<ListBucketsResult>>;
+    createBucket(request: CreateBucketArgument): Promise<AxiosHttpResult<CreateBucketResult>>;
+    deleteBucket(request: DeleteBucketArgument): Promise<AxiosHttpResult<DeleteBucketResult>>;
 }
 declare class ObjectService extends Service {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): ObjectService;
     getBaseAddress(): string;
-    private getListAddress;
     private getListV2Address;
     private getMultiDeleteAddress;
-    listObjects(request: ListObjectsArguments): Promise<AxiosHttpResult<ObjectListingDomain>>;
-    listObjectsV2(request: ListObjectsV2Arguments): Promise<AxiosHttpResult<ObjectListingV2Domain>>;
-    delete(request: DeleteObjectArguments): Promise<AxiosHttpResult<boolean>>;
-    batchDelete(request: DeleteObjectsArguments): Promise<AxiosHttpResult<Array<DeleteObjectDomain>>>;
+    listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>>;
+    delete(request: DeleteObjectArgument): Promise<AxiosHttpResult<DeleteObjectResult>>;
+    batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>>;
 }
 declare class ObjectStreamService extends Service {
     private static instance;

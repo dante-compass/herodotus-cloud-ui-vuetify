@@ -1,6 +1,6 @@
 declare const _default: import('vue').DefineComponent<{}, {
-    formTab: import('vue').Ref<string>;
-    elementTab: import('vue').Ref<string>;
+    formTab: import('vue').Ref<string, string>;
+    elementTab: import('vue').Ref<string, string>;
     isInformationPanel: import('vue').ComputedRef<boolean>;
     currentSchema: import('vue').ComputedRef<import('@herodotus/form-apis').Schema>;
     currentPanel: import('vue').ComputedRef<string>;

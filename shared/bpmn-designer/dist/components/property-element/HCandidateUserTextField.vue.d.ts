@@ -17,9 +17,9 @@ declare const _default: import('vue').DefineComponent<{
         type: StringConstructor;
     };
 }, {
-    isOpen: Ref<boolean>;
+    isOpen: Ref<boolean, boolean>;
     isDisabled: import('vue').ComputedRef<boolean>;
-    selected: Ref<UserEntity[]>;
+    selected: Ref<UserEntity[], UserEntity[]>;
     assignee: import('vue').WritableComputedRef<string>;
     onClose: () => void;
     onSave: () => void;

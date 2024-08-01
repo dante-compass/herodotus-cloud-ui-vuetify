@@ -8,7 +8,7 @@ declare const _default: import('vue').DefineComponent<{
     };
 }, {
     isOpen: import('vue').WritableComputedRef<boolean>;
-    property: Ref<ExtensionProperty>;
+    property: Ref<ExtensionProperty, ExtensionProperty>;
     isDisabled: import('vue').ComputedRef<boolean>;
     onSave: () => void;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "save" | "update:open")[], "update:modelValue" | "save" | "update:open", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{

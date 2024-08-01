@@ -18,7 +18,7 @@ declare const _default: import('vue').DefineComponent<{}, {
         headerStyle?: string;
         headerClasses?: string;
     }[];
-    tableRows: Ref<QBaseDataItem<boolean>[]>;
+    tableRows: Ref<QBaseDataItem<boolean>[], QBaseDataItem<boolean>[]>;
     condition: import('../../declarations').ConditionVariable;
     onModify: () => void;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{}>>, {}, {}>;

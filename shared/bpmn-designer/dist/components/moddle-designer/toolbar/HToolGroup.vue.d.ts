@@ -1,6 +1,6 @@
 declare const _default: import('vue').DefineComponent<{}, {
-    showMiniMap: import('vue').Ref<boolean>;
-    showBpmnLint: import('vue').Ref<boolean>;
+    showMiniMap: import('vue').Ref<boolean, boolean>;
+    showBpmnLint: import('vue').Ref<boolean, boolean>;
     toggleSimulation: () => void;
     toggleMinimap: () => void;
     toggleBpmnLint: () => void;
