@@ -1,7 +1,7 @@
 declare const _default: import('vue').DefineComponent<{}, {
-    before: import('vue').Ref<boolean>;
-    after: import('vue').Ref<boolean>;
-    exclusive: import('vue').Ref<boolean>;
+    before: import('vue').Ref<boolean, boolean>;
+    after: import('vue').Ref<boolean, boolean>;
+    exclusive: import('vue').Ref<boolean, boolean>;
     isExclusive: import('vue').ComputedRef<boolean>;
     updateBefore: (value: boolean) => void;
     updateAfter: (value: boolean) => void;

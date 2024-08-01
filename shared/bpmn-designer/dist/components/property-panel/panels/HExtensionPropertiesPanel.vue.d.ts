@@ -2,7 +2,7 @@ import { Ref } from 'vue';
 import { ExtensionProperty } from '../../../declarations';
 
 declare const _default: import('vue').DefineComponent<{}, {
-    tableRows: Ref<ExtensionProperty[]>;
+    tableRows: Ref<ExtensionProperty[], ExtensionProperty[]>;
     tableColumns: {
         name: string;
         label: string;
@@ -19,7 +19,7 @@ declare const _default: import('vue').DefineComponent<{}, {
         headerStyle?: string;
         headerClasses?: string;
     }[];
-    openDialog: Ref<boolean>;
+    openDialog: Ref<boolean, boolean>;
     count: import('vue').ComputedRef<number>;
     onCreate: (item: ExtensionProperty) => void;
     onDelete: (item: ExtensionProperty) => void;

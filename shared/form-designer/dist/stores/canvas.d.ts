@@ -25,7 +25,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string;
+                text?: string | undefined;
             };
         }[];
         sheet: {
@@ -51,7 +51,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string;
+                text?: string | undefined;
             };
         };
         id: string;
@@ -82,7 +82,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string;
+                text?: string | undefined;
             };
         }[];
         sheet: {
@@ -108,7 +108,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string;
+                text?: string | undefined;
             };
         };
         id: string;
@@ -139,7 +139,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string;
+                text?: string | undefined;
             };
         }[];
         sheet: {
@@ -165,7 +165,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus/form-apis').VModel>;
                 children?: any[] | undefined;
-                text?: string;
+                text?: string | undefined;
             };
         };
         id: string;
@@ -193,7 +193,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
             attrs: Record<string, any>;
             models: Record<string, import('@herodotus/form-apis').VModel>;
             children?: any[] | undefined;
-            text?: string;
+            text?: string | undefined;
         };
     }[];
     currentSchema(): Schema;

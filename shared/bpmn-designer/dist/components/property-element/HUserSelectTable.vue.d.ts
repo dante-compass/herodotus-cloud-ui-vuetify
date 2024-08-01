@@ -11,17 +11,29 @@ declare const _default: import('vue').DefineComponent<{
         default: string;
     };
 }, {
-    tableRows: import('vue').Ref<UserEntity[]>;
-    totalPages: import('vue').Ref<number>;
+    tableRows: import('vue').Ref<UserEntity[], UserEntity[]>;
+    totalPages: import('vue').Ref<number, number>;
     pagination: import('vue').Ref<{
         sortBy: string | null;
         descending: boolean;
         page: number;
         rowsPerPage: number;
         rowsNumber: number;
+    }, Required<{
+        sortBy?: string | null;
+        descending?: boolean;
+        page?: number;
+        rowsPerPage?: number;
+        rowsNumber?: number;
+    }> | {
+        sortBy: string | null;
+        descending: boolean;
+        page: number;
+        rowsPerPage: number;
+        rowsNumber: number;
     }>;
-    loading: import('vue').Ref<boolean>;
-    fieldValue: import('vue').Ref<string>;
+    loading: import('vue').Ref<boolean, boolean>;
+    fieldValue: import('vue').Ref<string, string>;
     selectedItems: import('vue').WritableComputedRef<UserEntity[]>;
     rowKey: keyof UserEntity;
     columns: {

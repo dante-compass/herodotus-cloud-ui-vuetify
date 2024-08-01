@@ -12,10 +12,10 @@ declare const _default: import('vue').DefineComponent<{
     };
 }, {
     isOfficialPanel: import('vue').ComputedRef<boolean>;
-    elementTitle: import('vue').Ref<string>;
-    elementIcon: import('vue').Ref<string>;
-    elementCaption: import('vue').Ref<string>;
-    elementType: import('vue').Ref<string>;
+    elementTitle: import('vue').Ref<string, string>;
+    elementIcon: import('vue').Ref<string, string>;
+    elementCaption: import('vue').Ref<string, string>;
+    elementType: import('vue').Ref<string, string>;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "close"[], "close", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     instance: {
         type: PropType<BpmnDesignerResources>;

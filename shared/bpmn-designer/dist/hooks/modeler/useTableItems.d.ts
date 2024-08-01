@@ -9,11 +9,23 @@ export default function useBpmnTableItems<E extends BpmnListEntity, Q extends Bp
         page: number;
         rowsPerPage: number;
         rowsNumber: number;
+    }, Required<{
+        sortBy?: string | null;
+        descending?: boolean;
+        page?: number;
+        rowsPerPage?: number;
+        rowsNumber?: number;
+    }> | {
+        sortBy: string | null;
+        descending: boolean;
+        page: number;
+        rowsPerPage: number;
+        rowsNumber: number;
     }>;
-    tableRows: Ref<E[]>;
-    loading: Ref<boolean>;
-    totalPages: Ref<number>;
-    conditions: Ref<Q>;
+    tableRows: Ref<E[], E[]>;
+    loading: Ref<boolean, boolean>;
+    totalPages: Ref<number, number>;
+    conditions: Ref<Q, Q>;
     findItemsByPage: (pageNumber?: number, pageSize?: number, params?: Q) => void;
     findItems: QTableOnRequestProps;
 };

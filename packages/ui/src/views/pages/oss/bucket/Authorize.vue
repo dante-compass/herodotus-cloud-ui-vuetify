@@ -45,7 +45,7 @@ import { useBaseTableItem } from '/@/hooks';
 import { useConstantsStore } from '/@/stores';
 
 import { HSimpleCenterFormLayout } from '/@/components';
-import { HOssTags, HOssBucketRetention } from '../components';
+import { HOssTags, HOssBucketRetention } from '/@/composables';
 
 export default defineComponent({
   name: 'OssBucketContent',

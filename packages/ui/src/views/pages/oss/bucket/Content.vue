@@ -28,6 +28,7 @@ import { ossApi, toast } from '/@/lib/utils';
 import { useBaseTableItem } from '/@/hooks';
 
 import { HSimpleCenterFormLayout } from '/@/components';
+import { CreateBucketResult } from '@herodotus/oss-apis';
 
 export default defineComponent({
   name: 'OssBucketContent',
@@ -42,37 +43,10 @@ export default defineComponent({
     const region = ref<string>('');
     const objectLock = ref<boolean>(false);
 
-    const isUnique = () => {
-      let name = editedItem.value.bucketName;
-
-      return new Promise((resolve, reject) => {
-        if (name) {
-          ossApi
-            .bucket()
-            .doesBucketExist(name)
-            .then(result => {
-              let isExists = result.data as boolean;
-              // 如果能够查询到roleCode
-              // 如果该roleCode 对应的 roleId 与当前 editedItem中的roleId相同
-              // 则认为是编辑状态，而且employeeName 没有变化，那么就校验通过。
-              // 目前能想到的解决新建空值、编辑是原值等校验问题的最优解
-              if (isExists) {
-                reject(false);
-              } else {
-                resolve(true);
-              }
-            });
-        } else {
-          reject(false);
-        }
-      });
-    };
-
     const rules = {
       editedItem: {
         bucketName: {
-          required: helpers.withMessage('存储桶名称不能为空', required),
-          isUnique: helpers.withMessage('存储桶名称已经存在，请使用其它名称', helpers.withAsync(isUnique))
+          required: helpers.withMessage('存储桶名称不能为空', required)
         }
       }
     };
@@ -86,11 +60,10 @@ export default defineComponent({
             .bucket()
             .createBucket({
               bucketName: editedItem.value.bucketName,
-              region: region.value,
-              objectLock: objectLock.value
+              objectLockEnabledForBucket: objectLock.value
             })
             .then(response => {
-              const result = response as HttpResult<boolean>;
+              const result = response as HttpResult<CreateBucketResult>;
               overlay.value = false;
               onFinish();
               if (result.message) {

@@ -23,12 +23,12 @@ declare const _default: import('vue').DefineComponent<{
         default: () => {};
     };
 }, {
-    leftDrawerOpen: import('vue').Ref<boolean>;
+    leftDrawerOpen: import('vue').Ref<boolean, boolean>;
     toggleLeftDrawer(): void;
-    rightDrawerOpen: import('vue').Ref<boolean>;
+    rightDrawerOpen: import('vue').Ref<boolean, boolean>;
     toggleRightDrawer(): void;
-    openPreview: import('vue').Ref<boolean>;
-    openUpload: import('vue').Ref<boolean>;
+    openPreview: import('vue').Ref<boolean, boolean>;
+    openUpload: import('vue').Ref<boolean, boolean>;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "close"[], "close", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     instance: {
         type: PropType<FormDesignerResources>;

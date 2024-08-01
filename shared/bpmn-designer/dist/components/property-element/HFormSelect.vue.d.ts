@@ -8,7 +8,7 @@ declare const _default: import('vue').DefineComponent<{
     };
 }, {
     selectedValue: import('vue').WritableComputedRef<string | undefined>;
-    options: Ref<FormSelectItem[]>;
+    options: Ref<FormSelectItem[], FormSelectItem[]>;
     filter: (value: string, update: (callbackFn: () => void, after?: (ref: QSelect) => void) => void, abort: () => void) => void;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {

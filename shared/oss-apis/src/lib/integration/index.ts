@@ -1,22 +1,23 @@
 import type {
   AxiosHttpResult,
   AxiosProgressEvent,
-  BucketDomain,
-  CreateBucketArguments,
-  DeleteBucketArguments,
-  ListObjectsArguments,
-  ObjectListingDomain,
-  ListObjectsV2Arguments,
-  ObjectListingV2Domain,
-  DeleteObjectArguments,
-  DeleteObjectsArguments,
-  DeleteObjectDomain,
-  PutObjectDomain,
   ObjectStreamDownloadArguments,
+  PutObjectDomain,
   CreateMultipartUploadArguments,
   CreateMultipartUploadBusiness,
   CompleteMultipartUploadArguments,
-  CompleteMultipartUploadDomain
+  CompleteMultipartUploadDomain,
+  CreateBucketArgument,
+  DeleteBucketArgument,
+  DeleteObjectArgument,
+  DeleteObjectsArgument,
+  ListObjectsV2Argument,
+  CreateBucketResult,
+  DeleteBucketResult,
+  DeleteObjectResult,
+  DeleteObjectsResult,
+  ListObjectsV2Result,
+  ListBucketsResult
 } from '/@/declarations';
 
 import { ContentTypeEnum } from '/@/enums';
@@ -45,24 +46,16 @@ class BucketService extends Service {
     return this.getBaseAddress() + '/list';
   }
 
-  private getExistsAddress(): string {
-    return this.getBaseAddress() + '/exists';
+  public listBuckets(): Promise<AxiosHttpResult<ListBucketsResult>> {
+    return this.getConfig().getHttp().get<ListBucketsResult, string>(this.getListAddress());
   }
 
-  public doesBucketExist(bucketName: string): Promise<AxiosHttpResult<boolean>> {
-    return this.getConfig().getHttp().get<boolean, string>(this.getExistsAddress(), { bucketName: bucketName });
+  public createBucket(request: CreateBucketArgument): Promise<AxiosHttpResult<CreateBucketResult>> {
+    return this.getConfig().getHttp().post<CreateBucketResult, CreateBucketArgument>(this.getBaseAddress(), request);
   }
 
-  public listBuckets(): Promise<AxiosHttpResult<Array<BucketDomain>>> {
-    return this.getConfig().getHttp().get<Array<BucketDomain>, string>(this.getListAddress());
-  }
-
-  public createBucket(request: CreateBucketArguments): Promise<AxiosHttpResult<boolean>> {
-    return this.getConfig().getHttp().post<boolean, CreateBucketArguments>(this.getBaseAddress(), request);
-  }
-
-  public deleteBucket(request: DeleteBucketArguments): Promise<AxiosHttpResult<boolean>> {
-    return this.getConfig().getHttp().delete<boolean, DeleteBucketArguments>(this.getBaseAddress(), request);
+  public deleteBucket(request: DeleteBucketArgument): Promise<AxiosHttpResult<DeleteBucketResult>> {
+    return this.getConfig().getHttp().delete<DeleteBucketResult, DeleteBucketArgument>(this.getBaseAddress(), request);
   }
 }
 
@@ -84,36 +77,26 @@ class ObjectService extends Service {
     return this.getConfig().getOss() + '/oss/object';
   }
 
-  private getListAddress(): string {
-    return this.getBaseAddress() + '/list';
-  }
-
   private getListV2Address(): string {
-    return this.getBaseAddress() + '/v2/list';
+    return this.getBaseAddress() + '/list';
   }
 
   private getMultiDeleteAddress(): string {
     return this.getBaseAddress() + '/multi';
   }
 
-  public listObjects(request: ListObjectsArguments): Promise<AxiosHttpResult<ObjectListingDomain>> {
-    return this.getConfig().getHttp().get<ObjectListingDomain, ListObjectsArguments>(this.getListAddress(), request);
+  public listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>> {
+    return this.getConfig().getHttp().get<ListObjectsV2Result, ListObjectsV2Argument>(this.getListV2Address(), request);
   }
 
-  public listObjectsV2(request: ListObjectsV2Arguments): Promise<AxiosHttpResult<ObjectListingV2Domain>> {
+  public delete(request: DeleteObjectArgument): Promise<AxiosHttpResult<DeleteObjectResult>> {
+    return this.getConfig().getHttp().delete<DeleteObjectResult, DeleteObjectArgument>(this.getBaseAddress(), request);
+  }
+
+  public batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>> {
     return this.getConfig()
       .getHttp()
-      .get<ObjectListingV2Domain, ListObjectsV2Arguments>(this.getListV2Address(), request);
-  }
-
-  public delete(request: DeleteObjectArguments): Promise<AxiosHttpResult<boolean>> {
-    return this.getConfig().getHttp().delete<boolean, DeleteObjectArguments>(this.getBaseAddress(), request);
-  }
-
-  public batchDelete(request: DeleteObjectsArguments): Promise<AxiosHttpResult<Array<DeleteObjectDomain>>> {
-    return this.getConfig()
-      .getHttp()
-      .delete<Array<DeleteObjectDomain>, DeleteObjectsArguments>(this.getMultiDeleteAddress(), request);
+      .delete<DeleteObjectsResult, DeleteObjectsArgument>(this.getMultiDeleteAddress(), request);
   }
 }
 
@@ -153,23 +136,19 @@ class ObjectStreamService extends Service {
   ): Promise<AxiosHttpResult<Blob>> {
     return this.getConfig()
       .getHttp()
-      .post<Blob, any>(
-        this.getDownloadAddress(),
-        request,
-        { contentType: ContentTypeEnum.JSON },
-        { responseType: 'blob', onDownloadProgress: onProgress }
-      );
+      .post<
+        Blob,
+        any
+      >(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
   }
 
   public display(request: ObjectStreamDownloadArguments): Promise<AxiosHttpResult<Blob>> {
     return this.getConfig()
       .getHttp()
-      .post<Blob, any>(
-        this.getDisplayAddress(),
-        request,
-        { contentType: ContentTypeEnum.JSON },
-        { responseType: 'blob' }
-      );
+      .post<
+        Blob,
+        any
+      >(this.getDisplayAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob' });
   }
 
   public upload(
@@ -179,12 +158,10 @@ class ObjectStreamService extends Service {
   ): Promise<AxiosHttpResult<PutObjectDomain>> {
     return this.getConfig()
       .getHttp()
-      .post<PutObjectDomain, any>(
-        this.getUploadAddress(),
-        { bucketName: bucketName, file: file },
-        { contentType: ContentTypeEnum.JSON },
-        { onUploadProgress: onProgress }
-      );
+      .post<
+        PutObjectDomain,
+        any
+      >(this.getUploadAddress(), { bucketName: bucketName, file: file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
   }
 }
 
@@ -219,10 +196,10 @@ class MultipartUploadService extends Service {
   ): Promise<AxiosHttpResult<CreateMultipartUploadBusiness>> {
     return this.getConfig()
       .getHttp()
-      .post<CreateMultipartUploadBusiness, CreateMultipartUploadArguments>(
-        this.getCreateMultipartUploadAddress(),
-        request
-      );
+      .post<
+        CreateMultipartUploadBusiness,
+        CreateMultipartUploadArguments
+      >(this.getCreateMultipartUploadAddress(), request);
   }
 
   public completeChunkUpload(
@@ -230,10 +207,10 @@ class MultipartUploadService extends Service {
   ): Promise<AxiosHttpResult<CompleteMultipartUploadDomain>> {
     return this.getConfig()
       .getHttp()
-      .post<CompleteMultipartUploadDomain, CompleteMultipartUploadArguments>(
-        this.getCompleteMultipartUploadAddress(),
-        request
-      );
+      .post<
+        CompleteMultipartUploadDomain,
+        CompleteMultipartUploadArguments
+      >(this.getCompleteMultipartUploadAddress(), request);
   }
 }
 
