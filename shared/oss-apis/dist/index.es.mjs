@@ -294,7 +294,7 @@ const _ObjectService = class _ObjectService extends Service {
     return this.getConfig().getOss() + "/oss/object";
   }
   getListV2Address() {
-    return this.getBaseAddress() + "/v2/list";
+    return this.getBaseAddress() + "/list";
   }
   getMultiDeleteAddress() {
     return this.getBaseAddress() + "/multi";

@@ -78,7 +78,7 @@ class ObjectService extends Service {
   }
 
   private getListV2Address(): string {
-    return this.getBaseAddress() + '/v2/list';
+    return this.getBaseAddress() + '/list';
   }
 
   private getMultiDeleteAddress(): string {
