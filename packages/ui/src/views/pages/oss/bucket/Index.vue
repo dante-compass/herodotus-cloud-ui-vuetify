@@ -15,11 +15,11 @@
 
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
-        <h-dense-icon-button
+        <!-- <h-dense-icon-button
           color="black"
           icon="mdi-cog-outline"
           tooltip="设置"
-          @click="toAuthorize(props.row)"></h-dense-icon-button>
+          @click="toAuthorize(props.row)"></h-dense-icon-button> -->
         <h-delete-button v-if="!props.row.reserved" @click="remove(props.row[rowKey])"></h-delete-button>
       </q-td>
     </template>
@@ -43,6 +43,7 @@ import { moment, toast, standardDeleteNotify, ossApi } from '/@/lib/utils';
 import { useBaseTable } from '/@/hooks';
 
 import { HDeleteButton, HTable, HDenseIconButton } from '/@/components';
+import { DeleteBucketResult } from '@herodotus/oss-apis';
 
 export default defineComponent({
   name: ComponentNameEnum.OSS_BUCKET,
@@ -73,7 +74,7 @@ export default defineComponent({
         .bucket()
         .listBuckets()
         .then(result => {
-          const data = result.data as Array<BucketDomain>;
+          const data = result.data.buckets as Array<BucketDomain>;
           tableRows.value = data;
           hideLoading();
         })
@@ -88,7 +89,7 @@ export default defineComponent({
           .bucket()
           .deleteBucket({ bucketName: bucketName })
           .then(response => {
-            const result = response as HttpResult<boolean>;
+            const result = response.data as HttpResult<DeleteBucketResult>;
             if (result.message) {
               toast.success(result.message);
             } else {

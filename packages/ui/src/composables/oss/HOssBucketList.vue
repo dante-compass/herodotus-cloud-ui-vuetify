@@ -61,7 +61,7 @@ export default defineComponent({
         .bucket()
         .listBuckets()
         .then(result => {
-          const data = result.data as Array<BucketDomain>;
+          const data = result.data.buckets as Array<BucketDomain>;
           items.value = data;
         });
     };

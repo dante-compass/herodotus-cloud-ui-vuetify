@@ -36,7 +36,7 @@ import { useBaseTableItem } from '/@/hooks';
 
 import { HSimpleCenterFormLayout } from '/@/components';
 
-import { HOssTags } from '../components';
+import { HOssTags } from '/@/composables';
 
 export default defineComponent({
   name: 'OssObjectAuthorize',

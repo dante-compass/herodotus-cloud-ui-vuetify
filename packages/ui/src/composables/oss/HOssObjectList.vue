@@ -33,12 +33,12 @@
             icon="mdi-download-box"
             tooltip="下载"
             @click="onDownload(props.row)"></h-dense-icon-button>
-          <h-dense-icon-button
+          <!-- <h-dense-icon-button
             v-if="!props.row.dir"
             color="black"
             icon="mdi-cog-outline"
             tooltip="详情"
-            @click="toSetting(props.row)"></h-dense-icon-button>
+            @click="toSetting(props.row)"></h-dense-icon-button> -->
           <h-dense-icon-button
             v-if="props.row.dir"
             color="orange"
@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, PropType } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { format, useQuasar } from 'quasar';
 
 import type {
@@ -69,7 +69,6 @@ import type {
   ObjectDomain,
   ObjectDomainProps,
   ObjectDomainConditions,
-  ObjectListingDomain,
   DeleteObjectDomain
 } from '/@/lib/declarations';
 
@@ -143,10 +142,10 @@ export default defineComponent({
       showLoading();
       ossApi
         .object()
-        .listObjects({ bucketName: bucketName, prefix: folderName })
+        .listObjectsV2({ bucketName: bucketName, prefix: folderName })
         .then(result => {
-          const data = result.data as ObjectListingDomain;
-          tableRows.value = data ? data.summaries : [];
+          const data = result.data.contents;
+          tableRows.value = data ? data : [];
           hideLoading();
         })
         .catch(() => {
@@ -190,7 +189,7 @@ export default defineComponent({
       standardDeleteNotify(() => {
         ossApi
           .object()
-          .batchDelete({ bucketName: bucketName, objects: toDeleteObjectDomain(objects) })
+          .batchDelete({ bucketName: bucketName, delete: toDeleteObjectDomain(objects) })
           .then(() => {
             toast.success('删除成功');
             onSuccess();
