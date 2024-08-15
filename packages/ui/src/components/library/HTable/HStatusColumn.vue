@@ -1,5 +1,5 @@
 <template>
-	<h-dense-icon-button :color="color" :icon="icon" :tooltip="tooltip"></h-dense-icon-button>
+  <h-dense-icon-button :color="color" :icon="icon" :tooltip="tooltip"></h-dense-icon-button>
 </template>
 
 <script lang="ts">
@@ -7,68 +7,68 @@ import { defineComponent, onMounted, computed, reactive } from 'vue';
 import type { ConstantDictionary } from '/@/lib/declarations';
 
 import { useConstantsStore } from '/@/stores';
-import { DATA_ITEM_STATUS } from '/@/settings';
+import { Constants } from '/@/lib/definitions';
 
 import HDenseIconButton from './HDenseIconButton.vue';
 import { lodash } from '/@/lib/utils';
 
 export default defineComponent({
-	name: 'HStatusColumn',
+  name: 'HStatusColumn',
 
-	components: {
-		HDenseIconButton,
-	},
+  components: {
+    HDenseIconButton,
+  },
 
-	props: {
-		type: { type: Number, defalut: '0', required: true },
-	},
+  props: {
+    type: { type: Number, defalut: '0', required: true },
+  },
 
-	setup(props) {
-		const state = reactive({
-			items: [] as Array<ConstantDictionary>,
-		});
+  setup(props) {
+    const state = reactive({
+      items: [] as Array<ConstantDictionary>,
+    });
 
-		const constants = useConstantsStore();
+    const constants = useConstantsStore();
 
-		const initialize = () => {
-			if (lodash.isEmpty(state.items)) {
-				state.items = constants.getDictionary('status');
-			}
-		};
+    const initialize = () => {
+      if (lodash.isEmpty(state.items)) {
+        state.items = constants.getDictionary('status');
+      }
+    };
 
-		onMounted(() => {
-			initialize();
-		});
+    onMounted(() => {
+      initialize();
+    });
 
-		watch(
-			() => props.type,
-			() => {
-				initialize();
-			},
-			{ immediate: true }
-		);
+    watch(
+      () => props.type,
+      () => {
+        initialize();
+      },
+      { immediate: true },
+    );
 
-		const color = computed(() => {
-			return DATA_ITEM_STATUS[props.type].color;
-		});
+    const color = computed(() => {
+      return Constants.DATA_ITEM_STATUS[props.type].color;
+    });
 
-		const icon = computed(() => {
-			return DATA_ITEM_STATUS[props.type].icon;
-		});
+    const icon = computed(() => {
+      return Constants.DATA_ITEM_STATUS[props.type].icon;
+    });
 
-		const tooltip = computed(() => {
-			if (!lodash.isEmpty(state.items)) {
-				return state.items[props.type].text;
-			} else {
-				return '';
-			}
-		});
+    const tooltip = computed(() => {
+      if (!lodash.isEmpty(state.items)) {
+        return state.items[props.type].text;
+      } else {
+        return '';
+      }
+    });
 
-		return {
-			color,
-			icon,
-			tooltip,
-		};
-	},
+    return {
+      color,
+      icon,
+      tooltip,
+    };
+  },
 });
 </script>
