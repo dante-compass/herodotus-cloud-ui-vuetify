@@ -1,5 +1,4 @@
 import { BpmnDesignerResources } from '../declarations';
-
 export declare const useResourceStore: import('pinia').StoreDefinition<"BpmnDesignerResources", {
     resources: BpmnDesignerResources;
 }, {

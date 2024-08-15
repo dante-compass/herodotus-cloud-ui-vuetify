@@ -22,8 +22,8 @@ declare const _default: import('vue').DefineComponent<{
         width: string;
         opacity: string;
     };
-    isShow: import('vue').Ref<boolean, boolean>;
-    panelGroups: import('vue').Ref<import('bpmn-js-properties-panel/lib/PropertiesActivator').Group[], import('bpmn-js-properties-panel/lib/PropertiesActivator').Group[]>;
+    isShow: import('vue').Ref<boolean>;
+    panelGroups: import('vue').Ref<import('bpmn-js-properties-panel/lib/PropertiesActivator').Group[]>;
     parsePropertyPanelName: (id: string) => string;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     title: {

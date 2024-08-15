@@ -1,6 +1,5 @@
 import { SysPermissionEntity, SysRoleEntity, SysUserEntity, SysAttributeEntity, SysDefaultRoleEntity, SysElementEntity, SysTenantDataSourceEntity, AxiosHttpResult, AccessSourceEntity } from '../../declarations';
 import { HttpConfig, BaseService } from '../base';
-
 declare class SysPermissionService extends BaseService<SysPermissionEntity> {
     private static instance;
     private constructor();

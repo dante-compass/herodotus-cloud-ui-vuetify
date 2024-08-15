@@ -1,5 +1,4 @@
 import { PropType } from 'vue';
-
 declare const _default: import('vue').DefineComponent<{
     modelValue: {
         type: BooleanConstructor;
@@ -31,7 +30,7 @@ declare const _default: import('vue').DefineComponent<{
     };
 }, {
     isOpen: import('vue').WritableComputedRef<boolean>;
-    isShow: import('vue').Ref<boolean, boolean>;
+    isShow: import('vue').Ref<boolean>;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {
         type: BooleanConstructor;

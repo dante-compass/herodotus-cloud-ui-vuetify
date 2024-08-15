@@ -1,5 +1,4 @@
 import { Entity, Conditions } from '../base';
-
 export interface DeleteDomain extends Entity {
     objectName: string;
     versionId?: string;

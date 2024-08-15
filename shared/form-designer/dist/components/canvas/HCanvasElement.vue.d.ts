@@ -1,6 +1,5 @@
 import { PropType } from 'vue';
 import { Element } from '../../declarations';
-
 declare const _default: import('vue').DefineComponent<{
     element: {
         type: PropType<Element>;
@@ -11,7 +10,7 @@ declare const _default: import('vue').DefineComponent<{
         required: true;
     };
 }, {
-    isHover: import('vue').Ref<boolean, boolean>;
+    isHover: import('vue').Ref<boolean>;
     schemas: import('vue').ComputedRef<import('../../declarations').Schema[]>;
     isSelected: import('vue').ComputedRef<boolean>;
     onDelete: () => void;

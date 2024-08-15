@@ -1,5 +1,4 @@
 import { Modeling, Modeler, Canvas, ElementRegistry, Moddle, Element, Group } from './bpmn';
-
 export interface DesignerSetting {
     useOfficialPanel: boolean;
     useOfficialTemplateChooser: boolean;

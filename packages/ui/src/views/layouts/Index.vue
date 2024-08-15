@@ -32,6 +32,7 @@ export default defineComponent({
 
   setup(props) {
     const settings = useSettingsStore();
+
     return {
       settings
     };

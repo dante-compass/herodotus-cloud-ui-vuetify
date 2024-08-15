@@ -1,6 +1,5 @@
 import { AxiosHttpResult, AxiosProgressEvent, ObjectStreamDownloadArguments, PutObjectDomain, CreateMultipartUploadArguments, CreateMultipartUploadBusiness, CompleteMultipartUploadArguments, CompleteMultipartUploadDomain, CreateBucketArgument, DeleteBucketArgument, DeleteObjectArgument, DeleteObjectsArgument, ListObjectsV2Argument, CreateBucketResult, DeleteBucketResult, DeleteObjectResult, DeleteObjectsResult, ListObjectsV2Result, ListBucketsResult } from '../../declarations';
 import { Service, HttpConfig } from '../base';
-
 declare class BucketService extends Service {
     private static instance;
     private constructor();

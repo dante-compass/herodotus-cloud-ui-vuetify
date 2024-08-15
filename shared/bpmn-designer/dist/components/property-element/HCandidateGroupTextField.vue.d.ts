@@ -1,6 +1,5 @@
 import { Ref } from 'vue';
 import { GroupEntity } from '../../declarations';
-
 declare const _default: import('vue').DefineComponent<{
     modelValue: {
         type: StringConstructor;
@@ -13,9 +12,9 @@ declare const _default: import('vue').DefineComponent<{
         type: StringConstructor;
     };
 }, {
-    isOpen: Ref<boolean, boolean>;
+    isOpen: Ref<boolean>;
     isDisabled: import('vue').ComputedRef<boolean>;
-    selected: Ref<GroupEntity[], GroupEntity[]>;
+    selected: Ref<GroupEntity[]>;
     assignee: import('vue').WritableComputedRef<string>;
     onClose: () => void;
     onSave: () => void;

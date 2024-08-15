@@ -1,5 +1,4 @@
 import { Element } from '../../declarations';
-
 declare const _default: import('vue').DefineComponent<{}, {
     isEmptyCanvas: import('vue').ComputedRef<boolean>;
     canvasElements: {

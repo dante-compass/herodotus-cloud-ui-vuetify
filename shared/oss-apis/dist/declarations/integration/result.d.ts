@@ -1,6 +1,5 @@
 import { Entity } from '../base';
 import { BucketDomain, OwnerDomain, DeletedObjectDomain, S3ErrorDomain, ObjectDomain } from './domain';
-
 export interface AbstractResult extends Entity {
     cloudFrontId: string;
     extendedRequestId: string;

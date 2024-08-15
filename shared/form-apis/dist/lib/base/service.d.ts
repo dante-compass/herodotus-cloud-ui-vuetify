@@ -1,6 +1,5 @@
 import { AxiosHttpResult, BaseMongoEntity, Pageable, Page, Conditions } from '../../declarations';
 import { Service } from './core';
-
 export declare abstract class BaseMongoService<E extends BaseMongoEntity> extends Service {
     private getConditionAddress;
     private getListAddress;

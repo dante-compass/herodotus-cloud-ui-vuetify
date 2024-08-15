@@ -1,5 +1,4 @@
 import { Widget, Element } from '../../declarations';
-
 declare const _default: import('vue').DefineComponent<{}, {
     widgetGroups: import('@herodotus/form-apis').WidgetDefinition[];
     cloneWidget: (widget: Widget) => Element;

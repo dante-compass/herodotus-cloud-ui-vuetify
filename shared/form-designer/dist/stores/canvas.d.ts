@@ -1,5 +1,4 @@
 import { Element, Schema, ElementConfig, DynamicFormEntity, Sheet, ConditionVariable } from '../declarations';
-
 export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDesignerCanvas", {
     isClosed: boolean;
     canvasElements: Array<Element>;

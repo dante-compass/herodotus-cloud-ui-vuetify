@@ -1,1 +1,0 @@
-import{e as s}from"./i18n-en_US.ts-HLn6M6iq.js";import{z as a}from"./i18n-zh_CN.ts-C3ctSRov.js";import{c as o}from"../modules/npm-vue-i18n-XfAHoofz.js";const c=o({legacy:!1,locale:"zh",fallbackLocale:"en",messages:{en:s,zh:a}}),l=e=>{e.use(c)};export{l as s};

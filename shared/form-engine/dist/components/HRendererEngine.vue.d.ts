@@ -1,9 +1,8 @@
 import { PropType } from 'vue';
 import { Schema } from '../declarations';
-
 declare const _default: import('vue').DefineComponent<{
     modelValue: {
-        type: (ObjectConstructor | StringConstructor | NumberConstructor | ArrayConstructor)[];
+        type: (ObjectConstructor | ArrayConstructor | StringConstructor | NumberConstructor)[];
     };
     schemas: {
         type: PropType<Array<Schema>>;
@@ -11,7 +10,7 @@ declare const _default: import('vue').DefineComponent<{
     };
 }, () => any, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, import('vue').EmitsOptions, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {
-        type: (ObjectConstructor | StringConstructor | NumberConstructor | ArrayConstructor)[];
+        type: (ObjectConstructor | ArrayConstructor | StringConstructor | NumberConstructor)[];
     };
     schemas: {
         type: PropType<Array<Schema>>;
