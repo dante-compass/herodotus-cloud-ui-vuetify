@@ -4,7 +4,7 @@ import type { Entity, HttpResult } from '/@/lib/declarations';
 
 import { BaseService } from '/@/lib/definitions';
 
-import { OperationEnum } from '/@/lib/enums';
+import { OperationEnum } from '/@/lib/definitions';
 import { toast } from '/@/lib/utils';
 
 import useBaseTableItem from './useBaseTableItem';
@@ -65,6 +65,6 @@ export default function useTableItem<E extends Entity>(baseService: BaseService<
     overlay,
     saveOrUpdate,
     assign,
-    isEdit
+    isEdit,
   };
 }

@@ -75,13 +75,13 @@ import { defineComponent, ref } from 'vue';
 import type { SysElementEntity, SysElementConditions, SysElementProps, QTableColumnProps } from '/@/lib/declarations';
 
 import { useTable } from '/@/hooks';
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 
 import { HDeleteButton, HEditButton, HTable, HBooleanColumn, HDenseIconButton, HElementCondition } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.SYS_ELEMENT,
+  name: Constants.ComponentName.SYS_ELEMENT,
 
   components: {
     HBooleanColumn,
@@ -89,7 +89,7 @@ export default defineComponent({
     HDenseIconButton,
     HDeleteButton,
     HEditButton,
-    HTable
+    HTable,
   },
 
   setup() {
@@ -103,10 +103,10 @@ export default defineComponent({
       toAuthorize,
       findItems,
       deleteItemById,
-      conditions
-    } = useTable<SysElementEntity, SysElementConditions>(api.sysElement(), ComponentNameEnum.SYS_ELEMENT, false, {
+      conditions,
+    } = useTable<SysElementEntity, SysElementConditions>(api.sysElement(), Constants.ComponentName.SYS_ELEMENT, false, {
       direction: 'ASC',
-      properties: ['path']
+      properties: ['path'],
     });
 
     const selected = ref([]);
@@ -124,7 +124,7 @@ export default defineComponent({
       { name: 'isIgnoreAuth', field: 'isIgnoreAuth', align: 'center', label: '忽略认证' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -140,8 +140,8 @@ export default defineComponent({
       toAuthorize,
       findItems,
       deleteItemById,
-      conditions
+      conditions,
     };
-  }
+  },
 });
 </script>

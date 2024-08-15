@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 
 /**
  * Meta 参数说明：
@@ -56,7 +56,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/security/user',
-        name: ComponentNameEnum.SYS_USER,
+        name: Constants.ComponentName.SYS_USER,
         meta: { title: '用户管理', icon: 'mdi-badge-account-horizontal', isHideAllChild: true },
         component: () => import('/@/views/pages/security/user/Index.vue'),
         children: [
@@ -64,20 +64,20 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/user/content',
             name: 'SysUserContent',
             meta: { title: '用户详情', icon: 'mdi-clipboard-account', isDetailContent: true },
-            component: () => import('/@/views/pages/security/user/Content.vue')
+            component: () => import('/@/views/pages/security/user/Content.vue'),
           },
           {
             path: '/security/user/authorize',
             name: 'SysUserAuthorize',
             meta: { title: '用户角色', icon: 'mdi-badge-account-alert', isDetailContent: true },
-            component: () => import('/@/views/pages/security/user/Authorize.vue')
-          }
-        ]
+            component: () => import('/@/views/pages/security/user/Authorize.vue'),
+          },
+        ],
       },
 
       {
         path: '/security/role',
-        name: ComponentNameEnum.SYS_ROLE,
+        name: Constants.ComponentName.SYS_ROLE,
         meta: { title: '角色管理', icon: 'mdi-shield-account', isHideAllChild: true },
         component: () => import('/@/views/pages/security/role/Index.vue'),
         children: [
@@ -85,19 +85,19 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/role/content',
             name: 'SysRoleContent',
             meta: { title: '角色详情', icon: 'mdi-shield-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/role/Content.vue')
+            component: () => import('/@/views/pages/security/role/Content.vue'),
           },
           {
             path: '/security/role/authorize',
             name: 'SysRoleAuthorize',
             meta: { title: '角色权限', icon: 'mdi-shield-key', isDetailContent: true },
-            component: () => import('/@/views/pages/security/role/Authorize.vue')
-          }
-        ]
+            component: () => import('/@/views/pages/security/role/Authorize.vue'),
+          },
+        ],
       },
       {
         path: '/security/permission',
-        name: ComponentNameEnum.SYS_PERMISSION,
+        name: Constants.ComponentName.SYS_PERMISSION,
         meta: { title: '权限管理', icon: 'mdi-shield-link-variant', isHideAllChild: true },
         component: () => import('/@/views/pages/security/permission/Index.vue'),
         children: [
@@ -105,13 +105,13 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/permission/content',
             name: 'SysPermissionContent',
             meta: { title: '权限详情', icon: 'mdi-clipboard-check-multiple', isDetailContent: true },
-            component: () => import('/@/views/pages/security/permission/Content.vue')
-          }
-        ]
+            component: () => import('/@/views/pages/security/permission/Content.vue'),
+          },
+        ],
       },
       {
         path: '/security/attribute',
-        name: ComponentNameEnum.SYS_ATTRIBUTE,
+        name: Constants.ComponentName.SYS_ATTRIBUTE,
         meta: { title: '元数据管理', icon: 'mdi-layers-triple', isHideAllChild: true },
         component: () => import('/@/views/pages/security/attribute/Index.vue'),
         children: [
@@ -119,19 +119,19 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/attribute/content',
             name: 'SysAttributeContent',
             meta: { title: '元数据详情', icon: 'mdi-layers', isDetailContent: true },
-            component: () => import('/@/views/pages/security/attribute/Content.vue')
+            component: () => import('/@/views/pages/security/attribute/Content.vue'),
           },
           {
             path: '/security/attribute/authorize',
             name: 'SysAttributeAuthorize',
             meta: { title: '元数据配置', icon: 'mdi-layers-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/attribute/Authorize.vue')
-          }
-        ]
+            component: () => import('/@/views/pages/security/attribute/Authorize.vue'),
+          },
+        ],
       },
       {
         path: '/security/default-role',
-        name: ComponentNameEnum.SYS_DEFAULT_ROLE,
+        name: Constants.ComponentName.SYS_DEFAULT_ROLE,
         meta: { title: '默认角色', icon: 'mdi-lock-open-alert', isHideAllChild: true },
         component: () => import('/@/views/pages/security/default-role/Index.vue'),
         children: [
@@ -139,13 +139,13 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/default-role/authorize',
             name: 'SysDefaultRoleAuthorize',
             meta: { title: '角色配置', icon: 'mdi-lock-open-check', isDetailContent: true },
-            component: () => import('/@/views/pages/security/default-role/Authorize.vue')
-          }
-        ]
+            component: () => import('/@/views/pages/security/default-role/Authorize.vue'),
+          },
+        ],
       },
       {
         path: '/security/element',
-        name: ComponentNameEnum.SYS_ELEMENT,
+        name: Constants.ComponentName.SYS_ELEMENT,
         meta: { title: '菜单管理', icon: 'mdi-clipboard-text', isHideAllChild: true },
         component: () => import('/@/views/pages/security/element/Index.vue'),
         children: [
@@ -153,19 +153,19 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/element/content',
             name: 'SysElementContent',
             meta: { title: '菜单详情', icon: 'mdi-clipboard-text-multiple', isDetailContent: true },
-            component: () => import('/@/views/pages/security/element/Content.vue')
+            component: () => import('/@/views/pages/security/element/Content.vue'),
           },
           {
             path: '/security/element/authorize',
             name: 'SysElementAuthorize',
             meta: { title: '菜单权限', icon: 'mdi-sort-variant-lock', isDetailContent: true },
-            component: () => import('/@/views/pages/security/element/Authorize.vue')
-          }
-        ]
+            component: () => import('/@/views/pages/security/element/Authorize.vue'),
+          },
+        ],
       },
       {
         path: '/security/tenant',
-        name: ComponentNameEnum.SYS_TENANT_DATA_SOURCE,
+        name: Constants.ComponentName.SYS_TENANT_DATA_SOURCE,
         meta: { title: '多租户数据源', icon: 'mdi-database-plus', isHideAllChild: true },
         component: () => import('/@/views/pages/security/tenant/Index.vue'),
         children: [
@@ -173,12 +173,12 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/tenant/content',
             name: 'SysTenantDataSourceContent',
             meta: { title: '数据源详情', icon: 'mdi-database-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/element/Content.vue')
-          }
-        ]
-      }
-    ]
-  }
+            component: () => import('/@/views/pages/security/element/Content.vue'),
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export default routes;

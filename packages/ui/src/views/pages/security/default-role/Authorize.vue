@@ -30,10 +30,10 @@ import type {
   SysRoleConditions,
   SysRoleProps,
   SysDefaultRoleEntity,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTableItem, useTable } from '/@/hooks';
 
@@ -44,15 +44,15 @@ export default defineComponent({
 
   components: {
     HAuthorizeList,
-    HAuthorizeLayout
+    HAuthorizeLayout,
   },
 
   setup(props) {
     const { editedItem, title, assign, overlay } = useTableItem<SysDefaultRoleEntity>(api.sysDefaultRole());
     const { tableRows, pagination, loading } = useTable<SysRoleEntity, SysRoleConditions>(
       api.sysRole(),
-      ComponentNameEnum.SYS_ROLE,
-      true
+      Constants.ComponentName.SYS_ROLE,
+      true,
     );
 
     const selectedItems = ref([]) as Ref<Array<SysRoleEntity>>;
@@ -60,7 +60,7 @@ export default defineComponent({
 
     const columns: QTableColumnProps = [
       { name: 'roleName', field: 'roleName', align: 'center', label: '角色名称' },
-      { name: 'roleCode', field: 'roleCode', align: 'center', label: '角色代码' }
+      { name: 'roleCode', field: 'roleCode', align: 'center', label: '角色代码' },
     ];
 
     onMounted(() => {
@@ -82,8 +82,8 @@ export default defineComponent({
       selectedItems,
       pagination,
       loading,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

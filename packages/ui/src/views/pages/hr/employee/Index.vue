@@ -47,28 +47,28 @@ import type {
   SysEmployeeEntity,
   SysEmployeeConditions,
   SysEmployeeProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTable, useEmployeeDisplay } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable, HEmployeeCondition } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.SYS_EMPLOYEE,
+  name: Constants.ComponentName.SYS_EMPLOYEE,
 
   components: {
     HDeleteButton,
     HEditButton,
     HEmployeeCondition,
-    HTable
+    HTable,
   },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, conditions, findItems, deleteItemById } =
-      useTable<SysEmployeeEntity, SysEmployeeConditions>(api.sysEmployee(), ComponentNameEnum.SYS_EMPLOYEE);
+      useTable<SysEmployeeEntity, SysEmployeeConditions>(api.sysEmployee(), Constants.ComponentName.SYS_EMPLOYEE);
 
     const { parseGender, parseIdentity } = useEmployeeDisplay();
 
@@ -82,7 +82,7 @@ export default defineComponent({
       { name: 'description', field: 'description', align: 'center', label: '备注' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -99,8 +99,8 @@ export default defineComponent({
       conditions,
       findItems,
       parseGender,
-      parseIdentity
+      parseIdentity,
     };
-  }
+  },
 });
 </script>

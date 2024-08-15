@@ -62,10 +62,10 @@ import type {
   AccessSourceEntity,
   AccessSourceConditions,
   AccessSourceProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api, getSocialLogo, moment } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 import { useAuthenticationStore } from '/@/stores';
@@ -78,7 +78,7 @@ export default defineComponent({
   components: {
     HBindingButton,
     HBindingDetailColumn,
-    HBindingStatusColumn
+    HBindingStatusColumn,
   },
 
   setup(props) {
@@ -88,7 +88,7 @@ export default defineComponent({
     const { tableRows, pagination, loading, findItems, conditions } = useTable<
       AccessSourceEntity,
       AccessSourceConditions
-    >(api.socialBinding(), ComponentNameEnum.SOCIAL_BINDING, true);
+    >(api.socialBinding(), Constants.ComponentName.SOCIAL_BINDING, true);
 
     const rowKey: AccessSourceProps = 'id';
 
@@ -96,7 +96,7 @@ export default defineComponent({
       {
         name: 'index',
         label: '序号',
-        field: 'index'
+        field: 'index',
       },
       { name: 'source', field: 'source', align: 'center', label: 'Logo' },
       { name: 'description', field: 'description', align: 'center', label: '绑定账号' },
@@ -106,10 +106,10 @@ export default defineComponent({
         field: 'bindingTime',
         align: 'center',
         label: '绑定时间',
-        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : '')
+        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
       },
       { name: 'bound', field: 'bound', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const getImage = (source: string) => {
@@ -132,6 +132,6 @@ export default defineComponent({
     });
 
     return { tab, tableRows, columns, rowKey, pagination, loading, getImage };
-  }
+  },
 });
 </script>

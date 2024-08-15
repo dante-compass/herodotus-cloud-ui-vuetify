@@ -31,27 +31,27 @@ import type {
   SysPermissionEntity,
   SysPermissionConditions,
   SysPermissionProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HTable } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.SYS_PERMISSION,
+  name: Constants.ComponentName.SYS_PERMISSION,
 
   components: {
-    HTable
+    HTable,
   },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, deleteItemById } = useTable<
       SysPermissionEntity,
       SysPermissionConditions
-    >(api.sysPermission(), ComponentNameEnum.SYS_PERMISSION);
+    >(api.sysPermission(), Constants.ComponentName.SYS_PERMISSION);
 
     const rowKey: SysPermissionProps = 'permissionId';
 
@@ -61,7 +61,7 @@ export default defineComponent({
       { name: 'description', field: 'description', align: 'center', label: '备注' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -74,8 +74,8 @@ export default defineComponent({
       toEdit,
       findItems,
       deleteItemById,
-      rowKey
+      rowKey,
     };
-  }
+  },
 });
 </script>

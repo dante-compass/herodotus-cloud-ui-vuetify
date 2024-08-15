@@ -18,7 +18,7 @@
 
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
-        <h-edit-button @click="toEdit(props.row, false)"></h-edit-button>
+        <h-edit-button @click="toEdit(props.row, {}, false)"></h-edit-button>
         <h-delete-button @click="onDeleteItemById(props.row[rowKey])"></h-delete-button>
       </q-td>
     </template>
@@ -36,15 +36,15 @@ import type {
   QTableOnRequestProps,
   QTableOnRequestParameter,
   DynamicFormEntity,
-  DynamicFormConditions
+  DynamicFormConditions,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
-import { formApi, Swal, toast, standardDeleteNotify } from '/@/lib/utils';
+import { Constants } from '/@/lib/definitions';
+import { formApi, toast, standardDeleteNotify } from '/@/lib/utils';
 import { useBaseTable } from '/@/hooks';
 
 export default defineComponent({
-  name: ComponentNameEnum.WORKFLOW_DYNAMIC_FORM,
+  name: Constants.ComponentName.WORKFLOW_DYNAMIC_FORM,
 
   setup(props) {
     const rowKey = 'id' as keyof DynamicFormEntity;
@@ -60,11 +60,11 @@ export default defineComponent({
       setPagination,
       setPageData,
       showLoading,
-      hideLoading
+      hideLoading,
     } = useBaseTable<DynamicFormEntity, DynamicFormConditions>(
-      ComponentNameEnum.WIDGETS_DYNAMIC_FORM,
+      Constants.ComponentName.WIDGETS_DYNAMIC_FORM,
       'updateTime',
-      true
+      true,
     );
 
     const columns: QTableColumnProps = [
@@ -72,7 +72,7 @@ export default defineComponent({
       { name: 'name', field: 'name', align: 'center', label: '名称' },
       { name: 'activityName', field: 'activityName', align: 'center', label: '适用节点' },
       { name: 'createTime', field: 'createTime', align: 'center', label: '创建时间' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const fetchDynamicFormByPage = (pageNumber = 1) => {
@@ -81,7 +81,7 @@ export default defineComponent({
         .dynamicForm()
         .fetchByPage({
           pageNumber: pageNumber - 1,
-          pageSize: pagination.value.rowsPerPage
+          pageSize: pagination.value.rowsPerPage,
         })
         .then(result => {
           const data = result.data as Page<DynamicFormEntity>;
@@ -123,7 +123,7 @@ export default defineComponent({
       () => pagination.value.page,
       newValue => {
         fetchDynamicFormByPage(newValue);
-      }
+      },
     );
 
     onMounted(() => {
@@ -141,8 +141,8 @@ export default defineComponent({
       findItems,
       toEdit,
       toCreate,
-      onDeleteItemById
+      onDeleteItemById,
     };
-  }
+  },
 });
 </script>

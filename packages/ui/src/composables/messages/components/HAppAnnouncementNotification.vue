@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { NotificationCategoryEnum } from '/@/lib/enums';
+import { NotificationCategoryEnum } from '/@/lib/definitions';
 import { defineComponent } from 'vue';
 
 import { useNotifications } from '../hooks';
@@ -29,8 +29,8 @@ export default defineComponent({
     return {
       items,
       hasAnnouncement,
-      convertDate
+      convertDate,
     };
-  }
+  },
 });
 </script>

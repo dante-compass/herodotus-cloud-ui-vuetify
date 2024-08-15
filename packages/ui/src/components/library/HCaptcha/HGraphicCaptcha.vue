@@ -39,7 +39,7 @@
 import { defineComponent, reactive, toRefs, onMounted, ref, computed } from 'vue';
 
 import type { GraphicCaptcha } from '/@/lib/declarations';
-import { CaptchaCategoryEnum } from '/@/lib/enums';
+import { CaptchaCategoryEnum } from '/@/lib/definitions';
 
 import { useCryptoStore } from '/@/stores';
 import { variables, api } from '/@/lib/utils';
@@ -48,7 +48,7 @@ export default defineComponent({
   name: 'HGraphicCaptcha',
 
   props: {
-    modelValue: { type: Boolean }
+    modelValue: { type: Boolean },
   },
 
   emits: ['update:modelValue'],
@@ -64,7 +64,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const createCaptcha = async () => {
@@ -83,7 +83,8 @@ export default defineComponent({
 
     const verifyCaptcha = () => {
       if (code.value && !isValid.value) {
-        api.open()
+        api
+          .open()
           .verifyCaptcha(crypto.sessionId, variables.getCaptcha(), code.value)
           .then(response => {
             const data = response.data as boolean;
@@ -116,8 +117,8 @@ export default defineComponent({
       graphicImageBase64,
       code,
       isValid,
-      hasError
+      hasError,
     };
-  }
+  },
 });
 </script>

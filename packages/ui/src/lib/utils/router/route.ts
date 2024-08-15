@@ -1,7 +1,7 @@
 import type { Router, RouteLocationRaw, RouteLocationNormalizedLoaded, NavigationFailure } from 'vue-router';
 
 import { lodash } from '../base';
-import { PathEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 
 class RouteUtilities {
   private static instance = new RouteUtilities();
@@ -91,7 +91,7 @@ class RouteUtilities {
 
   public toRoot(): void {
     if (this.isRouterExist()) {
-      this.to({ path: PathEnum.ROOT });
+      this.to({ path: Constants.Path.ROOT });
     }
   }
 
@@ -100,7 +100,7 @@ class RouteUtilities {
    */
   public toHome(): void {
     if (this.isRouterExist()) {
-      this.to({ name: PathEnum.HOME_NAME });
+      this.to({ name: Constants.Path.HOME_NAME });
     }
   }
 

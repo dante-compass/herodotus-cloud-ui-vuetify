@@ -54,7 +54,7 @@ import { defineComponent, ref } from 'vue';
 
 import type { SysUserEntity, SysUserConditions, SysUserProps, QTableColumnProps } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 
 import { useAuthenticationStore } from '/@/stores';
@@ -65,7 +65,7 @@ import { HChangePassword, HDeleteButton, HEditButton, HDenseIconButton, HTable }
 import { HSendMessageToUser } from '/@/composables';
 
 export default defineComponent({
-  name: ComponentNameEnum.SYS_USER,
+  name: Constants.ComponentName.SYS_USER,
 
   components: {
     HChangePassword,
@@ -73,12 +73,12 @@ export default defineComponent({
     HEditButton,
     HDenseIconButton,
     HTable,
-    HSendMessageToUser
+    HSendMessageToUser,
   },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<SysUserEntity, SysUserConditions>(api.sysUser(), ComponentNameEnum.SYS_USER);
+      useTable<SysUserEntity, SysUserConditions>(api.sysUser(), Constants.ComponentName.SYS_USER);
 
     const selected = ref([]);
     const rowKey: SysUserProps = 'userId';
@@ -95,7 +95,7 @@ export default defineComponent({
       { name: 'description', field: 'description', align: 'center', label: '备注' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const onChangePassword = (item: SysUserEntity) => {
@@ -134,8 +134,8 @@ export default defineComponent({
       currentUsername,
       currentUserAvatar,
       onChangePassword,
-      onSendMessageToUser
+      onSendMessageToUser,
     };
-  }
+  },
 });
 </script>

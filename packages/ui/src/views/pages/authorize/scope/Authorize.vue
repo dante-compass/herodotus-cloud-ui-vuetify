@@ -34,10 +34,10 @@ import type {
   OAuth2ScopeEntity,
   OAuth2ScopeAssignedBody,
   OAuth2PermissionBody,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api, toast } from '/@/lib/utils';
 import { useTableItem, useTable, useEditFinish } from '/@/hooks';
 
@@ -49,15 +49,15 @@ export default defineComponent({
   components: {
     HAuthorizeList,
     HAuthorizeLayout,
-    HTable
+    HTable,
   },
 
   setup(props) {
     const { editedItem, title, assign, overlay } = useTableItem<OAuth2ScopeEntity>(api.oauth2Scope());
     const { tableRows, pagination, loading } = useTable<SysPermissionEntity, SysPermissionConditions>(
       api.sysPermission(),
-      ComponentNameEnum.SYS_PERMISSION,
-      true
+      Constants.ComponentName.SYS_PERMISSION,
+      true,
     );
 
     const selectedItems = ref([]) as Ref<Array<SysPermissionEntity>>;
@@ -65,7 +65,7 @@ export default defineComponent({
 
     const columns: QTableColumnProps = [
       { name: 'permissionName', field: 'permissionName', align: 'center', label: '权限名称' },
-      { name: 'permissionCode', field: 'permissionCode', align: 'center', label: '权限代码' }
+      { name: 'permissionCode', field: 'permissionCode', align: 'center', label: '权限代码' },
     ];
 
     const { onFinish } = useEditFinish();
@@ -80,7 +80,7 @@ export default defineComponent({
         return {
           permissionId: item.permissionId,
           permissionCode: item.permissionCode,
-          permissionName: item.permissionName
+          permissionName: item.permissionName,
         };
       });
       let data: OAuth2ScopeAssignedBody = { scopeId: scopeId, permissions: permissions };
@@ -113,8 +113,8 @@ export default defineComponent({
       overlay,
       title,
       rowKey,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

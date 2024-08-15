@@ -39,10 +39,10 @@ import type {
   ProcessDefinitionDeleteQueryParams,
   ProcessSpecificsEntity,
   ProcessSpecificsConditions,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 
 import { useBaseTable, useBpmnTableItems, useBpmnProcess } from '/@/hooks';
 import { bpmnApi, lodash } from '/@/lib/utils';
@@ -51,7 +51,7 @@ export default defineComponent({
   name: 'HWorkflowSelectDialog',
 
   props: {
-    modelValue: { type: Boolean, required: true }
+    modelValue: { type: Boolean, required: true },
   },
 
   emits: ['update:modelValue'],
@@ -61,7 +61,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const { tableRows, totalPages, pagination, loading, findItems, conditions } = useBpmnTableItems<
@@ -71,12 +71,12 @@ export default defineComponent({
       ProcessDefinitionDeleteQueryParams
     >(bpmnApi.processDefinition(), {
       sortBy: 'id',
-      sortOrder: 'desc'
+      sortOrder: 'desc',
     });
     const { editedItem, createProcessSpecifics } = useBpmnProcess();
     const { toEdit } = useBaseTable<ProcessSpecificsEntity, ProcessSpecificsConditions>(
-      ComponentNameEnum.WORKFLOW_PROCESS_START,
-      'updateTime'
+      Constants.ComponentName.WORKFLOW_PROCESS_START,
+      'updateTime',
     );
 
     const selected = ref([]) as Ref<Array<ProcessDefinitionEntity>>;
@@ -89,15 +89,15 @@ export default defineComponent({
         field: 'suspended',
         align: 'center',
         label: '是否挂起',
-        format: value => (value ? '是' : '否')
+        format: value => (value ? '是' : '否'),
       },
       {
         name: 'startableInTasklist',
         field: 'startableInTasklist',
         align: 'center',
         label: '是否可启动',
-        format: value => (value ? '是' : '否')
-      }
+        format: value => (value ? '是' : '否'),
+      },
     ];
 
     const isDisabled = computed(() => {
@@ -110,7 +110,7 @@ export default defineComponent({
       if (!lodash.isElement(params)) {
         const item = params[0];
         await createProcessSpecifics(item.key, item.tenantId);
-        toEdit(editedItem.value, false);
+        toEdit(editedItem.value, {}, false);
       }
     };
 
@@ -126,8 +126,8 @@ export default defineComponent({
       selected,
       rowKey,
       columns,
-      findItems
+      findItems,
     };
-  }
+  },
 });
 </script>

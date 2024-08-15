@@ -17,16 +17,16 @@ import { defineComponent } from 'vue';
 
 import { useBpmnProcess } from '/@/hooks';
 import { HDetailContainer, HFormSkeleton } from '/@/components';
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 
-import { lodash, toast } from '/@/lib/utils';
+import { lodash } from '/@/lib/utils';
 
 export default defineComponent({
-  name: ComponentNameEnum.WORKFLOW_PROCESS_START,
+  name: Constants.ComponentName.WORKFLOW_PROCESS_START,
 
   components: {
     HDetailContainer,
-    HFormSkeleton
+    HFormSkeleton,
   },
 
   setup() {
@@ -38,7 +38,7 @@ export default defineComponent({
       formModeler,
       fetchStartForm,
       deleteProcessSpecifics,
-      startWorkflowProcess
+      startWorkflowProcess,
     } = useBpmnProcess();
 
     const onSave = () => {
@@ -64,8 +64,8 @@ export default defineComponent({
       editedItem,
       formModeler,
       onSave,
-      onCancel
+      onCancel,
     };
-  }
+  },
 });
 </script>

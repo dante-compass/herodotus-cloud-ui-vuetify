@@ -49,11 +49,11 @@ import type {
   Page,
   Sort,
   QTableColumnProps,
-  QTableOnRequestParameter
+  QTableOnRequestParameter,
 } from '/@/lib/declarations';
 
 import { useRouter } from 'vue-router';
-import { OperationEnum } from '/@/lib/enums';
+import { OperationEnum } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useEmployeeDisplay } from '/@/hooks';
 import { useRouteStore } from '/@/stores';
@@ -67,7 +67,7 @@ export default defineComponent({
     HDeleteButton,
     HDepartmentTree,
     HTable,
-    HOrganizationTree
+    HOrganizationTree,
   },
 
   setup(props) {
@@ -79,7 +79,7 @@ export default defineComponent({
       descending: false,
       page: 1,
       rowsPerPage: 10,
-      rowsNumber: 0
+      rowsNumber: 0,
     });
     const tableRows = ref([]) as Ref<Array<SysEmployeeEntity>>;
     const totalPages = ref(0);
@@ -93,7 +93,7 @@ export default defineComponent({
     const columns: QTableColumnProps = [
       { name: 'employeeName', field: 'employeeName', align: 'center', label: '姓名' },
       { name: 'identity', field: 'identity', align: 'center', label: '身份' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const sort = {} as Sort;
@@ -105,9 +105,9 @@ export default defineComponent({
           {
             pageNumber: pageNumber - 1,
             pageSize: pageSize,
-            ...sort
+            ...sort,
           },
-          { departmentId }
+          { departmentId },
         )
         .then(result => {
           const data = result.data as Page<SysEmployeeEntity>;
@@ -136,7 +136,7 @@ export default defineComponent({
         .deleteAllocatable({
           organizationId: organizationId.value,
           departmentId: departmentId.value,
-          employeeId: item.employeeId
+          employeeId: item.employeeId,
         })
         .then(() => {
           fetchAssignedByPage(pagination.value.page, pagination.value.rowsPerPage, departmentId.value);
@@ -147,14 +147,14 @@ export default defineComponent({
       () => departmentId.value,
       newValue => {
         fetchAssignedByPage(pagination.value.page, pagination.value.rowsPerPage, newValue);
-      }
+      },
     );
 
     watch(
       () => pagination.value.page,
       newValue => {
         fetchAssignedByPage(newValue, pagination.value.rowsPerPage, departmentId.value);
-      }
+      },
     );
 
     const isShowOperation = computed(() => {
@@ -165,7 +165,7 @@ export default defineComponent({
       const routeName = 'SysOwnershipContent';
       store.addRoutePushParam(routeName, {
         item: JSON.stringify({ organizationId: organizationId.value, departmentId: departmentId.value }),
-        operation: OperationEnum.AUTHORIZE
+        operation: OperationEnum.AUTHORIZE,
       });
       router.push({ name: routeName });
     };
@@ -184,8 +184,8 @@ export default defineComponent({
       deleteAllocatable,
       parseIdentity,
       toAllocatable,
-      isShowOperation
+      isShowOperation,
     };
-  }
+  },
 });
 </script>

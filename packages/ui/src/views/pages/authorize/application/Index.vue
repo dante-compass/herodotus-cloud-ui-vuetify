@@ -37,30 +37,30 @@ import type {
   OAuth2ApplicationEntity,
   OAuth2ApplicationConditions,
   OAuth2ApplicationProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { moment, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable, HGrantTypeColumn } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.OAUTH2_APPLICATION,
+  name: Constants.ComponentName.OAUTH2_APPLICATION,
 
   components: {
     HDeleteButton,
     HEditButton,
     HGrantTypeColumn,
-    HTable
+    HTable,
   },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
       useTable<OAuth2ApplicationEntity, OAuth2ApplicationConditions>(
         api.oauth2Application(),
-        ComponentNameEnum.OAUTH2_APPLICATION
+        Constants.ComponentName.OAUTH2_APPLICATION,
       );
 
     const rowKey: OAuth2ApplicationProps = 'applicationId';
@@ -75,32 +75,32 @@ export default defineComponent({
         field: 'accessTokenValidity',
         align: 'center',
         label: '令牌有效期',
-        format: value => formatDuration(value)
+        format: value => formatDuration(value),
       },
       {
         name: 'refreshTokenValidity',
         field: 'refreshTokenValidity',
         align: 'center',
         label: '刷新令牌有效期',
-        format: value => formatDuration(value)
+        format: value => formatDuration(value),
       },
       {
         name: 'authorizationCodeValidity',
         field: 'authorizationCodeValidity',
         align: 'center',
         label: '授权码有效期',
-        format: value => formatDuration(value)
+        format: value => formatDuration(value),
       },
       {
         name: 'deviceCodeValidity',
         field: 'deviceCodeValidity',
         align: 'center',
         label: '激活码有效期',
-        format: value => formatDuration(value)
+        format: value => formatDuration(value),
       },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const formatDuration = (date: string): string => {
@@ -119,8 +119,8 @@ export default defineComponent({
       toEdit,
       toAuthorize,
       findItems,
-      deleteItemById
+      deleteItemById,
     };
-  }
+  },
 });
 </script>

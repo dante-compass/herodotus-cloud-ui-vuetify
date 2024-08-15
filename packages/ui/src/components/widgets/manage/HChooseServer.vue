@@ -46,7 +46,7 @@ import { defineComponent, computed, ref, Ref, PropType } from 'vue';
 
 import type { AssetServerEntity, AssetServerConditions, QTableProps } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { lodash, api } from '/@/lib/utils';
 import { useServerDisplay, useTable } from '/@/hooks';
 
@@ -55,7 +55,7 @@ export default defineComponent({
 
   props: {
     modelValue: { type: Object as PropType<AssetServerEntity>, default: () => ({}), required: true },
-    open: { type: Boolean, required: true }
+    open: { type: Boolean, required: true },
   },
 
   emits: ['update:modelValue', 'update:open'],
@@ -65,14 +65,14 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const showDialog = computed({
       get: () => props.open,
       set: newValue => {
         emit('update:open', newValue);
-      }
+      },
     });
 
     const {
@@ -85,8 +85,8 @@ export default defineComponent({
       toAuthorize,
       conditions,
       findItems,
-      deleteItemById
-    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), ComponentNameEnum.ASSET_SERVER);
+      deleteItemById,
+    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), Constants.ComponentName.ASSET_SERVER);
 
     const { parseServerDevice } = useServerDisplay();
 
@@ -98,7 +98,7 @@ export default defineComponent({
       { name: 'actualIp', field: 'actualIp', align: 'center', label: '实际IP' },
       { name: 'manageIp', field: 'manageIp', align: 'center', label: '实体机IP' },
       { name: 'osPlatform', field: 'osPlatform', align: 'center', label: '操作系统' },
-      { name: 'osVersion', field: 'osVersion', align: 'center', label: '系统版本' }
+      { name: 'osVersion', field: 'osVersion', align: 'center', label: '系统版本' },
     ];
 
     onMounted(() => {
@@ -128,8 +128,8 @@ export default defineComponent({
       deleteItemById,
       selected,
       columns,
-      parseServerDevice
+      parseServerDevice,
     };
-  }
+  },
 });
 </script>

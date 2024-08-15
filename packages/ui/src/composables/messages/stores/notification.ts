@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import type { Sort, Page, NotificationEntity, NotificationConditions } from '/@/lib/declarations';
 
-import { NotificationCategoryEnum } from '/@/lib/enums';
+import { NotificationCategoryEnum } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useAuthenticationStore } from '/@/stores';
 
@@ -9,7 +9,7 @@ export const useNotificationStore = defineStore('Notification', {
   state: () => ({
     totalNumber: 0,
     dialogueCount: 0,
-    announcementCount: 0
+    announcementCount: 0,
   }),
 
   getters: {
@@ -21,7 +21,7 @@ export const useNotificationStore = defineStore('Notification', {
       } else {
         return state.totalNumber;
       }
-    }
+    },
   },
 
   actions: {
@@ -55,9 +55,9 @@ export const useNotificationStore = defineStore('Notification', {
           {
             pageNumber: 0,
             pageSize: 5,
-            ...sort
+            ...sort,
           },
-          { userId: store.userId, read: false } as NotificationConditions
+          { userId: store.userId, read: false } as NotificationConditions,
         )
         .then(result => {
           const data = result.data as Page<NotificationEntity>;
@@ -68,6 +68,6 @@ export const useNotificationStore = defineStore('Notification', {
             this.totalNumber = 0;
           }
         });
-    }
-  }
+    },
+  },
 });

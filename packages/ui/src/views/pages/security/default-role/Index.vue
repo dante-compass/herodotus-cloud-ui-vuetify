@@ -28,30 +28,30 @@ import type {
   SysDefaultRoleEntity,
   SysDefaultRoleConditions,
   SysDefaultRoleProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
 import { useTable } from '/@/hooks';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.SYS_DEFAULT_ROLE,
+  name: Constants.ComponentName.SYS_DEFAULT_ROLE,
 
   components: {
     HDeleteButton,
     HEditButton,
-    HTable
+    HTable,
   },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
       useTable<SysDefaultRoleEntity, SysDefaultRoleConditions>(
         api.sysDefaultRole(),
-        ComponentNameEnum.SYS_DEFAULT_ROLE
+        Constants.ComponentName.SYS_DEFAULT_ROLE,
       );
 
     const selected = ref([]);
@@ -63,7 +63,7 @@ export default defineComponent({
       { name: 'role', field: 'role', align: 'center', label: '角色代码', format: value => `${value.roleCode}` },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -78,8 +78,8 @@ export default defineComponent({
       toEdit,
       toAuthorize,
       findItems,
-      deleteItemById
+      deleteItemById,
     };
-  }
+  },
 });
 </script>

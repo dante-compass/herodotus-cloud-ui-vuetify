@@ -59,29 +59,32 @@ import type {
   SysDepartmentEntity,
   SysDepartmentConditions,
   SysDepartmentProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HDictionarySelect, HEditButton, HOrganizationSelect, HTable } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.SYS_DEPARTMENT,
+  name: Constants.ComponentName.SYS_DEPARTMENT,
 
   components: {
     HDeleteButton,
     HDictionarySelect,
     HEditButton,
     HOrganizationSelect,
-    HTable
+    HTable,
   },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, deleteItemById, conditions } =
-      useTable<SysDepartmentEntity, SysDepartmentConditions>(api.sysDepartment(), ComponentNameEnum.SYS_DEPARTMENT);
+      useTable<SysDepartmentEntity, SysDepartmentConditions>(
+        api.sysDepartment(),
+        Constants.ComponentName.SYS_DEPARTMENT,
+      );
 
     const selected = ref([]);
     const rowKey: SysDepartmentProps = 'departmentId';
@@ -93,7 +96,7 @@ export default defineComponent({
       { name: 'description', field: 'description', align: 'center', label: '备注' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -108,8 +111,8 @@ export default defineComponent({
       toEdit,
       findItems,
       deleteItemById,
-      conditions
+      conditions,
     };
-  }
+  },
 });
 </script>

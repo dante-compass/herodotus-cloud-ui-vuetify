@@ -53,30 +53,30 @@ import type {
   SysOrganizationEntity,
   SysOrganizationConditions,
   SysOrganizationProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HDictionarySelect, HEditButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.SYS_ORGANIZATION,
+  name: Constants.ComponentName.SYS_ORGANIZATION,
 
   components: {
     HDeleteButton,
     HDictionarySelect,
     HEditButton,
-    HTable
+    HTable,
   },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, deleteItemById, conditions } =
       useTable<SysOrganizationEntity, SysOrganizationConditions>(
         api.sysOrganization(),
-        ComponentNameEnum.SYS_ORGANIZATION
+        Constants.ComponentName.SYS_ORGANIZATION,
       );
 
     const selected = ref([]);
@@ -90,7 +90,7 @@ export default defineComponent({
       { name: 'description', field: 'description', align: 'center', label: '备注' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -106,8 +106,8 @@ export default defineComponent({
       findItems,
       deleteItemById,
       categroy,
-      conditions
+      conditions,
     };
-  }
+  },
 });
 </script>

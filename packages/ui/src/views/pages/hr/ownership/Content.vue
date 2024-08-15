@@ -44,10 +44,10 @@ import type {
   SysEmployeeConditions,
   SysEmployeeAllocatable,
   HttpResult,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { lodash, toast, api } from '/@/lib/utils';
 import { useTable, useTableItem, useEmployeeDisplay, useEditFinish } from '/@/hooks';
 
@@ -59,7 +59,7 @@ export default defineComponent({
   components: {
     HEmployeeCondition,
     HFullWidthLayout,
-    HTable
+    HTable,
   },
 
   setup(props) {
@@ -69,7 +69,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       SysEmployeeEntity,
       SysEmployeeConditions
-    >(api.sysEmployee(), ComponentNameEnum.SYS_EMPLOYEE);
+    >(api.sysEmployee(), Constants.ComponentName.SYS_EMPLOYEE);
 
     const selectedItems = ref([]) as Ref<Array<SysEmployeeEntity>>;
 
@@ -79,7 +79,7 @@ export default defineComponent({
       { name: 'identity', field: 'identity', align: 'center', label: '身份' },
       { name: 'description', field: 'description', align: 'center', label: '备注' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
-      { name: 'status', field: 'status', align: 'center', label: '状态' }
+      { name: 'status', field: 'status', align: 'center', label: '状态' },
     ];
 
     const onSave = () => {
@@ -92,7 +92,7 @@ export default defineComponent({
           .saveAllocatable({
             organizationId: editedItem.value.organizationId,
             departmentId: editedItem.value.departmentId,
-            employees: selectedItems.value
+            employees: selectedItems.value,
           })
           .then(response => {
             const result = response as HttpResult<string>;
@@ -124,8 +124,8 @@ export default defineComponent({
       parseIdentity,
       findItems,
       onSave,
-      title
+      title,
     };
-  }
+  },
 });
 </script>

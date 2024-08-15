@@ -4,13 +4,13 @@ import { useRouter } from 'vue-router';
 import type { Conditions, Entity, Page, QTablePaginationProps, QTableOnRequestParameter } from '/@/lib/declarations';
 
 import { useRouteStore } from '/@/stores';
-import { OperationEnum } from '/@/lib/enums';
+import { OperationEnum } from '/@/lib/definitions';
 
 export default function useBaseTableItems<E extends Entity, C extends Conditions>(
   name: string,
   sortBy: string,
   descending = false,
-  isFetchAll = false
+  isFetchAll = false,
 ) {
   const loading = ref<boolean>(false);
   const totalPages = ref<number>(0);
@@ -21,7 +21,7 @@ export default function useBaseTableItems<E extends Entity, C extends Conditions
     descending: descending,
     page: 1,
     rowsPerPage: isFetchAll ? 0 : 10,
-    rowsNumber: 0
+    rowsNumber: 0,
   });
 
   const store = useRouteStore();
@@ -37,12 +37,12 @@ export default function useBaseTableItems<E extends Entity, C extends Conditions
     componentName: string,
     operation: OperationEnum,
     item: E = {} as E,
-    additional: Record<string, unknown> = {}
+    additional: Record<string, unknown> = {},
   ) => {
     store.addRoutePushParam(componentName, {
       item: JSON.stringify(item),
       operation: operation,
-      additional: JSON.stringify(additional)
+      additional: JSON.stringify(additional),
     });
     router.push({ name: componentName });
   };
@@ -115,6 +115,6 @@ export default function useBaseTableItems<E extends Entity, C extends Conditions
     hideLoading,
     toAuthorize,
     toCreate,
-    toEdit
+    toEdit,
   };
 }

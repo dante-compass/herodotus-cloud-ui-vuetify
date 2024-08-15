@@ -1,20 +1,20 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { PathEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { WidgetRoute } from './widgets';
 import { SettingRoutes } from './settings';
 
 const RootRoute: RouteRecordRaw = {
-  path: PathEnum.ROOT,
+  path: Constants.Path.ROOT,
   name: 'Root',
-  redirect: PathEnum.HOME,
+  redirect: Constants.Path.HOME,
   meta: {
     title: 'Root'
   }
 };
 
 const SignInRoute: RouteRecordRaw = {
-  path: PathEnum.SIGN_IN,
+  path: Constants.Path.SIGN_IN,
   name: 'SignIn',
   component: () => import('../../views/sign-in/SignIn.vue'),
   meta: {
@@ -65,8 +65,8 @@ const ServiceErrorRoute: RouteRecordRaw = {
 };
 
 const PageNotFoundRoute: RouteRecordRaw = {
-  path: PathEnum.NOT_FOUND,
-  name: PathEnum.NOT_FOUND_NAME,
+  path: Constants.Path.NOT_FOUND,
+  name: Constants.Path.NOT_FOUND_NAME,
   component: () => import('/@/views/error/404.vue'),
   meta: {
     title: 'ErrorPage'

@@ -1,1 +1,2 @@
-export * from './keys';
+export const refreshTabInjectionKey = Symbol('reload');
+export const echartsInjectionKey = Symbol('echarts');

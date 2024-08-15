@@ -30,7 +30,7 @@ import type {
   DeploymentQueryParams,
   DeploymentSortBy,
   DeploymentDeleteQueryParams,
-  QTableProps
+  QTableProps,
 } from '/@/lib/declarations';
 
 import { useBpmnTableItems, useEditFinish } from '/@/hooks';
@@ -45,8 +45,8 @@ export default defineComponent({
         bpmnApi.deployment(),
         {
           sortBy: 'id',
-          sortOrder: 'desc'
-        }
+          sortOrder: 'desc',
+        },
       );
 
     const selected = ref([]);
@@ -61,10 +61,10 @@ export default defineComponent({
         field: 'deploymentTime',
         align: 'center',
         label: '部署时间',
-        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : '')
+        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
       },
       { name: 'tenantId', field: 'tenantId', align: 'center', label: '租户ID' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -79,8 +79,8 @@ export default defineComponent({
       toEdit,
       toCreate,
       findItems,
-      onDeleteItemById
+      onDeleteItemById,
     };
-  }
+  },
 });
 </script>

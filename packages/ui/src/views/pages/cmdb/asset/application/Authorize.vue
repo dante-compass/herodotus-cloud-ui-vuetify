@@ -30,10 +30,10 @@ import type {
   AssetServerConditions,
   AssetApplicationEntity,
   AssetServerProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTableItem, useTable } from '/@/hooks';
 
@@ -44,15 +44,15 @@ export default defineComponent({
 
   components: {
     HAuthorizeList,
-    HAuthorizeLayout
+    HAuthorizeLayout,
   },
 
   setup(props) {
     const { editedItem, title, assign, overlay } = useTableItem<AssetApplicationEntity>(api.assetApplication());
     const { tableRows, pagination, loading } = useTable<AssetServerEntity, AssetServerConditions>(
       api.assetServer(),
-      ComponentNameEnum.ASSET_SERVER,
-      true
+      Constants.ComponentName.ASSET_SERVER,
+      true,
     );
 
     const selectedItems = ref([]) as Ref<Array<AssetServerEntity>>;
@@ -62,7 +62,7 @@ export default defineComponent({
       { name: 'actualIp', field: 'actualIp', align: 'center', label: 'IP地址' },
       { name: 'hostName', field: 'hostName', align: 'center', label: '主机名' },
       { name: 'osPlatform', field: 'osPlatform', align: 'center', label: '操作系统' },
-      { name: 'osVersion', field: 'osVersion', align: 'center', label: '系统版本' }
+      { name: 'osVersion', field: 'osVersion', align: 'center', label: '系统版本' },
     ];
 
     onMounted(() => {
@@ -84,8 +84,8 @@ export default defineComponent({
       selectedItems,
       pagination,
       loading,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

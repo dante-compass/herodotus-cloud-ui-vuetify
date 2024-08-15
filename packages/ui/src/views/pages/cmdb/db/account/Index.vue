@@ -32,27 +32,30 @@ import type {
   DatabaseAccountEntity,
   DatabaseAccountConditions,
   DatabaseAccountProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.DATABASE_ACCOUNT,
+  name: Constants.ComponentName.DATABASE_ACCOUNT,
 
   components: {
     HDeleteButton,
     HEditButton,
-    HTable
+    HTable,
   },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<DatabaseAccountEntity, DatabaseAccountConditions>(api.dbAccount(), ComponentNameEnum.DATABASE_ACCOUNT);
+      useTable<DatabaseAccountEntity, DatabaseAccountConditions>(
+        api.dbAccount(),
+        Constants.ComponentName.DATABASE_ACCOUNT,
+      );
 
     const selected = ref([]);
     const rowKey: DatabaseAccountProps = 'accountId';
@@ -64,7 +67,7 @@ export default defineComponent({
       { name: 'purpose', field: 'purpose', align: 'center', label: '用途' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -79,8 +82,8 @@ export default defineComponent({
       toEdit,
       toAuthorize,
       findItems,
-      deleteItemById
+      deleteItemById,
     };
-  }
+  },
 });
 </script>

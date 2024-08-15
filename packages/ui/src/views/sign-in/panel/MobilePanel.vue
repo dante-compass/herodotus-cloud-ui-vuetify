@@ -100,7 +100,7 @@ import { useRouter } from 'vue-router';
 import { required, helpers } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import { useApplicationStore, useAuthenticationStore } from '/@/stores';
-import { PathEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { toast, api } from '/@/lib/utils';
 
 export default defineComponent({
@@ -168,7 +168,7 @@ export default defineComponent({
             isSubmitDisabled.value = false;
             toast.success('欢迎回来！');
             router.push({
-              path: PathEnum.HOME
+              path: Constants.Path.HOME
             });
           }
         })

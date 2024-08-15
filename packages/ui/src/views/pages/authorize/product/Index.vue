@@ -37,10 +37,10 @@ import type {
   OAuth2ProductEntity,
   OAuth2ProductConditions,
   OAuth2ProductProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 
 import { useTable } from '/@/hooks';
@@ -48,13 +48,16 @@ import { useTable } from '/@/hooks';
 import { HDeleteButton, HEditButton, HDenseIconButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.OAUTH2_PRODUCT,
+  name: Constants.ComponentName.OAUTH2_PRODUCT,
 
   components: { HDeleteButton, HEditButton, HDenseIconButton, HTable },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<OAuth2ProductEntity, OAuth2ProductConditions>(api.oauth2Product(), ComponentNameEnum.OAUTH2_PRODUCT);
+      useTable<OAuth2ProductEntity, OAuth2ProductConditions>(
+        api.oauth2Product(),
+        Constants.ComponentName.OAUTH2_PRODUCT,
+      );
 
     const selected = ref([]);
     const rowKey: OAuth2ProductProps = 'productId';
@@ -64,7 +67,7 @@ export default defineComponent({
       { name: 'description', field: 'description', align: 'center', label: '备注' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -79,8 +82,8 @@ export default defineComponent({
       toEdit,
       toAuthorize,
       findItems,
-      deleteItemById
+      deleteItemById,
     };
-  }
+  },
 });
 </script>
