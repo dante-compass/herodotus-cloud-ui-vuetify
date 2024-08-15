@@ -1,0 +1,1 @@
+import{d as e,l as r}from"../modules/npm-@vue-runtime-core-Cr5-LkSl.js";const n=e({name:"HBehaviorCaptchaControl",props:{size:{type:Number,default:30},description:{type:String,required:!0},prompt:{type:String,default:""}},setup(t){return{tips:r(()=>t.prompt?t.description+"【"+t.prompt+"】":t.description)}}});export{n as _};
