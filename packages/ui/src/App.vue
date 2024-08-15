@@ -8,7 +8,7 @@ import { useQuasar } from 'quasar';
 import { echarts } from '/@/plugins';
 import { useSettingsStore, useAuthenticationStore } from '/@/stores';
 import { variables } from '/@/lib/utils';
-import { refreshTabInjectionKey, echartsInjectionKey } from '/@/lib/symbol';
+import { refreshTabInjectionKey, echartsInjectionKey } from '/@/lib/definitions';
 import { useWebSocketMessage } from '/@/composables';
 
 export default defineComponent({

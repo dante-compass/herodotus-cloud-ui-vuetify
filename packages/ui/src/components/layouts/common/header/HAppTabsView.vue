@@ -53,7 +53,7 @@ import { storeToRefs } from 'pinia';
 import type { Tab } from '/@/lib/declarations';
 
 import { useTabsStore } from '/@/stores';
-import { refreshTabInjectionKey } from '/@/lib/symbol';
+import { refreshTabInjectionKey } from '/@/lib/definitions';
 
 export default defineComponent({
   name: 'HAppTabsView',
