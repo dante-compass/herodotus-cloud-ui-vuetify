@@ -2,7 +2,6 @@ import { SweetAlertResult } from 'sweetalert2';
 import { QTableOnRequestParameter, QTablePaginationProps, QTableOnRequestProps, QTableColumnProps } from '@herodotus/core';
 import { UserEntity, UserQueryParams, UserSortBy, UserService, GroupEntity, GroupQueryParams, GroupSortBy, GroupService, DeploymentCreateRequestBody, DeploymentService, BpmnQueryByGetService, BpmnSortable, BpmnListEntity, BpmnListQueryParams, BpmnDeleteQueryParams, Page } from '@herodotus/bpmn-apis';
 import { DynamicFormService } from '@herodotus/form-apis';
-
 export type BpmnAlign = 'left' | 'right' | 'top' | 'bottom' | 'center' | 'middle';
 export interface BpmnError {
     warnings: string;

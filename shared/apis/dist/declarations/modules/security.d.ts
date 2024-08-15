@@ -1,6 +1,5 @@
 import { BaseSysEntity, Conditions, EmptyObject, Entity } from '../base';
 import { SysEmployeeEntity } from './hr';
-
 export interface SysPermissionEntity extends BaseSysEntity {
     permissionId: string;
     permissionName: string;

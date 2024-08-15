@@ -1,35 +1,22 @@
 import { PropType } from 'vue';
 import { GroupEntity } from '../../declarations';
-
 declare const _default: import('vue').DefineComponent<{
     modelValue: {
         type: PropType<Array<GroupEntity>>;
         default: () => Array<GroupEntity>;
     };
 }, {
-    tableRows: import('vue').Ref<GroupEntity[], GroupEntity[]>;
-    totalPages: import('vue').Ref<number, number>;
+    tableRows: import('vue').Ref<GroupEntity[]>;
+    totalPages: import('vue').Ref<number>;
     pagination: import('vue').Ref<{
         sortBy: string | null;
         descending: boolean;
         page: number;
         rowsPerPage: number;
         rowsNumber: number;
-    }, Required<{
-        sortBy?: string | null;
-        descending?: boolean;
-        page?: number;
-        rowsPerPage?: number;
-        rowsNumber?: number;
-    }> | {
-        sortBy: string | null;
-        descending: boolean;
-        page: number;
-        rowsPerPage: number;
-        rowsNumber: number;
     }>;
-    loading: import('vue').Ref<boolean, boolean>;
-    fieldValue: import('vue').Ref<string, string>;
+    loading: import('vue').Ref<boolean>;
+    fieldValue: import('vue').Ref<string>;
     selectedItems: import('vue').WritableComputedRef<GroupEntity[]>;
     rowKey: keyof GroupEntity;
     columns: {

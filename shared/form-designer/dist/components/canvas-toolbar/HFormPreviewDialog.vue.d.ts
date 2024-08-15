@@ -1,5 +1,4 @@
 import { Ref } from 'vue';
-
 declare const _default: import('vue').DefineComponent<{
     modelValue: {
         type: BooleanConstructor;
@@ -7,7 +6,7 @@ declare const _default: import('vue').DefineComponent<{
     };
 }, {
     isOpen: import('vue').WritableComputedRef<boolean>;
-    state: Ref<Record<string, any>, Record<string, any>>;
+    state: Ref<Record<string, any>>;
     canvasElements: {
         id: string;
         config: {

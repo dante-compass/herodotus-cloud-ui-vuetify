@@ -1,6 +1,5 @@
 import { App } from 'vue';
 import { HDynamicForms } from './components';
-
 export { HDynamicForms };
 export * from './lib';
 export * from './declarations';

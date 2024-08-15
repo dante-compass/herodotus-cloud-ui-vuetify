@@ -2,5 +2,4 @@ import { default as HCandidateUserTextField } from './HCandidateUserTextField.vu
 import { default as HCandidateGroupTextField } from './HCandidateGroupTextField.vue';
 import { default as HExtensionPropertyDialog } from './HExtensionPropertyDialog.vue';
 import { default as HFormSelect } from './HFormSelect.vue';
-
 export { HCandidateUserTextField, HCandidateGroupTextField, HExtensionPropertyDialog, HFormSelect };

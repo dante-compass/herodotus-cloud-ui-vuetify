@@ -1,6 +1,5 @@
 import { Ref } from 'vue';
 import { ExtensionProperty } from '../../declarations';
-
 declare const _default: import('vue').DefineComponent<{
     modelValue: {
         type: BooleanConstructor;
@@ -8,7 +7,7 @@ declare const _default: import('vue').DefineComponent<{
     };
 }, {
     isOpen: import('vue').WritableComputedRef<boolean>;
-    property: Ref<ExtensionProperty, ExtensionProperty>;
+    property: Ref<ExtensionProperty>;
     isDisabled: import('vue').ComputedRef<boolean>;
     onSave: () => void;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "save" | "update:open")[], "update:modelValue" | "save" | "update:open", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{

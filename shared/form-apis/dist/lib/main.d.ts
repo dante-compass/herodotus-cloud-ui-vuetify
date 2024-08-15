@@ -1,6 +1,5 @@
 import { Axios, HttpConfig } from './base';
 import { DynamicFormService, ProcessCommentsService, ProcessSpecificsService } from './modules';
-
 declare class FormApiResources {
     private static instance;
     private config;

@@ -1,6 +1,5 @@
 import { PropType } from 'vue';
 import { Schema } from '../../declarations';
-
 declare const _default: import('vue').DefineComponent<{
     schema: {
         type: PropType<Schema>;

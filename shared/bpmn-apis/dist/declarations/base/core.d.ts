@@ -1,5 +1,4 @@
 import { Entity, Conditions, Pagination } from '@herodotus/core';
-
 export type { SweetAlertResult } from 'sweetalert2';
 export interface BpmnParams extends Conditions {
 }

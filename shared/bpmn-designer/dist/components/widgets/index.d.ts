@@ -7,5 +7,4 @@ import { default as HListItem } from './HListItem.vue';
 import { default as HSeparator } from './HSeparator.vue';
 import { default as HTableItemDeleteButton } from './HTableItemDeleteButton.vue';
 import { default as HTableItemEditButton } from './HTableItemEditButton.vue';
-
 export { HButton, HButtonDropdown, HButtonGroup, HDialog, HExpansionItem, HListItem, HSeparator, HTableItemDeleteButton, HTableItemEditButton, };

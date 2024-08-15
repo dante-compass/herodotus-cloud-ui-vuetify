@@ -1,6 +1,5 @@
 import { Entity } from '../base';
 import { DeleteDomain } from './domain';
-
 export interface AbstractArgument extends Entity {
 }
 export interface AbstractBucketArgument extends AbstractArgument {

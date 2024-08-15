@@ -1,6 +1,5 @@
 import { PropType } from 'vue';
 import { Element } from '../declarations';
-
 declare const _default: import('vue').DefineComponent<{
     modelValue: {
         type: PropType<Record<string, any>>;

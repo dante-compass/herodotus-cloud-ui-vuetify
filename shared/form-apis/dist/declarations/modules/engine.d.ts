@@ -1,5 +1,4 @@
 import { QBaseDataItem } from '../base';
-
 export type DataType = 'String' | 'Number' | 'Array' | 'Object';
 export interface VModel {
     name: string;

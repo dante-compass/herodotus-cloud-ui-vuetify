@@ -1,6 +1,5 @@
 import { PropType } from 'vue';
 import { FormDesignerResources, DynamicFormEntity } from '../declarations';
-
 declare const _default: import('vue').DefineComponent<{
     instance: {
         type: PropType<FormDesignerResources>;
@@ -23,12 +22,12 @@ declare const _default: import('vue').DefineComponent<{
         default: () => {};
     };
 }, {
-    leftDrawerOpen: import('vue').Ref<boolean, boolean>;
+    leftDrawerOpen: import('vue').Ref<boolean>;
     toggleLeftDrawer(): void;
-    rightDrawerOpen: import('vue').Ref<boolean, boolean>;
+    rightDrawerOpen: import('vue').Ref<boolean>;
     toggleRightDrawer(): void;
-    openPreview: import('vue').Ref<boolean, boolean>;
-    openUpload: import('vue').Ref<boolean, boolean>;
+    openPreview: import('vue').Ref<boolean>;
+    openUpload: import('vue').Ref<boolean>;
 }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "close"[], "close", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     instance: {
         type: PropType<FormDesignerResources>;

@@ -1,5 +1,4 @@
 import { Element } from '../../declarations';
-
 export default function useConditionProperties(): {
     getConditionExpressionValue: (element: Element) => string;
     setConditionExpressionValue: (element: Element, value: string) => void;

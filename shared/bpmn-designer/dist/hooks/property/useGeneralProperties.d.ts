@@ -1,5 +1,4 @@
 import { Element } from '../../declarations';
-
 export default function useGeneralProperties(): {
     isProcess: (element: Element) => boolean;
     getIdValue: (element: Element) => string;

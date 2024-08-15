@@ -1,6 +1,5 @@
 import { Ref, PropType } from 'vue';
 import { UserEntity } from '../../declarations';
-
 declare const _default: import('vue').DefineComponent<{
     modelValue: {
         type: StringConstructor;
@@ -17,9 +16,9 @@ declare const _default: import('vue').DefineComponent<{
         type: StringConstructor;
     };
 }, {
-    isOpen: Ref<boolean, boolean>;
+    isOpen: Ref<boolean>;
     isDisabled: import('vue').ComputedRef<boolean>;
-    selected: Ref<UserEntity[], UserEntity[]>;
+    selected: Ref<UserEntity[]>;
     assignee: import('vue').WritableComputedRef<string>;
     onClose: () => void;
     onSave: () => void;
