@@ -9,7 +9,7 @@ import { echarts } from '/@/plugins';
 import { useSettingsStore, useAuthenticationStore } from '/@/stores';
 import { variables } from '/@/lib/utils';
 import { refreshTabInjectionKey, echartsInjectionKey } from '/@/lib/definitions';
-import { useWebSocketMessage } from '/@/composables';
+import { useWebSocketMessage } from '/@/composables/messages';
 
 export default defineComponent({
   name: 'App',
@@ -37,7 +37,7 @@ export default defineComponent({
       () => settings.isDark,
       (newValue: boolean) => {
         $q.dark.set(newValue);
-      }
+      },
     );
 
     const beforeUnloadHandler = (e: any) => {
@@ -78,9 +78,9 @@ export default defineComponent({
     });
 
     return {
-      isRouterAlive
+      isRouterAlive,
     };
-  }
+  },
 });
 </script>
 

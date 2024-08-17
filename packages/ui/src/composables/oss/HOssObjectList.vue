@@ -69,7 +69,7 @@ import type {
   ObjectDomain,
   ObjectDomainProps,
   ObjectDomainConditions,
-  DeleteObjectDomain,
+  DeletedObjectDomain,
 } from '/@/lib/declarations';
 
 import { HDeleteButton, HDenseIconButton, HTable, HChunkUploader, HSimpleUploader } from '/@/components';
@@ -158,9 +158,9 @@ export default defineComponent({
      * @param objects Table 中已选择的 ObjectDomain
      * @returns DeleteObjectDomain
      */
-    const toDeleteObjectDomain = (objects: Array<ObjectDomain>): Array<DeleteObjectDomain> => {
+    const toDeleteObjectDomain = (objects: Array<ObjectDomain>): Array<DeletedObjectDomain> => {
       const deleteObjects = objects.map(object => {
-        const deleteObject: DeleteObjectDomain = { objectName: object.objectName };
+        const deleteObject: DeletedObjectDomain = { objectName: object.objectName };
         return deleteObject;
       });
       return deleteObjects;

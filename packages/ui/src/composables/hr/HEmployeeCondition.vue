@@ -59,17 +59,17 @@ import { defineComponent, computed, PropType } from 'vue';
 
 import type { SysEmployeeConditions } from '/@/lib/declarations';
 
-import { HDictionarySelect } from '../manage';
+import { HDictionarySelect } from '/@/components';
 
 export default defineComponent({
   name: 'HEmployeeCondition',
 
   components: {
-    HDictionarySelect
+    HDictionarySelect,
   },
 
   props: {
-    conditions: { type: Object as PropType<SysEmployeeConditions>, required: true }
+    conditions: { type: Object as PropType<SysEmployeeConditions>, required: true },
   },
 
   emits: ['update:conditions'],
@@ -79,7 +79,7 @@ export default defineComponent({
       get: () => props.conditions,
       set: newValue => {
         emit('update:conditions', newValue);
-      }
+      },
     });
 
     const onClear = () => {
@@ -88,8 +88,8 @@ export default defineComponent({
 
     return {
       conditionsModelValue,
-      onClear
+      onClear,
     };
-  }
+  },
 });
 </script>

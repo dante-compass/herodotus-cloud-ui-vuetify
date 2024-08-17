@@ -60,9 +60,10 @@ import { api } from '/@/lib/utils';
 import { useAuthenticationStore } from '/@/stores';
 import { useTable } from '/@/hooks';
 
-import { HChangePassword, HDeleteButton, HEditButton, HDenseIconButton, HTable } from '/@/components';
+import { HDeleteButton, HEditButton, HDenseIconButton, HTable } from '/@/components';
+import { HChangePassword } from '/@/composables/security';
 
-import { HSendMessageToUser } from '/@/composables';
+import { HSendMessageToUser } from '/@/composables/messages';
 
 export default defineComponent({
   name: Constants.ComponentName.SYS_USER,

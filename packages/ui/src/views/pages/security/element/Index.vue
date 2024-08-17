@@ -78,7 +78,8 @@ import { useTable } from '/@/hooks';
 import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 
-import { HDeleteButton, HEditButton, HTable, HBooleanColumn, HDenseIconButton, HElementCondition } from '/@/components';
+import { HDeleteButton, HEditButton, HTable, HBooleanColumn, HDenseIconButton } from '/@/components';
+import { HElementCondition } from '/@/composables/security';
 
 export default defineComponent({
   name: Constants.ComponentName.SYS_ELEMENT,

@@ -5,7 +5,7 @@
         <q-card-section>
           <q-tree
             ref="treeRef"
-            :nodes="treeItems"
+            :nodes="items"
             node-key="id"
             label-key="name"
             selected-color="primary"
@@ -17,26 +17,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, Ref, onMounted } from 'vue';
+import { defineComponent, ref, watch, Ref } from 'vue';
 
-import type { QTree, SysElementEntity, SysElementConditions } from '/@/lib/declarations';
-import { api } from '/@/lib/utils';
-import { useTreeItems } from '/@/hooks';
+import type { QTree, Tree } from '/@/lib/declarations';
 
 export default defineComponent({
-  name: 'HElementTree',
+  name: 'HTreeField',
 
   props: {
+    items: { type: Array as PropType<Array<Tree>>, required: true },
     selected: { type: String },
     label: { type: String },
-    value: { type: String }
+    value: { type: String },
   },
 
   emits: ['update:selected'],
 
   setup(props, { emit }) {
-    const { treeItems, conditions } = useTreeItems<SysElementEntity, SysElementConditions>(api.sysElement());
-
     const selectedValue = ref('');
     const treeRef = ref(null) as Ref<QTree | null>;
     const nodeName = ref('');
@@ -50,8 +47,8 @@ export default defineComponent({
         }
       },
       {
-        immediate: true
-      }
+        immediate: true,
+      },
     );
 
     watch(
@@ -62,8 +59,8 @@ export default defineComponent({
         }
       },
       {
-        immediate: true
-      }
+        immediate: true,
+      },
     );
 
     watch(
@@ -79,8 +76,8 @@ export default defineComponent({
         }
       },
       {
-        immediate: true
-      }
+        immediate: true,
+      },
     );
 
     const onClear = () => {
@@ -89,13 +86,11 @@ export default defineComponent({
     };
 
     return {
-      treeItems,
       selectedValue,
-      conditions,
       nodeName,
       treeRef,
-      isPopup
+      isPopup,
     };
-  }
+  },
 });
 </script>

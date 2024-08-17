@@ -16,7 +16,7 @@ import { defineComponent, ref } from 'vue';
 
 import { Constants } from '/@/lib/definitions';
 
-import { HOssBucketList, HOssObjectList } from '/@/composables';
+import { HOssBucketList, HOssObjectList } from '/@/composables/oss';
 
 export default defineComponent({
   name: Constants.ComponentName.OSS_OBJECT,

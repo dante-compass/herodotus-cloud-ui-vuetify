@@ -108,8 +108,7 @@
 import { defineComponent, onMounted } from 'vue';
 
 import { useConstantsStore } from '/@/stores';
-import { useRealTimeInformation } from '/@/composables';
-
+import { useRealTimeInformation } from '/@/composables/messages';
 import {
   HBarChart,
   HCategoryChart,
@@ -120,8 +119,8 @@ import {
   HScatterChart,
   HSankeyChart,
   HSummaryBox,
-  HLinkBox
-} from '../charts';
+  HLinkBox,
+} from '/@/composables/charts';
 
 export default defineComponent({
   name: 'DashboardConsole',
@@ -136,7 +135,7 @@ export default defineComponent({
     HScatterChart,
     HSankeyChart,
     HSummaryBox,
-    HLinkBox
+    HLinkBox,
   },
 
   setup() {
@@ -148,8 +147,8 @@ export default defineComponent({
     });
 
     return {
-      onlineUserCount
+      onlineUserCount,
     };
-  }
+  },
 });
 </script>

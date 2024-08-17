@@ -58,7 +58,9 @@ import { api } from '/@/lib/utils';
 import { useEmployeeDisplay } from '/@/hooks';
 import { useRouteStore } from '/@/stores';
 
-import { HDeleteButton, HDepartmentTree, HTable, HOrganizationTree } from '/@/components';
+import { HDeleteButton, HTable } from '/@/components';
+
+import { HOrganizationTree, HDepartmentTree } from '/@/composables/hr';
 
 export default defineComponent({
   name: 'SysOwnership',

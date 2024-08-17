@@ -26,8 +26,14 @@ import { defineComponent } from 'vue';
 import { useApplicationStore, useSettingsStore } from '/@/stores';
 import { ThemeModeEnum } from '/@/lib/definitions';
 
+import { HSettingSwitch } from '../settings';
+
 export default defineComponent({
   name: 'HAppRightDrawer',
+
+  components: {
+    HSettingSwitch,
+  },
 
   setup() {
     const application = useApplicationStore();

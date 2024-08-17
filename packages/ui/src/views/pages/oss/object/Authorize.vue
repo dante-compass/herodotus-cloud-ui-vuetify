@@ -36,14 +36,14 @@ import { useBaseTableItem } from '/@/hooks';
 
 import { HSimpleCenterFormLayout } from '/@/components';
 
-import { HOssTags } from '/@/composables';
+import { HOssTags } from '/@/composables/oss';
 
 export default defineComponent({
   name: 'OssObjectAuthorize',
 
   components: {
     HSimpleCenterFormLayout,
-    HOssTags
+    HOssTags,
   },
 
   setup(props) {
@@ -92,8 +92,8 @@ export default defineComponent({
         }
       },
       {
-        immediate: false
-      }
+        immediate: false,
+      },
     );
 
     // watch(
@@ -126,8 +126,8 @@ export default defineComponent({
       editedItem,
       operation,
       title,
-      refresh
+      refresh,
     };
-  }
+  },
 });
 </script>

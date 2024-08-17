@@ -54,7 +54,8 @@ import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTable, useEmployeeDisplay } from '/@/hooks';
 
-import { HDeleteButton, HEditButton, HTable, HEmployeeCondition } from '/@/components';
+import { HDeleteButton, HEditButton, HTable } from '/@/components';
+import { HEmployeeCondition } from '/@/composables/hr';
 
 export default defineComponent({
   name: Constants.ComponentName.SYS_EMPLOYEE,

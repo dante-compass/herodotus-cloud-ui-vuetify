@@ -54,8 +54,8 @@ export default defineComponent({
 
     return {
       source,
-      accessPrincipal
+      accessPrincipal,
     };
-  }
+  },
 });
 </script>

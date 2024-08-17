@@ -127,12 +127,11 @@ export type {
   ObjectDomain,
   ObjectDomainProps,
   ObjectDomainConditions,
-  ObjectListingDomain,
   BucketSettingBusiness,
   CreateMultipartUploadBusiness,
-  DeleteObjectDomain,
   ObjectSettingBusiness,
-  ObjectLockConfigurationDomain
+  ObjectLockConfigurationDomain,
+  DeletedObjectDomain
 } from '@herodotus/oss-apis';
 
 export type {

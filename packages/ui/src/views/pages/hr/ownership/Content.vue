@@ -51,7 +51,8 @@ import { Constants } from '/@/lib/definitions';
 import { lodash, toast, api } from '/@/lib/utils';
 import { useTable, useTableItem, useEmployeeDisplay, useEditFinish } from '/@/hooks';
 
-import { HEmployeeCondition, HFullWidthLayout, HTable } from '/@/components';
+import { HFullWidthLayout, HTable } from '/@/components';
+import { HEmployeeCondition } from '/@/composables/hr';
 
 export default defineComponent({
   name: 'SysOwnershipContent',

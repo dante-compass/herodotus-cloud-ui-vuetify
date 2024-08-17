@@ -94,7 +94,7 @@ import { required, helpers } from '@vuelidate/validators';
 import { Constants } from '/@/lib/definitions';
 import { toast } from '/@/lib/utils';
 import { useApplicationStore, useCryptoStore, useAuthenticationStore } from '/@/stores';
-import { HSocialSignInList } from '../components';
+import { HSocialSignInList } from '/@/composables/sign-in';
 
 export default defineComponent({
   name: 'AccountPanel',

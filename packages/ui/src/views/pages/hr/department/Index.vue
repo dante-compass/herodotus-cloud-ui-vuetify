@@ -66,7 +66,8 @@ import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
-import { HDeleteButton, HDictionarySelect, HEditButton, HOrganizationSelect, HTable } from '/@/components';
+import { HDeleteButton, HDictionarySelect, HEditButton, HTable } from '/@/components';
+import { HOrganizationSelect } from '/@/composables/hr';
 
 export default defineComponent({
   name: Constants.ComponentName.SYS_DEPARTMENT,

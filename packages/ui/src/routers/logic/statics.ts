@@ -9,8 +9,8 @@ const RootRoute: RouteRecordRaw = {
   name: 'Root',
   redirect: Constants.Path.HOME,
   meta: {
-    title: 'Root'
-  }
+    title: 'Root',
+  },
 };
 
 const SignInRoute: RouteRecordRaw = {
@@ -19,8 +19,8 @@ const SignInRoute: RouteRecordRaw = {
   component: () => import('../../views/sign-in/SignIn.vue'),
   meta: {
     title: '登录',
-    isIgnoreAuth: true
-  }
+    isIgnoreAuth: true,
+  },
 };
 
 const SocialSignInCallbackRoute: RouteRecordRaw = {
@@ -29,8 +29,8 @@ const SocialSignInCallbackRoute: RouteRecordRaw = {
   component: () => import('../../views/sign-in/SocialSignInCallback.vue'),
   meta: {
     title: '社交登录 Callback',
-    isIgnoreAuth: true
-  }
+    isIgnoreAuth: true,
+  },
 };
 
 const AuthorizationCodeSignInRoute: RouteRecordRaw = {
@@ -39,29 +39,29 @@ const AuthorizationCodeSignInRoute: RouteRecordRaw = {
   component: () => import('../../views/sign-in/AuthorizationCodeSignIn.vue'),
   meta: {
     title: '授权码模式登录',
-    isIgnoreAuth: true
-  }
+    isIgnoreAuth: true,
+  },
 };
 
 const NoPermissionRoute: RouteRecordRaw = {
   path: '/403',
   name: 'NoPermission',
-  component: () => import('/@/views/error/403.vue'),
-  meta: { title: 'No Permission' }
+  component: () => import('/@/composables/error/403.vue'),
+  meta: { title: 'No Permission' },
 };
 
 const NotFoundRoute: RouteRecordRaw = {
   path: '/404',
   name: 'NotFound',
-  component: () => import('/@/views/error/404.vue'),
-  meta: { title: 'Not Found' }
+  component: () => import('/@/composables/error/404.vue'),
+  meta: { title: 'Not Found' },
 };
 
 const ServiceErrorRoute: RouteRecordRaw = {
   path: '/500',
   name: 'ServiceError',
-  component: () => import('/@/views/error/500.vue'),
-  meta: { title: 'Service Error' }
+  component: () => import('/@/composables/error/500.vue'),
+  meta: { title: 'Service Error' },
 };
 
 const PageNotFoundRoute: RouteRecordRaw = {
@@ -69,8 +69,8 @@ const PageNotFoundRoute: RouteRecordRaw = {
   name: Constants.Path.NOT_FOUND_NAME,
   component: () => import('/@/views/error/404.vue'),
   meta: {
-    title: 'ErrorPage'
-  }
+    title: 'ErrorPage',
+  },
 };
 
 //普通路由 无需验证权限
@@ -83,5 +83,5 @@ export const staticRoutes: Array<RouteRecordRaw> = [
   SocialSignInCallbackRoute,
   AuthorizationCodeSignInRoute,
   WidgetRoute,
-  ...SettingRoutes
+  ...SettingRoutes,
 ];

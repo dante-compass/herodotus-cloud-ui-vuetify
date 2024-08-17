@@ -41,7 +41,8 @@ import { Constants } from '/@/lib/definitions';
 import { api, toast } from '/@/lib/utils';
 import { useTableItem, useTable, useEditFinish } from '/@/hooks';
 
-import { HAuthorizeList, HTable, HAuthorizeLayout } from '/@/components';
+import { HTable } from '/@/components';
+import { HAuthorizeList, HAuthorizeLayout } from '/@/composables/authorize';
 
 export default defineComponent({
   name: 'OAuth2ScopeAuthorize',

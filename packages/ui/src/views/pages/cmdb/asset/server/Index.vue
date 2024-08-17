@@ -49,6 +49,7 @@ import { api } from '/@/lib/utils';
 import { useTable, useServerDisplay } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
+import { HServerCondition } from '/@/composables/cmdb';
 
 export default defineComponent({
   name: Constants.ComponentName.ASSET_SERVER,
@@ -57,6 +58,7 @@ export default defineComponent({
     HDeleteButton,
     HEditButton,
     HTable,
+    HServerCondition,
   },
 
   setup() {

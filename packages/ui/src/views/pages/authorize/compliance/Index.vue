@@ -36,7 +36,8 @@ import { Constants } from '/@/lib/definitions';
 import { moment, api } from '/@/lib/utils';
 import { useTable, useXlsx } from '/@/hooks';
 
-import { HTable, HComplianceCondition } from '/@/components';
+import { HTable } from '/@/components';
+import { HComplianceCondition } from '/@/composables/authorize';
 
 export default defineComponent({
   name: Constants.ComponentName.OAUTH2_COMPLIANCE,

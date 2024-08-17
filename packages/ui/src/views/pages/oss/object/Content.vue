@@ -10,14 +10,14 @@ import { defineComponent, ref, onMounted } from 'vue';
 import type { ObjectDomain } from '/@/lib/declarations';
 
 import { useBaseTableItem } from '/@/hooks';
-import { HOssObjectList } from '/@/composables';
+import { HOssObjectList } from '/@/composables/oss';
 import { lodash } from '/@/lib/utils';
 
 export default defineComponent({
   name: 'OssObjectContent',
 
   components: {
-    HOssObjectList
+    HOssObjectList,
   },
 
   setup() {
@@ -47,8 +47,8 @@ export default defineComponent({
       bucketName,
       folderName,
       isShowObjects,
-      title
+      title,
     };
-  }
+  },
 });
 </script>
