@@ -160,7 +160,8 @@ import { api, lodash } from '/@/lib/utils';
 import { useTableItem, useTable } from '/@/hooks';
 import { useConstantsStore } from '/@/stores';
 
-import { HAuthorizeLayout, HDictionarySelect } from '/@/components';
+import { HDictionarySelect } from '/@/components';
+import { HAuthorizeLayout } from '/@/composables/authorize';
 
 export default defineComponent({
   name: 'OAuth2ApplicationContent',

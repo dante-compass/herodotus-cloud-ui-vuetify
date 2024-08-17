@@ -49,10 +49,10 @@ import type {
 
 import { Constants } from '/@/lib/definitions';
 import { lodash, toast, api } from '/@/lib/utils';
-import { useTable, useTableItem, useEmployeeDisplay, useEditFinish } from '/@/hooks';
+import { useTable, useTableItem, useEditFinish } from '/@/hooks';
 
 import { HFullWidthLayout, HTable } from '/@/components';
-import { HEmployeeCondition } from '/@/composables/hr';
+import { HEmployeeCondition, useEmployeeDisplay } from '/@/composables/hr';
 
 export default defineComponent({
   name: 'SysOwnershipContent',

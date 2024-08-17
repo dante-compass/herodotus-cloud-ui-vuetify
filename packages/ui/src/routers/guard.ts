@@ -2,9 +2,11 @@ import type { Router } from 'vue-router';
 import { useRouteStore, useAuthenticationStore } from '/@/stores';
 import { Constants } from '/@/lib/definitions';
 
-import { initBackEndRoutes, initFrontEndRoutes } from './logic/processor';
+import { useSystemRoute } from '/@/hooks';
 
 import { Loading, QSpinnerDots } from 'quasar';
+
+const { initBackEndRoutes, initFrontEndRoutes } = useSystemRoute();
 
 export const createRouterGuard = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
@@ -12,7 +14,7 @@ export const createRouterGuard = (router: Router) => {
       spinner: QSpinnerDots,
       spinnerSize: 100,
       spinnerColor: 'blue-10',
-      delay: 200
+      delay: 200,
     });
 
     const authStore = useAuthenticationStore();

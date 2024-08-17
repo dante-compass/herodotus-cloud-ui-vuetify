@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useBpmnModeler } from '/@/hooks';
+import { useBpmnModeler } from '../hooks';
 
 export default defineComponent({
   name: 'HBpmnViewXmlDialog',
@@ -16,7 +16,7 @@ export default defineComponent({
     modelValue: { type: Boolean, required: true },
     definitionId: { type: String },
     definitionKey: { type: String },
-    definitionTenantId: { type: String }
+    definitionTenantId: { type: String },
   },
 
   setup(props, { emit }) {
@@ -24,7 +24,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const { xml, loadXml } = useBpmnModeler();
@@ -38,14 +38,14 @@ export default defineComponent({
           }
         }
       },
-      { immediate: true }
+      { immediate: true },
     );
 
     return {
       isOpen,
-      xml
+      xml,
     };
-  }
+  },
 });
 </script>
 

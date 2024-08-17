@@ -52,10 +52,10 @@ import type {
 
 import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
-import { useTable, useEmployeeDisplay } from '/@/hooks';
+import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
-import { HEmployeeCondition } from '/@/composables/hr';
+import { HEmployeeCondition, useEmployeeDisplay } from '/@/composables/hr';
 
 export default defineComponent({
   name: Constants.ComponentName.SYS_EMPLOYEE,

@@ -67,7 +67,7 @@ const ServiceErrorRoute: RouteRecordRaw = {
 const PageNotFoundRoute: RouteRecordRaw = {
   path: Constants.Path.NOT_FOUND,
   name: Constants.Path.NOT_FOUND_NAME,
-  component: () => import('/@/views/error/404.vue'),
+  component: () => import('/@/composables/error/404.vue'),
   meta: {
     title: 'ErrorPage',
   },

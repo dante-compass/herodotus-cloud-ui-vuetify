@@ -27,6 +27,11 @@ export const GRANT_TYPE_STYLE_GROUP: DisplayElementGroup = {
   'urn:ietf:params:oauth:grant-type:jwt-bearer': { color: 'purple', icon: 'mdi-file-hidden', text: 'JWT Bearer 认证' },
 };
 
+export const IN_BROWSER = typeof window !== 'undefined';
+export const IS_DEBUG = import.meta.env.DEBUG === 'true';
+export const IS_PROD = import.meta.env.NODE_ENV === 'production';
+export const IS_SERVER = import.meta.env.SSR;
+
 export const Path = {
   ROOT: '/',
   // 登录

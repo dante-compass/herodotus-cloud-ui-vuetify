@@ -10,10 +10,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 
-
-import { useBpmnModeler } from '/@/hooks';
+import { useBpmnModeler } from '../hooks';
 import { lodash } from '/@/lib/utils';
 
 export default defineComponent({
@@ -26,7 +25,7 @@ export default defineComponent({
     definitionId: { type: String },
     definitionKey: { type: String },
     definitionTenantId: { type: String },
-    instanceId: { type: String }
+    instanceId: { type: String },
   },
 
   setup(props, { emit }) {
@@ -34,7 +33,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const { xml, activityNodes, loadDiagram } = useBpmnModeler();
@@ -46,7 +45,7 @@ export default defineComponent({
         if (props.definitionId || props.definitionKey) {
           loadDiagram(
             { id: props.definitionId, key: props.definitionKey, tenantId: props.definitionTenantId },
-            props.instanceId
+            props.instanceId,
           );
         }
       }
@@ -68,8 +67,8 @@ export default defineComponent({
       isOpen,
       xml,
       activityNodes,
-      isShow
+      isShow,
     };
-  }
+  },
 });
 </script>

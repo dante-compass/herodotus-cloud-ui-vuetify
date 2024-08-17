@@ -28,7 +28,7 @@ import { defineComponent } from 'vue';
 
 import type { Sheet, ProcessCommentsEntity, Variables } from '/@/lib/declarations';
 
-import { useBpmnProcess } from '/@/hooks';
+import { useBpmnProcess } from '/@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '/@/components';
 import { Constants } from '/@/lib/definitions';
 import { useAuthenticationStore } from '/@/stores';

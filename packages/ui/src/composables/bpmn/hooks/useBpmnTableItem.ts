@@ -1,6 +1,6 @@
 import type { Entity } from '/@/lib/declarations';
 
-import { useBaseTableItem } from '../common';
+import { useBaseTableItem } from '/@/hooks';
 
 export default function useBpmnTableItem<E extends Entity>() {
   const { editedItem, operation, overlay, title } = useBaseTableItem<E>();
@@ -9,6 +9,6 @@ export default function useBpmnTableItem<E extends Entity>() {
     editedItem,
     operation,
     title,
-    overlay
+    overlay,
   };
 }

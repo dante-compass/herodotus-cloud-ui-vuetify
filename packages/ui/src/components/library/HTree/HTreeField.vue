@@ -1,5 +1,5 @@
 <template>
-  <q-input v-model="nodeName" :label="label" outlined clearable bottom-slots>
+  <q-input v-model="nodeName" :label="label" outlined clearable v-bind="$attrs">
     <q-popup-proxy v-model="isPopup">
       <q-card>
         <q-card-section>

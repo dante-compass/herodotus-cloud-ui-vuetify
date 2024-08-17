@@ -7,10 +7,10 @@ import type {
   FormModeler,
   Element,
   ConditionVariable,
-  ExtendedTask
+  ExtendedTaskEntity,
 } from '/@/lib/declarations';
 
-import { useBaseTableItem, useEditFinish } from '../common';
+import { useBaseTableItem, useEditFinish } from '/@/hooks';
 
 import { bpmnApi, formApi, toast, lodash } from '/@/lib/utils';
 import { useAuthenticationStore } from '/@/stores';
@@ -75,12 +75,12 @@ export default function useBpmnProcess() {
       comments: [],
       processDefinitionKey: processDefinitionKey,
       tenantId: tenantId,
-      created: true
+      created: true,
     });
     editedItem.value = result.data as ProcessSpecificsEntity;
   };
 
-  const fetchProcessSpecifics = async (extendedTask: ExtendedTask) => {
+  const fetchProcessSpecifics = async (extendedTask: ExtendedTaskEntity) => {
     const result = await formApi.processSpecifics().fetchById(extendedTask.businessKey);
     editedItem.value = result.data as ProcessSpecificsEntity;
     editedItem.value.taskId = extendedTask.taskId;
@@ -88,9 +88,7 @@ export default function useBpmnProcess() {
     editedItem.value.activityName = extendedTask.activityName;
   };
 
-  const complete = () => {
-
-  }
+  const complete = () => {};
 
   const startWorkflowProcess = (entity: ProcessSpecificsEntity) => {
     entity.created = false;
@@ -103,7 +101,10 @@ export default function useBpmnProcess() {
           .processDefinition()
           .start(
             { key: data.processDefinitionKey },
-            { variables: { currentUserId: { type: 'String', value: auth.employeeId } }, businessKey: data.id as string }
+            {
+              variables: { currentUserId: { type: 'String', value: auth.employeeId } },
+              businessKey: data.id as string,
+            },
           )
           .then(() => {
             overlay.value = false;
@@ -149,6 +150,6 @@ export default function useBpmnProcess() {
     createProcessSpecifics,
     fetchProcessSpecifics,
     startWorkflowProcess,
-    deleteProcessSpecifics
+    deleteProcessSpecifics,
   };
 }

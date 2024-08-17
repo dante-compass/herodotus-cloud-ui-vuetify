@@ -27,6 +27,7 @@
       v-model:selected="editedItem.parentId"
       :items="treeItems"
       :value="parentPath"
+      bottom-slots
       label="上级节点"></h-tree-field>
 
     <div class="column q-gutter-y-sm">

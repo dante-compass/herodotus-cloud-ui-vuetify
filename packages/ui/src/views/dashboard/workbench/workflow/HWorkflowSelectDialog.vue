@@ -44,7 +44,8 @@ import type {
 
 import { Constants } from '/@/lib/definitions';
 
-import { useBaseTable, useBpmnTableItems, useBpmnProcess } from '/@/hooks';
+import { useBaseTable } from '/@/hooks';
+import { useBpmnTableItems, useBpmnProcess } from '/@/composables/bpmn';
 import { bpmnApi, lodash } from '/@/lib/utils';
 
 export default defineComponent({

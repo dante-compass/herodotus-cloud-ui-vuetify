@@ -33,8 +33,8 @@ import type {
   QTableProps,
 } from '/@/lib/declarations';
 
-import { useBpmnTableItems, useEditFinish } from '/@/hooks';
 import { bpmnApi, moment } from '/@/lib/utils';
+import { useBpmnTableItems } from '/@/composables/bpmn';
 
 export default defineComponent({
   name: 'WorkflowDeployment',

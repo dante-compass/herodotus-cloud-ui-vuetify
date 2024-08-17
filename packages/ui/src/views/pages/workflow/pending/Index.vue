@@ -27,9 +27,9 @@ import { defineComponent } from 'vue';
 
 import type { TaskEntity, TaskQueryParams, TaskSortBy, QTableProps } from '/@/lib/declarations';
 
-import { useBpmnTableItems } from '/@/hooks';
 import { bpmnApi, moment } from '/@/lib/utils';
 import { useAuthenticationStore } from '/@/stores';
+import { useBpmnTableItems } from '/@/composables/bpmn';
 
 export default defineComponent({
   name: 'WorkflowDeployment',
@@ -38,13 +38,13 @@ export default defineComponent({
     const store = useAuthenticationStore();
 
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, onDeleteItemById, conditions } =
-    useBpmnTableItems<TaskEntity, TaskQueryParams, TaskSortBy>(
+      useBpmnTableItems<TaskEntity, TaskQueryParams, TaskSortBy>(
         bpmnApi.task(),
         {
           sortBy: 'id',
-          sortOrder: 'desc'
+          sortOrder: 'desc',
         },
-        { candidateUser: store.employeeId }
+        { candidateUser: store.employeeId },
       );
 
     const selected = ref([]);
@@ -59,10 +59,10 @@ export default defineComponent({
         field: 'deploymentTime',
         align: 'center',
         label: '部署时间',
-        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : '')
+        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
       },
       { name: 'tenantId', field: 'tenantId', align: 'center', label: '租户ID' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -77,8 +77,8 @@ export default defineComponent({
       toEdit,
       toCreate,
       findItems,
-      onDeleteItemById
+      onDeleteItemById,
     };
-  }
+  },
 });
 </script>

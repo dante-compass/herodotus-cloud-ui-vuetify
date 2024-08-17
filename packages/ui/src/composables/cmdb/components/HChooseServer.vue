@@ -48,7 +48,9 @@ import type { AssetServerEntity, AssetServerConditions, QTableProps } from '/@/l
 
 import { Constants } from '/@/lib/definitions';
 import { lodash, api } from '/@/lib/utils';
-import { useServerDisplay, useTable } from '/@/hooks';
+import { useTable } from '/@/hooks';
+
+import { useServerDisplay } from '/@/composables/cmdb';
 
 export default defineComponent({
   name: 'HChooseServer',

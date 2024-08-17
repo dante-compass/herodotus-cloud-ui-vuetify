@@ -43,10 +43,9 @@ import type {
   QTableProps,
 } from '/@/lib/declarations';
 
-import { useBpmnTableItems } from '/@/hooks';
 import { bpmnApi } from '/@/lib/utils';
 import { HDenseIconButton } from '/@/components';
-import { HBpmnViewDiagramDialog } from '/@/composables/bpmn';
+import { useBpmnTableItems, HBpmnViewDiagramDialog } from '/@/composables/bpmn';
 
 export default defineComponent({
   name: 'WorkflowProcessInstance',

@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useBpmnProcess } from '/@/hooks';
+import { useBpmnProcess } from '/@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '/@/components';
 import { Constants } from '/@/lib/definitions';
 

@@ -41,7 +41,8 @@ import type {
 import { Constants } from '/@/lib/definitions';
 
 import { api, bpmnApi } from '/@/lib/utils';
-import { useBaseTable, useBpmnProcess } from '/@/hooks';
+import { useBaseTable } from '/@/hooks';
+import { useBpmnProcess } from '/@/composables/bpmn';
 import { useAuthenticationStore } from '/@/stores';
 import { HDenseIconButton } from '/@/components';
 

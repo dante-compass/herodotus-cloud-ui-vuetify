@@ -46,10 +46,10 @@ import type {
 
 import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
-import { useTable, useServerDisplay } from '/@/hooks';
+import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
-import { HServerCondition } from '/@/composables/cmdb';
+import { HServerCondition, useServerDisplay } from '/@/composables/cmdb';
 
 export default defineComponent({
   name: Constants.ComponentName.ASSET_SERVER,

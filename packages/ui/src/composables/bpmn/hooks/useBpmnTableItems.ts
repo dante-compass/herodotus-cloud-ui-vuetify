@@ -8,24 +8,24 @@ import type {
   BpmnDeleteQueryParams,
   Page,
   QTableOnRequestProps,
-  QTableOnRequestParameter
+  QTableOnRequestParameter,
 } from '/@/lib/declarations';
 
 import { toast, standardDeleteNotify } from '/@/lib/utils';
 
-import { useBaseTable } from '../common';
+import { useBaseTable } from '/@/hooks';
 
 export default function useBpmnTableItems<
   E extends BpmnListEntity,
   Q extends BpmnListQueryParams,
   S,
-  D extends BpmnDeleteQueryParams = BpmnDeleteQueryParams
+  D extends BpmnDeleteQueryParams = BpmnDeleteQueryParams,
 >(
   baseService: BpmnQueryByGetService<E, Q, S, D>,
   sortable: BpmnSortable<S>,
   queryParams = {} as Q,
   loadOnMount = true,
-  name = ''
+  name = '',
 ) {
   const {
     loading,
@@ -39,7 +39,7 @@ export default function useBpmnTableItems<
     toCreate,
     toEdit,
     toAuthorize,
-    addRoutePushParam
+    addRoutePushParam,
   } = useBaseTable<E, Q>(name, 'updateTime', true);
 
   conditions.value = queryParams;
@@ -51,9 +51,9 @@ export default function useBpmnTableItems<
         {
           pageNumber: pageNumber - 1,
           pageSize: pageSize,
-          ...sortable
+          ...sortable,
         },
-        params
+        params,
       )
       .then(result => {
         const data = result as Page<E>;
@@ -113,7 +113,7 @@ export default function useBpmnTableItems<
       if (newValue) {
         findItemsByPage(newValue, pagination.value.rowsPerPage, conditions.value);
       }
-    }
+    },
   );
 
   watch(conditions, newValue => {
@@ -141,6 +141,6 @@ export default function useBpmnTableItems<
     toEdit,
     toAuthorize,
     addRoutePushParam,
-    onDeleteItemById
+    onDeleteItemById,
   };
 }

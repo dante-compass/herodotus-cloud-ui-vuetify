@@ -48,7 +48,9 @@ import type {
 
 import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
-import { useTable, useDatabaseDisplay } from '/@/hooks';
+import { useTable } from '/@/hooks';
+
+import { useDatabaseDisplay } from '/@/composables/cmdb';
 
 import { HDenseIconButton, HDeleteButton, HEditButton, HTable } from '/@/components';
 

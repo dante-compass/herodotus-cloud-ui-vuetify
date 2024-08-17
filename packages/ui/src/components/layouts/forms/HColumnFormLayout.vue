@@ -32,14 +32,14 @@ import { defineComponent, PropType } from 'vue';
 import { useEditFinish } from '/@/hooks';
 import { BaseSysEntity } from '/@/lib/declarations';
 import HDetailContainer from './HDetailContainer.vue';
-import { HDictionarySelect } from '../../widgets/manage';
+import { HDictionarySelect } from '../../library/HSelect';
 
 export default defineComponent({
   name: 'HColumnFormLayout',
 
   components: {
     HDetailContainer,
-    HDictionarySelect
+    HDictionarySelect,
   },
 
   emits: ['save'],
@@ -47,7 +47,7 @@ export default defineComponent({
   props: {
     entity: { type: Object as PropType<BaseSysEntity>, required: true },
     overlay: { type: Boolean, default: false },
-    title: { type: String, default: '' }
+    title: { type: String, default: '' },
   },
 
   setup(props, { emit }) {
@@ -59,8 +59,8 @@ export default defineComponent({
 
     return {
       onFinish,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>
