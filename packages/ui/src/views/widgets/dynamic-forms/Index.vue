@@ -5,13 +5,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { ComponentNameEnum } from '/@/lib/enums';
-import { FormDesignerInstance, lodash } from '/@/lib/utils';
+import { Constants } from '/@/lib/definitions';
+import { FormDesignerInstance } from '/@/lib/utils';
 
 import { useEditFinish, useBaseTableItem } from '/@/hooks';
 
 export default defineComponent({
-  name: ComponentNameEnum.WIDGETS_DYNAMIC_FORM,
+  name: Constants.ComponentName.WIDGETS_DYNAMIC_FORM,
 
   setup(props) {
     const instance = FormDesignerInstance;
@@ -21,8 +21,8 @@ export default defineComponent({
     return {
       editedItem,
       instance,
-      onFinish
+      onFinish,
     };
-  }
+  },
 });
 </script>

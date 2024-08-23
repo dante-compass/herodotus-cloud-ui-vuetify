@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 
 import type { Entity } from '/@/lib/declarations';
 
-import { OperationEnum } from '/@/lib/enums';
+import { OperationEnum } from '/@/lib/definitions';
 import { useRouteStore } from '/@/stores';
 
 import useEditFinish from './useEditFinish';
@@ -66,6 +66,6 @@ export default function useBaseTableItem<E extends Entity>() {
     additional,
     title,
     overlay,
-    onFinish
+    onFinish,
   };
 }

@@ -69,12 +69,12 @@ import type {
   ObjectDomain,
   ObjectDomainProps,
   ObjectDomainConditions,
-  DeleteObjectDomain
+  DeletedObjectDomain,
 } from '/@/lib/declarations';
 
 import { HDeleteButton, HDenseIconButton, HTable, HChunkUploader, HSimpleUploader } from '/@/components';
 import { useBaseTable } from '/@/hooks';
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { ossApi, lodash, toast, standardDeleteNotify } from '/@/lib/utils';
 
 export default defineComponent({
@@ -85,13 +85,13 @@ export default defineComponent({
     HDenseIconButton,
     HTable,
     HChunkUploader,
-    HSimpleUploader
+    HSimpleUploader,
   },
 
   props: {
     bucketName: { type: String, required: true },
     folderName: { type: String, default: '' },
-    version: { type: Number }
+    version: { type: Number },
   },
 
   setup(props) {
@@ -100,7 +100,7 @@ export default defineComponent({
     const { tableRows, loading, toEdit, toAuthorize, hideLoading, showLoading } = useBaseTable<
       ObjectDomain,
       ObjectDomainConditions
-    >(ComponentNameEnum.OSS_OBJECT, '', false, true);
+    >(Constants.ComponentName.OSS_OBJECT, '', false, true);
 
     const columns: QTableColumnProps = [
       {
@@ -108,7 +108,7 @@ export default defineComponent({
         field: 'objectName',
         align: 'center',
         label: '文件名',
-        format: value => (value ? displayedObjectName(value) : '')
+        format: value => (value ? displayedObjectName(value) : ''),
       },
       { name: 'etag', field: 'etag', align: 'center', label: 'ETAG' },
       {
@@ -116,10 +116,10 @@ export default defineComponent({
         field: 'size',
         align: 'center',
         label: '大小',
-        format: value => (value ? humanStorageSize(Number(value)) : '')
+        format: value => (value ? humanStorageSize(Number(value)) : ''),
       },
       { name: 'lastModified', field: 'lastModified', align: 'center', label: '最后更新时间' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const rowKey: ObjectDomainProps = 'objectName';
@@ -158,9 +158,9 @@ export default defineComponent({
      * @param objects Table 中已选择的 ObjectDomain
      * @returns DeleteObjectDomain
      */
-    const toDeleteObjectDomain = (objects: Array<ObjectDomain>): Array<DeleteObjectDomain> => {
+    const toDeleteObjectDomain = (objects: Array<ObjectDomain>): Array<DeletedObjectDomain> => {
       const deleteObjects = objects.map(object => {
-        const deleteObject: DeleteObjectDomain = { objectName: object.objectName };
+        const deleteObject: DeletedObjectDomain = { objectName: object.objectName };
         return deleteObject;
       });
       return deleteObjects;
@@ -306,13 +306,13 @@ export default defineComponent({
         spinner: true,
         position: position,
         message: `文件${label}中...`,
-        caption: '0%'
+        caption: '0%',
       });
 
       const interval = setInterval(() => {
         // we update the dialog
         notify({
-          caption: `${loadProgress.value}%`
+          caption: `${loadProgress.value}%`,
         });
 
         if (loadProgress.value === 100) {
@@ -321,7 +321,7 @@ export default defineComponent({
             icon: 'done',
             spinner: false,
             message: `${label}完成!`,
-            timeout: 2000
+            timeout: 2000,
           });
           clearInterval(interval);
           loadProgress.value = 0;
@@ -347,7 +347,7 @@ export default defineComponent({
       () => props.version,
       () => {
         onFetchObjects();
-      }
+      },
     );
 
     onMounted(() => {
@@ -371,8 +371,8 @@ export default defineComponent({
       onBatchDeleteObjects,
       onDelete,
       onFinishChunkUpload,
-      onFinishSimpleUpload
+      onFinishSimpleUpload,
     };
-  }
+  },
 });
 </script>

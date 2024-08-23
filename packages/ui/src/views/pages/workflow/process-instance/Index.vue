@@ -40,19 +40,19 @@ import type {
   ProcessInstanceQueryParams,
   ProcessInstanceSortBy,
   ProcessInstanceDeleteQueryParams,
-  QTableProps
+  QTableProps,
 } from '/@/lib/declarations';
 
-import { useBpmnTableItems } from '/@/hooks';
-import { bpmnApi, lodash, moment } from '/@/lib/utils';
-import { HDenseIconButton, HBpmnViewDiagramDialog } from '/@/components';
+import { bpmnApi } from '/@/lib/utils';
+import { HDenseIconButton } from '/@/components';
+import { useBpmnTableItems, HBpmnViewDiagramDialog } from '/@/composables/bpmn';
 
 export default defineComponent({
   name: 'WorkflowProcessInstance',
 
   components: {
     HDenseIconButton,
-    HBpmnViewDiagramDialog
+    HBpmnViewDiagramDialog,
   },
 
   setup() {
@@ -64,7 +64,7 @@ export default defineComponent({
         ProcessInstanceDeleteQueryParams
       >(bpmnApi.processInstance(), {
         sortBy: 'businessKey',
-        sortOrder: 'desc'
+        sortOrder: 'desc',
       });
 
     const selected = ref([]);
@@ -80,17 +80,17 @@ export default defineComponent({
         field: 'suspended',
         align: 'center',
         label: '是否挂起',
-        format: value => (value ? '是' : '否')
+        format: value => (value ? '是' : '否'),
       },
       {
         name: 'ended',
         field: 'ended',
         align: 'center',
         label: '是否结束',
-        format: value => (value ? '是' : '否')
+        format: value => (value ? '是' : '否'),
       },
       { name: 'tenantId', field: 'tenantId', align: 'center', label: '租户ID' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -106,8 +106,8 @@ export default defineComponent({
       toCreate,
       findItems,
       onDeleteItemById,
-      viewProgress
+      viewProgress,
     };
-  }
+  },
 });
 </script>

@@ -23,27 +23,27 @@ import { defineComponent, ref, onMounted } from 'vue';
 
 import type { OAuth2AuthorizationEntity, OAuth2AuthorizationConditions, QTableColumnProps } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { moment, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.OAUTH2_TOKEN,
+  name: Constants.ComponentName.OAUTH2_TOKEN,
 
   components: {
     HDeleteButton,
-    HTable
+    HTable,
   },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, findItems, deleteItemById } = useTable<
       OAuth2AuthorizationEntity,
       OAuth2AuthorizationConditions
-    >(api.oauth2Authorization(), ComponentNameEnum.OAUTH2_TOKEN, false, {
+    >(api.oauth2Authorization(), Constants.ComponentName.OAUTH2_TOKEN, false, {
       direction: 'DESC',
-      properties: ['accessTokenIssuedAt']
+      properties: ['accessTokenIssuedAt'],
     });
 
     const selected = ref([]);
@@ -66,30 +66,30 @@ export default defineComponent({
         field: 'accessTokenIssuedAt',
         align: 'center',
         label: '访问Token颁发时间',
-        format: value => dateFormat(value)
+        format: value => dateFormat(value),
       },
       {
         name: 'accessTokenExpiresAt',
         field: 'accessTokenExpiresAt',
         align: 'center',
         label: '访问Token过期时间',
-        format: value => dateFormat(value)
+        format: value => dateFormat(value),
       },
       {
         name: 'refreshTokenIssuedAt',
         field: 'refreshTokenIssuedAt',
         align: 'center',
         label: '刷新Token颁发时间',
-        format: value => dateFormat(value)
+        format: value => dateFormat(value),
       },
       {
         name: 'refreshTokenExpiresAt',
         field: 'refreshTokenExpiresAt',
         align: 'center',
         label: '刷新Token过期时间',
-        format: value => dateFormat(value)
+        format: value => dateFormat(value),
       },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
     onMounted(() => {
       pagination.value.sortBy = 'accessTokenIssuedAt';
@@ -104,8 +104,8 @@ export default defineComponent({
       totalPages,
       loading,
       findItems,
-      deleteItemById
+      deleteItemById,
     };
-  }
+  },
 });
 </script>

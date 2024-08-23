@@ -33,12 +33,12 @@ export const useConstantsStore = defineStore('Constants', {
             .fetch()
             .then(response => {
               this.append(response);
-              ossApi
-                .constant()
-                .fetch()
-                .then(response => {
-                  this.append(response);
-                });
+              // ossApi
+              //   .constant()
+              //   .fetch()
+              //   .then(response => {
+              //     this.append(response);
+              //   });
             });
         });
     },

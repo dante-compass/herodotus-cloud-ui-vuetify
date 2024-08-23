@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,16 +25,16 @@ const routes: Array<RouteRecordRaw> = [
         path: '/workflow/process-instance',
         name: 'WorkflowProcessInstance',
         meta: { title: '流程实例管理', icon: 'mdi-motion-play', isHideAllChild: true },
-        component: () => import('/@/views/pages/workflow/process-instance/Index.vue')
+        component: () => import('/@/views/pages/workflow/process-instance/Index.vue'),
       },
       {
         path: '/workflow/dynamic-form',
-        name: ComponentNameEnum.WORKFLOW_DYNAMIC_FORM,
+        name: Constants.ComponentName.WORKFLOW_DYNAMIC_FORM,
         meta: { title: '动态表单管理', icon: 'mdi-monitor-dashboard', isHideAllChild: true },
-        component: () => import('/@/views/pages/workflow/dynamic-form/Index.vue')
+        component: () => import('/@/views/pages/workflow/dynamic-form/Index.vue'),
       },
-    ]
-  }
+    ],
+  },
 ];
 
 export default routes;

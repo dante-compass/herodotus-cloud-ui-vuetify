@@ -38,14 +38,15 @@ import type { DatabaseInstanceEntity, AssetServerEntity } from '/@/lib/declarati
 import { api } from '/@/lib/utils';
 import { useTableItem } from '/@/hooks';
 
-import { HCenterFormLayout, HChooseServer } from '/@/components';
+import { HCenterFormLayout } from '/@/components';
+import { HChooseServer } from '/@/composables/cmdb';
 
 export default defineComponent({
   name: 'DatabaseInstanceContent',
 
   components: {
     HCenterFormLayout,
-    HChooseServer
+    HChooseServer,
   },
 
   setup(props) {
@@ -56,19 +57,19 @@ export default defineComponent({
     const rules = {
       editedItem: {
         dbType: {
-          required: helpers.withMessage('数据库类型不能为空', required)
+          required: helpers.withMessage('数据库类型不能为空', required),
         },
         dbPorts: {
-          required: helpers.withMessage('数据库端口不能为空', required)
-        }
-      }
+          required: helpers.withMessage('数据库端口不能为空', required),
+        },
+      },
     };
 
     const selectedServerIp = computed({
       get: () => (editedItem.value.assetServer ? editedItem.value.assetServer.actualIp : ''),
       set: newValue => {
         editedItem.value.assetServer.actualIp = newValue;
-      }
+      },
     });
 
     const v = useVuelidate(rules, { editedItem }, { $lazy: true });
@@ -93,8 +94,8 @@ export default defineComponent({
       open,
       selectedServerIp,
       onSave,
-      onIpClear
+      onIpClear,
     };
-  }
+  },
 });
 </script>

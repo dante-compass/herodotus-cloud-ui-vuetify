@@ -29,21 +29,22 @@ import type {
   OAuth2ComplianceConditions,
   OAuth2ComplianceProps,
   QTableColumnProps,
-  EntityTitle
+  EntityTitle,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { moment, api } from '/@/lib/utils';
 import { useTable, useXlsx } from '/@/hooks';
 
-import { HTable, HComplianceCondition } from '/@/components';
+import { HTable } from '/@/components';
+import { HComplianceCondition } from '/@/composables/authorize';
 
 export default defineComponent({
-  name: ComponentNameEnum.OAUTH2_COMPLIANCE,
+  name: Constants.ComponentName.OAUTH2_COMPLIANCE,
 
   components: {
     HComplianceCondition,
-    HTable
+    HTable,
   },
 
   setup() {
@@ -51,9 +52,9 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       OAuth2ComplianceEntity,
       OAuth2ComplianceConditions
-    >(api.oauth2Compliance(), ComponentNameEnum.OAUTH2_COMPLIANCE, false, {
+    >(api.oauth2Compliance(), Constants.ComponentName.OAUTH2_COMPLIANCE, false, {
       direction: 'DESC',
-      properties: ['createTime']
+      properties: ['createTime'],
     });
 
     const selected = ref([]);
@@ -75,33 +76,33 @@ export default defineComponent({
         name: 'osName',
         field: 'osName',
         align: 'center',
-        label: '操作系统'
+        label: '操作系统',
       },
       {
         name: 'browserName',
         field: 'browserName',
         align: 'center',
-        label: '浏览器'
+        label: '浏览器',
       },
       {
         name: 'mobile',
         field: 'mobile',
         align: 'center',
-        label: '移动端？'
+        label: '移动端？',
       },
       {
         name: 'operation',
         field: 'operation',
         align: 'center',
-        label: '操作'
+        label: '操作',
       },
       {
         name: 'createTime',
         field: 'createTime',
         align: 'center',
         label: '时间',
-        format: value => dateFormat(value)
-      }
+        format: value => dateFormat(value),
+      },
     ];
 
     const title: EntityTitle<OAuth2ComplianceEntity> = {
@@ -122,7 +123,7 @@ export default defineComponent({
       ipad: 'Ipad ?',
       ios: 'IOS 操作系统 ?',
       android: 'Android 操作系统?',
-      operation: '执行操作'
+      operation: '执行操作',
     };
 
     const onExportExcel = () => {
@@ -139,8 +140,8 @@ export default defineComponent({
       totalPages,
       loading,
       findItems,
-      onExportExcel
+      onExportExcel,
     };
-  }
+  },
 });
 </script>

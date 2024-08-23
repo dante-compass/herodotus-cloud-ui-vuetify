@@ -41,22 +41,24 @@ import type {
   AssetServerEntity,
   AssetServerConditions,
   AssetServerProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
-import { useTable, useServerDisplay } from '/@/hooks';
+import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
+import { HServerCondition, useServerDisplay } from '/@/composables/cmdb';
 
 export default defineComponent({
-  name: ComponentNameEnum.ASSET_SERVER,
+  name: Constants.ComponentName.ASSET_SERVER,
 
   components: {
     HDeleteButton,
     HEditButton,
-    HTable
+    HTable,
+    HServerCondition,
   },
 
   setup() {
@@ -70,8 +72,8 @@ export default defineComponent({
       toAuthorize,
       conditions,
       findItems,
-      deleteItemById
-    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), ComponentNameEnum.ASSET_SERVER);
+      deleteItemById,
+    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), Constants.ComponentName.ASSET_SERVER);
 
     const { parseServerDevice } = useServerDisplay();
 
@@ -87,7 +89,7 @@ export default defineComponent({
       { name: 'osVersion', field: 'osVersion', align: 'center', label: '系统版本' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -104,8 +106,8 @@ export default defineComponent({
       conditions,
       findItems,
       deleteItemById,
-      parseServerDevice
+      parseServerDevice,
     };
-  }
+  },
 });
 </script>

@@ -1,12 +1,12 @@
 import type { Router } from 'vue-router';
 import { useRouteStore, useAuthenticationStore } from '/@/stores';
-import { PathEnum } from '/@/lib/enums';
-import { lodash } from '/@/lib/utils';
-import { staticRoutes } from './logic';
+import { Constants } from '/@/lib/definitions';
 
-import { initBackEndRoutes, initFrontEndRoutes, reloadDynamicRoutes } from './logic/processor';
+import { useSystemRoute } from '/@/hooks';
 
 import { Loading, QSpinnerDots } from 'quasar';
+
+const { initBackEndRoutes, initFrontEndRoutes } = useSystemRoute();
 
 export const createRouterGuard = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
@@ -14,7 +14,7 @@ export const createRouterGuard = (router: Router) => {
       spinner: QSpinnerDots,
       spinnerSize: 100,
       spinnerColor: 'blue-10',
-      delay: 200
+      delay: 200,
     });
 
     const authStore = useAuthenticationStore();
@@ -24,9 +24,9 @@ export const createRouterGuard = (router: Router) => {
 
     // 有 Token
     if (token) {
-      if (to.path === PathEnum.SIGN_IN) {
+      if (to.path === Constants.Path.SIGN_IN) {
         // 目的地址还是登录页面，直接跳转到首页。
-        next(PathEnum.HOME);
+        next(Constants.Path.HOME);
         return;
       } else {
         // 判断动态路由是否已经添加，没有添加则进行添加
@@ -52,12 +52,12 @@ export const createRouterGuard = (router: Router) => {
         next();
         return;
       } else {
-        if (to.path === PathEnum.SIGN_IN) {
+        if (to.path === Constants.Path.SIGN_IN) {
           localStorage.clear();
           next();
           return;
         } else {
-          next(PathEnum.SIGN_IN);
+          next(Constants.Path.SIGN_IN);
           return;
         }
       }

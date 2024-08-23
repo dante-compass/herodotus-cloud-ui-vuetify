@@ -48,10 +48,10 @@ import type {
   SysAttributeEntity,
   SysAttributeConditions,
   SysAttributeProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { lodash, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 import { useConstantsStore } from '/@/stores';
@@ -59,21 +59,26 @@ import { useConstantsStore } from '/@/stores';
 import { HEditButton, HTable, HSwaggerColumn } from '/@/components';
 
 export default defineComponent({
-  name: ComponentNameEnum.SYS_ATTRIBUTE,
+  name: Constants.ComponentName.SYS_ATTRIBUTE,
 
   components: {
     HEditButton,
     HTable,
-    HSwaggerColumn
+    HSwaggerColumn,
   },
 
   setup() {
     const constants = useConstantsStore();
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<SysAttributeEntity, SysAttributeConditions>(api.sysAttribute(), ComponentNameEnum.SYS_ATTRIBUTE, false, {
-        direction: 'ASC',
-        properties: ['url']
-      });
+      useTable<SysAttributeEntity, SysAttributeConditions>(
+        api.sysAttribute(),
+        Constants.ComponentName.SYS_ATTRIBUTE,
+        false,
+        {
+          direction: 'ASC',
+          properties: ['url'],
+        },
+      );
 
     const rowKey: SysAttributeProps = 'attributeId';
 
@@ -86,7 +91,7 @@ export default defineComponent({
       { name: 'webExpression', field: 'webExpression', align: 'center', label: '特定表达式' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     onMounted(() => {
@@ -114,8 +119,8 @@ export default defineComponent({
       toAuthorize,
       deleteItemById,
       findItems,
-      getText
+      getText,
     };
-  }
+  },
 });
 </script>

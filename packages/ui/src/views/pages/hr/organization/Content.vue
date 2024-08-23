@@ -34,7 +34,8 @@ import { required, helpers } from '@vuelidate/validators';
 import type { SysOrganizationEntity } from '/@/lib/declarations';
 import { api } from '/@/lib/utils';
 import { useTableItem } from '/@/hooks';
-import { HCenterFormLayout, HOrganizationSelect, HDictionarySelect } from '/@/components';
+import { HCenterFormLayout, HDictionarySelect } from '/@/components';
+import { HOrganizationSelect } from '/@/composables/hr';
 
 export default defineComponent({
   name: 'SysOrganizationContent',
@@ -42,7 +43,7 @@ export default defineComponent({
   components: {
     HCenterFormLayout,
     HOrganizationSelect,
-    HDictionarySelect
+    HDictionarySelect,
   },
 
   setup(props) {
@@ -51,9 +52,9 @@ export default defineComponent({
     const rules = {
       editedItem: {
         organizationName: {
-          required: helpers.withMessage('单位名称不能为空', required)
-        }
-      }
+          required: helpers.withMessage('单位名称不能为空', required),
+        },
+      },
     };
 
     const v = useVuelidate(rules, { editedItem }, { $lazy: true });
@@ -71,8 +72,8 @@ export default defineComponent({
       operation,
       title,
       v,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

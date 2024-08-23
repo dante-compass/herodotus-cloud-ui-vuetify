@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 import type { WidgetItem } from '/@/lib/declarations';
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 
 const WidgetRoute: RouteRecordRaw = {
   path: '/widgets',
@@ -13,15 +13,15 @@ const WidgetRoute: RouteRecordRaw = {
       path: '/widgets/bpmn-designer',
       name: 'WidgetsBpmnDesigner',
       meta: { title: '流程设计器', icon: 'mdi-list-status' },
-      component: () => import('/@/views/widgets/bpmn-designer/Index.vue')
+      component: () => import('/@/views/widgets/bpmn-designer/Index.vue'),
     },
     {
       path: '/widgets/dynamic-forms',
-      name: ComponentNameEnum.WIDGETS_DYNAMIC_FORM,
+      name: Constants.ComponentName.WIDGETS_DYNAMIC_FORM,
       meta: { title: '动态表单', icon: 'mdi-format-textbox' },
-      component: () => import('/@/views/widgets/dynamic-forms/Index.vue')
-    }
-  ]
+      component: () => import('/@/views/widgets/dynamic-forms/Index.vue'),
+    },
+  ],
 };
 
 const getWidgets = (): Array<WidgetItem> => {
@@ -31,7 +31,7 @@ const getWidgets = (): Array<WidgetItem> => {
       const widgetItem: WidgetItem = {
         tooltip: item.meta?.title as string,
         icon: item.meta?.icon as string,
-        path: item.path
+        path: item.path,
       };
 
       return widgetItem;

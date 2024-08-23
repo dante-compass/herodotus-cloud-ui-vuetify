@@ -35,13 +35,14 @@ import type {
   ExtendedTaskEntity,
   ExtendedTaskConditions,
   ProcessSpecificsEntity,
-  ProcessSpecificsConditions
+  ProcessSpecificsConditions,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 
 import { api, bpmnApi } from '/@/lib/utils';
-import { useBaseTable, useBpmnTableItems, useBpmnProcess } from '/@/hooks';
+import { useBaseTable } from '/@/hooks';
+import { useBpmnProcess } from '/@/composables/bpmn';
 import { useAuthenticationStore } from '/@/stores';
 import { HDenseIconButton } from '/@/components';
 
@@ -57,16 +58,16 @@ export default defineComponent({
     const { loading, tableRows, totalPages, pagination, setPagination, setPageData, showLoading, hideLoading } =
       useBaseTable<ExtendedTaskEntity, ExtendedTaskConditions>('HToDoTaskTable', 'updateTime', true);
     const { editedItem, fetchProcessSpecifics } = useBpmnProcess();
-    const { toEdit } = useBaseTableItems<ProcessSpecificsEntity, ProcessSpecificsConditions>(
-      ComponentNameEnum.WORKFLOW_PROCESS_APPROVE,
-      'updateTime'
+    const { toEdit } = useBaseTable<ProcessSpecificsEntity, ProcessSpecificsConditions>(
+      Constants.ComponentName.WORKFLOW_PROCESS_APPROVE,
+      'updateTime',
     );
 
     const columns: QTableColumnProps = [
       { name: 'businessKey', field: 'businessKey', align: 'center', label: '业务ID' },
       { name: 'startUsername', field: 'startUsername', align: 'center', label: '发起人' },
       { name: 'startTime', field: 'startTime', align: 'center', label: '申请时间' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const fetchToDoTasksByPage = (pageNumber = 1) => {
@@ -76,9 +77,9 @@ export default defineComponent({
         .fetchToDoTasksByPage(
           {
             pageNumber: pageNumber - 1,
-            pageSize: pagination.value.rowsPerPage
+            pageSize: pagination.value.rowsPerPage,
           },
-          { employeeId: authentication.employeeId }
+          { employeeId: authentication.employeeId },
         )
         .then(result => {
           const data = result.data as Page<ExtendedTaskEntity>;
@@ -101,14 +102,14 @@ export default defineComponent({
       }
 
       await fetchProcessSpecifics(item);
-      toEdit(editedItem.value, false);
+      toEdit(editedItem.value, {}, false);
     };
 
     watch(
       () => pagination.value.page,
       newValue => {
         fetchToDoTasksByPage(newValue);
-      }
+      },
     );
 
     onMounted(() => {
@@ -124,8 +125,8 @@ export default defineComponent({
       totalPages,
       loading,
       findItems,
-      dealWith
+      dealWith,
     };
-  }
+  },
 });
 </script>

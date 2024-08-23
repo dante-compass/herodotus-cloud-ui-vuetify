@@ -48,13 +48,13 @@ import type {
   ProcessDefinitionQueryParams,
   ProcessDefinitionSortBy,
   ProcessDefinitionDeleteQueryParams,
-  QTableProps
+  QTableProps,
 } from '/@/lib/declarations';
 
-import { useBpmnTableItems } from '/@/hooks';
 import { bpmnApi } from '/@/lib/utils';
 
-import { HDenseIconButton, HBpmnViewDiagramDialog, HBpmnViewXmlDialog } from '/@/components';
+import { HDenseIconButton } from '/@/components';
+import { useBpmnTableItems, HBpmnViewDiagramDialog, HBpmnViewXmlDialog } from '/@/composables/bpmn';
 
 export default defineComponent({
   name: 'WorkflowProcessDefinition',
@@ -62,7 +62,7 @@ export default defineComponent({
   components: {
     HDenseIconButton,
     HBpmnViewDiagramDialog,
-    HBpmnViewXmlDialog
+    HBpmnViewXmlDialog,
   },
 
   setup() {
@@ -74,7 +74,7 @@ export default defineComponent({
         ProcessDefinitionDeleteQueryParams
       >(bpmnApi.processDefinition(), {
         sortBy: 'id',
-        sortOrder: 'desc'
+        sortOrder: 'desc',
       });
 
     const selected = ref([]);
@@ -94,17 +94,17 @@ export default defineComponent({
         field: 'suspended',
         align: 'center',
         label: '是否挂起',
-        format: value => (value ? '是' : '否')
+        format: value => (value ? '是' : '否'),
       },
       {
         name: 'startableInTasklist',
         field: 'startableInTasklist',
         align: 'center',
         label: '是否可启动',
-        format: value => (value ? '是' : '否')
+        format: value => (value ? '是' : '否'),
       },
       { name: 'historyTimeToLive', field: 'historyTimeToLive', align: 'center', label: '历史数据保留时长' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     return {
@@ -121,8 +121,8 @@ export default defineComponent({
       findItems,
       onDeleteItemById,
       viewDiagram,
-      viewXml
+      viewXml,
     };
-  }
+  },
 });
 </script>

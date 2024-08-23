@@ -14,16 +14,16 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 
-import { HOssBucketList, HOssObjectList } from '/@/composables';
+import { HOssBucketList, HOssObjectList } from '/@/composables/oss';
 
 export default defineComponent({
-  name: ComponentNameEnum.OSS_OBJECT,
+  name: Constants.ComponentName.OSS_OBJECT,
 
   components: {
     HOssBucketList,
-    HOssObjectList
+    HOssObjectList,
   },
 
   setup() {
@@ -32,8 +32,8 @@ export default defineComponent({
 
     return {
       bucketName,
-      version
+      version,
     };
-  }
+  },
 });
 </script>

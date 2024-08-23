@@ -2,7 +2,7 @@ import { ref, Ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import type { NotificationEntity, NotificationConditions, Sort, Page } from '/@/lib/declarations';
 
-import { NotificationCategoryEnum } from '/@/lib/enums';
+import { NotificationCategoryEnum } from '/@/lib/definitions';
 import { api, moment } from '/@/lib/utils';
 import { useAuthenticationStore } from '/@/stores';
 import { useNotificationStore } from '../stores';
@@ -35,9 +35,9 @@ export default function useNotifications(category: NotificationCategoryEnum) {
         {
           pageNumber: number - 1,
           pageSize: 5,
-          ...sort
+          ...sort,
         },
-        { userId: authenticationStore.userId, category: category, read: false } as NotificationConditions
+        { userId: authenticationStore.userId, category: category, read: false } as NotificationConditions,
       )
       .then(result => {
         const data = result.data as Page<NotificationEntity>;
@@ -76,6 +76,6 @@ export default function useNotifications(category: NotificationCategoryEnum) {
     totalCount,
     dialogueCount,
     announcementCount,
-    convertDate
+    convertDate,
   };
 }

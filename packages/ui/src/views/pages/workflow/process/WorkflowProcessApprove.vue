@@ -28,18 +28,18 @@ import { defineComponent } from 'vue';
 
 import type { Sheet, ProcessCommentsEntity, Variables } from '/@/lib/declarations';
 
-import { useBpmnProcess } from '/@/hooks';
+import { useBpmnProcess } from '/@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '/@/components';
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { useAuthenticationStore } from '/@/stores';
 import { lodash, formApi, bpmnApi, toast } from '/@/lib/utils';
 
 export default defineComponent({
-  name: ComponentNameEnum.WORKFLOW_PROCESS_APPROVE,
+  name: Constants.ComponentName.WORKFLOW_PROCESS_APPROVE,
 
   components: {
     HDetailContainer,
-    HFormSkeleton
+    HFormSkeleton,
   },
 
   setup() {
@@ -56,7 +56,7 @@ export default defineComponent({
       condition,
       onFinish,
       fetchTaskForm,
-      startWorkflowProcess
+      startWorkflowProcess,
     } = useBpmnProcess();
 
     const approved = ref<boolean>(true);
@@ -78,7 +78,7 @@ export default defineComponent({
           activityName: editedItem.value.activityName,
           message: '',
           fullMessage: comments.value,
-          tenantId: editedItem.value.tenantId
+          tenantId: editedItem.value.tenantId,
         })
         .then(result => {
           const comment = result.data as ProcessCommentsEntity;
@@ -130,8 +130,8 @@ export default defineComponent({
       obtainedElements,
       comments,
       onSave,
-      onCancel
+      onCancel,
     };
-  }
+  },
 });
 </script>

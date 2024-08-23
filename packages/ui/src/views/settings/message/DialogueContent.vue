@@ -43,7 +43,7 @@ import { defineComponent } from 'vue';
 import type { DialogueDetailEntity, DialogueDetailConditions } from '/@/lib/declarations';
 
 import { HDetailContainer, HUserAvatar } from '/@/components';
-import { HSendMessageField } from '/@/composables';
+import { HSendMessageField } from '/@/composables/messages';
 import { api, moment } from '/@/lib/utils';
 import { useTableItem, useTable, useEditFinish } from '/@/hooks';
 
@@ -53,7 +53,7 @@ export default defineComponent({
   components: {
     HDetailContainer,
     HUserAvatar,
-    HSendMessageField
+    HSendMessageField,
   },
 
   setup(props) {
@@ -66,7 +66,7 @@ export default defineComponent({
         'MessageDialogueDetail',
         false,
         { direction: 'ASC', properties: ['createTime'] },
-        false
+        false,
       );
 
     const receiverId = ref('');
@@ -98,8 +98,8 @@ export default defineComponent({
       receiverName,
       receiverAvatar,
       dialogueId,
-      onSendMessage
+      onSendMessage,
     };
-  }
+  },
 });
 </script>

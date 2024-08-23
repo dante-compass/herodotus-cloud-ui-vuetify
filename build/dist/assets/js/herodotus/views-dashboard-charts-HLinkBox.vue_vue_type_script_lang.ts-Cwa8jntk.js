@@ -1,1 +1,0 @@
-import{d as t}from"../modules/npm-@vue-runtime-core-Cr5-LkSl.js";const o=t({name:"HSummaryBox",props:{description:{type:String},icon:{type:String},color:{type:String,default:""},link:{type:String}}});export{o as _};

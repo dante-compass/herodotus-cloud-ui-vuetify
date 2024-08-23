@@ -23,7 +23,12 @@
       label="Vue Router 重定向地址 "
       placeholder="如果包含子节点，即 children 中元素的 path"></h-text-field>
 
-    <h-element-tree v-model:selected="editedItem.parentId" :value="parentPath" label="上级节点"></h-element-tree>
+    <h-tree-field
+      v-model:selected="editedItem.parentId"
+      :items="treeItems"
+      :value="parentPath"
+      bottom-slots
+      label="上级节点"></h-tree-field>
 
     <div class="column q-gutter-y-sm">
       <h-switch v-model="editedItem.isNotKeepAlive" label="该应页面不需要KeepAlive缓存"></h-switch>
@@ -47,23 +52,24 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
 
-import type { SysElementEntity } from '/@/lib/declarations';
+import type { SysElementEntity, SysElementConditions } from '/@/lib/declarations';
 
-import { useTableItem } from '/@/hooks';
+import { useTableItem, useTreeItems } from '/@/hooks';
 import { api } from '/@/lib/utils';
 
-import { HCenterFormLayout, HElementTree } from '/@/components';
+import { HCenterFormLayout, HTreeField } from '/@/components';
 
 export default defineComponent({
   name: 'SysElementContent',
 
   components: {
     HCenterFormLayout,
-    HElementTree
+    HTreeField,
   },
 
   setup() {
     const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysElementEntity>(api.sysElement());
+    const { treeItems } = useTreeItems<SysElementEntity, SysElementConditions>(api.sysElement());
 
     const parentPath = ref('');
 
@@ -80,7 +86,7 @@ export default defineComponent({
           editedItem.value.isHaveChild = false;
         }
       },
-      { deep: true }
+      { deep: true },
     );
 
     onMounted(() => {
@@ -102,8 +108,9 @@ export default defineComponent({
       operation,
       title,
       onSave,
-      parentPath
+      parentPath,
+      treeItems,
     };
-  }
+  },
 });
 </script>

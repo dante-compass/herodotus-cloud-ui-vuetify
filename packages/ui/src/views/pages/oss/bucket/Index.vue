@@ -34,10 +34,10 @@ import type {
   QTableColumnProps,
   BucketDomain,
   BucketDomainProps,
-  BucketDomainConditions
+  BucketDomainConditions,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { moment, toast, standardDeleteNotify, ossApi } from '/@/lib/utils';
 
 import { useBaseTable } from '/@/hooks';
@@ -46,13 +46,13 @@ import { HDeleteButton, HTable, HDenseIconButton } from '/@/components';
 import { DeleteBucketResult } from '@herodotus/oss-apis';
 
 export default defineComponent({
-  name: ComponentNameEnum.OSS_BUCKET,
+  name: Constants.ComponentName.OSS_BUCKET,
 
   components: { HDeleteButton, HTable, HDenseIconButton },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, hideLoading, showLoading } =
-      useBaseTable<BucketDomain, BucketDomainConditions>(ComponentNameEnum.OSS_BUCKET, '', false, true);
+      useBaseTable<BucketDomain, BucketDomainConditions>(Constants.ComponentName.OSS_BUCKET, '', false, true);
 
     const selected = ref([]);
     const rowKey: BucketDomainProps = 'bucketName';
@@ -64,9 +64,9 @@ export default defineComponent({
         field: 'creationDate',
         align: 'center',
         label: '创建时间',
-        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : '')
+        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
       },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const list = () => {
@@ -119,8 +119,8 @@ export default defineComponent({
       toCreate,
       toEdit,
       toAuthorize,
-      remove
+      remove,
     };
-  }
+  },
 });
 </script>

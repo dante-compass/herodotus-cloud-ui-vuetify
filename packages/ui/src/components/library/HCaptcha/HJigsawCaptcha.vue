@@ -43,7 +43,7 @@ export default defineComponent({
 
   components: {
     HBehaviorCaptchaBackground,
-    HBehaviorCaptchaControl
+    HBehaviorCaptchaControl,
   },
 
   props: {
@@ -51,7 +51,7 @@ export default defineComponent({
     canvasWidth: { type: Number, default: 310 },
     canvasHeight: { type: Number, default: 155 },
     sliderSize: { type: Number, default: 30 },
-    loading: { type: Boolean, default: false }
+    loading: { type: Boolean, default: false },
   },
 
   setup(props, { emit }) {
@@ -71,7 +71,7 @@ export default defineComponent({
       // 鼠标是否在按钮上按下
       isMouseDown: false,
       // 为了解决Mac上的click BUG
-      isCloseDown: false
+      isCloseDown: false,
     });
 
     const { getImage, timeoutClear, message, canOperate, isSuccess, isLoading, isShowMessage, verifyCaptcha, reset } =
@@ -109,7 +109,7 @@ export default defineComponent({
         resetStatus();
         state.backgroundImageBase64 = newValue.originalImageBase64;
         state.jigsawImageBase64 = newValue.sliderImageBase64;
-      }
+      },
     );
 
     const resetStatus = () => {
@@ -180,7 +180,7 @@ export default defineComponent({
           emit('verify', false);
           resetStatus();
           emit('reset');
-        }
+        },
       );
     };
 
@@ -194,9 +194,9 @@ export default defineComponent({
       message,
       isSuccess,
       isShowMessage,
-      backgroundLoading
+      backgroundLoading,
     };
-  }
+  },
 });
 </script>
 
@@ -232,12 +232,11 @@ export default defineComponent({
   & > div {
     width: 0;
     height: 40%;
-
     transition: all 200ms;
+    border: solid 1px #6aa0ff;
     &:nth-child(2) {
       margin: 0 4px;
     }
-    border: solid 1px #6aa0ff;
   }
   &:hover,
   &.isDown {

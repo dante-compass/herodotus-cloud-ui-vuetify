@@ -40,7 +40,7 @@ import HAppRightDrawerControl from './HAppRightDrawerControl.vue';
 import HAppWidgetActions from './HAppWidgetActions.vue';
 import HUserAvatar from '../avatar/HUserAvatar.vue';
 
-import { HAppMessageActions } from '/@/composables';
+import { HAppMessageActions } from '/@/composables/messages';
 
 export default defineComponent({
   name: 'HAppToolbarActions',
@@ -49,11 +49,11 @@ export default defineComponent({
     HAppRightDrawerControl,
     HAppWidgetActions,
     HAppMessageActions,
-    HUserAvatar
+    HUserAvatar,
   },
 
   props: {
-    message: { type: Boolean, default: false }
+    message: { type: Boolean, default: false },
   },
 
   setup() {
@@ -68,8 +68,8 @@ export default defineComponent({
 
     return {
       signOut,
-      username
+      username,
     };
-  }
+  },
 });
 </script>

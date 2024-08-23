@@ -91,10 +91,10 @@ import { useRouter } from 'vue-router';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
-import { PathEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { toast } from '/@/lib/utils';
 import { useApplicationStore, useCryptoStore, useAuthenticationStore } from '/@/stores';
-import { HSocialSignInList } from '../components';
+import { HSocialSignInList } from '/@/composables/sign-in';
 
 export default defineComponent({
   name: 'AccountPanel',
@@ -139,7 +139,7 @@ export default defineComponent({
             isSubmitDisabled.value = false;
             toast.success('欢迎回来！');
             router.push({
-              path: PathEnum.HOME
+              path: Constants.Path.HOME
             });
           }
         })

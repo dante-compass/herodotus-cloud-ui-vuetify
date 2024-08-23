@@ -1,9 +1,9 @@
 import { RouteRecordRaw } from 'vue-router';
-import { PathEnum, ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: PathEnum.HOME,
+    path: Constants.Path.HOME,
     name: 'Dashboard',
     component: () => import('/@/views/layouts/Index.vue'),
     redirect: '/dashboard/console',
@@ -28,13 +28,13 @@ const routes: Array<RouteRecordRaw> = [
         children: [
           {
             path: '/dashboard/workbench/process-start',
-            name: ComponentNameEnum.WORKFLOW_PROCESS_START,
+            name: Constants.ComponentName.WORKFLOW_PROCESS_START,
             meta: { title: '审批流程', icon: 'mdi-format-list-group-plus', isDetailContent: true },
             component: () => import('/@/views/pages/workflow/process/WorkflowProcessStart.vue')
           },
           {
             path: '/dashboard/workbench/process-approve',
-            name: ComponentNameEnum.WORKFLOW_PROCESS_APPROVE,
+            name: Constants.ComponentName.WORKFLOW_PROCESS_APPROVE,
             meta: { title: '任务流程', icon: 'mdi-check-decagram', isDetailContent: true },
             component: () => import('/@/views/pages/workflow/process/WorkflowProcessApprove.vue')
           }

@@ -13,14 +13,14 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
 
-import { PathEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { useSettingsStore } from '/@/stores';
 
 export default defineComponent({
   name: 'HAppBreadcrumbs',
 
   setup(props) {
-    const homePath = PathEnum.HOME;
+    const homePath = Constants.Path.HOME;
     const settings = useSettingsStore();
 
     return {

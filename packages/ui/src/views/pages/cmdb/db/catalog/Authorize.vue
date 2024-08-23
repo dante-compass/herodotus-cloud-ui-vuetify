@@ -30,29 +30,29 @@ import type {
   DatabaseAccountConditions,
   DatabaseCatalogEntity,
   DatabaseAccountProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTableItem, useTable } from '/@/hooks';
 
-import { HAuthorizeList, HAuthorizeLayout } from '/@/components';
+import { HAuthorizeList, HAuthorizeLayout } from '/@/composables/authorize';
 
 export default defineComponent({
   name: 'DatabaseInstanceAuthorize',
 
   components: {
     HAuthorizeList,
-    HAuthorizeLayout
+    HAuthorizeLayout,
   },
 
   setup(props) {
     const { editedItem, title, assign, overlay } = useTableItem<DatabaseCatalogEntity>(api.dbCatalog());
     const { tableRows, pagination, loading } = useTable<DatabaseAccountEntity, DatabaseAccountConditions>(
       api.dbAccount(),
-      ComponentNameEnum.DATABASE_ACCOUNT,
-      true
+      Constants.ComponentName.DATABASE_ACCOUNT,
+      true,
     );
 
     const selectedItems = ref([]) as Ref<Array<DatabaseAccountEntity>>;
@@ -60,7 +60,7 @@ export default defineComponent({
 
     const columns: QTableColumnProps = [
       { name: 'username', field: 'username', align: 'center', label: '用户名' },
-      { name: 'credentialsExpireAt', field: 'credentialsExpireAt', align: 'center', label: '密码过期日期' }
+      { name: 'credentialsExpireAt', field: 'credentialsExpireAt', align: 'center', label: '密码过期日期' },
     ];
 
     onMounted(() => {
@@ -82,8 +82,8 @@ export default defineComponent({
       selectedItems,
       pagination,
       loading,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

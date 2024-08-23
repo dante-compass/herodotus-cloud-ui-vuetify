@@ -30,36 +30,36 @@ import type {
   DatabaseCatalogConditions,
   DatabaseInstanceEntity,
   DatabaseCatalogProps,
-  QTableColumnProps
+  QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { ComponentNameEnum } from '/@/lib/enums';
+import { Constants } from '/@/lib/definitions';
 import { api } from '/@/lib/utils';
 import { useTableItem, useTable } from '/@/hooks';
 
-import { HAuthorizeList, HAuthorizeLayout } from '/@/components';
+import { HAuthorizeList, HAuthorizeLayout } from '/@/composables/authorize';
 
 export default defineComponent({
   name: 'DatabaseInstanceAuthorize',
 
   components: {
     HAuthorizeList,
-    HAuthorizeLayout
+    HAuthorizeLayout,
   },
 
   setup(props) {
     const { editedItem, title, assign, overlay } = useTableItem<DatabaseInstanceEntity>(api.dbInstance());
     const { tableRows, pagination, loading } = useTable<DatabaseCatalogEntity, DatabaseCatalogConditions>(
       api.dbCatalog(),
-      ComponentNameEnum.DATABASE_CATALOG,
-      true
+      Constants.ComponentName.DATABASE_CATALOG,
+      true,
     );
 
     const selectedItems = ref([]) as Ref<Array<DatabaseCatalogEntity>>;
     const rowKey: DatabaseCatalogProps = 'catalogId';
 
     const columns: QTableColumnProps = [
-      { name: 'catalogName', field: 'catalogName', align: 'center', label: '数据库名称' }
+      { name: 'catalogName', field: 'catalogName', align: 'center', label: '数据库名称' },
     ];
 
     onMounted(() => {
@@ -81,8 +81,8 @@ export default defineComponent({
       selectedItems,
       pagination,
       loading,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>
