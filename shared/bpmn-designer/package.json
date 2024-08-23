@@ -37,23 +37,23 @@
     "bpmn-js": "^17.9.2",
     "bpmn-js-bpmnlint": "^0.22.3",
     "bpmn-js-connectors-extension": "^0.4.6",
-    "bpmn-js-properties-panel": "^5.21.0",
-    "bpmn-js-token-simulation": "^0.34.2",
+    "bpmn-js-properties-panel": "^5.22.0",
+    "bpmn-js-token-simulation": "^0.34.4",
     "bpmn-moddle": "^9.0.1",
     "bpmnlint": "^10.3.0",
     "camunda-bpmn-js-behaviors": "^1.5.0",
     "camunda-bpmn-moddle": "^7.0.1",
-    "diagram-js": "^14.8.0",
+    "diagram-js": "^14.9.0",
     "diagram-js-grid": "^1.0.0",
     "diagram-js-minimap": "^5.1.0",
     "didi": "^10.2.2",
     "highlight.js": "^11.10.0",
-    "pinia": "^2.2.1",
+    "pinia": "^2.2.2",
     "preact": "^10.23.2",
-    "vue": "^3.4.37",
+    "vue": "^3.4.38",
     "zeebe-bpmn-moddle": "^1.5.1"
   },
   "devDependencies": {
-    "webpack": "^5.93.0"
+    "webpack": "^5.94.0"
   }
 }
