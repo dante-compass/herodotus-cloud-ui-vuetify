@@ -49,18 +49,18 @@ export default defineComponent({
     const retentionUnitOptions = ref([]) as Ref<Array<QBaseDataItem<number>>>;
 
     const initRetentionModeOptions = () => {
-      const retentionModes = constants.getDictionary('retentionMode');
+      const retentionModes = constants.getDictionary('RetentionMode');
       if (!lodash.isEmpty(retentionModes)) {
         retentionModes.map(item => {
-          retentionModeOptions.value.push({ label: item.text, value: item.value });
+          retentionModeOptions.value.push({ label: item.label, value: item.value });
         });
       }
     };
     const initRetentionUnitOptions = () => {
-      const retentionUnits = constants.getDictionary('retentionUnit');
+      const retentionUnits = constants.getDictionary('RetentionUnit');
       if (!lodash.isEmpty(retentionUnits)) {
         retentionUnits.map(item => {
-          retentionUnitOptions.value.push({ label: item.text, value: item.value });
+          retentionUnitOptions.value.push({ label: item.label, value: item.value });
         });
       }
     };

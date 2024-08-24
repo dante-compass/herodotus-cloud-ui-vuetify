@@ -321,38 +321,6 @@ const _DatabaseInstanceService = class _DatabaseInstanceService extends BaseServ
 };
 __publicField(_DatabaseInstanceService, "instance");
 let DatabaseInstanceService = _DatabaseInstanceService;
-const _UaaConstantService = class _UaaConstantService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _UaaConstantService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getUaa() + "/authorize/constant/enums";
-  }
-};
-__publicField(_UaaConstantService, "instance");
-let UaaConstantService = _UaaConstantService;
-const _UpmsConstantService = class _UpmsConstantService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _UpmsConstantService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getUpms() + "/system/constant/enums";
-  }
-};
-__publicField(_UpmsConstantService, "instance");
-let UpmsConstantService = _UpmsConstantService;
 const _SysOrganizationService = class _SysOrganizationService extends BaseService {
   constructor(config) {
     super(config);
@@ -592,6 +560,31 @@ const _SysTenantDataSourceService = class _SysTenantDataSourceService extends Ba
 };
 __publicField(_SysTenantDataSourceService, "instance");
 let SysTenantDataSourceService = _SysTenantDataSourceService;
+const _SysDictionaryService = class _SysDictionaryService extends BaseService {
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _SysDictionaryService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getUpms() + "/security/dictionary";
+  }
+  getItemsAddress() {
+    return this.getBaseAddress() + "/items";
+  }
+  getCategoryPath(category) {
+    return this.getParamPath(this.getItemsAddress(), category);
+  }
+  fetchByCategory(category) {
+    return this.getConfig().getHttp().get(this.getCategoryPath(category));
+  }
+};
+__publicField(_SysDictionaryService, "instance");
+let SysDictionaryService = _SysDictionaryService;
 const _SocialBindingService = class _SocialBindingService extends BaseService {
   constructor(config) {
     super(config);
@@ -638,6 +631,66 @@ const _ExtendedTaskService = class _ExtendedTaskService extends BaseService {
 };
 __publicField(_ExtendedTaskService, "instance");
 let ExtendedTaskService = _ExtendedTaskService;
+const _IotProductCategoryService = class _IotProductCategoryService extends BaseService {
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _IotProductCategoryService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getIot() + "/iot/product-category";
+  }
+  fetchById(id) {
+    return this.getConfig().getHttp().get(this.getIdPath(id));
+  }
+};
+__publicField(_IotProductCategoryService, "instance");
+let IotProductCategoryService = _IotProductCategoryService;
+const _IotProductService = class _IotProductService extends BaseService {
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _IotProductService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getIot() + "/iot/product";
+  }
+  getProductKeyAddress() {
+    return this.getBaseAddress() + "/check";
+  }
+  getProductKeyPath(productKey) {
+    return this.getParamPath(this.getProductKeyAddress(), productKey);
+  }
+  fetchByProductKey(productKey) {
+    return this.getConfig().getHttp().get(this.getProductKeyPath(productKey));
+  }
+};
+__publicField(_IotProductService, "instance");
+let IotProductService = _IotProductService;
+const _IotDeviceService = class _IotDeviceService extends BaseService {
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _IotDeviceService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getIot() + "/iot/device";
+  }
+};
+__publicField(_IotDeviceService, "instance");
+let IotDeviceService = _IotDeviceService;
 const _OAuth2ApiService = class _OAuth2ApiService {
   constructor(config) {
     __publicField(this, "config", {});
@@ -984,12 +1037,6 @@ const _ApiResources = class _ApiResources {
   dbInstance() {
     return DatabaseInstanceService.getInstance(this.config);
   }
-  uaaConstant() {
-    return UaaConstantService.getInstance(this.config);
-  }
-  upmsConstant() {
-    return UpmsConstantService.getInstance(this.config);
-  }
   sysOrganization() {
     return SysOrganizationService.getInstance(this.config);
   }
@@ -1020,6 +1067,9 @@ const _ApiResources = class _ApiResources {
   sysElement() {
     return SysElementService.getInstance(this.config);
   }
+  sysDictionary() {
+    return SysDictionaryService.getInstance(this.config);
+  }
   sysTenantDataSource() {
     return SysTenantDataSourceService.getInstance(this.config);
   }
@@ -1040,6 +1090,15 @@ const _ApiResources = class _ApiResources {
   }
   task() {
     return ExtendedTaskService.getInstance(this.config);
+  }
+  iotProductCategory() {
+    return IotProductCategoryService.getInstance(this.config);
+  }
+  iotProduct() {
+    return IotProductService.getInstance(this.config);
+  }
+  iotDevice() {
+    return IotDeviceService.getInstance(this.config);
   }
 };
 __publicField(_ApiResources, "instance");
@@ -1066,6 +1125,9 @@ export {
   GenderEnum,
   HttpConfig2 as HttpConfig,
   IdentityEnum,
+  IotDeviceService,
+  IotProductCategoryService,
+  IotProductService,
   NotificationCategoryEnum,
   OAuth2ApiService,
   OAuth2ApplicationService,
@@ -1083,6 +1145,7 @@ export {
   SysAttributeService,
   SysDefaultRoleService,
   SysDepartmentService,
+  SysDictionaryService,
   SysElementService,
   SysEmployeeAllocatableService,
   SysEmployeeService,
@@ -1092,8 +1155,6 @@ export {
   SysTenantDataSourceService,
   SysUserService,
   TechnologyEnum,
-  UaaConstantService,
-  UpmsConstantService,
   createApi,
   lodash,
   moment

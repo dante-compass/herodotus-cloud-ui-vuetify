@@ -132,7 +132,6 @@ export const useTabsStore = defineStore('Tabs', {
         if (store.hasParameter(route)) {
           this.openTab(tab, isDetailRoute);
         } else {
-          console.log('dddddd');
           this.closeTab(tab);
           RouteUtils.goBack();
         }

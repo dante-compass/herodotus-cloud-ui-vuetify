@@ -2,10 +2,8 @@
   <h-center-form-layout :entity="editedItem" :title="title" :operation="operation" @save="onSave()">
     <h-dictionary-select
       v-model="editedItem.webExpression"
-      dictionary="permissionExpression"
-      label="权限表达式"
-      option-label="key"
-      option-value="value"></h-dictionary-select>
+      dictionary="PermissionExpression"
+      label="权限表达式"></h-dictionary-select>
     <h-text-field
       v-model="editedItem.serviceId"
       name="serviceId"
@@ -41,7 +39,7 @@ export default defineComponent({
 
   components: {
     HCenterFormLayout,
-    HDictionarySelect
+    HDictionarySelect,
   },
 
   setup(props) {
@@ -55,8 +53,8 @@ export default defineComponent({
       editedItem,
       operation,
       title,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

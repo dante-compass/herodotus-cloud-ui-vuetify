@@ -54,34 +54,6 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: '日志审计', icon: 'mdi-receipt-text-check', group: 'authorize' },
         component: () => import('/@/views/pages/authorize/compliance/Index.vue'),
       },
-      {
-        path: '/authorize/product',
-        name: Constants.ComponentName.OAUTH2_PRODUCT,
-        meta: { title: '产品管理', icon: 'mdi-folder-table', isHideAllChild: true },
-        component: () => import('/@/views/pages/authorize/product/Index.vue'),
-        children: [
-          {
-            path: '/authorize/product/content',
-            name: 'OAuth2ProductContent',
-            meta: { title: '产品详情', icon: 'mdi-folder-text', isDetailContent: true },
-            component: () => import('/@/views/pages/authorize/product/Content.vue'),
-          },
-        ],
-      },
-      {
-        path: '/authorize/device',
-        name: Constants.ComponentName.OAUTH2_DEVICE,
-        meta: { title: '设备管理', icon: 'mdi-devices', isHideAllChild: true },
-        component: () => import('/@/views/pages/authorize/device/Index.vue'),
-        children: [
-          {
-            path: '/authorize/device/content',
-            name: 'OAuth2DeviceContent',
-            meta: { title: '设备详情', icon: 'mdi-lan-check', isDetailContent: true },
-            component: () => import('/@/views/pages/authorize/device/Content.vue'),
-          },
-        ],
-      },
     ],
   },
 ];

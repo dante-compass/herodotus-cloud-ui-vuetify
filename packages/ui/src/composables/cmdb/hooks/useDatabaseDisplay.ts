@@ -12,11 +12,11 @@ export default function useDatabaseDisplay() {
 
   const parseDatabase = (item: DatabaseInstanceEntity) => {
     if (lodash.isEmpty(database.value)) {
-      database.value = constants.getDictionary('database');
+      database.value = constants.getDictionary('Database');
     }
 
     if (typeof item.dbType == 'number') {
-      return database.value[item.dbType].text;
+      return database.value[item.dbType].label;
     } else {
       return item.dbType;
     }

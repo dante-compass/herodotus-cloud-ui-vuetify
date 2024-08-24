@@ -12,8 +12,6 @@ import {
   DatabaseAccountService,
   DatabaseCatalogService,
   DatabaseInstanceService,
-  UaaConstantService,
-  UpmsConstantService,
   SysOrganizationService,
   SysDepartmentService,
   SysEmployeeService,
@@ -25,6 +23,7 @@ import {
   SysDefaultRoleService,
   SysElementService,
   SysTenantDataSourceService,
+  SysDictionaryService,
   SocialBindingService,
   ExtendedTaskService
 } from './modules';
@@ -107,14 +106,6 @@ class ApiResources {
     return DatabaseInstanceService.getInstance(this.config);
   }
 
-  public uaaConstant(): UaaConstantService {
-    return UaaConstantService.getInstance(this.config);
-  }
-
-  public upmsConstant(): UpmsConstantService {
-    return UpmsConstantService.getInstance(this.config);
-  }
-
   public sysOrganization(): SysOrganizationService {
     return SysOrganizationService.getInstance(this.config);
   }
@@ -152,6 +143,10 @@ class ApiResources {
 
   public sysElement(): SysElementService {
     return SysElementService.getInstance(this.config);
+  }
+
+  public sysDictionary(): SysDictionaryService {
+    return SysDictionaryService.getInstance(this.config);
   }
 
   public sysTenantDataSource(): SysTenantDataSourceService {

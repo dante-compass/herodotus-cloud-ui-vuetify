@@ -8,7 +8,7 @@
               <h-column :cols="2">
                 <h-dictionary-select
                   v-model="conditions.category"
-                  dictionary="organizationCategory"
+                  dictionary="OrganizationCategory"
                   label="组织类别"
                   dense
                   class="q-pb-none"></h-dictionary-select>

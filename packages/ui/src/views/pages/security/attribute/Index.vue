@@ -95,9 +95,9 @@ export default defineComponent({
     ];
 
     onMounted(() => {
-      const dictionary = constants.getDictionary('permissionExpression');
+      const dictionary = constants.getDictionary('PermissionExpression');
       dictionary.forEach(element => {
-        index.value[element.key] = element;
+        index.value[element.ordinal] = element;
       });
     });
 

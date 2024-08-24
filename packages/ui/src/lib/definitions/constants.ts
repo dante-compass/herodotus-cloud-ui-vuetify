@@ -9,10 +9,10 @@ export const HTTP_METHOD_STYLE_GROUP: DisplayElementGroup = {
 };
 
 export const DATA_ITEM_STATUS: Array<DisplayElement> = [
-  { color: 'green', icon: 'mdi-database-check' },
-  { color: 'error', icon: 'mdi-database-off' },
-  { color: 'error', icon: 'mdi-database-lock' },
-  { color: 'warning', icon: 'mdi-database-clock' },
+  { color: 'positive', icon: 'mdi-circle' },
+  { color: 'negative', icon: 'mdi-circle' },
+  { color: 'warning', icon: 'mdi-circle' },
+  { color: 'info', icon: 'mdi-circle' },
 ];
 
 export const DEFAULT_HTTP_METHOD_STYLE: DisplayElement = HTTP_METHOD_STYLE_GROUP.GET;
@@ -56,6 +56,7 @@ export const ComponentName = {
   SYS_DEPARTMENT: 'SysDepartment',
   SYS_EMPLOYEE: 'SysEmployee',
   SYS_OWNERSHIP: 'SysOwnership',
+  SYS_DICTIONARY: 'SysDictionary',
   OAUTH2_APPLICATION: 'OAuth2Application',
   OAUTH2_SCOPE: 'OAuth2Scope',
   OAUTH2_TOKEN: 'OAuth2Token',

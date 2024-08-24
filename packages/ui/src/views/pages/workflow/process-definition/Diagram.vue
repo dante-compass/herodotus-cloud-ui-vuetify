@@ -11,7 +11,6 @@ import { defineComponent, Ref, ref } from 'vue';
 
 import type { BpmnUnionPathParams, XmlEntity, ProcessDefinitionQueryParams, QTableProps } from '/@/lib/declarations';
 
-import { useBpmnTableItems } from '/@/hooks';
 import { bpmnApi, lodash } from '/@/lib/utils';
 
 export default defineComponent({
@@ -24,7 +23,7 @@ export default defineComponent({
     id: { type: String },
     definitionKey: { type: String },
     tenantId: { type: String },
-    processInstanceId: { type: String }
+    processInstanceId: { type: String },
   },
 
   setup(props, { emit }) {
@@ -32,7 +31,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const xml = ref('');
@@ -59,7 +58,7 @@ export default defineComponent({
         const params: BpmnUnionPathParams = {
           id: props.id,
           key: props.definitionKey,
-          tenantId: props.tenantId
+          tenantId: props.tenantId,
         };
 
         bpmnApi
@@ -84,8 +83,8 @@ export default defineComponent({
 
     return {
       isOpen,
-      xml
+      xml,
     };
-  }
+  },
 });
 </script>

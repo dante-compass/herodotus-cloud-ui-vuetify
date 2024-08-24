@@ -10,7 +10,7 @@
       @blur="v.editedItem.actualIp.$validate()"></h-text-field>
     <h-dictionary-select
       v-model="editedItem.deviceType"
-      dictionary="serverDevice"
+      dictionary="ServerDevice"
       label="服务器类型 * "
       multiple
       placeholder="服务器类型"></h-dictionary-select>

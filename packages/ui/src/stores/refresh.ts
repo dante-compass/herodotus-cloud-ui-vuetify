@@ -26,7 +26,6 @@ export const useRefreshStore = defineStore('Refresh', {
 						if (config.headers) config.headers.Authorization = 'Bearer ' + newToken;
 						this.requests.forEach(function (resolve) {
 							resolve(axiosInstance(config));
-							console.log('listed func');
 						});
 						this.requests = [];
 						return axiosInstance(config);

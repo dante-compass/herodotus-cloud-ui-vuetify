@@ -1,10 +1,10 @@
 <template>
   <h-simple-center-form-layout :title="title" :operation="operation" hide-save>
     <h-divider label="概要" class="q-mb-md"></h-divider>
-    <h-dictionary-select v-model="bucketSetting.policy" dictionary="policy" label="访问策略"></h-dictionary-select>
+    <h-dictionary-select v-model="bucketSetting.policy" dictionary="Policy" label="访问策略"></h-dictionary-select>
     <h-dictionary-select
       v-model="bucketSetting.sseConfiguration"
-      dictionary="sseConfiguration"
+      dictionary="SseConfiguration"
       label="服务端加密"></h-dictionary-select>
     <h-text-field v-model="bucketObjectLock" name="isObjectLock" label="对象锁定" readonly></h-text-field>
     <h-text-field v-model="bucketQuota" name="bucketQuota" label="存储桶容量" readonly></h-text-field>
@@ -53,7 +53,7 @@ export default defineComponent({
   components: {
     HSimpleCenterFormLayout,
     HOssTags,
-    HOssBucketRetention
+    HOssBucketRetention,
   },
 
   setup(props) {
@@ -86,14 +86,14 @@ export default defineComponent({
 
     const retentionValidity = computed(() => {
       const objectLock = bucketSetting.value.objectLock;
-      const retentionDuration = constants.getDictionaryItem('retentionUnit', objectLock.unit);
-      return objectLock.validity + ' ' + retentionDuration.text;
+      const retentionDuration = constants.getDictionaryItem('RetentionUnit', objectLock.unit);
+      return objectLock.validity + ' ' + retentionDuration.label;
     });
 
     const retentionMode = computed(() => {
       const objectLock = bucketSetting.value.objectLock;
-      const retentionDuration = constants.getDictionaryItem('retentionMode', objectLock.mode);
-      return retentionDuration.text;
+      const retentionDuration = constants.getDictionaryItem('RetentionMode', objectLock.mode);
+      return retentionDuration.label;
     });
 
     const loadSettings = async () => {
@@ -142,8 +142,8 @@ export default defineComponent({
         }
       },
       {
-        immediate: false
-      }
+        immediate: false,
+      },
     );
 
     watch(
@@ -155,8 +155,8 @@ export default defineComponent({
         }
       },
       {
-        immediate: false
-      }
+        immediate: false,
+      },
     );
 
     const refresh = () => {
@@ -183,8 +183,8 @@ export default defineComponent({
       retentionMode,
       openBucketRetention,
       onVersioningConfigurationChange,
-      onObjectLockConfigurationChange
+      onObjectLockConfigurationChange,
     };
-  }
+  },
 });
 </script>

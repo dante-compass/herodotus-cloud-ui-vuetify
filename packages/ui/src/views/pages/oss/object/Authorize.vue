@@ -5,7 +5,7 @@
     <h-text-field v-model="lastModified" name="lastModified" label="最后修改时间" readonly></h-text-field>
     <h-dictionary-select
       v-model="objectSetting.retentionMode"
-      dictionary="retentionMode"
+      dictionary="RetentionMode"
       label="保留模式"></h-dictionary-select>
     <h-text-field
       v-if="objectSetting.retentionRetainUntilDate"
@@ -84,8 +84,6 @@ export default defineComponent({
     watch(
       () => objectSetting.value.legalHold,
       (oldValue, newValue) => {
-        console.log('--oldValue', oldValue);
-        console.log('--newValue', newValue);
         // 避免首次加载就执行
         if (typeof newValue !== 'undefined') {
           onLegalHoldChange(bucketName.value, editedItem.value.objectName, newValue);

@@ -1,4 +1,4 @@
-import { SysPermissionEntity, SysRoleEntity, SysUserEntity, SysAttributeEntity, SysDefaultRoleEntity, SysElementEntity, SysTenantDataSourceEntity, AxiosHttpResult, AccessSourceEntity } from '../../declarations';
+import { SysPermissionEntity, SysRoleEntity, SysUserEntity, SysAttributeEntity, SysDefaultRoleEntity, SysElementEntity, SysDictionaryEntity, SysTenantDataSourceEntity, AxiosHttpResult, AccessSourceEntity } from '../../declarations';
 import { HttpConfig, BaseService } from '../base';
 declare class SysPermissionService extends BaseService<SysPermissionEntity> {
     private static instance;
@@ -52,10 +52,19 @@ declare class SysTenantDataSourceService extends BaseService<SysTenantDataSource
     getTenantIdPath(tenantId: string): string;
     fetchByTenantId(tenantId: string): Promise<AxiosHttpResult<SysTenantDataSourceEntity>>;
 }
+declare class SysDictionaryService extends BaseService<SysDictionaryEntity> {
+    private static instance;
+    private constructor();
+    static getInstance(config: HttpConfig): SysDictionaryService;
+    getBaseAddress(): string;
+    getItemsAddress(): string;
+    getCategoryPath(category: string): string;
+    fetchByCategory(category: string): Promise<AxiosHttpResult<Array<SysDictionaryEntity>>>;
+}
 declare class SocialBindingService extends BaseService<AccessSourceEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SocialBindingService;
     getBaseAddress(): string;
 }
-export { SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SocialBindingService };
+export { SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, };

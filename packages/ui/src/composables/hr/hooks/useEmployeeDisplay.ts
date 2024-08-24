@@ -13,11 +13,11 @@ export default function useEmployeeDisplay() {
 
 	const parseGender = (item: SysEmployeeEntity) => {
 		if (lodash.isEmpty(gender.value)) {
-			gender.value = constants.getDictionary('gender');
+			gender.value = constants.getDictionary('Gender');
 		}
 
 		if (typeof item.gender == 'number') {
-			return gender.value[item.gender].text;
+			return gender.value[item.gender].label;
 		} else {
 			return item.gender;
 		}
@@ -25,11 +25,11 @@ export default function useEmployeeDisplay() {
 
 	const parseIdentity = (item: SysEmployeeEntity) => {
 		if (lodash.isEmpty(identity.value)) {
-			identity.value = constants.getDictionary('identity');
+			identity.value = constants.getDictionary('Identity');
 		}
 
 		if (typeof item.identity == 'number') {
-			return identity.value[item.identity].text;
+			return identity.value[item.identity].label;
 		} else {
 			return item.identity;
 		}

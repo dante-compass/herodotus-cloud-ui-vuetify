@@ -97,8 +97,6 @@ const transform: AxiosTransform = {
       }
     });
 
-    console.log(config);
-
     return config;
   },
 

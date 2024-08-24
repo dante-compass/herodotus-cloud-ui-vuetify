@@ -17,11 +17,11 @@
       <h-text-field v-model="editedItem.homepage" label="应用主页(可选)" placeholder="请输入应用主页"></h-text-field>
       <h-dictionary-select
         v-model="editedItem.applicationType"
-        dictionary="applicationType"
+        dictionary="ApplicationType"
         label="应用类型"></h-dictionary-select>
       <h-dictionary-select
         v-model="editedItem.authorizationGrantTypes"
-        dictionary="grantType"
+        dictionary="GrantType"
         label="认证模式 * "
         multiple
         placeholder="请选择认证模式，可以多个"
@@ -34,7 +34,7 @@
         @blur="v.editedItem.authorizationGrantTypes.$validate()"></h-dictionary-select>
       <h-dictionary-select
         v-model="editedItem.clientAuthenticationMethods"
-        dictionary="authenticationMethod"
+        dictionary="AuthenticationMethod"
         label="客户端验证模式 * "
         multiple
         placeholder="请选择客户端验证模式，可以多个"
@@ -72,8 +72,6 @@
         v-if="isShowAuthenticationSigningAlgorithm"
         v-model="editedItem.authenticationSigningAlgorithm"
         :options="authenticationSigningAlgorithmItem"
-        option-label="text"
-        option-value="value"
         label="令牌端点认证签名算法"
         outlined
         use-chips
@@ -101,7 +99,7 @@
         label="令牌格式(需同步修改后端配置)"></h-dictionary-select> -->
       <h-dictionary-select
         v-model="editedItem.idTokenSignatureAlgorithm"
-        dictionary="signatureJwsAlgorithm"
+        dictionary="SignatureJwsAlgorithm"
         label="OIDC idToken 端点认证签名算法"></h-dictionary-select>
       <h-divider label="数据条目设置"></h-divider>
       <h-text-field
@@ -110,7 +108,10 @@
         placeholder="请输入备注"
         class="q-mt-md"></h-text-field>
       <h-text-field v-model.number="editedItem.ranking" label="排序值" placeholder="请输入排序值" type="number" />
-      <h-dictionary-select v-model="editedItem.status" dictionary="status" label="数据状态"></h-dictionary-select>
+      <h-dictionary-select
+        v-model="editedItem.status"
+        dictionary="DataItemStatus"
+        label="数据状态"></h-dictionary-select>
       <div class="column q-mb-sm">
         <h-switch v-model="editedItem.reserved" label="是否为保留数据"></h-switch>
       </div>
@@ -142,7 +143,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onBeforeMount } from 'vue';
+import { defineComponent, computed, onBeforeMount, markRaw } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
@@ -227,11 +228,14 @@ export default defineComponent({
       });
     };
 
-    const allJwsAlgorithm: Array<ConstantDictionary> = [];
+    const state = reactive({
+      items: [] as Array<ConstantDictionary>,
+    });
 
     const initialize = () => {
       const constants = useConstantsStore();
-      allJwsAlgorithm.push(...constants.getDictionary('allJwsAlgorithm'));
+
+      state.items = constants.getDictionary('AllJwsAlgorithm');
     };
 
     const includePrivateKeyJwt = () => {
@@ -261,14 +265,14 @@ export default defineComponent({
 
     const authenticationSigningAlgorithmItem = computed(() => {
       if (onlyHasPrivateKeyJwt()) {
-        return allJwsAlgorithm.filter(item => item.value < 9);
+        return state.items.filter(item => item.ordinal < 9);
       }
 
       if (onlyHasClientSecretJwt()) {
-        return allJwsAlgorithm.filter(item => item.value >= 9);
+        return state.items.filter(item => item.ordinal < 9);
       }
 
-      return allJwsAlgorithm;
+      return state.items;
     });
 
     onBeforeMount(() => {
