@@ -6,7 +6,8 @@ export type EmptyObject = {
  */
 export type ParametersType<T> = T extends (args: infer R) => any ? R : any;
 export type ConstantDictionary = {
-    key: string;
-    text: string;
-    value: number;
+    ordinal: number;
+    name: string;
+    value: string;
+    label: string;
 };

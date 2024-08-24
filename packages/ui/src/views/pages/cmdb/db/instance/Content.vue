@@ -2,7 +2,7 @@
   <h-center-form-layout :entity="editedItem" :title="title" :operation="operation" @save="onSave()">
     <h-dictionary-select
       v-model="editedItem.dbType"
-      dictionary="database"
+      dictionary="Database"
       label="数据库类型 * "
       placeholder="数据库类型"
       :error="v.editedItem.dbType.$error"

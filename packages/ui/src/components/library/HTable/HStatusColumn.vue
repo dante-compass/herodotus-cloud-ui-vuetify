@@ -20,7 +20,7 @@ export default defineComponent({
   },
 
   props: {
-    type: { type: Number, defalut: '0', required: true },
+    type: { type: String, defalut: '0', required: true },
   },
 
   setup(props) {
@@ -32,7 +32,7 @@ export default defineComponent({
 
     const initialize = () => {
       if (lodash.isEmpty(state.items)) {
-        state.items = constants.getDictionary('status');
+        state.items = constants.getDictionary('DataItemStatus');
       }
     };
 
@@ -49,16 +49,16 @@ export default defineComponent({
     );
 
     const color = computed(() => {
-      return Constants.DATA_ITEM_STATUS[props.type].color;
+      return Constants.DATA_ITEM_STATUS[Number(props.type)].color;
     });
 
     const icon = computed(() => {
-      return Constants.DATA_ITEM_STATUS[props.type].icon;
+      return Constants.DATA_ITEM_STATUS[Number(props.type)].icon;
     });
 
     const tooltip = computed(() => {
       if (!lodash.isEmpty(state.items)) {
-        return state.items[props.type].text;
+        return state.items[Number(props.type)].label;
       } else {
         return '';
       }

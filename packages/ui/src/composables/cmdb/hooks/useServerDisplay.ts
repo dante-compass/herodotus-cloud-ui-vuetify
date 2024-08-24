@@ -12,11 +12,11 @@ export default function useServerDisplay() {
 
   const parseServerDevice = (item: AssetServerEntity) => {
     if (lodash.isEmpty(serverDevice.value)) {
-      serverDevice.value = constants.getDictionary('serverDevice');
+      serverDevice.value = constants.getDictionary('ServerDevice');
     }
 
     if (typeof item.deviceType == 'number') {
-      return serverDevice.value[item.deviceType].text;
+      return serverDevice.value[item.deviceType].label;
     } else {
       return item.deviceType;
     }

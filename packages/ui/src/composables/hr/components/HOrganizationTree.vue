@@ -3,7 +3,7 @@
     <q-card-section>
       <h-dictionary-select
         v-model="conditions.category"
-        dictionary="organizationCategory"
+        dictionary="OrganizationCategory"
         label="组织类别"
         dense
         class="q-pb-none"></h-dictionary-select>
@@ -36,32 +36,32 @@ export default defineComponent({
   name: 'HOrganizationTree',
 
   components: {
-    HDictionarySelect
+    HDictionarySelect,
   },
 
   props: {
-    selected: { type: String }
+    selected: { type: String },
   },
 
   emits: ['update:selected'],
 
   setup(props, { emit }) {
     const { treeItems, conditions } = useTreeItems<SysOrganizationEntity, SysOrganizationConditions>(
-      api.sysOrganization()
+      api.sysOrganization(),
     );
 
     const selectedValue = computed({
       get: () => props.selected,
       set: newValue => {
         emit('update:selected', newValue);
-      }
+      },
     });
 
     return {
       treeItems,
       selectedValue,
-      conditions
+      conditions,
     };
-  }
+  },
 });
 </script>

@@ -16,7 +16,7 @@
     <h-text-field v-model="editedItem.shortName" label="单位简称" placeholder="请输入单位简称"></h-text-field>
     <h-dictionary-select
       v-model="editedItem.category"
-      dictionary="organizationCategory"
+      dictionary="OrganizationCategory"
       label="组织类别"></h-dictionary-select>
     <h-organization-select
       v-model="editedItem.parentId"

@@ -105,9 +105,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent } from 'vue';
 
-import { useConstantsStore } from '/@/stores';
 import { useRealTimeInformation } from '/@/composables/messages';
 import {
   HBarChart,
@@ -139,12 +138,7 @@ export default defineComponent({
   },
 
   setup() {
-    const constantsStore = useConstantsStore();
     const { onlineUserCount } = useRealTimeInformation();
-
-    onMounted(() => {
-      constantsStore.init();
-    });
 
     return {
       onlineUserCount,

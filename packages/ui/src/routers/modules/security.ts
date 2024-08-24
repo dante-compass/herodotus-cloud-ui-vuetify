@@ -177,6 +177,20 @@ const routes: Array<RouteRecordRaw> = [
           },
         ],
       },
+      {
+        path: '/security/dictionary',
+        name: Constants.ComponentName.SYS_DICTIONARY,
+        meta: { title: '数据字典', icon: 'mdi-playlist-check', isHideAllChild: true },
+        component: () => import('/@/views/pages/security/dictionary/Index.vue'),
+        children: [
+          {
+            path: '/security/dictionary/content',
+            name: 'SysDictionaryContent',
+            meta: { title: '字典详情', icon: 'mdi-playlist-edit', isDetailContent: true },
+            component: () => import('/@/views/pages/security/dictionary/Content.vue'),
+          },
+        ],
+      },
     ],
   },
 ];

@@ -1,6 +1,6 @@
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import type { Tree } from './base';
-import { SocialSourceEnum, OperationEnum } from '../enums';
+import { SocialSourceEnum, OperationEnum } from '/@/lib/definitions';
 
 export interface MenuItem {
   title: string | unknown;

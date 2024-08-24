@@ -38,7 +38,6 @@ export default defineComponent({
 
       if (isDetailRoute) {
         if (!store.hasParameter(route)) {
-          console.log('---=====----');
           onFinish();
         }
       }

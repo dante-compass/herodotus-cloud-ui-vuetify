@@ -6,44 +6,30 @@
           <h-row align="center" gutter="md" horizontal>
             <h-column :cols="2">
               <h-text-field
-                v-model="conditionsModelValue.employeeName"
+                v-model="conditionsModelValue.category"
                 debounce="1000"
-                label="姓名"
+                label="分类"
                 dense
                 class="q-pb-none"></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
-                v-model="conditionsModelValue.mobilePhoneNumber"
+                v-model="conditionsModelValue.name"
                 debounce="1000"
-                label="手机号码"
+                label="字面量"
                 dense
                 class="q-pb-none"></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
-                v-model="conditionsModelValue.email"
+                v-model="conditionsModelValue.label"
                 debounce="1000"
-                label="电子邮件"
+                label="显示值"
                 dense
                 class="q-pb-none"></h-text-field>
             </h-column>
-            <h-column :cols="2">
-              <h-dictionary-select
-                v-model="conditionsModelValue.identity"
-                dictionary="Identity"
-                label="身份"
-                dense
-                class="q-pb-none"></h-dictionary-select>
-            </h-column>
-            <h-column :cols="2">
-              <h-dictionary-select
-                v-model="conditionsModelValue.gender"
-                dictionary="Gender"
-                label="性别"
-                dense
-                class="q-pb-none"></h-dictionary-select>
-            </h-column>
+            <h-column :cols="2"></h-column>
+            <h-column :cols="2"></h-column>
             <h-column auto>
               <h-button color="red" icon="mdi-broom" tooltip="清空" @click.stop="onClear()"></h-button>
             </h-column>
@@ -57,19 +43,13 @@
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue';
 
-import type { SysEmployeeConditions } from '/@/lib/declarations';
-
-import { HDictionarySelect } from '/@/components';
+import type { SysDictionaryConditions } from '/@/lib/declarations';
 
 export default defineComponent({
-  name: 'HEmployeeCondition',
-
-  components: {
-    HDictionarySelect,
-  },
+  name: 'HElementCondition',
 
   props: {
-    conditions: { type: Object as PropType<SysEmployeeConditions>, required: true },
+    conditions: { type: Object as PropType<SysDictionaryConditions>, required: true },
   },
 
   emits: ['update:conditions'],
@@ -83,7 +63,7 @@ export default defineComponent({
     });
 
     const onClear = () => {
-      conditionsModelValue.value = {} as SysEmployeeConditions;
+      conditionsModelValue.value = {} as SysDictionaryConditions;
     };
 
     return {

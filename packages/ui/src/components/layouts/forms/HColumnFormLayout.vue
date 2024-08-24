@@ -7,7 +7,7 @@
         <h-text-field v-model.number="entity.ranking" label="排序值" placeholder="请输入排序值" type="number" />
         <h-dictionary-select
           v-model="entity.status"
-          dictionary="status"
+          dictionary="DataItemStatus"
           label="数据状态"
           class="q-mb-md"></h-dictionary-select>
         <q-separator></q-separator>

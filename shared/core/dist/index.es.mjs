@@ -4446,6 +4446,7 @@ class HttpConfig {
     __publicField(this, "ossAddress", "");
     __publicField(this, "bpmnAddress", "");
     __publicField(this, "cmdbAddress", "");
+    __publicField(this, "iotAddress", "");
     __publicField(this, "proxy", "");
     this.project = project;
     this.clientId = clientId;
@@ -4464,6 +4465,7 @@ class HttpConfig {
         this.ossAddress = "/dante-cloud-oss-ability";
         this.bpmnAddress = "/dante-cloud-bpmn-ability/engine-rest";
         this.cmdbAddress = "/dante-cloud-cmdb-ability";
+        this.iotAddress = "/dante-cloud-iot-ability";
         break;
       case "herodotus":
         this.uaaAddress = "/herodotus-cloud-uaa";
@@ -4472,6 +4474,7 @@ class HttpConfig {
         this.ossAddress = "/herodotus-cloud-oss-ability";
         this.bpmnAddress = "/herodotus-cloud-bpmn-ability/engine-rest";
         this.cmdbAddress = "/herodotus-cloud-cmdb-ability";
+        this.iotAddress = "/herodotus-cloud-iot-ability";
         break;
       default:
         this.uaaAddress = "";
@@ -4480,6 +4483,7 @@ class HttpConfig {
         this.ossAddress = "";
         this.bpmnAddress = "/engine-rest";
         this.cmdbAddress = "";
+        this.iotAddress = "";
     }
   }
   getProject() {
@@ -4529,6 +4533,9 @@ class HttpConfig {
   }
   getCmdb(withProxy = true) {
     return this.processProxy(this.cmdbAddress, withProxy);
+  }
+  getIot(withProxy = true) {
+    return this.processProxy(this.iotAddress, withProxy);
   }
 }
 let pendingMap = /* @__PURE__ */ new Map();

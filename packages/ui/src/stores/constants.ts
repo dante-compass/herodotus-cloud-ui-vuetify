@@ -1,64 +1,64 @@
 import { defineStore } from 'pinia';
-import type { AxiosHttpResult, ConstantDictionary } from '/@/lib/declarations';
+import type { SysDictionaryEntity, ConstantDictionary } from '/@/lib/declarations';
 
-import { lodash, api, ossApi } from '/@/lib/utils';
+import { api } from '/@/lib/utils';
 
 export const useConstantsStore = defineStore('Constants', {
   state: () => ({
-    enums: {} as Record<string, ConstantDictionary[]>
+    enums: {} as Record<string, ConstantDictionary[]>,
   }),
 
-  getters: {
-    getDictionary(state) {
-      return (key: string): ConstantDictionary[] => (key ? state.enums[key] : []);
+  actions: {
+    to(item: SysDictionaryEntity): ConstantDictionary {
+      const result: ConstantDictionary = {
+        ordinal: item.ordinal,
+        name: item.name,
+        value: item.value,
+        label: item.label,
+      };
+      return result;
     },
 
-    getDictionaryItem(state) {
-      return (key: string, index: number): ConstantDictionary => {
-        const items: ConstantDictionary[] = state.enums[key];
-        return items ? items[index] : ({} as ConstantDictionary);
-      };
-    }
-  },
+    convert(items: Array<SysDictionaryEntity>): Array<ConstantDictionary> {
+      if (items) {
+        return items.map(item => this.to(item));
+      } else {
+        return [];
+      }
+    },
 
-  actions: {
-    fetch() {
-      api
-        .uaaConstant()
-        .fetch()
+    async fetch(category: string) {
+      await api
+        .sysDictionary()
+        .fetchByCategory(category)
         .then(response => {
-          this.append(response);
-          api
-            .upmsConstant()
-            .fetch()
-            .then(response => {
-              this.append(response);
-              // ossApi
-              //   .constant()
-              //   .fetch()
-              //   .then(response => {
-              //     this.append(response);
-              //   });
-            });
+          const data = response.data;
+          this.enums[category] = this.convert(data);
         });
     },
 
-    refresh() {
-      this.fetch();
+    read(category: string): Array<ConstantDictionary> {
+      return this.enums[category];
     },
 
-    init() {
-      if (lodash.isEmpty(this.enums)) {
-        this.fetch();
+    getDictionary(category: string): Array<ConstantDictionary> {
+      let dictionary = this.read(category);
+      if (!dictionary) {
+        this.fetch(category);
+        dictionary = this.read(category);
       }
+      return dictionary;
     },
 
-    append(response: AxiosHttpResult) {
-      const data = response.data;
-      if (!lodash.isEmpty(data)) {
-        this.enums = Object.assign(this.enums, data);
+    getDictionaryItem(category: string, index: number): ConstantDictionary {
+      const dictionary = this.getDictionary(category);
+      if (dictionary) {
+        return dictionary[index];
+      } else {
+        return {} as ConstantDictionary;
       }
-    }
+    },
   },
-  persist: true
+
+  persist: true,
 });

@@ -13,6 +13,7 @@ class HttpConfig {
   private ossAddress = '';
   private bpmnAddress = '';
   private cmdbAddress = '';
+  private iotAddress = '';
   private proxy = '';
 
   public constructor(
@@ -21,7 +22,7 @@ class HttpConfig {
     clientSecret: string,
     http: Axios,
     oidc = false,
-    proxy = '/api'
+    proxy = '/api',
   ) {
     this.project = project;
     this.clientId = clientId;
@@ -40,6 +41,7 @@ class HttpConfig {
         this.ossAddress = '/dante-cloud-oss-ability';
         this.bpmnAddress = '/dante-cloud-bpmn-ability/engine-rest';
         this.cmdbAddress = '/dante-cloud-cmdb-ability';
+        this.iotAddress = '/dante-cloud-iot-ability';
         break;
       case 'herodotus':
         this.uaaAddress = '/herodotus-cloud-uaa';
@@ -48,6 +50,7 @@ class HttpConfig {
         this.ossAddress = '/herodotus-cloud-oss-ability';
         this.bpmnAddress = '/herodotus-cloud-bpmn-ability/engine-rest';
         this.cmdbAddress = '/herodotus-cloud-cmdb-ability';
+        this.iotAddress = '/herodotus-cloud-iot-ability';
         break;
       default:
         this.uaaAddress = '';
@@ -56,6 +59,7 @@ class HttpConfig {
         this.ossAddress = '';
         this.bpmnAddress = '/engine-rest';
         this.cmdbAddress = '';
+        this.iotAddress = '';
     }
   }
 
@@ -118,6 +122,10 @@ class HttpConfig {
 
   public getCmdb(withProxy: boolean = true): string {
     return this.processProxy(this.cmdbAddress, withProxy);
+  }
+
+  public getIot(withProxy: boolean = true): string {
+    return this.processProxy(this.iotAddress, withProxy);
   }
 }
 

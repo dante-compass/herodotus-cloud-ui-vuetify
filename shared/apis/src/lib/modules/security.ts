@@ -5,9 +5,10 @@ import type {
   SysAttributeEntity,
   SysDefaultRoleEntity,
   SysElementEntity,
+  SysDictionaryEntity,
   SysTenantDataSourceEntity,
   AxiosHttpResult,
-  AccessSourceEntity
+  AccessSourceEntity,
 } from '/@/declarations';
 
 import { ContentTypeEnum } from '/@/enums';
@@ -99,8 +100,8 @@ class SysUserService extends BaseService<SysUserEntity> {
       this.getChangePasswordAddress(),
       { userId, password },
       {
-        contentType: ContentTypeEnum.URL_ENCODED
-      }
+        contentType: ContentTypeEnum.URL_ENCODED,
+      },
     );
   }
 }
@@ -191,6 +192,36 @@ class SysTenantDataSourceService extends BaseService<SysTenantDataSourceEntity> 
   }
 }
 
+class SysDictionaryService extends BaseService<SysDictionaryEntity> {
+  private static instance: SysDictionaryService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): SysDictionaryService {
+    if (this.instance == null) {
+      this.instance = new SysDictionaryService(config);
+    }
+    return this.instance;
+  }
+  public getBaseAddress(): string {
+    return this.getConfig().getUpms() + '/security/dictionary';
+  }
+
+  public getItemsAddress(): string {
+    return this.getBaseAddress() + '/items';
+  }
+
+  public getCategoryPath(category: string): string {
+    return this.getParamPath(this.getItemsAddress(), category);
+  }
+
+  public fetchByCategory(category: string): Promise<AxiosHttpResult<Array<SysDictionaryEntity>>> {
+    return this.getConfig().getHttp().get<Array<SysDictionaryEntity>, string>(this.getCategoryPath(category));
+  }
+}
+
 class SocialBindingService extends BaseService<AccessSourceEntity> {
   private static instance: SocialBindingService;
 
@@ -218,5 +249,6 @@ export {
   SysDefaultRoleService,
   SysElementService,
   SysTenantDataSourceService,
-  SocialBindingService
+  SysDictionaryService,
+  SocialBindingService,
 };
