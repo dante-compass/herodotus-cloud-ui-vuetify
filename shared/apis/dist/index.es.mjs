@@ -631,66 +631,6 @@ const _ExtendedTaskService = class _ExtendedTaskService extends BaseService {
 };
 __publicField(_ExtendedTaskService, "instance");
 let ExtendedTaskService = _ExtendedTaskService;
-const _IotProductCategoryService = class _IotProductCategoryService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _IotProductCategoryService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getIot() + "/iot/product-category";
-  }
-  fetchById(id) {
-    return this.getConfig().getHttp().get(this.getIdPath(id));
-  }
-};
-__publicField(_IotProductCategoryService, "instance");
-let IotProductCategoryService = _IotProductCategoryService;
-const _IotProductService = class _IotProductService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _IotProductService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getIot() + "/iot/product";
-  }
-  getProductKeyAddress() {
-    return this.getBaseAddress() + "/check";
-  }
-  getProductKeyPath(productKey) {
-    return this.getParamPath(this.getProductKeyAddress(), productKey);
-  }
-  fetchByProductKey(productKey) {
-    return this.getConfig().getHttp().get(this.getProductKeyPath(productKey));
-  }
-};
-__publicField(_IotProductService, "instance");
-let IotProductService = _IotProductService;
-const _IotDeviceService = class _IotDeviceService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _IotDeviceService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getIot() + "/iot/device";
-  }
-};
-__publicField(_IotDeviceService, "instance");
-let IotDeviceService = _IotDeviceService;
 const _OAuth2ApiService = class _OAuth2ApiService {
   constructor(config) {
     __publicField(this, "config", {});
@@ -1091,15 +1031,6 @@ const _ApiResources = class _ApiResources {
   task() {
     return ExtendedTaskService.getInstance(this.config);
   }
-  iotProductCategory() {
-    return IotProductCategoryService.getInstance(this.config);
-  }
-  iotProduct() {
-    return IotProductService.getInstance(this.config);
-  }
-  iotDevice() {
-    return IotDeviceService.getInstance(this.config);
-  }
 };
 __publicField(_ApiResources, "instance");
 let ApiResources = _ApiResources;
@@ -1125,9 +1056,6 @@ export {
   GenderEnum,
   HttpConfig2 as HttpConfig,
   IdentityEnum,
-  IotDeviceService,
-  IotProductCategoryService,
-  IotProductService,
   NotificationCategoryEnum,
   OAuth2ApiService,
   OAuth2ApplicationService,
