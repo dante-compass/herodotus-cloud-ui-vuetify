@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent } from 'vue';
 
 import { Constants } from '/@/lib/definitions';
 import { useSettingsStore } from '/@/stores';
@@ -25,9 +25,9 @@ export default defineComponent({
 
     return {
       homePath,
-      settings
+      settings,
     };
-  }
+  },
 });
 </script>
 

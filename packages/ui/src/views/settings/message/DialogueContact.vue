@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 
 import { useTable } from '/@/hooks';
 import { useAuthenticationStore } from '/@/stores';
@@ -42,7 +42,7 @@ export default defineComponent({
   name: 'MessageDialogueContact',
 
   components: {
-    HUserAvatar
+    HUserAvatar,
   },
 
   setup(props) {
@@ -52,7 +52,7 @@ export default defineComponent({
         'MessageDialogue',
         false,
         { direction: 'ASC', properties: ['createTime'] },
-        false
+        false,
       );
     const store = useAuthenticationStore();
 
@@ -75,10 +75,10 @@ export default defineComponent({
           latestNews: '哈哈哈哈',
           createTime: new Date(),
           updateTime: new Date(),
-          ranking: 1
+          ranking: 1,
         },
-        ranking: 1
-      }
+        ranking: 1,
+      },
     ];
 
     return {
@@ -87,8 +87,8 @@ export default defineComponent({
       pagination,
       items,
       toEdit,
-      moment
+      moment,
     };
-  }
+  },
 });
 </script>

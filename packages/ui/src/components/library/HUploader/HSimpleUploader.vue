@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, Ref, computed, ref } from 'vue';
 import { QUploader } from 'quasar';
 
 import type { QUploaderFactoryObject, QUploaderInfo } from '/@/lib/declarations';
@@ -18,7 +18,7 @@ export default defineComponent({
     modelValue: { type: Boolean, required: true },
     open: { type: Boolean },
     loading: { type: Boolean, default: false },
-    bucketName: { type: String, required: true }
+    bucketName: { type: String, required: true },
   },
 
   emits: ['update:modelValue', 'update:open', 'close'],
@@ -28,7 +28,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
     const authStore = useAuthenticationStore();
 
@@ -42,7 +42,7 @@ export default defineComponent({
           method: 'POST',
           fieldName: 'file',
           headers: [{ name: 'Authorization', value: `Bearer ${token}` }],
-          formFields: [{ name: 'bucketName', value: props.bucketName }]
+          formFields: [{ name: 'bucketName', value: props.bucketName }],
         });
       });
     };
@@ -58,8 +58,8 @@ export default defineComponent({
     return {
       uploader,
       onFileUploaded,
-      onUpload
+      onUpload,
     };
-  }
+  },
 });
 </script>

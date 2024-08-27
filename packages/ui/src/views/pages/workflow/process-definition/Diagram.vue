@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue';
+import { defineComponent, Ref, ref, computed, onMounted } from 'vue';
 
 import type { BpmnUnionPathParams, XmlEntity, ProcessDefinitionQueryParams, QTableProps } from '/@/lib/declarations';
 

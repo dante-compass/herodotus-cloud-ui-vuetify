@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, Ref } from 'vue';
+import { defineComponent, computed, PropType } from 'vue';
 
 import type { Entity } from '/@/lib/declarations';
 

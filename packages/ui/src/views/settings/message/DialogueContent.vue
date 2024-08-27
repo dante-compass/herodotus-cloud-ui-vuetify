@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 
 import type { DialogueDetailEntity, DialogueDetailConditions } from '/@/lib/declarations';
 

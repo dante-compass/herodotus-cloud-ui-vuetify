@@ -12,12 +12,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, onMounted, nextTick } from 'vue';
+import { defineComponent, ref, Ref, onMounted, nextTick, computed } from 'vue';
 import type {
   CreateMultipartUploadBusiness,
   SimpleUploader,
   SimpleUploaderFile,
-  SimpleUploaderChunk
+  SimpleUploaderChunk,
 } from '/@/lib/declarations';
 import { ossApi } from '/@/lib/utils';
 import { getSystemHeaders } from '/@/stores';
@@ -27,7 +27,7 @@ export default defineComponent({
 
   props: {
     modelValue: { type: String, required: true },
-    open: { type: Boolean }
+    open: { type: Boolean },
   },
 
   emits: ['update:modelValue', 'update:open'],
@@ -37,7 +37,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const uploaderRef = ref(null) as Ref<SimpleUploader>;
@@ -79,17 +79,17 @@ export default defineComponent({
       processParams: (params: any) => {
         return {};
       },
-      headers: { ...getSystemHeaders() }
+      headers: { ...getSystemHeaders() },
     };
     const attrs = {
-      accept: 'image/*'
+      accept: 'image/*',
     };
     const statusText = {
       success: '成功',
       error: '出错',
       uploading: '上传中',
       paused: '暂停',
-      waiting: '等待'
+      waiting: '等待',
     };
 
     const getChunkUploadUrl = async (file: SimpleUploaderFile) => {
@@ -104,7 +104,7 @@ export default defineComponent({
       const result = await ossApi.multipartUpload().createChunkUpload({
         bucketName: bucketName.value,
         objectName: fileName,
-        partNumber: chunkSize
+        partNumber: chunkSize,
       });
 
       const data = result.data as CreateMultipartUploadBusiness;
@@ -131,7 +131,7 @@ export default defineComponent({
           bucketName: bucketName.value,
           objectName: fileName,
           // uploadId: uploadIds.get(file.uniqueIdentifier)
-          uploadId: uploadId.value
+          uploadId: uploadId.value,
         })
         .then(function (response) {
           console.log(response);
@@ -168,9 +168,9 @@ export default defineComponent({
       onFileAdded,
       onFileSuccess,
       complete,
-      fileComplete
+      fileComplete,
     };
-  }
+  },
 });
 </script>
 

@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 
 import { useBpmnProcess } from '/@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '/@/components';

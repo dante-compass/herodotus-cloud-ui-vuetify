@@ -15,6 +15,35 @@ export const DATA_ITEM_STATUS: Array<DisplayElement> = [
   { color: 'info', icon: 'mdi-circle' },
 ];
 
+export const COLOR_LIST: Array<string> = [
+  'positive',
+  'negative',
+  'info',
+  'warning',
+  'accent',
+  'secondary',
+  'primary',
+  'red',
+  'pink',
+  'purple',
+  'deep-purple',
+  'indigo',
+  'blue',
+  'light-blue',
+  'cyan',
+  'teal',
+  'green',
+  'light-green',
+  'lime',
+  'yellow',
+  'amber',
+  'orange',
+  'deep-orange',
+  'brown',
+  'grey',
+  'blue-grey',
+];
+
 export const DEFAULT_HTTP_METHOD_STYLE: DisplayElement = HTTP_METHOD_STYLE_GROUP.GET;
 
 export const GRANT_TYPE_STYLE_GROUP: DisplayElementGroup = {

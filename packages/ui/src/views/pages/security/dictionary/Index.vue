@@ -17,6 +17,13 @@
       <template #top-left>
         <h-button color="primary" label="新建产品" @click="toCreate" />
       </template>
+      <template #body-cell-name="props">
+        <q-td key="actions" :props="props">
+          <q-chip :color="getColor(props.row)" text-color="white" :dense="settings.display.table.dense">
+            {{ props.row.name }}
+          </q-chip>
+        </q-td>
+      </template>
 
       <template #body-cell-actions="props">
         <q-td key="actions" :props="props">
@@ -44,6 +51,7 @@ import { api } from '/@/lib/utils';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
 import { HDictionaryCondition } from '/@/composables/security';
+import { useSettingsStore } from '/@/stores';
 
 export default defineComponent({
   name: Constants.ComponentName.SYS_DICTIONARY,
@@ -88,6 +96,12 @@ export default defineComponent({
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
+    const settings = useSettingsStore();
+
+    const getColor = (item: SysDictionaryEntity) => {
+      return Constants.COLOR_LIST[item.ordinal];
+    };
+
     return {
       rowKey,
       selected,
@@ -102,6 +116,8 @@ export default defineComponent({
       findItems,
       deleteItemById,
       conditions,
+      getColor,
+      settings,
     };
   },
 });

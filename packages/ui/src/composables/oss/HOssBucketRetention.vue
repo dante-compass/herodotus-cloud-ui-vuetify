@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, PropType } from 'vue';
+import { defineComponent, ref, computed, PropType, Ref, onMounted } from 'vue';
 
 import type { ObjectLockConfigurationDomain, QBaseDataItem } from '/@/lib/declarations';
 

@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import HCompletedTaskTable from './HCompletedTaskTable.vue';
 import HToDoTaskTable from './HToDoTaskTable.vue';
@@ -37,7 +37,7 @@ export default defineComponent({
   components: {
     HCompletedTaskTable,
     HToDoTaskTable,
-    HWorkflowSelectDialog
+    HWorkflowSelectDialog,
   },
 
   setup(props) {
@@ -45,6 +45,6 @@ export default defineComponent({
     const isOpenDialog = ref<boolean>(false);
 
     return { tab, isOpenDialog };
-  }
+  },
 });
 </script>

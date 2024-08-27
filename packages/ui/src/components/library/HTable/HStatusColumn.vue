@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed, reactive } from 'vue';
+import { defineComponent, onMounted, computed, reactive, watch } from 'vue';
 import type { ConstantDictionary } from '/@/lib/declarations';
 
 import { useConstantsStore } from '/@/stores';

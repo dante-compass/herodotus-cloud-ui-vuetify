@@ -38,7 +38,7 @@ export default ({ mode }) => {
       }),
       AutoImport({
         dts: true,
-        imports: ['vue', 'vue-router', 'vue-i18n', 'pinia', 'quasar']
+        imports: ['quasar']
       }),
       Components({
         dts: true,

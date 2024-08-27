@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, Ref, PropType } from 'vue';
+import { defineComponent, computed, ref, Ref, PropType, onMounted } from 'vue';
 
 import type { AssetServerEntity, AssetServerConditions, QTableProps } from '/@/lib/declarations';
 

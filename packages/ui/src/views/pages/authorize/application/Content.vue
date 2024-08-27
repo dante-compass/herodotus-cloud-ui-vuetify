@@ -143,7 +143,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onBeforeMount, markRaw } from 'vue';
+import { defineComponent, computed, onBeforeMount, reactive } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 

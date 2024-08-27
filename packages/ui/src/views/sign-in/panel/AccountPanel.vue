@@ -86,7 +86,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
@@ -100,7 +100,7 @@ export default defineComponent({
   name: 'AccountPanel',
 
   components: {
-    HSocialSignInList
+    HSocialSignInList,
   },
 
   setup() {
@@ -120,11 +120,11 @@ export default defineComponent({
 
     const rules = {
       username: {
-        required: helpers.withMessage('用户名不能为空', required)
+        required: helpers.withMessage('用户名不能为空', required),
       },
       password: {
-        required: helpers.withMessage('密码不能为空', required)
-      }
+        required: helpers.withMessage('密码不能为空', required),
+      },
     };
 
     const v = useVuelidate(rules, { username, password });
@@ -139,7 +139,7 @@ export default defineComponent({
             isSubmitDisabled.value = false;
             toast.success('欢迎回来！');
             router.push({
-              path: Constants.Path.HOME
+              path: Constants.Path.HOME,
             });
           }
         })
@@ -213,8 +213,8 @@ export default defineComponent({
       onResetError,
       prompt,
       promptMessage,
-      isDisabled
+      isDisabled,
     };
-  }
+  },
 });
 </script>

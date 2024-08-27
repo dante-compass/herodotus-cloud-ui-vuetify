@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, computed } from 'vue';
+import { defineComponent, Ref, computed, ref, watch, onMounted } from 'vue';
 import { format } from 'quasar';
 
 import type { BucketDomain, BucketSettingBusiness } from '/@/lib/declarations';

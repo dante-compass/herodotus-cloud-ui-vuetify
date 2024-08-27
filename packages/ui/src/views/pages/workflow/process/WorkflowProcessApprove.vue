@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, Ref, onMounted } from 'vue';
 
 import type { Sheet, ProcessCommentsEntity, Variables } from '/@/lib/declarations';
 
