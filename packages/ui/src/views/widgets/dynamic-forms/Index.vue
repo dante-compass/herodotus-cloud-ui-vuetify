@@ -5,13 +5,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { FormDesignerInstance } from '/@/lib/utils';
 
 import { useEditFinish, useBaseTableItem } from '/@/hooks';
 
 export default defineComponent({
-  name: Constants.ComponentName.WIDGETS_DYNAMIC_FORM,
+  name: CONSTANTS.ComponentName.WIDGETS_DYNAMIC_FORM,
 
   setup(props) {
     const instance = FormDesignerInstance;

@@ -34,8 +34,9 @@ import { required, helpers } from '@vuelidate/validators';
 import type { SysOrganizationEntity } from '/@/lib/declarations';
 import { api } from '/@/lib/utils';
 import { useTableItem } from '/@/hooks';
-import { HCenterFormLayout, HDictionarySelect } from '/@/components';
+import { HCenterFormLayout } from '/@/components';
 import { HOrganizationSelect } from '/@/composables/hr';
+import { HDictionarySelect } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'SysOrganizationContent',

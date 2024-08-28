@@ -1,6 +1,6 @@
 import type { Router } from 'vue-router';
 import { useRouteStore, useAuthenticationStore } from '/@/stores';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 import { useSystemRoute } from '/@/hooks';
 
@@ -24,9 +24,9 @@ export const createRouterGuard = (router: Router) => {
 
     // 有 Token
     if (token) {
-      if (to.path === Constants.Path.SIGN_IN) {
+      if (to.path === CONSTANTS.Path.SIGN_IN) {
         // 目的地址还是登录页面，直接跳转到首页。
-        next(Constants.Path.HOME);
+        next(CONSTANTS.Path.HOME);
         return;
       } else {
         // 判断动态路由是否已经添加，没有添加则进行添加
@@ -52,12 +52,12 @@ export const createRouterGuard = (router: Router) => {
         next();
         return;
       } else {
-        if (to.path === Constants.Path.SIGN_IN) {
+        if (to.path === CONSTANTS.Path.SIGN_IN) {
           localStorage.clear();
           next();
           return;
         } else {
-          next(Constants.Path.SIGN_IN);
+          next(CONSTANTS.Path.SIGN_IN);
           return;
         }
       }

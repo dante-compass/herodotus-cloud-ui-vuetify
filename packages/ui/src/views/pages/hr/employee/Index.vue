@@ -50,7 +50,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
@@ -58,7 +58,7 @@ import { HDeleteButton, HEditButton, HTable } from '/@/components';
 import { HEmployeeCondition, useEmployeeDisplay } from '/@/composables/hr';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_EMPLOYEE,
+  name: CONSTANTS.ComponentName.SYS_EMPLOYEE,
 
   components: {
     HDeleteButton,
@@ -69,7 +69,7 @@ export default defineComponent({
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, conditions, findItems, deleteItemById } =
-      useTable<SysEmployeeEntity, SysEmployeeConditions>(api.sysEmployee(), Constants.ComponentName.SYS_EMPLOYEE);
+      useTable<SysEmployeeEntity, SysEmployeeConditions>(api.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
 
     const { parseGender, parseIdentity } = useEmployeeDisplay();
 

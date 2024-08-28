@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/workflow/dynamic-form',
-        name: Constants.ComponentName.WORKFLOW_DYNAMIC_FORM,
+        name: CONSTANTS.ComponentName.WORKFLOW_DYNAMIC_FORM,
         meta: { title: '动态表单管理', icon: 'mdi-monitor-dashboard', isHideAllChild: true },
         component: () => import('/@/views/pages/workflow/dynamic-form/Index.vue'),
       },

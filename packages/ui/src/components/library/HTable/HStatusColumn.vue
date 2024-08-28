@@ -6,8 +6,7 @@
 import { defineComponent, onMounted, computed, reactive, watch } from 'vue';
 import type { ConstantDictionary } from '/@/lib/declarations';
 
-import { useConstantsStore } from '/@/stores';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS, useDictionary } from '/@/composables/constants';
 
 import HDenseIconButton from './HDenseIconButton.vue';
 import { lodash } from '/@/lib/utils';
@@ -28,11 +27,11 @@ export default defineComponent({
       items: [] as Array<ConstantDictionary>,
     });
 
-    const constants = useConstantsStore();
+    const { getDictionary } = useDictionary();
 
     const initialize = () => {
       if (lodash.isEmpty(state.items)) {
-        state.items = constants.getDictionary('DataItemStatus');
+        state.items = getDictionary('DataItemStatus');
       }
     };
 
@@ -49,11 +48,11 @@ export default defineComponent({
     );
 
     const color = computed(() => {
-      return Constants.DATA_ITEM_STATUS[Number(props.type)].color;
+      return CONSTANTS.DATA_ITEM_STATUS[Number(props.type)].color;
     });
 
     const icon = computed(() => {
-      return Constants.DATA_ITEM_STATUS[Number(props.type)].icon;
+      return CONSTANTS.DATA_ITEM_STATUS[Number(props.type)].icon;
     });
 
     const tooltip = computed(() => {

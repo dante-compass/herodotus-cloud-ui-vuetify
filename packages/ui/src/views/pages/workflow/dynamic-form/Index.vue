@@ -29,7 +29,6 @@
 import { defineComponent, onMounted, ref, watch } from 'vue';
 
 import type {
-  SweetAlertResult,
   HttpResult,
   Page,
   QTableColumnProps,
@@ -39,12 +38,12 @@ import type {
   DynamicFormConditions,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { formApi, toast, standardDeleteNotify } from '/@/lib/utils';
 import { useBaseTable } from '/@/hooks';
 
 export default defineComponent({
-  name: Constants.ComponentName.WORKFLOW_DYNAMIC_FORM,
+  name: CONSTANTS.ComponentName.WORKFLOW_DYNAMIC_FORM,
 
   setup(props) {
     const rowKey = 'id' as keyof DynamicFormEntity;
@@ -62,7 +61,7 @@ export default defineComponent({
       showLoading,
       hideLoading,
     } = useBaseTable<DynamicFormEntity, DynamicFormConditions>(
-      Constants.ComponentName.WIDGETS_DYNAMIC_FORM,
+      CONSTANTS.ComponentName.WIDGETS_DYNAMIC_FORM,
       'updateTime',
       true,
     );

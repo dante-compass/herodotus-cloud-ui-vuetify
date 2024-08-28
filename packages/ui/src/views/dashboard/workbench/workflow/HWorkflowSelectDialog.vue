@@ -42,7 +42,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 import { useBaseTable } from '/@/hooks';
 import { useBpmnTableItems, useBpmnProcess } from '/@/composables/bpmn';
@@ -76,7 +76,7 @@ export default defineComponent({
     });
     const { editedItem, createProcessSpecifics } = useBpmnProcess();
     const { toEdit } = useBaseTable<ProcessSpecificsEntity, ProcessSpecificsConditions>(
-      Constants.ComponentName.WORKFLOW_PROCESS_START,
+      CONSTANTS.ComponentName.WORKFLOW_PROCESS_START,
       'updateTime',
     );
 

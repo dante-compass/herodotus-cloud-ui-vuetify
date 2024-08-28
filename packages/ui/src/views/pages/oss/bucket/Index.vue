@@ -37,7 +37,7 @@ import type {
   BucketDomainConditions,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { moment, toast, standardDeleteNotify, ossApi } from '/@/lib/utils';
 
 import { useBaseTable } from '/@/hooks';
@@ -46,13 +46,13 @@ import { HDeleteButton, HTable, HDenseIconButton } from '/@/components';
 import { DeleteBucketResult } from '@herodotus/oss-apis';
 
 export default defineComponent({
-  name: Constants.ComponentName.OSS_BUCKET,
+  name: CONSTANTS.ComponentName.OSS_BUCKET,
 
   components: { HDeleteButton, HTable, HDenseIconButton },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, hideLoading, showLoading } =
-      useBaseTable<BucketDomain, BucketDomainConditions>(Constants.ComponentName.OSS_BUCKET, '', false, true);
+      useBaseTable<BucketDomain, BucketDomainConditions>(CONSTANTS.ComponentName.OSS_BUCKET, '', false, true);
 
     const selected = ref([]);
     const rowKey: BucketDomainProps = 'bucketName';

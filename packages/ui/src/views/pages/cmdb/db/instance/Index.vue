@@ -46,7 +46,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
@@ -55,7 +55,7 @@ import { useDatabaseDisplay } from '/@/composables/cmdb';
 import { HDenseIconButton, HDeleteButton, HEditButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.DATABASE_INSTANCE,
+  name: CONSTANTS.ComponentName.DATABASE_INSTANCE,
 
   components: {
     HDeleteButton,
@@ -68,7 +68,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
       useTable<DatabaseInstanceEntity, DatabaseInstanceConditions>(
         api.dbInstance(),
-        Constants.ComponentName.DATABASE_INSTANCE,
+        CONSTANTS.ComponentName.DATABASE_INSTANCE,
       );
 
     const { parseDatabase } = useDatabaseDisplay();

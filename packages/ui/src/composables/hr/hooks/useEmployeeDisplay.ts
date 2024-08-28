@@ -3,40 +3,40 @@ import { ref, Ref } from 'vue';
 import type { ConstantDictionary, SysEmployeeEntity } from '/@/lib/declarations';
 
 import { lodash } from '/@/lib/utils';
-import { useConstantsStore } from '/@/stores';
+import { useDictionary } from '/@/composables/constants';
 
 export default function useEmployeeDisplay() {
-	const constants = useConstantsStore();
+  const { getDictionary } = useDictionary();
 
-	const gender = ref([]) as Ref<ConstantDictionary[]>;
-	const identity = ref([]) as Ref<ConstantDictionary[]>;
+  const gender = ref([]) as Ref<ConstantDictionary[]>;
+  const identity = ref([]) as Ref<ConstantDictionary[]>;
 
-	const parseGender = (item: SysEmployeeEntity) => {
-		if (lodash.isEmpty(gender.value)) {
-			gender.value = constants.getDictionary('Gender');
-		}
+  const parseGender = (item: SysEmployeeEntity) => {
+    if (lodash.isEmpty(gender.value)) {
+      gender.value = getDictionary('Gender');
+    }
 
-		if (typeof item.gender == 'number') {
-			return gender.value[item.gender].label;
-		} else {
-			return item.gender;
-		}
-	};
+    if (typeof item.gender == 'string') {
+      return gender.value[Number(item.gender)].label;
+    } else {
+      return item.gender;
+    }
+  };
 
-	const parseIdentity = (item: SysEmployeeEntity) => {
-		if (lodash.isEmpty(identity.value)) {
-			identity.value = constants.getDictionary('Identity');
-		}
+  const parseIdentity = (item: SysEmployeeEntity) => {
+    if (lodash.isEmpty(identity.value)) {
+      identity.value = getDictionary('Identity');
+    }
 
-		if (typeof item.identity == 'number') {
-			return identity.value[item.identity].label;
-		} else {
-			return item.identity;
-		}
-	};
+    if (typeof item.identity == 'string') {
+      return identity.value[Number(item.identity)].label;
+    } else {
+      return item.identity;
+    }
+  };
 
-	return {
-		parseGender,
-		parseIdentity,
-	};
+  return {
+    parseGender,
+    parseIdentity,
+  };
 }

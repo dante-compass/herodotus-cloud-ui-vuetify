@@ -3,13 +3,13 @@ import type { SysDictionaryEntity, ConstantDictionary } from '/@/lib/declaration
 
 import { api } from '/@/lib/utils';
 
-export const useConstantsStore = defineStore('Constants', {
+export const useDictionaryStore = defineStore('Dictionary', {
   state: () => ({
-    enums: {} as Record<string, ConstantDictionary[]>,
+    dictionaries: {} as Record<string, ConstantDictionary[]>,
   }),
 
   actions: {
-    to(item: SysDictionaryEntity): ConstantDictionary {
+    convertItem(item: SysDictionaryEntity): ConstantDictionary {
       const result: ConstantDictionary = {
         ordinal: item.ordinal,
         name: item.name,
@@ -19,33 +19,33 @@ export const useConstantsStore = defineStore('Constants', {
       return result;
     },
 
-    convert(items: Array<SysDictionaryEntity>): Array<ConstantDictionary> {
+    convertItems(items: Array<SysDictionaryEntity>): Array<ConstantDictionary> {
       if (items) {
-        return items.map(item => this.to(item));
+        return items.map(item => this.convertItem(item));
       } else {
         return [];
       }
     },
 
-    async fetch(category: string) {
+    async getFromServer(category: string) {
       await api
         .sysDictionary()
         .fetchByCategory(category)
         .then(response => {
           const data = response.data;
-          this.enums[category] = this.convert(data);
+          this.dictionaries[category] = this.convertItems(data);
         });
     },
 
-    read(category: string): Array<ConstantDictionary> {
-      return this.enums[category];
+    getFromLocal(category: string): Array<ConstantDictionary> {
+      return this.dictionaries[category];
     },
 
     getDictionary(category: string): Array<ConstantDictionary> {
-      let dictionary = this.read(category);
+      let dictionary = this.getFromLocal(category);
       if (!dictionary) {
-        this.fetch(category);
-        dictionary = this.read(category);
+        this.getFromServer(category);
+        dictionary = this.getFromLocal(category);
       }
       return dictionary;
     },

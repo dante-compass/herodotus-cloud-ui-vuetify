@@ -46,7 +46,7 @@ import type {
 } from '/@/lib/declarations';
 
 import { useTable } from '/@/hooks';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
@@ -54,7 +54,7 @@ import { HDictionaryCondition } from '/@/composables/security';
 import { useSettingsStore } from '/@/stores';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_DICTIONARY,
+  name: CONSTANTS.ComponentName.SYS_DICTIONARY,
 
   components: {
     HDeleteButton,
@@ -77,7 +77,7 @@ export default defineComponent({
       conditions,
     } = useTable<SysDictionaryEntity, SysDictionaryConditions>(
       api.sysDictionary(),
-      Constants.ComponentName.SYS_DICTIONARY,
+      CONSTANTS.ComponentName.SYS_DICTIONARY,
     );
 
     const selected = ref([]);
@@ -99,7 +99,7 @@ export default defineComponent({
     const settings = useSettingsStore();
 
     const getColor = (item: SysDictionaryEntity) => {
-      return Constants.COLOR_LIST[item.ordinal];
+      return CONSTANTS.COLOR_LIST[item.ordinal];
     };
 
     return {

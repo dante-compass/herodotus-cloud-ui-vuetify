@@ -40,14 +40,14 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDenseIconButton, HDeleteButton, HEditButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.ASSET_APPLICATION,
+  name: CONSTANTS.ComponentName.ASSET_APPLICATION,
 
   components: {
     HDeleteButton,
@@ -60,7 +60,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
       useTable<AssetApplicationEntity, AssetApplicationConditions>(
         api.assetApplication(),
-        Constants.ComponentName.ASSET_APPLICATION,
+        CONSTANTS.ComponentName.ASSET_APPLICATION,
       );
 
     const selected = ref([]);

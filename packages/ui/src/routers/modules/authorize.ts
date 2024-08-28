@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/authorize/application',
-        name: Constants.ComponentName.OAUTH2_APPLICATION,
+        name: CONSTANTS.ComponentName.OAUTH2_APPLICATION,
         meta: { title: '应用管理', icon: 'mdi-apps', isHideAllChild: true },
         component: () => import('/@/views/pages/authorize/application/Index.vue'),
         children: [
@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/authorize/scope',
-        name: Constants.ComponentName.OAUTH2_SCOPE,
+        name: CONSTANTS.ComponentName.OAUTH2_SCOPE,
         meta: { title: '范围管理', icon: 'mdi-group', isHideAllChild: true },
         component: () => import('/@/views/pages/authorize/scope/Index.vue'),
         children: [
@@ -44,13 +44,13 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/authorize/token',
-        name: Constants.ComponentName.OAUTH2_TOKEN,
+        name: CONSTANTS.ComponentName.OAUTH2_TOKEN,
         meta: { title: '凭证管理', icon: 'mdi-sitemap', group: 'authorize' },
         component: () => import('/@/views/pages/authorize/token/Index.vue'),
       },
       {
         path: '/authorize/compliance',
-        name: Constants.ComponentName.OAUTH2_COMPLIANCE,
+        name: CONSTANTS.ComponentName.OAUTH2_COMPLIANCE,
         meta: { title: '日志审计', icon: 'mdi-receipt-text-check', group: 'authorize' },
         component: () => import('/@/views/pages/authorize/compliance/Index.vue'),
       },

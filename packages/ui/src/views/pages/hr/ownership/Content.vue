@@ -47,7 +47,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { lodash, toast, api } from '/@/lib/utils';
 import { useTable, useTableItem, useEditFinish } from '/@/hooks';
 
@@ -70,7 +70,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       SysEmployeeEntity,
       SysEmployeeConditions
-    >(api.sysEmployee(), Constants.ComponentName.SYS_EMPLOYEE);
+    >(api.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
 
     const selectedItems = ref([]) as Ref<Array<SysEmployeeEntity>>;
 

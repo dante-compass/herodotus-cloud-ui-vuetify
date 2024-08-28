@@ -40,14 +40,14 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { moment, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable, HGrantTypeColumn } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.OAUTH2_APPLICATION,
+  name: CONSTANTS.ComponentName.OAUTH2_APPLICATION,
 
   components: {
     HDeleteButton,
@@ -60,7 +60,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
       useTable<OAuth2ApplicationEntity, OAuth2ApplicationConditions>(
         api.oauth2Application(),
-        Constants.ComponentName.OAUTH2_APPLICATION,
+        CONSTANTS.ComponentName.OAUTH2_APPLICATION,
       );
 
     const rowKey: OAuth2ApplicationProps = 'applicationId';

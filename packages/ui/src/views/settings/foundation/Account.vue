@@ -65,7 +65,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api, getSocialLogo, moment } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 import { useAuthenticationStore } from '/@/stores';
@@ -88,7 +88,7 @@ export default defineComponent({
     const { tableRows, pagination, loading, findItems, conditions } = useTable<
       AccessSourceEntity,
       AccessSourceConditions
-    >(api.socialBinding(), Constants.ComponentName.SOCIAL_BINDING, true);
+    >(api.socialBinding(), CONSTANTS.ComponentName.SOCIAL_BINDING, true);
 
     const rowKey: AccessSourceProps = 'id';
 

@@ -44,7 +44,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
@@ -52,7 +52,7 @@ import { HDeleteButton, HEditButton, HTable } from '/@/components';
 import { HServerCondition, useServerDisplay } from '/@/composables/cmdb';
 
 export default defineComponent({
-  name: Constants.ComponentName.ASSET_SERVER,
+  name: CONSTANTS.ComponentName.ASSET_SERVER,
 
   components: {
     HDeleteButton,
@@ -73,7 +73,7 @@ export default defineComponent({
       conditions,
       findItems,
       deleteItemById,
-    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), Constants.ComponentName.ASSET_SERVER);
+    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), CONSTANTS.ComponentName.ASSET_SERVER);
 
     const { parseServerDevice } = useServerDisplay();
 

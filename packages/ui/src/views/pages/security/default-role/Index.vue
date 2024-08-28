@@ -33,13 +33,13 @@ import type {
 
 import { useTable } from '/@/hooks';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_DEFAULT_ROLE,
+  name: CONSTANTS.ComponentName.SYS_DEFAULT_ROLE,
 
   components: {
     HDeleteButton,
@@ -51,7 +51,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
       useTable<SysDefaultRoleEntity, SysDefaultRoleConditions>(
         api.sysDefaultRole(),
-        Constants.ComponentName.SYS_DEFAULT_ROLE,
+        CONSTANTS.ComponentName.SYS_DEFAULT_ROLE,
       );
 
     const selected = ref([]);

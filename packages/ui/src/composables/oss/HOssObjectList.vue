@@ -74,7 +74,7 @@ import type {
 
 import { HDeleteButton, HDenseIconButton, HTable, HChunkUploader, HSimpleUploader } from '/@/components';
 import { useBaseTable } from '/@/hooks';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { ossApi, lodash, toast, standardDeleteNotify } from '/@/lib/utils';
 
 export default defineComponent({
@@ -100,7 +100,7 @@ export default defineComponent({
     const { tableRows, loading, toEdit, toAuthorize, hideLoading, showLoading } = useBaseTable<
       ObjectDomain,
       ObjectDomainConditions
-    >(Constants.ComponentName.OSS_OBJECT, '', false, true);
+    >(CONSTANTS.ComponentName.OSS_OBJECT, '', false, true);
 
     const columns: QTableColumnProps = [
       {

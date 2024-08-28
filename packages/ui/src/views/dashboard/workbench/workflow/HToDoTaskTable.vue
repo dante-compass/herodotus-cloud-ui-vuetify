@@ -38,7 +38,7 @@ import type {
   ProcessSpecificsConditions,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 import { api, bpmnApi } from '/@/lib/utils';
 import { useBaseTable } from '/@/hooks';
@@ -59,7 +59,7 @@ export default defineComponent({
       useBaseTable<ExtendedTaskEntity, ExtendedTaskConditions>('HToDoTaskTable', 'updateTime', true);
     const { editedItem, fetchProcessSpecifics } = useBpmnProcess();
     const { toEdit } = useBaseTable<ProcessSpecificsEntity, ProcessSpecificsConditions>(
-      Constants.ComponentName.WORKFLOW_PROCESS_APPROVE,
+      CONSTANTS.ComponentName.WORKFLOW_PROCESS_APPROVE,
       'updateTime',
     );
 

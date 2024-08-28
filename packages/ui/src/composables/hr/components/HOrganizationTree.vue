@@ -30,7 +30,7 @@ import type { SysOrganizationEntity, SysOrganizationConditions } from '/@/lib/de
 import { api } from '/@/lib/utils';
 import { useTreeItems } from '/@/hooks';
 
-import { HDictionarySelect } from '/@/components';
+import { HDictionarySelect } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'HOrganizationTree',

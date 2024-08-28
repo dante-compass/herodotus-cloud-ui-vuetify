@@ -46,7 +46,7 @@ import { defineComponent, computed, ref, Ref, PropType, onMounted } from 'vue';
 
 import type { AssetServerEntity, AssetServerConditions, QTableProps } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { lodash, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
@@ -88,7 +88,7 @@ export default defineComponent({
       conditions,
       findItems,
       deleteItemById,
-    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), Constants.ComponentName.ASSET_SERVER);
+    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), CONSTANTS.ComponentName.ASSET_SERVER);
 
     const { parseServerDevice } = useServerDisplay();
 

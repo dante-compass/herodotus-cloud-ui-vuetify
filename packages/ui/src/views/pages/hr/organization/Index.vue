@@ -56,14 +56,15 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
-import { HDeleteButton, HDictionarySelect, HEditButton, HTable } from '/@/components';
+import { HDeleteButton, HEditButton, HTable } from '/@/components';
+import { HDictionarySelect } from '/@/composables/constants';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_ORGANIZATION,
+  name: CONSTANTS.ComponentName.SYS_ORGANIZATION,
 
   components: {
     HDeleteButton,
@@ -76,7 +77,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, deleteItemById, conditions } =
       useTable<SysOrganizationEntity, SysOrganizationConditions>(
         api.sysOrganization(),
-        Constants.ComponentName.SYS_ORGANIZATION,
+        CONSTANTS.ComponentName.SYS_ORGANIZATION,
       );
 
     const selected = ref([]);

@@ -33,7 +33,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTableItem, useTable } from '/@/hooks';
 
@@ -51,7 +51,7 @@ export default defineComponent({
     const { editedItem, title, assign, overlay } = useTableItem<DatabaseCatalogEntity>(api.dbCatalog());
     const { tableRows, pagination, loading } = useTable<DatabaseAccountEntity, DatabaseAccountConditions>(
       api.dbAccount(),
-      Constants.ComponentName.DATABASE_ACCOUNT,
+      CONSTANTS.ComponentName.DATABASE_ACCOUNT,
       true,
     );
 

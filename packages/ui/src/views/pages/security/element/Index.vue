@@ -75,14 +75,14 @@ import { defineComponent, ref } from 'vue';
 import type { SysElementEntity, SysElementConditions, SysElementProps, QTableColumnProps } from '/@/lib/declarations';
 
 import { useTable } from '/@/hooks';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 
 import { HDeleteButton, HEditButton, HTable, HBooleanColumn, HDenseIconButton } from '/@/components';
 import { HElementCondition } from '/@/composables/security';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_ELEMENT,
+  name: CONSTANTS.ComponentName.SYS_ELEMENT,
 
   components: {
     HBooleanColumn,
@@ -105,7 +105,7 @@ export default defineComponent({
       findItems,
       deleteItemById,
       conditions,
-    } = useTable<SysElementEntity, SysElementConditions>(api.sysElement(), Constants.ComponentName.SYS_ELEMENT, false, {
+    } = useTable<SysElementEntity, SysElementConditions>(api.sysElement(), CONSTANTS.ComponentName.SYS_ELEMENT, false, {
       direction: 'ASC',
       properties: ['path'],
     });

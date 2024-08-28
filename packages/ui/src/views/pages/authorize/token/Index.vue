@@ -23,14 +23,14 @@ import { defineComponent, ref, onMounted } from 'vue';
 
 import type { OAuth2AuthorizationEntity, OAuth2AuthorizationConditions, QTableColumnProps } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { moment, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.OAUTH2_TOKEN,
+  name: CONSTANTS.ComponentName.OAUTH2_TOKEN,
 
   components: {
     HDeleteButton,
@@ -41,7 +41,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, findItems, deleteItemById } = useTable<
       OAuth2AuthorizationEntity,
       OAuth2AuthorizationConditions
-    >(api.oauth2Authorization(), Constants.ComponentName.OAUTH2_TOKEN, false, {
+    >(api.oauth2Authorization(), CONSTANTS.ComponentName.OAUTH2_TOKEN, false, {
       direction: 'DESC',
       properties: ['accessTokenIssuedAt'],
     });

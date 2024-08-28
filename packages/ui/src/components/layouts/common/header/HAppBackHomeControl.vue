@@ -7,13 +7,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'HAppBackHomeControl',
 
   setup(props) {
-    const homePath = Constants.Path.HOME;
+    const homePath = CONSTANTS.Path.HOME;
 
     return {
       homePath,

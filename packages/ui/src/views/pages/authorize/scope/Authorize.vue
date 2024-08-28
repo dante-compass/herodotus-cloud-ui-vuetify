@@ -37,7 +37,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api, toast } from '/@/lib/utils';
 import { useTableItem, useTable, useEditFinish } from '/@/hooks';
 
@@ -57,7 +57,7 @@ export default defineComponent({
     const { editedItem, title, assign, overlay } = useTableItem<OAuth2ScopeEntity>(api.oauth2Scope());
     const { tableRows, pagination, loading } = useTable<SysPermissionEntity, SysPermissionConditions>(
       api.sysPermission(),
-      Constants.ComponentName.SYS_PERMISSION,
+      CONSTANTS.ComponentName.SYS_PERMISSION,
       true,
     );
 
