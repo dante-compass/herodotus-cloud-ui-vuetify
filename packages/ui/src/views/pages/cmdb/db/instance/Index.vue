@@ -18,7 +18,7 @@
 
     <template #body-cell-dbType="props">
       <q-td key="dbType" :props="props">
-        {{ parseDatabase(props.row) }}
+        {{ display('Database', props.row) }}
       </q-td>
     </template>
 
@@ -50,7 +50,7 @@ import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
-import { useDatabaseDisplay } from '/@/composables/cmdb';
+import { useDictionary } from '/@/composables/constants';
 
 import { HDenseIconButton, HDeleteButton, HEditButton, HTable } from '/@/components';
 
@@ -71,7 +71,7 @@ export default defineComponent({
         CONSTANTS.ComponentName.DATABASE_INSTANCE,
       );
 
-    const { parseDatabase } = useDatabaseDisplay();
+    const { display } = useDictionary();
 
     const selected = ref([]);
     const rowKey: DatabaseInstanceProps = 'instanceId';
@@ -100,7 +100,7 @@ export default defineComponent({
       toAuthorize,
       findItems,
       deleteItemById,
-      parseDatabase,
+      display,
     };
   },
 });

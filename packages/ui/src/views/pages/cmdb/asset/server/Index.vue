@@ -20,7 +20,7 @@
 
       <template #body-cell-deviceType="props">
         <q-td key="deviceType" :props="props">
-          {{ parseServerDevice(props.row) }}
+          {{ display('ServiceDevice', props.row) }}
         </q-td>
       </template>
 
@@ -49,7 +49,8 @@ import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
-import { HServerCondition, useServerDisplay } from '/@/composables/cmdb';
+import { HServerCondition } from '/@/composables/cmdb';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.ASSET_SERVER,
@@ -75,7 +76,7 @@ export default defineComponent({
       deleteItemById,
     } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), CONSTANTS.ComponentName.ASSET_SERVER);
 
-    const { parseServerDevice } = useServerDisplay();
+    const { display } = useDictionary();
 
     const selected = ref([]);
     const rowKey: AssetServerProps = 'serverId';
@@ -106,7 +107,7 @@ export default defineComponent({
       conditions,
       findItems,
       deleteItemById,
-      parseServerDevice,
+      display,
     };
   },
 });

@@ -1,11 +1,16 @@
+import { ref, Ref } from 'vue';
+
 import type { SysDictionaryEntity, ConstantDictionary } from '/@/lib/declarations';
 
-import { api } from '/@/lib/utils';
+import { api, lodash } from '/@/lib/utils';
 
 import { useDictionaryStore } from '../store';
+import { useAuthenticationStore } from '/@/stores';
 
 export default function useDictionary() {
   const store = useDictionaryStore();
+
+  const authentication = useAuthenticationStore();
 
   const convertItem = (item: SysDictionaryEntity): ConstantDictionary => {
     const result: ConstantDictionary = {
@@ -19,20 +24,26 @@ export default function useDictionary() {
 
   const convertItems = (items: Array<SysDictionaryEntity>): Array<ConstantDictionary> => {
     if (items) {
-      return items.map(item => convertItem(item));
+      return lodash.orderBy(
+        items.map(item => convertItem(item)),
+        ['ordinal'],
+        ['asc'],
+      );
     } else {
       return [];
     }
   };
 
   const getFromServer = async (category: string) => {
-    await api
-      .sysDictionary()
-      .fetchByCategory(category)
-      .then(response => {
-        const data = response.data;
-        store.dictionaries[category] = convertItems(data);
-      });
+    if (authentication.token) {
+      await api
+        .sysDictionary()
+        .fetchByCategory(category)
+        .then(response => {
+          const data = response.data;
+          store.dictionaries[category] = convertItems(data);
+        });
+    }
   };
 
   const getFromLocal = (category: string): Array<ConstantDictionary> => {
@@ -41,24 +52,34 @@ export default function useDictionary() {
 
   const getDictionary = (category: string): Array<ConstantDictionary> => {
     let dictionary = getFromLocal(category);
-    if (!dictionary) {
+    if (lodash.isEmpty(dictionary)) {
       getFromServer(category);
       dictionary = getFromLocal(category);
     }
     return dictionary;
   };
 
-  const getDictionaryItem = (category: string, index: number): ConstantDictionary => {
+  const getDictionaryItem = (category: string, value: string): ConstantDictionary => {
     const dictionary = getDictionary(category);
     if (dictionary) {
-      return dictionary[index];
+      return dictionary[Number(value)];
     } else {
       return {} as ConstantDictionary;
+    }
+  };
+
+  const display = (category: string, value: string) => {
+    const dictionary = getDictionaryItem(category, value);
+    if (!lodash.isEmpty(dictionary)) {
+      return dictionary.label;
+    } else {
+      return value;
     }
   };
 
   return {
     getDictionary,
     getDictionaryItem,
+    display,
   };
 }

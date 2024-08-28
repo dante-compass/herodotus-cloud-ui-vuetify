@@ -26,7 +26,7 @@
             @request="findItems">
             <template #body-cell-deviceType="props">
               <q-td key="deviceType" :props="props">
-                {{ parseServerDevice(props.row) }}
+                {{ display('ServerDevice', props.row) }}
               </q-td>
             </template>
           </q-table>
@@ -50,7 +50,7 @@ import { CONSTANTS } from '/@/composables/constants';
 import { lodash, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
-import { useServerDisplay } from '/@/composables/cmdb';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'HChooseServer',
@@ -90,7 +90,7 @@ export default defineComponent({
       deleteItemById,
     } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), CONSTANTS.ComponentName.ASSET_SERVER);
 
-    const { parseServerDevice } = useServerDisplay();
+    const { display } = useDictionary();
 
     const selected = ref([]) as Ref<Array<AssetServerEntity>>;
 
@@ -130,7 +130,7 @@ export default defineComponent({
       deleteItemById,
       selected,
       columns,
-      parseServerDevice,
+      display,
     };
   },
 });
