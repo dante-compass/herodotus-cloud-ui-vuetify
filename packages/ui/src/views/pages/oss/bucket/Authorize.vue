@@ -45,7 +45,7 @@ import { useBaseTableItem } from '/@/hooks';
 
 import { HSimpleCenterFormLayout } from '/@/components';
 import { HOssTags, HOssBucketRetention } from '/@/composables/oss';
-import { useDictionary } from '/@/composables/constants';
+import { useDictionaryStore } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'OssBucketContent',
@@ -60,7 +60,7 @@ export default defineComponent({
     const { editedItem, operation, title } = useBaseTableItem<BucketDomain>();
     const { humanStorageSize } = format;
 
-    const { getDictionaryItem } = useDictionary();
+    const { getDictionaryItem } = useDictionaryStore();
 
     const bucketSetting = ref({}) as Ref<BucketSettingBusiness>;
     const bucketName = ref('');

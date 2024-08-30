@@ -1,6 +1,5 @@
 <template>
   <div class="q-gutter-y-md">
-    <h-server-condition v-model:conditions="conditions"></h-server-condition>
     <h-table
       :rows="tableRows"
       :columns="columns"
@@ -15,13 +14,7 @@
       reserved
       @request="findItems">
       <template #top-left>
-        <h-button color="primary" label="新建服务器" @click="toCreate" />
-      </template>
-
-      <template #body-cell-deviceType="props">
-        <q-td key="deviceType" :props="props">
-          {{ display('ServiceDevice', props.row) }}
-        </q-td>
+        <h-button color="primary" label="新建产品分类" @click="toCreate" />
       </template>
 
       <template #body-cell-actions="props">
@@ -38,28 +31,25 @@
 import { defineComponent, ref } from 'vue';
 
 import type {
-  AssetServerEntity,
-  AssetServerConditions,
-  AssetServerProps,
+  IotProductCategoryEntity,
+  IotProductCategoryConditions,
+  IotProductCategoryProps,
   QTableColumnProps,
 } from '/@/lib/declarations';
 
+import { useTable } from '/@/hooks';
 import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
-import { HServerCondition } from '/@/composables/cmdb';
-import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
-  name: CONSTANTS.ComponentName.ASSET_SERVER,
+  name: CONSTANTS.ComponentName.IOT_PRODUCT_CATEGORY,
 
   components: {
     HDeleteButton,
     HEditButton,
     HTable,
-    HServerCondition,
   },
 
   setup() {
@@ -71,23 +61,21 @@ export default defineComponent({
       toEdit,
       toCreate,
       toAuthorize,
-      conditions,
       findItems,
       deleteItemById,
-    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), CONSTANTS.ComponentName.ASSET_SERVER);
-
-    const { display } = useDictionary();
+      conditions,
+    } = useTable<IotProductCategoryEntity, IotProductCategoryConditions>(
+      api.iotProductCategory(),
+      CONSTANTS.ComponentName.IOT_PRODUCT_CATEGORY,
+    );
 
     const selected = ref([]);
-    const rowKey: AssetServerProps = 'serverId';
+    const rowKey: IotProductCategoryProps = 'categoryId';
 
     const columns: QTableColumnProps = [
-      { name: 'deviceType', field: 'deviceType', align: 'center', label: '服务器类型' },
-      { name: 'assetId', field: 'assetId', align: 'center', label: '资产编号' },
-      { name: 'actualIp', field: 'actualIp', align: 'center', label: '实际IP' },
-      { name: 'manageIp', field: 'manageIp', align: 'center', label: '实体机IP' },
-      { name: 'osPlatform', field: 'osPlatform', align: 'center', label: '操作系统' },
-      { name: 'osVersion', field: 'osVersion', align: 'center', label: '系统版本' },
+      { name: 'categoryId', field: 'categoryId', align: 'center', label: '分类ID' },
+      { name: 'categoryName', field: 'categoryName', align: 'center', label: '分类名称' },
+      { name: 'parentId', field: 'parentId', align: 'center', label: '上级ID' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
@@ -104,10 +92,9 @@ export default defineComponent({
       toCreate,
       toEdit,
       toAuthorize,
-      conditions,
       findItems,
       deleteItemById,
-      display,
+      conditions,
     };
   },
 });

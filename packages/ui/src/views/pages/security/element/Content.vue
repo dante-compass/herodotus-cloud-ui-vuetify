@@ -26,7 +26,6 @@
     <h-tree-field
       v-model:selected="editedItem.parentId"
       :items="treeItems"
-      :value="parentPath"
       bottom-slots
       label="上级节点"></h-tree-field>
 
@@ -50,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, watch } from 'vue';
+import { defineComponent, watch } from 'vue';
 
 import type { SysElementEntity, SysElementConditions } from '/@/lib/declarations';
 
@@ -71,8 +70,6 @@ export default defineComponent({
     const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysElementEntity>(api.sysElement());
     const { treeItems } = useTreeItems<SysElementEntity, SysElementConditions>(api.sysElement());
 
-    const parentPath = ref('');
-
     const onSave = () => {
       saveOrUpdate();
     };
@@ -89,26 +86,11 @@ export default defineComponent({
       { deep: true },
     );
 
-    onMounted(() => {
-      if (editedItem.value.parentId) {
-        api
-          .sysElement()
-          .fetchById(editedItem.value.parentId)
-          .then(result => {
-            const data = result.data as SysElementEntity;
-            if (data) {
-              parentPath.value = data.path;
-            }
-          });
-      }
-    });
-
     return {
       editedItem,
       operation,
       title,
       onSave,
-      parentPath,
       treeItems,
     };
   },

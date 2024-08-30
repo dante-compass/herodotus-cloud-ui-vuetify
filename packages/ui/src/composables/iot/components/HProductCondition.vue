@@ -5,45 +5,30 @@
         <q-card-section>
           <h-row align="center" gutter="md" horizontal>
             <h-column :cols="2">
+              <h-tree-field
+                v-model:selected="conditionsModelValue.categoryId"
+                :items="treeItems"
+                dense
+                label="产品分类"></h-tree-field>
+            </h-column>
+            <h-column :cols="2">
               <h-text-field
-                v-model="conditionsModelValue.actualIp"
+                v-model="conditionsModelValue.productKey"
                 debounce="1000"
-                label="IP地址"
+                label="ProductKey"
                 dense
                 class="q-pb-none"></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
-                v-model="conditionsModelValue.assetId"
+                v-model="conditionsModelValue.productName"
                 debounce="1000"
-                label="资产编号"
+                label="产品名称"
                 dense
                 class="q-pb-none"></h-text-field>
             </h-column>
-            <h-column :cols="2">
-              <h-text-field
-                v-model="conditionsModelValue.cabinetNumber"
-                debounce="1000"
-                label="机柜号"
-                dense
-                class="q-pb-none"></h-text-field>
-            </h-column>
-            <h-column :cols="2">
-              <h-text-field
-                v-model="conditionsModelValue.serialNumber"
-                debounce="1000"
-                label="序列号"
-                dense
-                class="q-pb-none"></h-text-field>
-            </h-column>
-            <h-column :cols="2">
-              <h-text-field
-                v-model="conditionsModelValue.hostName"
-                debounce="1000"
-                label="主机名"
-                dense
-                class="q-pb-none"></h-text-field>
-            </h-column>
+            <h-column :cols="2"></h-column>
+            <h-column :cols="2"></h-column>
             <h-column auto>
               <h-button color="red" icon="mdi-broom" tooltip="清空" @click.stop="onClear()"></h-button>
             </h-column>
@@ -57,13 +42,17 @@
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue';
 
-import type { AssetServerConditions } from '/@/lib/declarations';
+import type { IotProductCategoryEntity, IotProductCategoryConditions, IotProductConditions } from '/@/lib/declarations';
+
+import { useTreeItems } from '/@/hooks';
+
+import { api } from '/@/lib/utils';
 
 export default defineComponent({
-  name: 'HServerCondition',
+  name: 'HProductCondition',
 
   props: {
-    conditions: { type: Object as PropType<AssetServerConditions>, required: true }
+    conditions: { type: Object as PropType<IotProductConditions>, required: true },
   },
 
   emits: ['update:conditions'],
@@ -73,17 +62,22 @@ export default defineComponent({
       get: () => props.conditions,
       set: newValue => {
         emit('update:conditions', newValue);
-      }
+      },
     });
 
+    const { treeItems } = useTreeItems<IotProductCategoryEntity, IotProductCategoryConditions>(
+      api.iotProductCategory(),
+    );
+
     const onClear = () => {
-      conditionsModelValue.value = {} as AssetServerConditions;
+      conditionsModelValue.value = {} as IotProductConditions;
     };
 
     return {
       conditionsModelValue,
-      onClear
+      onClear,
+      treeItems,
     };
-  }
+  },
 });
 </script>

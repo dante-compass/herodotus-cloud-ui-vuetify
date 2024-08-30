@@ -60,7 +60,7 @@ import { useRouteStore } from '/@/stores';
 import { HDeleteButton, HTable } from '/@/components';
 
 import { HOrganizationTree, HDepartmentTree } from '/@/composables/hr';
-import { useDictionary } from '/@/composables/constants';
+import { useDictionaryStore } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'SysOwnership',
@@ -90,7 +90,7 @@ export default defineComponent({
     const router = useRouter();
     const store = useRouteStore();
 
-    const { display } = useDictionary();
+    const { display } = useDictionaryStore();
 
     const columns: QTableColumnProps = [
       { name: 'employeeName', field: 'employeeName', align: 'center', label: '姓名' },

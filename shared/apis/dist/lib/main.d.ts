@@ -1,6 +1,6 @@
 import { Axios, HttpConfig } from './base';
 import { OpenApiService, OAuth2ApiService } from './secure';
-import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2ComplianceService, OAuth2DeviceService, OAuth2ProductService, AssetServerService, AssetApplicationService, DatabaseAccountService, DatabaseCatalogService, DatabaseInstanceService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService } from './modules';
+import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2ComplianceService, OAuth2DeviceService, OAuth2ProductService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService } from './modules';
 import { DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './settings';
 declare class ApiResources {
     private static instance;
@@ -16,11 +16,6 @@ declare class ApiResources {
     oauth2Device(): OAuth2DeviceService;
     oauth2Product(): OAuth2ProductService;
     oauth2Compliance(): OAuth2ComplianceService;
-    assetServer(): AssetServerService;
-    assetApplication(): AssetApplicationService;
-    dbAccount(): DatabaseAccountService;
-    dbCatalog(): DatabaseCatalogService;
-    dbInstance(): DatabaseInstanceService;
     sysOrganization(): SysOrganizationService;
     sysDepartment(): SysDepartmentService;
     sysEmployee(): SysEmployeeService;

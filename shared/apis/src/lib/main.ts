@@ -7,11 +7,6 @@ import {
   OAuth2ComplianceService,
   OAuth2DeviceService,
   OAuth2ProductService,
-  AssetServerService,
-  AssetApplicationService,
-  DatabaseAccountService,
-  DatabaseCatalogService,
-  DatabaseInstanceService,
   SysOrganizationService,
   SysDepartmentService,
   SysEmployeeService,
@@ -84,26 +79,6 @@ class ApiResources {
 
   public oauth2Compliance(): OAuth2ComplianceService {
     return OAuth2ComplianceService.getInstance(this.config);
-  }
-
-  public assetServer(): AssetServerService {
-    return AssetServerService.getInstance(this.config);
-  }
-
-  public assetApplication(): AssetApplicationService {
-    return AssetApplicationService.getInstance(this.config);
-  }
-
-  public dbAccount(): DatabaseAccountService {
-    return DatabaseAccountService.getInstance(this.config);
-  }
-
-  public dbCatalog(): DatabaseCatalogService {
-    return DatabaseCatalogService.getInstance(this.config);
-  }
-
-  public dbInstance(): DatabaseInstanceService {
-    return DatabaseInstanceService.getInstance(this.config);
   }
 
   public sysOrganization(): SysOrganizationService {

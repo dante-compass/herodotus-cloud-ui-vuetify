@@ -13,16 +13,11 @@
     reserved
     @request="findItems">
     <template #top-left>
-      <h-button color="primary" label="新建应用系统" @click="toCreate" />
+      <h-button color="primary" label="新建产品分类" @click="toCreate" />
     </template>
 
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
-        <h-dense-icon-button
-          color="brown"
-          icon="mdi-application-cog"
-          tooltip="分配服务器"
-          @click="toAuthorize(props.row)"></h-dense-icon-button>
         <h-edit-button @click="toEdit(props.row)"></h-edit-button>
         <h-delete-button v-if="!props.row.reserved" @click="deleteItemById(props.row[rowKey])"></h-delete-button>
       </q-td>
@@ -34,44 +29,51 @@
 import { defineComponent, ref } from 'vue';
 
 import type {
-  AssetApplicationEntity,
-  AssetApplicationConditions,
-  AssetApplicationProps,
+  IotProductCategoryEntity,
+  IotProductCategoryConditions,
+  IotProductCategoryProps,
   QTableColumnProps,
 } from '/@/lib/declarations';
 
+import { useTable } from '/@/hooks';
 import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
 
-import { HDenseIconButton, HDeleteButton, HEditButton, HTable } from '/@/components';
+import { HDeleteButton, HEditButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: CONSTANTS.ComponentName.ASSET_APPLICATION,
+  name: CONSTANTS.ComponentName.IOT_PRODUCT_CATEGORY,
 
   components: {
     HDeleteButton,
-    HDenseIconButton,
     HEditButton,
     HTable,
   },
 
   setup() {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<AssetApplicationEntity, AssetApplicationConditions>(
-        api.assetApplication(),
-        CONSTANTS.ComponentName.ASSET_APPLICATION,
-      );
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      toAuthorize,
+      findItems,
+      deleteItemById,
+      conditions,
+    } = useTable<IotProductCategoryEntity, IotProductCategoryConditions>(
+      api.iotProductCategory(),
+      CONSTANTS.ComponentName.IOT_PRODUCT_CATEGORY,
+    );
 
     const selected = ref([]);
-    const rowKey: AssetApplicationProps = 'applicationId';
+    const rowKey: IotProductCategoryProps = 'categoryId';
 
     const columns: QTableColumnProps = [
-      { name: 'applicationName', field: 'applicationName', align: 'center', label: '应用系统名称' },
-      { name: 'department', field: 'department', align: 'center', label: '管理部门' },
-      { name: 'employee', field: 'employee', align: 'center', label: '管理部门负责人' },
-      { name: 'protectionGrade', field: 'protectionGrade', align: 'center', label: '等保定级' },
-      { name: 'protectionFilingNo', field: 'protectionFilingNo', align: 'center', label: '等保备案编号' },
+      { name: 'categoryId', field: 'categoryId', align: 'center', label: '分类ID' },
+      { name: 'categoryName', field: 'categoryName', align: 'center', label: '分类名称' },
+      { name: 'parentId', field: 'parentId', align: 'center', label: '上级ID' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
@@ -90,6 +92,7 @@ export default defineComponent({
       toAuthorize,
       findItems,
       deleteItemById,
+      conditions,
     };
   },
 });

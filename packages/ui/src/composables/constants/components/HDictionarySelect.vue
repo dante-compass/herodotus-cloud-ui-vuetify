@@ -20,7 +20,7 @@ import { defineComponent, computed, reactive, toRefs, onBeforeMount } from 'vue'
 
 import type { ConstantDictionary } from '/@/lib/declarations';
 
-import { useDictionary } from '../hooks';
+import { useDictionaryStore } from '../store';
 
 export default defineComponent({
   name: 'HDictionarySelect',
@@ -47,7 +47,7 @@ export default defineComponent({
       },
     });
 
-    const { getDictionary } = useDictionary();
+    const { getDictionary } = useDictionaryStore();
 
     const initialize = () => {
       state.items = getDictionary(props.dictionary);

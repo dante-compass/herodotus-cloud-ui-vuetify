@@ -53,7 +53,7 @@ import { useTable, useTableItem, useEditFinish } from '/@/hooks';
 
 import { HFullWidthLayout, HTable } from '/@/components';
 import { HEmployeeCondition } from '/@/composables/hr';
-import { useDictionary } from '/@/composables/constants';
+import { useDictionaryStore } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'SysOwnershipContent',
@@ -66,7 +66,7 @@ export default defineComponent({
 
   setup(props) {
     const { onFinish } = useEditFinish();
-    const { display } = useDictionary();
+    const { display } = useDictionaryStore();
     const { editedItem, title, overlay } = useTableItem<SysEmployeeAllocatable>(api.sysEmployeeAllocatable());
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       SysEmployeeEntity,

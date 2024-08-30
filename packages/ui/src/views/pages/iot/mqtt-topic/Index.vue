@@ -1,6 +1,5 @@
 <template>
   <div class="q-gutter-y-md">
-    <h-employee-condition v-model:conditions="conditions"></h-employee-condition>
     <h-table
       :rows="tableRows"
       :columns="columns"
@@ -15,19 +14,7 @@
       reserved
       @request="findItems">
       <template #top-left>
-        <h-button color="primary" label="新建人员" @click="toCreate" />
-      </template>
-
-      <template #body-cell-gender="props">
-        <q-td key="gender" :props="props">
-          {{ display('Gender', props.row) }}
-        </q-td>
-      </template>
-
-      <template #body-cell-identity="props">
-        <q-td key="identity" :props="props">
-          {{ display('Identity', props.row) }}
-        </q-td>
+        <h-button color="primary" label="新建产品分类" @click="toCreate" />
       </template>
 
       <template #body-cell-actions="props">
@@ -44,44 +31,51 @@
 import { defineComponent, ref } from 'vue';
 
 import type {
-  SysEmployeeEntity,
-  SysEmployeeConditions,
-  SysEmployeeProps,
+  IotProductCategoryEntity,
+  IotProductCategoryConditions,
+  IotProductCategoryProps,
   QTableColumnProps,
 } from '/@/lib/declarations';
 
+import { useTable } from '/@/hooks';
 import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
-import { HEmployeeCondition } from '/@/composables/hr';
-import { useDictionaryStore } from '/@/composables/constants';
 
 export default defineComponent({
-  name: CONSTANTS.ComponentName.SYS_EMPLOYEE,
+  name: CONSTANTS.ComponentName.IOT_PRODUCT_CATEGORY,
 
   components: {
     HDeleteButton,
     HEditButton,
-    HEmployeeCondition,
     HTable,
   },
 
   setup() {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, conditions, findItems, deleteItemById } =
-      useTable<SysEmployeeEntity, SysEmployeeConditions>(api.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
-
-    const { display } = useDictionaryStore();
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      toAuthorize,
+      findItems,
+      deleteItemById,
+      conditions,
+    } = useTable<IotProductCategoryEntity, IotProductCategoryConditions>(
+      api.iotProductCategory(),
+      CONSTANTS.ComponentName.IOT_PRODUCT_CATEGORY,
+    );
 
     const selected = ref([]);
-    const rowKey: SysEmployeeProps = 'employeeId';
+    const rowKey: IotProductCategoryProps = 'categoryId';
 
     const columns: QTableColumnProps = [
-      { name: 'employeeName', field: 'employeeName', align: 'center', label: '人员姓名' },
-      { name: 'gender', field: 'gender', align: 'center', label: '性别' },
-      { name: 'identity', field: 'identity', align: 'center', label: '身份' },
-      { name: 'description', field: 'description', align: 'center', label: '备注' },
+      { name: 'categoryId', field: 'categoryId', align: 'center', label: '分类ID' },
+      { name: 'categoryName', field: 'categoryName', align: 'center', label: '分类名称' },
+      { name: 'parentId', field: 'parentId', align: 'center', label: '上级ID' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
@@ -97,10 +91,10 @@ export default defineComponent({
       loading,
       toCreate,
       toEdit,
+      toAuthorize,
+      findItems,
       deleteItemById,
       conditions,
-      findItems,
-      display,
     };
   },
 });
