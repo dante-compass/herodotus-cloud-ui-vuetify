@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed, watch } from 'vue';
 
 import { useBpmnModeler } from '../hooks';
 

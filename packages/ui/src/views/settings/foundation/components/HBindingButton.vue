@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 
 import { useSettingsStore } from '/@/stores';
 
@@ -31,14 +31,14 @@ export default defineComponent({
   name: 'HBindingStatusColumn',
 
   props: {
-    item: { type: Object as PropType<AccessSourceEntity>, required: true }
+    item: { type: Object as PropType<AccessSourceEntity>, required: true },
   },
 
   setup(props) {
     const settings = useSettingsStore();
     return {
-      settings
+      settings,
     };
-  }
+  },
 });
 </script>

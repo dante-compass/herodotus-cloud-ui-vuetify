@@ -40,14 +40,14 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDenseIconButton, HDeleteButton, HEditButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.OAUTH2_SCOPE,
+  name: CONSTANTS.ComponentName.OAUTH2_SCOPE,
 
   components: {
     HDeleteButton,
@@ -58,7 +58,7 @@ export default defineComponent({
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<OAuth2ScopeEntity, OAuth2ApplicationConditions>(api.oauth2Scope(), Constants.ComponentName.OAUTH2_SCOPE);
+      useTable<OAuth2ScopeEntity, OAuth2ApplicationConditions>(api.oauth2Scope(), CONSTANTS.ComponentName.OAUTH2_SCOPE);
 
     const selected = ref([]);
     const rowKey: OAuth2ScopeProps = 'scopeId';

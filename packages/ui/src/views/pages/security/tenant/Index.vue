@@ -40,7 +40,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 
 import { useTable } from '/@/hooks';
@@ -48,7 +48,7 @@ import { useTable } from '/@/hooks';
 import { HDeleteButton, HEditButton, HDenseIconButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_TENANT_DATA_SOURCE,
+  name: CONSTANTS.ComponentName.SYS_TENANT_DATA_SOURCE,
 
   components: { HDeleteButton, HEditButton, HDenseIconButton, HTable },
 
@@ -56,7 +56,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
       useTable<SysTenantDataSourceEntity, SysTenantDataSourceConditions>(
         api.sysTenantDataSource(),
-        Constants.ComponentName.SYS_TENANT_DATA_SOURCE,
+        CONSTANTS.ComponentName.SYS_TENANT_DATA_SOURCE,
       );
 
     const selected = ref([]);

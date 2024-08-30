@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, Ref } from 'vue';
+import { defineComponent, computed, ref, Ref, watch, onMounted } from 'vue';
 import { format } from 'quasar';
 
 import type { ObjectDomain, ObjectSettingBusiness } from '/@/lib/declarations';

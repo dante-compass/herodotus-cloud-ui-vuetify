@@ -9,12 +9,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, PropType } from 'vue';
+import { defineComponent, ref, computed, PropType, Ref, onMounted } from 'vue';
 
 import type { ObjectLockConfigurationDomain, QBaseDataItem } from '/@/lib/declarations';
 
-import { useConstantsStore } from '/@/stores';
 import { lodash } from '/@/lib/utils';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'HOssBucketRetention',
@@ -23,7 +23,7 @@ export default defineComponent({
     modelValue: { type: Object as PropType<ObjectLockConfigurationDomain>, default: () => ({}) },
     open: { type: Boolean, default: false },
     bucketName: { type: String, required: true },
-    objectName: { type: String, default: '' }
+    objectName: { type: String, default: '' },
   },
 
   emits: ['update:modelValue', 'update:open'],
@@ -33,23 +33,23 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const isOpenDialog = computed({
       get: () => props.open,
       set: newValue => {
         emit('update:open', newValue);
-      }
+      },
     });
 
-    const constants = useConstantsStore();
+    const { getDictionary } = useDictionary();
 
     const retentionModeOptions = ref([]) as Ref<Array<QBaseDataItem<number>>>;
     const retentionUnitOptions = ref([]) as Ref<Array<QBaseDataItem<number>>>;
 
     const initRetentionModeOptions = () => {
-      const retentionModes = constants.getDictionary('RetentionMode');
+      const retentionModes = getDictionary('RetentionMode');
       if (!lodash.isEmpty(retentionModes)) {
         retentionModes.map(item => {
           retentionModeOptions.value.push({ label: item.label, value: item.value });
@@ -57,7 +57,7 @@ export default defineComponent({
       }
     };
     const initRetentionUnitOptions = () => {
-      const retentionUnits = constants.getDictionary('RetentionUnit');
+      const retentionUnits = getDictionary('RetentionUnit');
       if (!lodash.isEmpty(retentionUnits)) {
         retentionUnits.map(item => {
           retentionUnitOptions.value.push({ label: item.label, value: item.value });
@@ -74,8 +74,8 @@ export default defineComponent({
       isOpenDialog,
       retention,
       retentionModeOptions,
-      retentionUnitOptions
+      retentionUnitOptions,
     };
-  }
+  },
 });
 </script>

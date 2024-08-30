@@ -5,9 +5,9 @@
         v-for="(tab, i) in tabs"
         :key="i"
         :tabindex="i"
-        :name="(tab.name as string)"
-        :label="(tab.meta.title as string)"
-        :icon="(tab.meta.icon as string)"
+        :name="tab.name as string"
+        :label="tab.meta.title as string"
+        :icon="tab.meta.icon as string"
         :to="tab.path">
         <q-icon v-if="isNotLastTab(i)" size="xs" name="mdi-close-circle" class="q-ml-md" @click="onCloseTab(tab)" />
         <q-icon v-else size="xs" name="mdi-lock-outline" class="q-ml-md" />
@@ -46,7 +46,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, inject, computed } from 'vue';
+import { defineComponent, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
@@ -68,7 +68,7 @@ export default defineComponent({
       disableCloseCurrentTab,
       disableCloseRightTabs,
       disableCloseLeftTabs,
-      disableRefreshCurrentTab
+      disableRefreshCurrentTab,
     } = storeToRefs(store);
     const { closeTab, smartTab, closeCurrentTab, closeOtherTabs, closeLeftTabs, closeRightTabs } = store;
 
@@ -79,7 +79,7 @@ export default defineComponent({
       () => {
         smartTab(route);
       },
-      { immediate: true }
+      { immediate: true },
     );
 
     const onCloseTab = (tab: Tab) => {
@@ -118,8 +118,8 @@ export default defineComponent({
       disableCloseCurrentTab,
       disableCloseRightTabs,
       disableCloseLeftTabs,
-      disableRefreshCurrentTab
+      disableRefreshCurrentTab,
     };
-  }
+  },
 });
 </script>

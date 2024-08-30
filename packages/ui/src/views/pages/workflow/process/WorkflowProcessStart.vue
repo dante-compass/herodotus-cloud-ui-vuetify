@@ -13,16 +13,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 
 import { useBpmnProcess } from '/@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '/@/components';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 import { lodash } from '/@/lib/utils';
 
 export default defineComponent({
-  name: Constants.ComponentName.WORKFLOW_PROCESS_START,
+  name: CONSTANTS.ComponentName.WORKFLOW_PROCESS_START,
 
   components: {
     HDetailContainer,

@@ -54,7 +54,7 @@ import { defineComponent, ref } from 'vue';
 
 import type { SysUserEntity, SysUserConditions, SysUserProps, QTableColumnProps } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 
 import { useAuthenticationStore } from '/@/stores';
@@ -66,7 +66,7 @@ import { HChangePassword } from '/@/composables/security';
 import { HSendMessageToUser } from '/@/composables/messages';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_USER,
+  name: CONSTANTS.ComponentName.SYS_USER,
 
   components: {
     HChangePassword,
@@ -79,7 +79,7 @@ export default defineComponent({
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<SysUserEntity, SysUserConditions>(api.sysUser(), Constants.ComponentName.SYS_USER);
+      useTable<SysUserEntity, SysUserConditions>(api.sysUser(), CONSTANTS.ComponentName.SYS_USER);
 
     const selected = ref([]);
     const rowKey: SysUserProps = 'userId';

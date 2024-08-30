@@ -32,7 +32,8 @@ import { defineComponent } from 'vue';
 import type { SysAttributeEntity } from '/@/lib/declarations';
 import { api } from '/@/lib/utils';
 import { useTableItem } from '/@/hooks';
-import { HCenterFormLayout, HDictionarySelect } from '/@/components';
+import { HCenterFormLayout } from '/@/components';
+import { HDictionarySelect } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'SysAttributeContent',

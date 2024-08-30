@@ -30,7 +30,7 @@ import type { HttpMethod } from '/@/lib/declarations';
 import { useDisplayElement } from '/@/hooks';
 import { useSettingsStore } from '/@/stores';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'HSwaggerColumn',
@@ -42,7 +42,7 @@ export default defineComponent({
   },
 
   setup() {
-    const { color } = useDisplayElement(Constants.HTTP_METHOD_STYLE_GROUP);
+    const { color } = useDisplayElement(CONSTANTS.HTTP_METHOD_STYLE_GROUP);
     const settings = useSettingsStore();
 
     const dense = computed(() => {

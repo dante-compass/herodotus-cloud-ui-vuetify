@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { nextTick } from 'vue';
 
 import { useRouteStore } from './route';
 import { lodash, RouteUtils } from '/@/lib/utils';
@@ -20,7 +21,7 @@ export const useTabsStore = defineStore('Tabs', {
   state: () => ({
     tabs: [] as Array<Tab>,
     activatedTab: {} as Tab,
-    activatedTabName: '' as RouteRecordName | null | undefined
+    activatedTabName: '' as RouteRecordName | null | undefined,
   }),
 
   getters: {
@@ -72,7 +73,7 @@ export const useTabsStore = defineStore('Tabs', {
         }
       }
       return false;
-    }
+    },
   },
 
   actions: {
@@ -80,7 +81,7 @@ export const useTabsStore = defineStore('Tabs', {
       return {
         name: route.name,
         path: route.path,
-        meta: route.meta
+        meta: route.meta,
       };
     },
 
@@ -167,7 +168,7 @@ export const useTabsStore = defineStore('Tabs', {
       lodash.remove(this.tabs, (item, index) => {
         return index > activatedTabIndex;
       });
-    }
+    },
   },
-  persist: true
+  persist: true,
 });

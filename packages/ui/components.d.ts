@@ -31,7 +31,6 @@ declare module 'vue' {
     HDeleteButton: typeof import('./src/components/library/HTable/HDeleteButton.vue')['default']
     HDenseIconButton: typeof import('./src/components/library/HTable/HDenseIconButton.vue')['default']
     HDetailContainer: typeof import('./src/components/layouts/forms/HDetailContainer.vue')['default']
-    HDictionarySelect: typeof import('./src/components/library/HSelect/HDictionarySelect.vue')['default']
     HEditButton: typeof import('./src/components/library/HTable/HEditButton.vue')['default']
     HErrorLayout: typeof import('./src/components/layouts/forms/HErrorLayout.vue')['default']
     HFormSkeleton: typeof import('./src/components/library/HSkeleton/HFormSkeleton.vue')['default']

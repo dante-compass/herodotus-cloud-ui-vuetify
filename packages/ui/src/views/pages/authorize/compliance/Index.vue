@@ -32,7 +32,7 @@ import type {
   EntityTitle,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { moment, api } from '/@/lib/utils';
 import { useTable, useXlsx } from '/@/hooks';
 
@@ -40,7 +40,7 @@ import { HTable } from '/@/components';
 import { HComplianceCondition } from '/@/composables/authorize';
 
 export default defineComponent({
-  name: Constants.ComponentName.OAUTH2_COMPLIANCE,
+  name: CONSTANTS.ComponentName.OAUTH2_COMPLIANCE,
 
   components: {
     HComplianceCondition,
@@ -52,7 +52,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       OAuth2ComplianceEntity,
       OAuth2ComplianceConditions
-    >(api.oauth2Compliance(), Constants.ComponentName.OAUTH2_COMPLIANCE, false, {
+    >(api.oauth2Compliance(), CONSTANTS.ComponentName.OAUTH2_COMPLIANCE, false, {
       direction: 'DESC',
       properties: ['createTime'],
     });

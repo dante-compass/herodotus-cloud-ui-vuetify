@@ -10,7 +10,7 @@ import { defineComponent, PropType } from 'vue';
 import type { HttpMethod } from '/@/lib/declarations';
 
 import { useDisplayElement } from '/@/hooks';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'HHttpMethodAvatar',
@@ -20,7 +20,7 @@ export default defineComponent({
   },
 
   setup() {
-    const { icon, color } = useDisplayElement(Constants.HTTP_METHOD_STYLE_GROUP);
+    const { icon, color } = useDisplayElement(CONSTANTS.HTTP_METHOD_STYLE_GROUP);
 
     return {
       color,

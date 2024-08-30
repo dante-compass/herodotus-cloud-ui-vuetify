@@ -62,15 +62,16 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
-import { HDeleteButton, HDictionarySelect, HEditButton, HTable } from '/@/components';
+import { HDeleteButton, HEditButton, HTable } from '/@/components';
 import { HOrganizationSelect } from '/@/composables/hr';
+import { HDictionarySelect } from '/@/composables/constants';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_DEPARTMENT,
+  name: CONSTANTS.ComponentName.SYS_DEPARTMENT,
 
   components: {
     HDeleteButton,
@@ -84,7 +85,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, deleteItemById, conditions } =
       useTable<SysDepartmentEntity, SysDepartmentConditions>(
         api.sysDepartment(),
-        Constants.ComponentName.SYS_DEPARTMENT,
+        CONSTANTS.ComponentName.SYS_DEPARTMENT,
       );
 
     const selected = ref([]);

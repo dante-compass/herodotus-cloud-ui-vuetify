@@ -34,7 +34,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 
 import { useTableItem, useTable } from '/@/hooks';
@@ -54,7 +54,7 @@ export default defineComponent({
 
     const { tableRows, totalPages, pagination, loading } = useTable<SysPermissionEntity, SysPermissionConditions>(
       api.sysPermission(),
-      Constants.ComponentName.SYS_PERMISSION,
+      CONSTANTS.ComponentName.SYS_PERMISSION,
       true,
     );
 

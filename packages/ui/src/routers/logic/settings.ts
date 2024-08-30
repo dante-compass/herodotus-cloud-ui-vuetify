@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 const SettingRoutes: Array<RouteRecordRaw> = [
   {
@@ -10,7 +10,7 @@ const SettingRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/message/information',
-        name: Constants.ComponentName.MESSAGE_INFORMATION,
+        name: CONSTANTS.ComponentName.MESSAGE_INFORMATION,
         meta: { title: '我的消息', icon: 'mdi-bell', isHideAllChild: true },
         component: () => import('/@/views/settings/message/Information.vue'),
         children: [

@@ -28,6 +28,8 @@ import { defineComponent, PropType, ref } from 'vue';
 
 import type { RouteRecordRaw } from 'vue-router';
 
+import { useRoute } from 'vue-router';
+
 import { useSystemMenu } from '/@/hooks';
 
 export default defineComponent({
@@ -38,7 +40,7 @@ export default defineComponent({
     level: { type: Number, required: true },
   },
 
-  setup(props) {
+  setup() {
     const headerClass = ref('');
 
     const thisRoute = useRoute();

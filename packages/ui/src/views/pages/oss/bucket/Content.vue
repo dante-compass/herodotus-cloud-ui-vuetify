@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
@@ -34,7 +34,7 @@ export default defineComponent({
   name: 'OssBucketContent',
 
   components: {
-    HSimpleCenterFormLayout
+    HSimpleCenterFormLayout,
   },
 
   setup(props) {
@@ -46,9 +46,9 @@ export default defineComponent({
     const rules = {
       editedItem: {
         bucketName: {
-          required: helpers.withMessage('存储桶名称不能为空', required)
-        }
-      }
+          required: helpers.withMessage('存储桶名称不能为空', required),
+        },
+      },
     };
 
     const v = useVuelidate(rules, { editedItem }, { $lazy: true });
@@ -60,7 +60,7 @@ export default defineComponent({
             .bucket()
             .createBucket({
               bucketName: editedItem.value.bucketName,
-              objectLockEnabledForBucket: objectLock.value
+              objectLockEnabledForBucket: objectLock.value,
             })
             .then(response => {
               const result = response as HttpResult<CreateBucketResult>;
@@ -88,8 +88,8 @@ export default defineComponent({
       v,
       onSave,
       region,
-      objectLock
+      objectLock,
     };
-  }
+  },
 });
 </script>

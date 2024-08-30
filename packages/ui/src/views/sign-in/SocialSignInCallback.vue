@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, Ref } from 'vue';
+import { defineComponent, onMounted, Ref, ref } from 'vue';
 
 import { RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router';
 import { SocialSource, AccessPrincipal } from '/@/lib/declarations';

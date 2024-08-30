@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, Ref } from 'vue';
+import { defineComponent, ref, watch, Ref, PropType, computed } from 'vue';
 
 import type { QTree, Tree } from '/@/lib/declarations';
 
@@ -34,25 +34,19 @@ export default defineComponent({
   emits: ['update:selected'],
 
   setup(props, { emit }) {
-    const selectedValue = ref('');
+    const selectedValue = computed({
+      get: () => props.selected,
+      set: newValue => {
+        emit('update:selected', newValue);
+      },
+    });
+
     const treeRef = ref(null) as Ref<QTree | null>;
     const nodeName = ref('');
     const isPopup = ref(false);
 
     watch(
       () => props.selected,
-      newValue => {
-        if (newValue) {
-          selectedValue.value = newValue;
-        }
-      },
-      {
-        immediate: true,
-      },
-    );
-
-    watch(
-      () => props.value,
       newValue => {
         if (newValue) {
           nodeName.value = props.value as string;
@@ -65,8 +59,7 @@ export default defineComponent({
 
     watch(
       () => selectedValue.value,
-      (newValue: string) => {
-        emit('update:selected', newValue);
+      newValue => {
         if (newValue) {
           const node = treeRef.value?.getNodeByKey(newValue);
           if (node) {
@@ -74,9 +67,6 @@ export default defineComponent({
             isPopup.value = false;
           }
         }
-      },
-      {
-        immediate: true,
       },
     );
 

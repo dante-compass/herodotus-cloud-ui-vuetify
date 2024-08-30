@@ -24,18 +24,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, Ref, onMounted } from 'vue';
 
 import type { Sheet, ProcessCommentsEntity, Variables } from '/@/lib/declarations';
 
 import { useBpmnProcess } from '/@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '/@/components';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { useAuthenticationStore } from '/@/stores';
 import { lodash, formApi, bpmnApi, toast } from '/@/lib/utils';
 
 export default defineComponent({
-  name: Constants.ComponentName.WORKFLOW_PROCESS_APPROVE,
+  name: CONSTANTS.ComponentName.WORKFLOW_PROCESS_APPROVE,
 
   components: {
     HDetailContainer,

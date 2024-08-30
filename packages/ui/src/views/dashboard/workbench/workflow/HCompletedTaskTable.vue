@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, onMounted, ref, watch } from 'vue';
 
 import type {
   Page,
@@ -29,7 +29,7 @@ import type {
   QTableOnRequestProps,
   QTableOnRequestParameter,
   ExtendedTaskEntity,
-  ExtendedTaskConditions
+  ExtendedTaskConditions,
 } from '/@/lib/declarations';
 
 import { api } from '/@/lib/utils';
@@ -54,14 +54,14 @@ export default defineComponent({
       setPagination,
       setPageData,
       showLoading,
-      hideLoading
+      hideLoading,
     } = useBaseTable<ExtendedTaskEntity, ExtendedTaskConditions>('HToDoTaskTable', 'updateTime', true);
 
     const columns: QTableColumnProps = [
       { name: 'businessKey', field: 'businessKey', align: 'center', label: '业务ID' },
       { name: 'startUsername', field: 'startUsername', align: 'center', label: '发起人' },
       { name: 'startTime', field: 'startTime', align: 'center', label: '申请时间' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const fetchCompletedTasksByPage = (pageNumber = 1) => {
@@ -71,9 +71,9 @@ export default defineComponent({
         .fetchCompletedTasksByPage(
           {
             pageNumber: pageNumber - 1,
-            pageSize: pagination.value.rowsPerPage
+            pageSize: pagination.value.rowsPerPage,
           },
-          { employeeId: authentication.employeeId }
+          { employeeId: authentication.employeeId },
         )
         .then(result => {
           const data = result.data as Page<ExtendedTaskEntity>;
@@ -94,7 +94,7 @@ export default defineComponent({
       () => pagination.value.page,
       newValue => {
         fetchCompletedTasksByPage(newValue);
-      }
+      },
     );
 
     onMounted(() => {
@@ -109,8 +109,8 @@ export default defineComponent({
       pagination,
       totalPages,
       loading,
-      findItems
+      findItems,
     };
-  }
+  },
 });
 </script>

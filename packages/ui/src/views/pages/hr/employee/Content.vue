@@ -27,7 +27,8 @@ import { required, helpers } from '@vuelidate/validators';
 import type { SysEmployeeEntity } from '/@/lib/declarations';
 import { api } from '/@/lib/utils';
 import { useTableItem } from '/@/hooks';
-import { HCenterFormLayout, HDictionarySelect } from '/@/components';
+import { HCenterFormLayout } from '/@/components';
+import { HDictionarySelect } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'SysEmployeeContent',

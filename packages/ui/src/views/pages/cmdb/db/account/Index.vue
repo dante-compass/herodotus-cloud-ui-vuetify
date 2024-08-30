@@ -35,14 +35,14 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.DATABASE_ACCOUNT,
+  name: CONSTANTS.ComponentName.DATABASE_ACCOUNT,
 
   components: {
     HDeleteButton,
@@ -54,7 +54,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
       useTable<DatabaseAccountEntity, DatabaseAccountConditions>(
         api.dbAccount(),
-        Constants.ComponentName.DATABASE_ACCOUNT,
+        CONSTANTS.ComponentName.DATABASE_ACCOUNT,
       );
 
     const selected = ref([]);

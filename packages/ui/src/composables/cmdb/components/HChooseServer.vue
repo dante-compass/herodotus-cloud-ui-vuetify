@@ -26,7 +26,7 @@
             @request="findItems">
             <template #body-cell-deviceType="props">
               <q-td key="deviceType" :props="props">
-                {{ parseServerDevice(props.row) }}
+                {{ display('ServerDevice', props.row) }}
               </q-td>
             </template>
           </q-table>
@@ -42,15 +42,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, Ref, PropType } from 'vue';
+import { defineComponent, computed, ref, Ref, PropType, onMounted } from 'vue';
 
 import type { AssetServerEntity, AssetServerConditions, QTableProps } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { lodash, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
-import { useServerDisplay } from '/@/composables/cmdb';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'HChooseServer',
@@ -88,9 +88,9 @@ export default defineComponent({
       conditions,
       findItems,
       deleteItemById,
-    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), Constants.ComponentName.ASSET_SERVER);
+    } = useTable<AssetServerEntity, AssetServerConditions>(api.assetServer(), CONSTANTS.ComponentName.ASSET_SERVER);
 
-    const { parseServerDevice } = useServerDisplay();
+    const { display } = useDictionary();
 
     const selected = ref([]) as Ref<Array<AssetServerEntity>>;
 
@@ -130,7 +130,7 @@ export default defineComponent({
       deleteItemById,
       selected,
       columns,
-      parseServerDevice,
+      display,
     };
   },
 });

@@ -1,7 +1,8 @@
 import { watch, ref, computed } from 'vue';
 
-import { Constants, ThemeModeEnum } from '/@/lib/definitions';
+import { ThemeModeEnum } from '/@/lib/definitions';
 import { useSettingsStore } from '/@/stores';
+import { CONSTANTS } from '/@/composables/constants';
 
 export default function useSystemTheme() {
   let media: MediaQueryList;
@@ -10,7 +11,7 @@ export default function useSystemTheme() {
   const systemTheme = ref<string>(ThemeModeEnum.DARK);
 
   const getMatchMedia = () => {
-    if (!Constants.IN_BROWSER) return;
+    if (!CONSTANTS.IN_BROWSER) return;
 
     return window.matchMedia('(prefers-color-scheme: dark)');
   };

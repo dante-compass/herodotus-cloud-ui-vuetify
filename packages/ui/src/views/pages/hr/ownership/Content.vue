@@ -18,13 +18,13 @@
         @request="findItems">
         <template #body-cell-gender="props">
           <q-td key="gender" :props="props">
-            {{ parseGender(props.row) }}
+            {{ display('Gender', props.row) }}
           </q-td>
         </template>
 
         <template #body-cell-identity="props">
           <q-td key="identity" :props="props">
-            {{ parseIdentity(props.row) }}
+            {{ display('Identity', props.row) }}
           </q-td>
         </template>
       </h-table>
@@ -47,12 +47,13 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { lodash, toast, api } from '/@/lib/utils';
 import { useTable, useTableItem, useEditFinish } from '/@/hooks';
 
 import { HFullWidthLayout, HTable } from '/@/components';
-import { HEmployeeCondition, useEmployeeDisplay } from '/@/composables/hr';
+import { HEmployeeCondition } from '/@/composables/hr';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'SysOwnershipContent',
@@ -65,12 +66,12 @@ export default defineComponent({
 
   setup(props) {
     const { onFinish } = useEditFinish();
-    const { parseGender, parseIdentity } = useEmployeeDisplay();
+    const { display } = useDictionary();
     const { editedItem, title, overlay } = useTableItem<SysEmployeeAllocatable>(api.sysEmployeeAllocatable());
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       SysEmployeeEntity,
       SysEmployeeConditions
-    >(api.sysEmployee(), Constants.ComponentName.SYS_EMPLOYEE);
+    >(api.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
 
     const selectedItems = ref([]) as Ref<Array<SysEmployeeEntity>>;
 
@@ -121,8 +122,7 @@ export default defineComponent({
       loading,
       columns,
       selectedItems,
-      parseGender,
-      parseIdentity,
+      display,
       findItems,
       onSave,
       title,

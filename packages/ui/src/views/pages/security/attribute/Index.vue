@@ -51,15 +51,14 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS, useDictionary } from '/@/composables/constants';
 import { lodash, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
-import { useConstantsStore } from '/@/stores';
 
 import { HEditButton, HTable, HSwaggerColumn } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_ATTRIBUTE,
+  name: CONSTANTS.ComponentName.SYS_ATTRIBUTE,
 
   components: {
     HEditButton,
@@ -68,11 +67,10 @@ export default defineComponent({
   },
 
   setup() {
-    const constants = useConstantsStore();
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
       useTable<SysAttributeEntity, SysAttributeConditions>(
         api.sysAttribute(),
-        Constants.ComponentName.SYS_ATTRIBUTE,
+        CONSTANTS.ComponentName.SYS_ATTRIBUTE,
         false,
         {
           direction: 'ASC',
@@ -94,11 +92,15 @@ export default defineComponent({
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
+    const { getDictionary } = useDictionary();
+
     onMounted(() => {
-      const dictionary = constants.getDictionary('PermissionExpression');
-      dictionary.forEach(element => {
-        index.value[element.ordinal] = element;
-      });
+      const dictionary = getDictionary('PermissionExpression');
+      if (dictionary) {
+        dictionary.forEach(element => {
+          index.value[element.ordinal] = element;
+        });
+      }
     });
 
     const getText = (key: string) => {

@@ -35,7 +35,7 @@ import { defineComponent, ref } from 'vue';
 
 import type { SysRoleEntity, SysRoleConditions, SysRoleProps, QTableColumnProps } from '/@/lib/declarations';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { api } from '/@/lib/utils';
 
 import { useTable } from '/@/hooks';
@@ -43,13 +43,13 @@ import { useTable } from '/@/hooks';
 import { HDeleteButton, HEditButton, HDenseIconButton, HTable } from '/@/components';
 
 export default defineComponent({
-  name: Constants.ComponentName.SYS_ROLE,
+  name: CONSTANTS.ComponentName.SYS_ROLE,
 
   components: { HDeleteButton, HEditButton, HDenseIconButton, HTable },
 
   setup() {
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<SysRoleEntity, SysRoleConditions>(api.sysRole(), Constants.ComponentName.SYS_ROLE);
+      useTable<SysRoleEntity, SysRoleConditions>(api.sysRole(), CONSTANTS.ComponentName.SYS_ROLE);
 
     const selected = ref([]);
     const rowKey: SysRoleProps = 'roleId';

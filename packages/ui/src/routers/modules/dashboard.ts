@@ -1,9 +1,9 @@
 import { RouteRecordRaw } from 'vue-router';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: Constants.Path.HOME,
+    path: CONSTANTS.Path.HOME,
     name: 'Dashboard',
     component: () => import('/@/views/layouts/Index.vue'),
     redirect: '/dashboard/console',
@@ -11,14 +11,14 @@ const routes: Array<RouteRecordRaw> = [
       title: 'Dashboard',
       sort: 0,
       icon: 'mdi-view-dashboard',
-      group: 'herodotus'
+      group: 'herodotus',
     },
     children: [
       {
         path: '/dashboard/console',
         name: 'DashboardConsole',
         meta: { title: '主控台', icon: 'mdi-sign-text', isHideAllChild: true },
-        component: () => import('/@/views/dashboard/console/Index.vue')
+        component: () => import('/@/views/dashboard/console/Index.vue'),
       },
       {
         path: '/dashboard/workbench',
@@ -28,20 +28,20 @@ const routes: Array<RouteRecordRaw> = [
         children: [
           {
             path: '/dashboard/workbench/process-start',
-            name: Constants.ComponentName.WORKFLOW_PROCESS_START,
+            name: CONSTANTS.ComponentName.WORKFLOW_PROCESS_START,
             meta: { title: '审批流程', icon: 'mdi-format-list-group-plus', isDetailContent: true },
-            component: () => import('/@/views/pages/workflow/process/WorkflowProcessStart.vue')
+            component: () => import('/@/views/pages/workflow/process/WorkflowProcessStart.vue'),
           },
           {
             path: '/dashboard/workbench/process-approve',
-            name: Constants.ComponentName.WORKFLOW_PROCESS_APPROVE,
+            name: CONSTANTS.ComponentName.WORKFLOW_PROCESS_APPROVE,
             meta: { title: '任务流程', icon: 'mdi-check-decagram', isDetailContent: true },
-            component: () => import('/@/views/pages/workflow/process/WorkflowProcessApprove.vue')
-          }
-        ]
-      }
-    ]
-  }
+            component: () => import('/@/views/pages/workflow/process/WorkflowProcessApprove.vue'),
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export default routes;

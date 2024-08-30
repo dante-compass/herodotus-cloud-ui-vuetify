@@ -35,17 +35,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, computed } from 'vue';
+import { defineComponent, Ref, computed, ref, watch, onMounted } from 'vue';
 import { format } from 'quasar';
 
 import type { BucketDomain, BucketSettingBusiness } from '/@/lib/declarations';
 
 import { ossApi } from '/@/lib/utils';
 import { useBaseTableItem } from '/@/hooks';
-import { useConstantsStore } from '/@/stores';
 
 import { HSimpleCenterFormLayout } from '/@/components';
 import { HOssTags, HOssBucketRetention } from '/@/composables/oss';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'OssBucketContent',
@@ -57,9 +57,10 @@ export default defineComponent({
   },
 
   setup(props) {
-    const { editedItem, operation, title, overlay, onFinish } = useBaseTableItem<BucketDomain>();
+    const { editedItem, operation, title } = useBaseTableItem<BucketDomain>();
     const { humanStorageSize } = format;
-    const constants = useConstantsStore();
+
+    const { getDictionaryItem } = useDictionary();
 
     const bucketSetting = ref({}) as Ref<BucketSettingBusiness>;
     const bucketName = ref('');
@@ -86,13 +87,13 @@ export default defineComponent({
 
     const retentionValidity = computed(() => {
       const objectLock = bucketSetting.value.objectLock;
-      const retentionDuration = constants.getDictionaryItem('RetentionUnit', objectLock.unit);
+      const retentionDuration = getDictionaryItem('RetentionUnit', objectLock.unit);
       return objectLock.validity + ' ' + retentionDuration.label;
     });
 
     const retentionMode = computed(() => {
       const objectLock = bucketSetting.value.objectLock;
-      const retentionDuration = constants.getDictionaryItem('RetentionMode', objectLock.mode);
+      const retentionDuration = getDictionaryItem('RetentionMode', objectLock.mode);
       return retentionDuration.label;
     });
 

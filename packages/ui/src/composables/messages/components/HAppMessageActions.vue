@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent, onMounted, onUnmounted, ref, computed } from 'vue';
 
 import { storeToRefs } from 'pinia';
 
@@ -54,7 +54,7 @@ export default defineComponent({
 
   components: {
     HAppDialogueNotification,
-    HAppAnnouncementNotification
+    HAppAnnouncementNotification,
   },
 
   setup() {
@@ -86,8 +86,8 @@ export default defineComponent({
       dialogueCount,
       announcementCount,
       isEnabled,
-      onSetAllRead
+      onSetAllRead,
     };
-  }
+  },
 });
 </script>

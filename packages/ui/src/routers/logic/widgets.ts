@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 import type { WidgetItem } from '/@/lib/declarations';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 const WidgetRoute: RouteRecordRaw = {
   path: '/widgets',
@@ -17,7 +17,7 @@ const WidgetRoute: RouteRecordRaw = {
     },
     {
       path: '/widgets/dynamic-forms',
-      name: Constants.ComponentName.WIDGETS_DYNAMIC_FORM,
+      name: CONSTANTS.ComponentName.WIDGETS_DYNAMIC_FORM,
       meta: { title: '动态表单', icon: 'mdi-format-textbox' },
       component: () => import('/@/views/widgets/dynamic-forms/Index.vue'),
     },

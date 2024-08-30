@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 import HSendMessageField from './HSendMessageField.vue';
 
@@ -28,7 +28,7 @@ export default defineComponent({
   name: 'HSendMessageToUser',
 
   components: {
-    HSendMessageField
+    HSendMessageField,
   },
 
   props: {
@@ -36,7 +36,7 @@ export default defineComponent({
     id: { type: String, required: true },
     name: { type: String, required: true },
     dialogueId: { type: String, default: '' },
-    avatar: { type: String, default: '' }
+    avatar: { type: String, default: '' },
   },
 
   setup(props, { emit }) {
@@ -44,7 +44,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const onOpenDialog = () => {
@@ -58,8 +58,8 @@ export default defineComponent({
     return {
       showDialog,
       onOpenDialog,
-      onCloseDialog
+      onCloseDialog,
     };
-  }
+  },
 });
 </script>

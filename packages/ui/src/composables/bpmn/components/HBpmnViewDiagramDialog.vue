@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, ref, watch } from 'vue';
 
 import { useBpmnModeler } from '../hooks';
 import { lodash } from '/@/lib/utils';

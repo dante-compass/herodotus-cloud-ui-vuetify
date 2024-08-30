@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '/hr/organization',
-        name: Constants.ComponentName.SYS_ORGANIZATION,
+        name: CONSTANTS.ComponentName.SYS_ORGANIZATION,
         meta: { title: '单位管理', icon: 'mdi-bank-outline', isHideAllChild: true },
         component: () => import('/@/views/pages/hr/organization/Index.vue'),
         children: [
@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/hr/department',
-        name: Constants.ComponentName.SYS_DEPARTMENT,
+        name: CONSTANTS.ComponentName.SYS_DEPARTMENT,
         meta: { title: '部门管理', icon: 'mdi-home', isHideAllChild: true },
         component: () => import('/@/views/pages/hr/department/Index.vue'),
         children: [
@@ -38,7 +38,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/hr/employee',
-        name: Constants.ComponentName.SYS_EMPLOYEE,
+        name: CONSTANTS.ComponentName.SYS_EMPLOYEE,
         meta: { title: '人员管理', icon: 'mdi-card-account-details-star', isHideAllChild: true },
         component: () => import('/@/views/pages/hr/employee/Index.vue'),
         children: [
@@ -52,7 +52,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/hr/ownership',
-        name: Constants.ComponentName.SYS_OWNERSHIP,
+        name: CONSTANTS.ComponentName.SYS_OWNERSHIP,
         meta: { title: '人员归属', icon: 'mdi-account-switch', isHideAllChild: true },
         component: () => import('/@/views/pages/hr/ownership/Index.vue'),
         children: [

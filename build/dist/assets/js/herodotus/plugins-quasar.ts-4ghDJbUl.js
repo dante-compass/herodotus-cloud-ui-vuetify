@@ -1,0 +1,1 @@
+import{b5 as s,b6 as n,b7 as i,b8 as r,b9 as o,ba as e}from"../modules/npm-quasar-CpHWCPD4.js";import"../modules/npm-@quasar-extras-m4OLOzYY.js";const g=a=>{a.use(s,{plugins:{Loading:n,AppFullscreen:i,Notify:r},lang:o,iconSet:e,config:{loading:{spinnerColor:"primary",spinnerSize:100}}})};export{g as s};

@@ -95,12 +95,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
+import { defineComponent, ref, Ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { required, helpers } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import { useApplicationStore, useAuthenticationStore } from '/@/stores';
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 import { toast, api } from '/@/lib/utils';
 
 export default defineComponent({
@@ -129,12 +129,12 @@ export default defineComponent({
         format: helpers.withMessage(
           '手机号格式不正确',
           // 中国手机号(严谨), 根据工信部2019年最新公布的手机号段
-          helpers.regex(/^((\+|00)86)?1((3[\d])|(4[5,6,7,9])|(5[0-3,5-9])|(6[5-7])|(7[0-8])|(8[\d])|(9[1,8,9]))\d{8}$/)
-        )
+          helpers.regex(/^((\+|00)86)?1((3[\d])|(4[5,6,7,9])|(5[0-3,5-9])|(6[5-7])|(7[0-8])|(8[\d])|(9[1,8,9]))\d{8}$/),
+        ),
       },
       verificationCode: {
-        required: helpers.withMessage('手机验证码不能为空', required)
-      }
+        required: helpers.withMessage('手机验证码不能为空', required),
+      },
     };
     const v = useVuelidate(rules, { mobile, verificationCode });
 
@@ -168,7 +168,7 @@ export default defineComponent({
             isSubmitDisabled.value = false;
             toast.success('欢迎回来！');
             router.push({
-              path: Constants.Path.HOME
+              path: CONSTANTS.Path.HOME,
             });
           }
         })
@@ -234,8 +234,8 @@ export default defineComponent({
       onShowCaptcha,
       onGetVerificationCode,
       onResetError,
-      onCaptchaVerfiy
+      onCaptchaVerfiy,
     };
-  }
+  },
 });
 </script>

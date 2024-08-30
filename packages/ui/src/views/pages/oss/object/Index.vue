@@ -14,12 +14,12 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
-import { Constants } from '/@/lib/definitions';
+import { CONSTANTS } from '/@/composables/constants';
 
 import { HOssBucketList, HOssObjectList } from '/@/composables/oss';
 
 export default defineComponent({
-  name: Constants.ComponentName.OSS_OBJECT,
+  name: CONSTANTS.ComponentName.OSS_OBJECT,
 
   components: {
     HOssBucketList,
