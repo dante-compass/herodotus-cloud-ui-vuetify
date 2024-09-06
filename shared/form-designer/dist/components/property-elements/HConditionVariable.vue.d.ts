@@ -17,8 +17,29 @@ declare const _default: import('vue').DefineComponent<{}, {
         headerStyle?: string;
         headerClasses?: string;
     }[];
-    tableRows: Ref<QBaseDataItem<boolean>[]>;
+    tableRows: Ref<QBaseDataItem<boolean>[], QBaseDataItem<boolean>[]>;
     condition: import('../../declarations').ConditionVariable;
     onModify: () => void;
-}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{}>>, {}, {}>;
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+    HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+        headerClass: {
+            type: StringConstructor;
+            default: string;
+        };
+    }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+        headerClass: {
+            type: StringConstructor;
+            default: string;
+        };
+    }>> & Readonly<{}>, {
+        headerClass: string;
+    }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+    HTextField: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+        modelValue: {
+            type: (StringConstructor | NumberConstructor)[];
+        };
+    }>, {
+        text: globalThis.WritableComputedRef<string | number | undefined, string | number | undefined>;
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, any, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

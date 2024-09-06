@@ -31,8 +31,8 @@
     "@herodotus/core": "workspace:^",
     "@herodotus/form-apis": "workspace:^",
     "@herodotus/form-engine": "workspace:^",
-    "quasar": "^2.16.9",
-    "vue": "^3.4.38",
+    "quasar": "^2.16.10",
+    "vue": "^3.5.3",
     "vuedraggable": "4.1.0"
   }
 }

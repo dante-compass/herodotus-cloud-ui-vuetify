@@ -32501,12 +32501,12 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _hoisted_1$7 = {
+const _hoisted_1$4 = {
   id: "bpmn-viewer",
   class: "bpmn-viewer-canvas"
 };
 function _sfc_render$_(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$7);
+  return openBlock(), createElementBlock("div", _hoisted_1$4);
 }
 const __unplugin_components_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["render", _sfc_render$_]]);
 const _sfc_main$Z = defineComponent({
@@ -32549,7 +32549,7 @@ const _sfc_main$Z = defineComponent({
     };
   }
 });
-const _hoisted_1$6 = { class: "text-h6" };
+const _hoisted_1$3 = { class: "text-h6" };
 function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_space = QSpace;
   const _component_q_btn = QBtn;
@@ -32570,7 +32570,7 @@ function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode(_component_q_card_section, { class: "row items-center q-pb-none" }, {
             default: withCtx(() => [
-              createElementVNode("div", _hoisted_1$6, toDisplayString(_ctx.title), 1),
+              createElementVNode("div", _hoisted_1$3, toDisplayString(_ctx.title), 1),
               createVNode(_component_q_space),
               createVNode(_component_q_btn, {
                 icon: "close",
@@ -34474,7 +34474,7 @@ const _sfc_main$Y = defineComponent({
     };
   }
 });
-const _hoisted_1$5 = { class: "text-h6" };
+const _hoisted_1$2 = { class: "text-h6" };
 function _sfc_render$Y(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_space = QSpace;
   const _component_q_btn = QBtn;
@@ -34494,7 +34494,7 @@ function _sfc_render$Y(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode(_component_q_card_section, { class: "row items-center q-pb-none" }, {
             default: withCtx(() => [
-              createElementVNode("div", _hoisted_1$5, toDisplayString(_ctx.headerTitle), 1),
+              createElementVNode("div", _hoisted_1$2, toDisplayString(_ctx.headerTitle), 1),
               createVNode(_component_q_space),
               createVNode(_component_q_btn, {
                 icon: "close",
@@ -34552,7 +34552,7 @@ const _sfc_main$X = defineComponent({
     name: { type: String }
   }
 });
-const _hoisted_1$4 = ["src"];
+const _hoisted_1$1 = ["src"];
 function _sfc_render$X(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_avatar = QAvatar;
   const _component_q_item_section = QItemSection;
@@ -34564,7 +34564,7 @@ function _sfc_render$X(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode(_component_q_avatar, { rounded: "" }, {
             default: withCtx(() => [
-              createElementVNode("img", { src: _ctx.icon }, null, 8, _hoisted_1$4)
+              createElementVNode("img", { src: _ctx.icon }, null, 8, _hoisted_1$1)
             ]),
             _: 1
           })
@@ -34772,7 +34772,7 @@ const _sfc_main$S = defineComponent({
     };
   }
 });
-const _hoisted_1$3 = {
+const _hoisted_1 = {
   key: 0,
   class: "text-h6"
 };
@@ -34797,7 +34797,7 @@ function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode(_component_q_card_section, { class: "row items-center q-pb-none" }, {
             default: withCtx(() => [
-              _ctx.title ? (openBlock(), createElementBlock("div", _hoisted_1$3, toDisplayString(_ctx.title), 1)) : createCommentVNode("", true),
+              _ctx.title ? (openBlock(), createElementBlock("div", _hoisted_1, toDisplayString(_ctx.title), 1)) : createCommentVNode("", true),
               createVNode(_component_q_space),
               createVNode(_component_q_btn, {
                 icon: "close",
@@ -35473,7 +35473,6 @@ const _sfc_main$H = defineComponent({
     };
   }
 });
-const _hoisted_1$2 = /* @__PURE__ */ createElementVNode("div", { class: "text-h6" }, "设置扩展属性", -1);
 function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_space = QSpace;
   const _component_q_btn = QBtn;
@@ -35494,7 +35493,7 @@ function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode(_component_q_card_section, { class: "row items-center q-pb-none" }, {
             default: withCtx(() => [
-              _hoisted_1$2,
+              _cache[6] || (_cache[6] = createElementVNode("div", { class: "text-h6" }, "设置扩展属性", -1)),
               createVNode(_component_q_space),
               createVNode(_component_q_btn, {
                 icon: "close",
@@ -35618,9 +35617,9 @@ function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
       createVNode(_component_q_item, null, {
         default: withCtx(() => [
           createVNode(_component_q_item_section, { class: "text-grey" }, {
-            default: withCtx(() => [
+            default: withCtx(() => _cache[1] || (_cache[1] = [
               createTextVNode("没有数据")
-            ]),
+            ])),
             _: 1
           })
         ]),
@@ -37734,7 +37733,6 @@ const _sfc_main$5 = defineComponent({
     };
   }
 });
-const _hoisted_1$1 = /* @__PURE__ */ createElementVNode("div", { class: "text-h6" }, "模型信息", -1);
 function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_button = __unplugin_components_0$6;
   const _component_h_button_group = __unplugin_components_1$5;
@@ -37767,9 +37765,9 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
         createVNode(_component_q_card, null, {
           default: withCtx(() => [
             createVNode(_component_q_card_section, null, {
-              default: withCtx(() => [
-                _hoisted_1$1
-              ]),
+              default: withCtx(() => _cache[7] || (_cache[7] = [
+                createElementVNode("div", { class: "text-h6" }, "模型信息", -1)
+              ])),
               _: 1
             }),
             createVNode(_component_q_card_section, {
@@ -38165,16 +38163,6 @@ const _sfc_main = defineComponent({
     };
   }
 });
-const _hoisted_1 = /* @__PURE__ */ createElementVNode("div", { class: "main-content" }, [
-  /* @__PURE__ */ createElementVNode("div", {
-    id: "designer",
-    class: "designer"
-  }),
-  /* @__PURE__ */ createElementVNode("div", {
-    id: "camunda-panel",
-    class: "camunda-panel"
-  })
-], -1);
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_bpmn_designer_toolbar = __unplugin_components_0;
   const _component_q_page = QPage;
@@ -38196,7 +38184,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 style: normalizeStyle(`height: ${_ctx.height}`)
               }, [
                 createVNode(_component_h_bpmn_designer_toolbar),
-                _hoisted_1
+                _cache[0] || (_cache[0] = createElementVNode("div", { class: "main-content" }, [
+                  createElementVNode("div", {
+                    id: "designer",
+                    class: "designer"
+                  }),
+                  createElementVNode("div", {
+                    id: "camunda-panel",
+                    class: "camunda-panel"
+                  })
+                ], -1))
               ], 4)
             ]),
             _: 1

@@ -1,6 +1,6 @@
 import { PropType } from 'vue';
 import { BpmnDesignerResources } from '../../declarations';
-declare const _default: import('vue').DefineComponent<{
+declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     instance: {
         type: PropType<BpmnDesignerResources>;
         required: true;
@@ -9,13 +9,13 @@ declare const _default: import('vue').DefineComponent<{
         type: StringConstructor;
         default: string;
     };
-}, {
+}>, {
     isOfficialPanel: import('vue').ComputedRef<boolean>;
-    elementTitle: import('vue').Ref<string>;
-    elementIcon: import('vue').Ref<string>;
-    elementCaption: import('vue').Ref<string>;
-    elementType: import('vue').Ref<string>;
-}, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "close"[], "close", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+    elementTitle: import('vue').Ref<string, string>;
+    elementIcon: import('vue').Ref<string, string>;
+    elementCaption: import('vue').Ref<string, string>;
+    elementType: import('vue').Ref<string, string>;
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "close"[], "close", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     instance: {
         type: PropType<BpmnDesignerResources>;
         required: true;
@@ -24,9 +24,3239 @@ declare const _default: import('vue').DefineComponent<{
         type: StringConstructor;
         default: string;
     };
-}>> & {
+}>> & Readonly<{
     onClose?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     height: string;
-}, {}>;
+}, {}, {
+    HBpmnDesignerToolbar: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+        HAlignGroup: import('vue').DefineComponent<{}, {
+            onAlignLeft: () => void;
+            onAlignRight: () => void;
+            onAlignTop: () => void;
+            onAlignBottom: () => void;
+            onAlignHorizontalCenter: () => void;
+            onAlignVerticalCenter: () => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HButton: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>> & Readonly<{}>, {
+                tooltip: string;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HButtonGroup: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HSeparator: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HCommandGroup: import('vue').DefineComponent<{}, {
+            onUndo: () => void;
+            onRedo: () => void;
+            onRestart: () => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HButton: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>> & Readonly<{}>, {
+                tooltip: string;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HButtonGroup: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HSeparator: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HToolGroup: import('vue').DefineComponent<{}, {
+            showMiniMap: import('vue').Ref<boolean, boolean>;
+            showBpmnLint: import('vue').Ref<boolean, boolean>;
+            toggleSimulation: () => void;
+            toggleMinimap: () => void;
+            toggleBpmnLint: () => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HButton: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>> & Readonly<{}>, {
+                tooltip: string;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HButtonGroup: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HSeparator: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HZoomGroup: import('vue').DefineComponent<{}, {
+            onZoomReset: (newScale: number | "fit-viewport" | undefined) => void;
+            onZoomMinus: (step?: number) => void;
+            onZoomPlus: (step?: number) => void;
+            percentage: import('vue').ComputedRef<string>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HButton: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>> & Readonly<{}>, {
+                tooltip: string;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HButtonGroup: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HSeparator: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HDownloadDropdown: import('vue').DefineComponent<{}, {
+            onDownloadXml: () => void;
+            onDownloadSvg: () => void;
+            onDownloadBpmn: () => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HButtonDropdown: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                label: {
+                    type: StringConstructor;
+                };
+                icon: {
+                    type: StringConstructor;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                label: {
+                    type: StringConstructor;
+                };
+                icon: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HListItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                label: {
+                    type: StringConstructor;
+                };
+                icon: {
+                    type: StringConstructor;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                label: {
+                    type: StringConstructor;
+                };
+                icon: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HPreviewDropdown: import('vue').DefineComponent<{}, {
+            isOpen: import('vue').Ref<boolean, boolean>;
+            data: import('vue').Ref<string, string>;
+            language: import('vue').Ref<"xml" | "json", "xml" | "json">;
+            onPreviewXml: () => Promise<import('sweetalert2').SweetAlertResult<string> | undefined>;
+            onPreviewJson: () => Promise<import('sweetalert2').SweetAlertResult<string> | undefined>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HButtonDropdown: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                label: {
+                    type: StringConstructor;
+                };
+                icon: {
+                    type: StringConstructor;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                label: {
+                    type: StringConstructor;
+                };
+                icon: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HListItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                label: {
+                    type: StringConstructor;
+                };
+                icon: {
+                    type: StringConstructor;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                label: {
+                    type: StringConstructor;
+                };
+                icon: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HBpmnCodePreviewer: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: BooleanConstructor;
+                    required: true;
+                };
+                data: {
+                    type: StringConstructor;
+                    required: true;
+                };
+                title: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                language: {
+                    type: PropType<"xml" | "json">;
+                    default: string;
+                };
+                maxWidth: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                maxHeight: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>, {
+                isOpen: import('vue').WritableComputedRef<boolean, boolean>;
+                headerTitle: import('vue').ComputedRef<string>;
+                onCopy: () => void;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: BooleanConstructor;
+                    required: true;
+                };
+                data: {
+                    type: StringConstructor;
+                    required: true;
+                };
+                title: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                language: {
+                    type: PropType<"xml" | "json">;
+                    default: string;
+                };
+                maxWidth: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                maxHeight: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {
+                title: string;
+                maxWidth: string;
+                language: "xml" | "json";
+                maxHeight: string;
+            }, {}, {
+                highlightjs: import('vue').DefineComponent<{
+                    code: {
+                        type: StringConstructor;
+                        required: true;
+                    };
+                    language: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    autodetect: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    ignoreIllegals: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                }, {
+                    className: import('vue').ComputedRef<string>;
+                    highlightedCode: import('vue').ComputedRef<string>;
+                }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, Record<string, any>, string, import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps, Readonly<{
+                    code: string;
+                    language: string;
+                    autodetect: boolean;
+                    ignoreIllegals: boolean;
+                }>, {
+                    language: string;
+                    autodetect: boolean;
+                    ignoreIllegals: boolean;
+                }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HOpenFile: import('vue').DefineComponent<{}, {
+            diagramFile: import('vue').Ref<File | null, File | null>;
+            clear: () => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HUploadDialog: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+            tooltip: {
+                type: StringConstructor;
+                default: string;
+            };
+        }>, {
+            openUploadDialog: import('vue').Ref<boolean, boolean>;
+            enableDuplicateCheck: import('vue').Ref<boolean, boolean>;
+            deployChangedOnly: import('vue').Ref<boolean, boolean>;
+            deploymentName: import('vue').Ref<string, string>;
+            loading: import('vue').Ref<boolean, boolean>;
+            onSave: () => Promise<import('sweetalert2').SweetAlertResult<string> | undefined>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+            tooltip: {
+                type: StringConstructor;
+                default: string;
+            };
+        }>> & Readonly<{}>, {
+            tooltip: string;
+        }, {}, {
+            HButton: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                tooltip: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>> & Readonly<{}>, {
+                tooltip: string;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HButtonGroup: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+    }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+    HBpmnPropertyPanel: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+        title: {
+            type: StringConstructor;
+            required: true;
+        };
+        icon: {
+            type: StringConstructor;
+            required: true;
+        };
+        type: {
+            type: StringConstructor;
+            required: true;
+        };
+        label: {
+            type: StringConstructor;
+        };
+    }>, {
+        thumbStyle: {
+            right: string;
+            borderRadius: string;
+            backgroundColor: string;
+            width: string;
+            opacity: string;
+        };
+        isShow: import('vue').Ref<boolean, boolean>;
+        panelGroups: import('vue').Ref<import('bpmn-js-properties-panel/lib/PropertiesActivator').Group[], import('bpmn-js-properties-panel/lib/PropertiesActivator').Group[]>;
+        parsePropertyPanelName: (id: string) => string;
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+        title: {
+            type: StringConstructor;
+            required: true;
+        };
+        icon: {
+            type: StringConstructor;
+            required: true;
+        };
+        type: {
+            type: StringConstructor;
+            required: true;
+        };
+        label: {
+            type: StringConstructor;
+        };
+    }>> & Readonly<{}>, {}, {}, {
+        HAsynchronousContinuationsPanel: import('vue').DefineComponent<{}, {
+            before: import('vue').Ref<boolean, boolean>;
+            after: import('vue').Ref<boolean, boolean>;
+            exclusive: import('vue').Ref<boolean, boolean>;
+            isExclusive: import('vue').ComputedRef<boolean>;
+            updateBefore: (value: boolean) => void;
+            updateAfter: (value: boolean) => void;
+            updateExclusive: (value: boolean) => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HCalledElementPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HCandidateStarterPanel: import('vue').DefineComponent<{}, {
+            candidateStarterGroups: import('vue').Ref<string, string>;
+            candidateStarterUsers: import('vue').Ref<string, string>;
+            updateCandidateStarterGroups: (value: string | number | null) => void;
+            updateCandidateStarterUsers: (value: string | number | null) => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HCandidateGroupTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                };
+                title: {
+                    type: StringConstructor;
+                };
+            }>, {
+                isOpen: import('vue').Ref<boolean, boolean>;
+                isDisabled: import('vue').ComputedRef<boolean>;
+                selected: import('vue').Ref<import('../../declarations').GroupEntity[], import('../../declarations').GroupEntity[]>;
+                assignee: import('vue').WritableComputedRef<string, string>;
+                onClose: () => void;
+                onSave: () => void;
+                onOpen: () => void;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                };
+                title: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {
+                modelValue: string;
+            }, {}, {
+                HDialog: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    title: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    cancelLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmDisable: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    width: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>, {
+                    isOpen: import('vue').WritableComputedRef<boolean, boolean>;
+                    onClose: () => void;
+                    onSave: () => void;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "save")[], "update:modelValue" | "save", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    title: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    cancelLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmDisable: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    width: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>> & Readonly<{
+                    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                    onSave?: ((...args: any[]) => any) | undefined;
+                }>, {
+                    width: string;
+                    title: string;
+                    modelValue: boolean;
+                    cancelLabel: string;
+                    confirmLabel: string;
+                    confirmDisable: boolean;
+                }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+                HGroupSelectTable: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: PropType<Array<import('../../declarations').GroupEntity>>;
+                        default: () => Array<import('../../declarations').GroupEntity>;
+                    };
+                }>, {
+                    tableRows: import('vue').Ref<import('../../declarations').GroupEntity[], import('../../declarations').GroupEntity[]>;
+                    totalPages: import('vue').Ref<number, number>;
+                    pagination: import('vue').Ref<{
+                        sortBy: string | null;
+                        descending: boolean;
+                        page: number;
+                        rowsPerPage: number;
+                        rowsNumber: number;
+                    }, Required<{
+                        sortBy?: string | null;
+                        descending?: boolean;
+                        page?: number;
+                        rowsPerPage?: number;
+                        rowsNumber?: number;
+                    }> | {
+                        sortBy: string | null;
+                        descending: boolean;
+                        page: number;
+                        rowsPerPage: number;
+                        rowsNumber: number;
+                    }>;
+                    loading: import('vue').Ref<boolean, boolean>;
+                    fieldValue: import('vue').Ref<string, string>;
+                    selectedItems: import('vue').WritableComputedRef<import('../../declarations').GroupEntity[], import('../../declarations').GroupEntity[]>;
+                    rowKey: keyof import('../../declarations').GroupEntity;
+                    columns: {
+                        name: string;
+                        label: string;
+                        field: string | ((row: any) => any);
+                        required?: boolean;
+                        align?: "left" | "right" | "center";
+                        sortable?: boolean;
+                        sort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                        rawSort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                        sortOrder?: "ad" | "da";
+                        format?: (val: any, row: any) => any;
+                        style?: string | ((row: any) => string);
+                        classes?: string | ((row: any) => string);
+                        headerStyle?: string;
+                        headerClasses?: string;
+                    }[];
+                    findItems: import('../../declarations').QTableOnRequestProps;
+                    onClear: () => void;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: PropType<Array<import('../../declarations').GroupEntity>>;
+                        default: () => Array<import('../../declarations').GroupEntity>;
+                    };
+                }>> & Readonly<{}>, {
+                    modelValue: import('../../declarations').GroupEntity[];
+                }, {}, {
+                    HTextField: any;
+                }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+                HTextField: any;
+            }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HCandidateUserTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                selection: {
+                    type: PropType<"single" | "multiple">;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                };
+                title: {
+                    type: StringConstructor;
+                };
+            }>, {
+                isOpen: import('vue').Ref<boolean, boolean>;
+                isDisabled: import('vue').ComputedRef<boolean>;
+                selected: import('vue').Ref<import('../../declarations').UserEntity[], import('../../declarations').UserEntity[]>;
+                assignee: import('vue').WritableComputedRef<string, string>;
+                onClose: () => void;
+                onSave: () => void;
+                onOpen: () => void;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                selection: {
+                    type: PropType<"single" | "multiple">;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                };
+                title: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {
+                modelValue: string;
+                selection: "single" | "multiple";
+            }, {}, {
+                HDialog: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    title: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    cancelLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmDisable: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    width: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>, {
+                    isOpen: import('vue').WritableComputedRef<boolean, boolean>;
+                    onClose: () => void;
+                    onSave: () => void;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "save")[], "update:modelValue" | "save", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    title: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    cancelLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmDisable: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    width: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>> & Readonly<{
+                    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                    onSave?: ((...args: any[]) => any) | undefined;
+                }>, {
+                    width: string;
+                    title: string;
+                    modelValue: boolean;
+                    cancelLabel: string;
+                    confirmLabel: string;
+                    confirmDisable: boolean;
+                }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+                HTextField: any;
+                HUserSelectTable: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: PropType<Array<import('../../declarations').UserEntity>>;
+                        default: () => Array<import('../../declarations').UserEntity>;
+                    };
+                    selection: {
+                        type: PropType<"single" | "multiple">;
+                        default: string;
+                    };
+                }>, {
+                    tableRows: import('vue').Ref<import('../../declarations').UserEntity[], import('../../declarations').UserEntity[]>;
+                    totalPages: import('vue').Ref<number, number>;
+                    pagination: import('vue').Ref<{
+                        sortBy: string | null;
+                        descending: boolean;
+                        page: number;
+                        rowsPerPage: number;
+                        rowsNumber: number;
+                    }, Required<{
+                        sortBy?: string | null;
+                        descending?: boolean;
+                        page?: number;
+                        rowsPerPage?: number;
+                        rowsNumber?: number;
+                    }> | {
+                        sortBy: string | null;
+                        descending: boolean;
+                        page: number;
+                        rowsPerPage: number;
+                        rowsNumber: number;
+                    }>;
+                    loading: import('vue').Ref<boolean, boolean>;
+                    fieldValue: import('vue').Ref<string, string>;
+                    selectedItems: import('vue').WritableComputedRef<import('../../declarations').UserEntity[], import('../../declarations').UserEntity[]>;
+                    rowKey: keyof import('../../declarations').UserEntity;
+                    columns: {
+                        name: string;
+                        label: string;
+                        field: string | ((row: any) => any);
+                        required?: boolean;
+                        align?: "left" | "right" | "center";
+                        sortable?: boolean;
+                        sort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                        rawSort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                        sortOrder?: "ad" | "da";
+                        format?: (val: any, row: any) => any;
+                        style?: string | ((row: any) => string);
+                        classes?: string | ((row: any) => string);
+                        headerStyle?: string;
+                        headerClasses?: string;
+                    }[];
+                    findItems: import('../../declarations').QTableOnRequestProps;
+                    onClear: () => void;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: PropType<Array<import('../../declarations').UserEntity>>;
+                        default: () => Array<import('../../declarations').UserEntity>;
+                    };
+                    selection: {
+                        type: PropType<"single" | "multiple">;
+                        default: string;
+                    };
+                }>> & Readonly<{}>, {
+                    modelValue: import('../../declarations').UserEntity[];
+                    selection: "single" | "multiple";
+                }, {}, {
+                    HTextField: any;
+                }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HCompensationPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HConditionPanel: import('vue').DefineComponent<{}, {
+            conditionExpression: import('vue').Ref<string, string>;
+            format: import('vue').Ref<string, string>;
+            resource: import('vue').Ref<string, string>;
+            script: import('vue').Ref<string, string>;
+            conditionType: import('vue').Ref<string, string>;
+            conditionOptions: import('vue').Ref<{
+                text: string;
+                value: string;
+            }[], {
+                text: string;
+                value: string;
+            }[] | {
+                text: string;
+                value: string;
+            }[]>;
+            scriptType: import('vue').Ref<string, string>;
+            scriptOptions: import('vue').Ref<{
+                text: string;
+                value: string;
+            }[], {
+                text: string;
+                value: string;
+            }[] | {
+                text: string;
+                value: string;
+            }[]>;
+            isScript: import('vue').ComputedRef<boolean>;
+            isExpression: import('vue').ComputedRef<boolean>;
+            isExternalResource: import('vue').ComputedRef<boolean>;
+            updateConditionExpression: (value: string) => void;
+            updateFormat: (value: string) => void;
+            updateResource: (value: string) => void;
+            updateScript: (value: string) => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HTextField: any;
+            HSelect: any;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HDocumentationPanel: import('vue').DefineComponent<{}, {
+            document: import('vue').Ref<string, string>;
+            updateDocument: (value: string | number | null) => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HErrorPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HEscalationPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HExecutionListenerPanel: import('vue').DefineComponent<{}, {
+            count: import('vue').ComputedRef<number>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HExtensionPropertiesPanel: import('vue').DefineComponent<{}, {
+            tableRows: import('vue').Ref<import('../../declarations').ExtensionProperty[], import('../../declarations').ExtensionProperty[]>;
+            tableColumns: {
+                name: string;
+                label: string;
+                field: string | ((row: any) => any);
+                required?: boolean;
+                align?: "left" | "right" | "center";
+                sortable?: boolean;
+                sort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                rawSort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                sortOrder?: "ad" | "da";
+                format?: (val: any, row: any) => any;
+                style?: string | ((row: any) => string);
+                classes?: string | ((row: any) => string);
+                headerStyle?: string;
+                headerClasses?: string;
+            }[];
+            openDialog: import('vue').Ref<boolean, boolean>;
+            count: import('vue').ComputedRef<number>;
+            onCreate: (item: import('../../declarations').ExtensionProperty) => void;
+            onDelete: (item: import('../../declarations').ExtensionProperty) => void;
+            onModify: () => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HTableItemDeleteButton: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+                HTableActionButton: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    tooltip: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    tooltip: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>> & Readonly<{}>, {
+                    tooltip: string;
+                }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HExtensionPropertyDialog: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {
+                isOpen: import('vue').WritableComputedRef<boolean, boolean>;
+                property: import('vue').Ref<import('../../declarations').ExtensionProperty, import('../../declarations').ExtensionProperty>;
+                isDisabled: import('vue').ComputedRef<boolean>;
+                onSave: () => void;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "save" | "update:open")[], "update:modelValue" | "save" | "update:open", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                onSave?: ((...args: any[]) => any) | undefined;
+                "onUpdate:open"?: ((...args: any[]) => any) | undefined;
+            }>, {
+                modelValue: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HFormPanel: import('vue').DefineComponent<{}, {
+            formsType: import('vue').Ref<string, string>;
+            formsOptions: import('vue').Ref<{
+                text: string;
+                value: import('../../enums').FormTypeEnum;
+            }[], {
+                text: string;
+                value: import('../../enums').FormTypeEnum;
+            }[] | {
+                text: string;
+                value: import('../../enums').FormTypeEnum;
+            }[]>;
+            bindingType: import('vue').Ref<string, string>;
+            bindingOptions: import('vue').Ref<{
+                text: string;
+                value: import('../../enums').BindingTypeEnum;
+            }[], {
+                text: string;
+                value: import('../../enums').BindingTypeEnum;
+            }[] | {
+                text: string;
+                value: import('../../enums').BindingTypeEnum;
+            }[]>;
+            formKey: import('vue').Ref<string, string>;
+            formRef: import('vue').Ref<string, string>;
+            formRefVersion: import('vue').Ref<string, string>;
+            isCamundaForms: import('vue').ComputedRef<boolean>;
+            isEmbeddedOrExternalTaskForms: import('vue').ComputedRef<boolean>;
+            isFormRefVersion: import('vue').ComputedRef<boolean>;
+            updateFormKey: (value: string) => void;
+            updateFormRef: (value: string) => void;
+            updateVersion: (value: string) => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HSelect: any;
+            HTextField: any;
+            HFormSelect: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                };
+            }>, {
+                selectedValue: import('vue').WritableComputedRef<string | undefined, string | undefined>;
+                options: import('vue').Ref<import('../../declarations').FormSelectItem[], import('../../declarations').FormSelectItem[]>;
+                filter: (value: string, update: (callbackFn: () => void, after?: (ref: import('quasar').QSelect) => void) => void, abort: () => void) => void;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HFieldInjectionPanel: import('vue').DefineComponent<{}, {
+            count: import('vue').ComputedRef<number>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HExternalTaskPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HGeneralPanel: import('vue').DefineComponent<{}, {
+            isProcessElement: import('vue').ComputedRef<boolean>;
+            elementId: import('vue').Ref<string, string>;
+            elementName: import('vue').Ref<string, string>;
+            versionTag: import('vue').Ref<string, string>;
+            isExecutable: import('vue').Ref<boolean, boolean>;
+            updateName: (value: string | number | null) => void;
+            updateId: (value: string | number | null) => void;
+            updateVersionTag: (value: string | number | null) => void;
+            updateIsExecutable: (value: boolean) => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HHeadPanel: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+            title: {
+                type: StringConstructor;
+                required: true;
+            };
+            icon: {
+                type: StringConstructor;
+                required: true;
+            };
+            name: {
+                type: StringConstructor;
+            };
+        }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+            title: {
+                type: StringConstructor;
+                required: true;
+            };
+            icon: {
+                type: StringConstructor;
+                required: true;
+            };
+            name: {
+                type: StringConstructor;
+            };
+        }>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HHistoryCleanupPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HImplementationPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HInMappingPanel: import('vue').DefineComponent<{}, {
+            count: import('vue').ComputedRef<number>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HInMappingPropagationPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HInputPanel: import('vue').DefineComponent<{}, {
+            count: import('vue').ComputedRef<number>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HJobExecutionPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HLinkPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HMessagePanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HMultiInstancePanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HOutMappingPanel: import('vue').DefineComponent<{}, {
+            count: import('vue').ComputedRef<number>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HOutMappingPropagationPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HOutputPanel: import('vue').DefineComponent<{}, {
+            count: import('vue').ComputedRef<number>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HScriptPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HSignalPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HStartInitiatorPanel: import('vue').DefineComponent<{}, {
+            initiator: import('vue').Ref<string | undefined, string | undefined>;
+            updateInitiator: (value: string | number | null) => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HTextField: any;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HTaskListenerPanel: import('vue').DefineComponent<{}, {
+            count: import('vue').ComputedRef<number>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HTasklistPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HTimerPanel: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        HUserAssignmentPanel: import('vue').DefineComponent<{}, {
+            assignee: import('vue').Ref<string, string>;
+            candidateUsers: import('vue').Ref<string, string>;
+            candidateGroups: import('vue').Ref<string, string>;
+            dueDate: import('vue').Ref<string, string>;
+            followUpDate: import('vue').Ref<string, string>;
+            priority: import('vue').Ref<string | undefined, string | undefined>;
+            updateAssignee: (value: string | number | null) => void;
+            updateCandidateGroups: (value: string | number | null) => void;
+            updateCandidateUsers: (value: string | number | null) => void;
+            updateDueDate: (value: string | number | null) => void;
+            updateFollowUpDate: (value: string | number | null) => void;
+            updatePriority: (value: string | number | null) => void;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
+            HCandidateGroupTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                };
+                title: {
+                    type: StringConstructor;
+                };
+            }>, {
+                isOpen: import('vue').Ref<boolean, boolean>;
+                isDisabled: import('vue').ComputedRef<boolean>;
+                selected: import('vue').Ref<import('../../declarations').GroupEntity[], import('../../declarations').GroupEntity[]>;
+                assignee: import('vue').WritableComputedRef<string, string>;
+                onClose: () => void;
+                onSave: () => void;
+                onOpen: () => void;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                };
+                title: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {
+                modelValue: string;
+            }, {}, {
+                HDialog: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    title: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    cancelLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmDisable: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    width: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>, {
+                    isOpen: import('vue').WritableComputedRef<boolean, boolean>;
+                    onClose: () => void;
+                    onSave: () => void;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "save")[], "update:modelValue" | "save", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    title: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    cancelLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmDisable: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    width: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>> & Readonly<{
+                    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                    onSave?: ((...args: any[]) => any) | undefined;
+                }>, {
+                    width: string;
+                    title: string;
+                    modelValue: boolean;
+                    cancelLabel: string;
+                    confirmLabel: string;
+                    confirmDisable: boolean;
+                }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+                HGroupSelectTable: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: PropType<Array<import('../../declarations').GroupEntity>>;
+                        default: () => Array<import('../../declarations').GroupEntity>;
+                    };
+                }>, {
+                    tableRows: import('vue').Ref<import('../../declarations').GroupEntity[], import('../../declarations').GroupEntity[]>;
+                    totalPages: import('vue').Ref<number, number>;
+                    pagination: import('vue').Ref<{
+                        sortBy: string | null;
+                        descending: boolean;
+                        page: number;
+                        rowsPerPage: number;
+                        rowsNumber: number;
+                    }, Required<{
+                        sortBy?: string | null;
+                        descending?: boolean;
+                        page?: number;
+                        rowsPerPage?: number;
+                        rowsNumber?: number;
+                    }> | {
+                        sortBy: string | null;
+                        descending: boolean;
+                        page: number;
+                        rowsPerPage: number;
+                        rowsNumber: number;
+                    }>;
+                    loading: import('vue').Ref<boolean, boolean>;
+                    fieldValue: import('vue').Ref<string, string>;
+                    selectedItems: import('vue').WritableComputedRef<import('../../declarations').GroupEntity[], import('../../declarations').GroupEntity[]>;
+                    rowKey: keyof import('../../declarations').GroupEntity;
+                    columns: {
+                        name: string;
+                        label: string;
+                        field: string | ((row: any) => any);
+                        required?: boolean;
+                        align?: "left" | "right" | "center";
+                        sortable?: boolean;
+                        sort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                        rawSort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                        sortOrder?: "ad" | "da";
+                        format?: (val: any, row: any) => any;
+                        style?: string | ((row: any) => string);
+                        classes?: string | ((row: any) => string);
+                        headerStyle?: string;
+                        headerClasses?: string;
+                    }[];
+                    findItems: import('../../declarations').QTableOnRequestProps;
+                    onClear: () => void;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: PropType<Array<import('../../declarations').GroupEntity>>;
+                        default: () => Array<import('../../declarations').GroupEntity>;
+                    };
+                }>> & Readonly<{}>, {
+                    modelValue: import('../../declarations').GroupEntity[];
+                }, {}, {
+                    HTextField: any;
+                }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+                HTextField: any;
+            }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HCandidateUserTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                selection: {
+                    type: PropType<"single" | "multiple">;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                };
+                title: {
+                    type: StringConstructor;
+                };
+            }>, {
+                isOpen: import('vue').Ref<boolean, boolean>;
+                isDisabled: import('vue').ComputedRef<boolean>;
+                selected: import('vue').Ref<import('../../declarations').UserEntity[], import('../../declarations').UserEntity[]>;
+                assignee: import('vue').WritableComputedRef<string, string>;
+                onClose: () => void;
+                onSave: () => void;
+                onOpen: () => void;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                selection: {
+                    type: PropType<"single" | "multiple">;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                };
+                title: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {
+                modelValue: string;
+                selection: "single" | "multiple";
+            }, {}, {
+                HDialog: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    title: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    cancelLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmDisable: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    width: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>, {
+                    isOpen: import('vue').WritableComputedRef<boolean, boolean>;
+                    onClose: () => void;
+                    onSave: () => void;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "save")[], "update:modelValue" | "save", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    title: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    cancelLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmLabel: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                    confirmDisable: {
+                        type: BooleanConstructor;
+                        default: boolean;
+                    };
+                    width: {
+                        type: StringConstructor;
+                        default: string;
+                    };
+                }>> & Readonly<{
+                    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                    onSave?: ((...args: any[]) => any) | undefined;
+                }>, {
+                    width: string;
+                    title: string;
+                    modelValue: boolean;
+                    cancelLabel: string;
+                    confirmLabel: string;
+                    confirmDisable: boolean;
+                }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+                HTextField: any;
+                HUserSelectTable: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: PropType<Array<import('../../declarations').UserEntity>>;
+                        default: () => Array<import('../../declarations').UserEntity>;
+                    };
+                    selection: {
+                        type: PropType<"single" | "multiple">;
+                        default: string;
+                    };
+                }>, {
+                    tableRows: import('vue').Ref<import('../../declarations').UserEntity[], import('../../declarations').UserEntity[]>;
+                    totalPages: import('vue').Ref<number, number>;
+                    pagination: import('vue').Ref<{
+                        sortBy: string | null;
+                        descending: boolean;
+                        page: number;
+                        rowsPerPage: number;
+                        rowsNumber: number;
+                    }, Required<{
+                        sortBy?: string | null;
+                        descending?: boolean;
+                        page?: number;
+                        rowsPerPage?: number;
+                        rowsNumber?: number;
+                    }> | {
+                        sortBy: string | null;
+                        descending: boolean;
+                        page: number;
+                        rowsPerPage: number;
+                        rowsNumber: number;
+                    }>;
+                    loading: import('vue').Ref<boolean, boolean>;
+                    fieldValue: import('vue').Ref<string, string>;
+                    selectedItems: import('vue').WritableComputedRef<import('../../declarations').UserEntity[], import('../../declarations').UserEntity[]>;
+                    rowKey: keyof import('../../declarations').UserEntity;
+                    columns: {
+                        name: string;
+                        label: string;
+                        field: string | ((row: any) => any);
+                        required?: boolean;
+                        align?: "left" | "right" | "center";
+                        sortable?: boolean;
+                        sort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                        rawSort?: (a: any, b: any, rowA: any, rowB: any) => number;
+                        sortOrder?: "ad" | "da";
+                        format?: (val: any, row: any) => any;
+                        style?: string | ((row: any) => string);
+                        classes?: string | ((row: any) => string);
+                        headerStyle?: string;
+                        headerClasses?: string;
+                    }[];
+                    findItems: import('../../declarations').QTableOnRequestProps;
+                    onClear: () => void;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: PropType<Array<import('../../declarations').UserEntity>>;
+                        default: () => Array<import('../../declarations').UserEntity>;
+                    };
+                    selection: {
+                        type: PropType<"single" | "multiple">;
+                        default: string;
+                    };
+                }>> & Readonly<{}>, {
+                    modelValue: import('../../declarations').UserEntity[];
+                    selection: "single" | "multiple";
+                }, {}, {
+                    HTextField: any;
+                }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                icon: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                label: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                badge: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                badgeColor: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                count: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                defaultOpend: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {
+                label: string;
+                icon: string;
+                badge: boolean;
+                badgeColor: string;
+                count: number;
+                defaultOpend: boolean;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HTextField: any;
+        }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+    }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,5 +1,5 @@
 import { QInput, QList, QSpace, QBtn, QCardSection, QCardActions, QCard, QDialog, QPage, QPageContainer, QExpansionItem, QPopupEdit, QTd, QTr, QTable, QTab, QTabs, QSeparator, QTabPanel, QTabPanels, QIcon, QToolbarTitle, QToolbar, QHeader, QDrawer, QLayout } from "quasar";
-import { defineComponent, ref, openBlock, createBlock, withCtx, createVNode, computed, createElementVNode, renderSlot, mergeProps, resolveComponent, normalizeClass, createCommentVNode, createSlots, pushScopeId, popScopeId, createTextVNode, toDisplayString, resolveDynamicComponent, createElementBlock, Fragment, renderList, watch, onUnmounted, normalizeStyle } from "vue";
+import { defineComponent, ref, openBlock, createBlock, withCtx, createVNode, computed, createElementVNode, renderSlot, mergeProps, resolveComponent, normalizeClass, createCommentVNode, createSlots, createTextVNode, toDisplayString, resolveDynamicComponent, createElementBlock, Fragment, renderList, watch, onUnmounted, normalizeStyle } from "vue";
 import { defineStore, storeToRefs } from "pinia";
 import { lodash, toast, Swal } from "@herodotus/core";
 import { Swal as Swal2, lodash as lodash2, toast as toast2 } from "@herodotus/core";
@@ -241,7 +241,6 @@ const _sfc_main$f = defineComponent({
     };
   }
 });
-const _hoisted_1$8 = /* @__PURE__ */ createElementVNode("div", { class: "text-h6" }, "上传表单", -1);
 function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_space = QSpace;
   const _component_q_btn = QBtn;
@@ -262,7 +261,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode(_component_q_card_section, { class: "row items-center q-pb-none" }, {
             default: withCtx(() => [
-              _hoisted_1$8,
+              _cache[4] || (_cache[4] = createElementVNode("div", { class: "text-h6" }, "上传表单", -1)),
               createVNode(_component_q_space),
               createVNode(_component_q_btn, {
                 icon: "close",
@@ -389,7 +388,6 @@ const _sfc_main$c = defineComponent({
     };
   }
 });
-const _hoisted_1$7 = /* @__PURE__ */ createElementVNode("div", { class: "text-h6" }, "预览", -1);
 function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_space = QSpace;
   const _component_q_btn = QBtn;
@@ -410,7 +408,7 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode(_component_q_card_section, { class: "row items-center q-pb-none" }, {
             default: withCtx(() => [
-              _hoisted_1$7,
+              _cache[4] || (_cache[4] = createElementVNode("div", { class: "text-h6" }, "预览", -1)),
               createVNode(_component_q_space),
               createVNode(_component_q_btn, {
                 icon: "close",
@@ -552,10 +550,6 @@ const _sfc_main$a = defineComponent({
     };
   }
 });
-const _withScopeId = (n) => (pushScopeId("data-v-54c2f724"), n = n(), popScopeId(), n);
-const _hoisted_1$6 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createElementVNode("div", { class: "row text-center canvas-container" }, [
-  /* @__PURE__ */ createElementVNode("div", { class: "col-12 self-center text-h6 text-weight-medium text-grey-5" }, "从左侧拖拽或点击来添加字段")
-], -1));
 function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_canvas_element = __unplugin_components_0$1;
   const _component_draggable = resolveComponent("draggable");
@@ -582,7 +576,9 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
         _ctx.isEmptyCanvas ? {
           name: "footer",
           fn: withCtx(() => [
-            _hoisted_1$6
+            _cache[0] || (_cache[0] = createElementVNode("div", { class: "row text-center canvas-container" }, [
+              createElementVNode("div", { class: "col-12 self-center text-h6 text-weight-medium text-grey-5" }, "从左侧拖拽或点击来添加字段")
+            ], -1))
           ]),
           key: "0"
         } : void 0
