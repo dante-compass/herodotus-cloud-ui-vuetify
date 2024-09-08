@@ -1,1 +1,0 @@
-import{l as n}from"../modules/npm-@vue-runtime-core-CcD8gGyb.js";function m(c){const s=(t,r)=>t[r],e=(t,r)=>{const o=c[t];return o?s(o,r):r==="color"?"black":"GET & POST"},u=n(()=>t=>e(t,"color")),l=n(()=>t=>e(t,"icon")),i=n(()=>t=>e(t,"text"));return{color:u,icon:l,text:i}}export{m as u};
