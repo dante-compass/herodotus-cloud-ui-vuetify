@@ -6,7 +6,7 @@
 import { defineComponent, onMounted, computed, reactive, watch } from 'vue';
 import type { ConstantDictionary } from '/@/lib/declarations';
 
-import { CONSTANTS, useDictionary } from '/@/composables/constants';
+import { CONSTANTS, useDictionaryStore } from '/@/composables/constants';
 
 import HDenseIconButton from './HDenseIconButton.vue';
 import { lodash } from '/@/lib/utils';
@@ -27,7 +27,7 @@ export default defineComponent({
       items: [] as Array<ConstantDictionary>,
     });
 
-    const { getDictionary } = useDictionary();
+    const { getDictionary } = useDictionaryStore();
 
     const initialize = () => {
       if (lodash.isEmpty(state.items)) {

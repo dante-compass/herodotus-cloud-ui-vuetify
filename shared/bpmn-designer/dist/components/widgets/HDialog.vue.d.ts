@@ -1,4 +1,4 @@
-declare const _default: import('vue').DefineComponent<{
+declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     modelValue: {
         type: BooleanConstructor;
         default: boolean;
@@ -23,11 +23,11 @@ declare const _default: import('vue').DefineComponent<{
         type: StringConstructor;
         default: string;
     };
-}, {
-    isOpen: import('vue').WritableComputedRef<boolean>;
+}>, {
+    isOpen: import('vue').WritableComputedRef<boolean, boolean>;
     onClose: () => void;
     onSave: () => void;
-}, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "save")[], "update:modelValue" | "save", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "save")[], "update:modelValue" | "save", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {
         type: BooleanConstructor;
         default: boolean;
@@ -52,15 +52,15 @@ declare const _default: import('vue').DefineComponent<{
         type: StringConstructor;
         default: string;
     };
-}>> & {
+}>> & Readonly<{
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     onSave?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     width: string;
     title: string;
     modelValue: boolean;
     cancelLabel: string;
     confirmLabel: string;
     confirmDisable: boolean;
-}, {}>;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

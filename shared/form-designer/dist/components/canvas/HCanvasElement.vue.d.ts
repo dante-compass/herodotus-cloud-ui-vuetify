@@ -1,6 +1,6 @@
 import { PropType } from 'vue';
 import { Element } from '../../declarations';
-declare const _default: import('vue').DefineComponent<{
+declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     element: {
         type: PropType<Element>;
         required: true;
@@ -9,12 +9,12 @@ declare const _default: import('vue').DefineComponent<{
         type: NumberConstructor;
         required: true;
     };
-}, {
-    isHover: import('vue').Ref<boolean>;
+}>, {
+    isHover: import('vue').Ref<boolean, boolean>;
     schemas: import('vue').ComputedRef<import('../../declarations').Schema[]>;
     isSelected: import('vue').ComputedRef<boolean>;
     onDelete: () => void;
-}, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     element: {
         type: PropType<Element>;
         required: true;
@@ -23,5 +23,13 @@ declare const _default: import('vue').DefineComponent<{
         type: NumberConstructor;
         required: true;
     };
-}>>, {}, {}>;
+}>> & Readonly<{}>, {}, {}, {
+    HRendererEngine: import('vue').DefineComponent<{
+        [x: string]: any;
+    }, () => any, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{
+        [x: string]: any;
+    }> & Readonly<{}>, {
+        schemas: import('../../declarations').Schema[];
+    }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

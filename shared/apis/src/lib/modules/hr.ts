@@ -8,7 +8,7 @@ import type {
   Pageable,
   Page,
   AllocatableRemove,
-  AllocatableDeploy
+  AllocatableDeploy,
 } from '/@/declarations';
 
 import { ContentTypeEnum } from '/@/enums';
@@ -89,7 +89,7 @@ class SysEmployeeService extends BaseService<SysEmployeeEntity> {
 
   public fetchAssignedByPage(
     params: Pageable,
-    others: Conditions = {}
+    others: Conditions = {},
   ): Promise<AxiosHttpResult<Page<SysEmployeeEntity>>> {
     const fullParams = Object.assign(params, others);
     return this.getConfig().getHttp().get<Page<SysEmployeeEntity>>(this.getAssignedAddress(), fullParams);
@@ -105,7 +105,7 @@ class SysEmployeeService extends BaseService<SysEmployeeEntity> {
 
   public authorizeUser(data: any): Promise<AxiosHttpResult<SysEmployeeEntity>> {
     return this.getConfig().getHttp().put(this.getBaseAddress(), data, {
-      contentType: ContentTypeEnum.URL_ENCODED
+      contentType: ContentTypeEnum.URL_ENCODED,
     });
   }
 }

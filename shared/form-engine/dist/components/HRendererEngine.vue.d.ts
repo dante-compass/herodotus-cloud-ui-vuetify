@@ -1,22 +1,9 @@
-import { PropType } from 'vue';
 import { Schema } from '../declarations';
 declare const _default: import('vue').DefineComponent<{
-    modelValue: {
-        type: (ObjectConstructor | ArrayConstructor | StringConstructor | NumberConstructor)[];
-    };
-    schemas: {
-        type: PropType<Array<Schema>>;
-        default: () => never[];
-    };
-}, () => any, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, import('vue').EmitsOptions, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
-    modelValue: {
-        type: (ObjectConstructor | ArrayConstructor | StringConstructor | NumberConstructor)[];
-    };
-    schemas: {
-        type: PropType<Array<Schema>>;
-        default: () => never[];
-    };
-}>>, {
+    [x: string]: any;
+}, () => any, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{
+    [x: string]: any;
+}> & Readonly<{}>, {
     schemas: Schema[];
-}, {}>;
+}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

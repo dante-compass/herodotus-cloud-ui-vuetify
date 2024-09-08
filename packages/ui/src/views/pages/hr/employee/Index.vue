@@ -56,7 +56,7 @@ import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
 import { HEmployeeCondition } from '/@/composables/hr';
-import { useDictionary } from '/@/composables/constants';
+import { useDictionaryStore } from '/@/composables/constants';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.SYS_EMPLOYEE,
@@ -72,7 +72,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, conditions, findItems, deleteItemById } =
       useTable<SysEmployeeEntity, SysEmployeeConditions>(api.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
 
-    const { display } = useDictionary();
+    const { display } = useDictionaryStore();
 
     const selected = ref([]);
     const rowKey: SysEmployeeProps = 'employeeId';

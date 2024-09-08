@@ -156,11 +156,10 @@ import type {
 } from '/@/lib/declarations';
 
 import { useEditFinish } from '/@/hooks';
-import { CONSTANTS } from '/@/composables/constants';
+import { CONSTANTS, HDictionarySelect, useDictionaryStore } from '/@/composables/constants';
 import { api, lodash } from '/@/lib/utils';
 import { useTableItem, useTable } from '/@/hooks';
 
-import { HDictionarySelect, useDictionary } from '/@/composables/constants';
 import { HAuthorizeLayout } from '/@/composables/authorize';
 
 export default defineComponent({
@@ -181,7 +180,7 @@ export default defineComponent({
       true,
     );
 
-    const { getDictionary } = useDictionary();
+    const { getDictionary } = useDictionaryStore();
 
     const columns: QTableColumnProps = [
       { name: 'scopeCode', field: 'scopeCode', align: 'center', label: '范围代码' },

@@ -9,7 +9,7 @@
             node-key="id"
             label-key="name"
             selected-color="primary"
-            v-model:selected="selectedValue" />
+            v-model:selected="selectedValue"></q-tree>
         </q-card-section>
       </q-card>
     </q-popup-proxy>
@@ -17,9 +17,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, Ref, PropType, computed } from 'vue';
+import { defineComponent, ref, watch, Ref, PropType, onMounted } from 'vue';
 
 import type { QTree, Tree } from '/@/lib/declarations';
+
+import { lodash } from '/@/lib/utils';
 
 export default defineComponent({
   name: 'HTreeField',
@@ -34,22 +36,44 @@ export default defineComponent({
   emits: ['update:selected'],
 
   setup(props, { emit }) {
-    const selectedValue = computed({
-      get: () => props.selected,
-      set: newValue => {
-        emit('update:selected', newValue);
-      },
-    });
-
+    const selectedValue = ref('');
     const treeRef = ref(null) as Ref<QTree | null>;
     const nodeName = ref('');
     const isPopup = ref(false);
+
+    const treeToArray = (tree: Array<Tree>) => {
+      let result: Array<Tree> = [];
+      for (const item of tree) {
+        const { children, ...i } = item;
+        if (children && children.length) {
+          result = result.concat(treeToArray(children));
+        }
+        result.push(i);
+      }
+      return result;
+    };
+
+    watch(
+      () => props.items,
+      newValue => {
+        if (newValue) {
+          if (!lodash.isEmpty(newValue)) {
+            const result = treeToArray(props.items);
+            const item = lodash.find(result, i => i.id == props.selected);
+            nodeName.value = item?.name as string;
+          }
+        }
+      },
+      {
+        immediate: true,
+      },
+    );
 
     watch(
       () => props.selected,
       newValue => {
         if (newValue) {
-          nodeName.value = props.value as string;
+          selectedValue.value = newValue;
         }
       },
       {
@@ -59,7 +83,8 @@ export default defineComponent({
 
     watch(
       () => selectedValue.value,
-      newValue => {
+      (newValue: string) => {
+        emit('update:selected', newValue);
         if (newValue) {
           const node = treeRef.value?.getNodeByKey(newValue);
           if (node) {
@@ -68,12 +93,10 @@ export default defineComponent({
           }
         }
       },
+      {
+        immediate: true,
+      },
     );
-
-    const onClear = () => {
-      nodeName.value = '';
-      selectedValue.value = '';
-    };
 
     return {
       selectedValue,

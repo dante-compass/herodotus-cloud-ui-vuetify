@@ -14,7 +14,7 @@ import { defineComponent, ref, computed, PropType, Ref, onMounted } from 'vue';
 import type { ObjectLockConfigurationDomain, QBaseDataItem } from '/@/lib/declarations';
 
 import { lodash } from '/@/lib/utils';
-import { useDictionary } from '/@/composables/constants';
+import { useDictionaryStore } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'HOssBucketRetention',
@@ -43,7 +43,7 @@ export default defineComponent({
       },
     });
 
-    const { getDictionary } = useDictionary();
+    const { getDictionary } = useDictionaryStore();
 
     const retentionModeOptions = ref([]) as Ref<Array<QBaseDataItem<number>>>;
     const retentionUnitOptions = ref([]) as Ref<Array<QBaseDataItem<number>>>;

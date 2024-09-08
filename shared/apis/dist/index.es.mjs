@@ -241,86 +241,6 @@ const _OAuth2DeviceService = class _OAuth2DeviceService extends BaseService {
 };
 __publicField(_OAuth2DeviceService, "instance");
 let OAuth2DeviceService = _OAuth2DeviceService;
-const _AssetServerService = class _AssetServerService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _AssetServerService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getCmdb() + "/asset/server";
-  }
-};
-__publicField(_AssetServerService, "instance");
-let AssetServerService = _AssetServerService;
-const _AssetApplicationService = class _AssetApplicationService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _AssetApplicationService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getCmdb() + "/asset/application";
-  }
-};
-__publicField(_AssetApplicationService, "instance");
-let AssetApplicationService = _AssetApplicationService;
-const _DatabaseAccountService = class _DatabaseAccountService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _DatabaseAccountService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getCmdb() + "/db/account";
-  }
-};
-__publicField(_DatabaseAccountService, "instance");
-let DatabaseAccountService = _DatabaseAccountService;
-const _DatabaseCatalogService = class _DatabaseCatalogService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _DatabaseCatalogService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getCmdb() + "/db/catalog";
-  }
-};
-__publicField(_DatabaseCatalogService, "instance");
-let DatabaseCatalogService = _DatabaseCatalogService;
-const _DatabaseInstanceService = class _DatabaseInstanceService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _DatabaseInstanceService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getCmdb() + "/db/instance";
-  }
-};
-__publicField(_DatabaseInstanceService, "instance");
-let DatabaseInstanceService = _DatabaseInstanceService;
 const _SysOrganizationService = class _SysOrganizationService extends BaseService {
   constructor(config) {
     super(config);
@@ -962,21 +882,6 @@ const _ApiResources = class _ApiResources {
   oauth2Compliance() {
     return OAuth2ComplianceService.getInstance(this.config);
   }
-  assetServer() {
-    return AssetServerService.getInstance(this.config);
-  }
-  assetApplication() {
-    return AssetApplicationService.getInstance(this.config);
-  }
-  dbAccount() {
-    return DatabaseAccountService.getInstance(this.config);
-  }
-  dbCatalog() {
-    return DatabaseCatalogService.getInstance(this.config);
-  }
-  dbInstance() {
-    return DatabaseInstanceService.getInstance(this.config);
-  }
   sysOrganization() {
     return SysOrganizationService.getInstance(this.config);
   }
@@ -1040,8 +945,6 @@ const createApi = (project, clientId, clientSecret, http, oidc) => {
 };
 export {
   ApplicationEnum,
-  AssetApplicationService,
-  AssetServerService,
   AuthorityTypeEnum,
   Axios,
   Base642 as Base64,
@@ -1049,9 +952,6 @@ export {
   CaptchaCategoryEnum,
   ConstantEnum,
   ContentTypeEnum2 as ContentTypeEnum,
-  DatabaseAccountService,
-  DatabaseCatalogService,
-  DatabaseInstanceService,
   ExtendedTaskService,
   GenderEnum,
   HttpConfig2 as HttpConfig,

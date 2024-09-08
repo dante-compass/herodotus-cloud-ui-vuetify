@@ -51,7 +51,7 @@ import type {
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { CONSTANTS, useDictionary } from '/@/composables/constants';
+import { CONSTANTS, useDictionaryStore } from '/@/composables/constants';
 import { lodash, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
@@ -92,7 +92,7 @@ export default defineComponent({
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
-    const { getDictionary } = useDictionary();
+    const { getDictionary } = useDictionaryStore();
 
     onMounted(() => {
       const dictionary = getDictionary('PermissionExpression');

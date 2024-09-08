@@ -1,23 +1,35 @@
 import { PropType } from 'vue';
 import { GroupEntity } from '../../declarations';
-declare const _default: import('vue').DefineComponent<{
+declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     modelValue: {
         type: PropType<Array<GroupEntity>>;
         default: () => Array<GroupEntity>;
     };
-}, {
-    tableRows: import('vue').Ref<GroupEntity[]>;
-    totalPages: import('vue').Ref<number>;
+}>, {
+    tableRows: import('vue').Ref<GroupEntity[], GroupEntity[]>;
+    totalPages: import('vue').Ref<number, number>;
     pagination: import('vue').Ref<{
         sortBy: string | null;
         descending: boolean;
         page: number;
         rowsPerPage: number;
         rowsNumber: number;
+    }, Required<{
+        sortBy?: string | null;
+        descending?: boolean;
+        page?: number;
+        rowsPerPage?: number;
+        rowsNumber?: number;
+    }> | {
+        sortBy: string | null;
+        descending: boolean;
+        page: number;
+        rowsPerPage: number;
+        rowsNumber: number;
     }>;
-    loading: import('vue').Ref<boolean>;
-    fieldValue: import('vue').Ref<string>;
-    selectedItems: import('vue').WritableComputedRef<GroupEntity[]>;
+    loading: import('vue').Ref<boolean, boolean>;
+    fieldValue: import('vue').Ref<string, string>;
+    selectedItems: import('vue').WritableComputedRef<GroupEntity[], GroupEntity[]>;
     rowKey: keyof GroupEntity;
     columns: {
         name: string;
@@ -37,12 +49,14 @@ declare const _default: import('vue').DefineComponent<{
     }[];
     findItems: import('../../declarations').QTableOnRequestProps;
     onClear: () => void;
-}, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {
         type: PropType<Array<GroupEntity>>;
         default: () => Array<GroupEntity>;
     };
-}>>, {
+}>> & Readonly<{}>, {
     modelValue: GroupEntity[];
-}, {}>;
+}, {}, {
+    HTextField: any;
+}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;
