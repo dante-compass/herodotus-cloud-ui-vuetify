@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, computed, reactive, watch } from 'vue';
-import type { ConstantDictionary } from '/@/lib/declarations';
+import type { Dictionary } from '/@/lib/declarations';
 
 import { CONSTANTS, useDictionaryStore } from '/@/composables/constants';
 
@@ -15,16 +15,16 @@ export default defineComponent({
   name: 'HStatusColumn',
 
   components: {
-    HDenseIconButton,
+    HDenseIconButton
   },
 
   props: {
-    type: { type: String, defalut: '0', required: true },
+    type: { type: String, defalut: '0', required: true }
   },
 
   setup(props) {
     const state = reactive({
-      items: [] as Array<ConstantDictionary>,
+      items: [] as Array<Dictionary>
     });
 
     const { getDictionary } = useDictionaryStore();
@@ -44,7 +44,7 @@ export default defineComponent({
       () => {
         initialize();
       },
-      { immediate: true },
+      { immediate: true }
     );
 
     const color = computed(() => {
@@ -66,8 +66,8 @@ export default defineComponent({
     return {
       color,
       icon,
-      tooltip,
+      tooltip
     };
-  },
+  }
 });
 </script>

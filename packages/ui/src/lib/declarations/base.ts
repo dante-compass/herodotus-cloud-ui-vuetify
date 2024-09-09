@@ -23,7 +23,7 @@ export type {
   QTableOnRequestProps,
   QTableOnRequestParameter,
   QUploaderInfo,
-  QNotifyPosition,
+  QNotifyPosition
 } from '@herodotus/core';
 export type {
   BaseEntity,
@@ -36,7 +36,7 @@ export type {
   BehaviorCaptchaCategory,
   CaptchaResource,
   CaptchaData,
-  ConstantDictionary,
+  Dictionary,
   SignInErrorStatus,
   SysPermissionEntity,
   SysPermissionConditions,
@@ -114,7 +114,7 @@ export type {
   IotProductProps,
   IotDeviceEntity,
   IotDeviceConditions,
-  IotDeviceProps,
+  IotDeviceProps
 } from '@herodotus/apis';
 
 export type {
@@ -128,7 +128,7 @@ export type {
   CreateMultipartUploadBusiness,
   ObjectSettingBusiness,
   ObjectLockConfigurationDomain,
-  DeletedObjectDomain,
+  DeletedObjectDomain
 } from '@herodotus/oss-apis';
 
 export type {
@@ -142,7 +142,7 @@ export type {
   FormDesignerResources,
   ProcessSpecificsEntity,
   ProcessSpecificsConditions,
-  ProcessCommentsEntity,
+  ProcessCommentsEntity
 } from '@herodotus/form-apis';
 
 export type {
@@ -169,7 +169,7 @@ export type {
   TaskEntity,
   TaskQueryParams,
   TaskSortBy,
-  Variables,
+  Variables
 } from '@herodotus/bpmn-apis';
 
 export type { BpmnDesignerResources } from '@herodotus/bpmn-designer';

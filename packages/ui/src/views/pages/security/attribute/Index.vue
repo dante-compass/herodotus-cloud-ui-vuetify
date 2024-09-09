@@ -44,11 +44,11 @@
 import { defineComponent, ref, Ref, onMounted } from 'vue';
 
 import type {
-  ConstantDictionary,
+  Dictionary,
   SysAttributeEntity,
   SysAttributeConditions,
   SysAttributeProps,
-  QTableColumnProps,
+  QTableColumnProps
 } from '/@/lib/declarations';
 
 import { CONSTANTS, useDictionaryStore } from '/@/composables/constants';
@@ -63,7 +63,7 @@ export default defineComponent({
   components: {
     HEditButton,
     HTable,
-    HSwaggerColumn,
+    HSwaggerColumn
   },
 
   setup() {
@@ -74,14 +74,14 @@ export default defineComponent({
         false,
         {
           direction: 'ASC',
-          properties: ['url'],
-        },
+          properties: ['url']
+        }
       );
 
     const rowKey: SysAttributeProps = 'attributeId';
 
     const selected = ref([]);
-    const index = ref({}) as Ref<Record<string, ConstantDictionary>>;
+    const index = ref({}) as Ref<Record<string, Dictionary>>;
 
     const columns: QTableColumnProps = [
       { name: 'requestMethod', field: 'requestMethod', align: 'center', label: '权限接口' },
@@ -89,7 +89,7 @@ export default defineComponent({
       { name: 'webExpression', field: 'webExpression', align: 'center', label: '特定表达式' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
     ];
 
     const { getDictionary } = useDictionaryStore();
@@ -121,8 +121,8 @@ export default defineComponent({
       toAuthorize,
       deleteItemById,
       findItems,
-      getText,
+      getText
     };
-  },
+  }
 });
 </script>

@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, computed, reactive, toRefs, onBeforeMount } from 'vue';
 
-import type { ConstantDictionary } from '/@/lib/declarations';
+import type { Dictionary } from '/@/lib/declarations';
 
 import { useDictionaryStore } from '../store';
 
@@ -29,14 +29,14 @@ export default defineComponent({
     modelValue: { type: [Number, String, Array, Object] },
     dictionary: { type: String, required: true },
     optionLabel: { type: String, default: 'label' },
-    optionValue: { type: String, default: 'value' },
+    optionValue: { type: String, default: 'value' }
   },
 
   emits: ['update:modelValue'],
 
   setup(props, { emit }) {
     const state = reactive({
-      items: [] as Array<ConstantDictionary>,
+      items: [] as Array<Dictionary>
     });
 
     const selectedValue = computed({
@@ -44,7 +44,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      },
+      }
     });
 
     const { getDictionary } = useDictionaryStore();
@@ -59,8 +59,8 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
-      selectedValue,
+      selectedValue
     };
-  },
+  }
 });
 </script>

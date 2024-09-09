@@ -152,7 +152,7 @@ import type {
   OAuth2ScopeEntity,
   OAuth2ScopeConditions,
   QTableColumnProps,
-  ConstantDictionary,
+  Dictionary
 } from '/@/lib/declarations';
 
 import { useEditFinish } from '/@/hooks';
@@ -167,17 +167,17 @@ export default defineComponent({
 
   components: {
     HAuthorizeLayout,
-    HDictionarySelect,
+    HDictionarySelect
   },
 
   setup() {
     const { editedItem, isEdit, title, overlay, saveOrUpdate } = useTableItem<OAuth2ApplicationEntity>(
-      api.oauth2Application(),
+      api.oauth2Application()
     );
     const { tableRows, pagination, loading } = useTable<OAuth2ScopeEntity, OAuth2ScopeConditions>(
       api.oauth2Scope(),
       CONSTANTS.ComponentName.OAUTH2_SCOPE,
-      true,
+      true
     );
 
     const { getDictionary } = useDictionaryStore();
@@ -185,7 +185,7 @@ export default defineComponent({
     const columns: QTableColumnProps = [
       { name: 'scopeCode', field: 'scopeCode', align: 'center', label: '范围代码' },
       { name: 'scopeName', field: 'scopeName', align: 'center', label: '范围名称' },
-      { name: 'description', field: 'description', align: 'center', label: '说明' },
+      { name: 'description', field: 'description', align: 'center', label: '说明' }
     ];
 
     const { onFinish } = useEditFinish();
@@ -204,18 +204,18 @@ export default defineComponent({
     const rules = {
       editedItem: {
         applicationName: {
-          required: helpers.withMessage('应用名称不能为空', required),
+          required: helpers.withMessage('应用名称不能为空', required)
         },
         authorizationGrantTypes: {
-          required: helpers.withMessage('认证模式不能为空', required),
+          required: helpers.withMessage('认证模式不能为空', required)
         },
         clientAuthenticationMethods: {
-          required: helpers.withMessage('客户端验证模式不能为空', required),
+          required: helpers.withMessage('客户端验证模式不能为空', required)
         },
         redirectUris: {
-          isRedirectUrisRequired: helpers.withMessage('授权码模式下 Redirect URI 不能为空', isRedirectUrisRequired),
-        },
-      },
+          isRedirectUrisRequired: helpers.withMessage('授权码模式下 Redirect URI 不能为空', isRedirectUrisRequired)
+        }
+      }
     };
 
     const v = useVuelidate(rules, { editedItem }, { $lazy: true });
@@ -229,7 +229,7 @@ export default defineComponent({
     };
 
     const state = reactive({
-      items: [] as Array<ConstantDictionary>,
+      items: [] as Array<Dictionary>
     });
 
     const initialize = () => {
@@ -290,8 +290,8 @@ export default defineComponent({
       onFinish,
       v,
       onSave,
-      authenticationSigningAlgorithmItem,
+      authenticationSigningAlgorithmItem
     };
-  },
+  }
 });
 </script>
