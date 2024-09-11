@@ -503,7 +503,7 @@ const _SysDictionaryService = class _SysDictionaryService extends BaseService {
     return this.getConfig().getHttp().get(this.getCategoryPath(category));
   }
   fetchCategories(categories) {
-    return this.getConfig().getHttp().get(this.getItemsAddress(), categories);
+    return this.getConfig().getHttp().get(this.getItemsAddress(), { categories });
   }
 };
 __publicField(_SysDictionaryService, "instance");

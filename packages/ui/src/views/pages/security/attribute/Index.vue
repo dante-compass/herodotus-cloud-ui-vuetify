@@ -92,12 +92,11 @@ export default defineComponent({
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
-    const { getOptions } = useDictionary();
+    const { options } = useDictionary('PermissionExpression');
 
     onMounted(() => {
-      const dictionary = getOptions('PermissionExpression');
-      if (dictionary) {
-        dictionary.forEach(element => {
+      if (options.value) {
+        options.value.forEach(element => {
           index.value[element.ordinal] = element;
         });
       }

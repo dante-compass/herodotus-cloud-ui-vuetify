@@ -33,7 +33,7 @@ export const useDictionaryStore = defineStore('Dictionary', {
     getNotExist(state) {
       return (category: string, ...others: string[]): Array<string> => {
         const categories = lodash.concat(others, category);
-        return lodash.difference(Object.keys(state.dictionaries), categories);
+        return lodash.difference(categories, Object.keys(state.dictionaries));
       };
     },
   },
@@ -101,8 +101,11 @@ export const useDictionaryStore = defineStore('Dictionary', {
     },
 
     fetchCategory(category: string, ...others: string[]): Promise<Record<string, Array<Dictionary>>> {
+      console.log('--fetchCategory---');
       return new Promise((resolve, reject) => {
         const keys = this.getNotExist(category, ...others);
+        console.log('--keys---', keys);
+        console.log('-----', keys.join(','));
         if (lodash.isEmpty(keys)) {
           resolve(this.dictionaries);
         } else {

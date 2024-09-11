@@ -60,7 +60,7 @@ export default defineComponent({
     const { editedItem, operation, title } = useBaseTableItem<BucketDomain>();
     const { humanStorageSize } = format;
 
-    const { getOption } = useDictionary();
+    const { getDictionaryItem } = useDictionary('RetentionUnit', 'RetentionMode');
 
     const bucketSetting = ref({}) as Ref<BucketSettingBusiness>;
     const bucketName = ref('');
@@ -87,13 +87,13 @@ export default defineComponent({
 
     const retentionValidity = computed(() => {
       const objectLock = bucketSetting.value.objectLock;
-      const retentionDuration = getOption('RetentionUnit', String(objectLock.unit));
+      const retentionDuration = getDictionaryItem('RetentionUnit', String(objectLock.unit));
       return objectLock.validity + ' ' + retentionDuration.label;
     });
 
     const retentionMode = computed(() => {
       const objectLock = bucketSetting.value.objectLock;
-      const retentionDuration = getOption('RetentionMode', String(objectLock.mode));
+      const retentionDuration = getDictionaryItem('RetentionMode', String(objectLock.mode));
       return retentionDuration.label;
     });
 

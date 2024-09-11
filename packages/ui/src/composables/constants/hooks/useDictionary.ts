@@ -24,8 +24,8 @@ export default function useDictionary(category: string, ...others: string[]) {
     });
   });
 
-  const getDictionary = () => {
-    return dictionaryStore.getDictionary(category);
+  const getDictionary = (item: string = category) => {
+    return dictionaryStore.getDictionary(item);
   };
 
   const getDictionaryItem = (key: string, value: string) => {

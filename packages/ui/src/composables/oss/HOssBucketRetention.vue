@@ -43,13 +43,13 @@ export default defineComponent({
       },
     });
 
-    const { getOptions } = useDictionary();
+    const { getDictionary } = useDictionary('RetentionMode', 'RetentionUnit');
 
     const retentionModeOptions = ref([]) as Ref<Array<QBaseDataItem<number>>>;
     const retentionUnitOptions = ref([]) as Ref<Array<QBaseDataItem<number>>>;
 
     const initRetentionModeOptions = () => {
-      const retentionModes = getOptions('RetentionMode');
+      const retentionModes = getDictionary('RetentionMode');
       if (!lodash.isEmpty(retentionModes)) {
         retentionModes.map(item => {
           retentionModeOptions.value.push({ label: item.label, value: Number(item.value) });
@@ -57,7 +57,7 @@ export default defineComponent({
       }
     };
     const initRetentionUnitOptions = () => {
-      const retentionUnits = getOptions('RetentionUnit');
+      const retentionUnits = getDictionary('RetentionUnit');
       if (!lodash.isEmpty(retentionUnits)) {
         retentionUnits.map(item => {
           retentionUnitOptions.value.push({ label: item.label, value: Number(item.value) });
