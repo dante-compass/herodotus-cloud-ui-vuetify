@@ -23,7 +23,7 @@ export type {
   QTableOnRequestProps,
   QTableOnRequestParameter,
   QUploaderInfo,
-  QNotifyPosition
+  QNotifyPosition,
 } from '@herodotus/core';
 export type {
   BaseEntity,
@@ -106,15 +106,6 @@ export type {
   SysTenantDataSourceEntity,
   SysTenantDataSourceConditions,
   SysTenantDataSourceProps,
-  IotProductCategoryEntity,
-  IotProductCategoryConditions,
-  IotProductCategoryProps,
-  IotProductEntity,
-  IotProductConditions,
-  IotProductProps,
-  IotDeviceEntity,
-  IotDeviceConditions,
-  IotDeviceProps
 } from '@herodotus/apis';
 
 export type {
@@ -128,7 +119,7 @@ export type {
   CreateMultipartUploadBusiness,
   ObjectSettingBusiness,
   ObjectLockConfigurationDomain,
-  DeletedObjectDomain
+  DeletedObjectDomain,
 } from '@herodotus/oss-apis';
 
 export type {
@@ -142,7 +133,7 @@ export type {
   FormDesignerResources,
   ProcessSpecificsEntity,
   ProcessSpecificsConditions,
-  ProcessCommentsEntity
+  ProcessCommentsEntity,
 } from '@herodotus/form-apis';
 
 export type {
@@ -169,13 +160,13 @@ export type {
   TaskEntity,
   TaskQueryParams,
   TaskSortBy,
-  Variables
+  Variables,
 } from '@herodotus/bpmn-apis';
 
 export type { BpmnDesignerResources } from '@herodotus/bpmn-designer';
 
 export type { EChartsOption, EChartsCoreOption } from 'echarts';
 
-export type { QTableProps, QTree, QUploaderFactoryObject } from 'quasar';
+export type { QTableProps, QTree, QUploaderFactoryObject, QSelect } from 'quasar';
 
 export type { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';

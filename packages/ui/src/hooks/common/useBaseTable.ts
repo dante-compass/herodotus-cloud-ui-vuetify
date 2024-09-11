@@ -61,9 +61,14 @@ export default function useBaseTableItems<E extends Entity, C extends Conditions
     addRoutePushParam(componentName, OperationEnum.CREATE);
   };
 
-  const toAuthorize = (item: E, additional: Record<string, any> = {}, withSuffix = true) => {
+  const toAuthorize = (item: E, additional: Record<string, unknown> = {}, withSuffix = true) => {
     const componentName = appendSuffix(name, 'Authorize', withSuffix);
     addRoutePushParam(componentName, OperationEnum.AUTHORIZE, item, additional);
+  };
+
+  const toInfo = (item: E, additional: Record<string, unknown> = {}, withSuffix = true) => {
+    const componentName = appendSuffix(name, 'Info', withSuffix);
+    addRoutePushParam(componentName, OperationEnum.INFO, item, additional);
   };
 
   /**
@@ -116,5 +121,6 @@ export default function useBaseTableItems<E extends Entity, C extends Conditions
     toAuthorize,
     toCreate,
     toEdit,
+    toInfo,
   };
 }

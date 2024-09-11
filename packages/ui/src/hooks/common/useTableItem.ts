@@ -2,11 +2,8 @@ import { computed } from 'vue';
 
 import type { Entity, HttpResult } from '/@/lib/declarations';
 
-import { BaseService } from '/@/lib/definitions';
-
-import { OperationEnum } from '/@/lib/definitions';
+import { BaseService, OperationEnum } from '/@/lib/definitions';
 import { toast } from '/@/lib/utils';
-
 import useBaseTableItem from './useBaseTableItem';
 
 export default function useTableItem<E extends Entity>(baseService: BaseService<E>) {

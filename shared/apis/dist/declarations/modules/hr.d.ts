@@ -1,4 +1,4 @@
-import { BaseSysEntity, Conditions, Entity, EmptyObject } from '../base';
+import { BaseSysEntity, Conditions, Entity } from '../base';
 export interface SysDepartmentEntity extends BaseSysEntity {
     departmentId: string;
     departmentName: string;
@@ -24,8 +24,8 @@ export interface SysEmployeeEntity extends BaseSysEntity {
     a4BizEmpId: string;
     avatar: string;
     birthday: string;
-    gender: number | EmptyObject;
-    identity: number | EmptyObject;
+    gender: string;
+    identity: string;
     departments: Set<SysDepartmentEntity>;
 }
 export interface SysOrganizationEntity extends BaseSysEntity {

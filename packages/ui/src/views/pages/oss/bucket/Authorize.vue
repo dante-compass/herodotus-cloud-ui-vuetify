@@ -45,7 +45,7 @@ import { useBaseTableItem } from '/@/hooks';
 
 import { HSimpleCenterFormLayout } from '/@/components';
 import { HOssTags, HOssBucketRetention } from '/@/composables/oss';
-import { useDictionaryStore } from '/@/composables/constants';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'OssBucketContent',
@@ -60,7 +60,7 @@ export default defineComponent({
     const { editedItem, operation, title } = useBaseTableItem<BucketDomain>();
     const { humanStorageSize } = format;
 
-    const { getDictionaryItem } = useDictionaryStore();
+    const { getOption } = useDictionary();
 
     const bucketSetting = ref({}) as Ref<BucketSettingBusiness>;
     const bucketName = ref('');
@@ -87,13 +87,13 @@ export default defineComponent({
 
     const retentionValidity = computed(() => {
       const objectLock = bucketSetting.value.objectLock;
-      const retentionDuration = getDictionaryItem('RetentionUnit', objectLock.unit);
+      const retentionDuration = getOption('RetentionUnit', String(objectLock.unit));
       return objectLock.validity + ' ' + retentionDuration.label;
     });
 
     const retentionMode = computed(() => {
       const objectLock = bucketSetting.value.objectLock;
-      const retentionDuration = getDictionaryItem('RetentionMode', objectLock.mode);
+      const retentionDuration = getOption('RetentionMode', String(objectLock.mode));
       return retentionDuration.label;
     });
 

@@ -143,7 +143,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onBeforeMount, reactive } from 'vue';
+import { defineComponent, computed, onMounted, nextTick } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
@@ -152,11 +152,11 @@ import type {
   OAuth2ScopeEntity,
   OAuth2ScopeConditions,
   QTableColumnProps,
-  Dictionary
+  Dictionary,
 } from '/@/lib/declarations';
 
 import { useEditFinish } from '/@/hooks';
-import { CONSTANTS, HDictionarySelect, useDictionaryStore } from '/@/composables/constants';
+import { CONSTANTS, HDictionarySelect, useDictionary } from '/@/composables/constants';
 import { api, lodash } from '/@/lib/utils';
 import { useTableItem, useTable } from '/@/hooks';
 
@@ -167,25 +167,25 @@ export default defineComponent({
 
   components: {
     HAuthorizeLayout,
-    HDictionarySelect
+    HDictionarySelect,
   },
 
   setup() {
     const { editedItem, isEdit, title, overlay, saveOrUpdate } = useTableItem<OAuth2ApplicationEntity>(
-      api.oauth2Application()
+      api.oauth2Application(),
     );
     const { tableRows, pagination, loading } = useTable<OAuth2ScopeEntity, OAuth2ScopeConditions>(
       api.oauth2Scope(),
       CONSTANTS.ComponentName.OAUTH2_SCOPE,
-      true
+      true,
     );
 
-    const { getDictionary } = useDictionaryStore();
+    const { options } = useDictionary('AllJwsAlgorithm');
 
     const columns: QTableColumnProps = [
       { name: 'scopeCode', field: 'scopeCode', align: 'center', label: '范围代码' },
       { name: 'scopeName', field: 'scopeName', align: 'center', label: '范围名称' },
-      { name: 'description', field: 'description', align: 'center', label: '说明' }
+      { name: 'description', field: 'description', align: 'center', label: '说明' },
     ];
 
     const { onFinish } = useEditFinish();
@@ -204,18 +204,18 @@ export default defineComponent({
     const rules = {
       editedItem: {
         applicationName: {
-          required: helpers.withMessage('应用名称不能为空', required)
+          required: helpers.withMessage('应用名称不能为空', required),
         },
         authorizationGrantTypes: {
-          required: helpers.withMessage('认证模式不能为空', required)
+          required: helpers.withMessage('认证模式不能为空', required),
         },
         clientAuthenticationMethods: {
-          required: helpers.withMessage('客户端验证模式不能为空', required)
+          required: helpers.withMessage('客户端验证模式不能为空', required),
         },
         redirectUris: {
-          isRedirectUrisRequired: helpers.withMessage('授权码模式下 Redirect URI 不能为空', isRedirectUrisRequired)
-        }
-      }
+          isRedirectUrisRequired: helpers.withMessage('授权码模式下 Redirect URI 不能为空', isRedirectUrisRequired),
+        },
+      },
     };
 
     const v = useVuelidate(rules, { editedItem }, { $lazy: true });
@@ -226,14 +226,6 @@ export default defineComponent({
           saveOrUpdate();
         }
       });
-    };
-
-    const state = reactive({
-      items: [] as Array<Dictionary>
-    });
-
-    const initialize = () => {
-      state.items = getDictionary('AllJwsAlgorithm');
     };
 
     const includePrivateKeyJwt = () => {
@@ -263,18 +255,14 @@ export default defineComponent({
 
     const authenticationSigningAlgorithmItem = computed(() => {
       if (onlyHasPrivateKeyJwt()) {
-        return state.items.filter(item => item.ordinal < 9);
+        return options.value.filter(item => item.ordinal < 9);
       }
 
       if (onlyHasClientSecretJwt()) {
-        return state.items.filter(item => item.ordinal < 9);
+        return options.value.filter(item => item.ordinal < 9);
       }
 
-      return state.items;
-    });
-
-    onBeforeMount(() => {
-      initialize();
+      return options.value;
     });
 
     return {
@@ -290,8 +278,8 @@ export default defineComponent({
       onFinish,
       v,
       onSave,
-      authenticationSigningAlgorithmItem
+      authenticationSigningAlgorithmItem,
     };
-  }
+  },
 });
 </script>

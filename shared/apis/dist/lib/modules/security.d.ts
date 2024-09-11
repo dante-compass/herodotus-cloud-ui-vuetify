@@ -60,6 +60,7 @@ declare class SysDictionaryService extends BaseService<SysDictionaryEntity> {
     getItemsAddress(): string;
     getCategoryPath(category: string): string;
     fetchByCategory(category: string): Promise<AxiosHttpResult<Array<SysDictionaryEntity>>>;
+    fetchCategories(categories: string): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>>;
 }
 declare class SocialBindingService extends BaseService<AccessSourceEntity> {
     private static instance;

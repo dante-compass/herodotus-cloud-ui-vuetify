@@ -11,7 +11,7 @@ import type {
   Sort,
   Tree,
   BaseEntity,
-  BaseSysEntity
+  BaseSysEntity,
 } from '@herodotus/core';
 
 import { ApplicationEnum } from '/@/enums';
@@ -42,5 +42,5 @@ export type {
   Sort,
   Tree,
   BaseEntity,
-  BaseSysEntity
+  BaseSysEntity,
 };

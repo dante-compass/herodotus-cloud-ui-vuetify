@@ -26,8 +26,8 @@ export interface SysEmployeeEntity extends BaseSysEntity {
   a4BizEmpId: string;
   avatar: string;
   birthday: string;
-  gender: number | EmptyObject;
-  identity: number | EmptyObject;
+  gender: string;
+  identity: string;
   departments: Set<SysDepartmentEntity>;
 }
 

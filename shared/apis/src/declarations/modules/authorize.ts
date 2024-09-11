@@ -12,15 +12,15 @@ export interface BaseRegisteredClientEntity extends BaseSysEntity {
   requireProofKey: boolean;
   requireAuthorizationConsent: boolean;
   jwkSetUrl: string;
-  authenticationSigningAlgorithm: number | EmptyObject;
-  accessTokenFormat: number | EmptyObject;
+  authenticationSigningAlgorithm: string;
+  accessTokenFormat: string;
   accessTokenValidity: string;
   refreshTokenValidity: string;
   authorizationCodeValidity: string;
   deviceCodeValidity: string;
   reuseRefreshTokens: boolean;
-  signature: number | EmptyObject;
-  idTokenSignatureAlgorithm: number | EmptyObject;
+  signature: string;
+  idTokenSignatureAlgorithm: string;
   scopes: Array<OAuth2ScopeEntity>;
 }
 
@@ -30,7 +30,7 @@ export interface OAuth2ApplicationEntity extends BaseRegisteredClientEntity {
   abbreviation: string;
   logo: string;
   homepage: string;
-  applicationType: number | EmptyObject;
+  applicationType: string;
 }
 
 export interface OAuth2PermissionEntity extends BaseSysEntity {

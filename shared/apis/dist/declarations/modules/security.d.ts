@@ -1,4 +1,4 @@
-import { BaseSysEntity, Conditions, EmptyObject, Entity } from '../base';
+import { BaseSysEntity, Conditions, Entity } from '../base';
 import { SysEmployeeEntity } from './hr';
 export interface SysPermissionEntity extends BaseSysEntity {
     permissionId: string;
@@ -33,7 +33,7 @@ export interface SysAttributeEntity extends BaseSysEntity {
 }
 export interface SysDefaultRoleEntity extends BaseSysEntity {
     defaultId: string;
-    scene: number | EmptyObject;
+    scene: string;
     role: SysRoleEntity;
 }
 export interface SysElementEntity extends BaseSysEntity {

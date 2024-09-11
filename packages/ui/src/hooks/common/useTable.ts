@@ -7,8 +7,9 @@ import type {
   Conditions,
   HttpResult,
   QTableOnRequestProps,
-  QTableOnRequestParameter
+  QTableOnRequestParameter,
 } from '/@/lib/declarations';
+
 import { BaseService } from '/@/lib/definitions';
 import { toast, standardDeleteNotify } from '/@/lib/utils';
 import useBaseTable from './useBaseTable';
@@ -18,7 +19,7 @@ export default function <E extends Entity, C extends Conditions>(
   name: string,
   isFetchAll = false,
   sort = {} as Sort,
-  loadOnMount = true
+  loadOnMount = true,
 ) {
   const {
     loading,
@@ -31,7 +32,8 @@ export default function <E extends Entity, C extends Conditions>(
     hideLoading,
     toCreate,
     toEdit,
-    toAuthorize
+    toAuthorize,
+    toInfo,
   } = useBaseTable<E, C>(name, 'updateTime', isFetchAll);
 
   const findItems: QTableOnRequestProps = (props: QTableOnRequestParameter) => {
@@ -48,7 +50,7 @@ export default function <E extends Entity, C extends Conditions>(
     baseService
       .fetchAll({
         ...sort,
-        ...conditions.value
+        ...conditions.value,
       })
       .then(result => {
         const data = result.data as Array<E>;
@@ -56,7 +58,7 @@ export default function <E extends Entity, C extends Conditions>(
         pagination.value.rowsNumber = data.length;
         hideLoading();
       })
-      .catch(() => {
+      .catch(error => {
         hideLoading();
       });
   };
@@ -68,9 +70,9 @@ export default function <E extends Entity, C extends Conditions>(
         {
           pageNumber: pageNumber - 1,
           pageSize: pageSize,
-          ...sort
+          ...sort,
         },
-        others
+        others,
       )
       .then(result => {
         const data = result.data as Page<E>;
@@ -129,7 +131,7 @@ export default function <E extends Entity, C extends Conditions>(
       if (newValue && !isFetchAll) {
         findItemsByPage(newValue, pagination.value.rowsPerPage, conditions.value);
       }
-    }
+    },
   );
 
   watch(
@@ -141,7 +143,7 @@ export default function <E extends Entity, C extends Conditions>(
         else findItemsByPage(pagination.value.page, pagination.value.rowsPerPage, newValue);
       }
     },
-    { deep: true }
+    { deep: true },
   );
 
   return {
@@ -154,8 +156,9 @@ export default function <E extends Entity, C extends Conditions>(
     toCreate,
     toEdit,
     toAuthorize,
+    toInfo,
     findItemsByPage,
     deleteItemById,
-    refresh
+    refresh,
   };
 }

@@ -20,13 +20,13 @@
 
       <template #body-cell-gender="props">
         <q-td key="gender" :props="props">
-          {{ display('Gender', props.row) }}
+          {{ getDictionaryItemDisplay('Gender', props.row.gender) }}
         </q-td>
       </template>
 
       <template #body-cell-identity="props">
         <q-td key="identity" :props="props">
-          {{ display('Identity', props.row) }}
+          {{ getDictionaryItemDisplay('Identity', props.row.identity) }}
         </q-td>
       </template>
 
@@ -56,7 +56,7 @@ import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '/@/components';
 import { HEmployeeCondition } from '/@/composables/hr';
-import { useDictionaryStore } from '/@/composables/constants';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.SYS_EMPLOYEE,
@@ -72,7 +72,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, conditions, findItems, deleteItemById } =
       useTable<SysEmployeeEntity, SysEmployeeConditions>(api.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
 
-    const { display } = useDictionaryStore();
+    const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity', 'DataItemStatus');
 
     const selected = ref([]);
     const rowKey: SysEmployeeProps = 'employeeId';
@@ -100,7 +100,7 @@ export default defineComponent({
       deleteItemById,
       conditions,
       findItems,
-      display,
+      getDictionaryItemDisplay,
     };
   },
 });

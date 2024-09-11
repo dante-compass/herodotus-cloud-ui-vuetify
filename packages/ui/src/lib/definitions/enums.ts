@@ -5,6 +5,7 @@ export enum OperationEnum {
   CREATE = 'create',
   EDIT = 'edit',
   AUTHORIZE = 'authorize',
+  INFO = 'info',
   ALLOCATABLE = 'allocatable',
 }
 

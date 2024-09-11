@@ -3,86 +3,125 @@ import { defineStore } from 'pinia';
 import type { Dictionary, SysDictionaryEntity } from '/@/lib/declarations';
 
 import { lodash, api } from '/@/lib/utils';
-import { useAuthenticationStore } from '/@/stores';
 
 export const useDictionaryStore = defineStore('Dictionary', {
   state: () => ({
-    dictionaries: {} as Record<string, Dictionary[]>
+    dictionaries: {} as Record<string, Dictionary[]>,
   }),
 
+  getters: {
+    getDictionary(state) {
+      return (key: string): Dictionary[] => (key ? state.dictionaries[key] : []);
+    },
+
+    getDictionaryItem(state) {
+      return (key: string, value: string): Dictionary => {
+        const items: Dictionary[] = state.dictionaries[key];
+        return items ? items[Number(value)] : ({} as Dictionary);
+      };
+    },
+    getDictionaryItemDisplay(state) {
+      return (key: string, value: string): string => {
+        const items: Dictionary[] = state.dictionaries[key];
+        if (items) {
+          const item = items[Number(value)];
+          return item ? item.label : value;
+        }
+        return '';
+      };
+    },
+    getNotExist(state) {
+      return (category: string, ...others: string[]): Array<string> => {
+        const categories = lodash.concat(others, category);
+        return lodash.difference(Object.keys(state.dictionaries), categories);
+      };
+    },
+  },
+
   actions: {
-    convertItem(item: SysDictionaryEntity): Dictionary {
+    toDictionary(item: SysDictionaryEntity): Dictionary {
       const result: Dictionary = {
         ordinal: item.ordinal,
         name: item.name,
         value: item.value,
-        label: item.label
+        label: item.label,
       };
       return result;
     },
 
-    convertItems(items: Array<SysDictionaryEntity>): Array<Dictionary> {
+    convertCategory(items: Array<SysDictionaryEntity>): Array<Dictionary> {
       if (items) {
         return lodash.orderBy(
-          items.map(item => this.convertItem(item)),
+          items.map(item => this.toDictionary(item)),
           ['ordinal'],
-          ['asc']
+          ['asc'],
         );
       } else {
         return [];
       }
     },
 
-    async fetchFromServer(category: string): Promise<void> {
-      const authentication = useAuthenticationStore();
-
-      if (authentication.token) {
-        await api
-          .sysDictionary()
-          .fetchByCategory(category)
-          .then(response => {
-            const data = response.data;
-            this.dictionaries[category] = data;
-          });
-      }
+    convertCategories(categories: Record<string, Array<SysDictionaryEntity>>): Record<string, Array<Dictionary>> {
+      const result: Record<string, Array<Dictionary>> = {};
+      Object.keys(categories).map(key => {
+        const category = this.convertCategory(categories[key]);
+        result[key] = category;
+      });
+      return result;
     },
 
-    getFromClient(category: string): Array<Dictionary> {
-      return this.dictionaries[category];
+    store(category: string, data: Array<Dictionary>): void {
+      this.dictionaries[category] = data;
     },
 
-    getFromServer(category: string): Array<Dictionary> {
-      this.fetchFromServer(category);
-      return this.getFromClient(category);
+    storeAll(categories: Record<string, Array<Dictionary>>): void {
+      lodash.assign(this.dictionaries, categories);
     },
 
-    getDictionary(category: string): Array<Dictionary> {
-      let dictionary = this.getFromClient(category);
-      if (lodash.isEmpty(dictionary)) {
-        return this.getFromServer(category);
-      } else {
-        return dictionary;
-      }
+    fetchByCategory(category: string): Promise<Array<Dictionary>> {
+      return new Promise((resolve, reject) => {
+        const items = this.getDictionary(category);
+        if (!lodash.isEmpty(items)) {
+          reject(items);
+        } else {
+          api
+            .sysDictionary()
+            .fetchByCategory(category)
+            .then(response => {
+              const data = response.data;
+              const items = this.convertCategory(data);
+              this.store(category, items);
+              resolve(items);
+            })
+            .catch(error => {
+              reject(error);
+            });
+        }
+      });
     },
 
-    getDictionaryItem(category: string, value: string): Dictionary {
-      const dictionary = this.getDictionary(category);
-      if (dictionary) {
-        return dictionary[Number(value)];
-      } else {
-        return {} as Dictionary;
-      }
+    fetchCategory(category: string, ...others: string[]): Promise<Record<string, Array<Dictionary>>> {
+      return new Promise((resolve, reject) => {
+        const keys = this.getNotExist(category, ...others);
+        if (lodash.isEmpty(keys)) {
+          resolve(this.dictionaries);
+        } else {
+          api
+            .sysDictionary()
+            .fetchCategories(keys.join(','))
+            .then(response => {
+              const data = response.data;
+              const items = this.convertCategories(data);
+              this.storeAll(items);
+              resolve(items);
+            })
+            .catch(error => {
+              reject(error);
+            });
+        }
+      });
     },
-
-    display(category: string, value: string) {
-      const dictionary = this.getDictionaryItem(category, value);
-      if (!lodash.isEmpty(dictionary)) {
-        return dictionary.label;
-      } else {
-        return value;
-      }
-    }
   },
 
-  persist: true
+  persist: true,
 });

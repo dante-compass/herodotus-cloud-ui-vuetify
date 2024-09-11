@@ -220,6 +220,12 @@ class SysDictionaryService extends BaseService<SysDictionaryEntity> {
   public fetchByCategory(category: string): Promise<AxiosHttpResult<Array<SysDictionaryEntity>>> {
     return this.getConfig().getHttp().get<Array<SysDictionaryEntity>, string>(this.getCategoryPath(category));
   }
+
+  public fetchCategories(categories: string): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>> {
+    return this.getConfig()
+      .getHttp()
+      .get<Record<string, Array<SysDictionaryEntity>>, string>(this.getItemsAddress(), categories);
+  }
 }
 
 class SocialBindingService extends BaseService<AccessSourceEntity> {

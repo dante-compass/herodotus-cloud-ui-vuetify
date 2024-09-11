@@ -30,7 +30,7 @@
 
     <template v-if="status && !$slots['body-cell-status']" #body-cell-status="props">
       <q-td key="status" :props="props">
-        <h-status-column :type="props.row.status"></h-status-column>
+        <h-status-column :type="props.row.status" :options="options"></h-status-column>
       </q-td>
     </template>
   </q-table>
@@ -42,6 +42,7 @@ import { defineComponent, computed, PropType } from 'vue';
 import type { Entity } from '/@/lib/declarations';
 
 import { useSettingsStore } from '/@/stores';
+import { useDictionary } from '/@/composables/constants';
 
 import HTableAction from './HTableAction.vue';
 import HStatusColumn from './HStatusColumn.vue';
@@ -53,7 +54,7 @@ export default defineComponent({
   components: {
     HReservedColumn,
     HStatusColumn,
-    HTableAction
+    HTableAction,
   },
 
   emits: ['update:pageNumber'],
@@ -65,17 +66,19 @@ export default defineComponent({
     loading: { type: Boolean, default: false },
     showAll: { type: Boolean, default: false },
     status: { type: Boolean, default: false },
-    reserved: { type: Boolean, default: false }
+    reserved: { type: Boolean, default: false },
   },
 
   setup(props, { emit }) {
     const settings = useSettingsStore();
 
+    const { options } = useDictionary('DataItemStatus');
+
     const pageNumberVModel = computed({
       get: () => props.pageNumber,
       set: newValue => {
         emit('update:pageNumber', newValue);
-      }
+      },
     });
 
     const rowsPerPageOptions = computed(() => {
@@ -85,8 +88,9 @@ export default defineComponent({
     return {
       settings,
       pageNumberVModel,
-      rowsPerPageOptions
+      rowsPerPageOptions,
+      options,
     };
-  }
+  },
 });
 </script>

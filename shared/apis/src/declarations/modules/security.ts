@@ -38,7 +38,7 @@ export interface SysAttributeEntity extends BaseSysEntity {
 
 export interface SysDefaultRoleEntity extends BaseSysEntity {
   defaultId: string;
-  scene: number | EmptyObject;
+  scene: string;
   role: SysRoleEntity;
 }
 

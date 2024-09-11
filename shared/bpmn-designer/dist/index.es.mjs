@@ -4496,27 +4496,27 @@ BpmnRenderer.$inject = [
 BpmnRenderer.prototype.canRender = function(element) {
   return is$g(element, "bpmn:BaseElement");
 };
-BpmnRenderer.prototype.drawShape = function(parentGfx, element, attrs = {}) {
-  var { type } = element;
+BpmnRenderer.prototype.drawShape = function(parentGfx, shape, attrs = {}) {
+  var { type } = shape;
   var handler = this._renderer(type);
-  return handler(parentGfx, element, attrs);
+  return handler(parentGfx, shape, attrs);
 };
-BpmnRenderer.prototype.drawConnection = function(parentGfx, element, attrs = {}) {
-  var { type } = element;
+BpmnRenderer.prototype.drawConnection = function(parentGfx, connection, attrs = {}) {
+  var { type } = connection;
   var handler = this._renderer(type);
-  return handler(parentGfx, element, attrs);
+  return handler(parentGfx, connection, attrs);
 };
-BpmnRenderer.prototype.getShapePath = function(element) {
-  if (is$g(element, "bpmn:Event")) {
-    return getCirclePath(element);
+BpmnRenderer.prototype.getShapePath = function(shape) {
+  if (is$g(shape, "bpmn:Event")) {
+    return getCirclePath(shape);
   }
-  if (is$g(element, "bpmn:Activity")) {
-    return getRoundRectPath(element, TASK_BORDER_RADIUS);
+  if (is$g(shape, "bpmn:Activity")) {
+    return getRoundRectPath(shape, TASK_BORDER_RADIUS);
   }
-  if (is$g(element, "bpmn:Gateway")) {
-    return getDiamondPath(element);
+  if (is$g(shape, "bpmn:Gateway")) {
+    return getDiamondPath(shape);
   }
-  return getRectPath(element);
+  return getRectPath(shape);
 };
 function pickAttrs(attrs, keys2 = []) {
   return keys2.reduce((pickedAttrs, key) => {
@@ -10421,31 +10421,51 @@ function getParent(element, anyType) {
   }
   return null;
 }
-function isDirectionHorizontal(element) {
+function isDirectionHorizontal(element, elementRegistry) {
+  var parent = getParent(element, "bpmn:Process");
+  if (parent) {
+    return true;
+  }
   var types2 = ["bpmn:Participant", "bpmn:Lane"];
-  var parent = getParent(element, types2);
+  parent = getParent(element, types2);
   if (parent) {
     return isHorizontal$3(parent);
   } else if (isAny$7(element, types2)) {
     return isHorizontal$3(element);
   }
-  return true;
+  var process;
+  for (process = getBusinessObject(element); process; process = process.$parent) {
+    if (is$g(process, "bpmn:Process")) {
+      break;
+    }
+  }
+  if (!elementRegistry) {
+    return true;
+  }
+  var pool = elementRegistry.find(function(shape) {
+    var businessObject = getBusinessObject(shape);
+    return businessObject && businessObject.get("processRef") === process;
+  });
+  if (!pool) {
+    return true;
+  }
+  return isHorizontal$3(pool);
 }
-function getNewShapePosition(source2, element) {
+function getNewShapePosition(source2, element, elementRegistry) {
+  var placeHorizontally = isDirectionHorizontal(source2, elementRegistry);
   if (is$g(element, "bpmn:TextAnnotation")) {
-    return getTextAnnotationPosition(source2, element);
+    return getTextAnnotationPosition(source2, element, placeHorizontally);
   }
   if (isAny$7(element, ["bpmn:DataObjectReference", "bpmn:DataStoreReference"])) {
-    return getDataElementPosition(source2, element);
+    return getDataElementPosition(source2, element, placeHorizontally);
   }
   if (is$g(element, "bpmn:FlowNode")) {
-    return getFlowNodePosition(source2, element);
+    return getFlowNodePosition(source2, element, placeHorizontally);
   }
 }
-function getFlowNodePosition(source2, element) {
+function getFlowNodePosition(source2, element, placeHorizontally) {
   var sourceTrbl = asTRBL(source2);
   var sourceMid = getMid(source2);
-  var placeHorizontally = isDirectionHorizontal(source2);
   var placement = placeHorizontally ? {
     directionHint: "e",
     minDistance: 80,
@@ -10501,9 +10521,8 @@ function getDistance$2(orientation, minDistance, placement) {
     return 0;
   }
 }
-function getTextAnnotationPosition(source2, element) {
+function getTextAnnotationPosition(source2, element, placeHorizontally) {
   var sourceTrbl = asTRBL(source2);
-  var placeHorizontally = isDirectionHorizontal(source2);
   var position = placeHorizontally ? {
     x: sourceTrbl.right + element.width / 2,
     y: sourceTrbl.top - 50 - element.height / 2
@@ -10532,9 +10551,8 @@ function getTextAnnotationPosition(source2, element) {
   };
   return findFreePosition(source2, element, position, generateGetNextPosition(nextPositionDirection));
 }
-function getDataElementPosition(source2, element) {
+function getDataElementPosition(source2, element, placeHorizontally) {
   var sourceTrbl = asTRBL(source2);
-  var placeHorizontally = isDirectionHorizontal(source2);
   var position = placeHorizontally ? {
     x: sourceTrbl.right - 10 + element.width / 2,
     y: sourceTrbl.bottom + 40 + element.width / 2
@@ -10553,13 +10571,13 @@ function getDataElementPosition(source2, element) {
   };
   return findFreePosition(source2, element, position, generateGetNextPosition(nextPositionDirection));
 }
-function AutoPlace(eventBus) {
+function AutoPlace(eventBus, elementRegistry) {
   eventBus.on("autoPlace", function(context) {
     var shape = context.shape, source2 = context.source;
-    return getNewShapePosition(source2, shape);
+    return getNewShapePosition(source2, shape, elementRegistry);
   });
 }
-AutoPlace.$inject = ["eventBus"];
+AutoPlace.$inject = ["eventBus", "elementRegistry"];
 const AutoPlaceModule = {
   __depends__: [AutoPlaceModule$1],
   __init__: ["bpmnAutoPlace"],
@@ -13031,13 +13049,13 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
   this.postExecuted("element.updateProperties", handlePropertiesUpdate, true);
   function handleConnectionRemoval(context) {
     const source2 = context.source, target = context.target;
-    if (isCompensationBoundaryEvent(source2) && isForCompensation$1(target)) {
+    if (isCompensationBoundaryEvent$1(source2) && isForCompensation$2(target)) {
       removeIsForCompensationProperty(target);
     }
   }
   function handleNewConnection(context) {
     const connection = context.connection, source2 = context.source, target = context.target;
-    if (isCompensationBoundaryEvent(source2) && isForCompensationAllowed(target)) {
+    if (isCompensationBoundaryEvent$1(source2) && isForCompensationAllowed(target)) {
       addIsForCompensationProperty(target);
       removeExistingAssociations(source2, [connection]);
     }
@@ -13046,17 +13064,17 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
     const newTarget = context.newTarget, oldSource = context.oldSource, oldTarget = context.oldTarget;
     if (oldTarget !== newTarget) {
       const source2 = oldSource;
-      if (isForCompensation$1(oldTarget)) {
+      if (isForCompensation$2(oldTarget)) {
         removeIsForCompensationProperty(oldTarget);
       }
-      if (isCompensationBoundaryEvent(source2) && isForCompensationAllowed(newTarget)) {
+      if (isCompensationBoundaryEvent$1(source2) && isForCompensationAllowed(newTarget)) {
         addIsForCompensationProperty(newTarget);
       }
     }
   }
   function handlePropertiesUpdate(context) {
     const { element } = context;
-    if (isForCompensation$1(element)) {
+    if (isForCompensation$2(element)) {
       removeDisallowedConnections(element);
       removeAttachments(element);
     } else if (isForCompensationAllowed(element)) {
@@ -13068,14 +13086,14 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
       newData,
       oldShape
     } = context;
-    if (isCompensationBoundaryEvent(context.oldShape) && newData.eventDefinitionType !== "bpmn:CompensateEventDefinition" || newData.type !== "bpmn:BoundaryEvent") {
+    if (isCompensationBoundaryEvent$1(context.oldShape) && newData.eventDefinitionType !== "bpmn:CompensateEventDefinition" || newData.type !== "bpmn:BoundaryEvent") {
       const targetConnection = oldShape.outgoing.find(
-        ({ target }) => isForCompensation$1(target)
+        ({ target }) => isForCompensation$2(target)
       );
       if (targetConnection && targetConnection.target) {
         context._connectionTarget = targetConnection.target;
       }
-    } else if (!isCompensationBoundaryEvent(context.oldShape) && newData.eventDefinitionType === "bpmn:CompensateEventDefinition" && newData.type === "bpmn:BoundaryEvent") {
+    } else if (!isCompensationBoundaryEvent$1(context.oldShape) && newData.eventDefinitionType === "bpmn:CompensateEventDefinition" && newData.type === "bpmn:BoundaryEvent") {
       const targetConnection = oldShape.outgoing.find(
         ({ target }) => isForCompensationAllowed(target)
       );
@@ -13112,7 +13130,7 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
   function removeExistingAssociations(boundaryEvent, ignoredAssociations) {
     const associations2 = boundaryEvent.outgoing.filter((connection) => is$g(connection, "bpmn:Association"));
     const associationsToRemove = associations2.filter((association) => {
-      return isForCompensation$1(association.target) && !ignoredAssociations.includes(association);
+      return isForCompensation$2(association.target) && !ignoredAssociations.includes(association);
     });
     associationsToRemove.forEach((association) => modeling.removeConnection(association));
   }
@@ -13125,7 +13143,7 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
   }
   function removeIncomingCompensationAssociations(element) {
     const compensationAssociations = element.incoming.filter(
-      (connection) => isCompensationBoundaryEvent(connection.source)
+      (connection) => isCompensationBoundaryEvent$1(connection.source)
     );
     modeling.removeElements(compensationAssociations);
   }
@@ -13142,11 +13160,11 @@ CompensateBoundaryEventBehavior.$inject = [
   "modeling",
   "bpmnRules"
 ];
-function isForCompensation$1(element) {
+function isForCompensation$2(element) {
   const bo = getBusinessObject(element);
   return bo && bo.get("isForCompensation");
 }
-function isCompensationBoundaryEvent(element) {
+function isCompensationBoundaryEvent$1(element) {
   return element && is$g(element, "bpmn:BoundaryEvent") && hasEventDefinition$2(element, "bpmn:CompensateEventDefinition");
 }
 function isForCompensationAllowed(element) {
@@ -15342,10 +15360,22 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
   }
   allLanes.forEach(function(other2) {
     var otherTrbl = asTRBL(other2);
-    if (/n/.test(resizeDirection)) {
-      if (isHorizontalLane && otherTrbl.top < laneTrbl.top - 10) {
+    if (isHorizontalLane) {
+      if (otherTrbl.top < laneTrbl.top - 10) {
         isFirst = false;
       }
+      if (otherTrbl.bottom > laneTrbl.bottom + 10) {
+        isLast = false;
+      }
+    } else {
+      if (otherTrbl.left < laneTrbl.left - 10) {
+        isFirst = false;
+      }
+      if (otherTrbl.right > laneTrbl.right + 10) {
+        isLast = false;
+      }
+    }
+    if (/n/.test(resizeDirection)) {
       if (balanced && abs$2(laneTrbl.top - otherTrbl.bottom) < 10) {
         addMax(maxTrbl, "top", otherTrbl.top + minDimensions.height);
       }
@@ -15354,9 +15384,6 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
       }
     }
     if (/e/.test(resizeDirection)) {
-      if (!isHorizontalLane && otherTrbl.right > laneTrbl.right + 10) {
-        isLast = false;
-      }
       if (balanced && abs$2(laneTrbl.right - otherTrbl.left) < 10) {
         addMin(maxTrbl, "right", otherTrbl.right - minDimensions.width);
       }
@@ -15365,9 +15392,6 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
       }
     }
     if (/s/.test(resizeDirection)) {
-      if (isHorizontalLane && otherTrbl.bottom > laneTrbl.bottom + 10) {
-        isLast = false;
-      }
       if (balanced && abs$2(laneTrbl.bottom - otherTrbl.top) < 10) {
         addMin(maxTrbl, "bottom", otherTrbl.bottom - minDimensions.height);
       }
@@ -15376,9 +15400,6 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
       }
     }
     if (/w/.test(resizeDirection)) {
-      if (!isHorizontalLane && otherTrbl.left < laneTrbl.left - 10) {
-        isFirst = false;
-      }
       if (balanced && abs$2(laneTrbl.left - otherTrbl.right) < 10) {
         addMax(maxTrbl, "left", otherTrbl.left + minDimensions.width);
       }
@@ -15393,16 +15414,16 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
   var padding = isHorizontalLane ? LANE_PADDING : VERTICAL_LANE_PADDING;
   flowElements.forEach(function(flowElement) {
     var flowElementTrbl = asTRBL(flowElement);
-    if (isFirst && /n/.test(resizeDirection)) {
+    if (/n/.test(resizeDirection) && (!isHorizontalLane || isFirst)) {
       addMin(minTrbl, "top", flowElementTrbl.top - padding.top);
     }
-    if (isLast && /e/.test(resizeDirection)) {
+    if (/e/.test(resizeDirection) && (isHorizontalLane || isLast)) {
       addMax(minTrbl, "right", flowElementTrbl.right + padding.right);
     }
-    if (isLast && /s/.test(resizeDirection)) {
+    if (/s/.test(resizeDirection) && (!isHorizontalLane || isLast)) {
       addMax(minTrbl, "bottom", flowElementTrbl.bottom + padding.bottom);
     }
-    if (isFirst && /w/.test(resizeDirection)) {
+    if (/w/.test(resizeDirection) && (isHorizontalLane || isFirst)) {
       addMin(minTrbl, "left", flowElementTrbl.left - padding.left);
     }
   });
@@ -16250,6 +16271,38 @@ function UpdateContext() {
     return !this.counter;
   };
 }
+function SetCompensationActivityAfterPasteBehavior(eventBus, modeling) {
+  CommandInterceptor.call(this, eventBus);
+  this.postExecuted("elements.create", function(event2) {
+    const context = event2.context, elements = context.elements;
+    for (const element of elements) {
+      if (isForCompensation$1(element) && !isConnectedToCompensationBoundaryEvent(element)) {
+        modeling.updateProperties(element, { isForCompensation: void 0 });
+      }
+    }
+  });
+}
+e$3(SetCompensationActivityAfterPasteBehavior, CommandInterceptor);
+SetCompensationActivityAfterPasteBehavior.$inject = [
+  "eventBus",
+  "modeling"
+];
+function isForCompensation$1(element) {
+  const bo = getBusinessObject(element);
+  return bo && bo.isForCompensation;
+}
+function isCompensationBoundaryEvent(element) {
+  return element && is$g(element, "bpmn:BoundaryEvent") && hasEventDefinition$2(element, "bpmn:CompensateEventDefinition");
+}
+function isConnectedToCompensationBoundaryEvent(element) {
+  const compensationAssociations = element.incoming.filter(
+    (connection) => isCompensationBoundaryEvent(connection.source)
+  );
+  if (compensationAssociations.length > 0) {
+    return true;
+  }
+  return false;
+}
 const BehaviorModule = {
   __init__: [
     "adaptiveLabelPositioningBehavior",
@@ -16291,7 +16344,8 @@ const BehaviorModule = {
     "toggleElementCollapseBehaviour",
     "unclaimIdBehavior",
     "updateFlowNodeRefsBehavior",
-    "unsetDefaultFlowBehavior"
+    "unsetDefaultFlowBehavior",
+    "setCompensationActivityAfterPasteBehavior"
   ],
   adaptiveLabelPositioningBehavior: ["type", AdaptiveLabelPositioningBehavior],
   appendBehavior: ["type", AppendBehavior],
@@ -16332,7 +16386,8 @@ const BehaviorModule = {
   toggleElementCollapseBehaviour: ["type", ToggleElementCollapseBehaviour],
   unclaimIdBehavior: ["type", UnclaimIdBehavior],
   unsetDefaultFlowBehavior: ["type", DeleteSequenceFlowBehavior],
-  updateFlowNodeRefsBehavior: ["type", UpdateFlowNodeRefsBehavior]
+  updateFlowNodeRefsBehavior: ["type", UpdateFlowNodeRefsBehavior],
+  setCompensationActivityAfterPasteBehavior: ["type", SetCompensationActivityAfterPasteBehavior]
 };
 function getBoundaryAttachment(position, targetBounds) {
   var orientation = getOrientation(position, targetBounds, -15);
@@ -22870,14 +22925,15 @@ var orientationDirectionMapping = {
   bottom: "b",
   left: "l"
 };
-function BpmnLayouter() {
+function BpmnLayouter(elementRegistry) {
+  this._elementRegistry = elementRegistry;
 }
 e$3(BpmnLayouter, BaseLayouter);
 BpmnLayouter.prototype.layoutConnection = function(connection, hints) {
   if (!hints) {
     hints = {};
   }
-  var source2 = hints.source || connection.source, target = hints.target || connection.target, waypoints = hints.waypoints || connection.waypoints, connectionStart = hints.connectionStart, connectionEnd = hints.connectionEnd;
+  var source2 = hints.source || connection.source, target = hints.target || connection.target, waypoints = hints.waypoints || connection.waypoints, connectionStart = hints.connectionStart, connectionEnd = hints.connectionEnd, elementRegistry = this._elementRegistry;
   var manhattanOptions, updatedWaypoints;
   if (!connectionStart) {
     connectionStart = getConnectionDocking(waypoints && waypoints[0], source2);
@@ -22890,7 +22946,7 @@ BpmnLayouter.prototype.layoutConnection = function(connection, hints) {
       return [].concat([connectionStart], waypoints.slice(1, -1), [connectionEnd]);
     }
   }
-  var layout = isDirectionHorizontal(source2) ? PREFERRED_LAYOUTS_HORIZONTAL : PREFERRED_LAYOUTS_VERTICAL;
+  var layout = isDirectionHorizontal(source2, elementRegistry) ? PREFERRED_LAYOUTS_HORIZONTAL : PREFERRED_LAYOUTS_VERTICAL;
   if (is$g(connection, "bpmn:MessageFlow")) {
     manhattanOptions = getMessageFlowManhattanOptions(source2, target, layout);
   } else if (is$g(connection, "bpmn:SequenceFlow") || isCompensationAssociation(source2, target)) {
@@ -23101,6 +23157,7 @@ function getBoundaryEventTargetLayout(attachOrientation, targetOrientation, atta
     }
   }
 }
+BpmnLayouter.$inject = ["elementRegistry"];
 function dockingToPoint(docking) {
   return assign$2({ original: docking.point.original || docking.point }, docking.actual);
 }
@@ -26035,10 +26092,10 @@ const GridSnappingModule$1 = {
   gridSnapping: ["type", GridSnapping]
 };
 var HIGH_PRIORITY$5 = 2e3;
-function GridSnappingAutoPlaceBehavior(eventBus, gridSnapping) {
+function GridSnappingAutoPlaceBehavior(eventBus, gridSnapping, elementRegistry) {
   eventBus.on("autoPlace", HIGH_PRIORITY$5, function(context) {
     var source2 = context.source, sourceMid = getMid(source2), shape = context.shape;
-    var position = getNewShapePosition(source2, shape);
+    var position = getNewShapePosition(source2, shape, elementRegistry);
     ["x", "y"].forEach(function(axis) {
       var options = {};
       if (position[axis] === sourceMid[axis]) {
@@ -26063,7 +26120,8 @@ function GridSnappingAutoPlaceBehavior(eventBus, gridSnapping) {
 }
 GridSnappingAutoPlaceBehavior.$inject = [
   "eventBus",
-  "gridSnapping"
+  "gridSnapping",
+  "elementRegistry"
 ];
 function isHorizontal$1(axis) {
   return axis === "x";
@@ -27043,7 +27101,7 @@ function LabelEditingPreview(eventBus, canvas, pathMap) {
     }
     if (is$g(element, "bpmn:TextAnnotation") || element.labelTarget) {
       canvas.addMarker(element, MARKER_HIDDEN);
-    } else if (is$g(element, "bpmn:Task") || is$g(element, "bpmn:CallActivity") || is$g(element, "bpmn:SubProcess") || is$g(element, "bpmn:Participant")) {
+    } else if (is$g(element, "bpmn:Task") || is$g(element, "bpmn:CallActivity") || is$g(element, "bpmn:SubProcess") || is$g(element, "bpmn:Participant") || is$g(element, "bpmn:Lane")) {
       canvas.addMarker(element, MARKER_LABEL_HIDDEN);
     }
   });
