@@ -101,11 +101,8 @@ export const useDictionaryStore = defineStore('Dictionary', {
     },
 
     fetchCategory(category: string, ...others: string[]): Promise<Record<string, Array<Dictionary>>> {
-      console.log('--fetchCategory---');
       return new Promise((resolve, reject) => {
         const keys = this.getNotExist(category, ...others);
-        console.log('--keys---', keys);
-        console.log('-----', keys.join(','));
         if (lodash.isEmpty(keys)) {
           resolve(this.dictionaries);
         } else {

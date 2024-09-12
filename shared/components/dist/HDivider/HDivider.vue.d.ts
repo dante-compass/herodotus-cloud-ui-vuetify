@@ -1,5 +1,5 @@
 import { PropType } from 'vue';
-declare const _default: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     wider: {
         type: PropType<"start" | "center" | "end">;
         default: string;
@@ -14,8 +14,8 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
     };
     label: StringConstructor;
 }>, {
-    textWeight: globalThis.ComputedRef<string>;
-}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<globalThis.ExtractPropTypes<{
+    textWeight: import('vue').ComputedRef<string>;
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     wider: {
         type: PropType<"start" | "center" | "end">;
         default: string;
@@ -34,7 +34,7 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
     wider: "start" | "center" | "end";
     weight: "bold" | "thin" | "light" | "regular" | "medium" | "bolder";
 }, {}, {
-    HContainer: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+    HContainer: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         mode: {
             type: PropType<"two" | "three">;
             default: string;
@@ -49,12 +49,12 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
         };
     }>, {
         isTwoColumn: () => boolean;
-        isToTheLeft: globalThis.ComputedRef<boolean>;
-        isToTheRight: globalThis.ComputedRef<boolean>;
-        leftCols: globalThis.Ref<number, number>;
-        centerCols: globalThis.Ref<number, number>;
-        rightCols: globalThis.Ref<number, number>;
-    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<globalThis.ExtractPropTypes<{
+        isToTheLeft: import('vue').ComputedRef<boolean>;
+        isToTheRight: import('vue').ComputedRef<boolean>;
+        leftCols: import('vue').Ref<number, number>;
+        centerCols: import('vue').Ref<number, number>;
+        rightCols: import('vue').Ref<number, number>;
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
         mode: {
             type: PropType<"two" | "three">;
             default: string;
@@ -72,7 +72,7 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
         mode: "two" | "three";
         wider: "default" | "start" | "center" | "end";
     }, {}, {
-        HRow: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+        HRow: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             column: {
                 type: BooleanConstructor;
                 default: boolean;
@@ -107,7 +107,7 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
             };
         }>, {
             getClasses: () => string;
-        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<globalThis.ExtractPropTypes<{
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             column: {
                 type: BooleanConstructor;
                 default: boolean;
@@ -150,7 +150,7 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
             gutter: "xs" | "sm" | "md" | "lg" | "xl" | "none";
             gutterCol: boolean;
         }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-        HColumn: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+        HColumn: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             cols: {
                 type: (StringConstructor | NumberConstructor)[];
                 default: string;
@@ -184,8 +184,8 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
                 default: string;
             };
         }>, {
-            classes: globalThis.ComputedRef<string[]>;
-        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<globalThis.ExtractPropTypes<{
+            classes: import('vue').ComputedRef<string[]>;
+        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             cols: {
                 type: (StringConstructor | NumberConstructor)[];
                 default: string;
@@ -229,7 +229,7 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
             cols: string | number;
         }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-    HLabel: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+    HLabel: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         size: {
             type: PropType<"h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "caption" | "overline" | "subtitle-1" | "subtitle-2" | "body-1" | "body-2">;
             default: string;
@@ -244,8 +244,8 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
         };
         text: StringConstructor;
     }>, {
-        display: globalThis.ComputedRef<string>;
-    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<globalThis.ExtractPropTypes<{
+        display: import('vue').ComputedRef<string>;
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
         size: {
             type: PropType<"h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "caption" | "overline" | "subtitle-1" | "subtitle-2" | "body-1" | "body-2">;
             default: string;

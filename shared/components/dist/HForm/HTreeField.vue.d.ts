@@ -1,43 +1,45 @@
-import { Ref } from 'vue';
-import { QSelect } from 'quasar';
+import { Ref, PropType } from 'vue';
+import { QTree, Tree } from '../lib/declarations';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     modelValue: {
         type: StringConstructor;
-    };
-    optionLabel: {
-        type: StringConstructor;
         default: string;
+        required: true;
     };
-    optionValue: {
+    items: {
+        type: PropType<Array<Tree>>;
+        required: true;
+    };
+    label: {
         type: StringConstructor;
-        default: string;
     };
-    errorMessage: {
+    value: {
         type: StringConstructor;
     };
 }>, {
-    selectedValue: import('vue').WritableComputedRef<string | undefined, string | undefined>;
-    options: Ref<string[], string[]>;
-    filter: (value: string, update: (callbackFn: () => void, after?: (ref: QSelect) => void) => void, abort: () => void) => void;
+    selectedValue: import('vue').WritableComputedRef<string, string>;
+    nodeName: Ref<string, string>;
+    treeRef: Ref<QTree | null, QTree | null>;
+    isPopup: Ref<boolean, boolean>;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {
         type: StringConstructor;
-    };
-    optionLabel: {
-        type: StringConstructor;
         default: string;
+        required: true;
     };
-    optionValue: {
+    items: {
+        type: PropType<Array<Tree>>;
+        required: true;
+    };
+    label: {
         type: StringConstructor;
-        default: string;
     };
-    errorMessage: {
+    value: {
         type: StringConstructor;
     };
 }>> & Readonly<{
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }>, {
-    optionLabel: string;
-    optionValue: string;
+    modelValue: string;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

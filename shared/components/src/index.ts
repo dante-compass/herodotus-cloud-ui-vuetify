@@ -4,7 +4,7 @@ import { HButton, HIconButton, HVisibilityButton } from './HButton';
 import { HChartCard } from './HCard';
 import { HDivider } from './HDivider';
 import { HDialog } from './HDialog';
-import { HSwitch, HTextField, HSelect, HIconSelect, HDateTime, HDuration } from './HForm';
+import { HSwitch, HTextField, HSelect, HIconSelect, HDateTime, HDuration, HFieldLabel, HTreeField } from './HForm';
 import { HColumn, HContainer, HRow } from './HGrid';
 import { HLabel, HCenterLabel } from './HLabel';
 import { HListItem } from './HList';
@@ -25,6 +25,8 @@ const components = [
   HDuration,
   HIconButton,
   HIconSelect,
+  HFieldLabel,
+  HTreeField,
   HLabel,
   HListItem,
   HLoading,
@@ -35,11 +37,11 @@ const components = [
   HSignInBackground,
   HSwitch,
   HTextField,
-  HVisibilityButton
+  HVisibilityButton,
 ];
 
 const install = (app: App) => {
-  components.map(component => app.component(component.name as string, component));
+  components.map(component => component.install(app));
 };
 
 export {
@@ -54,6 +56,8 @@ export {
   HDuration,
   HIconButton,
   HIconSelect,
+  HFieldLabel,
+  HTreeField,
   HLabel,
   HListItem,
   HLoading,
@@ -64,11 +68,11 @@ export {
   HSignInBackground,
   HSwitch,
   HTextField,
-  HVisibilityButton
+  HVisibilityButton,
 };
 
 export * from './lib';
 
 export default {
-  install
+  install,
 };

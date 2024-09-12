@@ -1,5 +1,5 @@
 import { PropType } from 'vue';
-declare const _default: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     mode: {
         type: PropType<"two" | "three">;
         default: string;
@@ -33,12 +33,12 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
     };
 }>, {
     isTwoColumn: () => boolean;
-    isToTheLeft: globalThis.ComputedRef<boolean>;
-    isToTheRight: globalThis.ComputedRef<boolean>;
-    leftCols: globalThis.Ref<number, number>;
-    centerCols: globalThis.Ref<number, number>;
-    rightCols: globalThis.Ref<number, number>;
-}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<globalThis.ExtractPropTypes<{
+    isToTheLeft: import('vue').ComputedRef<boolean>;
+    isToTheRight: import('vue').ComputedRef<boolean>;
+    leftCols: import('vue').Ref<number, number>;
+    centerCols: import('vue').Ref<number, number>;
+    rightCols: import('vue').Ref<number, number>;
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     mode: {
         type: PropType<"two" | "three">;
         default: string;
@@ -75,7 +75,7 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
     mode: "two" | "three";
     wider: "default" | "start" | "center" | "end";
 }, {}, {
-    HRow: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+    HRow: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         column: {
             type: BooleanConstructor;
             default: boolean;
@@ -110,7 +110,7 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
         };
     }>, {
         getClasses: () => string;
-    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<globalThis.ExtractPropTypes<{
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
         column: {
             type: BooleanConstructor;
             default: boolean;
@@ -153,7 +153,7 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
         gutter: "xs" | "sm" | "md" | "lg" | "xl" | "none";
         gutterCol: boolean;
     }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-    HColumn: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+    HColumn: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         cols: {
             type: (StringConstructor | NumberConstructor)[];
             default: string;
@@ -187,8 +187,8 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
             default: string;
         };
     }>, {
-        classes: globalThis.ComputedRef<string[]>;
-    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<globalThis.ExtractPropTypes<{
+        classes: import('vue').ComputedRef<string[]>;
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
         cols: {
             type: (StringConstructor | NumberConstructor)[];
             default: string;

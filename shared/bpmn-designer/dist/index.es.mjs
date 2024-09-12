@@ -29141,25 +29141,31 @@ const SnappingModule = {
   connectSnapping: ["type", BpmnConnectSnapping],
   createMoveSnapping: ["type", BpmnCreateMoveSnapping]
 };
-function SearchPad(canvas, eventBus, overlays, selection, translate2) {
+function SearchPad(canvas, eventBus, selection, translate2) {
   this._open = false;
   this._results = [];
   this._eventMaps = [];
+  this._cachedRootElement = null;
+  this._cachedSelection = null;
+  this._cachedViewbox = null;
   this._canvas = canvas;
   this._eventBus = eventBus;
-  this._overlays = overlays;
   this._selection = selection;
   this._translate = translate2;
   this._container = this._getBoxHtml();
   this._searchInput = query(SearchPad.INPUT_SELECTOR, this._container);
   this._resultsContainer = query(SearchPad.RESULTS_CONTAINER_SELECTOR, this._container);
   this._canvas.getContainer().appendChild(this._container);
-  eventBus.on(["canvas.destroy", "diagram.destroy"], this.close, this);
+  eventBus.on([
+    "canvas.destroy",
+    "diagram.destroy",
+    "drag.init",
+    "elements.changed"
+  ], this.close, this);
 }
 SearchPad.$inject = [
   "canvas",
   "eventBus",
-  "overlays",
   "selection",
   "translate"
 ];
@@ -29173,7 +29179,7 @@ SearchPad.prototype._bindEvents = function() {
     });
   }
   listen(document, "html", "click", function(e2) {
-    self2.close();
+    self2.close(false);
   });
   listen(this._container, SearchPad.INPUT_SELECTOR, "click", function(e2) {
     e2.stopPropagation();
@@ -29202,7 +29208,7 @@ SearchPad.prototype._bindEvents = function() {
     }
     if (isKey("Enter", e2)) {
       var selected = self2._getCurrentResult();
-      return selected ? self2._select(selected) : self2.close();
+      return selected ? self2._select(selected) : self2.close(false);
     }
     if (isKey("ArrowUp", e2)) {
       return self2._scrollToDirection(true);
@@ -29228,6 +29234,9 @@ SearchPad.prototype._search = function(pattern) {
     return;
   }
   var searchResults = this._searchProvider.find(pattern);
+  searchResults = searchResults.filter(function(searchResult) {
+    return !self2._canvas.getRootElements().includes(searchResult.element);
+  });
   if (!searchResults.length) {
     return;
   }
@@ -29270,7 +29279,6 @@ SearchPad.prototype._scrollToNode = function(node2) {
 SearchPad.prototype._clearResults = function() {
   clear$1(this._resultsContainer);
   this._results = [];
-  this._resetOverlay();
   this._eventBus.fire("searchPad.cleared");
 };
 SearchPad.prototype._getCurrentResult = function() {
@@ -29296,23 +29304,42 @@ SearchPad.prototype.open = function() {
   if (this.isOpen()) {
     return;
   }
+  this._cachedRootElement = this._canvas.getRootElement();
+  this._cachedSelection = this._selection.get();
+  this._cachedViewbox = this._canvas.viewbox();
   this._bindEvents();
   this._open = true;
+  classes$1(this._canvas.getContainer()).add("djs-search-open");
   classes$1(this._container).add("open");
   this._searchInput.focus();
   this._eventBus.fire("searchPad.opened");
 };
-SearchPad.prototype.close = function() {
+SearchPad.prototype.close = function(restoreCached = true) {
   if (!this.isOpen()) {
     return;
   }
+  if (restoreCached) {
+    if (this._cachedRootElement) {
+      this._canvas.setRootElement(this._cachedRootElement);
+    }
+    if (this._cachedSelection) {
+      this._selection.select(this._cachedSelection);
+    }
+    if (this._cachedViewbox) {
+      this._canvas.viewbox(this._cachedViewbox);
+    }
+    this._eventBus.fire("searchPad.restored");
+  }
+  this._cachedRootElement = null;
+  this._cachedSelection = null;
+  this._cachedViewbox = null;
   this._unbindEvents();
   this._open = false;
+  classes$1(this._canvas.getContainer()).remove("djs-search-open");
   classes$1(this._container).remove("open");
   this._clearResults();
   this._searchInput.value = "";
   this._searchInput.blur();
-  this._resetOverlay();
   this._eventBus.fire("searchPad.closed");
 };
 SearchPad.prototype.toggle = function() {
@@ -29332,29 +29359,22 @@ SearchPad.prototype._preselect = function(node2) {
   var id = attr$1(node2, SearchPad.RESULT_ID_ATTRIBUTE);
   var element = this._results[id].element;
   classes$1(node2).add(SearchPad.RESULT_SELECTED_CLASS);
-  this._resetOverlay(element);
-  this._canvas.scrollToElement(element, { top: 400 });
+  this._canvas.zoom(1);
+  this._canvas.scrollToElement(element, {
+    top: 300
+  });
   this._selection.select(element);
   this._eventBus.fire("searchPad.preselected", element);
 };
 SearchPad.prototype._select = function(node2) {
   var id = attr$1(node2, SearchPad.RESULT_ID_ATTRIBUTE);
   var element = this._results[id].element;
-  this.close();
-  this._resetOverlay();
+  this._cachedSelection = null;
+  this._cachedViewbox = null;
+  this.close(false);
   this._canvas.scrollToElement(element, { top: 400 });
   this._selection.select(element);
   this._eventBus.fire("searchPad.selected", element);
-};
-SearchPad.prototype._resetOverlay = function(element) {
-  if (this._overlayId) {
-    this._overlays.remove(this._overlayId);
-  }
-  if (element) {
-    var box = getBBox(element);
-    var overlay = constructOverlay(box);
-    this._overlayId = this._overlays.add(element, overlay);
-  }
 };
 SearchPad.prototype._getBoxHtml = function() {
   const box = domify$1(SearchPad.BOX_HTML);
@@ -29364,25 +29384,6 @@ SearchPad.prototype._getBoxHtml = function() {
   }
   return box;
 };
-function constructOverlay(box) {
-  var offset = 6;
-  var w2 = box.width + offset * 2;
-  var h2 = box.height + offset * 2;
-  var styles = {
-    width: w2 + "px",
-    height: h2 + "px"
-  };
-  var html = domify$1('<div class="' + SearchPad.OVERLAY_CLASS + '"></div>');
-  assign$1(html, styles);
-  return {
-    position: {
-      bottom: h2 - offset,
-      right: w2 - offset
-    },
-    show: true,
-    html
-  };
-}
 function createInnerTextNode(parentNode, tokens, template) {
   var text = createHtmlText(tokens);
   var childNode = domify$1(template);
@@ -29393,7 +29394,7 @@ function createHtmlText(tokens) {
   var htmlText = "";
   tokens.forEach(function(t2) {
     if (t2.matched) {
-      htmlText += '<strong class="' + SearchPad.RESULT_HIGHLIGHT_CLASS + '">' + escapeHTML$1(t2.matched) + "</strong>";
+      htmlText += '<b class="' + SearchPad.RESULT_HIGHLIGHT_CLASS + '">' + escapeHTML$1(t2.matched) + "</b>";
     } else {
       htmlText += escapeHTML$1(t2.normal);
     }
@@ -29408,8 +29409,15 @@ SearchPad.RESULT_SELECTED_CLASS = "djs-search-result-selected";
 SearchPad.RESULT_SELECTED_SELECTOR = "." + SearchPad.RESULT_SELECTED_CLASS;
 SearchPad.RESULT_ID_ATTRIBUTE = "data-result-id";
 SearchPad.RESULT_HIGHLIGHT_CLASS = "djs-search-highlight";
-SearchPad.OVERLAY_CLASS = "djs-search-overlay";
-SearchPad.BOX_HTML = '<div class="djs-search-container djs-draggable djs-scrollable"><div class="djs-search-input"><input type="text"/></div><div class="djs-search-results"></div></div>';
+SearchPad.BOX_HTML = `<div class="djs-search-container djs-scrollable">
+  <div class="djs-search-input">
+    <svg class="djs-search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.0325 8.5H9.625L13.3675 12.25L12.25 13.3675L8.5 9.625V9.0325L8.2975 8.8225C7.4425 9.5575 6.3325 10 5.125 10C2.4325 10 0.25 7.8175 0.25 5.125C0.25 2.4325 2.4325 0.25 5.125 0.25C7.8175 0.25 10 2.4325 10 5.125C10 6.3325 9.5575 7.4425 8.8225 8.2975L9.0325 8.5ZM1.75 5.125C1.75 6.9925 3.2575 8.5 5.125 8.5C6.9925 8.5 8.5 6.9925 8.5 5.125C8.5 3.2575 6.9925 1.75 5.125 1.75C3.2575 1.75 1.75 3.2575 1.75 5.125Z" fill="#22242A"/>
+    </svg>
+    <input type="text" spellcheck="false" />
+  </div>
+  <div class="djs-search-results" />
+</div>`;
 SearchPad.RESULT_HTML = '<div class="djs-search-result"></div>';
 SearchPad.RESULT_PRIMARY_HTML = '<div class="djs-search-result-primary"></div>';
 SearchPad.RESULT_SECONDARY_HTML = '<p class="djs-search-result-secondary"></p>';
@@ -29434,60 +29442,94 @@ BpmnSearchProvider.$inject = [
 BpmnSearchProvider.prototype.find = function(pattern) {
   var rootElements = this._canvas.getRootElements();
   var elements = this._elementRegistry.filter(function(element) {
-    if (element.labelTarget) {
-      return false;
+    return !isLabel(element) && !rootElements.includes(element);
+  });
+  return elements.reduce(function(results, element) {
+    var label = getLabel(element);
+    var primaryTokens = findMatches(label, pattern), secondaryTokens = findMatches(element.id, pattern);
+    if (hasMatch(primaryTokens) || hasMatch(secondaryTokens)) {
+      return [
+        ...results,
+        {
+          primaryTokens,
+          secondaryTokens,
+          element
+        }
+      ];
     }
-    return true;
-  });
-  elements = filter$1(elements, function(element) {
-    return !rootElements.includes(element);
-  });
-  elements = map$2(elements, function(element) {
+    return results;
+  }, []).sort(function(a2, b2) {
+    return compareTokens(a2.primaryTokens, b2.primaryTokens) || compareTokens(a2.secondaryTokens, b2.secondaryTokens) || compareStrings(getLabel(a2.element), getLabel(b2.element)) || compareStrings(a2.element.id, b2.element.id);
+  }).map(function(result) {
     return {
-      primaryTokens: matchAndSplit(getLabel(element), pattern),
-      secondaryTokens: matchAndSplit(element.id, pattern),
-      element
+      element: result.element,
+      primaryTokens: result.primaryTokens.map(function(token) {
+        return omit$1(token, ["index"]);
+      }),
+      secondaryTokens: result.secondaryTokens.map(function(token) {
+        return omit$1(token, ["index"]);
+      })
     };
   });
-  elements = filter$1(elements, function(element) {
-    return hasMatched(element.primaryTokens) || hasMatched(element.secondaryTokens);
-  });
-  elements = sortBy$1(elements, function(element) {
-    return getLabel(element.element) + element.element.id;
-  });
-  return elements;
 };
-function hasMatched(tokens) {
-  var matched = filter$1(tokens, function(token) {
-    return !!token.matched;
-  });
-  return matched.length > 0;
+function isMatch(token) {
+  return "matched" in token;
 }
-function matchAndSplit(text, pattern) {
+function hasMatch(tokens) {
+  return tokens.find(isMatch);
+}
+function compareTokens(tokensA, tokensB) {
+  const tokensAHasMatch = hasMatch(tokensA), tokensBHasMatch = hasMatch(tokensB);
+  if (tokensAHasMatch && !tokensBHasMatch) {
+    return -1;
+  }
+  if (!tokensAHasMatch && tokensBHasMatch) {
+    return 1;
+  }
+  if (!tokensAHasMatch && !tokensBHasMatch) {
+    return 0;
+  }
+  const tokensAFirstMatch = tokensA.find(isMatch), tokensBFirstMatch = tokensB.find(isMatch);
+  if (tokensAFirstMatch.index < tokensBFirstMatch.index) {
+    return -1;
+  }
+  if (tokensAFirstMatch.index > tokensBFirstMatch.index) {
+    return 1;
+  }
+  return 0;
+}
+function compareStrings(a2, b2) {
+  return a2.localeCompare(b2);
+}
+function findMatches(text, pattern) {
   var tokens = [], originalText = text;
   if (!text) {
     return tokens;
   }
   text = text.toLowerCase();
   pattern = pattern.toLowerCase();
-  var i2 = text.indexOf(pattern);
-  if (i2 > -1) {
-    if (i2 !== 0) {
+  var index2 = text.indexOf(pattern);
+  if (index2 > -1) {
+    if (index2 !== 0) {
       tokens.push({
-        normal: originalText.substr(0, i2)
+        normal: originalText.slice(0, index2),
+        index: 0
       });
     }
     tokens.push({
-      matched: originalText.substr(i2, pattern.length)
+      matched: originalText.slice(index2, index2 + pattern.length),
+      index: index2
     });
-    if (pattern.length + i2 < text.length) {
+    if (pattern.length + index2 < text.length) {
       tokens.push({
-        normal: originalText.substr(pattern.length + i2, text.length)
+        normal: originalText.slice(index2 + pattern.length),
+        index: index2 + pattern.length
       });
     }
   } else {
     tokens.push({
-      normal: originalText
+      normal: originalText,
+      index: 0
     });
   }
   return tokens;
