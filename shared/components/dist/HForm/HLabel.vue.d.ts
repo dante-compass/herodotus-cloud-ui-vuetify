@@ -31,7 +31,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     text: StringConstructor;
 }>> & Readonly<{}>, {
     size: "caption" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "overline" | "subtitle-1" | "subtitle-2" | "body-1" | "body-2";
-    align: "left" | "right" | "justify" | "center";
+    align: "left" | "right" | "center" | "justify";
     weight: "bold" | "thin" | "light" | "regular" | "medium" | "bolder";
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

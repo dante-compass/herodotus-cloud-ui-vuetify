@@ -1,21 +1,13 @@
 import type { App } from 'vue';
 
-import HDateTime from './HDateTime.vue';
-import HDuration from './HDuration.vue';
 import HIconSelect from './HIconSelect.vue';
 import HSelect from './HSelect.vue';
 import HSwitch from './HSwitch.vue';
 import HFieldLabel from './HFieldLabel.vue';
 import HTextField from './HTextField.vue';
 import HTreeField from './HTreeField.vue';
-
-HDateTime.install = (app: App): void => {
-  app.component(HDateTime.name as string, HDateTime);
-};
-
-HDuration.install = (app: App): void => {
-  app.component(HDuration.name as string, HDuration);
-};
+import HLabel from './HLabel.vue';
+import HCenterLabel from './HCenterLabel.vue';
 
 HIconSelect.install = (app: App): void => {
   app.component(HIconSelect.name as string, HIconSelect);
@@ -41,4 +33,12 @@ HTreeField.install = (app: App): void => {
   app.component(HTreeField.name as string, HTreeField);
 };
 
-export { HDateTime, HDuration, HSwitch, HTextField, HIconSelect, HSelect, HFieldLabel, HTreeField };
+HLabel.install = (app: App): void => {
+  app.component(HLabel.name as string, HLabel);
+};
+
+HCenterLabel.install = (app: App): void => {
+  app.component(HCenterLabel.name as string, HCenterLabel);
+};
+
+export { HSwitch, HTextField, HIconSelect, HSelect, HFieldLabel, HTreeField, HLabel, HCenterLabel };

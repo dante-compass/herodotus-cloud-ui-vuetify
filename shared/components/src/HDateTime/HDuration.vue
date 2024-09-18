@@ -14,17 +14,16 @@
 import { defineComponent, computed, watch, ref } from 'vue';
 
 import { moment, DURATION_UNITS } from '/@/lib/utils';
+import { HSelect, HTextField } from '../HForm';
 import { HContainer } from '../HGrid';
-import HSelect from './HSelect.vue';
-import HTextField from './HTextField.vue';
 
 export default defineComponent({
   name: 'HDuration',
 
   components: {
-    HContainer,
-    HTextField,
     HSelect,
+    HTextField,
+    HContainer,
   },
 
   props: {

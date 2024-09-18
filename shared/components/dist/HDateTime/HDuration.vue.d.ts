@@ -1,46 +1,86 @@
-import { PropType } from 'vue';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
-    wider: {
-        type: PropType<"start" | "center" | "end">;
-        default: string;
+    modelValue: {
+        type: (StringConstructor | NumberConstructor)[];
+        defalut: string;
     };
-    weight: {
-        type: PropType<"thin" | "light" | "regular" | "medium" | "bold" | "bolder">;
-        default: string;
-    };
-    offset: {
-        type: NumberConstructor;
-        default: number;
-    };
-    label: StringConstructor;
 }>, {
-    textWeight: import('vue').ComputedRef<string>;
-}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
-    wider: {
-        type: PropType<"start" | "center" | "end">;
-        default: string;
+    durationValue: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+    amount: import('vue').Ref<number, number>;
+    unit: import('vue').Ref<string, string>;
+    options: import('vue').Ref<{
+        text: string;
+        value: string;
+    }[], import('..').SelectItem<string>[] | {
+        text: string;
+        value: string;
+    }[]>;
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+    modelValue: {
+        type: (StringConstructor | NumberConstructor)[];
+        defalut: string;
     };
-    weight: {
-        type: PropType<"thin" | "light" | "regular" | "medium" | "bold" | "bolder">;
-        default: string;
-    };
-    offset: {
-        type: NumberConstructor;
-        default: number;
-    };
-    label: StringConstructor;
-}>> & Readonly<{}>, {
-    offset: number;
-    weight: "bold" | "thin" | "light" | "regular" | "medium" | "bolder";
-    wider: "center" | "start" | "end";
-}, {}, {
+}>> & Readonly<{
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+}>, {}, {}, {
+    HSelect: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+        modelValue: {
+            type: (StringConstructor | ObjectConstructor | NumberConstructor | ArrayConstructor)[];
+        };
+        optionLabel: {
+            type: StringConstructor;
+            default: string;
+        };
+        optionValue: {
+            type: StringConstructor;
+            default: string;
+        };
+        errorMessage: {
+            type: StringConstructor;
+        };
+    }>, {
+        selectedValue: import('vue').WritableComputedRef<string | number | Record<string, any> | unknown[] | undefined, string | number | Record<string, any> | unknown[] | undefined>;
+        hasError: import('vue').ComputedRef<boolean>;
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+        modelValue: {
+            type: (StringConstructor | ObjectConstructor | NumberConstructor | ArrayConstructor)[];
+        };
+        optionLabel: {
+            type: StringConstructor;
+            default: string;
+        };
+        optionValue: {
+            type: StringConstructor;
+            default: string;
+        };
+        errorMessage: {
+            type: StringConstructor;
+        };
+    }>> & Readonly<{
+        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    }>, {
+        optionLabel: string;
+        optionValue: string;
+    }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+    HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+        modelValue: {
+            type: (StringConstructor | NumberConstructor)[];
+        };
+    }>, {
+        text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+        modelValue: {
+            type: (StringConstructor | NumberConstructor)[];
+        };
+    }>> & Readonly<{
+        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     HContainer: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         mode: {
-            type: PropType<"two" | "three">;
+            type: import('vue').PropType<"two" | "three">;
             default: string;
         };
         wider: {
-            type: PropType<"default" | "start" | "center" | "end">;
+            type: import('vue').PropType<"default" | "start" | "center" | "end">;
             default: string;
         };
         offset: {
@@ -56,11 +96,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         isToTheRight: import('vue').ComputedRef<boolean>;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
         mode: {
-            type: PropType<"two" | "three">;
+            type: import('vue').PropType<"two" | "three">;
             default: string;
         };
         wider: {
-            type: PropType<"default" | "start" | "center" | "end">;
+            type: import('vue').PropType<"default" | "start" | "center" | "end">;
             default: string;
         };
         offset: {
@@ -82,15 +122,15 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 default: boolean;
             };
             align: {
-                type: PropType<"none" | "start" | "center" | "end">;
+                type: import('vue').PropType<"none" | "start" | "center" | "end">;
                 default: string;
             };
             justify: {
-                type: PropType<"none" | "center" | "end" | "around" | "between" | "evenly">;
+                type: import('vue').PropType<"none" | "center" | "end" | "around" | "between" | "evenly">;
                 default: string;
             };
             gutter: {
-                type: PropType<"none" | "xs" | "sm" | "md" | "lg" | "xl">;
+                type: import('vue').PropType<"none" | "xs" | "sm" | "md" | "lg" | "xl">;
                 default: string;
             };
             gutterCol: {
@@ -117,15 +157,15 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 default: boolean;
             };
             align: {
-                type: PropType<"none" | "start" | "center" | "end">;
+                type: import('vue').PropType<"none" | "start" | "center" | "end">;
                 default: string;
             };
             justify: {
-                type: PropType<"none" | "center" | "end" | "around" | "between" | "evenly">;
+                type: import('vue').PropType<"none" | "center" | "end" | "around" | "between" | "evenly">;
                 default: string;
             };
             gutter: {
-                type: PropType<"none" | "xs" | "sm" | "md" | "lg" | "xl">;
+                type: import('vue').PropType<"none" | "xs" | "sm" | "md" | "lg" | "xl">;
                 default: string;
             };
             gutterCol: {
@@ -229,40 +269,5 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             cols: string | number;
         }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-    HLabel: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
-        size: {
-            type: PropType<"h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "caption" | "overline" | "subtitle-1" | "subtitle-2" | "body-1" | "body-2">;
-            default: string;
-        };
-        weight: {
-            type: PropType<"thin" | "light" | "regular" | "medium" | "bold" | "bolder">;
-            default: string;
-        };
-        align: {
-            type: PropType<"left" | "right" | "center" | "justify">;
-            default: string;
-        };
-        text: StringConstructor;
-    }>, {
-        display: import('vue').ComputedRef<string>;
-    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
-        size: {
-            type: PropType<"h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "caption" | "overline" | "subtitle-1" | "subtitle-2" | "body-1" | "body-2">;
-            default: string;
-        };
-        weight: {
-            type: PropType<"thin" | "light" | "regular" | "medium" | "bold" | "bolder">;
-            default: string;
-        };
-        align: {
-            type: PropType<"left" | "right" | "center" | "justify">;
-            default: string;
-        };
-        text: StringConstructor;
-    }>> & Readonly<{}>, {
-        size: "caption" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "overline" | "subtitle-1" | "subtitle-2" | "body-1" | "body-2";
-        align: "left" | "right" | "center" | "justify";
-        weight: "bold" | "thin" | "light" | "regular" | "medium" | "bolder";
-    }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

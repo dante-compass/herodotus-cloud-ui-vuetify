@@ -80,12 +80,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: boolean;
     };
 }>> & Readonly<{}>, {
-    align: "none" | "start" | "center" | "end";
+    align: "center" | "none" | "start" | "end";
     self: boolean;
     horizontal: boolean;
     vertical: boolean;
+    justify: "center" | "none" | "end" | "around" | "between" | "evenly";
     column: boolean;
-    justify: "none" | "center" | "end" | "around" | "between" | "evenly";
     gutter: "xs" | "sm" | "md" | "lg" | "xl" | "none";
     gutterCol: boolean;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;

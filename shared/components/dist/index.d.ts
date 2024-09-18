@@ -1,11 +1,11 @@
 import { App } from 'vue';
 import { HButton, HIconButton, HVisibilityButton } from './HButton';
 import { HChartCard } from './HCard';
+import { HDateTime, HDuration } from './HDateTime';
 import { HDivider } from './HDivider';
 import { HDialog } from './HDialog';
-import { HSwitch, HTextField, HSelect, HIconSelect, HDateTime, HDuration, HFieldLabel, HTreeField } from './HForm';
+import { HSwitch, HTextField, HSelect, HIconSelect, HFieldLabel, HTreeField, HLabel, HCenterLabel } from './HForm';
 import { HColumn, HContainer, HRow } from './HGrid';
-import { HLabel, HCenterLabel } from './HLabel';
 import { HListItem } from './HList';
 import { HLoading } from './HLoading';
 import { HPagination } from './HPagination';

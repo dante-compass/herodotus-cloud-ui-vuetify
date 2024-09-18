@@ -1,5 +1,5 @@
 <template>
-  <h-row v-if="isTwoColumn()" v-bind="$attrs">
+  <h-row v-if="isTwoColumn" v-bind="$attrs">
     <h-column :cols="leftCols">
       <slot v-if="isToTheLeft"></slot>
       <slot v-else name="left"></slot>
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, computed, onMounted, toRefs } from 'vue';
+import { defineComponent, PropType, computed, ref, watch } from 'vue';
 
 import HRow from './HRow.vue';
 import HColumn from './HColumn.vue';
@@ -33,7 +33,7 @@ export default defineComponent({
 
   components: {
     HRow,
-    HColumn
+    HColumn,
   },
 
   props: {
@@ -59,26 +59,20 @@ export default defineComponent({
      * 2. 如果是两列布局
      * 那么 offset 最大值为5，即 [0, 3]
      */
-    offset: { type: Number, default: 0 }
+    offset: { type: Number, default: 0 },
   },
 
   setup(props) {
     const defaultTwoCols = 6;
     const defaultThreeCols = 4;
 
-    const state = reactive({
-      leftCols: 4,
-      centerCols: 4,
-      rightCols: 4
-    });
+    const leftCols = ref(4);
+    const centerCols = ref(4);
+    const rightCols = ref(4);
 
-    const isTwoColumn = () => {
-      if (props.mode === 'two') {
-        return true;
-      } else {
-        return false;
-      }
-    };
+    const isTwoColumn = computed(() => {
+      return !!(props.mode === 'two');
+    });
 
     // 增量
     const increment = (defaultValue: number) => {
@@ -88,47 +82,6 @@ export default defineComponent({
     // 减量
     const decrement = (defaultValue: number) => {
       return defaultValue - props.offset;
-    };
-
-    /**
-     * 左侧比右侧宽
-     * @param defaultValue 三列或两列模式下，各个列宽度的默认值
-     */
-    const leftIsWider = (defaultValue: number) => {
-      state.leftCols = increment(defaultValue);
-      state.rightCols = decrement(defaultValue);
-    };
-
-    /**
-     * 右侧比左侧宽
-     * @param defaultValue 三列或两列模式下，各个列宽度的默认值
-     */
-    const rightIsWider = (defaultValue: number) => {
-      state.leftCols = decrement(defaultValue);
-      state.rightCols = increment(defaultValue);
-    };
-
-    /**
-     * 在三列的情况下，如果offset为奇数，在计算左右平均值时，有余数。默认把这个余数加到右侧
-     * @param value 值
-     * @param margin 计算左右平均值的余数
-     */
-    const setValue = (value: number, margin = 0) => {
-      state.leftCols = value;
-      state.rightCols = value + margin;
-    };
-
-    const setDefaultValueForTow = () => {
-      setValue(defaultTwoCols);
-    };
-
-    const setDefaultValueForCenter = () => {
-      state.centerCols = defaultThreeCols;
-    };
-
-    const setDefaultValueForThree = () => {
-      setDefaultValueForCenter();
-      setValue(defaultThreeCols);
     };
 
     /**
@@ -160,16 +113,57 @@ export default defineComponent({
       return Math.floor(getDifference() / 2);
     };
 
+    /**
+     * 左侧比右侧宽
+     * @param defaultValue 三列或两列模式下，各个列宽度的默认值
+     */
+    const leftIsWider = (defaultValue: number) => {
+      leftCols.value = increment(defaultValue);
+      rightCols.value = decrement(defaultValue);
+    };
+
+    /**
+     * 右侧比左侧宽
+     * @param defaultValue 三列或两列模式下，各个列宽度的默认值
+     */
+    const rightIsWider = (defaultValue: number) => {
+      leftCols.value = decrement(defaultValue);
+      rightCols.value = increment(defaultValue);
+    };
+
+    /**
+     * 在三列的情况下，如果offset为奇数，在计算左右平均值时，有余数。默认把这个余数加到右侧
+     * @param value 值
+     * @param margin 计算左右平均值的余数
+     */
+    const setValue = (value: number, margin = 0) => {
+      leftCols.value = value;
+      rightCols.value = value + margin;
+    };
+
+    const setDefaultValueForTow = () => {
+      setValue(defaultTwoCols);
+    };
+
+    const setDefaultValueForCenter = () => {
+      centerCols.value = defaultThreeCols;
+    };
+
+    const setDefaultValueForThree = () => {
+      setDefaultValueForCenter();
+      setValue(defaultThreeCols);
+    };
+
     const isToTheLeft = computed(() => {
-      return state.leftCols > state.rightCols;
+      return leftCols.value > rightCols.value;
     });
 
     const isToTheRight = computed(() => {
-      return state.leftCols < state.rightCols;
+      return leftCols.value < rightCols.value;
     });
 
     const adjustWidth = () => {
-      if (isTwoColumn()) {
+      if (isTwoColumn.value) {
         switch (props.wider) {
           case 'start':
             leftIsWider(defaultTwoCols);
@@ -184,7 +178,7 @@ export default defineComponent({
       } else {
         switch (props.wider) {
           case 'center':
-            state.centerCols = maximum();
+            centerCols.value = maximum();
             const surplus = getSurplus();
             if (isEven(getDifference())) {
               setValue(surplus);
@@ -207,16 +201,22 @@ export default defineComponent({
       }
     };
 
-    onMounted(() => {
-      adjustWidth();
-    });
+    watch(
+      () => props,
+      () => {
+        adjustWidth();
+      },
+      { immediate: true },
+    );
 
     return {
-      ...toRefs(state),
+      leftCols,
+      centerCols,
+      rightCols,
       isTwoColumn,
       isToTheLeft,
-      isToTheRight
+      isToTheRight,
     };
-  }
+  },
 });
 </script>

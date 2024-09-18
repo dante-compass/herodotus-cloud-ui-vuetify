@@ -32,12 +32,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: number;
     };
 }>, {
-    isTwoColumn: () => boolean;
-    isToTheLeft: import('vue').ComputedRef<boolean>;
-    isToTheRight: import('vue').ComputedRef<boolean>;
     leftCols: import('vue').Ref<number, number>;
     centerCols: import('vue').Ref<number, number>;
     rightCols: import('vue').Ref<number, number>;
+    isTwoColumn: import('vue').ComputedRef<boolean>;
+    isToTheLeft: import('vue').ComputedRef<boolean>;
+    isToTheRight: import('vue').ComputedRef<boolean>;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     mode: {
         type: PropType<"two" | "three">;
@@ -73,7 +73,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
 }>> & Readonly<{}>, {
     offset: number;
     mode: "two" | "three";
-    wider: "default" | "start" | "center" | "end";
+    wider: "default" | "center" | "start" | "end";
 }, {}, {
     HRow: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         column: {
@@ -144,12 +144,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             default: boolean;
         };
     }>> & Readonly<{}>, {
-        align: "none" | "start" | "center" | "end";
+        align: "center" | "none" | "start" | "end";
         self: boolean;
         horizontal: boolean;
         vertical: boolean;
+        justify: "center" | "none" | "end" | "around" | "between" | "evenly";
         column: boolean;
-        justify: "none" | "center" | "end" | "around" | "between" | "evenly";
         gutter: "xs" | "sm" | "md" | "lg" | "xl" | "none";
         gutterCol: boolean;
     }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
