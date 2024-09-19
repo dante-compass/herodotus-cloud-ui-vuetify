@@ -31043,9 +31043,6 @@ var labelRequired = function() {
     if (is$a(node2, "bpmn:Gateway") && !isForking(node2)) {
       return;
     }
-    if (is$a(node2, "bpmn:BoundaryEvent")) {
-      return;
-    }
     if (is$a(node2, "bpmn:SubProcess")) {
       return;
     }
@@ -31535,6 +31532,20 @@ function disallowNodeType$2(type) {
   };
 }
 helper.disallowNodeType = disallowNodeType$2;
+function findParent(node2, type) {
+  if (!node2) {
+    return null;
+  }
+  const parent = node2.$parent;
+  if (!parent) {
+    return node2;
+  }
+  if (is$8(parent, type)) {
+    return parent;
+  }
+  return findParent(parent, type);
+}
+helper.findParent = findParent;
 const disallowNodeType$1 = helper.disallowNodeType;
 var noComplexGateway = disallowNodeType$1("bpmn:ComplexGateway");
 const rule_6 = /* @__PURE__ */ getDefaultExportFromCjs(noComplexGateway);

@@ -1,0 +1,1 @@
+import{r}from"../modules/npm-@vue-reactivity-BbKY7Y-t.js";import{w as i}from"../modules/npm-@vue-runtime-core-B46gwpI4.js";function d(n,c=!0){const e=r([]),u=r(!1),o=r({}),s=(t={})=>{n.fetchTree(t).then(f=>{const a=f.data;a?e.value=a:e.value=[]})};return i(()=>o.value,t=>{s(t)},{deep:!0,immediate:c}),{loading:u,conditions:o,treeItems:e,fetchTree:s}}export{d as u};

@@ -1,1 +1,0 @@
-import{d as i,l as s}from"../modules/npm-@vue-runtime-core-BfniB-5N.js";const c=i({name:"HEmployeeCondition",props:{conditions:{type:Object,required:!0}},emits:["update:conditions"],setup(e,{emit:n}){const o=s({get:()=>e.conditions,set:t=>{n("update:conditions",t)}});return{conditionsModelValue:o,onClear:()=>{o.value={}}}}});export{c as _};

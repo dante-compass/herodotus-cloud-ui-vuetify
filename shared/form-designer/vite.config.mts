@@ -26,6 +26,13 @@ export default defineConfig({
       '/#': path.resolve(__dirname, 'types')
     }
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler' // or 'modern'
+      }
+    }
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
