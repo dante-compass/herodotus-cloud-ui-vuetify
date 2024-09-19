@@ -44,14 +44,14 @@
 import { defineComponent, ref, Ref, onMounted } from 'vue';
 
 import type {
-  ConstantDictionary,
+  Dictionary,
   SysAttributeEntity,
   SysAttributeConditions,
   SysAttributeProps,
   QTableColumnProps,
 } from '/@/lib/declarations';
 
-import { CONSTANTS, useDictionaryStore } from '/@/composables/constants';
+import { CONSTANTS, useDictionary } from '/@/composables/constants';
 import { lodash, api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
@@ -81,7 +81,7 @@ export default defineComponent({
     const rowKey: SysAttributeProps = 'attributeId';
 
     const selected = ref([]);
-    const index = ref({}) as Ref<Record<string, ConstantDictionary>>;
+    const index = ref({}) as Ref<Record<string, Dictionary>>;
 
     const columns: QTableColumnProps = [
       { name: 'requestMethod', field: 'requestMethod', align: 'center', label: '权限接口' },
@@ -92,12 +92,11 @@ export default defineComponent({
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
-    const { getDictionary } = useDictionaryStore();
+    const { options } = useDictionary('PermissionExpression');
 
     onMounted(() => {
-      const dictionary = getDictionary('PermissionExpression');
-      if (dictionary) {
-        dictionary.forEach(element => {
+      if (options.value) {
+        options.value.forEach(element => {
           index.value[element.ordinal] = element;
         });
       }

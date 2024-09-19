@@ -11,7 +11,7 @@ export {
   AvatarUtils,
   PKCE,
   standardDeleteNotify,
-  parseResponseStatus
+  parseResponseStatus,
 } from '@herodotus/core';
 
 export { createApi } from '@herodotus/apis';

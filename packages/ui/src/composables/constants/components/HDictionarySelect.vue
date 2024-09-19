@@ -1,9 +1,10 @@
 <template>
   <q-select
     v-model="selectedValue"
-    :options="items"
+    :options="options"
     :option-label="optionLabel"
     :option-value="optionValue"
+    :name="dictionary"
     outlined
     use-chips
     clearable
@@ -16,11 +17,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, reactive, toRefs, onBeforeMount } from 'vue';
+import { defineComponent, computed } from 'vue';
 
-import type { ConstantDictionary } from '/@/lib/declarations';
-
-import { useDictionaryStore } from '../store';
+import { useDictionary } from '../hooks';
 
 export default defineComponent({
   name: 'HDictionarySelect',
@@ -35,10 +34,6 @@ export default defineComponent({
   emits: ['update:modelValue'],
 
   setup(props, { emit }) {
-    const state = reactive({
-      items: [] as Array<ConstantDictionary>,
-    });
-
     const selectedValue = computed({
       // 子组件v-model绑定 计算属性, 一旦发生变化, 就会给父组件传递值
       get: () => props.modelValue,
@@ -47,19 +42,11 @@ export default defineComponent({
       },
     });
 
-    const { getDictionary } = useDictionaryStore();
-
-    const initialize = () => {
-      state.items = getDictionary(props.dictionary);
-    };
-
-    onBeforeMount(() => {
-      initialize();
-    });
+    const { options } = useDictionary(props.dictionary);
 
     return {
-      ...toRefs(state),
       selectedValue,
+      options,
     };
   },
 });

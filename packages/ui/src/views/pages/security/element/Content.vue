@@ -24,7 +24,7 @@
       placeholder="如果包含子节点，即 children 中元素的 path"></h-text-field>
 
     <h-tree-field
-      v-model:selected="editedItem.parentId"
+      v-model="editedItem.parentId"
       :items="treeItems"
       bottom-slots
       label="上级节点"></h-tree-field>
@@ -56,14 +56,13 @@ import type { SysElementEntity, SysElementConditions } from '/@/lib/declarations
 import { useTableItem, useTreeItems } from '/@/hooks';
 import { api } from '/@/lib/utils';
 
-import { HCenterFormLayout, HTreeField } from '/@/components';
+import { HCenterFormLayout } from '/@/components';
 
 export default defineComponent({
   name: 'SysElementContent',
 
   components: {
     HCenterFormLayout,
-    HTreeField,
   },
 
   setup() {

@@ -25,7 +25,7 @@
 
           <template #body-cell-identity="props">
             <q-td key="identity" :props="props">
-              {{ display('Identity', props.row) }}
+              {{ getDictionaryItemDisplay('Identity', props.row.identity) }}
             </q-td>
           </template>
 
@@ -60,7 +60,7 @@ import { useRouteStore } from '/@/stores';
 import { HDeleteButton, HTable } from '/@/components';
 
 import { HOrganizationTree, HDepartmentTree } from '/@/composables/hr';
-import { useDictionaryStore } from '/@/composables/constants';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'SysOwnership',
@@ -90,7 +90,7 @@ export default defineComponent({
     const router = useRouter();
     const store = useRouteStore();
 
-    const { display } = useDictionaryStore();
+    const { getDictionaryItemDisplay } = useDictionary('identity', 'DataItemStatus');
 
     const columns: QTableColumnProps = [
       { name: 'employeeName', field: 'employeeName', align: 'center', label: '姓名' },
@@ -184,7 +184,7 @@ export default defineComponent({
       totalPages,
       findItems,
       deleteAllocatable,
-      display,
+      getDictionaryItemDisplay,
       toAllocatable,
       isShowOperation,
     };

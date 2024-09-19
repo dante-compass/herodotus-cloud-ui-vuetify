@@ -1,10 +1,26 @@
 import { StatusEnum } from '/@/enums';
 
-export interface Entity {
-
-}
+export interface Entity {}
 
 export interface Conditions {}
+
+export interface BaseEntity extends Entity {
+  createTime?: Date;
+  updateTime?: Date;
+}
+
+export interface AbstractJpaEntity extends BaseEntity {
+  createBy?: string;
+  updateBy?: string;
+  ranking?: number;
+}
+
+export interface BaseSysEntity extends AbstractJpaEntity {
+  status: StatusEnum;
+  reserved: boolean;
+  reversion: number;
+  description: string;
+}
 
 export type Page<T extends Entity> = {
   content: T[];
@@ -28,20 +44,6 @@ export interface Tree {
   id: string;
   parentId: string;
   name: string;
-  weight: number;
-}
-
-export interface BaseEntity extends Entity {
-  createTime?: Date;
-  updateTime?: Date;
-  createBy?: string;
-  updateBy?: string;
-  ranking?: number;
-}
-
-export interface BaseSysEntity extends BaseEntity {
-  status: StatusEnum;
-  reserved: boolean;
-  reversion: number;
-  description: string;
+  selector: number;
+  children?: Array<Tree>;
 }

@@ -1,4 +1,4 @@
-declare const _default: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     modelValue: {
         type: BooleanConstructor;
         default: boolean;
@@ -33,12 +33,12 @@ declare const _default: import('vue').DefineComponent<globalThis.ExtractPropType
         default: boolean;
     };
 }>, {
-    showDialog: globalThis.WritableComputedRef<boolean, boolean>;
-    showLoading: globalThis.WritableComputedRef<boolean, boolean>;
+    showDialog: import('vue').WritableComputedRef<boolean, boolean>;
+    showLoading: import('vue').WritableComputedRef<boolean, boolean>;
     onClose: () => void;
     onCancel: () => void;
     onConfirm: () => void;
-}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "update:loading" | "confirm" | "cancel" | "close")[], "update:modelValue" | "update:loading" | "confirm" | "cancel" | "close", import('vue').PublicProps, Readonly<globalThis.ExtractPropTypes<{
+}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, ("update:modelValue" | "update:loading" | "confirm" | "cancel" | "close")[], "update:modelValue" | "update:loading" | "confirm" | "cancel" | "close", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {
         type: BooleanConstructor;
         default: boolean;

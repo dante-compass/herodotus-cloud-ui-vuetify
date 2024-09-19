@@ -31,7 +31,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     }>> & Readonly<{}>, {
         headerClass: string;
     }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-    HSwitch: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+    HSwitch: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         modelValue: {
             type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
             default: boolean;
@@ -49,19 +49,44 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             default: string;
         };
     }>, {
-        switchValue: globalThis.WritableComputedRef<string | number | boolean, string | number | boolean>;
-    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, any, {
+        switchValue: import('vue').WritableComputedRef<string | number | boolean, string | number | boolean>;
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+        modelValue: {
+            type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
+            default: boolean;
+        };
+        trueValue: {
+            type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
+            default: boolean;
+        };
+        falseValue: {
+            type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
+            default: boolean;
+        };
+        color: {
+            type: StringConstructor;
+            default: string;
+        };
+    }>> & Readonly<{
+        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    }>, {
         color: string;
         modelValue: string | number | boolean;
         trueValue: string | number | boolean;
         falseValue: string | number | boolean;
     }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-    HTextField: import('vue').DefineComponent<globalThis.ExtractPropTypes<{
+    HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         modelValue: {
             type: (StringConstructor | NumberConstructor)[];
         };
     }>, {
-        text: globalThis.WritableComputedRef<string | number | undefined, string | number | undefined>;
-    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, any, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+        modelValue: {
+            type: (StringConstructor | NumberConstructor)[];
+        };
+    }>> & Readonly<{
+        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

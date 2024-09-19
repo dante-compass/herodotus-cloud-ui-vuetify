@@ -105,9 +105,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 
 import { useRealTimeInformation } from '/@/composables/messages';
+import { useDictionary } from '/@/composables/constants';
 import {
   HBarChart,
   HCategoryChart,
@@ -139,6 +140,16 @@ export default defineComponent({
 
   setup() {
     const { onlineUserCount } = useRealTimeInformation();
+
+    /**
+     * 初始化信息获取
+     *
+     * 用户登录成功后，需要首次获取的以及需要第一次初始化的信息，在此处进行处理。
+     * 因为，Console 页面是登录成功后第一次展现的页面，所以在此处处理
+     */
+    onMounted(() => {
+      // onBeforeInitDictionary();
+    });
 
     return {
       onlineUserCount,

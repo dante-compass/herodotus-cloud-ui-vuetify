@@ -2,7 +2,7 @@ import type {
   AxiosHttpResult,
   OAuth2Token,
   Conditions,
-  ConstantDictionary,
+  Dictionary,
   EmptyObject,
   Entity,
   Page,
@@ -11,7 +11,7 @@ import type {
   Sort,
   Tree,
   BaseEntity,
-  BaseSysEntity
+  BaseSysEntity,
 } from '@herodotus/core';
 
 import { ApplicationEnum } from '/@/enums';
@@ -33,7 +33,7 @@ export type {
   AxiosHttpResult,
   OAuth2Token,
   Conditions,
-  ConstantDictionary,
+  Dictionary,
   EmptyObject,
   Entity,
   Page,
@@ -42,5 +42,5 @@ export type {
   Sort,
   Tree,
   BaseEntity,
-  BaseSysEntity
+  BaseSysEntity,
 };

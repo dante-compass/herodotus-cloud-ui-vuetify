@@ -36,7 +36,7 @@ export type {
   BehaviorCaptchaCategory,
   CaptchaResource,
   CaptchaData,
-  ConstantDictionary,
+  Dictionary,
   SignInErrorStatus,
   SysPermissionEntity,
   SysPermissionConditions,
@@ -115,6 +115,15 @@ export type {
   IotDeviceEntity,
   IotDeviceConditions,
   IotDeviceProps,
+  IotTslUnitEntity,
+  IotTslUnitConditions,
+  IotTslUnitProps,
+  IotTslAttributeEntity,
+  IotTslAttributeConditions,
+  IotTslAttributeProps,
+  IotTslFunctionEntity,
+  IotTslFunctionConditions,
+  IotTslFunctionProps,
 } from '@herodotus/apis';
 
 export type {
@@ -176,6 +185,6 @@ export type { BpmnDesignerResources } from '@herodotus/bpmn-designer';
 
 export type { EChartsOption, EChartsCoreOption } from 'echarts';
 
-export type { QTableProps, QTree, QUploaderFactoryObject } from 'quasar';
+export type { QTableProps, QTree, QUploaderFactoryObject, QSelect } from 'quasar';
 
 export type { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';

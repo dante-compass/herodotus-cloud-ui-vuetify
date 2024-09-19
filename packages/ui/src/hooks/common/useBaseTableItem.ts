@@ -31,6 +31,8 @@ export default function useBaseTableItem<E extends Entity>() {
           return '配置' + content;
         case OperationEnum.EDIT:
           return '编辑' + content;
+        case OperationEnum.INFO:
+          return '查看' + content;
         default:
           return '新建' + content;
       }

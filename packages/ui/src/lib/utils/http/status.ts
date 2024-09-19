@@ -108,7 +108,7 @@ export const statusCode = (axiosInstance: AxiosInstance, response?: AxiosRespons
 
 export const processor = (axiosInstance: AxiosInstance, error: AxiosError) => {
   const { response, message, code } = error;
-
+  
   console.log(code);
 
   switch (code) {

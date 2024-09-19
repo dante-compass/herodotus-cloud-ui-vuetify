@@ -14,17 +14,21 @@
 import { defineComponent, computed, watch, ref } from 'vue';
 
 import { moment, DURATION_UNITS } from '/@/lib/utils';
+import { HContainer } from '../HGrid';
 import HSelect from './HSelect.vue';
+import HTextField from './HTextField.vue';
 
 export default defineComponent({
   name: 'HDuration',
 
   components: {
-    HSelect
+    HContainer,
+    HTextField,
+    HSelect,
   },
 
   props: {
-    modelValue: { type: [String, Number], defalut: '' }
+    modelValue: { type: [String, Number], defalut: '' },
   },
 
   emits: ['update:modelValue'],
@@ -38,7 +42,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const convertDurationToData = (value: number | string) => {
@@ -75,8 +79,8 @@ export default defineComponent({
         }
       },
       {
-        immediate: true
-      }
+        immediate: true,
+      },
     );
 
     watch(
@@ -85,7 +89,7 @@ export default defineComponent({
         if (newValue) {
           convertDataToDuration(amount.value, newValue);
         }
-      }
+      },
     );
 
     watch(
@@ -94,15 +98,15 @@ export default defineComponent({
         if (newValue) {
           convertDataToDuration(newValue, unit.value);
         }
-      }
+      },
     );
 
     return {
       durationValue,
       amount,
       unit,
-      options
+      options,
     };
-  }
+  },
 });
 </script>

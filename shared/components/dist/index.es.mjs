@@ -1,12 +1,12 @@
-import { QTooltip, QBtn, QIcon, QCardSection, QSeparator, QCard, QSpace, QCardActions, QSpinnerDots, QInnerLoading, QDialog, ClosePopup, QDate, QPopupProxy, QTime, QInput, QSelect, QItemSection, QItemLabel, QItem, QToggle, Ripple, QSpinner, QSpinnerAudio, QSpinnerBall, QSpinnerBars, QSpinnerBox, QSpinnerClock, QSpinnerComment, QSpinnerCube, QSpinnerFacebook, QSpinnerGears, QSpinnerGrid, QSpinnerHearts, QSpinnerHourglass, QSpinnerInfinity, QSpinnerIos, QSpinnerOrbit, QSpinnerOval, QSpinnerPie, QSpinnerPuff, QSpinnerRadio, QSpinnerRings, QSpinnerTail, QPagination } from "quasar";
-import { defineComponent, openBlock, createBlock, normalizeProps, guardReactiveProps, createSlots, withCtx, renderSlot, createTextVNode, toDisplayString, createCommentVNode, resolveComponent, mergeProps, computed, createVNode, createElementVNode, createElementBlock, normalizeClass, reactive, onMounted, toRefs, normalizeStyle, resolveDirective, withDirectives, ref, watch, resolveDynamicComponent, nextTick, onUnmounted } from "vue";
-import { moment } from "@herodotus/core";
-import { moment as moment2 } from "@herodotus/core";
+import { QTooltip, QBtn, QIcon, QCardSection, QSeparator, QCard, ClosePopup, QDate, QPopupProxy, QTime, QInput, QItemSection, QItemLabel, QItem, QSelect, QToggle, QTree, QSpace, QCardActions, QSpinnerDots, QInnerLoading, QDialog, Ripple, QSpinner, QSpinnerAudio, QSpinnerBall, QSpinnerBars, QSpinnerBox, QSpinnerClock, QSpinnerComment, QSpinnerCube, QSpinnerFacebook, QSpinnerGears, QSpinnerGrid, QSpinnerHearts, QSpinnerHourglass, QSpinnerInfinity, QSpinnerIos, QSpinnerOrbit, QSpinnerOval, QSpinnerPie, QSpinnerPuff, QSpinnerRadio, QSpinnerRings, QSpinnerTail, QPagination } from "quasar";
+import { defineComponent, openBlock, createBlock, normalizeProps, guardReactiveProps, createSlots, withCtx, renderSlot, createTextVNode, toDisplayString, createCommentVNode, resolveComponent, mergeProps, computed, createVNode, createElementVNode, createElementBlock, resolveDirective, withDirectives, ref, onMounted, watch, normalizeClass, normalizeStyle, reactive, resolveDynamicComponent, nextTick, onUnmounted } from "vue";
+import { lodash, moment } from "@herodotus/core";
+import { lodash as lodash2, moment as moment2 } from "@herodotus/core";
 import * as allIcons from "@mdi/js";
 import { tsParticles } from "@tsparticles/engine";
 import { loadBasic } from "@tsparticles/basic";
 import { loadParticlesLinksInteraction } from "@tsparticles/interaction-particles-links";
-const _sfc_main$n = defineComponent({
+const _sfc_main$p = defineComponent({
   name: "HButton",
   props: {
     tooltip: { type: String, default: "" }
@@ -19,7 +19,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_tooltip = QTooltip;
   const _component_q_btn = QBtn;
   return openBlock(), createBlock(_component_q_btn, normalizeProps(guardReactiveProps(_ctx.$attrs)), createSlots({
@@ -42,8 +42,8 @@ function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     } : void 0
   ]), 1040);
 }
-const HButton = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$n]]);
-const _sfc_main$m = defineComponent({
+const HButton = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$p]]);
+const _sfc_main$o = defineComponent({
   name: "HIconButton",
   components: {
     HButton
@@ -54,7 +54,7 @@ const _sfc_main$m = defineComponent({
     dense: { type: Boolean, default: false }
   }
 });
-function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_button = resolveComponent("h-button");
   return openBlock(), createBlock(_component_h_button, mergeProps({
     flat: "",
@@ -64,8 +64,8 @@ function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     size: _ctx.size
   }, _ctx.$attrs), null, 16, ["color", "dense", "size"]);
 }
-const HIconButton = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$m]]);
-const _sfc_main$l = defineComponent({
+const HIconButton = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$o]]);
+const _sfc_main$n = defineComponent({
   name: "HVisibilityButton",
   props: {
     modelValue: { type: Boolean }
@@ -84,7 +84,7 @@ const _sfc_main$l = defineComponent({
     };
   }
 });
-function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_icon = QIcon;
   return openBlock(), createBlock(_component_q_icon, {
     name: _ctx.isShowPassword ? "visibility" : "visibility_off",
@@ -92,7 +92,7 @@ function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = ($event) => _ctx.isShowPassword = !_ctx.isShowPassword)
   }, null, 8, ["name"]);
 }
-const HVisibilityButton = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$l]]);
+const HVisibilityButton = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$n]]);
 HButton.install = (app) => {
   app.component(HButton.name, HButton);
 };
@@ -102,19 +102,19 @@ HIconButton.install = (app) => {
 HVisibilityButton.install = (app) => {
   app.component(HVisibilityButton.name, HVisibilityButton);
 };
-const _sfc_main$k = defineComponent({
+const _sfc_main$m = defineComponent({
   name: "HChartCard",
   props: {
     title: { type: String },
     subtitle: { type: String, default: "" }
   }
 });
-const _hoisted_1$7 = { class: "text-h6" };
-const _hoisted_2$4 = {
+const _hoisted_1$8 = { class: "text-h6" };
+const _hoisted_2$5 = {
   key: 0,
   class: "text-subtitle2"
 };
-function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_card_section = QCardSection;
   const _component_q_separator = QSeparator;
   const _component_q_card = QCard;
@@ -122,8 +122,8 @@ function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     default: withCtx(() => [
       createVNode(_component_q_card_section, null, {
         default: withCtx(() => [
-          createElementVNode("div", _hoisted_1$7, toDisplayString(_ctx.title), 1),
-          _ctx.subtitle ? (openBlock(), createElementBlock("div", _hoisted_2$4, toDisplayString(_ctx.subtitle), 1)) : createCommentVNode("", true)
+          createElementVNode("div", _hoisted_1$8, toDisplayString(_ctx.title), 1),
+          _ctx.subtitle ? (openBlock(), createElementBlock("div", _hoisted_2$5, toDisplayString(_ctx.subtitle), 1)) : createCommentVNode("", true)
         ]),
         _: 1
       }),
@@ -138,44 +138,125 @@ function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   });
 }
-const HChartCard = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
+const HChartCard = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$m]]);
 HChartCard.install = (app) => {
   app.component(HChartCard.name, HChartCard);
 };
-var BreakPointEnum = /* @__PURE__ */ ((BreakPointEnum2) => {
-  BreakPointEnum2["xs"] = "xs";
-  BreakPointEnum2["sm"] = "sm";
-  BreakPointEnum2["md"] = "md";
-  BreakPointEnum2["lg"] = "lg";
-  BreakPointEnum2["xl"] = "xl";
-  return BreakPointEnum2;
-})(BreakPointEnum || {});
-var SpinnerEnum = /* @__PURE__ */ ((SpinnerEnum2) => {
-  SpinnerEnum2["DEFAULT"] = "default";
-  SpinnerEnum2["AUDIO"] = "audio";
-  SpinnerEnum2["BALL"] = "ball";
-  SpinnerEnum2["BARS"] = "bars";
-  SpinnerEnum2["BOX"] = "box";
-  SpinnerEnum2["CLOCK"] = "clock";
-  SpinnerEnum2["COMMENT"] = "comment";
-  SpinnerEnum2["CUBE"] = "cube";
-  SpinnerEnum2["DOTS"] = "dots";
-  SpinnerEnum2["FACEBOOK"] = "facebook";
-  SpinnerEnum2["GEARS"] = "gears";
-  SpinnerEnum2["GRID"] = "grid";
-  SpinnerEnum2["HEARTS"] = "hearts";
-  SpinnerEnum2["HOURGLASS"] = "hourglass";
-  SpinnerEnum2["INFINITY"] = "infinity";
-  SpinnerEnum2["IOS"] = "ios";
-  SpinnerEnum2["ORBIT"] = "orbit";
-  SpinnerEnum2["OVAL"] = "oval";
-  SpinnerEnum2["PIE"] = "pie";
-  SpinnerEnum2["PUFF"] = "puff";
-  SpinnerEnum2["RADIO"] = "radio";
-  SpinnerEnum2["RINGS"] = "rings";
-  SpinnerEnum2["TAIL"] = "tail";
-  return SpinnerEnum2;
-})(SpinnerEnum || {});
+const _sfc_main$l = defineComponent({
+  name: "HDateTime",
+  directives: {
+    ClosePopup
+  },
+  props: {
+    modelValue: { type: String }
+  },
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
+    const dateTimeValue = computed({
+      get: () => props.modelValue,
+      set: (newValue) => {
+        emit("update:modelValue", newValue);
+      }
+    });
+    return {
+      dateTimeValue
+    };
+  }
+});
+const _hoisted_1$7 = { class: "row items-center justify-end" };
+const _hoisted_2$4 = { class: "row items-center justify-end" };
+function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_q_btn = QBtn;
+  const _component_q_date = QDate;
+  const _component_q_popup_proxy = QPopupProxy;
+  const _component_q_icon = QIcon;
+  const _component_q_time = QTime;
+  const _component_q_input = QInput;
+  const _directive_close_popup = resolveDirective("close-popup");
+  return openBlock(), createBlock(_component_q_input, mergeProps({
+    modelValue: _ctx.dateTimeValue,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => _ctx.dateTimeValue = $event),
+    outlined: "",
+    "bottom-slots": ""
+  }, _ctx.$attrs), {
+    prepend: withCtx(() => [
+      createVNode(_component_q_icon, {
+        name: "event",
+        class: "cursor-pointer"
+      }, {
+        default: withCtx(() => [
+          createVNode(_component_q_popup_proxy, {
+            cover: "",
+            "transition-show": "scale",
+            "transition-hide": "scale"
+          }, {
+            default: withCtx(() => [
+              createVNode(_component_q_date, {
+                modelValue: _ctx.dateTimeValue,
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.dateTimeValue = $event),
+                mask: "YYYY-MM-DD HH:mm:ss"
+              }, {
+                default: withCtx(() => [
+                  createElementVNode("div", _hoisted_1$7, [
+                    withDirectives(createVNode(_component_q_btn, {
+                      label: "关闭",
+                      color: "primary"
+                    }, null, 512), [
+                      [_directive_close_popup]
+                    ])
+                  ])
+                ]),
+                _: 1
+              }, 8, ["modelValue"])
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      })
+    ]),
+    append: withCtx(() => [
+      createVNode(_component_q_icon, {
+        name: "access_time",
+        class: "cursor-pointer"
+      }, {
+        default: withCtx(() => [
+          createVNode(_component_q_popup_proxy, {
+            cover: "",
+            "transition-show": "scale",
+            "transition-hide": "scale"
+          }, {
+            default: withCtx(() => [
+              createVNode(_component_q_time, {
+                modelValue: _ctx.dateTimeValue,
+                "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.dateTimeValue = $event),
+                mask: "YYYY-MM-DD HH:mm:ss",
+                format24h: "",
+                "with-seconds": ""
+              }, {
+                default: withCtx(() => [
+                  createElementVNode("div", _hoisted_2$4, [
+                    withDirectives(createVNode(_component_q_btn, {
+                      label: "关闭",
+                      color: "primary"
+                    }, null, 512), [
+                      [_directive_close_popup]
+                    ])
+                  ])
+                ]),
+                _: 1
+              }, 8, ["modelValue"])
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      })
+    ]),
+    _: 1
+  }, 16, ["modelValue"]);
+}
+const HDateTime = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$l]]);
 const DURATION_UNITS = [
   { text: "天", value: "days" },
   { text: "小时", value: "hours" },
@@ -215,892 +296,6 @@ const createColClass = (breakpoint = "", size = "") => {
     }
   }
 };
-const _sfc_main$j = defineComponent({
-  name: "HColumn",
-  props: {
-    cols: { type: [String, Number], default: "" },
-    xs: { type: String, default: "" },
-    sm: { type: String, default: "" },
-    md: { type: String, default: "" },
-    lg: { type: String, default: "" },
-    xl: { type: String, default: "" },
-    auto: { type: Boolean, default: false },
-    color: { type: String, default: "" }
-  },
-  setup(props) {
-    const classes = computed(() => {
-      let result = [];
-      if (props.auto) {
-        result.push(createColClass(Grid.auto));
-      } else {
-        if (props.cols) {
-          result.push(createColClass("", props.cols));
-        } else {
-          result.push(createColClass());
-          if (props.xs) {
-            result.push(createColClass(BreakPointEnum.xs, props.xs));
-          }
-          if (props.sm) {
-            result.push(createColClass(BreakPointEnum.sm, props.sm));
-          }
-          if (props.md) {
-            result.push(createColClass(BreakPointEnum.md, props.md));
-          }
-          if (props.lg) {
-            result.push(createColClass(BreakPointEnum.lg, props.lg));
-          }
-          if (props.xl) {
-            result.push(createColClass(BreakPointEnum.xl, props.xl));
-          }
-        }
-      }
-      if (props.color) {
-        result.push(createTextColor(props.color));
-      }
-      return result;
-    });
-    return { classes };
-  }
-});
-function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", {
-    class: normalizeClass(_ctx.classes)
-  }, [
-    renderSlot(_ctx.$slots, "default")
-  ], 2);
-}
-const HColumn = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j]]);
-const constants = {
-  row: "row",
-  column: "column",
-  justify: "justify",
-  self: "self",
-  align: "items",
-  gutter: "q-gutter",
-  gutterWithCol: "q-col-gutter"
-};
-const _sfc_main$i = defineComponent({
-  name: "HRow",
-  props: {
-    column: { type: Boolean, default: false },
-    self: { type: Boolean, default: false },
-    align: { type: String, default: "none" },
-    justify: { type: String, default: "none" },
-    gutter: { type: String, default: "none" },
-    gutterCol: { type: Boolean, default: false },
-    /**
-     * horizontal gutter
-     */
-    horizontal: { type: Boolean, default: false },
-    /**
-     * vertical gutter
-     */
-    vertical: { type: Boolean, default: false }
-  },
-  setup(props) {
-    const classes = reactive([]);
-    const createBase = () => {
-      return props.column ? constants.column : constants.row;
-    };
-    const createGutter = (size = "", direction = "") => {
-      let result = constants.gutter;
-      if (props.gutterCol) {
-        result = constants.gutterWithCol;
-      }
-      if (direction) {
-        result = result + "-" + direction;
-      }
-      result = result + "-" + size;
-      return result;
-    };
-    const createJustify = () => {
-      if (props.justify !== "none") {
-        return constants.justify + "-" + props.justify;
-      } else {
-        return "";
-      }
-    };
-    const createAlign = () => {
-      if (props.align !== "none") {
-        let result = constants.align;
-        if (props.self) {
-          result = constants.self;
-        }
-        return result + "-" + props.align;
-      } else {
-        return "";
-      }
-    };
-    const createHorizontalGutter = (size) => {
-      return createGutter(size, "x");
-    };
-    const createVerticalGutter = (size) => {
-      return createGutter(size, "y");
-    };
-    const appendClass = (value) => {
-      if (value) {
-        classes.push(value);
-      }
-    };
-    const getClasses = () => {
-      if (classes.length > 1) {
-        return classes.join(" ");
-      } else if (classes.length === 1) {
-        return classes[0];
-      } else {
-        return constants.row;
-      }
-    };
-    const initialize = () => {
-      appendClass(createBase());
-      appendClass(createJustify());
-      appendClass(createAlign());
-      if (props.gutter !== "none") {
-        if (!props.horizontal && !props.vertical) {
-          appendClass(createGutter(props.gutter));
-        } else {
-          if (props.horizontal) {
-            appendClass(createHorizontalGutter(props.gutter));
-          }
-          if (props.vertical) {
-            appendClass(createVerticalGutter(props.gutter));
-          }
-        }
-      }
-    };
-    onMounted(() => {
-      initialize();
-    });
-    return { getClasses };
-  }
-});
-function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", {
-    class: normalizeClass(_ctx.getClasses())
-  }, [
-    renderSlot(_ctx.$slots, "default")
-  ], 2);
-}
-const HRow = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$i]]);
-const _sfc_main$h = defineComponent({
-  name: "HContainer",
-  components: {
-    HRow,
-    HColumn
-  },
-  props: {
-    // 容器布局的列数，两列或者三列
-    mode: { type: String, default: "three" },
-    /**
-     * 1. 如果是三列布局：
-     * default：三列相等
-     * start：左边宽，中间默认，右边窄
-     * center：两边相同，中间宽
-     * end：右边宽，中间默认，左边窄
-     *
-     * 2.如果是两列布局：
-     * default：左右相等
-     * start：左边宽，右边窄
-     * end：右边宽，左边窄
-     */
-    wider: { type: String, default: "default" },
-    /**
-     * 1. 如果是三列布局
-     * 1.1 如果 wider 是 center，那么 offset 最大值为6，即 [0, 6]
-     * 1.2 如果 wider 是 start 或 end，那么 offset 最大值为3，即[0, 3]
-     * 2. 如果是两列布局
-     * 那么 offset 最大值为5，即 [0, 3]
-     */
-    offset: { type: Number, default: 0 }
-  },
-  setup(props) {
-    const defaultTwoCols = 6;
-    const defaultThreeCols = 4;
-    const state = reactive({
-      leftCols: 4,
-      centerCols: 4,
-      rightCols: 4
-    });
-    const isTwoColumn = () => {
-      if (props.mode === "two") {
-        return true;
-      } else {
-        return false;
-      }
-    };
-    const increment = (defaultValue) => {
-      return defaultValue + props.offset;
-    };
-    const decrement = (defaultValue) => {
-      return defaultValue - props.offset;
-    };
-    const leftIsWider = (defaultValue) => {
-      state.leftCols = increment(defaultValue);
-      state.rightCols = decrement(defaultValue);
-    };
-    const rightIsWider = (defaultValue) => {
-      state.leftCols = decrement(defaultValue);
-      state.rightCols = increment(defaultValue);
-    };
-    const setValue = (value, margin = 0) => {
-      state.leftCols = value;
-      state.rightCols = value + margin;
-    };
-    const setDefaultValueForTow = () => {
-      setValue(defaultTwoCols);
-    };
-    const setDefaultValueForCenter = () => {
-      state.centerCols = defaultThreeCols;
-    };
-    const setDefaultValueForThree = () => {
-      setDefaultValueForCenter();
-      setValue(defaultThreeCols);
-    };
-    const isEven = (value) => {
-      return Math.abs(value % 2) === 0;
-    };
-    const maximum = () => {
-      return defaultThreeCols + props.offset;
-    };
-    const getDifference = () => {
-      return 12 - maximum();
-    };
-    const getSurplus = () => {
-      return Math.floor(getDifference() / 2);
-    };
-    const isToTheLeft = computed(() => {
-      return state.leftCols > state.rightCols;
-    });
-    const isToTheRight = computed(() => {
-      return state.leftCols < state.rightCols;
-    });
-    const adjustWidth = () => {
-      if (isTwoColumn()) {
-        switch (props.wider) {
-          case "start":
-            leftIsWider(defaultTwoCols);
-            break;
-          case "end":
-            rightIsWider(defaultTwoCols);
-            break;
-          default:
-            setDefaultValueForTow();
-            break;
-        }
-      } else {
-        switch (props.wider) {
-          case "center":
-            state.centerCols = maximum();
-            const surplus = getSurplus();
-            if (isEven(getDifference())) {
-              setValue(surplus);
-            } else {
-              setValue(surplus, 1);
-            }
-            break;
-          case "start":
-            setDefaultValueForCenter();
-            leftIsWider(defaultThreeCols);
-            break;
-          case "end":
-            setDefaultValueForCenter();
-            rightIsWider(defaultThreeCols);
-            break;
-          default:
-            setDefaultValueForThree();
-            break;
-        }
-      }
-    };
-    onMounted(() => {
-      adjustWidth();
-    });
-    return {
-      ...toRefs(state),
-      isTwoColumn,
-      isToTheLeft,
-      isToTheRight
-    };
-  }
-});
-function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_column = resolveComponent("h-column");
-  const _component_h_row = resolveComponent("h-row");
-  return _ctx.isTwoColumn() ? (openBlock(), createBlock(_component_h_row, normalizeProps(mergeProps({ key: 0 }, _ctx.$attrs)), {
-    default: withCtx(() => [
-      createVNode(_component_h_column, { cols: _ctx.leftCols }, {
-        default: withCtx(() => [
-          _ctx.isToTheLeft ? renderSlot(_ctx.$slots, "default", { key: 0 }) : renderSlot(_ctx.$slots, "left", { key: 1 })
-        ]),
-        _: 3
-      }, 8, ["cols"]),
-      createVNode(_component_h_column, { cols: _ctx.rightCols }, {
-        default: withCtx(() => [
-          _ctx.isToTheRight ? renderSlot(_ctx.$slots, "default", { key: 0 }) : renderSlot(_ctx.$slots, "right", { key: 1 })
-        ]),
-        _: 3
-      }, 8, ["cols"])
-    ]),
-    _: 3
-  }, 16)) : (openBlock(), createBlock(_component_h_row, normalizeProps(mergeProps({ key: 1 }, _ctx.$attrs)), {
-    default: withCtx(() => [
-      createVNode(_component_h_column, { cols: _ctx.leftCols }, {
-        default: withCtx(() => [
-          renderSlot(_ctx.$slots, "left")
-        ]),
-        _: 3
-      }, 8, ["cols"]),
-      createVNode(_component_h_column, { cols: _ctx.centerCols }, {
-        default: withCtx(() => [
-          renderSlot(_ctx.$slots, "default")
-        ]),
-        _: 3
-      }, 8, ["cols"]),
-      createVNode(_component_h_column, { cols: _ctx.rightCols }, {
-        default: withCtx(() => [
-          renderSlot(_ctx.$slots, "right")
-        ]),
-        _: 3
-      }, 8, ["cols"])
-    ]),
-    _: 3
-  }, 16));
-}
-const HContainer = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$h]]);
-HColumn.install = (app) => {
-  app.component(HColumn.name, HColumn);
-};
-HContainer.install = (app) => {
-  app.component(HContainer.name, HContainer);
-};
-HRow.install = (app) => {
-  app.component(HRow.name, HRow);
-};
-const _sfc_main$g = defineComponent({
-  name: "HLabel",
-  props: {
-    size: {
-      type: String,
-      default: ""
-    },
-    weight: { type: String, default: "medium" },
-    align: { type: String, default: "center" },
-    text: String
-  },
-  setup(props) {
-    const getTextClass = (value) => {
-      return "text-" + value;
-    };
-    const getWeight = () => {
-      return "font-weight-" + props.weight;
-    };
-    const getTypography = () => {
-      if (props.size) {
-        return getTextClass(props.size);
-      } else {
-        return "";
-      }
-    };
-    const getAlignment = () => {
-      return getTextClass(props.align);
-    };
-    const display = computed(() => {
-      const value = [getAlignment(), getWeight()];
-      const typography = getTypography();
-      if (typography) {
-        value.push(typography);
-      }
-      return value.join(" ");
-    });
-    return {
-      display
-    };
-  }
-});
-function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", {
-    class: normalizeClass(_ctx.display)
-  }, toDisplayString(_ctx.text), 3);
-}
-const HLabel = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$g]]);
-const _sfc_main$f = defineComponent({
-  name: "HCenterLabel",
-  props: {
-    height: { type: String, default: "100px" },
-    text: String
-  }
-});
-const _hoisted_1$6 = { class: "col-12 self-center" };
-function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", {
-    class: "row text-center",
-    style: normalizeStyle(`height: ${_ctx.height}`)
-  }, [
-    createElementVNode("div", _hoisted_1$6, toDisplayString(_ctx.text), 1)
-  ], 4);
-}
-const HCenterLabel = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$f]]);
-HLabel.install = (app) => {
-  app.component(HLabel.name, HLabel);
-};
-HCenterLabel.install = (app) => {
-  app.component(HCenterLabel.name, HCenterLabel);
-};
-const _sfc_main$e = defineComponent({
-  name: "HDivider",
-  components: {
-    HContainer,
-    HLabel
-  },
-  props: {
-    wider: { type: String, default: "center" },
-    weight: {
-      type: String,
-      default: "medium"
-    },
-    offset: { type: Number, default: 0 },
-    label: String
-  },
-  setup(props) {
-    const textWeight = computed(() => {
-      return "text-center text-weight-" + props.weight;
-    });
-    return {
-      textWeight
-    };
-  }
-});
-function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_separator = QSeparator;
-  const _component_h_label = resolveComponent("h-label");
-  const _component_h_container = resolveComponent("h-container");
-  return openBlock(), createBlock(_component_h_container, {
-    mode: "three",
-    offset: _ctx.offset,
-    wider: _ctx.wider,
-    align: "center"
-  }, {
-    left: withCtx(() => [
-      createVNode(_component_q_separator)
-    ]),
-    right: withCtx(() => [
-      createVNode(_component_q_separator)
-    ]),
-    default: withCtx(() => [
-      createVNode(_component_h_label, {
-        text: _ctx.label,
-        weight: _ctx.weight
-      }, null, 8, ["text", "weight"])
-    ]),
-    _: 1
-  }, 8, ["offset", "wider"]);
-}
-const HDivider = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$e]]);
-HDivider.install = (app) => {
-  app.component(HDivider.name, HDivider);
-};
-const _sfc_main$d = defineComponent({
-  name: "HDialog",
-  props: {
-    modelValue: { type: Boolean, default: false, required: true },
-    loading: { type: Boolean, default: false },
-    title: { type: String, default: "" },
-    height: { type: String, default: "500px" },
-    spinnerSize: { type: String, default: "50px" },
-    hideConfirm: { type: Boolean, default: false },
-    hideCancel: { type: Boolean, default: false },
-    hideClose: { type: Boolean, default: false }
-  },
-  emits: ["update:modelValue", "update:loading", "confirm", "cancel", "close"],
-  setup(props, { emit }) {
-    const showDialog = computed({
-      get: () => props.modelValue,
-      set: (newValue) => {
-        emit("update:modelValue", newValue);
-      }
-    });
-    const showLoading = computed({
-      get: () => props.loading,
-      set: (newValue) => {
-        emit("update:loading", newValue);
-      }
-    });
-    const onClose = () => {
-      showDialog.value = false;
-      emit("close");
-    };
-    const onCancel = () => {
-      showDialog.value = false;
-      emit("cancel");
-    };
-    const onConfirm = () => {
-      showLoading.value = true;
-      showDialog.value = false;
-      emit("confirm");
-    };
-    return {
-      showDialog,
-      showLoading,
-      onClose,
-      onCancel,
-      onConfirm
-    };
-  }
-});
-const _hoisted_1$5 = { class: "text-h6" };
-function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_space = QSpace;
-  const _component_q_btn = QBtn;
-  const _component_q_card_section = QCardSection;
-  const _component_q_separator = QSeparator;
-  const _component_q_card_actions = QCardActions;
-  const _component_q_spinner_dots = QSpinnerDots;
-  const _component_q_inner_loading = QInnerLoading;
-  const _component_q_card = QCard;
-  const _component_q_dialog = QDialog;
-  return openBlock(), createBlock(_component_q_dialog, mergeProps({
-    modelValue: _ctx.showDialog,
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => _ctx.showDialog = $event),
-    persistent: ""
-  }, _ctx.$attrs), {
-    default: withCtx(() => [
-      createVNode(_component_q_card, {
-        class: "q-py-none",
-        style: normalizeStyle(`min-width: ${_ctx.height}`)
-      }, {
-        default: withCtx(() => [
-          createVNode(_component_q_card_section, { class: "row items-center" }, {
-            default: withCtx(() => [
-              createElementVNode("div", _hoisted_1$5, toDisplayString(_ctx.title), 1),
-              createVNode(_component_q_space),
-              !_ctx.hideClose ? (openBlock(), createBlock(_component_q_btn, {
-                key: 0,
-                icon: "close",
-                flat: "",
-                round: "",
-                dense: "",
-                onClick: _cache[0] || (_cache[0] = ($event) => _ctx.onClose())
-              })) : createCommentVNode("", true)
-            ]),
-            _: 1
-          }),
-          createVNode(_component_q_separator),
-          createVNode(_component_q_card_section, null, {
-            default: withCtx(() => [
-              renderSlot(_ctx.$slots, "default")
-            ]),
-            _: 3
-          }),
-          createVNode(_component_q_card_actions, {
-            align: "right",
-            class: "text-primary"
-          }, {
-            default: withCtx(() => [
-              !_ctx.hideCancel ? (openBlock(), createBlock(_component_q_btn, {
-                key: 0,
-                label: "取消",
-                color: "red",
-                onClick: _cache[1] || (_cache[1] = ($event) => _ctx.onCancel())
-              })) : createCommentVNode("", true),
-              !_ctx.hideConfirm ? (openBlock(), createBlock(_component_q_btn, {
-                key: 1,
-                label: "确认",
-                color: "primary",
-                onClick: _cache[2] || (_cache[2] = ($event) => _ctx.onConfirm())
-              })) : createCommentVNode("", true)
-            ]),
-            _: 1
-          }),
-          createVNode(_component_q_inner_loading, { showing: _ctx.showLoading }, {
-            default: withCtx(() => [
-              createVNode(_component_q_spinner_dots, {
-                size: _ctx.spinnerSize,
-                color: "primary"
-              }, null, 8, ["size"])
-            ]),
-            _: 1
-          }, 8, ["showing"])
-        ]),
-        _: 3
-      }, 8, ["style"])
-    ]),
-    _: 3
-  }, 16, ["modelValue"]);
-}
-const HDialog = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$d]]);
-HDialog.install = (app) => {
-  app.component(HDialog.name, HDialog);
-};
-const _sfc_main$c = defineComponent({
-  name: "HDateTime",
-  directives: {
-    ClosePopup
-  },
-  props: {
-    modelValue: { type: String }
-  },
-  emits: ["update:modelValue"],
-  setup(props, { emit }) {
-    const dateTimeValue = computed({
-      get: () => props.modelValue,
-      set: (newValue) => {
-        emit("update:modelValue", newValue);
-      }
-    });
-    return {
-      dateTimeValue
-    };
-  }
-});
-const _hoisted_1$4 = { class: "row items-center justify-end" };
-const _hoisted_2$3 = { class: "row items-center justify-end" };
-function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_btn = QBtn;
-  const _component_q_date = QDate;
-  const _component_q_popup_proxy = QPopupProxy;
-  const _component_q_icon = QIcon;
-  const _component_q_time = QTime;
-  const _component_q_input = QInput;
-  const _directive_close_popup = resolveDirective("close-popup");
-  return openBlock(), createBlock(_component_q_input, mergeProps({
-    modelValue: _ctx.dateTimeValue,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => _ctx.dateTimeValue = $event),
-    outlined: "",
-    "bottom-slots": ""
-  }, _ctx.$attrs), {
-    prepend: withCtx(() => [
-      createVNode(_component_q_icon, {
-        name: "event",
-        class: "cursor-pointer"
-      }, {
-        default: withCtx(() => [
-          createVNode(_component_q_popup_proxy, {
-            cover: "",
-            "transition-show": "scale",
-            "transition-hide": "scale"
-          }, {
-            default: withCtx(() => [
-              createVNode(_component_q_date, {
-                modelValue: _ctx.dateTimeValue,
-                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.dateTimeValue = $event),
-                mask: "YYYY-MM-DD HH:mm:ss"
-              }, {
-                default: withCtx(() => [
-                  createElementVNode("div", _hoisted_1$4, [
-                    withDirectives(createVNode(_component_q_btn, {
-                      label: "关闭",
-                      color: "primary"
-                    }, null, 512), [
-                      [_directive_close_popup]
-                    ])
-                  ])
-                ]),
-                _: 1
-              }, 8, ["modelValue"])
-            ]),
-            _: 1
-          })
-        ]),
-        _: 1
-      })
-    ]),
-    append: withCtx(() => [
-      createVNode(_component_q_icon, {
-        name: "access_time",
-        class: "cursor-pointer"
-      }, {
-        default: withCtx(() => [
-          createVNode(_component_q_popup_proxy, {
-            cover: "",
-            "transition-show": "scale",
-            "transition-hide": "scale"
-          }, {
-            default: withCtx(() => [
-              createVNode(_component_q_time, {
-                modelValue: _ctx.dateTimeValue,
-                "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.dateTimeValue = $event),
-                mask: "YYYY-MM-DD HH:mm:ss",
-                format24h: "",
-                "with-seconds": ""
-              }, {
-                default: withCtx(() => [
-                  createElementVNode("div", _hoisted_2$3, [
-                    withDirectives(createVNode(_component_q_btn, {
-                      label: "关闭",
-                      color: "primary"
-                    }, null, 512), [
-                      [_directive_close_popup]
-                    ])
-                  ])
-                ]),
-                _: 1
-              }, 8, ["modelValue"])
-            ]),
-            _: 1
-          })
-        ]),
-        _: 1
-      })
-    ]),
-    _: 1
-  }, 16, ["modelValue"]);
-}
-const HDateTime = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$c]]);
-const _sfc_main$b = defineComponent({
-  name: "HSelect",
-  props: {
-    modelValue: { type: [Number, String, Array, Object] },
-    optionLabel: { type: String, default: "text" },
-    optionValue: { type: String, default: "value" },
-    errorMessage: { type: String }
-  },
-  emits: ["update:modelValue"],
-  setup(props, { emit }) {
-    const selectedValue = computed({
-      get: () => props.modelValue,
-      set: (newValue) => {
-        emit("update:modelValue", newValue);
-      }
-    });
-    const hasError = computed(() => {
-      return props.errorMessage ? true : false;
-    });
-    return {
-      selectedValue,
-      hasError
-    };
-  }
-});
-function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_select = QSelect;
-  return openBlock(), createBlock(_component_q_select, mergeProps({
-    modelValue: _ctx.selectedValue,
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.selectedValue = $event),
-    "option-label": _ctx.optionLabel,
-    "option-value": _ctx.optionValue,
-    outlined: "",
-    clearable: "",
-    "emit-value": "",
-    "map-options": "",
-    "transition-show": "scale",
-    "transition-hide": "scale",
-    "bottom-slots": _ctx.hasError,
-    error: _ctx.hasError,
-    "error-message": _ctx.errorMessage
-  }, _ctx.$attrs), null, 16, ["modelValue", "option-label", "option-value", "bottom-slots", "error", "error-message"]);
-}
-const HSelect = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b]]);
-const _sfc_main$a = defineComponent({
-  name: "HDuration",
-  components: {
-    HSelect
-  },
-  props: {
-    modelValue: { type: [String, Number], defalut: "" }
-  },
-  emits: ["update:modelValue"],
-  setup(props, { emit }) {
-    const amount = ref(0);
-    const unit = ref("");
-    const options2 = ref(DURATION_UNITS);
-    const durationValue = computed({
-      get: () => props.modelValue,
-      set: (newValue) => {
-        emit("update:modelValue", newValue);
-      }
-    });
-    const convertDurationToData = (value) => {
-      if (value) {
-        let duration = moment.duration(value, "second");
-        if (duration) {
-          const data = duration._data;
-          for (let item in data) {
-            let key = item;
-            let value2 = data[key];
-            if (value2) {
-              amount.value = value2;
-              unit.value = key;
-            }
-          }
-        }
-      }
-    };
-    const convertDataToDuration = (amount2, unit2) => {
-      if (amount2 && unit2) {
-        const u = unit2;
-        const result = moment.duration(amount2, u).toISOString();
-        durationValue.value = result;
-      }
-    };
-    watch(
-      () => props.modelValue,
-      (newValue) => {
-        if (newValue) {
-          convertDurationToData(newValue);
-        }
-      },
-      {
-        immediate: true
-      }
-    );
-    watch(
-      () => unit.value,
-      (newValue) => {
-        if (newValue) {
-          convertDataToDuration(amount.value, newValue);
-        }
-      }
-    );
-    watch(
-      () => amount.value,
-      (newValue) => {
-        if (newValue) {
-          convertDataToDuration(newValue, unit.value);
-        }
-      }
-    );
-    return {
-      durationValue,
-      amount,
-      unit,
-      options: options2
-    };
-  }
-});
-function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_text_field = resolveComponent("h-text-field");
-  const _component_h_select = resolveComponent("h-select");
-  const _component_h_container = resolveComponent("h-container");
-  return openBlock(), createBlock(_component_h_container, {
-    mode: "two",
-    gutter: "xs",
-    "gutter-col": "",
-    horizontal: ""
-  }, {
-    left: withCtx(() => [
-      createVNode(_component_h_text_field, {
-        modelValue: _ctx.amount,
-        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.amount = $event),
-        modelModifiers: { number: true },
-        label: "数值",
-        placeholder: "请输入数值",
-        type: "number",
-        "hide-hint": ""
-      }, null, 8, ["modelValue"])
-    ]),
-    right: withCtx(() => [
-      createVNode(_component_h_select, {
-        modelValue: _ctx.unit,
-        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.unit = $event),
-        options: _ctx.options,
-        label: "单位",
-        "hide-hint": ""
-      }, null, 8, ["modelValue", "options"])
-    ]),
-    _: 1
-  });
-}
-const HDuration = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a]]);
 var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
 var freeSelf = typeof self == "object" && self && self.Object === Object && self;
 var root = freeGlobal || freeSelf || Function("return this")();
@@ -1429,7 +624,7 @@ function createCompounder(callback) {
 var kebabCase = createCompounder(function(result, word, index2) {
   return result + (index2 ? "-" : "") + word.toLowerCase();
 });
-const _sfc_main$9 = defineComponent({
+const _sfc_main$k = defineComponent({
   name: "HIconSelect",
   props: {
     modelValue: { type: String },
@@ -1470,7 +665,7 @@ const _sfc_main$9 = defineComponent({
     };
   }
 });
-function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_icon = QIcon;
   const _component_q_item_section = QItemSection;
   const _component_q_item_label = QItemLabel;
@@ -1545,8 +740,52 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     } : void 0
   ]), 1040, ["modelValue", "options", "onFilter"]);
 }
-const HIconSelect = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9]]);
-const _sfc_main$8 = defineComponent({
+const HIconSelect = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
+const _sfc_main$j = defineComponent({
+  name: "HSelect",
+  props: {
+    modelValue: { type: [Number, String, Array, Object] },
+    optionLabel: { type: String, default: "text" },
+    optionValue: { type: String, default: "value" },
+    errorMessage: { type: String }
+  },
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
+    const selectedValue = computed({
+      get: () => props.modelValue,
+      set: (newValue) => {
+        emit("update:modelValue", newValue);
+      }
+    });
+    const hasError = computed(() => {
+      return props.errorMessage ? true : false;
+    });
+    return {
+      selectedValue,
+      hasError
+    };
+  }
+});
+function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_q_select = QSelect;
+  return openBlock(), createBlock(_component_q_select, mergeProps({
+    modelValue: _ctx.selectedValue,
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.selectedValue = $event),
+    "option-label": _ctx.optionLabel,
+    "option-value": _ctx.optionValue,
+    outlined: "",
+    clearable: "",
+    "emit-value": "",
+    "map-options": "",
+    "transition-show": "scale",
+    "transition-hide": "scale",
+    "bottom-slots": _ctx.hasError,
+    error: _ctx.hasError,
+    "error-message": _ctx.errorMessage
+  }, _ctx.$attrs), null, 16, ["modelValue", "option-label", "option-value", "bottom-slots", "error", "error-message"]);
+}
+const HSelect = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j]]);
+const _sfc_main$i = defineComponent({
   name: "HSwitch",
   props: {
     modelValue: { type: [Boolean, Number, String], default: false },
@@ -1567,7 +806,7 @@ const _sfc_main$8 = defineComponent({
     };
   }
 });
-function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_toggle = QToggle;
   return openBlock(), createBlock(_component_q_toggle, mergeProps({
     modelValue: _ctx.switchValue,
@@ -1577,8 +816,51 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     color: _ctx.color
   }, _ctx.$attrs), null, 16, ["modelValue", "true-value", "false-value", "color"]);
 }
-const HSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8]]);
-const _sfc_main$7 = defineComponent({
+const HSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$i]]);
+const _sfc_main$h = defineComponent({
+  name: "HFieldLabel",
+  props: {
+    required: { type: Boolean, default: false },
+    text: { type: String, required: true },
+    tooltip: { type: String }
+  },
+  setup() {
+  }
+});
+const _hoisted_1$6 = { class: "q-gutter-xs row q-mb-xs" };
+const _hoisted_2$3 = { class: "ext-body2" };
+function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_q_icon = QIcon;
+  const _component_q_tooltip = QTooltip;
+  return openBlock(), createElementBlock("div", _hoisted_1$6, [
+    _ctx.required ? (openBlock(), createBlock(_component_q_icon, {
+      key: 0,
+      name: "mdi-star",
+      color: "red",
+      class: "q-pt-xs",
+      size: "10px"
+    })) : createCommentVNode("", true),
+    createElementVNode("div", _hoisted_2$3, toDisplayString(_ctx.text), 1),
+    _ctx.tooltip ? (openBlock(), createBlock(_component_q_icon, {
+      key: 1,
+      name: "mdi-information-variant-circle",
+      color: "grey",
+      size: "xs"
+    }, {
+      default: withCtx(() => [
+        createVNode(_component_q_tooltip, null, {
+          default: withCtx(() => [
+            createTextVNode(toDisplayString(_ctx.tooltip), 1)
+          ]),
+          _: 1
+        })
+      ]),
+      _: 1
+    })) : createCommentVNode("", true)
+  ]);
+}
+const HFieldLabel = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$h]]);
+const _sfc_main$g = defineComponent({
   name: "HTextField",
   props: {
     modelValue: { type: [String, Number] }
@@ -1596,7 +878,7 @@ const _sfc_main$7 = defineComponent({
     };
   }
 });
-function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_input = QInput;
   return openBlock(), createBlock(_component_q_input, mergeProps({
     modelValue: _ctx.text,
@@ -1628,13 +910,190 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     } : void 0
   ]), 1040, ["modelValue"]);
 }
-const HTextField = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7]]);
-HDateTime.install = (app) => {
-  app.component(HDateTime.name, HDateTime);
-};
-HDuration.install = (app) => {
-  app.component(HDuration.name, HDuration);
-};
+const HTextField = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$g]]);
+const _sfc_main$f = defineComponent({
+  name: "HTreeField",
+  props: {
+    modelValue: { type: String, default: "", required: true },
+    items: { type: Array, required: true },
+    label: { type: String },
+    value: { type: String }
+  },
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
+    const selectedValue = computed({
+      get: () => props.modelValue,
+      set: (newValue) => {
+        emit("update:modelValue", newValue);
+      }
+    });
+    const treeNodes = ref([]);
+    const treeRef = ref(null);
+    const nodeName = ref("");
+    const isPopup = ref(false);
+    const treeToArray = (tree) => {
+      let result = [];
+      for (const item of tree) {
+        const { children, ...i } = item;
+        if (children && children.length) {
+          result = result.concat(treeToArray(children));
+        }
+        result.push(i);
+      }
+      return result;
+    };
+    const init = (tree) => {
+      if (!lodash.isEmpty(tree) && lodash.isEmpty(treeNodes.value)) {
+        treeNodes.value = treeToArray(tree);
+        const item = lodash.find(treeNodes.value, (i) => i.id == props.modelValue);
+        nodeName.value = item == null ? void 0 : item.name;
+      }
+    };
+    watch(
+      () => props.items,
+      (newValue) => {
+        if (!lodash.isEmpty(newValue)) {
+          init(newValue);
+        }
+      },
+      {
+        immediate: true
+      }
+    );
+    watch(
+      () => selectedValue.value,
+      (newValue) => {
+        var _a;
+        if (newValue) {
+          const node = (_a = treeRef.value) == null ? void 0 : _a.getNodeByKey(newValue);
+          if (node) {
+            nodeName.value = node.name;
+          }
+          isPopup.value = false;
+        }
+      },
+      {
+        immediate: true
+      }
+    );
+    return {
+      selectedValue,
+      nodeName,
+      treeRef,
+      isPopup
+    };
+  }
+});
+function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_q_tree = QTree;
+  const _component_q_card_section = QCardSection;
+  const _component_q_card = QCard;
+  const _component_q_popup_proxy = QPopupProxy;
+  const _component_q_input = QInput;
+  return openBlock(), createBlock(_component_q_input, mergeProps({
+    modelValue: _ctx.nodeName,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => _ctx.nodeName = $event),
+    label: _ctx.label,
+    outlined: "",
+    clearable: ""
+  }, _ctx.$attrs), {
+    default: withCtx(() => [
+      createVNode(_component_q_popup_proxy, {
+        modelValue: _ctx.isPopup,
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.isPopup = $event)
+      }, {
+        default: withCtx(() => [
+          createVNode(_component_q_card, null, {
+            default: withCtx(() => [
+              createVNode(_component_q_card_section, null, {
+                default: withCtx(() => [
+                  createVNode(_component_q_tree, {
+                    ref: "treeRef",
+                    nodes: _ctx.items,
+                    "node-key": "id",
+                    "label-key": "name",
+                    "selected-color": "primary",
+                    selected: _ctx.selectedValue,
+                    "onUpdate:selected": _cache[0] || (_cache[0] = ($event) => _ctx.selectedValue = $event)
+                  }, null, 8, ["nodes", "selected"])
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      }, 8, ["modelValue"])
+    ]),
+    _: 1
+  }, 16, ["modelValue", "label"]);
+}
+const HTreeField = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$f]]);
+const _sfc_main$e = defineComponent({
+  name: "HLabel",
+  props: {
+    size: {
+      type: String,
+      default: ""
+    },
+    weight: { type: String, default: "medium" },
+    align: { type: String, default: "center" },
+    text: String
+  },
+  setup(props) {
+    const getTextClass = (value) => {
+      return "text-" + value;
+    };
+    const getWeight = () => {
+      return "font-weight-" + props.weight;
+    };
+    const getTypography = () => {
+      if (props.size) {
+        return getTextClass(props.size);
+      } else {
+        return "";
+      }
+    };
+    const getAlignment = () => {
+      return getTextClass(props.align);
+    };
+    const display = computed(() => {
+      const value = [getAlignment(), getWeight()];
+      const typography = getTypography();
+      if (typography) {
+        value.push(typography);
+      }
+      return value.join(" ");
+    });
+    return {
+      display
+    };
+  }
+});
+function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.display)
+  }, toDisplayString(_ctx.text), 3);
+}
+const HLabel = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$e]]);
+const _sfc_main$d = defineComponent({
+  name: "HCenterLabel",
+  props: {
+    height: { type: String, default: "100px" },
+    text: String
+  }
+});
+const _hoisted_1$5 = { class: "col-12 self-center" };
+function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: "row text-center",
+    style: normalizeStyle(`height: ${_ctx.height}`)
+  }, [
+    createElementVNode("div", _hoisted_1$5, toDisplayString(_ctx.text), 1)
+  ], 4);
+}
+const HCenterLabel = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$d]]);
 HIconSelect.install = (app) => {
   app.component(HIconSelect.name, HIconSelect);
 };
@@ -1646,6 +1105,717 @@ HSwitch.install = (app) => {
 };
 HTextField.install = (app) => {
   app.component(HTextField.name, HTextField);
+};
+HFieldLabel.install = (app) => {
+  app.component(HFieldLabel.name, HFieldLabel);
+};
+HTreeField.install = (app) => {
+  app.component(HTreeField.name, HTreeField);
+};
+HLabel.install = (app) => {
+  app.component(HLabel.name, HLabel);
+};
+HCenterLabel.install = (app) => {
+  app.component(HCenterLabel.name, HCenterLabel);
+};
+var BreakPointEnum = /* @__PURE__ */ ((BreakPointEnum2) => {
+  BreakPointEnum2["xs"] = "xs";
+  BreakPointEnum2["sm"] = "sm";
+  BreakPointEnum2["md"] = "md";
+  BreakPointEnum2["lg"] = "lg";
+  BreakPointEnum2["xl"] = "xl";
+  return BreakPointEnum2;
+})(BreakPointEnum || {});
+var SpinnerEnum = /* @__PURE__ */ ((SpinnerEnum2) => {
+  SpinnerEnum2["DEFAULT"] = "default";
+  SpinnerEnum2["AUDIO"] = "audio";
+  SpinnerEnum2["BALL"] = "ball";
+  SpinnerEnum2["BARS"] = "bars";
+  SpinnerEnum2["BOX"] = "box";
+  SpinnerEnum2["CLOCK"] = "clock";
+  SpinnerEnum2["COMMENT"] = "comment";
+  SpinnerEnum2["CUBE"] = "cube";
+  SpinnerEnum2["DOTS"] = "dots";
+  SpinnerEnum2["FACEBOOK"] = "facebook";
+  SpinnerEnum2["GEARS"] = "gears";
+  SpinnerEnum2["GRID"] = "grid";
+  SpinnerEnum2["HEARTS"] = "hearts";
+  SpinnerEnum2["HOURGLASS"] = "hourglass";
+  SpinnerEnum2["INFINITY"] = "infinity";
+  SpinnerEnum2["IOS"] = "ios";
+  SpinnerEnum2["ORBIT"] = "orbit";
+  SpinnerEnum2["OVAL"] = "oval";
+  SpinnerEnum2["PIE"] = "pie";
+  SpinnerEnum2["PUFF"] = "puff";
+  SpinnerEnum2["RADIO"] = "radio";
+  SpinnerEnum2["RINGS"] = "rings";
+  SpinnerEnum2["TAIL"] = "tail";
+  return SpinnerEnum2;
+})(SpinnerEnum || {});
+const _sfc_main$c = defineComponent({
+  name: "HColumn",
+  props: {
+    cols: { type: [String, Number], default: "" },
+    xs: { type: String, default: "" },
+    sm: { type: String, default: "" },
+    md: { type: String, default: "" },
+    lg: { type: String, default: "" },
+    xl: { type: String, default: "" },
+    auto: { type: Boolean, default: false },
+    color: { type: String, default: "" }
+  },
+  setup(props) {
+    const classes = computed(() => {
+      let result = [];
+      if (props.auto) {
+        result.push(createColClass(Grid.auto));
+      } else {
+        if (props.cols) {
+          result.push(createColClass("", props.cols));
+        } else {
+          result.push(createColClass());
+          if (props.xs) {
+            result.push(createColClass(BreakPointEnum.xs, props.xs));
+          }
+          if (props.sm) {
+            result.push(createColClass(BreakPointEnum.sm, props.sm));
+          }
+          if (props.md) {
+            result.push(createColClass(BreakPointEnum.md, props.md));
+          }
+          if (props.lg) {
+            result.push(createColClass(BreakPointEnum.lg, props.lg));
+          }
+          if (props.xl) {
+            result.push(createColClass(BreakPointEnum.xl, props.xl));
+          }
+        }
+      }
+      if (props.color) {
+        result.push(createTextColor(props.color));
+      }
+      return result;
+    });
+    return { classes };
+  }
+});
+function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.classes)
+  }, [
+    renderSlot(_ctx.$slots, "default")
+  ], 2);
+}
+const HColumn = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$c]]);
+const constants = {
+  row: "row",
+  column: "column",
+  justify: "justify",
+  self: "self",
+  align: "items",
+  gutter: "q-gutter",
+  gutterWithCol: "q-col-gutter"
+};
+const _sfc_main$b = defineComponent({
+  name: "HRow",
+  props: {
+    column: { type: Boolean, default: false },
+    self: { type: Boolean, default: false },
+    align: { type: String, default: "none" },
+    justify: { type: String, default: "none" },
+    gutter: { type: String, default: "none" },
+    gutterCol: { type: Boolean, default: false },
+    /**
+     * horizontal gutter
+     */
+    horizontal: { type: Boolean, default: false },
+    /**
+     * vertical gutter
+     */
+    vertical: { type: Boolean, default: false }
+  },
+  setup(props) {
+    const classes = reactive([]);
+    const createBase = () => {
+      return props.column ? constants.column : constants.row;
+    };
+    const createGutter = (size = "", direction = "") => {
+      let result = constants.gutter;
+      if (props.gutterCol) {
+        result = constants.gutterWithCol;
+      }
+      if (direction) {
+        result = result + "-" + direction;
+      }
+      result = result + "-" + size;
+      return result;
+    };
+    const createJustify = () => {
+      if (props.justify !== "none") {
+        return constants.justify + "-" + props.justify;
+      } else {
+        return "";
+      }
+    };
+    const createAlign = () => {
+      if (props.align !== "none") {
+        let result = constants.align;
+        if (props.self) {
+          result = constants.self;
+        }
+        return result + "-" + props.align;
+      } else {
+        return "";
+      }
+    };
+    const createHorizontalGutter = (size) => {
+      return createGutter(size, "x");
+    };
+    const createVerticalGutter = (size) => {
+      return createGutter(size, "y");
+    };
+    const appendClass = (value) => {
+      if (value) {
+        classes.push(value);
+      }
+    };
+    const getClasses = () => {
+      if (classes.length > 1) {
+        return classes.join(" ");
+      } else if (classes.length === 1) {
+        return classes[0];
+      } else {
+        return constants.row;
+      }
+    };
+    const initialize = () => {
+      appendClass(createBase());
+      appendClass(createJustify());
+      appendClass(createAlign());
+      if (props.gutter !== "none") {
+        if (!props.horizontal && !props.vertical) {
+          appendClass(createGutter(props.gutter));
+        } else {
+          if (props.horizontal) {
+            appendClass(createHorizontalGutter(props.gutter));
+          }
+          if (props.vertical) {
+            appendClass(createVerticalGutter(props.gutter));
+          }
+        }
+      }
+    };
+    onMounted(() => {
+      initialize();
+    });
+    return { getClasses };
+  }
+});
+function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.getClasses())
+  }, [
+    renderSlot(_ctx.$slots, "default")
+  ], 2);
+}
+const HRow = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b]]);
+const _sfc_main$a = defineComponent({
+  name: "HContainer",
+  components: {
+    HRow,
+    HColumn
+  },
+  props: {
+    // 容器布局的列数，两列或者三列
+    mode: { type: String, default: "three" },
+    /**
+     * 1. 如果是三列布局：
+     * default：三列相等
+     * start：左边宽，中间默认，右边窄
+     * center：两边相同，中间宽
+     * end：右边宽，中间默认，左边窄
+     *
+     * 2.如果是两列布局：
+     * default：左右相等
+     * start：左边宽，右边窄
+     * end：右边宽，左边窄
+     */
+    wider: { type: String, default: "default" },
+    /**
+     * 1. 如果是三列布局
+     * 1.1 如果 wider 是 center，那么 offset 最大值为6，即 [0, 6]
+     * 1.2 如果 wider 是 start 或 end，那么 offset 最大值为3，即[0, 3]
+     * 2. 如果是两列布局
+     * 那么 offset 最大值为5，即 [0, 3]
+     */
+    offset: { type: Number, default: 0 }
+  },
+  setup(props) {
+    const defaultTwoCols = 6;
+    const defaultThreeCols = 4;
+    const leftCols = ref(4);
+    const centerCols = ref(4);
+    const rightCols = ref(4);
+    const isTwoColumn = computed(() => {
+      return !!(props.mode === "two");
+    });
+    const increment = (defaultValue) => {
+      return defaultValue + props.offset;
+    };
+    const decrement = (defaultValue) => {
+      return defaultValue - props.offset;
+    };
+    const isEven = (value) => {
+      return Math.abs(value % 2) === 0;
+    };
+    const maximum = () => {
+      return defaultThreeCols + props.offset;
+    };
+    const getDifference = () => {
+      return 12 - maximum();
+    };
+    const getSurplus = () => {
+      return Math.floor(getDifference() / 2);
+    };
+    const leftIsWider = (defaultValue) => {
+      leftCols.value = increment(defaultValue);
+      rightCols.value = decrement(defaultValue);
+    };
+    const rightIsWider = (defaultValue) => {
+      leftCols.value = decrement(defaultValue);
+      rightCols.value = increment(defaultValue);
+    };
+    const setValue = (value, margin = 0) => {
+      leftCols.value = value;
+      rightCols.value = value + margin;
+    };
+    const setDefaultValueForTow = () => {
+      setValue(defaultTwoCols);
+    };
+    const setDefaultValueForCenter = () => {
+      centerCols.value = defaultThreeCols;
+    };
+    const setDefaultValueForThree = () => {
+      setDefaultValueForCenter();
+      setValue(defaultThreeCols);
+    };
+    const isToTheLeft = computed(() => {
+      return leftCols.value > rightCols.value;
+    });
+    const isToTheRight = computed(() => {
+      return leftCols.value < rightCols.value;
+    });
+    const adjustWidth = () => {
+      if (isTwoColumn.value) {
+        switch (props.wider) {
+          case "start":
+            leftIsWider(defaultTwoCols);
+            break;
+          case "end":
+            rightIsWider(defaultTwoCols);
+            break;
+          default:
+            setDefaultValueForTow();
+            break;
+        }
+      } else {
+        switch (props.wider) {
+          case "center":
+            centerCols.value = maximum();
+            const surplus = getSurplus();
+            if (isEven(getDifference())) {
+              setValue(surplus);
+            } else {
+              setValue(surplus, 1);
+            }
+            break;
+          case "start":
+            setDefaultValueForCenter();
+            leftIsWider(defaultThreeCols);
+            break;
+          case "end":
+            setDefaultValueForCenter();
+            rightIsWider(defaultThreeCols);
+            break;
+          default:
+            setDefaultValueForThree();
+            break;
+        }
+      }
+    };
+    watch(
+      () => props,
+      () => {
+        adjustWidth();
+      },
+      { immediate: true }
+    );
+    return {
+      leftCols,
+      centerCols,
+      rightCols,
+      isTwoColumn,
+      isToTheLeft,
+      isToTheRight
+    };
+  }
+});
+function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_column = resolveComponent("h-column");
+  const _component_h_row = resolveComponent("h-row");
+  return _ctx.isTwoColumn ? (openBlock(), createBlock(_component_h_row, normalizeProps(mergeProps({ key: 0 }, _ctx.$attrs)), {
+    default: withCtx(() => [
+      createVNode(_component_h_column, { cols: _ctx.leftCols }, {
+        default: withCtx(() => [
+          _ctx.isToTheLeft ? renderSlot(_ctx.$slots, "default", { key: 0 }) : renderSlot(_ctx.$slots, "left", { key: 1 })
+        ]),
+        _: 3
+      }, 8, ["cols"]),
+      createVNode(_component_h_column, { cols: _ctx.rightCols }, {
+        default: withCtx(() => [
+          _ctx.isToTheRight ? renderSlot(_ctx.$slots, "default", { key: 0 }) : renderSlot(_ctx.$slots, "right", { key: 1 })
+        ]),
+        _: 3
+      }, 8, ["cols"])
+    ]),
+    _: 3
+  }, 16)) : (openBlock(), createBlock(_component_h_row, normalizeProps(mergeProps({ key: 1 }, _ctx.$attrs)), {
+    default: withCtx(() => [
+      createVNode(_component_h_column, { cols: _ctx.leftCols }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "left")
+        ]),
+        _: 3
+      }, 8, ["cols"]),
+      createVNode(_component_h_column, { cols: _ctx.centerCols }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "default")
+        ]),
+        _: 3
+      }, 8, ["cols"]),
+      createVNode(_component_h_column, { cols: _ctx.rightCols }, {
+        default: withCtx(() => [
+          renderSlot(_ctx.$slots, "right")
+        ]),
+        _: 3
+      }, 8, ["cols"])
+    ]),
+    _: 3
+  }, 16));
+}
+const HContainer = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a]]);
+HColumn.install = (app) => {
+  app.component(HColumn.name, HColumn);
+};
+HContainer.install = (app) => {
+  app.component(HContainer.name, HContainer);
+};
+HRow.install = (app) => {
+  app.component(HRow.name, HRow);
+};
+const _sfc_main$9 = defineComponent({
+  name: "HDuration",
+  components: {
+    HSelect,
+    HTextField,
+    HContainer
+  },
+  props: {
+    modelValue: { type: [String, Number], defalut: "" }
+  },
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
+    const amount = ref(0);
+    const unit = ref("");
+    const options2 = ref(DURATION_UNITS);
+    const durationValue = computed({
+      get: () => props.modelValue,
+      set: (newValue) => {
+        emit("update:modelValue", newValue);
+      }
+    });
+    const convertDurationToData = (value) => {
+      if (value) {
+        let duration = moment.duration(value, "second");
+        if (duration) {
+          const data = duration._data;
+          for (let item in data) {
+            let key = item;
+            let value2 = data[key];
+            if (value2) {
+              amount.value = value2;
+              unit.value = key;
+            }
+          }
+        }
+      }
+    };
+    const convertDataToDuration = (amount2, unit2) => {
+      if (amount2 && unit2) {
+        const u = unit2;
+        const result = moment.duration(amount2, u).toISOString();
+        durationValue.value = result;
+      }
+    };
+    watch(
+      () => props.modelValue,
+      (newValue) => {
+        if (newValue) {
+          convertDurationToData(newValue);
+        }
+      },
+      {
+        immediate: true
+      }
+    );
+    watch(
+      () => unit.value,
+      (newValue) => {
+        if (newValue) {
+          convertDataToDuration(amount.value, newValue);
+        }
+      }
+    );
+    watch(
+      () => amount.value,
+      (newValue) => {
+        if (newValue) {
+          convertDataToDuration(newValue, unit.value);
+        }
+      }
+    );
+    return {
+      durationValue,
+      amount,
+      unit,
+      options: options2
+    };
+  }
+});
+function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_text_field = resolveComponent("h-text-field");
+  const _component_h_select = resolveComponent("h-select");
+  const _component_h_container = resolveComponent("h-container");
+  return openBlock(), createBlock(_component_h_container, {
+    mode: "two",
+    gutter: "xs",
+    "gutter-col": "",
+    horizontal: ""
+  }, {
+    left: withCtx(() => [
+      createVNode(_component_h_text_field, {
+        modelValue: _ctx.amount,
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.amount = $event),
+        modelModifiers: { number: true },
+        label: "数值",
+        placeholder: "请输入数值",
+        type: "number",
+        "hide-hint": ""
+      }, null, 8, ["modelValue"])
+    ]),
+    right: withCtx(() => [
+      createVNode(_component_h_select, {
+        modelValue: _ctx.unit,
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.unit = $event),
+        options: _ctx.options,
+        label: "单位",
+        "hide-hint": ""
+      }, null, 8, ["modelValue", "options"])
+    ]),
+    _: 1
+  });
+}
+const HDuration = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9]]);
+HDateTime.install = (app) => {
+  app.component(HDateTime.name, HDateTime);
+};
+HDuration.install = (app) => {
+  app.component(HDuration.name, HDuration);
+};
+const _sfc_main$8 = defineComponent({
+  name: "HDivider",
+  components: {
+    HContainer,
+    HLabel
+  },
+  props: {
+    wider: { type: String, default: "center" },
+    weight: {
+      type: String,
+      default: "medium"
+    },
+    offset: { type: Number, default: 0 },
+    label: String
+  },
+  setup(props) {
+    const textWeight = computed(() => {
+      return "text-center text-weight-" + props.weight;
+    });
+    return {
+      textWeight
+    };
+  }
+});
+function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_q_separator = QSeparator;
+  const _component_h_label = resolveComponent("h-label");
+  const _component_h_container = resolveComponent("h-container");
+  return openBlock(), createBlock(_component_h_container, {
+    mode: "three",
+    offset: _ctx.offset,
+    wider: _ctx.wider,
+    align: "center"
+  }, {
+    left: withCtx(() => [
+      createVNode(_component_q_separator)
+    ]),
+    right: withCtx(() => [
+      createVNode(_component_q_separator)
+    ]),
+    default: withCtx(() => [
+      createVNode(_component_h_label, {
+        text: _ctx.label,
+        weight: _ctx.weight
+      }, null, 8, ["text", "weight"])
+    ]),
+    _: 1
+  }, 8, ["offset", "wider"]);
+}
+const HDivider = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8]]);
+HDivider.install = (app) => {
+  app.component(HDivider.name, HDivider);
+};
+const _sfc_main$7 = defineComponent({
+  name: "HDialog",
+  props: {
+    modelValue: { type: Boolean, default: false, required: true },
+    loading: { type: Boolean, default: false },
+    title: { type: String, default: "" },
+    height: { type: String, default: "500px" },
+    spinnerSize: { type: String, default: "50px" },
+    hideConfirm: { type: Boolean, default: false },
+    hideCancel: { type: Boolean, default: false },
+    hideClose: { type: Boolean, default: false }
+  },
+  emits: ["update:modelValue", "update:loading", "confirm", "cancel", "close"],
+  setup(props, { emit }) {
+    const showDialog = computed({
+      get: () => props.modelValue,
+      set: (newValue) => {
+        emit("update:modelValue", newValue);
+      }
+    });
+    const showLoading = computed({
+      get: () => props.loading,
+      set: (newValue) => {
+        emit("update:loading", newValue);
+      }
+    });
+    const onClose = () => {
+      showDialog.value = false;
+      emit("close");
+    };
+    const onCancel = () => {
+      showDialog.value = false;
+      emit("cancel");
+    };
+    const onConfirm = () => {
+      showLoading.value = true;
+      showDialog.value = false;
+      emit("confirm");
+    };
+    return {
+      showDialog,
+      showLoading,
+      onClose,
+      onCancel,
+      onConfirm
+    };
+  }
+});
+const _hoisted_1$4 = { class: "text-h6" };
+function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_q_space = QSpace;
+  const _component_q_btn = QBtn;
+  const _component_q_card_section = QCardSection;
+  const _component_q_separator = QSeparator;
+  const _component_q_card_actions = QCardActions;
+  const _component_q_spinner_dots = QSpinnerDots;
+  const _component_q_inner_loading = QInnerLoading;
+  const _component_q_card = QCard;
+  const _component_q_dialog = QDialog;
+  return openBlock(), createBlock(_component_q_dialog, mergeProps({
+    modelValue: _ctx.showDialog,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => _ctx.showDialog = $event),
+    persistent: ""
+  }, _ctx.$attrs), {
+    default: withCtx(() => [
+      createVNode(_component_q_card, {
+        class: "q-py-none",
+        style: normalizeStyle(`min-width: ${_ctx.height}`)
+      }, {
+        default: withCtx(() => [
+          createVNode(_component_q_card_section, { class: "row items-center" }, {
+            default: withCtx(() => [
+              createElementVNode("div", _hoisted_1$4, toDisplayString(_ctx.title), 1),
+              createVNode(_component_q_space),
+              !_ctx.hideClose ? (openBlock(), createBlock(_component_q_btn, {
+                key: 0,
+                icon: "close",
+                flat: "",
+                round: "",
+                dense: "",
+                onClick: _cache[0] || (_cache[0] = ($event) => _ctx.onClose())
+              })) : createCommentVNode("", true)
+            ]),
+            _: 1
+          }),
+          createVNode(_component_q_separator),
+          createVNode(_component_q_card_section, null, {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "default")
+            ]),
+            _: 3
+          }),
+          createVNode(_component_q_card_actions, {
+            align: "right",
+            class: "text-primary"
+          }, {
+            default: withCtx(() => [
+              !_ctx.hideCancel ? (openBlock(), createBlock(_component_q_btn, {
+                key: 0,
+                label: "取消",
+                color: "red",
+                onClick: _cache[1] || (_cache[1] = ($event) => _ctx.onCancel())
+              })) : createCommentVNode("", true),
+              !_ctx.hideConfirm ? (openBlock(), createBlock(_component_q_btn, {
+                key: 1,
+                label: "确认",
+                color: "primary",
+                onClick: _cache[2] || (_cache[2] = ($event) => _ctx.onConfirm())
+              })) : createCommentVNode("", true)
+            ]),
+            _: 1
+          }),
+          createVNode(_component_q_inner_loading, { showing: _ctx.showLoading }, {
+            default: withCtx(() => [
+              createVNode(_component_q_spinner_dots, {
+                size: _ctx.spinnerSize,
+                color: "primary"
+              }, null, 8, ["size"])
+            ]),
+            _: 1
+          }, 8, ["showing"])
+        ]),
+        _: 3
+      }, 8, ["style"])
+    ]),
+    _: 3
+  }, 16, ["modelValue"]);
+}
+const HDialog = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7]]);
+HDialog.install = (app) => {
+  app.component(HDialog.name, HDialog);
 };
 const _sfc_main$6 = defineComponent({
   name: "HListItem",
@@ -2024,6 +2194,8 @@ const components = [
   HDuration,
   HIconButton,
   HIconSelect,
+  HFieldLabel,
+  HTreeField,
   HLabel,
   HListItem,
   HLoading,
@@ -2037,7 +2209,7 @@ const components = [
   HVisibilityButton
 ];
 const install = (app) => {
-  components.map((component) => app.component(component.name, component));
+  components.map((component) => component.install(app));
 };
 const index = {
   install
@@ -2056,6 +2228,7 @@ export {
   HDialog,
   HDivider,
   HDuration,
+  HFieldLabel,
   HIconButton,
   HIconSelect,
   HLabel,
@@ -2068,6 +2241,7 @@ export {
   HSignInBackground,
   HSwitch,
   HTextField,
+  HTreeField,
   HVisibilityButton,
   SpinnerEnum,
   Symbol$2 as Symbol,
@@ -2076,5 +2250,6 @@ export {
   createColClass,
   createTextColor,
   index as default,
+  lodash2 as lodash,
   moment2 as moment
 };

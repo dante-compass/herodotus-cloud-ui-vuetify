@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick } from 'vue';
+import { defineComponent, nextTick, ref, onMounted, onUnmounted } from 'vue';
 import { tsParticles } from '@tsparticles/engine';
 import { loadBasic } from '@tsparticles/basic';
 import { loadParticlesLinksInteraction } from '@tsparticles/interaction-particles-links';
@@ -39,10 +39,10 @@ export default defineComponent({
           id: id.value,
           options: {
             fullScreen: {
-              zIndex: 1
+              zIndex: 1,
             },
-            preset: 'triangles'
-          }
+            preset: 'triangles',
+          },
         });
       });
     });
@@ -55,8 +55,8 @@ export default defineComponent({
     });
 
     return {
-      id
+      id,
     };
-  }
+  },
 });
 </script>

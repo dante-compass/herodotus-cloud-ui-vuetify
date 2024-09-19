@@ -143,7 +143,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onBeforeMount, reactive } from 'vue';
+import { defineComponent, computed, onMounted, nextTick } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
@@ -152,11 +152,11 @@ import type {
   OAuth2ScopeEntity,
   OAuth2ScopeConditions,
   QTableColumnProps,
-  ConstantDictionary,
+  Dictionary,
 } from '/@/lib/declarations';
 
 import { useEditFinish } from '/@/hooks';
-import { CONSTANTS, HDictionarySelect, useDictionaryStore } from '/@/composables/constants';
+import { CONSTANTS, HDictionarySelect, useDictionary } from '/@/composables/constants';
 import { api, lodash } from '/@/lib/utils';
 import { useTableItem, useTable } from '/@/hooks';
 
@@ -180,7 +180,7 @@ export default defineComponent({
       true,
     );
 
-    const { getDictionary } = useDictionaryStore();
+    const { options } = useDictionary('AllJwsAlgorithm');
 
     const columns: QTableColumnProps = [
       { name: 'scopeCode', field: 'scopeCode', align: 'center', label: '范围代码' },
@@ -228,14 +228,6 @@ export default defineComponent({
       });
     };
 
-    const state = reactive({
-      items: [] as Array<ConstantDictionary>,
-    });
-
-    const initialize = () => {
-      state.items = getDictionary('AllJwsAlgorithm');
-    };
-
     const includePrivateKeyJwt = () => {
       return lodash.includes(editedItem.value.clientAuthenticationMethods, 'private_key_jwt');
     };
@@ -263,18 +255,14 @@ export default defineComponent({
 
     const authenticationSigningAlgorithmItem = computed(() => {
       if (onlyHasPrivateKeyJwt()) {
-        return state.items.filter(item => item.ordinal < 9);
+        return options.value.filter(item => item.ordinal < 9);
       }
 
       if (onlyHasClientSecretJwt()) {
-        return state.items.filter(item => item.ordinal < 9);
+        return options.value.filter(item => item.ordinal < 9);
       }
 
-      return state.items;
-    });
-
-    onBeforeMount(() => {
-      initialize();
+      return options.value;
     });
 
     return {

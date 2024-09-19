@@ -46,7 +46,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             required: true;
         };
     }>, {
-        getDefaultModel: (item: import('@herodotus/form-apis').Element) => import('@herodotus/form-apis').VModel;
+        getDefaultModel: (item: import('@herodotus/form-apis').Element) => import('@herodotus/form-engine/dist/declarations').VModel;
         modelObject: import('vue').WritableComputedRef<Record<string, any>, Record<string, any>>;
         state: Record<string, any>;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{

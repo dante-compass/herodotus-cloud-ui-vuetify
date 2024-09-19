@@ -65,7 +65,7 @@ export default defineComponent({
           .processDefinition()
           .getXml(params)
           .then(result => {
-            console.log(result);
+
             const data = result as XmlEntity;
             xml.value = data.bpmn20Xml;
           })

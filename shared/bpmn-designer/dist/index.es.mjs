@@ -4496,27 +4496,27 @@ BpmnRenderer.$inject = [
 BpmnRenderer.prototype.canRender = function(element) {
   return is$g(element, "bpmn:BaseElement");
 };
-BpmnRenderer.prototype.drawShape = function(parentGfx, element, attrs = {}) {
-  var { type } = element;
+BpmnRenderer.prototype.drawShape = function(parentGfx, shape, attrs = {}) {
+  var { type } = shape;
   var handler = this._renderer(type);
-  return handler(parentGfx, element, attrs);
+  return handler(parentGfx, shape, attrs);
 };
-BpmnRenderer.prototype.drawConnection = function(parentGfx, element, attrs = {}) {
-  var { type } = element;
+BpmnRenderer.prototype.drawConnection = function(parentGfx, connection, attrs = {}) {
+  var { type } = connection;
   var handler = this._renderer(type);
-  return handler(parentGfx, element, attrs);
+  return handler(parentGfx, connection, attrs);
 };
-BpmnRenderer.prototype.getShapePath = function(element) {
-  if (is$g(element, "bpmn:Event")) {
-    return getCirclePath(element);
+BpmnRenderer.prototype.getShapePath = function(shape) {
+  if (is$g(shape, "bpmn:Event")) {
+    return getCirclePath(shape);
   }
-  if (is$g(element, "bpmn:Activity")) {
-    return getRoundRectPath(element, TASK_BORDER_RADIUS);
+  if (is$g(shape, "bpmn:Activity")) {
+    return getRoundRectPath(shape, TASK_BORDER_RADIUS);
   }
-  if (is$g(element, "bpmn:Gateway")) {
-    return getDiamondPath(element);
+  if (is$g(shape, "bpmn:Gateway")) {
+    return getDiamondPath(shape);
   }
-  return getRectPath(element);
+  return getRectPath(shape);
 };
 function pickAttrs(attrs, keys2 = []) {
   return keys2.reduce((pickedAttrs, key) => {
@@ -6203,24 +6203,24 @@ Overlays.$inject = [
   "canvas",
   "elementRegistry"
 ];
-Overlays.prototype.get = function(search) {
-  if (isString$1(search)) {
-    search = { id: search };
+Overlays.prototype.get = function(search2) {
+  if (isString$1(search2)) {
+    search2 = { id: search2 };
   }
-  if (isString$1(search.element)) {
-    search.element = this._elementRegistry.get(search.element);
+  if (isString$1(search2.element)) {
+    search2.element = this._elementRegistry.get(search2.element);
   }
-  if (search.element) {
-    var container = this._getOverlayContainer(search.element, true);
+  if (search2.element) {
+    var container = this._getOverlayContainer(search2.element, true);
     if (container) {
-      return search.type ? filter$1(container.overlays, matchPattern$1({ type: search.type })) : container.overlays.slice();
+      return search2.type ? filter$1(container.overlays, matchPattern$1({ type: search2.type })) : container.overlays.slice();
     } else {
       return [];
     }
-  } else if (search.type) {
-    return filter$1(this._overlays, matchPattern$1({ type: search.type }));
+  } else if (search2.type) {
+    return filter$1(this._overlays, matchPattern$1({ type: search2.type }));
   } else {
-    return search.id ? this._overlays[search.id] : null;
+    return search2.id ? this._overlays[search2.id] : null;
   }
 };
 Overlays.prototype.add = function(element, type, overlay) {
@@ -8848,14 +8848,13 @@ const ContextPadModule$1 = {
   ],
   contextPad: ["type", ContextPad]
 };
-var n$1, l$1, u$1, i$1, o$2, r$3, f$1, e$2, c$1, s$1, h$1 = {}, p$1 = [], v$1 = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i, y$1 = Array.isArray;
+var n$1, l$1, u$1, i$1, o$2, r$3, f$1, e$2, c$1, s$1, h$1 = {}, v$1 = [], p$1 = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i, y$1 = Array.isArray;
 function d$1(n2, l2) {
   for (var u2 in l2) n2[u2] = l2[u2];
   return n2;
 }
 function w$1(n2) {
-  var l2 = n2.parentNode;
-  l2 && l2.removeChild(n2);
+  n2 && n2.parentNode && n2.parentNode.removeChild(n2);
 }
 function _$1(l2, u2, t2) {
   var i2, o2, r2, f2 = {};
@@ -8867,10 +8866,10 @@ function g(n2, t2, i2, o2, r2) {
   var f2 = { type: n2, props: t2, key: i2, ref: o2, __k: null, __: null, __b: 0, __e: null, __d: void 0, __c: null, constructor: void 0, __v: null == r2 ? ++u$1 : r2, __i: -1, __u: 0 };
   return null == r2 && null != l$1.vnode && l$1.vnode(f2), f2;
 }
-function k$1(n2) {
+function b(n2) {
   return n2.children;
 }
-function b(n2, l2) {
+function k$1(n2, l2) {
   this.props = n2, this.context = l2;
 }
 function x(n2, l2) {
@@ -8897,13 +8896,13 @@ function P() {
   P.__r = 0;
 }
 function S(n2, l2, u2, t2, i2, o2, r2, f2, e2, c2, s2) {
-  var a2, v2, y2, d2, w2, _2 = t2 && t2.__k || p$1, g2 = l2.length;
-  for (u2.__d = e2, $(u2, l2, _2), e2 = u2.__d, a2 = 0; a2 < g2; a2++) null != (y2 = u2.__k[a2]) && "boolean" != typeof y2 && "function" != typeof y2 && (v2 = -1 === y2.__i ? h$1 : _2[y2.__i] || h$1, y2.__i = a2, O(n2, y2, v2, i2, o2, r2, f2, e2, c2, s2), d2 = y2.__e, y2.ref && v2.ref != y2.ref && (v2.ref && N(v2.ref, null, y2), s2.push(y2.ref, y2.__c || d2, y2)), null == w2 && null != d2 && (w2 = d2), 65536 & y2.__u || v2.__k === y2.__k ? e2 = I(y2, e2, n2) : "function" == typeof y2.type && void 0 !== y2.__d ? e2 = y2.__d : d2 && (e2 = d2.nextSibling), y2.__d = void 0, y2.__u &= -196609);
+  var a2, p2, y2, d2, w2, _2 = t2 && t2.__k || v$1, g2 = l2.length;
+  for (u2.__d = e2, $(u2, l2, _2), e2 = u2.__d, a2 = 0; a2 < g2; a2++) null != (y2 = u2.__k[a2]) && (p2 = -1 === y2.__i ? h$1 : _2[y2.__i] || h$1, y2.__i = a2, O(n2, y2, p2, i2, o2, r2, f2, e2, c2, s2), d2 = y2.__e, y2.ref && p2.ref != y2.ref && (p2.ref && N(p2.ref, null, y2), s2.push(y2.ref, y2.__c || d2, y2)), null == w2 && null != d2 && (w2 = d2), 65536 & y2.__u || p2.__k === y2.__k ? e2 = I(y2, e2, n2) : "function" == typeof y2.type && void 0 !== y2.__d ? e2 = y2.__d : d2 && (e2 = d2.nextSibling), y2.__d = void 0, y2.__u &= -196609);
   u2.__d = e2, u2.__e = w2;
 }
 function $(n2, l2, u2) {
   var t2, i2, o2, r2, f2, e2 = l2.length, c2 = u2.length, s2 = c2, a2 = 0;
-  for (n2.__k = [], t2 = 0; t2 < e2; t2++) r2 = t2 + a2, null != (i2 = n2.__k[t2] = null == (i2 = l2[t2]) || "boolean" == typeof i2 || "function" == typeof i2 ? null : "string" == typeof i2 || "number" == typeof i2 || "bigint" == typeof i2 || i2.constructor == String ? g(null, i2, null, null, null) : y$1(i2) ? g(k$1, { children: i2 }, null, null, null) : void 0 === i2.constructor && i2.__b > 0 ? g(i2.type, i2.props, i2.key, i2.ref ? i2.ref : null, i2.__v) : i2) ? (i2.__ = n2, i2.__b = n2.__b + 1, f2 = L(i2, u2, r2, s2), i2.__i = f2, o2 = null, -1 !== f2 && (s2--, (o2 = u2[f2]) && (o2.__u |= 131072)), null == o2 || null === o2.__v ? (-1 == f2 && a2--, "function" != typeof i2.type && (i2.__u |= 65536)) : f2 !== r2 && (f2 == r2 - 1 ? a2-- : f2 == r2 + 1 ? a2++ : f2 > r2 ? s2 > e2 - r2 ? a2 += f2 - r2 : a2-- : f2 < r2 && (f2 == r2 - a2 ? a2 -= f2 - r2 : a2++), f2 !== t2 + a2 && (i2.__u |= 65536))) : (o2 = u2[r2]) && null == o2.key && o2.__e && 0 == (131072 & o2.__u) && (o2.__e == n2.__d && (n2.__d = x(o2)), V(o2, o2, false), u2[r2] = null, s2--);
+  for (n2.__k = [], t2 = 0; t2 < e2; t2++) null != (i2 = l2[t2]) && "boolean" != typeof i2 && "function" != typeof i2 ? (r2 = t2 + a2, (i2 = n2.__k[t2] = "string" == typeof i2 || "number" == typeof i2 || "bigint" == typeof i2 || i2.constructor == String ? g(null, i2, null, null, null) : y$1(i2) ? g(b, { children: i2 }, null, null, null) : void 0 === i2.constructor && i2.__b > 0 ? g(i2.type, i2.props, i2.key, i2.ref ? i2.ref : null, i2.__v) : i2).__ = n2, i2.__b = n2.__b + 1, o2 = null, -1 !== (f2 = i2.__i = L(i2, u2, r2, s2)) && (s2--, (o2 = u2[f2]) && (o2.__u |= 131072)), null == o2 || null === o2.__v ? (-1 == f2 && a2--, "function" != typeof i2.type && (i2.__u |= 65536)) : f2 !== r2 && (f2 == r2 - 1 ? a2-- : f2 == r2 + 1 ? a2++ : (f2 > r2 ? a2-- : a2++, i2.__u |= 65536))) : i2 = n2.__k[t2] = null;
   if (s2) for (t2 = 0; t2 < c2; t2++) null != (o2 = u2[t2]) && 0 == (131072 & o2.__u) && (o2.__e == n2.__d && (n2.__d = x(o2)), V(o2, o2));
 }
 function I(n2, l2, u2) {
@@ -8934,7 +8933,7 @@ function L(n2, l2, u2, t2) {
   return -1;
 }
 function T$1(n2, l2, u2) {
-  "-" === l2[0] ? n2.setProperty(l2, null == u2 ? "" : u2) : n2[l2] = null == u2 ? "" : "number" != typeof u2 || v$1.test(l2) ? u2 : u2 + "px";
+  "-" === l2[0] ? n2.setProperty(l2, null == u2 ? "" : u2) : n2[l2] = null == u2 ? "" : "number" != typeof u2 || p$1.test(l2) ? u2 : u2 + "px";
 }
 function A$1(n2, l2, u2, t2, i2) {
   var o2;
@@ -8965,21 +8964,21 @@ function F(n2) {
   };
 }
 function O(n2, u2, t2, i2, o2, r2, f2, e2, c2, s2) {
-  var a2, h2, p2, v2, w2, _2, g2, m2, x2, C2, M2, P2, $2, I2, H, L2, T2 = u2.type;
+  var a2, h2, v2, p2, w2, _2, g2, m2, x2, C2, M2, P2, $2, I2, H, L2, T2 = u2.type;
   if (void 0 !== u2.constructor) return null;
   128 & t2.__u && (c2 = !!(32 & t2.__u), r2 = [e2 = u2.__e = t2.__e]), (a2 = l$1.__b) && a2(u2);
   n: if ("function" == typeof T2) try {
-    if (m2 = u2.props, x2 = "prototype" in T2 && T2.prototype.render, C2 = (a2 = T2.contextType) && i2[a2.__c], M2 = a2 ? C2 ? C2.props.value : a2.__ : i2, t2.__c ? g2 = (h2 = u2.__c = t2.__c).__ = h2.__E : (x2 ? u2.__c = h2 = new T2(m2, M2) : (u2.__c = h2 = new b(m2, M2), h2.constructor = T2, h2.render = q$1), C2 && C2.sub(h2), h2.props = m2, h2.state || (h2.state = {}), h2.context = M2, h2.__n = i2, p2 = h2.__d = true, h2.__h = [], h2._sb = []), x2 && null == h2.__s && (h2.__s = h2.state), x2 && null != T2.getDerivedStateFromProps && (h2.__s == h2.state && (h2.__s = d$1({}, h2.__s)), d$1(h2.__s, T2.getDerivedStateFromProps(m2, h2.__s))), v2 = h2.props, w2 = h2.state, h2.__v = u2, p2) x2 && null == T2.getDerivedStateFromProps && null != h2.componentWillMount && h2.componentWillMount(), x2 && null != h2.componentDidMount && h2.__h.push(h2.componentDidMount);
+    if (m2 = u2.props, x2 = "prototype" in T2 && T2.prototype.render, C2 = (a2 = T2.contextType) && i2[a2.__c], M2 = a2 ? C2 ? C2.props.value : a2.__ : i2, t2.__c ? g2 = (h2 = u2.__c = t2.__c).__ = h2.__E : (x2 ? u2.__c = h2 = new T2(m2, M2) : (u2.__c = h2 = new k$1(m2, M2), h2.constructor = T2, h2.render = q$1), C2 && C2.sub(h2), h2.props = m2, h2.state || (h2.state = {}), h2.context = M2, h2.__n = i2, v2 = h2.__d = true, h2.__h = [], h2._sb = []), x2 && null == h2.__s && (h2.__s = h2.state), x2 && null != T2.getDerivedStateFromProps && (h2.__s == h2.state && (h2.__s = d$1({}, h2.__s)), d$1(h2.__s, T2.getDerivedStateFromProps(m2, h2.__s))), p2 = h2.props, w2 = h2.state, h2.__v = u2, v2) x2 && null == T2.getDerivedStateFromProps && null != h2.componentWillMount && h2.componentWillMount(), x2 && null != h2.componentDidMount && h2.__h.push(h2.componentDidMount);
     else {
-      if (x2 && null == T2.getDerivedStateFromProps && m2 !== v2 && null != h2.componentWillReceiveProps && h2.componentWillReceiveProps(m2, M2), !h2.__e && (null != h2.shouldComponentUpdate && false === h2.shouldComponentUpdate(m2, h2.__s, M2) || u2.__v === t2.__v)) {
-        for (u2.__v !== t2.__v && (h2.props = m2, h2.state = h2.__s, h2.__d = false), u2.__e = t2.__e, u2.__k = t2.__k, u2.__k.forEach(function(n3) {
+      if (x2 && null == T2.getDerivedStateFromProps && m2 !== p2 && null != h2.componentWillReceiveProps && h2.componentWillReceiveProps(m2, M2), !h2.__e && (null != h2.shouldComponentUpdate && false === h2.shouldComponentUpdate(m2, h2.__s, M2) || u2.__v === t2.__v)) {
+        for (u2.__v !== t2.__v && (h2.props = m2, h2.state = h2.__s, h2.__d = false), u2.__e = t2.__e, u2.__k = t2.__k, u2.__k.some(function(n3) {
           n3 && (n3.__ = u2);
         }), P2 = 0; P2 < h2._sb.length; P2++) h2.__h.push(h2._sb[P2]);
         h2._sb = [], h2.__h.length && f2.push(h2);
         break n;
       }
       null != h2.componentWillUpdate && h2.componentWillUpdate(m2, h2.__s, M2), x2 && null != h2.componentDidUpdate && h2.__h.push(function() {
-        h2.componentDidUpdate(v2, w2, _2);
+        h2.componentDidUpdate(p2, w2, _2);
       });
     }
     if (h2.context = M2, h2.props = m2, h2.__P = n2, h2.__e = false, $2 = l$1.__r, I2 = 0, x2) {
@@ -8988,7 +8987,7 @@ function O(n2, u2, t2, i2, o2, r2, f2, e2, c2, s2) {
     } else do {
       h2.__d = false, $2 && $2(u2), a2 = h2.render(h2.props, h2.state, h2.context), h2.state = h2.__s;
     } while (h2.__d && ++I2 < 25);
-    h2.state = h2.__s, null != h2.getChildContext && (i2 = d$1(d$1({}, i2), h2.getChildContext())), x2 && !p2 && null != h2.getSnapshotBeforeUpdate && (_2 = h2.getSnapshotBeforeUpdate(v2, w2)), S(n2, y$1(L2 = null != a2 && a2.type === k$1 && null == a2.key ? a2.props.children : a2) ? L2 : [L2], u2, t2, i2, o2, r2, f2, e2, c2, s2), h2.base = u2.__e, u2.__u &= -161, h2.__h.length && f2.push(h2), g2 && (h2.__E = h2.__ = null);
+    h2.state = h2.__s, null != h2.getChildContext && (i2 = d$1(d$1({}, i2), h2.getChildContext())), x2 && !v2 && null != h2.getSnapshotBeforeUpdate && (_2 = h2.getSnapshotBeforeUpdate(p2, w2)), S(n2, y$1(L2 = null != a2 && a2.type === b && null == a2.key ? a2.props.children : a2) ? L2 : [L2], u2, t2, i2, o2, r2, f2, e2, c2, s2), h2.base = u2.__e, u2.__u &= -161, h2.__h.length && f2.push(h2), g2 && (h2.__E = h2.__ = null);
   } catch (n3) {
     if (u2.__v = null, c2 || null != r2) {
       for (u2.__u |= c2 ? 160 : 32; e2 && 8 === e2.nodeType && e2.nextSibling; ) e2 = e2.nextSibling;
@@ -9012,33 +9011,33 @@ function j$1(n2, u2, t2) {
     }
   });
 }
-function z$1(l2, u2, t2, i2, o2, r2, f2, e2, c2) {
-  var s2, a2, p2, v2, d2, _2, g2, m2 = t2.props, k2 = u2.props, b2 = u2.type;
-  if ("svg" === b2 ? o2 = "http://www.w3.org/2000/svg" : "math" === b2 ? o2 = "http://www.w3.org/1998/Math/MathML" : o2 || (o2 = "http://www.w3.org/1999/xhtml"), null != r2) {
-    for (s2 = 0; s2 < r2.length; s2++) if ((d2 = r2[s2]) && "setAttribute" in d2 == !!b2 && (b2 ? d2.localName === b2 : 3 === d2.nodeType)) {
-      l2 = d2, r2[s2] = null;
+function z$1(u2, t2, i2, o2, r2, f2, e2, c2, s2) {
+  var a2, v2, p2, d2, _2, g2, m2, b2 = i2.props, k2 = t2.props, C2 = t2.type;
+  if ("svg" === C2 ? r2 = "http://www.w3.org/2000/svg" : "math" === C2 ? r2 = "http://www.w3.org/1998/Math/MathML" : r2 || (r2 = "http://www.w3.org/1999/xhtml"), null != f2) {
+    for (a2 = 0; a2 < f2.length; a2++) if ((_2 = f2[a2]) && "setAttribute" in _2 == !!C2 && (C2 ? _2.localName === C2 : 3 === _2.nodeType)) {
+      u2 = _2, f2[a2] = null;
       break;
     }
   }
-  if (null == l2) {
-    if (null === b2) return document.createTextNode(k2);
-    l2 = document.createElementNS(o2, b2, k2.is && k2), r2 = null, e2 = false;
+  if (null == u2) {
+    if (null === C2) return document.createTextNode(k2);
+    u2 = document.createElementNS(r2, C2, k2.is && k2), c2 && (l$1.__m && l$1.__m(t2, f2), c2 = false), f2 = null;
   }
-  if (null === b2) m2 === k2 || e2 && l2.data === k2 || (l2.data = k2);
+  if (null === C2) b2 === k2 || c2 && u2.data === k2 || (u2.data = k2);
   else {
-    if (r2 = r2 && n$1.call(l2.childNodes), m2 = t2.props || h$1, !e2 && null != r2) for (m2 = {}, s2 = 0; s2 < l2.attributes.length; s2++) m2[(d2 = l2.attributes[s2]).name] = d2.value;
-    for (s2 in m2) if (d2 = m2[s2], "children" == s2) ;
-    else if ("dangerouslySetInnerHTML" == s2) p2 = d2;
-    else if ("key" !== s2 && !(s2 in k2)) {
-      if ("value" == s2 && "defaultValue" in k2 || "checked" == s2 && "defaultChecked" in k2) continue;
-      A$1(l2, s2, null, d2, o2);
+    if (f2 = f2 && n$1.call(u2.childNodes), b2 = i2.props || h$1, !c2 && null != f2) for (b2 = {}, a2 = 0; a2 < u2.attributes.length; a2++) b2[(_2 = u2.attributes[a2]).name] = _2.value;
+    for (a2 in b2) if (_2 = b2[a2], "children" == a2) ;
+    else if ("dangerouslySetInnerHTML" == a2) p2 = _2;
+    else if (!(a2 in k2)) {
+      if ("value" == a2 && "defaultValue" in k2 || "checked" == a2 && "defaultChecked" in k2) continue;
+      A$1(u2, a2, null, _2, r2);
     }
-    for (s2 in k2) d2 = k2[s2], "children" == s2 ? v2 = d2 : "dangerouslySetInnerHTML" == s2 ? a2 = d2 : "value" == s2 ? _2 = d2 : "checked" == s2 ? g2 = d2 : "key" === s2 || e2 && "function" != typeof d2 || m2[s2] === d2 || A$1(l2, s2, d2, m2[s2], o2);
-    if (a2) e2 || p2 && (a2.__html === p2.__html || a2.__html === l2.innerHTML) || (l2.innerHTML = a2.__html), u2.__k = [];
-    else if (p2 && (l2.innerHTML = ""), S(l2, y$1(v2) ? v2 : [v2], u2, t2, i2, "foreignObject" === b2 ? "http://www.w3.org/1999/xhtml" : o2, r2, f2, r2 ? r2[0] : t2.__k && x(t2, 0), e2, c2), null != r2) for (s2 = r2.length; s2--; ) null != r2[s2] && w$1(r2[s2]);
-    e2 || (s2 = "value", void 0 !== _2 && (_2 !== l2[s2] || "progress" === b2 && !_2 || "option" === b2 && _2 !== m2[s2]) && A$1(l2, s2, _2, m2[s2], o2), s2 = "checked", void 0 !== g2 && g2 !== l2[s2] && A$1(l2, s2, g2, m2[s2], o2));
+    for (a2 in k2) _2 = k2[a2], "children" == a2 ? d2 = _2 : "dangerouslySetInnerHTML" == a2 ? v2 = _2 : "value" == a2 ? g2 = _2 : "checked" == a2 ? m2 = _2 : c2 && "function" != typeof _2 || b2[a2] === _2 || A$1(u2, a2, _2, b2[a2], r2);
+    if (v2) c2 || p2 && (v2.__html === p2.__html || v2.__html === u2.innerHTML) || (u2.innerHTML = v2.__html), t2.__k = [];
+    else if (p2 && (u2.innerHTML = ""), S(u2, y$1(d2) ? d2 : [d2], t2, i2, o2, "foreignObject" === C2 ? "http://www.w3.org/1999/xhtml" : r2, f2, e2, f2 ? f2[0] : i2.__k && x(i2, 0), c2, s2), null != f2) for (a2 = f2.length; a2--; ) w$1(f2[a2]);
+    c2 || (a2 = "value", "progress" === C2 && null == g2 ? u2.removeAttribute("value") : void 0 !== g2 && (g2 !== u2[a2] || "progress" === C2 && !g2 || "option" === C2 && g2 !== b2[a2]) && A$1(u2, a2, g2, b2[a2], r2), a2 = "checked", void 0 !== m2 && m2 !== u2[a2] && A$1(u2, a2, m2, b2[a2], r2));
   }
-  return l2;
+  return u2;
 }
 function N(n2, u2, t2) {
   try {
@@ -9061,28 +9060,28 @@ function V(n2, u2, t2) {
     i2.base = i2.__P = null;
   }
   if (i2 = n2.__k) for (o2 = 0; o2 < i2.length; o2++) i2[o2] && V(i2[o2], u2, t2 || "function" != typeof n2.type);
-  t2 || null == n2.__e || w$1(n2.__e), n2.__c = n2.__ = n2.__e = n2.__d = void 0;
+  t2 || w$1(n2.__e), n2.__c = n2.__ = n2.__e = n2.__d = void 0;
 }
 function q$1(n2, l2, u2) {
   return this.constructor(n2, u2);
 }
 function B$1(u2, t2, i2) {
   var o2, r2, f2, e2;
-  l$1.__ && l$1.__(u2, t2), r2 = (o2 = "function" == typeof i2) ? null : t2.__k, f2 = [], e2 = [], O(t2, u2 = (!o2 && i2 || t2).__k = _$1(k$1, null, [u2]), r2 || h$1, h$1, t2.namespaceURI, !o2 && i2 ? [i2] : r2 ? null : t2.firstChild ? n$1.call(t2.childNodes) : null, f2, !o2 && i2 ? i2 : r2 ? r2.__e : t2.firstChild, o2, e2), j$1(f2, u2, e2);
+  l$1.__ && l$1.__(u2, t2), r2 = (o2 = "function" == typeof i2) ? null : t2.__k, f2 = [], e2 = [], O(t2, u2 = (!o2 && i2 || t2).__k = _$1(b, null, [u2]), r2 || h$1, h$1, t2.namespaceURI, !o2 && i2 ? [i2] : r2 ? null : t2.firstChild ? n$1.call(t2.childNodes) : null, f2, !o2 && i2 ? i2 : r2 ? r2.__e : t2.firstChild, o2, e2), j$1(f2, u2, e2);
 }
-n$1 = p$1.slice, l$1 = { __e: function(n2, l2, u2, t2) {
+n$1 = v$1.slice, l$1 = { __e: function(n2, l2, u2, t2) {
   for (var i2, o2, r2; l2 = l2.__; ) if ((i2 = l2.__c) && !i2.__) try {
     if ((o2 = i2.constructor) && null != o2.getDerivedStateFromError && (i2.setState(o2.getDerivedStateFromError(n2)), r2 = i2.__d), null != i2.componentDidCatch && (i2.componentDidCatch(n2, t2 || {}), r2 = i2.__d), r2) return i2.__E = i2;
   } catch (l3) {
     n2 = l3;
   }
   throw n2;
-} }, u$1 = 0, b.prototype.setState = function(n2, l2) {
+} }, u$1 = 0, k$1.prototype.setState = function(n2, l2) {
   var u2;
   u2 = null != this.__s && this.__s !== this.state ? this.__s : this.__s = d$1({}, this.state), "function" == typeof n2 && (n2 = n2(d$1({}, u2), this.props)), n2 && d$1(u2, n2), null != n2 && this.__v && (l2 && this._sb.push(l2), M(this));
-}, b.prototype.forceUpdate = function(n2) {
+}, k$1.prototype.forceUpdate = function(n2) {
   this.__v && (this.__e = true, n2 && this.__h.push(n2), M(this));
-}, b.prototype.render = k$1, i$1 = [], r$3 = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, f$1 = function(n2, l2) {
+}, k$1.prototype.render = b, i$1 = [], r$3 = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, f$1 = function(n2, l2) {
   return n2.__v.__b - l2.__v.__b;
 }, P.__r = 0, e$2 = 0, c$1 = F(false), s$1 = F(true);
 var n = function(t2, s2, r2, e2) {
@@ -9455,38 +9454,35 @@ function PopupMenuComponent(props) {
     title,
     width,
     scale,
-    search,
+    search: search2,
     emptyPlaceholder,
+    searchFn,
     entries: originalEntries,
     onOpened,
     onClosed
   } = props;
   const searchable = T(() => {
-    if (!isDefined$1(search)) {
+    if (!isDefined$1(search2)) {
       return false;
     }
     return originalEntries.length > 5;
-  }, [search, originalEntries]);
+  }, [search2, originalEntries]);
   const [value, setValue] = h("");
   const filterEntries = q((originalEntries2, value2) => {
     if (!searchable) {
       return originalEntries2;
     }
-    const filter2 = (entry) => {
-      if (!value2) {
-        return (entry.rank || 0) >= 0;
-      }
-      if (entry.searchable === false) {
-        return false;
-      }
-      const searchableFields = [
-        entry.description || "",
-        entry.label || "",
-        entry.search || ""
-      ].map((string) => string.toLowerCase());
-      return value2.toLowerCase().split(/\s/g).every((word) => searchableFields.some((field) => field.includes(word)));
-    };
-    return originalEntries2.filter(filter2);
+    if (!value2) {
+      return originalEntries2.filter(({ rank = 0 }) => rank >= 0);
+    }
+    const searchableEntries = originalEntries2.filter(({ searchable: searchable2 }) => searchable2 !== false);
+    return searchFn(searchableEntries, value2, {
+      keys: [
+        "label",
+        "description",
+        "search"
+      ]
+    }).map(({ item }) => item);
   }, [searchable]);
   const [entries, setEntries] = h(filterEntries(originalEntries, value));
   const [selectedEntry, setSelectedEntry] = h(entries[0]);
@@ -9562,7 +9558,7 @@ function PopupMenuComponent(props) {
             <svg class="djs-popup-search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M9.0325 8.5H9.625L13.3675 12.25L12.25 13.3675L8.5 9.625V9.0325L8.2975 8.8225C7.4425 9.5575 6.3325 10 5.125 10C2.4325 10 0.25 7.8175 0.25 5.125C0.25 2.4325 2.4325 0.25 5.125 0.25C7.8175 0.25 10 2.4325 10 5.125C10 6.3325 9.5575 7.4425 8.8225 8.2975L9.0325 8.5ZM1.75 5.125C1.75 6.9925 3.2575 8.5 5.125 8.5C6.9925 8.5 8.5 6.9925 8.5 5.125C8.5 3.2575 6.9925 1.75 5.125 1.75C3.2575 1.75 1.75 3.2575 1.75 5.125Z" fill="#22242A"/>
             </svg>
-            <input type="text" aria-label="${title}" />
+            <input type="text" spellcheck=${false} aria-label="${title}" />
           </div>
           `}
 
@@ -9655,9 +9651,10 @@ var CLOSE_EVENTS = [
   "commandStack.changed"
 ];
 var DEFAULT_PRIORITY$1 = 1e3;
-function PopupMenu(config2, eventBus, canvas) {
+function PopupMenu(config2, eventBus, canvas, search2) {
   this._eventBus = eventBus;
   this._canvas = canvas;
+  this._search = search2;
   this._current = null;
   var scale = isDefined$1(config2 && config2.scale) ? config2.scale : {
     min: 1,
@@ -9679,7 +9676,8 @@ function PopupMenu(config2, eventBus, canvas) {
 PopupMenu.$inject = [
   "config.popupMenu",
   "eventBus",
-  "canvas"
+  "canvas",
+  "search"
 ];
 PopupMenu.prototype._render = function() {
   const {
@@ -9713,6 +9711,7 @@ PopupMenu.prototype._render = function() {
         scale=${scale}
         onOpened=${this._onOpened.bind(this)}
         onClosed=${this._onClosed.bind(this)}
+        searchFn=${this._search}
         ...${{ ...options }}
       />
     `,
@@ -9991,7 +9990,135 @@ PopupMenu.prototype._getEntry = function(entryId) {
   }
   return entry;
 };
+function search(items, pattern, options) {
+  return items.reduce((results, item) => {
+    const tokens = getTokens(item, pattern, options.keys);
+    if (Object.keys(tokens).length) {
+      const result = {
+        item,
+        tokens
+      };
+      const index2 = getIndex(result, results, options.keys);
+      results.splice(index2, 0, result);
+    }
+    return results;
+  }, []);
+}
+function getTokens(item, pattern, keys2) {
+  return keys2.reduce((results, key) => {
+    const string = item[key];
+    const tokens = getMatchingTokens(string, pattern);
+    if (hasMatch$1(tokens)) {
+      results[key] = tokens;
+    }
+    return results;
+  }, {});
+}
+function getIndex(result, results, keys2) {
+  if (!results.length) {
+    return 0;
+  }
+  let index2 = 0;
+  do {
+    for (const key of keys2) {
+      const tokens = result.tokens[key], tokensOther = results[index2].tokens[key];
+      if (tokens && !tokensOther) {
+        return index2;
+      } else if (!tokens && tokensOther) {
+        index2++;
+        break;
+      } else if (!tokens && !tokensOther) {
+        continue;
+      }
+      const tokenComparison = compareTokens$1(tokens, tokensOther);
+      if (tokenComparison === -1) {
+        return index2;
+      } else if (tokenComparison === 1) {
+        index2++;
+        break;
+      } else {
+        const stringComparison = compareStrings$1(result.item[key], results[index2].item[key]);
+        if (stringComparison === -1) {
+          return index2;
+        } else if (stringComparison === 1) {
+          index2++;
+          break;
+        } else {
+          continue;
+        }
+      }
+    }
+  } while (index2 < results.length);
+  return index2;
+}
+function isMatch$1(token) {
+  return token.match;
+}
+function hasMatch$1(tokens) {
+  return tokens.find(isMatch$1);
+}
+function compareTokens$1(tokensA, tokensB) {
+  const tokensAHasMatch = hasMatch$1(tokensA), tokensBHasMatch = hasMatch$1(tokensB);
+  if (tokensAHasMatch && !tokensBHasMatch) {
+    return -1;
+  }
+  if (!tokensAHasMatch && tokensBHasMatch) {
+    return 1;
+  }
+  if (!tokensAHasMatch && !tokensBHasMatch) {
+    return 0;
+  }
+  const tokensAFirstMatch = tokensA.find(isMatch$1), tokensBFirstMatch = tokensB.find(isMatch$1);
+  if (tokensAFirstMatch.index < tokensBFirstMatch.index) {
+    return -1;
+  }
+  if (tokensAFirstMatch.index > tokensBFirstMatch.index) {
+    return 1;
+  }
+  return 0;
+}
+function compareStrings$1(a2, b2) {
+  return a2.localeCompare(b2);
+}
+function getMatchingTokens(string, pattern) {
+  var tokens = [], originalString = string;
+  if (!string) {
+    return tokens;
+  }
+  string = string.toLowerCase();
+  pattern = pattern.toLowerCase();
+  var index2 = string.indexOf(pattern);
+  if (index2 > -1) {
+    if (index2 !== 0) {
+      tokens.push({
+        value: originalString.slice(0, index2),
+        index: 0
+      });
+    }
+    tokens.push({
+      value: originalString.slice(index2, index2 + pattern.length),
+      index: index2,
+      match: true
+    });
+    if (pattern.length + index2 < string.length) {
+      tokens.push({
+        value: originalString.slice(index2 + pattern.length),
+        index: index2 + pattern.length
+      });
+    }
+  } else {
+    tokens.push({
+      value: originalString,
+      index: 0
+    });
+  }
+  return tokens;
+}
+const Search = {
+  search: ["value", search]
+};
 const PopupMenuModule$1 = {
+  __depends__: [Search],
   __init__: ["popupMenu"],
   popupMenu: ["type", PopupMenu]
 };
@@ -10421,31 +10548,51 @@ function getParent(element, anyType) {
   }
   return null;
 }
-function isDirectionHorizontal(element) {
+function isDirectionHorizontal(element, elementRegistry) {
+  var parent = getParent(element, "bpmn:Process");
+  if (parent) {
+    return true;
+  }
   var types2 = ["bpmn:Participant", "bpmn:Lane"];
-  var parent = getParent(element, types2);
+  parent = getParent(element, types2);
   if (parent) {
     return isHorizontal$3(parent);
   } else if (isAny$7(element, types2)) {
     return isHorizontal$3(element);
   }
-  return true;
+  var process;
+  for (process = getBusinessObject(element); process; process = process.$parent) {
+    if (is$g(process, "bpmn:Process")) {
+      break;
+    }
+  }
+  if (!elementRegistry) {
+    return true;
+  }
+  var pool = elementRegistry.find(function(shape) {
+    var businessObject = getBusinessObject(shape);
+    return businessObject && businessObject.get("processRef") === process;
+  });
+  if (!pool) {
+    return true;
+  }
+  return isHorizontal$3(pool);
 }
-function getNewShapePosition(source2, element) {
+function getNewShapePosition(source2, element, elementRegistry) {
+  var placeHorizontally = isDirectionHorizontal(source2, elementRegistry);
   if (is$g(element, "bpmn:TextAnnotation")) {
-    return getTextAnnotationPosition(source2, element);
+    return getTextAnnotationPosition(source2, element, placeHorizontally);
   }
   if (isAny$7(element, ["bpmn:DataObjectReference", "bpmn:DataStoreReference"])) {
-    return getDataElementPosition(source2, element);
+    return getDataElementPosition(source2, element, placeHorizontally);
   }
   if (is$g(element, "bpmn:FlowNode")) {
-    return getFlowNodePosition(source2, element);
+    return getFlowNodePosition(source2, element, placeHorizontally);
   }
 }
-function getFlowNodePosition(source2, element) {
+function getFlowNodePosition(source2, element, placeHorizontally) {
   var sourceTrbl = asTRBL(source2);
   var sourceMid = getMid(source2);
-  var placeHorizontally = isDirectionHorizontal(source2);
   var placement = placeHorizontally ? {
     directionHint: "e",
     minDistance: 80,
@@ -10501,9 +10648,8 @@ function getDistance$2(orientation, minDistance, placement) {
     return 0;
   }
 }
-function getTextAnnotationPosition(source2, element) {
+function getTextAnnotationPosition(source2, element, placeHorizontally) {
   var sourceTrbl = asTRBL(source2);
-  var placeHorizontally = isDirectionHorizontal(source2);
   var position = placeHorizontally ? {
     x: sourceTrbl.right + element.width / 2,
     y: sourceTrbl.top - 50 - element.height / 2
@@ -10532,9 +10678,8 @@ function getTextAnnotationPosition(source2, element) {
   };
   return findFreePosition(source2, element, position, generateGetNextPosition(nextPositionDirection));
 }
-function getDataElementPosition(source2, element) {
+function getDataElementPosition(source2, element, placeHorizontally) {
   var sourceTrbl = asTRBL(source2);
-  var placeHorizontally = isDirectionHorizontal(source2);
   var position = placeHorizontally ? {
     x: sourceTrbl.right - 10 + element.width / 2,
     y: sourceTrbl.bottom + 40 + element.width / 2
@@ -10553,13 +10698,13 @@ function getDataElementPosition(source2, element) {
   };
   return findFreePosition(source2, element, position, generateGetNextPosition(nextPositionDirection));
 }
-function AutoPlace(eventBus) {
+function AutoPlace(eventBus, elementRegistry) {
   eventBus.on("autoPlace", function(context) {
     var shape = context.shape, source2 = context.source;
-    return getNewShapePosition(source2, shape);
+    return getNewShapePosition(source2, shape, elementRegistry);
   });
 }
-AutoPlace.$inject = ["eventBus"];
+AutoPlace.$inject = ["eventBus", "elementRegistry"];
 const AutoPlaceModule = {
   __depends__: [AutoPlaceModule$1],
   __init__: ["bpmnAutoPlace"],
@@ -13031,13 +13176,13 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
   this.postExecuted("element.updateProperties", handlePropertiesUpdate, true);
   function handleConnectionRemoval(context) {
     const source2 = context.source, target = context.target;
-    if (isCompensationBoundaryEvent(source2) && isForCompensation$1(target)) {
+    if (isCompensationBoundaryEvent$1(source2) && isForCompensation$2(target)) {
       removeIsForCompensationProperty(target);
     }
   }
   function handleNewConnection(context) {
     const connection = context.connection, source2 = context.source, target = context.target;
-    if (isCompensationBoundaryEvent(source2) && isForCompensationAllowed(target)) {
+    if (isCompensationBoundaryEvent$1(source2) && isForCompensationAllowed(target)) {
       addIsForCompensationProperty(target);
       removeExistingAssociations(source2, [connection]);
     }
@@ -13046,17 +13191,17 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
     const newTarget = context.newTarget, oldSource = context.oldSource, oldTarget = context.oldTarget;
     if (oldTarget !== newTarget) {
       const source2 = oldSource;
-      if (isForCompensation$1(oldTarget)) {
+      if (isForCompensation$2(oldTarget)) {
         removeIsForCompensationProperty(oldTarget);
       }
-      if (isCompensationBoundaryEvent(source2) && isForCompensationAllowed(newTarget)) {
+      if (isCompensationBoundaryEvent$1(source2) && isForCompensationAllowed(newTarget)) {
         addIsForCompensationProperty(newTarget);
       }
     }
   }
   function handlePropertiesUpdate(context) {
     const { element } = context;
-    if (isForCompensation$1(element)) {
+    if (isForCompensation$2(element)) {
       removeDisallowedConnections(element);
       removeAttachments(element);
     } else if (isForCompensationAllowed(element)) {
@@ -13068,14 +13213,14 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
       newData,
       oldShape
     } = context;
-    if (isCompensationBoundaryEvent(context.oldShape) && newData.eventDefinitionType !== "bpmn:CompensateEventDefinition" || newData.type !== "bpmn:BoundaryEvent") {
+    if (isCompensationBoundaryEvent$1(context.oldShape) && newData.eventDefinitionType !== "bpmn:CompensateEventDefinition" || newData.type !== "bpmn:BoundaryEvent") {
       const targetConnection = oldShape.outgoing.find(
-        ({ target }) => isForCompensation$1(target)
+        ({ target }) => isForCompensation$2(target)
       );
       if (targetConnection && targetConnection.target) {
         context._connectionTarget = targetConnection.target;
       }
-    } else if (!isCompensationBoundaryEvent(context.oldShape) && newData.eventDefinitionType === "bpmn:CompensateEventDefinition" && newData.type === "bpmn:BoundaryEvent") {
+    } else if (!isCompensationBoundaryEvent$1(context.oldShape) && newData.eventDefinitionType === "bpmn:CompensateEventDefinition" && newData.type === "bpmn:BoundaryEvent") {
       const targetConnection = oldShape.outgoing.find(
         ({ target }) => isForCompensationAllowed(target)
       );
@@ -13112,7 +13257,7 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
   function removeExistingAssociations(boundaryEvent, ignoredAssociations) {
     const associations2 = boundaryEvent.outgoing.filter((connection) => is$g(connection, "bpmn:Association"));
     const associationsToRemove = associations2.filter((association) => {
-      return isForCompensation$1(association.target) && !ignoredAssociations.includes(association);
+      return isForCompensation$2(association.target) && !ignoredAssociations.includes(association);
     });
     associationsToRemove.forEach((association) => modeling.removeConnection(association));
   }
@@ -13125,7 +13270,7 @@ function CompensateBoundaryEventBehavior(eventBus, modeling, bpmnRules) {
   }
   function removeIncomingCompensationAssociations(element) {
     const compensationAssociations = element.incoming.filter(
-      (connection) => isCompensationBoundaryEvent(connection.source)
+      (connection) => isCompensationBoundaryEvent$1(connection.source)
     );
     modeling.removeElements(compensationAssociations);
   }
@@ -13142,11 +13287,11 @@ CompensateBoundaryEventBehavior.$inject = [
   "modeling",
   "bpmnRules"
 ];
-function isForCompensation$1(element) {
+function isForCompensation$2(element) {
   const bo = getBusinessObject(element);
   return bo && bo.get("isForCompensation");
 }
-function isCompensationBoundaryEvent(element) {
+function isCompensationBoundaryEvent$1(element) {
   return element && is$g(element, "bpmn:BoundaryEvent") && hasEventDefinition$2(element, "bpmn:CompensateEventDefinition");
 }
 function isForCompensationAllowed(element) {
@@ -15342,10 +15487,22 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
   }
   allLanes.forEach(function(other2) {
     var otherTrbl = asTRBL(other2);
-    if (/n/.test(resizeDirection)) {
-      if (isHorizontalLane && otherTrbl.top < laneTrbl.top - 10) {
+    if (isHorizontalLane) {
+      if (otherTrbl.top < laneTrbl.top - 10) {
         isFirst = false;
       }
+      if (otherTrbl.bottom > laneTrbl.bottom + 10) {
+        isLast = false;
+      }
+    } else {
+      if (otherTrbl.left < laneTrbl.left - 10) {
+        isFirst = false;
+      }
+      if (otherTrbl.right > laneTrbl.right + 10) {
+        isLast = false;
+      }
+    }
+    if (/n/.test(resizeDirection)) {
       if (balanced && abs$2(laneTrbl.top - otherTrbl.bottom) < 10) {
         addMax(maxTrbl, "top", otherTrbl.top + minDimensions.height);
       }
@@ -15354,9 +15511,6 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
       }
     }
     if (/e/.test(resizeDirection)) {
-      if (!isHorizontalLane && otherTrbl.right > laneTrbl.right + 10) {
-        isLast = false;
-      }
       if (balanced && abs$2(laneTrbl.right - otherTrbl.left) < 10) {
         addMin(maxTrbl, "right", otherTrbl.right - minDimensions.width);
       }
@@ -15365,9 +15519,6 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
       }
     }
     if (/s/.test(resizeDirection)) {
-      if (isHorizontalLane && otherTrbl.bottom > laneTrbl.bottom + 10) {
-        isLast = false;
-      }
       if (balanced && abs$2(laneTrbl.bottom - otherTrbl.top) < 10) {
         addMin(maxTrbl, "bottom", otherTrbl.bottom - minDimensions.height);
       }
@@ -15376,9 +15527,6 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
       }
     }
     if (/w/.test(resizeDirection)) {
-      if (!isHorizontalLane && otherTrbl.left < laneTrbl.left - 10) {
-        isFirst = false;
-      }
       if (balanced && abs$2(laneTrbl.left - otherTrbl.right) < 10) {
         addMax(maxTrbl, "left", otherTrbl.left + minDimensions.width);
       }
@@ -15393,16 +15541,16 @@ function getParticipantResizeConstraints(laneShape, resizeDirection, balanced) {
   var padding = isHorizontalLane ? LANE_PADDING : VERTICAL_LANE_PADDING;
   flowElements.forEach(function(flowElement) {
     var flowElementTrbl = asTRBL(flowElement);
-    if (isFirst && /n/.test(resizeDirection)) {
+    if (/n/.test(resizeDirection) && (!isHorizontalLane || isFirst)) {
       addMin(minTrbl, "top", flowElementTrbl.top - padding.top);
     }
-    if (isLast && /e/.test(resizeDirection)) {
+    if (/e/.test(resizeDirection) && (isHorizontalLane || isLast)) {
       addMax(minTrbl, "right", flowElementTrbl.right + padding.right);
     }
-    if (isLast && /s/.test(resizeDirection)) {
+    if (/s/.test(resizeDirection) && (!isHorizontalLane || isLast)) {
       addMax(minTrbl, "bottom", flowElementTrbl.bottom + padding.bottom);
     }
-    if (isFirst && /w/.test(resizeDirection)) {
+    if (/w/.test(resizeDirection) && (isHorizontalLane || isFirst)) {
       addMin(minTrbl, "left", flowElementTrbl.left - padding.left);
     }
   });
@@ -16250,6 +16398,38 @@ function UpdateContext() {
     return !this.counter;
   };
 }
+function SetCompensationActivityAfterPasteBehavior(eventBus, modeling) {
+  CommandInterceptor.call(this, eventBus);
+  this.postExecuted("elements.create", function(event2) {
+    const context = event2.context, elements = context.elements;
+    for (const element of elements) {
+      if (isForCompensation$1(element) && !isConnectedToCompensationBoundaryEvent(element)) {
+        modeling.updateProperties(element, { isForCompensation: void 0 });
+      }
+    }
+  });
+}
+e$3(SetCompensationActivityAfterPasteBehavior, CommandInterceptor);
+SetCompensationActivityAfterPasteBehavior.$inject = [
+  "eventBus",
+  "modeling"
+];
+function isForCompensation$1(element) {
+  const bo = getBusinessObject(element);
+  return bo && bo.isForCompensation;
+}
+function isCompensationBoundaryEvent(element) {
+  return element && is$g(element, "bpmn:BoundaryEvent") && hasEventDefinition$2(element, "bpmn:CompensateEventDefinition");
+}
+function isConnectedToCompensationBoundaryEvent(element) {
+  const compensationAssociations = element.incoming.filter(
+    (connection) => isCompensationBoundaryEvent(connection.source)
+  );
+  if (compensationAssociations.length > 0) {
+    return true;
+  }
+  return false;
+}
 const BehaviorModule = {
   __init__: [
     "adaptiveLabelPositioningBehavior",
@@ -16291,7 +16471,8 @@ const BehaviorModule = {
     "toggleElementCollapseBehaviour",
     "unclaimIdBehavior",
     "updateFlowNodeRefsBehavior",
-    "unsetDefaultFlowBehavior"
+    "unsetDefaultFlowBehavior",
+    "setCompensationActivityAfterPasteBehavior"
   ],
   adaptiveLabelPositioningBehavior: ["type", AdaptiveLabelPositioningBehavior],
   appendBehavior: ["type", AppendBehavior],
@@ -16332,7 +16513,8 @@ const BehaviorModule = {
   toggleElementCollapseBehaviour: ["type", ToggleElementCollapseBehaviour],
   unclaimIdBehavior: ["type", UnclaimIdBehavior],
   unsetDefaultFlowBehavior: ["type", DeleteSequenceFlowBehavior],
-  updateFlowNodeRefsBehavior: ["type", UpdateFlowNodeRefsBehavior]
+  updateFlowNodeRefsBehavior: ["type", UpdateFlowNodeRefsBehavior],
+  setCompensationActivityAfterPasteBehavior: ["type", SetCompensationActivityAfterPasteBehavior]
 };
 function getBoundaryAttachment(position, targetBounds) {
   var orientation = getOrientation(position, targetBounds, -15);
@@ -22870,14 +23052,15 @@ var orientationDirectionMapping = {
   bottom: "b",
   left: "l"
 };
-function BpmnLayouter() {
+function BpmnLayouter(elementRegistry) {
+  this._elementRegistry = elementRegistry;
 }
 e$3(BpmnLayouter, BaseLayouter);
 BpmnLayouter.prototype.layoutConnection = function(connection, hints) {
   if (!hints) {
     hints = {};
   }
-  var source2 = hints.source || connection.source, target = hints.target || connection.target, waypoints = hints.waypoints || connection.waypoints, connectionStart = hints.connectionStart, connectionEnd = hints.connectionEnd;
+  var source2 = hints.source || connection.source, target = hints.target || connection.target, waypoints = hints.waypoints || connection.waypoints, connectionStart = hints.connectionStart, connectionEnd = hints.connectionEnd, elementRegistry = this._elementRegistry;
   var manhattanOptions, updatedWaypoints;
   if (!connectionStart) {
     connectionStart = getConnectionDocking(waypoints && waypoints[0], source2);
@@ -22890,7 +23073,7 @@ BpmnLayouter.prototype.layoutConnection = function(connection, hints) {
       return [].concat([connectionStart], waypoints.slice(1, -1), [connectionEnd]);
     }
   }
-  var layout = isDirectionHorizontal(source2) ? PREFERRED_LAYOUTS_HORIZONTAL : PREFERRED_LAYOUTS_VERTICAL;
+  var layout = isDirectionHorizontal(source2, elementRegistry) ? PREFERRED_LAYOUTS_HORIZONTAL : PREFERRED_LAYOUTS_VERTICAL;
   if (is$g(connection, "bpmn:MessageFlow")) {
     manhattanOptions = getMessageFlowManhattanOptions(source2, target, layout);
   } else if (is$g(connection, "bpmn:SequenceFlow") || isCompensationAssociation(source2, target)) {
@@ -23101,6 +23284,7 @@ function getBoundaryEventTargetLayout(attachOrientation, targetOrientation, atta
     }
   }
 }
+BpmnLayouter.$inject = ["elementRegistry"];
 function dockingToPoint(docking) {
   return assign$2({ original: docking.point.original || docking.point }, docking.actual);
 }
@@ -26035,10 +26219,10 @@ const GridSnappingModule$1 = {
   gridSnapping: ["type", GridSnapping]
 };
 var HIGH_PRIORITY$5 = 2e3;
-function GridSnappingAutoPlaceBehavior(eventBus, gridSnapping) {
+function GridSnappingAutoPlaceBehavior(eventBus, gridSnapping, elementRegistry) {
   eventBus.on("autoPlace", HIGH_PRIORITY$5, function(context) {
     var source2 = context.source, sourceMid = getMid(source2), shape = context.shape;
-    var position = getNewShapePosition(source2, shape);
+    var position = getNewShapePosition(source2, shape, elementRegistry);
     ["x", "y"].forEach(function(axis) {
       var options = {};
       if (position[axis] === sourceMid[axis]) {
@@ -26063,7 +26247,8 @@ function GridSnappingAutoPlaceBehavior(eventBus, gridSnapping) {
 }
 GridSnappingAutoPlaceBehavior.$inject = [
   "eventBus",
-  "gridSnapping"
+  "gridSnapping",
+  "elementRegistry"
 ];
 function isHorizontal$1(axis) {
   return axis === "x";
@@ -27043,7 +27228,7 @@ function LabelEditingPreview(eventBus, canvas, pathMap) {
     }
     if (is$g(element, "bpmn:TextAnnotation") || element.labelTarget) {
       canvas.addMarker(element, MARKER_HIDDEN);
-    } else if (is$g(element, "bpmn:Task") || is$g(element, "bpmn:CallActivity") || is$g(element, "bpmn:SubProcess") || is$g(element, "bpmn:Participant")) {
+    } else if (is$g(element, "bpmn:Task") || is$g(element, "bpmn:CallActivity") || is$g(element, "bpmn:SubProcess") || is$g(element, "bpmn:Participant") || is$g(element, "bpmn:Lane")) {
       canvas.addMarker(element, MARKER_LABEL_HIDDEN);
     }
   });
@@ -29083,25 +29268,31 @@ const SnappingModule = {
   connectSnapping: ["type", BpmnConnectSnapping],
   createMoveSnapping: ["type", BpmnCreateMoveSnapping]
 };
-function SearchPad(canvas, eventBus, overlays, selection, translate2) {
+function SearchPad(canvas, eventBus, selection, translate2) {
   this._open = false;
   this._results = [];
   this._eventMaps = [];
+  this._cachedRootElement = null;
+  this._cachedSelection = null;
+  this._cachedViewbox = null;
   this._canvas = canvas;
   this._eventBus = eventBus;
-  this._overlays = overlays;
   this._selection = selection;
   this._translate = translate2;
   this._container = this._getBoxHtml();
   this._searchInput = query(SearchPad.INPUT_SELECTOR, this._container);
   this._resultsContainer = query(SearchPad.RESULTS_CONTAINER_SELECTOR, this._container);
   this._canvas.getContainer().appendChild(this._container);
-  eventBus.on(["canvas.destroy", "diagram.destroy"], this.close, this);
+  eventBus.on([
+    "canvas.destroy",
+    "diagram.destroy",
+    "drag.init",
+    "elements.changed"
+  ], this.close, this);
 }
 SearchPad.$inject = [
   "canvas",
   "eventBus",
-  "overlays",
   "selection",
   "translate"
 ];
@@ -29115,7 +29306,7 @@ SearchPad.prototype._bindEvents = function() {
     });
   }
   listen(document, "html", "click", function(e2) {
-    self2.close();
+    self2.close(false);
   });
   listen(this._container, SearchPad.INPUT_SELECTOR, "click", function(e2) {
     e2.stopPropagation();
@@ -29144,7 +29335,7 @@ SearchPad.prototype._bindEvents = function() {
     }
     if (isKey("Enter", e2)) {
       var selected = self2._getCurrentResult();
-      return selected ? self2._select(selected) : self2.close();
+      return selected ? self2._select(selected) : self2.close(false);
     }
     if (isKey("ArrowUp", e2)) {
       return self2._scrollToDirection(true);
@@ -29170,6 +29361,9 @@ SearchPad.prototype._search = function(pattern) {
     return;
   }
   var searchResults = this._searchProvider.find(pattern);
+  searchResults = searchResults.filter(function(searchResult) {
+    return !self2._canvas.getRootElements().includes(searchResult.element);
+  });
   if (!searchResults.length) {
     return;
   }
@@ -29212,7 +29406,6 @@ SearchPad.prototype._scrollToNode = function(node2) {
 SearchPad.prototype._clearResults = function() {
   clear$1(this._resultsContainer);
   this._results = [];
-  this._resetOverlay();
   this._eventBus.fire("searchPad.cleared");
 };
 SearchPad.prototype._getCurrentResult = function() {
@@ -29238,23 +29431,42 @@ SearchPad.prototype.open = function() {
   if (this.isOpen()) {
     return;
   }
+  this._cachedRootElement = this._canvas.getRootElement();
+  this._cachedSelection = this._selection.get();
+  this._cachedViewbox = this._canvas.viewbox();
   this._bindEvents();
   this._open = true;
+  classes$1(this._canvas.getContainer()).add("djs-search-open");
   classes$1(this._container).add("open");
   this._searchInput.focus();
   this._eventBus.fire("searchPad.opened");
 };
-SearchPad.prototype.close = function() {
+SearchPad.prototype.close = function(restoreCached = true) {
   if (!this.isOpen()) {
     return;
   }
+  if (restoreCached) {
+    if (this._cachedRootElement) {
+      this._canvas.setRootElement(this._cachedRootElement);
+    }
+    if (this._cachedSelection) {
+      this._selection.select(this._cachedSelection);
+    }
+    if (this._cachedViewbox) {
+      this._canvas.viewbox(this._cachedViewbox);
+    }
+    this._eventBus.fire("searchPad.restored");
+  }
+  this._cachedRootElement = null;
+  this._cachedSelection = null;
+  this._cachedViewbox = null;
   this._unbindEvents();
   this._open = false;
+  classes$1(this._canvas.getContainer()).remove("djs-search-open");
   classes$1(this._container).remove("open");
   this._clearResults();
   this._searchInput.value = "";
   this._searchInput.blur();
-  this._resetOverlay();
   this._eventBus.fire("searchPad.closed");
 };
 SearchPad.prototype.toggle = function() {
@@ -29274,29 +29486,22 @@ SearchPad.prototype._preselect = function(node2) {
   var id = attr$1(node2, SearchPad.RESULT_ID_ATTRIBUTE);
   var element = this._results[id].element;
   classes$1(node2).add(SearchPad.RESULT_SELECTED_CLASS);
-  this._resetOverlay(element);
-  this._canvas.scrollToElement(element, { top: 400 });
+  this._canvas.zoom(1);
+  this._canvas.scrollToElement(element, {
+    top: 300
+  });
   this._selection.select(element);
   this._eventBus.fire("searchPad.preselected", element);
 };
 SearchPad.prototype._select = function(node2) {
   var id = attr$1(node2, SearchPad.RESULT_ID_ATTRIBUTE);
   var element = this._results[id].element;
-  this.close();
-  this._resetOverlay();
+  this._cachedSelection = null;
+  this._cachedViewbox = null;
+  this.close(false);
   this._canvas.scrollToElement(element, { top: 400 });
   this._selection.select(element);
   this._eventBus.fire("searchPad.selected", element);
-};
-SearchPad.prototype._resetOverlay = function(element) {
-  if (this._overlayId) {
-    this._overlays.remove(this._overlayId);
-  }
-  if (element) {
-    var box = getBBox(element);
-    var overlay = constructOverlay(box);
-    this._overlayId = this._overlays.add(element, overlay);
-  }
 };
 SearchPad.prototype._getBoxHtml = function() {
   const box = domify$1(SearchPad.BOX_HTML);
@@ -29306,25 +29511,6 @@ SearchPad.prototype._getBoxHtml = function() {
   }
   return box;
 };
-function constructOverlay(box) {
-  var offset = 6;
-  var w2 = box.width + offset * 2;
-  var h2 = box.height + offset * 2;
-  var styles = {
-    width: w2 + "px",
-    height: h2 + "px"
-  };
-  var html = domify$1('<div class="' + SearchPad.OVERLAY_CLASS + '"></div>');
-  assign$1(html, styles);
-  return {
-    position: {
-      bottom: h2 - offset,
-      right: w2 - offset
-    },
-    show: true,
-    html
-  };
-}
 function createInnerTextNode(parentNode, tokens, template) {
   var text = createHtmlText(tokens);
   var childNode = domify$1(template);
@@ -29335,7 +29521,7 @@ function createHtmlText(tokens) {
   var htmlText = "";
   tokens.forEach(function(t2) {
     if (t2.matched) {
-      htmlText += '<strong class="' + SearchPad.RESULT_HIGHLIGHT_CLASS + '">' + escapeHTML$1(t2.matched) + "</strong>";
+      htmlText += '<b class="' + SearchPad.RESULT_HIGHLIGHT_CLASS + '">' + escapeHTML$1(t2.matched) + "</b>";
     } else {
       htmlText += escapeHTML$1(t2.normal);
     }
@@ -29350,8 +29536,15 @@ SearchPad.RESULT_SELECTED_CLASS = "djs-search-result-selected";
 SearchPad.RESULT_SELECTED_SELECTOR = "." + SearchPad.RESULT_SELECTED_CLASS;
 SearchPad.RESULT_ID_ATTRIBUTE = "data-result-id";
 SearchPad.RESULT_HIGHLIGHT_CLASS = "djs-search-highlight";
-SearchPad.OVERLAY_CLASS = "djs-search-overlay";
-SearchPad.BOX_HTML = '<div class="djs-search-container djs-draggable djs-scrollable"><div class="djs-search-input"><input type="text"/></div><div class="djs-search-results"></div></div>';
+SearchPad.BOX_HTML = `<div class="djs-search-container djs-scrollable">
+  <div class="djs-search-input">
+    <svg class="djs-search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.0325 8.5H9.625L13.3675 12.25L12.25 13.3675L8.5 9.625V9.0325L8.2975 8.8225C7.4425 9.5575 6.3325 10 5.125 10C2.4325 10 0.25 7.8175 0.25 5.125C0.25 2.4325 2.4325 0.25 5.125 0.25C7.8175 0.25 10 2.4325 10 5.125C10 6.3325 9.5575 7.4425 8.8225 8.2975L9.0325 8.5ZM1.75 5.125C1.75 6.9925 3.2575 8.5 5.125 8.5C6.9925 8.5 8.5 6.9925 8.5 5.125C8.5 3.2575 6.9925 1.75 5.125 1.75C3.2575 1.75 1.75 3.2575 1.75 5.125Z" fill="#22242A"/>
+    </svg>
+    <input type="text" spellcheck="false" />
+  </div>
+  <div class="djs-search-results" />
+</div>`;
 SearchPad.RESULT_HTML = '<div class="djs-search-result"></div>';
 SearchPad.RESULT_PRIMARY_HTML = '<div class="djs-search-result-primary"></div>';
 SearchPad.RESULT_SECONDARY_HTML = '<p class="djs-search-result-secondary"></p>';
@@ -29376,60 +29569,94 @@ BpmnSearchProvider.$inject = [
 BpmnSearchProvider.prototype.find = function(pattern) {
   var rootElements = this._canvas.getRootElements();
   var elements = this._elementRegistry.filter(function(element) {
-    if (element.labelTarget) {
-      return false;
+    return !isLabel(element) && !rootElements.includes(element);
+  });
+  return elements.reduce(function(results, element) {
+    var label = getLabel(element);
+    var primaryTokens = findMatches(label, pattern), secondaryTokens = findMatches(element.id, pattern);
+    if (hasMatch(primaryTokens) || hasMatch(secondaryTokens)) {
+      return [
+        ...results,
+        {
+          primaryTokens,
+          secondaryTokens,
+          element
+        }
+      ];
     }
-    return true;
-  });
-  elements = filter$1(elements, function(element) {
-    return !rootElements.includes(element);
-  });
-  elements = map$2(elements, function(element) {
+    return results;
+  }, []).sort(function(a2, b2) {
+    return compareTokens(a2.primaryTokens, b2.primaryTokens) || compareTokens(a2.secondaryTokens, b2.secondaryTokens) || compareStrings(getLabel(a2.element), getLabel(b2.element)) || compareStrings(a2.element.id, b2.element.id);
+  }).map(function(result) {
     return {
-      primaryTokens: matchAndSplit(getLabel(element), pattern),
-      secondaryTokens: matchAndSplit(element.id, pattern),
-      element
+      element: result.element,
+      primaryTokens: result.primaryTokens.map(function(token) {
+        return omit$1(token, ["index"]);
+      }),
+      secondaryTokens: result.secondaryTokens.map(function(token) {
+        return omit$1(token, ["index"]);
+      })
     };
   });
-  elements = filter$1(elements, function(element) {
-    return hasMatched(element.primaryTokens) || hasMatched(element.secondaryTokens);
-  });
-  elements = sortBy$1(elements, function(element) {
-    return getLabel(element.element) + element.element.id;
-  });
-  return elements;
 };
-function hasMatched(tokens) {
-  var matched = filter$1(tokens, function(token) {
-    return !!token.matched;
-  });
-  return matched.length > 0;
+function isMatch(token) {
+  return "matched" in token;
 }
-function matchAndSplit(text, pattern) {
+function hasMatch(tokens) {
+  return tokens.find(isMatch);
+}
+function compareTokens(tokensA, tokensB) {
+  const tokensAHasMatch = hasMatch(tokensA), tokensBHasMatch = hasMatch(tokensB);
+  if (tokensAHasMatch && !tokensBHasMatch) {
+    return -1;
+  }
+  if (!tokensAHasMatch && tokensBHasMatch) {
+    return 1;
+  }
+  if (!tokensAHasMatch && !tokensBHasMatch) {
+    return 0;
+  }
+  const tokensAFirstMatch = tokensA.find(isMatch), tokensBFirstMatch = tokensB.find(isMatch);
+  if (tokensAFirstMatch.index < tokensBFirstMatch.index) {
+    return -1;
+  }
+  if (tokensAFirstMatch.index > tokensBFirstMatch.index) {
+    return 1;
+  }
+  return 0;
+}
+function compareStrings(a2 = "", b2 = "") {
+  return a2.localeCompare(b2);
+}
+function findMatches(text, pattern) {
   var tokens = [], originalText = text;
   if (!text) {
     return tokens;
   }
   text = text.toLowerCase();
   pattern = pattern.toLowerCase();
-  var i2 = text.indexOf(pattern);
-  if (i2 > -1) {
-    if (i2 !== 0) {
+  var index2 = text.indexOf(pattern);
+  if (index2 > -1) {
+    if (index2 !== 0) {
       tokens.push({
-        normal: originalText.substr(0, i2)
+        normal: originalText.slice(0, index2),
+        index: 0
       });
     }
     tokens.push({
-      matched: originalText.substr(i2, pattern.length)
+      matched: originalText.slice(index2, index2 + pattern.length),
+      index: index2
     });
-    if (pattern.length + i2 < text.length) {
+    if (pattern.length + index2 < text.length) {
       tokens.push({
-        normal: originalText.substr(pattern.length + i2, text.length)
+        normal: originalText.slice(index2 + pattern.length),
+        index: index2 + pattern.length
       });
     }
   } else {
     tokens.push({
-      normal: originalText
+      normal: originalText,
+      index: 0
     });
   }
   return tokens;
@@ -30816,9 +31043,6 @@ var labelRequired = function() {
     if (is$a(node2, "bpmn:Gateway") && !isForking(node2)) {
       return;
     }
-    if (is$a(node2, "bpmn:BoundaryEvent")) {
-      return;
-    }
     if (is$a(node2, "bpmn:SubProcess")) {
       return;
     }
@@ -31308,6 +31532,20 @@ function disallowNodeType$2(type) {
   };
 }
 helper.disallowNodeType = disallowNodeType$2;
+function findParent(node2, type) {
+  if (!node2) {
+    return null;
+  }
+  const parent = node2.$parent;
+  if (!parent) {
+    return node2;
+  }
+  if (is$8(parent, type)) {
+    return parent;
+  }
+  return findParent(parent, type);
+}
+helper.findParent = findParent;
 const disallowNodeType$1 = helper.disallowNodeType;
 var noComplexGateway = disallowNodeType$1("bpmn:ComplexGateway");
 const rule_6 = /* @__PURE__ */ getDefaultExportFromCjs(noComplexGateway);

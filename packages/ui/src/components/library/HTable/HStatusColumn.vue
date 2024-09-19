@@ -3,13 +3,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed, reactive, watch } from 'vue';
-import type { ConstantDictionary } from '/@/lib/declarations';
+import { defineComponent, computed, PropType } from 'vue';
 
-import { CONSTANTS, useDictionaryStore } from '/@/composables/constants';
+import { CONSTANTS } from '/@/composables/constants';
 
 import HDenseIconButton from './HDenseIconButton.vue';
 import { lodash } from '/@/lib/utils';
+import { Dictionary } from '/@/lib/declarations';
 
 export default defineComponent({
   name: 'HStatusColumn',
@@ -20,33 +20,10 @@ export default defineComponent({
 
   props: {
     type: { type: String, defalut: '0', required: true },
+    options: { type: Array as PropType<Array<Dictionary>>, required: true },
   },
 
   setup(props) {
-    const state = reactive({
-      items: [] as Array<ConstantDictionary>,
-    });
-
-    const { getDictionary } = useDictionaryStore();
-
-    const initialize = () => {
-      if (lodash.isEmpty(state.items)) {
-        state.items = getDictionary('DataItemStatus');
-      }
-    };
-
-    onMounted(() => {
-      initialize();
-    });
-
-    watch(
-      () => props.type,
-      () => {
-        initialize();
-      },
-      { immediate: true },
-    );
-
     const color = computed(() => {
       return CONSTANTS.DATA_ITEM_STATUS[Number(props.type)].color;
     });
@@ -56,8 +33,8 @@ export default defineComponent({
     });
 
     const tooltip = computed(() => {
-      if (!lodash.isEmpty(state.items)) {
-        return state.items[Number(props.type)].label;
+      if (!lodash.isEmpty(props.options)) {
+        return props.options[Number(props.type)].label;
       } else {
         return '';
       }

@@ -18,13 +18,13 @@
         @request="findItems">
         <template #body-cell-gender="props">
           <q-td key="gender" :props="props">
-            {{ display('Gender', props.row) }}
+            {{ getDictionaryItemDisplay('Gender', props.row.identity) }}
           </q-td>
         </template>
 
         <template #body-cell-identity="props">
           <q-td key="identity" :props="props">
-            {{ display('Identity', props.row) }}
+            {{ getDictionaryItemDisplay('Identity', props.row.identity) }}
           </q-td>
         </template>
       </h-table>
@@ -53,7 +53,7 @@ import { useTable, useTableItem, useEditFinish } from '/@/hooks';
 
 import { HFullWidthLayout, HTable } from '/@/components';
 import { HEmployeeCondition } from '/@/composables/hr';
-import { useDictionaryStore } from '/@/composables/constants';
+import { useDictionary } from '/@/composables/constants';
 
 export default defineComponent({
   name: 'SysOwnershipContent',
@@ -66,7 +66,7 @@ export default defineComponent({
 
   setup(props) {
     const { onFinish } = useEditFinish();
-    const { display } = useDictionaryStore();
+    const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity', 'DataItemStatus');
     const { editedItem, title, overlay } = useTableItem<SysEmployeeAllocatable>(api.sysEmployeeAllocatable());
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       SysEmployeeEntity,
@@ -122,7 +122,7 @@ export default defineComponent({
       loading,
       columns,
       selectedItems,
-      display,
+      getDictionaryItemDisplay,
       findItems,
       onSave,
       title,
