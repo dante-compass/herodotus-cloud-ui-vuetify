@@ -1557,7 +1557,7 @@ function createTransform(matrix) {
   }
 }
 var TEXT_ENTITIES = /([&<>]{1})/g;
-var ATTR_ENTITIES = /([\n\r"]{1})/g;
+var ATTR_ENTITIES = /([&<>\n\r"]{1})/g;
 var ENTITY_REPLACEMENT = {
   "&": "&amp;",
   "<": "&lt;",
