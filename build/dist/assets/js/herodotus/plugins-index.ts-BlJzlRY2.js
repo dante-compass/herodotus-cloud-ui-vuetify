@@ -1,1 +1,0 @@
-import"../modules/npm-quasar-C7Rgi3lj.js";import"../modules/npm-@quasar-extras-m4OLOzYY.js";import"./plugins-vue-i18n.ts-D9n67ga2.js";import"./plugins-echarts.ts-CfUTvTKh.js";import"./plugins-pinia.ts-DxNYKiRP.js";import"../modules/npm-vue-simple-uploader-CiD6mgBF.js";
