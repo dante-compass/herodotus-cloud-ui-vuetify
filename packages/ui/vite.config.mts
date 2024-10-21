@@ -34,7 +34,7 @@ export default ({ mode }) => {
         template: { transformAssetUrls }
       }),
       quasar({
-        sassVariables: 'src/static/styles/quasar.variables.sass'
+        sassVariables: '/@/static/styles/quasar.variables.sass'
       }),
       AutoImport({
         dts: true,
@@ -77,7 +77,7 @@ export default ({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use "./src/static/styles/global.scss" as *;`
+          additionalData: `@use "/@/static/styles/global.scss" as *;`
         }
       }
     },
