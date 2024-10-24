@@ -6,6 +6,7 @@ import './static/styles/index.scss';
 
 import '@herodotus/components/dist/assets/style.css';
 import '@herodotus/form-designer/dist/assets/style.css';
+import '@herodotus/bpmn-designer/dist/assets/style.css';
 import HerodotusComponents from '@herodotus/components';
 import HerodotusBpmnDesigner from '@herodotus/bpmn-designer';
 import HerodotusFormDesigner from '@herodotus/form-designer';
