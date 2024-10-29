@@ -17,6 +17,7 @@ import type { DialogueDetailEntity } from '/@/lib/declarations';
 
 import { lodash } from '/@/lib/utils';
 import { useWebSocketMessage } from '../hooks';
+import { useAuthenticationStore } from '/@/stores';
 
 export default defineComponent({
   name: 'HSendMessageField',
@@ -34,6 +35,7 @@ export default defineComponent({
     const text = ref('');
 
     const { sendToUser } = useWebSocketMessage();
+    const authentication = useAuthenticationStore();
 
     const sendMessage = () => {
       const data = {
@@ -41,7 +43,9 @@ export default defineComponent({
         receiverName: props.receiverName,
         receiverAvatar: props.receiverAvatar,
         content: text.value,
-        dialogueId: props.dialogueId
+        dialogueId: props.dialogueId,
+        senderId: authentication.userId,
+        senderName: authentication.username
       } as DialogueDetailEntity;
 
       sendToUser(data);

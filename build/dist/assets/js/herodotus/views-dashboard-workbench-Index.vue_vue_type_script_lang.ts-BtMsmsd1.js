@@ -1,1 +1,0 @@
-import o from"./views-dashboard-workbench-workflow-HWorkbenchWorkflow.vue-DDq8J_m3.js";import{d as n}from"../modules/npm-@vue-runtime-core-hlammBXQ.js";const p=n({name:"HWorkbench",components:{HWorkbenchWorkflow:o},setup(r){return{}}});export{p as _};
