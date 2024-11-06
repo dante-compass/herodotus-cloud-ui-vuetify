@@ -292,17 +292,7 @@ function getBusinessObject(element) {
 function getDi(element) {
   return element && element.di;
 }
-function remove$2(collection, element) {
-  if (!collection || !element) {
-    return -1;
-  }
-  var idx = collection.indexOf(element);
-  if (idx !== -1) {
-    collection.splice(idx, 1);
-  }
-  return idx;
-}
-function add$1(collection, element, idx) {
+function add$2(collection, element, idx) {
   if (!collection || !element) {
     return;
   }
@@ -326,12 +316,6 @@ function add$1(collection, element, idx) {
   } else {
     collection.push(element);
   }
-}
-function indexOf(collection, element) {
-  if (!collection || !element) {
-    return -1;
-  }
-  return collection.indexOf(element);
 }
 const _BpmnLog = class _BpmnLog {
   constructor() {
@@ -908,7 +892,7 @@ function useGeneralProperties() {
     const category = getBpmnFactory().create("bpmn:Category", {
       categoryValue: [categoryValue]
     });
-    add$1(definitions.get("rootElements"), category, 0);
+    add$2(definitions.get("rootElements"), category, 0);
     getBusinessObject(category).$parent = definitions;
     getBusinessObject(categoryValue).$parent = category;
     return categoryValue;
@@ -1322,7 +1306,7 @@ function all(selector, el) {
   el = el || document;
   return el.querySelectorAll(selector);
 }
-function remove$1(el) {
+function remove$2(el) {
   el.parentNode && el.parentNode.removeChild(el);
 }
 function ensureImported(element, target) {
@@ -1620,7 +1604,7 @@ function innerSVG(element, svg) {
     return get$1(element);
   }
 }
-function remove(element) {
+function remove$1(element) {
   var parent = element.parentNode;
   if (parent) {
     parent.removeChild(element);
@@ -2246,7 +2230,7 @@ BaseViewer.prototype.clear = function() {
 };
 BaseViewer.prototype.destroy = function() {
   Diagram.prototype.destroy.call(this);
-  remove$1(this._container);
+  remove$2(this._container);
 };
 BaseViewer.prototype.on = function(events2, priority, callback, that) {
   return this.get("eventBus").on(events2, priority, callback, that);
@@ -4700,7 +4684,7 @@ Text.prototype.layoutText = function(text, options) {
     tspan.textContent = line.text;
     append(textElement, tspan);
   });
-  remove(helperText);
+  remove$1(helperText);
   var dimensions = {
     width: maxLineWidth,
     height: totalHeight
@@ -6025,7 +6009,7 @@ function getParent$1(element, parent) {
   }
   return getParent$1(element.parent, parent);
 }
-function add(elements, element, unique) {
+function add$1(elements, element, unique) {
   var canAdd = !unique || elements.indexOf(element) === -1;
   if (canAdd) {
     elements.push(element);
@@ -6047,10 +6031,10 @@ function eachElement(elements, fn, depth) {
 function selfAndChildren(elements, unique, maxDepth) {
   var result = [], processedChildren = [];
   eachElement(elements, function(element, i2, depth) {
-    add(result, element, unique);
+    add$1(result, element, unique);
     var children = element.children;
     {
-      if (children && add(processedChildren, children, unique)) {
+      if (children && add$1(processedChildren, children, unique)) {
         return children;
       }
     }
@@ -6259,8 +6243,8 @@ Overlays.prototype.remove = function(filter2) {
   forEach$2(overlays, function(overlay) {
     var container = self2._getOverlayContainer(overlay.element, true);
     if (overlay) {
-      remove$1(overlay.html);
-      remove$1(overlay.htmlContainer);
+      remove$2(overlay.html);
+      remove$2(overlay.htmlContainer);
       delete overlay.htmlContainer;
       delete overlay.element;
       delete self2._overlays[overlay.id];
@@ -6444,7 +6428,7 @@ Overlays.prototype._init = function() {
     });
     var container = self2._getOverlayContainer(element);
     if (container) {
-      remove$1(container.html);
+      remove$2(container.html);
       var i2 = self2._overlayContainers.indexOf(container);
       if (i2 !== -1) {
         self2._overlayContainers.splice(i2, 1);
@@ -7483,7 +7467,7 @@ function InteractionEvents(eventBus, elementRegistry, styles) {
   }
   this.removeHits = function(gfx) {
     var hits = all(".djs-hit", gfx);
-    forEach$2(hits, remove);
+    forEach$2(hits, remove$1);
   };
   this.createDefaultHit = function(element, gfx) {
     var waypoints = element.waypoints, isFrame = element.isFrame, boxType;
@@ -9798,7 +9782,7 @@ PopupMenu.prototype.close = function() {
 PopupMenu.prototype.reset = function() {
   const container = this._current.container;
   B$1(null, container);
-  remove$1(container);
+  remove$2(container);
 };
 PopupMenu.prototype._emit = function(event2, payload) {
   this._eventBus.fire(`popupMenu.${event2}`, payload);
@@ -11498,12 +11482,12 @@ function Bendpoints(eventBus, canvas, interactionEvents, bendpointMove, connecti
   }
   function clearBendpoints(gfx) {
     forEach$2(all("." + BENDPOINT_CLS, gfx), function(node2) {
-      remove(node2);
+      remove$1(node2);
     });
   }
   function clearSegmentDraggers(gfx) {
     forEach$2(all("." + SEGMENT_DRAGGER_CLS, gfx), function(node2) {
-      remove(node2);
+      remove$1(node2);
     });
   }
   function addHandles(connection) {
@@ -11555,7 +11539,7 @@ function Bendpoints(eventBus, canvas, interactionEvents, bendpointMove, connecti
   eventBus.on("connection.remove", function(event2) {
     var gfx = getBendpointsContainer(event2.element);
     if (gfx) {
-      remove(gfx);
+      remove$1(gfx);
     }
   });
   eventBus.on("element.marker.update", function(event2) {
@@ -11880,7 +11864,7 @@ function BendpointMovePreview(bendpointMove, injector, eventBus, canvas) {
   ], HIGH_PRIORITY$i, function(event2) {
     var context = event2.context, connection = context.connection, draggerGfx = context.draggerGfx, hover = context.hover, target = context.target, waypoints = context.waypoints;
     connection.waypoints = waypoints;
-    remove(draggerGfx);
+    remove$1(draggerGfx);
     canvas.removeMarker(connection, MARKER_CONNECT_UPDATING$1);
     canvas.removeMarker(connection, MARKER_DRAGGER);
     if (hover) {
@@ -12063,7 +12047,7 @@ function ConnectionSegmentMove(injector, eventBus, canvas, dragging, graphicsFac
   eventBus.on("connectionSegment.move.cleanup", function(event2) {
     var context = event2.context, connection = context.connection;
     if (context.draggerGfx) {
-      remove(context.draggerGfx);
+      remove$1(context.draggerGfx);
     }
     canvas.removeMarker(connection, MARKER_CONNECT_UPDATING);
   });
@@ -12525,7 +12509,7 @@ ConnectionPreview.prototype.cropWaypoints = function(start, end, source2, target
 };
 ConnectionPreview.prototype.cleanUp = function(context) {
   if (context && context.connectionPreviewGfx) {
-    remove(context.connectionPreviewGfx);
+    remove$1(context.connectionPreviewGfx);
   }
 };
 ConnectionPreview.prototype.getConnection = function(canConnect2) {
@@ -13314,6 +13298,47 @@ function findParticipant(elements) {
     return is$g(element, "bpmn:Participant");
   });
 }
+function remove(collection, element) {
+  if (!collection || !element) {
+    return -1;
+  }
+  var idx = collection.indexOf(element);
+  if (idx !== -1) {
+    collection.splice(idx, 1);
+  }
+  return idx;
+}
+function add(collection, element, idx) {
+  if (!collection || !element) {
+    return;
+  }
+  if (typeof idx !== "number") {
+    idx = -1;
+  }
+  var currentIdx = collection.indexOf(element);
+  if (currentIdx !== -1) {
+    if (currentIdx === idx) {
+      return;
+    } else {
+      if (idx !== -1) {
+        collection.splice(currentIdx, 1);
+      } else {
+        return;
+      }
+    }
+  }
+  if (idx !== -1) {
+    collection.splice(idx, 0, element);
+  } else {
+    collection.push(element);
+  }
+}
+function indexOf(collection, element) {
+  if (!collection || !element) {
+    return -1;
+  }
+  return collection.indexOf(element);
+}
 var TARGET_REF_PLACEHOLDER_NAME = "__targetRef_placeholder";
 function DataInputAssociationBehavior(eventBus, bpmnFactory) {
   CommandInterceptor.call(this, eventBus);
@@ -13344,7 +13369,7 @@ function DataInputAssociationBehavior(eventBus, bpmnFactory) {
       targetRefProp = bpmnFactory.create("bpmn:Property", {
         name: TARGET_REF_PLACEHOLDER_NAME
       });
-      add$1(properties, targetRefProp);
+      add(properties, targetRefProp);
     }
     return targetRefProp;
   }
@@ -13354,7 +13379,7 @@ function DataInputAssociationBehavior(eventBus, bpmnFactory) {
       return;
     }
     if (!usesTargetRef(element, targetRefProp, connection)) {
-      remove$2(element.get("properties"), targetRefProp);
+      remove(element.get("properties"), targetRefProp);
     }
   }
   function fixTargetRef(event2) {
@@ -14142,16 +14167,16 @@ function createCategoryValue(bpmnFactory) {
   return bpmnFactory.create("bpmn:CategoryValue");
 }
 function linkCategoryValue(categoryValue, category, definitions) {
-  add$1(category.get("categoryValue"), categoryValue);
+  add(category.get("categoryValue"), categoryValue);
   categoryValue.$parent = category;
-  add$1(definitions.get("rootElements"), category);
+  add(definitions.get("rootElements"), category);
   category.$parent = definitions;
   return categoryValue;
 }
 function unlinkCategoryValue(categoryValue) {
   var category = categoryValue.$parent;
   if (category) {
-    remove$2(category.get("categoryValue"), categoryValue);
+    remove(category.get("categoryValue"), categoryValue);
     categoryValue.$parent = null;
   }
   return categoryValue;
@@ -14159,7 +14184,7 @@ function unlinkCategoryValue(categoryValue) {
 function unlinkCategory(category) {
   var definitions = category.$parent;
   if (definitions) {
-    remove$2(definitions.get("rootElements"), category);
+    remove(definitions.get("rootElements"), category);
     category.$parent = null;
   }
   return category;
@@ -15506,7 +15531,7 @@ function RootElementReferenceBehavior(bpmnjs, eventBus, injector, moddleCopy, bp
     var businessObject = getBusinessObject(shape), rootElement = getRootElement2(businessObject), rootElements;
     if (rootElement && !hasRootElement(rootElement)) {
       rootElements = bpmnjs.getDefinitions().get("rootElements");
-      add$1(rootElements, rootElement);
+      add(rootElements, rootElement);
       context.addedRootElement = rootElement;
     }
   }, true);
@@ -15520,7 +15545,7 @@ function RootElementReferenceBehavior(bpmnjs, eventBus, injector, moddleCopy, bp
       return;
     }
     var rootElements = bpmnjs.getDefinitions().get("rootElements");
-    remove$2(rootElements, addedRootElement);
+    remove(rootElements, addedRootElement);
   }, true);
   eventBus.on("copyPaste.copyElement", function(context) {
     var descriptor = context.descriptor, element = context.element;
@@ -17371,13 +17396,13 @@ function CreatePreview(canvas, eventBus, graphicsFactory, previewSupport, styles
       }
       translate$2(dragGroup, event2.x, event2.y);
     } else {
-      remove(dragGroup);
+      remove$1(dragGroup);
     }
   });
   eventBus.on("create.cleanup", function(event2) {
     var context = event2.context, dragGroup = context.dragGroup;
     if (dragGroup) {
-      remove(dragGroup);
+      remove$1(dragGroup);
     }
   });
 }
@@ -18790,7 +18815,7 @@ function SpaceToolPreview(eventBus, elementRegistry, canvas, styles, previewSupp
   eventBus.on("spaceTool.selection.cleanup", function(event2) {
     var context = event2.context, crosshairGroup = context.crosshairGroup;
     if (crosshairGroup) {
-      remove(crosshairGroup);
+      remove$1(crosshairGroup);
     }
   });
   eventBus.on("spaceTool.move", LOW_PRIORITY$9, function(event2) {
@@ -18908,14 +18933,14 @@ function SpaceToolPreview(eventBus, elementRegistry, canvas, styles, previewSupp
       canvas.removeMarker(connection, MARKER_DRAGGING$1);
     });
     if (dragGroup) {
-      remove(line);
-      remove(dragGroup);
+      remove$1(line);
+      remove$1(dragGroup);
     }
     forEach$2(resizingShapes, function(shape) {
       canvas.removeMarker(shape, MARKER_RESIZING$1);
     });
     if (frameGroup) {
-      remove(frameGroup);
+      remove$1(frameGroup);
     }
   });
 }
@@ -19267,7 +19292,7 @@ function LabelSupport(injector, eventBus, modeling) {
   this.revert("shape.delete", function(e2) {
     var context = e2.context, shape = context.shape, labelTarget = context.labelTarget, labelTargetIndex = context.labelTargetIndex;
     if (labelTarget) {
-      add$1(labelTarget.labels, shape, labelTargetIndex);
+      add(labelTarget.labels, shape, labelTargetIndex);
       shape.labelTarget = labelTarget;
     }
   });
@@ -19771,11 +19796,11 @@ BpmnUpdater.prototype.updateFlowNodeRefs = function(businessObject, newContainme
   var oldRefs, newRefs;
   if (is$g(oldContainment, "bpmn:Lane")) {
     oldRefs = oldContainment.get("flowNodeRef");
-    remove$2(oldRefs, businessObject);
+    remove(oldRefs, businessObject);
   }
   if (is$g(newContainment, "bpmn:Lane")) {
     newRefs = newContainment.get("flowNodeRef");
-    add$1(newRefs, businessObject);
+    add(newRefs, businessObject);
   }
 };
 BpmnUpdater.prototype.updateDiConnection = function(connection, newSource, newTarget) {
@@ -19799,7 +19824,7 @@ BpmnUpdater.prototype.updateDiParent = function(di, parentDi) {
     planeElements.push(di);
     di.$parent = parentDi;
   } else {
-    remove$2(planeElements, di);
+    remove(planeElements, di);
     di.$parent = null;
   }
 };
@@ -19879,11 +19904,11 @@ BpmnUpdater.prototype.updateSemanticParent = function(businessObject, newParent,
     if (process) {
       definitions = getDefinitions(businessObject.$parent || newParent);
       if (businessObject.$parent) {
-        remove$2(definitions.get("rootElements"), process);
+        remove(definitions.get("rootElements"), process);
         process.$parent = null;
       }
       if (newParent) {
-        add$1(definitions.get("rootElements"), process);
+        add(definitions.get("rootElements"), process);
         process.$parent = definitions;
       }
     }
@@ -19898,7 +19923,7 @@ BpmnUpdater.prototype.updateSemanticParent = function(businessObject, newParent,
   var children;
   if (businessObject.$parent) {
     children = businessObject.$parent.get(containment);
-    remove$2(children, businessObject);
+    remove(children, businessObject);
   }
   if (!newParent) {
     businessObject.$parent = null;
@@ -19909,7 +19934,7 @@ BpmnUpdater.prototype.updateSemanticParent = function(businessObject, newParent,
   }
   if (visualParent) {
     var diChildren = visualParent.get(containment);
-    remove$2(children, businessObject);
+    remove(children, businessObject);
     if (newParent) {
       if (!diChildren) {
         diChildren = [];
@@ -19929,7 +19954,7 @@ BpmnUpdater.prototype.updateConnection = function(context) {
     var inverseSet = is$g(businessObject, "bpmn:SequenceFlow");
     if (businessObject.sourceRef !== newSourceBo) {
       if (inverseSet) {
-        remove$2(businessObject.sourceRef && businessObject.sourceRef.get("outgoing"), businessObject);
+        remove(businessObject.sourceRef && businessObject.sourceRef.get("outgoing"), businessObject);
         if (newSourceBo && newSourceBo.get("outgoing")) {
           newSourceBo.get("outgoing").push(businessObject);
         }
@@ -19938,7 +19963,7 @@ BpmnUpdater.prototype.updateConnection = function(context) {
     }
     if (businessObject.targetRef !== newTargetBo) {
       if (inverseSet) {
-        remove$2(businessObject.targetRef && businessObject.targetRef.get("incoming"), businessObject);
+        remove(businessObject.targetRef && businessObject.targetRef.get("incoming"), businessObject);
         if (newTargetBo && newTargetBo.get("incoming")) {
           newTargetBo.get("incoming").push(businessObject);
         }
@@ -20643,7 +20668,7 @@ DeleteConnectionHandler.prototype.revert = function(context) {
   var connection = context.connection, parent = context.parent, parentIndex = context.parentIndex;
   connection.source = context.source;
   connection.target = context.target;
-  add$1(parent.children, connection, parentIndex);
+  add(parent.children, connection, parentIndex);
   this._canvas.addConnection(connection, parent);
   return connection;
 };
@@ -20701,7 +20726,7 @@ DeleteShapeHandler.prototype.execute = function(context) {
 DeleteShapeHandler.prototype.revert = function(context) {
   var canvas = this._canvas;
   var shape = context.shape, oldParent = context.oldParent, oldParentIndex = context.oldParentIndex;
-  add$1(oldParent.children, shape, oldParentIndex);
+  add(oldParent.children, shape, oldParentIndex);
   canvas.addShape(shape, oldParent);
   return shape;
 };
@@ -20822,8 +20847,8 @@ MoveConnectionHandler.prototype.execute = function(context) {
   var connection = context.connection, delta2 = context.delta;
   var newParent = context.newParent || connection.parent, newParentIndex = context.newParentIndex, oldParent = connection.parent;
   context.oldParent = oldParent;
-  context.oldParentIndex = remove$2(oldParent.children, connection);
-  add$1(newParent.children, connection, newParentIndex);
+  context.oldParentIndex = remove(oldParent.children, connection);
+  add(newParent.children, connection, newParentIndex);
   connection.parent = newParent;
   forEach$2(connection.waypoints, function(p2) {
     p2.x += delta2.x;
@@ -20837,8 +20862,8 @@ MoveConnectionHandler.prototype.execute = function(context) {
 };
 MoveConnectionHandler.prototype.revert = function(context) {
   var connection = context.connection, newParent = connection.parent, oldParent = context.oldParent, oldParentIndex = context.oldParentIndex, delta2 = context.delta;
-  remove$2(newParent.children, connection);
-  add$1(oldParent.children, connection, oldParentIndex);
+  remove(newParent.children, connection);
+  add(oldParent.children, connection, oldParentIndex);
   connection.parent = oldParent;
   forEach$2(connection.waypoints, function(p2) {
     p2.x -= delta2.x;
@@ -20932,8 +20957,8 @@ MoveShapeHandler.prototype.execute = function(context) {
   var shape = context.shape, delta2 = context.delta, newParent = context.newParent || shape.parent, newParentIndex = context.newParentIndex, oldParent = shape.parent;
   context.oldBounds = pick$1(shape, ["x", "y", "width", "height"]);
   context.oldParent = oldParent;
-  context.oldParentIndex = remove$2(oldParent.children, shape);
-  add$1(newParent.children, shape, newParentIndex);
+  context.oldParentIndex = remove(oldParent.children, shape);
+  add(newParent.children, shape, newParentIndex);
   assign$2(shape, {
     parent: newParent,
     x: shape.x + delta2.x,
@@ -20962,7 +20987,7 @@ MoveShapeHandler.prototype.postExecute = function(context) {
 };
 MoveShapeHandler.prototype.revert = function(context) {
   var shape = context.shape, oldParent = context.oldParent, oldParentIndex = context.oldParentIndex, delta2 = context.delta;
-  add$1(oldParent.children, shape, oldParentIndex);
+  add(oldParent.children, shape, oldParentIndex);
   assign$2(shape, {
     parent: oldParent,
     x: shape.x - delta2.x,
@@ -21367,7 +21392,7 @@ UpdateAttachmentHandler.prototype.revert = function(context) {
   return shape;
 };
 function removeAttacher(host, attacher) {
-  return remove$2(host && host.attachers, attacher);
+  return remove(host && host.attachers, attacher);
 }
 function addAttacher(host, attacher, idx) {
   if (!host) {
@@ -21377,7 +21402,7 @@ function addAttacher(host, attacher, idx) {
   if (!attachers) {
     host.attachers = attachers = [];
   }
-  add$1(attachers, attacher, idx);
+  add(attachers, attacher, idx);
 }
 function UpdateWaypointsHandler() {
 }
@@ -21861,9 +21886,9 @@ UpdateCanvasRootHandler.prototype.execute = function(context) {
   var newRoot = context.newRoot, newRootBusinessObject = newRoot.businessObject, oldRoot = canvas.getRootElement(), oldRootBusinessObject = oldRoot.businessObject, bpmnDefinitions = oldRootBusinessObject.$parent, diPlane = getDi(oldRoot);
   canvas.setRootElement(newRoot);
   canvas.removeRootElement(oldRoot);
-  add$1(bpmnDefinitions.rootElements, newRootBusinessObject);
+  add(bpmnDefinitions.rootElements, newRootBusinessObject);
   newRootBusinessObject.$parent = bpmnDefinitions;
-  remove$2(bpmnDefinitions.rootElements, oldRootBusinessObject);
+  remove(bpmnDefinitions.rootElements, oldRootBusinessObject);
   oldRootBusinessObject.$parent = null;
   oldRoot.di = null;
   diPlane.bpmnElement = newRootBusinessObject;
@@ -21876,9 +21901,9 @@ UpdateCanvasRootHandler.prototype.revert = function(context) {
   var newRoot = context.newRoot, newRootBusinessObject = newRoot.businessObject, oldRoot = context.oldRoot, oldRootBusinessObject = oldRoot.businessObject, bpmnDefinitions = newRootBusinessObject.$parent, diPlane = getDi(newRoot);
   canvas.setRootElement(oldRoot);
   canvas.removeRootElement(newRoot);
-  remove$2(bpmnDefinitions.rootElements, newRootBusinessObject);
+  remove(bpmnDefinitions.rootElements, newRootBusinessObject);
   newRootBusinessObject.$parent = null;
-  add$1(bpmnDefinitions.rootElements, oldRootBusinessObject);
+  add(bpmnDefinitions.rootElements, oldRootBusinessObject);
   oldRootBusinessObject.$parent = bpmnDefinitions;
   newRoot.di = null;
   diPlane.bpmnElement = oldRootBusinessObject;
@@ -22181,12 +22206,12 @@ UpdateFlowNodeRefsHandler.prototype.execute = function(context) {
   updates.forEach(function(update) {
     var flowNode = update.flowNode, lanes = flowNode.get(LANES_ATTR);
     update.remove.forEach(function(oldLane) {
-      remove$2(lanes, oldLane);
-      remove$2(oldLane.get(FLOW_NODE_REFS_ATTR), flowNode);
+      remove(lanes, oldLane);
+      remove(oldLane.get(FLOW_NODE_REFS_ATTR), flowNode);
     });
     update.add.forEach(function(newLane) {
-      add$1(lanes, newLane);
-      add$1(newLane.get(FLOW_NODE_REFS_ATTR), flowNode);
+      add(lanes, newLane);
+      add(newLane.get(FLOW_NODE_REFS_ATTR), flowNode);
     });
   });
   return [];
@@ -22196,12 +22221,12 @@ UpdateFlowNodeRefsHandler.prototype.revert = function(context) {
   updates.forEach(function(update) {
     var flowNode = update.flowNode, lanes = flowNode.get(LANES_ATTR);
     update.add.forEach(function(newLane) {
-      remove$2(lanes, newLane);
-      remove$2(newLane.get(FLOW_NODE_REFS_ATTR), flowNode);
+      remove(lanes, newLane);
+      remove(newLane.get(FLOW_NODE_REFS_ATTR), flowNode);
     });
     update.remove.forEach(function(oldLane) {
-      add$1(lanes, oldLane);
-      add$1(oldLane.get(FLOW_NODE_REFS_ATTR), flowNode);
+      add(lanes, oldLane);
+      add(oldLane.get(FLOW_NODE_REFS_ATTR), flowNode);
     });
   });
   return [];
@@ -23439,7 +23464,7 @@ TextBox.prototype._insertTextIE = function(text) {
       if (index2 === startContainerChildIndex) {
         childNode.textContent = startContainer.textContent.substring(0, startOffset) + text + endContainer.textContent.substring(endOffset);
       } else if (index2 > startContainerChildIndex && index2 <= endContainerChildIndex) {
-        remove$1(childNode);
+        remove$2(childNode);
       }
     });
     container = startContainer;
@@ -23533,9 +23558,9 @@ TextBox.prototype.destroy = function() {
   event.unbind(content, "paste", this.handlePaste);
   if (resizeHandle) {
     resizeHandle.removeAttribute("style");
-    remove$1(resizeHandle);
+    remove$2(resizeHandle);
   }
-  remove$1(parent);
+  remove$2(parent);
 };
 TextBox.prototype.getValue = function() {
   return this.content.innerText.trim();
@@ -23561,6 +23586,7 @@ function normalizeEndOfLineSequences(string) {
 }
 function DirectEditing(eventBus, canvas) {
   this._eventBus = eventBus;
+  this._canvas = canvas;
   this._providers = [];
   this._textbox = new TextBox({
     container: canvas.getContainer(),
@@ -23590,6 +23616,7 @@ DirectEditing.prototype.close = function() {
   this._fire("deactivate");
   this._active = null;
   this.resizable = void 0;
+  this._canvas.restoreFocus && this._canvas.restoreFocus();
 };
 DirectEditing.prototype.complete = function() {
   var active = this._active;
@@ -26635,7 +26662,7 @@ function ResizePreview(eventBus, canvas, previewSupport) {
   function removeFrame(context) {
     var shape = context.shape, frame = context.frame;
     if (frame) {
-      remove(context.frame);
+      remove$1(context.frame);
     }
     canvas.removeMarker(shape, MARKER_RESIZING);
   }
@@ -27132,7 +27159,7 @@ function LabelEditingPreview(eventBus, canvas, pathMap) {
     element = void 0;
     absoluteElementBBox = void 0;
     if (gfx) {
-      remove(gfx);
+      remove$1(gfx);
       gfx = void 0;
     }
   });
@@ -27266,8 +27293,8 @@ Tooltips.prototype.setTimeout = function(tooltip) {
 Tooltips.prototype.remove = function(id) {
   var tooltip = this.get(id);
   if (tooltip) {
-    remove$1(tooltip.html);
-    remove$1(tooltip.htmlContainer);
+    remove$2(tooltip.html);
+    remove$2(tooltip.htmlContainer);
     delete tooltip.htmlContainer;
     delete this._tooltips[tooltip.id];
   }
@@ -27578,7 +27605,7 @@ function MovePreview(eventBus, canvas, styles, previewSupport) {
       canvas.removeMarker(e2, MARKER_DRAGGING);
     });
     if (dragGroup) {
-      remove(dragGroup);
+      remove$1(dragGroup);
     }
   });
   this.makeDraggable = makeDraggable;
@@ -27889,7 +27916,7 @@ function LassoTool(eventBus, canvas, dragging, elementRegistry, selection, toolM
     },
     remove: function(context) {
       if (context.frame) {
-        remove(context.frame);
+        remove$1(context.frame);
       }
     }
   };
@@ -38351,7 +38378,7 @@ export {
   Logger,
   Swal2 as Swal,
   translate as Translator,
-  add$1 as add,
+  add$2 as add,
   index as default,
   getAssetsFile,
   getBpmnIcon,
