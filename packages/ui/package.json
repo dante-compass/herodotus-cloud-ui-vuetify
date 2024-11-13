@@ -24,7 +24,7 @@
     "@herodotus/form-engine": "workspace:^",
     "@herodotus/oss-apis": "workspace:^",
     "@mdi/js": "^7.4.47",
-    "@quasar/extras": "^1.16.12",
+    "@quasar/extras": "^1.16.13",
     "@rsocket/composite-metadata": "1.0.0-alpha.3",
     "@stomp/stompjs": "^7.0.0",
     "@vuelidate/core": "^2.0.3",

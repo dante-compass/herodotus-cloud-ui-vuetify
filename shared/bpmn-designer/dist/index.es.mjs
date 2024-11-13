@@ -292,7 +292,17 @@ function getBusinessObject(element) {
 function getDi(element) {
   return element && element.di;
 }
-function add$2(collection, element, idx) {
+function remove$2(collection, element) {
+  if (!collection || !element) {
+    return -1;
+  }
+  var idx = collection.indexOf(element);
+  if (idx !== -1) {
+    collection.splice(idx, 1);
+  }
+  return idx;
+}
+function add$1(collection, element, idx) {
   if (!collection || !element) {
     return;
   }
@@ -316,6 +326,12 @@ function add$2(collection, element, idx) {
   } else {
     collection.push(element);
   }
+}
+function indexOf(collection, element) {
+  if (!collection || !element) {
+    return -1;
+  }
+  return collection.indexOf(element);
 }
 const _BpmnLog = class _BpmnLog {
   constructor() {
@@ -892,7 +908,7 @@ function useGeneralProperties() {
     const category = getBpmnFactory().create("bpmn:Category", {
       categoryValue: [categoryValue]
     });
-    add$2(definitions.get("rootElements"), category, 0);
+    add$1(definitions.get("rootElements"), category, 0);
     getBusinessObject(category).$parent = definitions;
     getBusinessObject(categoryValue).$parent = category;
     return categoryValue;
@@ -1306,7 +1322,7 @@ function all(selector, el) {
   el = el || document;
   return el.querySelectorAll(selector);
 }
-function remove$2(el) {
+function remove$1(el) {
   el.parentNode && el.parentNode.removeChild(el);
 }
 function ensureImported(element, target) {
@@ -1604,7 +1620,7 @@ function innerSVG(element, svg) {
     return get$1(element);
   }
 }
-function remove$1(element) {
+function remove(element) {
   var parent = element.parentNode;
   if (parent) {
     parent.removeChild(element);
@@ -2230,7 +2246,7 @@ BaseViewer.prototype.clear = function() {
 };
 BaseViewer.prototype.destroy = function() {
   Diagram.prototype.destroy.call(this);
-  remove$2(this._container);
+  remove$1(this._container);
 };
 BaseViewer.prototype.on = function(events2, priority, callback, that) {
   return this.get("eventBus").on(events2, priority, callback, that);
@@ -2555,7 +2571,10 @@ function setLabel(element, text) {
   var semantic = element.businessObject, attr2 = getLabelAttr(semantic);
   if (attr2) {
     if (attr2 === "categoryValueRef") {
-      semantic["categoryValueRef"].value = text;
+      if (!semantic[attr2]) {
+        return element;
+      }
+      semantic[attr2].value = text;
     } else {
       semantic[attr2] = text;
     }
@@ -4550,6 +4569,7 @@ function getTextBBox(text, fakeText) {
     }
     return bbox;
   } catch (e2) {
+    console.log(e2);
     return { width: 0, height: 0 };
   }
 }
@@ -4684,7 +4704,7 @@ Text.prototype.layoutText = function(text, options) {
     tspan.textContent = line.text;
     append(textElement, tspan);
   });
-  remove$1(helperText);
+  remove(helperText);
   var dimensions = {
     width: maxLineWidth,
     height: totalHeight
@@ -6009,7 +6029,7 @@ function getParent$1(element, parent) {
   }
   return getParent$1(element.parent, parent);
 }
-function add$1(elements, element, unique) {
+function add(elements, element, unique) {
   var canAdd = !unique || elements.indexOf(element) === -1;
   if (canAdd) {
     elements.push(element);
@@ -6031,10 +6051,10 @@ function eachElement(elements, fn, depth) {
 function selfAndChildren(elements, unique, maxDepth) {
   var result = [], processedChildren = [];
   eachElement(elements, function(element, i2, depth) {
-    add$1(result, element, unique);
+    add(result, element, unique);
     var children = element.children;
     {
-      if (children && add$1(processedChildren, children, unique)) {
+      if (children && add(processedChildren, children, unique)) {
         return children;
       }
     }
@@ -6187,24 +6207,24 @@ Overlays.$inject = [
   "canvas",
   "elementRegistry"
 ];
-Overlays.prototype.get = function(search) {
-  if (isString$1(search)) {
-    search = { id: search };
+Overlays.prototype.get = function(search2) {
+  if (isString$1(search2)) {
+    search2 = { id: search2 };
   }
-  if (isString$1(search.element)) {
-    search.element = this._elementRegistry.get(search.element);
+  if (isString$1(search2.element)) {
+    search2.element = this._elementRegistry.get(search2.element);
   }
-  if (search.element) {
-    var container = this._getOverlayContainer(search.element, true);
+  if (search2.element) {
+    var container = this._getOverlayContainer(search2.element, true);
     if (container) {
-      return search.type ? filter$1(container.overlays, matchPattern$1({ type: search.type })) : container.overlays.slice();
+      return search2.type ? filter$1(container.overlays, matchPattern$1({ type: search2.type })) : container.overlays.slice();
     } else {
       return [];
     }
-  } else if (search.type) {
-    return filter$1(this._overlays, matchPattern$1({ type: search.type }));
+  } else if (search2.type) {
+    return filter$1(this._overlays, matchPattern$1({ type: search2.type }));
   } else {
-    return search.id ? this._overlays[search.id] : null;
+    return search2.id ? this._overlays[search2.id] : null;
   }
 };
 Overlays.prototype.add = function(element, type, overlay) {
@@ -6243,8 +6263,8 @@ Overlays.prototype.remove = function(filter2) {
   forEach$2(overlays, function(overlay) {
     var container = self2._getOverlayContainer(overlay.element, true);
     if (overlay) {
-      remove$2(overlay.html);
-      remove$2(overlay.htmlContainer);
+      remove$1(overlay.html);
+      remove$1(overlay.htmlContainer);
       delete overlay.htmlContainer;
       delete overlay.element;
       delete self2._overlays[overlay.id];
@@ -6428,7 +6448,7 @@ Overlays.prototype._init = function() {
     });
     var container = self2._getOverlayContainer(element);
     if (container) {
-      remove$2(container.html);
+      remove$1(container.html);
       var i2 = self2._overlayContainers.indexOf(container);
       if (i2 !== -1) {
         self2._overlayContainers.splice(i2, 1);
@@ -7054,217 +7074,6 @@ const DrilldownModdule = {
   drilldownOverlayBehavior: ["type", DrilldownOverlayBehavior],
   subprocessCompatibility: ["type", SubprocessCompatibility]
 };
-var LOW_PRIORITY$p = 500;
-var DEFAULT_PRIORITY$4 = 1e3;
-function Outline(eventBus, styles) {
-  this._eventBus = eventBus;
-  this.offset = 5;
-  var OUTLINE_STYLE = styles.cls("djs-outline", ["no-fill"]);
-  var self2 = this;
-  function createOutline(gfx) {
-    var outline = create$1("rect");
-    attr(outline, assign$2({
-      x: 0,
-      y: 0,
-      rx: 4,
-      width: 100,
-      height: 100
-    }, OUTLINE_STYLE));
-    return outline;
-  }
-  eventBus.on(["shape.added", "shape.changed"], LOW_PRIORITY$p, function(event2) {
-    var element = event2.element, gfx = event2.gfx;
-    var outline = query(".djs-outline", gfx);
-    if (!outline) {
-      outline = self2.getOutline(element) || createOutline();
-      append(gfx, outline);
-    }
-    self2.updateShapeOutline(outline, element);
-  });
-  eventBus.on(["connection.added", "connection.changed"], function(event2) {
-    var element = event2.element, gfx = event2.gfx;
-    var outline = query(".djs-outline", gfx);
-    if (!outline) {
-      outline = createOutline();
-      append(gfx, outline);
-    }
-    self2.updateConnectionOutline(outline, element);
-  });
-}
-Outline.prototype.updateShapeOutline = function(outline, element) {
-  var updated = false;
-  var providers = this._getProviders();
-  if (providers.length) {
-    forEach$2(providers, function(provider) {
-      updated = updated || provider.updateOutline(element, outline);
-    });
-  }
-  if (!updated) {
-    attr(outline, {
-      x: -this.offset,
-      y: -this.offset,
-      width: element.width + this.offset * 2,
-      height: element.height + this.offset * 2
-    });
-  }
-};
-Outline.prototype.updateConnectionOutline = function(outline, connection) {
-  var bbox = getBBox(connection);
-  attr(outline, {
-    x: bbox.x - this.offset,
-    y: bbox.y - this.offset,
-    width: bbox.width + this.offset * 2,
-    height: bbox.height + this.offset * 2
-  });
-};
-Outline.prototype.registerProvider = function(priority, provider) {
-  if (!provider) {
-    provider = priority;
-    priority = DEFAULT_PRIORITY$4;
-  }
-  this._eventBus.on("outline.getProviders", priority, function(event2) {
-    event2.providers.push(provider);
-  });
-};
-Outline.prototype._getProviders = function() {
-  var event2 = this._eventBus.createEvent({
-    type: "outline.getProviders",
-    providers: []
-  });
-  this._eventBus.fire(event2);
-  return event2.providers;
-};
-Outline.prototype.getOutline = function(element) {
-  var outline;
-  var providers = this._getProviders();
-  forEach$2(providers, function(provider) {
-    if (!isFunction$1(provider.getOutline)) {
-      return;
-    }
-    outline = outline || provider.getOutline(element);
-  });
-  return outline;
-};
-Outline.$inject = ["eventBus", "styles", "elementRegistry"];
-const OutlineModule$1 = {
-  __init__: ["outline"],
-  outline: ["type", Outline]
-};
-const DATA_OBJECT_REFERENCE_OUTLINE_PATH = "M44.7648 11.3263L36.9892 2.64074C36.0451 1.58628 34.5651 0.988708 33.1904 0.988708H5.98667C3.22688 0.988708 0.989624 3.34892 0.989624 6.26039V55.0235C0.989624 57.9349 3.22688 60.2952 5.98667 60.2952H40.966C43.7257 60.2952 45.963 57.9349 45.963 55.0235V14.9459C45.963 13.5998 45.6407 12.3048 44.7648 11.3263Z";
-const DATA_STORE_REFERENCE_OUTLINE_PATH = "M1.03845 48.1347C1.03845 49.3511 1.07295 50.758 1.38342 52.064C1.69949 53.3938 2.32428 54.7154 3.56383 55.6428C6.02533 57.4841 10.1161 58.7685 14.8212 59.6067C19.5772 60.4538 25.1388 60.8738 30.6831 60.8738C36.2276 60.8738 41.7891 60.4538 46.545 59.6067C51.2504 58.7687 55.3412 57.4842 57.8028 55.6429C59.0424 54.7156 59.6673 53.3938 59.9834 52.064C60.2938 50.7579 60.3285 49.351 60.3285 48.1344V13.8415C60.3285 12.6249 60.2938 11.218 59.9834 9.91171C59.6673 8.58194 59.0423 7.2602 57.8027 6.33294C55.341 4.49168 51.2503 3.20723 46.545 2.36914C41.7891 1.522 36.2276 1.10204 30.6831 1.10205C25.1388 1.10206 19.5772 1.52206 14.8213 2.36923C10.1162 3.20734 6.02543 4.49183 3.5639 6.33314C2.32433 7.26038 1.69951 8.58206 1.38343 9.91181C1.07295 11.2179 1.03845 12.6247 1.03845 13.8411V48.1347Z";
-const DATA_OBJECT_REFERENCE_STANDARD_SIZE = { width: 36, height: 50 };
-const DATA_STORE_REFERENCE_STANDARD_SIZE = { width: 50, height: 50 };
-function createPath(path, attrs, OUTLINE_STYLE) {
-  return create$1("path", {
-    d: path,
-    strokeWidth: 2,
-    transform: `translate(${attrs.x}, ${attrs.y})`,
-    ...OUTLINE_STYLE
-  });
-}
-const DEFAULT_OFFSET = 5;
-function OutlineProvider(outline, styles) {
-  this._styles = styles;
-  outline.registerProvider(this);
-}
-OutlineProvider.$inject = [
-  "outline",
-  "styles"
-];
-OutlineProvider.prototype.getOutline = function(element) {
-  const OUTLINE_STYLE = this._styles.cls("djs-outline", ["no-fill"]);
-  var outline;
-  if (isLabel(element)) {
-    return;
-  }
-  if (is$g(element, "bpmn:Gateway")) {
-    outline = create$1("rect");
-    assign$2(outline.style, {
-      "transform-box": "fill-box",
-      "transform": "rotate(45deg)",
-      "transform-origin": "center"
-    });
-    attr(outline, assign$2({
-      x: 2,
-      y: 2,
-      rx: 4,
-      width: element.width - 4,
-      height: element.height - 4
-    }, OUTLINE_STYLE));
-  } else if (isAny$7(element, ["bpmn:Task", "bpmn:SubProcess", "bpmn:Group", "bpmn:CallActivity"])) {
-    outline = create$1("rect");
-    attr(outline, assign$2({
-      x: -DEFAULT_OFFSET,
-      y: -DEFAULT_OFFSET,
-      rx: 14,
-      width: element.width + DEFAULT_OFFSET * 2,
-      height: element.height + DEFAULT_OFFSET * 2
-    }, OUTLINE_STYLE));
-  } else if (is$g(element, "bpmn:EndEvent")) {
-    outline = create$1("circle");
-    attr(outline, assign$2({
-      cx: element.width / 2,
-      cy: element.height / 2,
-      r: element.width / 2 + DEFAULT_OFFSET + 1
-    }, OUTLINE_STYLE));
-  } else if (is$g(element, "bpmn:Event")) {
-    outline = create$1("circle");
-    attr(outline, assign$2({
-      cx: element.width / 2,
-      cy: element.height / 2,
-      r: element.width / 2 + DEFAULT_OFFSET
-    }, OUTLINE_STYLE));
-  } else if (is$g(element, "bpmn:DataObjectReference") && isStandardSize(element, "bpmn:DataObjectReference")) {
-    outline = createPath(
-      DATA_OBJECT_REFERENCE_OUTLINE_PATH,
-      { x: -6, y: -6 },
-      OUTLINE_STYLE
-    );
-  } else if (is$g(element, "bpmn:DataStoreReference") && isStandardSize(element, "bpmn:DataStoreReference")) {
-    outline = createPath(
-      DATA_STORE_REFERENCE_OUTLINE_PATH,
-      { x: -6, y: -6 },
-      OUTLINE_STYLE
-    );
-  }
-  return outline;
-};
-OutlineProvider.prototype.updateOutline = function(element, outline) {
-  if (isLabel(element)) {
-    return;
-  }
-  if (isAny$7(element, ["bpmn:SubProcess", "bpmn:Group"])) {
-    attr(outline, {
-      width: element.width + DEFAULT_OFFSET * 2,
-      height: element.height + DEFAULT_OFFSET * 2
-    });
-    return true;
-  } else if (isAny$7(element, [
-    "bpmn:Event",
-    "bpmn:Gateway",
-    "bpmn:DataStoreReference",
-    "bpmn:DataObjectReference"
-  ])) {
-    return true;
-  }
-  return false;
-};
-function isStandardSize(element, type) {
-  var standardSize;
-  if (type === "bpmn:DataObjectReference") {
-    standardSize = DATA_OBJECT_REFERENCE_STANDARD_SIZE;
-  } else if (type === "bpmn:DataStoreReference") {
-    standardSize = DATA_STORE_REFERENCE_STANDARD_SIZE;
-  }
-  return element.width === standardSize.width && element.height === standardSize.height;
-}
-const OutlineModule = {
-  __depends__: [
-    OutlineModule$1
-  ],
-  __init__: ["outlineProvider"],
-  outlineProvider: ["type", OutlineProvider]
-};
 function __stopPropagation(event2) {
   if (!event2 || typeof event2.stopPropagation !== "function") {
     return;
@@ -7293,14 +7102,14 @@ function toPoint(event2) {
 function isMac() {
   return /mac/i.test(navigator.platform);
 }
-function isButton$1(event2, button) {
+function isButton(event2, button) {
   return (getOriginal$1(event2) || event2).button === button;
 }
 function isPrimaryButton(event2) {
-  return isButton$1(event2, 0);
+  return isButton(event2, 0);
 }
 function isAuxiliaryButton(event2) {
-  return isButton$1(event2, 1);
+  return isButton(event2, 1);
 }
 function hasPrimaryModifier(event2) {
   var originalEvent = getOriginal$1(event2) || event2;
@@ -7323,7 +7132,7 @@ function allowAll(event2) {
 function allowPrimaryAndAuxiliary(event2) {
   return isPrimaryButton(event2) || isAuxiliaryButton(event2);
 }
-var LOW_PRIORITY$o = 500;
+var LOW_PRIORITY$p = 500;
 function InteractionEvents(eventBus, elementRegistry, styles) {
   var self2 = this;
   function fire(type, event2, element) {
@@ -7425,11 +7234,11 @@ function InteractionEvents(eventBus, elementRegistry, styles) {
   eventBus.on([
     "shape.changed",
     "connection.changed"
-  ], LOW_PRIORITY$o, function(event2) {
+  ], LOW_PRIORITY$p, function(event2) {
     var element = event2.element, gfx = event2.gfx;
     eventBus.fire("interactionEvents.updateHit", { element, gfx });
   });
-  eventBus.on("interactionEvents.createHit", LOW_PRIORITY$o, function(event2) {
+  eventBus.on("interactionEvents.createHit", LOW_PRIORITY$p, function(event2) {
     var element = event2.element, gfx = event2.gfx;
     self2.createDefaultHit(element, gfx);
   });
@@ -7467,7 +7276,7 @@ function InteractionEvents(eventBus, elementRegistry, styles) {
   }
   this.removeHits = function(gfx) {
     var hits = all(".djs-hit", gfx);
-    forEach$2(hits, remove$1);
+    forEach$2(hits, remove);
   };
   this.createDefaultHit = function(element, gfx) {
     var waypoints = element.waypoints, isFrame = element.isFrame, boxType;
@@ -7582,11 +7391,8 @@ Selection.prototype.select = function(elements, add2) {
   this._eventBus.fire("selection.changed", { oldSelection, newSelection: selectedElements });
 };
 var MARKER_HOVER = "hover", MARKER_SELECTED = "selected";
-var SELECTION_OUTLINE_PADDING = 6;
-function SelectionVisuals(canvas, eventBus, selection) {
+function SelectionVisuals(canvas, eventBus) {
   this._canvas = canvas;
-  var self2 = this;
-  this._multiSelectionBox = null;
   function addMarker(e2, cls) {
     canvas.addMarker(e2, cls);
   }
@@ -7617,44 +7423,12 @@ function SelectionVisuals(canvas, eventBus, selection) {
         select(e2);
       }
     });
-    self2._updateSelectionOutline(newSelection);
-  });
-  eventBus.on("element.changed", function(event2) {
-    if (selection.isSelected(event2.element)) {
-      self2._updateSelectionOutline(selection.get());
-    }
   });
 }
 SelectionVisuals.$inject = [
   "canvas",
-  "eventBus",
-  "selection"
+  "eventBus"
 ];
-SelectionVisuals.prototype._updateSelectionOutline = function(selection) {
-  var layer = this._canvas.getLayer("selectionOutline");
-  clear(layer);
-  var enabled = selection.length > 1;
-  var container = this._canvas.getContainer();
-  classes(container)[enabled ? "add" : "remove"]("djs-multi-select");
-  if (!enabled) {
-    return;
-  }
-  var bBox = addSelectionOutlinePadding(getBBox(selection));
-  var rect = create$1("rect");
-  attr(rect, assign$2({
-    rx: 3
-  }, bBox));
-  classes(rect).add("djs-selection-outline");
-  append(layer, rect);
-};
-function addSelectionOutlinePadding(bBox) {
-  return {
-    x: bBox.x - SELECTION_OUTLINE_PADDING,
-    y: bBox.y - SELECTION_OUTLINE_PADDING,
-    width: bBox.width + SELECTION_OUTLINE_PADDING * 2,
-    height: bBox.height + SELECTION_OUTLINE_PADDING * 2
-  };
-}
 function SelectionBehavior(eventBus, selection, canvas, elementRegistry) {
   eventBus.on("create.end", 500, function(event2) {
     var context = event2.context, canExecute = context.canExecute, elements = context.elements, hints = context.hints || {}, autoSelect = hints.autoSelect;
@@ -7720,8 +7494,7 @@ function isShown(element) {
 const SelectionModule = {
   __init__: ["selectionVisuals", "selectionBehavior"],
   __depends__: [
-    InteractionEventsModule$1,
-    OutlineModule$1
+    InteractionEventsModule$1
   ],
   selection: ["type", Selection],
   selectionVisuals: ["type", SelectionVisuals],
@@ -7734,7 +7507,6 @@ e$3(Viewer, BaseViewer);
 Viewer.prototype._modules = [
   CoreModule,
   DrilldownModdule,
-  OutlineModule,
   OverlaysModule,
   SelectionModule,
   TranslateModule
@@ -7773,11 +7545,11 @@ function isRedo(event2) {
   return isCmd(event2) && (isKey(KEYS_REDO, event2) || isKey(KEYS_UNDO, event2) && isShift(event2));
 }
 var KEYDOWN_EVENT = "keyboard.keydown", KEYUP_EVENT = "keyboard.keyup";
-var HANDLE_MODIFIER_ATTRIBUTE = "input-handle-modified-keys";
-var DEFAULT_PRIORITY$3 = 1e3;
+var DEFAULT_PRIORITY$4 = 1e3;
+var compatMessage = "Keyboard binding is now implicit; explicit binding to an element got removed. For more information, see https://github.com/bpmn-io/diagram-js/issues/661";
 function Keyboard(config2, eventBus) {
   var self2 = this;
-  this._config = config2 || {};
+  this._config = config2 = config2 || {};
   this._eventBus = eventBus;
   this._keydownHandler = this._keydownHandler.bind(this);
   this._keyupHandler = this._keyupHandler.bind(this);
@@ -7785,16 +7557,16 @@ function Keyboard(config2, eventBus) {
     self2._fire("destroy");
     self2.unbind();
   });
-  eventBus.on("diagram.init", function() {
-    self2._fire("init");
-  });
-  eventBus.on("attach", function() {
-    if (config2 && config2.bindTo) {
-      self2.bind(config2.bindTo);
+  if (config2.bindTo) {
+    console.error("unsupported configuration <keyboard.bindTo>", new Error(compatMessage));
+  }
+  var bind2 = config2 && config2.bind !== false;
+  eventBus.on("canvas.init", function(event2) {
+    self2._target = event2.svg;
+    if (bind2) {
+      self2.bind();
     }
-  });
-  eventBus.on("detach", function() {
-    self2.unbind();
+    self2._fire("init");
   });
 }
 Keyboard.$inject = [
@@ -7821,28 +7593,14 @@ Keyboard.prototype._keyHandler = function(event2, type) {
   }
 };
 Keyboard.prototype._isEventIgnored = function(event2) {
-  if (event2.defaultPrevented) {
-    return true;
-  }
-  return (isInput(event2.target) || isButton(event2.target) && isKey([" ", "Enter"], event2)) && this._isModifiedKeyIgnored(event2);
-};
-Keyboard.prototype._isModifiedKeyIgnored = function(event2) {
-  if (!isCmd(event2)) {
-    return true;
-  }
-  var allowedModifiers = this._getAllowedModifiers(event2.target);
-  return allowedModifiers.indexOf(event2.key) === -1;
-};
-Keyboard.prototype._getAllowedModifiers = function(element) {
-  var modifierContainer = closest(element, "[" + HANDLE_MODIFIER_ATTRIBUTE + "]", true);
-  if (!modifierContainer || this._node && !this._node.contains(modifierContainer)) {
-    return [];
-  }
-  return modifierContainer.getAttribute(HANDLE_MODIFIER_ATTRIBUTE).split(",");
+  return false;
 };
 Keyboard.prototype.bind = function(node2) {
+  if (node2) {
+    console.error("unsupported argument <node>", new Error(compatMessage));
+  }
   this.unbind();
-  this._node = node2;
+  node2 = this._node = this._target;
   event.bind(node2, "keydown", this._keydownHandler);
   event.bind(node2, "keyup", this._keyupHandler);
   this._fire("bind");
@@ -7866,7 +7624,7 @@ Keyboard.prototype.addListener = function(priority, listener, type) {
   if (isFunction$1(priority)) {
     type = listener;
     listener = priority;
-    priority = DEFAULT_PRIORITY$3;
+    priority = DEFAULT_PRIORITY$4;
   }
   this._eventBus.on(type || KEYDOWN_EVENT, priority, listener);
 };
@@ -7877,16 +7635,10 @@ Keyboard.prototype.hasModifier = hasModifier;
 Keyboard.prototype.isCmd = isCmd;
 Keyboard.prototype.isShift = isShift;
 Keyboard.prototype.isKey = isKey;
-function isInput(target) {
-  return target && (matches(target, "input, textarea") || target.contentEditable === "true");
-}
-function isButton(target) {
-  return target && matches(target, "button, input[type=submit], input[type=button], a[href], [aria-role=button]");
-}
-var LOW_PRIORITY$n = 500;
+var LOW_PRIORITY$o = 500;
 function KeyboardBindings(eventBus, keyboard) {
   var self2 = this;
-  eventBus.on("editorActions.init", LOW_PRIORITY$n, function(event2) {
+  eventBus.on("editorActions.init", LOW_PRIORITY$o, function(event2) {
     var editorActions = event2.editorActions;
     self2.registerBindings(keyboard, editorActions);
   });
@@ -8398,21 +8150,22 @@ Scheduler.prototype.schedule = function(taskFn, id = Ids.next()) {
   return newScheduled.promise;
 };
 Scheduler.prototype._schedule = function(taskFn, id) {
-  const {
-    promise,
-    resolve,
-    reject
-  } = defer();
-  const executionId = requestAnimationFrame(() => {
+  const deferred = defer();
+  const executionId = setTimeout(() => {
     try {
-      resolve(taskFn());
+      this._scheduled[id] = null;
+      try {
+        deferred.resolve(taskFn());
+      } catch (error2) {
+        deferred.reject(error2);
+      }
     } catch (error2) {
-      reject(error2);
+      console.error("Scheduler#_schedule execution failed", error2);
     }
   });
   return {
     executionId,
-    promise
+    promise: deferred.promise
   };
 };
 Scheduler.prototype.cancel = function(id) {
@@ -8423,27 +8176,22 @@ Scheduler.prototype.cancel = function(id) {
   }
 };
 Scheduler.prototype._cancel = function(scheduled) {
-  cancelAnimationFrame(scheduled.executionId);
+  clearTimeout(scheduled.executionId);
 };
 function defer() {
-  let resolve;
-  let reject;
-  const promise = new Promise((_resolve, _reject) => {
-    resolve = _resolve;
-    reject = _reject;
+  const deferred = {};
+  deferred.promise = new Promise((resolve, reject) => {
+    deferred.resolve = resolve;
+    deferred.reject = reject;
   });
-  return {
-    promise,
-    resolve,
-    reject
-  };
+  return deferred;
 }
 const SchedulerModule = {
   scheduler: ["type", Scheduler]
 };
 var MARKER_HIDDEN$1 = "djs-element-hidden";
 var entrySelector = ".entry";
-var DEFAULT_PRIORITY$2 = 1e3;
+var DEFAULT_PRIORITY$3 = 1e3;
 var CONTEXT_PAD_MARGIN = 8;
 var HOVER_DELAY = 300;
 function ContextPad(canvas, elementRegistry, eventBus, scheduler) {
@@ -8516,7 +8264,7 @@ ContextPad.prototype._createContainer = function() {
 ContextPad.prototype.registerProvider = function(priority, provider) {
   if (!provider) {
     provider = priority;
-    priority = DEFAULT_PRIORITY$2;
+    priority = DEFAULT_PRIORITY$3;
   }
   this._eventBus.on("contextPad.getProviders", priority, function(event2) {
     event2.providers.push(provider);
@@ -9438,38 +9186,35 @@ function PopupMenuComponent(props) {
     title,
     width,
     scale,
-    search,
+    search: search2,
     emptyPlaceholder,
+    searchFn,
     entries: originalEntries,
     onOpened,
     onClosed
   } = props;
   const searchable = T(() => {
-    if (!isDefined$1(search)) {
+    if (!isDefined$1(search2)) {
       return false;
     }
     return originalEntries.length > 5;
-  }, [search, originalEntries]);
+  }, [search2, originalEntries]);
   const [value, setValue] = h("");
   const filterEntries = q((originalEntries2, value2) => {
     if (!searchable) {
       return originalEntries2;
     }
-    const filter2 = (entry) => {
-      if (!value2) {
-        return (entry.rank || 0) >= 0;
-      }
-      if (entry.searchable === false) {
-        return false;
-      }
-      const searchableFields = [
-        entry.description || "",
-        entry.label || "",
-        entry.search || ""
-      ].map((string) => string.toLowerCase());
-      return value2.toLowerCase().split(/\s/g).every((word) => searchableFields.some((field) => field.includes(word)));
-    };
-    return originalEntries2.filter(filter2);
+    if (!value2) {
+      return originalEntries2.filter(({ rank = 0 }) => rank >= 0);
+    }
+    const searchableEntries = originalEntries2.filter(({ searchable: searchable2 }) => searchable2 !== false);
+    return searchFn(searchableEntries, value2, {
+      keys: [
+        "label",
+        "description",
+        "search"
+      ]
+    }).map(({ item }) => item);
   }, [searchable]);
   const [entries, setEntries] = h(filterEntries(originalEntries, value));
   const [selectedEntry, setSelectedEntry] = h(entries[0]);
@@ -9637,10 +9382,11 @@ var CLOSE_EVENTS = [
   "canvas.viewbox.changing",
   "commandStack.changed"
 ];
-var DEFAULT_PRIORITY$1 = 1e3;
-function PopupMenu(config2, eventBus, canvas) {
+var DEFAULT_PRIORITY$2 = 1e3;
+function PopupMenu(config2, eventBus, canvas, search2) {
   this._eventBus = eventBus;
   this._canvas = canvas;
+  this._search = search2;
   this._current = null;
   var scale = isDefined$1(config2 && config2.scale) ? config2.scale : {
     min: 1,
@@ -9662,7 +9408,8 @@ function PopupMenu(config2, eventBus, canvas) {
 PopupMenu.$inject = [
   "config.popupMenu",
   "eventBus",
-  "canvas"
+  "canvas",
+  "search"
 ];
 PopupMenu.prototype._render = function() {
   const {
@@ -9696,6 +9443,7 @@ PopupMenu.prototype._render = function() {
         scale=${scale}
         onOpened=${this._onOpened.bind(this)}
         onClosed=${this._onClosed.bind(this)}
+        searchFn=${this._search}
         ...${{ ...options }}
       />
     `,
@@ -9777,12 +9525,13 @@ PopupMenu.prototype.close = function() {
   }
   this._emit("close");
   this.reset();
+  this._canvas.restoreFocus();
   this._current = null;
 };
 PopupMenu.prototype.reset = function() {
   const container = this._current.container;
   B$1(null, container);
-  remove$2(container);
+  remove$1(container);
 };
 PopupMenu.prototype._emit = function(event2, payload) {
   this._eventBus.fire(`popupMenu.${event2}`, payload);
@@ -9872,7 +9621,7 @@ PopupMenu.prototype.isEmpty = function(target, providerId) {
 PopupMenu.prototype.registerProvider = function(id, priority, provider) {
   if (!provider) {
     provider = priority;
-    priority = DEFAULT_PRIORITY$1;
+    priority = DEFAULT_PRIORITY$2;
   }
   this._eventBus.on("popupMenu.getProviders." + id, priority, function(event2) {
     event2.providers.push(provider);
@@ -9974,7 +9723,138 @@ PopupMenu.prototype._getEntry = function(entryId) {
   }
   return entry;
 };
+function search(items, pattern, options) {
+  const {
+    keys: keys2
+  } = options;
+  const words = pattern.trim().toLowerCase().split(/\s+/);
+  return items.flatMap((item) => {
+    const tokens = matchItem(item, words, keys2);
+    if (!tokens) {
+      return [];
+    }
+    return {
+      item,
+      tokens
+    };
+  }).sort(createResultSorter(keys2));
+}
+function matchItem(item, words, keys2) {
+  const {
+    matchedWords,
+    tokens
+  } = keys2.reduce((result, key) => {
+    const string = item[key];
+    const {
+      tokens: tokens2,
+      matchedWords: matchedWords2
+    } = matchString(string, words);
+    return {
+      tokens: {
+        ...result.tokens,
+        [key]: tokens2
+      },
+      matchedWords: {
+        ...result.matchedWords,
+        ...matchedWords2
+      }
+    };
+  }, {
+    matchedWords: {},
+    tokens: {}
+  });
+  if (Object.keys(matchedWords).length !== words.length) {
+    return null;
+  }
+  return tokens;
+}
+function createResultSorter(keys2) {
+  return (resultA, resultB) => {
+    for (const key of keys2) {
+      const tokenComparison = compareTokens(
+        resultA.tokens[key],
+        resultB.tokens[key]
+      );
+      if (tokenComparison !== 0) {
+        return tokenComparison;
+      }
+      const stringComparison = compareStrings(
+        resultA.item[key],
+        resultB.item[key]
+      );
+      if (stringComparison !== 0) {
+        return stringComparison;
+      }
+      continue;
+    }
+    return 0;
+  };
+}
+function compareTokens(tokensA, tokensB) {
+  return scoreTokens(tokensB) - scoreTokens(tokensA);
+}
+function scoreTokens(tokens) {
+  return tokens.reduce((sum, token) => sum + scoreToken(token), 0);
+}
+function scoreToken(token) {
+  if (!token.match) {
+    return 0;
+  }
+  return token.start ? 1.37 : token.wordStart ? 1.13 : 1;
+}
+function compareStrings(a2 = "", b2 = "") {
+  return a2.localeCompare(b2);
+}
+function matchString(string, words) {
+  if (!string) {
+    return {
+      tokens: [],
+      matchedWords: {}
+    };
+  }
+  const tokens = [];
+  const matchedWords = {};
+  const regexpString = words.map(escapeRegexp).flatMap((str) => ["(?<wordStart>\\b" + str + ")", str]).join("|");
+  const regexp = new RegExp(regexpString, "ig");
+  let match;
+  let lastIndex = 0;
+  while (match = regexp.exec(string)) {
+    const [value] = match;
+    if (match.index > lastIndex) {
+      tokens.push({
+        value: string.slice(lastIndex, match.index),
+        index: lastIndex
+      });
+    }
+    tokens.push({
+      value,
+      index: match.index,
+      match: true,
+      wordStart: !!match.groups.wordStart,
+      start: match.index === 0
+    });
+    matchedWords[value.toLowerCase()] = true;
+    lastIndex = match.index + value.length;
+  }
+  if (lastIndex < string.length) {
+    tokens.push({
+      value: string.slice(lastIndex),
+      index: lastIndex
+    });
+  }
+  return {
+    tokens,
+    matchedWords
+  };
+}
+function escapeRegexp(string) {
+  return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
+}
+const SearchModule$1 = {
+  search: ["value", search]
+};
 const PopupMenuModule$1 = {
+  __depends__: [SearchModule$1],
   __init__: ["popupMenu"],
   popupMenu: ["type", PopupMenu]
 };
@@ -10015,9 +9895,9 @@ var icons$1 = {
             <rect x="1050" y="500" width="600" height="800" rx="1" style="fill:currentColor;stroke:currentColor;stroke-width:100;opacity:.5;"></rect>
           </svg>`
 };
-var LOW_PRIORITY$m = 900;
+var LOW_PRIORITY$n = 900;
 function AlignElementsContextPadProvider(contextPad, popupMenu, translate2, canvas) {
-  contextPad.registerProvider(LOW_PRIORITY$m, this);
+  contextPad.registerProvider(LOW_PRIORITY$n, this);
   this._contextPad = contextPad;
   this._popupMenu = popupMenu;
   this._translate = translate2;
@@ -10337,9 +10217,9 @@ function getTargets(shape) {
 function noneFilter() {
   return true;
 }
-var LOW_PRIORITY$l = 100;
+var LOW_PRIORITY$m = 100;
 function AutoPlace$1(eventBus, modeling, canvas) {
-  eventBus.on("autoPlace", LOW_PRIORITY$l, function(context) {
+  eventBus.on("autoPlace", LOW_PRIORITY$m, function(context) {
     var shape = context.shape, source2 = context.source;
     return getNewShapePosition$1(source2, shape);
   });
@@ -11482,12 +11362,12 @@ function Bendpoints(eventBus, canvas, interactionEvents, bendpointMove, connecti
   }
   function clearBendpoints(gfx) {
     forEach$2(all("." + BENDPOINT_CLS, gfx), function(node2) {
-      remove$1(node2);
+      remove(node2);
     });
   }
   function clearSegmentDraggers(gfx) {
     forEach$2(all("." + SEGMENT_DRAGGER_CLS, gfx), function(node2) {
-      remove$1(node2);
+      remove(node2);
     });
   }
   function addHandles(connection) {
@@ -11539,7 +11419,7 @@ function Bendpoints(eventBus, canvas, interactionEvents, bendpointMove, connecti
   eventBus.on("connection.remove", function(event2) {
     var gfx = getBendpointsContainer(event2.element);
     if (gfx) {
-      remove$1(gfx);
+      remove(gfx);
     }
   });
   eventBus.on("element.marker.update", function(event2) {
@@ -11864,7 +11744,7 @@ function BendpointMovePreview(bendpointMove, injector, eventBus, canvas) {
   ], HIGH_PRIORITY$i, function(event2) {
     var context = event2.context, connection = context.connection, draggerGfx = context.draggerGfx, hover = context.hover, target = context.target, waypoints = context.waypoints;
     connection.waypoints = waypoints;
-    remove$1(draggerGfx);
+    remove(draggerGfx);
     canvas.removeMarker(connection, MARKER_CONNECT_UPDATING$1);
     canvas.removeMarker(connection, MARKER_DRAGGER);
     if (hover) {
@@ -12047,7 +11927,7 @@ function ConnectionSegmentMove(injector, eventBus, canvas, dragging, graphicsFac
   eventBus.on("connectionSegment.move.cleanup", function(event2) {
     var context = event2.context, connection = context.connection;
     if (context.draggerGfx) {
-      remove$1(context.draggerGfx);
+      remove(context.draggerGfx);
     }
     canvas.removeMarker(connection, MARKER_CONNECT_UPDATING);
   });
@@ -12380,7 +12260,7 @@ function isReverse$1(context) {
   var hover = context.hover, source2 = context.source, target = context.target;
   return hover && source2 && hover === source2 && source2 !== target;
 }
-var HIGH_PRIORITY$h = 1100, LOW_PRIORITY$k = 900;
+var HIGH_PRIORITY$h = 1100, LOW_PRIORITY$l = 900;
 var MARKER_OK$3 = "connect-ok", MARKER_NOT_OK$3 = "connect-not-ok";
 function ConnectPreview(injector, eventBus, canvas) {
   var connectionPreview = injector.get("connectionPreview", false);
@@ -12400,7 +12280,7 @@ function ConnectPreview(injector, eventBus, canvas) {
       connectionEnd: previewEnd
     });
   });
-  eventBus.on("connect.hover", LOW_PRIORITY$k, function(event2) {
+  eventBus.on("connect.hover", LOW_PRIORITY$l, function(event2) {
     var context = event2.context, hover = event2.hover, canExecute = context.canExecute;
     if (canExecute === null) {
       return;
@@ -12509,7 +12389,7 @@ ConnectionPreview.prototype.cropWaypoints = function(start, end, source2, target
 };
 ConnectionPreview.prototype.cleanUp = function(context) {
   if (context && context.connectionPreviewGfx) {
-    remove$1(context.connectionPreviewGfx);
+    remove(context.connectionPreviewGfx);
   }
 };
 ConnectionPreview.prototype.getConnection = function(canConnect2) {
@@ -12619,9 +12499,9 @@ PreviewSupport.prototype.addFrame = function(shape, group) {
 PreviewSupport.prototype._cloneMarkers = function(gfx, className = "djs-dragger", rootGfx = gfx) {
   var self2 = this;
   if (gfx.childNodes) {
-    for (var i2 = 0; i2 < gfx.childNodes.length; i2++) {
-      self2._cloneMarkers(gfx.childNodes[i2], className, rootGfx);
-    }
+    gfx.childNodes.forEach((childNode) => {
+      self2._cloneMarkers(childNode, className, rootGfx);
+    });
   }
   if (!canHaveMarker(gfx)) {
     return;
@@ -12796,6 +12676,9 @@ function AdaptiveLabelPositioningBehavior(eventBus, modeling) {
     if (!hasExternalLabel(element)) {
       return;
     }
+    if (isConnection(element)) {
+      return;
+    }
     var optimalPosition = getOptimalPosition(element);
     if (!optimalPosition) {
       return;
@@ -12937,12 +12820,12 @@ AssociationBehavior.$inject = [
   "injector",
   "modeling"
 ];
-var LOW_PRIORITY$j = 500;
+var LOW_PRIORITY$k = 500;
 function AttachEventBehavior(bpmnReplace, injector) {
   injector.invoke(CommandInterceptor, this);
   this._bpmnReplace = bpmnReplace;
   var self2 = this;
-  this.postExecuted("elements.create", LOW_PRIORITY$j, function(context) {
+  this.postExecuted("elements.create", LOW_PRIORITY$k, function(context) {
     var elements = context.elements;
     elements = elements.filter(function(shape) {
       var host = shape.host;
@@ -12958,7 +12841,7 @@ function AttachEventBehavior(bpmnReplace, injector) {
       context.elements[index2] = self2._replaceShape(elements[index2], host);
     });
   }, true);
-  this.preExecute("elements.move", LOW_PRIORITY$j, function(context) {
+  this.preExecute("elements.move", LOW_PRIORITY$k, function(context) {
     var shapes = context.shapes, host = context.newHost;
     if (shapes.length !== 1) {
       return;
@@ -13298,47 +13181,6 @@ function findParticipant(elements) {
     return is$g(element, "bpmn:Participant");
   });
 }
-function remove(collection, element) {
-  if (!collection || !element) {
-    return -1;
-  }
-  var idx = collection.indexOf(element);
-  if (idx !== -1) {
-    collection.splice(idx, 1);
-  }
-  return idx;
-}
-function add(collection, element, idx) {
-  if (!collection || !element) {
-    return;
-  }
-  if (typeof idx !== "number") {
-    idx = -1;
-  }
-  var currentIdx = collection.indexOf(element);
-  if (currentIdx !== -1) {
-    if (currentIdx === idx) {
-      return;
-    } else {
-      if (idx !== -1) {
-        collection.splice(currentIdx, 1);
-      } else {
-        return;
-      }
-    }
-  }
-  if (idx !== -1) {
-    collection.splice(idx, 0, element);
-  } else {
-    collection.push(element);
-  }
-}
-function indexOf(collection, element) {
-  if (!collection || !element) {
-    return -1;
-  }
-  return collection.indexOf(element);
-}
 var TARGET_REF_PLACEHOLDER_NAME = "__targetRef_placeholder";
 function DataInputAssociationBehavior(eventBus, bpmnFactory) {
   CommandInterceptor.call(this, eventBus);
@@ -13369,7 +13211,7 @@ function DataInputAssociationBehavior(eventBus, bpmnFactory) {
       targetRefProp = bpmnFactory.create("bpmn:Property", {
         name: TARGET_REF_PLACEHOLDER_NAME
       });
-      add(properties, targetRefProp);
+      add$1(properties, targetRefProp);
     }
     return targetRefProp;
   }
@@ -13379,7 +13221,7 @@ function DataInputAssociationBehavior(eventBus, bpmnFactory) {
       return;
     }
     if (!usesTargetRef(element, targetRefProp, connection)) {
-      remove(element.get("properties"), targetRefProp);
+      remove$2(element.get("properties"), targetRefProp);
     }
   }
   function fixTargetRef(event2) {
@@ -13748,7 +13590,7 @@ function computeLanesResize(shape, newBounds) {
   });
   return resizeNeeded;
 }
-var LOW_PRIORITY$i = 500;
+var LOW_PRIORITY$j = 500;
 function DeleteLaneBehavior(eventBus, spaceTool) {
   CommandInterceptor.call(this, eventBus);
   function compensateLaneDelete(shape, oldParent) {
@@ -13849,7 +13691,7 @@ function DeleteLaneBehavior(eventBus, spaceTool) {
       );
     }
   }
-  this.postExecuted("shape.delete", LOW_PRIORITY$i, function(event2) {
+  this.postExecuted("shape.delete", LOW_PRIORITY$j, function(event2) {
     var context = event2.context, hints = context.hints, shape = context.shape, oldParent = context.oldParent;
     if (!is$g(shape, "bpmn:Lane")) {
       return;
@@ -13865,12 +13707,12 @@ DeleteLaneBehavior.$inject = [
   "spaceTool"
 ];
 e$3(DeleteLaneBehavior, CommandInterceptor);
-var LOW_PRIORITY$h = 500;
+var LOW_PRIORITY$i = 500;
 function DetachEventBehavior(bpmnReplace, injector) {
   injector.invoke(CommandInterceptor, this);
   this._bpmnReplace = bpmnReplace;
   var self2 = this;
-  this.postExecuted("elements.create", LOW_PRIORITY$h, function(context) {
+  this.postExecuted("elements.create", LOW_PRIORITY$i, function(context) {
     var elements = context.elements;
     elements.filter(function(shape) {
       var host = shape.host;
@@ -13881,7 +13723,7 @@ function DetachEventBehavior(bpmnReplace, injector) {
       context.elements[index2] = self2._replaceShape(elements[index2]);
     });
   }, true);
-  this.preExecute("elements.move", LOW_PRIORITY$h, function(context) {
+  this.preExecute("elements.move", LOW_PRIORITY$i, function(context) {
     var shapes = context.shapes, newHost = context.newHost;
     shapes.forEach(function(shape, index2) {
       var host = shape.host;
@@ -14167,16 +14009,16 @@ function createCategoryValue(bpmnFactory) {
   return bpmnFactory.create("bpmn:CategoryValue");
 }
 function linkCategoryValue(categoryValue, category, definitions) {
-  add(category.get("categoryValue"), categoryValue);
+  add$1(category.get("categoryValue"), categoryValue);
   categoryValue.$parent = category;
-  add(definitions.get("rootElements"), category);
+  add$1(definitions.get("rootElements"), category);
   category.$parent = definitions;
   return categoryValue;
 }
 function unlinkCategoryValue(categoryValue) {
   var category = categoryValue.$parent;
   if (category) {
-    remove(category.get("categoryValue"), categoryValue);
+    remove$2(category.get("categoryValue"), categoryValue);
     categoryValue.$parent = null;
   }
   return categoryValue;
@@ -14184,7 +14026,7 @@ function unlinkCategoryValue(categoryValue) {
 function unlinkCategory(category) {
   var definitions = category.$parent;
   if (definitions) {
-    remove(definitions.get("rootElements"), category);
+    remove$2(definitions.get("rootElements"), category);
     category.$parent = null;
   }
   return category;
@@ -15479,7 +15321,7 @@ ResizeLaneBehavior.$inject = [
   "eventBus",
   "modeling"
 ];
-var LOW_PRIORITY$g = 500;
+var LOW_PRIORITY$h = 500;
 function RootElementReferenceBehavior(bpmnjs, eventBus, injector, moddleCopy, bpmnFactory) {
   injector.invoke(CommandInterceptor, this);
   function canHaveRootElementReference(element) {
@@ -15531,7 +15373,7 @@ function RootElementReferenceBehavior(bpmnjs, eventBus, injector, moddleCopy, bp
     var businessObject = getBusinessObject(shape), rootElement = getRootElement2(businessObject), rootElements;
     if (rootElement && !hasRootElement(rootElement)) {
       rootElements = bpmnjs.getDefinitions().get("rootElements");
-      add(rootElements, rootElement);
+      add$1(rootElements, rootElement);
       context.addedRootElement = rootElement;
     }
   }, true);
@@ -15545,7 +15387,7 @@ function RootElementReferenceBehavior(bpmnjs, eventBus, injector, moddleCopy, bp
       return;
     }
     var rootElements = bpmnjs.getDefinitions().get("rootElements");
-    remove(rootElements, addedRootElement);
+    remove$2(rootElements, addedRootElement);
   }, true);
   eventBus.on("copyPaste.copyElement", function(context) {
     var descriptor = context.descriptor, element = context.element;
@@ -15557,7 +15399,7 @@ function RootElementReferenceBehavior(bpmnjs, eventBus, injector, moddleCopy, bp
       descriptor.referencedRootElement = rootElement;
     }
   });
-  eventBus.on("copyPaste.pasteElement", LOW_PRIORITY$g, function(context) {
+  eventBus.on("copyPaste.pasteElement", LOW_PRIORITY$h, function(context) {
     var descriptor = context.descriptor, businessObject = descriptor.businessObject, referencedRootElement = descriptor.referencedRootElement;
     if (!referencedRootElement) {
       return;
@@ -15681,7 +15523,7 @@ function findResizedLane(lanes, resizeStart, isHorizontalResize) {
     }
   }
 }
-var LOW_PRIORITY$f = 400;
+var LOW_PRIORITY$g = 400;
 var HIGH_PRIORITY$d = 600;
 var DEFAULT_POSITION = {
   x: 180,
@@ -15832,7 +15674,7 @@ function SubProcessPlaneBehavior(canvas, eventBus, modeling, elementFactory, bpm
     }
     eventBus.fire("element.changed", { element: primaryShape });
   });
-  this.executed("shape.toggleCollapse", LOW_PRIORITY$f, function(context) {
+  this.executed("shape.toggleCollapse", LOW_PRIORITY$g, function(context) {
     var shape = context.shape;
     if (!is$g(shape, "bpmn:SubProcess")) {
       return;
@@ -15844,7 +15686,7 @@ function SubProcessPlaneBehavior(canvas, eventBus, modeling, elementFactory, bpm
       removeRoot(context);
     }
   }, true);
-  this.reverted("shape.toggleCollapse", LOW_PRIORITY$f, function(context) {
+  this.reverted("shape.toggleCollapse", LOW_PRIORITY$g, function(context) {
     var shape = context.shape;
     if (!is$g(shape, "bpmn:SubProcess")) {
       return;
@@ -16081,7 +15923,7 @@ ToggleCollapseConnectionBehaviour.$inject = [
   "eventBus",
   "modeling"
 ];
-var LOW_PRIORITY$e = 500;
+var LOW_PRIORITY$f = 500;
 function ToggleElementCollapseBehaviour(eventBus, elementFactory, modeling) {
   CommandInterceptor.call(this, eventBus);
   function hideEmptyLabels(children) {
@@ -16116,7 +15958,7 @@ function ToggleElementCollapseBehaviour(eventBus, elementFactory, modeling) {
       height: defaultSize.height
     };
   }
-  this.executed(["shape.toggleCollapse"], LOW_PRIORITY$e, function(e2) {
+  this.executed(["shape.toggleCollapse"], LOW_PRIORITY$f, function(e2) {
     var context = e2.context, shape = context.shape;
     if (!is$g(shape, "bpmn:SubProcess")) {
       return;
@@ -16128,7 +15970,7 @@ function ToggleElementCollapseBehaviour(eventBus, elementFactory, modeling) {
       getDi(shape).isExpanded = false;
     }
   });
-  this.reverted(["shape.toggleCollapse"], LOW_PRIORITY$e, function(e2) {
+  this.reverted(["shape.toggleCollapse"], LOW_PRIORITY$f, function(e2) {
     var context = e2.context;
     var shape = context.shape;
     if (!shape.collapsed) {
@@ -16137,7 +15979,7 @@ function ToggleElementCollapseBehaviour(eventBus, elementFactory, modeling) {
       getDi(shape).isExpanded = false;
     }
   });
-  this.postExecuted(["shape.toggleCollapse"], LOW_PRIORITY$e, function(e2) {
+  this.postExecuted(["shape.toggleCollapse"], LOW_PRIORITY$f, function(e2) {
     var shape = e2.context.shape, defaultSize = elementFactory.getDefaultSize(shape), newBounds;
     if (shape.collapsed) {
       newBounds = collapsedBounds(shape, defaultSize);
@@ -16208,7 +16050,7 @@ function isDefaultFlow$3(connection, source2) {
   var sourceBo = getBusinessObject(source2), sequenceFlow = getBusinessObject(connection);
   return sourceBo.get("default") === sequenceFlow;
 }
-var LOW_PRIORITY$d = 500, HIGH_PRIORITY$c = 5e3;
+var LOW_PRIORITY$e = 500, HIGH_PRIORITY$c = 5e3;
 function UpdateFlowNodeRefsBehavior(eventBus, modeling) {
   CommandInterceptor.call(this, eventBus);
   var context;
@@ -16250,7 +16092,7 @@ function UpdateFlowNodeRefsBehavior(eventBus, modeling) {
   this.preExecute(laneRefUpdateEvents, HIGH_PRIORITY$c, function(event2) {
     initContext();
   });
-  this.postExecuted(laneRefUpdateEvents, LOW_PRIORITY$d, function(event2) {
+  this.postExecuted(laneRefUpdateEvents, LOW_PRIORITY$e, function(event2) {
     releaseContext();
   });
   this.preExecute([
@@ -17360,7 +17202,7 @@ function ensureConstraints$1(event2) {
 function isSingleShape(elements) {
   return elements && elements.length === 1 && !isConnection(elements[0]);
 }
-var LOW_PRIORITY$c = 750;
+var LOW_PRIORITY$d = 750;
 function CreatePreview(canvas, eventBus, graphicsFactory, previewSupport, styles) {
   function createDragGroup(elements) {
     var dragGroup = create$1("g");
@@ -17383,7 +17225,7 @@ function CreatePreview(canvas, eventBus, graphicsFactory, previewSupport, styles
     });
     return dragGroup;
   }
-  eventBus.on("create.move", LOW_PRIORITY$c, function(event2) {
+  eventBus.on("create.move", LOW_PRIORITY$d, function(event2) {
     var hover = event2.hover, context = event2.context, elements = context.elements, dragGroup = context.dragGroup;
     if (!dragGroup) {
       dragGroup = context.dragGroup = createDragGroup(elements);
@@ -17396,13 +17238,13 @@ function CreatePreview(canvas, eventBus, graphicsFactory, previewSupport, styles
       }
       translate$2(dragGroup, event2.x, event2.y);
     } else {
-      remove$1(dragGroup);
+      remove(dragGroup);
     }
   });
   eventBus.on("create.cleanup", function(event2) {
     var context = event2.context, dragGroup = context.dragGroup;
     if (dragGroup) {
-      remove$1(dragGroup);
+      remove(dragGroup);
     }
   });
 }
@@ -17805,13 +17647,13 @@ function copyProperties$1(source2, target, properties) {
     }
   });
 }
-var LOW_PRIORITY$b = 750;
+var LOW_PRIORITY$c = 750;
 function BpmnCopyPaste(bpmnFactory, eventBus, moddleCopy) {
   function copy2(bo, clone2) {
     var targetBo = bpmnFactory.create(bo.$type);
     return moddleCopy.copyElement(bo, targetBo, null, clone2);
   }
-  eventBus.on("copyPaste.copyElement", LOW_PRIORITY$b, function(context) {
+  eventBus.on("copyPaste.copyElement", LOW_PRIORITY$c, function(context) {
     var descriptor = context.descriptor, element = context.element, businessObject = getBusinessObject(element);
     if (isLabel(element)) {
       return descriptor;
@@ -17868,7 +17710,7 @@ function BpmnCopyPaste(bpmnFactory, eventBus, moddleCopy) {
     ]);
     descriptor.type = businessObject.$type;
   });
-  eventBus.on("copyPaste.copyElement", LOW_PRIORITY$b, function(context) {
+  eventBus.on("copyPaste.copyElement", LOW_PRIORITY$c, function(context) {
     var descriptor = context.descriptor, element = context.element;
     if (!is$g(element, "bpmn:Participant")) {
       return;
@@ -17884,7 +17726,7 @@ function BpmnCopyPaste(bpmnFactory, eventBus, moddleCopy) {
       descriptor.processRef = copy2(processRef);
     }
   });
-  eventBus.on("copyPaste.pasteElement", LOW_PRIORITY$b, function(context) {
+  eventBus.on("copyPaste.pasteElement", LOW_PRIORITY$c, function(context) {
     var cache2 = context.cache, descriptor = context.descriptor;
     setReferences(
       cache2,
@@ -18292,7 +18134,7 @@ const ReplaceModule = {
   ],
   bpmnReplace: ["type", BpmnReplace]
 };
-var LOW_PRIORITY$a = 250;
+var LOW_PRIORITY$b = 250;
 function ToolManager(eventBus) {
   this._eventBus = eventBus;
   this._tools = [];
@@ -18335,7 +18177,7 @@ ToolManager.prototype.bindEvents = function(name2, events2) {
     eventsToRegister.push(event2 + ".ended");
     eventsToRegister.push(event2 + ".canceled");
   });
-  eventBus.on(eventsToRegister, LOW_PRIORITY$a, function(event2) {
+  eventBus.on(eventsToRegister, LOW_PRIORITY$b, function(event2) {
     if (!this._active) {
       return;
     }
@@ -18780,7 +18622,7 @@ function isAttacher$1(element) {
   return !!element.host;
 }
 var MARKER_DRAGGING$1 = "djs-dragging", MARKER_RESIZING$1 = "djs-resizing";
-var LOW_PRIORITY$9 = 250;
+var LOW_PRIORITY$a = 250;
 var max$1 = Math.max;
 function SpaceToolPreview(eventBus, elementRegistry, canvas, styles, previewSupport) {
   function addPreviewGfx(collection, dragGroup) {
@@ -18815,10 +18657,10 @@ function SpaceToolPreview(eventBus, elementRegistry, canvas, styles, previewSupp
   eventBus.on("spaceTool.selection.cleanup", function(event2) {
     var context = event2.context, crosshairGroup = context.crosshairGroup;
     if (crosshairGroup) {
-      remove$1(crosshairGroup);
+      remove(crosshairGroup);
     }
   });
-  eventBus.on("spaceTool.move", LOW_PRIORITY$9, function(event2) {
+  eventBus.on("spaceTool.move", LOW_PRIORITY$a, function(event2) {
     var context = event2.context, line = context.line, axis = context.axis, movingShapes = context.movingShapes, resizingShapes = context.resizingShapes;
     if (!context.initialized) {
       return;
@@ -18933,14 +18775,14 @@ function SpaceToolPreview(eventBus, elementRegistry, canvas, styles, previewSupp
       canvas.removeMarker(connection, MARKER_DRAGGING$1);
     });
     if (dragGroup) {
-      remove$1(line);
-      remove$1(dragGroup);
+      remove(line);
+      remove(dragGroup);
     }
     forEach$2(resizingShapes, function(shape) {
       canvas.removeMarker(shape, MARKER_RESIZING$1);
     });
     if (frameGroup) {
-      remove$1(frameGroup);
+      remove(frameGroup);
     }
   });
 }
@@ -19234,7 +19076,7 @@ function saveClear(collection, removeFn) {
   }
   return collection;
 }
-var LOW_PRIORITY$8 = 250, HIGH_PRIORITY$8 = 1400;
+var LOW_PRIORITY$9 = 250, HIGH_PRIORITY$8 = 1400;
 function LabelSupport(injector, eventBus, modeling) {
   CommandInterceptor.call(this, eventBus);
   var movePreview = injector.get("movePreview", false);
@@ -19243,7 +19085,7 @@ function LabelSupport(injector, eventBus, modeling) {
     context.shapes = removeLabels(shapes);
     context.validatedShapes = removeLabels(validatedShapes);
   });
-  movePreview && eventBus.on("shape.move.start", LOW_PRIORITY$8, function(e2) {
+  movePreview && eventBus.on("shape.move.start", LOW_PRIORITY$9, function(e2) {
     var context = e2.context, shapes = context.shapes;
     var labels = [];
     forEach$2(shapes, function(element) {
@@ -19292,7 +19134,7 @@ function LabelSupport(injector, eventBus, modeling) {
   this.revert("shape.delete", function(e2) {
     var context = e2.context, shape = context.shape, labelTarget = context.labelTarget, labelTargetIndex = context.labelTargetIndex;
     if (labelTarget) {
-      add(labelTarget.labels, shape, labelTargetIndex);
+      add$1(labelTarget.labels, shape, labelTargetIndex);
       shape.labelTarget = labelTarget;
     }
   });
@@ -19312,7 +19154,7 @@ const LabelSupportModule = {
   __init__: ["labelSupport"],
   labelSupport: ["type", LabelSupport]
 };
-var LOW_PRIORITY$7 = 251, HIGH_PRIORITY$7 = 1401;
+var LOW_PRIORITY$8 = 251, HIGH_PRIORITY$7 = 1401;
 var MARKER_ATTACH$1 = "attach-ok";
 function AttachSupport(injector, eventBus, canvas, rules2, modeling) {
   CommandInterceptor.call(this, eventBus);
@@ -19322,7 +19164,7 @@ function AttachSupport(injector, eventBus, canvas, rules2, modeling) {
     context.shapes = addAttached(shapes);
     context.validatedShapes = removeAttached(validatedShapes);
   });
-  movePreview && eventBus.on("shape.move.start", LOW_PRIORITY$7, function(e2) {
+  movePreview && eventBus.on("shape.move.start", LOW_PRIORITY$8, function(e2) {
     var context = e2.context, shapes = context.shapes, attachers = getAttachers(shapes);
     forEach$2(attachers, function(attacher) {
       movePreview.makeDraggable(context, attacher, true);
@@ -19796,11 +19638,11 @@ BpmnUpdater.prototype.updateFlowNodeRefs = function(businessObject, newContainme
   var oldRefs, newRefs;
   if (is$g(oldContainment, "bpmn:Lane")) {
     oldRefs = oldContainment.get("flowNodeRef");
-    remove(oldRefs, businessObject);
+    remove$2(oldRefs, businessObject);
   }
   if (is$g(newContainment, "bpmn:Lane")) {
     newRefs = newContainment.get("flowNodeRef");
-    add(newRefs, businessObject);
+    add$1(newRefs, businessObject);
   }
 };
 BpmnUpdater.prototype.updateDiConnection = function(connection, newSource, newTarget) {
@@ -19824,7 +19666,7 @@ BpmnUpdater.prototype.updateDiParent = function(di, parentDi) {
     planeElements.push(di);
     di.$parent = parentDi;
   } else {
-    remove(planeElements, di);
+    remove$2(planeElements, di);
     di.$parent = null;
   }
 };
@@ -19904,11 +19746,11 @@ BpmnUpdater.prototype.updateSemanticParent = function(businessObject, newParent,
     if (process) {
       definitions = getDefinitions(businessObject.$parent || newParent);
       if (businessObject.$parent) {
-        remove(definitions.get("rootElements"), process);
+        remove$2(definitions.get("rootElements"), process);
         process.$parent = null;
       }
       if (newParent) {
-        add(definitions.get("rootElements"), process);
+        add$1(definitions.get("rootElements"), process);
         process.$parent = definitions;
       }
     }
@@ -19923,7 +19765,7 @@ BpmnUpdater.prototype.updateSemanticParent = function(businessObject, newParent,
   var children;
   if (businessObject.$parent) {
     children = businessObject.$parent.get(containment);
-    remove(children, businessObject);
+    remove$2(children, businessObject);
   }
   if (!newParent) {
     businessObject.$parent = null;
@@ -19934,7 +19776,7 @@ BpmnUpdater.prototype.updateSemanticParent = function(businessObject, newParent,
   }
   if (visualParent) {
     var diChildren = visualParent.get(containment);
-    remove(children, businessObject);
+    remove$2(children, businessObject);
     if (newParent) {
       if (!diChildren) {
         diChildren = [];
@@ -19954,7 +19796,7 @@ BpmnUpdater.prototype.updateConnection = function(context) {
     var inverseSet = is$g(businessObject, "bpmn:SequenceFlow");
     if (businessObject.sourceRef !== newSourceBo) {
       if (inverseSet) {
-        remove(businessObject.sourceRef && businessObject.sourceRef.get("outgoing"), businessObject);
+        remove$2(businessObject.sourceRef && businessObject.sourceRef.get("outgoing"), businessObject);
         if (newSourceBo && newSourceBo.get("outgoing")) {
           newSourceBo.get("outgoing").push(businessObject);
         }
@@ -19963,7 +19805,7 @@ BpmnUpdater.prototype.updateConnection = function(context) {
     }
     if (businessObject.targetRef !== newTargetBo) {
       if (inverseSet) {
-        remove(businessObject.targetRef && businessObject.targetRef.get("incoming"), businessObject);
+        remove$2(businessObject.targetRef && businessObject.targetRef.get("incoming"), businessObject);
         if (newTargetBo && newTargetBo.get("incoming")) {
           newTargetBo.get("incoming").push(businessObject);
         }
@@ -20668,7 +20510,7 @@ DeleteConnectionHandler.prototype.revert = function(context) {
   var connection = context.connection, parent = context.parent, parentIndex = context.parentIndex;
   connection.source = context.source;
   connection.target = context.target;
-  add(parent.children, connection, parentIndex);
+  add$1(parent.children, connection, parentIndex);
   this._canvas.addConnection(connection, parent);
   return connection;
 };
@@ -20726,7 +20568,7 @@ DeleteShapeHandler.prototype.execute = function(context) {
 DeleteShapeHandler.prototype.revert = function(context) {
   var canvas = this._canvas;
   var shape = context.shape, oldParent = context.oldParent, oldParentIndex = context.oldParentIndex;
-  add(oldParent.children, shape, oldParentIndex);
+  add$1(oldParent.children, shape, oldParentIndex);
   canvas.addShape(shape, oldParent);
   return shape;
 };
@@ -20847,8 +20689,8 @@ MoveConnectionHandler.prototype.execute = function(context) {
   var connection = context.connection, delta2 = context.delta;
   var newParent = context.newParent || connection.parent, newParentIndex = context.newParentIndex, oldParent = connection.parent;
   context.oldParent = oldParent;
-  context.oldParentIndex = remove(oldParent.children, connection);
-  add(newParent.children, connection, newParentIndex);
+  context.oldParentIndex = remove$2(oldParent.children, connection);
+  add$1(newParent.children, connection, newParentIndex);
   connection.parent = newParent;
   forEach$2(connection.waypoints, function(p2) {
     p2.x += delta2.x;
@@ -20862,8 +20704,8 @@ MoveConnectionHandler.prototype.execute = function(context) {
 };
 MoveConnectionHandler.prototype.revert = function(context) {
   var connection = context.connection, newParent = connection.parent, oldParent = context.oldParent, oldParentIndex = context.oldParentIndex, delta2 = context.delta;
-  remove(newParent.children, connection);
-  add(oldParent.children, connection, oldParentIndex);
+  remove$2(newParent.children, connection);
+  add$1(oldParent.children, connection, oldParentIndex);
   connection.parent = oldParent;
   forEach$2(connection.waypoints, function(p2) {
     p2.x -= delta2.x;
@@ -20957,8 +20799,8 @@ MoveShapeHandler.prototype.execute = function(context) {
   var shape = context.shape, delta2 = context.delta, newParent = context.newParent || shape.parent, newParentIndex = context.newParentIndex, oldParent = shape.parent;
   context.oldBounds = pick$1(shape, ["x", "y", "width", "height"]);
   context.oldParent = oldParent;
-  context.oldParentIndex = remove(oldParent.children, shape);
-  add(newParent.children, shape, newParentIndex);
+  context.oldParentIndex = remove$2(oldParent.children, shape);
+  add$1(newParent.children, shape, newParentIndex);
   assign$2(shape, {
     parent: newParent,
     x: shape.x + delta2.x,
@@ -20987,7 +20829,7 @@ MoveShapeHandler.prototype.postExecute = function(context) {
 };
 MoveShapeHandler.prototype.revert = function(context) {
   var shape = context.shape, oldParent = context.oldParent, oldParentIndex = context.oldParentIndex, delta2 = context.delta;
-  add(oldParent.children, shape, oldParentIndex);
+  add$1(oldParent.children, shape, oldParentIndex);
   assign$2(shape, {
     parent: oldParent,
     x: shape.x - delta2.x,
@@ -21392,7 +21234,7 @@ UpdateAttachmentHandler.prototype.revert = function(context) {
   return shape;
 };
 function removeAttacher(host, attacher) {
-  return remove(host && host.attachers, attacher);
+  return remove$2(host && host.attachers, attacher);
 }
 function addAttacher(host, attacher, idx) {
   if (!host) {
@@ -21402,7 +21244,7 @@ function addAttacher(host, attacher, idx) {
   if (!attachers) {
     host.attachers = attachers = [];
   }
-  add(attachers, attacher, idx);
+  add$1(attachers, attacher, idx);
 }
 function UpdateWaypointsHandler() {
 }
@@ -21886,9 +21728,9 @@ UpdateCanvasRootHandler.prototype.execute = function(context) {
   var newRoot = context.newRoot, newRootBusinessObject = newRoot.businessObject, oldRoot = canvas.getRootElement(), oldRootBusinessObject = oldRoot.businessObject, bpmnDefinitions = oldRootBusinessObject.$parent, diPlane = getDi(oldRoot);
   canvas.setRootElement(newRoot);
   canvas.removeRootElement(oldRoot);
-  add(bpmnDefinitions.rootElements, newRootBusinessObject);
+  add$1(bpmnDefinitions.rootElements, newRootBusinessObject);
   newRootBusinessObject.$parent = bpmnDefinitions;
-  remove(bpmnDefinitions.rootElements, oldRootBusinessObject);
+  remove$2(bpmnDefinitions.rootElements, oldRootBusinessObject);
   oldRootBusinessObject.$parent = null;
   oldRoot.di = null;
   diPlane.bpmnElement = newRootBusinessObject;
@@ -21901,9 +21743,9 @@ UpdateCanvasRootHandler.prototype.revert = function(context) {
   var newRoot = context.newRoot, newRootBusinessObject = newRoot.businessObject, oldRoot = context.oldRoot, oldRootBusinessObject = oldRoot.businessObject, bpmnDefinitions = newRootBusinessObject.$parent, diPlane = getDi(newRoot);
   canvas.setRootElement(oldRoot);
   canvas.removeRootElement(newRoot);
-  remove(bpmnDefinitions.rootElements, newRootBusinessObject);
+  remove$2(bpmnDefinitions.rootElements, newRootBusinessObject);
   newRootBusinessObject.$parent = null;
-  add(bpmnDefinitions.rootElements, oldRootBusinessObject);
+  add$1(bpmnDefinitions.rootElements, oldRootBusinessObject);
   oldRootBusinessObject.$parent = bpmnDefinitions;
   newRoot.di = null;
   diPlane.bpmnElement = oldRootBusinessObject;
@@ -22206,12 +22048,12 @@ UpdateFlowNodeRefsHandler.prototype.execute = function(context) {
   updates.forEach(function(update) {
     var flowNode = update.flowNode, lanes = flowNode.get(LANES_ATTR);
     update.remove.forEach(function(oldLane) {
-      remove(lanes, oldLane);
-      remove(oldLane.get(FLOW_NODE_REFS_ATTR), flowNode);
+      remove$2(lanes, oldLane);
+      remove$2(oldLane.get(FLOW_NODE_REFS_ATTR), flowNode);
     });
     update.add.forEach(function(newLane) {
-      add(lanes, newLane);
-      add(newLane.get(FLOW_NODE_REFS_ATTR), flowNode);
+      add$1(lanes, newLane);
+      add$1(newLane.get(FLOW_NODE_REFS_ATTR), flowNode);
     });
   });
   return [];
@@ -22221,12 +22063,12 @@ UpdateFlowNodeRefsHandler.prototype.revert = function(context) {
   updates.forEach(function(update) {
     var flowNode = update.flowNode, lanes = flowNode.get(LANES_ATTR);
     update.add.forEach(function(newLane) {
-      remove(lanes, newLane);
-      remove(newLane.get(FLOW_NODE_REFS_ATTR), flowNode);
+      remove$2(lanes, newLane);
+      remove$2(newLane.get(FLOW_NODE_REFS_ATTR), flowNode);
     });
     update.remove.forEach(function(oldLane) {
-      add(lanes, oldLane);
-      add(oldLane.get(FLOW_NODE_REFS_ATTR), flowNode);
+      add$1(lanes, oldLane);
+      add$1(oldLane.get(FLOW_NODE_REFS_ATTR), flowNode);
     });
   });
   return [];
@@ -23464,7 +23306,7 @@ TextBox.prototype._insertTextIE = function(text) {
       if (index2 === startContainerChildIndex) {
         childNode.textContent = startContainer.textContent.substring(0, startOffset) + text + endContainer.textContent.substring(endOffset);
       } else if (index2 > startContainerChildIndex && index2 <= endContainerChildIndex) {
-        remove$2(childNode);
+        remove$1(childNode);
       }
     });
     container = startContainer;
@@ -23558,9 +23400,9 @@ TextBox.prototype.destroy = function() {
   event.unbind(content, "paste", this.handlePaste);
   if (resizeHandle) {
     resizeHandle.removeAttribute("style");
-    remove$2(resizeHandle);
+    remove$1(resizeHandle);
   }
-  remove$2(parent);
+  remove$1(parent);
 };
 TextBox.prototype.getValue = function() {
   return this.content.innerText.trim();
@@ -24791,17 +24633,20 @@ ReplaceMenuProvider.prototype._createEntry = function(replaceOption, target, act
 ReplaceMenuProvider.prototype._getLoopCharacteristicsHeaderEntries = function(target) {
   var self2 = this;
   var translate2 = this._translate;
-  function toggleLoopEntry(event2, entry) {
+  function toggleLoopCharacteristics(event2, entry) {
     if (entry.active) {
       self2._modeling.updateProperties(target, { loopCharacteristics: void 0 });
       return;
     }
-    const currentLoopCharacteristics = target.businessObject.get("loopCharacteristics"), newLoopCharacteristics = self2._moddle.create(entry.options.loopCharacteristics);
-    if (currentLoopCharacteristics) {
-      self2._moddleCopy.copyElement(currentLoopCharacteristics, newLoopCharacteristics);
+    var loopCharacteristics2 = target.businessObject.get("loopCharacteristics");
+    if (loopCharacteristics2 && is$g(loopCharacteristics2, entry.options.loopCharacteristics)) {
+      self2._modeling.updateModdleProperties(target, loopCharacteristics2, { isSequential: entry.options.isSequential });
+    } else {
+      loopCharacteristics2 = self2._moddle.create(entry.options.loopCharacteristics, {
+        isSequential: entry.options.isSequential
+      });
+      self2._modeling.updateProperties(target, { loopCharacteristics: loopCharacteristics2 });
     }
-    newLoopCharacteristics.set("isSequential", entry.options.isSequential);
-    self2._modeling.updateProperties(target, { loopCharacteristics: newLoopCharacteristics });
   }
   var businessObject = getBusinessObject(target), loopCharacteristics = businessObject.loopCharacteristics;
   var isSequential, isLoop, isParallel;
@@ -24815,7 +24660,7 @@ ReplaceMenuProvider.prototype._getLoopCharacteristicsHeaderEntries = function(ta
       className: "bpmn-icon-parallel-mi-marker",
       title: translate2("Parallel multi-instance"),
       active: isParallel,
-      action: toggleLoopEntry,
+      action: toggleLoopCharacteristics,
       options: {
         loopCharacteristics: "bpmn:MultiInstanceLoopCharacteristics",
         isSequential: false
@@ -24825,7 +24670,7 @@ ReplaceMenuProvider.prototype._getLoopCharacteristicsHeaderEntries = function(ta
       className: "bpmn-icon-sequential-mi-marker",
       title: translate2("Sequential multi-instance"),
       active: isSequential,
-      action: toggleLoopEntry,
+      action: toggleLoopCharacteristics,
       options: {
         loopCharacteristics: "bpmn:MultiInstanceLoopCharacteristics",
         isSequential: true
@@ -24835,7 +24680,7 @@ ReplaceMenuProvider.prototype._getLoopCharacteristicsHeaderEntries = function(ta
       className: "bpmn-icon-loop-marker",
       title: translate2("Loop"),
       active: isLoop,
-      action: toggleLoopEntry,
+      action: toggleLoopCharacteristics,
       options: {
         loopCharacteristics: "bpmn:StandardLoopCharacteristics"
       }
@@ -25458,13 +25303,13 @@ var icons = {
               <rect x="450" y="1050" width="800" height="600" rx="1" style="fill:currentColor;stroke:currentColor;stroke-width:100;opacity:.5;"></rect>
             </svg>`
 };
-var LOW_PRIORITY$6 = 900;
+var LOW_PRIORITY$7 = 900;
 function DistributeElementsMenuProvider(popupMenu, distributeElements, translate2, rules2) {
   this._distributeElements = distributeElements;
   this._translate = translate2;
   this._popupMenu = popupMenu;
   this._rules = rules2;
-  popupMenu.registerProvider("align-elements", LOW_PRIORITY$6, this);
+  popupMenu.registerProvider("align-elements", LOW_PRIORITY$7, this);
 }
 DistributeElementsMenuProvider.$inject = [
   "popupMenu",
@@ -25796,12 +25641,12 @@ function quantize(value, quantum, fn) {
   return Math[fn](value / quantum) * quantum;
 }
 var LOWER_PRIORITY = 1200;
-var LOW_PRIORITY$5 = 800;
+var LOW_PRIORITY$6 = 800;
 function GridSnapping(elementRegistry, eventBus, config2) {
   var active = !config2 || config2.active !== false;
   this._eventBus = eventBus;
   var self2 = this;
-  eventBus.on("diagram.init", LOW_PRIORITY$5, function() {
+  eventBus.on("diagram.init", LOW_PRIORITY$6, function() {
     self2.setActive(active);
   });
   eventBus.on([
@@ -26639,7 +26484,7 @@ function getCursor(direction) {
   }
 }
 var MARKER_RESIZING = "djs-resizing", MARKER_RESIZE_NOT_OK = "resize-not-ok";
-var LOW_PRIORITY$4 = 500;
+var LOW_PRIORITY$5 = 500;
 function ResizePreview(eventBus, canvas, previewSupport) {
   function updateFrame(context) {
     var shape = context.shape, bounds = context.newBounds, frame = context.frame;
@@ -26662,11 +26507,11 @@ function ResizePreview(eventBus, canvas, previewSupport) {
   function removeFrame(context) {
     var shape = context.shape, frame = context.frame;
     if (frame) {
-      remove$1(context.frame);
+      remove(context.frame);
     }
     canvas.removeMarker(shape, MARKER_RESIZING);
   }
-  eventBus.on("resize.move", LOW_PRIORITY$4, function(event2) {
+  eventBus.on("resize.move", LOW_PRIORITY$5, function(event2) {
     updateFrame(event2.context);
   });
   eventBus.on("resize.cleanup", function(event2) {
@@ -27159,7 +27004,7 @@ function LabelEditingPreview(eventBus, canvas, pathMap) {
     element = void 0;
     absoluteElementBBox = void 0;
     if (gfx) {
-      remove$1(gfx);
+      remove(gfx);
       gfx = void 0;
     }
   });
@@ -27293,8 +27138,8 @@ Tooltips.prototype.setTimeout = function(tooltip) {
 Tooltips.prototype.remove = function(id) {
   var tooltip = this.get(id);
   if (tooltip) {
-    remove$2(tooltip.html);
-    remove$2(tooltip.htmlContainer);
+    remove$1(tooltip.html);
+    remove$1(tooltip.htmlContainer);
     delete tooltip.htmlContainer;
     delete this._tooltips[tooltip.id];
   }
@@ -27400,6 +27245,146 @@ const ModelingFeedbackModule = {
     "modelingFeedback"
   ],
   modelingFeedback: ["type", ModelingFeedback]
+};
+var LOW_PRIORITY$4 = 500;
+var DEFAULT_PRIORITY$1 = 1e3;
+function Outline(eventBus, styles) {
+  this._eventBus = eventBus;
+  this.offset = 5;
+  var OUTLINE_STYLE = styles.cls("djs-outline", ["no-fill"]);
+  var self2 = this;
+  function createOutline(gfx) {
+    var outline = create$1("rect");
+    attr(outline, assign$2({
+      x: 0,
+      y: 0,
+      rx: 4,
+      width: 100,
+      height: 100
+    }, OUTLINE_STYLE));
+    return outline;
+  }
+  eventBus.on(["shape.added", "shape.changed"], LOW_PRIORITY$4, function(event2) {
+    var element = event2.element, gfx = event2.gfx;
+    var outline = query(".djs-outline", gfx);
+    if (!outline) {
+      outline = self2.getOutline(element) || createOutline();
+      append(gfx, outline);
+    }
+    self2.updateShapeOutline(outline, element);
+  });
+  eventBus.on(["connection.added", "connection.changed"], function(event2) {
+    var element = event2.element, gfx = event2.gfx;
+    var outline = query(".djs-outline", gfx);
+    if (!outline) {
+      outline = createOutline();
+      append(gfx, outline);
+    }
+    self2.updateConnectionOutline(outline, element);
+  });
+}
+Outline.prototype.updateShapeOutline = function(outline, element) {
+  var updated = false;
+  var providers = this._getProviders();
+  if (providers.length) {
+    forEach$2(providers, function(provider) {
+      updated = updated || provider.updateOutline(element, outline);
+    });
+  }
+  if (!updated) {
+    attr(outline, {
+      x: -this.offset,
+      y: -this.offset,
+      width: element.width + this.offset * 2,
+      height: element.height + this.offset * 2
+    });
+  }
+};
+Outline.prototype.updateConnectionOutline = function(outline, connection) {
+  var bbox = getBBox(connection);
+  attr(outline, {
+    x: bbox.x - this.offset,
+    y: bbox.y - this.offset,
+    width: bbox.width + this.offset * 2,
+    height: bbox.height + this.offset * 2
+  });
+};
+Outline.prototype.registerProvider = function(priority, provider) {
+  if (!provider) {
+    provider = priority;
+    priority = DEFAULT_PRIORITY$1;
+  }
+  this._eventBus.on("outline.getProviders", priority, function(event2) {
+    event2.providers.push(provider);
+  });
+};
+Outline.prototype._getProviders = function() {
+  var event2 = this._eventBus.createEvent({
+    type: "outline.getProviders",
+    providers: []
+  });
+  this._eventBus.fire(event2);
+  return event2.providers;
+};
+Outline.prototype.getOutline = function(element) {
+  var outline;
+  var providers = this._getProviders();
+  forEach$2(providers, function(provider) {
+    if (!isFunction$1(provider.getOutline)) {
+      return;
+    }
+    outline = outline || provider.getOutline(element);
+  });
+  return outline;
+};
+Outline.$inject = ["eventBus", "styles", "elementRegistry"];
+var SELECTION_OUTLINE_PADDING = 6;
+function MultiSelectionOutline(eventBus, canvas, selection) {
+  this._canvas = canvas;
+  var self2 = this;
+  eventBus.on("element.changed", function(event2) {
+    if (selection.isSelected(event2.element)) {
+      self2._updateMultiSelectionOutline(selection.get());
+    }
+  });
+  eventBus.on("selection.changed", function(event2) {
+    var newSelection = event2.newSelection;
+    self2._updateMultiSelectionOutline(newSelection);
+  });
+}
+MultiSelectionOutline.prototype._updateMultiSelectionOutline = function(selection) {
+  var layer = this._canvas.getLayer("selectionOutline");
+  clear(layer);
+  var enabled = selection.length > 1;
+  var container = this._canvas.getContainer();
+  classes(container)[enabled ? "add" : "remove"]("djs-multi-select");
+  if (!enabled) {
+    return;
+  }
+  var bBox = addSelectionOutlinePadding(getBBox(selection));
+  var rect = create$1("rect");
+  attr(rect, assign$2({
+    rx: 3
+  }, bBox));
+  classes(rect).add("djs-selection-outline");
+  append(layer, rect);
+};
+MultiSelectionOutline.$inject = ["eventBus", "canvas", "selection"];
+function addSelectionOutlinePadding(bBox) {
+  return {
+    x: bBox.x - SELECTION_OUTLINE_PADDING,
+    y: bBox.y - SELECTION_OUTLINE_PADDING,
+    width: bBox.width + SELECTION_OUTLINE_PADDING * 2,
+    height: bBox.height + SELECTION_OUTLINE_PADDING * 2
+  };
+}
+const Ouline = {
+  __depends__: [
+    SelectionModule
+  ],
+  __init__: ["outline", "multiSelectionOutline"],
+  outline: ["type", Outline],
+  multiSelectionOutline: ["type", MultiSelectionOutline]
 };
 var LOW_PRIORITY$3 = 500, MEDIUM_PRIORITY = 1250, HIGH_PRIORITY$2 = 1500;
 var round = Math.round;
@@ -27605,7 +27590,7 @@ function MovePreview(eventBus, canvas, styles, previewSupport) {
       canvas.removeMarker(e2, MARKER_DRAGGING);
     });
     if (dragGroup) {
-      remove$1(dragGroup);
+      remove(dragGroup);
     }
   });
   this.makeDraggable = makeDraggable;
@@ -27635,7 +27620,7 @@ const MoveModule = {
   __depends__: [
     InteractionEventsModule$1,
     SelectionModule,
-    OutlineModule$1,
+    Ouline,
     RulesModule$1,
     DraggingModule,
     PreviewSupportModule
@@ -27916,7 +27901,7 @@ function LassoTool(eventBus, canvas, dragging, elementRegistry, selection, toolM
     },
     remove: function(context) {
       if (context.frame) {
-        remove$1(context.frame);
+        remove(context.frame);
       }
     }
   };
@@ -29265,7 +29250,6 @@ SearchPad.prototype._search = function(pattern) {
     return !self2._canvas.getRootElements().includes(searchResult.element);
   });
   if (!searchResults.length) {
-    this._clearMarkers();
     this._selection.select(null);
     return;
   }
@@ -29310,11 +29294,6 @@ SearchPad.prototype._clearResults = function() {
   this._results = {};
   this._eventBus.fire("searchPad.cleared");
 };
-SearchPad.prototype._clearMarkers = function() {
-  for (var id in this._results) {
-    this._canvas.removeMarker(this._results[id].element, "djs-search-preselected");
-  }
-};
 SearchPad.prototype._getCurrentResult = function() {
   return query(SearchPad.RESULT_SELECTED_SELECTOR, this._resultsContainer);
 };
@@ -29341,6 +29320,7 @@ SearchPad.prototype.open = function() {
   this._cachedRootElement = this._canvas.getRootElement();
   this._cachedSelection = this._selection.get();
   this._cachedViewbox = this._canvas.viewbox();
+  this._selection.select(null);
   this._bindEvents();
   this._open = true;
   classes$1(this._canvas.getContainer()).add("djs-search-open");
@@ -29371,11 +29351,11 @@ SearchPad.prototype.close = function(restoreCached = true) {
   this._open = false;
   classes$1(this._canvas.getContainer()).remove("djs-search-open");
   classes$1(this._container).remove("open");
-  this._clearMarkers();
   this._clearResults();
   this._searchInput.value = "";
   this._searchInput.blur();
   this._eventBus.fire("searchPad.closed");
+  this._canvas.restoreFocus();
 };
 SearchPad.prototype.toggle = function() {
   this.isOpen() ? this.close() : this.open();
@@ -29388,7 +29368,6 @@ SearchPad.prototype._preselect = function(node2) {
   if (node2 === selectedNode) {
     return;
   }
-  this._clearMarkers();
   if (selectedNode) {
     classes$1(selectedNode).remove(SearchPad.RESULT_SELECTED_CLASS);
   }
@@ -29399,7 +29378,6 @@ SearchPad.prototype._preselect = function(node2) {
     top: SCROLL_TO_ELEMENT_PADDING
   });
   this._selection.select(element);
-  this._canvas.addMarker(element, "djs-search-preselected");
   this._eventBus.fire("searchPad.preselected", element);
 };
 SearchPad.prototype._select = function(node2) {
@@ -29431,10 +29409,12 @@ function createInnerTextNode(parentNode, tokens, template) {
 function createHtmlText(tokens) {
   var htmlText = "";
   tokens.forEach(function(t2) {
-    if (t2.matched) {
-      htmlText += '<b class="' + SearchPad.RESULT_HIGHLIGHT_CLASS + '">' + escapeHTML$1(t2.matched) + "</b>";
+    var text = escapeHTML$1(t2.value || t2.matched || t2.normal);
+    var match = t2.match || t2.matched;
+    if (match) {
+      htmlText += '<b class="' + SearchPad.RESULT_HIGHLIGHT_CLASS + '">' + text + "</b>";
     } else {
-      htmlText += escapeHTML$1(t2.normal);
+      htmlText += text;
     }
   });
   return htmlText !== "" ? htmlText : null;
@@ -29467,117 +29447,175 @@ const SearchPadModule = {
   ],
   searchPad: ["type", SearchPad]
 };
-function BpmnSearchProvider(elementRegistry, searchPad, canvas) {
+function BpmnSearchProvider(elementRegistry, searchPad, canvas, search2) {
   this._elementRegistry = elementRegistry;
   this._canvas = canvas;
+  this._search = search2;
   searchPad.registerProvider(this);
 }
 BpmnSearchProvider.$inject = [
   "elementRegistry",
   "searchPad",
-  "canvas"
+  "canvas",
+  "search"
 ];
 BpmnSearchProvider.prototype.find = function(pattern) {
   var rootElements = this._canvas.getRootElements();
   var elements = this._elementRegistry.filter(function(element) {
     return !isLabel(element) && !rootElements.includes(element);
   });
-  return elements.reduce(function(results, element) {
-    var label = getLabel(element);
-    var primaryTokens = findMatches(label, pattern), secondaryTokens = findMatches(element.id, pattern);
-    if (hasMatch(primaryTokens) || hasMatch(secondaryTokens)) {
-      return [
-        ...results,
-        {
-          primaryTokens,
-          secondaryTokens,
-          element
-        }
-      ];
+  return this._search(
+    elements.map((element) => {
+      return {
+        element,
+        label: getLabel(element),
+        id: element.id
+      };
+    }),
+    pattern,
+    {
+      keys: [
+        "label",
+        "id"
+      ]
     }
-    return results;
-  }, []).sort(function(a2, b2) {
-    return compareTokens(a2.primaryTokens, b2.primaryTokens) || compareTokens(a2.secondaryTokens, b2.secondaryTokens) || compareStrings(getLabel(a2.element), getLabel(b2.element)) || compareStrings(a2.element.id, b2.element.id);
-  }).map(function(result) {
-    return {
-      element: result.element,
-      primaryTokens: result.primaryTokens.map(function(token) {
-        return omit$1(token, ["index"]);
-      }),
-      secondaryTokens: result.secondaryTokens.map(function(token) {
-        return omit$1(token, ["index"]);
-      })
-    };
-  });
+  ).map(toSearchPadResult);
 };
-function isMatch(token) {
-  return "matched" in token;
-}
-function hasMatch(tokens) {
-  return tokens.find(isMatch);
-}
-function compareTokens(tokensA, tokensB) {
-  const tokensAHasMatch = hasMatch(tokensA), tokensBHasMatch = hasMatch(tokensB);
-  if (tokensAHasMatch && !tokensBHasMatch) {
-    return -1;
-  }
-  if (!tokensAHasMatch && tokensBHasMatch) {
-    return 1;
-  }
-  if (!tokensAHasMatch && !tokensBHasMatch) {
-    return 0;
-  }
-  const tokensAFirstMatch = tokensA.find(isMatch), tokensBFirstMatch = tokensB.find(isMatch);
-  if (tokensAFirstMatch.index < tokensBFirstMatch.index) {
-    return -1;
-  }
-  if (tokensAFirstMatch.index > tokensBFirstMatch.index) {
-    return 1;
-  }
-  return 0;
-}
-function compareStrings(a2 = "", b2 = "") {
-  return a2.localeCompare(b2);
-}
-function findMatches(text, pattern) {
-  var tokens = [], originalText = text;
-  if (!text) {
-    return tokens;
-  }
-  text = text.toLowerCase();
-  pattern = pattern.toLowerCase();
-  var index2 = text.indexOf(pattern);
-  if (index2 > -1) {
-    if (index2 !== 0) {
-      tokens.push({
-        normal: originalText.slice(0, index2),
-        index: 0
-      });
-    }
-    tokens.push({
-      matched: originalText.slice(index2, index2 + pattern.length),
-      index: index2
-    });
-    if (pattern.length + index2 < text.length) {
-      tokens.push({
-        normal: originalText.slice(index2 + pattern.length),
-        index: index2 + pattern.length
-      });
-    }
-  } else {
-    tokens.push({
-      normal: originalText,
-      index: 0
-    });
-  }
-  return tokens;
+function toSearchPadResult(result) {
+  const {
+    item: {
+      element
+    },
+    tokens
+  } = result;
+  return {
+    element,
+    primaryTokens: tokens.label,
+    secondaryTokens: tokens.id
+  };
 }
 const SearchModule = {
   __depends__: [
-    SearchPadModule
+    SearchPadModule,
+    SearchModule$1
   ],
   __init__: ["bpmnSearch"],
   bpmnSearch: ["type", BpmnSearchProvider]
+};
+const DATA_OBJECT_REFERENCE_OUTLINE_PATH = "M44.7648 11.3263L36.9892 2.64074C36.0451 1.58628 34.5651 0.988708 33.1904 0.988708H5.98667C3.22688 0.988708 0.989624 3.34892 0.989624 6.26039V55.0235C0.989624 57.9349 3.22688 60.2952 5.98667 60.2952H40.966C43.7257 60.2952 45.963 57.9349 45.963 55.0235V14.9459C45.963 13.5998 45.6407 12.3048 44.7648 11.3263Z";
+const DATA_STORE_REFERENCE_OUTLINE_PATH = "M1.03845 48.1347C1.03845 49.3511 1.07295 50.758 1.38342 52.064C1.69949 53.3938 2.32428 54.7154 3.56383 55.6428C6.02533 57.4841 10.1161 58.7685 14.8212 59.6067C19.5772 60.4538 25.1388 60.8738 30.6831 60.8738C36.2276 60.8738 41.7891 60.4538 46.545 59.6067C51.2504 58.7687 55.3412 57.4842 57.8028 55.6429C59.0424 54.7156 59.6673 53.3938 59.9834 52.064C60.2938 50.7579 60.3285 49.351 60.3285 48.1344V13.8415C60.3285 12.6249 60.2938 11.218 59.9834 9.91171C59.6673 8.58194 59.0423 7.2602 57.8027 6.33294C55.341 4.49168 51.2503 3.20723 46.545 2.36914C41.7891 1.522 36.2276 1.10204 30.6831 1.10205C25.1388 1.10206 19.5772 1.52206 14.8213 2.36923C10.1162 3.20734 6.02543 4.49183 3.5639 6.33314C2.32433 7.26038 1.69951 8.58206 1.38343 9.91181C1.07295 11.2179 1.03845 12.6247 1.03845 13.8411V48.1347Z";
+const DATA_OBJECT_REFERENCE_STANDARD_SIZE = { width: 36, height: 50 };
+const DATA_STORE_REFERENCE_STANDARD_SIZE = { width: 50, height: 50 };
+function createPath(path, attrs, OUTLINE_STYLE) {
+  return create$1("path", {
+    d: path,
+    strokeWidth: 2,
+    transform: `translate(${attrs.x}, ${attrs.y})`,
+    ...OUTLINE_STYLE
+  });
+}
+const DEFAULT_OFFSET = 5;
+function OutlineProvider(outline, styles) {
+  this._styles = styles;
+  outline.registerProvider(this);
+}
+OutlineProvider.$inject = [
+  "outline",
+  "styles"
+];
+OutlineProvider.prototype.getOutline = function(element) {
+  const OUTLINE_STYLE = this._styles.cls("djs-outline", ["no-fill"]);
+  var outline;
+  if (isLabel(element)) {
+    return;
+  }
+  if (is$g(element, "bpmn:Gateway")) {
+    outline = create$1("rect");
+    assign$2(outline.style, {
+      "transform-box": "fill-box",
+      "transform": "rotate(45deg)",
+      "transform-origin": "center"
+    });
+    attr(outline, assign$2({
+      x: 2,
+      y: 2,
+      rx: 4,
+      width: element.width - 4,
+      height: element.height - 4
+    }, OUTLINE_STYLE));
+  } else if (isAny$7(element, ["bpmn:Task", "bpmn:SubProcess", "bpmn:Group", "bpmn:CallActivity"])) {
+    outline = create$1("rect");
+    attr(outline, assign$2({
+      x: -DEFAULT_OFFSET,
+      y: -DEFAULT_OFFSET,
+      rx: 14,
+      width: element.width + DEFAULT_OFFSET * 2,
+      height: element.height + DEFAULT_OFFSET * 2
+    }, OUTLINE_STYLE));
+  } else if (is$g(element, "bpmn:EndEvent")) {
+    outline = create$1("circle");
+    attr(outline, assign$2({
+      cx: element.width / 2,
+      cy: element.height / 2,
+      r: element.width / 2 + DEFAULT_OFFSET + 1
+    }, OUTLINE_STYLE));
+  } else if (is$g(element, "bpmn:Event")) {
+    outline = create$1("circle");
+    attr(outline, assign$2({
+      cx: element.width / 2,
+      cy: element.height / 2,
+      r: element.width / 2 + DEFAULT_OFFSET
+    }, OUTLINE_STYLE));
+  } else if (is$g(element, "bpmn:DataObjectReference") && isStandardSize(element, "bpmn:DataObjectReference")) {
+    outline = createPath(
+      DATA_OBJECT_REFERENCE_OUTLINE_PATH,
+      { x: -6, y: -6 },
+      OUTLINE_STYLE
+    );
+  } else if (is$g(element, "bpmn:DataStoreReference") && isStandardSize(element, "bpmn:DataStoreReference")) {
+    outline = createPath(
+      DATA_STORE_REFERENCE_OUTLINE_PATH,
+      { x: -6, y: -6 },
+      OUTLINE_STYLE
+    );
+  }
+  return outline;
+};
+OutlineProvider.prototype.updateOutline = function(element, outline) {
+  if (isLabel(element)) {
+    return;
+  }
+  if (isAny$7(element, ["bpmn:SubProcess", "bpmn:Group"])) {
+    attr(outline, {
+      width: element.width + DEFAULT_OFFSET * 2,
+      height: element.height + DEFAULT_OFFSET * 2
+    });
+    return true;
+  } else if (isAny$7(element, [
+    "bpmn:Event",
+    "bpmn:Gateway",
+    "bpmn:DataStoreReference",
+    "bpmn:DataObjectReference"
+  ])) {
+    return true;
+  }
+  return false;
+};
+function isStandardSize(element, type) {
+  var standardSize;
+  if (type === "bpmn:DataObjectReference") {
+    standardSize = DATA_OBJECT_REFERENCE_STANDARD_SIZE;
+  } else if (type === "bpmn:DataStoreReference") {
+    standardSize = DATA_STORE_REFERENCE_STANDARD_SIZE;
+  }
+  return element.width === standardSize.width && element.height === standardSize.height;
+}
+const OutlineModule = {
+  __depends__: [
+    Ouline
+  ],
+  __init__: ["outlineProvider"],
+  outlineProvider: ["type", OutlineProvider]
 };
 var initialDiagram = '<?xml version="1.0" encoding="UTF-8"?><bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" targetNamespace="http://bpmn.io/schema/bpmn" id="Definitions_1"><bpmn:process id="Process_1" isExecutable="false"><bpmn:startEvent id="StartEvent_1"/></bpmn:process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1"><bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1"><dc:Bounds height="36.0" width="36.0" x="173.0" y="102.0"/></bpmndi:BPMNShape></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></bpmn:definitions>';
 function Modeler(options) {
@@ -29621,7 +29659,8 @@ Modeler.prototype._modelingModules = [
   ReplacePreviewModule,
   ResizeModule,
   SnappingModule,
-  SearchModule
+  SearchModule,
+  OutlineModule
 ];
 Modeler.prototype._modules = [].concat(
   Viewer.prototype._modules,
@@ -38378,7 +38417,7 @@ export {
   Logger,
   Swal2 as Swal,
   translate as Translator,
-  add$2 as add,
+  add$1 as add,
   index as default,
   getAssetsFile,
   getBpmnIcon,
