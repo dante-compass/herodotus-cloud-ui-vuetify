@@ -65,15 +65,15 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/user/content',
             name: 'SysUserContent',
             meta: { title: '用户详情', icon: 'mdi-clipboard-account', isDetailContent: true },
-            component: () => import('/@/views/pages/security/user/Content.vue'),
+            component: () => import('/@/views/pages/security/user/Content.vue')
           },
           {
             path: '/security/user/authorize',
             name: 'SysUserAuthorize',
-            meta: { title: '用户角色', icon: 'mdi-badge-account-alert', isDetailContent: true },
-            component: () => import('/@/views/pages/security/user/Authorize.vue'),
-          },
-        ],
+            meta: { title: '用户角色', icon: 'mdi-account-box-edit-outline', isDetailContent: true },
+            component: () => import('/@/views/pages/security/user/Authorize.vue')
+          }
+        ]
       },
 
       {
@@ -86,15 +86,15 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/role/content',
             name: 'SysRoleContent',
             meta: { title: '角色详情', icon: 'mdi-shield-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/role/Content.vue'),
+            component: () => import('/@/views/pages/security/role/Content.vue')
           },
           {
             path: '/security/role/authorize',
             name: 'SysRoleAuthorize',
             meta: { title: '角色权限', icon: 'mdi-shield-key', isDetailContent: true },
-            component: () => import('/@/views/pages/security/role/Authorize.vue'),
-          },
-        ],
+            component: () => import('/@/views/pages/security/role/Authorize.vue')
+          }
+        ]
       },
       {
         path: '/security/permission',
@@ -106,9 +106,9 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/permission/content',
             name: 'SysPermissionContent',
             meta: { title: '权限详情', icon: 'mdi-clipboard-check-multiple', isDetailContent: true },
-            component: () => import('/@/views/pages/security/permission/Content.vue'),
-          },
-        ],
+            component: () => import('/@/views/pages/security/permission/Content.vue')
+          }
+        ]
       },
       {
         path: '/security/attribute',
@@ -120,15 +120,15 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/attribute/content',
             name: 'SysAttributeContent',
             meta: { title: '元数据详情', icon: 'mdi-layers', isDetailContent: true },
-            component: () => import('/@/views/pages/security/attribute/Content.vue'),
+            component: () => import('/@/views/pages/security/attribute/Content.vue')
           },
           {
             path: '/security/attribute/authorize',
             name: 'SysAttributeAuthorize',
             meta: { title: '元数据配置', icon: 'mdi-layers-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/attribute/Authorize.vue'),
-          },
-        ],
+            component: () => import('/@/views/pages/security/attribute/Authorize.vue')
+          }
+        ]
       },
       {
         path: '/security/default-role',
@@ -140,9 +140,9 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/default-role/authorize',
             name: 'SysDefaultRoleAuthorize',
             meta: { title: '角色配置', icon: 'mdi-lock-open-check', isDetailContent: true },
-            component: () => import('/@/views/pages/security/default-role/Authorize.vue'),
-          },
-        ],
+            component: () => import('/@/views/pages/security/default-role/Authorize.vue')
+          }
+        ]
       },
       {
         path: '/security/element',
@@ -154,15 +154,15 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/element/content',
             name: 'SysElementContent',
             meta: { title: '菜单详情', icon: 'mdi-clipboard-text-multiple', isDetailContent: true },
-            component: () => import('/@/views/pages/security/element/Content.vue'),
+            component: () => import('/@/views/pages/security/element/Content.vue')
           },
           {
             path: '/security/element/authorize',
             name: 'SysElementAuthorize',
             meta: { title: '菜单权限', icon: 'mdi-sort-variant-lock', isDetailContent: true },
-            component: () => import('/@/views/pages/security/element/Authorize.vue'),
-          },
-        ],
+            component: () => import('/@/views/pages/security/element/Authorize.vue')
+          }
+        ]
       },
       {
         path: '/security/tenant',
@@ -174,9 +174,9 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/tenant/content',
             name: 'SysTenantDataSourceContent',
             meta: { title: '数据源详情', icon: 'mdi-database-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/element/Content.vue'),
-          },
-        ],
+            component: () => import('/@/views/pages/security/element/Content.vue')
+          }
+        ]
       },
       {
         path: '/security/dictionary',
@@ -188,12 +188,12 @@ const routes: Array<RouteRecordRaw> = [
             path: '/security/dictionary/content',
             name: 'SysDictionaryContent',
             meta: { title: '字典详情', icon: 'mdi-playlist-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/dictionary/Content.vue'),
-          },
-        ],
-      },
-    ],
-  },
+            component: () => import('/@/views/pages/security/dictionary/Content.vue')
+          }
+        ]
+      }
+    ]
+  }
 ];
 
 export default routes;

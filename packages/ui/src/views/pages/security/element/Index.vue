@@ -58,7 +58,7 @@
         <q-td key="actions" :props="props">
           <h-dense-icon-button
             color="brown"
-            icon="mdi-badge-account-alert"
+            icon="mdi-account-box-edit-outline"
             tooltip="配置角色"
             @click="toAuthorize(props.row)"></h-dense-icon-button>
           <h-edit-button @click="toEdit(props.row)"></h-edit-button>
@@ -90,7 +90,7 @@ export default defineComponent({
     HDenseIconButton,
     HDeleteButton,
     HEditButton,
-    HTable,
+    HTable
   },
 
   setup() {
@@ -104,10 +104,10 @@ export default defineComponent({
       toAuthorize,
       findItems,
       deleteItemById,
-      conditions,
+      conditions
     } = useTable<SysElementEntity, SysElementConditions>(api.sysElement(), CONSTANTS.ComponentName.SYS_ELEMENT, false, {
       direction: 'ASC',
-      properties: ['path'],
+      properties: ['path']
     });
 
     const selected = ref([]);
@@ -125,7 +125,7 @@ export default defineComponent({
       { name: 'isIgnoreAuth', field: 'isIgnoreAuth', align: 'center', label: '忽略认证' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
     ];
 
     return {
@@ -141,8 +141,8 @@ export default defineComponent({
       toAuthorize,
       findItems,
       deleteItemById,
-      conditions,
+      conditions
     };
-  },
+  }
 });
 </script>
