@@ -37,7 +37,7 @@ export default defineComponent({
       () => settings.isDark,
       (newValue: boolean) => {
         $q.dark.set(newValue);
-      },
+      }
     );
 
     const beforeUnloadHandler = (e: any) => {
@@ -61,7 +61,9 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      connect();
+      if (authentication.token) {
+        connect();
+      }
       if (!variables.getAutoRefreshToken()) {
         // 监听浏览器关闭
         window.addEventListener('beforeunload', e => beforeUnloadHandler(e));
@@ -70,7 +72,9 @@ export default defineComponent({
     });
 
     onUnmounted(() => {
-      disconnect();
+      if (authentication.token) {
+        disconnect();
+      }
       if (!variables.getAutoRefreshToken()) {
         window.removeEventListener('beforeunload', e => beforeUnloadHandler(e));
         window.removeEventListener('unload', e => unloadHandler(e));
@@ -78,9 +82,9 @@ export default defineComponent({
     });
 
     return {
-      isRouterAlive,
+      isRouterAlive
     };
-  },
+  }
 });
 </script>
 
