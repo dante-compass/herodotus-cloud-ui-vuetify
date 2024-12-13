@@ -209,6 +209,22 @@ const _OAuth2ComplianceService = class _OAuth2ComplianceService extends BaseServ
 };
 __publicField(_OAuth2ComplianceService, "instance");
 let OAuth2ComplianceService = _OAuth2ComplianceService;
+const _OAuth2AuditService = class _OAuth2AuditService extends BaseService {
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _OAuth2AuditService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getUaa() + "/authorize/audit";
+  }
+};
+__publicField(_OAuth2AuditService, "instance");
+let OAuth2AuditService = _OAuth2AuditService;
 const _OAuth2ProductService = class _OAuth2ProductService extends BaseService {
   constructor(config) {
     super(config);
@@ -885,6 +901,9 @@ const _ApiResources = class _ApiResources {
   oauth2Compliance() {
     return OAuth2ComplianceService.getInstance(this.config);
   }
+  oauth2Audit() {
+    return OAuth2AuditService.getInstance(this.config);
+  }
   sysOrganization() {
     return SysOrganizationService.getInstance(this.config);
   }
@@ -962,6 +981,7 @@ export {
   NotificationCategoryEnum,
   OAuth2ApiService,
   OAuth2ApplicationService,
+  OAuth2AuditService,
   OAuth2AuthorizationService,
   OAuth2ComplianceService,
   OAuth2DeviceService,
