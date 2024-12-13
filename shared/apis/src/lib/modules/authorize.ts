@@ -4,8 +4,6 @@ import {
   OAuth2AuthorizationEntity,
   OAuth2ComplianceEntity,
   OAuth2AuditEntity,
-  OAuth2ProductEntity,
-  OAuth2DeviceEntity,
   OAuth2ScopeAssignedBody,
   AxiosHttpResult,
 } from '/@/declarations';
@@ -121,50 +119,10 @@ class OAuth2AuditService extends BaseService<OAuth2AuditEntity> {
   }
 }
 
-class OAuth2ProductService extends BaseService<OAuth2ProductEntity> {
-  private static instance: OAuth2ProductService;
-
-  private constructor(config: HttpConfig) {
-    super(config);
-  }
-
-  public static getInstance(config: HttpConfig): OAuth2ProductService {
-    if (this.instance == null) {
-      this.instance = new OAuth2ProductService(config);
-    }
-    return this.instance;
-  }
-
-  public getBaseAddress(): string {
-    return this.getConfig().getUaa() + '/authorize/product';
-  }
-}
-
-class OAuth2DeviceService extends BaseService<OAuth2DeviceEntity> {
-  private static instance: OAuth2DeviceService;
-
-  private constructor(config: HttpConfig) {
-    super(config);
-  }
-
-  public static getInstance(config: HttpConfig): OAuth2DeviceService {
-    if (this.instance == null) {
-      this.instance = new OAuth2DeviceService(config);
-    }
-    return this.instance;
-  }
-
-  public getBaseAddress(): string {
-    return this.getConfig().getUaa() + '/authorize/device';
-  }
-}
-
 export {
   OAuth2ApplicationService,
   OAuth2ScopeService,
   OAuth2AuthorizationService,
   OAuth2ComplianceService,
   OAuth2AuditService,
-  OAuth2ProductService,
-  OAuth2DeviceService,
 };

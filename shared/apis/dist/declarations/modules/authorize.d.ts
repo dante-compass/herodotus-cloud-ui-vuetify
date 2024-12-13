@@ -1,4 +1,4 @@
-import { BaseSysEntity, Entity, Conditions, BaseEntity, AbstractJpaEntity } from '../base';
+import { BaseSysEntity, Entity, Conditions, AbstractJpaEntity } from '../base';
 export interface BaseRegisteredClientEntity extends BaseSysEntity {
     clientId: string;
     clientIdIssuedAt: string;
@@ -96,20 +96,10 @@ export interface OAuth2AuditEntity extends AbstractOAuth2Secure {
     url: string;
     serviceId: string;
 }
-export interface OAuth2ComplianceEntity extends BaseEntity {
+export interface OAuth2ComplianceEntity extends AbstractOAuth2Secure {
     complianceId: string;
     operation: string;
     location: string;
-}
-export interface OAuth2ProductEntity extends BaseSysEntity {
-    productId: string;
-    productKey: string;
-}
-export interface OAuth2DeviceEntity extends BaseRegisteredClientEntity {
-    deviceId: string;
-    deviceName: string;
-    productId: string;
-    activated: boolean;
 }
 export interface OAuth2ApplicationConditions extends Conditions {
 }
@@ -120,17 +110,13 @@ export interface OAuth2ScopeConditions extends Conditions {
 export interface OAuth2AuthorizationConditions extends Conditions {
 }
 export interface OAuth2ComplianceConditions extends Conditions {
-    principalName?: string;
-    clientId?: string;
-    ip?: string;
+    principalName: string;
+    clientId: string;
+    ip: string;
 }
 export interface OAuth2AuditConditions extends OAuth2ComplianceConditions {
-    requestMethod?: string;
-    url?: string;
-}
-export interface OAuth2ProductConditions extends Conditions {
-}
-export interface OAuth2DeviceConditions extends Conditions {
+    requestMethod: string;
+    url: string;
 }
 export type OAuth2ApplicationProps = keyof OAuth2ApplicationEntity;
 export type OAuth2PermissionProps = keyof OAuth2PermissionEntity;
@@ -138,8 +124,6 @@ export type OAuth2ScopeProps = keyof OAuth2ScopeEntity;
 export type OAuth2AuthorizationProps = keyof OAuth2AuthorizationEntity;
 export type OAuth2ComplianceProps = keyof OAuth2ComplianceEntity;
 export type OAuth2AuditProps = keyof OAuth2AuditEntity;
-export type OAuth2ProductProps = keyof OAuth2ProductEntity;
-export type OAuth2DeviceProps = keyof OAuth2DeviceEntity;
 export interface OAuth2PermissionBody extends Conditions {
     permissionId: string;
     permissionCode: string;

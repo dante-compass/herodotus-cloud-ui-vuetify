@@ -6,8 +6,6 @@ import {
   OAuth2AuthorizationService,
   OAuth2ComplianceService,
   OAuth2AuditService,
-  OAuth2DeviceService,
-  OAuth2ProductService,
   SysOrganizationService,
   SysDepartmentService,
   SysEmployeeService,
@@ -68,14 +66,6 @@ class ApiResources {
 
   public oauth2Authorization(): OAuth2AuthorizationService {
     return OAuth2AuthorizationService.getInstance(this.config);
-  }
-
-  public oauth2Device(): OAuth2DeviceService {
-    return OAuth2DeviceService.getInstance(this.config);
-  }
-
-  public oauth2Product(): OAuth2ProductService {
-    return OAuth2ProductService.getInstance(this.config);
   }
 
   public oauth2Compliance(): OAuth2ComplianceService {
