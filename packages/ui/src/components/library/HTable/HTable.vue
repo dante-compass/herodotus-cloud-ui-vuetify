@@ -30,7 +30,7 @@
 
     <template v-if="status && !$slots['body-cell-status']" #body-cell-status="props">
       <q-td key="status" :props="props">
-        <h-status-column :type="props.row.status" :options="options"></h-status-column>
+        <h-status-column v-if="options" :type="props.row.status" :options="options"></h-status-column>
       </q-td>
     </template>
   </q-table>

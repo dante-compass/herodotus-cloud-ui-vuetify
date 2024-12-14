@@ -90,7 +90,7 @@ export default defineComponent({
     const router = useRouter();
     const store = useRouteStore();
 
-    const { getDictionaryItemDisplay } = useDictionary('identity', 'DataItemStatus');
+    const { getDictionaryItemDisplay } = useDictionary('identity');
 
     const columns: QTableColumnProps = [
       { name: 'employeeName', field: 'employeeName', align: 'center', label: '姓名' },

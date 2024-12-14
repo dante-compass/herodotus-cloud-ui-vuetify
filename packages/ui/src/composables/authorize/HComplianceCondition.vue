@@ -46,10 +46,10 @@ import { defineComponent, computed, PropType } from 'vue';
 import type { OAuth2ComplianceConditions } from '/@/lib/declarations';
 
 export default defineComponent({
-  name: 'HEmployeeCondition',
+  name: 'HComplianceCondition',
 
   props: {
-    conditions: { type: Object as PropType<OAuth2ComplianceConditions>, required: true }
+    conditions: { type: Object as PropType<OAuth2ComplianceConditions>, required: true },
   },
 
   emits: ['update:conditions'],
@@ -59,7 +59,7 @@ export default defineComponent({
       get: () => props.conditions,
       set: newValue => {
         emit('update:conditions', newValue);
-      }
+      },
     });
 
     const onClear = () => {
@@ -68,8 +68,8 @@ export default defineComponent({
 
     return {
       conditionsModelValue,
-      onClear
+      onClear,
     };
-  }
+  },
 });
 </script>

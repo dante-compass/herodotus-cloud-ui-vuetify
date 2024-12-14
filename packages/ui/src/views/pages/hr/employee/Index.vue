@@ -72,7 +72,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, toEdit, toCreate, conditions, findItems, deleteItemById } =
       useTable<SysEmployeeEntity, SysEmployeeConditions>(api.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
 
-    const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity', 'DataItemStatus');
+    const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity');
 
     const selected = ref([]);
     const rowKey: SysEmployeeProps = 'employeeId';

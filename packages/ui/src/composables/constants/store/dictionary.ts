@@ -17,14 +17,22 @@ export const useDictionaryStore = defineStore('Dictionary', {
     getDictionaryItem(state) {
       return (key: string, value: string): Dictionary => {
         const items: Dictionary[] = state.dictionaries[key];
-        return items ? items[Number(value)] : ({} as Dictionary);
+
+        if (items) {
+          const item = lodash.find(items, { value: value });
+          console.log('---key---', item);
+          return item as Dictionary;
+        } else {
+          return {} as Dictionary;
+        }
       };
     },
     getDictionaryItemDisplay(state) {
       return (key: string, value: string): string => {
         const items: Dictionary[] = state.dictionaries[key];
+
         if (items) {
-          const item = items[Number(value)];
+          const item = lodash.find(items, { value: value });
           return item ? item.label : value;
         }
         return '';

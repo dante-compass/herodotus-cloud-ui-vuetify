@@ -1,4 +1,4 @@
-import { onBeforeMount, ref, Ref, nextTick } from 'vue';
+import { ref, Ref, nextTick, onBeforeMount, onUpdated, computed } from 'vue';
 import type { Dictionary } from '/@/lib/declarations';
 
 import { lodash } from '/@/lib/utils';
@@ -20,7 +20,9 @@ export default function useDictionary(category: string, ...others: string[]) {
       }
     }
     nextTick(() => {
-      options.value = getDictionary();
+      if (lodash.isEmpty(options.value)) {
+        options.value = getDictionary();
+      }
     });
   });
 
@@ -36,8 +38,13 @@ export default function useDictionary(category: string, ...others: string[]) {
     return dictionaryStore.getDictionaryItemDisplay(key, value);
   };
 
+  const isShow = computed(() => {
+    return !lodash.isEmpty(options.value);
+  });
+
   return {
     options,
+    isShow,
     getDictionary,
     getDictionaryItem,
     getDictionaryItemDisplay,

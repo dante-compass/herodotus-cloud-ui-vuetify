@@ -33,8 +33,10 @@ export default function useBaseTableItem<E extends Entity>() {
           return '编辑' + content;
         case OperationEnum.INFO:
           return '查看' + content;
-        default:
+        case OperationEnum.CREATE:
           return '新建' + content;
+        default:
+          return content;
       }
     } else {
       return content;

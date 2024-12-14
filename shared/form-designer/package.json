@@ -12,8 +12,7 @@
   "exports": {
     ".": {
       "import": "./dist/index.es.mjs",
-      "require": "./dist/index.umd.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.umd.js"
     },
     "./dist/assets/style.css": "./dist/assets/style.css",
     "./package.json": "./package.json"
@@ -31,7 +30,7 @@
     "@herodotus/core": "workspace:^",
     "@herodotus/form-apis": "workspace:^",
     "@herodotus/form-engine": "workspace:^",
-    "quasar": "^2.17.4",
+    "quasar": "^2.17.5",
     "vue": "^3.5.13",
     "vuedraggable": "4.1.0"
   }

@@ -71,6 +71,16 @@ export default function useBaseTableItems<E extends Entity, C extends Conditions
     addRoutePushParam(componentName, OperationEnum.INFO, item, additional);
   };
 
+  const toSetup = (item: E, additional: Record<string, unknown> = {}, withSuffix = true) => {
+    const componentName = appendSuffix(name, 'Setup', withSuffix);
+    addRoutePushParam(componentName, OperationEnum.SETUP, item, additional);
+  };
+
+  const toInvoke = (item: E, additional: Record<string, unknown> = {}, withSuffix = true) => {
+    const componentName = appendSuffix(name, 'Invoke', withSuffix);
+    addRoutePushParam(componentName, OperationEnum.INVOKE, item, additional);
+  };
+
   /**
    * 设置分页信息
    * @param request Quasar Table onRequest 传递的参数 {@link QTableRequestProps}
@@ -122,5 +132,7 @@ export default function useBaseTableItems<E extends Entity, C extends Conditions
     toCreate,
     toEdit,
     toInfo,
+    toSetup,
+    toInvoke,
   };
 }

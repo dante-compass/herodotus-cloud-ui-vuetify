@@ -17,6 +17,17 @@
       <template #top-left>
         <q-btn color="primary" label="导出Excel" @click="onExportExcel" />
       </template>
+
+      <template #body-cell-mobile="props">
+        <q-td key="mobile" :props="props">
+          <h-boolean-column :value="props.row.mobile"></h-boolean-column>
+        </q-td>
+      </template>
+      <template #body-cell-mobileBrowser="props">
+        <q-td key="mobileBrowser" :props="props">
+          <h-boolean-column :value="props.row.mobileBrowser"></h-boolean-column>
+        </q-td>
+      </template>
     </h-table>
   </div>
 </template>
@@ -36,7 +47,7 @@ import { CONSTANTS } from '/@/composables/constants';
 import { moment, api } from '/@/lib/utils';
 import { useTable, useXlsx } from '/@/hooks';
 
-import { HTable } from '/@/components';
+import { HTable, HBooleanColumn } from '/@/components';
 import { HComplianceCondition } from '/@/composables/authorize';
 
 export default defineComponent({
@@ -45,6 +56,7 @@ export default defineComponent({
   components: {
     HComplianceCondition,
     HTable,
+    HBooleanColumn,
   },
 
   setup() {
@@ -73,6 +85,30 @@ export default defineComponent({
       { name: 'clientId', field: 'clientId', align: 'center', label: '客户端ID' },
       { name: 'ip', field: 'ip', align: 'center', label: 'IP地址' },
       {
+        name: 'location',
+        field: 'location',
+        align: 'center',
+        label: '位置',
+      },
+      {
+        name: 'mobile',
+        field: 'mobile',
+        align: 'center',
+        label: '移动端？',
+      },
+      {
+        name: 'mobileBrowser',
+        field: 'mobileBrowser',
+        align: 'center',
+        label: '是移动端浏览器',
+      },
+      {
+        name: 'platformName',
+        field: 'platformName',
+        align: 'center',
+        label: '平台',
+      },
+      {
         name: 'osName',
         field: 'osName',
         align: 'center',
@@ -85,10 +121,10 @@ export default defineComponent({
         label: '浏览器',
       },
       {
-        name: 'mobile',
-        field: 'mobile',
+        name: 'browserEngineName',
+        field: 'browserEngineName',
         align: 'center',
-        label: '移动端？',
+        label: '浏览器引擎',
       },
       {
         name: 'operation',
@@ -108,22 +144,21 @@ export default defineComponent({
     const title: EntityTitle<OAuth2ComplianceEntity> = {
       createTime: '创建时间',
       updateTime: '更新时间',
-      ranking: '排序值',
       complianceId: 'ID',
       principalName: '用户名',
       clientId: 'OAuth2 客户端ID',
       ip: 'IP地址',
       mobile: '是移动端 ?',
-      osName: '操作系统',
       browserName: '浏览器',
       mobileBrowser: '是移动端浏览器 ?',
-      engineName: '浏览器引擎',
-      mobilePlatform: '是移动端平台 ?',
-      iphoneOrIpod: 'Iphone Or Ipod ?',
-      ipad: 'Ipad ?',
-      ios: 'IOS 操作系统 ?',
-      android: 'Android 操作系统?',
+      browserVersion: '浏览器版本',
+      platformName: '平台',
+      osName: '操作系统',
+      osVersion: '操作系统版本',
+      browserEngineName: '浏览器引擎',
+      browserEngineVersion: '浏览器引擎版本',
       operation: '执行操作',
+      location: '登录位置',
     };
 
     const onExportExcel = () => {

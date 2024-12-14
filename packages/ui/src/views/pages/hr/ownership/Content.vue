@@ -66,7 +66,7 @@ export default defineComponent({
 
   setup(props) {
     const { onFinish } = useEditFinish();
-    const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity', 'DataItemStatus');
+    const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity');
     const { editedItem, title, overlay } = useTableItem<SysEmployeeAllocatable>(api.sysEmployeeAllocatable());
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       SysEmployeeEntity,

@@ -12,7 +12,7 @@ export default defineComponent({
   name: 'HBooleanColumn',
 
   components: {
-    HDenseIconButton
+    HDenseIconButton,
   },
 
   props: {
@@ -22,7 +22,7 @@ export default defineComponent({
     trueIcon: { type: String, default: 'mdi-check-circle-outline' },
     falseIcon: { type: String, default: 'mdi-close-circle-outline' },
     trueTooltip: { type: String, default: 'TRUE' },
-    falseTooltip: { type: String, default: 'FALSE' }
-  }
+    falseTooltip: { type: String, default: 'FALSE' },
+  },
 });
 </script>

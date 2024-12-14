@@ -209,38 +209,22 @@ const _OAuth2ComplianceService = class _OAuth2ComplianceService extends BaseServ
 };
 __publicField(_OAuth2ComplianceService, "instance");
 let OAuth2ComplianceService = _OAuth2ComplianceService;
-const _OAuth2ProductService = class _OAuth2ProductService extends BaseService {
+const _OAuth2AuditService = class _OAuth2AuditService extends BaseService {
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _OAuth2ProductService(config);
+      this.instance = new _OAuth2AuditService(config);
     }
     return this.instance;
   }
   getBaseAddress() {
-    return this.getConfig().getUaa() + "/authorize/product";
+    return this.getConfig().getUaa() + "/authorize/audit";
   }
 };
-__publicField(_OAuth2ProductService, "instance");
-let OAuth2ProductService = _OAuth2ProductService;
-const _OAuth2DeviceService = class _OAuth2DeviceService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _OAuth2DeviceService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getUaa() + "/authorize/device";
-  }
-};
-__publicField(_OAuth2DeviceService, "instance");
-let OAuth2DeviceService = _OAuth2DeviceService;
+__publicField(_OAuth2AuditService, "instance");
+let OAuth2AuditService = _OAuth2AuditService;
 const _SysOrganizationService = class _SysOrganizationService extends BaseService {
   constructor(config) {
     super(config);
@@ -876,14 +860,11 @@ const _ApiResources = class _ApiResources {
   oauth2Authorization() {
     return OAuth2AuthorizationService.getInstance(this.config);
   }
-  oauth2Device() {
-    return OAuth2DeviceService.getInstance(this.config);
-  }
-  oauth2Product() {
-    return OAuth2ProductService.getInstance(this.config);
-  }
   oauth2Compliance() {
     return OAuth2ComplianceService.getInstance(this.config);
+  }
+  oauth2Audit() {
+    return OAuth2AuditService.getInstance(this.config);
   }
   sysOrganization() {
     return SysOrganizationService.getInstance(this.config);
@@ -962,10 +943,9 @@ export {
   NotificationCategoryEnum,
   OAuth2ApiService,
   OAuth2ApplicationService,
+  OAuth2AuditService,
   OAuth2AuthorizationService,
   OAuth2ComplianceService,
-  OAuth2DeviceService,
-  OAuth2ProductService,
   OAuth2ScopeService,
   OpenApiService,
   Service,

@@ -139,8 +139,11 @@ export default function <E extends Entity, C extends Conditions>(
     newValue => {
       if (newValue && !isFetchAll) {
         //防止不在第一页时发两遍请求
-        if (pagination.value.page > 1) pagination.value.page = 1;
-        else findItemsByPage(pagination.value.page, pagination.value.rowsPerPage, newValue);
+        if (pagination.value.page > 1) {
+          pagination.value.page = 1;
+        } else {
+          findItemsByPage(pagination.value.page, pagination.value.rowsPerPage, newValue);
+        }
       }
     },
     { deep: true },

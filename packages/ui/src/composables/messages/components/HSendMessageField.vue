@@ -26,7 +26,7 @@ export default defineComponent({
     receiverId: { type: String, default: '' },
     receiverName: { type: String, default: '' },
     receiverAvatar: { type: String, default: '' },
-    dialogueId: { type: String, default: '' }
+    dialogueId: { type: String, default: '' },
   },
 
   emits: ['send'],
@@ -45,7 +45,7 @@ export default defineComponent({
         content: text.value,
         dialogueId: props.dialogueId,
         senderId: authentication.userId,
-        senderName: authentication.username
+        senderName: authentication.username,
       } as DialogueDetailEntity;
 
       sendToUser(data);
@@ -63,8 +63,8 @@ export default defineComponent({
     return {
       text,
       onSend,
-      isDisabled
+      isDisabled,
     };
-  }
+  },
 });
 </script>

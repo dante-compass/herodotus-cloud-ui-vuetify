@@ -5,7 +5,7 @@ import type {
   SocialSource,
   AccessPrincipal,
   OAuth2Token,
-  OAuth2IdToken
+  OAuth2IdToken,
 } from '/@/lib/declarations';
 import { jwtDecode } from 'jwt-decode';
 import { useCryptoStore } from '/@/stores';
@@ -28,7 +28,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
     username: '',
     employeeId: '',
     avatar: '',
-    roles: [] as Array<string>
+    roles: [] as Array<string>,
   }),
 
   getters: {
@@ -47,7 +47,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           return '';
         }
       }
-    }
+    },
   },
 
   actions: {
@@ -253,7 +253,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
             if (error.code && [40106, 40111].includes(error.code)) reject(error);
           });
       });
-    }
+    },
   },
-  persist: true
+  persist: true,
 });

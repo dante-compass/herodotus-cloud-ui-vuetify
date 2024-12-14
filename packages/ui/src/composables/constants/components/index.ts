@@ -1,4 +1,5 @@
 import HDictionarySelect from './HDictionarySelect.vue';
-import HDictionaryToggleButton from './HDictionaryToggleButton.vue';
+import HOptionField from './HOptionField.vue';
+import HToggleField from './HToggleField.vue';
 
-export { HDictionarySelect, HDictionaryToggleButton };
+export { HDictionarySelect, HOptionField, HToggleField };
