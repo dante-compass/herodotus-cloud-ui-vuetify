@@ -18,18 +18,18 @@ export default defineComponent({
   name: 'HReservedColumn',
 
   components: {
-    HDenseIconButton
+    HDenseIconButton,
   },
 
   props: {
-    status: { type: Boolean, default: false }
+    status: { type: Boolean, default: false },
   },
 
   setup(props) {
     const settings = useSettingsStore();
     return {
-      settings
+      settings,
     };
-  }
+  },
 });
 </script>

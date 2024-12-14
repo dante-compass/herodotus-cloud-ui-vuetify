@@ -2,8 +2,7 @@
   <q-select
     v-model="selectedValue"
     :options="options"
-    :option-label="optionLabel"
-    :option-value="optionValue"
+    :option-disable="disableOption"
     :name="dictionary"
     outlined
     use-chips
@@ -17,8 +16,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, PropType } from 'vue';
 
+import type { Dictionary } from '/@/lib/declarations';
+
+import { lodash } from '/@/lib/utils';
 import { useDictionary } from '../hooks';
 
 export default defineComponent({
@@ -27,8 +29,10 @@ export default defineComponent({
   props: {
     modelValue: { type: [Number, String, Array, Object] },
     dictionary: { type: String, required: true },
-    optionLabel: { type: String, default: 'label' },
-    optionValue: { type: String, default: 'value' },
+    /**
+     * 禁用 Item 的值列表
+     */
+    disableItems: { type: Array as PropType<Array<string>>, default: () => [] },
   },
 
   emits: ['update:modelValue'],
@@ -44,9 +48,18 @@ export default defineComponent({
 
     const { options } = useDictionary(props.dictionary);
 
+    const disableOption = (option: Dictionary) => {
+      if (!lodash.isEmpty(props.disableItems) && props.disableItems.includes(option.label)) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
     return {
       selectedValue,
       options,
+      disableOption,
     };
   },
 });

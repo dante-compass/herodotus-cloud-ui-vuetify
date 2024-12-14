@@ -1,0 +1,1 @@
+import{d as i,l as s}from"../modules/npm-@vue-runtime-core-BZYSnpni.js";const c=i({name:"HAuditCondition",props:{conditions:{type:Object,required:!0}},emits:["update:conditions"],setup(t,{emit:e}){const o=s({get:()=>t.conditions,set:n=>{e("update:conditions",n)}});return{conditionsModelValue:o,onClear:()=>{o.value={}}}}});export{c as _};

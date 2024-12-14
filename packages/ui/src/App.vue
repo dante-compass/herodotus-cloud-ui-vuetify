@@ -37,7 +37,7 @@ export default defineComponent({
       () => settings.isDark,
       (newValue: boolean) => {
         $q.dark.set(newValue);
-      }
+      },
     );
 
     const beforeUnloadHandler = (e: any) => {
@@ -82,9 +82,9 @@ export default defineComponent({
     });
 
     return {
-      isRouterAlive
+      isRouterAlive,
     };
-  }
+  },
 });
 </script>
 

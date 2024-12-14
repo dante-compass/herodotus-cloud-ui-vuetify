@@ -16,12 +16,12 @@ export default defineComponent({
   name: 'HAppMenu',
 
   components: {
-    HAppMenuItems
+    HAppMenuItems,
   },
 
   setup() {
     const state = reactive({
-      items: [] as Array<RouteRecordRaw>
+      items: [] as Array<RouteRecordRaw>,
     });
 
     const store = useRouteStore();
@@ -31,8 +31,8 @@ export default defineComponent({
     });
 
     return {
-      ...toRefs(state)
+      ...toRefs(state),
     };
-  }
+  },
 });
 </script>

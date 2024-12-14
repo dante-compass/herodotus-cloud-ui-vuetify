@@ -7,6 +7,8 @@ export enum OperationEnum {
   AUTHORIZE = 'authorize',
   INFO = 'info',
   ALLOCATABLE = 'allocatable',
+  SETUP = 'setup',
+  INVOKE = 'invoke',
 }
 
 export enum LayoutModeEnum {

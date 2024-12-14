@@ -13,7 +13,7 @@
     </div>
 
     <q-chip clickable outline color="primary" text-color="white" icon="mdi-plus" @click="open = true">添加标签</q-chip>
-    <h-dialog v-model="open" v-model:loading="loading" title="添加标签" @save="onSave">
+    <h-dialog v-model="open" v-model:loading="loading" title="添加标签" @confirm="onSave">
       <h-label :text="subtitle" size="subtitle-1" weight="bolder" align="left" class="q-mb-md"></h-label>
       <h-text-field
         v-model="tagKey"
@@ -40,7 +40,7 @@ export default defineComponent({
   props: {
     modelValue: { type: Object as PropType<Record<string, string>>, required: true, default: () => ({}) },
     bucketName: { type: String, required: true },
-    objectName: { type: String, default: '' }
+    objectName: { type: String, default: '' },
   },
 
   emits: ['update:modelValue', 'tagChange'],
@@ -50,7 +50,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const open = ref(false);
@@ -130,8 +130,8 @@ export default defineComponent({
       tagValue,
       subtitle,
       onRemove,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

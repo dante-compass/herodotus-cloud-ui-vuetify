@@ -74,7 +74,7 @@ export default defineComponent({
     HEditButton,
     HDenseIconButton,
     HTable,
-    HSendMessageToUser
+    HSendMessageToUser,
   },
 
   setup() {
@@ -96,7 +96,7 @@ export default defineComponent({
       { name: 'description', field: 'description', align: 'center', label: '备注' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
       { name: 'status', field: 'status', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' }
+      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
     const onChangePassword = (item: SysUserEntity) => {
@@ -135,8 +135,8 @@ export default defineComponent({
       currentUsername,
       currentUserAvatar,
       onChangePassword,
-      onSendMessageToUser
+      onSendMessageToUser,
     };
-  }
+  },
 });
 </script>
