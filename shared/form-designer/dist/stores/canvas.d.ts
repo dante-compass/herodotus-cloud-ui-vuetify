@@ -10,49 +10,9 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
 }, {
     isSelected(state: {
         isClosed: boolean;
-        canvasElements: {
-            id: string;
-            config: {
-                formId: string;
-                renderKey: number;
-                name: string;
-                panel: string;
-            };
-            schema: {
-                title: string;
-                tag: string;
-                attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
-                children?: any[] | undefined;
-                text?: string | undefined;
-            };
-        }[];
-        sheet: {
-            condition?: {
-                variable: string;
-                options: {
-                    label: string;
-                    value: boolean;
-                }[];
-            } | undefined;
-        };
-        selectedElement: {
-            id: string;
-            config: {
-                formId: string;
-                renderKey: number;
-                name: string;
-                panel: string;
-            };
-            schema: {
-                title: string;
-                tag: string;
-                attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
-                children?: any[] | undefined;
-                text?: string | undefined;
-            };
-        };
+        canvasElements: Array<Element>;
+        sheet: Sheet;
+        selectedElement: Element;
         id: string;
         name: string;
         activityName: string;
@@ -67,49 +27,9 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
     }>): (id: number) => boolean;
     isEmptyCanvas: (state: {
         isClosed: boolean;
-        canvasElements: {
-            id: string;
-            config: {
-                formId: string;
-                renderKey: number;
-                name: string;
-                panel: string;
-            };
-            schema: {
-                title: string;
-                tag: string;
-                attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
-                children?: any[] | undefined;
-                text?: string | undefined;
-            };
-        }[];
-        sheet: {
-            condition?: {
-                variable: string;
-                options: {
-                    label: string;
-                    value: boolean;
-                }[];
-            } | undefined;
-        };
-        selectedElement: {
-            id: string;
-            config: {
-                formId: string;
-                renderKey: number;
-                name: string;
-                panel: string;
-            };
-            schema: {
-                title: string;
-                tag: string;
-                attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
-                children?: any[] | undefined;
-                text?: string | undefined;
-            };
-        };
+        canvasElements: Array<Element>;
+        sheet: Sheet;
+        selectedElement: Element;
         id: string;
         name: string;
         activityName: string;
@@ -124,49 +44,9 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
     }>) => boolean;
     getElements: (state: {
         isClosed: boolean;
-        canvasElements: {
-            id: string;
-            config: {
-                formId: string;
-                renderKey: number;
-                name: string;
-                panel: string;
-            };
-            schema: {
-                title: string;
-                tag: string;
-                attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
-                children?: any[] | undefined;
-                text?: string | undefined;
-            };
-        }[];
-        sheet: {
-            condition?: {
-                variable: string;
-                options: {
-                    label: string;
-                    value: boolean;
-                }[];
-            } | undefined;
-        };
-        selectedElement: {
-            id: string;
-            config: {
-                formId: string;
-                renderKey: number;
-                name: string;
-                panel: string;
-            };
-            schema: {
-                title: string;
-                tag: string;
-                attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
-                children?: any[] | undefined;
-                text?: string | undefined;
-            };
-        };
+        canvasElements: Array<Element>;
+        sheet: Sheet;
+        selectedElement: Element;
         id: string;
         name: string;
         activityName: string;
@@ -191,7 +71,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
             tag: string;
             attrs: Record<string, any>;
             models: Record<string, import('@herodotus/form-apis').VModel>;
-            children?: any[] | undefined;
+            children?: /*elided*/ any[] | undefined;
             text?: string | undefined;
         };
     }[];

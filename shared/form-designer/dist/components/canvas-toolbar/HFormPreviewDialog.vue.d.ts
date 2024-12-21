@@ -20,7 +20,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             tag: string;
             attrs: Record<string, any>;
             models: Record<string, import('@herodotus/form-apis').VModel>;
-            children?: any[] | undefined;
+            children?: /*elided*/ any[] | undefined;
             text?: string | undefined;
         };
     }[];
@@ -46,7 +46,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             required: true;
         };
     }>, {
-        getDefaultModel: (item: import('@herodotus/form-apis').Element) => import('@herodotus/form-engine/dist/declarations').VModel;
+        getDefaultModel: (item: import('@herodotus/form-apis').Element) => import('@herodotus/form-apis').VModel;
         modelObject: import('vue').WritableComputedRef<Record<string, any>, Record<string, any>>;
         state: Record<string, any>;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
