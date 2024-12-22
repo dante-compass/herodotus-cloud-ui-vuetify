@@ -1,0 +1,1 @@
+import{B as a}from"./npm-vite-plugin-node-polyfills-Ik6kLFlQ.js";var e,o;function B(){return o||(o=1,e=function(f,n){for(var u=Math.min(f.length,n.length),t=new a(u),r=0;r<u;++r)t[r]=f[r]^n[r];return t}),e}export{B as r};
