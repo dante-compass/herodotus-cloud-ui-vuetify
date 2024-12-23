@@ -51,35 +51,10 @@ export interface OAuth2AuthorizationEntity extends Entity {
   registeredClientId: string;
   principalName: string;
   authorizationGrantType: string;
-  attributes: string;
-  state: string;
-  authorizationCodeValue: string;
-  authorizationCodeIssuedAt: string;
-  authorizationCodeExpiresAt: string;
-  authorizationCodeMetadata: string;
-  accessTokenValue: string;
   accessTokenIssuedAt: string;
   accessTokenExpiresAt: string;
-  accessTokenMetadata: string;
-  accessTokenType: string;
-  accessTokenScopes: string;
-  oidcIdTokenValue: string;
-  oidcIdTokenIssuedAt: string;
-  oidcIdTokenExpiresAt: string;
-  oidcIdTokenMetadata: string;
-  oidcIdTokenClaims: string;
-  refreshTokenValue: string;
   refreshTokenIssuedAt: string;
   refreshTokenExpiresAt: string;
-  refreshTokenMetadata: string;
-  userCodeValue: string;
-  userCodeIssuedAt: string;
-  userCodeExpiresAt: string;
-  userCodeMetadata: string;
-  deviceCodeValue: string;
-  deviceCodeIssuedAt: string;
-  deviceCodeExpiresAt: string;
-  deviceCodeMetadata: string;
 }
 
 export interface AbstractOAuth2Secure extends AbstractJpaEntity {
