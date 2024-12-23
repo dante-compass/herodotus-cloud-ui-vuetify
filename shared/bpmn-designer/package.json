@@ -14,7 +14,7 @@
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
-    "./dist/assets/style.css": "./dist/assets/style.css",
+    "./dist/assets/style.css": "./dist/assets/css/bpmn-designer.css",
     "./package.json": "./package.json"
   },
   "files": [
@@ -33,7 +33,7 @@
     "@herodotus/core": "workspace:^",
     "@herodotus/form-apis": "workspace:^",
     "@highlightjs/vue-plugin": "^2.1.0",
-    "bpmn-js": "^18.1.1",
+    "bpmn-js": "^18.1.2",
     "bpmn-js-bpmnlint": "^0.22.3",
     "bpmn-js-connectors-extension": "^0.4.6",
     "bpmn-js-properties-panel": "^5.30.0",
@@ -42,13 +42,13 @@
     "bpmnlint": "^10.3.1",
     "camunda-bpmn-js-behaviors": "^1.9.0",
     "camunda-bpmn-moddle": "^7.0.1",
-    "diagram-js": "^15.2.3",
+    "diagram-js": "^15.2.4",
     "diagram-js-grid": "^1.1.0",
     "diagram-js-minimap": "^5.2.0",
     "didi": "^10.2.2",
-    "highlight.js": "^11.10.0",
+    "highlight.js": "^11.11.0",
     "pinia": "^2.3.0",
-    "preact": "^10.25.2",
+    "preact": "^10.25.3",
     "vue": "^3.5.13",
     "zeebe-bpmn-moddle": "^1.7.0"
   },

@@ -14,7 +14,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             tag: string;
             attrs: Record<string, any>;
             models: Record<string, import('@herodotus/form-apis').VModel>;
-            children?: any[] | undefined;
+            children?: /*elided*/ any[] | undefined;
             text?: string | undefined;
         };
     }[];

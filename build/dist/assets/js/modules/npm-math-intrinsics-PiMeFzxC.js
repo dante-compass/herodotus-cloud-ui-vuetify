@@ -1,0 +1,1 @@
+var r,n;function h(){return n||(n=1,r=Math.abs),r}var a,t;function q(){return t||(t=1,a=Math.floor),a}var e,o;function v(){return o||(o=1,e=Math.max),e}var u,s;function M(){return s||(s=1,u=Math.min),u}var i,f;function c(){return f||(f=1,i=Math.pow),i}export{q as a,v as b,M as c,c as d,h as r};

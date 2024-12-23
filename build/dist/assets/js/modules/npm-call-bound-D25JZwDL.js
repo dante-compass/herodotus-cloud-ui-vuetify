@@ -1,1 +1,0 @@
-import{g as c}from"./npm-get-intrinsic-BvrT5KOE.js";import{c as a}from"./npm-call-bind-BNjciq5t.js";var t=c,i=a,e=i(t("String.prototype.indexOf")),s=function(n,o){var r=t(n,!!o);return typeof r=="function"&&e(n,".prototype.")>-1?i(r):r};export{s as c};
