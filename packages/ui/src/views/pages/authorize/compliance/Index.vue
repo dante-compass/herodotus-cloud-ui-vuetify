@@ -36,9 +36,9 @@
 import { defineComponent, ref } from 'vue';
 
 import type {
-  OAuth2ComplianceEntity,
-  OAuth2ComplianceConditions,
-  OAuth2ComplianceProps,
+  OAuth2UserLoggingEntity,
+  OAuth2UserLoggingConditions,
+  OAuth2UserLoggingProps,
   QTableColumnProps,
   EntityTitle,
 } from '/@/lib/declarations';
@@ -60,17 +60,17 @@ export default defineComponent({
   },
 
   setup() {
-    const { postExport } = useXlsx<OAuth2ComplianceEntity>();
+    const { postExport } = useXlsx<OAuth2UserLoggingEntity>();
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
-      OAuth2ComplianceEntity,
-      OAuth2ComplianceConditions
-    >(api.oauth2Compliance(), CONSTANTS.ComponentName.OAUTH2_COMPLIANCE, false, {
+      OAuth2UserLoggingEntity,
+      OAuth2UserLoggingConditions
+    >(api.oauth2UserLogging(), CONSTANTS.ComponentName.OAUTH2_COMPLIANCE, false, {
       direction: 'DESC',
       properties: ['createTime'],
     });
 
     const selected = ref([]);
-    const rowKey: OAuth2ComplianceProps = 'complianceId';
+    const rowKey: OAuth2UserLoggingProps = 'loggingId';
 
     const dateFormat = (date: string) => {
       if (date) {
@@ -141,10 +141,10 @@ export default defineComponent({
       },
     ];
 
-    const title: EntityTitle<OAuth2ComplianceEntity> = {
+    const title: EntityTitle<OAuth2UserLoggingEntity> = {
       createTime: '创建时间',
       updateTime: '更新时间',
-      complianceId: 'ID',
+      loggingId: 'ID',
       principalName: '用户名',
       clientId: 'OAuth2 客户端ID',
       ip: 'IP地址',

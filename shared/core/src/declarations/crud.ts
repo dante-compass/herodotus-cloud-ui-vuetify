@@ -28,6 +28,12 @@ export type Page<T extends Entity> = {
   totalPages: number;
 };
 
+export type Slice<T extends Entity> = {
+  content: T[];
+  hasNext: boolean;
+  hasPrevious: boolean;
+};
+
 export interface Sort {
   direction?: 'ASC' | 'DESC';
   properties?: Array<string>;

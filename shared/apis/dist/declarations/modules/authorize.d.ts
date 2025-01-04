@@ -51,7 +51,7 @@ export interface OAuth2AuthorizationEntity extends Entity {
     refreshTokenIssuedAt: string;
     refreshTokenExpiresAt: string;
 }
-export interface AbstractOAuth2Secure extends AbstractJpaEntity {
+export interface AbstractAuditRecord extends AbstractJpaEntity {
     principalName: string;
     clientId: string;
     ip: string;
@@ -65,14 +65,14 @@ export interface AbstractOAuth2Secure extends AbstractJpaEntity {
     browserEngineName: string;
     browserEngineVersion: string;
 }
-export interface OAuth2AuditEntity extends AbstractOAuth2Secure {
+export interface OAuth2InterfaceAuditEntity extends AbstractAuditRecord {
     auditId: string;
     requestMethod: string;
     url: string;
     serviceId: string;
 }
-export interface OAuth2ComplianceEntity extends AbstractOAuth2Secure {
-    complianceId: string;
+export interface OAuth2UserLoggingEntity extends AbstractAuditRecord {
+    loggingId: string;
     operation: string;
     location: string;
 }
@@ -84,12 +84,12 @@ export interface OAuth2ScopeConditions extends Conditions {
 }
 export interface OAuth2AuthorizationConditions extends Conditions {
 }
-export interface OAuth2ComplianceConditions extends Conditions {
+export interface OAuth2UserLoggingConditions extends Conditions {
     principalName: string;
     clientId: string;
     ip: string;
 }
-export interface OAuth2AuditConditions extends OAuth2ComplianceConditions {
+export interface OAuth2InterfaceAuditConditions extends OAuth2UserLoggingConditions {
     requestMethod: string;
     url: string;
 }
@@ -97,8 +97,8 @@ export type OAuth2ApplicationProps = keyof OAuth2ApplicationEntity;
 export type OAuth2PermissionProps = keyof OAuth2PermissionEntity;
 export type OAuth2ScopeProps = keyof OAuth2ScopeEntity;
 export type OAuth2AuthorizationProps = keyof OAuth2AuthorizationEntity;
-export type OAuth2ComplianceProps = keyof OAuth2ComplianceEntity;
-export type OAuth2AuditProps = keyof OAuth2AuditEntity;
+export type OAuth2UserLoggingProps = keyof OAuth2UserLoggingEntity;
+export type OAuth2InterfaceAuditProps = keyof OAuth2InterfaceAuditEntity;
 export interface OAuth2PermissionBody extends Conditions {
     permissionId: string;
     permissionCode: string;

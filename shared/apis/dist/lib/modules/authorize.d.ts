@@ -1,4 +1,4 @@
-import { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2AuthorizationEntity, OAuth2ComplianceEntity, OAuth2AuditEntity, OAuth2ScopeAssignedBody, AxiosHttpResult } from '../../declarations';
+import { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2AuthorizationEntity, OAuth2UserLoggingEntity, OAuth2InterfaceAuditEntity, OAuth2ScopeAssignedBody, AxiosHttpResult } from '../../declarations';
 import { HttpConfig, BaseService } from '../base';
 declare class OAuth2ApplicationService extends BaseService<OAuth2ApplicationEntity> {
     private static instance;
@@ -22,16 +22,16 @@ declare class OAuth2AuthorizationService extends BaseService<OAuth2Authorization
     static getInstance(config: HttpConfig): OAuth2AuthorizationService;
     getBaseAddress(): string;
 }
-declare class OAuth2ComplianceService extends BaseService<OAuth2ComplianceEntity> {
+declare class OAuth2UserLoggingService extends BaseService<OAuth2UserLoggingEntity> {
     private static instance;
     private constructor();
-    static getInstance(config: HttpConfig): OAuth2ComplianceService;
+    static getInstance(config: HttpConfig): OAuth2UserLoggingService;
     getBaseAddress(): string;
 }
-declare class OAuth2AuditService extends BaseService<OAuth2AuditEntity> {
+declare class OAuth2InterfaceAuditService extends BaseService<OAuth2InterfaceAuditEntity> {
     private static instance;
     private constructor();
-    static getInstance(config: HttpConfig): OAuth2AuditService;
+    static getInstance(config: HttpConfig): OAuth2InterfaceAuditService;
     getBaseAddress(): string;
 }
-export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2ComplianceService, OAuth2AuditService, };
+export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, };
