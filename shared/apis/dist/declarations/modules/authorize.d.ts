@@ -1,4 +1,4 @@
-import { BaseSysEntity, Entity, Conditions } from '../base';
+import { BaseSysEntity, Entity, Conditions, AbstractJpaEntity } from '../base';
 export interface BaseRegisteredClientEntity extends BaseSysEntity {
     clientId: string;
     clientIdIssuedAt: string;
@@ -51,7 +51,7 @@ export interface OAuth2AuthorizationEntity extends Entity {
     refreshTokenIssuedAt: string;
     refreshTokenExpiresAt: string;
 }
-export interface AbstractAuditRecord extends Entity {
+export interface AbstractAuditRecord extends AbstractJpaEntity {
     principalName: string;
     clientId: string;
     ip: string;

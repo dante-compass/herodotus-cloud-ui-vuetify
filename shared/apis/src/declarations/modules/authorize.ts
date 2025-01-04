@@ -57,7 +57,7 @@ export interface OAuth2AuthorizationEntity extends Entity {
   refreshTokenExpiresAt: string;
 }
 
-export interface AbstractAuditRecord extends Entity {
+export interface AbstractAuditRecord extends AbstractJpaEntity {
   principalName: string;
   clientId: string;
   ip: string;

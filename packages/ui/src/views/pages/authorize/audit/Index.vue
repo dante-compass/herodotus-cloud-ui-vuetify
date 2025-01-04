@@ -36,9 +36,9 @@
 import { defineComponent, ref } from 'vue';
 
 import type {
-  OAuth2AuditEntity,
-  OAuth2AuditConditions,
-  OAuth2AuditProps,
+  OAuth2InterfaceAuditEntity,
+  OAuth2InterfaceAuditConditions,
+  OAuth2InterfaceAuditProps,
   QTableColumnProps,
   EntityTitle,
 } from '/@/lib/declarations';
@@ -60,17 +60,17 @@ export default defineComponent({
   },
 
   setup() {
-    const { postExport } = useXlsx<OAuth2AuditEntity>();
+    const { postExport } = useXlsx<OAuth2InterfaceAuditEntity>();
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
-      OAuth2AuditEntity,
-      OAuth2AuditConditions
-    >(api.oauth2Audit(), CONSTANTS.ComponentName.OAUTH2_AUDIT, false, {
+      OAuth2InterfaceAuditEntity,
+      OAuth2InterfaceAuditConditions
+    >(api.oauth2InterfaceAudit(), CONSTANTS.ComponentName.OAUTH2_AUDIT, false, {
       direction: 'DESC',
       properties: ['createTime'],
     });
 
     const selected = ref([]);
-    const rowKey: OAuth2AuditProps = 'auditId';
+    const rowKey: OAuth2InterfaceAuditProps = 'auditId';
 
     const dateFormat = (date: string) => {
       if (date) {
@@ -147,7 +147,7 @@ export default defineComponent({
       },
     ];
 
-    const title: EntityTitle<OAuth2AuditEntity> = {
+    const title: EntityTitle<OAuth2InterfaceAuditEntity> = {
       createTime: '创建时间',
       updateTime: '更新时间',
       auditId: 'ID',

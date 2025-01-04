@@ -43,13 +43,13 @@
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue';
 
-import type { OAuth2ComplianceConditions } from '/@/lib/declarations';
+import type { OAuth2UserLoggingConditions } from '/@/lib/declarations';
 
 export default defineComponent({
   name: 'HComplianceCondition',
 
   props: {
-    conditions: { type: Object as PropType<OAuth2ComplianceConditions>, required: true },
+    conditions: { type: Object as PropType<OAuth2UserLoggingConditions>, required: true },
   },
 
   emits: ['update:conditions'],
@@ -63,7 +63,7 @@ export default defineComponent({
     });
 
     const onClear = () => {
-      conditionsModelValue.value = {} as OAuth2ComplianceConditions;
+      conditionsModelValue.value = {} as OAuth2UserLoggingConditions;
     };
 
     return {
