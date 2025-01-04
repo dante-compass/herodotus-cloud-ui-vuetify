@@ -193,13 +193,13 @@ const _OAuth2AuthorizationService = class _OAuth2AuthorizationService extends Ba
 };
 __publicField(_OAuth2AuthorizationService, "instance");
 let OAuth2AuthorizationService = _OAuth2AuthorizationService;
-const _OAuth2ComplianceService = class _OAuth2ComplianceService extends BaseService {
+const _OAuth2UserLoggingService = class _OAuth2UserLoggingService extends BaseService {
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _OAuth2ComplianceService(config);
+      this.instance = new _OAuth2UserLoggingService(config);
     }
     return this.instance;
   }
@@ -207,15 +207,15 @@ const _OAuth2ComplianceService = class _OAuth2ComplianceService extends BaseServ
     return this.getConfig().getUaa() + "/authorize/compliance";
   }
 };
-__publicField(_OAuth2ComplianceService, "instance");
-let OAuth2ComplianceService = _OAuth2ComplianceService;
-const _OAuth2AuditService = class _OAuth2AuditService extends BaseService {
+__publicField(_OAuth2UserLoggingService, "instance");
+let OAuth2UserLoggingService = _OAuth2UserLoggingService;
+const _OAuth2InterfaceAuditService = class _OAuth2InterfaceAuditService extends BaseService {
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _OAuth2AuditService(config);
+      this.instance = new _OAuth2InterfaceAuditService(config);
     }
     return this.instance;
   }
@@ -223,8 +223,8 @@ const _OAuth2AuditService = class _OAuth2AuditService extends BaseService {
     return this.getConfig().getUaa() + "/authorize/audit";
   }
 };
-__publicField(_OAuth2AuditService, "instance");
-let OAuth2AuditService = _OAuth2AuditService;
+__publicField(_OAuth2InterfaceAuditService, "instance");
+let OAuth2InterfaceAuditService = _OAuth2InterfaceAuditService;
 const _SysOrganizationService = class _SysOrganizationService extends BaseService {
   constructor(config) {
     super(config);
@@ -860,11 +860,11 @@ const _ApiResources = class _ApiResources {
   oauth2Authorization() {
     return OAuth2AuthorizationService.getInstance(this.config);
   }
-  oauth2Compliance() {
-    return OAuth2ComplianceService.getInstance(this.config);
+  oauth2UserLogging() {
+    return OAuth2UserLoggingService.getInstance(this.config);
   }
-  oauth2Audit() {
-    return OAuth2AuditService.getInstance(this.config);
+  oauth2InterfaceAudit() {
+    return OAuth2InterfaceAuditService.getInstance(this.config);
   }
   sysOrganization() {
     return SysOrganizationService.getInstance(this.config);
@@ -943,10 +943,10 @@ export {
   NotificationCategoryEnum,
   OAuth2ApiService,
   OAuth2ApplicationService,
-  OAuth2AuditService,
   OAuth2AuthorizationService,
-  OAuth2ComplianceService,
+  OAuth2InterfaceAuditService,
   OAuth2ScopeService,
+  OAuth2UserLoggingService,
   OpenApiService,
   Service,
   SocialBindingService,

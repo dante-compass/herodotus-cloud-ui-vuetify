@@ -30382,10 +30382,11 @@ function requireNoBpmndi() {
   }
   function getAllDiBpmnReferences(definitionsNode) {
     return flatten2(
-      definitionsNode.diagrams.map((diagram) => {
+      definitionsNode.get("diagrams").map((diagram) => {
         const diElements = diagram.plane.planeElement || [];
         return diElements.map((element) => {
-          return element.bpmnElement.id;
+          var _a;
+          return (_a = element.bpmnElement) == null ? void 0 : _a.id;
         });
       })
     );
@@ -32713,7 +32714,7 @@ function requireCore() {
     }
     return mode;
   }
-  var version = "11.11.0";
+  var version = "11.11.1";
   class HTMLInjectionError extends Error {
     constructor(reason, html) {
       super(reason);
@@ -33909,7 +33910,7 @@ function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
     "text-color": "primary",
     class: "q-px-sm"
   }, _ctx.$attrs), createSlots({ _: 2 }, [
-    !_ctx.$slots.default && _ctx.tooltip ? {
+    _ctx.tooltip ? {
       name: "default",
       fn: withCtx(() => [
         _ctx.tooltip ? (openBlock(), createBlock(_component_q_tooltip, { key: 0 }, {
@@ -34146,7 +34147,7 @@ function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
     dense: "",
     size: "sm"
   }, _ctx.$attrs), createSlots({ _: 2 }, [
-    !_ctx.$slots.default && _ctx.tooltip ? {
+    _ctx.tooltip ? {
       name: "default",
       fn: withCtx(() => [
         _ctx.tooltip ? (openBlock(), createBlock(_component_q_tooltip, { key: 0 }, {

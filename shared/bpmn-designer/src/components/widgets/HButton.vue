@@ -1,6 +1,6 @@
 <template>
   <q-btn dense text-color="primary" class="q-px-sm" v-bind="$attrs">
-    <template v-if="!$slots.default && tooltip" #default>
+    <template v-if="tooltip" #default>
       <q-tooltip v-if="tooltip">{{ tooltip }}</q-tooltip>
     </template>
   </q-btn>

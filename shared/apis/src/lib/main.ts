@@ -4,8 +4,8 @@ import {
   OAuth2ApplicationService,
   OAuth2ScopeService,
   OAuth2AuthorizationService,
-  OAuth2ComplianceService,
-  OAuth2AuditService,
+  OAuth2UserLoggingService,
+  OAuth2InterfaceAuditService,
   SysOrganizationService,
   SysDepartmentService,
   SysEmployeeService,
@@ -68,12 +68,12 @@ class ApiResources {
     return OAuth2AuthorizationService.getInstance(this.config);
   }
 
-  public oauth2Compliance(): OAuth2ComplianceService {
-    return OAuth2ComplianceService.getInstance(this.config);
+  public oauth2UserLogging(): OAuth2UserLoggingService {
+    return OAuth2UserLoggingService.getInstance(this.config);
   }
 
-  public oauth2Audit(): OAuth2AuditService {
-    return OAuth2AuditService.getInstance(this.config);
+  public oauth2InterfaceAudit(): OAuth2InterfaceAuditService {
+    return OAuth2InterfaceAuditService.getInstance(this.config);
   }
 
   public sysOrganization(): SysOrganizationService {

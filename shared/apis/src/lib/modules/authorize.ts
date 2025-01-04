@@ -2,8 +2,8 @@ import {
   OAuth2ApplicationEntity,
   OAuth2ScopeEntity,
   OAuth2AuthorizationEntity,
-  OAuth2ComplianceEntity,
-  OAuth2AuditEntity,
+  OAuth2UserLoggingEntity,
+  OAuth2InterfaceAuditEntity,
   OAuth2ScopeAssignedBody,
   AxiosHttpResult,
 } from '/@/declarations';
@@ -83,16 +83,16 @@ class OAuth2AuthorizationService extends BaseService<OAuth2AuthorizationEntity> 
   }
 }
 
-class OAuth2ComplianceService extends BaseService<OAuth2ComplianceEntity> {
-  private static instance: OAuth2ComplianceService;
+class OAuth2UserLoggingService extends BaseService<OAuth2UserLoggingEntity> {
+  private static instance: OAuth2UserLoggingService;
 
   private constructor(config: HttpConfig) {
     super(config);
   }
 
-  public static getInstance(config: HttpConfig): OAuth2ComplianceService {
+  public static getInstance(config: HttpConfig): OAuth2UserLoggingService {
     if (this.instance == null) {
-      this.instance = new OAuth2ComplianceService(config);
+      this.instance = new OAuth2UserLoggingService(config);
     }
     return this.instance;
   }
@@ -101,16 +101,16 @@ class OAuth2ComplianceService extends BaseService<OAuth2ComplianceEntity> {
   }
 }
 
-class OAuth2AuditService extends BaseService<OAuth2AuditEntity> {
-  private static instance: OAuth2AuditService;
+class OAuth2InterfaceAuditService extends BaseService<OAuth2InterfaceAuditEntity> {
+  private static instance: OAuth2InterfaceAuditService;
 
   private constructor(config: HttpConfig) {
     super(config);
   }
 
-  public static getInstance(config: HttpConfig): OAuth2AuditService {
+  public static getInstance(config: HttpConfig): OAuth2InterfaceAuditService {
     if (this.instance == null) {
-      this.instance = new OAuth2AuditService(config);
+      this.instance = new OAuth2InterfaceAuditService(config);
     }
     return this.instance;
   }
@@ -123,6 +123,6 @@ export {
   OAuth2ApplicationService,
   OAuth2ScopeService,
   OAuth2AuthorizationService,
-  OAuth2ComplianceService,
-  OAuth2AuditService,
+  OAuth2UserLoggingService,
+  OAuth2InterfaceAuditService,
 };
