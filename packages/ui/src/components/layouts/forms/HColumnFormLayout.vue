@@ -30,7 +30,7 @@
 import { defineComponent, PropType } from 'vue';
 
 import { useEditFinish } from '/@/hooks';
-import { BaseSysEntity } from '/@/lib/declarations';
+import { AbstractSysEntity } from '/@/lib/declarations';
 import HDetailContainer from './HDetailContainer.vue';
 import { HDictionarySelect } from '/@/composables/constants';
 
@@ -39,15 +39,15 @@ export default defineComponent({
 
   components: {
     HDetailContainer,
-    HDictionarySelect,
+    HDictionarySelect
   },
 
   emits: ['save'],
 
   props: {
-    entity: { type: Object as PropType<BaseSysEntity>, required: true },
+    entity: { type: Object as PropType<AbstractSysEntity>, required: true },
     overlay: { type: Boolean, default: false },
-    title: { type: String, default: '' },
+    title: { type: String, default: '' }
   },
 
   setup(props, { emit }) {
@@ -59,8 +59,8 @@ export default defineComponent({
 
     return {
       onFinish,
-      onSave,
+      onSave
     };
-  },
+  }
 });
 </script>

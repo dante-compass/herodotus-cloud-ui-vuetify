@@ -12,7 +12,7 @@ export interface AbstractJpaEntity extends BaseEntity {
     updateBy?: string;
     ranking?: number;
 }
-export interface BaseSysEntity extends AbstractJpaEntity {
+export interface AbstractSysEntity extends AbstractJpaEntity {
     status: StatusEnum;
     reserved: boolean;
     reversion: number;

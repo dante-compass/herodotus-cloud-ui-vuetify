@@ -18,17 +18,17 @@ const SettingRoutes: Array<RouteRecordRaw> = [
             path: '/message/dialogue/detail',
             name: 'MessageDialogueContent',
             meta: { title: '私信记录', icon: 'mdi-bank-check', isDetailContent: true },
-            component: () => import('/@/views/settings/message/DialogueContent.vue'),
-          },
-        ],
+            component: () => import('/@/views/settings/message/DialogueContent.vue')
+          }
+        ]
       },
       {
         path: '/message/setting',
         name: 'MessageSetting',
         meta: { title: '通知设置', icon: 'mdi-bell-cog' },
-        component: () => import('/@/views/settings/message/Setting.vue'),
-      },
-    ],
+        component: () => import('/@/views/settings/message/Setting.vue')
+      }
+    ]
   },
   {
     path: '/foundation',
@@ -40,16 +40,16 @@ const SettingRoutes: Array<RouteRecordRaw> = [
         path: '/foundation/account',
         name: 'FoundationAccount',
         meta: { title: '账号管理', icon: 'mdi-card-account-details', isHideAllChild: true },
-        component: () => import('/@/views/settings/foundation/Account.vue'),
+        component: () => import('/@/views/settings/foundation/Account.vue')
       },
       {
         path: '/foundation/profile',
         name: 'FoundationProfile',
         meta: { title: '个人资料', icon: 'mdi-account' },
-        component: () => import('/@/views/settings/foundation/Profile.vue'),
-      },
-    ],
-  },
+        component: () => import('/@/views/settings/foundation/Profile.vue')
+      }
+    ]
+  }
 ];
 
 export { SettingRoutes };

@@ -27,7 +27,7 @@ export type {
 } from '@herodotus/core';
 export type {
   BaseEntity,
-  BaseSysEntity,
+  AbstractSysEntity,
   JigsawCaptcha,
   WordClickCaptcha,
   GraphicCaptcha,

@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, PropType, ref } from 'vue';
-import type { BaseSysEntity, HttpMethod } from '/@/lib/declarations';
+import type { AbstractSysEntity, HttpMethod } from '/@/lib/declarations';
 
 import { lodash } from '/@/lib/utils';
 
@@ -34,7 +34,7 @@ export default defineComponent({
   },
 
   props: {
-    modelValue: { type: Array as PropType<Array<BaseSysEntity>>, default: () => [], required: true },
+    modelValue: { type: Array as PropType<Array<AbstractSysEntity>>, default: () => [], required: true },
     prependTitle: { type: String, required: true },
     prependSubtitle: { type: String },
     appendTitle: { type: String },
@@ -58,12 +58,12 @@ export default defineComponent({
       selectedItems.value = [];
     };
 
-    const getValueProperty = (item: BaseSysEntity, property: string) => {
-      const attribute = property as keyof BaseSysEntity;
+    const getValueProperty = (item: AbstractSysEntity, property: string) => {
+      const attribute = property as keyof AbstractSysEntity;
       return item[attribute];
     };
 
-    const getTitle = (item: BaseSysEntity) => {
+    const getTitle = (item: AbstractSysEntity) => {
       let title = getValueProperty(item, props.prependTitle);
       if (props.appendTitle) {
         title += ' -- ' + getValueProperty(item, props.appendTitle);
@@ -72,7 +72,7 @@ export default defineComponent({
       return title;
     };
 
-    const getSubtitle = (item: BaseSysEntity) => {
+    const getSubtitle = (item: AbstractSysEntity) => {
       if (props.prependSubtitle) {
         let subtitle = getValueProperty(item, props.prependSubtitle);
         if (props.appendSubtitle) {
@@ -85,7 +85,7 @@ export default defineComponent({
       }
     };
 
-    const getHttpMethod = (item: BaseSysEntity): HttpMethod => {
+    const getHttpMethod = (item: AbstractSysEntity): HttpMethod => {
       if (props.httpMethodKey) {
         return getValueProperty(item, props.httpMethodKey) as HttpMethod;
       } else {
@@ -93,7 +93,7 @@ export default defineComponent({
       }
     };
 
-    const onRemoveItem = (item: BaseSysEntity) => {
+    const onRemoveItem = (item: AbstractSysEntity) => {
       let index = lodash.findIndex(selectedItems.value, item);
       lodash.remove(selectedItems.value, index);
       selectedItems.value = selectedItems.value.filter(i => {

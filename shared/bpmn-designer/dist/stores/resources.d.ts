@@ -3,22 +3,42 @@ export declare const useResourceStore: import('pinia').StoreDefinition<"BpmnDesi
     resources: BpmnDesignerResources;
 }, {
     userService: (state: {
-        resources: BpmnDesignerResources;
+        resources: {
+            user: () => import('../declarations').UserService;
+            group: () => import('../declarations').GroupService;
+            deployment: () => import('../declarations').DeploymentService;
+            dynamicForm: () => import('../declarations').DynamicFormService;
+        };
     } & import('pinia').PiniaCustomStateProperties<{
         resources: BpmnDesignerResources;
     }>) => import('../declarations').UserService;
     groupService: (state: {
-        resources: BpmnDesignerResources;
+        resources: {
+            user: () => import('../declarations').UserService;
+            group: () => import('../declarations').GroupService;
+            deployment: () => import('../declarations').DeploymentService;
+            dynamicForm: () => import('../declarations').DynamicFormService;
+        };
     } & import('pinia').PiniaCustomStateProperties<{
         resources: BpmnDesignerResources;
     }>) => import('../declarations').GroupService;
     deploymentService: (state: {
-        resources: BpmnDesignerResources;
+        resources: {
+            user: () => import('../declarations').UserService;
+            group: () => import('../declarations').GroupService;
+            deployment: () => import('../declarations').DeploymentService;
+            dynamicForm: () => import('../declarations').DynamicFormService;
+        };
     } & import('pinia').PiniaCustomStateProperties<{
         resources: BpmnDesignerResources;
     }>) => import('../declarations').DeploymentService;
     dynamicFormService: (state: {
-        resources: BpmnDesignerResources;
+        resources: {
+            user: () => import('../declarations').UserService;
+            group: () => import('../declarations').GroupService;
+            deployment: () => import('../declarations').DeploymentService;
+            dynamicForm: () => import('../declarations').DynamicFormService;
+        };
     } & import('pinia').PiniaCustomStateProperties<{
         resources: BpmnDesignerResources;
     }>) => import('../declarations').DynamicFormService;
