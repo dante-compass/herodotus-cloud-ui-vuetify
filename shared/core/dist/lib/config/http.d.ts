@@ -12,6 +12,7 @@ declare class HttpConfig {
     private bpmnAddress;
     private cmdbAddress;
     private iotAddress;
+    private manageAddress;
     private proxy;
     constructor(project: string, clientId: string, clientSecret: string, http: Axios, oidc?: boolean, proxy?: string);
     private switch;
@@ -29,5 +30,6 @@ declare class HttpConfig {
     getBpmn(withProxy?: boolean, isExtended?: boolean): string;
     getCmdb(withProxy?: boolean): string;
     getIot(withProxy?: boolean): string;
+    getManage(withProxy?: boolean): string;
 }
 export { HttpConfig };

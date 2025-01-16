@@ -538,6 +538,34 @@ const _ExtendedTaskService = class _ExtendedTaskService extends BaseService {
 };
 __publicField(_ExtendedTaskService, "instance");
 let ExtendedTaskService = _ExtendedTaskService;
+const _MgtCertificateService = class _MgtCertificateService extends BaseService {
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _MgtCertificateService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getManage() + "/manage/certificate";
+  }
+  getCommonNameAddress() {
+    return this.getBaseAddress() + "/common-name";
+  }
+  getCategoryAddress() {
+    return this.getBaseAddress() + "/category";
+  }
+  findByCommonName(certificateCategory) {
+    return this.getConfig().getHttp().get(this.getCommonNameAddress(), { certificateCategory });
+  }
+  findAllByCertificateCategory(commonName) {
+    return this.getConfig().getHttp().get(this.getCategoryAddress(), { commonName });
+  }
+};
+__publicField(_MgtCertificateService, "instance");
+let MgtCertificateService = _MgtCertificateService;
 const _OAuth2ApiService = class _OAuth2ApiService {
   constructor(config) {
     __publicField(this, "config", {});
@@ -920,6 +948,9 @@ const _ApiResources = class _ApiResources {
   task() {
     return ExtendedTaskService.getInstance(this.config);
   }
+  mgtCertificate() {
+    return MgtCertificateService.getInstance(this.config);
+  }
 };
 __publicField(_ApiResources, "instance");
 let ApiResources = _ApiResources;
@@ -940,6 +971,7 @@ export {
   GenderEnum,
   HttpConfig2 as HttpConfig,
   IdentityEnum,
+  MgtCertificateService,
   NotificationCategoryEnum,
   OAuth2ApiService,
   OAuth2ApplicationService,

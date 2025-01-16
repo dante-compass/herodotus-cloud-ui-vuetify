@@ -20,13 +20,14 @@ import {
   SysDictionaryService,
   SocialBindingService,
   ExtendedTaskService,
+  MgtCertificateService
 } from './modules';
 
 import {
   DialogueContactService,
   DialogueDetailService,
   NotificationService,
-  WebSocketMessageService,
+  WebSocketMessageService
 } from './settings';
 
 class ApiResources {
@@ -146,6 +147,10 @@ class ApiResources {
   public task(): ExtendedTaskService {
     return ExtendedTaskService.getInstance(this.config);
   }
+
+  public mgtCertificate(): MgtCertificateService {
+    return MgtCertificateService.getInstance(this.config);
+  }
 }
 
 const createApi = (
@@ -153,7 +158,7 @@ const createApi = (
   clientId: string,
   clientSecret: string,
   http: Axios,
-  oidc: boolean,
+  oidc: boolean
 ): ApiResources => {
   const config = new HttpConfig(project, clientId, clientSecret, http, oidc);
   return ApiResources.getInstance(config);
