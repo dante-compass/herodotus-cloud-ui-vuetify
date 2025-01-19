@@ -30,7 +30,7 @@ export default defineComponent({
 
   components: {
     HHttpMethodAvatar,
-    HAuthorizeHeader
+    HAuthorizeHeader,
   },
 
   props: {
@@ -41,7 +41,7 @@ export default defineComponent({
     appendSubtitle: { type: String },
     rowKey: { type: String, required: true },
     httpMethod: { type: Boolean, default: false },
-    httpMethodKey: { type: String }
+    httpMethodKey: { type: String },
   },
 
   emits: ['update:modelValue', 'save', 'clear'],
@@ -51,7 +51,7 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const clear = () => {
@@ -118,8 +118,8 @@ export default defineComponent({
       getSubtitle,
       onSave,
       onClear,
-      getValueProperty
+      getValueProperty,
     };
-  }
+  },
 });
 </script>

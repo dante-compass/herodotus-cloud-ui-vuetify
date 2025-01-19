@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType, onMounted } from 'vue';
+import { defineComponent, computed, onMounted, watch, onBeforeMount } from 'vue';
 
 import { useDictionary } from '../hooks';
 
@@ -28,11 +28,23 @@ export default defineComponent({
 
     const { options, isShow } = useDictionary(props.dictionary);
 
+    onBeforeMount(() => {
+      console.log('-------', props.defaultValue);
+    });
+
     onMounted(() => {
+      console.log('-------', props.defaultValue);
       if (props.defaultValue) {
         selectedValue.value = props.defaultValue;
       }
     });
+
+    watch(
+      () => props.defaultValue,
+      newValue => {
+        console.log('---new value----', newValue);
+      },
+    );
 
     return {
       selectedValue,

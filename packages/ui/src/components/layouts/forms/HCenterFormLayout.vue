@@ -29,7 +29,7 @@ export default defineComponent({
 
   components: {
     HDetailContainer,
-    HDictionarySelect
+    HDictionarySelect,
   },
 
   emits: ['save'],
@@ -37,7 +37,7 @@ export default defineComponent({
   props: {
     entity: { type: Object as PropType<AbstractSysEntity>, required: true },
     overlay: { type: Boolean, default: false },
-    title: { type: String, default: '' }
+    title: { type: String, default: '' },
   },
 
   setup(props, { emit }) {
@@ -49,8 +49,8 @@ export default defineComponent({
 
     return {
       onFinish,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>
