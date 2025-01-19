@@ -551,17 +551,17 @@ const _MgtCertificateService = class _MgtCertificateService extends BaseService 
   getBaseAddress() {
     return this.getConfig().getManage() + "/manage/certificate";
   }
-  getCommonNameAddress() {
-    return this.getBaseAddress() + "/common-name";
+  getAliasAddress() {
+    return this.getBaseAddress() + "/alias";
   }
   getCategoryAddress() {
     return this.getBaseAddress() + "/category";
   }
-  findByCommonName(certificateCategory) {
-    return this.getConfig().getHttp().get(this.getCommonNameAddress(), { certificateCategory });
+  findByAlias(alias) {
+    return this.getConfig().getHttp().get(this.getAliasAddress(), { alias });
   }
-  findAllByCertificateCategory(commonName) {
-    return this.getConfig().getHttp().get(this.getCategoryAddress(), { commonName });
+  findAllByCertificateCategory(certificateCategory) {
+    return this.getConfig().getHttp().get(this.getCategoryAddress(), { certificateCategory });
   }
 };
 __publicField(_MgtCertificateService, "instance");

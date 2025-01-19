@@ -20,29 +20,27 @@ class MgtCertificateService extends BaseService<MgtCertificateEntity> {
     return this.getConfig().getManage() + '/manage/certificate';
   }
 
-  public getCommonNameAddress(): string {
-    return this.getBaseAddress() + '/common-name';
+  public getAliasAddress(): string {
+    return this.getBaseAddress() + '/alias';
   }
 
   public getCategoryAddress(): string {
     return this.getBaseAddress() + '/category';
   }
 
-  public findByCommonName(certificateCategory: string): Promise<AxiosHttpResult<Record<string, MgtCertificateEntity>>> {
-    return this.getConfig()
-      .getHttp()
-      .get<
-        Record<string, MgtCertificateEntity>,
-        string
-      >(this.getCommonNameAddress(), { certificateCategory: certificateCategory });
+  public findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateEntity>> {
+    return this.getConfig().getHttp().get<MgtCertificateEntity, string>(this.getAliasAddress(), { alias: alias });
   }
 
   public findAllByCertificateCategory(
-    commonName: string,
-  ): Promise<AxiosHttpResult<Record<string, Array<MgtCertificateEntity>>>> {
+    certificateCategory: string,
+  ): Promise<AxiosHttpResult<Array<MgtCertificateEntity>>> {
     return this.getConfig()
       .getHttp()
-      .get<Record<string, Array<MgtCertificateEntity>>, string>(this.getCategoryAddress(), { commonName: commonName });
+      .get<
+        Array<MgtCertificateEntity>,
+        string
+      >(this.getCategoryAddress(), { certificateCategory: certificateCategory });
   }
 }
 

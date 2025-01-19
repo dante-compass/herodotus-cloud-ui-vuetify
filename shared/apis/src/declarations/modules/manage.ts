@@ -2,7 +2,7 @@ import type { AbstractSysEntity, Conditions } from '../base';
 
 export interface MgtCertificateEntity extends AbstractSysEntity {
   certId: string;
-  certName: string;
+  alias: string;
   /**
    * 证书所有者的公共名称
    * <p>

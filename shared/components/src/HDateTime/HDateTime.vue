@@ -34,11 +34,11 @@ export default defineComponent({
   name: 'HDateTime',
 
   directives: {
-    ClosePopup
+    ClosePopup,
   },
 
   props: {
-    modelValue: { type: String }
+    modelValue: { type: String, default: '', required: true },
   },
 
   emits: ['update:modelValue'],
@@ -48,12 +48,12 @@ export default defineComponent({
       get: () => props.modelValue,
       set: newValue => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     return {
-      dateTimeValue
+      dateTimeValue,
     };
-  }
+  },
 });
 </script>
