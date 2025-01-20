@@ -12,8 +12,12 @@ import HerodotusBpmnDesigner from '@herodotus/bpmn-designer';
 import HerodotusFormDesigner from '@herodotus/form-designer';
 import HerodotusFormEngine from '@herodotus/form-engine';
 
+import DisableDevtool from 'disable-devtool';
+
 import { setupStore, setupQuasar, setupI18n, setupUploader } from '/@/plugins';
 import { setupRouter } from './routers';
+
+import { CONSTANTS } from '/@/composables/constants';
 
 if (typeof (window as any).global === 'undefined') {
   (window as any).global = window;
@@ -41,6 +45,14 @@ async function setupApp() {
   app.use(HerodotusFormEngine);
 
   app.mount('#app', true);
+
+  if (!CONSTANTS.IS_DEV) {
+    DisableDevtool({
+      url: '/static/forbidden.html',
+      timeOutUrl: '/static/forbidden.html',
+      disableMenu: true,
+    });
+  }
 }
 
 setupApp();
