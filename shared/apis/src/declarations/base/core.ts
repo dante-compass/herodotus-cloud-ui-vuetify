@@ -11,20 +11,20 @@ import type {
   Sort,
   Tree,
   BaseEntity,
-  BaseSysEntity,
-  AbstractJpaEntity
+  AbstractSysEntity,
+  AbstractJpaEntity,
 } from '@herodotus/core';
 
 import { ApplicationEnum } from '/@/enums';
 
-export interface BaseAppEntity extends BaseSysEntity {
+export interface BaseAppEntity extends AbstractSysEntity {
   appSecret: string;
   appName: string;
   appCode: string;
   applicationType: ApplicationEnum;
 }
 
-export interface BaseCmdbEntity extends BaseSysEntity {
+export interface BaseCmdbEntity extends AbstractSysEntity {
   purpose: string;
   contacts: string;
   phoneNumber: string;
@@ -43,6 +43,6 @@ export type {
   Sort,
   Tree,
   BaseEntity,
-  BaseSysEntity,
-  AbstractJpaEntity
+  AbstractSysEntity,
+  AbstractJpaEntity,
 };

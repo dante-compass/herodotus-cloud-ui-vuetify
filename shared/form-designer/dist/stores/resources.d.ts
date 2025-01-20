@@ -3,7 +3,9 @@ export declare const useFormResourceStore: import('pinia').StoreDefinition<"Form
     resources: FormDesignerResources;
 }, {
     dynamicForm: (state: {
-        resources: FormDesignerResources;
+        resources: {
+            dynamicForm: () => import('@herodotus/form-apis').DynamicFormService;
+        };
     } & import('pinia').PiniaCustomStateProperties<{
         resources: FormDesignerResources;
     }>) => import('@herodotus/form-apis').DynamicFormService;

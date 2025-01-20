@@ -19,7 +19,8 @@ import {
   SysTenantDataSourceService,
   SysDictionaryService,
   SocialBindingService,
-  ExtendedTaskService
+  ExtendedTaskService,
+  MgtCertificateService
 } from './modules';
 
 import {
@@ -145,6 +146,10 @@ class ApiResources {
 
   public task(): ExtendedTaskService {
     return ExtendedTaskService.getInstance(this.config);
+  }
+
+  public mgtCertificate(): MgtCertificateService {
+    return MgtCertificateService.getInstance(this.config);
   }
 }
 

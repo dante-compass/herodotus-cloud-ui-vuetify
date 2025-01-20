@@ -1,5 +1,5 @@
-import { BaseSysEntity, Entity, Conditions, AbstractJpaEntity } from '../base';
-export interface BaseRegisteredClientEntity extends BaseSysEntity {
+import { AbstractSysEntity, Entity, Conditions, AbstractJpaEntity } from '../base';
+export interface BaseRegisteredClientEntity extends AbstractSysEntity {
     clientId: string;
     clientIdIssuedAt: string;
     clientSecret: string;
@@ -30,12 +30,12 @@ export interface OAuth2ApplicationEntity extends BaseRegisteredClientEntity {
     homepage: string;
     applicationType: string;
 }
-export interface OAuth2PermissionEntity extends BaseSysEntity {
+export interface OAuth2PermissionEntity extends AbstractSysEntity {
     permissionId: string;
     permissionCode: string;
     permissionName: string;
 }
-export interface OAuth2ScopeEntity extends BaseSysEntity {
+export interface OAuth2ScopeEntity extends AbstractSysEntity {
     scopeId: string;
     scopeCode: string;
     scopeName: string;

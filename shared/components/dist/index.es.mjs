@@ -148,7 +148,7 @@ const _sfc_main$l = defineComponent({
     ClosePopup
   },
   props: {
-    modelValue: { type: String }
+    modelValue: { type: String, default: "", required: true }
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
@@ -349,7 +349,6 @@ function arrayMap(array, iteratee) {
   return result;
 }
 var isArray = Array.isArray;
-var INFINITY = 1 / 0;
 var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0, symbolToString = symbolProto ? symbolProto.toString : void 0;
 function baseToString(value) {
   if (typeof value == "string") {
@@ -362,7 +361,7 @@ function baseToString(value) {
     return symbolToString ? symbolToString.call(value) : "";
   }
   var result = value + "";
-  return result == "0" && 1 / value == -INFINITY ? "-0" : result;
+  return result == "0" && 1 / value == -Infinity ? "-0" : result;
 }
 function toString(value) {
   return value == null ? "" : baseToString(value);
@@ -1695,7 +1694,12 @@ const _sfc_main$7 = defineComponent({
     spinnerSize: { type: String, default: "50px" },
     hideConfirm: { type: Boolean, default: false },
     hideCancel: { type: Boolean, default: false },
-    hideClose: { type: Boolean, default: false }
+    hideClose: { type: Boolean, default: false },
+    /**
+     * 由组件外部，即父组件决定是否关闭对话框。
+     * 正常情况下，点击 confirm 即关闭对话框。但这不适用于需要外部接入的情况，比如说表单校验，所以增加该参数，由外部逻辑控制对话框的关闭与否。
+     */
+    externalClose: { type: Boolean, default: false }
   },
   emits: ["update:modelValue", "update:loading", "confirm", "cancel", "close"],
   setup(props, { emit }) {
@@ -1721,7 +1725,9 @@ const _sfc_main$7 = defineComponent({
     };
     const onConfirm = () => {
       showLoading.value = true;
-      showDialog.value = false;
+      if (!props.externalClose) {
+        showDialog.value = false;
+      }
       emit("confirm");
     };
     return {
