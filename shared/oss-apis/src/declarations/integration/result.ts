@@ -1,5 +1,13 @@
 import type { Entity } from '../base';
-import type { BucketDomain, OwnerDomain, DeletedObjectDomain, S3ErrorDomain, ObjectDomain } from './domain';
+import type {
+  BucketDomain,
+  OwnerDomain,
+  DeletedObjectDomain,
+  S3ErrorDomain,
+  ObjectDomain,
+  SsekmsDomain,
+  ChecksumDomain,
+} from './domain';
 
 export interface AbstractResult extends Entity {
   cloudFrontId: string;
@@ -14,6 +22,11 @@ export interface AbstractObjectResult extends AbstractResult {
   deleteMarker: boolean;
   versionId: string;
   requestCharged: string;
+}
+
+export interface AbstractRequestChargedResult extends AbstractResult {
+  requestCharged: string;
+  bucketKeyEnabled: boolean;
 }
 
 export interface CreateBucketResult extends AbstractResult {
@@ -50,6 +63,18 @@ export interface ListObjectsV2Result extends AbstractResult {
   requestCharged: string;
 }
 
+export interface UploadPartResult extends AbstractRequestChargedResult {
+  serverSideEncryption: string;
+  eTag: string;
+  checksum: ChecksumDomain;
+  ssekms: SsekmsDomain;
+}
+
+export interface PutObjectResult extends UploadPartResult {
+  expiration: string;
+  versionId: string;
+}
+
 // ------------------------------ 以下未整理，上面是新整的内容 ------------------------------
 
 export interface BaseDomain extends Entity {
@@ -63,7 +88,6 @@ export interface ObjectWriteDomain extends BaseDomain {
   versionId: string;
 }
 
-export interface PutObjectDomain extends ObjectWriteDomain {}
 export interface CompleteMultipartUploadDomain extends ObjectWriteDomain {}
 
 // ------------------------------ Business ------------------------------

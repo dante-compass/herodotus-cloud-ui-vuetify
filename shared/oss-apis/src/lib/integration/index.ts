@@ -1,8 +1,6 @@
 import type {
   AxiosHttpResult,
   AxiosProgressEvent,
-  ObjectStreamDownloadArguments,
-  PutObjectDomain,
   CreateMultipartUploadArguments,
   CreateMultipartUploadBusiness,
   CompleteMultipartUploadArguments,
@@ -12,12 +10,14 @@ import type {
   DeleteObjectArgument,
   DeleteObjectsArgument,
   ListObjectsV2Argument,
+  GetObjectArgument,
   CreateBucketResult,
   DeleteBucketResult,
   DeleteObjectResult,
   DeleteObjectsResult,
   ListObjectsV2Result,
-  ListBucketsResult
+  ListBucketsResult,
+  PutObjectResult,
 } from '/@/declarations';
 
 import { ContentTypeEnum } from '/@/enums';
@@ -85,39 +85,6 @@ class ObjectService extends Service {
     return this.getBaseAddress() + '/multi';
   }
 
-  public listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>> {
-    return this.getConfig().getHttp().get<ListObjectsV2Result, ListObjectsV2Argument>(this.getListV2Address(), request);
-  }
-
-  public delete(request: DeleteObjectArgument): Promise<AxiosHttpResult<DeleteObjectResult>> {
-    return this.getConfig().getHttp().delete<DeleteObjectResult, DeleteObjectArgument>(this.getBaseAddress(), request);
-  }
-
-  public batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>> {
-    return this.getConfig()
-      .getHttp()
-      .delete<DeleteObjectsResult, DeleteObjectsArgument>(this.getMultiDeleteAddress(), request);
-  }
-}
-
-class ObjectStreamService extends Service {
-  private static instance: ObjectStreamService;
-
-  private constructor(config: HttpConfig) {
-    super(config);
-  }
-
-  public static getInstance(config: HttpConfig): ObjectStreamService {
-    if (this.instance == null) {
-      this.instance = new ObjectStreamService(config);
-    }
-    return this.instance;
-  }
-
-  public getBaseAddress(): string {
-    return this.getConfig().getOss() + '/oss/object/stream';
-  }
-
   private getDownloadAddress(): string {
     return this.getBaseAddress() + '/download';
   }
@@ -130,9 +97,30 @@ class ObjectStreamService extends Service {
     return this.getBaseAddress() + '/upload';
   }
 
+  public listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>> {
+    return this.getConfig().getHttp().get<ListObjectsV2Result, ListObjectsV2Argument>(this.getListV2Address(), request);
+  }
+
+  public delete(request: DeleteObjectArgument): Promise<AxiosHttpResult<DeleteObjectResult>> {
+    return this.getConfig().getHttp().delete<DeleteObjectResult, DeleteObjectArgument>(this.getBaseAddress(), request);
+  }
+
+  public upload(
+    bucketName: string,
+    file: File,
+    onProgress?: (progressEvent: AxiosProgressEvent) => void,
+  ): Promise<AxiosHttpResult<PutObjectResult>> {
+    return this.getConfig()
+      .getHttp()
+      .post<
+        PutObjectResult,
+        any
+      >(this.getUploadAddress(), { bucketName: bucketName, file: file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
+  }
+
   public download(
-    request: ObjectStreamDownloadArguments,
-    onProgress?: (progressEvent: AxiosProgressEvent) => void
+    request: GetObjectArgument,
+    onProgress?: (progressEvent: AxiosProgressEvent) => void,
   ): Promise<AxiosHttpResult<Blob>> {
     return this.getConfig()
       .getHttp()
@@ -142,7 +130,7 @@ class ObjectStreamService extends Service {
       >(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
   }
 
-  public display(request: ObjectStreamDownloadArguments): Promise<AxiosHttpResult<Blob>> {
+  public display(request: GetObjectArgument): Promise<AxiosHttpResult<Blob>> {
     return this.getConfig()
       .getHttp()
       .post<
@@ -151,17 +139,10 @@ class ObjectStreamService extends Service {
       >(this.getDisplayAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob' });
   }
 
-  public upload(
-    bucketName: string,
-    file: File,
-    onProgress?: (progressEvent: AxiosProgressEvent) => void
-  ): Promise<AxiosHttpResult<PutObjectDomain>> {
+  public batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>> {
     return this.getConfig()
       .getHttp()
-      .post<
-        PutObjectDomain,
-        any
-      >(this.getUploadAddress(), { bucketName: bucketName, file: file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
+      .delete<DeleteObjectsResult, DeleteObjectsArgument>(this.getMultiDeleteAddress(), request);
   }
 }
 
@@ -192,7 +173,7 @@ class MultipartUploadService extends Service {
   }
 
   public createChunkUpload(
-    request: CreateMultipartUploadArguments
+    request: CreateMultipartUploadArguments,
   ): Promise<AxiosHttpResult<CreateMultipartUploadBusiness>> {
     return this.getConfig()
       .getHttp()
@@ -203,7 +184,7 @@ class MultipartUploadService extends Service {
   }
 
   public completeChunkUpload(
-    request: CompleteMultipartUploadArguments
+    request: CompleteMultipartUploadArguments,
   ): Promise<AxiosHttpResult<CompleteMultipartUploadDomain>> {
     return this.getConfig()
       .getHttp()
@@ -214,4 +195,4 @@ class MultipartUploadService extends Service {
   }
 }
 
-export { BucketService, ObjectService, ObjectStreamService, MultipartUploadService };
+export { BucketService, ObjectService, MultipartUploadService };

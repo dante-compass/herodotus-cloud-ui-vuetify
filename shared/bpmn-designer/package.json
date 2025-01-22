@@ -50,7 +50,7 @@
     "pinia": "^2.3.1",
     "preact": "^10.25.4",
     "vue": "^3.5.13",
-    "zeebe-bpmn-moddle": "^1.8.0"
+    "zeebe-bpmn-moddle": "^1.9.0"
   },
   "devDependencies": {
     "webpack": "^5.97.1"
