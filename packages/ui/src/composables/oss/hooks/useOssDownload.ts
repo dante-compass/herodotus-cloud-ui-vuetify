@@ -33,9 +33,8 @@ export default function useOssDownload() {
    * @param objectName 对象名称
    */
   const download = (bucketName: string, objectName: string, size?: number) => {
-    showDownLoadProgress('下载');
-
     if (size) {
+      showDownLoadProgress('下载');
       ossApi
         .object()
         .download({ bucketName: bucketName, objectName: objectName }, (progressEvent: AxiosProgressEvent) => {

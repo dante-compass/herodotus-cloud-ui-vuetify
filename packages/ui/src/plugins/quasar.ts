@@ -21,7 +21,8 @@ export const setupQuasar = (app: App<Element>) => {
     config: {
       loading: {
         spinnerColor: 'primary',
-        spinnerSize: 100
+        spinnerSize: 100,
+        message: '正在处理中. 请稍后...',
       }
     }
   });

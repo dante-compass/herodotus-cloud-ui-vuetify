@@ -3,9 +3,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType, onMounted } from 'vue';
+import { defineComponent, computed, onMounted } from 'vue';
 
 import { useDictionary } from '../hooks';
+import { nextTick } from 'vue';
 
 export default defineComponent({
   name: 'HToggleField',
@@ -29,9 +30,11 @@ export default defineComponent({
     const { options, isShow } = useDictionary(props.dictionary);
 
     onMounted(() => {
-      if (props.defaultValue) {
-        selectedValue.value = props.defaultValue;
-      }
+      nextTick(() => {
+        if (props.defaultValue) {
+          selectedValue.value = props.defaultValue;
+        }
+      });
     });
 
     return {

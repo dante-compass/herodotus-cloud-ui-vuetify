@@ -64,12 +64,6 @@
       :error="v.editedItem.country.$error"
       :error-message="v.editedItem.country.$errors[0] ? v.editedItem.country.$errors[0].$message : ''"></h-text-field>
 
-    <h-toggle-field
-      class="q-mb-md"
-      v-model="editedItem.certificateCategory"
-      dictionary="CertificateCategory"
-      default-value="TRUST_ANCHOR"></h-toggle-field>
-
     <h-text-field
       v-model.lazy="v.editedItem.password.$model"
       label="证书密码 *"
@@ -78,11 +72,20 @@
       :error="v.editedItem.password.$error"
       :error-message="v.editedItem.password.$errors[0] ? v.editedItem.password.$errors[0].$message : ''"></h-text-field>
 
+    <h-toggle-field
+      class="q-mb-md"
+      v-model="editedItem.certificateCategory"
+      dictionary="CertificateCategory"
+      default-value="TRUST_ANCHOR"></h-toggle-field>
+
     <h-select
       v-model="editedItem.parentId"
       :options="parentOptions"
-      label="根证书"
+      label="上级证书"
       hide-hint
+      option-value="certId"
+      option-label="alias"
+      emit-value
       :loading="showParentLoading"
       :disable="disableParentSelect"
       :readonly="disableParentSelect"></h-select>
@@ -180,6 +183,7 @@ export default defineComponent({
       newValue => {
         if (newValue === 'TRUST_ANCHOR') {
           disableParentSelect.value = true;
+          editedItem.value.parentId = '';
         } else {
           loadOptionData(newValue);
         }

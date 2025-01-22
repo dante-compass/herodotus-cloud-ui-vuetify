@@ -20,8 +20,9 @@
       <q-td key="keystoreName" :props="props">
         <h-button
           :label="props.row.keystoreName"
-          tooltip="下载 KeyStore"
-          outline
+          tooltip="点击下载"
+          color="primary"
+          flat
           no-caps
           @click="onDownload(props.row.bucketName, props.row.keystoreName)"></h-button>
       </q-td>
@@ -32,10 +33,20 @@
         <h-button
           v-if="props.row.pemName"
           :label="props.row.pemName"
-          outline
+          color="primary"
+          flat
           no-caps
-          tooltip="下载 PEM"
+          tooltip="点击下载"
           @click="onDownload(props.row.bucketName, props.row.pemName)"></h-button>
+      </q-td>
+    </template>
+
+    <template #body-cell-distinguishedName="props">
+      <q-td key="distinguishedName" :props="props">
+        <h-dense-icon-button
+          color="info"
+          icon="mdi-information-variant-box"
+          :tooltip="props.row.distinguishedName"></h-dense-icon-button>
       </q-td>
     </template>
 
@@ -83,6 +94,7 @@ export default defineComponent({
 
     const columns: QTableColumnProps = [
       { name: 'alias', field: 'alias', align: 'center', label: '证书名称' },
+      { name: 'certificateCategory', field: 'certificateCategory', align: 'center', label: '证书类别' },
       { name: 'commonName', field: 'commonName', align: 'center', label: '公共名称' },
       { name: 'distinguishedName', field: 'distinguishedName', align: 'center', label: '区分名' },
       { name: 'startTime', field: 'startTime', align: 'center', label: '开始时间' },
@@ -93,7 +105,6 @@ export default defineComponent({
       { name: 'pemName', field: 'pemName', align: 'center', label: 'PEM' },
       { name: 'description', field: 'description', align: 'center', label: '备注' },
       { name: 'reserved', field: 'reserved', align: 'center', label: '保留数据' },
-      { name: 'status', field: 'status', align: 'center', label: '状态' },
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 

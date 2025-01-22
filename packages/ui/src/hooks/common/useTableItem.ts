@@ -20,17 +20,17 @@ export default function useTableItem<E extends Entity>(baseService: BaseService<
       .then(response => {
         const result = response as HttpResult<E>;
         overlay.value = false;
-        onFinish();
         if (result.message) {
           toast.success(result.message);
         } else {
           toast.success('保存成功');
         }
+        onFinish();
       })
       .catch(() => {
         overlay.value = false;
-        onFinish();
         toast.error('保存失败');
+        onFinish();
       });
   };
 
