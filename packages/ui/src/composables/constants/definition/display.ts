@@ -5,14 +5,14 @@ export const HTTP_METHOD_STYLE_GROUP: DisplayElementGroup = {
   DELETE: { color: 'red', icon: 'mdi-book-minus-multiple' },
   POST: { color: 'green', icon: 'mdi-book-plus-multiple' },
   GET: { color: 'blue', icon: 'mdi-book-multiple' },
-  ALL: { color: 'black', icon: 'mdi-book-cog' }
+  ALL: { color: 'black', icon: 'mdi-book-cog' },
 };
 
 export const DATA_ITEM_STATUS: Array<DisplayElement> = [
   { color: 'positive', icon: 'mdi-circle' },
   { color: 'negative', icon: 'mdi-circle' },
   { color: 'warning', icon: 'mdi-circle' },
-  { color: 'info', icon: 'mdi-circle' }
+  { color: 'info', icon: 'mdi-circle' },
 ];
 
 export const COLOR_LIST: Array<string> = [
@@ -41,7 +41,7 @@ export const COLOR_LIST: Array<string> = [
   'deep-orange',
   'brown',
   'grey',
-  'blue-grey'
+  'blue-grey',
 ];
 
 export const DEFAULT_HTTP_METHOD_STYLE: DisplayElement = HTTP_METHOD_STYLE_GROUP.GET;
@@ -53,7 +53,7 @@ export const GRANT_TYPE_STYLE_GROUP: DisplayElementGroup = {
   password: { color: 'cyan', icon: 'mdi-file-key', text: '密码认证' },
   social_credentials: { color: 'light-blue', icon: 'mdi-cast-connected', text: '社交化认证' },
   'urn:ietf:params:oauth:grant-type:device_code': { color: 'primary', icon: 'mdi-devices', text: '设备激活码认证' },
-  'urn:ietf:params:oauth:grant-type:jwt-bearer': { color: 'purple', icon: 'mdi-file-hidden', text: 'JWT Bearer 认证' }
+  'urn:ietf:params:oauth:grant-type:jwt-bearer': { color: 'purple', icon: 'mdi-file-hidden', text: 'JWT Bearer 认证' },
 };
 
 export const IN_BROWSER = typeof window !== 'undefined';
@@ -71,7 +71,7 @@ export const Path = {
   HOME_TITLE: '首页',
   // 错误
   NOT_FOUND: '/:path(.*)*',
-  NOT_FOUND_NAME: 'PageNotFound'
+  NOT_FOUND_NAME: 'PageNotFound',
 };
 
 export const ComponentName = {
@@ -112,5 +112,5 @@ export const ComponentName = {
   IOT_DEVICE: 'IotDevice',
   IOT_TSL_FUNCTION: 'IotTslFunction',
   IOT_TSL_UNIT: 'IotTslUnit',
-  MGT_CERTIFICATE: 'MgtCertificate'
+  MGT_CERTIFICATE: 'MgtCertificate',
 };

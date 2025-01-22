@@ -24,6 +24,9 @@ if (typeof (window as any).global === 'undefined') {
 }
 
 async function setupApp() {
+  const view = document.createElement('div');
+  document.body.appendChild(view);
+
   const app = createApp(App);
 
   setupI18n(app);

@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :operation="operation" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :operation="operation" :overlay="overlay" @save="onSave()">
     <h-toggle-field
       class="q-mb-md"
       v-model="editedItem.keyStoreCategory"
@@ -127,7 +127,9 @@ export default defineComponent({
   },
 
   setup(props) {
-    const { editedItem, operation, title, saveOrUpdate } = useTableItem<MgtCertificateEntity>(api.mgtCertificate());
+    const { editedItem, operation, title, saveOrUpdate, overlay } = useTableItem<MgtCertificateEntity>(
+      api.mgtCertificate(),
+    );
 
     const isUnique = () => {
       let alias = editedItem.value.alias;
@@ -239,6 +241,7 @@ export default defineComponent({
       parentOptions,
       showParentLoading,
       disableParentSelect,
+      overlay,
     };
   },
 });

@@ -16,6 +16,29 @@
       <h-button color="primary" label="新建证书" @click="toCreate" />
     </template>
 
+    <template #body-cell-keystoreName="props">
+      <q-td key="keystoreName" :props="props">
+        <h-button
+          :label="props.row.keystoreName"
+          tooltip="下载 KeyStore"
+          outline
+          no-caps
+          @click="onDownload(props.row.bucketName, props.row.keystoreName)"></h-button>
+      </q-td>
+    </template>
+
+    <template #body-cell-pemName="props">
+      <q-td key="pemName" :props="props">
+        <h-button
+          v-if="props.row.pemName"
+          :label="props.row.pemName"
+          outline
+          no-caps
+          tooltip="下载 PEM"
+          @click="onDownload(props.row.bucketName, props.row.pemName)"></h-button>
+      </q-td>
+    </template>
+
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
         <h-delete-button v-if="!props.row.reserved" @click="deleteItemById(props.row[rowKey])"></h-delete-button>
@@ -40,6 +63,7 @@ import { api } from '/@/lib/utils';
 import { useTable } from '/@/hooks';
 
 import { HDeleteButton, HTable } from '/@/components';
+import { useOssDownload } from '/@/composables/oss';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.MGT_CERTIFICATE,
@@ -52,6 +76,7 @@ export default defineComponent({
         api.mgtCertificate(),
         CONSTANTS.ComponentName.MGT_CERTIFICATE,
       );
+    const { download } = useOssDownload();
 
     const selected = ref([]);
     const rowKey: MgtCertificateProps = 'certId';
@@ -72,6 +97,10 @@ export default defineComponent({
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 
+    const onDownload = (bucketName: string, objectName: string) => {
+      download(bucketName, objectName);
+    };
+
     return {
       rowKey,
       selected,
@@ -85,6 +114,7 @@ export default defineComponent({
       toAuthorize,
       findItems,
       deleteItemById,
+      onDownload,
     };
   },
 });

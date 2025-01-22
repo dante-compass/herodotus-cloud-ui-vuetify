@@ -60,11 +60,9 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, Ref, watch, onMounted } from 'vue';
-import { format, useQuasar } from 'quasar';
+import { format } from 'quasar';
 
 import type {
-  AxiosProgressEvent,
-  QNotifyPosition,
   QTableColumnProps,
   ObjectDomain,
   ObjectDomainProps,
@@ -76,6 +74,7 @@ import { HDeleteButton, HDenseIconButton, HTable, HChunkUploader, HSimpleUploade
 import { useBaseTable } from '/@/hooks';
 import { CONSTANTS } from '/@/composables/constants';
 import { ossApi, lodash, toast, standardDeleteNotify } from '/@/lib/utils';
+import { useOssDownload } from '../hooks';
 
 export default defineComponent({
   name: 'HOssObjectList',
@@ -96,11 +95,11 @@ export default defineComponent({
 
   setup(props) {
     const { humanStorageSize } = format;
-    const $q = useQuasar();
     const { tableRows, loading, toEdit, toAuthorize, hideLoading, showLoading } = useBaseTable<
       ObjectDomain,
       ObjectDomainConditions
     >(CONSTANTS.ComponentName.OSS_OBJECT, '', false, true);
+    const { download } = useOssDownload();
 
     const columns: QTableColumnProps = [
       {
@@ -128,7 +127,6 @@ export default defineComponent({
     const openChunkUploadDialog = ref<boolean>(false);
     const openSimpleUploadDialog = ref<boolean>(false);
     const hasNewUploadedFiles = ref<boolean>(false);
-    const loadProgress = ref<number>(0);
 
     const isDisableBatchDelete = computed(() => {
       return lodash.isEmpty(selected.value);
@@ -261,72 +259,6 @@ export default defineComponent({
       deleteObject(props.bucketName, item.objectName, () => {
         onFetchObjects();
       });
-    };
-
-    /**
-     * 下载对象文件
-     * @param bucketName 存储桶名称
-     * @param objectName 对象名称
-     */
-    const download = (bucketName: string, objectName: string, size: number) => {
-      showDownLoadProgress('下载');
-      ossApi
-        .objectStream()
-        .download({ bucketName: bucketName, objectName: objectName }, (progressEvent: AxiosProgressEvent) => {
-          loadProgress.value = (progressEvent.loaded / size) * 100;
-        })
-        .then(response => {
-          const data = response as Blob;
-          const blob = new Blob([data], { type: 'application/x-download' });
-          // 创建元素
-          const link = document.createElement('a');
-          link.style.display = 'none';
-          // 创建下载的链接
-          link.href = URL.createObjectURL(blob);
-          // 给下载后的文件命名
-          link.setAttribute('download', objectName);
-          document.body.appendChild(link);
-          // 点击下载
-          link.click();
-          // 下载完成移除元素
-          document.body.removeChild(link);
-          // 释放掉blob对象
-          window.URL.revokeObjectURL(link.href);
-        })
-        .catch(() => {
-          toast.error('下载失败');
-        });
-    };
-
-    const showDownLoadProgress = (label: string, position: QNotifyPosition = 'center') => {
-      loadProgress.value = 0;
-      const notify = $q.notify({
-        group: false,
-        timeout: 0,
-        spinner: true,
-        position: position,
-        message: `文件${label}中...`,
-        caption: '0%',
-      });
-
-      const interval = setInterval(() => {
-        // we update the dialog
-        notify({
-          caption: `${loadProgress.value}%`,
-        });
-
-        if (loadProgress.value === 100) {
-          notify({
-            type: 'positive',
-            icon: 'done',
-            spinner: false,
-            message: `${label}完成!`,
-            timeout: 2000,
-          });
-          clearInterval(interval);
-          loadProgress.value = 0;
-        }
-      }, 500);
     };
 
     const onDownload = (item: ObjectDomain) => {
