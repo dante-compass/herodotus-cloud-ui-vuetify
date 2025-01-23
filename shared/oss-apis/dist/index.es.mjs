@@ -1,24 +1,8 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { BaseService, Service, ContentTypeEnum, HttpConfig } from "@herodotus/core";
-import { Axios, BaseService as BaseService2, HttpConfig as HttpConfig2, Service as Service2 } from "@herodotus/core";
-const _OssConstantService = class _OssConstantService extends BaseService {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _OssConstantService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getOss() + "/oss/minio/constant/enums";
-  }
-};
-__publicField(_OssConstantService, "instance");
-let OssConstantService = _OssConstantService;
+import { Service, ContentTypeEnum, HttpConfig } from "@herodotus/core";
+import { Axios, BaseService, HttpConfig as HttpConfig2, Service as Service2 } from "@herodotus/core";
 const _MinioBucketSettingService = class _MinioBucketSettingService extends Service {
   constructor(config) {
     super(config);
@@ -299,31 +283,6 @@ const _ObjectService = class _ObjectService extends Service {
   getMultiDeleteAddress() {
     return this.getBaseAddress() + "/multi";
   }
-  listObjectsV2(request) {
-    return this.getConfig().getHttp().get(this.getListV2Address(), request);
-  }
-  delete(request) {
-    return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
-  }
-  batchDelete(request) {
-    return this.getConfig().getHttp().delete(this.getMultiDeleteAddress(), request);
-  }
-};
-__publicField(_ObjectService, "instance");
-let ObjectService = _ObjectService;
-const _ObjectStreamService = class _ObjectStreamService extends Service {
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new _ObjectStreamService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getOss() + "/oss/object/stream";
-  }
   getDownloadAddress() {
     return this.getBaseAddress() + "/download";
   }
@@ -333,18 +292,27 @@ const _ObjectStreamService = class _ObjectStreamService extends Service {
   getUploadAddress() {
     return this.getBaseAddress() + "/upload";
   }
+  listObjectsV2(request) {
+    return this.getConfig().getHttp().get(this.getListV2Address(), request);
+  }
+  delete(request) {
+    return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
+  }
+  upload(bucketName, file, onProgress) {
+    return this.getConfig().getHttp().post(this.getUploadAddress(), { bucketName, file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
+  }
   download(request, onProgress) {
     return this.getConfig().getHttp().post(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: "blob", onDownloadProgress: onProgress });
   }
   display(request) {
     return this.getConfig().getHttp().post(this.getDisplayAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: "blob" });
   }
-  upload(bucketName, file, onProgress) {
-    return this.getConfig().getHttp().post(this.getUploadAddress(), { bucketName, file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
+  batchDelete(request) {
+    return this.getConfig().getHttp().delete(this.getMultiDeleteAddress(), request);
   }
 };
-__publicField(_ObjectStreamService, "instance");
-let ObjectStreamService = _ObjectStreamService;
+__publicField(_ObjectService, "instance");
+let ObjectService = _ObjectService;
 const _MultipartUploadService = class _MultipartUploadService extends Service {
   constructor(config) {
     super(config);
@@ -393,14 +361,8 @@ const _OssApiResources = class _OssApiResources {
   object() {
     return ObjectService.getInstance(this.config);
   }
-  objectStream() {
-    return ObjectStreamService.getInstance(this.config);
-  }
   multipartUpload() {
     return MultipartUploadService.getInstance(this.config);
-  }
-  constant() {
-    return OssConstantService.getInstance(this.config);
   }
   minioBucketSetting() {
     return MinioBucketSettingService.getInstance(this.config);
@@ -444,7 +406,7 @@ const createOssApi = (project, clientId, clientSecret, http) => {
 };
 export {
   Axios,
-  BaseService2 as BaseService,
+  BaseService,
   HttpConfig2 as HttpConfig,
   MinioBucketEncryptionService,
   MinioBucketPolicyService,
@@ -457,7 +419,6 @@ export {
   MinioObjectRetentionService,
   MinioObjectSettingService,
   MinioObjectTagsService,
-  OssConstantService,
   Service2 as Service,
   createOssApi
 };

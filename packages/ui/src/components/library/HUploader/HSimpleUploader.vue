@@ -38,7 +38,7 @@ export default defineComponent({
       return new Promise((resolve, reject) => {
         const token: string = authStore.token;
         resolve({
-          url: ossApi.objectStream().getUploadAddress(),
+          url: ossApi.object().getUploadAddress(),
           method: 'POST',
           fieldName: 'file',
           headers: [{ name: 'Authorization', value: `Bearer ${token}` }],

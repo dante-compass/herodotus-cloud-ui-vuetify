@@ -1,5 +1,7 @@
 import type { Entity } from '../base';
-import type { DeleteDomain } from './domain';
+import type { DeleteDomain, SseCustomerDomain } from './domain';
+
+// ------------------------------ Argument ------------------------------
 
 export interface AbstractArgument extends Entity {}
 
@@ -21,6 +23,23 @@ export interface AbstractObjectArgument extends AbstractObjectRequestPayerArgume
 
 export interface AbstractObjectVersionArgument extends AbstractObjectArgument {
   versionId?: string;
+}
+
+export interface AbstractGetObjectArgument extends AbstractObjectVersionArgument {
+  ifMatch?: string;
+  ifModifiedSince?: Date;
+  ifNoneMatch?: string;
+  ifUnmodifiedSince?: Date;
+  range?: string;
+  responseCacheControl?: string;
+  responseContentDisposition?: string;
+  responseContentEncoding?: string;
+  responseContentLanguage?: string;
+  responseContentType?: string;
+  responseExpires?: Date;
+  sseCustomer?: SseCustomerDomain;
+  partNumber?: number;
+  checksumMode?: string;
 }
 
 export interface CreateBucketArgument extends AbstractBucketArgument {
@@ -61,6 +80,8 @@ export interface ListObjectsV2Argument extends AbstractObjectRequestPayerArgumen
   startAfter?: string;
 }
 
+export interface GetObjectArgument extends AbstractGetObjectArgument {}
+
 // ------------------------------ 以下未整理，上面是新整的内容 ------------------------------
 
 export interface BaseArguments extends Entity {
@@ -83,7 +104,6 @@ export interface BasePartArguments extends ObjectArguments {
 
 // ------------------------------ Special ------------------------------
 
-export interface ObjectStreamDownloadArguments extends ObjectArguments {}
 export interface CreateMultipartUploadArguments extends ObjectArguments {
   partNumber: number;
 }

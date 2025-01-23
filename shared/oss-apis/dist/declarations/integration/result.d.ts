@@ -1,5 +1,5 @@
 import { Entity } from '../base';
-import { BucketDomain, OwnerDomain, DeletedObjectDomain, S3ErrorDomain, ObjectDomain } from './domain';
+import { BucketDomain, OwnerDomain, DeletedObjectDomain, S3ErrorDomain, ObjectDomain, SsekmsDomain, ChecksumDomain } from './domain';
 export interface AbstractResult extends Entity {
     cloudFrontId: string;
     extendedRequestId: string;
@@ -12,6 +12,10 @@ export interface AbstractObjectResult extends AbstractResult {
     deleteMarker: boolean;
     versionId: string;
     requestCharged: string;
+}
+export interface AbstractRequestChargedResult extends AbstractResult {
+    requestCharged: string;
+    bucketKeyEnabled: boolean;
 }
 export interface CreateBucketResult extends AbstractResult {
     location: string;
@@ -43,6 +47,16 @@ export interface ListObjectsV2Result extends AbstractResult {
     startAfter: string;
     requestCharged: string;
 }
+export interface UploadPartResult extends AbstractRequestChargedResult {
+    serverSideEncryption: string;
+    eTag: string;
+    checksum: ChecksumDomain;
+    ssekms: SsekmsDomain;
+}
+export interface PutObjectResult extends UploadPartResult {
+    expiration: string;
+    versionId: string;
+}
 export interface BaseDomain extends Entity {
     bucketName: string;
     region?: string;
@@ -51,8 +65,6 @@ export interface BaseDomain extends Entity {
 export interface ObjectWriteDomain extends BaseDomain {
     etag: string;
     versionId: string;
-}
-export interface PutObjectDomain extends ObjectWriteDomain {
 }
 export interface CompleteMultipartUploadDomain extends ObjectWriteDomain {
 }

@@ -1,5 +1,5 @@
 import { Entity } from '../base';
-import { DeleteDomain } from './domain';
+import { DeleteDomain, SseCustomerDomain } from './domain';
 export interface AbstractArgument extends Entity {
 }
 export interface AbstractBucketArgument extends AbstractArgument {
@@ -16,6 +16,22 @@ export interface AbstractObjectArgument extends AbstractObjectRequestPayerArgume
 }
 export interface AbstractObjectVersionArgument extends AbstractObjectArgument {
     versionId?: string;
+}
+export interface AbstractGetObjectArgument extends AbstractObjectVersionArgument {
+    ifMatch?: string;
+    ifModifiedSince?: Date;
+    ifNoneMatch?: string;
+    ifUnmodifiedSince?: Date;
+    range?: string;
+    responseCacheControl?: string;
+    responseContentDisposition?: string;
+    responseContentEncoding?: string;
+    responseContentLanguage?: string;
+    responseContentType?: string;
+    responseExpires?: Date;
+    sseCustomer?: SseCustomerDomain;
+    partNumber?: number;
+    checksumMode?: string;
 }
 export interface CreateBucketArgument extends AbstractBucketArgument {
     acl?: string;
@@ -51,6 +67,8 @@ export interface ListObjectsV2Argument extends AbstractObjectRequestPayerArgumen
     fetchOwner?: boolean;
     startAfter?: string;
 }
+export interface GetObjectArgument extends AbstractGetObjectArgument {
+}
 export interface BaseArguments extends Entity {
     extraHeaders?: Map<string, string>;
     extraQueryParams?: Map<string, string>;
@@ -64,8 +82,6 @@ export interface ObjectArguments extends BucketArguments {
 }
 export interface BasePartArguments extends ObjectArguments {
     uploadId: string;
-}
-export interface ObjectStreamDownloadArguments extends ObjectArguments {
 }
 export interface CreateMultipartUploadArguments extends ObjectArguments {
     partNumber: number;

@@ -28,8 +28,8 @@ export interface OwnerDomain extends Entity {
 }
 
 export interface DeletedObjectDomain extends DeleteDomain {
-  deleteMarker: boolean;
-  deleteMarkerVersionId: string;
+  deleteMarker?: boolean;
+  deleteMarkerVersionId?: string;
 }
 
 export interface S3ErrorDomain extends DeleteDomain {
@@ -52,6 +52,24 @@ export interface ObjectDomain extends Entity {
   owner: OwnerDomain;
   restoreStatus: RestoreStatusDomain;
   isDir: boolean;
+}
+
+export interface SseCustomerDomain extends Entity {
+  sseCustomerAlgorithm: string;
+  sseCustomerKey: string;
+  sseCustomerKeyMD5: string;
+}
+
+export interface SsekmsDomain extends SseCustomerDomain {
+  ssekmsKeyId: string;
+  ssekmsEncryptionContext: string;
+}
+
+export interface ChecksumDomain extends Entity {
+  checksumCRC32: string;
+  checksumCRC32C: string;
+  checksumSHA1: string;
+  checksumSHA256: string;
 }
 
 export type BucketDomainProps = keyof BucketDomain;

@@ -1,6 +1,6 @@
 {
   "name": "@dante/ui",
-  "version": "3.4.1.2",
+  "version": "3.4.2.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -24,12 +24,12 @@
     "@herodotus/form-engine": "workspace:^",
     "@herodotus/oss-apis": "workspace:^",
     "@mdi/js": "^7.4.47",
-    "@quasar/extras": "^1.16.15",
+    "@quasar/extras": "^1.16.16",
     "@rsocket/composite-metadata": "1.0.0-alpha.3",
     "@stomp/stompjs": "^7.0.0",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@vueuse/core": "^12.4.0",
+    "@vueuse/core": "^12.5.0",
     "animate.css": "^4.1.1",
     "colord": "^2.9.3",
     "echarts": "^5.6.0",
@@ -45,6 +45,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "22.10.7"
+    "@types/node": "22.10.9"
   }
 }
