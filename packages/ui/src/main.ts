@@ -1,6 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 
+import 'virtual:uno.css';
+
 import 'animate.css/animate.min.css';
 import './static/styles/index.scss';
 
@@ -53,7 +55,7 @@ async function setupApp() {
     DisableDevtool({
       url: '/static/forbidden.html',
       timeOutUrl: '/static/forbidden.html',
-      disableMenu: true,
+      disableMenu: true
     });
   }
 }
