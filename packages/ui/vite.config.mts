@@ -32,7 +32,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           Buffer: true
         }
       }),
-      UnoCSS(),
+      UnoCSS({
+        configFile: '../../uno.config.ts'
+      }),
       vue({
         template: { transformAssetUrls }
       }),
