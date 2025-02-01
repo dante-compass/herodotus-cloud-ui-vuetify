@@ -770,6 +770,44 @@ const _OpenApiService = class _OpenApiService {
 };
 __publicField(_OpenApiService, "instance");
 let OpenApiService = _OpenApiService;
+const _PasskeyApiService = class _PasskeyApiService {
+  constructor(config) {
+    __publicField(this, "config", {});
+    this.config = config;
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _PasskeyApiService(config);
+    }
+    return this.instance;
+  }
+  getWebAuthnRegisterAddress() {
+    return this.config.getUaa() + "/webauthn/register";
+  }
+  getWebAuthnRegisterOptionsAddress() {
+    return this.getWebAuthnRegisterAddress() + "/options";
+  }
+  getWebAuthnAuthenticateOptionsAddress() {
+    return this.config.getUaa() + "/webauthn/authenticate/options";
+  }
+  getLogicWebAuthnAddress() {
+    return this.config.getUaa() + "/login/webauthn";
+  }
+  webAuthnRegisterOptions() {
+    return this.config.getHttp().post(this.getWebAuthnRegisterOptionsAddress(), "");
+  }
+  webAuthnRegister(request) {
+    return this.config.getHttp().post(this.getWebAuthnRegisterAddress(), request);
+  }
+  webAuthnAuthenticateOptions() {
+    return this.config.getHttp().post(this.getWebAuthnAuthenticateOptionsAddress(), "");
+  }
+  webAuthnAuthenticate(request) {
+    return this.config.getHttp().post(this.getLogicWebAuthnAddress(), request);
+  }
+};
+__publicField(_PasskeyApiService, "instance");
+let PasskeyApiService = _PasskeyApiService;
 const _DialogueContactService = class _DialogueContactService extends BaseService {
   constructor(config) {
     super(config);
@@ -951,6 +989,9 @@ const _ApiResources = class _ApiResources {
   mgtCertificate() {
     return MgtCertificateService.getInstance(this.config);
   }
+  passkey() {
+    return PasskeyApiService.getInstance(this.config);
+  }
 };
 __publicField(_ApiResources, "instance");
 let ApiResources = _ApiResources;
@@ -980,6 +1021,7 @@ export {
   OAuth2ScopeService,
   OAuth2UserLoggingService,
   OpenApiService,
+  PasskeyApiService,
   Service,
   SocialBindingService,
   SocialSourceEnum,

@@ -38,16 +38,16 @@ class OAuth2ApiService {
     return this.config.getHttp().put(
       this.getOAuth2SignOutAddress(),
       {
-        accessToken: token
+        accessToken: token,
       },
       {
-        contentType: ContentTypeEnum.URL_ENCODED
+        contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
+          Authorization: this.getBasicHeader(),
+        },
+      },
     );
   }
 
@@ -55,16 +55,16 @@ class OAuth2ApiService {
     return this.config.getHttp().post(
       this.getOAuth2RevokeAddress(),
       {
-        token: token
+        token: token,
       },
       {
-        contentType: ContentTypeEnum.URL_ENCODED
+        contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
+          Authorization: this.getBasicHeader(),
+        },
+      },
     );
   }
 
@@ -75,13 +75,13 @@ class OAuth2ApiService {
         ? { refresh_token: refreshToken, grant_type: 'refresh_token', scope: 'openid' }
         : { refresh_token: refreshToken, grant_type: 'refresh_token' },
       {
-        contentType: ContentTypeEnum.URL_ENCODED
+        contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
+          Authorization: this.getBasicHeader(),
+        },
+      },
     );
   }
 
@@ -92,13 +92,13 @@ class OAuth2ApiService {
         ? { username: username, password: password, grant_type: 'password', scope: 'openid' }
         : { username: username, password: password, grant_type: 'password' },
       {
-        contentType: ContentTypeEnum.URL_ENCODED
+        contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
+          Authorization: this.getBasicHeader(),
+        },
+      },
     );
   }
 
@@ -106,7 +106,7 @@ class OAuth2ApiService {
     code: string,
     redirect_uri: string,
     state = '',
-    oidc = false
+    oidc = false,
   ): Promise<AxiosHttpResult<OAuth2Token>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
@@ -114,13 +114,13 @@ class OAuth2ApiService {
         ? { code: code, state: state, redirect_uri: redirect_uri, grant_type: 'authorization_code', scope: 'openid' }
         : { code: code, state: state, redirect_uri: redirect_uri, grant_type: 'authorization_code' },
       {
-        contentType: ContentTypeEnum.URL_ENCODED
+        contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
+          Authorization: this.getBasicHeader(),
+        },
+      },
     );
   }
 
@@ -131,20 +131,20 @@ class OAuth2ApiService {
         ? { mobile, code, grant_type: 'social_credentials', source: 'SMS', scope: 'openid' }
         : { mobile, code, grant_type: 'social_credentials', source: 'SMS' },
       {
-        contentType: ContentTypeEnum.URL_ENCODED
+        contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
+          Authorization: this.getBasicHeader(),
+        },
+      },
     );
   }
 
   public socialCredentialsFlowByJustAuth(
     source: SocialSource,
     accessPrincipal: AccessPrincipal,
-    oidc = false
+    oidc = false,
   ): Promise<AxiosHttpResult<OAuth2Token>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
@@ -152,13 +152,13 @@ class OAuth2ApiService {
         ? { ...accessPrincipal, grant_type: 'social_credentials', source: source, scope: 'openid' }
         : { ...accessPrincipal, grant_type: 'social_credentials', source: source },
       {
-        contentType: ContentTypeEnum.URL_ENCODED
+        contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
+          Authorization: this.getBasicHeader(),
+        },
+      },
     );
   }
 }

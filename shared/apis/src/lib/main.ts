@@ -1,5 +1,5 @@
 import { Axios, HttpConfig } from './base';
-import { OpenApiService, OAuth2ApiService } from './secure';
+import { OpenApiService, OAuth2ApiService, PasskeyApiService } from './secure';
 import {
   OAuth2ApplicationService,
   OAuth2ScopeService,
@@ -150,6 +150,10 @@ class ApiResources {
 
   public mgtCertificate(): MgtCertificateService {
     return MgtCertificateService.getInstance(this.config);
+  }
+
+  public passkey(): PasskeyApiService {
+    return PasskeyApiService.getInstance(this.config);
   }
 }
 

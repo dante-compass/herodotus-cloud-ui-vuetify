@@ -1,5 +1,5 @@
 import { Axios, HttpConfig } from './base';
-import { OpenApiService, OAuth2ApiService } from './secure';
+import { OpenApiService, OAuth2ApiService, PasskeyApiService } from './secure';
 import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService } from './modules';
 import { DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './settings';
 declare class ApiResources {
@@ -34,6 +34,7 @@ declare class ApiResources {
     webSocketMessage(): WebSocketMessageService;
     task(): ExtendedTaskService;
     mgtCertificate(): MgtCertificateService;
+    passkey(): PasskeyApiService;
 }
 declare const createApi: (project: string, clientId: string, clientSecret: string, http: Axios, oidc: boolean) => ApiResources;
 export { createApi };
