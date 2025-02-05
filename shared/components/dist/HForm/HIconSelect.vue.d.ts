@@ -1,4 +1,3 @@
-import { Ref } from 'vue';
 import { QSelect } from 'quasar';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     modelValue: {
@@ -17,7 +16,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     };
 }>, {
     selectedValue: import('vue').WritableComputedRef<string | undefined, string | undefined>;
-    options: Ref<string[], string[]>;
+    options: import('vue').Ref<string[], string[]>;
     filter: (value: string, update: (callbackFn: () => void, after?: (ref: QSelect) => void) => void, abort: () => void) => void;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {

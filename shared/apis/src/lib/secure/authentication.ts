@@ -1,4 +1,10 @@
-import type { AxiosHttpResult, SocialSource, AccessPrincipal, OAuth2Token } from '/@/declarations';
+import type {
+  AxiosHttpResult,
+  SocialSource,
+  AccessPrincipal,
+  OAuth2Token,
+  WebAuthnAuthenticate,
+} from '/@/declarations';
 
 import { HttpConfig, Base64 } from '../base';
 import { ContentTypeEnum } from '/@/enums';
@@ -153,6 +159,22 @@ class OAuth2ApiService {
         : { ...accessPrincipal, grant_type: 'social_credentials', source: source },
       {
         contentType: ContentTypeEnum.URL_ENCODED,
+      },
+      {
+        headers: {
+          Authorization: this.getBasicHeader(),
+        },
+      },
+    );
+  }
+
+  public webAuthnCredentialsFlow(publicKey: WebAuthnAuthenticate, oidc = false): Promise<AxiosHttpResult<OAuth2Token>> {
+    return this.config.getHttp().postWithParams(
+      this.getOAuth2TokenAddress(),
+      oidc ? { grant_type: 'webauthn_credentials', scope: 'openid' } : { grant_type: 'webauthn_credentials' },
+      { ...publicKey },
+      {
+        contentType: ContentTypeEnum.JSON,
       },
       {
         headers: {

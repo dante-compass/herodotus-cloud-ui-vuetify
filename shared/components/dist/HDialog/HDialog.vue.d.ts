@@ -16,6 +16,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: StringConstructor;
         default: string;
     };
+    confirmLabel: {
+        type: StringConstructor;
+        default: string;
+    };
     spinnerSize: {
         type: StringConstructor;
         default: string;
@@ -64,6 +68,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         type: StringConstructor;
         default: string;
     };
+    confirmLabel: {
+        type: StringConstructor;
+        default: string;
+    };
     spinnerSize: {
         type: StringConstructor;
         default: string;
@@ -98,6 +106,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     loading: boolean;
     title: string;
     height: string;
+    confirmLabel: string;
     spinnerSize: string;
     hideConfirm: boolean;
     hideCancel: boolean;

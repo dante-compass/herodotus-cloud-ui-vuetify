@@ -1,4 +1,4 @@
-import type { AbstractSysEntity, Conditions, EmptyObject, Entity } from '../base';
+import type { AbstractSysEntity, Conditions, Entity } from '../base';
 import type { SysEmployeeEntity } from './hr';
 
 export interface SysPermissionEntity extends AbstractSysEntity {

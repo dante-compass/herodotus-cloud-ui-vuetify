@@ -1,17 +1,18 @@
 import { AxiosHttpResult, WebAuthnRegisterOptions, WebAuthnRegister, WebAuthnAuthenticateOptions, WebAuthnAuthenticate } from '../../declarations';
-import { HttpConfig } from '../base';
-declare class PasskeyApiService {
+import { HttpConfig, Service } from '../base';
+declare class PasskeyApiService extends Service {
     private static instance;
-    private config;
     private constructor();
     static getInstance(config: HttpConfig): PasskeyApiService;
-    private getWebAuthnRegisterAddress;
+    getBaseAddress(): string;
     private getWebAuthnRegisterOptionsAddress;
+    private getWebAuthnAuthenticateAddress;
     private getWebAuthnAuthenticateOptionsAddress;
-    private getLogicWebAuthnAddress;
-    webAuthnRegisterOptions(): Promise<AxiosHttpResult<WebAuthnRegisterOptions>>;
+    protected getIdPath(id: string): string;
+    fetchWebAuthnRegisterOptions(): Promise<AxiosHttpResult<WebAuthnRegisterOptions>>;
     webAuthnRegister(request: WebAuthnRegister): Promise<AxiosHttpResult<boolean>>;
-    webAuthnAuthenticateOptions(): Promise<AxiosHttpResult<WebAuthnAuthenticateOptions>>;
+    fetchWebAuthnAuthenticateOptions(): Promise<AxiosHttpResult<WebAuthnAuthenticateOptions>>;
     webAuthnAuthenticate(request: WebAuthnAuthenticate): Promise<AxiosHttpResult<boolean>>;
+    delete(id: string): Promise<AxiosHttpResult<string>>;
 }
 export { PasskeyApiService };

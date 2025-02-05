@@ -55,7 +55,7 @@ async function setupApp() {
     DisableDevtool({
       url: '/static/forbidden.html',
       timeOutUrl: '/static/forbidden.html',
-      disableMenu: true
+      disableMenu: true,
     });
   }
 }

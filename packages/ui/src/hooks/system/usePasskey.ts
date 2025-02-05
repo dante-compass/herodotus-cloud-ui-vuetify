@@ -7,11 +7,14 @@ import {
   get,
 } from '@github/webauthn-json/browser-ponyfill';
 
-import type { WebAuthnRegisterOptions, WebAuthnRegister, WebAuthnAuthenticateOptions } from '/@/lib/declarations';
+import type { WebAuthnRegister } from '/@/lib/declarations';
 
 import { api } from '/@/lib/utils';
+import { useAuthenticationStore } from '/@/stores';
 
 export default function usePasskey() {
+  const authenticationStore = useAuthenticationStore();
+
   // Availability of `window.PublicKeyCredential` means WebAuthn is usable.
   // `isUserVerifyingPlatformAuthenticatorAvailable` means the feature detection is usable.
   // `isConditionalMediationAvailable` means the feature detection is usable.
@@ -33,35 +36,75 @@ export default function usePasskey() {
     return false;
   };
 
-  const registration = async (label: string): Promise<boolean> => {
-    const publicKey = (await api.passkey().webAuthnRegisterOptions()) as WebAuthnRegisterOptions;
+  const registration = (label: string): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      api
+        .passkey()
+        .fetchWebAuthnRegisterOptions()
+        .then(publicKey => {
+          const registrationOptions = parseCreationOptionsFromJSON({ publicKey } as CredentialCreationOptionsJSON);
+          create(registrationOptions).then(registration => {
+            const credential = registration.toJSON();
+            const request: WebAuthnRegister = { publicKey: { label: label, credential: credential } };
+            api
+              .passkey()
+              .webAuthnRegister(request)
+              .then(() => {
+                resolve(true);
+              });
+          });
+        })
+        .catch(() => {
+          reject(false);
+        });
+    });
 
-    const registrationOptions = parseCreationOptionsFromJSON({ publicKey } as CredentialCreationOptionsJSON);
+    // const publicKey = (await api.passkey().fetchWebAuthnRegisterOptions()) as WebAuthnRegisterOptions;
 
-    const registration = await create(registrationOptions);
+    // const registrationOptions = parseCreationOptionsFromJSON({ publicKey } as CredentialCreationOptionsJSON);
 
-    const credential = registration.toJSON();
+    // const registration = await create(registrationOptions);
 
-    const request: WebAuthnRegister = { publicKey: { label: label, credential: credential } };
+    // const credential = registration.toJSON();
 
-    return (await api.passkey().webAuthnRegister(request)) as boolean;
+    // const request: WebAuthnRegister = { publicKey: { label: label, credential: credential } };
+
+    // return (await api.passkey().webAuthnRegister(request)) as boolean;
   };
 
-  const authentication = async (): Promise<boolean> => {
-    const publicKey = (await api.passkey().webAuthnAuthenticateOptions()) as WebAuthnAuthenticateOptions;
+  const authenticator = (): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      api
+        .passkey()
+        .fetchWebAuthnAuthenticateOptions()
+        .then(publicKey => {
+          const authenticationOptions = parseRequestOptionsFromJSON({ publicKey } as CredentialRequestOptionsJSON);
+          get(authenticationOptions).then(authentication => {
+            const request = authentication.toJSON();
+            authenticationStore.passkey(request).then(result => {
+              resolve(result);
+            });
+          });
+        })
+        .catch(() => {
+          reject(false);
+        });
+    });
 
-    const authenticationOptions = parseRequestOptionsFromJSON({ publicKey } as CredentialRequestOptionsJSON);
+    // const publicKey = (await api.passkey().fetchWebAuthnAuthenticateOptions()) as WebAuthnAuthenticateOptions;
 
-    const authentication = await get(authenticationOptions);
+    // const authenticationOptions = parseRequestOptionsFromJSON({ publicKey } as CredentialRequestOptionsJSON);
 
-    const request = authentication.toJSON();
+    // const authentication = await get(authenticationOptions);
 
-    return (await api.passkey().webAuthnAuthenticate(request)) as boolean;
+    // const request = authentication.toJSON();
+
+    // return (await api.passkey().webAuthnAuthenticate(request)) as boolean;
   };
 
   return {
     isSupported,
     registration,
-    authentication,
+    authenticator,
   };
 }

@@ -865,7 +865,7 @@ const _sfc_main$g = defineComponent({
     modelValue: { type: [String, Number] }
   },
   emits: ["update:modelValue"],
-  setup(props, { emit, slots }) {
+  setup(props, { emit }) {
     const text = computed({
       get: () => props.modelValue,
       set: (newValue) => {
@@ -1691,6 +1691,7 @@ const _sfc_main$7 = defineComponent({
     loading: { type: Boolean, default: false },
     title: { type: String, default: "" },
     height: { type: String, default: "500px" },
+    confirmLabel: { type: String, default: "确认" },
     spinnerSize: { type: String, default: "50px" },
     hideConfirm: { type: Boolean, default: false },
     hideCancel: { type: Boolean, default: false },
@@ -1796,10 +1797,10 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
               })) : createCommentVNode("", true),
               !_ctx.hideConfirm ? (openBlock(), createBlock(_component_q_btn, {
                 key: 1,
-                label: "确认",
+                label: _ctx.confirmLabel,
                 color: "primary",
                 onClick: _cache[2] || (_cache[2] = ($event) => _ctx.onConfirm())
-              })) : createCommentVNode("", true)
+              }, null, 8, ["label"])) : createCommentVNode("", true)
             ]),
             _: 1
           }),

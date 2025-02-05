@@ -6,14 +6,13 @@ import type {
   WebAuthnAuthenticate,
 } from '/@/declarations';
 
-import { HttpConfig } from '../base';
+import { HttpConfig, Service } from '../base';
 
-class PasskeyApiService {
+class PasskeyApiService extends Service {
   private static instance: PasskeyApiService;
-  private config = {} as HttpConfig;
 
   private constructor(config: HttpConfig) {
-    this.config = config;
+    super(config);
   }
 
   public static getInstance(config: HttpConfig): PasskeyApiService {
@@ -23,38 +22,50 @@ class PasskeyApiService {
     return this.instance;
   }
 
-  private getWebAuthnRegisterAddress(): string {
-    return this.config.getUaa() + '/webauthn/register';
+  public getBaseAddress(): string {
+    return this.getConfig().getUaa() + '/webauthn/register';
   }
 
   private getWebAuthnRegisterOptionsAddress(): string {
-    return this.getWebAuthnRegisterAddress() + '/options';
+    return this.getBaseAddress() + '/options';
+  }
+
+  private getWebAuthnAuthenticateAddress(): string {
+    return this.getConfig().getUaa() + '/login/webauthn';
   }
 
   private getWebAuthnAuthenticateOptionsAddress(): string {
-    return this.config.getUaa() + '/webauthn/authenticate/options';
+    return this.getConfig().getUaa() +'/webauthn/authenticate/options';
   }
 
-  private getLogicWebAuthnAddress(): string {
-    return this.config.getUaa() + '/login/webauthn';
+  protected getIdPath(id: string): string {
+    return this.getParamPath(this.getBaseAddress(), id);
   }
 
-  public webAuthnRegisterOptions(): Promise<AxiosHttpResult<WebAuthnRegisterOptions>> {
-    return this.config.getHttp().post<WebAuthnRegisterOptions, string>(this.getWebAuthnRegisterOptionsAddress(), '');
+  public fetchWebAuthnRegisterOptions(): Promise<AxiosHttpResult<WebAuthnRegisterOptions>> {
+    return this.getConfig()
+      .getHttp()
+      .post<WebAuthnRegisterOptions, string>(this.getWebAuthnRegisterOptionsAddress(), '');
   }
 
   public webAuthnRegister(request: WebAuthnRegister): Promise<AxiosHttpResult<boolean>> {
-    return this.config.getHttp().post<boolean, WebAuthnRegister>(this.getWebAuthnRegisterAddress(), request);
+    return this.getConfig().getHttp().post<boolean, WebAuthnRegister>(this.getBaseAddress(), request);
   }
 
-  public webAuthnAuthenticateOptions(): Promise<AxiosHttpResult<WebAuthnAuthenticateOptions>> {
-    return this.config
+  public fetchWebAuthnAuthenticateOptions(): Promise<AxiosHttpResult<WebAuthnAuthenticateOptions>> {
+    return this.getConfig()
       .getHttp()
       .post<WebAuthnAuthenticateOptions, string>(this.getWebAuthnAuthenticateOptionsAddress(), '');
   }
 
   public webAuthnAuthenticate(request: WebAuthnAuthenticate): Promise<AxiosHttpResult<boolean>> {
-    return this.config.getHttp().post<boolean, WebAuthnAuthenticate>(this.getLogicWebAuthnAddress(), request);
+    return this.getConfig()
+      .getHttp()
+      .post<boolean, WebAuthnAuthenticate>(this.getWebAuthnAuthenticateAddress(), request);
+  }
+
+  public delete(id: string): Promise<AxiosHttpResult<string>> {
+    return this.getConfig().getHttp().delete<string, string>(this.getIdPath(id));
   }
 }
 

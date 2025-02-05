@@ -4,6 +4,7 @@ import {
   OAuth2ApplicationService,
   OAuth2ScopeService,
   OAuth2AuthorizationService,
+  OAuth2CredentialRecordService,
   OAuth2UserLoggingService,
   OAuth2InterfaceAuditService,
   SysOrganizationService,
@@ -67,6 +68,10 @@ class ApiResources {
 
   public oauth2Authorization(): OAuth2AuthorizationService {
     return OAuth2AuthorizationService.getInstance(this.config);
+  }
+
+  public oauth2CredentialRecord(): OAuth2CredentialRecordService {
+    return OAuth2CredentialRecordService.getInstance(this.config);
   }
 
   public oauth2UserLogging(): OAuth2UserLoggingService {

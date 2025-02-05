@@ -14,6 +14,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bpmn-io/properties-panel": "3.25.1",
     "@github/webauthn-json": "^2.1.1",
     "@herodotus/apis": "workspace:^",
     "@herodotus/bpmn-apis": "workspace:^",
@@ -32,6 +33,9 @@
     "@vuelidate/validators": "^2.0.4",
     "@vueuse/core": "^12.5.0",
     "animate.css": "^4.1.1",
+    "axios": "^1.7.9",
+    "bpmn-js": "^18.2.0",
+    "bpmn-js-token-simulation": "^0.36.2",
     "colord": "^2.9.3",
     "echarts": "^5.6.0",
     "element-resize-detector": "^1.2.4",
@@ -46,6 +50,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "22.13.0"
+    "@types/node": "22.13.1"
   }
 }

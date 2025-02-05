@@ -29,37 +29,38 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     plugins: [
       nodePolyfills({
         globals: {
-          Buffer: true
-        }
+          Buffer: true,
+        },
       }),
       UnoCSS({
-        configFile: '../../uno.config.ts'
+        configFile: '../../uno.config.ts',
       }),
       vue({
-        template: { transformAssetUrls }
+        template: { transformAssetUrls },
       }),
       quasar({
-        sassVariables: '/@/static/styles/quasar.variables.sass'
+        sassVariables: '/@/static/styles/quasar.variables.sass',
       }),
       AutoImport({
         dts: true,
-        imports: ['quasar']
+        imports: ['quasar'],
       }),
       Components({
         dts: true,
         resolvers: [
           QuasarResolver(),
           IconsResolver({
-            customCollections: ['custom']
-          })
-        ]
+            customCollections: ['custom'],
+          }),
+        ],
       }),
       Icons({
         compiler: 'vue3',
+        autoInstall: true,
         customCollections: {
           // 这里是存放svg图标的文件地址，custom是自定义图标库的名称
-          custom: FileSystemIconLoader('./src/assets/svg')
-        }
+          custom: FileSystemIconLoader('./src/assets/svg'),
+        },
       }),
       compression(),
       // VConsole 调试工具配置，若没有此配置，则调试工具控制台不会打印日志
@@ -69,25 +70,25 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         config: {
           // vconsole options
           maxLogNumber: 1000,
-          theme: 'light'
-        }
+          theme: 'light',
+        },
       }),
       createHtmlPlugin({
         inject: {
           data: {
             // 查找.env.test文件里面的VITE_PROJECT_TITLE，请以VITE_标识开头
-            title: env.VITE_PROJECT_NAME
-          }
-        }
+            title: env.VITE_PROJECT_NAME,
+          },
+        },
       }),
-      lifecycle === 'report' ? visualizer({ open: true, brotliSize: true, filename: 'report.html' }) : null
+      lifecycle === 'report' ? visualizer({ open: true, brotliSize: true, filename: 'report.html' }) : null,
     ],
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use "/@/static/styles/global.scss" as *;`
-        }
-      }
+          additionalData: `@use "/@/static/styles/global.scss" as *;`,
+        },
+      },
     },
     define: { 'process.env': env },
     resolve: {
@@ -95,8 +96,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         '/@': path.resolve(__dirname, 'src'),
         // 解决 vue-i18n : No known conditions for "." entry in "@intlify/shared" package 错误
         // "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js", // 修改前
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js' // 修改后
-      }
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js', // 修改后
+      },
     },
     server: {
       port: 3000,
@@ -104,24 +105,24 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         '/api': {
           target: env.VITE_API_URL,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, '')
+          rewrite: path => path.replace(/^\/api/, ''),
         },
         '/socket': {
           target: env.VITE_WS_URL,
           changeOrigin: true,
           ws: true,
-          rewrite: path => path.replace(/^\/socket/, '')
+          rewrite: path => path.replace(/^\/socket/, ''),
         },
         '/reactive': {
           target: env.VITE_REACTIVE_WS_URL,
           changeOrigin: true,
           ws: true,
-          rewrite: path => path.replace(/^\/reactive/, '')
-        }
-      }
+          rewrite: path => path.replace(/^\/reactive/, ''),
+        },
+      },
     },
     esbuild: {
-      drop: env.VITE_NODE_ENV === 'production' ? ['console', 'debugger'] : []
+      drop: env.VITE_NODE_ENV === 'production' ? ['console', 'debugger'] : [],
     },
 
     build: {
@@ -154,9 +155,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               const path = id.toString().split('src/')[1].replace(/\//g, '-');
               return 'js/herodotus/' + path;
             }
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   });
 };

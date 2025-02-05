@@ -67,6 +67,18 @@
         @click="onShowCaptcha()"
         @keyup.enter="onShowCaptcha()" />
       <h-behavior-captcha v-model="isShowCaptcha" @verify="onCaptchaVerify($event)"></h-behavior-captcha>
+      <h-divider label="or" class="q-mb-md"></h-divider>
+      <q-btn
+        tabindex="4"
+        rounded
+        unelevated
+        color="primary"
+        icon="mdi-account-key"
+        class="full-width q-mb-md"
+        :disable="isDisabled"
+        label="Passkey 快速登录"
+        @click="passkeySignIn()"
+        @keyup.enter="passkeySignIn()" />
 
       <!-- <h-container mode="two" gutter="md" gutter-col horizontal class="q-mb-md">
 				<template #left>
@@ -95,6 +107,7 @@ import { CONSTANTS } from '/@/composables/constants';
 import { toast } from '/@/lib/utils';
 import { useApplicationStore, useCryptoStore, useAuthenticationStore } from '/@/stores';
 import { HSocialSignInList } from '/@/composables/sign-in';
+import { usePasskey } from '/@/hooks';
 
 export default defineComponent({
   name: 'AccountPanel',
@@ -109,6 +122,7 @@ export default defineComponent({
     const crypto = useCryptoStore();
 
     const router = useRouter();
+    const { authenticator } = usePasskey();
 
     const username = ref('');
     const password = ref('');
@@ -155,6 +169,28 @@ export default defineComponent({
     const onResetError = () => {
       errorMessage.value = '';
       hasError.value = false;
+    };
+
+    const passkeySignIn = () => {
+      isSubmitDisabled.value = true;
+
+      authenticator()
+        .then(response => {
+          if (response) {
+            isSubmitDisabled.value = false;
+            toast.success('欢迎回来！');
+            router.push({
+              path: CONSTANTS.Path.HOME,
+            });
+          }
+        })
+        .catch(error => {
+          isSubmitDisabled.value = false;
+          if (error.message) {
+            errorMessage.value = error.message;
+            hasError.value = true;
+          }
+        });
     };
 
     const onShowCaptcha = () => {
@@ -214,6 +250,7 @@ export default defineComponent({
       prompt,
       promptMessage,
       isDisabled,
+      passkeySignIn,
     };
   },
 });

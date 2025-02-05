@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import type {
   SignInErrorStatus,
-  AxiosHttpResult,
+  WebAuthnAuthenticate,
   SocialSource,
   AccessPrincipal,
   OAuth2Token,
@@ -237,6 +237,29 @@ export const useAuthenticationStore = defineStore('Authentication', {
         api
           .oauth2()
           .socialCredentialsFlowByJustAuth(source, accessPrincipal, variables.isUseCrypto())
+          .then(response => {
+            if (response) {
+              const data = response as OAuth2Token;
+              this.setTokenInfo(data);
+            }
+
+            if (this.access_token) {
+              resolve(true);
+            } else {
+              resolve(false);
+            }
+          })
+          .catch(error => {
+            if (error.code && [40106, 40111].includes(error.code)) reject(error);
+          });
+      });
+    },
+
+    passkey(publicKey: WebAuthnAuthenticate) {
+      return new Promise<boolean>((resolve, reject) => {
+        api
+          .oauth2()
+          .webAuthnCredentialsFlow(publicKey, variables.isUseCrypto())
           .then(response => {
             if (response) {
               const data = response as OAuth2Token;
