@@ -1,4 +1,4 @@
-import type { AbstractSysEntity, Conditions, Entity, EmptyObject } from '../base';
+import type { AbstractSysEntity, Conditions, Entity } from '../base';
 
 export interface SysDepartmentEntity extends AbstractSysEntity {
   departmentId: string;

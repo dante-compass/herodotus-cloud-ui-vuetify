@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, Ref, onMounted } from 'vue';
+import { defineComponent, computed, ref, onMounted } from 'vue';
 import type { QSelect } from 'quasar';
 import * as allIcons from '@mdi/js';
 

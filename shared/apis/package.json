@@ -26,7 +26,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@herodotus/core": "workspace:^",
-    "@herodotus/form-designer": "workspace:^"
+    "@github/webauthn-json": "^2.1.1",
+    "@herodotus/core": "workspace:^"
   }
 }

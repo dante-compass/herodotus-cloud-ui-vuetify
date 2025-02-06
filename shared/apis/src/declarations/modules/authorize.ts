@@ -57,6 +57,15 @@ export interface OAuth2AuthorizationEntity extends Entity {
   refreshTokenExpiresAt: string;
 }
 
+export interface OAuth2CredentialRecordEntity extends Entity {
+  credentialId: string;
+  signatureCount: number;
+  label: string;
+  lastUsed: Date;
+  created: Date;
+  username: string;
+}
+
 export interface AbstractAuditRecord extends AbstractJpaEntity {
   principalName: string;
   clientId: string;
@@ -89,6 +98,9 @@ export interface OAuth2ApplicationConditions extends Conditions {}
 export interface OAuth2PermissionCondition extends Conditions {}
 export interface OAuth2ScopeConditions extends Conditions {}
 export interface OAuth2AuthorizationConditions extends Conditions {}
+export interface OAuth2CredentialRecordConditions extends Conditions {
+  username: string;
+}
 export interface OAuth2UserLoggingConditions extends Conditions {
   principalName: string;
   clientId: string;
@@ -103,6 +115,7 @@ export type OAuth2ApplicationProps = keyof OAuth2ApplicationEntity;
 export type OAuth2PermissionProps = keyof OAuth2PermissionEntity;
 export type OAuth2ScopeProps = keyof OAuth2ScopeEntity;
 export type OAuth2AuthorizationProps = keyof OAuth2AuthorizationEntity;
+export type OAuth2CredentialRecordProps = keyof OAuth2CredentialRecordEntity;
 export type OAuth2UserLoggingProps = keyof OAuth2UserLoggingEntity;
 export type OAuth2InterfaceAuditProps = keyof OAuth2InterfaceAuditEntity;
 

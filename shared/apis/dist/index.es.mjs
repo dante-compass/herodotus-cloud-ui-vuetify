@@ -1,8 +1,8 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { BaseService, ContentTypeEnum, Base64, HttpConfig } from "@herodotus/core";
-import { Axios, Base64 as Base642, BaseService as BaseService2, ContentTypeEnum as ContentTypeEnum2, HttpConfig as HttpConfig2, Service, lodash, moment } from "@herodotus/core";
+import { BaseService, ContentTypeEnum, Base64, Service, HttpConfig } from "@herodotus/core";
+import { Axios, Base64 as Base642, BaseService as BaseService2, ContentTypeEnum as ContentTypeEnum2, HttpConfig as HttpConfig2, Service as Service2, lodash, moment } from "@herodotus/core";
 var AuthorityTypeEnum = /* @__PURE__ */ ((AuthorityTypeEnum2) => {
   AuthorityTypeEnum2[AuthorityTypeEnum2["API"] = 0] = "API";
   AuthorityTypeEnum2[AuthorityTypeEnum2["MENU"] = 1] = "MENU";
@@ -225,6 +225,22 @@ const _OAuth2InterfaceAuditService = class _OAuth2InterfaceAuditService extends 
 };
 __publicField(_OAuth2InterfaceAuditService, "instance");
 let OAuth2InterfaceAuditService = _OAuth2InterfaceAuditService;
+const _OAuth2CredentialRecordService = class _OAuth2CredentialRecordService extends BaseService {
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _OAuth2CredentialRecordService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getUaa() + "/authorize/passkey";
+  }
+};
+__publicField(_OAuth2CredentialRecordService, "instance");
+let OAuth2CredentialRecordService = _OAuth2CredentialRecordService;
 const _SysOrganizationService = class _SysOrganizationService extends BaseService {
   constructor(config) {
     super(config);
@@ -691,6 +707,21 @@ const _OAuth2ApiService = class _OAuth2ApiService {
       }
     );
   }
+  webAuthnCredentialsFlow(publicKey, oidc = false) {
+    return this.config.getHttp().postWithParams(
+      this.getOAuth2TokenAddress(),
+      oidc ? { grant_type: "webauthn_credentials", scope: "openid" } : { grant_type: "webauthn_credentials" },
+      { ...publicKey },
+      {
+        contentType: ContentTypeEnum.JSON
+      },
+      {
+        headers: {
+          Authorization: this.getBasicHeader()
+        }
+      }
+    );
+  }
 };
 __publicField(_OAuth2ApiService, "instance");
 let OAuth2ApiService = _OAuth2ApiService;
@@ -770,6 +801,49 @@ const _OpenApiService = class _OpenApiService {
 };
 __publicField(_OpenApiService, "instance");
 let OpenApiService = _OpenApiService;
+const _PasskeyApiService = class _PasskeyApiService extends Service {
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new _PasskeyApiService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getUaa() + "/webauthn/register";
+  }
+  getWebAuthnRegisterOptionsAddress() {
+    return this.getBaseAddress() + "/options";
+  }
+  getWebAuthnAuthenticateAddress() {
+    return this.getConfig().getUaa() + "/login/webauthn";
+  }
+  getWebAuthnAuthenticateOptionsAddress() {
+    return this.getConfig().getUaa() + "/webauthn/authenticate/options";
+  }
+  getIdPath(id) {
+    return this.getParamPath(this.getBaseAddress(), id);
+  }
+  fetchWebAuthnRegisterOptions() {
+    return this.getConfig().getHttp().post(this.getWebAuthnRegisterOptionsAddress(), "");
+  }
+  webAuthnRegister(request) {
+    return this.getConfig().getHttp().post(this.getBaseAddress(), request);
+  }
+  fetchWebAuthnAuthenticateOptions() {
+    return this.getConfig().getHttp().post(this.getWebAuthnAuthenticateOptionsAddress(), "");
+  }
+  webAuthnAuthenticate(request) {
+    return this.getConfig().getHttp().post(this.getWebAuthnAuthenticateAddress(), request);
+  }
+  delete(id) {
+    return this.getConfig().getHttp().delete(this.getIdPath(id));
+  }
+};
+__publicField(_PasskeyApiService, "instance");
+let PasskeyApiService = _PasskeyApiService;
 const _DialogueContactService = class _DialogueContactService extends BaseService {
   constructor(config) {
     super(config);
@@ -888,6 +962,9 @@ const _ApiResources = class _ApiResources {
   oauth2Authorization() {
     return OAuth2AuthorizationService.getInstance(this.config);
   }
+  oauth2CredentialRecord() {
+    return OAuth2CredentialRecordService.getInstance(this.config);
+  }
   oauth2UserLogging() {
     return OAuth2UserLoggingService.getInstance(this.config);
   }
@@ -951,6 +1028,9 @@ const _ApiResources = class _ApiResources {
   mgtCertificate() {
     return MgtCertificateService.getInstance(this.config);
   }
+  passkey() {
+    return PasskeyApiService.getInstance(this.config);
+  }
 };
 __publicField(_ApiResources, "instance");
 let ApiResources = _ApiResources;
@@ -976,11 +1056,13 @@ export {
   OAuth2ApiService,
   OAuth2ApplicationService,
   OAuth2AuthorizationService,
+  OAuth2CredentialRecordService,
   OAuth2InterfaceAuditService,
   OAuth2ScopeService,
   OAuth2UserLoggingService,
   OpenApiService,
-  Service,
+  PasskeyApiService,
+  Service2 as Service,
   SocialBindingService,
   SocialSourceEnum,
   StatusEnum,

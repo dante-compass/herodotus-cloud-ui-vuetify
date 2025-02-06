@@ -9,7 +9,7 @@
       dense
       active-color="red"
       align="left"
-      :class="[$q.dark.isActive ? 'bg-dark text-white q-pt-xs' : 'bg-white text-grey-8 q-pt-xs']">
+      :class="[quasar.dark.isActive ? 'bg-dark text-white q-pt-xs' : 'bg-white text-grey-8 q-pt-xs']">
       <q-tab name="account" label="账号信息" />
       <q-tab name="realname" label="实名认证" />
     </q-tabs>
@@ -18,33 +18,8 @@
 
     <q-tab-panels v-model="tab" animated>
       <q-tab-panel name="account">
-        <div class="text-h6 q-mb-md">账号信息</div>
-        <div class="text-h6 q-mb-md">第三方账号绑定</div>
-        <div class="text-body2 q-mb-md">使用以下任一方式都可以登录到您的帐号，避免由于某个帐号失效导致无法登录</div>
-        <q-table :rows="tableRows" :columns="columns" :row-key="rowKey" flat bordered hide-bottom :loading="loading">
-          <template #body-cell-source="props">
-            <q-td key="source" :props="props">
-              <q-avatar size="30px">
-                <img :src="getImage(props.row.source)" />
-              </q-avatar>
-            </q-td>
-          </template>
-          <template #body-cell-bound="props">
-            <q-td key="bound" :props="props">
-              <h-binding-status-column :bound="props.row.bound"></h-binding-status-column>
-            </q-td>
-          </template>
-          <template #body-cell-detail="props">
-            <q-td key="detail" :props="props">
-              <h-binding-detail-column :item="props.row"></h-binding-detail-column>
-            </q-td>
-          </template>
-          <template #body-cell-actions="props">
-            <q-td key="actions" :props="props">
-              <h-binding-button :item="props.row"></h-binding-button>
-            </q-td>
-          </template>
-        </q-table>
+        <h-binding-list></h-binding-list>
+        <h-passkey-list></h-passkey-list>
       </q-tab-panel>
 
       <q-tab-panel name="realname">
@@ -56,82 +31,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, onMounted, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
+import { useQuasar } from 'quasar';
 
-import type {
-  AccessSourceEntity,
-  AccessSourceConditions,
-  AccessSourceProps,
-  QTableColumnProps,
-} from '/@/lib/declarations';
-
-import { CONSTANTS } from '/@/composables/constants';
-import { api, getSocialLogo, moment } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
-import { useAuthenticationStore } from '/@/stores';
-
-import { HBindingButton, HBindingDetailColumn, HBindingStatusColumn } from './components';
+import { HBindingList, HPasskeyList } from './components';
 
 export default defineComponent({
   name: 'FoundationAccount',
 
   components: {
-    HBindingButton,
-    HBindingDetailColumn,
-    HBindingStatusColumn,
+    HBindingList,
+    HPasskeyList,
   },
 
-  setup(props) {
+  setup() {
     const tab = ref('account');
-    const store = useAuthenticationStore();
+    const quasar = useQuasar();
 
-    const { tableRows, pagination, loading, findItems, conditions } = useTable<
-      AccessSourceEntity,
-      AccessSourceConditions
-    >(api.socialBinding(), CONSTANTS.ComponentName.SOCIAL_BINDING, true);
-
-    const rowKey: AccessSourceProps = 'id';
-
-    const columns: QTableColumnProps = [
-      {
-        name: 'index',
-        label: '序号',
-        field: 'index',
-      },
-      { name: 'source', field: 'source', align: 'center', label: 'Logo' },
-      { name: 'description', field: 'description', align: 'center', label: '绑定账号' },
-      { name: 'detail', field: 'detail', align: 'center', label: '详情' },
-      {
-        name: 'bindingTime',
-        field: 'bindingTime',
-        align: 'center',
-        label: '绑定时间',
-        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
-      },
-      { name: 'bound', field: 'bound', align: 'center', label: '状态' },
-      { name: 'actions', field: 'actions', align: 'center', label: '操作' },
-    ];
-
-    const getImage = (source: string) => {
-      const name = source.toLowerCase();
-      return getSocialLogo(name);
-    };
-
-    onMounted(() => {
-      conditions.value.userId = store.userId;
-      findItems({ pagination: pagination.value, getCellValue: (col: any, row: any) => {} });
-    });
-
-    watch(tableRows, newValue => {
-      if (newValue) {
-        newValue.forEach((row, index) => {
-          //@ts-ignore
-          row.index = index + 1;
-        });
-      }
-    });
-
-    return { tab, tableRows, columns, rowKey, pagination, loading, getImage };
+    return { tab, quasar };
   },
 });
 </script>

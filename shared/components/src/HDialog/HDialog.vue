@@ -16,7 +16,7 @@
 
       <q-card-actions align="right" class="text-primary">
         <q-btn v-if="!hideCancel" label="取消" color="red" @click="onCancel()" />
-        <q-btn v-if="!hideConfirm" label="确认" color="primary" @click="onConfirm()" />
+        <q-btn v-if="!hideConfirm" :label="confirmLabel" color="primary" @click="onConfirm()" />
       </q-card-actions>
 
       <q-inner-loading :showing="showLoading">
@@ -37,6 +37,7 @@ export default defineComponent({
     loading: { type: Boolean, default: false },
     title: { type: String, default: '' },
     height: { type: String, default: '500px' },
+    confirmLabel: { type: String, default: '确认' },
     spinnerSize: { type: String, default: '50px' },
     hideConfirm: { type: Boolean, default: false },
     hideCancel: { type: Boolean, default: false },

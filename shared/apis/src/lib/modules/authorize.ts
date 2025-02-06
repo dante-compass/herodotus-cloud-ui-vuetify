@@ -2,6 +2,7 @@ import {
   OAuth2ApplicationEntity,
   OAuth2ScopeEntity,
   OAuth2AuthorizationEntity,
+  OAuth2CredentialRecordEntity,
   OAuth2UserLoggingEntity,
   OAuth2InterfaceAuditEntity,
   OAuth2ScopeAssignedBody,
@@ -119,10 +120,30 @@ class OAuth2InterfaceAuditService extends BaseService<OAuth2InterfaceAuditEntity
   }
 }
 
+class OAuth2CredentialRecordService extends BaseService<OAuth2CredentialRecordEntity> {
+  private static instance: OAuth2CredentialRecordService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): OAuth2CredentialRecordService {
+    if (this.instance == null) {
+      this.instance = new OAuth2CredentialRecordService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getUaa() + '/authorize/passkey';
+  }
+}
+
 export {
   OAuth2ApplicationService,
   OAuth2ScopeService,
   OAuth2AuthorizationService,
   OAuth2UserLoggingService,
   OAuth2InterfaceAuditService,
+  OAuth2CredentialRecordService,
 };

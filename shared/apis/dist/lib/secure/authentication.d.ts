@@ -1,4 +1,4 @@
-import { AxiosHttpResult, SocialSource, AccessPrincipal, OAuth2Token } from '../../declarations';
+import { AxiosHttpResult, SocialSource, AccessPrincipal, OAuth2Token, WebAuthnAuthenticate } from '../../declarations';
 import { HttpConfig } from '../base';
 declare class OAuth2ApiService {
     private static instance;
@@ -16,5 +16,6 @@ declare class OAuth2ApiService {
     authorizationCodeFlow(code: string, redirect_uri: string, state?: string, oidc?: boolean): Promise<AxiosHttpResult<OAuth2Token>>;
     socialCredentialsFlowBySms(mobile: string, code: string, oidc?: boolean): Promise<AxiosHttpResult<OAuth2Token>>;
     socialCredentialsFlowByJustAuth(source: SocialSource, accessPrincipal: AccessPrincipal, oidc?: boolean): Promise<AxiosHttpResult<OAuth2Token>>;
+    webAuthnCredentialsFlow(publicKey: WebAuthnAuthenticate, oidc?: boolean): Promise<AxiosHttpResult<OAuth2Token>>;
 }
 export { OAuth2ApiService };

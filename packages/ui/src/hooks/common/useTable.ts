@@ -11,7 +11,7 @@ import type {
 } from '/@/lib/declarations';
 
 import { BaseService } from '/@/lib/definitions';
-import { toast, standardDeleteNotify } from '/@/lib/utils';
+import { toast, standardDeleteNotify, lodash } from '/@/lib/utils';
 import useBaseTable from './useBaseTable';
 
 export default function <E extends Entity, C extends Conditions>(
@@ -54,8 +54,13 @@ export default function <E extends Entity, C extends Conditions>(
       })
       .then(result => {
         const data = result.data as Array<E>;
-        tableRows.value = data;
-        pagination.value.rowsNumber = data.length;
+
+        if (!lodash.isEmpty(data)) {
+          tableRows.value = data;
+          pagination.value.rowsNumber = data.length;
+        } else {
+          tableRows.value = [];
+        }
         hideLoading();
       })
       .catch(error => {

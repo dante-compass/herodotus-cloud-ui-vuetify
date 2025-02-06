@@ -1,5 +1,5 @@
-import { QTooltip, QBtn, QIcon, QCardSection, QSeparator, QCard, ClosePopup, QDate, QPopupProxy, QTime, QInput, QItemSection, QItemLabel, QItem, QSelect, QToggle, QTree, QSpace, QCardActions, QSpinnerDots, QInnerLoading, QDialog, Ripple, QSpinner, QSpinnerAudio, QSpinnerBall, QSpinnerBars, QSpinnerBox, QSpinnerClock, QSpinnerComment, QSpinnerCube, QSpinnerFacebook, QSpinnerGears, QSpinnerGrid, QSpinnerHearts, QSpinnerHourglass, QSpinnerInfinity, QSpinnerIos, QSpinnerOrbit, QSpinnerOval, QSpinnerPie, QSpinnerPuff, QSpinnerRadio, QSpinnerRings, QSpinnerTail, QPagination } from "quasar";
-import { defineComponent, openBlock, createBlock, normalizeProps, guardReactiveProps, createSlots, withCtx, renderSlot, createTextVNode, toDisplayString, createCommentVNode, resolveComponent, mergeProps, computed, createVNode, createElementVNode, createElementBlock, resolveDirective, withDirectives, ref, onMounted, watch, normalizeClass, normalizeStyle, reactive, resolveDynamicComponent, nextTick, onUnmounted } from "vue";
+import { QBtn, QTooltip, QIcon, QCard, QCardSection, QSeparator, ClosePopup, QInput, QPopupProxy, QTime, QDate, QSelect, QItem, QItemSection, QItemLabel, QToggle, QTree, QDialog, QSpace, QCardActions, QInnerLoading, QSpinnerDots, Ripple, QSpinnerTail, QSpinnerRings, QSpinnerRadio, QSpinnerPuff, QSpinnerPie, QSpinnerOval, QSpinnerOrbit, QSpinnerIos, QSpinnerInfinity, QSpinnerHourglass, QSpinnerHearts, QSpinnerGrid, QSpinnerGears, QSpinnerFacebook, QSpinnerCube, QSpinnerComment, QSpinnerClock, QSpinnerBox, QSpinnerBars, QSpinnerBall, QSpinnerAudio, QSpinner, QPagination } from "quasar";
+import { defineComponent, createBlock, openBlock, normalizeProps, guardReactiveProps, createSlots, withCtx, renderSlot, createCommentVNode, createTextVNode, toDisplayString, resolveComponent, mergeProps, computed, createVNode, createElementVNode, createElementBlock, resolveDirective, withDirectives, ref, onMounted, watch, normalizeClass, normalizeStyle, reactive, resolveDynamicComponent, nextTick, onUnmounted } from "vue";
 import { lodash, moment } from "@herodotus/core";
 import { lodash as lodash2, moment as moment2 } from "@herodotus/core";
 import * as allIcons from "@mdi/js";
@@ -865,7 +865,7 @@ const _sfc_main$g = defineComponent({
     modelValue: { type: [String, Number] }
   },
   emits: ["update:modelValue"],
-  setup(props, { emit, slots }) {
+  setup(props, { emit }) {
     const text = computed({
       get: () => props.modelValue,
       set: (newValue) => {
@@ -1691,6 +1691,7 @@ const _sfc_main$7 = defineComponent({
     loading: { type: Boolean, default: false },
     title: { type: String, default: "" },
     height: { type: String, default: "500px" },
+    confirmLabel: { type: String, default: "确认" },
     spinnerSize: { type: String, default: "50px" },
     hideConfirm: { type: Boolean, default: false },
     hideCancel: { type: Boolean, default: false },
@@ -1796,10 +1797,10 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
               })) : createCommentVNode("", true),
               !_ctx.hideConfirm ? (openBlock(), createBlock(_component_q_btn, {
                 key: 1,
-                label: "确认",
+                label: _ctx.confirmLabel,
                 color: "primary",
                 onClick: _cache[2] || (_cache[2] = ($event) => _ctx.onConfirm())
-              })) : createCommentVNode("", true)
+              }, null, 8, ["label"])) : createCommentVNode("", true)
             ]),
             _: 1
           }),
