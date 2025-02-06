@@ -62,9 +62,9 @@
     "postcss": "^8.5.1",
     "postcss-html": "^1.8.0",
     "prettier": "^3.4.2",
-    "rollup": "4.34.3",
+    "rollup": "4.34.4",
     "rollup-plugin-visualizer": "^5.14.0",
-    "sass": "^1.83.4",
+    "sass": "^1.84.0",
     "stylelint": "^16.14.1",
     "stylelint-config-recess-order": "^6.0.0",
     "stylelint-config-recommended-vue": "^1.6.0",
@@ -83,16 +83,5 @@
     "vite-plugin-node-polyfills": "^0.23.0",
     "vite-plugin-vconsole": "^2.1.1",
     "vue-tsc": "^2.2.0"
-  },
-  "pnpm": {
-    "ignoredBuiltDependencies": [
-      "@parcel/watcher",
-      "core-js",
-      "esbuild",
-      "vue-demi"
-    ],
-    "onlyBuiltDependencies": [
-      "@tsparticles/engine"
-    ]
   }
 }

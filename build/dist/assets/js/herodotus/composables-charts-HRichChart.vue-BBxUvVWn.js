@@ -1,1 +1,0 @@
-import{_ as t}from"./composables-charts-HRichChart.vue_vue_type_script_lang.ts-DQGxvwNJ.js";import{_ as n}from"./App.vue-BW1Uxjz2.js";import{r as c,c as e,o as s}from"../modules/npm-@vue-runtime-core-DQHggTzk.js";function a(o,p,_,i,m,f){const r=c("h-chart-container");return s(),e(r,{options:o.options},null,8,["options"])}const $=n(t,[["render",a]]);export{$ as H};
