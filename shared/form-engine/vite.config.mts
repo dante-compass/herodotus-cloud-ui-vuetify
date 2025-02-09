@@ -7,8 +7,6 @@ import { transformAssetUrls } from '@quasar/vite-plugin';
 import Components from 'unplugin-vue-components/vite';
 import { QuasarResolver } from 'unplugin-vue-components/resolvers';
 
-import path from 'path';
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -31,7 +29,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
       name: '@herodotus/form-engine',
       fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
