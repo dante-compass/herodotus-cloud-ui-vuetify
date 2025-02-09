@@ -23,7 +23,7 @@ export default defineComponent({
 
     watch(
       () => designer.activeElement.id,
-      newValue => {
+      () => {
         loading();
       },
       { immediate: true, deep: true }

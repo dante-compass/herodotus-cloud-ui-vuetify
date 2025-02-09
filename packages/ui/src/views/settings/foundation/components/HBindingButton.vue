@@ -5,7 +5,8 @@
       color="red"
       label="解除绑定"
       :dense="settings.display.table.dense"
-      :size="settings.display.table.dense ? 'sm' : 'md'"></q-btn>
+      :size="settings.display.table.dense ? 'sm' : 'md'"
+    ></q-btn>
   </div>
   <div v-else>
     <q-btn
@@ -16,12 +17,14 @@
       :dense="settings.display.table.dense"
       :size="settings.display.table.dense ? 'sm' : 'md'"
       :href="item.authorizeUrl"
-      target="_blank"></q-btn>
+      target="_blank"
+    ></q-btn>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent } from 'vue';
 
 import { useSettingsStore } from '/@/stores';
 

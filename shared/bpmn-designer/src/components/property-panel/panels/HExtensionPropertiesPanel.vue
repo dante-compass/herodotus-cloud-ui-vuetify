@@ -9,7 +9,8 @@
       bordered
       hide-pagination
       no-data-label="尚未设置"
-      card-container-class="q-ml-2">
+      card-container-class="q-ml-2"
+    >
       <template v-slot:top-right>
         <q-space />
         <q-btn
@@ -18,7 +19,8 @@
           icon="mdi-plus-circle-outline"
           color="primary"
           label="新建"
-          @click="openDialog = true"></q-btn>
+          @click="openDialog = true"
+        ></q-btn>
       </template>
       <template v-slot:body="props">
         <q-tr :props="props">
@@ -31,7 +33,8 @@
               label-set="确定"
               label-cancel="取消"
               v-slot="scope"
-              @update:model-value="onModify">
+              @update:model-value="onModify"
+            >
               <q-input v-model="scope.value" dense autofocus />
             </q-popup-edit>
           </q-td>
@@ -44,7 +47,8 @@
               label-set="确定"
               label-cancel="取消"
               v-slot="scope"
-              @update:model-value="onModify">
+              @update:model-value="onModify"
+            >
               <q-input v-model="scope.value" dense autofocus />
             </q-popup-edit>
           </q-td>
@@ -54,12 +58,16 @@
         </q-tr>
       </template>
     </q-table>
-    <h-extension-property-dialog v-model="openDialog" @save="onCreate"></h-extension-property-dialog>
+    <h-extension-property-dialog
+      v-model="openDialog"
+      @save="onCreate"
+    ></h-extension-property-dialog>
   </h-expansion-item>
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref, computed, watch } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, computed, watch } from 'vue';
 
 import type { QTableProps } from 'quasar';
 import type { ExtensionProperty } from '/@/declarations';
@@ -77,20 +85,21 @@ export default defineComponent({
   components: {
     HExpansionItem,
     HTableItemDeleteButton,
-    HExtensionPropertyDialog
+    HExtensionPropertyDialog,
   },
 
   setup() {
     const designer = useDesignerStore();
 
-    const { getExtensionProperties, modifyExtensionProperty, deleteExtensionProperty } = useExtensionProperties();
+    const { getExtensionProperties, modifyExtensionProperty, deleteExtensionProperty } =
+      useExtensionProperties();
 
     const openDialog = ref<boolean>(false);
 
     const tableColumns: QTableProps['columns'] = [
       { align: 'center', name: 'name', field: 'calories', label: '名称' },
       { align: 'center', name: 'value', field: 'fat', label: '值' },
-      { align: 'center', name: 'actions', field: 'actions', label: '操作' }
+      { align: 'center', name: 'actions', field: 'actions', label: '操作' },
     ];
 
     const tableRows = ref([]) as Ref<Array<ExtensionProperty>>;
@@ -129,7 +138,7 @@ export default defineComponent({
       () => {
         loading();
       },
-      { immediate: true }
+      { immediate: true },
     );
 
     return {
@@ -139,8 +148,8 @@ export default defineComponent({
       count,
       onCreate,
       onDelete,
-      onModify
+      onModify,
     };
-  }
+  },
 });
 </script>

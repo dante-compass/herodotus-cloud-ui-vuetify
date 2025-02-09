@@ -1,4 +1,4 @@
-import { Ref, PropType } from 'vue';
+import { PropType, Ref } from 'vue';
 import { UserEntity } from '../../declarations';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     modelValue: {
@@ -161,7 +161,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             headerStyle?: string;
             headerClasses?: string;
         }[];
-        findItems: import('../../declarations').QTableOnRequestProps;
+        findItems: import('@herodotus/core').QTableOnRequestProps;
         onClear: () => void;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
         modelValue: {

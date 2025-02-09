@@ -1,7 +1,14 @@
-import { ref, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import type { Conditions, Entity, Page, QTablePaginationProps, QTableOnRequestParameter } from '/@/lib/declarations';
+import type {
+  Conditions,
+  Entity,
+  Page,
+  QTablePaginationProps,
+  QTableOnRequestParameter,
+} from '/@/lib/declarations';
 
 import { useRouteStore } from '/@/stores';
 import { OperationEnum } from '/@/lib/definitions';

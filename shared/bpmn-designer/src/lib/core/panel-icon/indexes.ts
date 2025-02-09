@@ -1,4 +1,4 @@
-import BpmnEmptyState from '/@/static/images/bpmn-icon-svg/bpmn-empty-state.svg?url';
+// import BpmnEmptyState from '/@/static/images/bpmn-icon-svg/bpmn-empty-state.svg?url';
 import BpmnIconAssociation from '/@/static/images/bpmn-icon-svg/bpmn-icon-association.svg?url';
 import BpmnIconBusinessRuleTask from '/@/static/images/bpmn-icon-svg/bpmn-icon-business-rule-task.svg?url';
 import BpmnIconCallActivity from '/@/static/images/bpmn-icon-svg/bpmn-icon-call-activity.svg?url';
@@ -86,7 +86,7 @@ import BpmnIconTaskNone from '/@/static/images/bpmn-icon-svg/bpmn-icon-task-none
 import BpmnIconTextAnnotation from '/@/static/images/bpmn-icon-svg/bpmn-icon-text-annotation.svg?url';
 import BpmnIconTransaction from '/@/static/images/bpmn-icon-svg/bpmn-icon-transaction.svg?url';
 import BpmnIconUserTask from '/@/static/images/bpmn-icon-svg/bpmn-icon-user-task.svg?url';
-import BpmnMultipleState from '/@/static/images/bpmn-icon-svg/bpmn-multiple-state.svg?url';
+// import BpmnMultipleState from '/@/static/images/bpmn-icon-svg/bpmn-multiple-state.svg?url';
 
 export const ImageIndexes: Record<string, string> = {
   Association: BpmnIconAssociation,
@@ -197,5 +197,5 @@ export const ImageIndexes: Record<string, string> = {
   Task: BpmnIconTaskNone,
   TextAnnotation: BpmnIconTextAnnotation,
   Transaction: BpmnIconTransaction,
-  UserTask: BpmnIconUserTask
+  UserTask: BpmnIconUserTask,
 };

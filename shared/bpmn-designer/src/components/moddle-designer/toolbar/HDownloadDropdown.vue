@@ -24,7 +24,7 @@ export default defineComponent({
     HListItem
   },
 
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
 
     /**

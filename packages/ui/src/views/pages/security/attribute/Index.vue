@@ -11,13 +11,15 @@
     :loading="loading"
     status
     reserved
-    @request="findItems">
+    @request="findItems"
+  >
     <template #body-cell-requestMethod="props">
       <q-td key="requestMethod" :props="props">
         <h-swagger-column
           :method="props.row.requestMethod"
           :url="props.row.url"
-          :description="props.row.description"></h-swagger-column>
+          :description="props.row.description"
+        ></h-swagger-column>
       </q-td>
     </template>
 
@@ -33,7 +35,8 @@
           color="brown"
           icon="mdi-shield-key"
           tooltip="配置归属权限"
-          @click="toAuthorize(props.row)"></h-dense-icon-button>
+          @click="toAuthorize(props.row)"
+        ></h-dense-icon-button>
         <h-edit-button @click="toEdit(props.row)"></h-edit-button>
       </q-td>
     </template>
@@ -41,7 +44,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, onMounted } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 
 import type {
   Dictionary,
@@ -67,16 +71,25 @@ export default defineComponent({
   },
 
   setup() {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<SysAttributeEntity, SysAttributeConditions>(
-        api.sysAttribute(),
-        CONSTANTS.ComponentName.SYS_ATTRIBUTE,
-        false,
-        {
-          direction: 'ASC',
-          properties: ['url'],
-        },
-      );
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      toAuthorize,
+      findItems,
+      deleteItemById,
+    } = useTable<SysAttributeEntity, SysAttributeConditions>(
+      api.sysAttribute(),
+      CONSTANTS.ComponentName.SYS_ATTRIBUTE,
+      false,
+      {
+        direction: 'ASC',
+        properties: ['url'],
+      },
+    );
 
     const rowKey: SysAttributeProps = 'attributeId';
 
@@ -96,7 +109,7 @@ export default defineComponent({
 
     onMounted(() => {
       if (options.value) {
-        options.value.forEach(element => {
+        options.value.forEach((element) => {
           index.value[element.ordinal] = element;
         });
       }

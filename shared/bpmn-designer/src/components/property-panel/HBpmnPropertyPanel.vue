@@ -104,7 +104,7 @@ export default defineComponent({
     label: { type: String }
   },
 
-  setup(props) {
+  setup() {
     const isShow = ref<boolean>(true);
 
     const designer = useDesignerStore();
@@ -120,8 +120,6 @@ export default defineComponent({
       }
 
       result = lodash.upperFirst(result);
-
-      console.log('======', result);
 
       return 'H' + result + 'Panel';
     };

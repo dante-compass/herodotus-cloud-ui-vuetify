@@ -1,6 +1,6 @@
 import type { Moddle, ModdleElement, Modeler, Modeling, Canvas, Element, BpmnFactory } from '/@/declarations';
 
-import { lodash, getBusinessObject, is, isAny } from '/@/lib/utils';
+import { lodash, getBusinessObject, is } from '/@/lib/utils';
 
 import { useDesignerStore, useSettingStore } from '/@/stores';
 
@@ -45,7 +45,7 @@ export default function usePropertyElements() {
   const createModdleElement = (
     type: string,
     properties: Record<string, any>,
-    parent = {} as Element | ModdleElement
+    parent = {} as Element | ModdleElement,
   ): ModdleElement => {
     const moddle = getModdle();
     const element = moddle.create(type, properties);
@@ -80,16 +80,16 @@ export default function usePropertyElements() {
   const setExtensionElementsValues = (
     parentElement: Element,
     extensionElements: ModdleElement,
-    values: Array<ModdleElement>
+    values: Array<ModdleElement>,
   ) => {
     getModeling().updateModdleProperties(parentElement, extensionElements, {
-      values: [...extensionElements.get('values'), ...values]
+      values: [...extensionElements.get('values'), ...values],
     });
   };
 
   const resetExtensionElementsValues = (element: Element, extensionElements: ModdleElement): ModdleElement => {
     getModeling().updateModdleProperties(element, extensionElements, {
-      values: []
+      values: [],
     });
   };
 
@@ -106,6 +106,6 @@ export default function usePropertyElements() {
     getExtensionElementsValues,
     getFirstExtensionElementsValue,
     setExtensionElementsValues,
-    resetExtensionElementsValues
+    resetExtensionElementsValues,
   };
 }

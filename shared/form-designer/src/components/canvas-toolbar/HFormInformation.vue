@@ -7,28 +7,30 @@
       dense
       outlined
       label="表单名称"
-      :rules="[val => !!val || '表单名称不能为空']" />
+      :rules="[(val) => !!val || '表单名称不能为空']"
+    />
     <q-input
       ref="activityNameRef"
       v-model="activityName"
       dense
       outlined
       label="流程节点名称"
-      :rules="[val => !!val || '流程节点不能为空']" />
+      :rules="[(val) => !!val || '流程节点不能为空']"
+    />
   </q-list>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { QInput } from 'quasar';
-import { storeToRefs } from 'pinia';
 
 import { useFormCanvasStore } from '/@/stores';
 
 export default defineComponent({
   name: 'HFormInformation',
 
-  setup(props, { emit }) {
+  setup() {
     const store = useFormCanvasStore();
     const { id, name, activityName } = store;
 
@@ -51,8 +53,8 @@ export default defineComponent({
       activityName,
       nameRef,
       activityNameRef,
-      validate
+      validate,
     };
-  }
+  },
 });
 </script>

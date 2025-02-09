@@ -1,6 +1,5 @@
 declare class BpmnLog {
     private static instance;
-    private static types;
     private constructor();
     static getInstance(): BpmnLog;
     private isArray;

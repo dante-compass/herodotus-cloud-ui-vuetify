@@ -3,13 +3,23 @@
     <h-container mode="two" gutter="md" gutter-col horizontal>
       <template #left>
         <slot name="left"></slot>
-        <h-text-field v-model="entity.description" label="备注" placeholder="请输入备注"></h-text-field>
-        <h-text-field v-model.number="entity.ranking" label="排序值" placeholder="请输入排序值" type="number" />
+        <h-text-field
+          v-model="entity.description"
+          label="备注"
+          placeholder="请输入备注"
+        ></h-text-field>
+        <h-text-field
+          v-model.number="entity.ranking"
+          label="排序值"
+          placeholder="请输入排序值"
+          type="number"
+        />
         <h-dictionary-select
           v-model="entity.status"
           dictionary="DataItemStatus"
           label="数据状态"
-          class="q-mb-md"></h-dictionary-select>
+          class="q-mb-md"
+        ></h-dictionary-select>
         <q-separator></q-separator>
         <q-toggle v-model="entity.reserved" label="是否为保留数据"></q-toggle>
         <div>
@@ -27,10 +37,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent } from 'vue';
 
 import { useEditFinish } from '/@/hooks';
-import { AbstractSysEntity } from '/@/lib/declarations';
+import type { AbstractSysEntity } from '/@/lib/declarations';
 import HDetailContainer from './HDetailContainer.vue';
 import { HDictionarySelect } from '/@/composables/constants';
 

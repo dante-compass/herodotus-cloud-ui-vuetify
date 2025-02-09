@@ -1,9 +1,16 @@
 <template>
-  <q-uploader ref="uploader" auto-upload :factory="onUpload" class="full-width" @uploaded="onFileUploaded" />
+  <q-uploader
+    ref="uploader"
+    auto-upload
+    :factory="onUpload"
+    class="full-width"
+    @uploaded="onFileUploaded"
+  />
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, computed, ref } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import { QUploader } from 'quasar';
 
 import type { QUploaderFactoryObject, QUploaderInfo } from '/@/lib/declarations';
@@ -26,7 +33,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const executedUpload = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });

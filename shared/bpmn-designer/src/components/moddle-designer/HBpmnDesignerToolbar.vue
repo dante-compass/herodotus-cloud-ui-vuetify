@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
+import { defineComponent } from 'vue';
 
 import {
   HAlignGroup,
@@ -22,7 +22,7 @@ import {
   HDownloadDropdown,
   HPreviewDropdown,
   HOpenFile,
-  HUploadDialog
+  HUploadDialog,
 } from './toolbar';
 
 export default defineComponent({
@@ -36,9 +36,9 @@ export default defineComponent({
     HDownloadDropdown,
     HPreviewDropdown,
     HOpenFile,
-    HUploadDialog
+    HUploadDialog,
   },
 
-  setup(props, { emit }) {}
+  setup() {},
 });
 </script>

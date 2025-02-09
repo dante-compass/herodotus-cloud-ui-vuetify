@@ -1,7 +1,7 @@
 import type { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 import { defineStore } from 'pinia';
 
-import { RoutePushParam, PushParam } from '/@/lib/declarations';
+import type { RoutePushParam, PushParam } from '/@/lib/declarations';
 import { lodash } from '/@/lib/utils';
 
 export const useRouteStore = defineStore('Route', {
@@ -10,7 +10,7 @@ export const useRouteStore = defineStore('Route', {
     cachedRoutes: [] as string[],
     details: new Map(),
     isRemote: true,
-    pushParams: {} as RoutePushParam
+    pushParams: {} as RoutePushParam,
   }),
 
   getters: {
@@ -24,7 +24,7 @@ export const useRouteStore = defineStore('Route', {
 
     getRoutePushParam(state) {
       return (key: string) => state.pushParams[key];
-    }
+    },
   },
 
   actions: {
@@ -44,7 +44,7 @@ export const useRouteStore = defineStore('Route', {
     addDetailRoutes(item: RouteRecordRaw) {
       const children: Array<RouteRecordRaw> = item.children || [];
       if (!lodash.isEmpty(children)) {
-        children.forEach(child => {
+        children.forEach((child) => {
           const componentName = child.name as string;
           if (componentName) {
             this.details.set(componentName, child.component);
@@ -86,6 +86,6 @@ export const useRouteStore = defineStore('Route', {
       if (name) {
         delete this.pushParams[name];
       }
-    }
-  }
+    },
+  },
 });

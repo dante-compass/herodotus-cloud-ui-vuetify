@@ -1,4 +1,4 @@
-import { Ref, PropType } from 'vue';
+import { PropType, Ref } from 'vue';
 import { QTree, Tree } from '../lib/declarations';
 declare const _default: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
     modelValue: {

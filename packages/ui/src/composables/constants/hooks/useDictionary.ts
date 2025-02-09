@@ -1,4 +1,5 @@
-import { ref, Ref, nextTick, onBeforeMount, onUpdated, computed } from 'vue';
+import type { Ref } from 'vue';
+import { ref, nextTick, onBeforeMount, computed } from 'vue';
 import type { Dictionary } from '/@/lib/declarations';
 
 import { lodash } from '/@/lib/utils';

@@ -23,7 +23,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, ref, watch } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed, ref, watch } from 'vue';
 
 import HRow from './HRow.vue';
 import HColumn from './HColumn.vue';

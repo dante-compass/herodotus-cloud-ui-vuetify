@@ -1,6 +1,6 @@
 {
   "name": "@dante/ui",
-  "version": "3.4.2.0",
+  "version": "3.4.2.1",
   "description": "",
   "keywords": [],
   "author": "",
@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "cross-env vite --force --host --mode development",
     "prod": "cross-env vite build --mode production",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --build && vite build",
     "report": "vite build",
     "preview": "vite preview"
   },
@@ -42,6 +42,7 @@
     "jwt-decode": "^4.0.0",
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",
+    "simple-uploader.js": "^0.6.0",
     "vue": "^3.5.13",
     "vue-cookies": "^1.8.6",
     "vue-i18n": "^11.1.1",

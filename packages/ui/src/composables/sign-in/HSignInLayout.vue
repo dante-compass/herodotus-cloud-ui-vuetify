@@ -59,9 +59,9 @@ export default defineComponent({
       backgroundColor,
       projectName,
       lightColor,
-      darkColor
+      darkColor,
     };
-  }
+  },
 });
 </script>
 

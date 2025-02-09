@@ -1,4 +1,3 @@
-import { Ref } from 'vue';
 declare const _default: import('vue').DefineComponent<{}, void, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
     HAlignGroup: import('vue').DefineComponent<{}, {
         onAlignLeft: () => void;
@@ -46,8 +45,8 @@ declare const _default: import('vue').DefineComponent<{}, void, {}, {}, {}, impo
         HSeparator: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     HToolGroup: import('vue').DefineComponent<{}, {
-        showMiniMap: Ref<boolean, boolean>;
-        showBpmnLint: Ref<boolean, boolean>;
+        showMiniMap: import('vue').Ref<boolean, boolean>;
+        showBpmnLint: import('vue').Ref<boolean, boolean>;
         toggleSimulation: () => void;
         toggleMinimap: () => void;
         toggleBpmnLint: () => void;
@@ -127,9 +126,9 @@ declare const _default: import('vue').DefineComponent<{}, void, {}, {}, {}, impo
         }>> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     HPreviewDropdown: import('vue').DefineComponent<{}, {
-        isOpen: Ref<boolean, boolean>;
-        data: Ref<string, string>;
-        language: Ref<"xml" | "json", "xml" | "json">;
+        isOpen: import('vue').Ref<boolean, boolean>;
+        data: import('vue').Ref<string, string>;
+        language: import('vue').Ref<"xml" | "json", "xml" | "json">;
         onPreviewXml: () => Promise<import('sweetalert2').SweetAlertResult<string> | undefined>;
         onPreviewJson: () => Promise<import('sweetalert2').SweetAlertResult<string> | undefined>;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
@@ -258,7 +257,7 @@ declare const _default: import('vue').DefineComponent<{}, void, {}, {}, {}, impo
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     HOpenFile: import('vue').DefineComponent<{}, {
-        diagramFile: Ref<File | null, File | null>;
+        diagramFile: import('vue').Ref<File | null, File | null>;
         clear: () => void;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     HUploadDialog: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -267,11 +266,11 @@ declare const _default: import('vue').DefineComponent<{}, void, {}, {}, {}, impo
             default: string;
         };
     }>, {
-        openUploadDialog: Ref<boolean, boolean>;
-        enableDuplicateCheck: Ref<boolean, boolean>;
-        deployChangedOnly: Ref<boolean, boolean>;
-        deploymentName: Ref<string, string>;
-        loading: Ref<boolean, boolean>;
+        openUploadDialog: import('vue').Ref<boolean, boolean>;
+        enableDuplicateCheck: import('vue').Ref<boolean, boolean>;
+        deployChangedOnly: import('vue').Ref<boolean, boolean>;
+        deploymentName: import('vue').Ref<string, string>;
+        loading: import('vue').Ref<boolean, boolean>;
         onSave: () => Promise<import('sweetalert2').SweetAlertResult<string> | undefined>;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
         tooltip: {

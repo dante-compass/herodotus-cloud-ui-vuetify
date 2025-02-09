@@ -1,4 +1,4 @@
-import { QBaseDataItem } from '/@/declarations/base';
+import type { QBaseDataItem } from '/@/declarations/base';
 
 export type DataType = 'String' | 'Number' | 'Array' | 'Object';
 

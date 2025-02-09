@@ -1,18 +1,30 @@
 <template>
   <h-simple-center-form-layout :title="title" :operation="operation" hide-save>
-    <h-text-field v-model="editedItem.objectName" name="objectName" label="名称" readonly></h-text-field>
+    <h-text-field
+      v-model="editedItem.objectName"
+      name="objectName"
+      label="名称"
+      readonly
+    ></h-text-field>
     <h-text-field v-model="size" name="size" label="大小" readonly></h-text-field>
-    <h-text-field v-model="lastModified" name="lastModified" label="最后修改时间" readonly></h-text-field>
+    <h-text-field
+      v-model="lastModified"
+      name="lastModified"
+      label="最后修改时间"
+      readonly
+    ></h-text-field>
     <h-dictionary-select
       v-model="objectSetting.retentionMode"
       dictionary="RetentionMode"
-      label="保留模式"></h-dictionary-select>
+      label="保留模式"
+    ></h-dictionary-select>
     <h-text-field
       v-if="objectSetting.retentionRetainUntilDate"
       v-model="objectSetting.retentionRetainUntilDate"
       name="retentionRetainUntilDate"
       label="保留截止时间"
-      readonly></h-text-field>
+      readonly
+    ></h-text-field>
     <div class="column q-mb-md">
       <h-switch v-model="objectSetting.legalHold" label="Legal Hold"></h-switch>
     </div>
@@ -21,12 +33,14 @@
       v-model="objectSetting.tags"
       :bucket-name="bucketName"
       :object-name="editedItem.objectName"
-      @tag-change="refresh()"></h-oss-tags>
+      @tag-change="refresh()"
+    ></h-oss-tags>
   </h-simple-center-form-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, Ref, watch, onMounted } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, computed, ref, watch, onMounted } from 'vue';
 import { format } from 'quasar';
 
 import type { ObjectDomain, ObjectSettingBusiness } from '/@/lib/declarations';
@@ -64,7 +78,9 @@ export default defineComponent({
 
     const loadObjectSetting = async () => {
       if (bucketName.value && editedItem.value.objectName) {
-        const result = await ossApi.minioObjectSetting().get(bucketName.value, editedItem.value.objectName);
+        const result = await ossApi
+          .minioObjectSetting()
+          .get(bucketName.value, editedItem.value.objectName);
         objectSetting.value = result.data;
       }
     };

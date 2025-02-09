@@ -10,7 +10,8 @@
                 debounce="1000"
                 label="用户名"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
@@ -18,7 +19,8 @@
                 debounce="1000"
                 label="客户端ID"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
@@ -26,7 +28,8 @@
                 debounce="1000"
                 label="IP地址"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
@@ -34,7 +37,8 @@
                 debounce="1000"
                 label="请求方法"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
@@ -42,10 +46,16 @@
                 debounce="1000"
                 label="请求路径"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column auto>
-              <h-button color="red" icon="mdi-broom" tooltip="清空" @click.stop="onClear()"></h-button>
+              <h-button
+                color="red"
+                icon="mdi-broom"
+                tooltip="清空"
+                @click.stop="onClear()"
+              ></h-button>
             </h-column>
           </h-row>
         </q-card-section>
@@ -55,7 +65,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 import type { OAuth2InterfaceAuditConditions } from '/@/lib/declarations';
 
@@ -71,7 +82,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const conditionsModelValue = computed({
       get: () => props.conditions,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:conditions', newValue);
       },
     });

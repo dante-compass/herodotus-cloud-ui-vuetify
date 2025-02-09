@@ -1,4 +1,4 @@
-import { PropertiesPanel } from '@bpmn-io/properties-panel';
+import type { PropertiesPanel } from '@bpmn-io/properties-panel';
 
 import type { Group } from 'bpmn-js-properties-panel/lib/PropertiesActivator';
 import type EventBus from 'diagram-js/lib/core/EventBus';

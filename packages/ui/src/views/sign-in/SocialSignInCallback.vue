@@ -3,10 +3,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, Ref, ref } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
-import { RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router';
-import { SocialSource, AccessPrincipal } from '/@/lib/declarations';
+import { useRoute, useRouter } from 'vue-router';
+import type { RouteLocationNormalizedLoaded } from 'vue-router';
+import type { SocialSource, AccessPrincipal } from '/@/lib/declarations';
 import { useAuthenticationStore } from '/@/stores';
 import { lodash } from '/@/lib/utils';
 
@@ -20,7 +22,10 @@ export default defineComponent({
     const source = ref() as Ref<SocialSource>;
     const accessPrincipal = ref({}) as Ref<AccessPrincipal>;
 
-    const getAccessPrincipal = (source: SocialSource, route: RouteLocationNormalizedLoaded): AccessPrincipal => {
+    const getAccessPrincipal = (
+      source: SocialSource,
+      route: RouteLocationNormalizedLoaded,
+    ): AccessPrincipal => {
       if (route && !lodash.isEmpty(route.query)) {
         switch (source) {
           case 'WXAPP':

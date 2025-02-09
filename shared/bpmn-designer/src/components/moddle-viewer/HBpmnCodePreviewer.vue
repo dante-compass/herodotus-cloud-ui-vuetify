@@ -18,7 +18,8 @@
           icon="mdi-content-copy"
           class="absolute"
           style="top: 18px; right: 14px"
-          @click="onCopy()" />
+          @click="onCopy()"
+        />
         <highlightjs :language="language" :code="data" />
       </q-card-section>
     </q-card>
@@ -26,7 +27,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { copyToClipboard } from 'quasar';
 
 import { toast } from '/@/lib/utils';
@@ -44,7 +46,7 @@ export default defineComponent({
   name: 'HBpmnCodePreviewer',
 
   components: {
-    highlightjs: hljsVuePlugin.component
+    highlightjs: hljsVuePlugin.component,
   },
 
   props: {
@@ -53,7 +55,7 @@ export default defineComponent({
     title: { type: String, default: '' },
     language: { type: String as PropType<'xml' | 'json'>, default: 'xml' },
     maxWidth: { type: String, default: '900px' },
-    maxHeight: { type: String, default: '50vh' }
+    maxHeight: { type: String, default: '50vh' },
   },
 
   emits: ['update:modelValue'],
@@ -61,9 +63,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const isOpen = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const headerTitle = computed(() => {
@@ -93,8 +95,8 @@ export default defineComponent({
     return {
       isOpen,
       headerTitle,
-      onCopy
+      onCopy,
     };
-  }
+  },
 });
 </script>

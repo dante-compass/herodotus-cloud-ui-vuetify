@@ -13,11 +13,11 @@ import TokenSimulationModule from "bpmn-js-token-simulation";
 import BpmnLintModule from "bpmn-js-bpmnlint";
 import MinimapModule from "diagram-js-minimap";
 import GridModule from "diagram-js-grid";
+import { BpmnQueryByGetService, DeploymentService } from "@herodotus/bpmn-apis";
 import Ids$1 from "ids";
 import Diagram from "diagram-js";
 import BpmnModdle from "bpmn-moddle";
 import { HTextField, HSelect } from "@herodotus/components";
-import { BpmnQueryByGetService, DeploymentService } from "@herodotus/bpmn-apis";
 function flatten(arr) {
   return Array.prototype.concat.apply([], arr);
 }
@@ -334,6 +334,7 @@ function indexOf(collection, element) {
   return collection.indexOf(element);
 }
 const _BpmnLog = class _BpmnLog {
+  // private static types: string[] = ['primary', 'success', 'warn', 'error', 'info'];
   constructor() {
     __publicField(this, "switchColor", (type) => {
       switch (type) {
@@ -418,7 +419,6 @@ const _BpmnLog = class _BpmnLog {
   }
 };
 __publicField(_BpmnLog, "instance", new _BpmnLog());
-__publicField(_BpmnLog, "types", ["primary", "success", "warn", "error", "info"]);
 let BpmnLog = _BpmnLog;
 const Logger = BpmnLog.getInstance();
 const useSettingStore = defineStore("BpmnDesignerSetting", {
@@ -34323,7 +34323,7 @@ const _sfc_main$M = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -34343,7 +34343,10 @@ const _sfc_main$L = defineComponent({
     HTextField
   },
   props: {
-    modelValue: { type: Array, default: () => [] },
+    modelValue: {
+      type: Array,
+      default: () => []
+    },
     selection: { type: String, default: "single" }
   },
   setup(props, { emit }) {
@@ -34505,7 +34508,7 @@ function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
     createVNode(_component_h_dialog, {
       modelValue: _ctx.isOpen,
       "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => _ctx.isOpen = $event),
-      onSave: _cache[4] || (_cache[4] = ($event) => _ctx.onSave()),
+      onConfirm: _cache[4] || (_cache[4] = ($event) => _ctx.onSave()),
       title: _ctx.title
     }, {
       default: withCtx(() => [
@@ -34526,7 +34529,10 @@ const _sfc_main$J = defineComponent({
     HTextField
   },
   props: {
-    modelValue: { type: Array, default: () => [] }
+    modelValue: {
+      type: Array,
+      default: () => []
+    }
   },
   setup(props, { emit }) {
     const resource = useResourceStore();
@@ -34687,7 +34693,7 @@ function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
     createVNode(_component_h_dialog, {
       modelValue: _ctx.isOpen,
       "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => _ctx.isOpen = $event),
-      onSave: _cache[4] || (_cache[4] = ($event) => _ctx.onSave()),
+      onConfirm: _cache[4] || (_cache[4] = ($event) => _ctx.onSave()),
       title: _ctx.title
     }, {
       default: withCtx(() => [
@@ -34850,6 +34856,7 @@ const _sfc_main$G = defineComponent({
         const needle = value.toLowerCase();
         options.value = options.value.filter((v2) => v2.label.match(needle));
       });
+      abort();
     };
     return {
       selectedValue,
@@ -34980,7 +34987,7 @@ const _sfc_main$E = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -35191,7 +35198,7 @@ const _sfc_main$C = defineComponent({
   components: {
     HExpansionItem: __unplugin_components_2$3
   },
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
     const { getDocumentationValue, setDocumentationValue } = useDocumentProperties();
     const document2 = ref("");
@@ -35247,7 +35254,7 @@ const _sfc_main$B = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -35270,7 +35277,7 @@ const _sfc_main$A = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -35501,7 +35508,7 @@ const _sfc_main$x = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -35759,7 +35766,7 @@ const _sfc_main$u = defineComponent({
   components: {
     HExpansionItem: __unplugin_components_2$3
   },
-  setup(props) {
+  setup() {
     const elementId = ref("");
     const elementName = ref("");
     const versionTag = ref("");
@@ -35811,7 +35818,7 @@ const _sfc_main$u = defineComponent({
     };
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
         loading();
       },
       { immediate: true, deep: true }
@@ -35898,7 +35905,7 @@ const _sfc_main$t = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -35921,7 +35928,7 @@ const _sfc_main$s = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -35969,7 +35976,7 @@ const _sfc_main$q = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36017,7 +36024,7 @@ const _sfc_main$o = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36040,7 +36047,7 @@ const _sfc_main$n = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36063,7 +36070,7 @@ const _sfc_main$m = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36086,7 +36093,7 @@ const _sfc_main$l = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36134,7 +36141,7 @@ const _sfc_main$j = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36182,7 +36189,7 @@ const _sfc_main$h = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36205,7 +36212,7 @@ const _sfc_main$g = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36279,7 +36286,7 @@ const _sfc_main$e = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36327,7 +36334,7 @@ const _sfc_main$c = defineComponent({
     const designer = useDesignerStore();
     watch(
       () => designer.activeElement.id,
-      (newValue) => {
+      () => {
       },
       { immediate: true, deep: true }
     );
@@ -36536,7 +36543,7 @@ const _sfc_main$a = defineComponent({
     type: { type: String, required: true },
     label: { type: String }
   },
-  setup(props) {
+  setup() {
     const isShow = ref(true);
     const designer = useDesignerStore();
     const { panelGroups } = storeToRefs(designer);
@@ -36547,7 +36554,6 @@ const _sfc_main$a = defineComponent({
         result = id.substring(index2 + 2);
       }
       result = lodash.upperFirst(result);
-      console.log("======", result);
       return "H" + result + "Panel";
     };
     const thumbStyle = {
@@ -36612,7 +36618,7 @@ const _sfc_main$9 = defineComponent({
     HButtonGroup: __unplugin_components_1$5,
     HSeparator: __unplugin_components_1$4
   },
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
     const settings = useSettingStore();
     const { showMiniMap, showBpmnLint } = storeToRefs(settings);
@@ -36674,7 +36680,7 @@ const _sfc_main$8 = defineComponent({
     HButtonGroup: __unplugin_components_1$5,
     HSeparator: __unplugin_components_1$4
   },
-  setup(props) {
+  setup() {
     const { createNewDiagram } = useModelerCreator();
     const designer = useDesignerStore();
     let command = {};
@@ -36735,7 +36741,7 @@ const _sfc_main$7 = defineComponent({
     HButtonGroup: __unplugin_components_1$5,
     HSeparator: __unplugin_components_1$4
   },
-  setup(props) {
+  setup() {
     const currentScale = ref(1);
     const designer = useDesignerStore();
     let canvas = {};
@@ -36809,7 +36815,7 @@ const _sfc_main$6 = defineComponent({
     HButtonGroup: __unplugin_components_1$5,
     HSeparator: __unplugin_components_1$4
   },
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
     let modeling = {};
     let selection = {};
@@ -36920,7 +36926,6 @@ const _sfc_main$5 = defineComponent({
     const enableDuplicateCheck = ref(false);
     const deployChangedOnly = ref(false);
     const deploymentName = ref("");
-    ref("");
     const $q = useQuasar();
     const designer = useDesignerStore();
     const resource = useResourceStore();
@@ -37098,7 +37103,7 @@ const _sfc_main$4 = defineComponent({
     HListItem: __unplugin_components_0$5,
     HBpmnCodePreviewer
   },
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
     const isOpen = ref(false);
     const data = ref("");
@@ -37191,7 +37196,7 @@ const _sfc_main$3 = defineComponent({
     HButtonDropdown: __unplugin_components_2$2,
     HListItem: __unplugin_components_0$5
   },
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
     const download = (href, filename) => {
       if (href && filename) {
@@ -37340,7 +37345,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["modelValue"]);
 }
-const __unplugin_components_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__scopeId", "data-v-6bd97e24"]]);
+const __unplugin_components_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__scopeId", "data-v-c472cba7"]]);
 const _sfc_main$1 = defineComponent({
   name: "HBpmnDesignerToolbar",
   components: {
@@ -37353,7 +37358,7 @@ const _sfc_main$1 = defineComponent({
     HOpenFile: __unplugin_components_0$1,
     HUploadDialog: __unplugin_components_3
   },
-  setup(props, { emit }) {
+  setup() {
   }
 });
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
@@ -37489,6 +37494,9 @@ export {
   bundle as BpmnLinter,
   BpmnQueryByGetService,
   DeploymentService,
+  HBpmnCodePreviewer,
+  HBpmnDesigner,
+  HBpmnDiagramViewer,
   HerodotusPropertiesProviderModule,
   ImageIndexes,
   Logger,

@@ -10,7 +10,8 @@
         draggable=".widget-item"
         :sort="false"
         :group="{ name: 'widgetGroup', pull: 'clone', put: false }"
-        :clone="cloneWidget">
+        :clone="cloneWidget"
+      >
         <template #item="{ element }">
           <div class="widget-item" @click="addWidget(element)">
             <div class="widget-body">
@@ -25,10 +26,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import Draggable from 'vuedraggable';
 
-import { Widget, Element } from '/@/declarations';
+import type { Widget } from '/@/declarations';
 import { useFormCanvasStore } from '/@/stores';
 import { WIDGET_DEFINITIONS, ElementUtils } from '/@/lib';
 
@@ -36,7 +37,7 @@ export default defineComponent({
   name: 'HWidgetPanel',
 
   components: {
-    Draggable
+    Draggable,
   },
 
   setup() {
@@ -59,9 +60,9 @@ export default defineComponent({
     return {
       widgetGroups,
       cloneWidget,
-      addWidget
+      addWidget,
     };
-  }
+  },
 });
 </script>
 

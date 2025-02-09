@@ -13,7 +13,7 @@ export default defineComponent({
   name: 'HTableActionButton',
 
   props: {
-    tooltip: { type: String, default: '' }
-  }
+    tooltip: { type: String, default: '' },
+  },
 });
 </script>

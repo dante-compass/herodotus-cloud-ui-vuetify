@@ -66,8 +66,8 @@ export default defineComponent({
       }
       if (!variables.getAutoRefreshToken()) {
         // 监听浏览器关闭
-        window.addEventListener('beforeunload', e => beforeUnloadHandler(e));
-        window.addEventListener('unload', e => unloadHandler(e));
+        window.addEventListener('beforeunload', (e) => beforeUnloadHandler(e));
+        window.addEventListener('unload', (e) => unloadHandler(e));
       }
     });
 
@@ -76,8 +76,8 @@ export default defineComponent({
         disconnect();
       }
       if (!variables.getAutoRefreshToken()) {
-        window.removeEventListener('beforeunload', e => beforeUnloadHandler(e));
-        window.removeEventListener('unload', e => unloadHandler(e));
+        window.removeEventListener('beforeunload', (e) => beforeUnloadHandler(e));
+        window.removeEventListener('unload', (e) => unloadHandler(e));
       }
     });
 

@@ -9,19 +9,32 @@
     v-model:selected="selectedItems"
     v-model:pagination="pagination"
     :loading="loading"
-    @request="findItems">
+    @request="findItems"
+  >
     <template v-slot:top>
-      <h-text-field v-model="fieldValue" debounce="1000" label="名称" dense @clear="onClear()"></h-text-field>
+      <h-text-field
+        v-model="fieldValue"
+        debounce="1000"
+        label="名称"
+        dense
+        @clear="onClear()"
+      ></h-text-field>
     </template>
   </q-table>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, ref, watch } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed, ref, watch } from 'vue';
 
-import type { GroupEntity, GroupQueryParams, GroupSortBy, QTableColumnProps } from '/@/declarations';
+import type {
+  GroupEntity,
+  GroupQueryParams,
+  GroupSortBy,
+  QTableColumnProps,
+} from '/@/declarations';
 
-import {useTableItems} from '/@/hooks';
+import { useTableItems } from '/@/hooks';
 import { useResourceStore } from '/@/stores';
 
 import { HTextField } from '../base';
@@ -30,11 +43,14 @@ export default defineComponent({
   name: 'HGroupSelectTable',
 
   components: {
-    HTextField
+    HTextField,
   },
 
   props: {
-    modelValue: { type: Array as PropType<Array<GroupEntity>>, default: () => [] as Array<GroupEntity> }
+    modelValue: {
+      type: Array as PropType<Array<GroupEntity>>,
+      default: () => [] as Array<GroupEntity>,
+    },
   },
 
   setup(props, { emit }) {
@@ -46,20 +62,20 @@ export default defineComponent({
       GroupSortBy
     >(resource.groupService, {
       sortBy: 'id',
-      sortOrder: 'desc'
+      sortOrder: 'desc',
     });
 
     const selectedItems = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const rowKey = 'id' as keyof GroupEntity;
     const fieldValue = ref<string>('');
 
-    watch(fieldValue, newValue => {
+    watch(fieldValue, (newValue) => {
       if (newValue) {
         conditions.value.nameLike = '%' + newValue + '%';
       }
@@ -68,7 +84,7 @@ export default defineComponent({
     const columns: QTableColumnProps = [
       { name: 'id', field: 'id', align: 'center', label: 'ID' },
       { name: 'name', field: 'name', align: 'center', label: '名称' },
-      { name: 'type', field: 'type', align: 'center', label: '类型' }
+      { name: 'type', field: 'type', align: 'center', label: '类型' },
     ];
 
     const onClear = () => {
@@ -85,8 +101,8 @@ export default defineComponent({
       rowKey,
       columns,
       findItems,
-      onClear
+      onClear,
     };
-  }
+  },
 });
 </script>

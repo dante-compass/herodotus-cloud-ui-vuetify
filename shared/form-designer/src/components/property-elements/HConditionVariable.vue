@@ -9,7 +9,8 @@
       flat
       bordered
       hide-pagination
-      card-container-class="q-ml-2">
+      card-container-class="q-ml-2"
+    >
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="label" :props="props">
@@ -21,7 +22,8 @@
               label-set="确定"
               label-cancel="取消"
               v-slot="scope"
-              @update:model-value="onModify">
+              @update:model-value="onModify"
+            >
               <q-input v-model="scope.value" dense autofocus />
             </q-popup-edit>
           </q-td>
@@ -35,8 +37,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref } from 'vue';
-import { storeToRefs } from 'pinia';
+import type { Ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import type { QBaseDataItem, QTableColumnProps } from '/@/declarations';
 
@@ -48,7 +50,7 @@ export default defineComponent({
 
   components: {
     HExpansionItem,
-    HTextField
+    HTextField,
   },
 
   setup(props) {
@@ -58,12 +60,12 @@ export default defineComponent({
 
     const tableColumns: QTableColumnProps = [
       { align: 'center', name: 'label', field: 'calories', label: '标签' },
-      { align: 'center', name: 'value', field: 'fat', label: '值' }
+      { align: 'center', name: 'value', field: 'fat', label: '值' },
     ];
 
     const tableRows = ref([
       { label: 'option1', value: true },
-      { label: 'option2', value: false }
+      { label: 'option2', value: false },
     ]) as Ref<Array<QBaseDataItem<boolean>>>;
 
     const onModify = () => {
@@ -74,8 +76,8 @@ export default defineComponent({
       tableColumns,
       tableRows,
       condition,
-      onModify
+      onModify,
     };
-  }
+  },
 });
 </script>

@@ -1,1 +1,0 @@
-import{d as t,l as e}from"../modules/npm-@vue-runtime-core-CaMaypo-.js";const p=t({name:"HBehaviorCaptchaControl",props:{size:{type:Number,default:30},description:{type:String,required:!0},prompt:{type:String,default:""}},setup:t=>({tips:e((()=>t.prompt?t.description+"【"+t.prompt+"】":t.description))})});export{p as _};

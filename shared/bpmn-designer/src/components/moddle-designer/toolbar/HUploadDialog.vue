@@ -56,11 +56,11 @@ export default defineComponent({
 
   components: {
     HButton,
-    HButtonGroup
+    HButtonGroup,
   },
 
   props: {
-    tooltip: { type: String, default: '' }
+    tooltip: { type: String, default: '' },
   },
 
   setup() {
@@ -69,7 +69,6 @@ export default defineComponent({
     const enableDuplicateCheck = ref<boolean>(false);
     const deployChangedOnly = ref<boolean>(false);
     const deploymentName = ref<string>('');
-    const tenantId = ref('');
 
     const $q = useQuasar();
     const designer = useDesignerStore();
@@ -79,7 +78,7 @@ export default defineComponent({
       $q.loading.show({
         spinner: QSpinnerGears,
         message: '<span class="text-amber text-italic">发布中， 请稍后...</span>',
-        html: true
+        html: true,
       });
     };
 
@@ -98,11 +97,11 @@ export default defineComponent({
         confirmButtonText: '确定!',
         cancelButtonText: '取消',
         showClass: {
-          popup: 'animate__animated animate__fadeIn'
+          popup: 'animate__animated animate__fadeIn',
         },
         hideClass: {
-          popup: 'animate__animated animate__fadeOut'
-        }
+          popup: 'animate__animated animate__fadeOut',
+        },
       }).then((confirm: SweetAlertResult) => {
         if (confirm.value) {
           designer.isClosed = true;
@@ -125,7 +124,7 @@ export default defineComponent({
           deploymentName: deploymentName.value,
           enableDuplicateFiltering: enableDuplicateCheck.value,
           deployChangedOnly: deployChangedOnly.value,
-          resource: xml as string
+          resource: xml as string,
         };
 
         await resource.deploymentService.create(data);
@@ -146,7 +145,7 @@ export default defineComponent({
           enableDuplicateCheck.value = false;
         }
       },
-      { immediate: true }
+      { immediate: true },
     );
 
     return {
@@ -155,8 +154,8 @@ export default defineComponent({
       deployChangedOnly,
       deploymentName,
       loading,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

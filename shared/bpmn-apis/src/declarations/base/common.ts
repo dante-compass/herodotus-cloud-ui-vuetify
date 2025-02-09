@@ -1,4 +1,4 @@
-import { BpmnQueryParams, BpmnEntity } from './core';
+import type { BpmnQueryParams, BpmnEntity } from './core';
 
 export interface Link {
   method: string;

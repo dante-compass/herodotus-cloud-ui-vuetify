@@ -18,7 +18,8 @@
           v-model:selected="selected"
           v-model:pagination="pagination"
           :loading="loading"
-          @request="findItems"></q-table>
+          @request="findItems"
+        ></q-table>
       </q-card-section>
 
       <q-card-actions align="right">
@@ -30,7 +31,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 
 import type {
   ProcessDefinitionEntity,
@@ -60,7 +62,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const isOpen = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });
@@ -90,14 +92,14 @@ export default defineComponent({
         field: 'suspended',
         align: 'center',
         label: '是否挂起',
-        format: value => (value ? '是' : '否'),
+        format: (value) => (value ? '是' : '否'),
       },
       {
         name: 'startableInTasklist',
         field: 'startableInTasklist',
         align: 'center',
         label: '是否可启动',
-        format: value => (value ? '是' : '否'),
+        format: (value) => (value ? '是' : '否'),
       },
     ];
 

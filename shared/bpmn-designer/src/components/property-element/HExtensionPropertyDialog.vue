@@ -14,16 +14,18 @@
           outlined
           dense
           label="属性名称"
-          :rules="[val => !!val || '属性名称不能为空']"
-          placeholder="请输入属性名称"></q-input>
+          :rules="[(val) => !!val || '属性名称不能为空']"
+          placeholder="请输入属性名称"
+        ></q-input>
         <q-input
           v-model="property.value"
           ref="valueRef"
           outlined
           dense
           label="属性值"
-          :rules="[val => !!val || '属性值不能为空']"
-          placeholder="请输入属性值"></q-input>
+          :rules="[(val) => !!val || '属性值不能为空']"
+          placeholder="请输入属性值"
+        ></q-input>
       </q-card-section>
 
       <q-card-actions align="right">
@@ -35,7 +37,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, computed, watch } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, computed, watch } from 'vue';
 
 import type { ExtensionProperty } from '/@/declarations';
 
@@ -43,7 +46,7 @@ export default defineComponent({
   name: 'HExtensionPropertyDialog',
 
   props: {
-    modelValue: { type: Boolean, default: false }
+    modelValue: { type: Boolean, default: false },
   },
 
   emits: ['update:modelValue', 'update:open', 'save'],
@@ -53,12 +56,12 @@ export default defineComponent({
 
     const isOpen = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
-    watch(isOpen, newValue => {
+    watch(isOpen, (newValue) => {
       if (newValue) {
         property.value = {} as ExtensionProperty;
       }
@@ -80,8 +83,8 @@ export default defineComponent({
       isOpen,
       property,
       isDisabled,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

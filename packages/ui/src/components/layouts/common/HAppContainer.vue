@@ -10,7 +10,8 @@
                 mode="out-in"
                 :duration="500"
                 enter-active-class="animate__animated animate__fadeIn"
-                leave-active-class="animate__animated animate__fadeOut">
+                leave-active-class="animate__animated animate__fadeOut"
+              >
                 <component :is="getComponent(Component, route)" />
               </transition>
             </template>
@@ -26,7 +27,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent, watch, VNode, RendererNode, RendererElement } from 'vue';
+import type { VNode, RendererNode, RendererElement } from 'vue';
+import { defineComponent, defineAsyncComponent, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
@@ -71,7 +73,6 @@ export default defineComponent({
 
     return {
       keepAlives,
-      store,
       getComponent,
     };
   },

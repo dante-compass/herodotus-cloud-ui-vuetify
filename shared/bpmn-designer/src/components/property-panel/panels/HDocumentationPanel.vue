@@ -19,7 +19,7 @@ export default defineComponent({
     HExpansionItem
   },
 
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
 
     const { getDocumentationValue, setDocumentationValue } = useDocumentProperties();

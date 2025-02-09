@@ -13,7 +13,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent } from 'vue';
 
 import { useSettingsStore } from '/@/stores';
 
@@ -23,14 +24,14 @@ export default defineComponent({
   name: 'HBindingDetailColumn',
 
   props: {
-    item: { type: Object as PropType<AccessSourceEntity>, required: true }
+    item: { type: Object as PropType<AccessSourceEntity>, required: true },
   },
 
   setup(props) {
     const settings = useSettingsStore();
     return {
-      settings
+      settings,
     };
-  }
+  },
 });
 </script>

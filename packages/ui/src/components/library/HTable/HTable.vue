@@ -5,13 +5,18 @@
     :dense="settings.display.table.dense"
     :rows-per-page-options="rowsPerPageOptions"
     :rows="rows"
-    v-bind="$attrs">
+    v-bind="$attrs"
+  >
+    //@ts-ignore
     <template v-for="slotName in Object.keys($slots)" v-slot:[slotName]="props">
       <slot :name="slotName" v-bind="props" />
     </template>
 
     <template v-if="!$slots['top-right']" #top-right="props">
-      <h-table-action :inFullscreen="props.inFullscreen" @toggle-fullscreen="props.toggleFullscreen"></h-table-action>
+      <h-table-action
+        :inFullscreen="props.inFullscreen"
+        @toggle-fullscreen="props.toggleFullscreen"
+      ></h-table-action>
     </template>
 
     <template v-if="loading && !$slots.loading" #loading>
@@ -30,14 +35,19 @@
 
     <template v-if="status && !$slots['body-cell-status']" #body-cell-status="props">
       <q-td key="status" :props="props">
-        <h-status-column v-if="options" :type="props.row.status" :options="options"></h-status-column>
+        <h-status-column
+          v-if="options"
+          :type="props.row.status"
+          :options="options"
+        ></h-status-column>
       </q-td>
     </template>
   </q-table>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 import type { Entity } from '/@/lib/declarations';
 
@@ -76,7 +86,7 @@ export default defineComponent({
 
     const pageNumberVModel = computed({
       get: () => props.pageNumber,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:pageNumber', newValue);
       },
     });

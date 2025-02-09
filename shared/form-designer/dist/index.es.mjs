@@ -114,7 +114,7 @@ const useFormResourceStore = defineStore("FormDesignerResources", {
 });
 const _sfc_main$g = defineComponent({
   name: "HFormInformation",
-  setup(props, { emit }) {
+  setup() {
     const store = useFormCanvasStore();
     const { id, name, activityName } = store;
     const nameRef = ref(null);
@@ -526,7 +526,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["class"]);
 }
-const __unplugin_components_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b], ["__scopeId", "data-v-c2ab7fab"]]);
+const __unplugin_components_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b], ["__scopeId", "data-v-fa20a858"]]);
 const _sfc_main$a = defineComponent({
   name: "HCanvasContainer",
   components: {
@@ -587,7 +587,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const __unplugin_components_7$1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a], ["__scopeId", "data-v-54c2f724"]]);
+const __unplugin_components_7$1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a], ["__scopeId", "data-v-aa4f6053"]]);
 const _sfc_main$9 = defineComponent({
   name: "HConditionVariable",
   components: {
@@ -1603,7 +1603,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     }), 128))
   ]);
 }
-const __unplugin_components_4 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-8d89d665"]]);
+const __unplugin_components_4 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-cfcaeda2"]]);
 const _sfc_main = defineComponent({
   name: "HDynamicForms",
   components: {

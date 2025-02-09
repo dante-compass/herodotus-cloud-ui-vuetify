@@ -28,7 +28,7 @@ export default defineComponent({
     HSeparator
   },
 
-  setup(props) {
+  setup() {
     const { createNewDiagram } = useModelerCreator();
     const designer = useDesignerStore();
 

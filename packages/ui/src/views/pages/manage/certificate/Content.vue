@@ -1,10 +1,17 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :operation="operation" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout
+    :entity="editedItem"
+    :title="title"
+    :operation="operation"
+    :overlay="overlay"
+    @save="onSave()"
+  >
     <h-toggle-field
       class="q-mb-md"
       v-model="editedItem.keyStoreCategory"
       dictionary="KeyStoreCategory"
-      default-value="PKCS12"></h-toggle-field>
+      default-value="PKCS12"
+    ></h-toggle-field>
 
     <h-text-field
       v-model.lazy="v.editedItem.alias.$model"
@@ -12,7 +19,8 @@
       placeholder="请输入证书别名"
       debounce="5000"
       :error="v.editedItem.alias.$error"
-      :error-message="v.editedItem.alias.$errors[0] ? v.editedItem.alias.$errors[0].$message : ''"></h-text-field>
+      :error-message="v.editedItem.alias.$errors[0] ? v.editedItem.alias.$errors[0].$message : ''"
+    ></h-text-field>
 
     <h-text-field
       v-model.lazy="v.editedItem.commonName.$model"
@@ -21,7 +29,8 @@
       :error="v.editedItem.commonName.$error"
       :error-message="
         v.editedItem.commonName.$errors[0] ? v.editedItem.commonName.$errors[0].$message : ''
-      "></h-text-field>
+      "
+    ></h-text-field>
 
     <h-text-field
       v-model.lazy="v.editedItem.organizationUnit.$model"
@@ -29,8 +38,11 @@
       placeholder="请输入组织单位(OU)"
       :error="v.editedItem.organizationUnit.$error"
       :error-message="
-        v.editedItem.organizationUnit.$errors[0] ? v.editedItem.organizationUnit.$errors[0].$message : ''
-      "></h-text-field>
+        v.editedItem.organizationUnit.$errors[0]
+          ? v.editedItem.organizationUnit.$errors[0].$message
+          : ''
+      "
+    ></h-text-field>
 
     <h-text-field
       v-model.lazy="v.editedItem.organization.$model"
@@ -39,14 +51,18 @@
       :error="v.editedItem.organization.$error"
       :error-message="
         v.editedItem.organization.$errors[0] ? v.editedItem.organization.$errors[0].$message : ''
-      "></h-text-field>
+      "
+    ></h-text-field>
 
     <h-text-field
       v-model.lazy="v.editedItem.locality.$model"
       label="位置或城市(L) *"
       placeholder="请输入位置或城市(L)"
       :error="v.editedItem.locality.$error"
-      :error-message="v.editedItem.locality.$errors[0] ? v.editedItem.locality.$errors[0].$message : ''"></h-text-field>
+      :error-message="
+        v.editedItem.locality.$errors[0] ? v.editedItem.locality.$errors[0].$message : ''
+      "
+    ></h-text-field>
 
     <h-text-field
       v-model.lazy="v.editedItem.stateOrProvince.$model"
@@ -54,15 +70,21 @@
       placeholder="请输入州或省(ST)"
       :error="v.editedItem.stateOrProvince.$error"
       :error-message="
-        v.editedItem.stateOrProvince.$errors[0] ? v.editedItem.stateOrProvince.$errors[0].$message : ''
-      "></h-text-field>
+        v.editedItem.stateOrProvince.$errors[0]
+          ? v.editedItem.stateOrProvince.$errors[0].$message
+          : ''
+      "
+    ></h-text-field>
 
     <h-text-field
       v-model.lazy="v.editedItem.country.$model"
       label="国家或地区(C) *"
       placeholder="请输入国家或地区(C)"
       :error="v.editedItem.country.$error"
-      :error-message="v.editedItem.country.$errors[0] ? v.editedItem.country.$errors[0].$message : ''"></h-text-field>
+      :error-message="
+        v.editedItem.country.$errors[0] ? v.editedItem.country.$errors[0].$message : ''
+      "
+    ></h-text-field>
 
     <h-text-field
       v-model.lazy="v.editedItem.password.$model"
@@ -70,13 +92,17 @@
       placeholder="请输入证书密码(C)"
       type="password"
       :error="v.editedItem.password.$error"
-      :error-message="v.editedItem.password.$errors[0] ? v.editedItem.password.$errors[0].$message : ''"></h-text-field>
+      :error-message="
+        v.editedItem.password.$errors[0] ? v.editedItem.password.$errors[0].$message : ''
+      "
+    ></h-text-field>
 
     <h-toggle-field
       class="q-mb-md"
       v-model="editedItem.certificateCategory"
       dictionary="CertificateCategory"
-      default-value="TRUST_ANCHOR"></h-toggle-field>
+      default-value="TRUST_ANCHOR"
+    ></h-toggle-field>
 
     <h-select
       v-model="editedItem.parentId"
@@ -88,7 +114,8 @@
       emit-value
       :loading="showParentLoading"
       :disable="disableParentSelect"
-      :readonly="disableParentSelect"></h-select>
+      :readonly="disableParentSelect"
+    ></h-select>
 
     <h-date-time
       v-model.lazy="v.editedItem.startTime.$model"
@@ -97,19 +124,24 @@
       :error="v.editedItem.startTime.$error"
       :error-message="
         v.editedItem.startTime.$errors[0] ? v.editedItem.startTime.$errors[0].$message : ''
-      "></h-date-time>
+      "
+    ></h-date-time>
 
     <h-date-time
       v-model.lazy="v.editedItem.endTime.$model"
       label="结束时间 *"
       placeholder="请输入结束时间"
       :error="v.editedItem.endTime.$error"
-      :error-message="v.editedItem.endTime.$errors[0] ? v.editedItem.endTime.$errors[0].$message : ''"></h-date-time>
+      :error-message="
+        v.editedItem.endTime.$errors[0] ? v.editedItem.endTime.$errors[0].$message : ''
+      "
+    ></h-date-time>
   </h-center-form-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, watch } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
@@ -130,9 +162,8 @@ export default defineComponent({
   },
 
   setup(props) {
-    const { editedItem, operation, title, saveOrUpdate, overlay } = useTableItem<MgtCertificateEntity>(
-      api.mgtCertificate(),
-    );
+    const { editedItem, operation, title, saveOrUpdate, overlay } =
+      useTableItem<MgtCertificateEntity>(api.mgtCertificate());
 
     const isUnique = () => {
       let alias = editedItem.value.alias;
@@ -142,7 +173,7 @@ export default defineComponent({
           api
             .mgtCertificate()
             .findByAlias(alias)
-            .then(result => {
+            .then((result) => {
               let cert = result.data as MgtCertificateEntity;
               // 如果能够查询到roleCode
               // 如果该roleCode 对应的 roleId 与当前 editedItem中的roleId相同
@@ -166,12 +197,12 @@ export default defineComponent({
         api
           .mgtCertificate()
           .findAllByCertificateCategory(category)
-          .then(result => {
+          .then((result) => {
             parentOptions.value = result.data;
             showParentLoading.value = false;
             disableParentSelect.value = false;
           })
-          .catch(error => {
+          .catch((error) => {
             showParentLoading.value = false;
             disableParentSelect.value = true;
           });
@@ -180,7 +211,7 @@ export default defineComponent({
 
     watch(
       () => editedItem.value.certificateCategory,
-      newValue => {
+      (newValue) => {
         if (newValue === 'TRUST_ANCHOR') {
           disableParentSelect.value = true;
           editedItem.value.parentId = '';
@@ -194,7 +225,10 @@ export default defineComponent({
       editedItem: {
         alias: {
           required: helpers.withMessage('证书别名不能为空', required),
-          isUnique: helpers.withMessage('证书别名已存在，请使用其它代码', helpers.withAsync(isUnique)),
+          isUnique: helpers.withMessage(
+            '证书别名已存在，请使用其它代码',
+            helpers.withAsync(isUnique),
+          ),
         },
         commonName: {
           required: helpers.withMessage('证书名称不能为空', required),
@@ -229,7 +263,7 @@ export default defineComponent({
     const v = useVuelidate(rules, { editedItem }, { $lazy: true });
 
     const onSave = () => {
-      v.value.$validate().then(result => {
+      v.value.$validate().then((result) => {
         if (result) {
           saveOrUpdate();
         }
