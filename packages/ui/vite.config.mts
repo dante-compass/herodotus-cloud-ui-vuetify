@@ -42,7 +42,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       }),
       quasar({
         sassVariables: fileURLToPath(
-          new URL('./src/static/styles/quasar-variables.sass', import.meta.url),
+          new URL('./src/static/styles/quasar.variables.sass', import.meta.url),
         ),
       }),
       AutoImport({
