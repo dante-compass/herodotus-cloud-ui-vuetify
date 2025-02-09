@@ -1,3 +1,5 @@
+import { fileURLToPath, URL } from 'node:url';
+
 import { defineConfig, loadEnv, UserConfigExport, ConfigEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
@@ -17,8 +19,6 @@ import { viteVConsole } from 'vite-plugin-vconsole';
 
 import { visualizer } from 'rollup-plugin-visualizer';
 
-import path from 'path';
-
 const lifecycle = process.env.npm_lifecycle_event;
 
 // https://vitejs.dev/config/
@@ -33,13 +33,15 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
       }),
       UnoCSS({
-        configFile: '../../uno.config.ts',
+        configFile: './uno.config.ts',
       }),
       vue({
         template: { transformAssetUrls },
       }),
       quasar({
-        sassVariables: '/@/static/styles/quasar.variables.sass',
+        sassVariables: fileURLToPath(
+          new URL('./src/static/styles/quasar.variables.sass', import.meta.url),
+        ),
       }),
       AutoImport({
         dts: true,
@@ -65,7 +67,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       compression(),
       // VConsole 调试工具配置，若没有此配置，则调试工具控制台不会打印日志
       viteVConsole({
-        entry: [path.resolve('src/main.ts')], // entry file
+        entry: [fileURLToPath(new URL('./src/main.ts', import.meta.url))], // entry file
         enabled: command !== 'build' || mode === 'development', // build production
         config: {
           // vconsole options
@@ -81,7 +83,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           },
         },
       }),
-      lifecycle === 'report' ? visualizer({ open: true, brotliSize: true, filename: 'report.html' }) : null,
+      lifecycle === 'report'
+        ? visualizer({ open: true, brotliSize: true, filename: 'report.html' })
+        : null,
     ],
     css: {
       preprocessorOptions: {
@@ -93,7 +97,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     define: { 'process.env': env },
     resolve: {
       alias: {
-        '/@': path.resolve(__dirname, 'src'),
+        '/@': fileURLToPath(new URL('./src', import.meta.url)),
+        '/#': fileURLToPath(new URL('./types', import.meta.url)),
         // 解决 vue-i18n : No known conditions for "." entry in "@intlify/shared" package 错误
         // "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js", // 修改前
         'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js', // 修改后
@@ -105,19 +110,19 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         '/api': {
           target: env.VITE_API_URL,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ''),
+          rewrite: (path) => path.replace(/^\/api/, ''),
         },
         '/socket': {
           target: env.VITE_WS_URL,
           changeOrigin: true,
           ws: true,
-          rewrite: path => path.replace(/^\/socket/, ''),
+          rewrite: (path) => path.replace(/^\/socket/, ''),
         },
         '/reactive': {
           target: env.VITE_REACTIVE_WS_URL,
           changeOrigin: true,
           ws: true,
-          rewrite: path => path.replace(/^\/reactive/, ''),
+          rewrite: (path) => path.replace(/^\/reactive/, ''),
         },
       },
     },
@@ -130,13 +135,28 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       outDir: '../../build/dist',
       emptyOutDir: true,
       cssCodeSplit: true, // 如果设置为false，整个项目中的所有 CSS 将被提取到一个 CSS 文件中
+      minify: 'terser',
+      terserOptions: {
+        // 生产环境下移除console
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+        keep_classnames: true,
+      },
       rollupOptions: {
         output: {
-          assetFileNames: assetInfo => {
-            if (assetInfo.type === 'asset' && /\.(jpe?g|png|gif|svg)$/i.test(assetInfo.name as string)) {
+          assetFileNames: (assetInfo) => {
+            if (
+              assetInfo.type === 'asset' &&
+              /\.(jpe?g|png|gif|svg)$/i.test(assetInfo.name as string)
+            ) {
               return 'assets/images/[name]-[hash].[ext]';
             }
-            if (assetInfo.type === 'asset' && /\.(ttf|woff|woff2|eot)$/i.test(assetInfo.name as string)) {
+            if (
+              assetInfo.type === 'asset' &&
+              /\.(ttf|woff|woff2|eot)$/i.test(assetInfo.name as string)
+            ) {
               return 'assets/fonts/[name]-[hash].[ext]';
             }
             return 'assets/[ext]/[name]-[hash].[ext]';

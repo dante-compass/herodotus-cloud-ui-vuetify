@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 
 import vue from '@vitejs/plugin-vue';
@@ -7,46 +8,44 @@ import { transformAssetUrls } from '@quasar/vite-plugin';
 import Components from 'unplugin-vue-components/vite';
 import { QuasarResolver } from 'unplugin-vue-components/resolvers';
 
-import path from 'path';
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue({
-      template: { transformAssetUrls }
+      template: { transformAssetUrls },
     }),
     Components({
-      resolvers: [QuasarResolver()]
+      resolvers: [QuasarResolver()],
     }),
-    dts({})
+    dts({}),
   ],
   resolve: {
     alias: {
-      '/@': path.resolve(__dirname, 'src'),
-      '/#': path.resolve(__dirname, 'types')
-    }
+      '/@': fileURLToPath(new URL('./src', import.meta.url)),
+      '/#': fileURLToPath(new URL('./types', import.meta.url)),
+    },
   },
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler' // or 'modern'
-      }
-    }
+        api: 'modern-compiler', // or 'modern'
+      },
+    },
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
       name: '@herodotus/form-designer',
-      fileName: format => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`)
+      fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
     minify: 'terser',
     terserOptions: {
       // 生产环境下移除console
       compress: {
         drop_console: true,
-        drop_debugger: true
+        drop_debugger: true,
       },
-      keep_classnames: true
+      keep_classnames: true,
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
@@ -58,7 +57,7 @@ export default defineConfig({
         '@herodotus/form-engine',
         '@herodotus/form-apis',
         '@herodotus/core',
-        'vuedraggable'
+        'vuedraggable',
       ],
       output: {
         exports: 'named',
@@ -72,9 +71,9 @@ export default defineConfig({
           '@herodotus/components': 'HerodotusComponents',
           '@herodotus/core': 'HerodotusCore',
           '@herodotus/form-apis': 'HerodotusFormApis',
-          vuedraggable: 'vuedraggable'
-        }
-      }
-    }
-  }
+          vuedraggable: 'vuedraggable',
+        },
+      },
+    },
+  },
 });

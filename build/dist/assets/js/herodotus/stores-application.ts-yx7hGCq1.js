@@ -1,1 +1,0 @@
-import{d as n}from"../modules/npm-pinia-BQFchIsZ.js";const e=n("Application",{state:()=>({leftDrawer:!0,rightDrawer:!1,signInPanel:"account"}),actions:{switchToMobilePanel(){this.signInPanel="mobile"},switchToScanPanel(){this.signInPanel="scan"},switchToAccountPanel(){this.signInPanel="account"}}});export{e as u};

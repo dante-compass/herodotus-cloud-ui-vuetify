@@ -1,0 +1,1 @@
+import{r as e}from"../modules/npm-@vue-reactivity-lcA9V3FK.js";import{w as t}from"../modules/npm-@vue-runtime-core-CaMaypo-.js";function o(o,r=!0){const m=e([]),n=e(!1),i=e({}),s=(e={})=>{o.fetchTree(e).then((e=>{const t=e.data;m.value=t||[]}))};return t((()=>i.value),(e=>{s(e)}),{deep:!0,immediate:r}),{loading:n,conditions:i,treeItems:m,fetchTree:s}}export{o as u};

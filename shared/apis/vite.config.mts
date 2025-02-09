@@ -1,8 +1,6 @@
+import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
-
 import dts from 'vite-plugin-dts';
-
-import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,15 +11,15 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '/@': path.resolve(__dirname, 'src'),
-      '/#': path.resolve(__dirname, 'types'),
+      '/@': fileURLToPath(new URL('./src', import.meta.url)),
+      '/#': fileURLToPath(new URL('./types', import.meta.url)),
     },
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, './src/index.ts'),
+      entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
       name: '@herodotus/apis',
-      fileName: format => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
+      fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
     minify: 'terser',
     terserOptions: {
