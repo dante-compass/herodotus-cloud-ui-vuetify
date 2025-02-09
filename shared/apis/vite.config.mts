@@ -1,5 +1,5 @@
+import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
-
 import dts from 'vite-plugin-dts';
 
 import path from 'path';
@@ -21,7 +21,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, './src/index.ts'),
       name: '@herodotus/apis',
-      fileName: format => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
+      fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
     minify: 'terser',
     terserOptions: {

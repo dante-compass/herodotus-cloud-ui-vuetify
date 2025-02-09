@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url';
 import { transformAssetUrls } from '@quasar/vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
@@ -10,43 +11,43 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
   plugins: [
     vue({
-      template: { transformAssetUrls }
+      template: { transformAssetUrls },
     }),
     Components({
       dts: true,
-      resolvers: [QuasarResolver()]
+      resolvers: [QuasarResolver()],
     }),
     dts({
-      insertTypesEntry: true
-    })
+      insertTypesEntry: true,
+    }),
   ],
   resolve: {
     alias: {
       '/@': path.resolve(__dirname, 'src'),
-      '/#': path.resolve(__dirname, 'types')
-    }
+      '/#': path.resolve(__dirname, 'types'),
+    },
   },
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler' // or 'modern'
-      }
-    }
+        api: 'modern-compiler', // or 'modern'
+      },
+    },
   },
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: '@herodotus/bpmn-designer',
-      fileName: format => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`)
+      fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
     minify: 'terser',
     terserOptions: {
       // 生产环境下移除console
       compress: {
         drop_console: true,
-        drop_debugger: true
+        drop_debugger: true,
       },
-      keep_classnames: true
+      keep_classnames: true,
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
@@ -74,7 +75,7 @@ export default defineConfig({
         'diagram-js-minimap',
         'diagram-js-grid',
         'didi',
-        'zeebe-bpmn-moddle'
+        'zeebe-bpmn-moddle',
       ],
       output: {
         exports: 'named',
@@ -104,9 +105,9 @@ export default defineConfig({
           'diagram-js-grid': 'DiagramJsGrid',
           'zeebe-bpmn-moddle': 'ZeebeBpmnModdle',
           ids: 'Ids',
-          didi: 'didi'
-        }
-      }
-    }
-  }
+          didi: 'didi',
+        },
+      },
+    },
+  },
 });
