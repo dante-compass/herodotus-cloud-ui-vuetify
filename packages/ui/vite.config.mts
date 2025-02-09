@@ -1,3 +1,5 @@
+import { fileURLToPath, URL } from 'node:url';
+
 import { defineConfig, loadEnv, UserConfigExport, ConfigEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
@@ -33,13 +35,15 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
       }),
       UnoCSS({
-        configFile: '../../uno.config.ts',
+        configFile: './uno.config.ts',
       }),
       vue({
         template: { transformAssetUrls },
       }),
       quasar({
-        sassVariables: '/@/static/styles/quasar.variables.sass',
+        sassVariables: fileURLToPath(
+          new URL('./src/static/styles/quasar-variables.sass', import.meta.url),
+        ),
       }),
       AutoImport({
         dts: true,
@@ -81,7 +85,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           },
         },
       }),
-      lifecycle === 'report' ? visualizer({ open: true, brotliSize: true, filename: 'report.html' }) : null,
+      lifecycle === 'report'
+        ? visualizer({ open: true, brotliSize: true, filename: 'report.html' })
+        : null,
     ],
     css: {
       preprocessorOptions: {
@@ -105,19 +111,19 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         '/api': {
           target: env.VITE_API_URL,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ''),
+          rewrite: (path) => path.replace(/^\/api/, ''),
         },
         '/socket': {
           target: env.VITE_WS_URL,
           changeOrigin: true,
           ws: true,
-          rewrite: path => path.replace(/^\/socket/, ''),
+          rewrite: (path) => path.replace(/^\/socket/, ''),
         },
         '/reactive': {
           target: env.VITE_REACTIVE_WS_URL,
           changeOrigin: true,
           ws: true,
-          rewrite: path => path.replace(/^\/reactive/, ''),
+          rewrite: (path) => path.replace(/^\/reactive/, ''),
         },
       },
     },
@@ -130,13 +136,28 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       outDir: '../../build/dist',
       emptyOutDir: true,
       cssCodeSplit: true, // 如果设置为false，整个项目中的所有 CSS 将被提取到一个 CSS 文件中
+      minify: 'terser',
+      terserOptions: {
+        // 生产环境下移除console
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+        keep_classnames: true,
+      },
       rollupOptions: {
         output: {
-          assetFileNames: assetInfo => {
-            if (assetInfo.type === 'asset' && /\.(jpe?g|png|gif|svg)$/i.test(assetInfo.name as string)) {
+          assetFileNames: (assetInfo) => {
+            if (
+              assetInfo.type === 'asset' &&
+              /\.(jpe?g|png|gif|svg)$/i.test(assetInfo.name as string)
+            ) {
               return 'assets/images/[name]-[hash].[ext]';
             }
-            if (assetInfo.type === 'asset' && /\.(ttf|woff|woff2|eot)$/i.test(assetInfo.name as string)) {
+            if (
+              assetInfo.type === 'asset' &&
+              /\.(ttf|woff|woff2|eot)$/i.test(assetInfo.name as string)
+            ) {
               return 'assets/fonts/[name]-[hash].[ext]';
             }
             return 'assets/[ext]/[name]-[hash].[ext]';

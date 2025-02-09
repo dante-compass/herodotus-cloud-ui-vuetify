@@ -4,7 +4,6 @@ import quasarLang from 'quasar/lang/zh-CN';
 import quasarIconSet from 'quasar/icon-set/svg-mdi-v7';
 
 // Import icon libraries
-import '@quasar/extras/material-icons/material-icons.css';
 import '@quasar/extras/mdi-v7/mdi-v7.css';
 // Import Quasar css
 import 'quasar/dist/quasar.css';
@@ -14,7 +13,7 @@ export const setupQuasar = (app: App<Element>) => {
     plugins: {
       Loading,
       AppFullscreen,
-      Notify
+      Notify,
     },
     lang: quasarLang,
     iconSet: quasarIconSet,
@@ -23,7 +22,7 @@ export const setupQuasar = (app: App<Element>) => {
         spinnerColor: 'primary',
         spinnerSize: 100,
         message: '正在处理中. 请稍后...',
-      }
-    }
+      },
+    },
   });
 };
