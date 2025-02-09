@@ -4,7 +4,6 @@ import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 import { transformAssetUrls } from '@quasar/vite-plugin';
 
-import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { QuasarResolver } from 'unplugin-vue-components/resolvers';
 
@@ -13,10 +12,6 @@ export default defineConfig({
   plugins: [
     vue({
       template: { transformAssetUrls },
-    }),
-    AutoImport({
-      imports: ['vue'],
-      resolvers: [QuasarResolver()],
     }),
     Components({
       resolvers: [QuasarResolver()],

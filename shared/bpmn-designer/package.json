@@ -11,6 +11,7 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
@@ -22,8 +23,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "build": "vue-tsc --build && vite build",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "@bpmn-io/element-template-chooser": "^1.0.0",
@@ -47,6 +49,7 @@
     "diagram-js-minimap": "^5.2.0",
     "didi": "^10.2.2",
     "highlight.js": "^11.11.1",
+    "ids": "^1.0.5",
     "pinia": "^2.3.1",
     "preact": "^10.25.4",
     "vue": "^3.5.13",

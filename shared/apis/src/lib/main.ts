@@ -21,14 +21,14 @@ import {
   SysDictionaryService,
   SocialBindingService,
   ExtendedTaskService,
-  MgtCertificateService
+  MgtCertificateService,
 } from './modules';
 
 import {
   DialogueContactService,
   DialogueDetailService,
   NotificationService,
-  WebSocketMessageService
+  WebSocketMessageService,
 } from './settings';
 
 class ApiResources {
@@ -167,7 +167,7 @@ const createApi = (
   clientId: string,
   clientSecret: string,
   http: Axios,
-  oidc: boolean
+  oidc: boolean,
 ): ApiResources => {
   const config = new HttpConfig(project, clientId, clientSecret, http, oidc);
   return ApiResources.getInstance(config);

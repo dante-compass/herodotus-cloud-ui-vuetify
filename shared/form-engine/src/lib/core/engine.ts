@@ -1,5 +1,6 @@
 import type { VModel, Schema } from '/@/declarations';
-import { h, resolveComponent, SetupContext } from 'vue';
+import type { SetupContext } from 'vue';
+import { h, resolveComponent } from 'vue';
 
 const createModelEvent = (name: string): string => {
   return 'onUpdate:' + name;
@@ -21,17 +22,25 @@ const createBinding = (name: string, props: Record<string, unknown>, context: Se
   return { ...vModel };
 };
 
-const createModels = (models: Record<string, VModel>, props: Record<string, unknown>, context: SetupContext) => {
+const createModels = (
+  models: Record<string, VModel>,
+  props: Record<string, unknown>,
+  context: SetupContext,
+) => {
   let result: Record<string, any> = {};
-  Object.keys(models).forEach(key => {
+  Object.keys(models).forEach((key) => {
     const model = createBinding(key, props, context);
     result = Object.assign(result, model);
   });
   return result;
 };
 
-export const renderSchema = (schemas: Array<Schema>, props: Record<string, unknown>, context: SetupContext): any => {
-  return schemas.map(schema => {
+export const renderSchema = (
+  schemas: Array<Schema>,
+  props: Record<string, unknown>,
+  context: SetupContext,
+): any => {
+  return schemas.map((schema) => {
     const children = schema.children ? schema.children : [];
     const models = schema.models ? schema.models : {};
     let vModels = {};
@@ -40,13 +49,13 @@ export const renderSchema = (schemas: Array<Schema>, props: Record<string, unkno
     }
     if (schema.children) {
       return h(resolveComponent(schema.tag), { ...schema.attrs, ...vModels }, () =>
-        renderSchema(children, props, context)
+        renderSchema(children, props, context),
       );
     } else {
       return h(
         resolveComponent(schema.tag),
         { ...schema.attrs, ...vModels },
-        schema.text ? () => schema.text : () => {}
+        schema.text ? () => schema.text : () => {},
       );
     }
   });

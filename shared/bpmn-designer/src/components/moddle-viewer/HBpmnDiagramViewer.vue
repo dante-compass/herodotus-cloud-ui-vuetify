@@ -10,14 +10,20 @@
       <q-separator />
 
       <q-card-section class="q-pt-none q-pa-none">
-        <h-bpmn-viewer v-if="isShow" :diagram="diagram" :nodes="nodes" :height="height"></h-bpmn-viewer>
+        <h-bpmn-viewer
+          v-if="isShow"
+          :diagram="diagram"
+          :nodes="nodes"
+          :height="height"
+        ></h-bpmn-viewer>
       </q-card-section>
     </q-card>
   </q-dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, watch, ref } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed, watch, ref } from 'vue';
 
 import HBpmnViewer from './HBpmnViewer.vue';
 
@@ -25,17 +31,17 @@ export default defineComponent({
   name: 'HBpmnDiagramViewer',
 
   components: {
-    HBpmnViewer
+    HBpmnViewer,
   },
 
   props: {
     modelValue: { type: Boolean, required: true },
     diagram: { type: String, required: true },
-    nodes: { type: Array as PropType<Array<string>>, default: () => []},
+    nodes: { type: Array as PropType<Array<string>>, default: () => [] },
     title: { type: String, default: '' },
     width: { type: String, default: '800px' },
     height: { type: String, default: '450px' },
-    maxWidth: { type: String, default: '80vh' }
+    maxWidth: { type: String, default: '80vh' },
   },
 
   emits: ['update:modelValue'],
@@ -43,29 +49,29 @@ export default defineComponent({
   setup(props, { emit }) {
     const isOpen = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const isShow = ref(false);
 
     watch(
       () => props.diagram,
-      newValue => {
+      (newValue) => {
         if (newValue) {
           isShow.value = true;
         } else {
           isShow.value = false;
         }
       },
-      { immediate: true }
+      { immediate: true },
     );
 
     return {
       isOpen,
-      isShow
+      isShow,
     };
-  }
+  },
 });
 </script>

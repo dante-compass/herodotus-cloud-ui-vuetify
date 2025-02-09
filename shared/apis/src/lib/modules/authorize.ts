@@ -1,4 +1,4 @@
-import {
+import type {
   OAuth2ApplicationEntity,
   OAuth2ScopeEntity,
   OAuth2AuthorizationEntity,
@@ -57,7 +57,9 @@ class OAuth2ScopeService extends BaseService<OAuth2ScopeEntity> {
   }
 
   public fetchByScopeCode(scopeCode: string): Promise<AxiosHttpResult<OAuth2ScopeEntity>> {
-    return this.getConfig().getHttp().get<OAuth2ScopeEntity, string>(this.getScopeCodePath(scopeCode));
+    return this.getConfig()
+      .getHttp()
+      .get<OAuth2ScopeEntity, string>(this.getScopeCodePath(scopeCode));
   }
 
   public assigned(data: OAuth2ScopeAssignedBody): Promise<AxiosHttpResult<OAuth2ScopeEntity>> {

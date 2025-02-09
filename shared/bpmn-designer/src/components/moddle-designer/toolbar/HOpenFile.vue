@@ -6,18 +6,25 @@
     label="打开"
     label-color="primary"
     class="text-no-wrap"
-    style="max-width: 200px">
+    style="max-width: 200px"
+  >
     <template v-slot:prepend>
       <q-icon name="mdi-folder-open" color="primary" @click.stop.prevent />
     </template>
     <template v-slot:append>
-      <q-icon v-if="diagramFile !== null" name="close" @click.stop.prevent="clear" class="cursor-pointer" />
+      <q-icon
+        v-if="diagramFile !== null"
+        name="close"
+        @click.stop.prevent="clear"
+        class="cursor-pointer"
+      />
     </template>
   </q-file>
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref, watch } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 
 import { useModelerCreator } from '/@/hooks';
 import { toast } from '/@/lib/utils';
@@ -54,9 +61,9 @@ export default defineComponent({
 
     return {
       diagramFile,
-      clear
+      clear,
     };
-  }
+  },
 });
 </script>
 

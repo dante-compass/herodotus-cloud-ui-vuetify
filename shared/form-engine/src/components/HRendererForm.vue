@@ -1,11 +1,15 @@
 <template>
   <div v-for="item in elements" :key="item.id">
-    <h-renderer-engine v-model="state[getDefaultModel(item).name]" :schemas="[item.schema]"></h-renderer-engine>
+    <h-renderer-engine
+      v-model="state[getDefaultModel(item).name]"
+      :schemas="[item.schema]"
+    ></h-renderer-engine>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType, reactive, watch } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed, reactive, watch } from 'vue';
 
 import type { Element } from '/@/declarations';
 
@@ -15,8 +19,12 @@ export default defineComponent({
   name: 'HRendererForm',
 
   props: {
-    modelValue: { type: Object as PropType<Record<string, any>>, default: () => ({}), required: true },
-    elements: { type: Array as PropType<Array<Element>>, required: true }
+    modelValue: {
+      type: Object as PropType<Record<string, any>>,
+      default: () => ({}),
+      required: true,
+    },
+    elements: { type: Array as PropType<Array<Element>>, required: true },
   },
 
   emits: ['update:modelValue'],
@@ -24,9 +32,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const modelObject = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const getDefaultModel = (item: Element) => {
@@ -49,7 +57,7 @@ export default defineComponent({
     const createModels = () => {
       const models = {} as Record<string, any>;
       if (props.elements) {
-        props.elements.map(item => {
+        props.elements.map((item) => {
           const model = getDefaultModel(item);
           if (model.name) {
             models[model.name] = getModelDefaultValue(model.type);
@@ -63,21 +71,21 @@ export default defineComponent({
       if (isEmpty(modelObject.value)) {
         return createModels();
       } else {
-        return modelObject.value
+        return modelObject.value;
       }
-    }
+    };
 
     const state = reactive(assignModels());
 
-    watch(state, newValue => {
+    watch(state, (newValue) => {
       modelObject.value = { ...newValue };
     });
 
     return {
       getDefaultModel,
       modelObject,
-      state
+      state,
     };
-  }
+  },
 });
 </script>

@@ -2,7 +2,7 @@ import { lodash } from './base';
 
 class BpmnLog {
   private static instance = new BpmnLog();
-  private static types: string[] = ['primary', 'success', 'warn', 'error', 'info'];
+  // private static types: string[] = ['primary', 'success', 'warn', 'error', 'info'];
 
   private constructor() {}
 
@@ -40,14 +40,14 @@ class BpmnLog {
       // 如果是打印帶背景圖的
       console.log(
         `%c ${text} `,
-        `background:${this.switchColor(type)}; padding: 2px; border-radius: 4px; color: #fff;`
+        `background:${this.switchColor(type)}; padding: 2px; border-radius: 4px; color: #fff;`,
       );
     } else {
       console.log(
         `%c ${text} `,
         `border: 1px solid ${this.switchColor(type)};
           padding: 2px; border-radius: 4px;
-          color: ${this.switchColor(type)};`
+          color: ${this.switchColor(type)};`,
       );
     }
   }
@@ -62,7 +62,7 @@ class BpmnLog {
       console.log(
         `%c ${title}`,
         `background:${this.switchColor(type)};border:1px solid ${this.switchColor(type)};
-          padding: 1px; border-radius: 4px; color: #fff;`
+          padding: 1px; border-radius: 4px; color: #fff;`,
       );
       this.isArray(text) ? console.table(text) : console.dir(text);
       console.groupEnd();
@@ -74,7 +74,7 @@ class BpmnLog {
         padding: 1px; border-radius: 4px 0 0 4px; color: #fff;`,
       `border:1px solid ${this.switchColor(type)};
         padding: 1px; border-radius: 0 4px 4px 0; color: ${this.switchColor(type)};`,
-      'background:transparent'
+      'background:transparent',
     );
   }
 

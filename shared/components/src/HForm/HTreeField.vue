@@ -9,7 +9,8 @@
             node-key="id"
             label-key="name"
             selected-color="primary"
-            v-model:selected="selectedValue"></q-tree>
+            v-model:selected="selectedValue"
+          ></q-tree>
         </q-card-section>
       </q-card>
     </q-popup-proxy>
@@ -17,7 +18,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, Ref, PropType, computed } from 'vue';
+import type { PropType, Ref } from 'vue';
+import { defineComponent, ref, watch, computed } from 'vue';
 
 import type { QTree, Tree } from '/@/lib/declarations';
 
@@ -38,7 +40,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const selectedValue = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });
@@ -63,14 +65,14 @@ export default defineComponent({
     const init = (tree: Array<Tree>) => {
       if (!lodash.isEmpty(tree) && lodash.isEmpty(treeNodes.value)) {
         treeNodes.value = treeToArray(tree);
-        const item = lodash.find(treeNodes.value, i => i.id == props.modelValue);
+        const item = lodash.find(treeNodes.value, (i) => i.id == props.modelValue);
         nodeName.value = item?.name as string;
       }
     };
 
     watch(
       () => props.items,
-      newValue => {
+      (newValue) => {
         if (!lodash.isEmpty(newValue)) {
           init(newValue);
         }

@@ -1,4 +1,5 @@
-import { ref, Ref, computed } from 'vue';
+import type { Ref } from 'vue';
+import { ref, computed } from 'vue';
 
 import type {
   Sheet,
@@ -35,7 +36,9 @@ export default function useBpmnProcess() {
   });
 
   const conditionOptions = computed(() => {
-    return !lodash.isEmpty(condition.value) && !lodash.isEmpty(condition.value.options) ? condition.value.options : [];
+    return !lodash.isEmpty(condition.value) && !lodash.isEmpty(condition.value.options)
+      ? condition.value.options
+      : [];
   });
 
   const fetchFormModeler = async (id: string) => {
@@ -52,7 +55,9 @@ export default function useBpmnProcess() {
 
   const fetchStartForm = async (key: string, tenantId = '') => {
     skeleton.value = true;
-    const result = await bpmnApi.processDefinition().getStartFormKey({ key: key, tenantId: tenantId });
+    const result = await bpmnApi
+      .processDefinition()
+      .getStartFormKey({ key: key, tenantId: tenantId });
     const data = result as FormKeyEntity;
     if (data.key) {
       await fetchFormModeler(data.key);
@@ -95,7 +100,7 @@ export default function useBpmnProcess() {
     formApi
       .processSpecifics()
       .saveOrUpdate(entity)
-      .then(response => {
+      .then((response) => {
         const data = response.data as ProcessSpecificsEntity;
         bpmnApi
           .processDefinition()

@@ -15,7 +15,8 @@
         :loading="loading"
         status
         reserved
-        @request="findItems">
+        @request="findItems"
+      >
         <template #body-cell-gender="props">
           <q-td key="gender" :props="props">
             {{ getDictionaryItemDisplay('Gender', props.row.identity) }}
@@ -37,7 +38,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import type {
   SysEmployeeEntity,
@@ -67,7 +69,9 @@ export default defineComponent({
   setup(props) {
     const { onFinish } = useEditFinish();
     const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity');
-    const { editedItem, title, overlay } = useTableItem<SysEmployeeAllocatable>(api.sysEmployeeAllocatable());
+    const { editedItem, title, overlay } = useTableItem<SysEmployeeAllocatable>(
+      api.sysEmployeeAllocatable(),
+    );
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       SysEmployeeEntity,
       SysEmployeeConditions
@@ -96,7 +100,7 @@ export default defineComponent({
             departmentId: editedItem.value.departmentId,
             employees: selectedItems.value,
           })
-          .then(response => {
+          .then((response) => {
             const result = response as HttpResult<string>;
             overlay.value = false;
             onFinish();

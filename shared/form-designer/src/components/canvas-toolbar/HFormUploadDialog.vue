@@ -20,7 +20,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 
 import type { SweetAlertResult } from '/@/declarations';
 
@@ -33,11 +34,11 @@ export default defineComponent({
   name: 'HFormUploadDialog',
 
   components: {
-    HFormInformation
+    HFormInformation,
   },
 
   props: {
-    modelValue: { type: Boolean, default: false }
+    modelValue: { type: Boolean, default: false },
   },
 
   emits: ['update:modelValue', 'update:open', 'save'],
@@ -45,9 +46,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const isOpen = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const infoRef = ref(null) as Ref<typeof HFormInformation | null>;
@@ -65,11 +66,11 @@ export default defineComponent({
         confirmButtonText: '确定!',
         cancelButtonText: '取消',
         showClass: {
-          popup: 'animate__animated animate__fadeIn'
+          popup: 'animate__animated animate__fadeIn',
         },
         hideClass: {
-          popup: 'animate__animated animate__fadeOut'
-        }
+          popup: 'animate__animated animate__fadeOut',
+        },
       }).then((confirm: SweetAlertResult) => {
         if (confirm.value) {
           canvas.isClosed = true;
@@ -84,11 +85,11 @@ export default defineComponent({
           const entity = canvas.compose();
           resource.dynamicForm
             .saveOrUpdate(entity)
-            .then(result => {
+            .then((result) => {
               isOpen.value = false;
               showComfirm();
             })
-            .catch(error => {
+            .catch((error) => {
               isOpen.value = false;
               toast.error('保存失败！');
             });
@@ -99,8 +100,8 @@ export default defineComponent({
     return {
       isOpen,
       onSave,
-      infoRef
+      infoRef,
     };
-  }
+  },
 });
 </script>

@@ -13,7 +13,7 @@ export default defineComponent({
   name: 'HHistoryCleanupPanel',
 
   components: {
-    HExpansionItem
+    HExpansionItem,
   },
 
   setup() {
@@ -23,11 +23,11 @@ export default defineComponent({
 
     watch(
       () => designer.activeElement.id,
-      newValue => {
+      () => {
         loading();
       },
-      { immediate: true, deep: true }
+      { immediate: true, deep: true },
     );
-  }
+  },
 });
 </script>

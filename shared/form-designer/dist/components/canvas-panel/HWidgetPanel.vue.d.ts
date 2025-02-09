@@ -1,7 +1,7 @@
-import { Widget, Element } from '../../declarations';
+import { Widget } from '../../declarations';
 declare const _default: import('vue').DefineComponent<{}, {
     widgetGroups: import('@herodotus/form-apis').WidgetDefinition[];
-    cloneWidget: (widget: Widget) => Element;
+    cloneWidget: (widget: Widget) => import('@herodotus/form-apis').Element;
     addWidget: (widget: Widget) => void;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
     Draggable: import('vue').DefineComponent<{

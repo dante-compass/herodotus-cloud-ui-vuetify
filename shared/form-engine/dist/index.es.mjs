@@ -1174,7 +1174,11 @@ const _sfc_main$1 = defineComponent({
 const _sfc_main = defineComponent({
   name: "HRendererForm",
   props: {
-    modelValue: { type: Object, default: () => ({}), required: true },
+    modelValue: {
+      type: Object,
+      default: () => ({}),
+      required: true
+    },
     elements: { type: Array, required: true }
   },
   emits: ["update:modelValue"],

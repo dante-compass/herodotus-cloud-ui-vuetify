@@ -1,5 +1,5 @@
 import type { BaseMongoEntity, Conditions } from '../base';
-import type { Element, FormModeler } from './engine';
+import type { FormModeler } from './engine';
 
 export interface DynamicFormEntity extends BaseMongoEntity {
   name: string;

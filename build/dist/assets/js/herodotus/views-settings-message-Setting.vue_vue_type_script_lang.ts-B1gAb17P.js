@@ -1,0 +1,1 @@
+import{d as e}from"../modules/npm-@vue-runtime-core-D-eYiq3p.js";import{r as t}from"../modules/npm-@vue-reactivity-tvqkAIf7.js";const o=e({name:"MessageSetting",setup:e=>({tab:t("configuration")})});export{o as _};

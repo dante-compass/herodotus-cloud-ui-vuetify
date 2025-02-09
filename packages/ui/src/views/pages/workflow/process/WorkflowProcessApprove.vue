@@ -9,7 +9,13 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none">
-          <q-option-group v-if="hasCondition" v-model="approved" :options="conditionOptions" color="primary" inline />
+          <q-option-group
+            v-if="hasCondition"
+            v-model="approved"
+            :options="conditionOptions"
+            color="primary"
+            inline
+          />
           <q-input v-model="comments" outlined type="textarea" />
         </q-card-section>
       </q-card>
@@ -24,7 +30,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, onMounted } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 
 import type { Sheet, ProcessCommentsEntity, Variables } from '/@/lib/declarations';
 
@@ -80,14 +87,14 @@ export default defineComponent({
           fullMessage: comments.value,
           tenantId: editedItem.value.tenantId,
         })
-        .then(result => {
+        .then((result) => {
           const comment = result.data as ProcessCommentsEntity;
           if (!lodash.isEmpty(comment)) {
             editedItem.value.comments.push(comment);
             formApi
               .processSpecifics()
               .saveOrUpdate(editedItem.value)
-              .then(response => {
+              .then((response) => {
                 const specifics = response.data;
 
                 const name = condition.value.variable;
@@ -95,7 +102,10 @@ export default defineComponent({
                 variables[name] = { value: approved.value };
                 bpmnApi
                   .task()
-                  .complete(specifics.taskId as string, { variables: variables, withVariablesInReturn: false })
+                  .complete(specifics.taskId as string, {
+                    variables: variables,
+                    withVariablesInReturn: false,
+                  })
                   .then(() => {
                     onFinish();
                     toast.success('保存成功！');

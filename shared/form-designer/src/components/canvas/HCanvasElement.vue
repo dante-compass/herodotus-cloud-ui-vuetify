@@ -2,7 +2,8 @@
   <q-card
     :class="[isSelected && !isHover ? 'canvas-item-selected' : 'canvas-item']"
     @mouseover="isHover = true"
-    @mouseleave="isHover = false">
+    @mouseleave="isHover = false"
+  >
     <h-renderer-engine :schemas="schemas"></h-renderer-engine>
     <q-card-actions v-if="isHover" class="justify-end q-pa-none">
       <q-btn flat round size="sm" color="red" icon="mdi-delete" @click="onDelete" />
@@ -13,7 +14,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, computed } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import type { Element } from '/@/declarations';
 
 import { useFormCanvasStore } from '/@/stores';
@@ -23,12 +25,12 @@ export default defineComponent({
   name: 'HCanvasElement',
 
   components: {
-    HRendererEngine
+    HRendererEngine,
   },
 
   props: {
     element: { type: Object as PropType<Element>, required: true },
-    selectedId: { type: Number, required: true }
+    selectedId: { type: Number, required: true },
   },
 
   setup(props) {
@@ -51,9 +53,9 @@ export default defineComponent({
       isHover,
       schemas,
       isSelected,
-      onDelete
+      onDelete,
     };
-  }
+  },
 });
 </script>
 

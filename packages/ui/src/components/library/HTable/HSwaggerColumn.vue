@@ -9,7 +9,13 @@
       <div class="col-5">
         <div class="column items-start">
           <div class="col">
-            <q-btn flat :label="url" :dense="dense" :size="size" class="text-weight-bold text-lowercase" />
+            <q-btn
+              flat
+              :label="url"
+              :dense="dense"
+              :size="size"
+              class="text-weight-bold text-lowercase"
+            />
           </div>
         </div>
       </div>
@@ -23,7 +29,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 import type { HttpMethod } from '/@/lib/declarations';
 

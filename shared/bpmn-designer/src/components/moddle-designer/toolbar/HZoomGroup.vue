@@ -26,10 +26,10 @@ export default defineComponent({
   components: {
     HButton,
     HButtonGroup,
-    HSeparator
+    HSeparator,
   },
 
-  setup(props) {
+  setup() {
     const currentScale = ref(1);
 
     const designer = useDesignerStore();
@@ -67,8 +67,8 @@ export default defineComponent({
       onZoomReset,
       onZoomMinus,
       onZoomPlus,
-      percentage
+      percentage,
     };
-  }
+  },
 });
 </script>

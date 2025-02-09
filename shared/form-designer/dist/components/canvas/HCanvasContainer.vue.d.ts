@@ -104,7 +104,7 @@ declare const _default: import('vue').DefineComponent<{}, {
         };
     }>, {
         isHover: import('vue').Ref<boolean, boolean>;
-        schemas: import('vue').ComputedRef<import('../../declarations').Schema[]>;
+        schemas: import('vue').ComputedRef<import('@herodotus/form-apis').Schema[]>;
         isSelected: import('vue').ComputedRef<boolean>;
         onDelete: () => void;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
@@ -122,7 +122,7 @@ declare const _default: import('vue').DefineComponent<{}, {
         }, () => any, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{
             [x: string]: any;
         }> & Readonly<{}>, {
-            schemas: import('../../declarations').Schema[];
+            schemas: import('@herodotus/form-apis').Schema[];
         }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     HCanvasLayout: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;

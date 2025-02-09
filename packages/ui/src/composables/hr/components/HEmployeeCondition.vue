@@ -10,7 +10,8 @@
                 debounce="1000"
                 label="姓名"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
@@ -18,7 +19,8 @@
                 debounce="1000"
                 label="手机号码"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
@@ -26,7 +28,8 @@
                 debounce="1000"
                 label="电子邮件"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-dictionary-select
@@ -34,7 +37,8 @@
                 dictionary="Identity"
                 label="身份"
                 dense
-                class="q-pb-none"></h-dictionary-select>
+                class="q-pb-none"
+              ></h-dictionary-select>
             </h-column>
             <h-column :cols="2">
               <h-dictionary-select
@@ -42,10 +46,16 @@
                 dictionary="Gender"
                 label="性别"
                 dense
-                class="q-pb-none"></h-dictionary-select>
+                class="q-pb-none"
+              ></h-dictionary-select>
             </h-column>
             <h-column auto>
-              <h-button color="red" icon="mdi-broom" tooltip="清空" @click.stop="onClear()"></h-button>
+              <h-button
+                color="red"
+                icon="mdi-broom"
+                tooltip="清空"
+                @click.stop="onClear()"
+              ></h-button>
             </h-column>
           </h-row>
         </q-card-section>
@@ -55,7 +65,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 import type { SysEmployeeConditions } from '/@/lib/declarations';
 
@@ -77,7 +88,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const conditionsModelValue = computed({
       get: () => props.conditions,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:conditions', newValue);
       },
     });

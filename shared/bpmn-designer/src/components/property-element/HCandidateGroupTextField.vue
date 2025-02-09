@@ -9,17 +9,19 @@
           icon="mdi-text-box-search-outline"
           color="red"
           class="cursor-pointer"
-          @click="onOpen()" />
+          @click="onOpen()"
+        />
       </template>
     </h-text-field>
-    <h-dialog v-model="isOpen" @save="onSave()" :title="title">
+    <h-dialog v-model="isOpen" @confirm="onSave()" :title="title">
       <h-group-select-table v-model="selected"></h-group-select-table>
     </h-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref, computed } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 
 import type { GroupEntity } from '/@/declarations';
 
@@ -35,13 +37,13 @@ export default defineComponent({
   components: {
     HDialog,
     HGroupSelectTable,
-    HTextField
+    HTextField,
   },
 
   props: {
     modelValue: { type: String, default: '' },
     label: { type: String },
-    title: { type: String }
+    title: { type: String },
   },
 
   emits: ['update:modelValue'],
@@ -49,9 +51,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const assignee = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const isOpen = ref(false);
@@ -69,8 +71,8 @@ export default defineComponent({
       onClose();
       if (!lodash.isEmpty(selected.value)) {
         assignee.value = lodash.join(
-          lodash.map(selected.value, item => item.id),
-          ','
+          lodash.map(selected.value, (item) => item.id),
+          ',',
         );
       } else {
         assignee.value = '';
@@ -80,7 +82,7 @@ export default defineComponent({
     const onOpen = () => {
       if (assignee.value) {
         const items = lodash.split(assignee.value);
-        selected.value = lodash.map(items, item => {
+        selected.value = lodash.map(items, (item) => {
           return { id: item, name: '', type: '' };
         });
       }
@@ -95,8 +97,8 @@ export default defineComponent({
       assignee,
       onClose,
       onSave,
-      onOpen
+      onOpen,
     };
-  }
+  },
 });
 </script>

@@ -3,13 +3,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 import { CONSTANTS } from '/@/composables/constants';
 
 import HDenseIconButton from './HDenseIconButton.vue';
 import { lodash } from '/@/lib/utils';
-import { Dictionary } from '/@/lib/declarations';
+import type { Dictionary } from '/@/lib/declarations';
 
 export default defineComponent({
   name: 'HStatusColumn',

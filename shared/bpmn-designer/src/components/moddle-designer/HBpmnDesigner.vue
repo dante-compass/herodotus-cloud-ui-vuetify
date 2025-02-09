@@ -15,12 +15,14 @@
       :title="elementTitle"
       :icon="elementIcon"
       :type="elementType"
-      :label="elementCaption"></h-bpmn-property-panel>
+      :label="elementCaption"
+    ></h-bpmn-property-panel>
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onBeforeUnmount, watch, computed, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, onMounted, onBeforeUnmount, watch, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
 import type { BpmnDesignerResources } from '/@/declarations';
@@ -36,14 +38,14 @@ export default defineComponent({
 
   components: {
     HBpmnDesignerToolbar,
-    HBpmnPropertyPanel
+    HBpmnPropertyPanel,
   },
 
   emits: ['close'],
 
   props: {
     instance: { type: Object as PropType<BpmnDesignerResources>, required: true },
-    height: { type: String, default: '100vh' }
+    height: { type: String, default: '100vh' },
   },
 
   setup(props, { emit }) {
@@ -61,11 +63,11 @@ export default defineComponent({
 
     watch(
       () => designer.isClosed,
-      newValue => {
+      (newValue) => {
         if (newValue) {
           emit('close');
         }
-      }
+      },
     );
 
     onBeforeUnmount(() => {
@@ -87,8 +89,8 @@ export default defineComponent({
       elementTitle,
       elementIcon,
       elementCaption,
-      elementType
+      elementType,
     };
-  }
+  },
 });
 </script>

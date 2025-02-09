@@ -4,44 +4,44 @@ export declare const useResourceStore: import('pinia').StoreDefinition<"BpmnDesi
 }, {
     userService: (state: {
         resources: {
-            user: () => import('../declarations').UserService;
-            group: () => import('../declarations').GroupService;
-            deployment: () => import('../declarations').DeploymentService;
-            dynamicForm: () => import('../declarations').DynamicFormService;
+            user: () => import('@herodotus/bpmn-apis').UserService;
+            group: () => import('@herodotus/bpmn-apis').GroupService;
+            deployment: () => import('@herodotus/bpmn-apis').DeploymentService;
+            dynamicForm: () => import('@herodotus/form-apis').DynamicFormService;
         };
     } & import('pinia').PiniaCustomStateProperties<{
         resources: BpmnDesignerResources;
-    }>) => import('../declarations').UserService;
+    }>) => import('@herodotus/bpmn-apis').UserService;
     groupService: (state: {
         resources: {
-            user: () => import('../declarations').UserService;
-            group: () => import('../declarations').GroupService;
-            deployment: () => import('../declarations').DeploymentService;
-            dynamicForm: () => import('../declarations').DynamicFormService;
+            user: () => import('@herodotus/bpmn-apis').UserService;
+            group: () => import('@herodotus/bpmn-apis').GroupService;
+            deployment: () => import('@herodotus/bpmn-apis').DeploymentService;
+            dynamicForm: () => import('@herodotus/form-apis').DynamicFormService;
         };
     } & import('pinia').PiniaCustomStateProperties<{
         resources: BpmnDesignerResources;
-    }>) => import('../declarations').GroupService;
+    }>) => import('@herodotus/bpmn-apis').GroupService;
     deploymentService: (state: {
         resources: {
-            user: () => import('../declarations').UserService;
-            group: () => import('../declarations').GroupService;
-            deployment: () => import('../declarations').DeploymentService;
-            dynamicForm: () => import('../declarations').DynamicFormService;
+            user: () => import('@herodotus/bpmn-apis').UserService;
+            group: () => import('@herodotus/bpmn-apis').GroupService;
+            deployment: () => import('@herodotus/bpmn-apis').DeploymentService;
+            dynamicForm: () => import('@herodotus/form-apis').DynamicFormService;
         };
     } & import('pinia').PiniaCustomStateProperties<{
         resources: BpmnDesignerResources;
-    }>) => import('../declarations').DeploymentService;
+    }>) => import('@herodotus/bpmn-apis').DeploymentService;
     dynamicFormService: (state: {
         resources: {
-            user: () => import('../declarations').UserService;
-            group: () => import('../declarations').GroupService;
-            deployment: () => import('../declarations').DeploymentService;
-            dynamicForm: () => import('../declarations').DynamicFormService;
+            user: () => import('@herodotus/bpmn-apis').UserService;
+            group: () => import('@herodotus/bpmn-apis').GroupService;
+            deployment: () => import('@herodotus/bpmn-apis').DeploymentService;
+            dynamicForm: () => import('@herodotus/form-apis').DynamicFormService;
         };
     } & import('pinia').PiniaCustomStateProperties<{
         resources: BpmnDesignerResources;
-    }>) => import('../declarations').DynamicFormService;
+    }>) => import('@herodotus/form-apis').DynamicFormService;
 }, {
     init(instance: BpmnDesignerResources): void;
 }>;

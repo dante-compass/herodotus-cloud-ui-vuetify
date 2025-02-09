@@ -12,11 +12,13 @@
     transition-show="scale"
     transition-hide="scale"
     bottom-slots
-    v-bind="$attrs"></q-select>
+    v-bind="$attrs"
+  ></q-select>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 import type { Dictionary } from '/@/lib/declarations';
 
@@ -41,7 +43,7 @@ export default defineComponent({
     const selectedValue = computed({
       // 子组件v-model绑定 计算属性, 一旦发生变化, 就会给父组件传递值
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });

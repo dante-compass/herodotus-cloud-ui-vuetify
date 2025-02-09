@@ -13,7 +13,8 @@
     transition-show="scale"
     transition-hide="scale"
     @filter="filter"
-    v-bind="$attrs">
+    v-bind="$attrs"
+  >
     <template v-slot:no-option>
       <q-item>
         <q-item-section class="text-grey">没有数据</q-item-section>
@@ -23,7 +24,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed, ref, Ref, watch } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, onMounted, computed, ref } from 'vue';
 import { QSelect } from 'quasar';
 
 import type { FormSelectItem } from '/@/declarations';
@@ -35,15 +37,15 @@ export default defineComponent({
   name: 'HFormSelect',
 
   props: {
-    modelValue: { type: String }
+    modelValue: { type: String },
   },
 
   setup(props, { emit }) {
     const selectedValue = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const resource = useResourceStore();
@@ -54,7 +56,7 @@ export default defineComponent({
       const result = await resource.dynamicFormService.fetchAll();
       const data = result.data;
       if (!lodash.isEmpty(data)) {
-        options.value = data.map(i => {
+        options.value = data.map((i) => {
           return { label: i.name + '-' + i.activityName, value: i.id } as FormSelectItem;
         });
       }
@@ -67,19 +69,20 @@ export default defineComponent({
     const filter = (
       value: string,
       update: (callbackFn: () => void, after?: (ref: QSelect) => void) => void,
-      abort: () => void
+      abort: () => void,
     ) => {
       update(() => {
         const needle = value.toLowerCase();
-        options.value = options.value.filter(v => v.label.match(needle));
+        options.value = options.value.filter((v) => v.label.match(needle));
       });
+      abort();
     };
 
     return {
       selectedValue,
       options,
-      filter
+      filter,
     };
-  }
+  },
 });
 </script>

@@ -10,7 +10,8 @@
                 debounce="1000"
                 label="分类"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
@@ -18,7 +19,8 @@
                 debounce="1000"
                 label="字面量"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2">
               <h-text-field
@@ -26,12 +28,18 @@
                 debounce="1000"
                 label="显示值"
                 dense
-                class="q-pb-none"></h-text-field>
+                class="q-pb-none"
+              ></h-text-field>
             </h-column>
             <h-column :cols="2"></h-column>
             <h-column :cols="2"></h-column>
             <h-column auto>
-              <h-button color="red" icon="mdi-broom" tooltip="清空" @click.stop="onClear()"></h-button>
+              <h-button
+                color="red"
+                icon="mdi-broom"
+                tooltip="清空"
+                @click.stop="onClear()"
+              ></h-button>
             </h-column>
           </h-row>
         </q-card-section>
@@ -41,7 +49,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 import type { SysDictionaryConditions } from '/@/lib/declarations';
 
@@ -57,7 +66,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const conditionsModelValue = computed({
       get: () => props.conditions,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:conditions', newValue);
       },
     });

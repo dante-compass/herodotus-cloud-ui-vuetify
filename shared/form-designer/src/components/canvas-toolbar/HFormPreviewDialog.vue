@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, Ref, ref } from 'vue';
-import { storeToRefs } from 'pinia';
+import type { Ref } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import { useFormCanvasStore } from '/@/stores';
 
 import { HRendererForm } from '../library';
@@ -29,11 +29,11 @@ export default defineComponent({
   name: 'HFormPreviewDialog',
 
   components: {
-    HRendererForm
+    HRendererForm,
   },
 
   props: {
-    modelValue: { type: Boolean, default: false }
+    modelValue: { type: Boolean, default: false },
   },
 
   emits: ['update:modelValue'],
@@ -44,9 +44,9 @@ export default defineComponent({
 
     const isOpen = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const onClose = () => {
@@ -59,8 +59,8 @@ export default defineComponent({
       isOpen,
       state,
       canvasElements,
-      onClose
+      onClose,
     };
-  }
+  },
 });
 </script>

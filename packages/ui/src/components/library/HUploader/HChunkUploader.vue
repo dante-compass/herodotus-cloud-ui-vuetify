@@ -8,11 +8,13 @@
     @file-added="onFileAdded"
     @file-complete="fileComplete"
     @file-success="onFileSuccess"
-    @complete="complete"></uploader>
+    @complete="complete"
+  ></uploader>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, onMounted, nextTick, computed } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, onMounted, nextTick, computed } from 'vue';
 import type {
   CreateMultipartUploadBusiness,
   SimpleUploader,
@@ -35,7 +37,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const bucketName = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });
@@ -120,9 +122,11 @@ export default defineComponent({
     });
 
     // 单个文件上传成功
-    const onFileSuccess = (rootFile: SimpleUploaderFile, file: SimpleUploaderFile, message: string) => {
-      console.log('文件上传成功', arguments);
-
+    const onFileSuccess = (
+      rootFile: SimpleUploaderFile,
+      file: SimpleUploaderFile,
+      message: string,
+    ) => {
       // 调用后台合并文件
       const fileName = file.name; // 文件名
       ossApi
@@ -152,12 +156,12 @@ export default defineComponent({
 
     // 上传完毕
     const complete = () => {
-      console.log('complete', arguments);
+      console.log('complete');
     };
 
     // 根下的单个文件（文件夹）上传完成
     const fileComplete = (rootFile: SimpleUploaderFile) => {
-      console.log('根下的单个文件（文件夹）上传完成', arguments);
+      console.log('根下的单个文件（文件夹）上传完成');
     };
 
     return {

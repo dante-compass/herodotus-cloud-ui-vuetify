@@ -15,7 +15,8 @@ import { useDesignerStore } from '/@/stores';
 import { HButtonDropdown, HListItem } from '../../widgets';
 import { HBpmnCodePreviewer } from '../../moddle-viewer';
 import { toast } from '/@/lib/utils';
-import BpmnModdle, { ParseResult } from 'bpmn-moddle';
+import type { ParseResult } from 'bpmn-moddle';
+import BpmnModdle from 'bpmn-moddle';
 
 export default defineComponent({
   name: 'HPreviewDropdown',
@@ -23,10 +24,10 @@ export default defineComponent({
   components: {
     HButtonDropdown,
     HListItem,
-    HBpmnCodePreviewer
+    HBpmnCodePreviewer,
   },
 
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
 
     const isOpen = ref<boolean>(false);
@@ -81,8 +82,8 @@ export default defineComponent({
       data,
       language,
       onPreviewXml,
-      onPreviewJson
+      onPreviewJson,
     };
-  }
+  },
 });
 </script>

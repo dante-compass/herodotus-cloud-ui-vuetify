@@ -6,7 +6,9 @@
 
       <q-item-section>
         <q-item-label>{{ getTitle(item) }}</q-item-label>
-        <q-item-label v-if="prependSubtitle" caption lines="1">{{ getSubtitle(item) }}</q-item-label>
+        <q-item-label v-if="prependSubtitle" caption lines="1">{{
+          getSubtitle(item)
+        }}</q-item-label>
       </q-item-section>
 
       <q-item-section side>
@@ -17,7 +19,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType, ref } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed } from 'vue';
 import type { AbstractSysEntity, HttpMethod } from '/@/lib/declarations';
 
 import { lodash } from '/@/lib/utils';
@@ -34,7 +37,11 @@ export default defineComponent({
   },
 
   props: {
-    modelValue: { type: Array as PropType<Array<AbstractSysEntity>>, default: () => [], required: true },
+    modelValue: {
+      type: Array as PropType<Array<AbstractSysEntity>>,
+      default: () => [],
+      required: true,
+    },
     prependTitle: { type: String, required: true },
     prependSubtitle: { type: String },
     appendTitle: { type: String },
@@ -49,7 +56,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const selectedItems = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });
@@ -96,7 +103,7 @@ export default defineComponent({
     const onRemoveItem = (item: AbstractSysEntity) => {
       let index = lodash.findIndex(selectedItems.value, item);
       lodash.remove(selectedItems.value, index);
-      selectedItems.value = selectedItems.value.filter(i => {
+      selectedItems.value = selectedItems.value.filter((i) => {
         return getValueProperty(i, props.rowKey) != getValueProperty(item, props.rowKey);
       });
     };

@@ -11,10 +11,11 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
-    "./dist/assets/style.css": "./dist/assets/css/form-api.css",
+    "./dist/assets/style.css": "./dist/assets/css/form-apis.css",
     "./package.json": "./package.json"
   },
   "files": [
@@ -22,8 +23,9 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "build": "vue-tsc --build && vite build",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "@herodotus/core": "workspace:^"

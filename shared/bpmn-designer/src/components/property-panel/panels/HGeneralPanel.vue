@@ -34,10 +34,10 @@ export default defineComponent({
   name: 'HElementGeneral',
 
   components: {
-    HExpansionItem
+    HExpansionItem,
   },
 
-  setup(props) {
+  setup() {
     const elementId = ref<string>('');
     const elementName = ref<string>('');
     const versionTag = ref<string>('');
@@ -55,7 +55,7 @@ export default defineComponent({
       getVersionTagValue,
       setVersionTagValue,
       isIdValid,
-      isVersionTagValid
+      isVersionTagValid,
     } = useGeneralProperties();
 
     const isProcessElement = computed(() => {
@@ -99,10 +99,10 @@ export default defineComponent({
 
     watch(
       () => designer.activeElement.id,
-      newValue => {
+      () => {
         loading();
       },
-      { immediate: true, deep: true }
+      { immediate: true, deep: true },
     );
 
     return {
@@ -114,8 +114,8 @@ export default defineComponent({
       updateName,
       updateId,
       updateVersionTag,
-      updateIsExecutable
+      updateIsExecutable,
     };
-  }
+  },
 });
 </script>

@@ -12,7 +12,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent } from 'vue';
 import HDetailContainer from './HDetailContainer.vue';
 
 import { useEditFinish } from '/@/hooks';
@@ -21,7 +22,7 @@ export default defineComponent({
   name: 'HOssFormLayout',
 
   components: {
-    HDetailContainer
+    HDetailContainer,
   },
 
   emits: ['save'],
@@ -29,7 +30,7 @@ export default defineComponent({
   props: {
     overlay: { type: Boolean, default: false },
     title: { type: String, default: '' },
-    hideSave: { type: Boolean, default: false }
+    hideSave: { type: Boolean, default: false },
   },
 
   setup(props, { emit }) {
@@ -41,8 +42,8 @@ export default defineComponent({
 
     return {
       onFinish,
-      onSave
+      onSave,
     };
-  }
+  },
 });
 </script>

@@ -1,7 +1,10 @@
-import {
-  create,
+import type {
   CredentialCreationOptionsJSON,
   CredentialRequestOptionsJSON,
+} from '@github/webauthn-json/browser-ponyfill';
+
+import {
+  create,
   parseCreationOptionsFromJSON,
   parseRequestOptionsFromJSON,
   get,
@@ -29,7 +32,7 @@ export default function usePasskey() {
         PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(),
         PublicKeyCredential.isConditionalMediationAvailable(),
       ]);
-      if (results.every(r => r === true)) {
+      if (results.every((r) => r === true)) {
         return true;
       }
     }
@@ -41,11 +44,15 @@ export default function usePasskey() {
       api
         .passkey()
         .fetchWebAuthnRegisterOptions()
-        .then(publicKey => {
-          const registrationOptions = parseCreationOptionsFromJSON({ publicKey } as CredentialCreationOptionsJSON);
-          create(registrationOptions).then(registration => {
+        .then((publicKey) => {
+          const registrationOptions = parseCreationOptionsFromJSON({
+            publicKey,
+          } as CredentialCreationOptionsJSON);
+          create(registrationOptions).then((registration) => {
             const credential = registration.toJSON();
-            const request: WebAuthnRegister = { publicKey: { label: label, credential: credential } };
+            const request: WebAuthnRegister = {
+              publicKey: { label: label, credential: credential },
+            };
             api
               .passkey()
               .webAuthnRegister(request)
@@ -77,11 +84,13 @@ export default function usePasskey() {
       api
         .passkey()
         .fetchWebAuthnAuthenticateOptions()
-        .then(publicKey => {
-          const authenticationOptions = parseRequestOptionsFromJSON({ publicKey } as CredentialRequestOptionsJSON);
-          get(authenticationOptions).then(authentication => {
+        .then((publicKey) => {
+          const authenticationOptions = parseRequestOptionsFromJSON({
+            publicKey,
+          } as CredentialRequestOptionsJSON);
+          get(authenticationOptions).then((authentication) => {
             const request = authentication.toJSON();
-            authenticationStore.passkey(request).then(result => {
+            authenticationStore.passkey(request).then((result) => {
               resolve(result);
             });
           });

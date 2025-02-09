@@ -7,9 +7,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref, computed, onMounted } from 'vue';
+import type { Ref } from 'vue';
+import { defineComponent, ref, computed, onMounted } from 'vue';
 
-import type { BpmnUnionPathParams, XmlEntity, ProcessDefinitionQueryParams, QTableProps } from '/@/lib/declarations';
+import type { BpmnUnionPathParams, XmlEntity } from '/@/lib/declarations';
 
 import { bpmnApi, lodash } from '/@/lib/utils';
 
@@ -29,7 +30,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const isOpen = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });
@@ -40,7 +41,10 @@ export default defineComponent({
     const initActivityNodes = async (processInstanceId: string) => {
       const result = await bpmnApi
         .historyActivityInstance()
-        .getAll({ sortBy: 'startTime', sortOrder: 'desc' }, { processInstanceId: processInstanceId });
+        .getAll(
+          { sortBy: 'startTime', sortOrder: 'desc' },
+          { processInstanceId: processInstanceId },
+        );
       if (!lodash.isEmpty(result)) {
         const nodes = lodash.map(result, 'activityId');
         activityNodes.value.push(...nodes);
@@ -64,12 +68,11 @@ export default defineComponent({
         bpmnApi
           .processDefinition()
           .getXml(params)
-          .then(result => {
-
+          .then((result) => {
             const data = result as XmlEntity;
             xml.value = data.bpmn20Xml;
           })
-          .catch(error => {
+          .catch((error) => {
             console.error('Get Diagram Error!', error);
           });
       } else {

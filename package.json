@@ -1,7 +1,7 @@
 {
-  "name": "herodotus-cloud-ui",
+  "name": "herodotus-thingsbrain-ui",
   "private": true,
-  "version": "3.4.2.0",
+  "version": "3.4.2.1",
   "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -9,7 +9,6 @@
     "push": "pnpm run commit && git push --set-upstream origin develop",
     "dev": "pnpm run --filter=@dante/ui dev",
     "prod": "pnpm run --filter=@dante/ui prod",
-    "report": "pnpm run --filter=@dante/ui report",
     "shared:build": "pnpm -r --filter=@herodotus/* run build"
   },
   "config": {
@@ -49,7 +48,7 @@
     "@types/qs": "^6.9.18",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/eslint-config-prettier": "^10.2.0",
-    "@vue/eslint-config-typescript": "^14.3.0",
+    "@vue/eslint-config-typescript": "^14.4.0",
     "@vue/tsconfig": "^0.7.0",
     "commitizen": "^4.3.1",
     "cross-env": "^7.0.3",

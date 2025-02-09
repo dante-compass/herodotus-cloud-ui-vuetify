@@ -9,15 +9,23 @@
     v-model:selected="selectedItems"
     v-model:pagination="pagination"
     :loading="loading"
-    @request="findItems">
+    @request="findItems"
+  >
     <template v-slot:top>
-      <h-text-field v-model="fieldValue" debounce="2000" label="姓名" dense @clear="onClear()"></h-text-field>
+      <h-text-field
+        v-model="fieldValue"
+        debounce="2000"
+        label="姓名"
+        dense
+        @clear="onClear()"
+      ></h-text-field>
     </template>
   </q-table>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed, watch, ref } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, computed, watch, ref } from 'vue';
 
 import type { UserEntity, UserQueryParams, UserSortBy, QTableColumnProps } from '/@/declarations';
 
@@ -30,12 +38,15 @@ export default defineComponent({
   name: 'HUserSelectTable',
 
   components: {
-    HTextField
+    HTextField,
   },
 
   props: {
-    modelValue: { type: Array as PropType<Array<UserEntity>>, default: () => [] as Array<UserEntity> },
-    selection: { type: String as PropType<'single' | 'multiple'>, default: 'single' }
+    modelValue: {
+      type: Array as PropType<Array<UserEntity>>,
+      default: () => [] as Array<UserEntity>,
+    },
+    selection: { type: String as PropType<'single' | 'multiple'>, default: 'single' },
   },
 
   setup(props, { emit }) {
@@ -47,19 +58,19 @@ export default defineComponent({
       UserSortBy
     >(resource.userService, {
       sortBy: 'userId',
-      sortOrder: 'desc'
+      sortOrder: 'desc',
     });
     const selectedItems = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
-      }
+      },
     });
 
     const rowKey = 'id' as keyof UserEntity;
     const fieldValue = ref<string>('');
 
-    watch(fieldValue, newValue => {
+    watch(fieldValue, (newValue) => {
       if (newValue) {
         conditions.value.firstNameLike = '%' + newValue + '%';
       }
@@ -67,7 +78,7 @@ export default defineComponent({
 
     const columns: QTableColumnProps = [
       { name: 'id', field: 'id', align: 'center', label: 'ID' },
-      { name: 'firstName', field: 'firstName', align: 'center', label: '姓名' }
+      { name: 'firstName', field: 'firstName', align: 'center', label: '姓名' },
     ];
 
     const onClear = () => {
@@ -84,8 +95,8 @@ export default defineComponent({
       rowKey,
       columns,
       findItems,
-      onClear
+      onClear,
     };
-  }
+  },
 });
 </script>

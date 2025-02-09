@@ -1,4 +1,5 @@
-import { ref, Ref, watch, onMounted } from 'vue';
+import type { Ref } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 
 import type {
   BpmnSortable,
@@ -8,7 +9,7 @@ import type {
   Page,
   QTableOnRequestParameter,
   QTablePaginationProps,
-  QTableOnRequestProps
+  QTableOnRequestProps,
 } from '/@/declarations';
 
 import { BpmnQueryByGetService } from '/@/lib/logic';
@@ -17,12 +18,12 @@ export default function useBpmnTableItems<
   E extends BpmnListEntity,
   Q extends BpmnListQueryParams,
   S,
-  D extends BpmnDeleteQueryParams = BpmnDeleteQueryParams
+  D extends BpmnDeleteQueryParams = BpmnDeleteQueryParams,
 >(
   baseService: BpmnQueryByGetService<E, Q, S, D>,
   sortable: BpmnSortable<S>,
   queryParams = {} as Q,
-  loadOnMount = true
+  loadOnMount = true,
 ) {
   const loading = ref(false);
   const tableRows = ref([]) as Ref<E[]>;
@@ -33,7 +34,7 @@ export default function useBpmnTableItems<
     descending: true,
     page: 1,
     rowsPerPage: 10,
-    rowsNumber: 0
+    rowsNumber: 0,
   });
 
   const findItemsByPage = (pageNumber = 1, pageSize = 10, params = {} as Q) => {
@@ -43,11 +44,11 @@ export default function useBpmnTableItems<
         {
           pageNumber: pageNumber - 1,
           pageSize: pageSize,
-          ...sortable
+          ...sortable,
         },
-        params
+        params,
       )
-      .then(result => {
+      .then((result) => {
         const data = result as Page<E>;
         if (data) {
           tableRows.value = data.content;
@@ -83,12 +84,12 @@ export default function useBpmnTableItems<
       if (newValue) {
         findItemsByPage(newValue, pagination.value.rowsPerPage, conditions.value);
       }
-    }
+    },
   );
 
   watch(
     conditions,
-    newValue => {
+    (newValue) => {
       if (newValue) {
         //防止不在第一页时发两遍请求
         if ((pagination.value.page as number) > 1) {
@@ -98,7 +99,7 @@ export default function useBpmnTableItems<
         }
       }
     },
-    { deep: true }
+    { deep: true },
   );
 
   return {
@@ -108,6 +109,6 @@ export default function useBpmnTableItems<
     totalPages,
     conditions,
     findItemsByPage,
-    findItems
+    findItems,
   };
 }

@@ -28,10 +28,10 @@ export default defineComponent({
   components: {
     HButton,
     HButtonGroup,
-    HSeparator
+    HSeparator,
   },
 
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
     const settings = useSettingStore();
 
@@ -57,8 +57,8 @@ export default defineComponent({
       showBpmnLint,
       toggleSimulation,
       toggleMinimap,
-      toggleBpmnLint
+      toggleBpmnLint,
     };
-  }
+  },
 });
 </script>

@@ -7,19 +7,22 @@
       :loading="backgroundLoading"
       :success="isSuccess"
       :show-message="isShowMessage"
-      :message="message">
+      :message="message"
+    >
       <img
         class="jigsaw-slider"
         :src="jigsawImage"
         :height="canvasHeight"
-        :style="`transform:translateX(${styleWidth - sliderSize}px)`" />
+        :style="`transform:translateX(${styleWidth - sliderSize}px)`"
+      />
     </h-behavior-captcha-background>
     <h-behavior-captcha-control description="拖动滑块完成拼图" :size="sliderSize">
       <div class="range-slider" ref="RangeSlider" :style="`width:${styleWidth}px`">
         <div
           :class="['range-btn', { isDown: isMouseDown }]"
           :style="`width:${sliderSize}px`"
-          @mousedown="onRangeMouseDown($event)">
+          @mousedown="onRangeMouseDown($event)"
+        >
           <div></div>
           <div></div>
           <div></div>
@@ -30,9 +33,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs, onMounted, onBeforeMount, watch, PropType, computed } from 'vue';
+import type { PropType } from 'vue';
+import {
+  defineComponent,
+  reactive,
+  ref,
+  toRefs,
+  onMounted,
+  onBeforeMount,
+  watch,
+  computed,
+} from 'vue';
 
-import { JigsawCaptcha } from '/@/lib/declarations';
+import type { JigsawCaptcha } from '/@/lib/declarations';
 import { useBehaviorCaptcha } from '/@/hooks';
 
 import HBehaviorCaptchaBackground from './HBehaviorCaptchaBackground.vue';
@@ -74,8 +87,17 @@ export default defineComponent({
       isCloseDown: false,
     });
 
-    const { getImage, timeoutClear, message, canOperate, isSuccess, isLoading, isShowMessage, verifyCaptcha, reset } =
-      useBehaviorCaptcha();
+    const {
+      getImage,
+      timeoutClear,
+      message,
+      canOperate,
+      isSuccess,
+      isLoading,
+      isShowMessage,
+      verifyCaptcha,
+      reset,
+    } = useBehaviorCaptcha();
 
     onMounted(() => {
       addEventListener();
@@ -105,7 +127,7 @@ export default defineComponent({
 
     watch(
       () => props.schema,
-      newValue => {
+      (newValue) => {
         resetStatus();
         state.backgroundImageBase64 = newValue.originalImageBase64;
         state.jigsawImageBase64 = newValue.sliderImageBase64;
@@ -127,7 +149,11 @@ export default defineComponent({
      */
     const styleWidth = computed(() => {
       const w = state.startWidth + state.newX - state.startX;
-      return w < props.sliderSize ? props.sliderSize : w > props.canvasWidth ? props.canvasWidth : w;
+      return w < props.sliderSize
+        ? props.sliderSize
+        : w > props.canvasWidth
+          ? props.canvasWidth
+          : w;
     });
 
     const backgroundImage = computed(() => {

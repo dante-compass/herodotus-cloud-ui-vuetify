@@ -33,7 +33,7 @@ export default defineComponent({
     HSeparator
   },
 
-  setup(props) {
+  setup() {
     const designer = useDesignerStore();
 
     let modeling = {} as Modeling;

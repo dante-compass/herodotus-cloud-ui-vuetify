@@ -1,4 +1,4 @@
-import { BpmnEntity, BpmnListQueryParams } from '../../base';
+import type { BpmnEntity, BpmnListQueryParams } from '../../base';
 
 export interface HistoryActivityInstanceEntity extends BpmnEntity {
   /**

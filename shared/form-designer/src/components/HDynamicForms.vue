@@ -1,5 +1,10 @@
 <template>
-  <q-layout view="lHr LpR lfr" :container="container" class="bg-grey-2" :style="`height: ${height}`">
+  <q-layout
+    view="lHr LpR lfr"
+    :container="container"
+    class="bg-grey-2"
+    :style="`height: ${height}`"
+  >
     <q-header bordered class="text-primary bg-white">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="leftDrawerOpen = !leftDrawerOpen" />
@@ -24,7 +29,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onUnmounted, PropType, watch } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, ref, onUnmounted, watch } from 'vue';
 
 import type { FormDesignerResources, DynamicFormEntity } from '/@/declarations';
 
@@ -41,7 +47,7 @@ export default defineComponent({
     HPropertyPanel,
     HCanvasContainer,
     HFormPreviewDialog,
-    HFormUploadDialog
+    HFormUploadDialog,
   },
 
   props: {
@@ -49,7 +55,7 @@ export default defineComponent({
     title: { type: String, default: 'Dante Cloud Form Designer' },
     container: { type: Boolean, default: false },
     height: { type: String, default: '90vh' },
-    item: { type: Object as PropType<DynamicFormEntity>, default: () => ({}) }
+    item: { type: Object as PropType<DynamicFormEntity>, default: () => ({}) },
   },
 
   emits: ['close'],
@@ -66,20 +72,20 @@ export default defineComponent({
 
     watch(
       () => props.item,
-      newValue => {
+      (newValue) => {
         resource.init(props.instance);
         canvas.loading(newValue);
       },
-      { deep: true, immediate: true }
+      { deep: true, immediate: true },
     );
 
     watch(
       () => canvas.isClosed,
-      newValue => {
+      (newValue) => {
         if (newValue) {
           emit('close');
         }
-      }
+      },
     );
 
     onUnmounted(() => {
@@ -99,8 +105,8 @@ export default defineComponent({
       },
 
       openPreview,
-      openUpload
+      openUpload,
     };
-  }
+  },
 });
 </script>
