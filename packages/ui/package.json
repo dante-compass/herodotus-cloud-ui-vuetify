@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "cross-env vite --force --host --mode development",
     "prod": "cross-env vite build --mode production",
-    "build": "vue-tsc --build && vite build",
+    "build": "vue-tsc --noEmit && vite build",
     "report": "vite build",
     "preview": "vite preview"
   },
