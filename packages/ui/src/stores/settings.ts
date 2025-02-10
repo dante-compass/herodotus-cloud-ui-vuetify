@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 import { reactive, toRefs, computed } from 'vue';
 
-import type { GlobalSetting } from '/@/lib/declarations';
-import { ThemeModeEnum, LayoutModeEnum } from '/@/lib/definitions';
+import type { GlobalSetting } from '@/lib/declarations';
+import { ThemeModeEnum, LayoutModeEnum } from '@/lib/definitions';
 
 export const useSettingsStore = defineStore('GlobalSettings', {
   state: (): GlobalSetting => ({
@@ -42,14 +42,14 @@ export const useSettingsStore = defineStore('GlobalSettings', {
   }),
 
   getters: {
-    isDark: state => state.theme.mode === ThemeModeEnum.DARK,
+    isDark: (state) => state.theme.mode === ThemeModeEnum.DARK,
 
-    isLight: state => state.theme.mode === ThemeModeEnum.LIGHT,
+    isLight: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
 
-    isSystem: state => state.theme.mode === ThemeModeEnum.SYSTEM,
+    isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
 
-    isDefaultLayout: state => state.layout === LayoutModeEnum.DEFAULT,
+    isDefaultLayout: (state) => state.layout === LayoutModeEnum.DEFAULT,
 
-    isClassicLayout: state => state.layout === LayoutModeEnum.CLASSIC,
+    isClassicLayout: (state) => state.layout === LayoutModeEnum.CLASSIC,
   },
 });

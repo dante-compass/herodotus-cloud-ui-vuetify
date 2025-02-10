@@ -32,9 +32,9 @@
 import type { PropType } from 'vue';
 import { defineComponent, ref, onUnmounted, watch } from 'vue';
 
-import type { FormDesignerResources, DynamicFormEntity } from '/@/declarations';
+import type { FormDesignerResources, DynamicFormEntity } from '@/declarations';
 
-import { useFormResourceStore, useFormCanvasStore } from '/@/stores';
+import { useFormResourceStore, useFormCanvasStore } from '@/stores';
 import { HWidgetPanel, HPropertyPanel } from './canvas-panel';
 import { HCanvasContainer } from './canvas';
 import { HFormPreviewDialog, HFormUploadDialog } from './canvas-toolbar';

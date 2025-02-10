@@ -10,7 +10,8 @@
     :loading="loading"
     status
     reserved
-    @request="findItems">
+    @request="findItems"
+  >
     <template #top-left>
       <h-button color="primary" label="新建权限" @click="toCreate" />
     </template>
@@ -18,7 +19,10 @@
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
         <h-edit-button @click="toEdit(props.row)"></h-edit-button>
-        <h-delete-button v-if="!props.row.reserved" @click="deleteItemById(props.row[rowKey])"></h-delete-button>
+        <h-delete-button
+          v-if="!props.row.reserved"
+          @click="deleteItemById(props.row[rowKey])"
+        ></h-delete-button>
       </q-td>
     </template>
   </h-table>
@@ -32,13 +36,13 @@ import type {
   SysPermissionConditions,
   SysPermissionProps,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { api } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { api } from '@/lib/utils';
+import { useTable } from '@/hooks';
 
-import { HTable } from '/@/components';
+import { HTable } from '@/components';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.SYS_PERMISSION,
@@ -48,10 +52,19 @@ export default defineComponent({
   },
 
   setup() {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, deleteItemById } = useTable<
-      SysPermissionEntity,
-      SysPermissionConditions
-    >(api.sysPermission(), CONSTANTS.ComponentName.SYS_PERMISSION);
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      findItems,
+      deleteItemById,
+    } = useTable<SysPermissionEntity, SysPermissionConditions>(
+      api.sysPermission(),
+      CONSTANTS.ComponentName.SYS_PERMISSION,
+    );
 
     const rowKey: SysPermissionProps = 'permissionId';
 

@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent, watch } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
+import { useDesignerStore } from '@/stores';
 
 import { HExpansionItem } from '../../widgets';
 

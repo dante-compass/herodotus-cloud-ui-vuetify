@@ -1,6 +1,15 @@
 import { defineStore } from 'pinia';
 
-import type { Element, ModelerState, Modeler, ElementRegistry, Modeling, Canvas, Moddle, Group } from '/@/declarations';
+import type {
+  Element,
+  ModelerState,
+  Modeler,
+  ElementRegistry,
+  Modeling,
+  Canvas,
+  Moddle,
+  Group,
+} from '@/declarations';
 
 export const useDesignerStore = defineStore('BpmnDesignerModeler', {
   state: (): ModelerState => ({
@@ -18,7 +27,7 @@ export const useDesignerStore = defineStore('BpmnDesignerModeler', {
     elementTitle: '',
     elementIcon: '',
     elementCaption: '',
-    isMultiInstance: false
+    isMultiInstance: false,
   }),
 
   actions: {
@@ -31,7 +40,7 @@ export const useDesignerStore = defineStore('BpmnDesignerModeler', {
       elementTitle: string,
       elementIcon: string,
       elementCaption: string,
-      isMultiInstance: boolean
+      isMultiInstance: boolean,
     ) {
       this.activeElement = activeElement;
       this.activeElementId = activeElementId;
@@ -42,6 +51,6 @@ export const useDesignerStore = defineStore('BpmnDesignerModeler', {
       this.elementIcon = elementIcon;
       this.elementCaption = elementCaption;
       this.isMultiInstance = isMultiInstance;
-    }
-  }
+    },
+  },
 });

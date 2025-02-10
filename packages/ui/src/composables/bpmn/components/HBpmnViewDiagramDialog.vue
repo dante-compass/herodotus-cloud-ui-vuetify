@@ -6,14 +6,15 @@
     height="450px"
     width="800px"
     max-width="80vw"
-    title="流程图"></h-bpmn-diagram-viewer>
+    title="流程图"
+  ></h-bpmn-diagram-viewer>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, ref, watch } from 'vue';
 
 import { useBpmnModeler } from '../hooks';
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HBpmnViewDiagramDialog',
@@ -31,7 +32,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const isOpen = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });
@@ -40,18 +41,22 @@ export default defineComponent({
 
     const isShow = ref(false);
 
-    watch(isOpen, newValue => {
+    watch(isOpen, (newValue) => {
       if (newValue) {
         if (props.definitionId || props.definitionKey) {
           loadDiagram(
-            { id: props.definitionId, key: props.definitionKey, tenantId: props.definitionTenantId },
+            {
+              id: props.definitionId,
+              key: props.definitionKey,
+              tenantId: props.definitionTenantId,
+            },
             props.instanceId,
           );
         }
       }
     });
 
-    watch(xml, newValue => {
+    watch(xml, (newValue) => {
       if (newValue) {
         if (!props.instanceId) {
           isShow.value = true;

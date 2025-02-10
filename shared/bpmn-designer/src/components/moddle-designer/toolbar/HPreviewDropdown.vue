@@ -10,11 +10,11 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
+import { useDesignerStore } from '@/stores';
 
 import { HButtonDropdown, HListItem } from '../../widgets';
 import { HBpmnCodePreviewer } from '../../moddle-viewer';
-import { toast } from '/@/lib/utils';
+import { toast } from '@/lib/utils';
 import type { ParseResult } from 'bpmn-moddle';
 import BpmnModdle from 'bpmn-moddle';
 

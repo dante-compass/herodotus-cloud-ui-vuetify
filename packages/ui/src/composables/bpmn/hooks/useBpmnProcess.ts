@@ -9,12 +9,12 @@ import type {
   Element,
   ConditionVariable,
   ExtendedTaskEntity,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { useBaseTableItem, useEditFinish } from '/@/hooks';
+import { useBaseTableItem, useEditFinish } from '@/hooks';
 
-import { bpmnApi, formApi, toast, lodash } from '/@/lib/utils';
-import { useAuthenticationStore } from '/@/stores';
+import { bpmnApi, formApi, toast, lodash } from '@/lib/utils';
+import { useAuthenticationStore } from '@/stores';
 
 export default function useBpmnProcess() {
   const { editedItem, title, overlay } = useBaseTableItem<ProcessSpecificsEntity>();

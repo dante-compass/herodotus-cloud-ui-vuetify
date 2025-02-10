@@ -1,4 +1,4 @@
-import type { AxiosHttpResult, BaseMongoEntity, Pageable, Page, Conditions } from '/@/declarations';
+import type { AxiosHttpResult, BaseMongoEntity, Pageable, Page, Conditions } from '@/declarations';
 
 import { Service, lodash } from './core';
 
@@ -16,7 +16,9 @@ export abstract class BaseMongoService<E extends BaseMongoEntity> extends Servic
       return this.getConfig().getHttp().get<Page<E>, Pageable>(this.getBaseAddress(), params);
     } else {
       const fullParams = Object.assign(params, others);
-      return this.getConfig().getHttp().get<Page<E>, Pageable>(this.getConditionAddress(), fullParams);
+      return this.getConfig()
+        .getHttp()
+        .get<Page<E>, Pageable>(this.getConditionAddress(), fullParams);
     }
   }
 

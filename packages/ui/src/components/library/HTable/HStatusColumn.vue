@@ -6,11 +6,11 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 
-import { CONSTANTS } from '/@/composables/constants';
+import { CONSTANTS } from '@/composables/constants';
 
 import HDenseIconButton from './HDenseIconButton.vue';
-import { lodash } from '/@/lib/utils';
-import type { Dictionary } from '/@/lib/declarations';
+import { lodash } from '@/lib/utils';
+import type { Dictionary } from '@/lib/declarations';
 
 export default defineComponent({
   name: 'HStatusColumn',

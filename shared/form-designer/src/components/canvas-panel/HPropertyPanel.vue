@@ -7,7 +7,8 @@
       active-color="primary"
       indicator-color="primary"
       align="justify"
-      narrow-indicator>
+      narrow-indicator
+    >
       <q-tab name="info" label="信息" />
     </q-tabs>
 
@@ -27,7 +28,8 @@
       active-color="primary"
       indicator-color="primary"
       align="justify"
-      narrow-indicator>
+      narrow-indicator
+    >
       <q-tab name="display" label="显示" />
       <q-tab name="sheet" label="表单" />
     </q-tabs>
@@ -49,14 +51,14 @@
 <script lang="ts">
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useFormCanvasStore } from '/@/stores';
+import { useFormCanvasStore } from '@/stores';
 import {
   HDatePanel,
   HPasswordPanel,
   HSheetPanel,
   HTextareaPanel,
   HTextFieldPanel,
-  HTimePanel
+  HTimePanel,
 } from '../property-panels';
 import { HFormInformation } from '../canvas-toolbar';
 
@@ -70,7 +72,7 @@ export default {
     PASSWORD: HPasswordPanel,
     TEXT_AREA: HTextareaPanel,
     TEXT_FIELD: HTextFieldPanel,
-    TIME_PICKER: HTimePanel
+    TIME_PICKER: HTimePanel,
   },
 
   setup() {
@@ -85,8 +87,8 @@ export default {
       elementTab,
       isInformationPanel,
       currentSchema,
-      currentPanel
+      currentPanel,
     };
-  }
+  },
 };
 </script>

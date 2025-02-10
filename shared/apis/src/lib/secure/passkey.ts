@@ -4,7 +4,7 @@ import type {
   WebAuthnRegister,
   WebAuthnAuthenticateOptions,
   WebAuthnAuthenticate,
-} from '/@/declarations';
+} from '@/declarations';
 
 import { HttpConfig, Service } from '../base';
 
@@ -35,7 +35,7 @@ class PasskeyApiService extends Service {
   }
 
   private getWebAuthnAuthenticateOptionsAddress(): string {
-    return this.getConfig().getUaa() +'/webauthn/authenticate/options';
+    return this.getConfig().getUaa() + '/webauthn/authenticate/options';
   }
 
   protected getIdPath(id: string): string {
@@ -49,7 +49,9 @@ class PasskeyApiService extends Service {
   }
 
   public webAuthnRegister(request: WebAuthnRegister): Promise<AxiosHttpResult<boolean>> {
-    return this.getConfig().getHttp().post<boolean, WebAuthnRegister>(this.getBaseAddress(), request);
+    return this.getConfig()
+      .getHttp()
+      .post<boolean, WebAuthnRegister>(this.getBaseAddress(), request);
   }
 
   public fetchWebAuthnAuthenticateOptions(): Promise<AxiosHttpResult<WebAuthnAuthenticateOptions>> {

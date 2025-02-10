@@ -1,7 +1,12 @@
-import type { Router, RouteLocationRaw, RouteLocationNormalizedLoaded, NavigationFailure } from 'vue-router';
+import type {
+  Router,
+  RouteLocationRaw,
+  RouteLocationNormalizedLoaded,
+  NavigationFailure,
+} from 'vue-router';
 
 import { lodash } from '../base';
-import { CONSTANTS } from '/@/composables/constants';
+import { CONSTANTS } from '@/composables/constants';
 
 class RouteUtilities {
   private static instance = new RouteUtilities();

@@ -40,7 +40,7 @@
 import type { Ref } from 'vue';
 import { defineComponent, ref, computed, watch } from 'vue';
 
-import type { ExtensionProperty } from '/@/declarations';
+import type { ExtensionProperty } from '@/declarations';
 
 export default defineComponent({
   name: 'HExtensionPropertyDialog',

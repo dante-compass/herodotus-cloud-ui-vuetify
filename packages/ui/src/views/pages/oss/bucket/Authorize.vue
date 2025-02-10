@@ -81,14 +81,14 @@ import type { Ref } from 'vue';
 import { defineComponent, computed, ref, watch, onMounted } from 'vue';
 import { format } from 'quasar';
 
-import type { BucketDomain, BucketSettingBusiness } from '/@/lib/declarations';
+import type { BucketDomain, BucketSettingBusiness } from '@/lib/declarations';
 
-import { ossApi } from '/@/lib/utils';
-import { useBaseTableItem } from '/@/hooks';
+import { ossApi } from '@/lib/utils';
+import { useBaseTableItem } from '@/hooks';
 
-import { HSimpleCenterFormLayout } from '/@/components';
-import { HOssTags, HOssBucketRetention } from '/@/composables/oss';
-import { useDictionary } from '/@/composables/constants';
+import { HSimpleCenterFormLayout } from '@/components';
+import { HOssTags, HOssBucketRetention } from '@/composables/oss';
+import { useDictionary } from '@/composables/constants';
 
 export default defineComponent({
   name: 'OssBucketContent',

@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { NotificationCategoryEnum } from '/@/lib/definitions';
+import { NotificationCategoryEnum } from '@/lib/definitions';
 import { defineComponent } from 'vue';
 
 import { useNotifications } from '../hooks';

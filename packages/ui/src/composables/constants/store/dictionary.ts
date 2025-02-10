@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 
-import type { Dictionary, SysDictionaryEntity } from '/@/lib/declarations';
+import type { Dictionary, SysDictionaryEntity } from '@/lib/declarations';
 
-import { lodash, api } from '/@/lib/utils';
+import { lodash, api } from '@/lib/utils';
 
 export const useDictionaryStore = defineStore('Dictionary', {
   state: () => ({
@@ -60,7 +60,7 @@ export const useDictionaryStore = defineStore('Dictionary', {
     convertCategory(items: Array<SysDictionaryEntity>): Array<Dictionary> {
       if (items) {
         return lodash.orderBy(
-          items.map(item => this.toDictionary(item)),
+          items.map((item) => this.toDictionary(item)),
           ['ordinal'],
           ['asc'],
         );
@@ -69,9 +69,11 @@ export const useDictionaryStore = defineStore('Dictionary', {
       }
     },
 
-    convertCategories(categories: Record<string, Array<SysDictionaryEntity>>): Record<string, Array<Dictionary>> {
+    convertCategories(
+      categories: Record<string, Array<SysDictionaryEntity>>,
+    ): Record<string, Array<Dictionary>> {
       const result: Record<string, Array<Dictionary>> = {};
-      Object.keys(categories).map(key => {
+      Object.keys(categories).map((key) => {
         const category = this.convertCategory(categories[key]);
         result[key] = category;
       });
@@ -95,20 +97,23 @@ export const useDictionaryStore = defineStore('Dictionary', {
           api
             .sysDictionary()
             .fetchByCategory(category)
-            .then(response => {
+            .then((response) => {
               const data = response.data;
               const items = this.convertCategory(data);
               this.store(category, items);
               resolve(items);
             })
-            .catch(error => {
+            .catch((error) => {
               reject(error);
             });
         }
       });
     },
 
-    fetchCategory(category: string, ...others: string[]): Promise<Record<string, Array<Dictionary>>> {
+    fetchCategory(
+      category: string,
+      ...others: string[]
+    ): Promise<Record<string, Array<Dictionary>>> {
       return new Promise((resolve, reject) => {
         const keys = this.getNotExist(category, ...others);
         if (lodash.isEmpty(keys)) {
@@ -117,13 +122,13 @@ export const useDictionaryStore = defineStore('Dictionary', {
           api
             .sysDictionary()
             .fetchCategories(keys.join(','))
-            .then(response => {
+            .then((response) => {
               const data = response.data;
               const items = this.convertCategories(data);
               this.storeAll(items);
               resolve(items);
             })
-            .catch(error => {
+            .catch((error) => {
               reject(error);
             });
         }

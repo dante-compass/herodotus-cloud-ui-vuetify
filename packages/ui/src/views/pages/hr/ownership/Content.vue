@@ -47,15 +47,15 @@ import type {
   SysEmployeeAllocatable,
   HttpResult,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { lodash, toast, api } from '/@/lib/utils';
-import { useTable, useTableItem, useEditFinish } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { lodash, toast, api } from '@/lib/utils';
+import { useTable, useTableItem, useEditFinish } from '@/hooks';
 
-import { HFullWidthLayout, HTable } from '/@/components';
-import { HEmployeeCondition } from '/@/composables/hr';
-import { useDictionary } from '/@/composables/constants';
+import { HFullWidthLayout, HTable } from '@/components';
+import { HEmployeeCondition } from '@/composables/hr';
+import { useDictionary } from '@/composables/constants';
 
 export default defineComponent({
   name: 'SysOwnershipContent',

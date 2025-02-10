@@ -1,17 +1,21 @@
 <template>
   <h-detail-container :title="title">
-    <h-oss-object-list v-if="isShowObjects" :bucket-name="bucketName" :folder-name="folderName"></h-oss-object-list>
+    <h-oss-object-list
+      v-if="isShowObjects"
+      :bucket-name="bucketName"
+      :folder-name="folderName"
+    ></h-oss-object-list>
   </h-detail-container>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, computed } from 'vue';
 
-import type { ObjectDomain } from '/@/lib/declarations';
+import type { ObjectDomain } from '@/lib/declarations';
 
-import { useBaseTableItem } from '/@/hooks';
-import { HOssObjectList } from '/@/composables/oss';
-import { lodash } from '/@/lib/utils';
+import { useBaseTableItem } from '@/hooks';
+import { HOssObjectList } from '@/composables/oss';
+import { lodash } from '@/lib/utils';
 
 export default defineComponent({
   name: 'OssObjectContent',

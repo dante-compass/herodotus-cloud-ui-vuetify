@@ -5,7 +5,8 @@
       label="消息内容"
       type="textarea"
       placeholder="文明发言，真诚提问，请输入要发送的内容"
-      :rules="[(val: string) => !!val || '发送内容不能为空']"></h-text-field>
+      :rules="[(val: string) => !!val || '发送内容不能为空']"
+    ></h-text-field>
     <h-button label="发送" :disable="isDisabled" @click="onSend()" color="primary" />
   </div>
 </template>
@@ -13,11 +14,11 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 
-import type { DialogueDetailEntity } from '/@/lib/declarations';
+import type { DialogueDetailEntity } from '@/lib/declarations';
 
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 import { useWebSocketMessage } from '../hooks';
-import { useAuthenticationStore } from '/@/stores';
+import { useAuthenticationStore } from '@/stores';
 
 export default defineComponent({
   name: 'HSendMessageField',

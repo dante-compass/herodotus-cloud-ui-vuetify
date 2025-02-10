@@ -13,7 +13,8 @@
       :loading="loading"
       status
       reserved
-      @request="findItems">
+      @request="findItems"
+    >
       <template #top-left>
         <h-button color="primary" label="新建人员" @click="toCreate" />
       </template>
@@ -33,7 +34,10 @@
       <template #body-cell-actions="props">
         <q-td key="actions" :props="props">
           <h-edit-button @click="toEdit(props.row)"></h-edit-button>
-          <h-delete-button v-if="!props.row.reserved" @click="deleteItemById(props.row[rowKey])"></h-delete-button>
+          <h-delete-button
+            v-if="!props.row.reserved"
+            @click="deleteItemById(props.row[rowKey])"
+          ></h-delete-button>
         </q-td>
       </template>
     </h-table>
@@ -48,15 +52,15 @@ import type {
   SysEmployeeConditions,
   SysEmployeeProps,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { api } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { api } from '@/lib/utils';
+import { useTable } from '@/hooks';
 
-import { HDeleteButton, HEditButton, HTable } from '/@/components';
-import { HEmployeeCondition } from '/@/composables/hr';
-import { useDictionary } from '/@/composables/constants';
+import { HDeleteButton, HEditButton, HTable } from '@/components';
+import { HEmployeeCondition } from '@/composables/hr';
+import { useDictionary } from '@/composables/constants';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.SYS_EMPLOYEE,
@@ -69,8 +73,20 @@ export default defineComponent({
   },
 
   setup() {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, conditions, findItems, deleteItemById } =
-      useTable<SysEmployeeEntity, SysEmployeeConditions>(api.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      conditions,
+      findItems,
+      deleteItemById,
+    } = useTable<SysEmployeeEntity, SysEmployeeConditions>(
+      api.sysEmployee(),
+      CONSTANTS.ComponentName.SYS_EMPLOYEE,
+    );
 
     const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity');
 

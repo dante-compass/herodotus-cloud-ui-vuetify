@@ -1,7 +1,7 @@
-import type { SweetAlertIcon, SweetAlertResult } from '/@/lib/declarations';
+import type { SweetAlertIcon, SweetAlertResult } from '@/lib/declarations';
 
-import { useAuthenticationStore, clearPersistData } from '/@/stores';
-import { useWebSocketMessage } from '/@/composables/messages';
+import { useAuthenticationStore, clearPersistData } from '@/stores';
+import { useWebSocketMessage } from '@/composables/messages';
 import { RouteUtils } from './route';
 import { Swal } from '../base';
 

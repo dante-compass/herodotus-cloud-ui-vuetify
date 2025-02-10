@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
 
-import type { WebSocketOperations, DialogueDetailEntity, Entity } from '/@/lib/declarations';
+import type { WebSocketOperations, DialogueDetailEntity, Entity } from '@/lib/declarations';
 
-import { api } from '/@/lib/utils';
+import { api } from '@/lib/utils';
 
 import {
   RSocketConnector,
@@ -12,21 +12,21 @@ import {
   OnNextSubscriber,
   OnExtensionSubscriber,
   Requestable,
-  Cancellable
+  Cancellable,
 } from 'rsocket-core';
 import { WebsocketClientTransport } from 'rsocket-websocket-client';
 import {
   WellKnownMimeType,
   encodeRoute,
   encodeCompositeMetadata,
-  encodeBearerAuthMetadata
+  encodeBearerAuthMetadata,
 } from '@rsocket/composite-metadata';
-import { useAuthenticationStore } from '/@/stores';
+import { useAuthenticationStore } from '@/stores';
 
 export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
   state: () => ({
     rsocket: {} as RSocket,
-    client: {} as RSocketConnector
+    client: {} as RSocketConnector,
   }),
 
   actions: {
@@ -55,7 +55,11 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
       console.log('[RSocket] onNext isComplete ', isComplete);
     },
 
-    onExtension(extendedType: number, content: Buffer | null | undefined, canBeIgnored: boolean): void {
+    onExtension(
+      extendedType: number,
+      content: Buffer | null | undefined,
+      canBeIgnored: boolean,
+    ): void {
       console.log('[RSocket] onExtension extendedType ', extendedType);
       console.log('[RSocket] onExtension content ', content);
       console.log('[RSocket] onExtension canBeIgnored ', canBeIgnored);
@@ -71,7 +75,8 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
 
     // 客户端配置方法
     getRSocketWebSocketAddress(): string {
-      const address = `ws://${location.host}/reactive` + api.getConfig().getMsg(false) + '/websocket';
+      const address =
+        `ws://${location.host}/reactive` + api.getConfig().getMsg(false) + '/websocket';
       // const address = 'ws://192.168.101.10:8847/herodotus-cloud-message/websocket';
       // const address = 'ws://localhost:9997/websocket';
       return address;
@@ -100,18 +105,18 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
         metadataMimeType: WellKnownMimeType.MESSAGE_RSOCKET_COMPOSITE_METADATA.string,
         payload: {
           data: this.encodeData({ id: userId, name: username }),
-          metadata: this.createMetadata('SETUP')
-        }
+          metadata: this.createMetadata('SETUP'),
+        },
       };
     },
 
     createTransport(): WebsocketClientTransport {
       return new WebsocketClientTransport({
         url: this.getRSocketWebSocketAddress(),
-        wsCreator: url => {
+        wsCreator: (url) => {
           return new WebSocket(url);
         },
-        debug: true
+        debug: true,
       });
     },
 
@@ -132,14 +137,14 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
               operation.syncOnlineUserCount(data);
             }
             return {
-              cancel: this.onCancel
+              cancel: this.onCancel,
             };
           },
 
           requestStream: (
             payload: Payload,
             initialRequestN: number,
-            responderStream: OnTerminalSubscriber & OnNextSubscriber & OnExtensionSubscriber
+            responderStream: OnTerminalSubscriber & OnNextSubscriber & OnExtensionSubscriber,
           ) => {
             console.log('[RSocket] responder data', this.decodeData(payload.data as Buffer));
             console.log('[RSocket] responder initialRequestN', initialRequestN);
@@ -149,7 +154,7 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
               onNext: this.onNext,
               onExtension: this.onExtension,
               request: this.onRequest,
-              cancel: this.onCancel
+              cancel: this.onCancel,
             };
           },
 
@@ -157,7 +162,11 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
             payload: Payload,
             initialRequestN: number,
             isCompleted: boolean,
-            responderStream: OnTerminalSubscriber & OnNextSubscriber & OnExtensionSubscriber & Requestable & Cancellable
+            responderStream: OnTerminalSubscriber &
+              OnNextSubscriber &
+              OnExtensionSubscriber &
+              Requestable &
+              Cancellable,
           ) => {
             console.log('[RSocket] responder data', this.decodeData(payload.data as Buffer));
             console.log('[RSocket] responder initialRequestN', initialRequestN);
@@ -168,23 +177,23 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
 
           requestResponse: (
             payload: Payload,
-            responderStream: OnTerminalSubscriber & OnNextSubscriber & OnExtensionSubscriber
+            responderStream: OnTerminalSubscriber & OnNextSubscriber & OnExtensionSubscriber,
           ) => {
             const data = this.decodeData(payload.data as Buffer);
             console.log('[RSocket] responder data', data);
             console.log('[RSocket] responder responderStream', responderStream);
             return {
               onExtension: this.onExtension,
-              cancel: this.onCancel
+              cancel: this.onCancel,
             };
-          }
-        }
+          },
+        },
       });
     },
 
     init(): void {
       if (this.client) {
-        this.client.connect().then(socket => {
+        this.client.connect().then((socket) => {
           if (socket) {
             console.info('连接 RSocket Server 成功');
             console.log('[RSocket] core ---', socket);
@@ -214,14 +223,14 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
     createPayload(data: Entity, destination: string): Payload {
       return {
         data: Buffer.from(JSON.stringify(data)),
-        metadata: this.createMetadata(destination)
+        metadata: this.createMetadata(destination),
       };
     },
 
     fireAndForget(data: Entity, destination: string): void {
       this.rsocket.fireAndForget(this.createPayload(data, destination), {
         onError: this.onError,
-        onComplete: this.onComplete
+        onComplete: this.onComplete,
       });
     },
 
@@ -230,7 +239,7 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
         onError: this.onError,
         onComplete: this.onComplete,
         onNext: this.onNext,
-        onExtension: this.onExtension
+        onExtension: this.onExtension,
       });
     },
 
@@ -239,25 +248,35 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
         onError: this.onError,
         onComplete: this.onComplete,
         onNext: this.onNext,
-        onExtension: this.onExtension
+        onExtension: this.onExtension,
       });
     },
 
-    requestChannel(data: string, destination: string, initialRequestN = 100, isCompleted = false): void {
-      this.rsocket.requestChannel(this.createPayload(data, destination), initialRequestN, isCompleted, {
-        onError: this.onError,
-        onComplete: this.onComplete,
-        onNext: this.onNext,
-        onExtension: this.onExtension,
-        request: this.onRequest,
-        cancel: this.onCancel
-      });
+    requestChannel(
+      data: string,
+      destination: string,
+      initialRequestN = 100,
+      isCompleted = false,
+    ): void {
+      this.rsocket.requestChannel(
+        this.createPayload(data, destination),
+        initialRequestN,
+        isCompleted,
+        {
+          onError: this.onError,
+          onComplete: this.onComplete,
+          onNext: this.onNext,
+          onExtension: this.onExtension,
+          request: this.onRequest,
+          cancel: this.onCancel,
+        },
+      );
     },
 
     sendNotice(content: string): void {},
 
     sendToUser(detail: DialogueDetailEntity) {
       this.fireAndForget(detail, 'personal');
-    }
-  }
+    },
+  },
 });

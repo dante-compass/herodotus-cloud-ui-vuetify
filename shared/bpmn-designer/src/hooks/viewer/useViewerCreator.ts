@@ -1,20 +1,20 @@
-import type { Canvas, Viewer } from '/@/declarations';
+import type { Canvas, Viewer } from '@/declarations';
 
 import BpmnViewer from 'bpmn-js/lib/Viewer';
 
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 
 export default function useViewerCreator(
   containerHtmlId: string,
   height: string | number | undefined,
-  highlightNodes: Array<string>
+  highlightNodes: Array<string>,
 ) {
   let bpmnViewer = {} as Viewer;
 
   const createBpmnViewer = (): InstanceType<typeof BpmnViewer<null>> => {
     return new BpmnViewer({
       container: containerHtmlId,
-      height: height
+      height: height,
     });
   };
 
@@ -25,7 +25,7 @@ export default function useViewerCreator(
     canvas.zoom('fit-viewport', { x: 0, y: 0 });
 
     if (!lodash.isEmpty(highlightNodes)) {
-      highlightNodes.forEach(item => {
+      highlightNodes.forEach((item) => {
         canvas.addMarker(item, 'highlight');
         const ele = document.querySelector('.highlight')?.querySelector('.djs-visual rect');
         if (ele) {
@@ -48,6 +48,6 @@ export default function useViewerCreator(
 
   return {
     init,
-    destroy
+    destroy,
   };
 }

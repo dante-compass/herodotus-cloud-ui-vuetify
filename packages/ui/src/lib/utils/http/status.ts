@@ -1,7 +1,7 @@
-// import type { ErrorMessageMode } from '/#/axios';
+// import type { ErrorMessageMode } from '#/axios';
 import type { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 
-import { notify, ActionUtils, parseResponseStatus } from '/@/lib/utils';
+import { notify, ActionUtils, parseResponseStatus } from '@/lib/utils';
 
 const responseMessageHandler = (response: AxiosResponse<any>, message?: string): string => {
   const data = response.data;
@@ -35,7 +35,11 @@ const isIncluded = (response: AxiosResponse<any>) => {
   return !(request && excludedRequest.includes(request));
 };
 
-export const statusCode = (axiosInstance: AxiosInstance, response?: AxiosResponse<any>, message?: string) => {
+export const statusCode = (
+  axiosInstance: AxiosInstance,
+  response?: AxiosResponse<any>,
+  message?: string,
+) => {
   if (response && isIncluded(response)) {
     const information = parseResponseStatus(response, message);
     const content = information.message;
@@ -108,7 +112,7 @@ export const statusCode = (axiosInstance: AxiosInstance, response?: AxiosRespons
 
 export const processor = (axiosInstance: AxiosInstance, error: AxiosError) => {
   const { response, message, code } = error;
-  
+
   console.log(code);
 
   switch (code) {

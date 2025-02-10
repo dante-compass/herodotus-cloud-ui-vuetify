@@ -5,11 +5,11 @@
 <script lang="ts">
 import { defineComponent, watch, nextTick, provide, ref, onMounted, onUnmounted } from 'vue';
 import { useQuasar } from 'quasar';
-import { echarts } from '/@/plugins';
-import { useSettingsStore, useAuthenticationStore } from '/@/stores';
-import { variables } from '/@/lib/utils';
-import { refreshTabInjectionKey, echartsInjectionKey } from '/@/lib/definitions';
-import { useWebSocketMessage } from '/@/composables/messages';
+import { echarts } from '@/plugins';
+import { useSettingsStore, useAuthenticationStore } from '@/stores';
+import { variables } from '@/lib/utils';
+import { refreshTabInjectionKey, echartsInjectionKey } from '@/lib/definitions';
+import { useWebSocketMessage } from '@/composables/messages';
 
 export default defineComponent({
   name: 'App',

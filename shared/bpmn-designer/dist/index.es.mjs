@@ -532,7 +532,11 @@ function usePropertyElements() {
     const businessObject = getBusinessObject(element);
     let extensionElements = businessObject.extensionElements;
     if (lodash.isEmpty(extensionElements)) {
-      extensionElements = createModdleElement("bpmn:ExtensionElements", { values: [] }, businessObject);
+      extensionElements = createModdleElement(
+        "bpmn:ExtensionElements",
+        { values: [] },
+        businessObject
+      );
       getModeling().updateModdleProperties(element, businessObject, { extensionElements });
     }
     return extensionElements;
@@ -721,7 +725,10 @@ function useDocumentProperties() {
         return getModeling().updateModdleProperties(element, documentation, { text: value });
       } else {
         return getModeling().updateModdleProperties(element, businessObject, {
-          documentation: lodash.without(businessObject.get("documentation"), documentation)
+          documentation: lodash.without(
+            businessObject.get("documentation"),
+            documentation
+          )
         });
       }
     }
@@ -783,12 +790,20 @@ function useExtensionProperties() {
     const businessObject = getRelevantBusinessObject(element);
     let extensionElements = getExtensionElements(businessObject);
     if (lodash.isEmpty(extensionElements)) {
-      extensionElements = createModdleElement("bpmn:ExtensionElements", { values: [] }, businessObject);
+      extensionElements = createModdleElement(
+        "bpmn:ExtensionElements",
+        { values: [] },
+        businessObject
+      );
       getModeling().updateModdleProperties(element, businessObject, { extensionElements });
     }
     let properties = getProperties2(extensionElements);
     if (lodash.isEmpty(properties)) {
-      properties = createModdleElement(`${processEngine}:Properties`, { values: [] }, extensionElements);
+      properties = createModdleElement(
+        `${processEngine}:Properties`,
+        { values: [] },
+        extensionElements
+      );
       getModeling().updateModdleProperties(element, extensionElements, {
         values: [...extensionElements.get("values"), properties]
       });
@@ -34224,7 +34239,14 @@ const _sfc_main$N = defineComponent({
   },
   setup() {
     const designer = useDesignerStore();
-    const { getBeforeValue, setBeforeValue, getAfterValue, setAfterValue, getExclusiveValue, setExclusiveValue } = useAsynchronousContinuationsProperties();
+    const {
+      getBeforeValue,
+      setBeforeValue,
+      getAfterValue,
+      setAfterValue,
+      getExclusiveValue,
+      setExclusiveValue
+    } = useAsynchronousContinuationsProperties();
     const before = ref(false);
     const after = ref(false);
     const exclusive = ref(false);
@@ -37345,7 +37367,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["modelValue"]);
 }
-const __unplugin_components_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__scopeId", "data-v-c472cba7"]]);
+const __unplugin_components_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__scopeId", "data-v-4449628a"]]);
 const _sfc_main$1 = defineComponent({
   name: "HBpmnDesignerToolbar",
   components: {

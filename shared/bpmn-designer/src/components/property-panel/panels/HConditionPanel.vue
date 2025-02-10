@@ -1,15 +1,28 @@
 <template>
   <h-expansion-item icon="mdi-call-split" label="条件">
-    <h-select v-model="conditionType" dense :options="conditionOptions" label="类型" hide-hint></h-select>
+    <h-select
+      v-model="conditionType"
+      dense
+      :options="conditionOptions"
+      label="类型"
+      hide-hint
+    ></h-select>
     <template v-if="isScript">
       <h-text-field v-model="format" dense label="格式" @update:model-value="updateFormat" />
-      <h-select v-model="scriptType" dense :options="scriptOptions" label="脚本类型" hide-hint></h-select>
+      <h-select
+        v-model="scriptType"
+        dense
+        :options="scriptOptions"
+        label="脚本类型"
+        hide-hint
+      ></h-select>
       <h-text-field
         v-if="isExternalResource"
         v-model="resource"
         dense
         label="资源"
-        @update:model-value="updateResource" />
+        @update:model-value="updateResource"
+      />
       <h-text-field
         v-else
         v-model="script"
@@ -17,7 +30,8 @@
         outlined
         type="textarea"
         label="脚本"
-        @update:model-value="updateScript" />
+        @update:model-value="updateScript"
+      />
     </template>
 
     <h-text-field
@@ -25,18 +39,19 @@
       v-model="conditionExpression"
       dense
       label="条件表达式"
-      @update:model-value="updateConditionExpression" />
+      @update:model-value="updateConditionExpression"
+    />
   </h-expansion-item>
 </template>
 
 <script lang="ts">
 import { defineComponent, watch, ref, computed } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
-import { useConditionProperties } from '/@/hooks';
+import { useDesignerStore } from '@/stores';
+import { useConditionProperties } from '@/hooks';
 
-import { HExpansionItem } from '/@/components/widgets';
-import { HTextField, HSelect } from '/@/components/base';
+import { HExpansionItem } from '@/components/widgets';
+import { HTextField, HSelect } from '@/components/base';
 
 export default defineComponent({
   name: 'HConditionPanel',
@@ -44,7 +59,7 @@ export default defineComponent({
   components: {
     HExpansionItem,
     HTextField,
-    HSelect
+    HSelect,
   },
 
   setup() {
@@ -64,19 +79,19 @@ export default defineComponent({
       setResourceValue,
       getScriptValue,
       setScriptValue,
-      resetConditionExpression
+      resetConditionExpression,
     } = useConditionProperties();
 
     const conditionType = ref<string>('NONE');
     const conditionOptions = ref([
       { text: '无', value: 'NONE' },
       { text: '脚本', value: 'SCRIPT' },
-      { text: '表达式', value: 'EXPRESSION' }
+      { text: '表达式', value: 'EXPRESSION' },
     ]);
     const scriptType = ref<string>('INLINE_SCRIPT');
     const scriptOptions = ref([
       { text: '外部资源', value: 'EXTERNAL_RESOURCE' },
-      { text: '内联脚本', value: 'INLINE_SCRIPT' }
+      { text: '内联脚本', value: 'INLINE_SCRIPT' },
     ]);
 
     const isScript = computed(() => {
@@ -136,7 +151,7 @@ export default defineComponent({
       () => {
         loading();
       },
-      { immediate: true, deep: true }
+      { immediate: true, deep: true },
     );
 
     watch(
@@ -144,7 +159,7 @@ export default defineComponent({
       () => {
         resetConditionExpression(designer.activeElement);
         loading();
-      }
+      },
     );
 
     watch(
@@ -155,7 +170,7 @@ export default defineComponent({
           updateFormat(format.value);
         }
         loading();
-      }
+      },
     );
 
     return {
@@ -173,8 +188,8 @@ export default defineComponent({
       updateConditionExpression,
       updateFormat,
       updateResource,
-      updateScript
+      updateScript,
     };
-  }
+  },
 });
 </script>

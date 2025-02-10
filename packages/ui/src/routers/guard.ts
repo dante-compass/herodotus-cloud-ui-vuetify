@@ -1,8 +1,8 @@
 import type { Router } from 'vue-router';
-import { useRouteStore, useAuthenticationStore } from '/@/stores';
-import { CONSTANTS } from '/@/composables/constants';
+import { useRouteStore, useAuthenticationStore } from '@/stores';
+import { CONSTANTS } from '@/composables/constants';
 
-import { useSystemRoute } from '/@/hooks';
+import { useSystemRoute } from '@/hooks';
 
 import { Loading, QSpinnerDots } from 'quasar';
 
@@ -38,7 +38,8 @@ export const createRouterGuard = (router: Router) => {
           }
           const redirectPath = (from.query.redirect || to.path) as string;
           const redirectURI = decodeURIComponent(redirectPath);
-          const nextPath = to.path === redirectURI ? { ...to, replace: true } : { path: redirectURI };
+          const nextPath =
+            to.path === redirectURI ? { ...to, replace: true } : { path: redirectURI };
           next(nextPath);
           return;
         } else {

@@ -1,11 +1,11 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import type { WidgetItem } from '/@/lib/declarations';
-import { CONSTANTS } from '/@/composables/constants';
+import type { WidgetItem } from '@/lib/declarations';
+import { CONSTANTS } from '@/composables/constants';
 
 const WidgetRoute: RouteRecordRaw = {
   path: '/widgets',
-  component: () => import('/@/views/layouts/Widgets.vue'),
+  component: () => import('@/views/layouts/Widgets.vue'),
   meta: { title: '应用程序部件', icon: 'mdi-apps-box' },
   redirect: '/widgets/bpmn-designer',
   children: [
@@ -13,13 +13,13 @@ const WidgetRoute: RouteRecordRaw = {
       path: '/widgets/bpmn-designer',
       name: 'WidgetsBpmnDesigner',
       meta: { title: '流程设计器', icon: 'mdi-list-status' },
-      component: () => import('/@/views/widgets/bpmn-designer/Index.vue'),
+      component: () => import('@/views/widgets/bpmn-designer/Index.vue'),
     },
     {
       path: '/widgets/dynamic-forms',
       name: CONSTANTS.ComponentName.WIDGETS_DYNAMIC_FORM,
       meta: { title: '动态表单', icon: 'mdi-format-textbox' },
-      component: () => import('/@/views/widgets/dynamic-forms/Index.vue'),
+      component: () => import('@/views/widgets/dynamic-forms/Index.vue'),
     },
   ],
 };

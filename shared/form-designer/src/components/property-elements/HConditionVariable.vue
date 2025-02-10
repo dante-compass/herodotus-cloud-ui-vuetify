@@ -40,10 +40,10 @@
 import type { Ref } from 'vue';
 import { defineComponent, ref } from 'vue';
 
-import type { QBaseDataItem, QTableColumnProps } from '/@/declarations';
+import type { QBaseDataItem, QTableColumnProps } from '@/declarations';
 
-import { HTextField, HExpansionItem } from '/@/components/library';
-import { useFormCanvasStore } from '/@/stores';
+import { HTextField, HExpansionItem } from '@/components/library';
+import { useFormCanvasStore } from '@/stores';
 
 export default defineComponent({
   name: 'HConditionVariable',

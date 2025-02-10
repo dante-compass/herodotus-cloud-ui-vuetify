@@ -5,9 +5,9 @@ import { useCryptoStore } from './crypto';
 import { useSettingsStore } from './settings';
 import { useTabsStore } from './tabs';
 
-import { useDictionaryStore } from '/@/composables/constants';
+import { useDictionaryStore } from '@/composables/constants';
 
-import { variables } from '/@/lib/utils';
+import { variables } from '@/lib/utils';
 
 export const clearPersistData = () => {
   console.log('Clear Persist Data');
@@ -40,4 +40,11 @@ export const getSystemHeaders = () => {
   return headers;
 };
 
-export { useApplicationStore, useAuthenticationStore, useRouteStore, useCryptoStore, useSettingsStore, useTabsStore };
+export {
+  useApplicationStore,
+  useAuthenticationStore,
+  useRouteStore,
+  useCryptoStore,
+  useSettingsStore,
+  useTabsStore,
+};

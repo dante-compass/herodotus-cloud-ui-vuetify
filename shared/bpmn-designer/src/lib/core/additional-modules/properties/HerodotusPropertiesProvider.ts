@@ -4,14 +4,14 @@ import type { Group } from 'bpmn-js-properties-panel/lib/PropertiesActivator';
 import type EventBus from 'diagram-js/lib/core/EventBus';
 
 import { parseElementType, getRawType, getBpmnIcon } from '../../panel-icon';
-import { lodash, Logger } from '/@/lib/utils';
+import { lodash, Logger } from '@/lib/utils';
 
 const LOW_PRIORITY = 500;
 
 export default function HerodotusPropertiesProvider(
   propertiesPanel: typeof PropertiesPanel,
   translate: Function,
-  eventBus: EventBus
+  eventBus: EventBus,
 ) {
   // @ts-ignore
   this.getGroups = function (element: any) {
@@ -22,7 +22,8 @@ export default function HerodotusPropertiesProvider(
       !lodash.isEmpty(element.businessObject.loopCharacteristics) &&
       element.businessObject.loopCharacteristics.$type === 'bpmn:MultiInstanceLoopCharacteristics';
 
-    const elementTitle = translate(elementRawTypeName) + '(' + lodash.upperCase(elementRawTypeName) + ')';
+    const elementTitle =
+      translate(elementRawTypeName) + '(' + lodash.upperCase(elementRawTypeName) + ')';
     const elementIcon = getBpmnIcon(elementTypeName);
     const elementCaption = element.businessObject.name;
 
@@ -40,7 +41,7 @@ export default function HerodotusPropertiesProvider(
         elementTitle: elementTitle,
         elementIcon: elementIcon,
         elementCaption: elementCaption,
-        isMultiInstance: isMultiInstance
+        isMultiInstance: isMultiInstance,
       });
 
       Logger.prettyPrimary('Selected element changed', `ID: ${element.id} , type: ${element.type}`);

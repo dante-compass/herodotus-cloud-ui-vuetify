@@ -8,10 +8,10 @@ import type {
   HttpResult,
   QTableOnRequestProps,
   QTableOnRequestParameter,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { BaseService } from '/@/lib/definitions';
-import { toast, standardDeleteNotify, lodash } from '/@/lib/utils';
+import { BaseService } from '@/lib/definitions';
+import { toast, standardDeleteNotify, lodash } from '@/lib/utils';
 import useBaseTable from './useBaseTable';
 
 export default function <E extends Entity, C extends Conditions>(
@@ -52,7 +52,7 @@ export default function <E extends Entity, C extends Conditions>(
         ...sort,
         ...conditions.value,
       })
-      .then(result => {
+      .then((result) => {
         const data = result.data as Array<E>;
 
         if (!lodash.isEmpty(data)) {
@@ -63,7 +63,7 @@ export default function <E extends Entity, C extends Conditions>(
         }
         hideLoading();
       })
-      .catch(error => {
+      .catch((error) => {
         hideLoading();
       });
   };
@@ -79,7 +79,7 @@ export default function <E extends Entity, C extends Conditions>(
         },
         others,
       )
-      .then(result => {
+      .then((result) => {
         const data = result.data as Page<E>;
         // 用户文档列表中无结果时也要更新列表数据
         if (data) {
@@ -102,7 +102,7 @@ export default function <E extends Entity, C extends Conditions>(
     standardDeleteNotify(() => {
       baseService
         .delete(id)
-        .then(response => {
+        .then((response) => {
           const result = response as HttpResult<string>;
           if (result.message) {
             toast.success(result.message);
@@ -112,7 +112,7 @@ export default function <E extends Entity, C extends Conditions>(
 
           findItemsByPage(pagination.value.page, pagination.value.rowsPerPage);
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.message) {
             toast.error(error.message);
           } else {
@@ -127,7 +127,8 @@ export default function <E extends Entity, C extends Conditions>(
   };
 
   onMounted(() => {
-    if (loadOnMount) findItems({ pagination: pagination.value, getCellValue: (col: any, row: any) => {} });
+    if (loadOnMount)
+      findItems({ pagination: pagination.value, getCellValue: (col: any, row: any) => {} });
   });
 
   watch(
@@ -141,7 +142,7 @@ export default function <E extends Entity, C extends Conditions>(
 
   watch(
     conditions,
-    newValue => {
+    (newValue) => {
       if (newValue && !isFetchAll) {
         //防止不在第一页时发两遍请求
         if (pagination.value.page > 1) {

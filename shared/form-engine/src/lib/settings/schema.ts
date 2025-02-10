@@ -1,4 +1,4 @@
-import type { SchemaDefinitions } from '/@/declarations';
+import type { SchemaDefinitions } from '@/declarations';
 
 export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
   TEXT_FIELD: {
@@ -10,12 +10,12 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
         outlined: true,
         'bottom-slots': true,
         label: '单行文本',
-        type: 'text'
+        type: 'text',
       },
       models: {
-        modelValue: { name: '', type: 'String' }
-      }
-    }
+        modelValue: { name: '', type: 'String' },
+      },
+    },
   },
   TEXT_AREA: {
     name: 'TEXT_AREA',
@@ -26,12 +26,12 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
         outlined: true,
         'bottom-slots': true,
         label: '多行文本',
-        type: 'textarea'
+        type: 'textarea',
       },
       models: {
-        modelValue: { name: '', type: 'String' }
-      }
-    }
+        modelValue: { name: '', type: 'String' },
+      },
+    },
   },
   PASSWORD: {
     name: 'PASSWORD',
@@ -41,12 +41,12 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         filled: true,
         label: '密码输入',
-        type: 'password'
+        type: 'password',
       },
       models: {
-        modelValue: { name: '', type: 'String' }
-      }
-    }
+        modelValue: { name: '', type: 'String' },
+      },
+    },
   },
   DATE_PICKER: {
     name: 'DATE_PICKER',
@@ -57,12 +57,12 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
         filled: true,
         label: '日期选择',
         'stack-label': true,
-        type: 'date'
+        type: 'date',
       },
       models: {
-        modelValue: { name: '', type: 'String' }
-      }
-    }
+        modelValue: { name: '', type: 'String' },
+      },
+    },
   },
   TIME_PICKER: {
     name: 'TIME_PICKER',
@@ -73,12 +73,12 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
         filled: true,
         label: '时间选择',
         'stack-label': true,
-        type: 'time'
+        type: 'time',
       },
       models: {
-        modelValue: { name: '', type: 'String' }
-      }
-    }
+        modelValue: { name: '', type: 'String' },
+      },
+    },
   },
   SLIDER: {
     name: 'SLIDER',
@@ -88,12 +88,12 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
       models: {
-        modelValue: { name: '', type: 'String' }
-      }
-    }
+        modelValue: { name: '', type: 'String' },
+      },
+    },
   },
   RANGE_SLIDER: {
     name: 'RANGE_SLIDER',
@@ -103,12 +103,12 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
       models: {
-        modelValue: { name: '', type: 'String' }
-      }
-    }
+        modelValue: { name: '', type: 'String' },
+      },
+    },
   },
 
   CHECKBOX: {
@@ -119,12 +119,12 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
       models: {
-        modelValue: { name: '', type: 'String' }
-      }
-    }
+        modelValue: { name: '', type: 'String' },
+      },
+    },
   },
   SWITCHS: {
     name: 'SWITCHS',
@@ -134,12 +134,12 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
       models: {
-        modelValue: { name: '', type: 'String' }
-      }
-    }
+        modelValue: { name: '', type: 'String' },
+      },
+    },
   },
 
   SELECT_SINGLE: {
@@ -150,10 +150,10 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
-      models: {}
-    }
+      models: {},
+    },
   },
   COMBOBOX: {
     name: 'COMBOBOX',
@@ -163,10 +163,10 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
-      models: {}
-    }
+      models: {},
+    },
   },
 
   COLOR_PICKER: {
@@ -177,10 +177,10 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
-      models: {}
-    }
+      models: {},
+    },
   },
   RADIO: {
     name: 'RADIO',
@@ -190,10 +190,10 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
-      models: {}
-    }
+      models: {},
+    },
   },
 
   FILE_INPUT: {
@@ -204,10 +204,10 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
-      models: {}
-    }
+      models: {},
+    },
   },
   IMAGES: {
     name: 'IMAGES',
@@ -217,9 +217,9 @@ export const SCHEMA_DEFINITIONS: SchemaDefinitions = {
       attrs: {
         rounded: true,
         filled: true,
-        label: 'Rounded filled'
+        label: 'Rounded filled',
       },
-      models: {}
-    }
-  }
+      models: {},
+    },
+  },
 };

@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent, watch } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
+import { useDesignerStore } from '@/stores';
 
 import { HExpansionItem } from '../../widgets';
 
@@ -13,7 +13,7 @@ export default defineComponent({
   name: 'HTasklistPanel',
 
   components: {
-    HExpansionItem
+    HExpansionItem,
   },
 
   setup() {
@@ -26,8 +26,8 @@ export default defineComponent({
       () => {
         loading();
       },
-      { immediate: true, deep: true }
+      { immediate: true, deep: true },
     );
-  }
+  },
 });
 </script>

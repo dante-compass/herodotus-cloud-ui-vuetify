@@ -1,6 +1,6 @@
-import type { DialogueDetailEntity } from '/@/lib/declarations';
+import type { DialogueDetailEntity } from '@/lib/declarations';
 
-import { variables } from '/@/lib/utils';
+import { variables } from '@/lib/utils';
 import { MessageChannelEnum } from '../enums';
 
 import {
@@ -8,7 +8,7 @@ import {
   useWebFluxWebSocketStore,
   useStompWebSocketStore,
   useNotificationStore,
-  useRealTimeInformationStore
+  useRealTimeInformationStore,
 } from '../stores';
 
 export default function useWebSocketMessage() {
@@ -27,7 +27,7 @@ export default function useWebSocketMessage() {
     syncOnlineUserCount: (data: string) => {
       const count = data as unknown as number;
       realtimeStore.onlineUserCount = count;
-    }
+    },
   };
 
   const messageChannel = (category = MessageChannelEnum.RSOCKET, isConnected = true) => {
@@ -97,6 +97,6 @@ export default function useWebSocketMessage() {
     disconnect,
     messageChannel,
     sendNotice,
-    sendToUser
+    sendToUser,
   };
 }

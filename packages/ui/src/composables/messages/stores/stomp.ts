@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia';
 import { Client } from '@stomp/stompjs';
 
-import type { DialogueDetailEntity, WebSocketOperations } from '/@/lib/declarations';
-import { api, lodash, variables } from '/@/lib/utils';
-import { useAuthenticationStore } from '/@/stores';
+import type { DialogueDetailEntity, WebSocketOperations } from '@/lib/declarations';
+import { api, lodash, variables } from '@/lib/utils';
+import { useAuthenticationStore } from '@/stores';
 
 export const useStompWebSocketStore = defineStore('StompWebSocket', {
   state: () => ({
     client: {} as Client,
-    operation: {} as WebSocketOperations
+    operation: {} as WebSocketOperations,
   }),
 
   actions: {
@@ -26,7 +26,12 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
 
     getWebSocketAddress(): string {
       const store = useAuthenticationStore();
-      return `ws://${location.host}/socket` + api.getConfig().getMsg(false) + '/stomp/ws?openid=' + store.userId;
+      return (
+        `ws://${location.host}/socket` +
+        api.getConfig().getMsg(false) +
+        '/stomp/ws?openid=' +
+        store.userId
+      );
       // return `ws://${location.host}/socket` + api.getConfig().getMsg(false) + '/stomp/ws';
     },
 
@@ -42,7 +47,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
         brokerURL: this.getWebSocketAddress(),
         // 此处的 Header 仅在后端 ChannelInterpetor中有效
         connectHeaders: {
-          ...this.getAuthorizationHeader()
+          ...this.getAuthorizationHeader(),
         },
         debug: function (str) {
           console.log(str);
@@ -51,7 +56,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
         heartbeatIncoming: 10000,
         heartbeatOutgoing: 10000,
 
-        onStompError: frame => {
+        onStompError: (frame) => {
           // Will be invoked in case of error encountered at Broker
           // Bad login/passcode typically will cause an error
           // Complaint brokers will set `message` header with a brief message. Body may contain details.
@@ -68,26 +73,26 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
 
         webSocketFactory: () => {
           return new WebSocket(this.getWebSocketAddress(), [store.token, 'v10.stomp']);
-        }
+        },
       });
     },
 
     subscribe(): void {
-      this.client.onConnect = frame => {
+      this.client.onConnect = (frame) => {
         console.log('WebSocket connected: ' + frame.headers['message']);
-        this.client.subscribe('/broadcast/notice', res => {
+        this.client.subscribe('/broadcast/notice', (res) => {
           console.log(res);
           // toast.info(res.body);
           this.pullNotifications();
         });
 
-        this.client.subscribe('/broadcast/online', res => {
+        this.client.subscribe('/broadcast/online', (res) => {
           // toast.info(res.body);
           const count = res.body as unknown as number;
           this.syncOnlineUserCount(count);
         });
 
-        this.client.subscribe('/user/personal/message', res => {
+        this.client.subscribe('/user/personal/message', (res) => {
           // console.log(res);
           // toast.info(res.body);
           this.pullNotifications();
@@ -102,7 +107,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
       this.client.publish({
         destination: '/app/public/notice',
         body: content,
-        headers: this.getAuthorizationHeader()
+        headers: this.getAuthorizationHeader(),
       });
     },
 
@@ -110,7 +115,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
       this.client.publish({
         destination: '/app/private/message',
         body: JSON.stringify(detail),
-        headers: this.getAuthorizationHeader()
+        headers: this.getAuthorizationHeader(),
       });
     },
 
@@ -138,10 +143,10 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
       api
         .webSocketMessage()
         .fetchAllStat()
-        .then(result => {
+        .then((result) => {
           const data = result.data as Record<string, any>;
           this.syncOnlineUserCount(data.onlineCount);
         });
-    }
-  }
+    },
+  },
 });

@@ -5,24 +5,26 @@
       label="候选启动组"
       title="选择候选启动组"
       hint="可指定多个组以逗号分隔"
-      @update:model-value="updateCandidateStarterGroups"></h-candidate-group-text-field>
+      @update:model-value="updateCandidateStarterGroups"
+    ></h-candidate-group-text-field>
     <h-candidate-user-text-field
       v-model="candidateStarterUsers"
       label="候选启动用户"
       title="选择候选启动用户"
       hint="可指定多个用户以逗号分隔"
-      @update:model-value="updateCandidateStarterUsers"></h-candidate-user-text-field>
+      @update:model-value="updateCandidateStarterUsers"
+    ></h-candidate-user-text-field>
   </h-expansion-item>
 </template>
 
 <script lang="ts">
 import { defineComponent, watch, ref } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
-import { useCandidateStarterProperties } from '/@/hooks';
+import { useDesignerStore } from '@/stores';
+import { useCandidateStarterProperties } from '@/hooks';
 
-import { HExpansionItem } from '/@/components/widgets';
-import { HCandidateUserTextField, HCandidateGroupTextField } from '/@/components/property-element';
+import { HExpansionItem } from '@/components/widgets';
+import { HCandidateUserTextField, HCandidateGroupTextField } from '@/components/property-element';
 
 export default defineComponent({
   name: 'HCandidateStarterPanel',
@@ -30,7 +32,7 @@ export default defineComponent({
   components: {
     HCandidateGroupTextField,
     HCandidateUserTextField,
-    HExpansionItem
+    HExpansionItem,
   },
 
   setup() {
@@ -40,7 +42,7 @@ export default defineComponent({
       getCandidateStarterGroupsValue,
       setCandidateStarterGroupsValue,
       getCandidateStarterUsersValue,
-      setCandidateStarterUsersValue
+      setCandidateStarterUsersValue,
     } = useCandidateStarterProperties();
 
     const candidateStarterUsers = ref<string>('');
@@ -64,15 +66,15 @@ export default defineComponent({
       () => {
         loading();
       },
-      { immediate: true, deep: true }
+      { immediate: true, deep: true },
     );
 
     return {
       candidateStarterGroups,
       candidateStarterUsers,
       updateCandidateStarterGroups,
-      updateCandidateStarterUsers
+      updateCandidateStarterUsers,
     };
-  }
+  },
 });
 </script>

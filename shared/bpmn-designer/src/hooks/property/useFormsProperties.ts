@@ -1,6 +1,6 @@
-import type { Element } from '/@/declarations';
+import type { Element } from '@/declarations';
 
-import { getBusinessObject, lodash } from '/@/lib/utils';
+import { getBusinessObject, lodash } from '@/lib/utils';
 
 import usePropertyElement from './usePropertyElements';
 
@@ -12,7 +12,7 @@ export default function useFormsProperties() {
     getExtensionElementsValues,
     setExtensionElementsValues,
     createModdleElement,
-    resetExtensionElementsValues
+    resetExtensionElementsValues,
   } = usePropertyElement();
 
   const getFormKeyValue = (element: Element): string => {
@@ -86,6 +86,6 @@ export default function useFormsProperties() {
     setGeneratedTaskFormsValues,
     resetGeneratedTaskFormsValues,
     resetProperties,
-    hasExtensionElements
+    hasExtensionElements,
   };
 }

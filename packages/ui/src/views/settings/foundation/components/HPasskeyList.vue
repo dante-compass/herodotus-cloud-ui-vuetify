@@ -1,17 +1,29 @@
 <template>
   <div>
     <div class="text-h6 q-my-md">Passkey(无密码登录)</div>
-    <q-table :rows="tableRows" :columns="columns" :row-key="rowKey" flat bordered hide-bottom :loading="loading">
+    <q-table
+      :rows="tableRows"
+      :columns="columns"
+      :row-key="rowKey"
+      flat
+      bordered
+      hide-bottom
+      :loading="loading"
+    >
       <template v-slot:top>
         <h-button
           :disabled="isRegisterButtonDisable"
           color="primary"
           label="通行密钥"
-          @click="openDialog = !openDialog" />
+          @click="openDialog = !openDialog"
+        />
       </template>
       <template #body-cell-actions="props">
         <q-td key="actions" :props="props">
-          <h-delete-button v-if="!props.row.reserved" @click="onDelete(props.row[rowKey])"></h-delete-button>
+          <h-delete-button
+            v-if="!props.row.reserved"
+            @click="onDelete(props.row[rowKey])"
+          ></h-delete-button>
         </q-td>
       </template>
     </q-table>
@@ -28,14 +40,14 @@ import type {
   OAuth2CredentialRecordProps,
   QTableColumnProps,
   HttpResult,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { api, moment, toast, standardDeleteNotify } from '/@/lib/utils';
-import { useTable, usePasskey } from '/@/hooks';
-import { useAuthenticationStore } from '/@/stores';
+import { CONSTANTS } from '@/composables/constants';
+import { api, moment, toast, standardDeleteNotify } from '@/lib/utils';
+import { useTable, usePasskey } from '@/hooks';
+import { useAuthenticationStore } from '@/stores';
 
-import { HDeleteButton } from '/@/components';
+import { HDeleteButton } from '@/components';
 
 import HPasskeyRegisterDialog from './HPasskeyRegisterDialog.vue';
 
@@ -70,14 +82,14 @@ export default defineComponent({
         field: 'created',
         align: 'center',
         label: '创建时间',
-        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
+        format: (value) => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
       },
       {
         name: 'lastUsed',
         field: 'lastUsed',
         align: 'center',
         label: '更新时间',
-        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
+        format: (value) => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
       },
       { name: 'signatureCount', field: 'signatureCount', align: 'center', label: '签名数量' },
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
@@ -95,7 +107,7 @@ export default defineComponent({
         api
           .passkey()
           .delete(id)
-          .then(response => {
+          .then((response) => {
             const result = response as HttpResult<string>;
             if (result.message) {
               toast.success(result.message);
@@ -104,7 +116,7 @@ export default defineComponent({
               fetchItems();
             }
           })
-          .catch(error => {
+          .catch((error) => {
             if (error.message) {
               toast.error(error.message);
             } else {
@@ -127,7 +139,7 @@ export default defineComponent({
       fetchItems();
     });
 
-    watch(tableRows, newValue => {
+    watch(tableRows, (newValue) => {
       if (newValue) {
         newValue.forEach((row, index) => {
           //@ts-ignore
@@ -136,7 +148,17 @@ export default defineComponent({
       }
     });
 
-    return { tableRows, columns, rowKey, pagination, onDelete, loading, openDialog, isRegisterButtonDisable, onSave };
+    return {
+      tableRows,
+      columns,
+      rowKey,
+      pagination,
+      onDelete,
+      loading,
+      openDialog,
+      isRegisterButtonDisable,
+      onSave,
+    };
   },
 });
 </script>

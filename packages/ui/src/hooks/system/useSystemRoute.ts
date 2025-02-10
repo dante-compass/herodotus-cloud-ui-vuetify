@@ -1,9 +1,9 @@
 import type { ModuleNamespace } from 'vite/types/hot.d.ts';
 import type { RouteRecordRaw, RouteMeta, Router } from 'vue-router';
-import type { RemoteRoute } from '/@/lib/declarations';
+import type { RemoteRoute } from '@/lib/declarations';
 
-import { useRouteStore } from '/@/stores';
-import { lodash, api } from '/@/lib/utils';
+import { useRouteStore } from '@/stores';
+import { lodash, api } from '@/lib/utils';
 
 export default function useSystemRoute() {
   const routeModules = import.meta.glob('../../routers/modules/**/*.ts', {
@@ -70,7 +70,7 @@ export default function useSystemRoute() {
   const getRoutesFromLocal = () => {
     const routes: Array<RouteRecordRaw> = [];
     const modules = routeModules as ModuleNamespace;
-    Object.keys(modules).forEach(key => {
+    Object.keys(modules).forEach((key) => {
       const item = modules[key];
       const module = item.default || {};
       const list = Array.isArray(module) ? [...module] : [module];
@@ -86,7 +86,7 @@ export default function useSystemRoute() {
   };
 
   const dynamicAddRoutes = (router: Router, routes: Array<RouteRecordRaw>) => {
-    routes.forEach(item => {
+    routes.forEach((item) => {
       router.addRoute(item as RouteRecordRaw);
     });
     console.log('[Herodotus] |- Dynamic routes add success!');

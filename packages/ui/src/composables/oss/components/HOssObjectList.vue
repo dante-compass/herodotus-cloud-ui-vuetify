@@ -94,7 +94,7 @@ import type {
   ObjectDomainProps,
   ObjectDomainConditions,
   DeletedObjectDomain,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
 import {
   HDeleteButton,
@@ -102,10 +102,10 @@ import {
   HTable,
   HChunkUploader,
   HSimpleUploader,
-} from '/@/components';
-import { useBaseTable } from '/@/hooks';
-import { CONSTANTS } from '/@/composables/constants';
-import { ossApi, lodash, toast, standardDeleteNotify } from '/@/lib/utils';
+} from '@/components';
+import { useBaseTable } from '@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { ossApi, lodash, toast, standardDeleteNotify } from '@/lib/utils';
 import { useOssDownload } from '../hooks';
 
 export default defineComponent({

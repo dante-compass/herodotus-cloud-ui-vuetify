@@ -6,10 +6,10 @@ import type {
   HttpResult,
   BpmnDesignerResources,
   FormDesignerResources,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
 import qs from 'qs';
-import { ContentTypeEnum } from '/@/lib/definitions';
+import { ContentTypeEnum } from '@/lib/definitions';
 import {
   lodash,
   variables,
@@ -24,7 +24,7 @@ import {
   DynamicFormService,
 } from '../base';
 
-import { getSystemHeaders } from '/@/stores';
+import { getSystemHeaders } from '@/stores';
 import { processor } from './status';
 
 const logResponse = (response: AxiosResponse<any>) => {
@@ -117,7 +117,7 @@ const transform: AxiosTransform = {
   requestInterceptorsCatch(axiosInstance: AxiosInstance, error: AxiosError): Promise<any> {
     return Promise.reject(error);
   },
-  
+
   responseInterceptorsCatch(axiosInstance: AxiosInstance, error: AxiosError): Promise<any> {
     return processor(axiosInstance, error);
   },

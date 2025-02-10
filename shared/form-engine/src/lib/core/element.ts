@@ -1,4 +1,4 @@
-import type { SchemaDefinition, Schema, Element, Widget } from '/@/declarations';
+import type { SchemaDefinition, Schema, Element, Widget } from '@/declarations';
 import { nanoid } from 'nanoid';
 import { cloneDeep } from 'lodash-es';
 

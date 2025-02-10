@@ -8,7 +8,7 @@ import camundaModdleDescriptors from 'camunda-bpmn-moddle/resources/camunda';
 import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
-  CamundaPlatformPropertiesProviderModule
+  CamundaPlatformPropertiesProviderModule,
 } from 'bpmn-js-properties-panel';
 
 // 官方扩展工具 元素模板选择
@@ -28,10 +28,10 @@ import MinimapModule from 'diagram-js-minimap';
 import GridModule from 'diagram-js-grid';
 
 // 自定义 modules 扩展模块
-import { Translator, BpmnLinter, HerodotusPropertiesProviderModule } from '/@/lib/core';
+import { Translator, BpmnLinter, HerodotusPropertiesProviderModule } from '@/lib/core';
 
-import { useSettingStore, useDesignerStore } from '/@/stores';
-import { lodash, Logger } from '/@/lib/utils';
+import { useSettingStore, useDesignerStore } from '@/stores';
+import { lodash, Logger } from '@/lib/utils';
 
 export default function useModelerCreator() {
   const settings = useSettingStore();
@@ -46,14 +46,14 @@ export default function useModelerCreator() {
       BpmnPropertiesPanelModule,
       BpmnPropertiesProviderModule,
       CamundaPlatformPropertiesProviderModule,
-      HerodotusPropertiesProviderModule
+      HerodotusPropertiesProviderModule,
     );
 
     extensions['camunda'] = camundaModdleDescriptors;
 
     if (settings.useOfficialPanel) {
       options['propertiesPanel'] = {
-        parent: panelHtmlId
+        parent: panelHtmlId,
       };
     }
 
@@ -61,10 +61,10 @@ export default function useModelerCreator() {
       modules.push(ElementTemplateChooserModule, ConnectorsExtensionModule);
       options['exporter'] = {
         name: 'element-template-chooser',
-        version: '1.0.0'
+        version: '1.0.0',
       };
       options['connectorsExtension'] = {
-        appendAnything: true
+        appendAnything: true,
       };
     }
 
@@ -73,7 +73,7 @@ export default function useModelerCreator() {
       modules.push(BpmnLintModule);
       options['linting'] = {
         active: true,
-        bpmnlint: BpmnLinter
+        bpmnlint: BpmnLinter,
       };
     }
 
@@ -81,7 +81,7 @@ export default function useModelerCreator() {
     if (settings.showMiniMap) {
       modules.push(MinimapModule);
       options['minimap'] = {
-        open: true
+        open: true,
       };
     }
 
@@ -95,20 +95,20 @@ export default function useModelerCreator() {
       modules.push(TokenSimulationModule);
       // 设置键盘事件绑定
       options['keyboard'] = {
-        bindTo: document
+        bindTo: document,
       };
     }
 
     // 翻译模块
     const TranslateModule = {
-      translate: ['value', Translator]
+      translate: ['value', Translator],
     };
     modules.push(TranslateModule);
 
     return {
       additionalModules: modules,
       moddleExtensions: extensions,
-      ...options
+      ...options,
     };
   };
 
@@ -119,7 +119,7 @@ export default function useModelerCreator() {
 
     const modeler: Modeler = new Modeler({
       container: containerHtmlId,
-      ...modules
+      ...modules,
     });
 
     designer.modeler = markRaw(modeler);
@@ -178,7 +178,7 @@ export default function useModelerCreator() {
   };
 
   const createModelerListeners = (modeler: Modeler) => {
-    modeler.on('herodotus.element.changed', data => {
+    modeler.on('herodotus.element.changed', (data) => {
       designer.switchElement(
         // @ts-ignore
         markRaw(data.activeElement),
@@ -197,7 +197,7 @@ export default function useModelerCreator() {
         // @ts-ignore
         data.elementCaption,
         // @ts-ignore
-        data.isMultiInstance
+        data.isMultiInstance,
       );
     });
   };
@@ -219,6 +219,6 @@ export default function useModelerCreator() {
     createBpmnModeler,
     createNewDiagram,
     create,
-    destroy
+    destroy,
   };
 }

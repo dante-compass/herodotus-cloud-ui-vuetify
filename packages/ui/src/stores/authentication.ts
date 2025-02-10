@@ -6,10 +6,10 @@ import type {
   AccessPrincipal,
   OAuth2Token,
   OAuth2IdToken,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 import { jwtDecode } from 'jwt-decode';
-import { useCryptoStore } from '/@/stores';
-import { variables, moment, api } from '/@/lib/utils';
+import { useCryptoStore } from '@/stores';
+import { variables, moment, api } from '@/lib/utils';
 
 export const useAuthenticationStore = defineStore('Authentication', {
   state: () => ({
@@ -32,7 +32,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
   }),
 
   getters: {
-    isNotExpired: state => {
+    isNotExpired: (state) => {
       const expires = moment().add(state.expires_in, 'seconds').valueOf();
       const flag = moment(expires).add(1, 'seconds').diff(moment(), 'seconds');
       return flag !== 0;
@@ -111,7 +111,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         api
           .open()
           .getPrompt(principal)
-          .then(result => {
+          .then((result) => {
             this.setUserErrorStatus(result.data as SignInErrorStatus);
           });
       }
@@ -127,7 +127,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         api
           .oauth2()
           .passwordFlow(username, password, variables.isUseCrypto())
-          .then(response => {
+          .then((response) => {
             if (response) {
               const data = response as OAuth2Token;
               this.setTokenInfo(data);
@@ -139,7 +139,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
               resolve(false);
             }
           })
-          .catch(error => {
+          .catch((error) => {
             this.setErrorPrompt(error, username);
             reject(error);
           });
@@ -150,7 +150,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         api
           .oauth2()
           .refreshTokenFlow(this.refresh_token, variables.isUseCrypto())
-          .then(response => {
+          .then((response) => {
             if (response) {
               const data = response as OAuth2Token;
               this.setTokenInfo(data);
@@ -162,7 +162,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
               resolve(false);
             }
           })
-          .catch(error => {
+          .catch((error) => {
             reject(error);
           });
       });
@@ -175,7 +175,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then(() => {
             console.log('Server side sign out successfully.');
           })
-          .catch(error => {
+          .catch((error) => {
             console.log('Server side sign out has error.', error);
           });
       }
@@ -185,7 +185,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         api
           .oauth2()
           .authorizationCodeFlow(code, variables.getRedirectUri(), state, variables.isUseCrypto())
-          .then(response => {
+          .then((response) => {
             if (response) {
               const data = response as OAuth2Token;
               this.setTokenInfo(data);
@@ -197,7 +197,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
               resolve(false);
             }
           })
-          .catch(error => {
+          .catch((error) => {
             reject(error);
           });
       });
@@ -213,7 +213,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         api
           .oauth2()
           .socialCredentialsFlowBySms(mobile, code, variables.isUseCrypto())
-          .then(response => {
+          .then((response) => {
             if (response) {
               const data = response as unknown as OAuth2Token;
               this.setTokenInfo(data);
@@ -225,7 +225,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
               resolve(false);
             }
           })
-          .catch(error => {
+          .catch((error) => {
             this.setErrorPrompt(error, mobile);
             reject(error);
           });
@@ -237,7 +237,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         api
           .oauth2()
           .socialCredentialsFlowByJustAuth(source, accessPrincipal, variables.isUseCrypto())
-          .then(response => {
+          .then((response) => {
             if (response) {
               const data = response as OAuth2Token;
               this.setTokenInfo(data);
@@ -249,7 +249,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
               resolve(false);
             }
           })
-          .catch(error => {
+          .catch((error) => {
             if (error.code && [40106, 40111].includes(error.code)) reject(error);
           });
       });
@@ -260,7 +260,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         api
           .oauth2()
           .webAuthnCredentialsFlow(publicKey, variables.isUseCrypto())
-          .then(response => {
+          .then((response) => {
             if (response) {
               const data = response as OAuth2Token;
               this.setTokenInfo(data);
@@ -272,7 +272,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
               resolve(false);
             }
           })
-          .catch(error => {
+          .catch((error) => {
             if (error.code && [40106, 40111].includes(error.code)) reject(error);
           });
       });

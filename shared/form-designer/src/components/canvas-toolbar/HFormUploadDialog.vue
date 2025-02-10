@@ -23,10 +23,10 @@
 import type { Ref } from 'vue';
 import { defineComponent, computed, ref } from 'vue';
 
-import type { SweetAlertResult } from '/@/declarations';
+import type { SweetAlertResult } from '@/declarations';
 
-import { toast, Swal } from '/@/lib/utils';
-import { useFormResourceStore, useFormCanvasStore } from '/@/stores';
+import { toast, Swal } from '@/lib/utils';
+import { useFormResourceStore, useFormCanvasStore } from '@/stores';
 
 import HFormInformation from './HFormInformation.vue';
 

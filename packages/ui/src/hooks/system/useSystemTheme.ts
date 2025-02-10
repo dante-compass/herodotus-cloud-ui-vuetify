@@ -1,8 +1,8 @@
 import { watch, ref, computed } from 'vue';
 
-import { ThemeModeEnum } from '/@/lib/definitions';
-import { useSettingsStore } from '/@/stores';
-import { CONSTANTS } from '/@/composables/constants';
+import { ThemeModeEnum } from '@/lib/definitions';
+import { useSettingsStore } from '@/stores';
+import { CONSTANTS } from '@/composables/constants';
 
 export default function useSystemTheme() {
   let media: MediaQueryList;
@@ -22,7 +22,7 @@ export default function useSystemTheme() {
 
   watch(
     () => settings.theme.mode,
-    val => {
+    (val) => {
       if (val === ThemeModeEnum.SYSTEM) {
         media = getMatchMedia()!;
         media.addEventListener('change', onThemeChange);

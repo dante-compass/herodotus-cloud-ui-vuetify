@@ -11,14 +11,16 @@
     :loading="loading"
     status
     reserved
-    @request="findItems">
+    @request="findItems"
+  >
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
         <h-dense-icon-button
           color="brown"
           icon="mdi-file-document-edit"
           tooltip="办理"
-          @click="dealWith(props.row)"></h-dense-icon-button>
+          @click="dealWith(props.row)"
+        ></h-dense-icon-button>
       </q-td>
     </template>
   </h-table>
@@ -36,15 +38,15 @@ import type {
   ExtendedTaskConditions,
   ProcessSpecificsEntity,
   ProcessSpecificsConditions,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
+import { CONSTANTS } from '@/composables/constants';
 
-import { api, bpmnApi } from '/@/lib/utils';
-import { useBaseTable } from '/@/hooks';
-import { useBpmnProcess } from '/@/composables/bpmn';
-import { useAuthenticationStore } from '/@/stores';
-import { HDenseIconButton } from '/@/components';
+import { api, bpmnApi } from '@/lib/utils';
+import { useBaseTable } from '@/hooks';
+import { useBpmnProcess } from '@/composables/bpmn';
+import { useAuthenticationStore } from '@/stores';
+import { HDenseIconButton } from '@/components';
 
 export default defineComponent({
   name: 'HToDoTaskTable',
@@ -55,8 +57,20 @@ export default defineComponent({
     const rowKey = 'taskId' as keyof ExtendedTaskEntity;
     const selected = ref([]);
 
-    const { loading, tableRows, totalPages, pagination, setPagination, setPageData, showLoading, hideLoading } =
-      useBaseTable<ExtendedTaskEntity, ExtendedTaskConditions>('HToDoTaskTable', 'updateTime', true);
+    const {
+      loading,
+      tableRows,
+      totalPages,
+      pagination,
+      setPagination,
+      setPageData,
+      showLoading,
+      hideLoading,
+    } = useBaseTable<ExtendedTaskEntity, ExtendedTaskConditions>(
+      'HToDoTaskTable',
+      'updateTime',
+      true,
+    );
     const { editedItem, fetchProcessSpecifics } = useBpmnProcess();
     const { toEdit } = useBaseTable<ProcessSpecificsEntity, ProcessSpecificsConditions>(
       CONSTANTS.ComponentName.WORKFLOW_PROCESS_APPROVE,
@@ -81,7 +95,7 @@ export default defineComponent({
           },
           { employeeId: authentication.employeeId },
         )
-        .then(result => {
+        .then((result) => {
           const data = result.data as Page<ExtendedTaskEntity>;
           setPageData(data);
           hideLoading();
@@ -107,7 +121,7 @@ export default defineComponent({
 
     watch(
       () => pagination.value.page,
-      newValue => {
+      (newValue) => {
         fetchToDoTasksByPage(newValue);
       },
     );

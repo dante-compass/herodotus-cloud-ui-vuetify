@@ -2,8 +2,18 @@
   <div>
     <div class="text-h6 q-mb-md">账号信息</div>
     <div class="text-h6 q-mb-md">第三方账号绑定</div>
-    <div class="text-body2 q-mb-md">使用以下任一方式都可以登录到您的帐号，避免由于某个帐号失效导致无法登录</div>
-    <q-table :rows="tableRows" :columns="columns" :row-key="rowKey" flat bordered hide-bottom :loading="loading">
+    <div class="text-body2 q-mb-md">
+      使用以下任一方式都可以登录到您的帐号，避免由于某个帐号失效导致无法登录
+    </div>
+    <q-table
+      :rows="tableRows"
+      :columns="columns"
+      :row-key="rowKey"
+      flat
+      bordered
+      hide-bottom
+      :loading="loading"
+    >
       <template #body-cell-source="props">
         <q-td key="source" :props="props">
           <q-avatar size="30px">
@@ -38,12 +48,12 @@ import type {
   AccessSourceConditions,
   AccessSourceProps,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { api, getSocialLogo, moment } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
-import { useAuthenticationStore } from '/@/stores';
+import { CONSTANTS } from '@/composables/constants';
+import { api, getSocialLogo, moment } from '@/lib/utils';
+import { useTable } from '@/hooks';
+import { useAuthenticationStore } from '@/stores';
 
 import HBindingButton from './HBindingButton.vue';
 import HBindingDetailColumn from './HBindingDetailColumn.vue';
@@ -82,7 +92,7 @@ export default defineComponent({
         field: 'bindingTime',
         align: 'center',
         label: '绑定时间',
-        format: value => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
+        format: (value) => (value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : ''),
       },
       { name: 'bound', field: 'bound', align: 'center', label: '状态' },
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
@@ -98,7 +108,7 @@ export default defineComponent({
       findItems({ pagination: pagination.value, getCellValue: (col: any, row: any) => {} });
     });
 
-    watch(tableRows, newValue => {
+    watch(tableRows, (newValue) => {
       if (newValue) {
         newValue.forEach((row, index) => {
           //@ts-ignore

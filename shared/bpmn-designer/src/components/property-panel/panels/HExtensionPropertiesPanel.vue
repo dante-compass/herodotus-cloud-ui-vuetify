@@ -70,11 +70,11 @@ import type { Ref } from 'vue';
 import { defineComponent, ref, computed, watch } from 'vue';
 
 import type { QTableProps } from 'quasar';
-import type { ExtensionProperty } from '/@/declarations';
+import type { ExtensionProperty } from '@/declarations';
 
-import { lodash } from '/@/lib/utils';
-import { useExtensionProperties } from '/@/hooks';
-import { useDesignerStore } from '/@/stores';
+import { lodash } from '@/lib/utils';
+import { useExtensionProperties } from '@/hooks';
+import { useDesignerStore } from '@/stores';
 
 import { HExpansionItem, HTableItemDeleteButton } from '../../widgets';
 import { HExtensionPropertyDialog } from '../../property-element';

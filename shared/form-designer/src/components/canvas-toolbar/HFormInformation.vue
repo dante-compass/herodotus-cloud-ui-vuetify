@@ -25,7 +25,7 @@ import type { Ref } from 'vue';
 import { defineComponent, ref } from 'vue';
 import { QInput } from 'quasar';
 
-import { useFormCanvasStore } from '/@/stores';
+import { useFormCanvasStore } from '@/stores';
 
 export default defineComponent({
   name: 'HFormInformation',

@@ -16,9 +16,9 @@
 import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 
-import { useSettingsStore } from '/@/stores';
+import { useSettingsStore } from '@/stores';
 
-import type { AccessSourceEntity } from '/@/lib/declarations';
+import type { AccessSourceEntity } from '@/lib/declarations';
 
 export default defineComponent({
   name: 'HBindingDetailColumn',

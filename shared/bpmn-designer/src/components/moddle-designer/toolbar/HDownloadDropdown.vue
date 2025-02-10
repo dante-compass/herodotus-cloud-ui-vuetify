@@ -11,17 +11,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
+import { useDesignerStore } from '@/stores';
 
 import { HButtonDropdown, HListItem } from '../../widgets';
-import { Logger } from '/@/lib/utils';
+import { Logger } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HDownloadDropdown',
 
   components: {
     HButtonDropdown,
-    HListItem
+    HListItem,
   },
 
   setup() {
@@ -48,7 +48,7 @@ export default defineComponent({
       return {
         filename: `${filename}.${type}`,
         href: `data:application/${type === 'svg' ? 'text/xml' : 'bpmn20-xml'};charset=UTF-8,${encodedData}`,
-        data: data
+        data: data,
       };
     };
 
@@ -83,8 +83,8 @@ export default defineComponent({
     return {
       onDownloadXml,
       onDownloadSvg,
-      onDownloadBpmn
+      onDownloadBpmn,
     };
-  }
+  },
 });
 </script>

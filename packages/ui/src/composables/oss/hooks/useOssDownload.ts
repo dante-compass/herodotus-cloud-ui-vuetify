@@ -1,9 +1,9 @@
 import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 
-import type { AxiosProgressEvent, QNotifyPosition } from '/@/lib/declarations';
+import type { AxiosProgressEvent, QNotifyPosition } from '@/lib/declarations';
 
-import { ossApi, toast } from '/@/lib/utils';
+import { ossApi, toast } from '@/lib/utils';
 
 export default function useOssDownload() {
   const $q = useQuasar();
@@ -37,10 +37,13 @@ export default function useOssDownload() {
       showDownLoadProgress('下载');
       ossApi
         .object()
-        .download({ bucketName: bucketName, objectName: objectName }, (progressEvent: AxiosProgressEvent) => {
-          loadProgress.value = (progressEvent.loaded / size) * 100;
-        })
-        .then(response => {
+        .download(
+          { bucketName: bucketName, objectName: objectName },
+          (progressEvent: AxiosProgressEvent) => {
+            loadProgress.value = (progressEvent.loaded / size) * 100;
+          },
+        )
+        .then((response) => {
           const data = response as Blob;
           process(data, objectName);
         })
@@ -51,7 +54,7 @@ export default function useOssDownload() {
       ossApi
         .object()
         .download({ bucketName: bucketName, objectName: objectName })
-        .then(response => {
+        .then((response) => {
           const data = response as Blob;
           process(data, objectName);
         })

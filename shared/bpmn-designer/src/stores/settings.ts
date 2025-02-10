@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import type { DesignerSetting } from '/@/declarations';
+import type { DesignerSetting } from '@/declarations';
 
 export const useSettingStore = defineStore('BpmnDesignerSetting', {
   state: (): DesignerSetting => ({
@@ -19,6 +19,6 @@ export const useSettingStore = defineStore('BpmnDesignerSetting', {
     processId: `Process_${new Date().getTime()}`,
     processName: `业务流程`,
     // 使用的工作流引擎
-    processEngine: 'camunda'
-  })
+    processEngine: 'camunda',
+  }),
 });

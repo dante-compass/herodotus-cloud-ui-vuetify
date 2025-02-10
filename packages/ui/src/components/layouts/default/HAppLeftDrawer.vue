@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useApplicationStore } from '/@/stores';
+import { useApplicationStore } from '@/stores';
 
 import HAppMenu from './HAppMenu.vue';
 

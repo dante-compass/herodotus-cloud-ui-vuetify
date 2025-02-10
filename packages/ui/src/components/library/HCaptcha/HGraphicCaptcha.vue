@@ -9,7 +9,8 @@
       :error="hasError"
       error-message="验证码错误！"
       @blur="verifyCaptcha()"
-      @clear="onClear()">
+      @clear="onClear()"
+    >
       <template #before>
         <q-icon color="primary" name="mdi-barcode-scan" />
       </template>
@@ -29,7 +30,8 @@
           :img-style="{ border: '1px solid black' }"
           fit="fill"
           alt="点击图片刷新"
-          @click="onRefresh()" />
+          @click="onRefresh()"
+        />
       </div>
     </template>
   </h-container>
@@ -38,11 +40,11 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, onMounted, ref, computed } from 'vue';
 
-import type { GraphicCaptcha } from '/@/lib/declarations';
-import { CaptchaCategoryEnum } from '/@/lib/definitions';
+import type { GraphicCaptcha } from '@/lib/declarations';
+import { CaptchaCategoryEnum } from '@/lib/definitions';
 
-import { useCryptoStore } from '/@/stores';
-import { variables, api } from '/@/lib/utils';
+import { useCryptoStore } from '@/stores';
+import { variables, api } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HGraphicCaptcha',
@@ -62,7 +64,7 @@ export default defineComponent({
 
     const isValid = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });
@@ -86,12 +88,12 @@ export default defineComponent({
         api
           .open()
           .verifyCaptcha(crypto.sessionId, variables.getCaptcha(), code.value)
-          .then(response => {
+          .then((response) => {
             const data = response.data as boolean;
             hasError.value = false;
             isValid.value = true;
           })
-          .catch(error => {
+          .catch((error) => {
             hasError.value = true;
             isValid.value = false;
           });

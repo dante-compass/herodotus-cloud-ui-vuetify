@@ -23,12 +23,12 @@
 import type { Ref } from 'vue';
 import { defineComponent, ref, computed } from 'vue';
 
-import type { GroupEntity } from '/@/declarations';
+import type { GroupEntity } from '@/declarations';
 
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 
-import { HDialog } from '/@/components/widgets';
-import { HTextField } from '/@/components/base';
+import { HDialog } from '@/components/widgets';
+import { HTextField } from '@/components/base';
 import HGroupSelectTable from './HGroupSelectTable.vue';
 
 export default defineComponent({

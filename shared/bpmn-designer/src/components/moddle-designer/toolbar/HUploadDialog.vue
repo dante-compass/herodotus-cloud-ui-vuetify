@@ -1,7 +1,11 @@
 <template>
   <div>
     <h-button-group>
-      <h-button icon="mdi-cloud-upload" tooltip="上传云端" @click="openUploadDialog = true"></h-button>
+      <h-button
+        icon="mdi-cloud-upload"
+        tooltip="上传云端"
+        @click="openUploadDialog = true"
+      ></h-button>
     </h-button-group>
 
     <q-dialog v-model="openUploadDialog" persistent transition-show="scale" transition-hide="scale">
@@ -17,18 +21,21 @@
             dense
             label="流程名称"
             hint="流程名称是该流程主要显示名称，请使用规范准确的文字描述"
-            :rules="[val => !!val || '流程名称不能为空']"
-            placeholder="请输入流程名称"></q-input>
+            :rules="[(val) => !!val || '流程名称不能为空']"
+            placeholder="请输入流程名称"
+          ></q-input>
           <q-toggle
             v-model="enableDuplicateCheck"
             label="开启部署重复检查"
             :true-value="true"
-            :false-value="false"></q-toggle>
+            :false-value="false"
+          ></q-toggle>
           <q-toggle
             v-model="deployChangedOnly"
             label="仅在模型存在变化时部署"
             :true-value="true"
-            :false-value="false"></q-toggle>
+            :false-value="false"
+          ></q-toggle>
         </q-card-section>
 
         <q-card-actions align="right">
@@ -44,10 +51,10 @@
 import { defineComponent, ref, watch } from 'vue';
 import { useQuasar, QSpinnerGears } from 'quasar';
 
-import type { SweetAlertResult, DeploymentCreateRequestBody } from '/@/declarations';
+import type { SweetAlertResult, DeploymentCreateRequestBody } from '@/declarations';
 
-import { useDesignerStore, useResourceStore } from '/@/stores';
-import { toast, Swal } from '/@/lib/utils';
+import { useDesignerStore, useResourceStore } from '@/stores';
+import { toast, Swal } from '@/lib/utils';
 
 import { HButton, HButtonGroup } from '../../widgets';
 
@@ -138,7 +145,7 @@ export default defineComponent({
 
     watch(
       deployChangedOnly,
-      newValue => {
+      (newValue) => {
         if (newValue) {
           enableDuplicateCheck.value = true;
         } else {

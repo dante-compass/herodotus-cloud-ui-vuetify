@@ -1,6 +1,6 @@
-import type { Element, Documentation } from '/@/declarations';
+import type { Element, Documentation } from '@/declarations';
 
-import { getBusinessObject, lodash } from '/@/lib/utils';
+import { getBusinessObject, lodash } from '@/lib/utils';
 
 import usePropertyElement from './usePropertyElements';
 
@@ -14,7 +14,7 @@ export default function useDocumentProperties() {
       return undefined;
     }
 
-    return docs.find(d => {
+    return docs.find((d) => {
       return (d.textFormat || DOCUMENTATION_TEXT_FORMAT) === DOCUMENTATION_TEXT_FORMAT;
     });
   };
@@ -43,23 +43,26 @@ export default function useDocumentProperties() {
         return getModeling().updateModdleProperties(element, documentation, { text: value });
       } else {
         return getModeling().updateModdleProperties(element, businessObject, {
-          documentation: lodash.without<Documentation>(businessObject.get('documentation'), documentation)
+          documentation: lodash.without<Documentation>(
+            businessObject.get('documentation'),
+            documentation,
+          ),
         });
       }
     }
     // (2) 创建新的 documentation
     if (value) {
       const newDocumentation = getBpmnFactory().create('bpmn:Documentation', {
-        text: value
+        text: value,
       });
       return getModeling().updateModdleProperties(element, businessObject, {
-        documentation: [...businessObject.get('documentation'), newDocumentation]
+        documentation: [...businessObject.get('documentation'), newDocumentation],
       });
     }
   };
 
   return {
     getDocumentationValue,
-    setDocumentationValue
+    setDocumentationValue,
   };
 }

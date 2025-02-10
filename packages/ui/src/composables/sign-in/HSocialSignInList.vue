@@ -29,7 +29,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import { defineComponent, ref, computed, onMounted } from 'vue';
-import { getSocialLogo, lodash, api, variables, PKCE } from '/@/lib/utils';
+import { getSocialLogo, lodash, api, variables, PKCE } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HSocialSignInList',

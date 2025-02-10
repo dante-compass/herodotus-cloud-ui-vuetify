@@ -11,7 +11,8 @@
     :loading="loading"
     status
     reserved
-    @request="findItems">
+    @request="findItems"
+  >
     <template #top-left>
       <q-btn color="primary" label="新建表单" @click="toCreate(false)" />
     </template>
@@ -36,11 +37,11 @@ import type {
   QTableOnRequestParameter,
   DynamicFormEntity,
   DynamicFormConditions,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { formApi, toast, standardDeleteNotify } from '/@/lib/utils';
-import { useBaseTable } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { formApi, toast, standardDeleteNotify } from '@/lib/utils';
+import { useBaseTable } from '@/hooks';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.WORKFLOW_DYNAMIC_FORM,
@@ -82,7 +83,7 @@ export default defineComponent({
           pageNumber: pageNumber - 1,
           pageSize: pagination.value.rowsPerPage,
         })
-        .then(result => {
+        .then((result) => {
           const data = result.data as Page<DynamicFormEntity>;
           setPageData(data);
           hideLoading();
@@ -102,7 +103,7 @@ export default defineComponent({
         formApi
           .dynamicForm()
           .delete(id)
-          .then(response => {
+          .then((response) => {
             const result = response as HttpResult<string>;
             if (result.message) {
               toast.success(result.message);
@@ -120,7 +121,7 @@ export default defineComponent({
 
     watch(
       () => pagination.value.page,
-      newValue => {
+      (newValue) => {
         fetchDynamicFormByPage(newValue);
       },
     );

@@ -1,14 +1,24 @@
 <template>
   <h-button-group>
-    <h-button icon="mdi-motion-play" tooltip="开启/关闭流程模拟" @click="toggleSimulation()"></h-button>
+    <h-button
+      icon="mdi-motion-play"
+      tooltip="开启/关闭流程模拟"
+      @click="toggleSimulation()"
+    ></h-button>
     <h-separator />
-    <h-button v-if="showMiniMap" icon="mdi-map-outline" tooltip="开启/关闭小地图" @click="toggleMinimap()"></h-button>
+    <h-button
+      v-if="showMiniMap"
+      icon="mdi-map-outline"
+      tooltip="开启/关闭小地图"
+      @click="toggleMinimap()"
+    ></h-button>
     <h-separator />
     <h-button
       v-if="showBpmnLint"
       icon="mdi-alert-circle-check-outline"
       tooltip="开启/关闭模型校验"
-      @click="toggleBpmnLint()"></h-button>
+      @click="toggleBpmnLint()"
+    ></h-button>
   </h-button-group>
 </template>
 
@@ -16,9 +26,9 @@
 import { defineComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 
-import type { Minimap, Linting, ToggleMode } from '/@/declarations';
+import type { Minimap, Linting, ToggleMode } from '@/declarations';
 
-import { useDesignerStore, useSettingStore } from '/@/stores';
+import { useDesignerStore, useSettingStore } from '@/stores';
 
 import { HButton, HButtonGroup, HSeparator } from '../../widgets';
 

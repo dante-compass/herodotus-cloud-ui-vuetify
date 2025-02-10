@@ -1,8 +1,8 @@
-import type { Element, ModdleElement } from '/@/declarations';
+import type { Element, ModdleElement } from '@/declarations';
 
-import { getBusinessObject, is, isAny, add } from '/@/lib/utils';
+import { getBusinessObject, is, isAny, add } from '@/lib/utils';
 
-import { useSettingStore } from '/@/stores';
+import { useSettingStore } from '@/stores';
 import usePropertyElement from './usePropertyElements';
 
 export default function useGeneralProperties() {
@@ -37,7 +37,7 @@ export default function useGeneralProperties() {
   const createCategoryValue = (definitions: ModdleElement): ModdleElement => {
     const categoryValue = getBpmnFactory().create('bpmn:CategoryValue');
     const category = getBpmnFactory().create('bpmn:Category', {
-      categoryValue: [categoryValue]
+      categoryValue: [categoryValue],
     });
     add(definitions.get('rootElements'), category, 0);
     getBusinessObject(category).$parent = definitions;
@@ -97,7 +97,7 @@ export default function useGeneralProperties() {
 
   const setIsExecutableValue = (element: Element, value: boolean) => {
     getModeling().updateProperties(element, {
-      isExecutable: value
+      isExecutable: value,
     });
   };
 
@@ -111,7 +111,7 @@ export default function useGeneralProperties() {
     const prefix = setting.processEngine;
 
     getModeling().updateProperties(element, {
-      [`${prefix}:versionTag`]: value
+      [`${prefix}:versionTag`]: value,
     });
   };
 
@@ -121,7 +121,7 @@ export default function useGeneralProperties() {
 
   const setIdValue = (element: Element, value: string) => {
     getModeling().updateProperties(element, {
-      id: value
+      id: value,
     });
   };
 
@@ -167,6 +167,6 @@ export default function useGeneralProperties() {
     getVersionTagValue,
     setVersionTagValue,
     isIdValid,
-    isVersionTagValid
+    isVersionTagValid,
   };
 }

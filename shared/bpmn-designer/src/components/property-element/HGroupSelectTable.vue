@@ -27,15 +27,10 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed, ref, watch } from 'vue';
 
-import type {
-  GroupEntity,
-  GroupQueryParams,
-  GroupSortBy,
-  QTableColumnProps,
-} from '/@/declarations';
+import type { GroupEntity, GroupQueryParams, GroupSortBy, QTableColumnProps } from '@/declarations';
 
-import { useTableItems } from '/@/hooks';
-import { useResourceStore } from '/@/stores';
+import { useTableItems } from '@/hooks';
+import { useResourceStore } from '@/stores';
 
 import { HTextField } from '../base';
 
