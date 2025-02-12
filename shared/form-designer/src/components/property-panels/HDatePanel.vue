@@ -17,7 +17,10 @@
         <h-switch v-model="properties.outlined" label="Outlined"></h-switch>
         <h-switch v-model="properties.borderless" label="Borderless"></h-switch>
         <h-switch v-model="properties.standout" label="Standout"></h-switch>
-        <h-switch v-model="properties[ATTRIBUTES.HideBottomSpace]" label="Hide Bottom Space"></h-switch>
+        <h-switch
+          v-model="properties[ATTRIBUTES.HideBottomSpace]"
+          label="Hide Bottom Space"
+        ></h-switch>
         <h-switch v-model="properties.rounded" label="Rounded"></h-switch>
         <h-switch v-model="properties.square" label="Square"></h-switch>
         <h-switch v-model="properties.dense" label="Dense"></h-switch>
@@ -31,9 +34,9 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 
-import type { Schema } from '/@/declarations';
+import type { Schema } from '@/declarations';
 
-import { Attributes } from '/@/lib';
+import { Attributes } from '@/lib';
 
 import { HSwitch, HTextField, HExpansionItem } from '../library';
 
@@ -43,11 +46,11 @@ export default defineComponent({
   components: {
     HExpansionItem,
     HSwitch,
-    HTextField
+    HTextField,
   },
 
   props: {
-    schema: { type: Object as PropType<Schema>, required: true }
+    schema: { type: Object as PropType<Schema>, required: true },
   },
 
   setup(props) {
@@ -63,8 +66,8 @@ export default defineComponent({
     return {
       ATTRIBUTES,
       properties,
-      models
+      models,
     };
-  }
+  },
 });
 </script>

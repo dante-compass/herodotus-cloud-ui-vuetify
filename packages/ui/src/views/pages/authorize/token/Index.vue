@@ -9,7 +9,8 @@
     v-model:pageNumber="pagination.page"
     :totalPages="totalPages"
     :loading="loading"
-    @request="findItems">
+    @request="findItems"
+  >
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
         <h-delete-button @click="deleteItemById(props.row[rowKey])"></h-delete-button>
@@ -21,13 +22,17 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
 
-import type { OAuth2AuthorizationEntity, OAuth2AuthorizationConditions, QTableColumnProps } from '/@/lib/declarations';
+import type {
+  OAuth2AuthorizationEntity,
+  OAuth2AuthorizationConditions,
+  QTableColumnProps,
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { moment, api } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { moment, api } from '@/lib/utils';
+import { useTable } from '@/hooks';
 
-import { HDeleteButton, HTable } from '/@/components';
+import { HDeleteButton, HTable } from '@/components';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.OAUTH2_TOKEN,
@@ -58,36 +63,46 @@ export default defineComponent({
     };
 
     const columns: QTableColumnProps = [
-      { name: 'registeredClientId', field: 'registeredClientId', align: 'center', label: '客户端ID' },
+      {
+        name: 'registeredClientId',
+        field: 'registeredClientId',
+        align: 'center',
+        label: '客户端ID',
+      },
       { name: 'principalName', field: 'principalName', align: 'center', label: '用户名' },
-      { name: 'authorizationGrantType', field: 'authorizationGrantType', align: 'center', label: '认证模式' },
+      {
+        name: 'authorizationGrantType',
+        field: 'authorizationGrantType',
+        align: 'center',
+        label: '认证模式',
+      },
       {
         name: 'accessTokenIssuedAt',
         field: 'accessTokenIssuedAt',
         align: 'center',
         label: '访问Token颁发时间',
-        format: value => dateFormat(value),
+        format: (value) => dateFormat(value),
       },
       {
         name: 'accessTokenExpiresAt',
         field: 'accessTokenExpiresAt',
         align: 'center',
         label: '访问Token过期时间',
-        format: value => dateFormat(value),
+        format: (value) => dateFormat(value),
       },
       {
         name: 'refreshTokenIssuedAt',
         field: 'refreshTokenIssuedAt',
         align: 'center',
         label: '刷新Token颁发时间',
-        format: value => dateFormat(value),
+        format: (value) => dateFormat(value),
       },
       {
         name: 'refreshTokenExpiresAt',
         field: 'refreshTokenExpiresAt',
         align: 'center',
         label: '刷新Token过期时间',
-        format: value => dateFormat(value),
+        format: (value) => dateFormat(value),
       },
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];

@@ -25,10 +25,10 @@ import type { PropType } from 'vue';
 import { defineComponent, onMounted, onBeforeUnmount, watch, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
-import type { BpmnDesignerResources } from '/@/declarations';
+import type { BpmnDesignerResources } from '@/declarations';
 
-import { useModelerCreator } from '/@/hooks';
-import { useDesignerStore, useResourceStore, useSettingStore } from '/@/stores';
+import { useModelerCreator } from '@/hooks';
+import { useDesignerStore, useResourceStore, useSettingStore } from '@/stores';
 
 import { HBpmnPropertyPanel } from '../property-panel';
 import HBpmnDesignerToolbar from './HBpmnDesignerToolbar.vue';

@@ -5,7 +5,8 @@
       :receiver-name="receiverName"
       :receiver-avatar="receiverAvatar"
       :dialogue-id="dialogueId"
-      @send="onSendMessage()"></h-send-message-field>
+      @send="onSendMessage()"
+    ></h-send-message-field>
 
     <q-separator class="q-mt-md" />
 
@@ -40,12 +41,12 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
 
-import type { DialogueDetailEntity, DialogueDetailConditions } from '/@/lib/declarations';
+import type { DialogueDetailEntity, DialogueDetailConditions } from '@/lib/declarations';
 
-import { HDetailContainer, HUserAvatar } from '/@/components';
-import { HSendMessageField } from '/@/composables/messages';
-import { api, moment } from '/@/lib/utils';
-import { useTableItem, useTable, useEditFinish } from '/@/hooks';
+import { HDetailContainer, HUserAvatar } from '@/components';
+import { HSendMessageField } from '@/composables/messages';
+import { api, moment } from '@/lib/utils';
+import { useTableItem, useTable, useEditFinish } from '@/hooks';
 
 export default defineComponent({
   name: 'MessageSetting',
@@ -60,14 +61,23 @@ export default defineComponent({
     const { onFinish } = useEditFinish();
     const { editedItem } = useTableItem(api.dialogueContact());
 
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, deleteItemById, conditions } =
-      useTable<DialogueDetailEntity, DialogueDetailConditions>(
-        api.dialogueDetail(),
-        'MessageDialogueDetail',
-        false,
-        { direction: 'ASC', properties: ['createTime'] },
-        false,
-      );
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      findItems,
+      deleteItemById,
+      conditions,
+    } = useTable<DialogueDetailEntity, DialogueDetailConditions>(
+      api.dialogueDetail(),
+      'MessageDialogueDetail',
+      false,
+      { direction: 'ASC', properties: ['createTime'] },
+      false,
+    );
 
     const receiverId = ref('');
     const receiverName = ref('');

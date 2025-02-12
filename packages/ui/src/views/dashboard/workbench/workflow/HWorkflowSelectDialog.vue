@@ -42,13 +42,13 @@ import type {
   ProcessSpecificsEntity,
   ProcessSpecificsConditions,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
+import { CONSTANTS } from '@/composables/constants';
 
-import { useBaseTable } from '/@/hooks';
-import { useBpmnTableItems, useBpmnProcess } from '/@/composables/bpmn';
-import { bpmnApi, lodash } from '/@/lib/utils';
+import { useBaseTable } from '@/hooks';
+import { useBpmnTableItems, useBpmnProcess } from '@/composables/bpmn';
+import { bpmnApi, lodash } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HWorkflowSelectDialog',

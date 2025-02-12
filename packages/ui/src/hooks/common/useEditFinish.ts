@@ -1,6 +1,6 @@
 import { useRoute } from 'vue-router';
-import { useTabsStore, useRouteStore } from '/@/stores';
-import { RouteUtils } from '/@/lib/utils';
+import { useTabsStore, useRouteStore } from '@/stores';
+import { RouteUtils } from '@/lib/utils';
 
 export default function useEditFinish() {
   const route = useRoute();
@@ -16,6 +16,6 @@ export default function useEditFinish() {
   };
 
   return {
-    onFinish
+    onFinish,
   };
 }

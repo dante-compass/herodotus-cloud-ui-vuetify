@@ -6,19 +6,23 @@
     <h-separator />
     <h-button icon="mdi-magnify-plus" tooltip="放大视图" @click="onZoomPlus()"></h-button>
     <h-separator />
-    <h-button icon="mdi-magnify-scan" tooltip="重置视图并居中" @click="onZoomReset('fit-viewport')"></h-button>
+    <h-button
+      icon="mdi-magnify-scan"
+      tooltip="重置视图并居中"
+      @click="onZoomReset('fit-viewport')"
+    ></h-button>
   </h-button-group>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, nextTick, computed } from 'vue';
 
-import type { Canvas, CanvasViewbox } from '/@/declarations';
+import type { Canvas, CanvasViewbox } from '@/declarations';
 
-import { useDesignerStore } from '/@/stores';
+import { useDesignerStore } from '@/stores';
 
 import { HButton, HButtonGroup, HSeparator } from '../../widgets';
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HZoomGroup',

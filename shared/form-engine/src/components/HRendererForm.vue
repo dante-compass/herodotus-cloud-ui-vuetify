@@ -11,7 +11,7 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed, reactive, watch } from 'vue';
 
-import type { Element } from '/@/declarations';
+import type { Element } from '@/declarations';
 
 import { isEmpty } from 'lodash-es';
 

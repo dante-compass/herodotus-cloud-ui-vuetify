@@ -34,13 +34,13 @@ import type {
   SysRoleProps,
   SysDefaultRoleEntity,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { api } from '/@/lib/utils';
-import { useTableItem, useTable } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { api } from '@/lib/utils';
+import { useTableItem, useTable } from '@/hooks';
 
-import { HAuthorizeList, HAuthorizeLayout } from '/@/composables/authorize';
+import { HAuthorizeList, HAuthorizeLayout } from '@/composables/authorize';
 
 export default defineComponent({
   name: 'SysUserAuthorize',

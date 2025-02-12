@@ -6,15 +6,16 @@
       :key="i"
       :label="item.meta.title as unknown as string"
       :icon="item.meta.icon as unknown as string"
-      :disable="true" />
+      :disable="true"
+    />
   </q-breadcrumbs>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { useSettingsStore } from '/@/stores';
+import { CONSTANTS } from '@/composables/constants';
+import { useSettingsStore } from '@/stores';
 
 export default defineComponent({
   name: 'HAppBreadcrumbs',

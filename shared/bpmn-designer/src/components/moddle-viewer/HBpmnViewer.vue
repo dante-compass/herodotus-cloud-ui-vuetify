@@ -6,7 +6,7 @@
 import type { PropType } from 'vue';
 import { defineComponent, onMounted, onBeforeUnmount } from 'vue';
 
-import { useViewerCreator } from '/@/hooks';
+import { useViewerCreator } from '@/hooks';
 
 export default defineComponent({
   name: 'HBpmnViewer',

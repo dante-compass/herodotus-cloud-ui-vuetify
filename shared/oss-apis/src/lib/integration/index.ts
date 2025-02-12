@@ -18,9 +18,9 @@ import type {
   ListObjectsV2Result,
   ListBucketsResult,
   PutObjectResult,
-} from '/@/declarations';
+} from '@/declarations';
 
-import { ContentTypeEnum } from '/@/enums';
+import { ContentTypeEnum } from '@/enums';
 
 import { Service, HttpConfig } from '../base';
 
@@ -51,11 +51,15 @@ class BucketService extends Service {
   }
 
   public createBucket(request: CreateBucketArgument): Promise<AxiosHttpResult<CreateBucketResult>> {
-    return this.getConfig().getHttp().post<CreateBucketResult, CreateBucketArgument>(this.getBaseAddress(), request);
+    return this.getConfig()
+      .getHttp()
+      .post<CreateBucketResult, CreateBucketArgument>(this.getBaseAddress(), request);
   }
 
   public deleteBucket(request: DeleteBucketArgument): Promise<AxiosHttpResult<DeleteBucketResult>> {
-    return this.getConfig().getHttp().delete<DeleteBucketResult, DeleteBucketArgument>(this.getBaseAddress(), request);
+    return this.getConfig()
+      .getHttp()
+      .delete<DeleteBucketResult, DeleteBucketArgument>(this.getBaseAddress(), request);
   }
 }
 
@@ -97,12 +101,18 @@ class ObjectService extends Service {
     return this.getBaseAddress() + '/upload';
   }
 
-  public listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>> {
-    return this.getConfig().getHttp().get<ListObjectsV2Result, ListObjectsV2Argument>(this.getListV2Address(), request);
+  public listObjectsV2(
+    request: ListObjectsV2Argument,
+  ): Promise<AxiosHttpResult<ListObjectsV2Result>> {
+    return this.getConfig()
+      .getHttp()
+      .get<ListObjectsV2Result, ListObjectsV2Argument>(this.getListV2Address(), request);
   }
 
   public delete(request: DeleteObjectArgument): Promise<AxiosHttpResult<DeleteObjectResult>> {
-    return this.getConfig().getHttp().delete<DeleteObjectResult, DeleteObjectArgument>(this.getBaseAddress(), request);
+    return this.getConfig()
+      .getHttp()
+      .delete<DeleteObjectResult, DeleteObjectArgument>(this.getBaseAddress(), request);
   }
 
   public upload(
@@ -139,7 +149,9 @@ class ObjectService extends Service {
       >(this.getDisplayAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob' });
   }
 
-  public batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>> {
+  public batchDelete(
+    request: DeleteObjectsArgument,
+  ): Promise<AxiosHttpResult<DeleteObjectsResult>> {
     return this.getConfig()
       .getHttp()
       .delete<DeleteObjectsResult, DeleteObjectsArgument>(this.getMultiDeleteAddress(), request);

@@ -4,13 +4,14 @@
     dense
     round
     @click="application.leftDrawer = !application.leftDrawer"
-    :icon="application.leftDrawer ? 'mdi-menu-open' : 'mdi-menu-close'" />
+    :icon="application.leftDrawer ? 'mdi-menu-open' : 'mdi-menu-close'"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useApplicationStore } from '/@/stores';
+import { useApplicationStore } from '@/stores';
 
 export default defineComponent({
   name: 'HAppLeftDrawerControl',

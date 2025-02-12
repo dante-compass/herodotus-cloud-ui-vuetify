@@ -1,4 +1,4 @@
-import type { VModel, Schema } from '/@/declarations';
+import type { VModel, Schema } from '@/declarations';
 import type { SetupContext } from 'vue';
 import { h, resolveComponent } from 'vue';
 

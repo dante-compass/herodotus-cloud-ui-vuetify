@@ -47,9 +47,9 @@
 import type { PropType } from 'vue';
 import { defineComponent, reactive, watch, computed, toRefs } from 'vue';
 
-import type { WordClickCaptcha, Coordinate } from '/@/lib/declarations';
+import type { WordClickCaptcha, Coordinate } from '@/lib/declarations';
 
-import { useBehaviorCaptcha } from '/@/hooks';
+import { useBehaviorCaptcha } from '@/hooks';
 
 import HBehaviorCaptchaBackground from './HBehaviorCaptchaBackground.vue';
 import HBehaviorCaptchaControl from './HBehaviorCaptchaControl.vue';

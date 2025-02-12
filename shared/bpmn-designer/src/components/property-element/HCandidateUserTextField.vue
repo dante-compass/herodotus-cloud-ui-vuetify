@@ -23,12 +23,12 @@
 import type { PropType, Ref } from 'vue';
 import { defineComponent, ref, computed } from 'vue';
 
-import type { UserEntity } from '/@/declarations';
+import type { UserEntity } from '@/declarations';
 
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 
-import { HDialog } from '/@/components/widgets';
-import { HTextField } from '/@/components/base';
+import { HDialog } from '@/components/widgets';
+import { HTextField } from '@/components/base';
 import HUserSelectTable from './HUserSelectTable.vue';
 
 export default defineComponent({

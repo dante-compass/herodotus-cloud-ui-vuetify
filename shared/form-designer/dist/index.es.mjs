@@ -526,7 +526,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["class"]);
 }
-const __unplugin_components_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b], ["__scopeId", "data-v-fa20a858"]]);
+const __unplugin_components_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b], ["__scopeId", "data-v-8129af03"]]);
 const _sfc_main$a = defineComponent({
   name: "HCanvasContainer",
   components: {
@@ -577,7 +577,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
           name: "footer",
           fn: withCtx(() => [
             _cache[0] || (_cache[0] = createElementVNode("div", { class: "row text-center canvas-container" }, [
-              createElementVNode("div", { class: "col-12 self-center text-h6 text-weight-medium text-grey-5" }, "从左侧拖拽或点击来添加字段")
+              createElementVNode("div", { class: "col-12 self-center text-h6 text-weight-medium text-grey-5" }, " 从左侧拖拽或点击来添加字段 ")
             ], -1))
           ]),
           key: "0"
@@ -587,7 +587,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const __unplugin_components_7$1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a], ["__scopeId", "data-v-aa4f6053"]]);
+const __unplugin_components_7$1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a], ["__scopeId", "data-v-b8c7d9b0"]]);
 const _sfc_main$9 = defineComponent({
   name: "HConditionVariable",
   components: {
@@ -1603,7 +1603,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     }), 128))
   ]);
 }
-const __unplugin_components_4 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-cfcaeda2"]]);
+const __unplugin_components_4 = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-ae3d4bd2"]]);
 const _sfc_main = defineComponent({
   name: "HDynamicForms",
   components: {

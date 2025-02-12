@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { lodash } from '/@/lib/utils';
-import { useRouteStore, useAuthenticationStore } from '/@/stores';
+import { lodash } from '@/lib/utils';
+import { useRouteStore, useAuthenticationStore } from '@/stores';
 
 export default function useSystemMenu() {
   const store = useRouteStore();

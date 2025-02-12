@@ -32,12 +32,12 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 
-import type { HttpMethod } from '/@/lib/declarations';
+import type { HttpMethod } from '@/lib/declarations';
 
-import { useDisplayElement } from '/@/hooks';
-import { useSettingsStore } from '/@/stores';
+import { useDisplayElement } from '@/hooks';
+import { useSettingsStore } from '@/stores';
 
-import { CONSTANTS } from '/@/composables/constants';
+import { CONSTANTS } from '@/composables/constants';
 
 export default defineComponent({
   name: 'HSwaggerColumn',

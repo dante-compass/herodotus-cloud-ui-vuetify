@@ -63,17 +63,17 @@ import type {
   Sort,
   QTableColumnProps,
   QTableOnRequestParameter,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
 import { useRouter } from 'vue-router';
-import { OperationEnum } from '/@/lib/definitions';
-import { api } from '/@/lib/utils';
-import { useRouteStore } from '/@/stores';
+import { OperationEnum } from '@/lib/definitions';
+import { api } from '@/lib/utils';
+import { useRouteStore } from '@/stores';
 
-import { HDeleteButton, HTable } from '/@/components';
+import { HDeleteButton, HTable } from '@/components';
 
-import { HOrganizationTree, HDepartmentTree } from '/@/composables/hr';
-import { useDictionary } from '/@/composables/constants';
+import { HOrganizationTree, HDepartmentTree } from '@/composables/hr';
+import { useDictionary } from '@/composables/constants';
 
 export default defineComponent({
   name: 'SysOwnership',

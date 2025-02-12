@@ -52,7 +52,7 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 
-import type { SysDictionaryConditions } from '/@/lib/declarations';
+import type { SysDictionaryConditions } from '@/lib/declarations';
 
 export default defineComponent({
   name: 'HElementCondition',

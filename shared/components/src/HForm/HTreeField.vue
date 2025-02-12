@@ -21,9 +21,9 @@
 import type { PropType, Ref } from 'vue';
 import { defineComponent, ref, watch, computed } from 'vue';
 
-import type { QTree, Tree } from '/@/lib/declarations';
+import type { QTree, Tree } from '@/lib/declarations';
 
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HTreeField',

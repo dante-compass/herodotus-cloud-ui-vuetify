@@ -9,9 +9,9 @@ import type {
   SysTenantDataSourceEntity,
   AxiosHttpResult,
   AccessSourceEntity,
-} from '/@/declarations';
+} from '@/declarations';
 
-import { ContentTypeEnum } from '/@/enums';
+import { ContentTypeEnum } from '@/enums';
 
 import { HttpConfig, BaseService } from '../base';
 
@@ -188,7 +188,9 @@ class SysTenantDataSourceService extends BaseService<SysTenantDataSourceEntity> 
   }
 
   public fetchByTenantId(tenantId: string): Promise<AxiosHttpResult<SysTenantDataSourceEntity>> {
-    return this.getConfig().getHttp().get<SysTenantDataSourceEntity, string>(this.getTenantIdPath(tenantId));
+    return this.getConfig()
+      .getHttp()
+      .get<SysTenantDataSourceEntity, string>(this.getTenantIdPath(tenantId));
   }
 }
 
@@ -218,13 +220,20 @@ class SysDictionaryService extends BaseService<SysDictionaryEntity> {
   }
 
   public fetchByCategory(category: string): Promise<AxiosHttpResult<Array<SysDictionaryEntity>>> {
-    return this.getConfig().getHttp().get<Array<SysDictionaryEntity>, string>(this.getCategoryPath(category));
-  }
-
-  public fetchCategories(categories: string): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>> {
     return this.getConfig()
       .getHttp()
-      .get<Record<string, Array<SysDictionaryEntity>>, string>(this.getItemsAddress(), { categories: categories });
+      .get<Array<SysDictionaryEntity>, string>(this.getCategoryPath(category));
+  }
+
+  public fetchCategories(
+    categories: string,
+  ): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>> {
+    return this.getConfig()
+      .getHttp()
+      .get<
+        Record<string, Array<SysDictionaryEntity>>,
+        string
+      >(this.getItemsAddress(), { categories: categories });
   }
 }
 

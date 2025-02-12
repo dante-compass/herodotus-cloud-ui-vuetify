@@ -40,10 +40,10 @@
 import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 
-import { useEditFinish } from '/@/hooks';
-import type { AbstractSysEntity } from '/@/lib/declarations';
+import { useEditFinish } from '@/hooks';
+import type { AbstractSysEntity } from '@/lib/declarations';
 import HDetailContainer from './HDetailContainer.vue';
-import { HDictionarySelect } from '/@/composables/constants';
+import { HDictionarySelect } from '@/composables/constants';
 
 export default defineComponent({
   name: 'HColumnFormLayout',

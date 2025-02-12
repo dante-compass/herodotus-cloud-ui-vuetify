@@ -13,13 +13,18 @@
       :loading="loading"
       status
       reserved
-      @request="findItems">
+      @request="findItems"
+    >
       <template #top-left>
         <h-button color="primary" label="新建产品" @click="toCreate" />
       </template>
       <template #body-cell-name="props">
         <q-td key="actions" :props="props">
-          <q-chip :color="getColor(props.row)" text-color="white" :dense="settings.display.table.dense">
+          <q-chip
+            :color="getColor(props.row)"
+            text-color="white"
+            :dense="settings.display.table.dense"
+          >
             {{ props.row.name }}
           </q-chip>
         </q-td>
@@ -28,7 +33,10 @@
       <template #body-cell-actions="props">
         <q-td key="actions" :props="props">
           <h-edit-button @click="toEdit(props.row)"></h-edit-button>
-          <h-delete-button v-if="!props.row.reserved" @click="deleteItemById(props.row[rowKey])"></h-delete-button>
+          <h-delete-button
+            v-if="!props.row.reserved"
+            @click="deleteItemById(props.row[rowKey])"
+          ></h-delete-button>
         </q-td>
       </template>
     </h-table>
@@ -43,15 +51,15 @@ import type {
   SysDictionaryConditions,
   SysDictionaryProps,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { useTable } from '/@/hooks';
-import { CONSTANTS } from '/@/composables/constants';
-import { api } from '/@/lib/utils';
+import { useTable } from '@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { api } from '@/lib/utils';
 
-import { HDeleteButton, HEditButton, HTable } from '/@/components';
-import { HDictionaryCondition } from '/@/composables/security';
-import { useSettingsStore } from '/@/stores';
+import { HDeleteButton, HEditButton, HTable } from '@/components';
+import { HDictionaryCondition } from '@/composables/security';
+import { useSettingsStore } from '@/stores';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.SYS_DICTIONARY,

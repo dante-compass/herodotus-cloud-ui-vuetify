@@ -13,14 +13,19 @@
       :loading="loading"
       status
       reserved
-      @request="findItems">
+      @request="findItems"
+    >
       <template #top-left>
         <h-button color="primary" label="新建菜单" @click="toCreate" />
       </template>
 
       <template #body-cell-icon="props">
         <q-td key="icon" :props="props">
-          <h-dense-icon-button color="primary" :icon="props.row.icon" :tooltip="props.row.icon"></h-dense-icon-button>
+          <h-dense-icon-button
+            color="primary"
+            :icon="props.row.icon"
+            :tooltip="props.row.icon"
+          ></h-dense-icon-button>
         </q-td>
       </template>
 
@@ -60,9 +65,13 @@
             color="brown"
             icon="mdi-account-box-edit-outline"
             tooltip="配置角色"
-            @click="toAuthorize(props.row)"></h-dense-icon-button>
+            @click="toAuthorize(props.row)"
+          ></h-dense-icon-button>
           <h-edit-button @click="toEdit(props.row)"></h-edit-button>
-          <h-delete-button v-if="!props.row.reserved" @click="deleteItemById(props.row[rowKey])"></h-delete-button>
+          <h-delete-button
+            v-if="!props.row.reserved"
+            @click="deleteItemById(props.row[rowKey])"
+          ></h-delete-button>
         </q-td>
       </template>
     </h-table>
@@ -72,14 +81,19 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
-import type { SysElementEntity, SysElementConditions, SysElementProps, QTableColumnProps } from '/@/lib/declarations';
+import type {
+  SysElementEntity,
+  SysElementConditions,
+  SysElementProps,
+  QTableColumnProps,
+} from '@/lib/declarations';
 
-import { useTable } from '/@/hooks';
-import { CONSTANTS } from '/@/composables/constants';
-import { api } from '/@/lib/utils';
+import { useTable } from '@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { api } from '@/lib/utils';
 
-import { HDeleteButton, HEditButton, HTable, HBooleanColumn, HDenseIconButton } from '/@/components';
-import { HElementCondition } from '/@/composables/security';
+import { HDeleteButton, HEditButton, HTable, HBooleanColumn, HDenseIconButton } from '@/components';
+import { HElementCondition } from '@/composables/security';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.SYS_ELEMENT,
@@ -105,10 +119,15 @@ export default defineComponent({
       findItems,
       deleteItemById,
       conditions,
-    } = useTable<SysElementEntity, SysElementConditions>(api.sysElement(), CONSTANTS.ComponentName.SYS_ELEMENT, false, {
-      direction: 'ASC',
-      properties: ['path'],
-    });
+    } = useTable<SysElementEntity, SysElementConditions>(
+      api.sysElement(),
+      CONSTANTS.ComponentName.SYS_ELEMENT,
+      false,
+      {
+        direction: 'ASC',
+        properties: ['path'],
+      },
+    );
 
     const selected = ref([]);
     const rowKey: SysElementProps = 'elementId';

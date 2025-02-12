@@ -53,13 +53,13 @@ import type {
   SysAttributeConditions,
   SysAttributeProps,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS, useDictionary } from '/@/composables/constants';
-import { lodash, api } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
+import { CONSTANTS, useDictionary } from '@/composables/constants';
+import { lodash, api } from '@/lib/utils';
+import { useTable } from '@/hooks';
 
-import { HEditButton, HTable, HSwaggerColumn } from '/@/components';
+import { HEditButton, HTable, HSwaggerColumn } from '@/components';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.SYS_ATTRIBUTE,

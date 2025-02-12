@@ -6,7 +6,8 @@
         <component
           v-for="(element, index) in panelGroups"
           :is="parsePropertyPanelName(element.id)"
-          :key="index"></component>
+          :key="index"
+        ></component>
       </q-list>
     </q-scroll-area>
   </q-drawer>
@@ -17,8 +18,8 @@ import { defineComponent, ref } from 'vue';
 
 import { storeToRefs } from 'pinia';
 
-import { useDesignerStore } from '/@/stores';
-import { lodash } from '/@/lib/utils';
+import { useDesignerStore } from '@/stores';
+import { lodash } from '@/lib/utils';
 
 import {
   HAsynchronousContinuationsPanel,
@@ -54,7 +55,7 @@ import {
   HTaskListenerPanel,
   HTasklistPanel,
   HTimerPanel,
-  HUserAssignmentPanel
+  HUserAssignmentPanel,
 } from './panels';
 
 export default defineComponent({
@@ -94,14 +95,14 @@ export default defineComponent({
     HTaskListenerPanel,
     HTasklistPanel,
     HTimerPanel,
-    HUserAssignmentPanel
+    HUserAssignmentPanel,
   },
 
   props: {
     title: { type: String, required: true },
     icon: { type: String, required: true },
     type: { type: String, required: true },
-    label: { type: String }
+    label: { type: String },
   },
 
   setup() {
@@ -129,15 +130,15 @@ export default defineComponent({
       borderRadius: '5px',
       backgroundColor: '#027be3',
       width: '5px',
-      opacity: '0.75'
+      opacity: '0.75',
     };
 
     return {
       thumbStyle,
       isShow,
       panelGroups,
-      parsePropertyPanelName
+      parsePropertyPanelName,
     };
-  }
+  },
 });
 </script>

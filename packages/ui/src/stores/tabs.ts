@@ -2,11 +2,15 @@ import { defineStore } from 'pinia';
 import { nextTick } from 'vue';
 
 import { useRouteStore } from './route';
-import { lodash, RouteUtils } from '/@/lib/utils';
-import { staticRoutes } from '/@/routers/logic';
+import { lodash, RouteUtils } from '@/lib/utils';
+import { staticRoutes } from '@/routers/logic';
 
-import type { RouteLocationNormalizedLoaded, RouteRecordName, RouteRecordNormalized } from 'vue-router';
-import type { Tab } from '/@/lib/declarations';
+import type {
+  RouteLocationNormalizedLoaded,
+  RouteRecordName,
+  RouteRecordNormalized,
+} from 'vue-router';
+import type { Tab } from '@/lib/declarations';
 
 /**
  * TabView 目前完全基于 Quasar 的 QRouteTab 进行构建。
@@ -25,16 +29,16 @@ export const useTabsStore = defineStore('Tabs', {
   }),
 
   getters: {
-    isNotLastTab: state => {
+    isNotLastTab: (state) => {
       return (index: number) => state.tabs.length - 1 !== index;
     },
 
-    getLastTabIndex: state => {
+    getLastTabIndex: (state) => {
       return state.tabs.length - 1;
     },
 
-    getTabIndex: state => {
-      return (tab: Tab) => lodash.findIndex(state.tabs, item => item.name === tab.name);
+    getTabIndex: (state) => {
+      return (tab: Tab) => lodash.findIndex(state.tabs, (item) => item.name === tab.name);
     },
 
     getActivatedTabIndex(): number {
@@ -93,7 +97,7 @@ export const useTabsStore = defineStore('Tabs', {
     },
 
     isNotExistInStaticRoute(tab: Tab): boolean {
-      return lodash.findIndex(staticRoutes, item => item.path === tab.path) === -1;
+      return lodash.findIndex(staticRoutes, (item) => item.path === tab.path) === -1;
     },
 
     isTabNotOpened(tab: Tab): boolean {
@@ -118,7 +122,7 @@ export const useTabsStore = defineStore('Tabs', {
     },
 
     closeTab(tab: Tab): void {
-      lodash.remove(this.tabs, item => {
+      lodash.remove(this.tabs, (item) => {
         return item.name === tab.name;
       });
     },
@@ -151,7 +155,7 @@ export const useTabsStore = defineStore('Tabs', {
     },
 
     closeOtherTabs(): void {
-      lodash.remove(this.tabs, item => {
+      lodash.remove(this.tabs, (item) => {
         return item.name !== this.activatedTab.name;
       });
     },

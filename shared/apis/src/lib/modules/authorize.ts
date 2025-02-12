@@ -7,7 +7,7 @@ import type {
   OAuth2InterfaceAuditEntity,
   OAuth2ScopeAssignedBody,
   AxiosHttpResult,
-} from '/@/declarations';
+} from '@/declarations';
 
 import { HttpConfig, BaseService } from '../base';
 

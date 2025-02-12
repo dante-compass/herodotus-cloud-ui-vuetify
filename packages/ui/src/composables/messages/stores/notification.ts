@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import type { Sort, Page, NotificationEntity, NotificationConditions } from '/@/lib/declarations';
+import type { Sort, Page, NotificationEntity, NotificationConditions } from '@/lib/declarations';
 
-import { NotificationCategoryEnum } from '/@/lib/definitions';
-import { api } from '/@/lib/utils';
-import { useAuthenticationStore } from '/@/stores';
+import { NotificationCategoryEnum } from '@/lib/definitions';
+import { api } from '@/lib/utils';
+import { useAuthenticationStore } from '@/stores';
 
 export const useNotificationStore = defineStore('Notification', {
   state: () => ({
@@ -13,9 +13,9 @@ export const useNotificationStore = defineStore('Notification', {
   }),
 
   getters: {
-    hasDialogue: state => state.dialogueCount !== 0,
-    hasAnnouncement: state => state.announcementCount !== 0,
-    totalCount: state => {
+    hasDialogue: (state) => state.dialogueCount !== 0,
+    hasAnnouncement: (state) => state.announcementCount !== 0,
+    totalCount: (state) => {
       if (state.totalNumber === 0) {
         return state.dialogueCount + state.announcementCount;
       } else {
@@ -59,7 +59,7 @@ export const useNotificationStore = defineStore('Notification', {
           },
           { userId: store.userId, read: false } as NotificationConditions,
         )
-        .then(result => {
+        .then((result) => {
           const data = result.data as Page<NotificationEntity>;
           // 用户文档列表中无结果时也要更新列表数据
           if (data) {

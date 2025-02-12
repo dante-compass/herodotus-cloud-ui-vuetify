@@ -4,15 +4,16 @@
       :instance="instance"
       height="91vh"
       :class="[$q.dark.isActive ? 'bg-dark text-white q-pt-xs' : 'bg-white text-grey-8 q-pt-xs']"
-      @close="onFinish"></h-bpmn-designer>
+      @close="onFinish"
+    ></h-bpmn-designer>
   </q-card>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useEditFinish } from '/@/hooks';
-import { BpmnDesignerInstance } from '/@/lib/utils';
+import { useEditFinish } from '@/hooks';
+import { BpmnDesignerInstance } from '@/lib/utils';
 
 export default defineComponent({
   name: 'WidgetsBpmnDesigner',
@@ -24,8 +25,8 @@ export default defineComponent({
 
     return {
       instance,
-      onFinish
+      onFinish,
     };
-  }
+  },
 });
 </script>

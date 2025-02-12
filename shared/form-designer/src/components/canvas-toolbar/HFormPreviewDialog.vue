@@ -21,7 +21,7 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import { defineComponent, computed, ref } from 'vue';
-import { useFormCanvasStore } from '/@/stores';
+import { useFormCanvasStore } from '@/stores';
 
 import { HRendererForm } from '../library';
 

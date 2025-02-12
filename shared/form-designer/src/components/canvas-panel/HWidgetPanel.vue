@@ -29,9 +29,9 @@
 import { defineComponent } from 'vue';
 import Draggable from 'vuedraggable';
 
-import type { Widget } from '/@/declarations';
-import { useFormCanvasStore } from '/@/stores';
-import { WIDGET_DEFINITIONS, ElementUtils } from '/@/lib';
+import type { Widget } from '@/declarations';
+import { useFormCanvasStore } from '@/stores';
+import { WIDGET_DEFINITIONS, ElementUtils } from '@/lib';
 
 export default defineComponent({
   name: 'HWidgetPanel',

@@ -1,6 +1,6 @@
-import type { Element, ModdleElement } from '/@/declarations';
+import type { Element, ModdleElement } from '@/declarations';
 
-import { lodash, getBusinessObject } from '/@/lib/utils';
+import { lodash, getBusinessObject } from '@/lib/utils';
 
 import usePropertyElement from './usePropertyElements';
 
@@ -80,6 +80,6 @@ export default function useConditionProperties() {
     setResourceValue,
     getScriptValue,
     setScriptValue,
-    resetConditionExpression
+    resetConditionExpression,
   };
 }

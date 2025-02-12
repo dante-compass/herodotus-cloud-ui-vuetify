@@ -33,13 +33,13 @@
 import type { Ref } from 'vue';
 import { defineComponent, ref, onMounted } from 'vue';
 
-import type { Sheet, ProcessCommentsEntity, Variables } from '/@/lib/declarations';
+import type { Sheet, ProcessCommentsEntity, Variables } from '@/lib/declarations';
 
-import { useBpmnProcess } from '/@/composables/bpmn';
-import { HDetailContainer, HFormSkeleton } from '/@/components';
-import { CONSTANTS } from '/@/composables/constants';
-import { useAuthenticationStore } from '/@/stores';
-import { lodash, formApi, bpmnApi, toast } from '/@/lib/utils';
+import { useBpmnProcess } from '@/composables/bpmn';
+import { HDetailContainer, HFormSkeleton } from '@/components';
+import { CONSTANTS } from '@/composables/constants';
+import { useAuthenticationStore } from '@/stores';
+import { lodash, formApi, bpmnApi, toast } from '@/lib/utils';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.WORKFLOW_PROCESS_APPROVE,

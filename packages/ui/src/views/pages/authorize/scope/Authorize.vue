@@ -38,14 +38,14 @@ import type {
   OAuth2ScopeAssignedBody,
   OAuth2PermissionBody,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { api, toast } from '/@/lib/utils';
-import { useTableItem, useTable, useEditFinish } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { api, toast } from '@/lib/utils';
+import { useTableItem, useTable, useEditFinish } from '@/hooks';
 
-import { HTable } from '/@/components';
-import { HAuthorizeList, HAuthorizeLayout } from '/@/composables/authorize';
+import { HTable } from '@/components';
+import { HAuthorizeList, HAuthorizeLayout } from '@/composables/authorize';
 
 export default defineComponent({
   name: 'OAuth2ScopeAuthorize',

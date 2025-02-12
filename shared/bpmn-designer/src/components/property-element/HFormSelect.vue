@@ -28,10 +28,10 @@ import type { Ref } from 'vue';
 import { defineComponent, onMounted, computed, ref } from 'vue';
 import { QSelect } from 'quasar';
 
-import type { FormSelectItem } from '/@/declarations';
+import type { FormSelectItem } from '@/declarations';
 
-import { useResourceStore } from '/@/stores';
-import { lodash } from '/@/lib/utils';
+import { useResourceStore } from '@/stores';
+import { lodash } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HFormSelect',

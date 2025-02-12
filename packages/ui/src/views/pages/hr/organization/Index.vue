@@ -11,7 +11,8 @@
                   dictionary="OrganizationCategory"
                   label="组织类别"
                   dense
-                  class="q-pb-none"></h-dictionary-select>
+                  class="q-pb-none"
+                ></h-dictionary-select>
               </h-column>
             </h-row>
           </q-card-section>
@@ -31,7 +32,8 @@
       :loading="loading"
       status
       reserved
-      @request="findItems">
+      @request="findItems"
+    >
       <template #top-left>
         <h-button color="primary" label="新建单位" @click="toCreate" />
       </template>
@@ -39,7 +41,10 @@
       <template #body-cell-actions="props">
         <q-td key="actions" :props="props">
           <h-edit-button @click="toEdit(props.row)"></h-edit-button>
-          <h-delete-button v-if="!props.row.reserved" @click="deleteItemById(props.row[rowKey])"></h-delete-button>
+          <h-delete-button
+            v-if="!props.row.reserved"
+            @click="deleteItemById(props.row[rowKey])"
+          ></h-delete-button>
         </q-td>
       </template>
     </h-table>
@@ -54,14 +59,14 @@ import type {
   SysOrganizationConditions,
   SysOrganizationProps,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { api } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { api } from '@/lib/utils';
+import { useTable } from '@/hooks';
 
-import { HDeleteButton, HEditButton, HTable } from '/@/components';
-import { HDictionarySelect } from '/@/composables/constants';
+import { HDeleteButton, HEditButton, HTable } from '@/components';
+import { HDictionarySelect } from '@/composables/constants';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.SYS_ORGANIZATION,
@@ -74,11 +79,20 @@ export default defineComponent({
   },
 
   setup() {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, deleteItemById, conditions } =
-      useTable<SysOrganizationEntity, SysOrganizationConditions>(
-        api.sysOrganization(),
-        CONSTANTS.ComponentName.SYS_ORGANIZATION,
-      );
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      findItems,
+      deleteItemById,
+      conditions,
+    } = useTable<SysOrganizationEntity, SysOrganizationConditions>(
+      api.sysOrganization(),
+      CONSTANTS.ComponentName.SYS_ORGANIZATION,
+    );
 
     const selected = ref([]);
     const rowKey: SysOrganizationProps = 'organizationId';

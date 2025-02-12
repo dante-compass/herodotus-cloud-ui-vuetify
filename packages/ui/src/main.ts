@@ -16,10 +16,10 @@ import HerodotusFormEngine from '@herodotus/form-engine';
 
 import DisableDevtool from 'disable-devtool';
 
-import { setupStore, setupQuasar, setupI18n, setupUploader } from '/@/plugins';
+import { setupStore, setupQuasar, setupI18n, setupUploader } from '@/plugins';
 import { setupRouter } from './routers';
 
-import { CONSTANTS } from '/@/composables/constants';
+import { CONSTANTS } from '@/composables/constants';
 
 if (typeof (window as any).global === 'undefined') {
   (window as any).global = window;

@@ -11,7 +11,8 @@
     :loading="loading"
     status
     reserved
-    @request="findItems">
+    @request="findItems"
+  >
     <template #top-left>
       <h-button color="primary" label="新建范围" @click="toCreate" />
     </template>
@@ -22,9 +23,13 @@
           color="brown"
           icon="mdi-vector-intersection"
           tooltip="配置权限"
-          @click="toAuthorize(props.row)"></h-dense-icon-button>
+          @click="toAuthorize(props.row)"
+        ></h-dense-icon-button>
         <h-edit-button @click="toEdit(props.row)"></h-edit-button>
-        <h-delete-button v-if="!props.row.reserved" @click="deleteItemById(props.row[rowKey])"></h-delete-button>
+        <h-delete-button
+          v-if="!props.row.reserved"
+          @click="deleteItemById(props.row[rowKey])"
+        ></h-delete-button>
       </q-td>
     </template>
   </h-table>
@@ -38,13 +43,13 @@ import type {
   OAuth2ScopeEntity,
   OAuth2ScopeProps,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { api } from '/@/lib/utils';
-import { useTable } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { api } from '@/lib/utils';
+import { useTable } from '@/hooks';
 
-import { HDenseIconButton, HDeleteButton, HEditButton, HTable } from '/@/components';
+import { HDenseIconButton, HDeleteButton, HEditButton, HTable } from '@/components';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.OAUTH2_SCOPE,
@@ -57,8 +62,20 @@ export default defineComponent({
   },
 
   setup() {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<OAuth2ScopeEntity, OAuth2ApplicationConditions>(api.oauth2Scope(), CONSTANTS.ComponentName.OAUTH2_SCOPE);
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      toAuthorize,
+      findItems,
+      deleteItemById,
+    } = useTable<OAuth2ScopeEntity, OAuth2ApplicationConditions>(
+      api.oauth2Scope(),
+      CONSTANTS.ComponentName.OAUTH2_SCOPE,
+    );
 
     const selected = ref([]);
     const rowKey: OAuth2ScopeProps = 'scopeId';

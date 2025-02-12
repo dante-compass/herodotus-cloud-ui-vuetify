@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { CONSTANTS } from '/@/composables/constants';
+import { CONSTANTS } from '@/composables/constants';
 
 /**
  * Meta 参数说明：
@@ -51,7 +51,7 @@ import { CONSTANTS } from '/@/composables/constants';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/security',
-    component: () => import('/@/views/layouts/Index.vue'),
+    component: () => import('@/views/layouts/Index.vue'),
     meta: { title: '用户安全管理', sort: 2, icon: 'mdi-lock-pattern' },
     redirect: '/security/user',
     children: [
@@ -59,19 +59,23 @@ const routes: Array<RouteRecordRaw> = [
         path: '/security/user',
         name: CONSTANTS.ComponentName.SYS_USER,
         meta: { title: '用户管理', icon: 'mdi-badge-account-horizontal', isHideAllChild: true },
-        component: () => import('/@/views/pages/security/user/Index.vue'),
+        component: () => import('@/views/pages/security/user/Index.vue'),
         children: [
           {
             path: '/security/user/content',
             name: 'SysUserContent',
             meta: { title: '用户详情', icon: 'mdi-clipboard-account', isDetailContent: true },
-            component: () => import('/@/views/pages/security/user/Content.vue'),
+            component: () => import('@/views/pages/security/user/Content.vue'),
           },
           {
             path: '/security/user/authorize',
             name: 'SysUserAuthorize',
-            meta: { title: '用户角色', icon: 'mdi-account-box-edit-outline', isDetailContent: true },
-            component: () => import('/@/views/pages/security/user/Authorize.vue'),
+            meta: {
+              title: '用户角色',
+              icon: 'mdi-account-box-edit-outline',
+              isDetailContent: true,
+            },
+            component: () => import('@/views/pages/security/user/Authorize.vue'),
           },
         ],
       },
@@ -80,19 +84,19 @@ const routes: Array<RouteRecordRaw> = [
         path: '/security/role',
         name: CONSTANTS.ComponentName.SYS_ROLE,
         meta: { title: '角色管理', icon: 'mdi-shield-account', isHideAllChild: true },
-        component: () => import('/@/views/pages/security/role/Index.vue'),
+        component: () => import('@/views/pages/security/role/Index.vue'),
         children: [
           {
             path: '/security/role/content',
             name: 'SysRoleContent',
             meta: { title: '角色详情', icon: 'mdi-shield-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/role/Content.vue'),
+            component: () => import('@/views/pages/security/role/Content.vue'),
           },
           {
             path: '/security/role/authorize',
             name: 'SysRoleAuthorize',
             meta: { title: '角色权限', icon: 'mdi-shield-key', isDetailContent: true },
-            component: () => import('/@/views/pages/security/role/Authorize.vue'),
+            component: () => import('@/views/pages/security/role/Authorize.vue'),
           },
         ],
       },
@@ -100,13 +104,17 @@ const routes: Array<RouteRecordRaw> = [
         path: '/security/permission',
         name: CONSTANTS.ComponentName.SYS_PERMISSION,
         meta: { title: '权限管理', icon: 'mdi-shield-link-variant', isHideAllChild: true },
-        component: () => import('/@/views/pages/security/permission/Index.vue'),
+        component: () => import('@/views/pages/security/permission/Index.vue'),
         children: [
           {
             path: '/security/permission/content',
             name: 'SysPermissionContent',
-            meta: { title: '权限详情', icon: 'mdi-clipboard-check-multiple', isDetailContent: true },
-            component: () => import('/@/views/pages/security/permission/Content.vue'),
+            meta: {
+              title: '权限详情',
+              icon: 'mdi-clipboard-check-multiple',
+              isDetailContent: true,
+            },
+            component: () => import('@/views/pages/security/permission/Content.vue'),
           },
         ],
       },
@@ -114,19 +122,19 @@ const routes: Array<RouteRecordRaw> = [
         path: '/security/attribute',
         name: CONSTANTS.ComponentName.SYS_ATTRIBUTE,
         meta: { title: '元数据管理', icon: 'mdi-layers-triple', isHideAllChild: true },
-        component: () => import('/@/views/pages/security/attribute/Index.vue'),
+        component: () => import('@/views/pages/security/attribute/Index.vue'),
         children: [
           {
             path: '/security/attribute/content',
             name: 'SysAttributeContent',
             meta: { title: '元数据详情', icon: 'mdi-layers', isDetailContent: true },
-            component: () => import('/@/views/pages/security/attribute/Content.vue'),
+            component: () => import('@/views/pages/security/attribute/Content.vue'),
           },
           {
             path: '/security/attribute/authorize',
             name: 'SysAttributeAuthorize',
             meta: { title: '元数据配置', icon: 'mdi-layers-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/attribute/Authorize.vue'),
+            component: () => import('@/views/pages/security/attribute/Authorize.vue'),
           },
         ],
       },
@@ -134,13 +142,13 @@ const routes: Array<RouteRecordRaw> = [
         path: '/security/default-role',
         name: CONSTANTS.ComponentName.SYS_DEFAULT_ROLE,
         meta: { title: '默认角色', icon: 'mdi-lock-open-alert', isHideAllChild: true },
-        component: () => import('/@/views/pages/security/default-role/Index.vue'),
+        component: () => import('@/views/pages/security/default-role/Index.vue'),
         children: [
           {
             path: '/security/default-role/authorize',
             name: 'SysDefaultRoleAuthorize',
             meta: { title: '角色配置', icon: 'mdi-lock-open-check', isDetailContent: true },
-            component: () => import('/@/views/pages/security/default-role/Authorize.vue'),
+            component: () => import('@/views/pages/security/default-role/Authorize.vue'),
           },
         ],
       },
@@ -148,19 +156,19 @@ const routes: Array<RouteRecordRaw> = [
         path: '/security/element',
         name: CONSTANTS.ComponentName.SYS_ELEMENT,
         meta: { title: '菜单管理', icon: 'mdi-clipboard-text', isHideAllChild: true },
-        component: () => import('/@/views/pages/security/element/Index.vue'),
+        component: () => import('@/views/pages/security/element/Index.vue'),
         children: [
           {
             path: '/security/element/content',
             name: 'SysElementContent',
             meta: { title: '菜单详情', icon: 'mdi-clipboard-text-multiple', isDetailContent: true },
-            component: () => import('/@/views/pages/security/element/Content.vue'),
+            component: () => import('@/views/pages/security/element/Content.vue'),
           },
           {
             path: '/security/element/authorize',
             name: 'SysElementAuthorize',
             meta: { title: '菜单权限', icon: 'mdi-sort-variant-lock', isDetailContent: true },
-            component: () => import('/@/views/pages/security/element/Authorize.vue'),
+            component: () => import('@/views/pages/security/element/Authorize.vue'),
           },
         ],
       },
@@ -168,13 +176,13 @@ const routes: Array<RouteRecordRaw> = [
         path: '/security/tenant',
         name: CONSTANTS.ComponentName.SYS_TENANT_DATA_SOURCE,
         meta: { title: '多租户数据源', icon: 'mdi-database-plus', isHideAllChild: true },
-        component: () => import('/@/views/pages/security/tenant/Index.vue'),
+        component: () => import('@/views/pages/security/tenant/Index.vue'),
         children: [
           {
             path: '/security/tenant/content',
             name: 'SysTenantDataSourceContent',
             meta: { title: '数据源详情', icon: 'mdi-database-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/element/Content.vue'),
+            component: () => import('@/views/pages/security/element/Content.vue'),
           },
         ],
       },
@@ -182,13 +190,13 @@ const routes: Array<RouteRecordRaw> = [
         path: '/security/dictionary',
         name: CONSTANTS.ComponentName.SYS_DICTIONARY,
         meta: { title: '数据字典', icon: 'mdi-playlist-check', isHideAllChild: true },
-        component: () => import('/@/views/pages/security/dictionary/Index.vue'),
+        component: () => import('@/views/pages/security/dictionary/Index.vue'),
         children: [
           {
             path: '/security/dictionary/content',
             name: 'SysDictionaryContent',
             meta: { title: '字典详情', icon: 'mdi-playlist-edit', isDetailContent: true },
-            component: () => import('/@/views/pages/security/dictionary/Content.vue'),
+            component: () => import('@/views/pages/security/dictionary/Content.vue'),
           },
         ],
       },

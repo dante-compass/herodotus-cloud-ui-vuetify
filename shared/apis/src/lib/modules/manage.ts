@@ -1,4 +1,4 @@
-import type { AxiosHttpResult, MgtCertificateEntity } from '/@/declarations';
+import type { AxiosHttpResult, MgtCertificateEntity } from '@/declarations';
 
 import { HttpConfig, BaseService } from '../base';
 
@@ -29,7 +29,9 @@ class MgtCertificateService extends BaseService<MgtCertificateEntity> {
   }
 
   public findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateEntity>> {
-    return this.getConfig().getHttp().get<MgtCertificateEntity, string>(this.getAliasAddress(), { alias: alias });
+    return this.getConfig()
+      .getHttp()
+      .get<MgtCertificateEntity, string>(this.getAliasAddress(), { alias: alias });
   }
 
   public findAllByCertificateCategory(

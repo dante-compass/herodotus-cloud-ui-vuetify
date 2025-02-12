@@ -9,11 +9,11 @@ import type {
   Page,
   QTableOnRequestProps,
   QTableOnRequestParameter,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { toast, standardDeleteNotify } from '/@/lib/utils';
+import { toast, standardDeleteNotify } from '@/lib/utils';
 
-import { useBaseTable } from '/@/hooks';
+import { useBaseTable } from '@/hooks';
 
 export default function useBpmnTableItems<
   E extends BpmnListEntity,
@@ -55,7 +55,7 @@ export default function useBpmnTableItems<
         },
         params,
       )
-      .then(result => {
+      .then((result) => {
         const data = result as Page<E>;
         // 无结果时也要更新列表数据
         if (data) {
@@ -87,7 +87,7 @@ export default function useBpmnTableItems<
     standardDeleteNotify(() => {
       baseService
         .delete(id, params)
-        .then(response => {
+        .then((response) => {
           findItemsByPage(pagination.value.page, pagination.value.rowsPerPage);
           toast.success('删除成功');
         })
@@ -116,7 +116,7 @@ export default function useBpmnTableItems<
     },
   );
 
-  watch(conditions, newValue => {
+  watch(conditions, (newValue) => {
     if (newValue) {
       //防止不在第一页时发两遍请求
       if ((pagination.value.page as number) > 1) {

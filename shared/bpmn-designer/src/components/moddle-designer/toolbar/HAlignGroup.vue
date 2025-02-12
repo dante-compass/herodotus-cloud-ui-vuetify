@@ -2,25 +2,41 @@
   <h-button-group>
     <h-button icon="mdi-align-horizontal-left" tooltip="向左对齐" @click="onAlignLeft()"></h-button>
     <h-separator />
-    <h-button icon="mdi-align-horizontal-right" tooltip="向右对齐" @click="onAlignRight()"></h-button>
+    <h-button
+      icon="mdi-align-horizontal-right"
+      tooltip="向右对齐"
+      @click="onAlignRight()"
+    ></h-button>
     <h-separator />
     <h-button icon="mdi-align-vertical-top" tooltip="向上对齐" @click="onAlignTop()"></h-button>
     <h-separator />
-    <h-button icon="mdi-align-vertical-bottom" tooltip="向下对齐" @click="onAlignBottom()"></h-button>
+    <h-button
+      icon="mdi-align-vertical-bottom"
+      tooltip="向下对齐"
+      @click="onAlignBottom()"
+    ></h-button>
     <h-separator />
-    <h-button icon="mdi-align-horizontal-center" tooltip="水平居中" @click="onAlignHorizontalCenter()"></h-button>
+    <h-button
+      icon="mdi-align-horizontal-center"
+      tooltip="水平居中"
+      @click="onAlignHorizontalCenter()"
+    ></h-button>
     <h-separator />
-    <h-button icon="mdi-align-vertical-center" tooltip="垂直居中" @click="onAlignVerticalCenter()"></h-button>
+    <h-button
+      icon="mdi-align-vertical-center"
+      tooltip="垂直居中"
+      @click="onAlignVerticalCenter()"
+    ></h-button>
   </h-button-group>
 </template>
 
 <script lang="ts">
 import { defineComponent, nextTick } from 'vue';
 
-import type { BpmnAlign, Selection, AlignElements, Modeling } from '/@/declarations';
+import type { BpmnAlign, Selection, AlignElements, Modeling } from '@/declarations';
 
-import { useDesignerStore } from '/@/stores';
-import { toast, lodash } from '/@/lib/utils';
+import { useDesignerStore } from '@/stores';
+import { toast, lodash } from '@/lib/utils';
 
 import { HButton, HButtonGroup, HSeparator } from '../../widgets';
 
@@ -30,7 +46,7 @@ export default defineComponent({
   components: {
     HButton,
     HButtonGroup,
-    HSeparator
+    HSeparator,
   },
 
   setup() {
@@ -89,8 +105,8 @@ export default defineComponent({
       onAlignTop,
       onAlignBottom,
       onAlignHorizontalCenter,
-      onAlignVerticalCenter
+      onAlignVerticalCenter,
     };
-  }
+  },
 });
 </script>

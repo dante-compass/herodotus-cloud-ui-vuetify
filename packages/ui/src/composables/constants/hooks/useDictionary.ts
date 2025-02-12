@@ -1,8 +1,8 @@
 import type { Ref } from 'vue';
 import { ref, nextTick, onBeforeMount, computed } from 'vue';
-import type { Dictionary } from '/@/lib/declarations';
+import type { Dictionary } from '@/lib/declarations';
 
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 
 import { useDictionaryStore } from '../store';
 

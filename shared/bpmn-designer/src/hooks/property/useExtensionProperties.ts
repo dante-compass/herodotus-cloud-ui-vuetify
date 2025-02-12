@@ -1,13 +1,16 @@
-import type { Element, ModdleElement, ExtensionProperty } from '/@/declarations';
+import type { Element, ModdleElement, ExtensionProperty } from '@/declarations';
 
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 import usePropertyElement from './usePropertyElements';
 
 export default function useExtensionProperties() {
-  const { getModeling, createModdleElement, getRelevantBusinessObject, processEngine } = usePropertyElement();
+  const { getModeling, createModdleElement, getRelevantBusinessObject, processEngine } =
+    usePropertyElement();
 
   const getExtensionElements = (businessObject: ModdleElement): ModdleElement => {
-    return !lodash.isEmpty(businessObject.extensionElements) ? businessObject.extensionElements : ({} as ModdleElement);
+    return !lodash.isEmpty(businessObject.extensionElements)
+      ? businessObject.extensionElements
+      : ({} as ModdleElement);
   };
 
   const getExtensionElementsValues = (extensionElements: ModdleElement): Array<ModdleElement> => {
@@ -29,7 +32,7 @@ export default function useExtensionProperties() {
     const properties = getProperties(extensionElements);
     const values = getPropertiesValues(properties);
     if (!lodash.isEmpty(values)) {
-      return lodash.map(values, item => lodash.pick(item, ['name', 'value']));
+      return lodash.map(values, (item) => lodash.pick(item, ['name', 'value']));
     } else {
       return [];
     }
@@ -45,7 +48,7 @@ export default function useExtensionProperties() {
 
       if (lodash.isEmpty(values)) {
         getModeling().updateModdleProperties(element, extensionElements, {
-          values: lodash.without(getExtensionElementsValues(extensionElements), properties)
+          values: lodash.without(getExtensionElementsValues(extensionElements), properties),
         });
       }
     }
@@ -57,16 +60,24 @@ export default function useExtensionProperties() {
 
     // 判断 extensionElements
     if (lodash.isEmpty(extensionElements)) {
-      extensionElements = createModdleElement('bpmn:ExtensionElements', { values: [] }, businessObject);
+      extensionElements = createModdleElement(
+        'bpmn:ExtensionElements',
+        { values: [] },
+        businessObject,
+      );
       getModeling().updateModdleProperties(element, businessObject, { extensionElements });
     }
 
     // 判断 extensionElements 是否有 properties
     let properties = getProperties(extensionElements);
     if (lodash.isEmpty(properties)) {
-      properties = createModdleElement(`${processEngine}:Properties`, { values: [] }, extensionElements);
+      properties = createModdleElement(
+        `${processEngine}:Properties`,
+        { values: [] },
+        extensionElements,
+      );
       getModeling().updateModdleProperties(element, extensionElements, {
-        values: [...extensionElements.get('values'), properties]
+        values: [...extensionElements.get('values'), properties],
       });
     }
 
@@ -74,14 +85,18 @@ export default function useExtensionProperties() {
     createProperties(element, items, properties);
   };
 
-  const createProperties = (element: Element, items: Array<ExtensionProperty>, parent: ModdleElement) => {
+  const createProperties = (
+    element: Element,
+    items: Array<ExtensionProperty>,
+    parent: ModdleElement,
+  ) => {
     if (!lodash.isEmpty(items)) {
-      const newElements = lodash.map(items, item => {
+      const newElements = lodash.map(items, (item) => {
         return createModdleElement(`${processEngine}:Property`, item, parent);
       });
 
       getModeling().updateModdleProperties(element, parent, {
-        values: newElements
+        values: newElements,
       });
     }
   };
@@ -89,6 +104,6 @@ export default function useExtensionProperties() {
   return {
     getExtensionProperties,
     modifyExtensionProperty,
-    deleteExtensionProperty
+    deleteExtensionProperty,
   };
 }

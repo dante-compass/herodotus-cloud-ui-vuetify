@@ -11,12 +11,12 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
 
-import { HSettingContainer } from '/@/components';
+import { HSettingContainer } from '@/components';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { useRoute } from 'vue-router';
 
-import { useRouteStore } from '/@/stores';
-import { useEditFinish } from '/@/hooks';
+import { useRouteStore } from '@/stores';
+import { useEditFinish } from '@/hooks';
 
 export default defineComponent({
   name: 'HSettingsLayout',

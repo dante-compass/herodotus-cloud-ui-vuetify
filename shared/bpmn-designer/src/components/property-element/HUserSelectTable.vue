@@ -27,10 +27,10 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed, watch, ref } from 'vue';
 
-import type { UserEntity, UserQueryParams, UserSortBy, QTableColumnProps } from '/@/declarations';
+import type { UserEntity, UserQueryParams, UserSortBy, QTableColumnProps } from '@/declarations';
 
-import { useTableItems } from '/@/hooks';
-import { useResourceStore } from '/@/stores';
+import { useTableItems } from '@/hooks';
+import { useResourceStore } from '@/stores';
 
 import { HTextField } from '../base';
 

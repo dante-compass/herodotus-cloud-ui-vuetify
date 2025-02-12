@@ -50,7 +50,7 @@
 import type { PropType } from 'vue';
 import { defineComponent, ref, computed } from 'vue';
 
-import { ossApi, standardDeleteNotify } from '/@/lib/utils';
+import { ossApi, standardDeleteNotify } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HOssTags',

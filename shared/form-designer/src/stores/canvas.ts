@@ -1,7 +1,14 @@
 import { defineStore } from 'pinia';
-import { lodash } from '/@/lib';
+import { lodash } from '@/lib';
 
-import type { Element, Schema, ElementConfig, DynamicFormEntity, Sheet, ConditionVariable } from '/@/declarations';
+import type {
+  Element,
+  Schema,
+  ElementConfig,
+  DynamicFormEntity,
+  Sheet,
+  ConditionVariable,
+} from '@/declarations';
 
 export const useFormCanvasStore = defineStore('FormDesignerCanvas', {
   state: () => {
@@ -12,7 +19,7 @@ export const useFormCanvasStore = defineStore('FormDesignerCanvas', {
       selectedElement: {} as Element,
       id: '',
       name: '',
-      activityName: ''
+      activityName: '',
     };
   },
 
@@ -28,9 +35,9 @@ export const useFormCanvasStore = defineStore('FormDesignerCanvas', {
         return false;
       };
     },
-    isEmptyCanvas: state => lodash.isEmpty(state.canvasElements),
+    isEmptyCanvas: (state) => lodash.isEmpty(state.canvasElements),
 
-    getElements: state => state.canvasElements,
+    getElements: (state) => state.canvasElements,
 
     currentSchema(): Schema {
       return !lodash.isEmpty(this.selectedElement) && !lodash.isEmpty(this.selectedElement.schema)
@@ -59,7 +66,7 @@ export const useFormCanvasStore = defineStore('FormDesignerCanvas', {
         this.sheet['condition'] = { variable: '', options: [] };
       }
       return this.sheet.condition as ConditionVariable;
-    }
+    },
   },
 
   actions: {
@@ -89,7 +96,7 @@ export const useFormCanvasStore = defineStore('FormDesignerCanvas', {
         id: this.id,
         name: this.name,
         activityName: this.activityName,
-        modeler: { elements: this.canvasElements, sheet: this.sheet }
+        modeler: { elements: this.canvasElements, sheet: this.sheet },
       } as DynamicFormEntity;
     },
 
@@ -104,12 +111,12 @@ export const useFormCanvasStore = defineStore('FormDesignerCanvas', {
 
     removeElement(element: Element) {
       if (!lodash.isEmpty(this.canvasElements) && element.id) {
-        lodash.remove(this.canvasElements, item => {
+        lodash.remove(this.canvasElements, (item) => {
           return item.id === element.id;
         });
 
         this.selectFirstElement();
       }
-    }
-  }
+    },
+  },
 });

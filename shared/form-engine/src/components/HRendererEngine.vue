@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { SetupContext, PropType } from 'vue';
 import { defineComponent } from 'vue';
-import type { Schema } from '/@/declarations';
+import type { Schema } from '@/declarations';
 
 import { renderSchema } from '../lib';
 

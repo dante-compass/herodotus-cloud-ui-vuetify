@@ -34,9 +34,9 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 
-import type { Schema } from '/@/declarations';
+import type { Schema } from '@/declarations';
 
-import { Attributes } from '/@/lib';
+import { Attributes } from '@/lib';
 
 import { HSwitch, HTextField, HExpansionItem } from '../library';
 

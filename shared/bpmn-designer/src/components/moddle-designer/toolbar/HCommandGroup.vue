@@ -11,13 +11,13 @@
 <script lang="ts">
 import { defineComponent, nextTick } from 'vue';
 
-import type { CommandStack } from '/@/declarations';
+import type { CommandStack } from '@/declarations';
 
-import { useDesignerStore } from '/@/stores';
-import { useModelerCreator } from '/@/hooks';
+import { useDesignerStore } from '@/stores';
+import { useModelerCreator } from '@/hooks';
 
 import { HButton, HButtonGroup, HSeparator } from '../../widgets';
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HCommandGroup',
@@ -25,7 +25,7 @@ export default defineComponent({
   components: {
     HButton,
     HButtonGroup,
-    HSeparator
+    HSeparator,
   },
 
   setup() {
@@ -56,8 +56,8 @@ export default defineComponent({
     return {
       onUndo,
       onRedo,
-      onRestart
+      onRestart,
     };
-  }
+  },
 });
 </script>

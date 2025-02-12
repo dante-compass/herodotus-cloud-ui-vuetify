@@ -2,15 +2,20 @@
   <h-expansion-item icon="mdi-shuffle-variant" label="异步属性">
     <q-checkbox v-model="before" label="之前" @update:model-value="updateBefore"></q-checkbox>
     <q-checkbox v-model="after" label="之后" @update:model-value="updateAfter"></q-checkbox>
-    <q-checkbox v-if="isExclusive" v-model="exclusive" label="排除" @update:model-value="updateExclusive"></q-checkbox>
+    <q-checkbox
+      v-if="isExclusive"
+      v-model="exclusive"
+      label="排除"
+      @update:model-value="updateExclusive"
+    ></q-checkbox>
   </h-expansion-item>
 </template>
 
 <script lang="ts">
 import { defineComponent, watch, ref, computed } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
-import { useAsynchronousContinuationsProperties } from '/@/hooks';
+import { useDesignerStore } from '@/stores';
+import { useAsynchronousContinuationsProperties } from '@/hooks';
 
 import { HExpansionItem } from '../../widgets';
 
@@ -18,14 +23,20 @@ export default defineComponent({
   name: 'HAsynchronousContinuationsPanel',
 
   components: {
-    HExpansionItem
+    HExpansionItem,
   },
 
   setup() {
     const designer = useDesignerStore();
 
-    const { getBeforeValue, setBeforeValue, getAfterValue, setAfterValue, getExclusiveValue, setExclusiveValue } =
-      useAsynchronousContinuationsProperties();
+    const {
+      getBeforeValue,
+      setBeforeValue,
+      getAfterValue,
+      setAfterValue,
+      getExclusiveValue,
+      setExclusiveValue,
+    } = useAsynchronousContinuationsProperties();
 
     const before = ref<boolean>(false);
     const after = ref<boolean>(false);
@@ -61,10 +72,10 @@ export default defineComponent({
 
     watch(
       () => isExclusive.value,
-      newValue => {
+      (newValue) => {
         exclusive.value = newValue;
         updateExclusive(newValue);
-      }
+      },
     );
 
     watch(
@@ -72,7 +83,7 @@ export default defineComponent({
       () => {
         loading();
       },
-      { immediate: true }
+      { immediate: true },
     );
 
     return {
@@ -82,8 +93,8 @@ export default defineComponent({
       isExclusive,
       updateBefore,
       updateAfter,
-      updateExclusive
+      updateExclusive,
     };
-  }
+  },
 });
 </script>

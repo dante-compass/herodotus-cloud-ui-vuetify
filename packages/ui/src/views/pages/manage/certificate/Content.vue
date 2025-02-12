@@ -145,13 +145,13 @@ import { defineComponent, ref, watch } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
-import type { MgtCertificateEntity } from '/@/lib/declarations';
+import type { MgtCertificateEntity } from '@/lib/declarations';
 
-import { api } from '/@/lib/utils';
-import { useTableItem } from '/@/hooks';
+import { api } from '@/lib/utils';
+import { useTableItem } from '@/hooks';
 
-import { HToggleField } from '/@/composables/constants';
-import { HCenterFormLayout } from '/@/components';
+import { HToggleField } from '@/composables/constants';
+import { HCenterFormLayout } from '@/components';
 
 export default defineComponent({
   name: 'MgtCertificateContent',

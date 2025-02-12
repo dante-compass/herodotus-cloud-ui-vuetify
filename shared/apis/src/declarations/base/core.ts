@@ -15,7 +15,7 @@ import type {
   AbstractJpaEntity,
 } from '@herodotus/core';
 
-import { ApplicationEnum } from '/@/enums';
+import { ApplicationEnum } from '@/enums';
 
 export interface BaseAppEntity extends AbstractSysEntity {
   appSecret: string;

@@ -21,9 +21,9 @@
 <script lang="ts">
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
-import type { AbstractSysEntity, HttpMethod } from '/@/lib/declarations';
+import type { AbstractSysEntity, HttpMethod } from '@/lib/declarations';
 
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 
 import HAuthorizeHeader from './HAuthorizeHeader.vue';
 import HHttpMethodAvatar from './HHttpMethodAvatar.vue';

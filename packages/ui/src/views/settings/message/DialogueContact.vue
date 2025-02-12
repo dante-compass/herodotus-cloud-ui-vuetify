@@ -31,12 +31,12 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
 
-import { useTable } from '/@/hooks';
-import { useAuthenticationStore } from '/@/stores';
-import { api, moment } from '/@/lib/utils';
-import { DialogueContactEntity, DialogueContactConditions } from '/@/lib/declarations';
+import { useTable } from '@/hooks';
+import { useAuthenticationStore } from '@/stores';
+import { api, moment } from '@/lib/utils';
+import { DialogueContactEntity, DialogueContactConditions } from '@/lib/declarations';
 
-import { HUserAvatar } from '/@/components';
+import { HUserAvatar } from '@/components';
 
 export default defineComponent({
   name: 'MessageDialogueContact',
@@ -46,14 +46,23 @@ export default defineComponent({
   },
 
   setup(props) {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, deleteItemById, conditions } =
-      useTable<DialogueContactEntity, DialogueContactConditions>(
-        api.dialogueContact(),
-        'MessageDialogue',
-        false,
-        { direction: 'ASC', properties: ['createTime'] },
-        false,
-      );
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      findItems,
+      deleteItemById,
+      conditions,
+    } = useTable<DialogueContactEntity, DialogueContactConditions>(
+      api.dialogueContact(),
+      'MessageDialogue',
+      false,
+      { direction: 'ASC', properties: ['createTime'] },
+      false,
+    );
     const store = useAuthenticationStore();
 
     onMounted(() => {

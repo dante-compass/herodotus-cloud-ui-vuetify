@@ -10,10 +10,10 @@ import {
   get,
 } from '@github/webauthn-json/browser-ponyfill';
 
-import type { WebAuthnRegister } from '/@/lib/declarations';
+import type { WebAuthnRegister } from '@/lib/declarations';
 
-import { api } from '/@/lib/utils';
-import { useAuthenticationStore } from '/@/stores';
+import { api } from '@/lib/utils';
+import { useAuthenticationStore } from '@/stores';
 
 export default function usePasskey() {
   const authenticationStore = useAuthenticationStore();

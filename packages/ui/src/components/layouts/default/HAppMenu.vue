@@ -8,7 +8,7 @@
 import { defineComponent, reactive, onMounted, toRefs } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 
-import { useRouteStore } from '/@/stores';
+import { useRouteStore } from '@/stores';
 
 import HAppMenuItems from './HAppMenuItems.vue';
 

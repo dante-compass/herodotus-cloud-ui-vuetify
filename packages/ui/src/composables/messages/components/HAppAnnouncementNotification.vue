@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { NotificationCategoryEnum } from '/@/lib/definitions';
+import { NotificationCategoryEnum } from '@/lib/definitions';
 import { defineComponent } from 'vue';
 
 import { useNotifications } from '../hooks';
@@ -24,7 +24,9 @@ export default defineComponent({
   name: 'HAppAnnouncementNotification',
 
   setup() {
-    const { items, hasAnnouncement, convertDate } = useNotifications(NotificationCategoryEnum.ANNOUNCEMENT);
+    const { items, hasAnnouncement, convertDate } = useNotifications(
+      NotificationCategoryEnum.ANNOUNCEMENT,
+    );
 
     return {
       items,

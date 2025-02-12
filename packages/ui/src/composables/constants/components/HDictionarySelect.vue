@@ -20,9 +20,9 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 
-import type { Dictionary } from '/@/lib/declarations';
+import type { Dictionary } from '@/lib/declarations';
 
-import { lodash } from '/@/lib/utils';
+import { lodash } from '@/lib/utils';
 import { useDictionary } from '../hooks';
 
 export default defineComponent({

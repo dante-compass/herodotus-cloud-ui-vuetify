@@ -11,7 +11,8 @@
     :loading="loading"
     status
     reserved
-    @request="findItems">
+    @request="findItems"
+  >
     <template #top-left>
       <h-button color="primary" label="新建证书" @click="toCreate" />
     </template>
@@ -24,7 +25,8 @@
           color="primary"
           flat
           no-caps
-          @click="onDownload(props.row.bucketName, props.row.keystoreName)"></h-button>
+          @click="onDownload(props.row.bucketName, props.row.keystoreName)"
+        ></h-button>
       </q-td>
     </template>
 
@@ -37,7 +39,8 @@
           flat
           no-caps
           tooltip="点击下载"
-          @click="onDownload(props.row.bucketName, props.row.pemName)"></h-button>
+          @click="onDownload(props.row.bucketName, props.row.pemName)"
+        ></h-button>
       </q-td>
     </template>
 
@@ -46,13 +49,17 @@
         <h-dense-icon-button
           color="info"
           icon="mdi-information-variant-box"
-          :tooltip="props.row.distinguishedName"></h-dense-icon-button>
+          :tooltip="props.row.distinguishedName"
+        ></h-dense-icon-button>
       </q-td>
     </template>
 
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
-        <h-delete-button v-if="!props.row.reserved" @click="deleteItemById(props.row[rowKey])"></h-delete-button>
+        <h-delete-button
+          v-if="!props.row.reserved"
+          @click="deleteItemById(props.row[rowKey])"
+        ></h-delete-button>
       </q-td>
     </template>
   </h-table>
@@ -66,15 +73,15 @@ import type {
   MgtCertificateConditions,
   MgtCertificateProps,
   QTableColumnProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { api } from '/@/lib/utils';
+import { CONSTANTS } from '@/composables/constants';
+import { api } from '@/lib/utils';
 
-import { useTable } from '/@/hooks';
+import { useTable } from '@/hooks';
 
-import { HDeleteButton, HTable } from '/@/components';
-import { useOssDownload } from '/@/composables/oss';
+import { HDeleteButton, HTable } from '@/components';
+import { useOssDownload } from '@/composables/oss';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.MGT_CERTIFICATE,
@@ -82,11 +89,20 @@ export default defineComponent({
   components: { HDeleteButton, HTable },
 
   setup() {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, toAuthorize, findItems, deleteItemById } =
-      useTable<MgtCertificateEntity, MgtCertificateConditions>(
-        api.mgtCertificate(),
-        CONSTANTS.ComponentName.MGT_CERTIFICATE,
-      );
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      toAuthorize,
+      findItems,
+      deleteItemById,
+    } = useTable<MgtCertificateEntity, MgtCertificateConditions>(
+      api.mgtCertificate(),
+      CONSTANTS.ComponentName.MGT_CERTIFICATE,
+    );
     const { download } = useOssDownload();
 
     const selected = ref([]);
@@ -94,7 +110,12 @@ export default defineComponent({
 
     const columns: QTableColumnProps = [
       { name: 'alias', field: 'alias', align: 'center', label: '证书名称' },
-      { name: 'certificateCategory', field: 'certificateCategory', align: 'center', label: '证书类别' },
+      {
+        name: 'certificateCategory',
+        field: 'certificateCategory',
+        align: 'center',
+        label: '证书类别',
+      },
       { name: 'commonName', field: 'commonName', align: 'center', label: '公共名称' },
       { name: 'distinguishedName', field: 'distinguishedName', align: 'center', label: '区分名' },
       { name: 'startTime', field: 'startTime', align: 'center', label: '开始时间' },

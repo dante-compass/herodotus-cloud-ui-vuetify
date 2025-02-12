@@ -6,8 +6,8 @@
 import { defineComponent, onMounted } from 'vue';
 
 import { useRoute, useRouter } from 'vue-router';
-import { useAuthenticationStore } from '/@/stores';
-import { lodash } from '/@/lib/utils';
+import { useAuthenticationStore } from '@/stores';
+import { lodash } from '@/lib/utils';
 
 export default defineComponent({
   name: 'AuthorizationCodeSignIn',
@@ -34,6 +34,6 @@ export default defineComponent({
       }
       router.push('/403');
     });
-  }
+  },
 });
 </script>

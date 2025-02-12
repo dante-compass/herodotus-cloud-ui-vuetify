@@ -10,9 +10,9 @@ import type {
   QTableOnRequestParameter,
   QTablePaginationProps,
   QTableOnRequestProps,
-} from '/@/declarations';
+} from '@/declarations';
 
-import { BpmnQueryByGetService } from '/@/lib/logic';
+import { BpmnQueryByGetService } from '@/lib/logic';
 
 export default function useBpmnTableItems<
   E extends BpmnListEntity,

@@ -5,29 +5,34 @@
       selection="single"
       label="代理人"
       title="选择代理人"
-      @update:model-value="updateAssignee"></h-candidate-user-text-field>
+      @update:model-value="updateAssignee"
+    ></h-candidate-user-text-field>
     <h-candidate-group-text-field
       v-model="candidateGroups"
       label="候选组"
       title="选择候选组"
-      @update:model-value="updateCandidateGroups"></h-candidate-group-text-field>
+      @update:model-value="updateCandidateGroups"
+    ></h-candidate-group-text-field>
     <h-candidate-user-text-field
       v-model="candidateUsers"
       label="候选用户"
       title="选择候选用户"
-      @update:model-value="updateCandidateUsers"></h-candidate-user-text-field>
+      @update:model-value="updateCandidateUsers"
+    ></h-candidate-user-text-field>
     <h-text-field
       v-model="dueDate"
       dense
       label="到期时间"
       hint="表达式(eg.'${someDate}')或时间(eg.2015-06-26T09:00:30)"
-      @update:model-value="updateDueDate" />
+      @update:model-value="updateDueDate"
+    />
     <h-text-field
       v-model="followUpDate"
       dense
       label="后续时间"
       hint="表达式(eg.'${someDate}')或时间(eg.2015-06-26T09:00:30)"
-      @update:model-value="updateFollowUpDate" />
+      @update:model-value="updateFollowUpDate"
+    />
     <h-text-field v-model="priority" dense label="优先级" @update:model-value="updatePriority" />
   </h-expansion-item>
 </template>
@@ -35,12 +40,12 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
 
-import { useUserAssignmentProperties } from '/@/hooks';
-import { useDesignerStore } from '/@/stores';
+import { useUserAssignmentProperties } from '@/hooks';
+import { useDesignerStore } from '@/stores';
 
-import { HExpansionItem } from '/@/components/widgets';
-import { HTextField } from '/@/components/base';
-import { HCandidateUserTextField, HCandidateGroupTextField } from '/@/components/property-element';
+import { HExpansionItem } from '@/components/widgets';
+import { HTextField } from '@/components/base';
+import { HCandidateUserTextField, HCandidateGroupTextField } from '@/components/property-element';
 
 export default defineComponent({
   name: 'HUserAssignmentPanel',
@@ -49,7 +54,7 @@ export default defineComponent({
     HCandidateGroupTextField,
     HCandidateUserTextField,
     HExpansionItem,
-    HTextField
+    HTextField,
   },
 
   setup() {
@@ -67,7 +72,7 @@ export default defineComponent({
       getFollowUpDateValue,
       setFollowUpDateValue,
       getPriorityValue,
-      setPriorityValue
+      setPriorityValue,
     } = useUserAssignmentProperties();
 
     const assignee = ref<string>('');
@@ -115,7 +120,7 @@ export default defineComponent({
       () => {
         loading();
       },
-      { immediate: true }
+      { immediate: true },
     );
 
     return {
@@ -130,8 +135,8 @@ export default defineComponent({
       updateCandidateUsers,
       updateDueDate,
       updateFollowUpDate,
-      updatePriority
+      updatePriority,
     };
-  }
+  },
 });
 </script>

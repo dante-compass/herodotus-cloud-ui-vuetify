@@ -8,10 +8,10 @@
 import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 
-import type { HttpMethod } from '/@/lib/declarations';
+import type { HttpMethod } from '@/lib/declarations';
 
-import { useDisplayElement } from '/@/hooks';
-import { CONSTANTS } from '/@/composables/constants';
+import { useDisplayElement } from '@/hooks';
+import { CONSTANTS } from '@/composables/constants';
 
 export default defineComponent({
   name: 'HHttpMethodAvatar',

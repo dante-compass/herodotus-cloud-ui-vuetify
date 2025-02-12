@@ -1,14 +1,20 @@
 <template>
-  <h-dynamic-forms container title="Dynamic Forms" :instance="instance" :item="editedItem" @close="onFinish" />
+  <h-dynamic-forms
+    container
+    title="Dynamic Forms"
+    :instance="instance"
+    :item="editedItem"
+    @close="onFinish"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { FormDesignerInstance } from '/@/lib/utils';
+import { CONSTANTS } from '@/composables/constants';
+import { FormDesignerInstance } from '@/lib/utils';
 
-import { useEditFinish, useBaseTableItem } from '/@/hooks';
+import { useEditFinish, useBaseTableItem } from '@/hooks';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.WIDGETS_DYNAMIC_FORM,

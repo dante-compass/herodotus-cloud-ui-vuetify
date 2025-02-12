@@ -1,11 +1,18 @@
 <template>
-  <h-dialog v-model="openDialog" title="注册通行密钥" confirm-label="注册" @confirm="onSave" external-close>
+  <h-dialog
+    v-model="openDialog"
+    title="注册通行密钥"
+    confirm-label="注册"
+    @confirm="onSave"
+    external-close
+  >
     <h-text-field
       v-model.lazy="v.label.$model"
       label="标签 *"
       placeholder="请输入标签"
       :error="v.label.$error"
-      :error-message="v.label.$errors[0] ? v.label.$errors[0].$message : ''"></h-text-field>
+      :error-message="v.label.$errors[0] ? v.label.$errors[0].$message : ''"
+    ></h-text-field>
   </h-dialog>
 </template>
 
@@ -15,7 +22,7 @@ import { defineComponent, computed, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
-import { usePasskey } from '/@/hooks';
+import { usePasskey } from '@/hooks';
 
 export default defineComponent({
   name: 'HPasskeyRegisterDialog',
@@ -29,7 +36,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const openDialog = computed({
       get: () => props.modelValue,
-      set: newValue => {
+      set: (newValue) => {
         emit('update:modelValue', newValue);
       },
     });
@@ -47,7 +54,7 @@ export default defineComponent({
     const v = useVuelidate(rules, { label }, { $lazy: true });
 
     const onSave = () => {
-      v.value.$validate().then(result => {
+      v.value.$validate().then((result) => {
         if (result) {
           registration(label.value).then(() => {
             openDialog.value = false;

@@ -1,6 +1,6 @@
-import type { Element } from '/@/declarations';
+import type { Element } from '@/declarations';
 
-import { getBusinessObject } from '/@/lib/utils';
+import { getBusinessObject } from '@/lib/utils';
 
 import usePropertyElement from './usePropertyElements';
 
@@ -18,6 +18,6 @@ export default function useStartInitiatorProperties() {
 
   return {
     getInitiatorValue,
-    setInitiatorValue
+    setInitiatorValue,
   };
 }

@@ -13,7 +13,8 @@
       :loading="loading"
       status
       reserved
-      @request="findItems">
+      @request="findItems"
+    >
       <template #top-left>
         <q-btn color="primary" label="导出Excel" @click="onExportExcel" />
       </template>
@@ -41,14 +42,14 @@ import type {
   OAuth2UserLoggingProps,
   QTableColumnProps,
   EntityTitle,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { CONSTANTS } from '/@/composables/constants';
-import { moment, api } from '/@/lib/utils';
-import { useTable, useXlsx } from '/@/hooks';
+import { CONSTANTS } from '@/composables/constants';
+import { moment, api } from '@/lib/utils';
+import { useTable, useXlsx } from '@/hooks';
 
-import { HTable, HBooleanColumn } from '/@/components';
-import { HComplianceCondition } from '/@/composables/authorize';
+import { HTable, HBooleanColumn } from '@/components';
+import { HComplianceCondition } from '@/composables/authorize';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.OAUTH2_COMPLIANCE,
@@ -137,7 +138,7 @@ export default defineComponent({
         field: 'createTime',
         align: 'center',
         label: '时间',
-        format: value => dateFormat(value),
+        format: (value) => dateFormat(value),
       },
     ];
 

@@ -8,8 +8,15 @@
         :name="tab.name as string"
         :label="tab.meta.title as string"
         :icon="tab.meta.icon as string"
-        :to="tab.path">
-        <q-icon v-if="isNotLastTab(i)" size="xs" name="mdi-close-circle" class="q-ml-md" @click="onCloseTab(tab)" />
+        :to="tab.path"
+      >
+        <q-icon
+          v-if="isNotLastTab(i)"
+          size="xs"
+          name="mdi-close-circle"
+          class="q-ml-md"
+          @click="onCloseTab(tab)"
+        />
         <q-icon v-else size="xs" name="mdi-lock-outline" class="q-ml-md" />
       </q-route-tab>
     </q-tabs>
@@ -20,26 +27,31 @@
           :disable="disableRefreshCurrentTab"
           label="刷新当前"
           icon="mdi-refresh"
-          @click="onRefresh"></h-list-item>
+          @click="onRefresh"
+        ></h-list-item>
         <h-list-item
           label="关闭当前"
           :disable="disableCloseCurrentTab"
           icon="mdi-close"
-          @click="onCloseCurrentTab()"></h-list-item>
+          @click="onCloseCurrentTab()"
+        ></h-list-item>
         <h-list-item
           label="关闭其它"
           icon="mdi-format-horizontal-align-center"
-          @click="onCloseOtherTabs()"></h-list-item>
+          @click="onCloseOtherTabs()"
+        ></h-list-item>
         <h-list-item
           label="关闭左侧"
           :disable="disableCloseLeftTabs"
           icon="mdi-format-horizontal-align-right"
-          @click="onCloseLeftTabs()"></h-list-item>
+          @click="onCloseLeftTabs()"
+        ></h-list-item>
         <h-list-item
           label="关闭右侧"
           :disable="disableCloseRightTabs"
           icon="mdi-format-horizontal-align-left"
-          @click="onCloseRightTabs()"></h-list-item>
+          @click="onCloseRightTabs()"
+        ></h-list-item>
       </q-list>
     </q-btn-dropdown>
   </q-toolbar>
@@ -50,10 +62,10 @@ import { defineComponent, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
-import type { Tab } from '/@/lib/declarations';
+import type { Tab } from '@/lib/declarations';
 
-import { useTabsStore } from '/@/stores';
-import { refreshTabInjectionKey } from '/@/lib/definitions';
+import { useTabsStore } from '@/stores';
+import { refreshTabInjectionKey } from '@/lib/definitions';
 
 export default defineComponent({
   name: 'HAppTabsView',
@@ -70,7 +82,8 @@ export default defineComponent({
       disableCloseLeftTabs,
       disableRefreshCurrentTab,
     } = storeToRefs(store);
-    const { closeTab, smartTab, closeCurrentTab, closeOtherTabs, closeLeftTabs, closeRightTabs } = store;
+    const { closeTab, smartTab, closeCurrentTab, closeOtherTabs, closeLeftTabs, closeRightTabs } =
+      store;
 
     const refreshTab = inject<Function>(refreshTabInjectionKey);
 

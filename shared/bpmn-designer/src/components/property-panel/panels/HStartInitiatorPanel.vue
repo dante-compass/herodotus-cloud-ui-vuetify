@@ -7,18 +7,18 @@
 <script lang="ts">
 import { defineComponent, watch, ref } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
-import { useStartInitiatorProperties } from '/@/hooks';
+import { useDesignerStore } from '@/stores';
+import { useStartInitiatorProperties } from '@/hooks';
 
-import { HExpansionItem } from '/@/components/widgets';
-import { HTextField } from '/@/components/base';
+import { HExpansionItem } from '@/components/widgets';
+import { HTextField } from '@/components/base';
 
 export default defineComponent({
   name: 'HStartInitiatorPanel',
 
   components: {
     HExpansionItem,
-    HTextField
+    HTextField,
   },
 
   setup() {
@@ -41,13 +41,13 @@ export default defineComponent({
       () => {
         loading();
       },
-      { immediate: true, deep: true }
+      { immediate: true, deep: true },
     );
 
     return {
       initiator,
-      updateInitiator
+      updateInitiator,
     };
-  }
+  },
 });
 </script>

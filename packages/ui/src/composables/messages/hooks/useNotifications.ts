@@ -1,11 +1,11 @@
 import type { Ref } from 'vue';
 import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import type { NotificationEntity, NotificationConditions, Sort, Page } from '/@/lib/declarations';
+import type { NotificationEntity, NotificationConditions, Sort, Page } from '@/lib/declarations';
 
-import { NotificationCategoryEnum } from '/@/lib/definitions';
-import { api, moment } from '/@/lib/utils';
-import { useAuthenticationStore } from '/@/stores';
+import { NotificationCategoryEnum } from '@/lib/definitions';
+import { api, moment } from '@/lib/utils';
+import { useAuthenticationStore } from '@/stores';
 import { useNotificationStore } from '../stores';
 
 export default function useNotifications(category: NotificationCategoryEnum) {

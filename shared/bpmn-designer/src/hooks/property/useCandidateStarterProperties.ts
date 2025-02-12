@@ -1,6 +1,6 @@
-import type { Element } from '/@/declarations';
+import type { Element } from '@/declarations';
 
-import { getBusinessObject } from '/@/lib/utils';
+import { getBusinessObject } from '@/lib/utils';
 
 import usePropertyElement from './usePropertyElements';
 
@@ -29,6 +29,6 @@ export default function useCandidateStarterProperties() {
     getCandidateStarterGroupsValue,
     setCandidateStarterGroupsValue,
     getCandidateStarterUsersValue,
-    setCandidateStarterUsersValue
+    setCandidateStarterUsersValue,
   };
 }

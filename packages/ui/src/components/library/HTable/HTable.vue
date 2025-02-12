@@ -49,10 +49,10 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 
-import type { Entity } from '/@/lib/declarations';
+import type { Entity } from '@/lib/declarations';
 
-import { useSettingsStore } from '/@/stores';
-import { useDictionary } from '/@/composables/constants';
+import { useSettingsStore } from '@/stores';
+import { useDictionary } from '@/composables/constants';
 
 import HTableAction from './HTableAction.vue';
 import HStatusColumn from './HStatusColumn.vue';

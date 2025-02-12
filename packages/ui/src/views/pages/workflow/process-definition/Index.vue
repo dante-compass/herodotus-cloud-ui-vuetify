@@ -9,7 +9,8 @@
     v-model:pageNumber="pagination.page"
     :totalPages="totalPages"
     :loading="loading"
-    @request="findItems">
+    @request="findItems"
+  >
     <template #top-left>
       <q-btn color="primary" label="新建单位" @click="toCreate()" />
     </template>
@@ -20,21 +21,25 @@
           color="brown"
           icon="mdi-image-area"
           tooltip="查看流程图"
-          @click="viewDiagram = true"></h-dense-icon-button>
+          @click="viewDiagram = true"
+        ></h-dense-icon-button>
         <h-dense-icon-button
           color="purple"
           icon="mdi-xml"
           tooltip="查看XML"
-          @click="viewXml = true"></h-dense-icon-button>
+          @click="viewXml = true"
+        ></h-dense-icon-button>
         <h-delete-button @click="onDeleteItemById(props.row[rowKey])"></h-delete-button>
         <h-bpmn-view-diagram-dialog
           v-model="viewDiagram"
           :definition-key="props.row['key']"
-          :definition-tenant-id="props.row['tenantId']"></h-bpmn-view-diagram-dialog>
+          :definition-tenant-id="props.row['tenantId']"
+        ></h-bpmn-view-diagram-dialog>
         <h-bpmn-view-xml-dialog
           v-model="viewXml"
           :definition-key="props.row['key']"
-          :definition-tenant-id="props.row['tenantId']"></h-bpmn-view-xml-dialog>
+          :definition-tenant-id="props.row['tenantId']"
+        ></h-bpmn-view-xml-dialog>
       </q-td>
     </template>
   </h-table>
@@ -49,12 +54,12 @@ import type {
   ProcessDefinitionSortBy,
   ProcessDefinitionDeleteQueryParams,
   QTableProps,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { bpmnApi } from '/@/lib/utils';
+import { bpmnApi } from '@/lib/utils';
 
-import { HDenseIconButton } from '/@/components';
-import { useBpmnTableItems, HBpmnViewDiagramDialog, HBpmnViewXmlDialog } from '/@/composables/bpmn';
+import { HDenseIconButton } from '@/components';
+import { useBpmnTableItems, HBpmnViewDiagramDialog, HBpmnViewXmlDialog } from '@/composables/bpmn';
 
 export default defineComponent({
   name: 'WorkflowProcessDefinition',
@@ -66,16 +71,25 @@ export default defineComponent({
   },
 
   setup() {
-    const { tableRows, totalPages, pagination, loading, toEdit, toCreate, findItems, onDeleteItemById, conditions } =
-      useBpmnTableItems<
-        ProcessDefinitionEntity,
-        ProcessDefinitionQueryParams,
-        ProcessDefinitionSortBy,
-        ProcessDefinitionDeleteQueryParams
-      >(bpmnApi.processDefinition(), {
-        sortBy: 'id',
-        sortOrder: 'desc',
-      });
+    const {
+      tableRows,
+      totalPages,
+      pagination,
+      loading,
+      toEdit,
+      toCreate,
+      findItems,
+      onDeleteItemById,
+      conditions,
+    } = useBpmnTableItems<
+      ProcessDefinitionEntity,
+      ProcessDefinitionQueryParams,
+      ProcessDefinitionSortBy,
+      ProcessDefinitionDeleteQueryParams
+    >(bpmnApi.processDefinition(), {
+      sortBy: 'id',
+      sortOrder: 'desc',
+    });
 
     const selected = ref([]);
     const rowKey = 'id' as keyof ProcessDefinitionEntity;
@@ -94,16 +108,21 @@ export default defineComponent({
         field: 'suspended',
         align: 'center',
         label: '是否挂起',
-        format: value => (value ? '是' : '否'),
+        format: (value) => (value ? '是' : '否'),
       },
       {
         name: 'startableInTasklist',
         field: 'startableInTasklist',
         align: 'center',
         label: '是否可启动',
-        format: value => (value ? '是' : '否'),
+        format: (value) => (value ? '是' : '否'),
       },
-      { name: 'historyTimeToLive', field: 'historyTimeToLive', align: 'center', label: '历史数据保留时长' },
+      {
+        name: 'historyTimeToLive',
+        field: 'historyTimeToLive',
+        align: 'center',
+        label: '历史数据保留时长',
+      },
       { name: 'actions', field: 'actions', align: 'center', label: '操作' },
     ];
 

@@ -1,7 +1,14 @@
 <template>
   <h-expansion-item icon="mdi-information-outline" label="常规信息" default-opened>
     <q-input v-model="elementName" dense outlined label="名称" @update:model-value="updateName" />
-    <q-input v-model="elementId" dense outlined label="编号" @update:model-value="updateId" class="q-mt-md" />
+    <q-input
+      v-model="elementId"
+      dense
+      outlined
+      label="编号"
+      @update:model-value="updateId"
+      class="q-mt-md"
+    />
     <template v-if="isProcessElement">
       <q-input
         v-model="versionTag"
@@ -9,14 +16,16 @@
         outlined
         label="版本"
         @update:model-value="updateVersionTag"
-        class="q-mt-md" />
+        class="q-mt-md"
+      />
       <q-toggle
         v-model="isExecutable"
         dense
         outlined
         label="可执行文件"
         @update:model-value="updateIsExecutable"
-        class="q-mt-md" />
+        class="q-mt-md"
+      />
     </template>
   </h-expansion-item>
 </template>
@@ -24,9 +33,9 @@
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
-import { useGeneralProperties } from '/@/hooks';
-import { lodash, toast } from '/@/lib/utils';
+import { useDesignerStore } from '@/stores';
+import { useGeneralProperties } from '@/hooks';
+import { lodash, toast } from '@/lib/utils';
 
 import { HExpansionItem } from '../../widgets';
 

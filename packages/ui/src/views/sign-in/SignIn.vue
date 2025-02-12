@@ -7,9 +7,9 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
 
-import { useApplicationStore, useCryptoStore, useAuthenticationStore } from '/@/stores';
+import { useApplicationStore, useCryptoStore, useAuthenticationStore } from '@/stores';
 
-import { HSignInLayout } from '/@/composables/sign-in';
+import { HSignInLayout } from '@/composables/sign-in';
 import { AccountPanel, MobilePanel, ScanPanel } from './panel';
 
 export default defineComponent({

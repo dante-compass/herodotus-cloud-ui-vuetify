@@ -11,7 +11,8 @@
     :loading="loading"
     status
     reserved
-    @request="findItems">
+    @request="findItems"
+  >
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
         <h-edit-button></h-edit-button>
@@ -30,11 +31,11 @@ import type {
   QTableOnRequestParameter,
   ExtendedTaskEntity,
   ExtendedTaskConditions,
-} from '/@/lib/declarations';
+} from '@/lib/declarations';
 
-import { api } from '/@/lib/utils';
-import { useBaseTable } from '/@/hooks';
-import { useAuthenticationStore } from '/@/stores';
+import { api } from '@/lib/utils';
+import { useBaseTable } from '@/hooks';
+import { useAuthenticationStore } from '@/stores';
 
 export default defineComponent({
   name: 'HCompletedTaskTable',
@@ -55,7 +56,11 @@ export default defineComponent({
       setPageData,
       showLoading,
       hideLoading,
-    } = useBaseTable<ExtendedTaskEntity, ExtendedTaskConditions>('HToDoTaskTable', 'updateTime', true);
+    } = useBaseTable<ExtendedTaskEntity, ExtendedTaskConditions>(
+      'HToDoTaskTable',
+      'updateTime',
+      true,
+    );
 
     const columns: QTableColumnProps = [
       { name: 'businessKey', field: 'businessKey', align: 'center', label: '业务ID' },
@@ -75,7 +80,7 @@ export default defineComponent({
           },
           { employeeId: authentication.employeeId },
         )
-        .then(result => {
+        .then((result) => {
           const data = result.data as Page<ExtendedTaskEntity>;
           setPageData(data);
           hideLoading();
@@ -92,7 +97,7 @@ export default defineComponent({
 
     watch(
       () => pagination.value.page,
-      newValue => {
+      (newValue) => {
         fetchCompletedTasksByPage(newValue);
       },
     );

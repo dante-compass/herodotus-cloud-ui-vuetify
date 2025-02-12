@@ -3,33 +3,41 @@
     <h-select v-model="formsType" dense :options="formsOptions" label="类型" hide-hint></h-select>
     <template v-if="isCamundaForms">
       <h-text-field v-model="formRef" dense label="表单引用" @update:model-value="updateFormRef" />
-      <h-select v-model="bindingType" dense :options="bindingOptions" label="绑定" hide-hint></h-select>
+      <h-select
+        v-model="bindingType"
+        dense
+        :options="bindingOptions"
+        label="绑定"
+        hide-hint
+      ></h-select>
       <h-text-field
         v-if="isFormRefVersion"
         v-model="formRefVersion"
         dense
         label="版本"
-        @update:model-value="updateVersion" />
+        @update:model-value="updateVersion"
+      />
     </template>
     <h-form-select
       v-if="isEmbeddedOrExternalTaskForms"
       v-model="formKey"
       dense
       label="Form Key"
-      @update:model-value="updateFormKey" />
+      @update:model-value="updateFormKey"
+    />
   </h-expansion-item>
 </template>
 
 <script lang="ts">
 import { defineComponent, watch, ref, computed } from 'vue';
 
-import { useDesignerStore } from '/@/stores';
-import { useFormsProperties } from '/@/hooks';
-import { FormTypeEnum, BindingTypeEnum } from '/@/enums';
+import { useDesignerStore } from '@/stores';
+import { useFormsProperties } from '@/hooks';
+import { FormTypeEnum, BindingTypeEnum } from '@/enums';
 
-import { HExpansionItem } from '/@/components/widgets';
-import { HTextField, HSelect } from '/@/components/base';
-import { HFormSelect } from '/@/components/property-element';
+import { HExpansionItem } from '@/components/widgets';
+import { HTextField, HSelect } from '@/components/base';
+import { HFormSelect } from '@/components/property-element';
 
 export default defineComponent({
   name: 'HFormPanel',
@@ -38,7 +46,7 @@ export default defineComponent({
     HExpansionItem,
     HSelect,
     HTextField,
-    HFormSelect
+    HFormSelect,
   },
 
   setup() {
@@ -56,7 +64,7 @@ export default defineComponent({
       setGeneratedTaskFormsValues,
       resetGeneratedTaskFormsValues,
       hasExtensionElements,
-      resetProperties
+      resetProperties,
     } = useFormsProperties();
 
     const formKey = ref<string>('');
@@ -69,13 +77,13 @@ export default defineComponent({
       { text: '无', value: FormTypeEnum.NONE },
       { text: 'Camunda 表单', value: FormTypeEnum.CAMUNDA_FORMS },
       { text: '嵌入或外部任务表单', value: FormTypeEnum.EMBEDDED_OR_EXTERNAL_TASK_FORMS },
-      { text: '生成的任务表单', value: FormTypeEnum.GENERATED_TASK_FORMS }
+      { text: '生成的任务表单', value: FormTypeEnum.GENERATED_TASK_FORMS },
     ]);
     const bindingType = ref<string>(BindingTypeEnum.LATEST);
     const bindingOptions = ref([
       { text: '部署', value: BindingTypeEnum.DEVELOPMENT },
       { text: '最新', value: BindingTypeEnum.LATEST },
-      { text: '版本', value: BindingTypeEnum.VERSION }
+      { text: '版本', value: BindingTypeEnum.VERSION },
     ]);
 
     const isCamundaForms = computed(() => {
@@ -154,22 +162,22 @@ export default defineComponent({
         loading();
         initSelectValue();
       },
-      { immediate: true, deep: true }
+      { immediate: true, deep: true },
     );
 
     watch(
       () => bindingType.value,
-      newValue => {
+      (newValue) => {
         setFormRefBindingValue(designer.activeElement, newValue);
-      }
+      },
     );
 
     watch(
       () => formsType.value,
-      newValue => {
+      (newValue) => {
         changeFormType(newValue);
         resetProperties(designer.activeElement);
-      }
+      },
     );
 
     return {
@@ -185,8 +193,8 @@ export default defineComponent({
       isFormRefVersion,
       updateFormKey,
       updateFormRef,
-      updateVersion
+      updateVersion,
     };
-  }
+  },
 });
 </script>

@@ -16,9 +16,9 @@
 <script lang="ts">
 import type { PropType } from 'vue';
 import { defineComponent, ref, computed } from 'vue';
-import type { Element } from '/@/declarations';
+import type { Element } from '@/declarations';
 
-import { useFormCanvasStore } from '/@/stores';
+import { useFormCanvasStore } from '@/stores';
 import { HRendererEngine } from '../library';
 
 export default defineComponent({

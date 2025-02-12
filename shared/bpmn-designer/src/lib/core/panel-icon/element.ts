@@ -1,4 +1,4 @@
-import type { Element } from '/@/declarations';
+import type { Element } from '@/declarations';
 
 import { getBusinessObject, is } from 'bpmn-js/lib/util/ModelUtil';
 import { isEventSubProcess, isExpanded, isInterrupting } from 'bpmn-js/lib/util/DiUtil';
