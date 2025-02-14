@@ -16,6 +16,7 @@ import { compression } from 'vite-plugin-compression2';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteVConsole } from 'vite-plugin-vconsole';
+import vueDevTools from 'vite-plugin-vue-devtools';
 
 import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -35,6 +36,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       UnoCSS({
         configFile: './uno.config.ts',
       }),
+      vueDevTools(),
       vue({
         template: { transformAssetUrls },
       }),
