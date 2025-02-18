@@ -31,7 +31,7 @@ import {
   WebSocketMessageService,
 } from './settings';
 
-class ApiResources {
+export class ApiResources {
   private static instance: ApiResources;
   private config = {} as HttpConfig;
 

@@ -16,7 +16,7 @@ import {
   MinioObjectLegalHoldService,
 } from './modules';
 
-class OssApiResources {
+export class OssApiResources {
   private static instance: OssApiResources;
   private config = {} as HttpConfig;
 
@@ -92,7 +92,12 @@ class OssApiResources {
   }
 }
 
-const createOssApi = (project: string, clientId: string, clientSecret: string, http: Axios): OssApiResources => {
+const createOssApi = (
+  project: string,
+  clientId: string,
+  clientSecret: string,
+  http: Axios,
+): OssApiResources => {
   const config = new HttpConfig(project, clientId, clientSecret, http);
   return OssApiResources.getInstance(config);
 };

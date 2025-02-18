@@ -1,10 +1,6 @@
 <template>
   <q-layout view="lHr LpR lFr" :class="[$q.dark.isActive ? 'bg-black' : 'bg-grey-2']">
-    <h-app-header
-      :tab-view="settings.display.isTabsView"
-      :breadcrumbs="settings.display.showBreadcrumbs"
-      message
-    ></h-app-header>
+    <h-app-header :tab-view="isTabsView" :breadcrumbs="showBreadcrumbs" message></h-app-header>
 
     <h-app-left-drawer></h-app-left-drawer>
 
@@ -14,29 +10,32 @@
   </q-layout>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useQuasar } from 'quasar';
 
 import { HAppHeader, HAppLeftDrawer, HAppRightDrawer, HAppContainer } from '@/components';
 
 import { useSettingsStore } from '@/stores';
 
-export default defineComponent({
+defineOptions({
   name: 'HDefaultLayout',
-
   components: {
     HAppContainer,
     HAppHeader,
     HAppLeftDrawer,
     HAppRightDrawer,
   },
+});
 
-  setup(props) {
-    const settings = useSettingsStore();
+const settings = useSettingsStore();
+const $q = useQuasar();
 
-    return {
-      settings,
-    };
-  },
+const isTabsView = computed(() => {
+  return settings.display.isTabsView;
+});
+
+const showBreadcrumbs = computed(() => {
+  return settings.display.showBreadcrumbs;
 });
 </script>

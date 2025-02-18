@@ -114,6 +114,7 @@ export {
   Base64,
   BaseMongoService,
   DynamicFormService,
+  FormApiResources,
   HttpConfig2 as HttpConfig,
   ProcessCommentsService,
   ProcessSpecificsService,
