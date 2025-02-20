@@ -419,6 +419,7 @@ export {
   MinioObjectRetentionService,
   MinioObjectSettingService,
   MinioObjectTagsService,
+  OssApiResources,
   Service2 as Service,
   createOssApi
 };

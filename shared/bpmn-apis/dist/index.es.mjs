@@ -1232,6 +1232,7 @@ const createBpmnApi = (project, clientId, clientSecret, http) => {
 export {
   Axios,
   BaseBpmnService,
+  BpmnApiResources,
   BpmnQueryByGetService,
   BpmnQueryByPostService,
   BpmnQueryService,

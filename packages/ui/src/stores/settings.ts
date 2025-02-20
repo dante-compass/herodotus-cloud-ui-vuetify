@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { reactive, toRefs, computed } from 'vue';
 
 import type { GlobalSetting } from '@/lib/declarations';
 import { ThemeModeEnum, LayoutModeEnum } from '@/lib/definitions';

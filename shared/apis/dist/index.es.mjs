@@ -1050,6 +1050,7 @@ const createApi = (project, clientId, clientSecret, http, oidc) => {
   return ApiResources.getInstance(config);
 };
 export {
+  ApiResources,
   ApplicationEnum,
   AuthorityTypeEnum,
   Axios,

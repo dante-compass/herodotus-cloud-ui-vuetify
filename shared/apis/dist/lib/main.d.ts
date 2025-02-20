@@ -2,7 +2,7 @@ import { Axios, HttpConfig } from './base';
 import { OpenApiService, OAuth2ApiService, PasskeyApiService } from './secure';
 import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService } from './modules';
 import { DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './settings';
-declare class ApiResources {
+export declare class ApiResources {
     private static instance;
     private config;
     private constructor();

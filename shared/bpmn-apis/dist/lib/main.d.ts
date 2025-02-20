@@ -1,6 +1,6 @@
 import { Axios, HttpConfig } from './base';
 import { DeploymentService, ProcessDefinitionService, ProcessInstanceService, TaskService, HistoryActivityInstanceService, HistoryProcessInstanceService, HistoryTaskService, GroupService, GroupMemberService, TenantService, TenantUserService, TenantGroupService, UserService } from './modules';
-declare class BpmnApiResources {
+export declare class BpmnApiResources {
     private static instance;
     private config;
     private constructor();

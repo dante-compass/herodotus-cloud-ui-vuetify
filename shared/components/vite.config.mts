@@ -51,6 +51,7 @@ export default defineConfig({
         '@tsparticles/interaction-particles-links',
         '@mdi/js',
         '@herodotus/core',
+        'lodash-es',
       ],
       output: {
         exports: 'named',
@@ -64,6 +65,7 @@ export default defineConfig({
           '@tsparticles/interaction-particles-links': 'TsparticlesInteractionParticlesLinkss',
           '@mdi/js': 'MdiJs',
           '@herodotus/core': 'HerodotusCore',
+          'lodash-es': 'LodashEs',
         },
       },
     },

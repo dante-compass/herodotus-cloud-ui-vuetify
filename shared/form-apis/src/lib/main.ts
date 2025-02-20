@@ -1,7 +1,7 @@
 import { Axios, HttpConfig } from './base';
 import { DynamicFormService, ProcessCommentsService, ProcessSpecificsService } from './modules';
 
-class FormApiResources {
+export class FormApiResources {
   private static instance: FormApiResources;
   private config = {} as HttpConfig;
 
@@ -33,7 +33,12 @@ class FormApiResources {
   }
 }
 
-const createFormApi = (project: string, clientId: string, clientSecret: string, http: Axios): FormApiResources => {
+const createFormApi = (
+  project: string,
+  clientId: string,
+  clientSecret: string,
+  http: Axios,
+): FormApiResources => {
   const config = new HttpConfig(project, clientId, clientSecret, http);
   return FormApiResources.getInstance(config);
 };
