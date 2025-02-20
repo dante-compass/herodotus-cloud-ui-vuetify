@@ -14,7 +14,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bpmn-io/properties-panel": "3.26.0",
+    "@bpmn-io/properties-panel": "3.26.1",
     "@github/webauthn-json": "^2.1.1",
     "@herodotus/apis": "workspace:^",
     "@herodotus/bpmn-apis": "workspace:^",
@@ -34,7 +34,7 @@
     "@vueuse/core": "^12.7.0",
     "animate.css": "^4.1.1",
     "axios": "^1.7.9",
-    "bpmn-js": "^18.2.0",
+    "bpmn-js": "^18.3.0",
     "bpmn-js-token-simulation": "^0.37.0",
     "colord": "^2.9.3",
     "echarts": "^5.6.0",

@@ -3,6 +3,7 @@ import { defineComponent, createBlock, openBlock, normalizeProps, guardReactiveP
 import { lodash, moment } from "@herodotus/core";
 import { lodash as lodash2, moment as moment2 } from "@herodotus/core";
 import * as allIcons from "@mdi/js";
+import { kebabCase } from "lodash-es";
 import { tsParticles } from "@tsparticles/engine";
 import { loadBasic } from "@tsparticles/basic";
 import { loadParticlesLinksInteraction } from "@tsparticles/interaction-particles-links";
@@ -263,7 +264,7 @@ const DURATION_UNITS = [
   { text: "分", value: "minutes" },
   { text: "秒", value: "seconds" }
 ];
-const Symbol$2 = {
+const Symbol$1 = {
   DASH: "-"
 };
 const Content = {
@@ -275,7 +276,7 @@ const Grid = {
   col: "col"
 };
 const createClass = (base, ...params) => {
-  return base + Symbol$2.DASH + params.join(Symbol$2.DASH);
+  return base + Symbol$1.DASH + params.join(Symbol$1.DASH);
 };
 const createTextColor = (color) => {
   return createClass(Content.text, color);
@@ -296,333 +297,6 @@ const createColClass = (breakpoint = "", size = "") => {
     }
   }
 };
-var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root = freeGlobal || freeSelf || Function("return this")();
-var Symbol$1 = root.Symbol;
-var objectProto$1 = Object.prototype;
-var hasOwnProperty = objectProto$1.hasOwnProperty;
-var nativeObjectToString$1 = objectProto$1.toString;
-var symToStringTag$1 = Symbol$1 ? Symbol$1.toStringTag : void 0;
-function getRawTag(value) {
-  var isOwn = hasOwnProperty.call(value, symToStringTag$1), tag = value[symToStringTag$1];
-  try {
-    value[symToStringTag$1] = void 0;
-    var unmasked = true;
-  } catch (e) {
-  }
-  var result = nativeObjectToString$1.call(value);
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag$1] = tag;
-    } else {
-      delete value[symToStringTag$1];
-    }
-  }
-  return result;
-}
-var objectProto = Object.prototype;
-var nativeObjectToString = objectProto.toString;
-function objectToString(value) {
-  return nativeObjectToString.call(value);
-}
-var nullTag = "[object Null]", undefinedTag = "[object Undefined]";
-var symToStringTag = Symbol$1 ? Symbol$1.toStringTag : void 0;
-function baseGetTag(value) {
-  if (value == null) {
-    return value === void 0 ? undefinedTag : nullTag;
-  }
-  return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
-}
-function isObjectLike(value) {
-  return value != null && typeof value == "object";
-}
-var symbolTag = "[object Symbol]";
-function isSymbol(value) {
-  return typeof value == "symbol" || isObjectLike(value) && baseGetTag(value) == symbolTag;
-}
-function arrayMap(array, iteratee) {
-  var index2 = -1, length = array == null ? 0 : array.length, result = Array(length);
-  while (++index2 < length) {
-    result[index2] = iteratee(array[index2], index2, array);
-  }
-  return result;
-}
-var isArray = Array.isArray;
-var symbolProto = Symbol$1 ? Symbol$1.prototype : void 0, symbolToString = symbolProto ? symbolProto.toString : void 0;
-function baseToString(value) {
-  if (typeof value == "string") {
-    return value;
-  }
-  if (isArray(value)) {
-    return arrayMap(value, baseToString) + "";
-  }
-  if (isSymbol(value)) {
-    return symbolToString ? symbolToString.call(value) : "";
-  }
-  var result = value + "";
-  return result == "0" && 1 / value == -Infinity ? "-0" : result;
-}
-function toString(value) {
-  return value == null ? "" : baseToString(value);
-}
-function arrayReduce(array, iteratee, accumulator, initAccum) {
-  var index2 = -1, length = array == null ? 0 : array.length;
-  while (++index2 < length) {
-    accumulator = iteratee(accumulator, array[index2], index2, array);
-  }
-  return accumulator;
-}
-function basePropertyOf(object) {
-  return function(key) {
-    return object == null ? void 0 : object[key];
-  };
-}
-var deburredLetters = {
-  // Latin-1 Supplement block.
-  "À": "A",
-  "Á": "A",
-  "Â": "A",
-  "Ã": "A",
-  "Ä": "A",
-  "Å": "A",
-  "à": "a",
-  "á": "a",
-  "â": "a",
-  "ã": "a",
-  "ä": "a",
-  "å": "a",
-  "Ç": "C",
-  "ç": "c",
-  "Ð": "D",
-  "ð": "d",
-  "È": "E",
-  "É": "E",
-  "Ê": "E",
-  "Ë": "E",
-  "è": "e",
-  "é": "e",
-  "ê": "e",
-  "ë": "e",
-  "Ì": "I",
-  "Í": "I",
-  "Î": "I",
-  "Ï": "I",
-  "ì": "i",
-  "í": "i",
-  "î": "i",
-  "ï": "i",
-  "Ñ": "N",
-  "ñ": "n",
-  "Ò": "O",
-  "Ó": "O",
-  "Ô": "O",
-  "Õ": "O",
-  "Ö": "O",
-  "Ø": "O",
-  "ò": "o",
-  "ó": "o",
-  "ô": "o",
-  "õ": "o",
-  "ö": "o",
-  "ø": "o",
-  "Ù": "U",
-  "Ú": "U",
-  "Û": "U",
-  "Ü": "U",
-  "ù": "u",
-  "ú": "u",
-  "û": "u",
-  "ü": "u",
-  "Ý": "Y",
-  "ý": "y",
-  "ÿ": "y",
-  "Æ": "Ae",
-  "æ": "ae",
-  "Þ": "Th",
-  "þ": "th",
-  "ß": "ss",
-  // Latin Extended-A block.
-  "Ā": "A",
-  "Ă": "A",
-  "Ą": "A",
-  "ā": "a",
-  "ă": "a",
-  "ą": "a",
-  "Ć": "C",
-  "Ĉ": "C",
-  "Ċ": "C",
-  "Č": "C",
-  "ć": "c",
-  "ĉ": "c",
-  "ċ": "c",
-  "č": "c",
-  "Ď": "D",
-  "Đ": "D",
-  "ď": "d",
-  "đ": "d",
-  "Ē": "E",
-  "Ĕ": "E",
-  "Ė": "E",
-  "Ę": "E",
-  "Ě": "E",
-  "ē": "e",
-  "ĕ": "e",
-  "ė": "e",
-  "ę": "e",
-  "ě": "e",
-  "Ĝ": "G",
-  "Ğ": "G",
-  "Ġ": "G",
-  "Ģ": "G",
-  "ĝ": "g",
-  "ğ": "g",
-  "ġ": "g",
-  "ģ": "g",
-  "Ĥ": "H",
-  "Ħ": "H",
-  "ĥ": "h",
-  "ħ": "h",
-  "Ĩ": "I",
-  "Ī": "I",
-  "Ĭ": "I",
-  "Į": "I",
-  "İ": "I",
-  "ĩ": "i",
-  "ī": "i",
-  "ĭ": "i",
-  "į": "i",
-  "ı": "i",
-  "Ĵ": "J",
-  "ĵ": "j",
-  "Ķ": "K",
-  "ķ": "k",
-  "ĸ": "k",
-  "Ĺ": "L",
-  "Ļ": "L",
-  "Ľ": "L",
-  "Ŀ": "L",
-  "Ł": "L",
-  "ĺ": "l",
-  "ļ": "l",
-  "ľ": "l",
-  "ŀ": "l",
-  "ł": "l",
-  "Ń": "N",
-  "Ņ": "N",
-  "Ň": "N",
-  "Ŋ": "N",
-  "ń": "n",
-  "ņ": "n",
-  "ň": "n",
-  "ŋ": "n",
-  "Ō": "O",
-  "Ŏ": "O",
-  "Ő": "O",
-  "ō": "o",
-  "ŏ": "o",
-  "ő": "o",
-  "Ŕ": "R",
-  "Ŗ": "R",
-  "Ř": "R",
-  "ŕ": "r",
-  "ŗ": "r",
-  "ř": "r",
-  "Ś": "S",
-  "Ŝ": "S",
-  "Ş": "S",
-  "Š": "S",
-  "ś": "s",
-  "ŝ": "s",
-  "ş": "s",
-  "š": "s",
-  "Ţ": "T",
-  "Ť": "T",
-  "Ŧ": "T",
-  "ţ": "t",
-  "ť": "t",
-  "ŧ": "t",
-  "Ũ": "U",
-  "Ū": "U",
-  "Ŭ": "U",
-  "Ů": "U",
-  "Ű": "U",
-  "Ų": "U",
-  "ũ": "u",
-  "ū": "u",
-  "ŭ": "u",
-  "ů": "u",
-  "ű": "u",
-  "ų": "u",
-  "Ŵ": "W",
-  "ŵ": "w",
-  "Ŷ": "Y",
-  "ŷ": "y",
-  "Ÿ": "Y",
-  "Ź": "Z",
-  "Ż": "Z",
-  "Ž": "Z",
-  "ź": "z",
-  "ż": "z",
-  "ž": "z",
-  "Ĳ": "IJ",
-  "ĳ": "ij",
-  "Œ": "Oe",
-  "œ": "oe",
-  "ŉ": "'n",
-  "ſ": "s"
-};
-var deburrLetter = basePropertyOf(deburredLetters);
-var reLatin = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g;
-var rsComboMarksRange$1 = "\\u0300-\\u036f", reComboHalfMarksRange$1 = "\\ufe20-\\ufe2f", rsComboSymbolsRange$1 = "\\u20d0-\\u20ff", rsComboRange$1 = rsComboMarksRange$1 + reComboHalfMarksRange$1 + rsComboSymbolsRange$1;
-var rsCombo$1 = "[" + rsComboRange$1 + "]";
-var reComboMark = RegExp(rsCombo$1, "g");
-function deburr(string) {
-  string = toString(string);
-  return string && string.replace(reLatin, deburrLetter).replace(reComboMark, "");
-}
-var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
-function asciiWords(string) {
-  return string.match(reAsciiWord) || [];
-}
-var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
-function hasUnicodeWord(string) {
-  return reHasUnicodeWord.test(string);
-}
-var rsAstralRange = "\\ud800-\\udfff", rsComboMarksRange = "\\u0300-\\u036f", reComboHalfMarksRange = "\\ufe20-\\ufe2f", rsComboSymbolsRange = "\\u20d0-\\u20ff", rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange, rsDingbatRange = "\\u2700-\\u27bf", rsLowerRange = "a-z\\xdf-\\xf6\\xf8-\\xff", rsMathOpRange = "\\xac\\xb1\\xd7\\xf7", rsNonCharRange = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", rsPunctuationRange = "\\u2000-\\u206f", rsSpaceRange = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", rsUpperRange = "A-Z\\xc0-\\xd6\\xd8-\\xde", rsVarRange = "\\ufe0e\\ufe0f", rsBreakRange = rsMathOpRange + rsNonCharRange + rsPunctuationRange + rsSpaceRange;
-var rsApos$1 = "['’]", rsBreak = "[" + rsBreakRange + "]", rsCombo = "[" + rsComboRange + "]", rsDigits = "\\d+", rsDingbat = "[" + rsDingbatRange + "]", rsLower = "[" + rsLowerRange + "]", rsMisc = "[^" + rsAstralRange + rsBreakRange + rsDigits + rsDingbatRange + rsLowerRange + rsUpperRange + "]", rsFitz = "\\ud83c[\\udffb-\\udfff]", rsModifier = "(?:" + rsCombo + "|" + rsFitz + ")", rsNonAstral = "[^" + rsAstralRange + "]", rsRegional = "(?:\\ud83c[\\udde6-\\uddff]){2}", rsSurrPair = "[\\ud800-\\udbff][\\udc00-\\udfff]", rsUpper = "[" + rsUpperRange + "]", rsZWJ = "\\u200d";
-var rsMiscLower = "(?:" + rsLower + "|" + rsMisc + ")", rsMiscUpper = "(?:" + rsUpper + "|" + rsMisc + ")", rsOptContrLower = "(?:" + rsApos$1 + "(?:d|ll|m|re|s|t|ve))?", rsOptContrUpper = "(?:" + rsApos$1 + "(?:D|LL|M|RE|S|T|VE))?", reOptMod = rsModifier + "?", rsOptVar = "[" + rsVarRange + "]?", rsOptJoin = "(?:" + rsZWJ + "(?:" + [rsNonAstral, rsRegional, rsSurrPair].join("|") + ")" + rsOptVar + reOptMod + ")*", rsOrdLower = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", rsOrdUpper = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", rsSeq = rsOptVar + reOptMod + rsOptJoin, rsEmoji = "(?:" + [rsDingbat, rsRegional, rsSurrPair].join("|") + ")" + rsSeq;
-var reUnicodeWord = RegExp([
-  rsUpper + "?" + rsLower + "+" + rsOptContrLower + "(?=" + [rsBreak, rsUpper, "$"].join("|") + ")",
-  rsMiscUpper + "+" + rsOptContrUpper + "(?=" + [rsBreak, rsUpper + rsMiscLower, "$"].join("|") + ")",
-  rsUpper + "?" + rsMiscLower + "+" + rsOptContrLower,
-  rsUpper + "+" + rsOptContrUpper,
-  rsOrdUpper,
-  rsOrdLower,
-  rsDigits,
-  rsEmoji
-].join("|"), "g");
-function unicodeWords(string) {
-  return string.match(reUnicodeWord) || [];
-}
-function words(string, pattern, guard) {
-  string = toString(string);
-  pattern = pattern;
-  if (pattern === void 0) {
-    return hasUnicodeWord(string) ? unicodeWords(string) : asciiWords(string);
-  }
-  return string.match(pattern) || [];
-}
-var rsApos = "['’]";
-var reApos = RegExp(rsApos, "g");
-function createCompounder(callback) {
-  return function(string) {
-    return arrayReduce(words(deburr(string).replace(reApos, "")), callback, "");
-  };
-}
-var kebabCase = createCompounder(function(result, word, index2) {
-  return result + (index2 ? "-" : "") + word.toLowerCase();
-});
 const _sfc_main$k = defineComponent({
   name: "HIconSelect",
   props: {
@@ -2260,7 +1934,7 @@ export {
   HTreeField,
   HVisibilityButton,
   SpinnerEnum,
-  Symbol$2 as Symbol,
+  Symbol$1 as Symbol,
   createBackgroundColor,
   createClass,
   createColClass,
