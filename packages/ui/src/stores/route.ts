@@ -1,14 +1,15 @@
-import type { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 import { defineStore } from 'pinia';
 
+import type { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 import type { RoutePushParam, PushParam } from '@/lib/declarations';
+
 import { lodash } from '@/lib/utils';
 
 export const useRouteStore = defineStore('Route', {
   state: () => ({
     routes: [] as Array<RouteRecordRaw>,
     cachedRoutes: [] as string[],
-    details: new Map(),
+    details: new Map<any, any>(),
     isRemote: true,
     pushParams: {} as RoutePushParam,
   }),
@@ -17,17 +18,17 @@ export const useRouteStore = defineStore('Route', {
     isDynamicRouteAdded(): boolean {
       return !lodash.isEmpty(this.routes);
     },
-
-    getDetailComponent(state) {
-      return (key: string) => state.details.get(key);
-    },
-
-    getRoutePushParam(state) {
-      return (key: string) => state.pushParams[key];
-    },
   },
 
   actions: {
+    getDetailComponent(key: string) {
+      return this.details.get(key);
+    },
+
+    getRoutePushParam(key: string) {
+      return this.pushParams[key];
+    },
+
     addDynamicRoutes(routes: Array<RouteRecordRaw>) {
       this.routes = routes;
     },

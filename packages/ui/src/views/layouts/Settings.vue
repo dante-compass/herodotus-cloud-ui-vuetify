@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
-import { useQuasar } from 'quasar';
+
 import { HSettingContainer } from '@/components';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { useRoute } from 'vue-router';
@@ -28,7 +28,6 @@ export default defineComponent({
   setup() {
     const leftDrawerOpen = ref(false);
     const rightDrawerOpen = ref(false);
-    const $q = useQuasar();
 
     const route = useRoute();
     const { onFinish } = useEditFinish();
@@ -62,7 +61,6 @@ export default defineComponent({
       toggleRightDrawer() {
         rightDrawerOpen.value = !rightDrawerOpen.value;
       },
-      $q,
     };
   },
 });

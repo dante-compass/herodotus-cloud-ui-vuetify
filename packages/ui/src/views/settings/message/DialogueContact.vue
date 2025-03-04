@@ -31,10 +31,11 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
 
+import type { DialogueContactEntity, DialogueContactConditions } from '@/lib/declarations';
+
 import { useTable } from '@/hooks';
 import { useAuthenticationStore } from '@/stores';
 import { api, moment } from '@/lib/utils';
-import { DialogueContactEntity, DialogueContactConditions } from '@/lib/declarations';
 
 import { HUserAvatar } from '@/components';
 
@@ -84,7 +85,6 @@ export default defineComponent({
           latestNews: '哈哈哈哈',
           createTime: new Date(),
           updateTime: new Date(),
-          ranking: 1,
         },
         ranking: 1,
       },

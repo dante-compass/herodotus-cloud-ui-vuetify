@@ -1,0 +1,1 @@
+import{d as e}from"../modules/npm-@vue-runtime-core-CaMaypo-.js";const t=e({name:"HAuthorizeLayout",props:{overlay:{type:Boolean,default:!1},title:{type:String,default:""}}});export{t as _};

@@ -8,7 +8,7 @@ import type {
   OAuth2IdToken,
 } from '@/lib/declarations';
 import { jwtDecode } from 'jwt-decode';
-import { useCryptoStore } from '@/stores';
+import { useCryptoStore } from './crypto';
 import { variables, moment, api } from '@/lib/utils';
 
 export const useAuthenticationStore = defineStore('Authentication', {

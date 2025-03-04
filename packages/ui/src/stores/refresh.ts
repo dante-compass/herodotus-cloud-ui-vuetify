@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore } from './authentication';
 import { ActionUtils } from '@/lib/utils';
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 import type { RetryRequest } from '@/lib/declarations';

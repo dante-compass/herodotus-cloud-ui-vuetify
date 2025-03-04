@@ -39,6 +39,7 @@ import type {
   BucketDomain,
   BucketDomainProps,
   BucketDomainConditions,
+  DeleteBucketResult,
 } from '@/lib/declarations';
 
 import { CONSTANTS } from '@/composables/constants';
@@ -47,7 +48,6 @@ import { moment, toast, standardDeleteNotify, ossApi } from '@/lib/utils';
 import { useBaseTable } from '@/hooks';
 
 import { HDeleteButton, HTable, HDenseIconButton } from '@/components';
-import { DeleteBucketResult } from '@herodotus/oss-apis';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.OSS_BUCKET,

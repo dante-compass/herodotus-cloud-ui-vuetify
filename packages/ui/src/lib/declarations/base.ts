@@ -127,6 +127,8 @@ export type {
   ObjectSettingBusiness,
   ObjectLockConfigurationDomain,
   DeletedObjectDomain,
+  CreateBucketResult,
+  DeleteBucketResult,
 } from '@herodotus/oss-apis';
 
 export type {
