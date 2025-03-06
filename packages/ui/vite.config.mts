@@ -27,6 +27,7 @@ const lifecycle = process.env.npm_lifecycle_event;
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const env = loadEnv(mode, process.cwd());
   return defineConfig({
+    base: './',
     plugins: [
       nodePolyfills({
         globals: {
