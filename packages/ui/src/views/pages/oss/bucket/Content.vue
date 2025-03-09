@@ -34,13 +34,12 @@ import { defineComponent, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
-import type { BucketDomain, HttpResult } from '@/lib/declarations';
+import type { BucketDomain, HttpResult, CreateBucketResult } from '@/lib/declarations';
 
 import { ossApi, toast } from '@/lib/utils';
 import { useBaseTableItem } from '@/hooks';
 
 import { HSimpleCenterFormLayout } from '@/components';
-import { CreateBucketResult } from '@herodotus/oss-apis';
 
 export default defineComponent({
   name: 'OssBucketContent',

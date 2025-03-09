@@ -1,3 +1,1 @@
-import { useDictionaryStore } from './dictionary';
-
-export { useDictionaryStore };
+export * from './dictionary';

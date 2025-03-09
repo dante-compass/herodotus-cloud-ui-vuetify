@@ -1,5 +1,3 @@
-import HAppMessageActions from './HAppMessageActions.vue';
-import HSendMessageField from './HSendMessageField.vue';
-import HSendMessageToUser from './HSendMessageToUser.vue';
-
-export { HAppMessageActions, HSendMessageField, HSendMessageToUser };
+export { default as HAppMessageActions } from './HAppMessageActions.vue';
+export { default as HSendMessageField } from './HSendMessageField.vue';
+export { default as HSendMessageToUser } from './HSendMessageToUser.vue';
