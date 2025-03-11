@@ -112,13 +112,16 @@
       ></q-select>
       <h-divider label="令牌设置(Token Settings)" class="q-mb-md"></h-divider>
       <h-label text="令牌有效期" size="subtitle-1" weight="bolder" align="left"></h-label>
-      <h-duration v-model="editedItem.accessTokenValidity" label="令牌有效期"></h-duration>
+      <h-duration v-model="editedItem.accessTokenTimeToLive" label="令牌有效期"></h-duration>
       <h-label text="刷新令牌有效期" size="subtitle-1" weight="bolder" align="left"></h-label>
-      <h-duration v-model="editedItem.refreshTokenValidity" label="刷新令牌有效期"></h-duration>
+      <h-duration v-model="editedItem.refreshTokenTimeToLive" label="刷新令牌有效期"></h-duration>
       <h-label text="授权码有效期" size="subtitle-1" weight="bolder" align="left"></h-label>
-      <h-duration v-model="editedItem.authorizationCodeValidity" label="授权码有效期"></h-duration>
+      <h-duration
+        v-model="editedItem.authorizationCodeTimeToLive"
+        label="授权码有效期"
+      ></h-duration>
       <h-label text="设备激活码有效期" size="subtitle-1" weight="bolder" align="left"></h-label>
-      <h-duration v-model="editedItem.deviceCodeValidity" label="设备激活码有效期"></h-duration>
+      <h-duration v-model="editedItem.deviceCodeTimeToLive" label="设备激活码有效期"></h-duration>
       <div class="column q-mb-sm">
         <h-switch v-model="editedItem.reuseRefreshTokens" label="是否允许重用刷新令牌"></h-switch>
       </div>
@@ -127,7 +130,7 @@
         dictionary="tokenFormat"
         label="令牌格式(需同步修改后端配置)"></h-dictionary-select> -->
       <h-dictionary-select
-        v-model="editedItem.idTokenSignatureAlgorithm"
+        v-model="editedItem.idTokenSignatureAlgorithmJwsAlgorithm"
         dictionary="SignatureJwsAlgorithm"
         label="OIDC idToken 端点认证签名算法"
       ></h-dictionary-select>
@@ -187,8 +190,8 @@
   </h-authorize-layout>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, onMounted, nextTick } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
@@ -197,140 +200,116 @@ import type {
   OAuth2ScopeEntity,
   OAuth2ScopeConditions,
   QTableColumnProps,
-  Dictionary,
 } from '@/lib/declarations';
 
-import { useEditFinish } from '@/hooks';
 import { CONSTANTS, HDictionarySelect, useDictionary } from '@/composables/constants';
-import { api, lodash } from '@/lib/utils';
-import { useTableItem, useTable } from '@/hooks';
-
 import { HAuthorizeLayout } from '@/composables/authorize';
+import { api, lodash } from '@/lib/utils';
+import { useTableItem, useTable, useEditFinish } from '@/hooks';
 
-export default defineComponent({
+defineOptions({
   name: 'OAuth2ApplicationContent',
+  components: { HAuthorizeLayout, HDictionarySelect },
+});
 
-  components: {
-    HAuthorizeLayout,
-    HDictionarySelect,
+const { editedItem, isEdit, title, overlay, saveOrUpdate } = useTableItem<OAuth2ApplicationEntity>(
+  api.oauth2Application(),
+);
+const { tableRows, pagination, loading } = useTable<OAuth2ScopeEntity, OAuth2ScopeConditions>(
+  api.oauth2Scope(),
+  CONSTANTS.ComponentName.OAUTH2_SCOPE,
+  true,
+);
+
+const { options } = useDictionary('AllJwsAlgorithm');
+
+const columns: QTableColumnProps = [
+  { name: 'scopeCode', field: 'scopeCode', align: 'center', label: '范围代码' },
+  { name: 'scopeName', field: 'scopeName', align: 'center', label: '范围名称' },
+  { name: 'description', field: 'description', align: 'center', label: '说明' },
+];
+
+const { onFinish } = useEditFinish();
+
+const isRedirectUrisRequired = () => {
+  let authorizationGrantTypes = editedItem.value.authorizationGrantTypes;
+  let redirectUris = editedItem.value.redirectUris;
+
+  if (
+    authorizationGrantTypes &&
+    authorizationGrantTypes.includes('authorization_code') &&
+    !redirectUris
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const rules = {
+  editedItem: {
+    applicationName: {
+      required: helpers.withMessage('应用名称不能为空', required),
+    },
+    authorizationGrantTypes: {
+      required: helpers.withMessage('认证模式不能为空', required),
+    },
+    clientAuthenticationMethods: {
+      required: helpers.withMessage('客户端验证模式不能为空', required),
+    },
+    redirectUris: {
+      isRedirectUrisRequired: helpers.withMessage(
+        '授权码模式下 Redirect URI 不能为空',
+        isRedirectUrisRequired,
+      ),
+    },
   },
+};
 
-  setup() {
-    const { editedItem, isEdit, title, overlay, saveOrUpdate } =
-      useTableItem<OAuth2ApplicationEntity>(api.oauth2Application());
-    const { tableRows, pagination, loading } = useTable<OAuth2ScopeEntity, OAuth2ScopeConditions>(
-      api.oauth2Scope(),
-      CONSTANTS.ComponentName.OAUTH2_SCOPE,
-      true,
-    );
+const v = useVuelidate(rules, { editedItem }, { $lazy: true });
 
-    const { options } = useDictionary('AllJwsAlgorithm');
+const onSave = () => {
+  v.value.$validate().then((result) => {
+    if (result) {
+      saveOrUpdate();
+    }
+  });
+};
 
-    const columns: QTableColumnProps = [
-      { name: 'scopeCode', field: 'scopeCode', align: 'center', label: '范围代码' },
-      { name: 'scopeName', field: 'scopeName', align: 'center', label: '范围名称' },
-      { name: 'description', field: 'description', align: 'center', label: '说明' },
-    ];
+const includePrivateKeyJwt = () => {
+  return lodash.includes(editedItem.value.clientAuthenticationMethods, 'private_key_jwt');
+};
 
-    const { onFinish } = useEditFinish();
+const includeClientSecretJwt = () => {
+  return lodash.includes(editedItem.value.clientAuthenticationMethods, 'client_secret_jwt');
+};
 
-    const isRedirectUrisRequired = () => {
-      let authorizationGrantTypes = editedItem.value.authorizationGrantTypes;
-      let redirectUris = editedItem.value.redirectUris;
+const onlyHasPrivateKeyJwt = () => {
+  return includePrivateKeyJwt() && !includeClientSecretJwt();
+};
 
-      if (
-        authorizationGrantTypes &&
-        authorizationGrantTypes.includes('authorization_code') &&
-        !redirectUris
-      ) {
-        return false;
-      } else {
-        return true;
-      }
-    };
+const onlyHasClientSecretJwt = () => {
+  return !includePrivateKeyJwt() && includeClientSecretJwt();
+};
 
-    const rules = {
-      editedItem: {
-        applicationName: {
-          required: helpers.withMessage('应用名称不能为空', required),
-        },
-        authorizationGrantTypes: {
-          required: helpers.withMessage('认证模式不能为空', required),
-        },
-        clientAuthenticationMethods: {
-          required: helpers.withMessage('客户端验证模式不能为空', required),
-        },
-        redirectUris: {
-          isRedirectUrisRequired: helpers.withMessage(
-            '授权码模式下 Redirect URI 不能为空',
-            isRedirectUrisRequired,
-          ),
-        },
-      },
-    };
+/**
+ * 参见后端 SAS ： JwtClientAssertionAuthenticationProvider
+ * 1. 只有当客户端配置了 urn:ietf:params:oauth:client-assertion-type:jwt-bearer 认证模式时，配置 private_key_jwt 或 client_secret_jwt 才有意义。
+ * 2. private_key_jwt 是针对 签名算法 client_secret_jwt 是针对 mac 算法。
+ */
+const isShowAuthenticationSigningAlgorithm = computed(() => {
+  return includePrivateKeyJwt() || includeClientSecretJwt();
+});
 
-    const v = useVuelidate(rules, { editedItem }, { $lazy: true });
+const authenticationSigningAlgorithmItem = computed(() => {
+  if (onlyHasPrivateKeyJwt()) {
+    return options.value.filter((item) => item.ordinal < 9);
+  }
 
-    const onSave = () => {
-      v.value.$validate().then((result) => {
-        if (result) {
-          saveOrUpdate();
-        }
-      });
-    };
+  if (onlyHasClientSecretJwt()) {
+    return options.value.filter((item) => item.ordinal < 9);
+  }
 
-    const includePrivateKeyJwt = () => {
-      return lodash.includes(editedItem.value.clientAuthenticationMethods, 'private_key_jwt');
-    };
-
-    const includeClientSecretJwt = () => {
-      return lodash.includes(editedItem.value.clientAuthenticationMethods, 'client_secret_jwt');
-    };
-
-    const onlyHasPrivateKeyJwt = () => {
-      return includePrivateKeyJwt() && !includeClientSecretJwt();
-    };
-
-    const onlyHasClientSecretJwt = () => {
-      return !includePrivateKeyJwt() && includeClientSecretJwt();
-    };
-
-    /**
-     * 参见后端 SAS ： JwtClientAssertionAuthenticationProvider
-     * 1. 只有当客户端配置了 urn:ietf:params:oauth:client-assertion-type:jwt-bearer 认证模式时，配置 private_key_jwt 或 client_secret_jwt 才有意义。
-     * 2. private_key_jwt 是针对 签名算法 client_secret_jwt 是针对 mac 算法。
-     */
-    const isShowAuthenticationSigningAlgorithm = computed(() => {
-      return includePrivateKeyJwt() || includeClientSecretJwt();
-    });
-
-    const authenticationSigningAlgorithmItem = computed(() => {
-      if (onlyHasPrivateKeyJwt()) {
-        return options.value.filter((item) => item.ordinal < 9);
-      }
-
-      if (onlyHasClientSecretJwt()) {
-        return options.value.filter((item) => item.ordinal < 9);
-      }
-
-      return options.value;
-    });
-
-    return {
-      editedItem,
-      title,
-      overlay,
-      tableRows,
-      columns,
-      pagination,
-      loading,
-      isShowAuthenticationSigningAlgorithm,
-      isEdit,
-      onFinish,
-      v,
-      onSave,
-      authenticationSigningAlgorithmItem,
-    };
-  },
+  return options.value;
 });
 </script>

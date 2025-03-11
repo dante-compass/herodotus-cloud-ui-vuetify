@@ -1,25 +1,26 @@
 import { AbstractSysEntity, Entity, Conditions, AbstractJpaEntity } from '../base';
 export interface BaseRegisteredClientEntity extends AbstractSysEntity {
-    clientId: string;
     clientIdIssuedAt: string;
-    clientSecret: string;
     clientSecretExpiresAt: string;
     clientAuthenticationMethods: Array<string>;
     authorizationGrantTypes: Array<string>;
     redirectUris: string;
     postLogoutRedirectUris: string;
+    clientId: string;
+    clientSecret: string;
     requireProofKey: boolean;
     requireAuthorizationConsent: boolean;
     jwkSetUrl: string;
     authenticationSigningAlgorithm: string;
-    accessTokenFormat: string;
-    accessTokenValidity: string;
-    refreshTokenValidity: string;
-    authorizationCodeValidity: string;
-    deviceCodeValidity: string;
+    x509CertificateSubjectDN: string;
+    authorizationCodeTimeToLive: string;
+    deviceCodeTimeToLive: string;
+    accessTokenTimeToLive: string;
+    refreshTokenTimeToLive: string;
+    tokenFormat: string;
     reuseRefreshTokens: boolean;
-    signature: string;
-    idTokenSignatureAlgorithm: string;
+    idTokenSignatureAlgorithmJwsAlgorithm: string;
+    x509CertificateBoundAccessTokens: boolean;
     scopes: Array<OAuth2ScopeEntity>;
 }
 export interface OAuth2ApplicationEntity extends BaseRegisteredClientEntity {
