@@ -130,9 +130,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
       },
     },
-    esbuild: {
-      drop: env.VITE_NODE_ENV === 'production' ? ['console', 'debugger'] : [],
-    },
 
     build: {
       // chunkSizeWarningLimit: 1000,
