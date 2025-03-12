@@ -24,7 +24,7 @@ class EnvironmentVariable {
   private constructor() {}
 
   private toBoolean(value: string): boolean {
-    if (value === 'true') {
+    if (value && value === 'true') {
       return true;
     } else {
       return false;
