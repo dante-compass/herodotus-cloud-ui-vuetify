@@ -2,18 +2,6 @@
 
 ROOT_DIR=/etc/nginx/html/ui
 
-# environment.js.gz 会影响环境变量的设置
-ENV_GZIP_FILE=$ROOT_DIR/static/js/environment.js.gz
-  
-# 检查文件是否存在  
-if [ -f "$ENV_GZIP_FILE" ]; then  
-  # 文件存在，删除它  
-  rm "$ENV_GZIP_FILE"  
-  echo "Gzip file '$ENV_GZIP_FILE' deleted."  
-else  
-  echo "Gzip file '$ENV_GZIP_FILE' not exist."  
-fi
-
 # Replace env vars in JavaScript files
 echo "Replacing env constants in JS"
 for file in $ROOT_DIR/static/js/environment.js;
@@ -30,8 +18,20 @@ done
 echo "Replace result is:"
 echo "--------------------------------------------------"
 
-cat $ROOT_DIR/static/js/environment.js;
+cat $ROOT_DIR/static/js/environment.js
 
 echo "--------------------------------------------------"
 
-echo "Starting Nginx"
+# environment.js.gz 会影响环境变量的设置
+ENV_GZIP_FILE=$ROOT_DIR/static/js/environment.js.gz
+  
+# 检查文件是否存在  
+if [ -f "$ENV_GZIP_FILE" ]; then  
+  # 文件存在，删除它  
+  rm "$ENV_GZIP_FILE"
+  echo "Gzip file $ENV_GZIP_FILE deleted."  
+else  
+  echo "Gzip file $ENV_GZIP_FILE not exist."  
+fi
+
+echo "Environment replace finished."
