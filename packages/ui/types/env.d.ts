@@ -30,6 +30,7 @@ declare interface ImportMetaEnv {
   readonly VITE_OAUTH2_CLIENT_ID: string;
   readonly VITE_OAUTH2_CLIENT_SECRET: string;
   readonly VITE_OAUTH2_REDIRECT_URI: string;
+  readonly VITE_USE_DISABLE_DEVTOOL: string;
 
   // 更多环境变量...
 }
@@ -50,6 +51,7 @@ declare interface Window {
   APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_CLIENT_ID: string;
   APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_CLIENT_SECRET: string;
   APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_REDIRECT_URI: string;
+  APPLICATION_ENVIRONMENT_VARIABLES_USE_DISABLE_DEVTOOL: string;
 }
 
 declare module '*.bpmn' {

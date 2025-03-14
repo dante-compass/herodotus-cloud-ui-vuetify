@@ -19,6 +19,7 @@ import DisableDevtool from 'disable-devtool';
 import { setupStore, setupQuasar, setupI18n, setupUploader } from '@/plugins';
 import { setupRouter } from './routers';
 
+import { variables } from '@/lib/utils';
 import { CONSTANTS } from '@/composables/constants';
 
 if (typeof (window as any).global === 'undefined') {
@@ -52,11 +53,13 @@ async function setupApp() {
   app.mount('#app', true);
 
   if (!CONSTANTS.IS_DEV) {
-    DisableDevtool({
-      url: '/static/forbidden.html',
-      timeOutUrl: '/static/forbidden.html',
-      disableMenu: true,
-    });
+    if (variables.getUseDisableDevtool()) {
+      DisableDevtool({
+        url: '/static/forbidden.html',
+        timeOutUrl: '/static/forbidden.html',
+        disableMenu: true,
+      });
+    }
   }
 }
 

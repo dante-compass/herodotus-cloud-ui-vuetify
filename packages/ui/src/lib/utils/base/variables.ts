@@ -13,6 +13,7 @@ class EnvironmentVariable {
   private static CLIENT_ID: string = import.meta.env.VITE_OAUTH2_CLIENT_ID;
   private static CLIENT_SECRET: string = import.meta.env.VITE_OAUTH2_CLIENT_SECRET;
   private static REDIRECT_URI: string = import.meta.env.VITE_OAUTH2_REDIRECT_URI;
+  private static USE_DISABLE_DEVTOOL: string = import.meta.env.VITE_USE_DISABLE_DEVTOOL;
 
   private static instance = new EnvironmentVariable();
 
@@ -23,7 +24,7 @@ class EnvironmentVariable {
   private constructor() {}
 
   private toBoolean(value: string): boolean {
-    if (value === 'true') {
+    if (value && value === 'true') {
       return true;
     } else {
       return false;
@@ -81,14 +82,14 @@ class EnvironmentVariable {
   public getClientId(): string {
     return this.getEnvironmentVariable(
       window.APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_CLIENT_ID,
-      EnvironmentVariable.CLIENT_ID
+      EnvironmentVariable.CLIENT_ID,
     );
   }
 
   public getClientSecret(): string {
     return this.getEnvironmentVariable(
       window.APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_CLIENT_SECRET,
-      EnvironmentVariable.CLIENT_SECRET
+      EnvironmentVariable.CLIENT_SECRET,
     );
   }
 
@@ -115,7 +116,7 @@ class EnvironmentVariable {
   public getProjectName(): string {
     return this.getEnvironmentVariable(
       window.APPLICATION_ENVIRONMENT_VARIABLES_PROJECT_NAME,
-      EnvironmentVariable.PROJECT_NAME
+      EnvironmentVariable.PROJECT_NAME,
     );
   }
 
@@ -130,7 +131,22 @@ class EnvironmentVariable {
   public getRedirectUri(): string {
     return this.getEnvironmentVariable(
       window.APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_REDIRECT_URI,
-      EnvironmentVariable.REDIRECT_URI
+      EnvironmentVariable.REDIRECT_URI,
+    );
+  }
+
+  private getEnvironmentVariableBoolean(docker: string, vite: string): boolean {
+    if (this.useDockerEnvironmentVariable(docker)) {
+      return this.toBoolean(docker);
+    } else {
+      return this.toBoolean(vite);
+    }
+  }
+
+  public getUseDisableDevtool(): boolean {
+    return this.getEnvironmentVariableBoolean(
+      window.APPLICATION_ENVIRONMENT_VARIABLES_USE_DISABLE_DEVTOOL,
+      EnvironmentVariable.USE_DISABLE_DEVTOOL,
     );
   }
 }
