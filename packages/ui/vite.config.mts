@@ -109,7 +109,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       },
     },
     server: {
-      port: env.VITE_PORT,
+      port: 3000,
       proxy: {
         '/api': {
           target: env.VITE_API_URL,
