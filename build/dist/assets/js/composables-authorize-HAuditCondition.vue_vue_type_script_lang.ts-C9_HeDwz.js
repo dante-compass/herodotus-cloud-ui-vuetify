@@ -1,1 +1,0 @@
-import{d as t,l as e}from"./npm-@vue-runtime-core-Bpel2nBe.js";const o=t({name:"HAuditCondition",props:{conditions:{type:Object,required:!0}},emits:["update:conditions"],setup(t,{emit:o}){const n=e({get:()=>t.conditions,set:t=>{o("update:conditions",t)}});return{conditionsModelValue:n,onClear:()=>{n.value={}}}}});export{o as _};
