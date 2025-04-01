@@ -14,7 +14,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bpmn-io/properties-panel": "3.26.3",
+    "@bpmn-io/properties-panel": "3.26.4",
     "@github/webauthn-json": "^2.1.1",
     "@herodotus/apis": "workspace:^",
     "@herodotus/bpmn-apis": "workspace:^",
@@ -28,14 +28,14 @@
     "@mdi/js": "^7.4.47",
     "@quasar/extras": "^1.16.17",
     "@rsocket/composite-metadata": "1.0.0-alpha.3",
-    "@stomp/stompjs": "^7.0.1",
+    "@stomp/stompjs": "^7.1.0",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "@vueuse/core": "^13.0.0",
     "animate.css": "^4.1.1",
     "axios": "^1.8.4",
     "bpmn-js": "^18.4.0",
-    "bpmn-js-token-simulation": "^0.38.0",
+    "bpmn-js-token-simulation": "^0.38.1",
     "colord": "^2.9.3",
     "echarts": "^5.6.0",
     "element-resize-detector": "^1.2.4",
@@ -51,6 +51,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "22.13.10"
+    "@types/node": "22.13.15"
   }
 }
