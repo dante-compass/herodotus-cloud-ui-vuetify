@@ -1,6 +1,6 @@
-import { AbstractJpaEntity, BaseEntity, Conditions } from '../base';
+import { AbstractAuditEntity, BaseEntity, Conditions } from '../base';
 import { NotificationCategoryEnum } from '../../enums';
-export interface BaseSenderEntity extends AbstractJpaEntity {
+export interface BaseSenderEntity extends AbstractAuditEntity {
     senderId: string;
     senderName: string;
     senderAvatar: string;

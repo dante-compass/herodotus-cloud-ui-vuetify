@@ -9,13 +9,13 @@ export interface BaseEntity extends Entity {
   updateTime?: Date;
 }
 
-export interface AbstractJpaEntity extends BaseEntity {
+export interface AbstractAuditEntity extends BaseEntity {
   createBy?: string;
   updateBy?: string;
   ranking?: number;
 }
 
-export interface AbstractSysEntity extends AbstractJpaEntity {
+export interface AbstractSysEntity extends AbstractAuditEntity {
   status: StatusEnum;
   reserved: boolean;
   reversion: number;

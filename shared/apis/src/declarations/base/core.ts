@@ -12,7 +12,7 @@ import type {
   Tree,
   BaseEntity,
   AbstractSysEntity,
-  AbstractJpaEntity,
+  AbstractAuditEntity,
 } from '@herodotus/core';
 
 import { ApplicationEnum } from '@/enums';
@@ -44,5 +44,5 @@ export type {
   Tree,
   BaseEntity,
   AbstractSysEntity,
-  AbstractJpaEntity,
+  AbstractAuditEntity,
 };
