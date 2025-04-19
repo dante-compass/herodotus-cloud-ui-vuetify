@@ -3,11 +3,11 @@ export interface Entity {
 }
 export interface Conditions {
 }
-export interface BaseEntity extends Entity {
+export interface AbstractEntity extends Entity {
     createTime?: Date;
     updateTime?: Date;
 }
-export interface AbstractAuditEntity extends BaseEntity {
+export interface AbstractAuditEntity extends AbstractEntity {
     createBy?: string;
     updateBy?: string;
     ranking?: number;

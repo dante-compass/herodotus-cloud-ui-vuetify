@@ -26,7 +26,7 @@ export type {
   QNotifyPosition,
 } from '@herodotus/core';
 export type {
-  BaseEntity,
+  AbstractEntity,
   AbstractSysEntity,
   JigsawCaptcha,
   WordClickCaptcha,

@@ -10,7 +10,7 @@ import type {
   Pagination,
   Sort,
   Tree,
-  BaseEntity,
+  AbstractEntity,
   AbstractSysEntity,
   AbstractAuditEntity,
 } from '@herodotus/core';
@@ -42,7 +42,7 @@ export type {
   Pagination,
   Sort,
   Tree,
-  BaseEntity,
+  AbstractEntity,
   AbstractSysEntity,
   AbstractAuditEntity,
 };

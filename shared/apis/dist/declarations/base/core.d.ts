@@ -1,4 +1,4 @@
-import { AxiosHttpResult, OAuth2Token, Conditions, Dictionary, EmptyObject, Entity, Page, Pageable, Pagination, Sort, Tree, BaseEntity, AbstractSysEntity, AbstractAuditEntity } from '@herodotus/core';
+import { AxiosHttpResult, OAuth2Token, Conditions, Dictionary, EmptyObject, Entity, Page, Pageable, Pagination, Sort, Tree, AbstractEntity, AbstractSysEntity, AbstractAuditEntity } from '@herodotus/core';
 import { ApplicationEnum } from '../../enums';
 export interface BaseAppEntity extends AbstractSysEntity {
     appSecret: string;
@@ -11,4 +11,4 @@ export interface BaseCmdbEntity extends AbstractSysEntity {
     contacts: string;
     phoneNumber: string;
 }
-export type { AxiosHttpResult, OAuth2Token, Conditions, Dictionary, EmptyObject, Entity, Page, Pageable, Pagination, Sort, Tree, BaseEntity, AbstractSysEntity, AbstractAuditEntity, };
+export type { AxiosHttpResult, OAuth2Token, Conditions, Dictionary, EmptyObject, Entity, Page, Pageable, Pagination, Sort, Tree, AbstractEntity, AbstractSysEntity, AbstractAuditEntity, };
