@@ -10,12 +10,12 @@ import type {
   QTableOnRequestParameter,
 } from '@/lib/declarations';
 
-import { BaseService } from '@/lib/definitions';
+import { AbstractService } from '@/lib/definitions';
 import { toast, standardDeleteNotify, lodash } from '@/lib/utils';
 import useBaseTable from './useBaseTable';
 
 export default function <E extends Entity, C extends Conditions>(
-  baseService: BaseService<E>,
+  AbstractService: AbstractService<E>,
   name: string,
   isFetchAll = false,
   sort = {} as Sort,
@@ -47,11 +47,10 @@ export default function <E extends Entity, C extends Conditions>(
 
   const findAllItems = () => {
     showLoading();
-    baseService
-      .fetchAll({
-        ...sort,
-        ...conditions.value,
-      })
+    AbstractService.fetchAll({
+      ...sort,
+      ...conditions.value,
+    })
       .then((result) => {
         const data = result.data as Array<E>;
 
@@ -70,15 +69,14 @@ export default function <E extends Entity, C extends Conditions>(
 
   const findItemsByPage = (pageNumber = 1, pageSize = 10, others = {}) => {
     showLoading();
-    baseService
-      .fetchByPage(
-        {
-          pageNumber: pageNumber - 1,
-          pageSize: pageSize,
-          ...sort,
-        },
-        others,
-      )
+    AbstractService.fetchByPage(
+      {
+        pageNumber: pageNumber - 1,
+        pageSize: pageSize,
+        ...sort,
+      },
+      others,
+    )
       .then((result) => {
         const data = result.data as Page<E>;
         // 用户文档列表中无结果时也要更新列表数据
@@ -100,8 +98,7 @@ export default function <E extends Entity, C extends Conditions>(
 
   const deleteItemById = (id: string) => {
     standardDeleteNotify(() => {
-      baseService
-        .delete(id)
+      AbstractService.delete(id)
         .then((response) => {
           const result = response as HttpResult<string>;
           if (result.message) {

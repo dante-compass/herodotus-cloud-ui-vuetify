@@ -13,9 +13,9 @@ import type {
 
 import { ContentTypeEnum } from '@/enums';
 
-import { HttpConfig, BaseService } from '../base';
+import { HttpConfig, AbstractService } from '../base';
 
-class SysPermissionService extends BaseService<SysPermissionEntity> {
+class SysPermissionService extends AbstractService<SysPermissionEntity> {
   private static instance: SysPermissionService;
 
   private constructor(config: HttpConfig) {
@@ -34,7 +34,7 @@ class SysPermissionService extends BaseService<SysPermissionEntity> {
   }
 }
 
-class SysRoleService extends BaseService<SysRoleEntity> {
+class SysRoleService extends AbstractService<SysRoleEntity> {
   private static instance: SysRoleService;
 
   private constructor(config: HttpConfig) {
@@ -61,7 +61,7 @@ class SysRoleService extends BaseService<SysRoleEntity> {
   }
 }
 
-class SysUserService extends BaseService<SysUserEntity> {
+class SysUserService extends AbstractService<SysUserEntity> {
   private static instance: SysUserService;
 
   private constructor(config: HttpConfig) {
@@ -106,7 +106,7 @@ class SysUserService extends BaseService<SysUserEntity> {
   }
 }
 
-class SysAttributeService extends BaseService<SysAttributeEntity> {
+class SysAttributeService extends AbstractService<SysAttributeEntity> {
   private static instance: SysAttributeService;
 
   private constructor(config: HttpConfig) {
@@ -125,7 +125,7 @@ class SysAttributeService extends BaseService<SysAttributeEntity> {
   }
 }
 
-class SysDefaultRoleService extends BaseService<SysDefaultRoleEntity> {
+class SysDefaultRoleService extends AbstractService<SysDefaultRoleEntity> {
   private static instance: SysDefaultRoleService;
 
   private constructor(config: HttpConfig) {
@@ -144,7 +144,7 @@ class SysDefaultRoleService extends BaseService<SysDefaultRoleEntity> {
   }
 }
 
-class SysElementService extends BaseService<SysElementEntity> {
+class SysElementService extends AbstractService<SysElementEntity> {
   private static instance: SysElementService;
 
   private constructor(config: HttpConfig) {
@@ -166,7 +166,7 @@ class SysElementService extends BaseService<SysElementEntity> {
   }
 }
 
-class SysTenantDataSourceService extends BaseService<SysTenantDataSourceEntity> {
+class SysTenantDataSourceService extends AbstractService<SysTenantDataSourceEntity> {
   private static instance: SysTenantDataSourceService;
 
   private constructor(config: HttpConfig) {
@@ -194,7 +194,7 @@ class SysTenantDataSourceService extends BaseService<SysTenantDataSourceEntity> 
   }
 }
 
-class SysDictionaryService extends BaseService<SysDictionaryEntity> {
+class SysDictionaryService extends AbstractService<SysDictionaryEntity> {
   private static instance: SysDictionaryService;
 
   private constructor(config: HttpConfig) {
@@ -237,7 +237,7 @@ class SysDictionaryService extends BaseService<SysDictionaryEntity> {
   }
 }
 
-class SocialBindingService extends BaseService<AccessSourceEntity> {
+class SocialBindingService extends AbstractService<AccessSourceEntity> {
   private static instance: SocialBindingService;
 
   private constructor(config: HttpConfig) {

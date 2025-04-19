@@ -1,8 +1,8 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { BaseService, ContentTypeEnum, Base64, Service, HttpConfig } from "@herodotus/core";
-import { Axios, Base64 as Base642, BaseService as BaseService2, ContentTypeEnum as ContentTypeEnum2, HttpConfig as HttpConfig2, Service as Service2, lodash, moment } from "@herodotus/core";
+import { AbstractService, ContentTypeEnum, Base64, Service, HttpConfig } from "@herodotus/core";
+import { AbstractService as AbstractService2, Axios, Base64 as Base642, ContentTypeEnum as ContentTypeEnum2, HttpConfig as HttpConfig2, Service as Service2, lodash, moment } from "@herodotus/core";
 var AuthorityTypeEnum = /* @__PURE__ */ ((AuthorityTypeEnum2) => {
   AuthorityTypeEnum2[AuthorityTypeEnum2["API"] = 0] = "API";
   AuthorityTypeEnum2[AuthorityTypeEnum2["MENU"] = 1] = "MENU";
@@ -133,7 +133,7 @@ var NotificationCategoryEnum = /* @__PURE__ */ ((NotificationCategoryEnum2) => {
   NotificationCategoryEnum2[NotificationCategoryEnum2["DIALOGUE"] = 1] = "DIALOGUE";
   return NotificationCategoryEnum2;
 })(NotificationCategoryEnum || {});
-const _OAuth2ApplicationService = class _OAuth2ApplicationService extends BaseService {
+const _OAuth2ApplicationService = class _OAuth2ApplicationService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -149,7 +149,7 @@ const _OAuth2ApplicationService = class _OAuth2ApplicationService extends BaseSe
 };
 __publicField(_OAuth2ApplicationService, "instance");
 let OAuth2ApplicationService = _OAuth2ApplicationService;
-const _OAuth2ScopeService = class _OAuth2ScopeService extends BaseService {
+const _OAuth2ScopeService = class _OAuth2ScopeService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -177,7 +177,7 @@ const _OAuth2ScopeService = class _OAuth2ScopeService extends BaseService {
 };
 __publicField(_OAuth2ScopeService, "instance");
 let OAuth2ScopeService = _OAuth2ScopeService;
-const _OAuth2AuthorizationService = class _OAuth2AuthorizationService extends BaseService {
+const _OAuth2AuthorizationService = class _OAuth2AuthorizationService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -193,7 +193,7 @@ const _OAuth2AuthorizationService = class _OAuth2AuthorizationService extends Ba
 };
 __publicField(_OAuth2AuthorizationService, "instance");
 let OAuth2AuthorizationService = _OAuth2AuthorizationService;
-const _OAuth2UserLoggingService = class _OAuth2UserLoggingService extends BaseService {
+const _OAuth2UserLoggingService = class _OAuth2UserLoggingService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -209,7 +209,7 @@ const _OAuth2UserLoggingService = class _OAuth2UserLoggingService extends BaseSe
 };
 __publicField(_OAuth2UserLoggingService, "instance");
 let OAuth2UserLoggingService = _OAuth2UserLoggingService;
-const _OAuth2InterfaceAuditService = class _OAuth2InterfaceAuditService extends BaseService {
+const _OAuth2InterfaceAuditService = class _OAuth2InterfaceAuditService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -225,7 +225,7 @@ const _OAuth2InterfaceAuditService = class _OAuth2InterfaceAuditService extends 
 };
 __publicField(_OAuth2InterfaceAuditService, "instance");
 let OAuth2InterfaceAuditService = _OAuth2InterfaceAuditService;
-const _OAuth2CredentialRecordService = class _OAuth2CredentialRecordService extends BaseService {
+const _OAuth2CredentialRecordService = class _OAuth2CredentialRecordService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -241,7 +241,7 @@ const _OAuth2CredentialRecordService = class _OAuth2CredentialRecordService exte
 };
 __publicField(_OAuth2CredentialRecordService, "instance");
 let OAuth2CredentialRecordService = _OAuth2CredentialRecordService;
-const _SysOrganizationService = class _SysOrganizationService extends BaseService {
+const _SysOrganizationService = class _SysOrganizationService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -257,7 +257,7 @@ const _SysOrganizationService = class _SysOrganizationService extends BaseServic
 };
 __publicField(_SysOrganizationService, "instance");
 let SysOrganizationService = _SysOrganizationService;
-const _SysDepartmentService = class _SysDepartmentService extends BaseService {
+const _SysDepartmentService = class _SysDepartmentService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -273,7 +273,7 @@ const _SysDepartmentService = class _SysDepartmentService extends BaseService {
 };
 __publicField(_SysDepartmentService, "instance");
 let SysDepartmentService = _SysDepartmentService;
-const _SysEmployeeService = class _SysEmployeeService extends BaseService {
+const _SysEmployeeService = class _SysEmployeeService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -316,7 +316,7 @@ const _SysEmployeeService = class _SysEmployeeService extends BaseService {
 };
 __publicField(_SysEmployeeService, "instance");
 let SysEmployeeService = _SysEmployeeService;
-const _SysEmployeeAllocatableService = class _SysEmployeeAllocatableService extends BaseService {
+const _SysEmployeeAllocatableService = class _SysEmployeeAllocatableService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -332,7 +332,7 @@ const _SysEmployeeAllocatableService = class _SysEmployeeAllocatableService exte
 };
 __publicField(_SysEmployeeAllocatableService, "instance");
 let SysEmployeeAllocatableService = _SysEmployeeAllocatableService;
-const _SysPermissionService = class _SysPermissionService extends BaseService {
+const _SysPermissionService = class _SysPermissionService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -348,7 +348,7 @@ const _SysPermissionService = class _SysPermissionService extends BaseService {
 };
 __publicField(_SysPermissionService, "instance");
 let SysPermissionService = _SysPermissionService;
-const _SysRoleService = class _SysRoleService extends BaseService {
+const _SysRoleService = class _SysRoleService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -370,7 +370,7 @@ const _SysRoleService = class _SysRoleService extends BaseService {
 };
 __publicField(_SysRoleService, "instance");
 let SysRoleService = _SysRoleService;
-const _SysUserService = class _SysUserService extends BaseService {
+const _SysUserService = class _SysUserService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -407,7 +407,7 @@ const _SysUserService = class _SysUserService extends BaseService {
 };
 __publicField(_SysUserService, "instance");
 let SysUserService = _SysUserService;
-const _SysAttributeService = class _SysAttributeService extends BaseService {
+const _SysAttributeService = class _SysAttributeService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -423,7 +423,7 @@ const _SysAttributeService = class _SysAttributeService extends BaseService {
 };
 __publicField(_SysAttributeService, "instance");
 let SysAttributeService = _SysAttributeService;
-const _SysDefaultRoleService = class _SysDefaultRoleService extends BaseService {
+const _SysDefaultRoleService = class _SysDefaultRoleService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -439,7 +439,7 @@ const _SysDefaultRoleService = class _SysDefaultRoleService extends BaseService 
 };
 __publicField(_SysDefaultRoleService, "instance");
 let SysDefaultRoleService = _SysDefaultRoleService;
-const _SysElementService = class _SysElementService extends BaseService {
+const _SysElementService = class _SysElementService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -458,7 +458,7 @@ const _SysElementService = class _SysElementService extends BaseService {
 };
 __publicField(_SysElementService, "instance");
 let SysElementService = _SysElementService;
-const _SysTenantDataSourceService = class _SysTenantDataSourceService extends BaseService {
+const _SysTenantDataSourceService = class _SysTenantDataSourceService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -480,7 +480,7 @@ const _SysTenantDataSourceService = class _SysTenantDataSourceService extends Ba
 };
 __publicField(_SysTenantDataSourceService, "instance");
 let SysTenantDataSourceService = _SysTenantDataSourceService;
-const _SysDictionaryService = class _SysDictionaryService extends BaseService {
+const _SysDictionaryService = class _SysDictionaryService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -508,7 +508,7 @@ const _SysDictionaryService = class _SysDictionaryService extends BaseService {
 };
 __publicField(_SysDictionaryService, "instance");
 let SysDictionaryService = _SysDictionaryService;
-const _SocialBindingService = class _SocialBindingService extends BaseService {
+const _SocialBindingService = class _SocialBindingService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -524,7 +524,7 @@ const _SocialBindingService = class _SocialBindingService extends BaseService {
 };
 __publicField(_SocialBindingService, "instance");
 let SocialBindingService = _SocialBindingService;
-const _ExtendedTaskService = class _ExtendedTaskService extends BaseService {
+const _ExtendedTaskService = class _ExtendedTaskService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -554,7 +554,7 @@ const _ExtendedTaskService = class _ExtendedTaskService extends BaseService {
 };
 __publicField(_ExtendedTaskService, "instance");
 let ExtendedTaskService = _ExtendedTaskService;
-const _MgtCertificateService = class _MgtCertificateService extends BaseService {
+const _MgtCertificateService = class _MgtCertificateService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -855,7 +855,7 @@ const _PasskeyApiService = class _PasskeyApiService extends Service {
 };
 __publicField(_PasskeyApiService, "instance");
 let PasskeyApiService = _PasskeyApiService;
-const _DialogueContactService = class _DialogueContactService extends BaseService {
+const _DialogueContactService = class _DialogueContactService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -871,7 +871,7 @@ const _DialogueContactService = class _DialogueContactService extends BaseServic
 };
 __publicField(_DialogueContactService, "instance");
 let DialogueContactService = _DialogueContactService;
-const _DialogueDetailService = class _DialogueDetailService extends BaseService {
+const _DialogueDetailService = class _DialogueDetailService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -893,7 +893,7 @@ const _DialogueDetailService = class _DialogueDetailService extends BaseService 
 };
 __publicField(_DialogueDetailService, "instance");
 let DialogueDetailService = _DialogueDetailService;
-const _NotificationService = class _NotificationService extends BaseService {
+const _NotificationService = class _NotificationService extends AbstractService {
   constructor(config) {
     super(config);
   }
@@ -1050,12 +1050,12 @@ const createApi = (project, clientId, clientSecret, http, oidc) => {
   return ApiResources.getInstance(config);
 };
 export {
+  AbstractService2 as AbstractService,
   ApiResources,
   ApplicationEnum,
   AuthorityTypeEnum,
   Axios,
   Base642 as Base64,
-  BaseService2 as BaseService,
   CaptchaCategoryEnum,
   ConstantEnum,
   ContentTypeEnum2 as ContentTypeEnum,

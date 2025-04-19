@@ -25,7 +25,7 @@ export abstract class Service {
   }
 }
 
-export abstract class BaseService<R extends Entity> extends Service {
+export abstract class AbstractService<R extends Entity> extends Service {
   private getConditionAddress(): string {
     return this.getBaseAddress() + '/condition';
   }

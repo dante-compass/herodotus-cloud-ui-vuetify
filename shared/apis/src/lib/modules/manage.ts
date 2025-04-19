@@ -1,8 +1,8 @@
 import type { AxiosHttpResult, MgtCertificateEntity } from '@/declarations';
 
-import { HttpConfig, BaseService } from '../base';
+import { HttpConfig, AbstractService } from '../base';
 
-class MgtCertificateService extends BaseService<MgtCertificateEntity> {
+class MgtCertificateService extends AbstractService<MgtCertificateEntity> {
   private static instance: MgtCertificateService;
 
   private constructor(config: HttpConfig) {

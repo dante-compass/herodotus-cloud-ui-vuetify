@@ -1609,7 +1609,7 @@ function useModelerCreator() {
     destroy
   };
 }
-function useBpmnTableItems(baseService, sortable, queryParams = {}, loadOnMount = true) {
+function useBpmnTableItems(AbstractService, sortable, queryParams = {}, loadOnMount = true) {
   const loading = ref(false);
   const tableRows = ref([]);
   const totalPages = ref(0);
@@ -1623,7 +1623,7 @@ function useBpmnTableItems(baseService, sortable, queryParams = {}, loadOnMount 
   });
   const findItemsByPage = (pageNumber = 1, pageSize = 10, params = {}) => {
     loading.value = true;
-    baseService.getByPage(
+    AbstractService.getByPage(
       {
         pageNumber: pageNumber - 1,
         pageSize,

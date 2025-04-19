@@ -757,7 +757,7 @@ class Service {
     return this.getParamPath(this.getBaseAddress(), id);
   }
 }
-class BaseService extends Service {
+class AbstractService extends Service {
   getConditionAddress() {
     return this.getBaseAddress() + "/condition";
   }
@@ -797,10 +797,10 @@ class BaseService extends Service {
   }
 }
 export {
+  AbstractService,
   AvatarUtils,
   Axios,
   Base64,
-  BaseService,
   ContentTypeEnum,
   HttpConfig,
   HttpMethodEnum,
