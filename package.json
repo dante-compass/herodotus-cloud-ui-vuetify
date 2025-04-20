@@ -1,6 +1,6 @@
 {
   "name": "herodotus-cloud-ui",
-  "private": true,
+  "private": false,
   "version": "3.4.4.2",
   "type": "module",
   "scripts": {

@@ -1,11 +1,11 @@
 {
   "name": "@herodotus-cloud/bpmn-apis",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "description": "",
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "private": true,
+  "private": false,
   "type": "module",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.mjs",
@@ -18,6 +18,9 @@
     },
     "./dist/assets/style.css": "./dist/assets/css/bpmn-apis.css",
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "files": [
     "dist"
