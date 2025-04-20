@@ -7,9 +7,16 @@
     "preinstall": "npx only-allow pnpm",
     "commit": "git add . && git status && git-cz",
     "push": "pnpm run commit && git push --set-upstream origin develop",
-    "dev": "pnpm run --filter=@dante/ui dev",
-    "prod": "pnpm run --filter=@dante/ui prod",
-    "shared:build": "pnpm -r --filter=@herodotus-cloud/* run build"
+    "dev": "pnpm run --filter=@herodotus/ui dev",
+    "prod": "pnpm run --filter=@herodotus/ui prod",
+    "shared:build": "pnpm -r --filter=@herodotus-cloud/* run build",
+    "pub:changeset": "pnpm changeset",
+    "pub:alpha": "pnpm changeset pre enter alpha",
+    "pub:beta": "pnpm changeset pre enter beta",
+    "pub:rc": "pnpm changeset pre enter rc",
+    "pub:exit-pre": "pnpm changeset pre exit",
+    "pub:version": "pnpm changeset version",
+    "pub:release": "pnpm changeset publish"
   },
   "config": {
     "commitizen": {
