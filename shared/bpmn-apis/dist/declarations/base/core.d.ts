@@ -1,4 +1,4 @@
-import { Entity, Conditions, Pagination } from '@herodotus/core';
+import { Entity, Conditions, Pagination } from '@herodotus-cloud/core';
 export type { SweetAlertResult } from 'sweetalert2';
 export interface BpmnParams extends Conditions {
 }

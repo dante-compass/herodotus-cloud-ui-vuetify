@@ -3,8 +3,8 @@ var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { en
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 import { QDialog, QCard, QCardSection, QSpace, QBtn, QSeparator, copyToClipboard, QItem, QItemSection, QAvatar, QItemLabel, QExpansionItem, QIcon, QBadge, QTooltip, QBtnDropdown, QList, QBtnGroup, QCardActions, QCheckbox, QTable, QInput, QSelect, QTr, QTd, QPopupEdit, QToggle, QDrawer, QScrollArea, useQuasar, QSpinnerGears, QFile, QToolbar, QLayout, QPageContainer, QPage } from "quasar";
 import { markRaw, ref, onMounted, watch, defineComponent, onBeforeUnmount, createElementBlock, openBlock, computed, createBlock, withCtx, createVNode, normalizeStyle, createElementVNode, toDisplayString, createCommentVNode, resolveComponent, createTextVNode, renderSlot, mergeProps, createSlots, normalizeProps, guardReactiveProps, resolveDirective, withDirectives, Fragment, renderList, resolveDynamicComponent, nextTick, withModifiers } from "vue";
-import { lodash, toast, Swal } from "@herodotus/core";
-import { Swal as Swal2, lodash as lodash2, toast as toast2 } from "@herodotus/core";
+import { lodash, toast, Swal } from "@herodotus-cloud/core";
+import { Swal as Swal2, lodash as lodash2, toast as toast2 } from "@herodotus-cloud/core";
 import { getBusinessObject, is, isAny } from "bpmn-js/lib/util/ModelUtil";
 import { getBusinessObject as getBusinessObject2, is as is2, isAny as isAny2 } from "bpmn-js/lib/util/ModelUtil";
 import { add } from "diagram-js/lib/util/Collections";
@@ -38,13 +38,13 @@ import rule_15 from "bpmnlint/rules/sub-process-blank-start-event";
 import rule_16 from "bpmnlint/rules/superfluous-gateway";
 import { isInterrupting, isEventSubProcess, isExpanded } from "bpmn-js/lib/util/DiUtil";
 import { isPlane } from "bpmn-js/lib/util/DrilldownUtil";
-import { BpmnQueryByGetService, DeploymentService } from "@herodotus/bpmn-apis";
+import { BpmnQueryByGetService, DeploymentService } from "@herodotus-cloud/bpmn-apis";
 import BpmnViewer from "bpmn-js/lib/Viewer";
 import hljs from "highlight.js/lib/core";
 import xml from "highlight.js/lib/languages/xml";
 import json from "highlight.js/lib/languages/json";
 import hljsVuePlugin from "@highlightjs/vue-plugin";
-import { HTextField, HSelect } from "@herodotus/components";
+import { HTextField, HSelect } from "@herodotus-cloud/components";
 import BpmnModdle from "bpmn-moddle";
 const _BpmnLog = class _BpmnLog {
   // private static types: string[] = ['primary', 'success', 'warn', 'error', 'info'];

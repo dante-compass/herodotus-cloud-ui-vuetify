@@ -24,7 +24,7 @@ export type {
   QTableOnRequestParameter,
   QUploaderInfo,
   QNotifyPosition,
-} from '@herodotus/core';
+} from '@herodotus-cloud/core';
 export type {
   AbstractEntity,
   AbstractSysEntity,
@@ -113,7 +113,7 @@ export type {
   WebAuthnRegister,
   WebAuthnAuthenticateOptions,
   WebAuthnAuthenticate,
-} from '@herodotus/apis';
+} from '@herodotus-cloud/apis';
 
 export type {
   BucketDomain,
@@ -129,7 +129,7 @@ export type {
   DeletedObjectDomain,
   CreateBucketResult,
   DeleteBucketResult,
-} from '@herodotus/oss-apis';
+} from '@herodotus-cloud/oss-apis';
 
 export type {
   Element,
@@ -143,7 +143,7 @@ export type {
   ProcessSpecificsEntity,
   ProcessSpecificsConditions,
   ProcessCommentsEntity,
-} from '@herodotus/form-apis';
+} from '@herodotus-cloud/form-apis';
 
 export type {
   BpmnQueryByGetService,
@@ -170,9 +170,9 @@ export type {
   TaskQueryParams,
   TaskSortBy,
   Variables,
-} from '@herodotus/bpmn-apis';
+} from '@herodotus-cloud/bpmn-apis';
 
-export type { BpmnDesignerResources } from '@herodotus/bpmn-designer';
+export type { BpmnDesignerResources } from '@herodotus-cloud/bpmn-designer';
 
 export type { EChartsOption, EChartsCoreOption } from 'echarts';
 

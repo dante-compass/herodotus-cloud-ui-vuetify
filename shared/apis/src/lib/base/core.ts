@@ -6,4 +6,4 @@ export {
   AbstractService,
   Service,
   Axios,
-} from '@herodotus/core';
+} from '@herodotus-cloud/core';

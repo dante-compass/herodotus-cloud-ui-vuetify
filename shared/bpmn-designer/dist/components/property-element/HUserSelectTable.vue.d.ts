@@ -51,7 +51,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         headerStyle?: string;
         headerClasses?: string;
     }[];
-    findItems: import('@herodotus/core').QTableOnRequestProps;
+    findItems: import('@herodotus-cloud/core').QTableOnRequestProps;
     onClear: () => void;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     modelValue: {

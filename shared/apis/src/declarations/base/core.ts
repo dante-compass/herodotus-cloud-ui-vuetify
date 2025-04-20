@@ -13,7 +13,7 @@ import type {
   AbstractEntity,
   AbstractSysEntity,
   AbstractAuditEntity,
-} from '@herodotus/core';
+} from '@herodotus-cloud/core';
 
 import { ApplicationEnum } from '@/enums';
 

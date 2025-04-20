@@ -9,7 +9,7 @@
     "push": "pnpm run commit && git push --set-upstream origin develop",
     "dev": "pnpm run --filter=@dante/ui dev",
     "prod": "pnpm run --filter=@dante/ui prod",
-    "shared:build": "pnpm -r --filter=@herodotus/* run build"
+    "shared:build": "pnpm -r --filter=@herodotus-cloud/* run build"
   },
   "config": {
     "commitizen": {

@@ -19,7 +19,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             title: string;
             tag: string;
             attrs: Record<string, any>;
-            models: Record<string, import('@herodotus/form-apis').VModel>;
+            models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
             children?: /*elided*/ any[] | undefined;
             text?: string | undefined;
         };
@@ -42,11 +42,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             required: true;
         };
         elements: {
-            type: import('vue').PropType<Array<import('@herodotus/form-apis').Element>>;
+            type: import('vue').PropType<Array<import('@herodotus-cloud/form-apis').Element>>;
             required: true;
         };
     }>, {
-        getDefaultModel: (item: import('@herodotus/form-apis').Element) => import('@herodotus/form-apis').VModel;
+        getDefaultModel: (item: import('@herodotus-cloud/form-apis').Element) => import('@herodotus-cloud/form-apis').VModel;
         modelObject: import('vue').WritableComputedRef<Record<string, any>, Record<string, any>>;
         state: Record<string, any>;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
@@ -56,7 +56,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             required: true;
         };
         elements: {
-            type: import('vue').PropType<Array<import('@herodotus/form-apis').Element>>;
+            type: import('vue').PropType<Array<import('@herodotus-cloud/form-apis').Element>>;
             required: true;
         };
     }>> & Readonly<{

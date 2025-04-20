@@ -1,2 +1,2 @@
-export { lodash, toast, Swal } from '@herodotus/core';
-export { WIDGET_DEFINITIONS, ElementUtils } from '@herodotus/form-engine';
+export { lodash, toast, Swal } from '@herodotus-cloud/core';
+export { WIDGET_DEFINITIONS, ElementUtils } from '@herodotus-cloud/form-engine';

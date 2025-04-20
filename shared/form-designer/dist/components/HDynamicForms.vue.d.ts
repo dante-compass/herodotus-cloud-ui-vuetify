@@ -58,9 +58,9 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
     height: string;
 }, {}, {
     HWidgetPanel: import('vue').DefineComponent<{}, {
-        widgetGroups: import('@herodotus/form-apis').WidgetDefinition[];
-        cloneWidget: (widget: import('@herodotus/form-apis').Widget) => import('@herodotus/form-apis').Element;
-        addWidget: (widget: import('@herodotus/form-apis').Widget) => void;
+        widgetGroups: import('@herodotus-cloud/form-apis').WidgetDefinition[];
+        cloneWidget: (widget: import('@herodotus-cloud/form-apis').Widget) => import('@herodotus-cloud/form-apis').Element;
+        addWidget: (widget: import('@herodotus-cloud/form-apis').Widget) => void;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
         Draggable: import('vue').DefineComponent<{
             list: {
@@ -140,7 +140,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         formTab: import('vue').Ref<string, string>;
         elementTab: import('vue').Ref<string, string>;
         isInformationPanel: import('vue').ComputedRef<boolean>;
-        currentSchema: import('vue').ComputedRef<import('@herodotus/form-apis').Schema>;
+        currentSchema: import('vue').ComputedRef<import('@herodotus-cloud/form-apis').Schema>;
         currentPanel: import('vue').ComputedRef<string>;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
         HSheetPanel: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
@@ -161,8 +161,8 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     headerStyle?: string;
                     headerClasses?: string;
                 }[];
-                tableRows: import('vue').Ref<import('@herodotus/core').QBaseDataItem<boolean>[], import('@herodotus/core').QBaseDataItem<boolean>[]>;
-                condition: import('@herodotus/form-apis').ConditionVariable;
+                tableRows: import('vue').Ref<import('@herodotus-cloud/core').QBaseDataItem<boolean>[], import('@herodotus-cloud/core').QBaseDataItem<boolean>[]>;
+                condition: import('@herodotus-cloud/form-apis').ConditionVariable;
                 onModify: () => void;
             }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
                 HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -203,7 +203,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         DATE_PICKER: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>, {
@@ -212,10 +212,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 ItemAligned: string;
             };
             properties: import('vue').ComputedRef<Record<string, any>>;
-            models: import('vue').ComputedRef<Record<string, import('@herodotus/form-apis').VModel>>;
+            models: import('vue').ComputedRef<Record<string, import('@herodotus-cloud/form-apis').VModel>>;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>> & Readonly<{}>, {}, {}, {
@@ -292,7 +292,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         PASSWORD: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>, {
@@ -301,10 +301,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 ItemAligned: string;
             };
             properties: import('vue').ComputedRef<Record<string, any>>;
-            models: import('vue').ComputedRef<Record<string, import('@herodotus/form-apis').VModel>>;
+            models: import('vue').ComputedRef<Record<string, import('@herodotus-cloud/form-apis').VModel>>;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>> & Readonly<{}>, {}, {}, {
@@ -381,7 +381,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         TEXT_AREA: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>, {
@@ -390,10 +390,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 ItemAligned: string;
             };
             properties: import('vue').ComputedRef<Record<string, any>>;
-            models: import('vue').ComputedRef<Record<string, import('@herodotus/form-apis').VModel>>;
+            models: import('vue').ComputedRef<Record<string, import('@herodotus-cloud/form-apis').VModel>>;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>> & Readonly<{}>, {}, {}, {
@@ -470,7 +470,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         TEXT_FIELD: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>, {
@@ -479,10 +479,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 ItemAligned: string;
             };
             properties: import('vue').ComputedRef<Record<string, any>>;
-            models: import('vue').ComputedRef<Record<string, import('@herodotus/form-apis').VModel>>;
+            models: import('vue').ComputedRef<Record<string, import('@herodotus-cloud/form-apis').VModel>>;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>> & Readonly<{}>, {}, {}, {
@@ -559,7 +559,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         TIME_PICKER: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>, {
@@ -568,10 +568,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 ItemAligned: string;
             };
             properties: import('vue').ComputedRef<Record<string, any>>;
-            models: import('vue').ComputedRef<Record<string, import('@herodotus/form-apis').VModel>>;
+            models: import('vue').ComputedRef<Record<string, import('@herodotus-cloud/form-apis').VModel>>;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             schema: {
-                type: PropType<import('@herodotus/form-apis').Schema>;
+                type: PropType<import('@herodotus-cloud/form-apis').Schema>;
                 required: true;
             };
         }>> & Readonly<{}>, {}, {}, {
@@ -661,12 +661,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 title: string;
                 tag: string;
                 attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
+                models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
                 children?: /*elided*/ any[] | undefined;
                 text?: string | undefined;
             };
         }[];
-        onSelectedItem: (element: import('@herodotus/form-apis').Element) => void;
+        onSelectedItem: (element: import('@herodotus-cloud/form-apis').Element) => void;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
         Draggable: import('vue').DefineComponent<{
             list: {
@@ -743,7 +743,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         HCanvasElement: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             element: {
-                type: PropType<import('@herodotus/form-apis').Element>;
+                type: PropType<import('@herodotus-cloud/form-apis').Element>;
                 required: true;
             };
             selectedId: {
@@ -752,12 +752,12 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             };
         }>, {
             isHover: import('vue').Ref<boolean, boolean>;
-            schemas: import('vue').ComputedRef<import('@herodotus/form-apis').Schema[]>;
+            schemas: import('vue').ComputedRef<import('@herodotus-cloud/form-apis').Schema[]>;
             isSelected: import('vue').ComputedRef<boolean>;
             onDelete: () => void;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             element: {
-                type: PropType<import('@herodotus/form-apis').Element>;
+                type: PropType<import('@herodotus-cloud/form-apis').Element>;
                 required: true;
             };
             selectedId: {
@@ -770,7 +770,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             }, () => any, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{
                 [x: string]: any;
             }> & Readonly<{}>, {
-                schemas: import('@herodotus/form-apis').Schema[];
+                schemas: import('@herodotus-cloud/form-apis').Schema[];
             }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         HCanvasLayout: import('vue').DefineComponent<{}, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
@@ -795,7 +795,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 title: string;
                 tag: string;
                 attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
+                models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
                 children?: /*elided*/ any[] | undefined;
                 text?: string | undefined;
             };
@@ -818,11 +818,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 required: true;
             };
             elements: {
-                type: PropType<Array<import('@herodotus/form-apis').Element>>;
+                type: PropType<Array<import('@herodotus-cloud/form-apis').Element>>;
                 required: true;
             };
         }>, {
-            getDefaultModel: (item: import('@herodotus/form-apis').Element) => import('@herodotus/form-apis').VModel;
+            getDefaultModel: (item: import('@herodotus-cloud/form-apis').Element) => import('@herodotus-cloud/form-apis').VModel;
             modelObject: import('vue').WritableComputedRef<Record<string, any>, Record<string, any>>;
             state: Record<string, any>;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
@@ -832,7 +832,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 required: true;
             };
             elements: {
-                type: PropType<Array<import('@herodotus/form-apis').Element>>;
+                type: PropType<Array<import('@herodotus-cloud/form-apis').Element>>;
                 required: true;
             };
         }>> & Readonly<{

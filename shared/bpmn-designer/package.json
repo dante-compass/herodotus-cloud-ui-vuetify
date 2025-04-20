@@ -1,5 +1,5 @@
 {
-  "name": "@herodotus/bpmn-designer",
+  "name": "@herodotus-cloud/bpmn-designer",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -30,10 +30,10 @@
   "dependencies": {
     "@bpmn-io/element-template-chooser": "^1.0.0",
     "@bpmn-io/properties-panel": "3.26.4",
-    "@herodotus/bpmn-apis": "workspace:^",
-    "@herodotus/components": "workspace:^",
-    "@herodotus/core": "workspace:^",
-    "@herodotus/form-apis": "workspace:^",
+    "@herodotus-cloud/bpmn-apis": "workspace:^",
+    "@herodotus-cloud/components": "workspace:^",
+    "@herodotus-cloud/core": "workspace:^",
+    "@herodotus-cloud/form-apis": "workspace:^",
     "@highlightjs/vue-plugin": "^2.1.0",
     "bpmn-js": "^18.5.0",
     "bpmn-js-bpmnlint": "^0.23.0",

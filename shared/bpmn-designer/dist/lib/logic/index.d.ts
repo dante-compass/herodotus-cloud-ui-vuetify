@@ -1,1 +1,1 @@
-export { DeploymentService, BpmnQueryByGetService } from '@herodotus/bpmn-apis';
+export { DeploymentService, BpmnQueryByGetService } from '@herodotus-cloud/bpmn-apis';

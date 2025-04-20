@@ -29,7 +29,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
-      name: '@herodotus/components',
+      name: '@herodotus-cloud/components',
       fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
     minify: 'terser',
@@ -50,7 +50,7 @@ export default defineConfig({
         '@tsparticles/engine',
         '@tsparticles/interaction-particles-links',
         '@mdi/js',
-        '@herodotus/core',
+        '@herodotus-cloud/core',
         'lodash-es',
       ],
       output: {
@@ -64,7 +64,7 @@ export default defineConfig({
           '@tsparticles/engine': 'TsparticlesEngine',
           '@tsparticles/interaction-particles-links': 'TsparticlesInteractionParticlesLinkss',
           '@mdi/js': 'MdiJs',
-          '@herodotus/core': 'HerodotusCore',
+          '@herodotus-cloud/core': 'HerodotusCore',
           'lodash-es': 'LodashEs',
         },
       },

@@ -6,13 +6,13 @@ import 'virtual:uno.css';
 import 'animate.css/animate.min.css';
 import './static/styles/index.scss';
 
-import '@herodotus/components/dist/assets/style.css';
-import '@herodotus/bpmn-designer/dist/assets/style.css';
-import '@herodotus/form-designer/dist/assets/style.css';
-import HerodotusComponents from '@herodotus/components';
-import HerodotusBpmnDesigner from '@herodotus/bpmn-designer';
-import HerodotusFormDesigner from '@herodotus/form-designer';
-import HerodotusFormEngine from '@herodotus/form-engine';
+import '@herodotus-cloud/components/dist/assets/style.css';
+import '@herodotus-cloud/bpmn-designer/dist/assets/style.css';
+import '@herodotus-cloud/form-designer/dist/assets/style.css';
+import HerodotusComponents from '@herodotus-cloud/components';
+import HerodotusBpmnDesigner from '@herodotus-cloud/bpmn-designer';
+import HerodotusFormDesigner from '@herodotus-cloud/form-designer';
+import HerodotusFormEngine from '@herodotus-cloud/form-engine';
 
 import DisableDevtool from 'disable-devtool';
 

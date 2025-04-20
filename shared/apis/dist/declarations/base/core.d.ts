@@ -1,4 +1,4 @@
-import { AxiosHttpResult, OAuth2Token, Conditions, Dictionary, EmptyObject, Entity, Page, Pageable, Pagination, Sort, Tree, AbstractEntity, AbstractSysEntity, AbstractAuditEntity } from '@herodotus/core';
+import { AxiosHttpResult, OAuth2Token, Conditions, Dictionary, EmptyObject, Entity, Page, Pageable, Pagination, Sort, Tree, AbstractEntity, AbstractSysEntity, AbstractAuditEntity } from '@herodotus-cloud/core';
 import { ApplicationEnum } from '../../enums';
 export interface BaseAppEntity extends AbstractSysEntity {
     appSecret: string;

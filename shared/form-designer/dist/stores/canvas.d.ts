@@ -22,7 +22,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 title: string;
                 tag: string;
                 attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
+                models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
                 children?: /*elided*/ any[] | undefined;
                 text?: string | undefined;
             };
@@ -48,7 +48,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 title: string;
                 tag: string;
                 attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
+                models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
                 children?: /*elided*/ any[] | undefined;
                 text?: string | undefined;
             };
@@ -79,7 +79,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 title: string;
                 tag: string;
                 attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
+                models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
                 children?: /*elided*/ any[] | undefined;
                 text?: string | undefined;
             };
@@ -105,7 +105,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 title: string;
                 tag: string;
                 attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
+                models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
                 children?: /*elided*/ any[] | undefined;
                 text?: string | undefined;
             };
@@ -136,7 +136,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 title: string;
                 tag: string;
                 attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
+                models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
                 children?: /*elided*/ any[] | undefined;
                 text?: string | undefined;
             };
@@ -162,7 +162,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 title: string;
                 tag: string;
                 attrs: Record<string, any>;
-                models: Record<string, import('@herodotus/form-apis').VModel>;
+                models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
                 children?: /*elided*/ any[] | undefined;
                 text?: string | undefined;
             };
@@ -190,7 +190,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
             title: string;
             tag: string;
             attrs: Record<string, any>;
-            models: Record<string, import('@herodotus/form-apis').VModel>;
+            models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
             children?: /*elided*/ any[] | undefined;
             text?: string | undefined;
         };

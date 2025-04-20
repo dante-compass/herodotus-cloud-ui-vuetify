@@ -1,5 +1,5 @@
 {
-  "name": "@herodotus/bpmn-apis",
+  "name": "@herodotus-cloud/bpmn-apis",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -28,6 +28,6 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@herodotus/core": "workspace:^"
+    "@herodotus-cloud/core": "workspace:^"
   }
 }

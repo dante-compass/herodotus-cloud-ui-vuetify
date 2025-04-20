@@ -1,4 +1,4 @@
-import type { Entity, Conditions, Pagination } from '@herodotus/core';
+import type { Entity, Conditions, Pagination } from '@herodotus-cloud/core';
 
 export type { SweetAlertResult } from 'sweetalert2';
 

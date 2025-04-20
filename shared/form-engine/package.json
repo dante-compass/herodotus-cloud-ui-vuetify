@@ -1,5 +1,5 @@
 {
-  "name": "@herodotus/form-engine",
+  "name": "@herodotus-cloud/form-engine",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -28,7 +28,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@herodotus/form-apis": "workspace:^",
+    "@herodotus-cloud/form-apis": "workspace:^",
     "nanoid": "^5.1.5"
   }
 }

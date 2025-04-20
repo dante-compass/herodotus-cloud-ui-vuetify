@@ -12,15 +12,15 @@ export {
   PKCE,
   standardDeleteNotify,
   parseResponseStatus,
-} from '@herodotus/core';
+} from '@herodotus-cloud/core';
 
-export { createApi } from '@herodotus/apis';
-export { createBpmnApi } from '@herodotus/bpmn-apis';
-export { createFormApi } from '@herodotus/form-apis';
-export { createOssApi } from '@herodotus/oss-apis';
+export { createApi } from '@herodotus-cloud/apis';
+export { createBpmnApi } from '@herodotus-cloud/bpmn-apis';
+export { createFormApi } from '@herodotus-cloud/form-apis';
+export { createOssApi } from '@herodotus-cloud/oss-apis';
 
-export { DeploymentService, GroupService, UserService } from '@herodotus/bpmn-apis';
-export { DynamicFormService } from '@herodotus/form-apis';
+export { DeploymentService, GroupService, UserService } from '@herodotus-cloud/bpmn-apis';
+export { DynamicFormService } from '@herodotus-cloud/form-apis';
 
 export * from './variables';
 export * from './tools';

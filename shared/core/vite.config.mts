@@ -18,7 +18,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
-      name: '@herodotus/core',
+      name: '@herodotus-cloud/core',
       fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
     minify: 'terser',

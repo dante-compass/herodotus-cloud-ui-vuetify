@@ -1,5 +1,5 @@
 {
-  "name": "@herodotus/components",
+  "name": "@herodotus-cloud/components",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -28,7 +28,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@herodotus/core": "workspace:^",
+    "@herodotus-cloud/core": "workspace:^",
     "@mdi/js": "^7.4.47",
     "@tsparticles/basic": "^3.8.1",
     "@tsparticles/engine": "^3.8.1",

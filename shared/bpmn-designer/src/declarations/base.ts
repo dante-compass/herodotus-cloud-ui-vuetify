@@ -5,7 +5,7 @@ import type {
   QTablePaginationProps,
   QTableOnRequestProps,
   QTableColumnProps
-} from '@herodotus/core';
+} from '@herodotus-cloud/core';
 
 import type {
   UserEntity,
@@ -24,9 +24,9 @@ import type {
   BpmnListQueryParams,
   BpmnDeleteQueryParams,
   Page
-} from '@herodotus/bpmn-apis';
+} from '@herodotus-cloud/bpmn-apis';
 
-import type { DynamicFormService } from '@herodotus/form-apis';
+import type { DynamicFormService } from '@herodotus-cloud/form-apis';
 
 export type BpmnAlign = 'left' | 'right' | 'top' | 'bottom' | 'center' | 'middle';
 

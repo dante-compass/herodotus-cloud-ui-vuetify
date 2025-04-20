@@ -1,7 +1,7 @@
 import { QBtn, QTooltip, QIcon, QCard, QCardSection, QSeparator, ClosePopup, QInput, QPopupProxy, QTime, QDate, QSelect, QItem, QItemSection, QItemLabel, QToggle, QTree, QDialog, QSpace, QCardActions, QInnerLoading, QSpinnerDots, Ripple, QSpinnerTail, QSpinnerRings, QSpinnerRadio, QSpinnerPuff, QSpinnerPie, QSpinnerOval, QSpinnerOrbit, QSpinnerIos, QSpinnerInfinity, QSpinnerHourglass, QSpinnerHearts, QSpinnerGrid, QSpinnerGears, QSpinnerFacebook, QSpinnerCube, QSpinnerComment, QSpinnerClock, QSpinnerBox, QSpinnerBars, QSpinnerBall, QSpinnerAudio, QSpinner, QPagination } from "quasar";
 import { defineComponent, createBlock, openBlock, normalizeProps, guardReactiveProps, createSlots, withCtx, renderSlot, createCommentVNode, createTextVNode, toDisplayString, resolveComponent, mergeProps, computed, createVNode, createElementVNode, createElementBlock, resolveDirective, withDirectives, ref, onMounted, watch, normalizeClass, normalizeStyle, reactive, resolveDynamicComponent, nextTick, onUnmounted } from "vue";
-import { lodash, moment } from "@herodotus/core";
-import { lodash as lodash2, moment as moment2 } from "@herodotus/core";
+import { lodash, moment } from "@herodotus-cloud/core";
+import { lodash as lodash2, moment as moment2 } from "@herodotus-cloud/core";
 import * as allIcons from "@mdi/js";
 import { kebabCase } from "lodash-es";
 import { tsParticles } from "@tsparticles/engine";

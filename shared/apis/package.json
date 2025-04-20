@@ -1,5 +1,5 @@
 {
-  "name": "@herodotus/apis",
+  "name": "@herodotus-cloud/apis",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "@github/webauthn-json": "^2.1.1",
-    "@herodotus/core": "workspace:^"
+    "@herodotus-cloud/core": "workspace:^"
   }
 }

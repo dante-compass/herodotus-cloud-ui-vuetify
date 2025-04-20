@@ -11,7 +11,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         ItemAligned: string;
     };
     properties: import('vue').ComputedRef<Record<string, any>>;
-    models: import('vue').ComputedRef<Record<string, import('@herodotus/form-apis').VModel>>;
+    models: import('vue').ComputedRef<Record<string, import('@herodotus-cloud/form-apis').VModel>>;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
     schema: {
         type: PropType<Schema>;
