@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from '../../declarations';
+import { AxiosRequestConfig } from 'axios';
 export declare const getPendingUrl: (config: AxiosRequestConfig) => string;
 export declare class AxiosCanceler {
     /**

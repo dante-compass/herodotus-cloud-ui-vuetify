@@ -47,6 +47,8 @@ export default defineConfig({
         'lodash-es',
         'moment',
         'moment/dist/locale/zh-cn',
+        '@vueuse/integrations',
+        '@vueuse/integrations/useAxios',
       ],
       output: {
         exports: 'named',
@@ -67,6 +69,8 @@ export default defineConfig({
           'lodash-es': 'LodashEs',
           moment: 'Moment',
           'moment/dist/locale/zh-cn': 'MomentDistLocaleZhcn',
+          '@vueuse/integrations': 'VueuseIntegrations',
+          '@vueuse/integrations/useAxios': 'VueuseIntegrationsUseAxios',
         },
       },
     },

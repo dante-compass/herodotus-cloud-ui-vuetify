@@ -1,4 +1,5 @@
-import { Axios } from '../http';
+import { HttpConfigOption } from '../../declarations';
+import { Axios } from './axios';
 declare class HttpConfig {
     private http;
     private project;
@@ -14,7 +15,7 @@ declare class HttpConfig {
     private iotAddress;
     private manageAddress;
     private proxy;
-    constructor(project: string, clientId: string, clientSecret: string, http: Axios, oidc?: boolean, proxy?: string);
+    constructor(http: Axios, options: HttpConfigOption);
     private switch;
     getProject(): string;
     getClientSecret(): string;

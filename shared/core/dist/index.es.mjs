@@ -3,16 +3,22 @@ var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { en
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 import axios from "axios";
 import qs from "qs";
+import { useAxios } from "@vueuse/integrations/useAxios";
 import * as lodash from "lodash-es";
-import { isFunction, isEmpty } from "lodash-es";
+import { isEmpty as isEmpty$1 } from "lodash-es";
+import moment from "moment";
+import { default as default2 } from "moment";
+import "moment/dist/locale/zh-cn";
+import dayjs from "dayjs";
+import { default as default3 } from "dayjs";
+import "dayjs/locale/zh-cn";
+import { assignIn, endsWith, isEmpty, isFunction, merge, partition } from "es-toolkit/compat";
 import { generateFromString } from "generate-avatar";
 import { sm2, sm4 } from "sm-crypto";
 import { Base64 } from "js-base64";
+import { Base64 as Base642 } from "js-base64";
 import Swal from "sweetalert2";
-import { default as default2 } from "sweetalert2";
-import moment from "moment";
-import { default as default3 } from "moment";
-import "moment/dist/locale/zh-cn";
+import { default as default4 } from "sweetalert2";
 import { lib, SHA256, enc } from "crypto-js";
 var ContentTypeEnum = /* @__PURE__ */ ((ContentTypeEnum2) => {
   ContentTypeEnum2[ContentTypeEnum2["URL_ENCODED"] = 0] = "URL_ENCODED";
@@ -35,6 +41,34 @@ var StatusEnum = /* @__PURE__ */ ((StatusEnum2) => {
   StatusEnum2[StatusEnum2["EXPIRED"] = 3] = "EXPIRED";
   return StatusEnum2;
 })(StatusEnum || {});
+var AuthorizationTokenEnum = /* @__PURE__ */ ((AuthorizationTokenEnum2) => {
+  AuthorizationTokenEnum2["BASIC"] = "Basic ";
+  AuthorizationTokenEnum2["BEARER"] = "Bearer ";
+  return AuthorizationTokenEnum2;
+})(AuthorizationTokenEnum || {});
+var AuthorizationGrantTypeEnum = /* @__PURE__ */ ((AuthorizationGrantTypeEnum2) => {
+  AuthorizationGrantTypeEnum2["AUTHORIZATION_CODE"] = "authorization_code";
+  AuthorizationGrantTypeEnum2["REFRESH_TOKEN"] = "refresh_token";
+  AuthorizationGrantTypeEnum2["CLIENT_CREDENTIALS"] = "client_credentials";
+  AuthorizationGrantTypeEnum2["PASSWORD"] = "password";
+  AuthorizationGrantTypeEnum2["SOCIAL_CREDENTIALS"] = "social_credentials";
+  AuthorizationGrantTypeEnum2["WEBAUTHN_CREDENTIALS"] = "webauthn_credentials";
+  AuthorizationGrantTypeEnum2["DEVICE_CODE"] = "urn:ietf:params:oauth:grant-type:device_code";
+  AuthorizationGrantTypeEnum2["JWT_BEARER"] = "urn:ietf:params:oauth:grant-type:jwt-bearer";
+  AuthorizationGrantTypeEnum2["TOKEN_EXCHANGE"] = "urn:ietf:params:oauth:grant-type:token-exchange";
+  return AuthorizationGrantTypeEnum2;
+})(AuthorizationGrantTypeEnum || {});
+moment.locale("zh-cn");
+dayjs.locale("zh-cn");
+const esToolkit = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  assignIn,
+  endsWith,
+  isEmpty,
+  isFunction,
+  merge,
+  partition
+}, Symbol.toStringTag, { value: "Module" }));
 let pendingMap = /* @__PURE__ */ new Map();
 const getPendingUrl = (config) => [config.method, config.url].join("&");
 class AxiosCanceler {
@@ -384,6 +418,172 @@ const parseResponseStatus = (response, message) => {
   }
   return responseStatus;
 };
+class HttpConfig {
+  constructor(http, options) {
+    __publicField(this, "http", {});
+    __publicField(this, "project", "");
+    __publicField(this, "clientId", "");
+    __publicField(this, "clientSecret", "");
+    __publicField(this, "oidc", false);
+    __publicField(this, "uaaAddress", "");
+    __publicField(this, "upmsAddress", "");
+    __publicField(this, "msgAddress", "");
+    __publicField(this, "ossAddress", "");
+    __publicField(this, "bpmnAddress", "");
+    __publicField(this, "cmdbAddress", "");
+    __publicField(this, "iotAddress", "");
+    __publicField(this, "manageAddress", "");
+    __publicField(this, "proxy", "");
+    this.http = http;
+    this.project = options.project;
+    this.clientId = options.clientId;
+    this.clientSecret = options.clientSecret;
+    this.oidc = options.oidc ? options.oidc : false;
+    this.proxy = options.proxy ? options.proxy : "/api";
+    this.switch(options.project);
+  }
+  switch(type) {
+    switch (type) {
+      case "dante":
+        this.uaaAddress = "/dante-cloud-uaa";
+        this.upmsAddress = "/dante-cloud-upms";
+        this.msgAddress = "/dante-cloud-message";
+        this.ossAddress = "/dante-cloud-oss-ability";
+        this.bpmnAddress = "/dante-cloud-bpmn-ability/engine-rest";
+        this.cmdbAddress = "/dante-cloud-cmdb-ability";
+        this.iotAddress = "/dante-cloud-iot-ability";
+        this.manageAddress = "/dante-cloud-manage-ability";
+        break;
+      case "herodotus":
+        this.uaaAddress = "/herodotus-cloud-uaa";
+        this.upmsAddress = "/herodotus-cloud-upms";
+        this.msgAddress = "/herodotus-cloud-message";
+        this.ossAddress = "/herodotus-cloud-oss-ability";
+        this.bpmnAddress = "/herodotus-cloud-bpmn-ability/engine-rest";
+        this.cmdbAddress = "/herodotus-cloud-cmdb-ability";
+        this.iotAddress = "/herodotus-cloud-iot-ability";
+        this.manageAddress = "/herodotus-cloud-manage-ability";
+        break;
+      default:
+        this.uaaAddress = "";
+        this.upmsAddress = "";
+        this.msgAddress = "";
+        this.ossAddress = "";
+        this.bpmnAddress = "/engine-rest";
+        this.cmdbAddress = "";
+        this.iotAddress = "";
+        this.manageAddress = "";
+    }
+  }
+  getProject() {
+    return this.project;
+  }
+  getClientSecret() {
+    return this.clientSecret;
+  }
+  getClientId() {
+    return this.clientId;
+  }
+  isOidc() {
+    return this.oidc;
+  }
+  getProxy() {
+    return this.proxy;
+  }
+  getHttp() {
+    return this.http;
+  }
+  processProxy(content, withProxy = true) {
+    if (withProxy) {
+      return this.proxy + content;
+    } else {
+      return content;
+    }
+  }
+  getUaa(withProxy = true) {
+    return this.processProxy(this.uaaAddress, withProxy);
+  }
+  getUpms(withProxy = true) {
+    return this.processProxy(this.upmsAddress, withProxy);
+  }
+  getMsg(withProxy = true) {
+    return this.processProxy(this.msgAddress, withProxy);
+  }
+  getOss(withProxy = true) {
+    return this.processProxy(this.ossAddress, withProxy);
+  }
+  getBpmn(withProxy = true, isExtended = false) {
+    let result = this.processProxy(this.bpmnAddress, withProxy);
+    if (isExtended) {
+      return lodash.replace(result, "engine-rest", "camunda-extended");
+    } else {
+      return result;
+    }
+  }
+  getCmdb(withProxy = true) {
+    return this.processProxy(this.cmdbAddress, withProxy);
+  }
+  getIot(withProxy = true) {
+    return this.processProxy(this.iotAddress, withProxy);
+  }
+  getManage(withProxy = true) {
+    return this.processProxy(this.manageAddress, withProxy);
+  }
+}
+class Service {
+  constructor(config) {
+    __publicField(this, "config");
+    this.config = config;
+  }
+  getConfig() {
+    return this.config;
+  }
+  getParamPath(path, param) {
+    return path + "/" + param;
+  }
+  getIdPath(id) {
+    return this.getParamPath(this.getBaseAddress(), id);
+  }
+}
+class AbstractService extends Service {
+  getConditionAddress() {
+    return this.getBaseAddress() + "/condition";
+  }
+  getListAddress() {
+    return this.getBaseAddress() + "/list";
+  }
+  getTreeAddress() {
+    return this.getBaseAddress() + "/tree";
+  }
+  fetch(params = {}) {
+    return this.getConfig().getHttp().get(this.getBaseAddress(), params);
+  }
+  fetchByPage(params, others = {}) {
+    if (isEmpty$1(others)) {
+      return this.getConfig().getHttp().get(this.getBaseAddress(), params);
+    } else {
+      const fullParams = Object.assign(params, others);
+      return this.getConfig().getHttp().get(this.getConditionAddress(), fullParams);
+    }
+  }
+  fetchAll(params = {}) {
+    return this.getConfig().getHttp().get(this.getListAddress(), params);
+  }
+  fetchTree(params = {}) {
+    return this.getConfig().getHttp().get(this.getTreeAddress(), params);
+  }
+  saveOrUpdate(data) {
+    return this.getConfig().getHttp().post(this.getBaseAddress(), data);
+  }
+  delete(id) {
+    return this.getConfig().getHttp().delete(this.getIdPath(id));
+  }
+  assign(data) {
+    return this.getConfig().getHttp().put(this.getBaseAddress(), data, {
+      contentType: ContentTypeEnum.URL_ENCODED
+    });
+  }
+}
 const _AvatarUtilities = class _AvatarUtilities {
   constructor() {
   }
@@ -538,7 +738,6 @@ const _Toast = class _Toast {
 __publicField(_Toast, "instance", new _Toast());
 let Toast = _Toast;
 const toast = Toast.getInstance();
-moment.locale("zh-cn");
 const _PkceUtilities = class _PkceUtilities {
   constructor() {
   }
@@ -630,177 +829,116 @@ const _PkceUtilities = class _PkceUtilities {
 __publicField(_PkceUtilities, "instance", new _PkceUtilities());
 let PkceUtilities = _PkceUtilities;
 const PKCE = PkceUtilities.getInstance();
-class HttpConfig {
-  constructor(project, clientId, clientSecret, http, oidc = false, proxy = "/api") {
-    __publicField(this, "http", {});
-    __publicField(this, "project", "");
-    __publicField(this, "clientId", "");
-    __publicField(this, "clientSecret", "");
-    __publicField(this, "oidc", false);
-    __publicField(this, "uaaAddress", "");
-    __publicField(this, "upmsAddress", "");
-    __publicField(this, "msgAddress", "");
-    __publicField(this, "ossAddress", "");
-    __publicField(this, "bpmnAddress", "");
-    __publicField(this, "cmdbAddress", "");
-    __publicField(this, "iotAddress", "");
-    __publicField(this, "manageAddress", "");
-    __publicField(this, "proxy", "");
-    this.project = project;
-    this.clientId = clientId;
-    this.clientSecret = clientSecret;
-    this.http = http;
-    this.oidc = oidc;
-    this.proxy = proxy;
-    this.switch(project);
-  }
-  switch(type) {
-    switch (type) {
-      case "dante":
-        this.uaaAddress = "/dante-cloud-uaa";
-        this.upmsAddress = "/dante-cloud-upms";
-        this.msgAddress = "/dante-cloud-message";
-        this.ossAddress = "/dante-cloud-oss-ability";
-        this.bpmnAddress = "/dante-cloud-bpmn-ability/engine-rest";
-        this.cmdbAddress = "/dante-cloud-cmdb-ability";
-        this.iotAddress = "/dante-cloud-iot-ability";
-        this.manageAddress = "/dante-cloud-manage-ability";
-        break;
-      case "herodotus":
-        this.uaaAddress = "/herodotus-cloud-uaa";
-        this.upmsAddress = "/herodotus-cloud-upms";
-        this.msgAddress = "/herodotus-cloud-message";
-        this.ossAddress = "/herodotus-cloud-oss-ability";
-        this.bpmnAddress = "/herodotus-cloud-bpmn-ability/engine-rest";
-        this.cmdbAddress = "/herodotus-cloud-cmdb-ability";
-        this.iotAddress = "/herodotus-cloud-iot-ability";
-        this.manageAddress = "/herodotus-cloud-manage-ability";
-        break;
+function useHttp(config) {
+  const defaultAxiosConfig = {
+    timeout: 1e3 * 12,
+    paramsSerializer: (data) => {
+      return qs.stringify(data, { arrayFormat: "brackets" });
+    }
+  };
+  const createConfig = () => {
+    if (config) {
+      return assignIn(defaultAxiosConfig, config);
+    } else {
+      return defaultAxiosConfig;
+    }
+  };
+  const getContentType = (contentType) => {
+    switch (contentType) {
+      case ContentTypeEnum.URL_ENCODED:
+        return {
+          "Content-Type": "application/x-www-form-urlencoded"
+        };
+      case ContentTypeEnum.MULTI_PART:
+        return { "Content-Type": "multipart/form-data" };
       default:
-        this.uaaAddress = "";
-        this.upmsAddress = "";
-        this.msgAddress = "";
-        this.ossAddress = "";
-        this.bpmnAddress = "/engine-rest";
-        this.cmdbAddress = "";
-        this.iotAddress = "";
-        this.manageAddress = "";
+        return { "Content-Type": "application/json" };
     }
-  }
-  getProject() {
-    return this.project;
-  }
-  getClientSecret() {
-    return this.clientSecret;
-  }
-  getClientId() {
-    return this.clientId;
-  }
-  isOidc() {
-    return this.oidc;
-  }
-  getProxy() {
-    return this.proxy;
-  }
-  getHttp() {
-    return this.http;
-  }
-  processProxy(content, withProxy = true) {
-    if (withProxy) {
-      return this.proxy + content;
+  };
+  const createHeaderWithBearer = (token, sessionId, tenantId) => {
+    const headers = {
+      Authorization: AuthorizationTokenEnum.BEARER + token
+    };
+    if (sessionId) {
+      headers["X-Herodotus-Session-Id"] = sessionId;
+    }
+    if (tenantId) {
+      headers["X-Herodotus-Tenant-Id"] = tenantId;
+    }
+    return headers;
+  };
+  const createHeaderWithBasic = (clientId, clientSecret, sessionId, tenantId) => {
+    const headers = {
+      Authorization: AuthorizationTokenEnum.BASIC + Base64.encode(clientId + ":" + clientSecret)
+    };
+    if (sessionId) {
+      headers["X-Herodotus-Session-Id"] = sessionId;
+    }
+    if (tenantId) {
+      headers["X-Herodotus-Tenant-Id"] = tenantId;
+    }
+    return headers;
+  };
+  const createHeaders = (contentType, headers) => {
+    const contentTypeHeader = getContentType(contentType);
+    if (headers) {
+      return assignIn({}, contentTypeHeader, headers);
     } else {
-      return content;
+      return contentTypeHeader;
     }
-  }
-  getUaa(withProxy = true) {
-    return this.processProxy(this.uaaAddress, withProxy);
-  }
-  getUpms(withProxy = true) {
-    return this.processProxy(this.upmsAddress, withProxy);
-  }
-  getMsg(withProxy = true) {
-    return this.processProxy(this.msgAddress, withProxy);
-  }
-  getOss(withProxy = true) {
-    return this.processProxy(this.ossAddress, withProxy);
-  }
-  getBpmn(withProxy = true, isExtended = false) {
-    let result = this.processProxy(this.bpmnAddress, withProxy);
-    if (isExtended) {
-      return lodash.replace(result, "engine-rest", "camunda-extended");
-    } else {
-      return result;
+  };
+  const instance = axios.create(createConfig());
+  const request = (url, data = {}, params = {}, method = HttpMethodEnum.GET, contentType = ContentTypeEnum.JSON, headers) => {
+    const { execute } = useAxios(
+      url,
+      { headers: createHeaders(contentType, headers), method },
+      instance,
+      { immediate: false }
+    );
+    const config2 = {};
+    if (data) {
+      config2.data = data;
     }
-  }
-  getCmdb(withProxy = true) {
-    return this.processProxy(this.cmdbAddress, withProxy);
-  }
-  getIot(withProxy = true) {
-    return this.processProxy(this.iotAddress, withProxy);
-  }
-  getManage(withProxy = true) {
-    return this.processProxy(this.manageAddress, withProxy);
-  }
-}
-class Service {
-  constructor(config) {
-    __publicField(this, "config");
-    this.config = config;
-  }
-  getConfig() {
-    return this.config;
-  }
-  getParamPath(path, param) {
-    return path + "/" + param;
-  }
-  getIdPath(id) {
-    return this.getParamPath(this.getBaseAddress(), id);
-  }
-}
-class AbstractService extends Service {
-  getConditionAddress() {
-    return this.getBaseAddress() + "/condition";
-  }
-  getListAddress() {
-    return this.getBaseAddress() + "/list";
-  }
-  getTreeAddress() {
-    return this.getBaseAddress() + "/tree";
-  }
-  fetch(params = {}) {
-    return this.getConfig().getHttp().get(this.getBaseAddress(), params);
-  }
-  fetchByPage(params, others = {}) {
-    if (isEmpty(others)) {
-      return this.getConfig().getHttp().get(this.getBaseAddress(), params);
-    } else {
-      const fullParams = Object.assign(params, others);
-      return this.getConfig().getHttp().get(this.getConditionAddress(), fullParams);
+    if (params) {
+      config2.params = params;
     }
-  }
-  fetchAll(params = {}) {
-    return this.getConfig().getHttp().get(this.getListAddress(), params);
-  }
-  fetchTree(params = {}) {
-    return this.getConfig().getHttp().get(this.getTreeAddress(), params);
-  }
-  saveOrUpdate(data) {
-    return this.getConfig().getHttp().post(this.getBaseAddress(), data);
-  }
-  delete(id) {
-    return this.getConfig().getHttp().delete(this.getIdPath(id));
-  }
-  assign(data) {
-    return this.getConfig().getHttp().put(this.getBaseAddress(), data, {
-      contentType: ContentTypeEnum.URL_ENCODED
+    return new Promise((resolve, reject) => {
+      execute(config2).then((result) => {
+        const data2 = result.response.value;
+        resolve(data2);
+      }).catch((error) => {
+        reject(error);
+      });
     });
-  }
+  };
+  const doGet = (url, params = {}, headers) => {
+    return request(url, "", params, HttpMethodEnum.GET, ContentTypeEnum.JSON, headers);
+  };
+  const doPost = (url, data = {}, contentType = ContentTypeEnum.JSON, params = {}, headers) => {
+    return request(url, data, params, HttpMethodEnum.POST, contentType, headers);
+  };
+  const doPut = (url, data = {}, contentType = ContentTypeEnum.JSON, params = {}) => {
+    return request(url, data, params, HttpMethodEnum.PUT, contentType);
+  };
+  const doDelete = (url, data = {}, contentType = ContentTypeEnum.JSON, params = {}) => {
+    return request(url, data, params, HttpMethodEnum.DELETE, contentType);
+  };
+  return {
+    doGet,
+    doPost,
+    doPut,
+    doDelete,
+    createHeaderWithBearer,
+    createHeaderWithBasic
+  };
 }
 export {
   AbstractService,
+  AuthorizationGrantTypeEnum,
+  AuthorizationTokenEnum,
   AvatarUtils,
   Axios,
-  Base64,
+  Base642 as Base64,
   ContentTypeEnum,
   HttpConfig,
   HttpMethodEnum,
@@ -809,11 +947,14 @@ export {
   SM4Utils,
   Service,
   StatusEnum,
-  default2 as Swal,
+  default4 as Swal,
+  esToolkit as Toolkit,
+  default3 as dayjs,
   lodash,
-  default3 as moment,
+  default2 as moment,
   notify,
   parseResponseStatus,
   standardDeleteNotify,
-  toast
+  toast,
+  useHttp
 };
