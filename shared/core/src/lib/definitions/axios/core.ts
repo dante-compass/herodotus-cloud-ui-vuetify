@@ -22,7 +22,7 @@ import axios from 'axios';
 import qs from 'qs';
 
 import { AxiosCanceler } from './canceler';
-import { isFunction, isEmpty } from 'lodash-es';
+import { Toolkit } from '../../utils';
 
 /**
  * @description:  axios module
@@ -138,7 +138,7 @@ export class Axios {
    */
   private mergeRequestOptions(options?: RequestOptions): RequestOptions {
     const requestOptions = this.getDefaultRequestOptions();
-    if (!isEmpty(options)) {
+    if (!Toolkit.isEmpty(options)) {
       return Object.assign({}, requestOptions, options);
     } else {
       return requestOptions;
@@ -180,7 +180,7 @@ export class Axios {
 
     // 合并 axios request config。把当前请求的 AxiosRequestConfig 与全局 AxiosRequestConfig 整合获得一个完整的 AxiosRequestConfig
     let axiosRequestConfig: RawAxiosRequestConfig = this.mergeRequestConfigs<D>(config);
-    if (beforeRequestHook && isFunction(beforeRequestHook)) {
+    if (beforeRequestHook && Toolkit.isFunction(beforeRequestHook)) {
       // 允许在 beforeRequestHook 中，对 AxiosRequestConfig 进行一些额外的设置
       axiosRequestConfig = beforeRequestHook(axiosRequestConfig, requestOptions);
     }
@@ -194,7 +194,7 @@ export class Axios {
     }
 
     axiosRequestConfig.url = url;
-    if (!isEmpty(axiosRequestConfig.data)) {
+    if (!Toolkit.isEmpty(axiosRequestConfig.data)) {
       axiosRequestConfig.data = policy.dataConvert(axiosRequestConfig.data);
     }
 
@@ -382,7 +382,7 @@ export class Axios {
       this.getAxiosInstance()
         .request<HttpResult<T>, AxiosResponse<HttpResult<T>>, D>(config)
         .then((response: AxiosResponse<HttpResult<T>>) => {
-          if (transformRequestHook && isFunction(transformRequestHook)) {
+          if (transformRequestHook && Toolkit.isFunction(transformRequestHook)) {
             const result = transformRequestHook(response, options);
             resolve(result);
           } else {
@@ -390,7 +390,7 @@ export class Axios {
           }
         })
         .catch((error: AxiosError) => {
-          if (requestCatchHook && isFunction(requestCatchHook)) {
+          if (requestCatchHook && Toolkit.isFunction(requestCatchHook)) {
             reject(requestCatchHook(error, options));
           } else {
             reject(error);
