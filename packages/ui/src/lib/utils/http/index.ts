@@ -1,11 +1,15 @@
-import type { AxiosResponse, InternalAxiosRequestConfig, AxiosError, AxiosInstance } from 'axios';
 import type {
   AxiosTransform,
   AxiosHttpResult,
   RequestOptions,
   HttpResult,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+  AxiosError,
+  AxiosInstance,
   BpmnDesignerResources,
   FormDesignerResources,
+  HttpConfigOption,
 } from '@/lib/declarations';
 
 import qs from 'qs';
@@ -91,7 +95,7 @@ const transform: AxiosTransform = {
   requestInterceptors(config: InternalAxiosRequestConfig) {
     const headers = getSystemHeaders();
 
-    Object.keys(headers).forEach(key => {
+    Object.keys(headers).forEach((key) => {
       if (config.headers && !config.headers[key]) {
         config.headers[key] = headers[key];
       }
@@ -143,29 +147,20 @@ export const http = new Axios(
   },
 );
 
-export const api = createApi(
-  variables.getProject(),
-  variables.getClientId(),
-  variables.getClientSecret(),
-  http,
-  variables.isUseOidc(),
-);
+const options: HttpConfigOption = {
+  project: variables.getProject(),
+  clientId: variables.getClientId(),
+  clientSecret: variables.getClientSecret(),
+  oidc: variables.isUseOidc(),
+};
 
-export const bpmnApi = createBpmnApi(
-  variables.getProject(),
-  variables.getClientId(),
-  variables.getClientSecret(),
-  http,
-);
+export const api = createApi(http, options);
 
-export const formApi = createFormApi(
-  variables.getProject(),
-  variables.getClientId(),
-  variables.getClientSecret(),
-  http,
-);
+export const bpmnApi = createBpmnApi(http, options);
 
-export const ossApi = createOssApi(variables.getProject(), variables.getClientId(), variables.getClientSecret(), http);
+export const formApi = createFormApi(http, options);
+
+export const ossApi = createOssApi(http, options);
 
 class BpmnDesignerStorage implements BpmnDesignerResources {
   private static instance: BpmnDesignerStorage;
