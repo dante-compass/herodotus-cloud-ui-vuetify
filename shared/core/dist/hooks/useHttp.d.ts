@@ -1,5 +1,4 @@
-import { CreateAxiosDefaults } from 'axios';
-import { AxiosHttpResult } from '../declarations';
+import { AxiosHttpResult, CreateAxiosDefaults } from '../declarations';
 import { ContentTypeEnum } from '../enums';
 /**
  * Http 请求 Hooks

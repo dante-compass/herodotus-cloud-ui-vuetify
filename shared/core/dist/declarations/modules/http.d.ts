@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { AxiosResponse } from '../base';
 import { AccessTokenResponse, DeviceAuthorizationResponse } from './oauth2';
 import { HttpMethodEnum } from '../../enums';
 export type HttpMethod = keyof typeof HttpMethodEnum;

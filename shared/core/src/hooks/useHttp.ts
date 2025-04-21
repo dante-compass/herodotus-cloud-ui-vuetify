@@ -1,5 +1,11 @@
-import type { CreateAxiosDefaults, AxiosRequestConfig, AxiosResponse } from 'axios';
-import type { AxiosHttpResult, HttpResult } from '@/declarations';
+import type {
+  AxiosHttpResult,
+  HttpResult,
+  CreateAxiosDefaults,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from '@/declarations';
+
 import axios from 'axios';
 import qs from 'qs';
 import { useAxios } from '@vueuse/integrations/useAxios';

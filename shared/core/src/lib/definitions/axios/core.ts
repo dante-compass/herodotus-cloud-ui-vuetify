@@ -1,19 +1,16 @@
 import type {
-  AxiosInstance,
-  AxiosResponse,
-  AxiosError,
-  ParamsSerializerOptions,
-  RawAxiosRequestConfig,
-  InternalAxiosRequestConfig,
-} from 'axios';
-
-import type {
   HttpResult,
   AxiosTransform,
   AxiosHttpResult,
   AxiosRequestPolicy,
   RequestOptions,
   Policy,
+  AxiosInstance,
+  AxiosResponse,
+  AxiosError,
+  ParamsSerializerOptions,
+  RawAxiosRequestConfig,
+  InternalAxiosRequestConfig,
 } from '@/declarations';
 
 import { ContentTypeEnum, HttpMethodEnum } from '@/enums';

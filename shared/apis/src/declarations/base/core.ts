@@ -1,9 +1,8 @@
 import type {
   AxiosHttpResult,
-  OAuth2Token,
+  AccessTokenResponse,
   Conditions,
   Dictionary,
-  EmptyObject,
   Entity,
   Page,
   Pageable,
@@ -13,6 +12,7 @@ import type {
   AbstractEntity,
   AbstractSysEntity,
   AbstractAuditEntity,
+  HttpConfigOption,
 } from '@herodotus-cloud/core';
 
 import { ApplicationEnum } from '@/enums';
@@ -32,10 +32,9 @@ export interface BaseCmdbEntity extends AbstractSysEntity {
 
 export type {
   AxiosHttpResult,
-  OAuth2Token,
+  AccessTokenResponse,
   Conditions,
   Dictionary,
-  EmptyObject,
   Entity,
   Page,
   Pageable,
@@ -45,4 +44,5 @@ export type {
   AbstractEntity,
   AbstractSysEntity,
   AbstractAuditEntity,
+  HttpConfigOption,
 };

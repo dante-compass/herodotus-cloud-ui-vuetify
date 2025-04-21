@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig, Canceler } from 'axios';
+import type { AxiosRequestConfig, Canceler } from '@/declarations';
 
 import axios from 'axios';
 import { Toolkit } from '../../utils';

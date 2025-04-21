@@ -1,4 +1,4 @@
-import { RawAxiosRequestConfig, RawAxiosRequestHeaders, AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { RawAxiosRequestConfig, RawAxiosRequestHeaders, AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from '../base';
 import { HttpResult, AxiosHttpResult } from '../modules';
 import { ContentTypeEnum } from '../../enums';
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;

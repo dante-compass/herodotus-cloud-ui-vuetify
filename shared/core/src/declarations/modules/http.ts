@@ -1,4 +1,4 @@
-import type { AxiosResponse } from 'axios';
+import type { AxiosResponse } from '../base';
 import type { AccessTokenResponse, DeviceAuthorizationResponse } from './oauth2';
 
 import { HttpMethodEnum } from '@/enums';
