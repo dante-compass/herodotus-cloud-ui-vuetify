@@ -1,5 +1,13 @@
 # @herodotus-cloud/oss-apis
 
+## 0.0.5
+
+### Patch Changes
+
+- core 模块调整完成
+- Updated dependencies
+  - @herodotus-cloud/core@0.0.5
+
 ## 0.0.4
 
 ### Patch Changes

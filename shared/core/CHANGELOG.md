@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 0.0.5
+
+### Patch Changes
+
+- core 模块调整完成
+
 ## 0.0.4
 
 ### Patch Changes
