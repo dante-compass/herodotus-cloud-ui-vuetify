@@ -1,3 +1,4 @@
+import { HttpConfigOption } from '../declarations';
 import { Axios, HttpConfig } from './base';
 import { OpenApiService, OAuth2ApiService, PasskeyApiService } from './secure';
 import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService } from './modules';
@@ -37,5 +38,5 @@ export declare class ApiResources {
     mgtCertificate(): MgtCertificateService;
     passkey(): PasskeyApiService;
 }
-declare const createApi: (project: string, clientId: string, clientSecret: string, http: Axios, oidc: boolean) => ApiResources;
+declare const createApi: (http: Axios, options: HttpConfigOption) => ApiResources;
 export { createApi };

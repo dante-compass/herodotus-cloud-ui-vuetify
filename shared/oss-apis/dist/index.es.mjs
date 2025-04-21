@@ -400,8 +400,8 @@ const _OssApiResources = class _OssApiResources {
 };
 __publicField(_OssApiResources, "instance");
 let OssApiResources = _OssApiResources;
-const createOssApi = (project, clientId, clientSecret, http) => {
-  const config = new HttpConfig(project, clientId, clientSecret, http);
+const createOssApi = (http, options) => {
+  const config = new HttpConfig(http, options);
   return OssApiResources.getInstance(config);
 };
 export {

@@ -1045,8 +1045,8 @@ const _ApiResources = class _ApiResources {
 };
 __publicField(_ApiResources, "instance");
 let ApiResources = _ApiResources;
-const createApi = (project, clientId, clientSecret, http, oidc) => {
-  const config = new HttpConfig(project, clientId, clientSecret, http, oidc);
+const createApi = (http, options) => {
+  const config = new HttpConfig(http, options);
   return ApiResources.getInstance(config);
 };
 export {

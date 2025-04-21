@@ -1225,8 +1225,8 @@ const _BpmnApiResources = class _BpmnApiResources {
 };
 __publicField(_BpmnApiResources, "instance");
 let BpmnApiResources = _BpmnApiResources;
-const createBpmnApi = (project, clientId, clientSecret, http) => {
-  const config = new HttpConfig(project, clientId, clientSecret, http);
+const createBpmnApi = (http, options) => {
+  const config = new HttpConfig(http, options);
   return BpmnApiResources.getInstance(config);
 };
 export {

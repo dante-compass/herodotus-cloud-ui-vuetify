@@ -1,3 +1,4 @@
+import { HttpConfigOption } from '../declarations';
 import { Axios, HttpConfig } from './base';
 import { BucketService, ObjectService, MultipartUploadService } from './integration';
 import { MinioBucketSettingService, MinioBucketEncryptionService, MinioBucketPolicyService, MinioBucketTagsService, MinioBucketQuotaService, MinioBucketVersioningService, MinioObjectLockConfigurationService, MinioObjectSettingService, MinioObjectTagsService, MinioObjectRetentionService, MinioObjectLegalHoldService } from './modules';
@@ -22,5 +23,5 @@ export declare class OssApiResources {
     minioObjectRetention(): MinioObjectRetentionService;
     minioObjectLegalHold(): MinioObjectLegalHoldService;
 }
-declare const createOssApi: (project: string, clientId: string, clientSecret: string, http: Axios) => OssApiResources;
+declare const createOssApi: (http: Axios, options: HttpConfigOption) => OssApiResources;
 export { createOssApi };

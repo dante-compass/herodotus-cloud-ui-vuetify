@@ -105,8 +105,8 @@ const _FormApiResources = class _FormApiResources {
 };
 __publicField(_FormApiResources, "instance");
 let FormApiResources = _FormApiResources;
-const createFormApi = (project, clientId, clientSecret, http) => {
-  const config = new HttpConfig(project, clientId, clientSecret, http);
+const createFormApi = (http, options) => {
+  const config = new HttpConfig(http, options);
   return FormApiResources.getInstance(config);
 };
 export {
