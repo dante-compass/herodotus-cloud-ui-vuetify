@@ -1,5 +1,5 @@
 import type { QTableProps, QNotifyCreateOptions } from 'quasar';
-import type { ParametersType } from './core';
+import type { ParametersType } from '../modules';
 
 export type QTableSeparatorProps = QTableProps['separator'];
 

@@ -1,4 +1,4 @@
-import type { AxiosRequestConfig, Canceler } from '@/declarations';
+import type { AxiosRequestConfig, Canceler } from 'axios';
 
 import axios from 'axios';
 import { isFunction } from 'lodash-es';

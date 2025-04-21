@@ -1,4 +1,5 @@
-import { Axios } from '../http';
+import type { HttpConfigOption } from '@/declarations';
+import { Axios } from './axios';
 import { lodash } from '../utils';
 
 class HttpConfig {
@@ -17,22 +18,16 @@ class HttpConfig {
   private manageAddress = '';
   private proxy = '';
 
-  public constructor(
-    project: string,
-    clientId: string,
-    clientSecret: string,
-    http: Axios,
-    oidc = false,
-    proxy = '/api',
-  ) {
-    this.project = project;
-    this.clientId = clientId;
-    this.clientSecret = clientSecret;
+  public constructor(http: Axios, options: HttpConfigOption) {
     this.http = http;
-    this.oidc = oidc;
-    this.proxy = proxy;
-    this.switch(project);
+    this.project = options.project;
+    this.clientId = options.clientId;
+    this.clientSecret = options.clientSecret;
+    this.oidc = options.oidc ? options.oidc : false;
+    this.proxy = options.proxy ? options.proxy : '/api';
+    this.switch(options.project);
   }
+
   private switch(type: string) {
     switch (type) {
       case 'dante':

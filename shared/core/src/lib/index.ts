@@ -1,4 +1,4 @@
-export * from './base';
+export * from './plugins';
 export * from './config';
-export * from './http';
+export * from './utilities';
 export * from './utils';

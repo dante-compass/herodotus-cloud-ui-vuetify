@@ -1,2 +1,2 @@
-export * from './axios';
+export * from './core';
 export * from './response';
