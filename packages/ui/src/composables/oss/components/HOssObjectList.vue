@@ -104,7 +104,7 @@ import {
   HSimpleUploader,
 } from '@/components';
 import { useBaseTable } from '@/hooks';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { ossApi, lodash, toast, standardDeleteNotify } from '@/lib/utils';
 import { useOssDownload } from '../hooks';
 

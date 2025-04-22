@@ -45,7 +45,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { api } from '@/lib/utils';
 import { useTable } from '@/hooks';
 

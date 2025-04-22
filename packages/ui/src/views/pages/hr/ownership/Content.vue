@@ -49,7 +49,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { lodash, toast, api } from '@/lib/utils';
 import { useTable, useTableItem, useEditFinish } from '@/hooks';
 

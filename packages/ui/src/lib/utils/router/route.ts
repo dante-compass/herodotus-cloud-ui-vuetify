@@ -6,7 +6,7 @@ import type {
 } from 'vue-router';
 
 import { lodash } from '../base';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 class RouteUtilities {
   private static instance = new RouteUtilities();

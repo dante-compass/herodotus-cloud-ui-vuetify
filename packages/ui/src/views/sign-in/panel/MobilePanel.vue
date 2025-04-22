@@ -113,7 +113,7 @@ import { useRouter } from 'vue-router';
 import { required, helpers } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import { useApplicationStore, useAuthenticationStore } from '@/stores';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { toast, api } from '@/lib/utils';
 
 export default defineComponent({

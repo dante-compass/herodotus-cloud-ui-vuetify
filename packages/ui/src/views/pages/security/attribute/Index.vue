@@ -55,7 +55,8 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS, useDictionary } from '@/composables/constants';
+import { useDictionary } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { lodash, api } from '@/lib/utils';
 import { useTable } from '@/hooks';
 

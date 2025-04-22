@@ -42,7 +42,7 @@ import type {
   DeleteBucketResult,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { moment, toast, standardDeleteNotify, ossApi } from '@/lib/utils';
 
 import { useBaseTable } from '@/hooks';

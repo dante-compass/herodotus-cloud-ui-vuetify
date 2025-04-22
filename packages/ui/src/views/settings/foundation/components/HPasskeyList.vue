@@ -42,7 +42,7 @@ import type {
   HttpResult,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { api, moment, toast, standardDeleteNotify } from '@/lib/utils';
 import { useTable, usePasskey } from '@/hooks';
 import { useAuthenticationStore } from '@/stores';

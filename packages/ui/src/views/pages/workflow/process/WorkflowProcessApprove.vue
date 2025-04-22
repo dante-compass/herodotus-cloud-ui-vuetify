@@ -37,7 +37,7 @@ import type { Sheet, ProcessCommentsEntity, Variables } from '@/lib/declarations
 
 import { useBpmnProcess } from '@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '@/components';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { useAuthenticationStore } from '@/stores';
 import { lodash, formApi, bpmnApi, toast } from '@/lib/utils';
 

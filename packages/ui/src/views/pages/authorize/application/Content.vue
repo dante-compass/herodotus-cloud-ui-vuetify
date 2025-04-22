@@ -202,7 +202,8 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS, HDictionarySelect, useDictionary } from '@/composables/constants';
+import { HDictionarySelect, useDictionary } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { HAuthorizeLayout } from '@/composables/authorize';
 import { api, lodash } from '@/lib/utils';
 import { useTableItem, useTable, useEditFinish } from '@/hooks';

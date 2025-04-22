@@ -6,7 +6,7 @@
 import type { PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 import HDenseIconButton from './HDenseIconButton.vue';
 import { lodash } from '@/lib/utils';

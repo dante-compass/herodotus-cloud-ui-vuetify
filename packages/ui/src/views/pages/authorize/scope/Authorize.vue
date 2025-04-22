@@ -40,7 +40,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { api, toast } from '@/lib/utils';
 import { useTableItem, useTable, useEditFinish } from '@/hooks';
 

@@ -40,7 +40,7 @@ import type {
   ProcessSpecificsConditions,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 import { api, bpmnApi } from '@/lib/utils';
 import { useBaseTable } from '@/hooks';

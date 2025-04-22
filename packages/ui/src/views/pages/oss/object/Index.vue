@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 import { HOssBucketList, HOssObjectList } from '@/composables/oss';
 

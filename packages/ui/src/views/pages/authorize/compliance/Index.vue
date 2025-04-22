@@ -44,7 +44,7 @@ import type {
   EntityTitle,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { moment, api } from '@/lib/utils';
 import { useTable, useXlsx } from '@/hooks';
 

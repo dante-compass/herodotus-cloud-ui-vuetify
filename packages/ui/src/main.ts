@@ -21,7 +21,7 @@ import { setupStore, setupQuasar, setupI18n, setupUploader } from '@/plugins';
 import { setupRouter } from './routers';
 
 import { variables } from '@/lib/utils';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 if (typeof (window as any).global === 'undefined') {
   (window as any).global = window;

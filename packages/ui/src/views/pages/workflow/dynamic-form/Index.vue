@@ -39,7 +39,7 @@ import type {
   DynamicFormConditions,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { formApi, toast, standardDeleteNotify } from '@/lib/utils';
 import { useBaseTable } from '@/hooks';
 

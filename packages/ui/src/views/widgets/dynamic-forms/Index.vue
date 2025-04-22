@@ -11,7 +11,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { FormDesignerInstance } from '@/lib/utils';
 
 import { useEditFinish, useBaseTableItem } from '@/hooks';
