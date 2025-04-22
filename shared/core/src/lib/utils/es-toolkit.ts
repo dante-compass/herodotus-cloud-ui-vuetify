@@ -1,1 +1,9 @@
-export { assignIn, isEmpty, isFunction, endsWith, merge, partition } from 'es-toolkit/compat';
+export {
+  assignIn,
+  endsWith,
+  isEmpty,
+  isFunction,
+  merge,
+  partition,
+  toUpper,
+} from 'es-toolkit/compat';

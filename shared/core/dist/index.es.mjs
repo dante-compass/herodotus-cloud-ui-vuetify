@@ -11,7 +11,7 @@ import "moment/dist/locale/zh-cn";
 import dayjs from "dayjs";
 import { default as default3 } from "dayjs";
 import "dayjs/locale/zh-cn";
-import { assignIn, endsWith, isEmpty, isFunction, merge, partition } from "es-toolkit/compat";
+import { assignIn, endsWith, isEmpty, isFunction, merge, partition, toUpper } from "es-toolkit/compat";
 import { generateFromString } from "generate-avatar";
 import { sm2, sm4 } from "sm-crypto";
 import { Base64 } from "js-base64";
@@ -66,7 +66,8 @@ const esToolkit = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePro
   isEmpty,
   isFunction,
   merge,
-  partition
+  partition,
+  toUpper
 }, Symbol.toStringTag, { value: "Module" }));
 let pendingMap = /* @__PURE__ */ new Map();
 const getPendingUrl = (config) => [config.method, config.url].join("&");
@@ -416,6 +417,32 @@ const parseResponseStatus = (response, message) => {
     }
   }
   return responseStatus;
+};
+const logResponse = (response) => {
+  if (process.env.NODE_ENV === "development") {
+    const randomColor = `rgba(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(
+      Math.random() * 255
+    )})`;
+    console.log(
+      "%c┍------------------------------------------------------------------------------------------┑",
+      `color:${randomColor};`
+    );
+    console.log("| 请求地址：", response.config.url);
+    console.log("| 请求类型：", toUpper(response.config.method));
+    console.log("| 请求参数：", qs.parse(response.config.params));
+    console.log("| 响应数据：", response.data);
+    console.log(
+      "%c┕------------------------------------------------------------------------------------------┙",
+      `color:${randomColor};`
+    );
+  }
+};
+const isSuccess = (response) => {
+  if (response && response.status) {
+    return /^(2|3)\d{2}$/.test(String(response.status));
+  } else {
+    return false;
+  }
 };
 class HttpConfig {
   constructor(http, options) {
@@ -949,7 +976,9 @@ export {
   StatusEnum,
   default4 as Swal,
   esToolkit as Toolkit,
+  isSuccess,
   lodash,
+  logResponse,
   default2 as moment,
   notify,
   parseResponseStatus,

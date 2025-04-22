@@ -1,5 +1,9 @@
 import type { AxiosResponse, ResponseStatus } from '@/declarations';
 
+import { Toolkit } from '../../utils';
+
+import qs from 'qs';
+
 export const parseResponseStatus = (
   response: AxiosResponse<any>,
   message?: string,
@@ -24,4 +28,32 @@ export const parseResponseStatus = (
   }
 
   return responseStatus;
+};
+
+export const logResponse = (response: AxiosResponse<any>) => {
+  if (process.env.NODE_ENV === 'development') {
+    const randomColor = `rgba(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(
+      Math.random() * 255,
+    )})`;
+    console.log(
+      '%c┍------------------------------------------------------------------------------------------┑',
+      `color:${randomColor};`,
+    );
+    console.log('| 请求地址：', response.config.url);
+    console.log('| 请求类型：', Toolkit.toUpper(response.config.method));
+    console.log('| 请求参数：', qs.parse(response.config.params));
+    console.log('| 响应数据：', response.data);
+    console.log(
+      '%c┕------------------------------------------------------------------------------------------┙',
+      `color:${randomColor};`,
+    );
+  }
+};
+
+export const isSuccess = (response: AxiosResponse<any>) => {
+  if (response && response.status) {
+    return /^(2|3)\d{2}$/.test(String(response.status));
+  } else {
+    return false;
+  }
 };

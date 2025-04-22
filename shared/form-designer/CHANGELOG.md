@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 0.0.7
+
+### Patch Changes
+
+- 部分请求工具方法迁移至模块
+- Updated dependencies
+  - @herodotus-cloud/form-engine@0.0.7
+  - @herodotus-cloud/components@0.0.7
+  - @herodotus-cloud/form-apis@0.0.7
+  - @herodotus-cloud/core@0.0.7
+
 ## 0.0.6
 
 ### Patch Changes
