@@ -6,7 +6,6 @@ import 'virtual:uno.css';
 import 'animate.css/animate.min.css';
 
 import './static/styles/index.scss';
-import 'sweetalert2/dist/sweetalert2.min.css';
 
 import '@herodotus-cloud/components/dist/assets/style.css';
 import '@herodotus-cloud/bpmn-designer/dist/assets/style.css';
