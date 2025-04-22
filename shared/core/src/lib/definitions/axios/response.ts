@@ -31,23 +31,21 @@ export const parseResponseStatus = (
 };
 
 export const logResponse = (response: AxiosResponse<any>) => {
-  if (process.env.NODE_ENV === 'development') {
-    const randomColor = `rgba(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(
-      Math.random() * 255,
-    )})`;
-    console.log(
-      '%c┍------------------------------------------------------------------------------------------┑',
-      `color:${randomColor};`,
-    );
-    console.log('| 请求地址：', response.config.url);
-    console.log('| 请求类型：', Toolkit.toUpper(response.config.method));
-    console.log('| 请求参数：', qs.parse(response.config.params));
-    console.log('| 响应数据：', response.data);
-    console.log(
-      '%c┕------------------------------------------------------------------------------------------┙',
-      `color:${randomColor};`,
-    );
-  }
+  const randomColor = `rgba(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(
+    Math.random() * 255,
+  )})`;
+  console.log(
+    '%c┍------------------------------------------------------------------------------------------┑',
+    `color:${randomColor};`,
+  );
+  console.log('| 请求地址：', response.config.url);
+  console.log('| 请求类型：', Toolkit.toUpper(response.config.method));
+  console.log('| 请求参数：', qs.parse(response.config.params));
+  console.log('| 响应数据：', response.data);
+  console.log(
+    '%c┕------------------------------------------------------------------------------------------┙',
+    `color:${randomColor};`,
+  );
 };
 
 export const isSuccess = (response: AxiosResponse<any>) => {

@@ -1,5 +1,16 @@
 # @herodotus-cloud/bpmn-designer
 
+## 0.0.8
+
+### Patch Changes
+
+- 去除 logResponse 方法环境条件配置
+- Updated dependencies
+  - @herodotus-cloud/components@0.0.8
+  - @herodotus-cloud/bpmn-apis@0.0.8
+  - @herodotus-cloud/form-apis@0.0.8
+  - @herodotus-cloud/core@0.0.8
+
 ## 0.0.7
 
 ### Patch Changes
