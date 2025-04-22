@@ -1,5 +1,13 @@
 # @herodotus-cloud/bpmn-apis
 
+## 0.0.6
+
+### Patch Changes
+
+- 模块化验证完成
+- Updated dependencies
+  - @herodotus-cloud/core@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes

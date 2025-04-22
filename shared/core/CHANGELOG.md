@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 0.0.6
+
+### Patch Changes
+
+- 模块化验证完成
+
 ## 0.0.5
 
 ### Patch Changes
