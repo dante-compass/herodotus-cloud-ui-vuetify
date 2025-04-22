@@ -12,10 +12,8 @@ import type {
   HttpConfigOption,
 } from '@/lib/declarations';
 
-import qs from 'qs';
 import { ContentTypeEnum } from '@/lib/definitions';
 import {
-  lodash,
   variables,
   createApi,
   createBpmnApi,
@@ -26,38 +24,12 @@ import {
   GroupService,
   UserService,
   DynamicFormService,
+  logResponse,
+  isSuccess,
 } from '../base';
 
 import { getSystemHeaders } from '@/stores';
 import { processor } from './status';
-
-const logResponse = (response: AxiosResponse<any>) => {
-  if (process.env.NODE_ENV === 'development') {
-    const randomColor = `rgba(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(
-      Math.random() * 255,
-    )})`;
-    console.log(
-      '%c┍------------------------------------------------------------------------------------------┑',
-      `color:${randomColor};`,
-    );
-    console.log('| 请求地址：', response.config.url);
-    console.log('| 请求类型：', lodash.toUpper(response.config.method));
-    console.log('| 请求参数：', qs.parse(response.config.params));
-    console.log('| 响应数据：', response.data);
-    console.log(
-      '%c┕------------------------------------------------------------------------------------------┙',
-      `color:${randomColor};`,
-    );
-  }
-};
-
-const isSuccess = (response: AxiosResponse<any>) => {
-  if (response && response.status) {
-    return /^(2|3)\d{2}$/.test(String(response.status));
-  } else {
-    return false;
-  }
-};
 
 const transform: AxiosTransform = {
   // 请求之前处理config
@@ -108,7 +80,9 @@ const transform: AxiosTransform = {
    * @description: 响应拦截器处理
    */
   responseInterceptors(response: AxiosResponse<any>): Promise<any> {
-    logResponse(response);
+    if (process.env.NODE_ENV === 'development') {
+      logResponse(response);
+    }
     // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
     // 否则的话抛出错误
     if (isSuccess(response)) {

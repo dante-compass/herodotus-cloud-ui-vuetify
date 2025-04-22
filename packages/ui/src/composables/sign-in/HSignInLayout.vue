@@ -24,7 +24,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 
-import { getColorPalette, mixColor } from '@/lib/utils';
+import { getColorPalette, mixColor } from './color';
 import { variables } from '@/lib/utils';
 import { useSettingsStore } from '@/stores';
 

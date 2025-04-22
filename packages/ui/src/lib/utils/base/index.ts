@@ -12,6 +12,8 @@ export {
   PKCE,
   standardDeleteNotify,
   parseResponseStatus,
+  logResponse,
+  isSuccess,
 } from '@herodotus-cloud/core';
 
 export { createApi } from '@herodotus-cloud/apis';
@@ -24,4 +26,3 @@ export { DynamicFormService } from '@herodotus-cloud/form-apis';
 
 export * from './variables';
 export * from './tools';
-export * from './color';
