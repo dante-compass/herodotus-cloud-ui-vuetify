@@ -1,0 +1,1 @@
+import{l as o}from"./npm-@vue-runtime-core-BDADXezj.js";function r(r){const t=(o,t)=>{const c=r[o];return c?((o,r)=>o[r])(c,t):"color"===t?"black":"GET & POST"};return{color:o((()=>o=>t(o,"color"))),icon:o((()=>o=>t(o,"icon"))),text:o((()=>o=>t(o,"text")))}}export{r as u};

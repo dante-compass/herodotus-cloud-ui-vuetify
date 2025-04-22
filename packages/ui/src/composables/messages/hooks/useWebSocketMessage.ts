@@ -1,6 +1,6 @@
 import type { DialogueDetailEntity } from '@/lib/declarations';
 
-import { variables } from '@/lib/utils';
+import { VARIABLES } from '@/configurations';
 import { MessageChannelEnum } from '../enums';
 
 import {
@@ -12,8 +12,8 @@ import {
 } from '../stores';
 
 export default function useWebSocketMessage() {
-  const isUseWebSocket = variables.isUseWebSocket();
-  const isReactiveProject = variables.isReactiveProject();
+  const isUseWebSocket = VARIABLES.isUseWebSocket();
+  const isReactiveProject = VARIABLES.isReactiveProject();
   const stompWebSocketStore = useStompWebSocketStore();
   const webfluxWebSocketStore = useWebFluxWebSocketStore();
   const rsocketWebSocketStore = useRSocketWebSocketStore();

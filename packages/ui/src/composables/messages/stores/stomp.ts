@@ -2,7 +2,8 @@ import { defineStore } from 'pinia';
 import { Client } from '@stomp/stompjs';
 
 import type { DialogueDetailEntity, WebSocketOperations } from '@/lib/declarations';
-import { api, lodash, variables } from '@/lib/utils';
+import { api, lodash } from '@/lib/utils';
+import { VARIABLES } from '@/configurations';
 import { useAuthenticationStore } from '@/stores';
 
 export const useStompWebSocketStore = defineStore('StompWebSocket', {
@@ -121,7 +122,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
 
     connect(webSocketOperations: WebSocketOperations): void {
       this.operation = webSocketOperations;
-      if (variables.isUseWebSocket()) {
+      if (VARIABLES.isUseWebSocket()) {
         const store = useAuthenticationStore();
         if (store.token) {
           this.createClient();
@@ -132,7 +133,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
     },
 
     async disconnect(): Promise<any> {
-      if (variables.isUseWebSocket()) {
+      if (VARIABLES.isUseWebSocket()) {
         if (!lodash.isEmpty(this.client)) {
           await this.client.deactivate();
         }

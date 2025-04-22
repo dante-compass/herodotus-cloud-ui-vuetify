@@ -25,7 +25,7 @@
 import { defineComponent, computed } from 'vue';
 
 import { getColorPalette, mixColor } from './color';
-import { variables } from '@/lib/utils';
+import { VARIABLES } from '@/configurations';
 import { useSettingsStore } from '@/stores';
 
 export default defineComponent({
@@ -52,7 +52,7 @@ export default defineComponent({
       return getColorPalette(backgroundThemeColor.value as string, 6);
     });
 
-    const projectName = variables.getProjectName();
+    const projectName = VARIABLES.getProjectName();
 
     return {
       backgroundThemeColor,

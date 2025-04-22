@@ -20,8 +20,7 @@ import DisableDevtool from 'disable-devtool';
 import { setupStore, setupQuasar, setupI18n, setupUploader } from '@/plugins';
 import { setupRouter } from './routers';
 
-import { variables } from '@/lib/utils';
-import { CONSTANTS } from '@/configurations';
+import { CONSTANTS, VARIABLES } from '@/configurations';
 
 if (typeof (window as any).global === 'undefined') {
   (window as any).global = window;
@@ -54,7 +53,7 @@ async function setupApp() {
   app.mount('#app', true);
 
   if (!CONSTANTS.IS_DEV) {
-    if (variables.getUseDisableDevtool()) {
+    if (VARIABLES.getUseDisableDevtool()) {
       DisableDevtool({
         url: '/static/forbidden.html',
         timeOutUrl: '/static/forbidden.html',

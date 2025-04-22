@@ -9,7 +9,8 @@ import type {
 } from '@/lib/declarations';
 import { jwtDecode } from 'jwt-decode';
 import { useCryptoStore } from './crypto';
-import { variables, moment, api } from '@/lib/utils';
+import { moment, api } from '@/lib/utils';
+import { VARIABLES } from '@/configurations';
 
 export const useAuthenticationStore = defineStore('Authentication', {
   state: () => ({
@@ -38,7 +39,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       return flag !== 0;
     },
     token(): string {
-      if (variables.getAutoRefreshToken()) {
+      if (VARIABLES.getAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -119,14 +120,14 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     signIn(username: string, password: string) {
       const crypto = useCryptoStore();
-      if (variables.isUseCrypto()) {
+      if (VARIABLES.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise<boolean>((resolve, reject) => {
         api
           .oauth2()
-          .passwordFlow(username, password, variables.isUseCrypto())
+          .passwordFlow(username, password, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
@@ -149,7 +150,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       return new Promise<boolean>((resolve, reject) => {
         api
           .oauth2()
-          .refreshTokenFlow(this.refresh_token, variables.isUseCrypto())
+          .refreshTokenFlow(this.refresh_token, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
@@ -184,7 +185,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       return new Promise<boolean>((resolve, reject) => {
         api
           .oauth2()
-          .authorizationCodeFlow(code, variables.getRedirectUri(), state, variables.isUseCrypto())
+          .authorizationCodeFlow(code, VARIABLES.getRedirectUri(), state, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
@@ -205,14 +206,14 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     smsSignIn(mobile: string, code: string) {
       const crypto = useCryptoStore();
-      if (variables.isUseCrypto()) {
+      if (VARIABLES.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise<boolean>((resolve, reject) => {
         api
           .oauth2()
-          .socialCredentialsFlowBySms(mobile, code, variables.isUseCrypto())
+          .socialCredentialsFlowBySms(mobile, code, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
               const data = response as unknown as AccessTokenResponse;
@@ -236,7 +237,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       return new Promise<boolean>((resolve, reject) => {
         api
           .oauth2()
-          .socialCredentialsFlowByJustAuth(source, accessPrincipal, variables.isUseCrypto())
+          .socialCredentialsFlowByJustAuth(source, accessPrincipal, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
@@ -259,7 +260,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       return new Promise<boolean>((resolve, reject) => {
         api
           .oauth2()
-          .webAuthnCredentialsFlow(publicKey, variables.isUseCrypto())
+          .webAuthnCredentialsFlow(publicKey, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
