@@ -21,6 +21,8 @@ export type {
   QTableOnRequestParameter,
   QUploaderInfo,
   QNotifyPosition,
+  SweetAlertIcon,
+  SweetAlertResult,
 } from '@herodotus-cloud/core';
 export type {
   AbstractEntity,
@@ -170,5 +172,3 @@ export type {
 export type { EChartsOption, EChartsCoreOption } from 'echarts';
 
 export type { QTableProps, QTree, QUploaderFactoryObject, QSelect } from 'quasar';
-
-export type { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';
