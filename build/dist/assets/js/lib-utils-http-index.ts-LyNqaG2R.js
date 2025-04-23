@@ -1,0 +1,1 @@
+import"./configurations-constants.ts-STGhZzJt.js";import{A as s}from"./configurations-http.ts-73P_A_eu.js";import"./configurations-variables.ts-CrWc6tFp.js";const o=s.core,t=s.bpmn,a=s.form;export{o as a,t as b,a as f};

@@ -36,10 +36,11 @@ import { required, helpers } from '@vuelidate/validators';
 
 import type { BucketDomain, HttpResult, CreateBucketResult } from '@/lib/declarations';
 
-import { ossApi, toast } from '@/lib/utils';
+import { toast } from '@/lib/utils';
 import { useBaseTableItem } from '@/hooks';
 
 import { HSimpleCenterFormLayout } from '@/components';
+import { API } from '@/configurations';
 
 export default defineComponent({
   name: 'OssBucketContent',
@@ -67,7 +68,7 @@ export default defineComponent({
     const onSave = () => {
       v.value.$validate().then((vResult) => {
         if (vResult) {
-          ossApi
+          API.oss
             .bucket()
             .createBucket({
               bucketName: editedItem.value.bucketName,

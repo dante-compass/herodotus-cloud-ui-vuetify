@@ -15,8 +15,9 @@ import { QUploader } from 'quasar';
 
 import type { QUploaderFactoryObject, QUploaderInfo } from '@/lib/declarations';
 
-import { ossApi, lodash } from '@/lib/utils';
+import { lodash } from '@/lib/utils';
 import { useAuthenticationStore } from '@/stores';
+import { API } from '@/configurations';
 
 export default defineComponent({
   name: 'HSimpleUploader',
@@ -45,7 +46,7 @@ export default defineComponent({
       return new Promise((resolve, reject) => {
         const token: string = authStore.token;
         resolve({
-          url: ossApi.object().getUploadAddress(),
+          url: API.oss.object().getUploadAddress(),
           method: 'POST',
           fieldName: 'file',
           headers: [{ name: 'Authorization', value: `Bearer ${token}` }],

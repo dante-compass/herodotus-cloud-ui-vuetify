@@ -4,4 +4,3 @@ import { API } from '@/configurations';
 export const api = API.core;
 export const bpmnApi = API.bpmn;
 export const formApi = API.form;
-export const ossApi = API.oss;

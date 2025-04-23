@@ -28,7 +28,7 @@ import { defineComponent, onMounted, computed, ref } from 'vue';
 
 import type { BucketDomain } from '@/lib/declarations';
 
-import { ossApi } from '@/lib/utils';
+import { API } from '@/configurations';
 
 export default defineComponent({
   name: 'HOssBucketList',
@@ -63,7 +63,7 @@ export default defineComponent({
     };
 
     const initialize = () => {
-      ossApi
+      API.oss
         .bucket()
         .listBuckets()
         .then((result) => {

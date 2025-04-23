@@ -21,7 +21,7 @@ import type {
   SimpleUploaderFile,
   SimpleUploaderChunk,
 } from '@/lib/declarations';
-import { ossApi } from '@/lib/utils';
+import { API } from '@/configurations';
 import { getSystemHeaders } from '@/stores';
 
 export default defineComponent({
@@ -103,7 +103,7 @@ export default defineComponent({
       const chunkSize = file.chunks.length;
 
       // 请求后台返回每个分块的上传链接
-      const result = await ossApi.multipartUpload().createChunkUpload({
+      const result = await API.oss.multipartUpload().createChunkUpload({
         bucketName: bucketName.value,
         objectName: fileName,
         partNumber: chunkSize,
@@ -129,7 +129,7 @@ export default defineComponent({
     ) => {
       // 调用后台合并文件
       const fileName = file.name; // 文件名
-      ossApi
+      API.oss
         .multipartUpload()
         .completeChunkUpload({
           bucketName: bucketName.value,

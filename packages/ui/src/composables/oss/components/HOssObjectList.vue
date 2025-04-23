@@ -104,8 +104,8 @@ import {
   HSimpleUploader,
 } from '@/components';
 import { useBaseTable } from '@/hooks';
-import { CONSTANTS } from '@/configurations';
-import { ossApi, lodash, toast, standardDeleteNotify } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
+import { lodash, toast, standardDeleteNotify } from '@/lib/utils';
 import { useOssDownload } from '../hooks';
 
 export default defineComponent({
@@ -170,7 +170,7 @@ export default defineComponent({
 
     const fetchObjects = (bucketName: string, folderName = '') => {
       showLoading();
-      ossApi
+      API.oss
         .object()
         .listObjectsV2({ bucketName: bucketName, prefix: folderName })
         .then((result) => {
@@ -221,7 +221,7 @@ export default defineComponent({
       onSuccess: () => void,
     ) => {
       standardDeleteNotify(() => {
-        ossApi
+        API.oss
           .object()
           .batchDelete({ bucketName: bucketName, delete: toDeleteObjectDomain(objects) })
           .then(() => {
@@ -246,7 +246,7 @@ export default defineComponent({
      */
     const deleteObject = (bucketName: string, objectName: string, onSuccess: () => void) => {
       standardDeleteNotify(() => {
-        ossApi
+        API.oss
           .object()
           .delete({ bucketName: bucketName, objectName: objectName })
           .then(() => {

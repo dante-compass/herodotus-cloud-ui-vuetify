@@ -3,7 +3,8 @@ import { useQuasar } from 'quasar';
 
 import type { AxiosProgressEvent, QNotifyPosition } from '@/lib/declarations';
 
-import { ossApi, toast } from '@/lib/utils';
+import { toast } from '@/lib/utils';
+import { API } from '@/configurations';
 
 export default function useOssDownload() {
   const $q = useQuasar();
@@ -35,7 +36,7 @@ export default function useOssDownload() {
   const download = (bucketName: string, objectName: string, size?: number) => {
     if (size) {
       showDownLoadProgress('下载');
-      ossApi
+      API.oss
         .object()
         .download(
           { bucketName: bucketName, objectName: objectName },
@@ -51,7 +52,7 @@ export default function useOssDownload() {
           toast.error('下载失败');
         });
     } else {
-      ossApi
+      API.oss
         .object()
         .download({ bucketName: bucketName, objectName: objectName })
         .then((response) => {
