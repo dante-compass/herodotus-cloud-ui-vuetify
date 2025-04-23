@@ -12,8 +12,8 @@ import type {
 } from '@/lib/declarations';
 
 import { useBaseTableItem, useEditFinish } from '@/hooks';
-
-import { bpmnApi, formApi, toast, lodash } from '@/lib/utils';
+import { API } from '@/configurations';
+import { toast, lodash } from '@/lib/utils';
 import { useAuthenticationStore } from '@/stores';
 
 export default function useBpmnProcess() {
@@ -42,7 +42,7 @@ export default function useBpmnProcess() {
   });
 
   const fetchFormModeler = async (id: string) => {
-    const result = await formApi.dynamicForm().fetchById(id);
+    const result = await API.form.dynamicForm().fetchById(id);
     formModeler.value = result.data.modeler;
     if (!lodash.isEmpty(formModeler.value)) {
       sheet.value = formModeler.value.sheet;
@@ -55,7 +55,7 @@ export default function useBpmnProcess() {
 
   const fetchStartForm = async (key: string, tenantId = '') => {
     skeleton.value = true;
-    const result = await bpmnApi
+    const result = await API.bpmn
       .processDefinition()
       .getStartFormKey({ key: key, tenantId: tenantId });
     const data = result as FormKeyEntity;
@@ -66,7 +66,7 @@ export default function useBpmnProcess() {
   };
 
   const fetchTaskForm = async (taskId: string) => {
-    const result = await bpmnApi.task().getFormKey(taskId);
+    const result = await API.bpmn.task().getFormKey(taskId);
     const data = result as FormKeyEntity;
     if (data.key) {
       await fetchFormModeler(data.key);
@@ -74,7 +74,7 @@ export default function useBpmnProcess() {
   };
 
   const createProcessSpecifics = async (processDefinitionKey: string, tenantId = '') => {
-    const result = await formApi.processSpecifics().saveOrUpdate({
+    const result = await API.form.processSpecifics().saveOrUpdate({
       id: '',
       state: {},
       comments: [],
@@ -86,7 +86,7 @@ export default function useBpmnProcess() {
   };
 
   const fetchProcessSpecifics = async (extendedTask: ExtendedTaskEntity) => {
-    const result = await formApi.processSpecifics().fetchById(extendedTask.businessKey);
+    const result = await API.form.processSpecifics().fetchById(extendedTask.businessKey);
     editedItem.value = result.data as ProcessSpecificsEntity;
     editedItem.value.taskId = extendedTask.taskId;
     editedItem.value.activityId = extendedTask.activityId;
@@ -97,12 +97,12 @@ export default function useBpmnProcess() {
 
   const startWorkflowProcess = (entity: ProcessSpecificsEntity) => {
     entity.created = false;
-    formApi
+    API.form
       .processSpecifics()
       .saveOrUpdate(entity)
       .then((response) => {
         const data = response.data as ProcessSpecificsEntity;
-        bpmnApi
+        API.bpmn
           .processDefinition()
           .start(
             { key: data.processDefinitionKey },
@@ -125,7 +125,7 @@ export default function useBpmnProcess() {
   };
 
   const deleteProcessSpecifics = (id: string) => {
-    formApi
+    API.form
       .processSpecifics()
       .delete(id)
       .then(() => {

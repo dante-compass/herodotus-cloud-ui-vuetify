@@ -40,9 +40,9 @@ import type {
   ProcessSpecificsConditions,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/configurations';
+import { CONSTANTS, API } from '@/configurations';
 
-import { api, bpmnApi } from '@/lib/utils';
+import { api } from '@/lib/utils';
 import { useBaseTable } from '@/hooks';
 import { useBpmnProcess } from '@/composables/bpmn';
 import { useAuthenticationStore } from '@/stores';
@@ -112,7 +112,7 @@ export default defineComponent({
 
     const dealWith = async (item: ExtendedTaskEntity) => {
       if (!item.ownerId && !item.assigneeId) {
-        await bpmnApi.task().claim(item.taskId, { userId: authentication.employeeId });
+        await API.bpmn.task().claim(item.taskId, { userId: authentication.employeeId });
       }
 
       await fetchProcessSpecifics(item);

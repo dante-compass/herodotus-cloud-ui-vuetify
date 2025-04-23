@@ -56,7 +56,7 @@ import type {
   QTableProps,
 } from '@/lib/declarations';
 
-import { bpmnApi } from '@/lib/utils';
+import { API } from '@/configurations';
 
 import { HDenseIconButton } from '@/components';
 import { useBpmnTableItems, HBpmnViewDiagramDialog, HBpmnViewXmlDialog } from '@/composables/bpmn';
@@ -86,7 +86,7 @@ export default defineComponent({
       ProcessDefinitionQueryParams,
       ProcessDefinitionSortBy,
       ProcessDefinitionDeleteQueryParams
-    >(bpmnApi.processDefinition(), {
+    >(API.bpmn.processDefinition(), {
       sortBy: 'id',
       sortOrder: 'desc',
     });

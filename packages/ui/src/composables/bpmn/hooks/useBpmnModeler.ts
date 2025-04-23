@@ -2,7 +2,8 @@ import type { Ref } from 'vue';
 import { ref } from 'vue';
 
 import type { BpmnUnionPathParams, XmlEntity } from '@/lib/declarations';
-import { bpmnApi, lodash } from '@/lib/utils';
+import { lodash } from '@/lib/utils';
+import { API } from '@/configurations';
 
 export default function useBpmnModeler() {
   const xml = ref('');
@@ -10,7 +11,7 @@ export default function useBpmnModeler() {
 
   const loadXml = (params: BpmnUnionPathParams) => {
     if (params.id || params.key) {
-      bpmnApi
+      API.bpmn
         .processDefinition()
         .getXml(params)
         .then((result) => {
@@ -28,7 +29,7 @@ export default function useBpmnModeler() {
     if (!processInstanceId) {
       loadXml(params);
     } else {
-      bpmnApi
+      API.bpmn
         .historyActivityInstance()
         .getAll(
           { sortBy: 'startTime', sortOrder: 'desc' },

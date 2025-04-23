@@ -37,9 +37,9 @@ import type { Sheet, ProcessCommentsEntity, Variables } from '@/lib/declarations
 
 import { useBpmnProcess } from '@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '@/components';
-import { CONSTANTS } from '@/configurations';
+import { CONSTANTS, API } from '@/configurations';
 import { useAuthenticationStore } from '@/stores';
-import { lodash, formApi, bpmnApi, toast } from '@/lib/utils';
+import { lodash, toast } from '@/lib/utils';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.WORKFLOW_PROCESS_APPROVE,
@@ -74,7 +74,7 @@ export default defineComponent({
     const auth = useAuthenticationStore();
 
     const onSave = () => {
-      formApi
+      API.form
         .processComments()
         .saveOrUpdate({
           username: auth.employeeId,
@@ -91,7 +91,7 @@ export default defineComponent({
           const comment = result.data as ProcessCommentsEntity;
           if (!lodash.isEmpty(comment)) {
             editedItem.value.comments.push(comment);
-            formApi
+            API.form
               .processSpecifics()
               .saveOrUpdate(editedItem.value)
               .then((response) => {
@@ -100,7 +100,7 @@ export default defineComponent({
                 const name = condition.value.variable;
                 const variables = {} as Variables;
                 variables[name] = { value: approved.value };
-                bpmnApi
+                API.bpmn
                   .task()
                   .complete(specifics.taskId as string, {
                     variables: variables,

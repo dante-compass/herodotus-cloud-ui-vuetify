@@ -44,11 +44,11 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/configurations';
+import { CONSTANTS, API } from '@/configurations';
 
 import { useBaseTable } from '@/hooks';
 import { useBpmnTableItems, useBpmnProcess } from '@/composables/bpmn';
-import { bpmnApi, lodash } from '@/lib/utils';
+import { lodash } from '@/lib/utils';
 
 export default defineComponent({
   name: 'HWorkflowSelectDialog',
@@ -72,7 +72,7 @@ export default defineComponent({
       ProcessDefinitionQueryParams,
       ProcessDefinitionSortBy,
       ProcessDefinitionDeleteQueryParams
-    >(bpmnApi.processDefinition(), {
+    >(API.bpmn.processDefinition(), {
       sortBy: 'id',
       sortOrder: 'desc',
     });
