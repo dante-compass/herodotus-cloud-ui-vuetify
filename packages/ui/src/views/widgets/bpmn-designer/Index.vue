@@ -11,21 +11,24 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useQuasar } from 'quasar';
 
 import { useEditFinish } from '@/hooks';
-import { BpmnDesignerInstance } from '@/lib/utils';
+import { API } from '@/configurations';
 
 export default defineComponent({
   name: 'WidgetsBpmnDesigner',
 
   setup() {
-    const instance = BpmnDesignerInstance;
+    const instance = API.bpmnStorage;
+    const $q = useQuasar();
 
     const { onFinish } = useEditFinish();
 
     return {
       instance,
       onFinish,
+      $q,
     };
   },
 });

@@ -135,8 +135,6 @@ export type {
   ConditionVariable,
   DynamicFormEntity,
   DynamicFormConditions,
-  DynamicFormService,
-  FormDesignerResources,
   ProcessSpecificsEntity,
   ProcessSpecificsConditions,
   ProcessCommentsEntity,
@@ -168,8 +166,6 @@ export type {
   TaskSortBy,
   Variables,
 } from '@herodotus-cloud/bpmn-apis';
-
-export type { BpmnDesignerResources } from '@herodotus-cloud/bpmn-designer';
 
 export type { EChartsOption, EChartsCoreOption } from 'echarts';
 

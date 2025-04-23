@@ -11,6 +11,3 @@ export {
   PKCE,
   standardDeleteNotify,
 } from '@herodotus-cloud/core';
-
-export { DeploymentService, GroupService, UserService } from '@herodotus-cloud/bpmn-apis';
-export { DynamicFormService } from '@herodotus-cloud/form-apis';
