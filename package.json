@@ -86,6 +86,6 @@
     "vite-plugin-node-polyfills": "^0.23.0",
     "vite-plugin-vconsole": "^2.1.1",
     "vite-plugin-vue-devtools": "^7.7.5",
-    "vue-tsc": "^2.2.8"
+    "vue-tsc": "^2.2.10"
   }
 }
