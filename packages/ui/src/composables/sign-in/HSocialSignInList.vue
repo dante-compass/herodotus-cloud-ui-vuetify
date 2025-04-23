@@ -29,8 +29,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import { defineComponent, ref, computed, onMounted } from 'vue';
-import { getSocialLogo, lodash, api, PKCE } from '@/lib/utils';
-import { VARIABLES } from '@/configurations';
+import { lodash, api, PKCE } from '@/lib/utils';
+import { VARIABLES, IMAGES } from '@/configurations';
 
 export default defineComponent({
   name: 'HSocialSignInList',
@@ -49,7 +49,7 @@ export default defineComponent({
 
     const getImage = (source: string) => {
       const name = source.toLowerCase();
-      return getSocialLogo(name);
+      return IMAGES.getSocialLogo(name);
     };
 
     const createAuthorizationCodeAddress = () => {

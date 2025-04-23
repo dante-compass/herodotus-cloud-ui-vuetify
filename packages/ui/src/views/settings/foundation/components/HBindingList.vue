@@ -50,8 +50,8 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/configurations';
-import { api, getSocialLogo, moment } from '@/lib/utils';
+import { CONSTANTS, IMAGES } from '@/configurations';
+import { api, moment } from '@/lib/utils';
 import { useTable } from '@/hooks';
 import { useAuthenticationStore } from '@/stores';
 
@@ -100,7 +100,7 @@ export default defineComponent({
 
     const getImage = (source: string) => {
       const name = source.toLowerCase();
-      return getSocialLogo(name);
+      return IMAGES.getSocialLogo(name);
     };
 
     onMounted(() => {
