@@ -35,7 +35,8 @@ import type { DialogueContactEntity, DialogueContactConditions } from '@/lib/dec
 
 import { useTable } from '@/hooks';
 import { useAuthenticationStore } from '@/stores';
-import { api, moment } from '@/lib/utils';
+import { moment } from '@/lib/utils';
+import { API } from '@/configurations';
 
 import { HUserAvatar } from '@/components';
 
@@ -58,7 +59,7 @@ export default defineComponent({
       deleteItemById,
       conditions,
     } = useTable<DialogueContactEntity, DialogueContactConditions>(
-      api.dialogueContact(),
+      API.core.dialogueContact(),
       'MessageDialogue',
       false,
       { direction: 'ASC', properties: ['createTime'] },

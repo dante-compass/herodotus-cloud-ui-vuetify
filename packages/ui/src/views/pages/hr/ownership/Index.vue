@@ -67,7 +67,7 @@ import type {
 
 import { useRouter } from 'vue-router';
 import { OperationEnum } from '@/lib/definitions';
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useRouteStore } from '@/stores';
 
 import { HDeleteButton, HTable } from '@/components';
@@ -114,7 +114,7 @@ export default defineComponent({
     const sort = {} as Sort;
 
     const fetchAssignedByPage = (pageNumber = 1, pageSize: number, departmentId: string) => {
-      api
+      API.core
         .sysEmployee()
         .fetchAssignedByPage(
           {
@@ -146,7 +146,7 @@ export default defineComponent({
     };
 
     const deleteAllocatable = (item: SysEmployeeEntity) => {
-      api
+      API.core
         .sysEmployee()
         .deleteAllocatable({
           organizationId: organizationId.value,

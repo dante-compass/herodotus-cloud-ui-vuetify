@@ -61,8 +61,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/configurations';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 import { useTable } from '@/hooks';
 
 import { HDeleteButton, HEditButton, HTable } from '@/components';
@@ -90,7 +89,7 @@ export default defineComponent({
       deleteItemById,
       conditions,
     } = useTable<SysOrganizationEntity, SysOrganizationConditions>(
-      api.sysOrganization(),
+      API.core.sysOrganization(),
       CONSTANTS.ComponentName.SYS_ORGANIZATION,
     );
 

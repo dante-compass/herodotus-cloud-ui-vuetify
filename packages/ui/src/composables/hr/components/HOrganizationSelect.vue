@@ -24,7 +24,7 @@
 import type { Ref } from 'vue';
 import { defineComponent, computed, watch, ref, onMounted } from 'vue';
 import type { SysOrganizationEntity } from '@/lib/declarations';
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 
 export default defineComponent({
   name: 'HOrganizationSelect',
@@ -48,7 +48,7 @@ export default defineComponent({
     });
 
     const loadData = (category: number | string) => {
-      api
+      API.core
         .sysOrganization()
         .fetchAll({ category: category })
         .then((result) => {

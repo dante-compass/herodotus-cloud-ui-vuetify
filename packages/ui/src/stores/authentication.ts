@@ -9,8 +9,8 @@ import type {
 } from '@/lib/declarations';
 import { jwtDecode } from 'jwt-decode';
 import { useCryptoStore } from './crypto';
-import { moment, api } from '@/lib/utils';
-import { VARIABLES } from '@/configurations';
+import { moment } from '@/lib/utils';
+import { VARIABLES, API } from '@/configurations';
 
 export const useAuthenticationStore = defineStore('Authentication', {
   state: () => ({
@@ -109,8 +109,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     setErrorPrompt(error: any, principal: string): void {
       if (this.isAlertMessage(error)) {
-        api
-          .open()
+        API.core.open()
           .getPrompt(principal)
           .then((result) => {
             this.setUserErrorStatus(result.data as SignInErrorStatus);
@@ -125,8 +124,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         password = crypto.encrypt(password);
       }
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
+        API.core.oauth2()
           .passwordFlow(username, password, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
@@ -148,8 +146,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
     },
     refreshToken() {
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
+        API.core.oauth2()
           .refreshTokenFlow(this.refresh_token, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
@@ -170,8 +167,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
     },
     signOut() {
       if (this.access_token) {
-        api
-          .oauth2()
+        API.core.oauth2()
           .signOut(this.access_token)
           .then(() => {
             console.log('Server side sign out successfully.');
@@ -183,8 +179,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
     },
     authorizationCode(code: string, state = '') {
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
+        API.core.oauth2()
           .authorizationCodeFlow(code, VARIABLES.getRedirectUri(), state, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
@@ -211,8 +206,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         code = crypto.encrypt(code);
       }
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
+        API.core.oauth2()
           .socialCredentialsFlowBySms(mobile, code, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
@@ -235,8 +229,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     socialSignIn(source: SocialSource, accessPrincipal: AccessPrincipal) {
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
+        API.core.oauth2()
           .socialCredentialsFlowByJustAuth(source, accessPrincipal, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
@@ -258,8 +251,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     passkey(publicKey: WebAuthnAuthenticate) {
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
+        API.core.oauth2()
           .webAuthnCredentialsFlow(publicKey, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {

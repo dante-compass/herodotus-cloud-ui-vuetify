@@ -89,8 +89,7 @@ import type {
 } from '@/lib/declarations';
 
 import { useTable } from '@/hooks';
-import { CONSTANTS } from '@/configurations';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 
 import { HDeleteButton, HEditButton, HTable, HBooleanColumn, HDenseIconButton } from '@/components';
 import { HElementCondition } from '@/composables/security';
@@ -120,7 +119,7 @@ export default defineComponent({
       deleteItemById,
       conditions,
     } = useTable<SysElementEntity, SysElementConditions>(
-      api.sysElement(),
+      API.core.sysElement(),
       CONSTANTS.ComponentName.SYS_ELEMENT,
       false,
       {

@@ -1,7 +1,8 @@
 import type { Session } from '@/lib/declarations';
 import { defineStore } from 'pinia';
 
-import { SM2Utils, SM4Utils, api } from '@/lib/utils';
+import { SM2Utils, SM4Utils } from '@/lib/utils';
+import { API } from '@/configurations';
 
 const SECRET_KEY: string = import.meta.env.VITE_SECRET_KEY;
 
@@ -37,7 +38,7 @@ export const useCryptoStore = defineStore('Crypto', {
 
     exchange(identity = ''): Promise<string> {
       return new Promise<string>((resolve, reject) => {
-        api
+        API.core
           .open()
           .createSession(identity)
           .then((response) => {
@@ -48,7 +49,7 @@ export const useCryptoStore = defineStore('Crypto', {
               this.state = data.state;
               const pair = SM2Utils.createKeyPair();
               const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-              api
+              API.core
                 .open()
                 .exchange(sessionId, encryptData)
                 .then((response) => {

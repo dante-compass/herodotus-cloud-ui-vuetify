@@ -12,7 +12,7 @@ import {
 
 import type { WebAuthnRegister } from '@/lib/declarations';
 
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useAuthenticationStore } from '@/stores';
 
 export default function usePasskey() {
@@ -41,8 +41,7 @@ export default function usePasskey() {
 
   const registration = (label: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
-      api
-        .passkey()
+      API.passkey()
         .fetchWebAuthnRegisterOptions()
         .then((publicKey) => {
           const registrationOptions = parseCreationOptionsFromJSON({
@@ -53,8 +52,7 @@ export default function usePasskey() {
             const request: WebAuthnRegister = {
               publicKey: { label: label, credential: credential },
             };
-            api
-              .passkey()
+            API.passkey()
               .webAuthnRegister(request)
               .then(() => {
                 resolve(true);
@@ -66,7 +64,7 @@ export default function usePasskey() {
         });
     });
 
-    // const publicKey = (await api.passkey().fetchWebAuthnRegisterOptions()) as WebAuthnRegisterOptions;
+    // const publicKey = (await API.passkey().fetchWebAuthnRegisterOptions()) as WebAuthnRegisterOptions;
 
     // const registrationOptions = parseCreationOptionsFromJSON({ publicKey } as CredentialCreationOptionsJSON);
 
@@ -76,13 +74,12 @@ export default function usePasskey() {
 
     // const request: WebAuthnRegister = { publicKey: { label: label, credential: credential } };
 
-    // return (await api.passkey().webAuthnRegister(request)) as boolean;
+    // return (await API.passkey().webAuthnRegister(request)) as boolean;
   };
 
   const authenticator = (): Promise<boolean> => {
     return new Promise((resolve, reject) => {
-      api
-        .passkey()
+      API.passkey()
         .fetchWebAuthnAuthenticateOptions()
         .then((publicKey) => {
           const authenticationOptions = parseRequestOptionsFromJSON({
@@ -100,7 +97,7 @@ export default function usePasskey() {
         });
     });
 
-    // const publicKey = (await api.passkey().fetchWebAuthnAuthenticateOptions()) as WebAuthnAuthenticateOptions;
+    // const publicKey = (await API.passkey().fetchWebAuthnAuthenticateOptions()) as WebAuthnAuthenticateOptions;
 
     // const authenticationOptions = parseRequestOptionsFromJSON({ publicKey } as CredentialRequestOptionsJSON);
 
@@ -108,7 +105,7 @@ export default function usePasskey() {
 
     // const request = authentication.toJSON();
 
-    // return (await api.passkey().webAuthnAuthenticate(request)) as boolean;
+    // return (await API.passkey().webAuthnAuthenticate(request)) as boolean;
   };
 
   return {

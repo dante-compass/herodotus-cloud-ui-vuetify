@@ -33,7 +33,7 @@ import type {
   ExtendedTaskConditions,
 } from '@/lib/declarations';
 
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useBaseTable } from '@/hooks';
 import { useAuthenticationStore } from '@/stores';
 
@@ -71,8 +71,7 @@ export default defineComponent({
 
     const fetchCompletedTasksByPage = (pageNumber = 1) => {
       showLoading();
-      api
-        .task()
+      API.core.task()
         .fetchCompletedTasksByPage(
           {
             pageNumber: pageNumber - 1,

@@ -29,8 +29,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import { defineComponent, ref, computed, onMounted } from 'vue';
-import { lodash, api, PKCE } from '@/lib/utils';
-import { VARIABLES, IMAGES } from '@/configurations';
+import { lodash, PKCE } from '@/lib/utils';
+import { VARIABLES, IMAGES, API } from '@/configurations';
 
 export default defineComponent({
   name: 'HSocialSignInList',
@@ -39,8 +39,7 @@ export default defineComponent({
     const list = ref({}) as Ref<Record<string, string>>;
 
     const init = () => {
-      api
-        .open()
+      API.core.open()
         .getSocialList()
         .then((result) => {
           list.value = result.data as Record<string, string>;
@@ -53,14 +52,14 @@ export default defineComponent({
     };
 
     const createAuthorizationCodeAddress = () => {
-      const project = api.getConfig().getProject();
+      const project = API.core.getConfig().getProject();
       let address = VARIABLES.getApiUrl();
       if (lodash.endsWith(address, '/')) {
         address = address.substring(0, address.length - 1);
       }
 
       if (project && (project === 'dante' || project === 'herodotus')) {
-        address += api.getConfig().getUaa(false);
+        address += API.core.getConfig().getUaa(false);
       }
 
       return address + '/oauth2/authorize';

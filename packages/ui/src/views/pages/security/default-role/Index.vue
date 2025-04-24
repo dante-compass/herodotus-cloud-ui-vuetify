@@ -37,8 +37,7 @@ import type {
 
 import { useTable } from '@/hooks';
 
-import { CONSTANTS } from '@/configurations';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 
 import { HDeleteButton, HEditButton, HTable } from '@/components';
 
@@ -63,7 +62,7 @@ export default defineComponent({
       findItems,
       deleteItemById,
     } = useTable<SysDefaultRoleEntity, SysDefaultRoleConditions>(
-      api.sysDefaultRole(),
+      API.core.sysDefaultRole(),
       CONSTANTS.ComponentName.SYS_DEFAULT_ROLE,
     );
 

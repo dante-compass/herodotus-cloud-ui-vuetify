@@ -203,9 +203,9 @@ import type {
 } from '@/lib/declarations';
 
 import { HDictionarySelect, useDictionary } from '@/composables/constants';
-import { CONSTANTS } from '@/configurations';
+import { CONSTANTS, API } from '@/configurations';
 import { HAuthorizeLayout } from '@/composables/authorize';
-import { api, lodash } from '@/lib/utils';
+import { lodash } from '@/lib/utils';
 import { useTableItem, useTable, useEditFinish } from '@/hooks';
 
 defineOptions({
@@ -214,10 +214,10 @@ defineOptions({
 });
 
 const { editedItem, isEdit, title, overlay, saveOrUpdate } = useTableItem<OAuth2ApplicationEntity>(
-  api.oauth2Application(),
+  API.core.oauth2Application(),
 );
 const { tableRows, pagination, loading } = useTable<OAuth2ScopeEntity, OAuth2ScopeConditions>(
-  api.oauth2Scope(),
+  API.core.oauth2Scope(),
   CONSTANTS.ComponentName.OAUTH2_SCOPE,
   true,
 );

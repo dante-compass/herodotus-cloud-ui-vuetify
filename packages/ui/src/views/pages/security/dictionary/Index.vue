@@ -54,8 +54,7 @@ import type {
 } from '@/lib/declarations';
 
 import { useTable } from '@/hooks';
-import { CONSTANTS } from '@/configurations';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 
 import { HDeleteButton, HEditButton, HTable } from '@/components';
 import { HDictionaryCondition } from '@/composables/security';
@@ -84,7 +83,7 @@ export default defineComponent({
       deleteItemById,
       conditions,
     } = useTable<SysDictionaryEntity, SysDictionaryConditions>(
-      api.sysDictionary(),
+      API.core.sysDictionary(),
       CONSTANTS.ComponentName.SYS_DICTIONARY,
     );
 

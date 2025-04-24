@@ -37,8 +37,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/configurations';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 
 import { useTableItem, useTable } from '@/hooks';
 
@@ -53,9 +52,11 @@ export default defineComponent({
   },
 
   setup(props) {
-    const { editedItem, title, assign, overlay } = useTableItem<SysElementEntity>(api.sysElement());
+    const { editedItem, title, assign, overlay } = useTableItem<SysElementEntity>(
+      API.core.sysElement(),
+    );
     const { tableRows, pagination, loading } = useTable<SysRoleEntity, SysRoleConditions>(
-      api.sysRole(),
+      API.core.sysRole(),
       CONSTANTS.ComponentName.SYS_ROLE,
       true,
     );

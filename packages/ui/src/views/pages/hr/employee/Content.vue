@@ -50,7 +50,7 @@ import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
 import type { SysEmployeeEntity } from '@/lib/declarations';
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useTableItem } from '@/hooks';
 import { HCenterFormLayout } from '@/components';
 import { HDictionarySelect } from '@/composables/constants';
@@ -65,7 +65,7 @@ export default defineComponent({
 
   setup(props) {
     const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysEmployeeEntity>(
-      api.sysEmployee(),
+      API.core.sysEmployee(),
     );
 
     const isUnique = () => {
@@ -73,7 +73,7 @@ export default defineComponent({
 
       return new Promise((resolve, reject) => {
         if (employeeName) {
-          api
+          API.core
             .sysEmployee()
             .fetchByEmployeeName(employeeName)
             .then((result) => {

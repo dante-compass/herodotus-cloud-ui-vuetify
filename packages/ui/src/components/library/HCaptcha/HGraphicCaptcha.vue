@@ -44,8 +44,7 @@ import type { GraphicCaptcha } from '@/lib/declarations';
 import { CaptchaCategoryEnum } from '@/lib/definitions';
 
 import { useCryptoStore } from '@/stores';
-import { api } from '@/lib/utils';
-import { VARIABLES } from '@/configurations';
+import { VARIABLES, API } from '@/configurations';
 
 export default defineComponent({
   name: 'HGraphicCaptcha',
@@ -71,7 +70,7 @@ export default defineComponent({
     });
 
     const createCaptcha = async () => {
-      const response = await api.open().createCaptcha(crypto.sessionId, VARIABLES.getCaptcha());
+      const response = await API.core.open().createCaptcha(crypto.sessionId, VARIABLES.getCaptcha());
 
       if (
         !(
@@ -86,8 +85,7 @@ export default defineComponent({
 
     const verifyCaptcha = () => {
       if (code.value && !isValid.value) {
-        api
-          .open()
+        API.core.open()
           .verifyCaptcha(crypto.sessionId, VARIABLES.getCaptcha(), code.value)
           .then((response) => {
             const data = response.data as boolean;

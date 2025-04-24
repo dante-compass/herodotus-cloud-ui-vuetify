@@ -4,7 +4,8 @@ import { storeToRefs } from 'pinia';
 import type { NotificationEntity, NotificationConditions, Sort, Page } from '@/lib/declarations';
 
 import { NotificationCategoryEnum } from '@/lib/definitions';
-import { api, moment } from '@/lib/utils';
+import { moment } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useAuthenticationStore } from '@/stores';
 import { useNotificationStore } from '../stores';
 
@@ -31,8 +32,7 @@ export default function useNotifications(category: NotificationCategoryEnum) {
 
   const findItemsByPage = (number: number) => {
     currentPageNumber.value = number;
-    api
-      .notification()
+    API.core.notification()
       .fetchByPage(
         {
           pageNumber: number - 1,

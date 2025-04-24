@@ -49,8 +49,8 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/configurations';
-import { lodash, toast, api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
+import { lodash, toast } from '@/lib/utils';
 import { useTable, useTableItem, useEditFinish } from '@/hooks';
 
 import { HFullWidthLayout, HTable } from '@/components';
@@ -70,12 +70,12 @@ export default defineComponent({
     const { onFinish } = useEditFinish();
     const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity');
     const { editedItem, title, overlay } = useTableItem<SysEmployeeAllocatable>(
-      api.sysEmployeeAllocatable(),
+      API.core.sysEmployeeAllocatable(),
     );
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       SysEmployeeEntity,
       SysEmployeeConditions
-    >(api.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
+    >(API.core.sysEmployee(), CONSTANTS.ComponentName.SYS_EMPLOYEE);
 
     const selectedItems = ref([]) as Ref<Array<SysEmployeeEntity>>;
 
@@ -93,7 +93,7 @@ export default defineComponent({
         toast.warning('您还没有选择任何人员！');
       } else {
         overlay.value = true;
-        api
+        API.core
           .sysEmployee()
           .saveAllocatable({
             organizationId: editedItem.value.organizationId,

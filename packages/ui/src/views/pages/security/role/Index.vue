@@ -45,8 +45,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/configurations';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 
 import { useTable } from '@/hooks';
 
@@ -68,7 +67,10 @@ export default defineComponent({
       toAuthorize,
       findItems,
       deleteItemById,
-    } = useTable<SysRoleEntity, SysRoleConditions>(api.sysRole(), CONSTANTS.ComponentName.SYS_ROLE);
+    } = useTable<SysRoleEntity, SysRoleConditions>(
+      API.core.sysRole(),
+      CONSTANTS.ComponentName.SYS_ROLE,
+    );
 
     const selected = ref([]);
     const rowKey: SysRoleProps = 'roleId';

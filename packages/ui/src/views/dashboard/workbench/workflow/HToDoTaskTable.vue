@@ -42,7 +42,6 @@ import type {
 
 import { CONSTANTS, API } from '@/configurations';
 
-import { api } from '@/lib/utils';
 import { useBaseTable } from '@/hooks';
 import { useBpmnProcess } from '@/composables/bpmn';
 import { useAuthenticationStore } from '@/stores';
@@ -86,7 +85,7 @@ export default defineComponent({
 
     const fetchToDoTasksByPage = (pageNumber = 1) => {
       showLoading();
-      api
+      API.core
         .task()
         .fetchToDoTasksByPage(
           {
