@@ -50,3 +50,6 @@ export const API = {
   bpmnStorage: BpmnDesignerStorage.getInstance(bpmnApi, formApi),
   formStorage: FormDesignerStorage.getInstance(formApi),
 };
+
+export const BpmnDesignerInstance = BpmnDesignerStorage.getInstance(bpmnApi, formApi);
+export const FormDesignerInstance = FormDesignerStorage.getInstance(formApi);
