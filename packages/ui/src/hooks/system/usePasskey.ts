@@ -41,7 +41,7 @@ export default function usePasskey() {
 
   const registration = (label: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
-      API.passkey()
+      API.core.passkey()
         .fetchWebAuthnRegisterOptions()
         .then((publicKey) => {
           const registrationOptions = parseCreationOptionsFromJSON({
@@ -52,7 +52,7 @@ export default function usePasskey() {
             const request: WebAuthnRegister = {
               publicKey: { label: label, credential: credential },
             };
-            API.passkey()
+            API.core.passkey()
               .webAuthnRegister(request)
               .then(() => {
                 resolve(true);
@@ -79,7 +79,7 @@ export default function usePasskey() {
 
   const authenticator = (): Promise<boolean> => {
     return new Promise((resolve, reject) => {
-      API.passkey()
+      API.core.passkey()
         .fetchWebAuthnAuthenticateOptions()
         .then((publicKey) => {
           const authenticationOptions = parseRequestOptionsFromJSON({

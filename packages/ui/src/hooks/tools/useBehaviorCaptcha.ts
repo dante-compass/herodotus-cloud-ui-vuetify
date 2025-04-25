@@ -32,7 +32,8 @@ export default function useBehaviorCaptcha() {
 
     const identity = crypto.sessionId;
 
-    API.open()
+    API.core
+      .open()
       .verifyCaptcha(identity, category, data)
       .then((result) => {
         if (result.data) {
@@ -63,7 +64,8 @@ export default function useBehaviorCaptcha() {
     const identity = crypto.sessionId;
 
     if (identity) {
-      API.open()
+      API.core
+        .open()
         .createCaptcha(identity, category)
         .then((result) => {
           schema.value = result.data as CaptchaResource;

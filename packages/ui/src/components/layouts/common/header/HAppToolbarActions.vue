@@ -6,11 +6,11 @@
       dense
       flat
       color="grey-8"
-      @click="$q.fullscreen.toggle()"
-      :icon="$q.fullscreen.isActive ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'"
-      v-if="$q.screen.gt.sm"
+      @click="q.fullscreen.toggle()"
+      :icon="q.fullscreen.isActive ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'"
+      v-if="q.screen.gt.sm"
     >
-      <q-tooltip>{{ $q.fullscreen.isActive ? '退出全屏' : '全屏显示' }}</q-tooltip>
+      <q-tooltip>{{ q.fullscreen.isActive ? '退出全屏' : '全屏显示' }}</q-tooltip>
     </q-btn>
     <h-app-message-actions v-if="message"></h-app-message-actions>
     <h-app-right-drawer-control></h-app-right-drawer-control>
@@ -34,47 +34,32 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from 'vue';
+<script setup lang="ts">
+import { useQuasar } from 'quasar';
 
 import { ActionUtils } from '@/lib/utils';
-
-import { useAuthenticationStore } from '@/stores';
+import { HAppMessageActions } from '@/composables/messages';
 
 import HAppRightDrawerControl from './HAppRightDrawerControl.vue';
 import HAppWidgetActions from './HAppWidgetActions.vue';
 import HUserAvatar from '../avatar/HUserAvatar.vue';
 
-import { HAppMessageActions } from '@/composables/messages';
-
-export default defineComponent({
+defineOptions({
   name: 'HAppToolbarActions',
-
   components: {
     HAppRightDrawerControl,
     HAppWidgetActions,
     HAppMessageActions,
     HUserAvatar,
   },
-
-  props: {
-    message: { type: Boolean, default: false },
-  },
-
-  setup() {
-    const authentication = useAuthenticationStore();
-    const signOut = () => {
-      ActionUtils.signOutWithDialog();
-    };
-
-    const username = computed(() => {
-      return authentication.username ? authentication.username : '系统用户';
-    });
-
-    return {
-      signOut,
-      username,
-    };
-  },
 });
+
+defineProps({
+  message: { type: Boolean, default: false },
+});
+
+const q = useQuasar();
+const signOut = () => {
+  ActionUtils.signOutWithDialog();
+};
 </script>
