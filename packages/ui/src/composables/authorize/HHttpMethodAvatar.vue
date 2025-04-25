@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import type { HttpMethod } from '@/lib/declarations';
 
 import { useDisplayElement } from '@/hooks';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 export default defineComponent({
   name: 'HHttpMethodAvatar',

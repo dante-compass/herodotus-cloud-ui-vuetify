@@ -40,7 +40,7 @@
 import { defineComponent } from 'vue';
 
 import type { SysAttributeEntity } from '@/lib/declarations';
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useTableItem } from '@/hooks';
 import { HCenterFormLayout } from '@/components';
 import { HDictionarySelect } from '@/composables/constants';
@@ -55,7 +55,7 @@ export default defineComponent({
 
   setup(props) {
     const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysAttributeEntity>(
-      api.sysAttribute(),
+      API.core.sysAttribute(),
     );
 
     const onSave = () => {

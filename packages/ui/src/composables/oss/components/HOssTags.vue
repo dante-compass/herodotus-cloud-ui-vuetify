@@ -50,7 +50,8 @@
 import type { PropType } from 'vue';
 import { defineComponent, ref, computed } from 'vue';
 
-import { ossApi, standardDeleteNotify } from '@/lib/utils';
+import { standardDeleteNotify } from '@/lib/utils';
+import { API } from '@/configurations';
 
 export default defineComponent({
   name: 'HOssTags',
@@ -91,7 +92,7 @@ export default defineComponent({
       isAdd = true,
     ) => {
       if (!props.objectName) {
-        ossApi
+        API.oss
           .minioBucketTags()
           .set({ bucketName: bucketName, tags: tags })
           .then(() => {
@@ -102,7 +103,7 @@ export default defineComponent({
             emit('tagChange');
           });
       } else {
-        ossApi
+        API.oss
           .minioObjectTags()
           .set({ bucketName: bucketName, objectName: objectName, tags: tags })
           .then(() => {
@@ -117,14 +118,14 @@ export default defineComponent({
 
     const clearTags = (bucketName: string, objectName = '', tags: Record<string, string>) => {
       if (!props.objectName) {
-        ossApi
+        API.oss
           .minioBucketTags()
           .delete({ bucketName: bucketName })
           .then(() => {
             emit('tagChange');
           });
       } else {
-        ossApi
+        API.oss
           .minioObjectTags()
           .delete({ bucketName: bucketName, objectName: objectName })
           .then(() => {

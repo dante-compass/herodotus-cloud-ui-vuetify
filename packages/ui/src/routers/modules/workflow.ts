@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 const routes: Array<RouteRecordRaw> = [
   {

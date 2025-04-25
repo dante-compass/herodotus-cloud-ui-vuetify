@@ -44,7 +44,7 @@ import type { GraphicCaptcha } from '@/lib/declarations';
 import { CaptchaCategoryEnum } from '@/lib/definitions';
 
 import { useCryptoStore } from '@/stores';
-import { variables, api } from '@/lib/utils';
+import { VARIABLES, API } from '@/configurations';
 
 export default defineComponent({
   name: 'HGraphicCaptcha',
@@ -70,12 +70,12 @@ export default defineComponent({
     });
 
     const createCaptcha = async () => {
-      const response = await api.open().createCaptcha(crypto.sessionId, variables.getCaptcha());
+      const response = await API.core.open().createCaptcha(crypto.sessionId, VARIABLES.getCaptcha());
 
       if (
         !(
-          variables.getCaptcha() === CaptchaCategoryEnum.JIGSAW &&
-          variables.getCaptcha() === CaptchaCategoryEnum.WORD_CLICK
+          VARIABLES.getCaptcha() === CaptchaCategoryEnum.JIGSAW &&
+          VARIABLES.getCaptcha() === CaptchaCategoryEnum.WORD_CLICK
         )
       ) {
         const data = response.data as GraphicCaptcha;
@@ -85,9 +85,8 @@ export default defineComponent({
 
     const verifyCaptcha = () => {
       if (code.value && !isValid.value) {
-        api
-          .open()
-          .verifyCaptcha(crypto.sessionId, variables.getCaptcha(), code.value)
+        API.core.open()
+          .verifyCaptcha(crypto.sessionId, VARIABLES.getCaptcha(), code.value)
           .then((response) => {
             const data = response.data as boolean;
             hasError.value = false;

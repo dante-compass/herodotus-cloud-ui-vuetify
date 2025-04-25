@@ -55,9 +55,10 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS, useDictionary } from '@/composables/constants';
-import { lodash, api } from '@/lib/utils';
+import { useDictionary } from '@/composables/constants';
+import { CONSTANTS, API } from '@/configurations';
 import { useTable } from '@/hooks';
+import { lodash } from '@/lib/utils';
 
 import { HEditButton, HTable, HSwaggerColumn } from '@/components';
 
@@ -82,7 +83,7 @@ export default defineComponent({
       findItems,
       deleteItemById,
     } = useTable<SysAttributeEntity, SysAttributeConditions>(
-      api.sysAttribute(),
+      API.core.sysAttribute(),
       CONSTANTS.ComponentName.SYS_ATTRIBUTE,
       false,
       {

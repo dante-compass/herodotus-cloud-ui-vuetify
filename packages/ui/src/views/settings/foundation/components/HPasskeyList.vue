@@ -42,8 +42,8 @@ import type {
   HttpResult,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { api, moment, toast, standardDeleteNotify } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
+import { moment, toast, standardDeleteNotify } from '@/lib/utils';
 import { useTable, usePasskey } from '@/hooks';
 import { useAuthenticationStore } from '@/stores';
 
@@ -65,7 +65,7 @@ export default defineComponent({
     const { tableRows, pagination, loading, findItems, conditions } = useTable<
       OAuth2CredentialRecordEntity,
       OAuth2CredentialRecordConditions
-    >(api.oauth2CredentialRecord(), CONSTANTS.ComponentName.OAUTH2_CREDENTIAL_RECORD, true);
+    >(API.core.oauth2CredentialRecord(), CONSTANTS.ComponentName.OAUTH2_CREDENTIAL_RECORD, true);
     const { isSupported } = usePasskey();
 
     const rowKey: OAuth2CredentialRecordProps = 'credentialId';
@@ -104,7 +104,7 @@ export default defineComponent({
 
     const onDelete = (id: string) => {
       standardDeleteNotify(() => {
-        api
+        API.core
           .passkey()
           .delete(id)
           .then((response) => {

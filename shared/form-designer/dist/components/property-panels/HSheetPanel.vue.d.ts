@@ -16,8 +16,8 @@ declare const _default: import('vue').DefineComponent<{}, {}, {}, {}, {}, import
             headerStyle?: string;
             headerClasses?: string;
         }[];
-        tableRows: import('vue').Ref<import('@herodotus/core').QBaseDataItem<boolean>[], import('@herodotus/core').QBaseDataItem<boolean>[]>;
-        condition: import('@herodotus/form-apis').ConditionVariable;
+        tableRows: import('vue').Ref<import('@herodotus-cloud/core').QBaseDataItem<boolean>[], import('@herodotus-cloud/core').QBaseDataItem<boolean>[]>;
+        condition: import('@herodotus-cloud/form-apis').ConditionVariable;
         onModify: () => void;
     }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
         HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{

@@ -1,7 +1,7 @@
 import { Ref } from 'vue';
 import { BpmnSortable, BpmnListEntity, BpmnListQueryParams, BpmnDeleteQueryParams, QTableOnRequestProps } from '../../declarations';
 import { BpmnQueryByGetService } from '../../lib/logic';
-export default function useBpmnTableItems<E extends BpmnListEntity, Q extends BpmnListQueryParams, S, D extends BpmnDeleteQueryParams = BpmnDeleteQueryParams>(baseService: BpmnQueryByGetService<E, Q, S, D>, sortable: BpmnSortable<S>, queryParams?: Q, loadOnMount?: boolean): {
+export default function useBpmnTableItems<E extends BpmnListEntity, Q extends BpmnListQueryParams, S, D extends BpmnDeleteQueryParams = BpmnDeleteQueryParams>(AbstractService: BpmnQueryByGetService<E, Q, S, D>, sortable: BpmnSortable<S>, queryParams?: Q, loadOnMount?: boolean): {
     pagination: Ref<{
         sortBy: string | null;
         descending: boolean;

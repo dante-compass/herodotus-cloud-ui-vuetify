@@ -2,7 +2,7 @@ import type {
   AxiosHttpResult,
   SocialSource,
   AccessPrincipal,
-  OAuth2Token,
+  AccessTokenResponse,
   WebAuthnAuthenticate,
 } from '@/declarations';
 
@@ -79,7 +79,7 @@ class OAuth2ApiService {
   public refreshTokenFlow(
     refreshToken: string,
     oidc = false,
-  ): Promise<AxiosHttpResult<OAuth2Token>> {
+  ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
       oidc
@@ -100,7 +100,7 @@ class OAuth2ApiService {
     username: string,
     password: string,
     oidc = false,
-  ): Promise<AxiosHttpResult<OAuth2Token>> {
+  ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
       oidc
@@ -122,7 +122,7 @@ class OAuth2ApiService {
     redirect_uri: string,
     state = '',
     oidc = false,
-  ): Promise<AxiosHttpResult<OAuth2Token>> {
+  ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
       oidc
@@ -154,7 +154,7 @@ class OAuth2ApiService {
     mobile: string,
     code: string,
     oidc = false,
-  ): Promise<AxiosHttpResult<OAuth2Token>> {
+  ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
       oidc
@@ -175,7 +175,7 @@ class OAuth2ApiService {
     source: SocialSource,
     accessPrincipal: AccessPrincipal,
     oidc = false,
-  ): Promise<AxiosHttpResult<OAuth2Token>> {
+  ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
       oidc
@@ -195,7 +195,7 @@ class OAuth2ApiService {
   public webAuthnCredentialsFlow(
     publicKey: WebAuthnAuthenticate,
     oidc = false,
-  ): Promise<AxiosHttpResult<OAuth2Token>> {
+  ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().postWithParams(
       this.getOAuth2TokenAddress(),
       oidc

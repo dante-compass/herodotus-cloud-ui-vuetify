@@ -18,7 +18,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
-      name: '@herodotus/apis',
+      name: '@herodotus-cloud/apis',
       fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
     minify: 'terser',
@@ -33,7 +33,7 @@ export default defineConfig({
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: [
-        '@herodotus/core',
+        '@herodotus-cloud/core',
         '@github/webauthn-json',
         '@github/webauthn-json/browser-ponyfill',
       ],
@@ -42,7 +42,7 @@ export default defineConfig({
         assetFileNames: `assets/[ext]/[name][extname]`,
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
-          '@herodotus/core': 'HerodotusCore',
+          '@herodotus-cloud/core': 'HerodotusCore',
           '@github/webauthn-json': 'GithubWebauthnJson',
           '@github/webauthn-json/browser-ponyfill': 'GithubWebauthnJsonBrowserPonyfill',
         },

@@ -28,4 +28,4 @@ declare module 'bpmnlint/rules/start-event-required';
 declare module 'bpmnlint/rules/sub-process-blank-start-event';
 declare module 'bpmnlint/rules/superfluous-gateway';
 
-declare module '@herodotus/components';
+declare module '@herodotus-cloud/components';

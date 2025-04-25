@@ -4,37 +4,30 @@
   </h-sign-in-layout>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted } from 'vue';
+<script setup lang="ts">
+import { onMounted } from 'vue';
 
 import { useApplicationStore, useCryptoStore, useAuthenticationStore } from '@/stores';
 
 import { HSignInLayout } from '@/composables/sign-in';
 import { AccountPanel, MobilePanel, ScanPanel } from './panel';
 
-export default defineComponent({
+defineOptions({
   name: 'SignIn',
-
   components: {
     HSignInLayout,
     account: AccountPanel,
     mobile: MobilePanel,
     scan: ScanPanel,
   },
+});
 
-  setup() {
-    const application = useApplicationStore();
-    const authentication = useAuthenticationStore();
-    const crypto = useCryptoStore();
+const application = useApplicationStore();
+const authentication = useAuthenticationStore();
+const crypto = useCryptoStore();
 
-    onMounted(() => {
-      crypto.exchange();
-      authentication.errorTimes = 0;
-    });
-
-    return {
-      application,
-    };
-  },
+onMounted(() => {
+  crypto.exchange();
+  authentication.errorTimes = 0;
 });
 </script>

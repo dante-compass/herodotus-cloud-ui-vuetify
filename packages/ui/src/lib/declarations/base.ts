@@ -4,18 +4,15 @@ export type {
   Page,
   Sort,
   Tree,
-  ValidateResult,
-  AxiosTransform,
   AxiosHttpResult,
   AxiosProgressEvent,
   ResponseStatus,
-  RequestOptions,
   RetryRequest,
   HttpConfig,
   HttpResult,
   HttpMethod,
-  OAuth2Token,
-  OAuth2IdToken,
+  AccessTokenResponse,
+  OidcIdTokenResponse,
   QBaseDataItem,
   QTableSeparatorProps,
   QTableColumnProps,
@@ -24,9 +21,11 @@ export type {
   QTableOnRequestParameter,
   QUploaderInfo,
   QNotifyPosition,
-} from '@herodotus/core';
+  SweetAlertIcon,
+  SweetAlertResult,
+} from '@herodotus-cloud/core';
 export type {
-  BaseEntity,
+  AbstractEntity,
   AbstractSysEntity,
   JigsawCaptcha,
   WordClickCaptcha,
@@ -113,7 +112,7 @@ export type {
   WebAuthnRegister,
   WebAuthnAuthenticateOptions,
   WebAuthnAuthenticate,
-} from '@herodotus/apis';
+} from '@herodotus-cloud/apis';
 
 export type {
   BucketDomain,
@@ -129,7 +128,7 @@ export type {
   DeletedObjectDomain,
   CreateBucketResult,
   DeleteBucketResult,
-} from '@herodotus/oss-apis';
+} from '@herodotus-cloud/oss-apis';
 
 export type {
   Element,
@@ -138,12 +137,10 @@ export type {
   ConditionVariable,
   DynamicFormEntity,
   DynamicFormConditions,
-  DynamicFormService,
-  FormDesignerResources,
   ProcessSpecificsEntity,
   ProcessSpecificsConditions,
   ProcessCommentsEntity,
-} from '@herodotus/form-apis';
+} from '@herodotus-cloud/form-apis';
 
 export type {
   BpmnQueryByGetService,
@@ -170,12 +167,8 @@ export type {
   TaskQueryParams,
   TaskSortBy,
   Variables,
-} from '@herodotus/bpmn-apis';
-
-export type { BpmnDesignerResources } from '@herodotus/bpmn-designer';
+} from '@herodotus-cloud/bpmn-apis';
 
 export type { EChartsOption, EChartsCoreOption } from 'echarts';
 
 export type { QTableProps, QTree, QUploaderFactoryObject, QSelect } from 'quasar';
-
-export type { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';

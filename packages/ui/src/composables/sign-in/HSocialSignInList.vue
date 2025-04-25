@@ -29,7 +29,8 @@
 <script lang="ts">
 import type { Ref } from 'vue';
 import { defineComponent, ref, computed, onMounted } from 'vue';
-import { getSocialLogo, lodash, api, variables, PKCE } from '@/lib/utils';
+import { lodash, PKCE } from '@/lib/utils';
+import { VARIABLES, IMAGES, API } from '@/configurations';
 
 export default defineComponent({
   name: 'HSocialSignInList',
@@ -38,8 +39,7 @@ export default defineComponent({
     const list = ref({}) as Ref<Record<string, string>>;
 
     const init = () => {
-      api
-        .open()
+      API.core.open()
         .getSocialList()
         .then((result) => {
           list.value = result.data as Record<string, string>;
@@ -48,25 +48,25 @@ export default defineComponent({
 
     const getImage = (source: string) => {
       const name = source.toLowerCase();
-      return getSocialLogo(name);
+      return IMAGES.getSocialLogo(name);
     };
 
     const createAuthorizationCodeAddress = () => {
-      const project = api.getConfig().getProject();
-      let address = variables.getApiUrl();
+      const project = API.core.getConfig().getProject();
+      let address = VARIABLES.getApiUrl();
       if (lodash.endsWith(address, '/')) {
         address = address.substring(0, address.length - 1);
       }
 
       if (project && (project === 'dante' || project === 'herodotus')) {
-        address += api.getConfig().getUaa(false);
+        address += API.core.getConfig().getUaa(false);
       }
 
       return address + '/oauth2/authorize';
     };
 
     const createAuthorizationCodeParams = () => {
-      const param = `?response_type=code&client_id=${variables.getClientId()}&client_secret=${variables.getClientSecret()}&redirect_uri=${variables.getRedirectUri()}&scope=openid`;
+      const param = `?response_type=code&client_id=${VARIABLES.getClientId()}&client_secret=${VARIABLES.getClientSecret()}&redirect_uri=${VARIABLES.getRedirectUri()}&scope=openid`;
       console.log('---pkce---', PKCE.generateCodePair(64));
       return param;
     };

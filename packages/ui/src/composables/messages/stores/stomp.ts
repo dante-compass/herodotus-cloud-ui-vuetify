@@ -2,7 +2,8 @@ import { defineStore } from 'pinia';
 import { Client } from '@stomp/stompjs';
 
 import type { DialogueDetailEntity, WebSocketOperations } from '@/lib/declarations';
-import { api, lodash, variables } from '@/lib/utils';
+import { lodash } from '@/lib/utils';
+import { VARIABLES, API } from '@/configurations';
 import { useAuthenticationStore } from '@/stores';
 
 export const useStompWebSocketStore = defineStore('StompWebSocket', {
@@ -28,11 +29,11 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
       const store = useAuthenticationStore();
       return (
         `ws://${location.host}/socket` +
-        api.getConfig().getMsg(false) +
+        API.core.getConfig().getMsg(false) +
         '/stomp/ws?openid=' +
         store.userId
       );
-      // return `ws://${location.host}/socket` + api.getConfig().getMsg(false) + '/stomp/ws';
+      // return `ws://${location.host}/socket` + API.getConfig().getMsg(false) + '/stomp/ws';
     },
 
     getAuthorizationHeader(): Record<string, string> {
@@ -121,7 +122,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
 
     connect(webSocketOperations: WebSocketOperations): void {
       this.operation = webSocketOperations;
-      if (variables.isUseWebSocket()) {
+      if (VARIABLES.isUseWebSocket()) {
         const store = useAuthenticationStore();
         if (store.token) {
           this.createClient();
@@ -132,7 +133,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
     },
 
     async disconnect(): Promise<any> {
-      if (variables.isUseWebSocket()) {
+      if (VARIABLES.isUseWebSocket()) {
         if (!lodash.isEmpty(this.client)) {
           await this.client.deactivate();
         }
@@ -140,8 +141,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
     },
 
     pullStat(): void {
-      api
-        .webSocketMessage()
+      API.core.webSocketMessage()
         .fetchAllStat()
         .then((result) => {
           const data = result.data as Record<string, any>;

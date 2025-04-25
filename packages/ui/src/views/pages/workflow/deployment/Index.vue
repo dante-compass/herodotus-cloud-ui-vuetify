@@ -37,7 +37,8 @@ import type {
   QTableProps,
 } from '@/lib/declarations';
 
-import { bpmnApi, moment } from '@/lib/utils';
+import { moment } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useBpmnTableItems } from '@/composables/bpmn';
 
 export default defineComponent({
@@ -59,7 +60,7 @@ export default defineComponent({
       DeploymentQueryParams,
       DeploymentSortBy,
       DeploymentDeleteQueryParams
-    >(bpmnApi.deployment(), {
+    >(API.bpmn.deployment(), {
       sortBy: 'id',
       sortOrder: 'desc',
     });

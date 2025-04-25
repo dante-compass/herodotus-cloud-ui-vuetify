@@ -3,7 +3,8 @@ import type { RouteRecordRaw, RouteMeta, Router } from 'vue-router';
 import type { RemoteRoute } from '@/lib/declarations';
 
 import { useRouteStore } from '@/stores';
-import { lodash, api } from '@/lib/utils';
+import { lodash } from '@/lib/utils';
+import { API } from '@/configurations';
 
 export default function useSystemRoute() {
   const routeModules = import.meta.glob('../../routers/modules/**/*.ts', {
@@ -64,7 +65,7 @@ export default function useSystemRoute() {
   };
 
   const getRoutesFromServer = () => {
-    return api.sysElement().fetchTree();
+    return API.core.sysElement().fetchTree();
   };
 
   const getRoutesFromLocal = () => {

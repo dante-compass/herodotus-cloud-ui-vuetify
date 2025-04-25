@@ -15,7 +15,7 @@ import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 
 import { useDisplayElement } from '@/hooks';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 import HDenseIconButton from './HDenseIconButton.vue';
 

@@ -45,7 +45,8 @@ import type { DialogueDetailEntity, DialogueDetailConditions } from '@/lib/decla
 
 import { HDetailContainer, HUserAvatar } from '@/components';
 import { HSendMessageField } from '@/composables/messages';
-import { api, moment } from '@/lib/utils';
+import { moment } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useTableItem, useTable, useEditFinish } from '@/hooks';
 
 export default defineComponent({
@@ -59,7 +60,7 @@ export default defineComponent({
 
   setup(props) {
     const { onFinish } = useEditFinish();
-    const { editedItem } = useTableItem(api.dialogueContact());
+    const { editedItem } = useTableItem(API.core.dialogueContact());
 
     const {
       tableRows,
@@ -72,7 +73,7 @@ export default defineComponent({
       deleteItemById,
       conditions,
     } = useTable<DialogueDetailEntity, DialogueDetailConditions>(
-      api.dialogueDetail(),
+      API.core.dialogueDetail(),
       'MessageDialogueDetail',
       false,
       { direction: 'ASC', properties: ['createTime'] },

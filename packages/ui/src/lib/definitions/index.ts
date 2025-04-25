@@ -1,4 +1,4 @@
-export { BaseService } from '@herodotus/core';
+export { AbstractService } from '@herodotus-cloud/core';
 
 export * from './enums';
 export * from './symbol';

@@ -1,8 +1,8 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { lodash, Service, moment, ContentTypeEnum, HttpConfig } from "@herodotus/core";
-import { Axios, ContentTypeEnum as ContentTypeEnum2, HttpConfig as HttpConfig2, Service as Service2, Swal, lodash as lodash2, moment as moment2, toast } from "@herodotus/core";
+import { lodash, Service, moment, ContentTypeEnum, HttpConfig } from "@herodotus-cloud/core";
+import { Axios, ContentTypeEnum as ContentTypeEnum2, HttpConfig as HttpConfig2, Service as Service2, Swal, lodash as lodash2, moment as moment2, toast } from "@herodotus-cloud/core";
 class PathParamBuilder {
   constructor(address) {
     __publicField(this, "address");
@@ -1225,8 +1225,8 @@ const _BpmnApiResources = class _BpmnApiResources {
 };
 __publicField(_BpmnApiResources, "instance");
 let BpmnApiResources = _BpmnApiResources;
-const createBpmnApi = (project, clientId, clientSecret, http) => {
-  const config = new HttpConfig(project, clientId, clientSecret, http);
+const createBpmnApi = (http, options) => {
+  const config = new HttpConfig(http, options);
   return BpmnApiResources.getInstance(config);
 };
 export {

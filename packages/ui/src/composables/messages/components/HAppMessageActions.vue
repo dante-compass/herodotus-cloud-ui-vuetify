@@ -48,7 +48,7 @@ import { storeToRefs } from 'pinia';
 
 import { useWebSocketMessage } from '../hooks';
 import { useNotificationStore } from '../stores';
-import { variables } from '@/lib/utils';
+import { VARIABLES } from '@/configurations';
 
 import HAppDialogueNotification from './HAppDialogueNotification.vue';
 import HAppAnnouncementNotification from './HAppAnnouncementNotification.vue';
@@ -69,7 +69,7 @@ export default defineComponent({
     const tab = ref('dialogue');
 
     const isEnabled = computed(() => {
-      return variables.isUseWebSocket();
+      return VARIABLES.isUseWebSocket();
     });
 
     onMounted(() => {

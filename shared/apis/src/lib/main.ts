@@ -1,3 +1,5 @@
+import type { HttpConfigOption } from '@/declarations';
+
 import { Axios, HttpConfig } from './base';
 import { OpenApiService, OAuth2ApiService, PasskeyApiService } from './secure';
 import {
@@ -162,14 +164,8 @@ export class ApiResources {
   }
 }
 
-const createApi = (
-  project: string,
-  clientId: string,
-  clientSecret: string,
-  http: Axios,
-  oidc: boolean,
-): ApiResources => {
-  const config = new HttpConfig(project, clientId, clientSecret, http, oidc);
+const createApi = (http: Axios, options: HttpConfigOption): ApiResources => {
+  const config = new HttpConfig(http, options);
   return ApiResources.getInstance(config);
 };
 

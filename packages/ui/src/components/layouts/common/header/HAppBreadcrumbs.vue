@@ -14,7 +14,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { useSettingsStore } from '@/stores';
 
 export default defineComponent({

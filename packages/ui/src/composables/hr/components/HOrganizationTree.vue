@@ -29,7 +29,7 @@
 import { defineComponent, ref, computed } from 'vue';
 
 import type { SysOrganizationEntity, SysOrganizationConditions } from '@/lib/declarations';
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useTreeItems } from '@/hooks';
 
 import { HDictionarySelect } from '@/composables/constants';
@@ -51,7 +51,7 @@ export default defineComponent({
     const { treeItems, conditions } = useTreeItems<
       SysOrganizationEntity,
       SysOrganizationConditions
-    >(api.sysOrganization());
+    >(API.core.sysOrganization());
 
     const selectedValue = computed({
       get: () => props.selected,

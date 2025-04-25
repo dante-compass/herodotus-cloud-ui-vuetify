@@ -117,7 +117,7 @@ import { useRouter } from 'vue-router';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 import { toast } from '@/lib/utils';
 import { useApplicationStore, useCryptoStore, useAuthenticationStore } from '@/stores';
 import { HSocialSignInList } from '@/composables/sign-in';

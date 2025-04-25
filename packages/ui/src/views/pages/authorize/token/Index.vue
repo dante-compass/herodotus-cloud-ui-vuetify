@@ -28,9 +28,9 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { moment, api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 import { useTable } from '@/hooks';
+import { moment } from '@/lib/utils';
 
 import { HDeleteButton, HTable } from '@/components';
 
@@ -46,7 +46,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, findItems, deleteItemById } = useTable<
       OAuth2AuthorizationEntity,
       OAuth2AuthorizationConditions
-    >(api.oauth2Authorization(), CONSTANTS.ComponentName.OAUTH2_TOKEN, false, {
+    >(API.core.oauth2Authorization(), CONSTANTS.ComponentName.OAUTH2_TOKEN, false, {
       direction: 'DESC',
       properties: ['accessTokenIssuedAt'],
     });

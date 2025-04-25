@@ -55,7 +55,8 @@
 import { defineComponent, computed, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, sameAs, helpers } from '@vuelidate/validators';
-import { variables, toast, api } from '@/lib/utils';
+import { toast } from '@/lib/utils';
+import { VARIABLES, API } from '@/configurations';
 import { useCryptoStore } from '@/stores';
 
 export default defineComponent({
@@ -108,11 +109,10 @@ export default defineComponent({
       v.value.$validate().then((result) => {
         if (result) {
           loading.value = true;
-          const password = variables.isUseCrypto()
+          const password = VARIABLES.isUseCrypto()
             ? crypto.encrypt(confirmPassword.value)
             : confirmPassword.value;
-          api
-            .sysUser()
+          API.core.sysUser()
             .changePassword(props.userId, password)
             .then((response) => {
               if (response) {

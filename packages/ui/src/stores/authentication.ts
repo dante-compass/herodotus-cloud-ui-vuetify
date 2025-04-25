@@ -4,12 +4,13 @@ import type {
   WebAuthnAuthenticate,
   SocialSource,
   AccessPrincipal,
-  OAuth2Token,
-  OAuth2IdToken,
+  AccessTokenResponse,
+  OidcIdTokenResponse,
 } from '@/lib/declarations';
 import { jwtDecode } from 'jwt-decode';
 import { useCryptoStore } from './crypto';
-import { variables, moment, api } from '@/lib/utils';
+import { moment } from '@/lib/utils';
+import { VARIABLES, API } from '@/configurations';
 
 export const useAuthenticationStore = defineStore('Authentication', {
   state: () => ({
@@ -38,7 +39,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       return flag !== 0;
     },
     token(): string {
-      if (variables.getAutoRefreshToken()) {
+      if (VARIABLES.getAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -59,7 +60,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       return { Authorization: this.getBearerToken(), 'X-Herodotus-Open-Id': this.userId };
     },
 
-    setTokenInfo(data: OAuth2Token): void {
+    setTokenInfo(data: AccessTokenResponse): void {
       this.access_token = data.access_token;
       this.expires_in = data.expires_in;
       this.refresh_token = data.refresh_token;
@@ -68,7 +69,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       this.token_type = data.token_type;
       if (data.id_token) {
         this.idToken = data.id_token;
-        const jwt: OAuth2IdToken = jwtDecode(this.idToken);
+        const jwt: OidcIdTokenResponse = jwtDecode(this.idToken);
         this.userId = jwt.openid;
         this.username = jwt.sub;
         this.avatar = jwt.avatar;
@@ -108,8 +109,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     setErrorPrompt(error: any, principal: string): void {
       if (this.isAlertMessage(error)) {
-        api
-          .open()
+        API.core.open()
           .getPrompt(principal)
           .then((result) => {
             this.setUserErrorStatus(result.data as SignInErrorStatus);
@@ -119,17 +119,16 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     signIn(username: string, password: string) {
       const crypto = useCryptoStore();
-      if (variables.isUseCrypto()) {
+      if (VARIABLES.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
-          .passwordFlow(username, password, variables.isUseCrypto())
+        API.core.oauth2()
+          .passwordFlow(username, password, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
-              const data = response as OAuth2Token;
+              const data = response as AccessTokenResponse;
               this.setTokenInfo(data);
             }
 
@@ -147,12 +146,11 @@ export const useAuthenticationStore = defineStore('Authentication', {
     },
     refreshToken() {
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
-          .refreshTokenFlow(this.refresh_token, variables.isUseCrypto())
+        API.core.oauth2()
+          .refreshTokenFlow(this.refresh_token, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
-              const data = response as OAuth2Token;
+              const data = response as AccessTokenResponse;
               this.setTokenInfo(data);
             }
 
@@ -169,8 +167,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
     },
     signOut() {
       if (this.access_token) {
-        api
-          .oauth2()
+        API.core.oauth2()
           .signOut(this.access_token)
           .then(() => {
             console.log('Server side sign out successfully.');
@@ -182,12 +179,11 @@ export const useAuthenticationStore = defineStore('Authentication', {
     },
     authorizationCode(code: string, state = '') {
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
-          .authorizationCodeFlow(code, variables.getRedirectUri(), state, variables.isUseCrypto())
+        API.core.oauth2()
+          .authorizationCodeFlow(code, VARIABLES.getRedirectUri(), state, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
-              const data = response as OAuth2Token;
+              const data = response as AccessTokenResponse;
               this.setTokenInfo(data);
             }
 
@@ -205,17 +201,16 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     smsSignIn(mobile: string, code: string) {
       const crypto = useCryptoStore();
-      if (variables.isUseCrypto()) {
+      if (VARIABLES.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
-          .socialCredentialsFlowBySms(mobile, code, variables.isUseCrypto())
+        API.core.oauth2()
+          .socialCredentialsFlowBySms(mobile, code, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
-              const data = response as unknown as OAuth2Token;
+              const data = response as unknown as AccessTokenResponse;
               this.setTokenInfo(data);
             }
 
@@ -234,12 +229,11 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     socialSignIn(source: SocialSource, accessPrincipal: AccessPrincipal) {
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
-          .socialCredentialsFlowByJustAuth(source, accessPrincipal, variables.isUseCrypto())
+        API.core.oauth2()
+          .socialCredentialsFlowByJustAuth(source, accessPrincipal, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
-              const data = response as OAuth2Token;
+              const data = response as AccessTokenResponse;
               this.setTokenInfo(data);
             }
 
@@ -257,12 +251,11 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
     passkey(publicKey: WebAuthnAuthenticate) {
       return new Promise<boolean>((resolve, reject) => {
-        api
-          .oauth2()
-          .webAuthnCredentialsFlow(publicKey, variables.isUseCrypto())
+        API.core.oauth2()
+          .webAuthnCredentialsFlow(publicKey, VARIABLES.isUseCrypto())
           .then((response) => {
             if (response) {
-              const data = response as OAuth2Token;
+              const data = response as AccessTokenResponse;
               this.setTokenInfo(data);
             }
 

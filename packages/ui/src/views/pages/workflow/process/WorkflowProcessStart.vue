@@ -21,7 +21,7 @@ import { defineComponent, onMounted } from 'vue';
 
 import { useBpmnProcess } from '@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '@/components';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 import { lodash } from '@/lib/utils';
 

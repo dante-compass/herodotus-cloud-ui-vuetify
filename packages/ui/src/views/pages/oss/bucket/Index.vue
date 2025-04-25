@@ -42,8 +42,8 @@ import type {
   DeleteBucketResult,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { moment, toast, standardDeleteNotify, ossApi } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
+import { moment, toast, standardDeleteNotify } from '@/lib/utils';
 
 import { useBaseTable } from '@/hooks';
 
@@ -88,7 +88,7 @@ export default defineComponent({
     ];
 
     const list = () => {
-      ossApi
+      API.oss
         .bucket()
         .listBuckets()
         .then((result) => {
@@ -103,7 +103,7 @@ export default defineComponent({
 
     const remove = (bucketName: string) => {
       standardDeleteNotify(() => {
-        ossApi
+        API.oss
           .bucket()
           .deleteBucket({ bucketName: bucketName })
           .then((response) => {

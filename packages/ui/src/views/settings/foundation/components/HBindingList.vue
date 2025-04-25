@@ -50,10 +50,10 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { api, getSocialLogo, moment } from '@/lib/utils';
+import { CONSTANTS, IMAGES, API } from '@/configurations';
 import { useTable } from '@/hooks';
 import { useAuthenticationStore } from '@/stores';
+import { moment } from '@/lib/utils';
 
 import HBindingButton from './HBindingButton.vue';
 import HBindingDetailColumn from './HBindingDetailColumn.vue';
@@ -74,7 +74,7 @@ export default defineComponent({
     const { tableRows, pagination, loading, findItems, conditions } = useTable<
       AccessSourceEntity,
       AccessSourceConditions
-    >(api.socialBinding(), CONSTANTS.ComponentName.SOCIAL_BINDING, true);
+    >(API.core.socialBinding(), CONSTANTS.ComponentName.SOCIAL_BINDING, true);
 
     const rowKey: AccessSourceProps = 'id';
 
@@ -100,7 +100,7 @@ export default defineComponent({
 
     const getImage = (source: string) => {
       const name = source.toLowerCase();
-      return getSocialLogo(name);
+      return IMAGES.getSocialLogo(name);
     };
 
     onMounted(() => {

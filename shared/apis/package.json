@@ -1,10 +1,11 @@
 {
-  "name": "@herodotus/apis",
+  "name": "@herodotus-cloud/apis",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "private": false,
   "type": "module",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.mjs",
@@ -21,6 +22,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -29,6 +33,6 @@
   },
   "dependencies": {
     "@github/webauthn-json": "^2.1.1",
-    "@herodotus/core": "workspace:^"
+    "@herodotus-cloud/core": "workspace:^"
   }
 }

@@ -18,7 +18,7 @@ declare const _default: import('vue').DefineComponent<{}, {
     }>, {
         isOpen: import('vue').Ref<boolean, boolean>;
         isDisabled: import('vue').ComputedRef<boolean>;
-        selected: import('vue').Ref<import('@herodotus/bpmn-apis').GroupEntity[], import('@herodotus/bpmn-apis').GroupEntity[]>;
+        selected: import('vue').Ref<import('@herodotus-cloud/bpmn-apis').GroupEntity[], import('@herodotus-cloud/bpmn-apis').GroupEntity[]>;
         assignee: import('vue').WritableComputedRef<string, string>;
         onClose: () => void;
         onSave: () => void;
@@ -106,11 +106,11 @@ declare const _default: import('vue').DefineComponent<{}, {
         }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         HGroupSelectTable: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             modelValue: {
-                type: import('vue').PropType<Array<import('@herodotus/bpmn-apis').GroupEntity>>;
-                default: () => Array<import('@herodotus/bpmn-apis').GroupEntity>;
+                type: import('vue').PropType<Array<import('@herodotus-cloud/bpmn-apis').GroupEntity>>;
+                default: () => Array<import('@herodotus-cloud/bpmn-apis').GroupEntity>;
             };
         }>, {
-            tableRows: import('vue').Ref<import('@herodotus/bpmn-apis').GroupEntity[], import('@herodotus/bpmn-apis').GroupEntity[]>;
+            tableRows: import('vue').Ref<import('@herodotus-cloud/bpmn-apis').GroupEntity[], import('@herodotus-cloud/bpmn-apis').GroupEntity[]>;
             totalPages: import('vue').Ref<number, number>;
             pagination: import('vue').Ref<{
                 sortBy: string | null;
@@ -133,8 +133,8 @@ declare const _default: import('vue').DefineComponent<{}, {
             }>;
             loading: import('vue').Ref<boolean, boolean>;
             fieldValue: import('vue').Ref<string, string>;
-            selectedItems: import('vue').WritableComputedRef<import('@herodotus/bpmn-apis').GroupEntity[], import('@herodotus/bpmn-apis').GroupEntity[]>;
-            rowKey: keyof import('@herodotus/bpmn-apis').GroupEntity;
+            selectedItems: import('vue').WritableComputedRef<import('@herodotus-cloud/bpmn-apis').GroupEntity[], import('@herodotus-cloud/bpmn-apis').GroupEntity[]>;
+            rowKey: keyof import('@herodotus-cloud/bpmn-apis').GroupEntity;
             columns: {
                 name: string;
                 label: string;
@@ -151,15 +151,15 @@ declare const _default: import('vue').DefineComponent<{}, {
                 headerStyle?: string;
                 headerClasses?: string;
             }[];
-            findItems: import('@herodotus/core').QTableOnRequestProps;
+            findItems: import('@herodotus-cloud/core').QTableOnRequestProps;
             onClear: () => void;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             modelValue: {
-                type: import('vue').PropType<Array<import('@herodotus/bpmn-apis').GroupEntity>>;
-                default: () => Array<import('@herodotus/bpmn-apis').GroupEntity>;
+                type: import('vue').PropType<Array<import('@herodotus-cloud/bpmn-apis').GroupEntity>>;
+                default: () => Array<import('@herodotus-cloud/bpmn-apis').GroupEntity>;
             };
         }>> & Readonly<{}>, {
-            modelValue: import('@herodotus/bpmn-apis').GroupEntity[];
+            modelValue: import('@herodotus-cloud/bpmn-apis').GroupEntity[];
         }, {}, {
             HTextField: any;
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
@@ -183,7 +183,7 @@ declare const _default: import('vue').DefineComponent<{}, {
     }>, {
         isOpen: import('vue').Ref<boolean, boolean>;
         isDisabled: import('vue').ComputedRef<boolean>;
-        selected: import('vue').Ref<import('@herodotus/bpmn-apis').UserEntity[], import('@herodotus/bpmn-apis').UserEntity[]>;
+        selected: import('vue').Ref<import('@herodotus-cloud/bpmn-apis').UserEntity[], import('@herodotus-cloud/bpmn-apis').UserEntity[]>;
         assignee: import('vue').WritableComputedRef<string, string>;
         onClose: () => void;
         onSave: () => void;
@@ -277,15 +277,15 @@ declare const _default: import('vue').DefineComponent<{}, {
         HTextField: any;
         HUserSelectTable: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             modelValue: {
-                type: import('vue').PropType<Array<import('@herodotus/bpmn-apis').UserEntity>>;
-                default: () => Array<import('@herodotus/bpmn-apis').UserEntity>;
+                type: import('vue').PropType<Array<import('@herodotus-cloud/bpmn-apis').UserEntity>>;
+                default: () => Array<import('@herodotus-cloud/bpmn-apis').UserEntity>;
             };
             selection: {
                 type: import('vue').PropType<"single" | "multiple">;
                 default: string;
             };
         }>, {
-            tableRows: import('vue').Ref<import('@herodotus/bpmn-apis').UserEntity[], import('@herodotus/bpmn-apis').UserEntity[]>;
+            tableRows: import('vue').Ref<import('@herodotus-cloud/bpmn-apis').UserEntity[], import('@herodotus-cloud/bpmn-apis').UserEntity[]>;
             totalPages: import('vue').Ref<number, number>;
             pagination: import('vue').Ref<{
                 sortBy: string | null;
@@ -308,8 +308,8 @@ declare const _default: import('vue').DefineComponent<{}, {
             }>;
             loading: import('vue').Ref<boolean, boolean>;
             fieldValue: import('vue').Ref<string, string>;
-            selectedItems: import('vue').WritableComputedRef<import('@herodotus/bpmn-apis').UserEntity[], import('@herodotus/bpmn-apis').UserEntity[]>;
-            rowKey: keyof import('@herodotus/bpmn-apis').UserEntity;
+            selectedItems: import('vue').WritableComputedRef<import('@herodotus-cloud/bpmn-apis').UserEntity[], import('@herodotus-cloud/bpmn-apis').UserEntity[]>;
+            rowKey: keyof import('@herodotus-cloud/bpmn-apis').UserEntity;
             columns: {
                 name: string;
                 label: string;
@@ -326,19 +326,19 @@ declare const _default: import('vue').DefineComponent<{}, {
                 headerStyle?: string;
                 headerClasses?: string;
             }[];
-            findItems: import('@herodotus/core').QTableOnRequestProps;
+            findItems: import('@herodotus-cloud/core').QTableOnRequestProps;
             onClear: () => void;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
             modelValue: {
-                type: import('vue').PropType<Array<import('@herodotus/bpmn-apis').UserEntity>>;
-                default: () => Array<import('@herodotus/bpmn-apis').UserEntity>;
+                type: import('vue').PropType<Array<import('@herodotus-cloud/bpmn-apis').UserEntity>>;
+                default: () => Array<import('@herodotus-cloud/bpmn-apis').UserEntity>;
             };
             selection: {
                 type: import('vue').PropType<"single" | "multiple">;
                 default: string;
             };
         }>> & Readonly<{}>, {
-            modelValue: import('@herodotus/bpmn-apis').UserEntity[];
+            modelValue: import('@herodotus-cloud/bpmn-apis').UserEntity[];
             selection: "single" | "multiple";
         }, {}, {
             HTextField: any;

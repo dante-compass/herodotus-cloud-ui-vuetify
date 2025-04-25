@@ -2,7 +2,8 @@ import { defineStore } from 'pinia';
 
 import type { Dictionary, SysDictionaryEntity } from '@/lib/declarations';
 
-import { lodash, api } from '@/lib/utils';
+import { lodash } from '@/lib/utils';
+import { API } from '@/configurations';
 
 export const useDictionaryStore = defineStore('Dictionary', {
   state: () => ({
@@ -94,8 +95,7 @@ export const useDictionaryStore = defineStore('Dictionary', {
         if (!lodash.isEmpty(items)) {
           reject(items);
         } else {
-          api
-            .sysDictionary()
+          API.core.sysDictionary()
             .fetchByCategory(category)
             .then((response) => {
               const data = response.data;
@@ -119,8 +119,7 @@ export const useDictionaryStore = defineStore('Dictionary', {
         if (lodash.isEmpty(keys)) {
           resolve(this.dictionaries);
         } else {
-          api
-            .sysDictionary()
+          API.core.sysDictionary()
             .fetchCategories(keys.join(','))
             .then((response) => {
               const data = response.data;

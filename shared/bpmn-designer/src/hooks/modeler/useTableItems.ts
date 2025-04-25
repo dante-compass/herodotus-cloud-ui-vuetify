@@ -20,7 +20,7 @@ export default function useBpmnTableItems<
   S,
   D extends BpmnDeleteQueryParams = BpmnDeleteQueryParams,
 >(
-  baseService: BpmnQueryByGetService<E, Q, S, D>,
+  AbstractService: BpmnQueryByGetService<E, Q, S, D>,
   sortable: BpmnSortable<S>,
   queryParams = {} as Q,
   loadOnMount = true,
@@ -39,15 +39,14 @@ export default function useBpmnTableItems<
 
   const findItemsByPage = (pageNumber = 1, pageSize = 10, params = {} as Q) => {
     loading.value = true;
-    baseService
-      .getByPage(
-        {
-          pageNumber: pageNumber - 1,
-          pageSize: pageSize,
-          ...sortable,
-        },
-        params,
-      )
+    AbstractService.getByPage(
+      {
+        pageNumber: pageNumber - 1,
+        pageSize: pageSize,
+        ...sortable,
+      },
+      params,
+    )
       .then((result) => {
         const data = result as Page<E>;
         if (data) {

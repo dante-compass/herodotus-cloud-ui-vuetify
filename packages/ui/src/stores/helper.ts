@@ -1,5 +1,5 @@
 import { useDictionaryStore } from '@/composables/constants';
-import { variables } from '@/lib/utils';
+import { VARIABLES } from '@/configurations';
 
 import { useAuthenticationStore } from './authentication';
 import { useCryptoStore } from './crypto';
@@ -27,7 +27,7 @@ export const getSystemHeaders = () => {
     headers['X-Herodotus-Session-Id'] = sessionId;
   }
 
-  const tenantId = variables.getCurrentTenantId();
+  const tenantId = VARIABLES.getCurrentTenantId();
   if (tenantId) {
     headers['X-Herodotus-Tenant-Id'] = tenantId;
   }

@@ -45,8 +45,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 
 import { useTable } from '@/hooks';
 
@@ -69,7 +68,7 @@ export default defineComponent({
       findItems,
       deleteItemById,
     } = useTable<SysTenantDataSourceEntity, SysTenantDataSourceConditions>(
-      api.sysTenantDataSource(),
+      API.core.sysTenantDataSource(),
       CONSTANTS.ComponentName.SYS_TENANT_DATA_SOURCE,
     );
 

@@ -2,7 +2,7 @@ import { watch, ref, computed } from 'vue';
 
 import { ThemeModeEnum } from '@/lib/definitions';
 import { useSettingsStore } from '@/stores';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 export default function useSystemTheme() {
   let media: MediaQueryList;

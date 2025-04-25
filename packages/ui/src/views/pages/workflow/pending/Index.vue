@@ -31,7 +31,8 @@ import { defineComponent, ref } from 'vue';
 
 import type { TaskEntity, TaskQueryParams, TaskSortBy, QTableProps } from '@/lib/declarations';
 
-import { bpmnApi, moment } from '@/lib/utils';
+import { moment } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useAuthenticationStore } from '@/stores';
 import { useBpmnTableItems } from '@/composables/bpmn';
 
@@ -52,7 +53,7 @@ export default defineComponent({
       onDeleteItemById,
       conditions,
     } = useBpmnTableItems<TaskEntity, TaskQueryParams, TaskSortBy>(
-      bpmnApi.task(),
+      API.bpmn.task(),
       {
         sortBy: 'id',
         sortOrder: 'desc',

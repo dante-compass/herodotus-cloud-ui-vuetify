@@ -1,6 +1,6 @@
 import type { Router } from 'vue-router';
 import { useRouteStore, useAuthenticationStore } from '@/stores';
-import { CONSTANTS } from '@/composables/constants';
+import { CONSTANTS } from '@/configurations';
 
 import { useSystemRoute } from '@/hooks';
 

@@ -30,7 +30,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
-      name: '@herodotus/form-engine',
+      name: '@herodotus-cloud/form-engine',
       fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
     minify: 'terser',
@@ -44,7 +44,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
-      external: ['vue', 'quasar', 'nanoid', '@herodotus/form-apis'],
+      external: ['vue', 'quasar', 'nanoid', '@herodotus-cloud/form-apis'],
       output: {
         exports: 'named',
         assetFileNames: `assets/[ext]/[name][extname]`,
@@ -53,7 +53,7 @@ export default defineConfig({
           vue: 'vue',
           quasar: 'quasar',
           nanoid: 'nanoid',
-          '@herodotus/form-apis': 'HerodotusFormApis',
+          '@herodotus-cloud/form-apis': 'HerodotusFormApis',
         },
       },
     },

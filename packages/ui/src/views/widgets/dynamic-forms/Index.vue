@@ -8,27 +8,15 @@
   />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-import { CONSTANTS } from '@/composables/constants';
-import { FormDesignerInstance } from '@/lib/utils';
-
+<script setup lang="ts">
+import { CONSTANTS, API } from '@/configurations';
 import { useEditFinish, useBaseTableItem } from '@/hooks';
 
-export default defineComponent({
+defineOptions({
   name: CONSTANTS.ComponentName.WIDGETS_DYNAMIC_FORM,
-
-  setup(props) {
-    const instance = FormDesignerInstance;
-    const { onFinish } = useEditFinish();
-    const { editedItem } = useBaseTableItem();
-
-    return {
-      editedItem,
-      instance,
-      onFinish,
-    };
-  },
 });
+
+const instance = API.bpmnStorage;
+const { onFinish } = useEditFinish();
+const { editedItem } = useBaseTableItem();
 </script>

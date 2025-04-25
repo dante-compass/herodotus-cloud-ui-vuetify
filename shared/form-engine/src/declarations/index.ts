@@ -8,4 +8,4 @@ export type {
   WidgetDefinition,
   ElementConfig,
   Element
-} from '@herodotus/form-apis';
+} from '@herodotus-cloud/form-apis';

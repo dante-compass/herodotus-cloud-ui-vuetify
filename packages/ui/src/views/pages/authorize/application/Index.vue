@@ -42,8 +42,8 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { moment, api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
+import { moment } from '@/lib/utils';
 import { useTable } from '@/hooks';
 
 import { HDeleteButton, HEditButton, HTable, HGrantTypeColumn } from '@/components';
@@ -64,7 +64,7 @@ const {
   findItems,
   deleteItemById,
 } = useTable<OAuth2ApplicationEntity, OAuth2ApplicationConditions>(
-  api.oauth2Application(),
+  API.core.oauth2Application(),
   CONSTANTS.ComponentName.OAUTH2_APPLICATION,
 );
 

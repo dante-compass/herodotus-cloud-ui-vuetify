@@ -12,7 +12,8 @@ import { defineComponent, ref, computed, onMounted } from 'vue';
 
 import type { BpmnUnionPathParams, XmlEntity } from '@/lib/declarations';
 
-import { bpmnApi, lodash } from '@/lib/utils';
+import { lodash } from '@/lib/utils';
+import { API } from '@/configurations';
 
 export default defineComponent({
   name: 'WorkflowProcessDefinitionDiagram',
@@ -39,7 +40,7 @@ export default defineComponent({
     const activityNodes = ref([]) as Ref<Array<string>>;
 
     const initActivityNodes = async (processInstanceId: string) => {
-      const result = await bpmnApi
+      const result = await API.bpmn
         .historyActivityInstance()
         .getAll(
           { sortBy: 'startTime', sortOrder: 'desc' },
@@ -65,7 +66,7 @@ export default defineComponent({
           tenantId: props.tenantId,
         };
 
-        bpmnApi
+        API.bpmn
           .processDefinition()
           .getXml(params)
           .then((result) => {

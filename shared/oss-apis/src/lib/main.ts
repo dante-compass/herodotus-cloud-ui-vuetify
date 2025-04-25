@@ -1,3 +1,4 @@
+import type { HttpConfigOption } from '@/declarations';
 import { Axios, HttpConfig } from './base';
 
 import { BucketService, ObjectService, MultipartUploadService } from './integration';
@@ -92,13 +93,8 @@ export class OssApiResources {
   }
 }
 
-const createOssApi = (
-  project: string,
-  clientId: string,
-  clientSecret: string,
-  http: Axios,
-): OssApiResources => {
-  const config = new HttpConfig(project, clientId, clientSecret, http);
+const createOssApi = (http: Axios, options: HttpConfigOption): OssApiResources => {
+  const config = new HttpConfig(http, options);
   return OssApiResources.getInstance(config);
 };
 

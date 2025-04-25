@@ -1,8 +1,8 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { Service, ContentTypeEnum, HttpConfig } from "@herodotus/core";
-import { Axios, BaseService, HttpConfig as HttpConfig2, Service as Service2 } from "@herodotus/core";
+import { Service, ContentTypeEnum, HttpConfig } from "@herodotus-cloud/core";
+import { AbstractService, Axios, HttpConfig as HttpConfig2, Service as Service2 } from "@herodotus-cloud/core";
 const _MinioBucketSettingService = class _MinioBucketSettingService extends Service {
   constructor(config) {
     super(config);
@@ -400,13 +400,13 @@ const _OssApiResources = class _OssApiResources {
 };
 __publicField(_OssApiResources, "instance");
 let OssApiResources = _OssApiResources;
-const createOssApi = (project, clientId, clientSecret, http) => {
-  const config = new HttpConfig(project, clientId, clientSecret, http);
+const createOssApi = (http, options) => {
+  const config = new HttpConfig(http, options);
   return OssApiResources.getInstance(config);
 };
 export {
+  AbstractService,
   Axios,
-  BaseService,
   HttpConfig2 as HttpConfig,
   MinioBucketEncryptionService,
   MinioBucketPolicyService,

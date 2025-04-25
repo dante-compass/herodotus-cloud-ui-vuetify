@@ -7,7 +7,7 @@ import { defineComponent, watch, nextTick, provide, ref, onMounted, onUnmounted 
 import { useQuasar } from 'quasar';
 import { echarts } from '@/plugins';
 import { useSettingsStore, useAuthenticationStore } from '@/stores';
-import { variables } from '@/lib/utils';
+import { VARIABLES } from '@/configurations';
 import { refreshTabInjectionKey, echartsInjectionKey } from '@/lib/definitions';
 import { useWebSocketMessage } from '@/composables/messages';
 
@@ -64,7 +64,7 @@ export default defineComponent({
       if (authentication.token) {
         connect();
       }
-      if (!variables.getAutoRefreshToken()) {
+      if (!VARIABLES.getAutoRefreshToken()) {
         // 监听浏览器关闭
         window.addEventListener('beforeunload', (e) => beforeUnloadHandler(e));
         window.addEventListener('unload', (e) => unloadHandler(e));
@@ -75,7 +75,7 @@ export default defineComponent({
       if (authentication.token) {
         disconnect();
       }
-      if (!variables.getAutoRefreshToken()) {
+      if (!VARIABLES.getAutoRefreshToken()) {
         window.removeEventListener('beforeunload', (e) => beforeUnloadHandler(e));
         window.removeEventListener('unload', (e) => unloadHandler(e));
       }

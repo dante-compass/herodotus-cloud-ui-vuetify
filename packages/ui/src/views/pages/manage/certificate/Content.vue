@@ -147,7 +147,7 @@ import { required, helpers } from '@vuelidate/validators';
 
 import type { MgtCertificateEntity } from '@/lib/declarations';
 
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useTableItem } from '@/hooks';
 
 import { HToggleField } from '@/composables/constants';
@@ -163,15 +163,14 @@ export default defineComponent({
 
   setup(props) {
     const { editedItem, operation, title, saveOrUpdate, overlay } =
-      useTableItem<MgtCertificateEntity>(api.mgtCertificate());
+      useTableItem<MgtCertificateEntity>(API.mgtCertificate());
 
     const isUnique = () => {
       let alias = editedItem.value.alias;
 
       return new Promise((resolve, reject) => {
         if (alias) {
-          api
-            .mgtCertificate()
+          API.mgtCertificate()
             .findByAlias(alias)
             .then((result) => {
               let cert = result.data as MgtCertificateEntity;
@@ -194,8 +193,7 @@ export default defineComponent({
     const loadOptionData = (category: string) => {
       showParentLoading.value = true;
       if (category) {
-        api
-          .mgtCertificate()
+        API.mgtCertificate()
           .findAllByCertificateCategory(category)
           .then((result) => {
             parentOptions.value = result.data;

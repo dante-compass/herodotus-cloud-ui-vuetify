@@ -9,24 +9,16 @@
   </q-card>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
+<script setup lang="ts">
+import { useQuasar } from 'quasar';
 import { useEditFinish } from '@/hooks';
-import { BpmnDesignerInstance } from '@/lib/utils';
+import { API } from '@/configurations';
 
-export default defineComponent({
+defineOptions({
   name: 'WidgetsBpmnDesigner',
-
-  setup() {
-    const instance = BpmnDesignerInstance;
-
-    const { onFinish } = useEditFinish();
-
-    return {
-      instance,
-      onFinish,
-    };
-  },
 });
+
+const instance = API.bpmnStorage;
+const $q = useQuasar();
+const { onFinish } = useEditFinish();
 </script>

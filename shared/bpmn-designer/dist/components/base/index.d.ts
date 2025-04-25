@@ -1,2 +1,2 @@
-import { HSelect, HTextField } from '@herodotus/components';
+import { HSelect, HTextField } from '@herodotus-cloud/components';
 export { HSelect, HTextField };

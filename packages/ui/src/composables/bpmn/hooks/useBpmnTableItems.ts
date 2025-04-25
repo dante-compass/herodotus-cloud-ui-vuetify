@@ -21,7 +21,7 @@ export default function useBpmnTableItems<
   S,
   D extends BpmnDeleteQueryParams = BpmnDeleteQueryParams,
 >(
-  baseService: BpmnQueryByGetService<E, Q, S, D>,
+  AbstractService: BpmnQueryByGetService<E, Q, S, D>,
   sortable: BpmnSortable<S>,
   queryParams = {} as Q,
   loadOnMount = true,
@@ -46,15 +46,14 @@ export default function useBpmnTableItems<
 
   const findItemsByPage = (pageNumber = 1, pageSize = 10, params = {} as Q) => {
     showLoading();
-    baseService
-      .getByPage(
-        {
-          pageNumber: pageNumber - 1,
-          pageSize: pageSize,
-          ...sortable,
-        },
-        params,
-      )
+    AbstractService.getByPage(
+      {
+        pageNumber: pageNumber - 1,
+        pageSize: pageSize,
+        ...sortable,
+      },
+      params,
+    )
       .then((result) => {
         const data = result as Page<E>;
         // 无结果时也要更新列表数据
@@ -85,8 +84,7 @@ export default function useBpmnTableItems<
 
   const deleteItemById = (id: string, params = {} as D) => {
     standardDeleteNotify(() => {
-      baseService
-        .delete(id, params)
+      AbstractService.delete(id, params)
         .then((response) => {
           findItemsByPage(pagination.value.page, pagination.value.rowsPerPage);
           toast.success('删除成功');

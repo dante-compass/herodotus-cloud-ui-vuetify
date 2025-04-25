@@ -67,7 +67,7 @@ import { defineComponent, watch } from 'vue';
 import type { SysElementEntity, SysElementConditions } from '@/lib/declarations';
 
 import { useTableItem, useTreeItems } from '@/hooks';
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 
 import { HCenterFormLayout } from '@/components';
 
@@ -80,9 +80,9 @@ export default defineComponent({
 
   setup() {
     const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysElementEntity>(
-      api.sysElement(),
+      API.sysElement(),
     );
-    const { treeItems } = useTreeItems<SysElementEntity, SysElementConditions>(api.sysElement());
+    const { treeItems } = useTreeItems<SysElementEntity, SysElementConditions>(API.sysElement());
 
     const onSave = () => {
       saveOrUpdate();

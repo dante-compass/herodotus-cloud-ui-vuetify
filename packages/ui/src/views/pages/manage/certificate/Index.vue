@@ -75,8 +75,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 
 import { useTable } from '@/hooks';
 
@@ -100,7 +99,7 @@ export default defineComponent({
       findItems,
       deleteItemById,
     } = useTable<MgtCertificateEntity, MgtCertificateConditions>(
-      api.mgtCertificate(),
+      API.core.mgtCertificate(),
       CONSTANTS.ComponentName.MGT_CERTIFICATE,
     );
     const { download } = useOssDownload();

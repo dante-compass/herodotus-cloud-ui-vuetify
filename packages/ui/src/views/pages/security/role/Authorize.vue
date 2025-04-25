@@ -37,8 +37,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 
 import { useTableItem, useTable } from '@/hooks';
 
@@ -53,12 +52,12 @@ export default defineComponent({
   },
 
   setup(props) {
-    const { editedItem, title, assign, overlay } = useTableItem<SysRoleEntity>(api.sysRole());
+    const { editedItem, title, assign, overlay } = useTableItem<SysRoleEntity>(API.core.sysRole());
 
     const { tableRows, totalPages, pagination, loading } = useTable<
       SysPermissionEntity,
       SysPermissionConditions
-    >(api.sysPermission(), CONSTANTS.ComponentName.SYS_PERMISSION, true);
+    >(API.core.sysPermission(), CONSTANTS.ComponentName.SYS_PERMISSION, true);
 
     const selectedItems = ref([]) as Ref<Array<SysPermissionEntity>>;
     const rowKey: SysPermissionProps = 'permissionId';

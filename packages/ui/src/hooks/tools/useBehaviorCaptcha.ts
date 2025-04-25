@@ -2,7 +2,7 @@ import type { Ref } from 'vue';
 import { ref } from 'vue';
 import type { BehaviorCaptchaCategory, CaptchaResource, CaptchaData } from '@/lib/declarations';
 
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useCryptoStore } from '@/stores';
 
 export default function useBehaviorCaptcha() {
@@ -32,7 +32,7 @@ export default function useBehaviorCaptcha() {
 
     const identity = crypto.sessionId;
 
-    api
+    API.core
       .open()
       .verifyCaptcha(identity, category, data)
       .then((result) => {
@@ -64,7 +64,7 @@ export default function useBehaviorCaptcha() {
     const identity = crypto.sessionId;
 
     if (identity) {
-      api
+      API.core
         .open()
         .createCaptcha(identity, category)
         .then((result) => {

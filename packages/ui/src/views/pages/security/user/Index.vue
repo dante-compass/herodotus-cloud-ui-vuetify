@@ -70,8 +70,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 
 import { useAuthenticationStore } from '@/stores';
 import { useTable } from '@/hooks';
@@ -104,7 +103,10 @@ export default defineComponent({
       toAuthorize,
       findItems,
       deleteItemById,
-    } = useTable<SysUserEntity, SysUserConditions>(api.sysUser(), CONSTANTS.ComponentName.SYS_USER);
+    } = useTable<SysUserEntity, SysUserConditions>(
+      API.core.sysUser(),
+      CONSTANTS.ComponentName.SYS_USER,
+    );
 
     const selected = ref([]);
     const rowKey: SysUserProps = 'userId';

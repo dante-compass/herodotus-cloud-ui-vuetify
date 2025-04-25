@@ -44,8 +44,8 @@ import type {
   EntityTitle,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { moment, api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
+import { moment } from '@/lib/utils';
 import { useTable, useXlsx } from '@/hooks';
 
 import { HTable, HBooleanColumn } from '@/components';
@@ -65,7 +65,7 @@ export default defineComponent({
     const { tableRows, totalPages, pagination, loading, conditions, findItems } = useTable<
       OAuth2UserLoggingEntity,
       OAuth2UserLoggingConditions
-    >(api.oauth2UserLogging(), CONSTANTS.ComponentName.OAUTH2_COMPLIANCE, false, {
+    >(API.core.oauth2UserLogging(), CONSTANTS.ComponentName.OAUTH2_COMPLIANCE, false, {
       direction: 'DESC',
       properties: ['createTime'],
     });

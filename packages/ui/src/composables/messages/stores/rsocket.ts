@@ -1,11 +1,7 @@
 import { defineStore } from 'pinia';
 
 import type { WebSocketOperations, DialogueDetailEntity, Entity } from '@/lib/declarations';
-
-import { api } from '@/lib/utils';
-
-import {
-  RSocketConnector,
+import type {
   RSocket,
   Payload,
   OnTerminalSubscriber,
@@ -14,6 +10,10 @@ import {
   Requestable,
   Cancellable,
 } from 'rsocket-core';
+
+import { API } from '@/configurations';
+
+import { RSocketConnector } from 'rsocket-core';
 import { WebsocketClientTransport } from 'rsocket-websocket-client';
 import {
   WellKnownMimeType,
@@ -76,7 +76,7 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
     // 客户端配置方法
     getRSocketWebSocketAddress(): string {
       const address =
-        `ws://${location.host}/reactive` + api.getConfig().getMsg(false) + '/websocket';
+        `ws://${location.host}/reactive` + API.core.getConfig().getMsg(false) + '/websocket';
       // const address = 'ws://192.168.101.10:8847/herodotus-cloud-message/websocket';
       // const address = 'ws://localhost:9997/websocket';
       return address;

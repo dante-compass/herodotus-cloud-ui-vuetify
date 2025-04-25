@@ -38,8 +38,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 import { useTable } from '@/hooks';
 
 import { HTable } from '@/components';
@@ -62,7 +61,7 @@ export default defineComponent({
       findItems,
       deleteItemById,
     } = useTable<SysPermissionEntity, SysPermissionConditions>(
-      api.sysPermission(),
+      API.core.sysPermission(),
       CONSTANTS.ComponentName.SYS_PERMISSION,
     );
 

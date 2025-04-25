@@ -36,8 +36,7 @@ import type {
   QTableColumnProps,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { api } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
 import { useTableItem, useTable } from '@/hooks';
 
 import { HAuthorizeList, HAuthorizeLayout } from '@/composables/authorize';
@@ -52,10 +51,10 @@ export default defineComponent({
 
   setup(props) {
     const { editedItem, title, assign, overlay } = useTableItem<SysDefaultRoleEntity>(
-      api.sysDefaultRole(),
+      API.core.sysDefaultRole(),
     );
     const { tableRows, pagination, loading } = useTable<SysRoleEntity, SysRoleConditions>(
-      api.sysRole(),
+      API.core.sysRole(),
       CONSTANTS.ComponentName.SYS_ROLE,
       true,
     );

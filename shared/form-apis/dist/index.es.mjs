@@ -1,8 +1,8 @@
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-import { Service, lodash, HttpConfig } from "@herodotus/core";
-import { Axios, Base64, HttpConfig as HttpConfig2, Service as Service2, lodash as lodash2, moment } from "@herodotus/core";
+import { Service, lodash, HttpConfig } from "@herodotus-cloud/core";
+import { Axios, Base64, HttpConfig as HttpConfig2, Service as Service2, lodash as lodash2, moment } from "@herodotus-cloud/core";
 class BaseMongoService extends Service {
   getConditionAddress() {
     return this.getBaseAddress() + "/condition";
@@ -105,8 +105,8 @@ const _FormApiResources = class _FormApiResources {
 };
 __publicField(_FormApiResources, "instance");
 let FormApiResources = _FormApiResources;
-const createFormApi = (project, clientId, clientSecret, http) => {
-  const config = new HttpConfig(project, clientId, clientSecret, http);
+const createFormApi = (http, options) => {
+  const config = new HttpConfig(http, options);
   return FormApiResources.getInstance(config);
 };
 export {

@@ -1,10 +1,11 @@
 {
-  "name": "@dante/ui",
-  "version": "3.4.4.2",
+  "name": "@herodotus/ui",
+  "version": "3.4.5.0",
   "description": "",
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "dev": "cross-env vite --force --host --mode development",
@@ -16,15 +17,15 @@
   "dependencies": {
     "@bpmn-io/properties-panel": "3.26.4",
     "@github/webauthn-json": "^2.1.1",
-    "@herodotus/apis": "workspace:^",
-    "@herodotus/bpmn-apis": "workspace:^",
-    "@herodotus/bpmn-designer": "workspace:^",
-    "@herodotus/components": "workspace:^",
-    "@herodotus/core": "workspace:^",
-    "@herodotus/form-apis": "workspace:^",
-    "@herodotus/form-designer": "workspace:^",
-    "@herodotus/form-engine": "workspace:^",
-    "@herodotus/oss-apis": "workspace:^",
+    "@herodotus-cloud/apis": "workspace:^",
+    "@herodotus-cloud/bpmn-apis": "workspace:^",
+    "@herodotus-cloud/bpmn-designer": "workspace:^",
+    "@herodotus-cloud/components": "workspace:^",
+    "@herodotus-cloud/core": "workspace:^",
+    "@herodotus-cloud/form-apis": "workspace:^",
+    "@herodotus-cloud/form-designer": "workspace:^",
+    "@herodotus-cloud/form-engine": "workspace:^",
+    "@herodotus-cloud/oss-apis": "workspace:^",
     "@mdi/js": "^7.4.47",
     "@quasar/extras": "^1.16.17",
     "@rsocket/composite-metadata": "1.0.0-alpha.3",
@@ -33,8 +34,8 @@
     "@vuelidate/validators": "^2.0.4",
     "@vueuse/core": "^13.1.0",
     "animate.css": "^4.1.1",
-    "axios": "^1.8.4",
-    "bpmn-js": "^18.4.0",
+    "axios": "^1.9.0",
+    "bpmn-js": "^18.6.0",
     "bpmn-js-token-simulation": "^0.38.1",
     "colord": "^2.9.3",
     "echarts": "^5.6.0",
@@ -51,6 +52,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "22.14.0"
+    "@types/node": "22.15.1"
   }
 }

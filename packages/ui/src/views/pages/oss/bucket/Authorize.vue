@@ -83,9 +83,8 @@ import { format } from 'quasar';
 
 import type { BucketDomain, BucketSettingBusiness } from '@/lib/declarations';
 
-import { ossApi } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useBaseTableItem } from '@/hooks';
-
 import { HSimpleCenterFormLayout } from '@/components';
 import { HOssTags, HOssBucketRetention } from '@/composables/oss';
 import { useDictionary } from '@/composables/constants';
@@ -143,19 +142,19 @@ export default defineComponent({
     });
 
     const loadSettings = async () => {
-      const result = await ossApi.minioBucketSetting().get(bucketName.value);
+      const result = await API.oss.minioBucketSetting().get(bucketName.value);
       bucketSetting.value = result.data;
     };
 
     const onPolicyChange = (bucketName: string, policy: number) => {
-      ossApi.minioBucketPolicy().set({ bucketName: bucketName, type: policy });
+      API.oss.minioBucketPolicy().set({ bucketName: bucketName, type: policy });
     };
 
     const onSseConfigurationChange = (bucketName: string, sseConfiguration: number) => {
       if (sseConfiguration === 0) {
-        ossApi.minioBucketEncryption().delete({ bucketName: bucketName });
+        API.oss.minioBucketEncryption().delete({ bucketName: bucketName });
       } else {
-        ossApi
+        API.oss
           .minioBucketEncryption()
           .set({ bucketName: bucketName, sseConfiguration: sseConfiguration });
       }
@@ -172,13 +171,13 @@ export default defineComponent({
           newStatus = 'ENABLED';
       }
 
-      ossApi
+      API.oss
         .minioBucketVersioning()
         .set({ bucketName: bucketName.value, config: { status: newStatus, mfaDelete: false } });
     };
 
     const onObjectLockConfigurationChange = () => {
-      ossApi
+      API.oss
         .minioObjectLock()
         .set({ bucketName: bucketName.value, objectLock: bucketSetting.value.objectLock });
     };

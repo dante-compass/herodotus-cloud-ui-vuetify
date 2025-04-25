@@ -1,1 +1,8 @@
-export type { AxiosHttpResult, AxiosProgressEvent, Entity, Conditions, Dictionary } from '@herodotus/core';
+export type {
+  AxiosHttpResult,
+  AxiosProgressEvent,
+  Entity,
+  Conditions,
+  Dictionary,
+  HttpConfigOption,
+} from '@herodotus-cloud/core';

@@ -39,8 +39,8 @@ import type {
   DynamicFormConditions,
 } from '@/lib/declarations';
 
-import { CONSTANTS } from '@/composables/constants';
-import { formApi, toast, standardDeleteNotify } from '@/lib/utils';
+import { CONSTANTS, API } from '@/configurations';
+import { toast, standardDeleteNotify } from '@/lib/utils';
 import { useBaseTable } from '@/hooks';
 
 export default defineComponent({
@@ -77,7 +77,7 @@ export default defineComponent({
 
     const fetchDynamicFormByPage = (pageNumber = 1) => {
       showLoading();
-      formApi
+      API.form
         .dynamicForm()
         .fetchByPage({
           pageNumber: pageNumber - 1,
@@ -100,7 +100,7 @@ export default defineComponent({
 
     const onDeleteItemById = (id: string) => {
       standardDeleteNotify(() => {
-        formApi
+        API.form
           .dynamicForm()
           .delete(id)
           .then((response) => {

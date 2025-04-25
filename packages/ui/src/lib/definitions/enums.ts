@@ -1,5 +1,5 @@
-export { ContentTypeEnum } from '@herodotus/core';
-export { SocialSourceEnum, CaptchaCategoryEnum, NotificationCategoryEnum } from '@herodotus/apis';
+export { ContentTypeEnum } from '@herodotus-cloud/core';
+export { SocialSourceEnum, CaptchaCategoryEnum, NotificationCategoryEnum } from '@herodotus-cloud/apis';
 
 export enum OperationEnum {
   CREATE = 'create',

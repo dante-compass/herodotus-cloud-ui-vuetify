@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import type { Sort, Page, NotificationEntity, NotificationConditions } from '@/lib/declarations';
 
 import { NotificationCategoryEnum } from '@/lib/definitions';
-import { api } from '@/lib/utils';
+import { API } from '@/configurations';
 import { useAuthenticationStore } from '@/stores';
 
 export const useNotificationStore = defineStore('Notification', {
@@ -27,8 +27,7 @@ export const useNotificationStore = defineStore('Notification', {
   actions: {
     setAllRead(): void {
       const authenticationStore = useAuthenticationStore();
-      api
-        .notification()
+      API.notification()
         .setAllRead(authenticationStore.userId)
         .then(() => {
           this.totalNumber = 0;
@@ -49,8 +48,7 @@ export const useNotificationStore = defineStore('Notification', {
     pullAllNotification(): void {
       const sort: Sort = { direction: 'DESC', properties: ['createTime'] };
       const store = useAuthenticationStore();
-      api
-        .notification()
+      API.notification()
         .fetchByPage(
           {
             pageNumber: 0,

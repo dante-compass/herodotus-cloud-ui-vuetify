@@ -1,11 +1,11 @@
 import { QList, QInput, QDialog, QCard, QCardSection, QSpace, QBtn, QCardActions, QPageContainer, QPage, QExpansionItem, QTable, QTr, QTd, QPopupEdit, QTabs, QTab, QSeparator, QTabPanels, QTabPanel, QIcon, QLayout, QHeader, QToolbar, QToolbarTitle, QDrawer } from "quasar";
 import { defineComponent, ref, createBlock, openBlock, withCtx, createVNode, computed, createElementVNode, renderSlot, mergeProps, resolveComponent, normalizeClass, createCommentVNode, createSlots, createTextVNode, toDisplayString, resolveDynamicComponent, createElementBlock, Fragment, renderList, watch, onUnmounted, normalizeStyle } from "vue";
 import { defineStore, storeToRefs } from "pinia";
-import { lodash, toast, Swal } from "@herodotus/core";
-import { Swal as Swal2, lodash as lodash2, toast as toast2 } from "@herodotus/core";
-import { HRendererForm, HRendererEngine, WIDGET_DEFINITIONS, ElementUtils } from "@herodotus/form-engine";
-import { ElementUtils as ElementUtils2, WIDGET_DEFINITIONS as WIDGET_DEFINITIONS2 } from "@herodotus/form-engine";
-import { HTextField, HSwitch } from "@herodotus/components";
+import { lodash, toast, Swal } from "@herodotus-cloud/core";
+import { Swal as Swal2, lodash as lodash2, toast as toast2 } from "@herodotus-cloud/core";
+import { HRendererForm, HRendererEngine, WIDGET_DEFINITIONS, ElementUtils } from "@herodotus-cloud/form-engine";
+import { ElementUtils as ElementUtils2, WIDGET_DEFINITIONS as WIDGET_DEFINITIONS2 } from "@herodotus-cloud/form-engine";
+import { HTextField, HSwitch } from "@herodotus-cloud/components";
 import Draggable from "vuedraggable";
 const Attributes = {
   HideBottomSpace: "hide-bottom-space",
