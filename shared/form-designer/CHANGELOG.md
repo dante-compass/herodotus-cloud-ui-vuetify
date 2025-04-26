@@ -1,5 +1,19 @@
 # @herodotus-cloud/form-designer
 
+## 1.1.0
+
+### Minor Changes
+
+- 重新发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.1.0
+  - @herodotus-cloud/components@1.1.0
+  - @herodotus-cloud/form-apis@1.1.0
+  - @herodotus-cloud/core@1.1.0
+
 ## 1.0.1
 
 ### Patch Changes
