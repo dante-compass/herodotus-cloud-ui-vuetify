@@ -9,5 +9,6 @@ export {
   SM4Utils,
   AvatarUtils,
   PKCE,
+  Toolkit,
   standardDeleteNotify,
 } from '@herodotus-cloud/core';

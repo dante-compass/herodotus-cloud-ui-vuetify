@@ -1,5 +1,13 @@
 # @herodotus-cloud/components
 
+## 1.0.1
+
+### Patch Changes
+
+- 新增 es-toolkit pickby 方法
+- Updated dependencies
+  - @herodotus-cloud/core@1.0.1
+
 ## 1.0.0
 
 ### Major Changes
