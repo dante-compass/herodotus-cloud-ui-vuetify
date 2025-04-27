@@ -10,7 +10,9 @@ import { onMounted } from 'vue';
 import { useApplicationStore, useCryptoStore, useAuthenticationStore } from '@/stores';
 
 import { HSignInLayout } from '@/composables/sign-in';
-import { AccountPanel, MobilePanel, ScanPanel } from './panel';
+import AccountPanel from './panel/AccountPanel.vue';
+import MobilePanel from './panel/MobilePanel.vue';
+import ScanPanel from './panel/ScanPanel.vue';
 
 defineOptions({
   name: 'SignIn',

@@ -21,48 +21,38 @@
   </q-parallax>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from 'vue';
+<script setup lang="ts">
+import { computed, shallowRef } from 'vue';
 
 import { getColorPalette, mixColor } from './color';
 import { VARIABLES } from '@/configurations';
 import { useSettingsStore } from '@/stores';
 
-export default defineComponent({
+defineOptions({
   name: 'HSignInLayout',
-
-  setup() {
-    const settings = useSettingsStore();
-
-    const backgroundThemeColor = computed(() => {
-      return settings.isDark ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
-    });
-
-    const backgroundColor = computed(() => {
-      const COLOR_WHITE = '#ffffff';
-      const ratio = settings.isDark ? 0.5 : 0.2;
-      return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
-    });
-
-    const lightColor = computed(() => {
-      return getColorPalette(backgroundThemeColor.value as string, 3);
-    });
-
-    const darkColor = computed(() => {
-      return getColorPalette(backgroundThemeColor.value as string, 6);
-    });
-
-    const projectName = VARIABLES.getProjectName();
-
-    return {
-      backgroundThemeColor,
-      backgroundColor,
-      projectName,
-      lightColor,
-      darkColor,
-    };
-  },
 });
+
+const settings = useSettingsStore();
+
+const backgroundThemeColor = computed(() => {
+  return settings.isDark ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
+});
+
+const backgroundColor = computed(() => {
+  const COLOR_WHITE = '#ffffff';
+  const ratio = settings.isDark ? 0.5 : 0.2;
+  return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
+});
+
+const lightColor = computed(() => {
+  return getColorPalette(backgroundThemeColor.value as string, 3);
+});
+
+const darkColor = computed(() => {
+  return getColorPalette(backgroundThemeColor.value as string, 6);
+});
+
+const projectName = shallowRef(VARIABLES.getProjectName());
 </script>
 
 <style lang="scss" scoped>
