@@ -1,5 +1,17 @@
 # @herodotus-cloud/core
 
+## 1.2.2
+
+### Patch Changes
+
+- 新增 CardTitle 组件
+
+## 1.2.1
+
+### Patch Changes
+
+- 调整Dialog组件显示
+
 ## 1.2.0
 
 ### Minor Changes

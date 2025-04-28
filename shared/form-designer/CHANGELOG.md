@@ -1,5 +1,27 @@
 # @herodotus-cloud/form-designer
 
+## 1.2.2
+
+### Patch Changes
+
+- 新增 CardTitle 组件
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.2.2
+  - @herodotus-cloud/components@1.2.2
+  - @herodotus-cloud/form-apis@1.2.2
+  - @herodotus-cloud/core@1.2.2
+
+## 1.2.1
+
+### Patch Changes
+
+- 调整Dialog组件显示
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.2.1
+  - @herodotus-cloud/components@1.2.1
+  - @herodotus-cloud/form-apis@1.2.1
+  - @herodotus-cloud/core@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes

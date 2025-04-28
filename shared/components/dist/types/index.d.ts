@@ -1,6 +1,6 @@
 import { App } from 'vue';
 import { HButton, HIconButton, HVisibilityButton } from './HButton';
-import { HChartCard } from './HCard';
+import { HCardTitle, HChartCard } from './HCard';
 import { HDateTime, HDuration } from './HDateTime';
 import { HDivider } from './HDivider';
 import { HDialog } from './HDialog';
@@ -11,7 +11,7 @@ import { HLoading } from './HLoading';
 import { HPagination } from './HPagination';
 import { HParticles } from './HParticles';
 import { HSignInBackground } from './HBackground';
-export { HButton, HCenterLabel, HChartCard, HColumn, HContainer, HDateTime, HDivider, HDialog, HDuration, HIconButton, HIconSelect, HFieldLabel, HTreeField, HLabel, HListItem, HLoading, HPagination, HParticles, HRow, HSelect, HSignInBackground, HSwitch, HTextField, HVisibilityButton, };
+export { HButton, HCardTitle, HCenterLabel, HChartCard, HColumn, HContainer, HDateTime, HDivider, HDialog, HDuration, HIconButton, HIconSelect, HFieldLabel, HTreeField, HLabel, HListItem, HLoading, HPagination, HParticles, HRow, HSelect, HSignInBackground, HSwitch, HTextField, HVisibilityButton, };
 export * from './lib';
 declare const _default: {
     install: (app: App) => void;
