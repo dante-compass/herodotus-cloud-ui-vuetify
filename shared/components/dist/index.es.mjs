@@ -159,8 +159,10 @@ function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
   });
 }
 const HChartCard = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$m]]);
-HChartCard.install = (app) => {
+HCardTitle.install = (app) => {
   app.component(HCardTitle.name, HCardTitle);
+};
+HChartCard.install = (app) => {
   app.component(HChartCard.name, HChartCard);
 };
 const _sfc_main$l = defineComponent({

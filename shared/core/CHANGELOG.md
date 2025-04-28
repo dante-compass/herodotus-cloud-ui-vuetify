@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.2.3
+
+### Patch Changes
+
+- 修复组件注入错误
+
 ## 1.2.2
 
 ### Patch Changes
