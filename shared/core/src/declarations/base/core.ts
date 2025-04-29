@@ -12,3 +12,5 @@ export type Dictionary = {
   value: string;
   label: string;
 };
+
+export type Validation = () => Promise<boolean>;

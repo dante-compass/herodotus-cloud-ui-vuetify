@@ -1,5 +1,13 @@
 # @herodotus-cloud/form-engine
 
+## 1.2.4
+
+### Patch Changes
+
+- 新增校验定义
+- Updated dependencies
+  - @herodotus-cloud/form-apis@1.2.4
+
 ## 1.2.3
 
 ### Patch Changes

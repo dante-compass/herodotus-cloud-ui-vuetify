@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.2.4
+
+### Patch Changes
+
+- 新增校验定义
+
 ## 1.2.3
 
 ### Patch Changes
