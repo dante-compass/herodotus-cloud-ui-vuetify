@@ -1,1 +1,0 @@
-import{_ as o}from"./composables-charts-HCategoryChart.vue_vue_type_script_lang.ts-BQ_2pGDn.js";import{_ as t}from"./App.vue-Y8fXYi8q.js";import{r,c as s,o as e}from"./npm-@vue-runtime-core-D7pa_eBU.js";const n=t(o,[["render",function(o,t,n,p,a,i){const c=r("h-chart-container");return e(),s(c,{options:o.options,height:"500px"},null,8,["options"])}]]);export{n as H};

@@ -11,4 +11,6 @@ export type Dictionary = {
     value: string;
     label: string;
 };
-export type Validation = () => Promise<boolean>;
+export interface Validation {
+    validate: () => Promise<boolean>;
+}
