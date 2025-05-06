@@ -1,7 +1,7 @@
 import type { App } from 'vue';
 
 import { HButton, HIconButton, HVisibilityButton } from './HButton';
-import { HChartCard } from './HCard';
+import { HCardTitle, HChartCard } from './HCard';
 import { HDateTime, HDuration } from './HDateTime';
 import { HDivider } from './HDivider';
 import { HDialog } from './HDialog';
@@ -15,6 +15,7 @@ import { HSignInBackground } from './HBackground';
 
 const components = [
   HButton,
+  HCardTitle,
   HCenterLabel,
   HChartCard,
   HColumn,
@@ -46,6 +47,7 @@ const install = (app: App) => {
 
 export {
   HButton,
+  HCardTitle,
   HCenterLabel,
   HChartCard,
   HColumn,

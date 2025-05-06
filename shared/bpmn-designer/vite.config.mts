@@ -18,6 +18,7 @@ export default defineConfig({
     }),
     dts({
       insertTypesEntry: true,
+      outDir: './dist/types',
     }),
   ],
   resolve: {

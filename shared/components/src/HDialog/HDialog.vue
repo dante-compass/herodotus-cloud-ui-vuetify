@@ -3,12 +3,9 @@
     <q-card class="q-py-none" :style="`min-width: ${height}`">
       <q-card-section class="row items-center">
         <div class="text-h6">{{ title }}</div>
-
         <q-space />
         <q-btn v-if="!hideClose" icon="close" flat round dense @click="onClose()" />
       </q-card-section>
-
-      <q-separator />
 
       <q-card-section>
         <slot></slot>

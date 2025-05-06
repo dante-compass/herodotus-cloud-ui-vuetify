@@ -16,7 +16,7 @@ export default defineConfig({
     Components({
       resolvers: [QuasarResolver()],
     }),
-    dts({}),
+    dts({ insertTypesEntry: true, outDir: './dist/types' }),
   ],
   resolve: {
     alias: {

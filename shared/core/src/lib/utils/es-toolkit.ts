@@ -5,5 +5,6 @@ export {
   isFunction,
   merge,
   partition,
+  pickBy,
   toUpper,
 } from 'es-toolkit/compat';

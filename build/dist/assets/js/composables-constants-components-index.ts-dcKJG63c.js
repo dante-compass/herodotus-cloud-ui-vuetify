@@ -1,0 +1,1 @@
+import"./npm-quasar-BZnSAVsH.js";import"./configurations-axios-status.ts-Bd47isFG.js";import"./lib-utils-router-action.ts-KF3HFbiv.js";import"./lib-utils-router-route.ts-BPyZm9zq.js";import"./configurations-constants.ts-STGhZzJt.js";import"./configurations-variables.ts-CrWc6tFp.js";import"./configurations-http.ts-OEFscC6D.js";

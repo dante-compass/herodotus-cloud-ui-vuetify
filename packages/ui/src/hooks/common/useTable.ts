@@ -69,13 +69,14 @@ export default function <E extends Entity, C extends Conditions>(
 
   const findItemsByPage = (pageNumber = 1, pageSize = 10, others = {}) => {
     showLoading();
+    const params = lodash.pickBy(others);
     AbstractService.fetchByPage(
       {
         pageNumber: pageNumber - 1,
         pageSize: pageSize,
         ...sort,
       },
-      others,
+      params,
     )
       .then((result) => {
         const data = result.data as Page<E>;

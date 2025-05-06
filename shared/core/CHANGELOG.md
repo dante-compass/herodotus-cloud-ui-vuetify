@@ -1,5 +1,59 @@
 # @herodotus-cloud/core
 
+## 1.2.6
+
+### Patch Changes
+
+- 发布新版本
+
+## 1.2.5
+
+### Patch Changes
+
+- 完善校验
+
+## 1.2.4
+
+### Patch Changes
+
+- 新增校验定义
+
+## 1.2.3
+
+### Patch Changes
+
+- 修复组件注入错误
+
+## 1.2.2
+
+### Patch Changes
+
+- 新增 CardTitle 组件
+
+## 1.2.1
+
+### Patch Changes
+
+- 调整Dialog组件显示
+
+## 1.2.0
+
+### Minor Changes
+
+- 修改type目录
+
+## 1.1.0
+
+### Minor Changes
+
+- 重新发布
+
+## 1.0.1
+
+### Patch Changes
+
+- 新增 es-toolkit pickby 方法
+
 ## 1.0.0
 
 ### Major Changes

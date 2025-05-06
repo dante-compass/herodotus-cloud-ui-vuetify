@@ -1,5 +1,5 @@
 import { QBtn, QTooltip, QIcon, QCard, QCardSection, QSeparator, ClosePopup, QInput, QPopupProxy, QTime, QDate, QSelect, QItem, QItemSection, QItemLabel, QToggle, QTree, QDialog, QSpace, QCardActions, QInnerLoading, QSpinnerDots, Ripple, QSpinnerTail, QSpinnerRings, QSpinnerRadio, QSpinnerPuff, QSpinnerPie, QSpinnerOval, QSpinnerOrbit, QSpinnerIos, QSpinnerInfinity, QSpinnerHourglass, QSpinnerHearts, QSpinnerGrid, QSpinnerGears, QSpinnerFacebook, QSpinnerCube, QSpinnerComment, QSpinnerClock, QSpinnerBox, QSpinnerBars, QSpinnerBall, QSpinnerAudio, QSpinner, QPagination } from "quasar";
-import { defineComponent, createBlock, openBlock, normalizeProps, guardReactiveProps, createSlots, withCtx, renderSlot, createCommentVNode, createTextVNode, toDisplayString, resolveComponent, mergeProps, computed, createVNode, createElementVNode, createElementBlock, resolveDirective, withDirectives, ref, onMounted, watch, normalizeClass, normalizeStyle, reactive, resolveDynamicComponent, nextTick, onUnmounted } from "vue";
+import { defineComponent, createBlock, openBlock, normalizeProps, guardReactiveProps, createSlots, withCtx, renderSlot, createCommentVNode, createTextVNode, toDisplayString, resolveComponent, mergeProps, computed, createElementBlock, createElementVNode, createVNode, resolveDirective, withDirectives, ref, onMounted, watch, normalizeClass, normalizeStyle, reactive, resolveDynamicComponent, nextTick, onUnmounted } from "vue";
 import { lodash, moment } from "@herodotus-cloud/core";
 import { lodash as lodash2, moment as moment2 } from "@herodotus-cloud/core";
 import * as allIcons from "@mdi/js";
@@ -7,7 +7,7 @@ import { kebabCase } from "lodash-es";
 import { tsParticles } from "@tsparticles/engine";
 import { loadBasic } from "@tsparticles/basic";
 import { loadParticlesLinksInteraction } from "@tsparticles/interaction-particles-links";
-const _sfc_main$p = defineComponent({
+const _sfc_main$q = defineComponent({
   name: "HButton",
   props: {
     tooltip: { type: String, default: "" }
@@ -43,8 +43,8 @@ function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     } : void 0
   ]), 1040);
 }
-const HButton = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$p]]);
-const _sfc_main$o = defineComponent({
+const HButton = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p]]);
+const _sfc_main$p = defineComponent({
   name: "HIconButton",
   components: {
     HButton
@@ -65,8 +65,8 @@ function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     size: _ctx.size
   }, _ctx.$attrs), null, 16, ["color", "dense", "size"]);
 }
-const HIconButton = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$o]]);
-const _sfc_main$n = defineComponent({
+const HIconButton = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o]]);
+const _sfc_main$o = defineComponent({
   name: "HVisibilityButton",
   props: {
     modelValue: { type: Boolean }
@@ -93,7 +93,7 @@ function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = ($event) => _ctx.isShowPassword = !_ctx.isShowPassword)
   }, null, 8, ["name"]);
 }
-const HVisibilityButton = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$n]]);
+const HVisibilityButton = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n]]);
 HButton.install = (app) => {
   app.component(HButton.name, HButton);
 };
@@ -103,6 +103,25 @@ HIconButton.install = (app) => {
 HVisibilityButton.install = (app) => {
   app.component(HVisibilityButton.name, HVisibilityButton);
 };
+const _hoisted_1$9 = { class: "title-toolbar row items-center q-pr-sm" };
+const _hoisted_2$6 = { class: "card-title q-my-xs q-mr-sm cursor-pointer" };
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
+  ...{
+    name: "HCardTitle"
+  },
+  __name: "HCardTitle",
+  props: {
+    text: { type: String, default: "" }
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1$9, [
+        createElementVNode("div", _hoisted_2$6, toDisplayString(__props.text), 1)
+      ]);
+    };
+  }
+});
+const HCardTitle = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-6c35157d"]]);
 const _sfc_main$m = defineComponent({
   name: "HChartCard",
   props: {
@@ -140,6 +159,9 @@ function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
   });
 }
 const HChartCard = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$m]]);
+HCardTitle.install = (app) => {
+  app.component(HCardTitle.name, HCardTitle);
+};
 HChartCard.install = (app) => {
   app.component(HChartCard.name, HChartCard);
 };
@@ -1428,7 +1450,6 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_space = QSpace;
   const _component_q_btn = QBtn;
   const _component_q_card_section = QCardSection;
-  const _component_q_separator = QSeparator;
   const _component_q_card_actions = QCardActions;
   const _component_q_spinner_dots = QSpinnerDots;
   const _component_q_inner_loading = QInnerLoading;
@@ -1460,7 +1481,6 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
             ]),
             _: 1
           }),
-          createVNode(_component_q_separator),
           createVNode(_component_q_card_section, null, {
             default: withCtx(() => [
               renderSlot(_ctx.$slots, "default")
@@ -1874,6 +1894,7 @@ HSignInBackground.install = (app) => {
 };
 const components = [
   HButton,
+  HCardTitle,
   HCenterLabel,
   HChartCard,
   HColumn,
@@ -1910,6 +1931,7 @@ export {
   DURATION_UNITS,
   Grid,
   HButton,
+  HCardTitle,
   HCenterLabel,
   HChartCard,
   HColumn,

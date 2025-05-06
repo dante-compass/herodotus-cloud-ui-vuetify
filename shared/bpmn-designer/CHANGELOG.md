@@ -1,5 +1,110 @@
 # @herodotus-cloud/bpmn-designer
 
+## 1.2.6
+
+### Patch Changes
+
+- 发布新版本
+- Updated dependencies
+  - @herodotus-cloud/components@1.2.6
+  - @herodotus-cloud/bpmn-apis@1.2.6
+  - @herodotus-cloud/form-apis@1.2.6
+  - @herodotus-cloud/core@1.2.6
+
+## 1.2.5
+
+### Patch Changes
+
+- 完善校验
+- Updated dependencies
+  - @herodotus-cloud/components@1.2.5
+  - @herodotus-cloud/bpmn-apis@1.2.5
+  - @herodotus-cloud/form-apis@1.2.5
+  - @herodotus-cloud/core@1.2.5
+
+## 1.2.4
+
+### Patch Changes
+
+- 新增校验定义
+- Updated dependencies
+  - @herodotus-cloud/components@1.2.4
+  - @herodotus-cloud/bpmn-apis@1.2.4
+  - @herodotus-cloud/form-apis@1.2.4
+  - @herodotus-cloud/core@1.2.4
+
+## 1.2.3
+
+### Patch Changes
+
+- 修复组件注入错误
+- Updated dependencies
+  - @herodotus-cloud/components@1.2.3
+  - @herodotus-cloud/bpmn-apis@1.2.3
+  - @herodotus-cloud/form-apis@1.2.3
+  - @herodotus-cloud/core@1.2.3
+
+## 1.2.2
+
+### Patch Changes
+
+- 新增 CardTitle 组件
+- Updated dependencies
+  - @herodotus-cloud/components@1.2.2
+  - @herodotus-cloud/bpmn-apis@1.2.2
+  - @herodotus-cloud/form-apis@1.2.2
+  - @herodotus-cloud/core@1.2.2
+
+## 1.2.1
+
+### Patch Changes
+
+- 调整Dialog组件显示
+- Updated dependencies
+  - @herodotus-cloud/components@1.2.1
+  - @herodotus-cloud/bpmn-apis@1.2.1
+  - @herodotus-cloud/form-apis@1.2.1
+  - @herodotus-cloud/core@1.2.1
+
+## 1.2.0
+
+### Minor Changes
+
+- 修改type目录
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/components@1.2.0
+  - @herodotus-cloud/bpmn-apis@1.2.0
+  - @herodotus-cloud/form-apis@1.2.0
+  - @herodotus-cloud/core@1.2.0
+
+## 1.1.0
+
+### Minor Changes
+
+- 重新发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/components@1.1.0
+  - @herodotus-cloud/bpmn-apis@1.1.0
+  - @herodotus-cloud/form-apis@1.1.0
+  - @herodotus-cloud/core@1.1.0
+
+## 1.0.1
+
+### Patch Changes
+
+- 新增 es-toolkit pickby 方法
+- Updated dependencies
+  - @herodotus-cloud/components@1.0.1
+  - @herodotus-cloud/bpmn-apis@1.0.1
+  - @herodotus-cloud/form-apis@1.0.1
+  - @herodotus-cloud/core@1.0.1
+
 ## 1.0.0
 
 ### Major Changes
