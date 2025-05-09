@@ -10,5 +10,6 @@ export {
   AvatarUtils,
   PKCE,
   Toolkit,
+  DayJs,
   standardDeleteNotify,
 } from '@herodotus-cloud/core';
