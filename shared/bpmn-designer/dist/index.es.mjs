@@ -2944,7 +2944,8 @@ function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
                 onClick: _cache[0] || (_cache[0] = ($event) => _ctx.isOpen = false)
               })
             ]),
-            _: 1
+            _: 1,
+            __: [6]
           }),
           createVNode(_component_q_card_section, null, {
             default: withCtx(() => [
@@ -3062,7 +3063,8 @@ function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
             default: withCtx(() => _cache[1] || (_cache[1] = [
               createTextVNode("没有数据")
             ])),
-            _: 1
+            _: 1,
+            __: [1]
           })
         ]),
         _: 1
@@ -5208,7 +5210,8 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
               default: withCtx(() => _cache[7] || (_cache[7] = [
                 createElementVNode("div", { class: "text-h6" }, "模型信息", -1)
               ])),
-              _: 1
+              _: 1,
+              __: [7]
             }),
             createVNode(_component_q_card_section, {
               style: { "max-height": "50vh" },

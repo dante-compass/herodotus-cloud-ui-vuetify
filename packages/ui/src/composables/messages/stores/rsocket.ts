@@ -12,6 +12,7 @@ import type {
 } from 'rsocket-core';
 
 import { API } from '@/configurations';
+import { lodash } from '@/lib/utils';
 
 import { RSocketConnector } from 'rsocket-core';
 import { WebsocketClientTransport } from 'rsocket-websocket-client';
@@ -127,13 +128,13 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
         responder: {
           fireAndForget: (payload: Payload, responderStream: OnTerminalSubscriber) => {
             const data = this.decodeData(payload.data as Buffer);
-            console.log('[RSocket] responder data', data);
-            console.log('[RSocket] responder responderStream', responderStream);
-            if (operation.pullNotifications) {
+            console.log('[RSocket] fireAndForget responder data', data);
+            console.log('[RSocket] fireAndForget responder responderStream', responderStream);
+
+            if (lodash.isFunction(operation.pullNotifications)) {
               operation.pullNotifications();
             }
-
-            if (operation.syncOnlineUserCount) {
+            if (lodash.isFunction(operation.syncOnlineUserCount)) {
               operation.syncOnlineUserCount(data);
             }
             return {
@@ -146,9 +147,12 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
             initialRequestN: number,
             responderStream: OnTerminalSubscriber & OnNextSubscriber & OnExtensionSubscriber,
           ) => {
-            console.log('[RSocket] responder data', this.decodeData(payload.data as Buffer));
-            console.log('[RSocket] responder initialRequestN', initialRequestN);
-            console.log('[RSocket] responder responderStream', responderStream);
+            console.log(
+              '[RSocket] requestStream responder data',
+              this.decodeData(payload.data as Buffer),
+            );
+            console.log('[RSocket] requestStream responder initialRequestN', initialRequestN);
+            console.log('[RSocket] requestStream responder responderStream', responderStream);
             return {
               onComplete: this.onComplete,
               onNext: this.onNext,
@@ -168,10 +172,13 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
               Requestable &
               Cancellable,
           ) => {
-            console.log('[RSocket] responder data', this.decodeData(payload.data as Buffer));
-            console.log('[RSocket] responder initialRequestN', initialRequestN);
-            console.log('[RSocket] responder isCompleted', isCompleted);
-            console.log('[RSocket] responder responderStream', responderStream);
+            console.log(
+              '[RSocket] requestResponse responder data',
+              this.decodeData(payload.data as Buffer),
+            );
+            console.log('[RSocket] requestResponse responder initialRequestN', initialRequestN);
+            console.log('[RSocket] requestResponse responder isCompleted', isCompleted);
+            console.log('[RSocket] requestResponse responder responderStream', responderStream);
             return responderStream;
           },
 
@@ -180,8 +187,8 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
             responderStream: OnTerminalSubscriber & OnNextSubscriber & OnExtensionSubscriber,
           ) => {
             const data = this.decodeData(payload.data as Buffer);
-            console.log('[RSocket] responder data', data);
-            console.log('[RSocket] responder responderStream', responderStream);
+            console.log('[RSocket] requestResponse responder data', data);
+            console.log('[RSocket] requestResponse responder responderStream', responderStream);
             return {
               onExtension: this.onExtension,
               cancel: this.onCancel,

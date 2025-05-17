@@ -27,7 +27,8 @@ export const useNotificationStore = defineStore('Notification', {
   actions: {
     setAllRead(): void {
       const authenticationStore = useAuthenticationStore();
-      API.notification()
+      API.core
+        .notification()
         .setAllRead(authenticationStore.userId)
         .then(() => {
           this.totalNumber = 0;
@@ -48,7 +49,9 @@ export const useNotificationStore = defineStore('Notification', {
     pullAllNotification(): void {
       const sort: Sort = { direction: 'DESC', properties: ['createTime'] };
       const store = useAuthenticationStore();
-      API.notification()
+
+      API.core
+        .notification()
         .fetchByPage(
           {
             pageNumber: 0,
