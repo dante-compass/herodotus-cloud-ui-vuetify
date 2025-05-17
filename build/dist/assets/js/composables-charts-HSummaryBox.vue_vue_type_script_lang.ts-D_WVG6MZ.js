@@ -1,1 +1,0 @@
-import{d as e}from"./npm-@vue-runtime-core-d95RkcDH.js";const r=e({name:"HSummaryBox",props:{numeric:{type:[String,Number]},percent:{type:Number},description:{type:String},icon:{type:String},color:{type:String,default:""}}});export{r as _};
