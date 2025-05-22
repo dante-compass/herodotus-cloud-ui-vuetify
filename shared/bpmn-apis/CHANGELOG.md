@@ -1,5 +1,13 @@
 # @herodotus-cloud/bpmn-apis
 
+## 1.2.8
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus-cloud/core@1.2.8
+
 ## 1.2.7
 
 ### Patch Changes
