@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/bpmn-designer",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "",
   "keywords": [],
   "author": "",
@@ -39,7 +39,7 @@
     "@herodotus-cloud/core": "workspace:^",
     "@herodotus-cloud/form-apis": "workspace:^",
     "@highlightjs/vue-plugin": "^2.1.0",
-    "bpmn-js": "^18.6.1",
+    "bpmn-js": "^18.6.2",
     "bpmn-js-bpmnlint": "^0.23.0",
     "bpmn-js-connectors-extension": "^0.4.6",
     "bpmn-js-properties-panel": "^5.35.0",
