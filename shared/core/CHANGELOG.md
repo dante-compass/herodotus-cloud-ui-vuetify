@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.2.10
+
+### Patch Changes
+
+- 版本发布
+
 ## 1.2.9
 
 ### Patch Changes
