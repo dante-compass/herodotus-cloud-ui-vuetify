@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/core",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "",
   "keywords": [],
   "author": "",
@@ -32,8 +32,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@vueuse/integrations": "^13.3.0",
-    "axios": "^1.9.0",
+    "@vueuse/integrations": "^13.4.0",
+    "axios": "^1.10.0",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
     "es-toolkit": "^1.39.3",

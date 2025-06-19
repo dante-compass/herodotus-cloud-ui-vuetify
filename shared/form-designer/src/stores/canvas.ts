@@ -111,9 +111,9 @@ export const useFormCanvasStore = defineStore('FormDesignerCanvas', {
 
     removeElement(element: Element) {
       if (!lodash.isEmpty(this.canvasElements) && element.id) {
-        lodash.remove(this.canvasElements, (item) => {
-          return item.id === element.id;
-        });
+        // lodash.remove(this.canvasElements, (item) => {
+        //   return item.id === element.id;
+        // });
 
         this.selectFirstElement();
       }
