@@ -1,6 +1,3 @@
-var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 import axios from "axios";
 import qs from "qs";
 import { useAxios } from "@vueuse/integrations/useAxios";
@@ -115,11 +112,11 @@ class AxiosCanceler {
   }
 }
 class Axios {
+  axiosInstance;
+  axiosConfig;
+  axiosTransform;
+  defaultRequestOptions;
   constructor(config, transform, options) {
-    __publicField(this, "axiosInstance");
-    __publicField(this, "axiosConfig");
-    __publicField(this, "axiosTransform");
-    __publicField(this, "defaultRequestOptions");
     this.axiosConfig = config;
     this.axiosTransform = transform;
     this.defaultRequestOptions = options;
@@ -444,21 +441,21 @@ const isSuccess = (response) => {
   }
 };
 class HttpConfig {
+  http = {};
+  project = "";
+  clientId = "";
+  clientSecret = "";
+  oidc = false;
+  uaaAddress = "";
+  upmsAddress = "";
+  msgAddress = "";
+  ossAddress = "";
+  bpmnAddress = "";
+  cmdbAddress = "";
+  iotAddress = "";
+  manageAddress = "";
+  proxy = "";
   constructor(http, options) {
-    __publicField(this, "http", {});
-    __publicField(this, "project", "");
-    __publicField(this, "clientId", "");
-    __publicField(this, "clientSecret", "");
-    __publicField(this, "oidc", false);
-    __publicField(this, "uaaAddress", "");
-    __publicField(this, "upmsAddress", "");
-    __publicField(this, "msgAddress", "");
-    __publicField(this, "ossAddress", "");
-    __publicField(this, "bpmnAddress", "");
-    __publicField(this, "cmdbAddress", "");
-    __publicField(this, "iotAddress", "");
-    __publicField(this, "manageAddress", "");
-    __publicField(this, "proxy", "");
     this.http = http;
     this.project = options.project;
     this.clientId = options.clientId;
@@ -556,8 +553,8 @@ class HttpConfig {
   }
 }
 class Service {
+  config;
   constructor(config) {
-    __publicField(this, "config");
     this.config = config;
   }
   getConfig() {
@@ -609,7 +606,8 @@ class AbstractService extends Service {
     });
   }
 }
-const _AvatarUtilities = class _AvatarUtilities {
+class AvatarUtilities {
+  static instance = new AvatarUtilities();
   constructor() {
   }
   static getInstance() {
@@ -618,14 +616,13 @@ const _AvatarUtilities = class _AvatarUtilities {
   generate(id) {
     return `data:image/svg+xml;utf8,${generateFromString(id)}`;
   }
-};
-__publicField(_AvatarUtilities, "instance", new _AvatarUtilities());
-let AvatarUtilities = _AvatarUtilities;
+}
 const AvatarUtils = AvatarUtilities.getInstance();
-const _SM2Utilities = class _SM2Utilities {
+class SM2Utilities {
+  static instance = new SM2Utilities();
+  cipherMode = 1;
   // 1 - C1C3C2，0 - C1C2C3
   constructor() {
-    __publicField(this, "cipherMode", 1);
   }
   static getInstance() {
     return this.instance;
@@ -640,10 +637,9 @@ const _SM2Utilities = class _SM2Utilities {
     let data = content.substring(2).toLocaleLowerCase();
     return sm2.doDecrypt(data, privateKey, this.cipherMode);
   }
-};
-__publicField(_SM2Utilities, "instance", new _SM2Utilities());
-let SM2Utilities = _SM2Utilities;
-const _SM4Utilities = class _SM4Utilities {
+}
+class SM4Utilities {
+  static instance = new SM4Utilities();
   constructor() {
   }
   static getInstance() {
@@ -655,9 +651,7 @@ const _SM4Utilities = class _SM4Utilities {
   decrypt(content, privateKey) {
     return sm4.decrypt(content, privateKey);
   }
-};
-__publicField(_SM4Utilities, "instance", new _SM4Utilities());
-let SM4Utilities = _SM4Utilities;
+}
 const SM2Utils = SM2Utilities.getInstance();
 const SM4Utils = SM4Utilities.getInstance();
 const SwalToast = Swal.mixin({
@@ -691,7 +685,8 @@ const standardDeleteNotify = (onConfirm, onCancel) => {
     }
   });
 };
-const _Notify = class _Notify {
+class Notify {
+  static instance = new Notify();
   constructor() {
   }
   static getInstance() {
@@ -728,11 +723,10 @@ const _Notify = class _Notify {
   question(title, text = "") {
     return this.information(title, text, "question");
   }
-};
-__publicField(_Notify, "instance", new _Notify());
-let Notify = _Notify;
+}
 const notify = Notify.getInstance();
-const _Toast = class _Toast {
+class Toast {
+  static instance = new Toast();
   constructor() {
   }
   static getInstance() {
@@ -759,11 +753,10 @@ const _Toast = class _Toast {
   question(text) {
     return this.information(text, "question");
   }
-};
-__publicField(_Toast, "instance", new _Toast());
-let Toast = _Toast;
+}
 const toast = Toast.getInstance();
-const _PkceUtilities = class _PkceUtilities {
+class PkceUtilities {
+  static instance = new PkceUtilities();
   constructor() {
   }
   static getInstance() {
@@ -850,9 +843,7 @@ const _PkceUtilities = class _PkceUtilities {
     const actualChallenge = this.generateChallenge(code_verifier);
     return actualChallenge === expectedChallenge;
   }
-};
-__publicField(_PkceUtilities, "instance", new _PkceUtilities());
-let PkceUtilities = _PkceUtilities;
+}
 const PKCE = PkceUtilities.getInstance();
 function useHttp(config) {
   const defaultAxiosConfig = {

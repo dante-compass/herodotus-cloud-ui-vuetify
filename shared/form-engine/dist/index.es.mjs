@@ -1,6 +1,3 @@
-var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 import { h, resolveComponent, defineComponent, computed, reactive, watch, createElementBlock, openBlock, Fragment, renderList, createVNode } from "vue";
 import { nanoid } from "nanoid";
 import { QIcon, QList, QItem, QItemSection, QInput } from "quasar";
@@ -527,8 +524,8 @@ Stack.prototype.set = stackSet;
 var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
 var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
 var moduleExports = freeModule && freeModule.exports === freeExports;
-var Buffer2 = moduleExports ? root.Buffer : void 0;
-Buffer2 ? Buffer2.allocUnsafe : void 0;
+var Buffer = moduleExports ? root.Buffer : void 0;
+Buffer ? Buffer.allocUnsafe : void 0;
 function cloneBuffer(buffer, isDeep) {
   {
     return buffer.slice();
@@ -603,10 +600,10 @@ function initCloneArray(array) {
   }
   return result;
 }
-var Uint8Array2 = root.Uint8Array;
+var Uint8Array = root.Uint8Array;
 function cloneArrayBuffer(arrayBuffer) {
   var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
-  new Uint8Array2(result).set(new Uint8Array2(arrayBuffer));
+  new Uint8Array(result).set(new Uint8Array(arrayBuffer));
   return result;
 }
 function cloneDataView(dataView, isDeep) {
@@ -1118,7 +1115,8 @@ const WIDGET_DEFINITIONS = [
     list: SELECT_WIDGETS
   }
 ];
-const _ElementUtilities = class _ElementUtilities {
+class ElementUtilities {
+  static instance = new ElementUtilities();
   constructor() {
   }
   static getInstance() {
@@ -1156,9 +1154,7 @@ const _ElementUtilities = class _ElementUtilities {
     this.setIdentityValues(newElement, element.config.name);
     return newElement;
   }
-};
-__publicField(_ElementUtilities, "instance", new _ElementUtilities());
-let ElementUtilities = _ElementUtilities;
+}
 const ElementUtils = ElementUtilities.getInstance();
 const _sfc_main$1 = defineComponent({
   name: "HRendererEngine",
