@@ -642,7 +642,7 @@ const _sfc_main$f = defineComponent({
       if (!lodash.isEmpty(tree) && lodash.isEmpty(treeNodes.value)) {
         treeNodes.value = treeToArray(tree);
         const item = lodash.find(treeNodes.value, (i) => i.id == props.modelValue);
-        nodeName.value = item == null ? void 0 : item.name;
+        nodeName.value = item?.name;
       }
     };
     watch(
@@ -659,9 +659,8 @@ const _sfc_main$f = defineComponent({
     watch(
       () => selectedValue.value,
       (newValue) => {
-        var _a;
         if (newValue) {
-          const node = (_a = treeRef.value) == null ? void 0 : _a.getNodeByKey(newValue);
+          const node = treeRef.value?.getNodeByKey(newValue);
           if (node) {
             nodeName.value = node.name;
           }

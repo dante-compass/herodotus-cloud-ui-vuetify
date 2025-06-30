@@ -1,6 +1,3 @@
-var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 import { QDialog, QCard, QCardSection, QSpace, QBtn, QSeparator, copyToClipboard, QItem, QItemSection, QAvatar, QItemLabel, QExpansionItem, QIcon, QBadge, QTooltip, QBtnDropdown, QList, QBtnGroup, QCardActions, QCheckbox, QTable, QInput, QSelect, QTr, QTd, QPopupEdit, QToggle, QDrawer, QScrollArea, useQuasar, QSpinnerGears, QFile, QToolbar, QLayout, QPageContainer, QPage } from "quasar";
 import { markRaw, ref, onMounted, watch, defineComponent, onBeforeUnmount, createElementBlock, openBlock, computed, createBlock, withCtx, createVNode, normalizeStyle, createElementVNode, toDisplayString, createCommentVNode, resolveComponent, createTextVNode, renderSlot, mergeProps, createSlots, normalizeProps, guardReactiveProps, resolveDirective, withDirectives, Fragment, renderList, resolveDynamicComponent, nextTick, withModifiers } from "vue";
 import { lodash, toast, Swal } from "@herodotus-cloud/core";
@@ -46,25 +43,10 @@ import json from "highlight.js/lib/languages/json";
 import hljsVuePlugin from "@highlightjs/vue-plugin";
 import { HTextField, HSelect } from "@herodotus-cloud/components";
 import BpmnModdle from "bpmn-moddle";
-const _BpmnLog = class _BpmnLog {
+class BpmnLog {
+  static instance = new BpmnLog();
   // private static types: string[] = ['primary', 'success', 'warn', 'error', 'info'];
   constructor() {
-    __publicField(this, "switchColor", (type) => {
-      switch (type) {
-        case "primary":
-          return "#2d8cf0";
-        case "success":
-          return "#19be6b";
-        case "info":
-          return "#909399";
-        case "warn":
-          return "#ff9900";
-        case "error":
-          return "#f03f14";
-        default:
-          return "#35495E";
-      }
-    });
   }
   static getInstance() {
     return this.instance;
@@ -72,6 +54,22 @@ const _BpmnLog = class _BpmnLog {
   isArray(obj) {
     return lodash.isArray(obj);
   }
+  switchColor = (type) => {
+    switch (type) {
+      case "primary":
+        return "#2d8cf0";
+      case "success":
+        return "#19be6b";
+      case "info":
+        return "#909399";
+      case "warn":
+        return "#ff9900";
+      case "error":
+        return "#f03f14";
+      default:
+        return "#35495E";
+    }
+  };
   print(type = "default", text, back = false) {
     if (typeof text === "object") {
       this.isArray(text) ? console.table(text) : console.dir(text);
@@ -130,9 +128,7 @@ const _BpmnLog = class _BpmnLog {
   prettyInfo(title, ...text) {
     text.forEach((t) => this.pretty("info", title, t));
   }
-};
-__publicField(_BpmnLog, "instance", new _BpmnLog());
-let BpmnLog = _BpmnLog;
+}
 const Logger = BpmnLog.getInstance();
 const useSettingStore = defineStore("BpmnDesignerSetting", {
   state: () => ({
@@ -1700,9 +1696,8 @@ function useViewerCreator(containerHtmlId, height, highlightNodes) {
     canvas.zoom("fit-viewport", { x: 0, y: 0 });
     if (!lodash.isEmpty(highlightNodes)) {
       highlightNodes.forEach((item) => {
-        var _a;
         canvas.addMarker(item, "highlight");
-        const ele = (_a = document.querySelector(".highlight")) == null ? void 0 : _a.querySelector(".djs-visual rect");
+        const ele = document.querySelector(".highlight")?.querySelector(".djs-visual rect");
         if (ele) {
           ele.setAttribute("stroke-dasharray", "4,4");
         }

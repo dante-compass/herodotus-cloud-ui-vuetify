@@ -1,0 +1,1 @@
+var r,t,n,a;function i(){if(t)return r;t=1;var n={}.toString;return r=Array.isArray||function(r){return"[object Array]"==n.call(r)}}function u(){if(a)return n;a=1;var r={}.toString;return n=Array.isArray||function(t){return"[object Array]"==r.call(t)}}export{i as a,u as r};

@@ -1,1 +1,0 @@
-import{d as e,l as o}from"./npm-@vue-runtime-core-onQCl9ry.js";const t=e({name:"HComplianceCondition",props:{conditions:{type:Object,required:!0}},emits:["update:conditions"],setup(e,{emit:t}){const n=o({get:()=>e.conditions,set:e=>{t("update:conditions",e)}});return{conditionsModelValue:n,onClear:()=>{n.value={}}}}});export{t as _};

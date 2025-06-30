@@ -1,15 +1,13 @@
-var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 import { Service, ContentTypeEnum, HttpConfig } from "@herodotus-cloud/core";
 import { AbstractService, Axios, HttpConfig as HttpConfig2, Service as Service2 } from "@herodotus-cloud/core";
-const _MinioBucketSettingService = class _MinioBucketSettingService extends Service {
+class MinioBucketSettingService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioBucketSettingService(config);
+      this.instance = new MinioBucketSettingService(config);
     }
     return this.instance;
   }
@@ -19,16 +17,15 @@ const _MinioBucketSettingService = class _MinioBucketSettingService extends Serv
   get(bucketName, region = "") {
     return this.getConfig().getHttp().get(this.getBaseAddress(), { bucketName, region });
   }
-};
-__publicField(_MinioBucketSettingService, "instance");
-let MinioBucketSettingService = _MinioBucketSettingService;
-const _MinioBucketEncryptionService = class _MinioBucketEncryptionService extends Service {
+}
+class MinioBucketEncryptionService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioBucketEncryptionService(config);
+      this.instance = new MinioBucketEncryptionService(config);
     }
     return this.instance;
   }
@@ -41,16 +38,15 @@ const _MinioBucketEncryptionService = class _MinioBucketEncryptionService extend
   delete(request) {
     return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
   }
-};
-__publicField(_MinioBucketEncryptionService, "instance");
-let MinioBucketEncryptionService = _MinioBucketEncryptionService;
-const _MinioBucketPolicyService = class _MinioBucketPolicyService extends Service {
+}
+class MinioBucketPolicyService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioBucketPolicyService(config);
+      this.instance = new MinioBucketPolicyService(config);
     }
     return this.instance;
   }
@@ -63,16 +59,15 @@ const _MinioBucketPolicyService = class _MinioBucketPolicyService extends Servic
   delete(request) {
     return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
   }
-};
-__publicField(_MinioBucketPolicyService, "instance");
-let MinioBucketPolicyService = _MinioBucketPolicyService;
-const _MinioBucketTagsService = class _MinioBucketTagsService extends Service {
+}
+class MinioBucketTagsService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioBucketTagsService(config);
+      this.instance = new MinioBucketTagsService(config);
     }
     return this.instance;
   }
@@ -85,16 +80,15 @@ const _MinioBucketTagsService = class _MinioBucketTagsService extends Service {
   delete(request) {
     return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
   }
-};
-__publicField(_MinioBucketTagsService, "instance");
-let MinioBucketTagsService = _MinioBucketTagsService;
-const _MinioBucketQuotaService = class _MinioBucketQuotaService extends Service {
+}
+class MinioBucketQuotaService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioBucketQuotaService(config);
+      this.instance = new MinioBucketQuotaService(config);
     }
     return this.instance;
   }
@@ -104,16 +98,15 @@ const _MinioBucketQuotaService = class _MinioBucketQuotaService extends Service 
   set(request) {
     return this.getConfig().getHttp().put(this.getBaseAddress(), request);
   }
-};
-__publicField(_MinioBucketQuotaService, "instance");
-let MinioBucketQuotaService = _MinioBucketQuotaService;
-const _MinioBucketVersioningService = class _MinioBucketVersioningService extends Service {
+}
+class MinioBucketVersioningService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioBucketVersioningService(config);
+      this.instance = new MinioBucketVersioningService(config);
     }
     return this.instance;
   }
@@ -123,16 +116,15 @@ const _MinioBucketVersioningService = class _MinioBucketVersioningService extend
   set(request) {
     return this.getConfig().getHttp().put(this.getBaseAddress(), request);
   }
-};
-__publicField(_MinioBucketVersioningService, "instance");
-let MinioBucketVersioningService = _MinioBucketVersioningService;
-const _MinioObjectLockConfigurationService = class _MinioObjectLockConfigurationService extends Service {
+}
+class MinioObjectLockConfigurationService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioObjectLockConfigurationService(config);
+      this.instance = new MinioObjectLockConfigurationService(config);
     }
     return this.instance;
   }
@@ -145,16 +137,15 @@ const _MinioObjectLockConfigurationService = class _MinioObjectLockConfiguration
   delete(request) {
     return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
   }
-};
-__publicField(_MinioObjectLockConfigurationService, "instance");
-let MinioObjectLockConfigurationService = _MinioObjectLockConfigurationService;
-const _MinioObjectSettingService = class _MinioObjectSettingService extends Service {
+}
+class MinioObjectSettingService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioObjectSettingService(config);
+      this.instance = new MinioObjectSettingService(config);
     }
     return this.instance;
   }
@@ -164,16 +155,15 @@ const _MinioObjectSettingService = class _MinioObjectSettingService extends Serv
   get(bucketName, objectName) {
     return this.getConfig().getHttp().get(this.getBaseAddress(), { bucketName, objectName });
   }
-};
-__publicField(_MinioObjectSettingService, "instance");
-let MinioObjectSettingService = _MinioObjectSettingService;
-const _MinioObjectTagsService = class _MinioObjectTagsService extends Service {
+}
+class MinioObjectTagsService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioObjectTagsService(config);
+      this.instance = new MinioObjectTagsService(config);
     }
     return this.instance;
   }
@@ -186,16 +176,15 @@ const _MinioObjectTagsService = class _MinioObjectTagsService extends Service {
   delete(request) {
     return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
   }
-};
-__publicField(_MinioObjectTagsService, "instance");
-let MinioObjectTagsService = _MinioObjectTagsService;
-const _MinioObjectRetentionService = class _MinioObjectRetentionService extends Service {
+}
+class MinioObjectRetentionService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioObjectRetentionService(config);
+      this.instance = new MinioObjectRetentionService(config);
     }
     return this.instance;
   }
@@ -205,16 +194,15 @@ const _MinioObjectRetentionService = class _MinioObjectRetentionService extends 
   set(request) {
     return this.getConfig().getHttp().put(this.getBaseAddress(), request);
   }
-};
-__publicField(_MinioObjectRetentionService, "instance");
-let MinioObjectRetentionService = _MinioObjectRetentionService;
-const _MinioObjectLegalHoldService = class _MinioObjectLegalHoldService extends Service {
+}
+class MinioObjectLegalHoldService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MinioObjectLegalHoldService(config);
+      this.instance = new MinioObjectLegalHoldService(config);
     }
     return this.instance;
   }
@@ -233,16 +221,15 @@ const _MinioObjectLegalHoldService = class _MinioObjectLegalHoldService extends 
   disable(request) {
     return this.getConfig().getHttp().put(this.getDisableAddress(), request);
   }
-};
-__publicField(_MinioObjectLegalHoldService, "instance");
-let MinioObjectLegalHoldService = _MinioObjectLegalHoldService;
-const _BucketService = class _BucketService extends Service {
+}
+class BucketService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _BucketService(config);
+      this.instance = new BucketService(config);
     }
     return this.instance;
   }
@@ -261,16 +248,15 @@ const _BucketService = class _BucketService extends Service {
   deleteBucket(request) {
     return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
   }
-};
-__publicField(_BucketService, "instance");
-let BucketService = _BucketService;
-const _ObjectService = class _ObjectService extends Service {
+}
+class ObjectService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _ObjectService(config);
+      this.instance = new ObjectService(config);
     }
     return this.instance;
   }
@@ -310,16 +296,15 @@ const _ObjectService = class _ObjectService extends Service {
   batchDelete(request) {
     return this.getConfig().getHttp().delete(this.getMultiDeleteAddress(), request);
   }
-};
-__publicField(_ObjectService, "instance");
-let ObjectService = _ObjectService;
-const _MultipartUploadService = class _MultipartUploadService extends Service {
+}
+class MultipartUploadService extends Service {
+  static instance;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _MultipartUploadService(config);
+      this.instance = new MultipartUploadService(config);
     }
     return this.instance;
   }
@@ -338,17 +323,16 @@ const _MultipartUploadService = class _MultipartUploadService extends Service {
   completeChunkUpload(request) {
     return this.getConfig().getHttp().post(this.getCompleteMultipartUploadAddress(), request);
   }
-};
-__publicField(_MultipartUploadService, "instance");
-let MultipartUploadService = _MultipartUploadService;
-const _OssApiResources = class _OssApiResources {
+}
+class OssApiResources {
+  static instance;
+  config = {};
   constructor(config) {
-    __publicField(this, "config", {});
     this.config = config;
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new _OssApiResources(config);
+      this.instance = new OssApiResources(config);
     }
     return this.instance;
   }
@@ -397,9 +381,7 @@ const _OssApiResources = class _OssApiResources {
   minioObjectLegalHold() {
     return MinioObjectLegalHoldService.getInstance(this.config);
   }
-};
-__publicField(_OssApiResources, "instance");
-let OssApiResources = _OssApiResources;
+}
 const createOssApi = (http, options) => {
   const config = new HttpConfig(http, options);
   return OssApiResources.getInstance(config);

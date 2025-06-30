@@ -1,1 +1,0 @@
-import t from"./views-settings-message-DialogueContact.vue-D6x7bSbT.js";import{d as e}from"./npm-@vue-runtime-core-onQCl9ry.js";import{r as o}from"./npm-@vue-reactivity-BaW43XHy.js";const s=e({name:"MessageInformation",components:{HInformationList:t},setup:t=>({tab:o("private")})});export{s as _};
