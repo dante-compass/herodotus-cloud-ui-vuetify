@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.5.0
+
+### Minor Changes
+
+- 重新发版
+
 ## 1.4.1
 
 ### Patch Changes
