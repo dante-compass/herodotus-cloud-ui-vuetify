@@ -15,7 +15,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bpmn-io/properties-panel": "3.30.0",
+    "@bpmn-io/properties-panel": "3.30.1",
     "@github/webauthn-json": "^2.1.1",
     "@herodotus-cloud/apis": "workspace:^",
     "@herodotus-cloud/bpmn-apis": "workspace:^",
