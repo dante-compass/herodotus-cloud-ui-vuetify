@@ -52,6 +52,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "24.0.10"
+    "@types/node": "24.0.13"
   }
 }

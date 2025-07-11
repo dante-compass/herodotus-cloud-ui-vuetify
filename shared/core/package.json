@@ -36,7 +36,7 @@
     "axios": "^1.10.0",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
-    "es-toolkit": "^1.39.6",
+    "es-toolkit": "^1.39.7",
     "generate-avatar": "^1.4.10",
     "js-base64": "^3.7.7",
     "lodash-es": "^4.17.21",
