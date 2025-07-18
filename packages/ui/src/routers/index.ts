@@ -2,7 +2,6 @@ import type { App } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import { staticRoutes } from './logic';
 import { createRouterGuard } from './guard';
-import { RouteUtils } from '@/lib/utils';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_PATH),
@@ -14,8 +13,6 @@ export async function setupRouter(app: App) {
   app.use(router);
   createRouterGuard(router);
   await router.isReady();
-
-  RouteUtils.setRouter(router);
 }
 
 export default router;

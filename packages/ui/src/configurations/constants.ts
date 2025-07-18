@@ -78,6 +78,7 @@ export const Path = {
   ROOT: '/',
   // 登录
   SIGN_IN: '/sign-in',
+  SIGN_IN_NAME: 'SignIn',
   // 首页
   HOME: '/dashboard',
   HOME_NAME: 'Dashboard',

@@ -18,9 +18,9 @@ import HerodotusFormEngine from '@herodotus-cloud/form-engine';
 import DisableDevtool from 'disable-devtool';
 
 import { setupStore, setupQuasar, setupI18n, setupUploader } from '@/plugins';
-import { setupRouter } from './routers';
+import router, { setupRouter } from './routers';
 
-import { CONSTANTS, VARIABLES } from '@/configurations';
+import { CONSTANTS, VARIABLES, setupKernel } from '@/configurations';
 
 if (typeof (window as any).global === 'undefined') {
   (window as any).global = window;
@@ -42,6 +42,8 @@ async function setupApp() {
 
   // 挂载路由
   await setupRouter(app);
+
+  setupKernel(router);
 
   setupUploader(app);
 

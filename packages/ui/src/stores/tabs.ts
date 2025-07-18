@@ -2,8 +2,9 @@ import { defineStore } from 'pinia';
 import { nextTick } from 'vue';
 
 import { useRouteStore } from './route';
-import { lodash, RouteUtils } from '@/lib/utils';
+import { lodash } from '@/lib/utils';
 import { staticRoutes } from '@/routers/logic';
+import { RouterUtils } from '@/configurations';
 
 import type {
   RouteLocationNormalizedLoaded,
@@ -138,7 +139,7 @@ export const useTabsStore = defineStore('Tabs', {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouteUtils.goBack();
+          RouterUtils.goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);

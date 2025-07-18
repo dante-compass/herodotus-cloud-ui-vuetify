@@ -15,7 +15,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bpmn-io/properties-panel": "3.30.1",
+    "@bpmn-io/properties-panel": "3.30.2",
     "@github/webauthn-json": "^2.1.1",
     "@herodotus-cloud/apis": "workspace:^",
     "@herodotus-cloud/bpmn-apis": "workspace:^",
@@ -25,6 +25,7 @@
     "@herodotus-cloud/form-apis": "workspace:^",
     "@herodotus-cloud/form-designer": "workspace:^",
     "@herodotus-cloud/form-engine": "workspace:^",
+    "@herodotus-cloud/framework-kernel": "workspace:^",
     "@herodotus-cloud/oss-apis": "workspace:^",
     "@mdi/js": "^7.4.47",
     "@quasar/extras": "^1.17.0",
@@ -46,12 +47,12 @@
     "simple-uploader.js": "^0.6.0",
     "vue": "^3.5.17",
     "vue-cookies": "^1.8.6",
-    "vue-i18n": "^11.1.9",
+    "vue-i18n": "^11.1.10",
     "vue-router": "^4.5.1",
     "vue-simple-uploader": "^1.0.3",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "24.0.13"
+    "@types/node": "24.0.14"
   }
 }

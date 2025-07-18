@@ -2,7 +2,7 @@ import type { SweetAlertIcon, SweetAlertResult } from '@/lib/declarations';
 
 import { useAuthenticationStore, clearPersistData } from '@/stores';
 import { useWebSocketMessage } from '@/composables/messages';
-import { RouteUtils } from './route';
+import { RouterUtils } from '@/configurations';
 import { Swal } from '../base';
 
 class ActionUtilities {
@@ -24,7 +24,7 @@ class ActionUtilities {
     disconnect();
     clearPersistData();
 
-    RouteUtils.toSignIn();
+    RouterUtils.toSignIn();
   }
 
   public signOutWithDialog(): void {

@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/framework-kernel",
-  "version": "1.0.0",
+  "version": "1.6.1",
   "description": "",
   "keywords": [],
   "author": "",
@@ -32,5 +32,9 @@
       },
       "./package.json": "./package.json"
     }
+  },
+  "dependencies": {
+    "@herodotus-cloud/core": "workspace:^",
+    "vue-router": "^4.5.1"
   }
 }
