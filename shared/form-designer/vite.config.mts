@@ -24,13 +24,6 @@ export default defineConfig({
       '#': fileURLToPath(new URL('./types', import.meta.url)),
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler', // or 'modern'
-      },
-    },
-  },
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
