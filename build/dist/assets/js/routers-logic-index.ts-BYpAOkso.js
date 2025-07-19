@@ -1,0 +1,1 @@
+import"./routers-logic-statics.ts-BGETTIio.js";import"./configurations-constants.ts-Co8UGXEL.js";import"./configurations-variables.ts-LPlmJIdb.js";import"./configurations-http.ts-DNDYbvLO.js";import"./configurations-axios-status.ts-kFa5W8j7.js";

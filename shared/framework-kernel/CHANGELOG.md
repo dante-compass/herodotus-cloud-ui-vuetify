@@ -1,5 +1,13 @@
 # @herodotus-cloud/framework-kernel
 
+## 1.6.2
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus-cloud/core@1.6.2
+
 ## 1.6.1
 
 ### Patch Changes

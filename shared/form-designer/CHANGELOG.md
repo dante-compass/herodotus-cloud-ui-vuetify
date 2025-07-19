@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 1.6.2
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.6.2
+  - @herodotus-cloud/components@1.6.2
+  - @herodotus-cloud/form-apis@1.6.2
+  - @herodotus-cloud/core@1.6.2
+
 ## 1.6.1
 
 ### Patch Changes

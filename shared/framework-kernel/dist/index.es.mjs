@@ -30,7 +30,7 @@ class RouterUtilities {
    */
   static getInstance() {
     if (!RouterUtilities._instance) {
-      throw new Error("Singleton not initialized. Call initialize() first.");
+      throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
     return RouterUtilities._instance;
   }
