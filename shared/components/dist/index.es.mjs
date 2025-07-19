@@ -121,7 +121,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const HCardTitle = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-6c35157d"]]);
+const HCardTitle = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["__scopeId", "data-v-26f51c84"]]);
 const _sfc_main$m = defineComponent({
   name: "HChartCard",
   props: {

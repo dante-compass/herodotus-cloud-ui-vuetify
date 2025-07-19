@@ -1,1 +1,0 @@
-import{c as r}from"./npm-@rsocket-composite-metadata-YOvRo0td.js";import{r as t}from"./npm-possible-typed-array-names-D-Cicn17.js";var o,e;function n(){if(e)return o;e=1;var n=t(),a="undefined"==typeof globalThis?r:globalThis;return o=function(){for(var r=[],t=0;t<n.length;t++)"function"==typeof a[n[t]]&&(r[r.length]=n[t]);return r}}export{n as r};

@@ -1,5 +1,51 @@
 # @herodotus-cloud/form-engine
 
+## 1.6.2
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus-cloud/form-apis@1.6.2
+
+## 1.6.1
+
+### Patch Changes
+
+- 修复Router单例
+- Updated dependencies
+  - @herodotus-cloud/form-apis@1.6.1
+
+## 1.6.0
+
+### Minor Changes
+
+- 新增 framework kernel 模块，提取框架公共类以支持不同框架
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-apis@1.6.0
+
+## 1.5.1
+
+### Patch Changes
+
+- 重新发版
+- Updated dependencies
+  - @herodotus-cloud/form-apis@1.5.1
+
+## 1.5.0
+
+### Minor Changes
+
+- 重新发版
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-apis@1.5.0
+
 ## 1.4.1
 
 ### Patch Changes

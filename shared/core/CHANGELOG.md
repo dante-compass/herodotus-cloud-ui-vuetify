@@ -1,5 +1,35 @@
 # @herodotus-cloud/core
 
+## 1.6.2
+
+### Patch Changes
+
+- 版本发布
+
+## 1.6.1
+
+### Patch Changes
+
+- 修复Router单例
+
+## 1.6.0
+
+### Minor Changes
+
+- 新增 framework kernel 模块，提取框架公共类以支持不同框架
+
+## 1.5.1
+
+### Patch Changes
+
+- 重新发版
+
+## 1.5.0
+
+### Minor Changes
+
+- 重新发版
+
 ## 1.4.1
 
 ### Patch Changes

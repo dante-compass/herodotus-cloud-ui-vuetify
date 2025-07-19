@@ -1,0 +1,1 @@
+import{P as t}from"./configurations-constants.ts-Co8UGXEL.js";import"./configurations-variables.ts-LPlmJIdb.js";import"./configurations-http.ts-DNDYbvLO.js";import"./configurations-axios-status.ts-kFa5W8j7.js";import{d as o}from"./npm-@vue-runtime-core-xXyKGs9k.js";const s=o({name:"HAppBackHomeControl",setup:o=>({homePath:t.HOME})});export{s as _};

@@ -1,6 +1,6 @@
 import { useRoute } from 'vue-router';
 import { useTabsStore, useRouteStore } from '@/stores';
-import { RouteUtils } from '@/lib/utils';
+import { RouterUtils } from '@/configurations';
 
 export default function useEditFinish() {
   const route = useRoute();
@@ -12,7 +12,7 @@ export default function useEditFinish() {
 
     routeStore.removeRoutePushParam(name);
     tabs.deleteTab(route);
-    RouteUtils.goBack();
+    RouterUtils.goBack();
   };
 
   return {

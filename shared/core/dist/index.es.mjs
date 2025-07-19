@@ -8,7 +8,7 @@ import "moment/dist/locale/zh-cn";
 import dayjs from "dayjs";
 import { default as default3 } from "dayjs";
 import "dayjs/locale/zh-cn";
-import { assignIn, endsWith, isEmpty, isFunction, merge, partition, pickBy, toUpper } from "es-toolkit/compat";
+import { assignIn, dropRight, endsWith, isEmpty, isFunction, join, merge, partition, pickBy, split, toUpper } from "es-toolkit/compat";
 import { generateFromString } from "generate-avatar";
 import { sm2, sm4 } from "sm-crypto";
 import { Base64 } from "js-base64";
@@ -59,12 +59,15 @@ dayjs.locale("zh-cn");
 const esToolkit = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   assignIn,
+  dropRight,
   endsWith,
   isEmpty,
   isFunction,
+  join,
   merge,
   partition,
   pickBy,
+  split,
   toUpper
 }, Symbol.toStringTag, { value: "Module" }));
 let pendingMap = /* @__PURE__ */ new Map();
