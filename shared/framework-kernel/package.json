@@ -7,31 +7,28 @@
   "license": "ISC",
   "private": false,
   "type": "module",
-  "main": "src/index.js",
-  "module": "src/index.js",
-  "types": "src/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
   },
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.mjs",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.es.mjs",
+      "require": "./dist/index.umd.js"
+    },
+    "./package.json": "./package.json"
+  },
   "publishConfig": {
-    "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/",
-    "main": "dist/index.umd.js",
-    "module": "dist/index.es.mjs",
-    "types": "dist/types/index.d.ts",
-    "exports": {
-      ".": {
-        "types": "./dist/types/index.d.ts",
-        "import": "./dist/index.es.mjs",
-        "require": "./dist/index.umd.js"
-      },
-      "./package.json": "./package.json"
-    }
+    "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
     "@herodotus-cloud/core": "workspace:^",

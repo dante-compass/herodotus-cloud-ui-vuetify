@@ -7,9 +7,18 @@
   "license": "ISC",
   "private": false,
   "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/"
+  },
   "main": "dist/index.umd.js",
   "module": "dist/index.es.mjs",
   "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
@@ -19,17 +28,8 @@
     "./dist/assets/style.css": "./dist/assets/css/apis.css",
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
   "publishConfig": {
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
   },
   "dependencies": {
     "@github/webauthn-json": "^2.1.1",
