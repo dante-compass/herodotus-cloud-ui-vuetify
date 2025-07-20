@@ -33,7 +33,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
-      external: ['vue-router', '@herodotus-cloud/core'],
+      external: ['vue-router', '@herodotus-cloud/core', 'pinia', 'pinia-plugin-persistedstate'],
       output: {
         exports: 'named',
         assetFileNames: `assets/[ext]/[name][extname]`,
@@ -41,6 +41,8 @@ export default defineConfig({
         globals: {
           'vue-router': 'VueRouter',
           '@herodotus-cloud/core': 'HerodotusCore',
+          pinia: 'Pinia',
+          'pinia-plugin-persistedstate': 'PiniaPluginPersistedstate',
         },
       },
     },
