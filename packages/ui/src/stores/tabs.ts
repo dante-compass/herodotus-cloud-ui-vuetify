@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { nextTick } from 'vue';
 
-import { useRouteStore } from './route';
+import { useRouterStore } from './base';
 import { lodash } from '@/lib/utils';
 import { staticRoutes } from '@/routers/logic';
 import { RouterUtils } from '@/configurations';
@@ -129,7 +129,7 @@ export const useTabsStore = defineStore('Tabs', {
     },
 
     smartTab(route: RouteLocationNormalizedLoaded) {
-      const store = useRouteStore();
+      const store = useRouterStore();
       const isDetailRoute = store.isDetailRoute(route);
 
       const tab = this.convertRouteToTab(route);

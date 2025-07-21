@@ -2,7 +2,7 @@ import type { ModuleNamespace } from 'vite/types/hot.d.ts';
 import type { RouteRecordRaw, RouteMeta, Router } from 'vue-router';
 import type { RemoteRoute } from '@/lib/declarations';
 
-import { useRouteStore } from '@/stores';
+import { useRouterStore } from '@/stores';
 import { lodash } from '@/lib/utils';
 import { API } from '@/configurations';
 
@@ -94,13 +94,13 @@ export default function useSystemRoute() {
   };
 
   const reloadDynamicRoutes = (router: Router) => {
-    const store = useRouteStore();
+    const store = useRouterStore();
     dynamicAddRoutes(router, store.routes);
     console.log('[Herodotus] |- Dynamic routes reload success!');
   };
 
   const addRoutes = (router: Router, routes: Array<RouteRecordRaw>) => {
-    const store = useRouteStore();
+    const store = useRouterStore();
 
     console.log('[Herodotus] |- Begin add dynamic routes');
 

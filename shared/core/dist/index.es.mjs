@@ -8,7 +8,7 @@ import "moment/dist/locale/zh-cn";
 import dayjs from "dayjs";
 import { default as default3 } from "dayjs";
 import "dayjs/locale/zh-cn";
-import { assignIn, dropRight, endsWith, isEmpty, isFunction, join, merge, partition, pickBy, split, toUpper } from "es-toolkit/compat";
+import { assignIn, dropRight, endsWith, has, isEmpty, isFunction, join, merge, partition, pickBy, split, toUpper } from "es-toolkit/compat";
 import { generateFromString } from "generate-avatar";
 import { sm2, sm4 } from "sm-crypto";
 import { Base64 } from "js-base64";
@@ -54,6 +54,29 @@ var AuthorizationGrantTypeEnum = /* @__PURE__ */ ((AuthorizationGrantTypeEnum2) 
   AuthorizationGrantTypeEnum2["TOKEN_EXCHANGE"] = "urn:ietf:params:oauth:grant-type:token-exchange";
   return AuthorizationGrantTypeEnum2;
 })(AuthorizationGrantTypeEnum || {});
+var OperationEnum = /* @__PURE__ */ ((OperationEnum2) => {
+  OperationEnum2["CREATE"] = "create";
+  OperationEnum2["EDIT"] = "edit";
+  OperationEnum2["AUTHORIZE"] = "authorize";
+  OperationEnum2["INFO"] = "info";
+  OperationEnum2["ALLOCATABLE"] = "allocatable";
+  OperationEnum2["SETUP"] = "setup";
+  OperationEnum2["INVOKE"] = "invoke";
+  return OperationEnum2;
+})(OperationEnum || {});
+var LayoutModeEnum = /* @__PURE__ */ ((LayoutModeEnum2) => {
+  LayoutModeEnum2["DEFAULT"] = "defaults";
+  LayoutModeEnum2["CLASSIC"] = "classic";
+  LayoutModeEnum2["TRANSVERSE"] = "transverse";
+  LayoutModeEnum2["COLUMNS"] = "transverse";
+  return LayoutModeEnum2;
+})(LayoutModeEnum || {});
+var ThemeModeEnum = /* @__PURE__ */ ((ThemeModeEnum2) => {
+  ThemeModeEnum2["DARK"] = "dark";
+  ThemeModeEnum2["LIGHT"] = "light";
+  ThemeModeEnum2["SYSTEM"] = "system";
+  return ThemeModeEnum2;
+})(ThemeModeEnum || {});
 moment.locale("zh-cn");
 dayjs.locale("zh-cn");
 const esToolkit = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
@@ -61,6 +84,7 @@ const esToolkit = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePro
   assignIn,
   dropRight,
   endsWith,
+  has,
   isEmpty,
   isFunction,
   join,
@@ -962,12 +986,15 @@ export {
   default3 as DayJs,
   HttpConfig,
   HttpMethodEnum,
+  LayoutModeEnum,
+  OperationEnum,
   PKCE,
   SM2Utils,
   SM4Utils,
   Service,
   StatusEnum,
   default4 as Swal,
+  ThemeModeEnum,
   esToolkit as Toolkit,
   isSuccess,
   lodash,

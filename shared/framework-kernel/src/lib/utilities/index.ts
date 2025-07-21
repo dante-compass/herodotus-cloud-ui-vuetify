@@ -1,1 +1,1 @@
-export * from './RouterUtilities';
+export * from './router-utilities';

@@ -2,6 +2,7 @@ export {
   assignIn,
   dropRight,
   endsWith,
+  has,
   isEmpty,
   isFunction,
   join,

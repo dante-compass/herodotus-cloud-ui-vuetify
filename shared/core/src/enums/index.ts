@@ -35,3 +35,26 @@ export enum AuthorizationGrantTypeEnum {
   JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer',
   TOKEN_EXCHANGE = 'urn:ietf:params:oauth:grant-type:token-exchange',
 }
+
+export enum OperationEnum {
+  CREATE = 'create',
+  EDIT = 'edit',
+  AUTHORIZE = 'authorize',
+  INFO = 'info',
+  ALLOCATABLE = 'allocatable',
+  SETUP = 'setup',
+  INVOKE = 'invoke',
+}
+
+export enum LayoutModeEnum {
+  DEFAULT = 'defaults',
+  CLASSIC = 'classic',
+  TRANSVERSE = 'transverse',
+  COLUMNS = 'transverse',
+}
+
+export enum ThemeModeEnum {
+  DARK = 'dark',
+  LIGHT = 'light',
+  SYSTEM = 'system',
+}

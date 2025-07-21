@@ -33,16 +33,23 @@ export default defineConfig({
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
-      external: ['vue-router', '@herodotus-cloud/core', 'pinia', 'pinia-plugin-persistedstate'],
+      external: [
+        'vue',
+        'vue-router',
+        'pinia',
+        'pinia-plugin-persistedstate',
+        '@herodotus-cloud/core',
+      ],
       output: {
         exports: 'named',
         assetFileNames: `assets/[ext]/[name][extname]`,
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
+          vue: 'Vue',
           'vue-router': 'VueRouter',
-          '@herodotus-cloud/core': 'HerodotusCore',
           pinia: 'Pinia',
           'pinia-plugin-persistedstate': 'PiniaPluginPersistedstate',
+          '@herodotus-cloud/core': 'HerodotusCore',
         },
       },
     },

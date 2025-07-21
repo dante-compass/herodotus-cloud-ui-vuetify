@@ -28,14 +28,14 @@ import { defineComponent } from 'vue';
 import type { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 
 import { SettingRoutes } from '@/routers/logic';
-import { useRouteStore } from '@/stores';
+import { useRouterStore } from '@/stores';
 
 export default defineComponent({
   name: 'HSettingMenu',
 
   setup() {
     const settingRoutes = SettingRoutes;
-    const routeStore = useRouteStore();
+    const routeStore = useRouterStore();
 
     const getItemTitle = (item: RouteRecordRaw): string => {
       return item.meta?.title as string;

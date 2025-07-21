@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.6.3
+
+### Patch Changes
+
+- 迁移 useRouterStore 代码
+
 ## 1.6.2
 
 ### Patch Changes

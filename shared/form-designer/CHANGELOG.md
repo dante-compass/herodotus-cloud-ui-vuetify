@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 1.6.3
+
+### Patch Changes
+
+- 迁移 useRouterStore 代码
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.6.3
+  - @herodotus-cloud/components@1.6.3
+  - @herodotus-cloud/form-apis@1.6.3
+  - @herodotus-cloud/core@1.6.3
+
 ## 1.6.2
 
 ### Patch Changes

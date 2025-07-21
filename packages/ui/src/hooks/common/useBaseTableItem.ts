@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router';
 import type { Entity } from '@/lib/declarations';
 
 import { OperationEnum } from '@/lib/definitions';
-import { useRouteStore } from '@/stores';
+import { useRouterStore } from '@/stores';
 
 import useEditFinish from './useEditFinish';
 
@@ -19,7 +19,7 @@ export default function useBaseTableItem<E extends Entity>() {
   const additional = ref({}) as Ref<Record<string, unknown>>;
   const title = ref('');
   const overlay = ref(false);
-  const store = useRouteStore();
+  const store = useRouterStore();
 
   onMounted(() => {
     parseParam();

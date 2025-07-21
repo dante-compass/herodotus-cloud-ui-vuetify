@@ -68,7 +68,7 @@ import type {
 import { useRouter } from 'vue-router';
 import { OperationEnum } from '@/lib/definitions';
 import { API } from '@/configurations';
-import { useRouteStore } from '@/stores';
+import { useRouterStore } from '@/stores';
 
 import { HDeleteButton, HTable } from '@/components';
 
@@ -101,7 +101,7 @@ export default defineComponent({
     const selected = ref([]);
     const rowKey: SysEmployeeProps = 'employeeId';
     const router = useRouter();
-    const store = useRouteStore();
+    const store = useRouterStore();
 
     const { getDictionaryItemDisplay } = useDictionary('identity');
 
