@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.6.5
+
+### Patch Changes
+
+- [重构] 迁移前端 useEditFinish 代码至模块 @herodotus-cloud/framework-kernel
+
 ## 1.6.4
 
 ### Patch Changes

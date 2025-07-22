@@ -1,5 +1,16 @@
 # @herodotus-cloud/bpmn-designer
 
+## 1.6.5
+
+### Patch Changes
+
+- [重构] 迁移前端 useEditFinish 代码至模块 @herodotus-cloud/framework-kernel
+- Updated dependencies
+  - @herodotus-cloud/components@1.6.5
+  - @herodotus-cloud/bpmn-apis@1.6.5
+  - @herodotus-cloud/form-apis@1.6.5
+  - @herodotus-cloud/core@1.6.5
+
 ## 1.6.4
 
 ### Patch Changes

@@ -5,4 +5,3 @@ export * from './crypto';
 export * from './helper';
 export * from './refresh';
 export * from './settings';
-export * from './tabs';

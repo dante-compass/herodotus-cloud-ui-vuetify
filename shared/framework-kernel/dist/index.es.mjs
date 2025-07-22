@@ -1,5 +1,126 @@
-import { lodash } from "@herodotus-cloud/core";
+import { useRoute } from "vue-router";
 import { defineStore } from "pinia";
+import { lodash } from "@herodotus-cloud/core";
+import { nextTick } from "vue";
+import "pinia-plugin-persistedstate";
+const useRouterStore = defineStore("Router", {
+  state: () => ({
+    routes: [],
+    cachedRoutes: [],
+    details: /* @__PURE__ */ new Map(),
+    isRemote: true,
+    pushParams: {}
+  }),
+  getters: {
+    isDynamicRouteAdded() {
+      return !lodash.isEmpty(this.routes);
+    }
+  },
+  actions: {
+    /**
+     * 查询三级路由组件
+     * @param key 三级路由组件名称
+     * @returns 组件名称
+     */
+    getDetailComponent(key) {
+      return this.details.get(key);
+    },
+    /**
+     * 获取 Vue Router Push 类型参数
+     * @param key 组件名称
+     * @returns Push 类型参数
+     */
+    getRoutePushParam(key) {
+      return this.pushParams[key];
+    },
+    /**
+     * 添加动态路由
+     * @param routes 路由列表
+     */
+    addDynamicRoutes(routes) {
+      this.routes = routes;
+    },
+    /**
+     * 将路由添加至缓存
+     * @param route 路由
+     */
+    addCachedRoute(route) {
+      if (!route.meta?.isNotKeepAlive) {
+        const name = route.name;
+        if (!this.cachedRoutes.includes(name)) {
+          this.cachedRoutes.push(name);
+        }
+      }
+    },
+    /**
+     * 添加三级路由
+     * @param item 路由条目
+     */
+    addDetailRoutes(item) {
+      const children = item.children || [];
+      if (!lodash.isEmpty(children)) {
+        children.forEach((child) => {
+          const componentName = child.name;
+          if (componentName) {
+            this.details.set(componentName, child.component);
+          }
+        });
+      }
+    },
+    /**
+     * 判断路由中是否包含 Push 路由
+     * @param route 路由
+     * @returns true 包含参数，false 不包含参数
+     */
+    hasParameter(route) {
+      const name = route.name;
+      if (name && lodash.has(this.pushParams, name)) {
+        return true;
+      }
+      return false;
+    },
+    /**
+     * 判断是否为三级路由
+     * @param route 路由
+     * @returns true 是三级路由，false 不是三级路由
+     */
+    isDetailRoute(route) {
+      if (route.meta) {
+        if (route.meta.isDetailContent) {
+          return true;
+        }
+      }
+      return false;
+    },
+    /**
+     * 判断当前是否为有效的三级路由
+     * @param route 路由
+     * @returns true 是三级路由，false 不是三级路由
+     */
+    isValidDetailRoute(route) {
+      return this.isDetailRoute(route) && this.hasParameter(route);
+    },
+    /**
+     * 向当前缓存添加 Push 参数
+     * @param name 参数名称
+     * @param params 参数值
+     */
+    addRoutePushParam(name, params = {}) {
+      if (name) {
+        this.pushParams[name] = params;
+      }
+    },
+    /**
+     * 从当前缓存中删除 Push 参数
+     * @param name 参数名称
+     */
+    removeRoutePushParam(name) {
+      if (name) {
+        delete this.pushParams[name];
+      }
+    }
+  }
+});
 class OptionsUtilities {
   // 静态私有实例引用
   static _instance = null;
@@ -177,124 +298,154 @@ class RouterUtilities {
     }
   }
 }
-const useRouterStore = defineStore("Router", {
+const useTabsViewStore = defineStore("TabsView", {
   state: () => ({
-    routes: [],
-    cachedRoutes: [],
-    details: /* @__PURE__ */ new Map(),
-    isRemote: true,
-    pushParams: {}
+    tabs: [],
+    activatedTab: {},
+    activatedTabName: ""
   }),
   getters: {
-    isDynamicRouteAdded() {
-      return !lodash.isEmpty(this.routes);
-    }
-  },
-  actions: {
-    /**
-     * 查询三级路由组件
-     * @param key 三级路由组件名称
-     * @returns 组件名称
-     */
-    getDetailComponent(key) {
-      return this.details.get(key);
+    isNotLastTab: (state) => {
+      return (index) => state.tabs.length - 1 !== index;
+    },
+    getLastTabIndex: (state) => {
+      return state.tabs.length - 1;
+    },
+    getTabIndex: (state) => {
+      return (tab) => lodash.findIndex(state.tabs, (item) => item.name === tab.name);
+    },
+    getActivatedTabIndex() {
+      return this.getTabIndex(this.activatedTab);
     },
     /**
-     * 获取 Vue Router Push 类型参数
-     * @param key 组件名称
-     * @returns Push 类型参数
+     * 最后一个Tab是否为激活状态
      */
-    getRoutePushParam(key) {
-      return this.pushParams[key];
+    isLastTabActivated() {
+      const activatedTabIndex = this.getActivatedTabIndex;
+      return activatedTabIndex === this.getLastTabIndex;
     },
-    /**
-     * 添加动态路由
-     * @param routes 路由列表
-     */
-    addDynamicRoutes(routes) {
-      this.routes = routes;
+    isFirstTabActivated() {
+      const activatedTabIndex = this.getActivatedTabIndex;
+      return activatedTabIndex === 0;
     },
-    /**
-     * 将路由添加至缓存
-     * @param route 路由
-     */
-    addCachedRoute(route) {
-      if (!route.meta?.isNotKeepAlive) {
-        const name = route.name;
-        if (!this.cachedRoutes.includes(name)) {
-          this.cachedRoutes.push(name);
-        }
-      }
+    disableCloseCurrentTab() {
+      return this.isLastTabActivated || this.isFirstTabActivated;
     },
-    /**
-     * 添加三级路由
-     * @param item 路由条目
-     */
-    addDetailRoutes(item) {
-      const children = item.children || [];
-      if (!lodash.isEmpty(children)) {
-        children.forEach((child) => {
-          const componentName = child.name;
-          if (componentName) {
-            this.details.set(componentName, child.component);
-          }
-        });
-      }
+    disableCloseLeftTabs() {
+      return this.isFirstTabActivated;
     },
-    /**
-     * 判断路由中是否包含 Push 路由
-     * @param route 路由
-     * @returns true 包含参数，false 不包含参数
-     */
-    hasParameter(route) {
-      const name = route.name;
-      if (name && lodash.has(this.pushParams, name)) {
-        return true;
-      }
-      return false;
+    disableCloseRightTabs() {
+      return this.isLastTabActivated;
     },
-    /**
-     * 判断是否为三级路由
-     * @param route 路由
-     * @returns true 是三级路由，false 不是三级路由
-     */
-    isDetailRoute(route) {
-      if (route.meta) {
-        if (route.meta.isDetailContent) {
+    disableRefreshCurrentTab() {
+      if (this.activatedTab.meta) {
+        if (this.activatedTab.meta.isDetailContent) {
           return true;
         }
       }
       return false;
-    },
-    /**
-     * 判断当前是否为有效的三级路由
-     * @param route 路由
-     * @returns true 是三级路由，false 不是三级路由
-     */
-    isValidDetailRoute(route) {
-      return this.isDetailRoute(route) && this.hasParameter(route);
-    },
-    /**
-     * 向当前缓存添加 Push 参数
-     * @param name 参数名称
-     * @param params 参数值
-     */
-    addRoutePushParam(name, params = {}) {
-      if (name) {
-        this.pushParams[name] = params;
-      }
-    },
-    /**
-     * 从当前缓存中删除 Push 参数
-     * @param name 参数名称
-     */
-    removeRoutePushParam(name) {
-      if (name) {
-        delete this.pushParams[name];
-      }
     }
-  }
+  },
+  actions: {
+    convertRouteToTab(route) {
+      return {
+        name: route.name,
+        path: route.path,
+        meta: route.meta
+      };
+    },
+    setActivatedTab(tab) {
+      nextTick(() => {
+        this.activatedTab = tab;
+        this.activatedTabName = tab.name;
+      });
+    },
+    isNotExistInStaticRoute(tab) {
+      return lodash.findIndex(
+        OptionsUtilities.getInstance().getOptions().staticRoutes,
+        (item) => item.path === tab.path
+      ) === -1;
+    },
+    isTabNotOpened(tab) {
+      return this.getTabIndex(tab) === -1;
+    },
+    openTab(tab, isDetail = false) {
+      if (this.isNotExistInStaticRoute(tab)) {
+        if (this.isTabNotOpened(tab)) {
+          if (isDetail) {
+            if (this.isLastTabActivated) {
+              this.tabs.splice(this.getActivatedTabIndex, 0, tab);
+            } else {
+              this.tabs.splice(this.getActivatedTabIndex + 1, 0, tab);
+            }
+          } else {
+            this.tabs.push(tab);
+          }
+        }
+        this.setActivatedTab(tab);
+      }
+    },
+    closeTab(tab) {
+      lodash.remove(this.tabs, (item) => {
+        return item.name === tab.name;
+      });
+    },
+    smartTab(route) {
+      const store = useRouterStore();
+      const isDetailRoute = store.isDetailRoute(route);
+      const tab = this.convertRouteToTab(route);
+      if (isDetailRoute) {
+        if (store.hasParameter(route)) {
+          this.openTab(tab, isDetailRoute);
+        } else {
+          this.closeTab(tab);
+          RouterUtilities.getInstance().goBack();
+        }
+      } else {
+        this.openTab(tab, isDetailRoute);
+      }
+    },
+    deleteTab(route) {
+      const tab = this.convertRouteToTab(route);
+      this.closeTab(tab);
+    },
+    closeCurrentTab() {
+      this.closeTab(this.activatedTab);
+    },
+    closeOtherTabs() {
+      lodash.remove(this.tabs, (item) => {
+        return item.name !== this.activatedTab.name;
+      });
+    },
+    closeLeftTabs() {
+      const activatedTabIndex = this.getActivatedTabIndex;
+      lodash.remove(this.tabs, (item, index) => {
+        return index < activatedTabIndex;
+      });
+    },
+    closeRightTabs() {
+      const activatedTabIndex = this.getActivatedTabIndex;
+      lodash.remove(this.tabs, (item, index) => {
+        return index > activatedTabIndex;
+      });
+    }
+  },
+  persist: true
 });
+function useEditFinish() {
+  const route = useRoute();
+  const routeStore = useRouterStore();
+  const tabs = useTabsViewStore();
+  const onFinish = () => {
+    const name = route.name;
+    routeStore.removeRoutePushParam(name);
+    tabs.deleteTab(route);
+    RouterUtilities.getInstance().goBack();
+  };
+  return {
+    onFinish
+  };
+}
 const initializer = (options) => {
   OptionsUtilities.initialize(options);
   RouterUtilities.initialize(options.router);
@@ -303,5 +454,7 @@ export {
   OptionsUtilities,
   RouterUtilities,
   initializer,
-  useRouterStore
+  useEditFinish,
+  useRouterStore,
+  useTabsViewStore
 };

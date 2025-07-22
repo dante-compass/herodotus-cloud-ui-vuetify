@@ -1,5 +1,14 @@
 import { RouteLocationNormalizedLoaded, RouteRecordName, RouteRecordNormalized } from 'vue-router';
 import { Tab } from '../../declarations';
+/**
+ * TabView 目前完全基于 Quasar 的 QRouteTab 进行构建。
+ * QRouteTab 可以和 VueRouter 完全融合。
+ *
+ * 但是有一个问题，就是在关闭最后一个 Tab 时，QRouteTab 会从新跳转到该 Tab 所在的地址，这样就导致自定义方法中的 router 跳转不起作用。
+ * 为了解决这个问题，彻底将最后一个 Tab 锁定 (即不允许关闭)
+ *
+ * 思考下来发现这个逻辑也符合常理，因为界面上还是始终要留一个Tab才好。
+ */
 export declare const useTabsViewStore: import('pinia').StoreDefinition<"TabsView", {
     tabs: Array<Tab>;
     activatedTab: Tab;

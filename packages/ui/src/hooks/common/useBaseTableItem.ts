@@ -7,7 +7,7 @@ import type { Entity } from '@/lib/declarations';
 import { OperationEnum } from '@/lib/definitions';
 import { useRouterStore } from '@/stores';
 
-import useEditFinish from './useEditFinish';
+import { useEditFinish } from '@herodotus-cloud/framework-kernel';
 
 export default function useBaseTableItem<E extends Entity>() {
   const { onFinish } = useEditFinish();

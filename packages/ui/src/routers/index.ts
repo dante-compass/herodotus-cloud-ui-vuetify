@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { staticRoutes } from './logic';
 import { createRouterGuard } from './guard';
 
+import { setupKernel } from '@/configurations';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_PATH),
   routes: staticRoutes,
@@ -13,6 +15,7 @@ export async function setupRouter(app: App) {
   app.use(router);
   createRouterGuard(router);
   await router.isReady();
+  setupKernel(router, staticRoutes);
 }
 
 export default router;

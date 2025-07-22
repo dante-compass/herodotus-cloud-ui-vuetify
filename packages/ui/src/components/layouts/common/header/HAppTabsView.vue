@@ -62,9 +62,9 @@ import { defineComponent, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
-import type { Tab } from '@/lib/declarations';
+import type { Tab } from '@herodotus-cloud/framework-kernel';
 
-import { useTabsStore } from '@/stores';
+import { useTabsViewStore } from '@herodotus-cloud/framework-kernel';
 import { refreshTabInjectionKey } from '@/lib/definitions';
 
 export default defineComponent({
@@ -73,7 +73,7 @@ export default defineComponent({
   setup(props) {
     const route = useRoute();
 
-    const store = useTabsStore();
+    const store = useTabsViewStore();
     const {
       tabs,
       isNotLastTab,

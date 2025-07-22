@@ -1,4 +1,3 @@
-import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import type { Tree } from './base';
 import { SocialSourceEnum } from '@/lib/definitions';
 
@@ -9,8 +8,6 @@ export interface MenuItem {
   value?: string;
   $children?: MenuItem[];
 }
-
-export interface Tab extends Pick<RouteLocationNormalizedLoaded, 'name' | 'path' | 'meta'> {}
 
 export interface RemoteRouteMeta {
   title: string;

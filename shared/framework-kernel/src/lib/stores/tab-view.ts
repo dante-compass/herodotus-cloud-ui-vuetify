@@ -24,12 +24,6 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
  * 思考下来发现这个逻辑也符合常理，因为界面上还是始终要留一个Tab才好。
  */
 
-interface TabsViewState {
-  tabs: Tab[];
-  activatedTab: Tab;
-  activatedTabName: RouteRecordName | null | undefined;
-}
-
 export const useTabsViewStore = defineStore('TabsView', {
   state: () => ({
     tabs: [] as Array<Tab>,
