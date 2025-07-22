@@ -1,5 +1,45 @@
-import { Toolkit } from "@herodotus-cloud/core";
+import { lodash } from "@herodotus-cloud/core";
 import { defineStore } from "pinia";
+class OptionsUtilities {
+  // 静态私有实例引用
+  static _instance = null;
+  // 初始化标志
+  static _initialized = false;
+  options;
+  // 私有构造函数防止外部实例化
+  constructor(options) {
+    this.options = options;
+  }
+  /**
+   * 初始化单例（仅允许一次）
+   * @param {KernelOptions} options 配置选项
+   * @returns {OptionsUtilities} 单例实例
+   */
+  static initialize(options) {
+    if (OptionsUtilities._initialized) {
+      throw new Error("RouterUtilities has already been initialized");
+    }
+    OptionsUtilities._instance = new OptionsUtilities(options);
+    OptionsUtilities._initialized = true;
+    return OptionsUtilities._instance;
+  }
+  /**
+   * 获取单例实例
+   * @returns {RouterUtilities} 单例实例
+   */
+  static getInstance() {
+    if (!OptionsUtilities._instance) {
+      throw new Error("RouterUtilities not initialized. Call initialize() first.");
+    }
+    return OptionsUtilities._instance;
+  }
+  setOptions(options) {
+    this.options = options;
+  }
+  getOptions() {
+    return this.options;
+  }
+}
 class RouterUtilities {
   // 静态私有实例引用
   static _instance = null;
@@ -15,7 +55,7 @@ class RouterUtilities {
   /**
    * 初始化单例（仅允许一次）
    * @param {RouterOptions} options 配置选项
-   * @returns {SingletonService} 单例实例
+   * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
     if (RouterUtilities._initialized) {
@@ -42,10 +82,10 @@ class RouterUtilities {
     return this.router;
   }
   isRouterExist() {
-    return !Toolkit.isEmpty(this.router);
+    return !lodash.isEmpty(this.router);
   }
   hasParameter(route) {
-    return !Toolkit.isEmpty(route.params) || !Toolkit.isEmpty(route.query);
+    return !lodash.isEmpty(route.params) || !lodash.isEmpty(route.query);
   }
   /**
    * 判断是否为三级路由页面
@@ -124,9 +164,9 @@ class RouterUtilities {
     }
   }
   getParent(path) {
-    const array = Toolkit.split(path, "/");
-    const result = Toolkit.dropRight(array, 1);
-    return Toolkit.join(result, "/");
+    const array = lodash.split(path, "/");
+    const result = lodash.dropRight(array);
+    return lodash.join(result, "/");
   }
   toPrev(route) {
     if (route.path) {
@@ -147,7 +187,7 @@ const useRouterStore = defineStore("Router", {
   }),
   getters: {
     isDynamicRouteAdded() {
-      return !Toolkit.isEmpty(this.routes);
+      return !lodash.isEmpty(this.routes);
     }
   },
   actions: {
@@ -192,7 +232,7 @@ const useRouterStore = defineStore("Router", {
      */
     addDetailRoutes(item) {
       const children = item.children || [];
-      if (!Toolkit.isEmpty(children)) {
+      if (!lodash.isEmpty(children)) {
         children.forEach((child) => {
           const componentName = child.name;
           if (componentName) {
@@ -208,7 +248,7 @@ const useRouterStore = defineStore("Router", {
      */
     hasParameter(route) {
       const name = route.name;
-      if (name && Toolkit.has(this.pushParams, name)) {
+      if (name && lodash.has(this.pushParams, name)) {
         return true;
       }
       return false;
@@ -256,9 +296,11 @@ const useRouterStore = defineStore("Router", {
   }
 });
 const initializer = (options) => {
+  OptionsUtilities.initialize(options);
   RouterUtilities.initialize(options.router);
 };
 export {
+  OptionsUtilities,
   RouterUtilities,
   initializer,
   useRouterStore

@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 1.6.4
+
+### Patch Changes
+
+- 不再使用 es-toolkit
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.6.4
+  - @herodotus-cloud/components@1.6.4
+  - @herodotus-cloud/form-apis@1.6.4
+  - @herodotus-cloud/core@1.6.4
+
 ## 1.6.3
 
 ### Patch Changes

@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import type { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 import type { RoutePushParam, PushParam } from '@/declarations';
 
-import { Toolkit } from '@/lib/base';
+import { lodash } from '@/lib/base';
 
 export const useRouterStore = defineStore('Router', {
   state: () => ({
@@ -16,7 +16,7 @@ export const useRouterStore = defineStore('Router', {
 
   getters: {
     isDynamicRouteAdded(): boolean {
-      return !Toolkit.isEmpty(this.routes);
+      return !lodash.isEmpty(this.routes);
     },
   },
 
@@ -66,7 +66,7 @@ export const useRouterStore = defineStore('Router', {
      */
     addDetailRoutes(item: RouteRecordRaw) {
       const children: Array<RouteRecordRaw> = item.children || [];
-      if (!Toolkit.isEmpty(children)) {
+      if (!lodash.isEmpty(children)) {
         children.forEach((child) => {
           const componentName = child.name as string;
           if (componentName) {
@@ -84,7 +84,7 @@ export const useRouterStore = defineStore('Router', {
     hasParameter(route: RouteLocationNormalizedLoaded): boolean {
       const name = route.name as string;
 
-      if (name && Toolkit.has(this.pushParams, name)) {
+      if (name && lodash.has(this.pushParams, name)) {
         return true;
       }
 

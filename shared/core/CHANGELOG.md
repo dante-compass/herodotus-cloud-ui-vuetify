@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.6.4
+
+### Patch Changes
+
+- 不再使用 es-toolkit
+
 ## 1.6.3
 
 ### Patch Changes

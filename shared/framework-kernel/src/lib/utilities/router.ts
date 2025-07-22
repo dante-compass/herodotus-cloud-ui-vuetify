@@ -7,7 +7,7 @@ import type {
 
 import type { RouterOptions } from '@/declarations';
 
-import { Toolkit } from '../base';
+import { lodash } from '../base';
 
 export class RouterUtilities {
   // 静态私有实例引用
@@ -28,7 +28,7 @@ export class RouterUtilities {
   /**
    * 初始化单例（仅允许一次）
    * @param {RouterOptions} options 配置选项
-   * @returns {SingletonService} 单例实例
+   * @returns {RouterUtilities} 单例实例
    */
   public static initialize(options: RouterOptions): RouterUtilities {
     if (RouterUtilities._initialized) {
@@ -60,11 +60,11 @@ export class RouterUtilities {
   }
 
   private isRouterExist(): boolean {
-    return !Toolkit.isEmpty(this.router);
+    return !lodash.isEmpty(this.router);
   }
 
   public hasParameter(route: RouteLocationNormalizedLoaded): boolean {
-    return !Toolkit.isEmpty(route.params) || !Toolkit.isEmpty(route.query);
+    return !lodash.isEmpty(route.params) || !lodash.isEmpty(route.query);
   }
 
   /**
@@ -155,9 +155,9 @@ export class RouterUtilities {
   }
 
   private getParent(path: string): string {
-    const array = Toolkit.split(path, '/');
-    const result = Toolkit.dropRight(array, 1);
-    return Toolkit.join(result, '/');
+    const array = lodash.split(path, '/');
+    const result = lodash.dropRight(array);
+    return lodash.join(result, '/');
   }
 
   public toPrev(route: RouteLocationNormalizedLoaded): void {

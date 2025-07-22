@@ -9,7 +9,7 @@ export declare class RouterUtilities {
     /**
      * 初始化单例（仅允许一次）
      * @param {RouterOptions} options 配置选项
-     * @returns {SingletonService} 单例实例
+     * @returns {RouterUtilities} 单例实例
      */
     static initialize(options: RouterOptions): RouterUtilities;
     /**

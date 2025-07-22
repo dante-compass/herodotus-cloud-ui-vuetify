@@ -1,6 +1,6 @@
 import type { AxiosResponse, ResponseStatus } from '@/declarations';
 
-import { Toolkit } from '../../utils';
+import { lodash } from '../../utils';
 
 import qs from 'qs';
 
@@ -39,7 +39,7 @@ export const logResponse = (response: AxiosResponse<any>) => {
     `color:${randomColor};`,
   );
   console.log('| 请求地址：', response.config.url);
-  console.log('| 请求类型：', Toolkit.toUpper(response.config.method));
+  console.log('| 请求类型：', lodash.toUpper(response.config.method));
   console.log('| 请求参数：', qs.parse(response.config.params));
   console.log('| 响应数据：', response.data);
   console.log(

@@ -10,7 +10,7 @@ import axios from 'axios';
 import qs from 'qs';
 import { useAxios } from '@vueuse/integrations/useAxios';
 
-import { Toolkit, Base64 } from '@/lib';
+import { lodash, Base64 } from '@/lib';
 import { ContentTypeEnum, HttpMethodEnum, AuthorizationTokenEnum } from '@/enums';
 
 /**
@@ -28,7 +28,7 @@ export default function useHttp(config?: CreateAxiosDefaults) {
 
   const createConfig = (): CreateAxiosDefaults => {
     if (config) {
-      return Toolkit.assignIn(defaultAxiosConfig, config);
+      return lodash.assignIn(defaultAxiosConfig, config);
     } else {
       return defaultAxiosConfig;
     }
@@ -92,7 +92,7 @@ export default function useHttp(config?: CreateAxiosDefaults) {
     const contentTypeHeader = getContentType(contentType);
 
     if (headers) {
-      return Toolkit.assignIn({}, contentTypeHeader, headers);
+      return lodash.assignIn({}, contentTypeHeader, headers);
     } else {
       return contentTypeHeader;
     }

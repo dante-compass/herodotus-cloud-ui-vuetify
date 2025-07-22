@@ -19,7 +19,7 @@ import axios from 'axios';
 import qs from 'qs';
 
 import { AxiosCanceler } from './canceler';
-import { Toolkit } from '../../utils';
+import { lodash } from '../../utils';
 
 /**
  * @description:  axios module
@@ -135,7 +135,7 @@ export class Axios {
    */
   private mergeRequestOptions(options?: RequestOptions): RequestOptions {
     const requestOptions = this.getDefaultRequestOptions();
-    if (!Toolkit.isEmpty(options)) {
+    if (!lodash.isEmpty(options)) {
       return Object.assign({}, requestOptions, options);
     } else {
       return requestOptions;
@@ -177,7 +177,7 @@ export class Axios {
 
     // 合并 axios request config。把当前请求的 AxiosRequestConfig 与全局 AxiosRequestConfig 整合获得一个完整的 AxiosRequestConfig
     let axiosRequestConfig: RawAxiosRequestConfig = this.mergeRequestConfigs<D>(config);
-    if (beforeRequestHook && Toolkit.isFunction(beforeRequestHook)) {
+    if (beforeRequestHook && lodash.isFunction(beforeRequestHook)) {
       // 允许在 beforeRequestHook 中，对 AxiosRequestConfig 进行一些额外的设置
       axiosRequestConfig = beforeRequestHook(axiosRequestConfig, requestOptions);
     }
@@ -191,7 +191,7 @@ export class Axios {
     }
 
     axiosRequestConfig.url = url;
-    if (!Toolkit.isEmpty(axiosRequestConfig.data)) {
+    if (!lodash.isEmpty(axiosRequestConfig.data)) {
       axiosRequestConfig.data = policy.dataConvert(axiosRequestConfig.data);
     }
 
@@ -379,7 +379,7 @@ export class Axios {
       this.getAxiosInstance()
         .request<HttpResult<T>, AxiosResponse<HttpResult<T>>, D>(config)
         .then((response: AxiosResponse<HttpResult<T>>) => {
-          if (transformRequestHook && Toolkit.isFunction(transformRequestHook)) {
+          if (transformRequestHook && lodash.isFunction(transformRequestHook)) {
             const result = transformRequestHook(response, options);
             resolve(result);
           } else {
@@ -387,7 +387,7 @@ export class Axios {
           }
         })
         .catch((error: AxiosError) => {
-          if (requestCatchHook && Toolkit.isFunction(requestCatchHook)) {
+          if (requestCatchHook && lodash.isFunction(requestCatchHook)) {
             reject(requestCatchHook(error, options));
           } else {
             reject(error);

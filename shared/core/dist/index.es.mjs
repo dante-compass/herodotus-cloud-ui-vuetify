@@ -8,7 +8,6 @@ import "moment/dist/locale/zh-cn";
 import dayjs from "dayjs";
 import { default as default3 } from "dayjs";
 import "dayjs/locale/zh-cn";
-import { assignIn, dropRight, endsWith, has, isEmpty, isFunction, join, merge, partition, pickBy, split, toUpper } from "es-toolkit/compat";
 import { generateFromString } from "generate-avatar";
 import { sm2, sm4 } from "sm-crypto";
 import { Base64 } from "js-base64";
@@ -79,21 +78,6 @@ var ThemeModeEnum = /* @__PURE__ */ ((ThemeModeEnum2) => {
 })(ThemeModeEnum || {});
 moment.locale("zh-cn");
 dayjs.locale("zh-cn");
-const esToolkit = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  assignIn,
-  dropRight,
-  endsWith,
-  has,
-  isEmpty,
-  isFunction,
-  join,
-  merge,
-  partition,
-  pickBy,
-  split,
-  toUpper
-}, Symbol.toStringTag, { value: "Module" }));
 let pendingMap = /* @__PURE__ */ new Map();
 const getPendingUrl = (config) => [config.method, config.url].join("&");
 class AxiosCanceler {
@@ -115,7 +99,7 @@ class AxiosCanceler {
    */
   removeAllPending() {
     pendingMap.forEach((cancel) => {
-      cancel && isFunction(cancel) && cancel();
+      cancel && lodash.isFunction(cancel) && cancel();
     });
     pendingMap.clear();
   }
@@ -231,7 +215,7 @@ class Axios {
    */
   mergeRequestOptions(options) {
     const requestOptions = this.getDefaultRequestOptions();
-    if (!isEmpty(options)) {
+    if (!lodash.isEmpty(options)) {
       return Object.assign({}, requestOptions, options);
     } else {
       return requestOptions;
@@ -258,7 +242,7 @@ class Axios {
     const { beforeRequestHook } = this.getAxiosTransform();
     const requestOptions = this.mergeRequestOptions(options);
     let axiosRequestConfig = this.mergeRequestConfigs(config);
-    if (beforeRequestHook && isFunction(beforeRequestHook)) {
+    if (beforeRequestHook && lodash.isFunction(beforeRequestHook)) {
       axiosRequestConfig = beforeRequestHook(axiosRequestConfig, requestOptions);
     }
     const contentType = requestOptions.contentType;
@@ -269,7 +253,7 @@ class Axios {
       axiosRequestConfig.headers = policy.headers;
     }
     axiosRequestConfig.url = url;
-    if (!isEmpty(axiosRequestConfig.data)) {
+    if (!lodash.isEmpty(axiosRequestConfig.data)) {
       axiosRequestConfig.data = policy.dataConvert(axiosRequestConfig.data);
     }
     return {
@@ -408,14 +392,14 @@ class Axios {
     return new Promise((resolve, reject) => {
       const { requestCatchHook, transformRequestHook } = this.getAxiosTransform();
       this.getAxiosInstance().request(config).then((response) => {
-        if (transformRequestHook && isFunction(transformRequestHook)) {
+        if (transformRequestHook && lodash.isFunction(transformRequestHook)) {
           const result = transformRequestHook(response, options);
           resolve(result);
         } else {
           resolve(response);
         }
       }).catch((error) => {
-        if (requestCatchHook && isFunction(requestCatchHook)) {
+        if (requestCatchHook && lodash.isFunction(requestCatchHook)) {
           reject(requestCatchHook(error, options));
         } else {
           reject(error);
@@ -452,7 +436,7 @@ const logResponse = (response) => {
     `color:${randomColor};`
   );
   console.log("| 请求地址：", response.config.url);
-  console.log("| 请求类型：", toUpper(response.config.method));
+  console.log("| 请求类型：", lodash.toUpper(response.config.method));
   console.log("| 请求参数：", qs.parse(response.config.params));
   console.log("| 响应数据：", response.data);
   console.log(
@@ -608,7 +592,7 @@ class AbstractService extends Service {
     return this.getConfig().getHttp().get(this.getBaseAddress(), params);
   }
   fetchByPage(params, others = {}) {
-    if (isEmpty(others)) {
+    if (lodash.isEmpty(others)) {
       return this.getConfig().getHttp().get(this.getBaseAddress(), params);
     } else {
       const fullParams = Object.assign(params, others);
@@ -881,7 +865,7 @@ function useHttp(config) {
   };
   const createConfig = () => {
     if (config) {
-      return assignIn(defaultAxiosConfig, config);
+      return lodash.assignIn(defaultAxiosConfig, config);
     } else {
       return defaultAxiosConfig;
     }
@@ -925,7 +909,7 @@ function useHttp(config) {
   const createHeaders = (contentType, headers) => {
     const contentTypeHeader = getContentType(contentType);
     if (headers) {
-      return assignIn({}, contentTypeHeader, headers);
+      return lodash.assignIn({}, contentTypeHeader, headers);
     } else {
       return contentTypeHeader;
     }
@@ -995,7 +979,6 @@ export {
   StatusEnum,
   default4 as Swal,
   ThemeModeEnum,
-  esToolkit as Toolkit,
   isSuccess,
   lodash,
   logResponse,
