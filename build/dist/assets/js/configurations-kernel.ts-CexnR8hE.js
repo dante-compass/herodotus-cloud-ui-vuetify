@@ -1,0 +1,1 @@
+import{e as t,R as s}from"./components-layouts-common-header-HAppTabsView.vue_vue_type_script_lang.ts-CL8tRI5S.js";import{P as o}from"./configurations-constants.ts-Co8UGXEL.js";let a={};const e=(e,n)=>{const c={router:{instance:e,path:{root:{path:o.ROOT},home:{name:o.HOME_NAME},signIn:{name:o.SIGN_IN_NAME}}},staticRoutes:n};t(c),a=s.getInstance()};export{a as R,e as s};

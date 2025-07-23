@@ -1,0 +1,1 @@
+import"./components-layouts-common-header-HAppTabsView.vue_vue_type_script_lang.ts-CL8tRI5S.js";var e=(e=>(e.CREATE="create",e.EDIT="edit",e.AUTHORIZE="authorize",e.INFO="info",e.ALLOCATABLE="allocatable",e.SETUP="setup",e.INVOKE="invoke",e))(e||{}),t=(e=>(e.DARK="dark",e.LIGHT="light",e.SYSTEM="system",e))(t||{});export{e as O,t as T};

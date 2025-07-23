@@ -1,1 +1,1 @@
-export { useRouterStore } from '@herodotus-cloud/framework-kernel';
+export { useRouterStore, useSettingsStore } from '@herodotus-cloud/framework-kernel';

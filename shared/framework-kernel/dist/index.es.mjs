@@ -1,8 +1,64 @@
 import { useRoute } from "vue-router";
 import { defineStore } from "pinia";
 import { lodash } from "@herodotus-cloud/core";
-import { nextTick } from "vue";
+import { nextTick, shallowRef, watch, computed } from "vue";
 import "pinia-plugin-persistedstate";
+var LayoutModeEnum = /* @__PURE__ */ ((LayoutModeEnum2) => {
+  LayoutModeEnum2["DEFAULT"] = "defaults";
+  LayoutModeEnum2["CLASSIC"] = "classic";
+  LayoutModeEnum2["TRANSVERSE"] = "transverse";
+  LayoutModeEnum2["COLUMNS"] = "transverse";
+  return LayoutModeEnum2;
+})(LayoutModeEnum || {});
+var ThemeModeEnum = /* @__PURE__ */ ((ThemeModeEnum2) => {
+  ThemeModeEnum2["DARK"] = "dark";
+  ThemeModeEnum2["LIGHT"] = "light";
+  ThemeModeEnum2["SYSTEM"] = "system";
+  return ThemeModeEnum2;
+})(ThemeModeEnum || {});
+const useSettingsStore = defineStore("GlobalSettings", {
+  state: () => ({
+    /**
+     * 全局主题
+     */
+    theme: {
+      mode: ThemeModeEnum.LIGHT,
+      // 默认 primary 主题颜色
+      primary: "#1867c0"
+    },
+    /**
+     * 布局切换
+     */
+    layout: LayoutModeEnum.DEFAULT,
+    /**
+     * 界面效果
+     */
+    effect: {
+      // 是否开启菜单手风琴效果
+      isUniqueOpened: false
+    },
+    display: {
+      // 是否开启 TabsView
+      isTabsView: true,
+      // 关闭标签页，激活左侧标签页
+      isActivateLeftTab: true,
+      // 显示面包屑
+      showBreadcrumbs: true,
+      // 显示面包屑图标
+      showBreadcrumbsIcon: true,
+      table: {
+        dense: false
+      }
+    }
+  }),
+  getters: {
+    isDark: (state) => state.theme.mode === ThemeModeEnum.DARK,
+    isLight: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
+    isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
+    isDefaultLayout: (state) => state.layout === LayoutModeEnum.DEFAULT,
+    isClassicLayout: (state) => state.layout === LayoutModeEnum.CLASSIC
+  }
+});
 const useRouterStore = defineStore("Router", {
   state: () => ({
     routes: [],
@@ -446,15 +502,51 @@ function useEditFinish() {
     onFinish
   };
 }
+function useSystemTheme() {
+  let media;
+  const settings = useSettingsStore();
+  const systemTheme = shallowRef(ThemeModeEnum.DARK);
+  const IN_BROWSER = typeof window !== "undefined";
+  const getMatchMedia = () => {
+    if (!IN_BROWSER) return;
+    return window.matchMedia("(prefers-color-scheme: dark)");
+  };
+  const onThemeChange = () => {
+    systemTheme.value = media.matches ? ThemeModeEnum.DARK : ThemeModeEnum.LIGHT;
+  };
+  watch(
+    () => settings.theme.mode,
+    (val) => {
+      if (val === ThemeModeEnum.SYSTEM) {
+        media = getMatchMedia();
+        media.addEventListener("change", onThemeChange);
+        onThemeChange();
+      } else if (media) {
+        media.removeEventListener("change", onThemeChange);
+      }
+    },
+    { immediate: true }
+  );
+  const theme = computed(() => {
+    return settings.isSystem ? systemTheme.value : settings.theme.mode;
+  });
+  return {
+    theme
+  };
+}
 const initializer = (options) => {
   OptionsUtilities.initialize(options);
   RouterUtilities.initialize(options.router);
 };
 export {
+  LayoutModeEnum,
   OptionsUtilities,
   RouterUtilities,
+  ThemeModeEnum,
   initializer,
   useEditFinish,
   useRouterStore,
+  useSettingsStore,
+  useSystemTheme,
   useTabsViewStore
 };

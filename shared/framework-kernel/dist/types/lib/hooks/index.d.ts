@@ -1,2 +1,3 @@
 import { default as useEditFinish } from './useEditFinish';
-export { useEditFinish };
+import { default as useSystemTheme } from './useSystemTheme';
+export { useEditFinish, useSystemTheme };

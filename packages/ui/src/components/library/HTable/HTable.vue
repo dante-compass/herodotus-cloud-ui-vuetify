@@ -1,7 +1,6 @@
 <template>
   <q-table
     :loading="loading"
-    :separator="settings.display.table.separator"
     :dense="settings.display.table.dense"
     :rows-per-page-options="rowsPerPageOptions"
     :rows="rows"
@@ -45,9 +44,9 @@
   </q-table>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue';
-import { defineComponent, computed } from 'vue';
+import { computed } from 'vue';
 
 import type { Entity } from '@/lib/declarations';
 
@@ -58,49 +57,38 @@ import HTableAction from './HTableAction.vue';
 import HStatusColumn from './HStatusColumn.vue';
 import HReservedColumn from './HReservedColumn.vue';
 
-export default defineComponent({
+defineOptions({
   name: 'HTable',
-
   components: {
     HReservedColumn,
     HStatusColumn,
     HTableAction,
   },
+});
 
-  emits: ['update:pageNumber'],
+const props = defineProps({
+  rows: { type: Array as PropType<Array<Entity>>, required: true },
+  pageNumber: { type: Number, default: 0 },
+  totalPages: { type: Number },
+  loading: { type: Boolean, default: false },
+  showAll: { type: Boolean, default: false },
+  status: { type: Boolean, default: false },
+  reserved: { type: Boolean, default: false },
+});
 
-  props: {
-    rows: { type: Array as PropType<Array<Entity>>, required: true },
-    pageNumber: { type: Number, default: 0 },
-    totalPages: { type: Number },
-    loading: { type: Boolean, default: false },
-    showAll: { type: Boolean, default: false },
-    status: { type: Boolean, default: false },
-    reserved: { type: Boolean, default: false },
+const emit = defineEmits(['update:pageNumber']);
+
+const settings = useSettingsStore();
+const { options } = useDictionary('DataItemStatus');
+
+const pageNumberVModel = computed({
+  get: () => props.pageNumber,
+  set: (newValue) => {
+    emit('update:pageNumber', newValue);
   },
+});
 
-  setup(props, { emit }) {
-    const settings = useSettingsStore();
-
-    const { options } = useDictionary('DataItemStatus');
-
-    const pageNumberVModel = computed({
-      get: () => props.pageNumber,
-      set: (newValue) => {
-        emit('update:pageNumber', newValue);
-      },
-    });
-
-    const rowsPerPageOptions = computed(() => {
-      return props.showAll ? [0] : [5, 10, 15, 20, 25, 50];
-    });
-
-    return {
-      settings,
-      pageNumberVModel,
-      rowsPerPageOptions,
-      options,
-    };
-  },
+const rowsPerPageOptions = computed(() => {
+  return props.showAll ? [0] : [5, 10, 15, 20, 25, 50];
 });
 </script>
