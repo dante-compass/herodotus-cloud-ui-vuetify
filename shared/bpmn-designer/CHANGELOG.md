@@ -1,5 +1,16 @@
 # @herodotus-cloud/bpmn-designer
 
+## 1.6.6
+
+### Patch Changes
+
+- 迁移系统设置代码
+- Updated dependencies
+  - @herodotus-cloud/components@1.6.6
+  - @herodotus-cloud/bpmn-apis@1.6.6
+  - @herodotus-cloud/form-apis@1.6.6
+  - @herodotus-cloud/core@1.6.6
+
 ## 1.6.5
 
 ### Patch Changes

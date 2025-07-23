@@ -50,7 +50,7 @@ declare module 'vue' {
     HSwaggerColumn: typeof import('./src/components/library/HTable/HSwaggerColumn.vue')['default']
     HTable: typeof import('./src/components/library/HTable/HTable.vue')['default']
     HTableAction: typeof import('./src/components/library/HTable/HTableAction.vue')['default']
-    HTableSeparatorMenu: typeof import('./src/components/library/HMenu/HTableSeparatorMenu.vue')['default']
+    HTableSeparatorMenu: typeof import('./src/components/library/HTable/HTableSeparatorMenu.vue')['default']
     HUserAvatar: typeof import('./src/components/layouts/common/avatar/HUserAvatar.vue')['default']
     HWordClickCaptcha: typeof import('./src/components/library/HCaptcha/HWordClickCaptcha.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

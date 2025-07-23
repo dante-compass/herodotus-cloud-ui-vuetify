@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/core",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "description": "",
   "keywords": [],
   "author": "",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@vueuse/integrations": "^13.5.0",
-    "axios": "^1.10.0",
+    "axios": "^1.11.0",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
     "generate-avatar": "^1.4.10",

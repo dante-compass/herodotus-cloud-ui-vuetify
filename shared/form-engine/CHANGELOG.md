@@ -1,5 +1,13 @@
 # @herodotus-cloud/form-engine
 
+## 1.6.6
+
+### Patch Changes
+
+- 迁移系统设置代码
+- Updated dependencies
+  - @herodotus-cloud/form-apis@1.6.6
+
 ## 1.6.5
 
 ### Patch Changes

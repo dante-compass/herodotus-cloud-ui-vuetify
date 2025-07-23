@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.6.6
+
+### Patch Changes
+
+- 迁移系统设置代码
+
 ## 1.6.5
 
 ### Patch Changes

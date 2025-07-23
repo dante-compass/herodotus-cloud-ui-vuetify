@@ -1,6 +1,7 @@
 <template>
   <q-table
     :loading="loading"
+    :separator="separator"
     :dense="settings.display.table.dense"
     :rows-per-page-options="rowsPerPageOptions"
     :rows="rows"
@@ -13,6 +14,7 @@
 
     <template v-if="!$slots['top-right']" #top-right="props">
       <h-table-action
+        v-model="separator"
         :inFullscreen="props.inFullscreen"
         @toggle-fullscreen="props.toggleFullscreen"
       ></h-table-action>
@@ -45,10 +47,10 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
-import { computed } from 'vue';
+import type { PropType, ShallowRef } from 'vue';
+import { computed, shallowRef } from 'vue';
 
-import type { Entity } from '@/lib/declarations';
+import type { Entity, QTableSeparatorProps } from '@/lib/declarations';
 
 import { useSettingsStore } from '@/stores';
 import { useDictionary } from '@/composables/constants';
@@ -80,6 +82,7 @@ const emit = defineEmits(['update:pageNumber']);
 
 const settings = useSettingsStore();
 const { options } = useDictionary('DataItemStatus');
+const separator = shallowRef('horizontal') as ShallowRef<QTableSeparatorProps>;
 
 const pageNumberVModel = computed({
   get: () => props.pageNumber,
