@@ -1,10 +1,10 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 import { lodash } from '@/lib/utils';
-import { useRouteStore, useAuthenticationStore } from '@/stores';
+import { useRouterStore, useAuthenticationStore } from '@/stores';
 
 export default function useSystemMenu() {
-  const store = useRouteStore();
+  const store = useRouterStore();
   const authentication = useAuthenticationStore();
 
   const getItemTitle = (item: RouteRecordRaw): string => {

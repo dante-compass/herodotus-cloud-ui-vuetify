@@ -1,1 +1,0 @@
-import{R as t}from"./lib-utilities-RouterUtilities.ts-Ww2n_mXo.js";import{i as s}from"./lib-main.ts-CNK9lXRO.js";import{P as i}from"./configurations-constants.ts-Co8UGXEL.js";let o={};const n=n=>{const a={router:{instance:n,path:{root:{path:i.ROOT},home:{name:i.HOME_NAME},signIn:{name:i.SIGN_IN_NAME}}}};s(a),o=t.getInstance()};export{o as R,n as s};

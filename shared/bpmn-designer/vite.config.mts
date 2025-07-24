@@ -27,13 +27,6 @@ export default defineConfig({
       '#': fileURLToPath(new URL('./types', import.meta.url)),
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler', // or 'modern'
-      },
-    },
-  },
   build: {
     lib: {
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
@@ -56,7 +49,6 @@ export default defineConfig({
         'sweetalert2',
         'ids',
         'didi',
-
         'bpmnlint',
         'bpmnlint/rules/conditional-flows',
         'bpmnlint/rules/end-event-required',

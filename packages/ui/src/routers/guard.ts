@@ -1,5 +1,5 @@
 import type { Router } from 'vue-router';
-import { useRouteStore, useAuthenticationStore } from '@/stores';
+import { useRouterStore, useAuthenticationStore } from '@/stores';
 import { CONSTANTS } from '@/configurations';
 
 import { useSystemRoute } from '@/hooks';
@@ -18,7 +18,7 @@ export const createRouterGuard = (router: Router) => {
     });
 
     const authStore = useAuthenticationStore();
-    const routeStore = useRouteStore();
+    const routeStore = useRouterStore();
 
     const token = authStore.token;
 

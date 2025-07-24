@@ -1,15 +1,24 @@
 {
   "name": "@herodotus-cloud/form-apis",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "private": false,
   "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "lint": "eslint . --fix",
+    "format": "prettier --write src/"
+  },
   "main": "dist/index.umd.js",
   "module": "dist/index.es.mjs",
   "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
@@ -21,15 +30,6 @@
   },
   "publishConfig": {
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
   },
   "dependencies": {
     "@herodotus-cloud/core": "workspace:^"

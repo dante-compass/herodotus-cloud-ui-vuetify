@@ -1,4 +1,4 @@
-import type { Router } from 'vue-router';
+import type { Router, RouteRecordRaw } from 'vue-router';
 import type { KernelOptions } from '@herodotus-cloud/framework-kernel';
 
 import { initializer, RouterUtilities } from '@herodotus-cloud/framework-kernel';
@@ -6,7 +6,7 @@ import { Path } from './constants';
 
 let RouterUtils = {} as RouterUtilities;
 
-const setupKernel = (currentRouter: Router) => {
+const setupKernel = (currentRouter: Router, staticRoutes: Array<RouteRecordRaw>) => {
   const options: KernelOptions = {
     router: {
       instance: currentRouter,
@@ -16,6 +16,7 @@ const setupKernel = (currentRouter: Router) => {
         signIn: { name: Path.SIGN_IN_NAME },
       },
     },
+    staticRoutes: staticRoutes,
   };
 
   initializer(options);

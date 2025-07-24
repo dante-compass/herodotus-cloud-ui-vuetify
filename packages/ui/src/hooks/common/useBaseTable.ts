@@ -10,7 +10,7 @@ import type {
   QTableOnRequestParameter,
 } from '@/lib/declarations';
 
-import { useRouteStore } from '@/stores';
+import { useRouterStore } from '@/stores';
 import { OperationEnum } from '@/lib/definitions';
 
 export default function useBaseTableItems<E extends Entity, C extends Conditions>(
@@ -31,7 +31,7 @@ export default function useBaseTableItems<E extends Entity, C extends Conditions
     rowsNumber: 0,
   });
 
-  const store = useRouteStore();
+  const store = useRouterStore();
   const router = useRouter();
 
   /**

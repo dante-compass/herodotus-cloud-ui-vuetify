@@ -1,5 +1,35 @@
 # @herodotus-cloud/core
 
+## 1.7.0
+
+### Minor Changes
+
+- 版本发布
+
+## 1.6.6
+
+### Patch Changes
+
+- 迁移系统设置代码
+
+## 1.6.5
+
+### Patch Changes
+
+- [重构] 迁移前端 useEditFinish 代码至模块 @herodotus-cloud/framework-kernel
+
+## 1.6.4
+
+### Patch Changes
+
+- 不再使用 es-toolkit
+
+## 1.6.3
+
+### Patch Changes
+
+- 迁移 useRouterStore 代码
+
 ## 1.6.2
 
 ### Patch Changes

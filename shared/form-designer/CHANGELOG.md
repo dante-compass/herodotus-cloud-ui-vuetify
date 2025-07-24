@@ -1,5 +1,63 @@
 # @herodotus-cloud/form-designer
 
+## 1.7.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.7.0
+  - @herodotus-cloud/components@1.7.0
+  - @herodotus-cloud/form-apis@1.7.0
+  - @herodotus-cloud/core@1.7.0
+
+## 1.6.6
+
+### Patch Changes
+
+- 迁移系统设置代码
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.6.6
+  - @herodotus-cloud/components@1.6.6
+  - @herodotus-cloud/form-apis@1.6.6
+  - @herodotus-cloud/core@1.6.6
+
+## 1.6.5
+
+### Patch Changes
+
+- [重构] 迁移前端 useEditFinish 代码至模块 @herodotus-cloud/framework-kernel
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.6.5
+  - @herodotus-cloud/components@1.6.5
+  - @herodotus-cloud/form-apis@1.6.5
+  - @herodotus-cloud/core@1.6.5
+
+## 1.6.4
+
+### Patch Changes
+
+- 不再使用 es-toolkit
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.6.4
+  - @herodotus-cloud/components@1.6.4
+  - @herodotus-cloud/form-apis@1.6.4
+  - @herodotus-cloud/core@1.6.4
+
+## 1.6.3
+
+### Patch Changes
+
+- 迁移 useRouterStore 代码
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.6.3
+  - @herodotus-cloud/components@1.6.3
+  - @herodotus-cloud/form-apis@1.6.3
+  - @herodotus-cloud/core@1.6.3
+
 ## 1.6.2
 
 ### Patch Changes

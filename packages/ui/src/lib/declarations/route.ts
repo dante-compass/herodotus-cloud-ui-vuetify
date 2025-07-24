@@ -1,6 +1,5 @@
-import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import type { Tree } from './base';
-import { SocialSourceEnum, OperationEnum } from '@/lib/definitions';
+import { SocialSourceEnum } from '@/lib/definitions';
 
 export interface MenuItem {
   title: string | unknown;
@@ -9,8 +8,6 @@ export interface MenuItem {
   value?: string;
   $children?: MenuItem[];
 }
-
-export interface Tab extends Pick<RouteLocationNormalizedLoaded, 'name' | 'path' | 'meta'> {}
 
 export interface RemoteRouteMeta {
   title: string;
@@ -50,23 +47,6 @@ export interface AccessPrincipal {
   oauth_verifier?: string;
   mobile?: string;
 }
-
-export interface PushParam {
-  /**
-   * 表格数据条目参数
-   */
-  item: string;
-  /**
-   * 额外参数
-   */
-  additional?: string;
-  /**
-   * 操作类型
-   */
-  operation?: OperationEnum;
-}
-
-export type RoutePushParam = Record<string, PushParam>;
 
 export interface WidgetItem {
   tooltip: string;

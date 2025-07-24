@@ -16,7 +16,7 @@ import { HSettingContainer } from '@/components';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { useRoute } from 'vue-router';
 
-import { useRouteStore } from '@/stores';
+import { useRouterStore } from '@/stores';
 import { useEditFinish } from '@/hooks';
 
 defineOptions({
@@ -31,7 +31,7 @@ const q = useQuasar();
 const { onFinish } = useEditFinish();
 
 const smartCloseDetail = (route: RouteLocationNormalizedLoaded) => {
-  const store = useRouteStore();
+  const store = useRouterStore();
   const isDetailRoute = store.isDetailRoute(route);
 
   if (isDetailRoute) {

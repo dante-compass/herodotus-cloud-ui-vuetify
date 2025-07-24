@@ -1,1 +1,1 @@
-export { lodash, Toolkit } from '@herodotus-cloud/core';
+export { lodash } from '@herodotus-cloud/core';
