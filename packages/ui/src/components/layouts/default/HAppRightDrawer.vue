@@ -37,7 +37,7 @@
 import { defineComponent } from 'vue';
 
 import { useApplicationStore, useSettingsStore } from '@/stores';
-import { ThemeModeEnum } from '@/lib/definitions';
+import { ThemeModeEnum } from '@herodotus-cloud/framework-kernel';
 
 import { HSettingSwitch } from '../settings';
 
