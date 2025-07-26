@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-import { useAuthenticationStore } from './authentication';
+import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 import { ActionUtils } from '@/lib/utils';
 import type { AxiosInstance, AxiosRequestConfig } from 'axios';
 import type { RetryRequest } from '@/lib/declarations';

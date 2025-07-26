@@ -45,7 +45,7 @@ import type {
 import { CONSTANTS, API } from '@/configurations';
 import { moment, toast, standardDeleteNotify } from '@/lib/utils';
 import { useTable, usePasskey } from '@/hooks';
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore, SecurityApiResources } from '@herodotus-cloud/framework-kernel';
 
 import { HDeleteButton } from '@/components';
 
@@ -104,7 +104,7 @@ export default defineComponent({
 
     const onDelete = (id: string) => {
       standardDeleteNotify(() => {
-        API.core
+        SecurityApiResources.getInstance()
           .passkey()
           .delete(id)
           .then((response) => {

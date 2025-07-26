@@ -5,9 +5,8 @@ import { useRoute } from 'vue-router';
 import type { Entity } from '@/lib/declarations';
 
 import { OperationEnum } from '@/lib/definitions';
-import { useRouterStore } from '@/stores';
 
-import { useEditFinish } from '@herodotus-cloud/framework-kernel';
+import { useEditFinish, useRouterStore } from '@herodotus-cloud/framework-kernel';
 
 export default function useBaseTableItem<E extends Entity>() {
   const { onFinish } = useEditFinish();

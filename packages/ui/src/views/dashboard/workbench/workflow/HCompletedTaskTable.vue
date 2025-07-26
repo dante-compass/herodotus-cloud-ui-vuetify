@@ -35,7 +35,7 @@ import type {
 
 import { API } from '@/configurations';
 import { useBaseTable } from '@/hooks';
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HCompletedTaskTable',
@@ -71,7 +71,8 @@ export default defineComponent({
 
     const fetchCompletedTasksByPage = (pageNumber = 1) => {
       showLoading();
-      API.core.task()
+      API.core
+        .task()
         .fetchCompletedTasksByPage(
           {
             pageNumber: pageNumber - 1,

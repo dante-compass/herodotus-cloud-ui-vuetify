@@ -1,7 +1,6 @@
 import type { HttpConfigOption } from '@/declarations';
 
 import { Axios, HttpConfig } from './base';
-import { OpenApiService, OAuth2ApiService, PasskeyApiService } from './secure';
 import {
   OAuth2ApplicationService,
   OAuth2ScopeService,
@@ -50,14 +49,6 @@ export class ApiResources {
 
   public getConfig(): HttpConfig {
     return this.config;
-  }
-
-  public open(): OpenApiService {
-    return OpenApiService.getInstance(this.config);
-  }
-
-  public oauth2(): OAuth2ApiService {
-    return OAuth2ApiService.getInstance(this.config);
   }
 
   public oauth2Application(): OAuth2ApplicationService {
@@ -157,10 +148,6 @@ export class ApiResources {
 
   public mgtCertificate(): MgtCertificateService {
     return MgtCertificateService.getInstance(this.config);
-  }
-
-  public passkey(): PasskeyApiService {
-    return PasskeyApiService.getInstance(this.config);
   }
 }
 

@@ -13,9 +13,7 @@ import { CaptchaCategoryEnum } from '@/declarations';
 
 export class OpenApiService {
   // 静态私有实例引用
-  private static _instance: OpenApiService | null = null;
-  // 初始化标志
-  private static _initialized = false;
+  private static instance: OpenApiService | null = null;
 
   private config = {} as HttpConfig;
 
@@ -24,13 +22,11 @@ export class OpenApiService {
   }
 
   public static getInstance(config: HttpConfig): OpenApiService {
-    if (OpenApiService._initialized) {
-      throw new Error('SecurityApiResources has already been initialized');
+    if (this.instance == null) {
+      this.instance = new OpenApiService(config);
     }
 
-    OpenApiService._instance = new OpenApiService(config);
-    OpenApiService._initialized = true;
-    return OpenApiService._instance;
+    return this.instance;
   }
 
   public createSession(sessionId = ''): Promise<AxiosHttpResult<Session>> {

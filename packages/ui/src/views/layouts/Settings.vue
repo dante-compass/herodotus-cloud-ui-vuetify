@@ -16,8 +16,7 @@ import { HSettingContainer } from '@/components';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { useRoute } from 'vue-router';
 
-import { useRouterStore } from '@/stores';
-import { useEditFinish } from '@/hooks';
+import { useRouterStore, useEditFinish } from '@herodotus-cloud/framework-kernel';
 
 defineOptions({
   name: 'HSettingsLayout',

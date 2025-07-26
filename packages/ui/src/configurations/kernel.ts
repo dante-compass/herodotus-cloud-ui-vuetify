@@ -1,12 +1,14 @@
-import type { Router, RouteRecordRaw } from 'vue-router';
+import type { Router } from 'vue-router';
 import type { KernelOptions } from '@herodotus-cloud/framework-kernel';
 
 import { initializer, RouterUtilities } from '@herodotus-cloud/framework-kernel';
 import { Path } from './constants';
+import { VARIABLES } from './variables';
+import { config } from './http';
 
 let RouterUtils = {} as RouterUtilities;
 
-const setupKernel = (currentRouter: Router, staticRoutes: Array<RouteRecordRaw>) => {
+const setupKernel = (currentRouter: Router) => {
   const options: KernelOptions = {
     router: {
       instance: currentRouter,
@@ -16,7 +18,12 @@ const setupKernel = (currentRouter: Router, staticRoutes: Array<RouteRecordRaw>)
         signIn: { name: Path.SIGN_IN_NAME },
       },
     },
-    staticRoutes: staticRoutes,
+    staticRoutes: currentRouter.getRoutes(),
+    securityKey: VARIABLES.getSecretKey(),
+    isAutoRefreshToken: VARIABLES.getAutoRefreshToken(),
+    isUseCrypto: VARIABLES.isUseCrypto(),
+    redirectUri: VARIABLES.getRedirectUri(),
+    config: config,
   };
 
   initializer(options);

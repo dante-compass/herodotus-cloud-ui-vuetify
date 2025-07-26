@@ -1,8 +1,7 @@
 import { HttpConfig, AxiosHttpResult, Service } from '@herodotus-cloud/core';
 import { WebAuthnRegisterOptions, WebAuthnRegister, WebAuthnAuthenticateOptions, WebAuthnAuthenticate } from '../../declarations';
 export declare class PasskeyApiService extends Service {
-    private static _instance;
-    private static _initialized;
+    private static instance;
     private constructor();
     static getInstance(config: HttpConfig): PasskeyApiService;
     getBaseAddress(): string;

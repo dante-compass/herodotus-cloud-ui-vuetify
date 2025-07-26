@@ -11,22 +11,18 @@ import { Service } from '@herodotus-cloud/core';
 
 export class PasskeyApiService extends Service {
   // 静态私有实例引用
-  private static _instance: PasskeyApiService | null = null;
-  // 初始化标志
-  private static _initialized = false;
+  private static instance: PasskeyApiService | null = null;
 
   private constructor(config: HttpConfig) {
     super(config);
   }
 
   public static getInstance(config: HttpConfig): PasskeyApiService {
-    if (PasskeyApiService._initialized) {
-      throw new Error('PasskeyApiService has already been initialized');
+    if (this.instance == null) {
+      this.instance = new PasskeyApiService(config);
     }
 
-    PasskeyApiService._instance = new PasskeyApiService(config);
-    PasskeyApiService._initialized = true;
-    return PasskeyApiService._instance;
+    return this.instance;
   }
 
   public getBaseAddress(): string {

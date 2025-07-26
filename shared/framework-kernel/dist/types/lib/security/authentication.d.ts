@@ -1,8 +1,7 @@
 import { HttpConfig, AxiosHttpResult, AccessTokenResponse } from '@herodotus-cloud/core';
 import { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '../../declarations';
 export declare class OAuth2ApiService {
-    private static _instance;
-    private static _initialized;
+    private static instance;
     private config;
     private constructor();
     static getInstance(config: HttpConfig): OAuth2ApiService;

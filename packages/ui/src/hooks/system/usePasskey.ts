@@ -10,10 +10,10 @@ import {
   get,
 } from '@github/webauthn-json/browser-ponyfill';
 
-import type { WebAuthnRegister } from '@/lib/declarations';
+import type { WebAuthnRegister } from '@herodotus-cloud/framework-kernel';
 
 import { API } from '@/configurations';
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore, SecurityApiResources } from '@herodotus-cloud/framework-kernel';
 
 export default function usePasskey() {
   const authenticationStore = useAuthenticationStore();
@@ -41,7 +41,8 @@ export default function usePasskey() {
 
   const registration = (label: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
-      API.core.passkey()
+      SecurityApiResources.getInstance()
+        .passkey()
         .fetchWebAuthnRegisterOptions()
         .then((publicKey) => {
           const registrationOptions = parseCreationOptionsFromJSON({
@@ -52,7 +53,8 @@ export default function usePasskey() {
             const request: WebAuthnRegister = {
               publicKey: { label: label, credential: credential },
             };
-            API.core.passkey()
+            SecurityApiResources.getInstance()
+              .passkey()
               .webAuthnRegister(request)
               .then(() => {
                 resolve(true);
@@ -79,7 +81,8 @@ export default function usePasskey() {
 
   const authenticator = (): Promise<boolean> => {
     return new Promise((resolve, reject) => {
-      API.core.passkey()
+      SecurityApiResources.getInstance()
+        .passkey()
         .fetchWebAuthnAuthenticateOptions()
         .then((publicKey) => {
           const authenticationOptions = parseRequestOptionsFromJSON({

@@ -1,8 +1,7 @@
 import { HttpConfig, AxiosHttpResult } from '@herodotus-cloud/core';
 import { CaptchaResource, CaptchaData, Session, SignInErrorStatus } from '../../declarations';
 export declare class OpenApiService {
-    private static _instance;
-    private static _initialized;
+    private static instance;
     private config;
     private constructor();
     static getInstance(config: HttpConfig): OpenApiService;

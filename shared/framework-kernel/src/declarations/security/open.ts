@@ -26,16 +26,16 @@ export interface Verification extends Captcha {
   characters: string;
 }
 
-interface GraphicCaptcha extends Captcha {
+export interface GraphicCaptcha extends Captcha {
   graphicImageBase64: string;
 }
 
-interface JigsawCaptcha extends Captcha {
+export interface JigsawCaptcha extends Captcha {
   originalImageBase64: string;
   sliderImageBase64: string;
 }
 
-interface WordClickCaptcha extends Captcha {
+export interface WordClickCaptcha extends Captcha {
   wordClickImageBase64: string;
   words: string;
   wordsCount: number;
@@ -44,3 +44,5 @@ interface WordClickCaptcha extends Captcha {
 export type CaptchaResource = GraphicCaptcha | JigsawCaptcha | WordClickCaptcha;
 
 export type CaptchaData = Coordinate | Array<Coordinate> | string;
+
+export type BehaviorCaptchaCategory = 'JIGSAW' | 'WORD_CLICK';

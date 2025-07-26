@@ -6,7 +6,7 @@ import type { NotificationEntity, NotificationConditions, Sort, Page } from '@/l
 import { NotificationCategoryEnum } from '@/lib/definitions';
 import { moment } from '@/lib/utils';
 import { API } from '@/configurations';
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 import { useNotificationStore } from '../stores';
 
 export default function useNotifications(category: NotificationCategoryEnum) {
@@ -32,7 +32,8 @@ export default function useNotifications(category: NotificationCategoryEnum) {
 
   const findItemsByPage = (number: number) => {
     currentPageNumber.value = number;
-    API.core.notification()
+    API.core
+      .notification()
       .fetchByPage(
         {
           pageNumber: number - 1,

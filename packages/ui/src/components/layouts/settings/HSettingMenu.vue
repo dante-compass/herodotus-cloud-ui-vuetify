@@ -28,7 +28,7 @@ import { defineComponent } from 'vue';
 import type { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 
 import { SettingRoutes } from '@/routers/logic';
-import { useRouterStore } from '@/stores';
+import { useRouterStore } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HSettingMenu',

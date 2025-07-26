@@ -1,5 +1,5 @@
-import { AbstractService, ContentTypeEnum, Base64, Service, HttpConfig } from "@herodotus-cloud/core";
-import { AbstractService as AbstractService2, Axios, Base64 as Base642, ContentTypeEnum as ContentTypeEnum2, HttpConfig as HttpConfig2, Service as Service2, lodash, moment } from "@herodotus-cloud/core";
+import { AbstractService, ContentTypeEnum, HttpConfig } from "@herodotus-cloud/core";
+import { AbstractService as AbstractService2, Axios, Base64, ContentTypeEnum as ContentTypeEnum2, HttpConfig as HttpConfig2, Service, lodash, moment } from "@herodotus-cloud/core";
 var AuthorityTypeEnum = /* @__PURE__ */ ((AuthorityTypeEnum2) => {
   AuthorityTypeEnum2[AuthorityTypeEnum2["API"] = 0] = "API";
   AuthorityTypeEnum2[AuthorityTypeEnum2["MENU"] = 1] = "MENU";
@@ -64,67 +64,6 @@ var SupplierType = /* @__PURE__ */ ((SupplierType2) => {
   SupplierType2[SupplierType2["Outsourcing"] = 3] = "Outsourcing";
   return SupplierType2;
 })(SupplierType || {});
-var SocialSourceEnum = /* @__PURE__ */ ((SocialSourceEnum2) => {
-  SocialSourceEnum2[SocialSourceEnum2["INSTITUTION"] = 0] = "INSTITUTION";
-  SocialSourceEnum2[SocialSourceEnum2["SMS"] = 1] = "SMS";
-  SocialSourceEnum2[SocialSourceEnum2["WXAPP"] = 2] = "WXAPP";
-  SocialSourceEnum2[SocialSourceEnum2["QQ"] = 3] = "QQ";
-  SocialSourceEnum2[SocialSourceEnum2["WEIBO"] = 4] = "WEIBO";
-  SocialSourceEnum2[SocialSourceEnum2["BAIDU"] = 5] = "BAIDU";
-  SocialSourceEnum2[SocialSourceEnum2["WECHAT_OPEN"] = 6] = "WECHAT_OPEN";
-  SocialSourceEnum2[SocialSourceEnum2["WECHAT_MP"] = 7] = "WECHAT_MP";
-  SocialSourceEnum2[SocialSourceEnum2["WECHAT_ENTERPRISE"] = 8] = "WECHAT_ENTERPRISE";
-  SocialSourceEnum2[SocialSourceEnum2["WECHAT_ENTERPRISE_WEB"] = 9] = "WECHAT_ENTERPRISE_WEB";
-  SocialSourceEnum2[SocialSourceEnum2["DINGTALK"] = 10] = "DINGTALK";
-  SocialSourceEnum2[SocialSourceEnum2["DINGTALK_ACCOUNT"] = 11] = "DINGTALK_ACCOUNT";
-  SocialSourceEnum2[SocialSourceEnum2["ALIYUN"] = 12] = "ALIYUN";
-  SocialSourceEnum2[SocialSourceEnum2["TAOBAO"] = 13] = "TAOBAO";
-  SocialSourceEnum2[SocialSourceEnum2["ALIPAY"] = 14] = "ALIPAY";
-  SocialSourceEnum2[SocialSourceEnum2["TEAMBITION"] = 15] = "TEAMBITION";
-  SocialSourceEnum2[SocialSourceEnum2["HUAWEI"] = 16] = "HUAWEI";
-  SocialSourceEnum2[SocialSourceEnum2["FEISHU"] = 17] = "FEISHU";
-  SocialSourceEnum2[SocialSourceEnum2["JD"] = 18] = "JD";
-  SocialSourceEnum2[SocialSourceEnum2["DOUYIN"] = 19] = "DOUYIN";
-  SocialSourceEnum2[SocialSourceEnum2["TOUTIAO"] = 20] = "TOUTIAO";
-  SocialSourceEnum2[SocialSourceEnum2["MI"] = 21] = "MI";
-  SocialSourceEnum2[SocialSourceEnum2["RENREN"] = 22] = "RENREN";
-  SocialSourceEnum2[SocialSourceEnum2["MEITUAN"] = 23] = "MEITUAN";
-  SocialSourceEnum2[SocialSourceEnum2["ELEME"] = 24] = "ELEME";
-  SocialSourceEnum2[SocialSourceEnum2["KUJIALE"] = 25] = "KUJIALE";
-  SocialSourceEnum2[SocialSourceEnum2["XMLY"] = 26] = "XMLY";
-  SocialSourceEnum2[SocialSourceEnum2["GITEE"] = 27] = "GITEE";
-  SocialSourceEnum2[SocialSourceEnum2["OSCHINA"] = 28] = "OSCHINA";
-  SocialSourceEnum2[SocialSourceEnum2["CSDN"] = 29] = "CSDN";
-  SocialSourceEnum2[SocialSourceEnum2["GITHUB"] = 30] = "GITHUB";
-  SocialSourceEnum2[SocialSourceEnum2["GITLAB"] = 31] = "GITLAB";
-  SocialSourceEnum2[SocialSourceEnum2["STACK_OVERFLOW"] = 32] = "STACK_OVERFLOW";
-  SocialSourceEnum2[SocialSourceEnum2["CODING"] = 33] = "CODING";
-  SocialSourceEnum2[SocialSourceEnum2["GOOGLE"] = 34] = "GOOGLE";
-  SocialSourceEnum2[SocialSourceEnum2["MICROSOFT"] = 35] = "MICROSOFT";
-  SocialSourceEnum2[SocialSourceEnum2["FACEBOOK"] = 36] = "FACEBOOK";
-  SocialSourceEnum2[SocialSourceEnum2["LINKEDIN"] = 37] = "LINKEDIN";
-  SocialSourceEnum2[SocialSourceEnum2["TWITTER"] = 38] = "TWITTER";
-  SocialSourceEnum2[SocialSourceEnum2["AMAZON"] = 39] = "AMAZON";
-  SocialSourceEnum2[SocialSourceEnum2["SLACK"] = 40] = "SLACK";
-  SocialSourceEnum2[SocialSourceEnum2["LINE"] = 41] = "LINE";
-  SocialSourceEnum2[SocialSourceEnum2["OKTA"] = 42] = "OKTA";
-  SocialSourceEnum2[SocialSourceEnum2["PINTEREST"] = 43] = "PINTEREST";
-  return SocialSourceEnum2;
-})(SocialSourceEnum || {});
-var CaptchaCategoryEnum = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
-  CaptchaCategoryEnum2["JIGSAW"] = "JIGSAW";
-  CaptchaCategoryEnum2["WORD_CLICK"] = "WORD_CLICK";
-  CaptchaCategoryEnum2["ARITHMETIC"] = "ARITHMETIC";
-  CaptchaCategoryEnum2["CHINESE"] = "CHINESE";
-  CaptchaCategoryEnum2["CHINESE_GIF"] = "CHINESE_GIF";
-  CaptchaCategoryEnum2["SPEC_GIF"] = "SPEC_GIF";
-  CaptchaCategoryEnum2["SPEC"] = "SPEC";
-  CaptchaCategoryEnum2["HUTOOL_LINE"] = "HUTOOL_LINE";
-  CaptchaCategoryEnum2["HUTOOL_CIRCLE"] = "HUTOOL_CIRCLE";
-  CaptchaCategoryEnum2["HUTOOL_SHEAR"] = "HUTOOL_SHEAR";
-  CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
-  return CaptchaCategoryEnum2;
-})(CaptchaCategoryEnum || {});
 var NotificationCategoryEnum = /* @__PURE__ */ ((NotificationCategoryEnum2) => {
   NotificationCategoryEnum2[NotificationCategoryEnum2["ANNOUNCEMENT"] = 0] = "ANNOUNCEMENT";
   NotificationCategoryEnum2[NotificationCategoryEnum2["DIALOGUE"] = 1] = "DIALOGUE";
@@ -558,276 +497,6 @@ class MgtCertificateService extends AbstractService {
     return this.getConfig().getHttp().get(this.getCategoryAddress(), { certificateCategory });
   }
 }
-class OAuth2ApiService {
-  static instance;
-  config = {};
-  constructor(config) {
-    this.config = config;
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new OAuth2ApiService(config);
-    }
-    return this.instance;
-  }
-  getOAuth2TokenAddress() {
-    return this.config.getUaa() + "/oauth2/token";
-  }
-  getOAuth2RevokeAddress() {
-    return this.config.getUaa() + "/oauth2/revoke";
-  }
-  getOAuth2SignOutAddress() {
-    return this.config.getUaa() + "/oauth2/sign-out";
-  }
-  getBasicHeader() {
-    return "Basic " + Base64.encode(this.config.getClientId() + ":" + this.config.getClientSecret());
-  }
-  signOut(token) {
-    return this.config.getHttp().put(
-      this.getOAuth2SignOutAddress(),
-      {
-        accessToken: token
-      },
-      {
-        contentType: ContentTypeEnum.URL_ENCODED
-      },
-      {
-        headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
-    );
-  }
-  revoke(token) {
-    return this.config.getHttp().post(
-      this.getOAuth2RevokeAddress(),
-      {
-        token
-      },
-      {
-        contentType: ContentTypeEnum.URL_ENCODED
-      },
-      {
-        headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
-    );
-  }
-  refreshTokenFlow(refreshToken, oidc = false) {
-    return this.config.getHttp().post(
-      this.getOAuth2TokenAddress(),
-      oidc ? { refresh_token: refreshToken, grant_type: "refresh_token", scope: "openid" } : { refresh_token: refreshToken, grant_type: "refresh_token" },
-      {
-        contentType: ContentTypeEnum.URL_ENCODED
-      },
-      {
-        headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
-    );
-  }
-  passwordFlow(username, password, oidc = false) {
-    return this.config.getHttp().post(
-      this.getOAuth2TokenAddress(),
-      oidc ? { username, password, grant_type: "password", scope: "openid" } : { username, password, grant_type: "password" },
-      {
-        contentType: ContentTypeEnum.URL_ENCODED
-      },
-      {
-        headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
-    );
-  }
-  authorizationCodeFlow(code, redirect_uri, state = "", oidc = false) {
-    return this.config.getHttp().post(
-      this.getOAuth2TokenAddress(),
-      oidc ? {
-        code,
-        state,
-        redirect_uri,
-        grant_type: "authorization_code",
-        scope: "openid"
-      } : {
-        code,
-        state,
-        redirect_uri,
-        grant_type: "authorization_code"
-      },
-      {
-        contentType: ContentTypeEnum.URL_ENCODED
-      },
-      {
-        headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
-    );
-  }
-  socialCredentialsFlowBySms(mobile, code, oidc = false) {
-    return this.config.getHttp().post(
-      this.getOAuth2TokenAddress(),
-      oidc ? { mobile, code, grant_type: "social_credentials", source: "SMS", scope: "openid" } : { mobile, code, grant_type: "social_credentials", source: "SMS" },
-      {
-        contentType: ContentTypeEnum.URL_ENCODED
-      },
-      {
-        headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
-    );
-  }
-  socialCredentialsFlowByJustAuth(source, accessPrincipal, oidc = false) {
-    return this.config.getHttp().post(
-      this.getOAuth2TokenAddress(),
-      oidc ? { ...accessPrincipal, grant_type: "social_credentials", source, scope: "openid" } : { ...accessPrincipal, grant_type: "social_credentials", source },
-      {
-        contentType: ContentTypeEnum.URL_ENCODED
-      },
-      {
-        headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
-    );
-  }
-  webAuthnCredentialsFlow(publicKey, oidc = false) {
-    return this.config.getHttp().postWithParams(
-      this.getOAuth2TokenAddress(),
-      oidc ? { grant_type: "webauthn_credentials", scope: "openid" } : { grant_type: "webauthn_credentials" },
-      { ...publicKey },
-      {
-        contentType: ContentTypeEnum.JSON
-      },
-      {
-        headers: {
-          Authorization: this.getBasicHeader()
-        }
-      }
-    );
-  }
-}
-class OpenApiService {
-  static instance;
-  config = {};
-  constructor(config) {
-    this.config = config;
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new OpenApiService(config);
-    }
-    return this.instance;
-  }
-  createSession(sessionId = "") {
-    const SECURE_SESSION = this.config.getUaa() + "/open/identity/session";
-    return this.config.getHttp().post(SECURE_SESSION, {
-      clientId: this.config.getClientId(),
-      clientSecret: this.config.getClientSecret(),
-      sessionId
-    });
-  }
-  exchange(sessionId = "", publicKey) {
-    const SECURE_EXCHANGE = this.config.getUaa() + "/open/identity/exchange";
-    return this.config.getHttp().post(SECURE_EXCHANGE, {
-      publicKey,
-      sessionId
-    });
-  }
-  getPrompt(username) {
-    const SECURE_PROMPT = this.config.getUaa() + "/open/identity/prompt";
-    return this.config.getHttp().post(SECURE_PROMPT, {
-      username
-    });
-  }
-  createCaptcha(sessionId, type) {
-    const SECURE_CAPTCHA = this.config.getUaa() + "/open/captcha";
-    return this.config.getHttp().get(SECURE_CAPTCHA, {
-      identity: sessionId,
-      category: type
-    });
-  }
-  verifyCaptcha(identity, category, data) {
-    const SECURE_CAPTCHA = this.config.getUaa() + "/open/captcha";
-    const verify = {
-      identity,
-      category,
-      coordinate: { x: 0, y: 0 },
-      coordinates: [],
-      characters: ""
-    };
-    if (category === CaptchaCategoryEnum.WORD_CLICK) {
-      verify.coordinates = data;
-    } else if (category === CaptchaCategoryEnum.JIGSAW) {
-      verify.coordinate = data;
-    } else {
-      verify.characters = data;
-    }
-    return this.config.getHttp().post(SECURE_CAPTCHA, verify);
-  }
-  createVerificationCode(mobile) {
-    const SECURE_VERIFICATION_CODE = this.config.getUpms() + "/open/identity/verification-code";
-    return this.config.getHttp().post(
-      SECURE_VERIFICATION_CODE,
-      {
-        mobile
-      },
-      {
-        contentType: ContentTypeEnum.URL_ENCODED
-      }
-    );
-  }
-  getSocialList() {
-    const SECURE_SOCIAL_LIST = this.config.getUpms() + "/open/identity/sources";
-    return this.config.getHttp().get(SECURE_SOCIAL_LIST);
-  }
-}
-class PasskeyApiService extends Service {
-  static instance;
-  constructor(config) {
-    super(config);
-  }
-  static getInstance(config) {
-    if (this.instance == null) {
-      this.instance = new PasskeyApiService(config);
-    }
-    return this.instance;
-  }
-  getBaseAddress() {
-    return this.getConfig().getUaa() + "/webauthn/register";
-  }
-  getWebAuthnRegisterOptionsAddress() {
-    return this.getBaseAddress() + "/options";
-  }
-  getWebAuthnAuthenticateAddress() {
-    return this.getConfig().getUaa() + "/login/webauthn";
-  }
-  getWebAuthnAuthenticateOptionsAddress() {
-    return this.getConfig().getUaa() + "/webauthn/authenticate/options";
-  }
-  getIdPath(id) {
-    return this.getParamPath(this.getBaseAddress(), id);
-  }
-  fetchWebAuthnRegisterOptions() {
-    return this.getConfig().getHttp().post(this.getWebAuthnRegisterOptionsAddress(), "");
-  }
-  webAuthnRegister(request) {
-    return this.getConfig().getHttp().post(this.getBaseAddress(), request);
-  }
-  fetchWebAuthnAuthenticateOptions() {
-    return this.getConfig().getHttp().post(this.getWebAuthnAuthenticateOptionsAddress(), "");
-  }
-  webAuthnAuthenticate(request) {
-    return this.getConfig().getHttp().post(this.getWebAuthnAuthenticateAddress(), request);
-  }
-  delete(id) {
-    return this.getConfig().getHttp().delete(this.getIdPath(id));
-  }
-}
 class DialogueContactService extends AbstractService {
   static instance;
   constructor(config) {
@@ -928,12 +597,6 @@ class ApiResources {
   getConfig() {
     return this.config;
   }
-  open() {
-    return OpenApiService.getInstance(this.config);
-  }
-  oauth2() {
-    return OAuth2ApiService.getInstance(this.config);
-  }
   oauth2Application() {
     return OAuth2ApplicationService.getInstance(this.config);
   }
@@ -1009,9 +672,6 @@ class ApiResources {
   mgtCertificate() {
     return MgtCertificateService.getInstance(this.config);
   }
-  passkey() {
-    return PasskeyApiService.getInstance(this.config);
-  }
 }
 const createApi = (http, options) => {
   const config = new HttpConfig(http, options);
@@ -1023,8 +683,7 @@ export {
   ApplicationEnum,
   AuthorityTypeEnum,
   Axios,
-  Base642 as Base64,
-  CaptchaCategoryEnum,
+  Base64,
   ConstantEnum,
   ContentTypeEnum2 as ContentTypeEnum,
   ExtendedTaskService,
@@ -1033,18 +692,14 @@ export {
   IdentityEnum,
   MgtCertificateService,
   NotificationCategoryEnum,
-  OAuth2ApiService,
   OAuth2ApplicationService,
   OAuth2AuthorizationService,
   OAuth2CredentialRecordService,
   OAuth2InterfaceAuditService,
   OAuth2ScopeService,
   OAuth2UserLoggingService,
-  OpenApiService,
-  PasskeyApiService,
-  Service2 as Service,
+  Service,
   SocialBindingService,
-  SocialSourceEnum,
   StatusEnum,
   SupplierType,
   SysAttributeService,

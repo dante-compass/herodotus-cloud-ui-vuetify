@@ -2,7 +2,7 @@ import type { ModuleNamespace } from 'vite/types/hot.d.ts';
 import type { RouteRecordRaw, RouteMeta, Router } from 'vue-router';
 import type { RemoteRoute } from '@/lib/declarations';
 
-import { useRouterStore } from '@/stores';
+import { useRouterStore } from '@herodotus-cloud/framework-kernel';
 import { lodash } from '@/lib/utils';
 import { API } from '@/configurations';
 

@@ -38,7 +38,7 @@ import type { Sheet, ProcessCommentsEntity, Variables } from '@/lib/declarations
 import { useBpmnProcess } from '@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '@/components';
 import { CONSTANTS, API } from '@/configurations';
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 import { lodash, toast } from '@/lib/utils';
 
 export default defineComponent({

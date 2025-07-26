@@ -112,7 +112,8 @@ import { defineComponent, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { required, helpers } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-import { useApplicationStore, useAuthenticationStore } from '@/stores';
+import { useApplicationStore } from '@/stores';
+import { useAuthenticationStore, SecurityApiResources } from '@herodotus-cloud/framework-kernel';
 import { CONSTANTS, API } from '@/configurations';
 import { toast } from '@/lib/utils';
 
@@ -156,7 +157,7 @@ export default defineComponent({
     //点击发送验证码
     const onGetVerificationCode = () => {
       if (showPrompt.value) {
-        API.core.open().createVerificationCode(mobile.value);
+        SecurityApiResources.getInstance().open().createVerificationCode(mobile.value);
       }
       if (!timer.value) {
         count.value = TIME_COUNT.value;

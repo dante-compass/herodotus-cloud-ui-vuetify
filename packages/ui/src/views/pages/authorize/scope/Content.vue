@@ -38,7 +38,7 @@ export default defineComponent({
 
   setup(props) {
     const { editedItem, operation, title, saveOrUpdate } = useTableItem<OAuth2ScopeEntity>(
-      API.oauth2Scope(),
+      API.core.oauth2Scope(),
     );
 
     const isUnique = () => {
@@ -46,7 +46,8 @@ export default defineComponent({
 
       return new Promise((resolve, reject) => {
         if (scopeCode) {
-          API.oauth2Scope()
+          API.core
+            .oauth2Scope()
             .fetchByScopeCode(scopeCode)
             .then((result) => {
               let scope = result.data as OAuth2ScopeEntity;

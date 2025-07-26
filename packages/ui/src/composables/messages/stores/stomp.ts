@@ -4,7 +4,7 @@ import { Client } from '@stomp/stompjs';
 import type { DialogueDetailEntity, WebSocketOperations } from '@/lib/declarations';
 import { lodash } from '@/lib/utils';
 import { VARIABLES, API } from '@/configurations';
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 
 export const useStompWebSocketStore = defineStore('StompWebSocket', {
   state: () => ({
@@ -141,7 +141,8 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
     },
 
     pullStat(): void {
-      API.core.webSocketMessage()
+      API.core
+        .webSocketMessage()
         .fetchAllStat()
         .then((result) => {
           const data = result.data as Record<string, any>;

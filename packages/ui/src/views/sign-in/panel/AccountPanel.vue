@@ -119,7 +119,8 @@ import { required, helpers } from '@vuelidate/validators';
 
 import { CONSTANTS } from '@/configurations';
 import { toast } from '@/lib/utils';
-import { useApplicationStore, useCryptoStore, useAuthenticationStore } from '@/stores';
+import { useApplicationStore } from '@/stores';
+import { useCryptoStore, useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 import { HSocialSignInList } from '@/composables/sign-in';
 import { usePasskey } from '@/hooks';
 

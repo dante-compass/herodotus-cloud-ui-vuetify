@@ -1,9 +1,11 @@
 import type { SweetAlertIcon, SweetAlertResult } from '@/lib/declarations';
 
-import { useAuthenticationStore, clearPersistData } from '@/stores';
+import { clearPersistData } from '@/stores';
 import { useWebSocketMessage } from '@/composables/messages';
 import { RouterUtils } from '@/configurations';
 import { Swal } from '../base';
+
+import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 
 class ActionUtilities {
   private static instance = new ActionUtilities();

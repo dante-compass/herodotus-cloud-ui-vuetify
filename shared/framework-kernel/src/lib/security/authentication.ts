@@ -6,9 +6,7 @@ import { Base64, ContentTypeEnum, AuthorizationGrantTypeEnum } from '@herodotus-
 
 export class OAuth2ApiService {
   // 静态私有实例引用
-  private static _instance: OAuth2ApiService | null = null;
-  // 初始化标志
-  private static _initialized = false;
+  private static instance: OAuth2ApiService | null = null;
   private config = {} as HttpConfig;
 
   private constructor(config: HttpConfig) {
@@ -16,13 +14,11 @@ export class OAuth2ApiService {
   }
 
   public static getInstance(config: HttpConfig): OAuth2ApiService {
-    if (OAuth2ApiService._initialized) {
-      throw new Error('OAuth2ApiService has already been initialized');
+    if (this.instance == null) {
+      this.instance = new OAuth2ApiService(config);
     }
 
-    OAuth2ApiService._instance = new OAuth2ApiService(config);
-    OAuth2ApiService._initialized = true;
-    return OAuth2ApiService._instance;
+    return this.instance;
   }
 
   private getOAuth2TokenAddress(): string {

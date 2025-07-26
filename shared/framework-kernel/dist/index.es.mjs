@@ -632,20 +632,16 @@ function jwtDecode(token, options) {
 }
 class OAuth2ApiService {
   // 静态私有实例引用
-  static _instance = null;
-  // 初始化标志
-  static _initialized = false;
+  static instance = null;
   config = {};
   constructor(config) {
     this.config = config;
   }
   static getInstance(config) {
-    if (OAuth2ApiService._initialized) {
-      throw new Error("OAuth2ApiService has already been initialized");
+    if (this.instance == null) {
+      this.instance = new OAuth2ApiService(config);
     }
-    OAuth2ApiService._instance = new OAuth2ApiService(config);
-    OAuth2ApiService._initialized = true;
-    return OAuth2ApiService._instance;
+    return this.instance;
   }
   getOAuth2TokenAddress() {
     return this.config.getUaa() + "/oauth2/token";
@@ -823,20 +819,16 @@ class OAuth2ApiService {
 }
 class OpenApiService {
   // 静态私有实例引用
-  static _instance = null;
-  // 初始化标志
-  static _initialized = false;
+  static instance = null;
   config = {};
   constructor(config) {
     this.config = config;
   }
   static getInstance(config) {
-    if (OpenApiService._initialized) {
-      throw new Error("SecurityApiResources has already been initialized");
+    if (this.instance == null) {
+      this.instance = new OpenApiService(config);
     }
-    OpenApiService._instance = new OpenApiService(config);
-    OpenApiService._initialized = true;
-    return OpenApiService._instance;
+    return this.instance;
   }
   createSession(sessionId = "") {
     const SECURE_SESSION = this.config.getUaa() + "/open/identity/session";
@@ -903,19 +895,15 @@ class OpenApiService {
 }
 class PasskeyApiService extends Service {
   // 静态私有实例引用
-  static _instance = null;
-  // 初始化标志
-  static _initialized = false;
+  static instance = null;
   constructor(config) {
     super(config);
   }
   static getInstance(config) {
-    if (PasskeyApiService._initialized) {
-      throw new Error("PasskeyApiService has already been initialized");
+    if (this.instance == null) {
+      this.instance = new PasskeyApiService(config);
     }
-    PasskeyApiService._instance = new PasskeyApiService(config);
-    PasskeyApiService._initialized = true;
-    return PasskeyApiService._instance;
+    return this.instance;
   }
   getBaseAddress() {
     return this.getConfig().getUaa() + "/webauthn/register";

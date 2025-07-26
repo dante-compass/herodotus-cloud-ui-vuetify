@@ -1,8 +1,7 @@
 import { useDictionaryStore } from '@/composables/constants';
 import { VARIABLES } from '@/configurations';
 
-import { useAuthenticationStore } from './authentication';
-import { useCryptoStore } from './crypto';
+import { useCryptoStore, useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 
 export const clearPersistData = () => {
   console.log('Clear Persist Data');

@@ -1,6 +1,5 @@
 import { HttpConfigOption } from '../declarations';
 import { Axios, HttpConfig } from './base';
-import { OpenApiService, OAuth2ApiService, PasskeyApiService } from './secure';
 import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService } from './modules';
 import { DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './settings';
 export declare class ApiResources {
@@ -9,8 +8,6 @@ export declare class ApiResources {
     private constructor();
     static getInstance(config: HttpConfig): ApiResources;
     getConfig(): HttpConfig;
-    open(): OpenApiService;
-    oauth2(): OAuth2ApiService;
     oauth2Application(): OAuth2ApplicationService;
     oauth2Scope(): OAuth2ScopeService;
     oauth2Authorization(): OAuth2AuthorizationService;
@@ -36,7 +33,6 @@ export declare class ApiResources {
     webSocketMessage(): WebSocketMessageService;
     task(): ExtendedTaskService;
     mgtCertificate(): MgtCertificateService;
-    passkey(): PasskeyApiService;
 }
 declare const createApi: (http: Axios, options: HttpConfigOption) => ApiResources;
 export { createApi };

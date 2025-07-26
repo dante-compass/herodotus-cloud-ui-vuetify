@@ -2,7 +2,6 @@ import type { App } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import { staticRoutes } from './logic';
 import { createRouterGuard } from './guard';
-
 import { setupKernel } from '@/configurations';
 
 const router = createRouter({
@@ -13,9 +12,11 @@ const router = createRouter({
 
 export async function setupRouter(app: App) {
   app.use(router);
+
+  setupKernel(router);
+
   createRouterGuard(router);
   await router.isReady();
-  setupKernel(router, staticRoutes);
 }
 
 export default router;
