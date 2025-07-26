@@ -1,5 +1,13 @@
 # @herodotus-cloud/form-apis
 
+## 1.7.1
+
+### Patch Changes
+
+- 调整认证安全相关内容
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.1
+
 ## 1.7.0
 
 ### Minor Changes

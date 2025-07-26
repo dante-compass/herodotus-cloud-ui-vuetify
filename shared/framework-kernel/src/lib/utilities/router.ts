@@ -7,7 +7,7 @@ import type {
 
 import type { RouterOptions } from '@/declarations';
 
-import { lodash } from '../base';
+import { lodash } from '@herodotus-cloud/core';
 
 export class RouterUtilities {
   // 静态私有实例引用

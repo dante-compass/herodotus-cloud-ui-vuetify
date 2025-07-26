@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.5",
-    "@eslint/js": "^9.31.0",
+    "@eslint/js": "^9.32.0",
     "@quasar/app-vite": "^2.3.0",
     "@quasar/vite-plugin": "^1.10.0",
     "@tsconfig/node22": "^22.0.2",
@@ -57,14 +57,14 @@
     "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/tsconfig": "^0.7.0",
     "commitizen": "^4.3.1",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.0.0",
     "cz-conventional-changelog": "^3.3.0",
-    "dotenv": "^17.2.0",
-    "eslint": "^9.31.0",
+    "dotenv": "^17.2.1",
+    "eslint": "^9.32.0",
     "eslint-plugin-vue": "^10.3.0",
     "globals": "^16.3.0",
     "husky": "^9.1.7",
-    "jiti": "^2.5.0",
+    "jiti": "^2.5.1",
     "lint-staged": "^16.1.2",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
@@ -85,6 +85,6 @@
     "vite-plugin-node-polyfills": "^0.24.0",
     "vite-plugin-vconsole": "^2.1.1",
     "vite-plugin-vue-devtools": "^7.7.7",
-    "vue-tsc": "^3.0.3"
+    "vue-tsc": "^3.0.4"
   }
 }

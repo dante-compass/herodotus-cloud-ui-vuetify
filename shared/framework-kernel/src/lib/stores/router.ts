@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import type { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 import type { RoutePushParam, PushParam } from '@/declarations';
 
-import { lodash } from '@/lib/base';
+import { lodash } from '@herodotus-cloud/core';
 
 export const useRouterStore = defineStore('Router', {
   state: () => ({

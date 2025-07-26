@@ -1,3 +1,4 @@
+import type { HttpConfig } from '@herodotus-cloud/core';
 import type { KernelOptions } from '@/declarations';
 
 /**
@@ -49,5 +50,25 @@ export class OptionsUtilities {
 
   public getOptions(): KernelOptions {
     return this.options;
+  }
+
+  public static securityKey(): string {
+    return this.getInstance().getOptions().securityKey;
+  }
+
+  public static axiosConfig(): HttpConfig {
+    return this.getInstance().getOptions().config;
+  }
+
+  public static isUseCrypto(): boolean {
+    return this.getInstance().getOptions().isUseCrypto;
+  }
+
+  public static isAutoRefreshToken(): boolean {
+    return this.getInstance().getOptions().isAutoRefreshToken;
+  }
+
+  public static getRedirectUri(): string {
+    return this.getInstance().getOptions().redirectUri;
   }
 }

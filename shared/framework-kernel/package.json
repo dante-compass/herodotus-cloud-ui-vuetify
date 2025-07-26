@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/framework-kernel",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "",
   "keywords": [],
   "author": "",
@@ -31,7 +31,9 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
+    "@github/webauthn-json": "^2.1.1",
     "@herodotus-cloud/core": "workspace:^",
+    "jwt-decode": "^4.0.0",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "4.4.1",
     "vue": "^3.5.18",

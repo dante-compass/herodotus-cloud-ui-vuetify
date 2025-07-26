@@ -1,13 +1,13 @@
 import axios from "axios";
 import qs from "qs";
 import { useAxios } from "@vueuse/integrations/useAxios";
-import * as lodash from "lodash-es";
 import moment from "moment";
 import { default as default2 } from "moment";
 import "moment/dist/locale/zh-cn";
 import dayjs from "dayjs";
 import { default as default3 } from "dayjs";
 import "dayjs/locale/zh-cn";
+import * as lodash from "lodash-es";
 import { generateFromString } from "generate-avatar";
 import { sm2, sm4 } from "sm-crypto";
 import { Base64 } from "js-base64";
@@ -63,19 +63,6 @@ var OperationEnum = /* @__PURE__ */ ((OperationEnum2) => {
   OperationEnum2["INVOKE"] = "invoke";
   return OperationEnum2;
 })(OperationEnum || {});
-var LayoutModeEnum = /* @__PURE__ */ ((LayoutModeEnum2) => {
-  LayoutModeEnum2["DEFAULT"] = "defaults";
-  LayoutModeEnum2["CLASSIC"] = "classic";
-  LayoutModeEnum2["TRANSVERSE"] = "transverse";
-  LayoutModeEnum2["COLUMNS"] = "transverse";
-  return LayoutModeEnum2;
-})(LayoutModeEnum || {});
-var ThemeModeEnum = /* @__PURE__ */ ((ThemeModeEnum2) => {
-  ThemeModeEnum2["DARK"] = "dark";
-  ThemeModeEnum2["LIGHT"] = "light";
-  ThemeModeEnum2["SYSTEM"] = "system";
-  return ThemeModeEnum2;
-})(ThemeModeEnum || {});
 moment.locale("zh-cn");
 dayjs.locale("zh-cn");
 let pendingMap = /* @__PURE__ */ new Map();
@@ -970,7 +957,6 @@ export {
   default3 as DayJs,
   HttpConfig,
   HttpMethodEnum,
-  LayoutModeEnum,
   OperationEnum,
   PKCE,
   SM2Utils,
@@ -978,7 +964,6 @@ export {
   Service,
   StatusEnum,
   default4 as Swal,
-  ThemeModeEnum,
   isSuccess,
   lodash,
   logResponse,

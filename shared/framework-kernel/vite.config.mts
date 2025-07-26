@@ -38,6 +38,7 @@ export default defineConfig({
         'vue-router',
         'pinia',
         'pinia-plugin-persistedstate',
+        '@github/webauthn-json',
         '@herodotus-cloud/core',
       ],
       output: {
@@ -49,6 +50,7 @@ export default defineConfig({
           'vue-router': 'VueRouter',
           pinia: 'Pinia',
           'pinia-plugin-persistedstate': 'PiniaPluginPersistedstate',
+          '@github/webauthn-json': 'GithubWebauthnJson',
           '@herodotus-cloud/core': 'HerodotusCore',
         },
       },

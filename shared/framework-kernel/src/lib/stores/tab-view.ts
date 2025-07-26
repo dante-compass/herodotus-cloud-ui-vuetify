@@ -8,11 +8,11 @@ import type {
 } from 'vue-router';
 import type { Tab } from '@/declarations';
 
-import { lodash } from '@/lib/base';
-import { RouterUtilities, OptionsUtilities } from '@/lib/utilities';
+import { lodash } from '@herodotus-cloud/core';
+import { RouterUtilities, OptionsUtilities } from '../utilities';
 import { useRouterStore } from './router';
 
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+
 
 /**
  * TabView 目前完全基于 Quasar 的 QRouteTab 进行构建。

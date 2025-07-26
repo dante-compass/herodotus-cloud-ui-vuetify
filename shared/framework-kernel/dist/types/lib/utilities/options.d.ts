@@ -1,3 +1,4 @@
+import { HttpConfig } from '@herodotus-cloud/core';
 import { KernelOptions } from '../../declarations';
 /**
  * Framework Kernel Options 工具类，方便在代码中传递 Options
@@ -20,4 +21,9 @@ export declare class OptionsUtilities {
     static getInstance(): OptionsUtilities;
     setOptions(options: KernelOptions): void;
     getOptions(): KernelOptions;
+    static securityKey(): string;
+    static axiosConfig(): HttpConfig;
+    static isUseCrypto(): boolean;
+    static isAutoRefreshToken(): boolean;
+    static getRedirectUri(): string;
 }
