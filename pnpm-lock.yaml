@@ -165,9 +165,6 @@ importers:
       '@bpmn-io/properties-panel':
         specifier: 3.31.0
         version: 3.31.0
-      '@github/webauthn-json':
-        specifier: ^2.1.1
-        version: 2.1.1
       '@herodotus-cloud/apis':
         specifier: workspace:^
         version: link:../../shared/apis

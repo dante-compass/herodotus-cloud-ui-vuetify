@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.4
+
+### Patch Changes
+
+- 迁移 Passkey
+
 ## 1.7.3
 
 ### Patch Changes

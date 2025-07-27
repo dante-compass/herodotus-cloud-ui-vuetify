@@ -44,8 +44,12 @@ import type {
 
 import { CONSTANTS, API } from '@/configurations';
 import { moment, toast, standardDeleteNotify } from '@/lib/utils';
-import { useTable, usePasskey } from '@/hooks';
-import { useAuthenticationStore, SecurityApiResources } from '@herodotus-cloud/framework-kernel';
+import { useTable } from '@/hooks';
+import {
+  useAuthenticationStore,
+  SecurityApiResources,
+  usePasskey,
+} from '@herodotus-cloud/framework-kernel';
 
 import { HDeleteButton } from '@/components';
 

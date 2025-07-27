@@ -1,5 +1,16 @@
 # @herodotus-cloud/bpmn-designer
 
+## 1.7.4
+
+### Patch Changes
+
+- 迁移 Passkey
+- Updated dependencies
+  - @herodotus-cloud/components@1.7.4
+  - @herodotus-cloud/bpmn-apis@1.7.4
+  - @herodotus-cloud/form-apis@1.7.4
+  - @herodotus-cloud/core@1.7.4
+
 ## 1.7.3
 
 ### Patch Changes

@@ -120,9 +120,8 @@ import { required, helpers } from '@vuelidate/validators';
 import { CONSTANTS } from '@/configurations';
 import { toast } from '@/lib/utils';
 import { useApplicationStore } from '@/stores';
-import { useCryptoStore, useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useCryptoStore, useAuthenticationStore, usePasskey } from '@herodotus-cloud/framework-kernel';
 import { HSocialSignInList } from '@/composables/sign-in';
-import { usePasskey } from '@/hooks';
 
 export default defineComponent({
   name: 'AccountPanel',

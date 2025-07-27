@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@bpmn-io/properties-panel": "3.31.0",
-    "@github/webauthn-json": "^2.1.1",
     "@herodotus-cloud/apis": "workspace:^",
     "@herodotus-cloud/bpmn-apis": "workspace:^",
     "@herodotus-cloud/bpmn-designer": "workspace:^",
