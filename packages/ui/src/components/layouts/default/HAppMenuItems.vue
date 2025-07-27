@@ -33,7 +33,7 @@ import type { RouteRecordRaw } from 'vue-router';
 
 import { useRoute } from 'vue-router';
 
-import { useSystemMenu } from '@/hooks';
+import { useSystemMenu } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HAppMenuItems',

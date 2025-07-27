@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { lodash } from '@/lib/utils';
+import { lodash } from '@herodotus-cloud/core';
 import { useRouterStore, useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 
 export default function useSystemMenu() {

@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.5
+
+### Patch Changes
+
+- [重构] 迁移前端菜单相关内容代码至模块 @herodotus-cloud/framework-kernel
+
 ## 1.7.4
 
 ### Patch Changes
