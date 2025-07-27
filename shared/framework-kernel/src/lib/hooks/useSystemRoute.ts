@@ -1,17 +1,15 @@
-import type { ModuleNamespace } from 'vite/types/hot.d.ts';
 import type { RouteRecordRaw, RouteMeta, Router } from 'vue-router';
-import type { RemoteRoute } from '@/lib/declarations';
+import type { RemoteRoute, ModuleNamespace } from '@/declarations';
 
-import { useRouterStore } from '@herodotus-cloud/framework-kernel';
-import { lodash } from '@/lib/utils';
-import { API } from '@/configurations';
+import { useRouterStore } from '../stores';
+import { lodash } from '@herodotus-cloud/core';
 
-export default function useSystemRoute() {
-  const routeModules = import.meta.glob('../../routers/modules/**/*.ts', {
-    eager: true,
-  });
-  const vueModules = import.meta.glob('../../views/**/*.vue');
-
+export default function useSystemRoute(
+  routeModules: Record<string, unknown>,
+  vueModules: Record<string, unknown>,
+  locate: (item: string) => string,
+  getRoutesFromServer: () => Promise<any>,
+) {
   /**
    * 将后端返回的路由 JSON 转换为前端可识别的格式，主要解决 vite 环境下，component 的 import 问题
    * @param dataimport { ModuleNamespace } from 'vite/types/hot';
@@ -23,7 +21,7 @@ export default function useSystemRoute() {
     return data.map((item: RemoteRoute) => {
       const raw = {} as RouteRecordRaw;
       raw.path = item.name;
-      raw.component = modules[`../../${item.componentPath}`];
+      raw.component = modules[locate(item.componentPath)];
       if (item.componentName) {
         raw.name = item.componentName;
       }
@@ -62,10 +60,6 @@ export default function useSystemRoute() {
 
       return raw;
     });
-  };
-
-  const getRoutesFromServer = () => {
-    return API.core.sysElement().fetchTree();
   };
 
   const getRoutesFromLocal = () => {

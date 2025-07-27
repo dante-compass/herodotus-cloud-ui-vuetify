@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.11
+
+### Patch Changes
+
+- 框架代码迁移至模块主体完成
+
 ## 1.7.10
 
 ### Patch Changes

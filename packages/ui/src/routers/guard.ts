@@ -1,11 +1,30 @@
 import type { Router } from 'vue-router';
 import { useAuthenticationStore, useRouterStore } from '@herodotus-cloud/framework-kernel';
-import { CONSTANTS } from '@/configurations';
-import { useSystemRoute } from '@/hooks';
+import { CONSTANTS, API } from '@/configurations';
+import { useSystemRoute } from '@herodotus-cloud/framework-kernel';
 
 import { Loading, QSpinnerDots } from 'quasar';
 
-const { initBackEndRoutes, initFrontEndRoutes } = useSystemRoute();
+const routeModules = import.meta.glob('./modules/**/*.ts', {
+  eager: true,
+});
+
+const vueModules = import.meta.glob('../views/**/*.vue');
+
+const locate = (item: string) => {
+  return `../${item}`;
+};
+
+const getRoutesFromServer = () => {
+  return API.core.sysElement().fetchTree();
+};
+
+const { initBackEndRoutes, initFrontEndRoutes } = useSystemRoute(
+  routeModules,
+  vueModules,
+  locate,
+  getRoutesFromServer,
+);
 
 export const createRouterGuard = (router: Router) => {
   router.beforeEach(async (to, from, next) => {

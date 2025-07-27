@@ -1,5 +1,5 @@
 import type { Router, RouteLocationRaw, RouteLocationNormalizedLoaded } from 'vue-router';
-import type { OperationEnum } from '@herodotus-cloud/core';
+import type { OperationEnum, Tree } from '@herodotus-cloud/core';
 
 export interface RouterOptions {
   instance: Router;
@@ -28,3 +28,26 @@ export interface PushParam {
 }
 
 export type RoutePushParam = Record<string, PushParam>;
+
+export interface RemoteRouteMeta {
+  title: string;
+  icon: string;
+  sort: number;
+  isHaveChild?: boolean;
+  isNotKeepAlive?: boolean;
+  isHideAllChild?: boolean;
+  isDetailContent?: boolean;
+  isIgnoreAuth?: boolean;
+}
+export interface RemoteRoute extends Tree {
+  componentName: string;
+  componentPath: string;
+  redirect: string;
+  meta: RemoteRouteMeta;
+  roles: Array<string>;
+  children?: Array<RemoteRoute>;
+}
+
+export type ModuleNamespace = Record<string, any> & {
+  [Symbol.toStringTag]: 'Module';
+};

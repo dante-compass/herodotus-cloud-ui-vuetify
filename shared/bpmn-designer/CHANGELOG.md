@@ -1,5 +1,16 @@
 # @herodotus-cloud/bpmn-designer
 
+## 1.7.11
+
+### Patch Changes
+
+- 框架代码迁移至模块主体完成
+- Updated dependencies
+  - @herodotus-cloud/components@1.7.11
+  - @herodotus-cloud/bpmn-apis@1.7.11
+  - @herodotus-cloud/form-apis@1.7.11
+  - @herodotus-cloud/core@1.7.11
+
 ## 1.7.10
 
 ### Patch Changes
