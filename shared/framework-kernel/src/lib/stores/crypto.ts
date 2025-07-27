@@ -20,11 +20,11 @@ export const useCryptoStore = defineStore('Crypto', {
     },
 
     setKey(key: string) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities.securityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities.getSecurityKey());
     },
 
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities.securityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities.getSecurityKey());
     },
 
     encrypt(content: string) {

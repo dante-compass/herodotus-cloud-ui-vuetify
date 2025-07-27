@@ -12,8 +12,6 @@ import { lodash } from '@herodotus-cloud/core';
 import { RouterUtilities, OptionsUtilities } from '../utilities';
 import { useRouterStore } from './router';
 
-
-
 /**
  * TabView 目前完全基于 Quasar 的 QRouteTab 进行构建。
  * QRouteTab 可以和 VueRouter 完全融合。
@@ -101,10 +99,7 @@ export const useTabsViewStore = defineStore('TabsView', {
 
     isNotExistInStaticRoute(tab: Tab): boolean {
       return (
-        lodash.findIndex(
-          OptionsUtilities.getInstance().getOptions().staticRoutes,
-          (item) => item.path === tab.path,
-        ) === -1
+        lodash.findIndex(OptionsUtilities.getRoutes(), (item) => item.path === tab.path) === -1
       );
     },
 

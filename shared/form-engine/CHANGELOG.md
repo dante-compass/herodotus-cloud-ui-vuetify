@@ -1,5 +1,13 @@
 # @herodotus-cloud/form-engine
 
+## 1.7.7
+
+### Patch Changes
+
+- 调整 Kernel Options 定义
+- Updated dependencies
+  - @herodotus-cloud/form-apis@1.7.7
+
 ## 1.7.6
 
 ### Patch Changes

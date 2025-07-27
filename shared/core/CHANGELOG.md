@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.7
+
+### Patch Changes
+
+- 调整 Kernel Options 定义
+
 ## 1.7.6
 
 ### Patch Changes

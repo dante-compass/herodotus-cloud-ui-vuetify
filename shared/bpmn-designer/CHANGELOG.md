@@ -1,5 +1,16 @@
 # @herodotus-cloud/bpmn-designer
 
+## 1.7.7
+
+### Patch Changes
+
+- 调整 Kernel Options 定义
+- Updated dependencies
+  - @herodotus-cloud/components@1.7.7
+  - @herodotus-cloud/bpmn-apis@1.7.7
+  - @herodotus-cloud/form-apis@1.7.7
+  - @herodotus-cloud/core@1.7.7
+
 ## 1.7.6
 
 ### Patch Changes

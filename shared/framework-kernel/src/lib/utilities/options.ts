@@ -1,5 +1,6 @@
 import type { HttpConfig } from '@herodotus-cloud/core';
-import type { KernelOptions } from '@/declarations';
+import type { KernelOptions, RouterOptions } from '@/declarations';
+import type { Router, RouteRecord, RouteLocationRaw } from 'vue-router';
 
 /**
  * Framework Kernel Options 工具类，方便在代码中传递 Options
@@ -52,27 +53,51 @@ export class OptionsUtilities {
     return this.options;
   }
 
-  public static securityKey(): string {
-    return this.getInstance().getOptions().securityKey;
-  }
-
   public static axiosConfig(): HttpConfig {
     return this.getInstance().getOptions().config;
   }
 
-  public static isUseCrypto(): boolean {
-    return this.getInstance().getOptions().isUseCrypto;
+  private static getRouterOptions(): RouterOptions {
+    return this.getInstance().getOptions().router;
   }
 
-  public static isAutoRefreshToken(): boolean {
-    return this.getInstance().getOptions().isAutoRefreshToken;
+  public static getRouter(): Router {
+    return this.getRouterOptions().instance;
+  }
+
+  public static getRoutes(): RouteRecord[] {
+    return this.getRouter().getRoutes();
+  }
+
+  public static getPathRoot(): RouteLocationRaw {
+    return this.getRouterOptions().path.root;
+  }
+
+  public static getPathHome(): RouteLocationRaw {
+    return this.getRouterOptions().path.home;
+  }
+
+  public static getPathSignIn(): RouteLocationRaw {
+    return this.getRouterOptions().path.signIn;
+  }
+
+  public static getSecurityKey(): string {
+    return this.getInstance().getOptions().variables.securityKey;
   }
 
   public static getRedirectUri(): string {
-    return this.getInstance().getOptions().redirectUri;
+    return this.getInstance().getOptions().variables.redirectUri;
+  }
+
+  public static isUseCrypto(): boolean {
+    return this.getInstance().getOptions().variables.isUseCrypto;
+  }
+
+  public static isAutoRefreshToken(): boolean {
+    return this.getInstance().getOptions().variables.isAutoRefreshToken;
   }
 
   public static getTenantId(): string {
-    return this.getInstance().getOptions().tenantId;
+    return this.getInstance().getOptions().variables.tenantId;
   }
 }

@@ -1,13 +1,15 @@
-import { RouteRecordRaw } from 'vue-router';
 import { RouterOptions } from './router';
 import { HttpConfig } from '@herodotus-cloud/core';
-export interface KernelOptions {
-    router: RouterOptions;
-    staticRoutes: Array<RouteRecordRaw>;
-    config: HttpConfig;
+interface VariableOptions {
     securityKey: string;
     redirectUri: string;
     tenantId: string;
     isUseCrypto: boolean;
     isAutoRefreshToken: boolean;
 }
+export interface KernelOptions {
+    router: RouterOptions;
+    variables: VariableOptions;
+    config: HttpConfig;
+}
+export {};

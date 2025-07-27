@@ -18,13 +18,14 @@ const setupKernel = (currentRouter: Router) => {
         signIn: { name: Path.SIGN_IN_NAME },
       },
     },
-    staticRoutes: currentRouter.getRoutes(),
-    securityKey: VARIABLES.getSecretKey(),
-    tenantId: VARIABLES.getCurrentTenantId(),
-    isAutoRefreshToken: VARIABLES.getAutoRefreshToken(),
-    isUseCrypto: VARIABLES.isUseCrypto(),
-    redirectUri: VARIABLES.getRedirectUri(),
     config: config,
+    variables: {
+      securityKey: VARIABLES.getSecretKey(),
+      tenantId: VARIABLES.getCurrentTenantId(),
+      isAutoRefreshToken: VARIABLES.getAutoRefreshToken(),
+      isUseCrypto: VARIABLES.isUseCrypto(),
+      redirectUri: VARIABLES.getRedirectUri(),
+    },
   };
 
   initializer(options);
