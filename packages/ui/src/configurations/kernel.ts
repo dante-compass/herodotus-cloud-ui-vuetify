@@ -5,6 +5,8 @@ import { initializer, RouterUtilities } from '@herodotus-cloud/framework-kernel'
 import { Path } from './constants';
 import { VARIABLES } from './variables';
 import { config } from './http';
+import { useWebSocketMessage } from '@/composables/messages';
+import { useDictionaryStore } from '@/composables/constants';
 
 let RouterUtils = {} as RouterUtilities;
 
@@ -26,6 +28,11 @@ const setupKernel = (currentRouter: Router) => {
       isAutoRefreshToken: VARIABLES.getAutoRefreshToken(),
       isUseCrypto: VARIABLES.isUseCrypto(),
       redirectUri: VARIABLES.getRedirectUri(),
+    },
+    signOutExtension: () => {
+      const { disconnect } = useWebSocketMessage();
+      disconnect();
+      useDictionaryStore().$reset();
     },
   };
 

@@ -1,5 +1,27 @@
 # @herodotus-cloud/form-designer
 
+## 1.7.10
+
+### Patch Changes
+
+- 调整代码错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.7.10
+  - @herodotus-cloud/components@1.7.10
+  - @herodotus-cloud/form-apis@1.7.10
+  - @herodotus-cloud/core@1.7.10
+
+## 1.7.9
+
+### Patch Changes
+
+- 迁移最后的管理代码
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.7.9
+  - @herodotus-cloud/components@1.7.9
+  - @herodotus-cloud/form-apis@1.7.9
+  - @herodotus-cloud/core@1.7.9
+
 ## 1.7.8
 
 ### Patch Changes

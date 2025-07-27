@@ -13,5 +13,6 @@ export interface KernelOptions {
     variables: VariableOptions;
     staticRoutes: Array<RouteRecordRaw>;
     config: HttpConfig;
+    signOutExtension: () => void;
 }
 export {};

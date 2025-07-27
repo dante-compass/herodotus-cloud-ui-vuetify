@@ -3,12 +3,6 @@ import { useAuthenticationStore } from './authentication';
 import { OptionsUtilities } from '../utilities';
 import { AuthorizationTokenEnum } from '@herodotus-cloud/core';
 
-export const clearKernelPersistData = () => {
-  console.log('Clear Framework Kernel Data');
-  useAuthenticationStore().$reset();
-  useCryptoStore().$reset();
-};
-
 export const getSystemHeaders = () => {
   const authentication = useAuthenticationStore();
   const crypto = useCryptoStore();

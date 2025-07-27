@@ -1,6 +1,6 @@
 import type { HttpConfig } from '@herodotus-cloud/core';
 import type { KernelOptions, RouterOptions } from '@/declarations';
-import type { Router, RouteRecordRaw, RouteLocationRaw } from 'vue-router';
+import type { Router, RouteRecordRaw } from 'vue-router';
 
 /**
  * Framework Kernel Options 工具类，方便在代码中传递 Options
@@ -67,18 +67,6 @@ export class OptionsUtilities {
 
   public static getRoutes(): RouteRecordRaw[] {
     return this.getInstance().getOptions().staticRoutes;
-  }
-
-  public static getPathRoot(): RouteLocationRaw {
-    return this.getRouterOptions().path.root;
-  }
-
-  public static getPathHome(): RouteLocationRaw {
-    return this.getRouterOptions().path.home;
-  }
-
-  public static getPathSignIn(): RouteLocationRaw {
-    return this.getRouterOptions().path.signIn;
   }
 
   public static getSecurityKey(): string {

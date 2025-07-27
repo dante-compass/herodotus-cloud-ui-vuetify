@@ -2,7 +2,7 @@ import type { AxiosResponse, AxiosInstance, AxiosError } from '@herodotus-cloud/
 
 import { notify, parseResponseStatus } from '@herodotus-cloud/core';
 
-import { ActionUtils } from '@/lib/utils';
+import { SignOutUtilities } from '@herodotus-cloud/framework-kernel';
 
 const excludedRequest = ['/open/captcha', '/oauth2/token'];
 
@@ -34,7 +34,11 @@ const statusCode = (
           // } else {
           //   ActionUtils.tokenExpires('认证失效!', '登录认证已过期，请重新登录！', 'warning');
           // }
-          ActionUtils.tokenExpires('认证失效!', '登录认证已过期，请重新登录！', 'warning');
+          SignOutUtilities.getInstance().tokenExpires(
+            '认证失效!',
+            '登录认证已过期，请重新登录！',
+            'warning',
+          );
         } else if ([40103, 40106, 40105, 40111, 40112].includes(code)) {
         } else {
           notify.error(content, detail);
@@ -62,7 +66,11 @@ const statusCode = (
       case 500:
         if (content) {
           if (content === 'Request failed with status code 500') {
-            ActionUtils.tokenExpires('网络错误!', '后端服务无法访问或者尚未启动！', 'error');
+            SignOutUtilities.getInstance().tokenExpires(
+              '网络错误!',
+              '后端服务无法访问或者尚未启动！',
+              'error',
+            );
           } else {
             notify.error(content, detail);
           }
@@ -93,10 +101,15 @@ export const processor = (axiosInstance: AxiosInstance, error: AxiosError) => {
 
   switch (code) {
     case 'ECONNABORTED':
-      ActionUtils.tokenExpires('网络错误!', '响应超时，请稍后再试！', 'error');
+      SignOutUtilities.getInstance().tokenExpires('网络错误!', '响应超时，请稍后再试！', 'error');
       break;
     case 'ERR_NETWORK':
-      ActionUtils.tokenExpires('网络错误!', '系统响应超时，请稍后再试！', 'error', true);
+      SignOutUtilities.getInstance().tokenExpires(
+        '网络错误!',
+        '系统响应超时，请稍后再试！',
+        'error',
+        true,
+      );
       break;
     // case 'ERR_BAD_RESPONSE':
     //   ActionUtils.tokenExpires('网络错误!', '响应超时，请稍后再试！', 'error');

@@ -1,5 +1,17 @@
 # @herodotus-cloud/core
 
+## 1.7.10
+
+### Patch Changes
+
+- 调整代码错误
+
+## 1.7.9
+
+### Patch Changes
+
+- 迁移最后的管理代码
+
 ## 1.7.8
 
 ### Patch Changes
