@@ -13,7 +13,7 @@ import { moment } from '@herodotus-cloud/core';
 import { jwtDecode } from 'jwt-decode';
 import { useCryptoStore } from './crypto';
 import { OptionsUtilities } from '../utilities';
-import { SecurityApiResources } from '../security';
+import { SecurityApiResources } from '../api';
 
 export const useAuthenticationStore = defineStore('Authentication', {
   state: () => ({

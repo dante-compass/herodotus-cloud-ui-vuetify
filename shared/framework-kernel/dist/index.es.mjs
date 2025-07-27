@@ -2,6 +2,7 @@ import { useRoute } from "vue-router";
 import { defineStore } from "pinia";
 import { lodash, Base64, ContentTypeEnum, AuthorizationGrantTypeEnum as AuthorizationGrantTypeEnum$1, Service, SM2Utils, SM4Utils, moment } from "@herodotus-cloud/core";
 import { nextTick, shallowRef, watch, computed } from "vue";
+import { jwtDecode } from "jwt-decode";
 import "pinia-plugin-persistedstate";
 var LayoutModeEnum = /* @__PURE__ */ ((LayoutModeEnum2) => {
   LayoutModeEnum2["DEFAULT"] = "defaults";
@@ -576,60 +577,6 @@ const useTabsViewStore = defineStore("TabsView", {
   },
   persist: true
 });
-class InvalidTokenError extends Error {
-}
-InvalidTokenError.prototype.name = "InvalidTokenError";
-function b64DecodeUnicode(str) {
-  return decodeURIComponent(atob(str).replace(/(.)/g, (m, p) => {
-    let code = p.charCodeAt(0).toString(16).toUpperCase();
-    if (code.length < 2) {
-      code = "0" + code;
-    }
-    return "%" + code;
-  }));
-}
-function base64UrlDecode(str) {
-  let output = str.replace(/-/g, "+").replace(/_/g, "/");
-  switch (output.length % 4) {
-    case 0:
-      break;
-    case 2:
-      output += "==";
-      break;
-    case 3:
-      output += "=";
-      break;
-    default:
-      throw new Error("base64 string is not of the correct length");
-  }
-  try {
-    return b64DecodeUnicode(output);
-  } catch (err) {
-    return atob(output);
-  }
-}
-function jwtDecode(token, options) {
-  if (typeof token !== "string") {
-    throw new InvalidTokenError("Invalid token specified: must be a string");
-  }
-  options || (options = {});
-  const pos = options.header === true ? 0 : 1;
-  const part = token.split(".")[pos];
-  if (typeof part !== "string") {
-    throw new InvalidTokenError(`Invalid token specified: missing part #${pos + 1}`);
-  }
-  let decoded;
-  try {
-    decoded = base64UrlDecode(part);
-  } catch (e) {
-    throw new InvalidTokenError(`Invalid token specified: invalid base64 for part #${pos + 1} (${e.message})`);
-  }
-  try {
-    return JSON.parse(decoded);
-  } catch (e) {
-    throw new InvalidTokenError(`Invalid token specified: invalid json for part #${pos + 1} (${e.message})`);
-  }
-}
 class OAuth2ApiService {
   // 静态私有实例引用
   static instance = null;
@@ -1274,6 +1221,262 @@ function useEditFinish() {
     onFinish
   };
 }
+function base64urlToBuffer(baseurl64String) {
+  const padding = "==".slice(0, (4 - baseurl64String.length % 4) % 4);
+  const base64String = baseurl64String.replace(/-/g, "+").replace(/_/g, "/") + padding;
+  const str = atob(base64String);
+  const buffer = new ArrayBuffer(str.length);
+  const byteView = new Uint8Array(buffer);
+  for (let i = 0; i < str.length; i++) {
+    byteView[i] = str.charCodeAt(i);
+  }
+  return buffer;
+}
+function bufferToBase64url(buffer) {
+  const byteView = new Uint8Array(buffer);
+  let str = "";
+  for (const charCode of byteView) {
+    str += String.fromCharCode(charCode);
+  }
+  const base64String = btoa(str);
+  const base64urlString = base64String.replace(/\+/g, "-").replace(
+    /\//g,
+    "_"
+  ).replace(/=/g, "");
+  return base64urlString;
+}
+var copyValue = "copy";
+var convertValue = "convert";
+function convert(conversionFn, schema, input) {
+  if (schema === copyValue) {
+    return input;
+  }
+  if (schema === convertValue) {
+    return conversionFn(input);
+  }
+  if (schema instanceof Array) {
+    return input.map((v) => convert(conversionFn, schema[0], v));
+  }
+  if (schema instanceof Object) {
+    const output = {};
+    for (const [key, schemaField] of Object.entries(schema)) {
+      if (schemaField.derive) {
+        const v = schemaField.derive(input);
+        if (v !== void 0) {
+          input[key] = v;
+        }
+      }
+      if (!(key in input)) {
+        if (schemaField.required) {
+          throw new Error(`Missing key: ${key}`);
+        }
+        continue;
+      }
+      if (input[key] == null) {
+        output[key] = null;
+        continue;
+      }
+      output[key] = convert(
+        conversionFn,
+        schemaField.schema,
+        input[key]
+      );
+    }
+    return output;
+  }
+}
+function derived(schema, derive) {
+  return {
+    required: true,
+    schema,
+    derive
+  };
+}
+function required(schema) {
+  return {
+    required: true,
+    schema
+  };
+}
+function optional(schema) {
+  return {
+    required: false,
+    schema
+  };
+}
+var publicKeyCredentialDescriptorSchema = {
+  type: required(copyValue),
+  id: required(convertValue),
+  transports: optional(copyValue)
+};
+var simplifiedExtensionsSchema = {
+  appid: optional(copyValue),
+  appidExclude: optional(copyValue),
+  credProps: optional(copyValue)
+};
+var simplifiedClientExtensionResultsSchema = {
+  appid: optional(copyValue),
+  appidExclude: optional(copyValue),
+  credProps: optional(copyValue)
+};
+var credentialCreationOptions = {
+  publicKey: required({
+    rp: required(copyValue),
+    user: required({
+      id: required(convertValue),
+      name: required(copyValue),
+      displayName: required(copyValue)
+    }),
+    challenge: required(convertValue),
+    pubKeyCredParams: required(copyValue),
+    timeout: optional(copyValue),
+    excludeCredentials: optional([publicKeyCredentialDescriptorSchema]),
+    authenticatorSelection: optional(copyValue),
+    attestation: optional(copyValue),
+    extensions: optional(simplifiedExtensionsSchema)
+  }),
+  signal: optional(copyValue)
+};
+var publicKeyCredentialWithAttestation = {
+  type: required(copyValue),
+  id: required(copyValue),
+  rawId: required(convertValue),
+  authenticatorAttachment: optional(copyValue),
+  response: required({
+    clientDataJSON: required(convertValue),
+    attestationObject: required(convertValue),
+    transports: derived(
+      copyValue,
+      (response) => {
+        var _a;
+        return ((_a = response.getTransports) == null ? void 0 : _a.call(response)) || [];
+      }
+    )
+  }),
+  clientExtensionResults: derived(
+    simplifiedClientExtensionResultsSchema,
+    (pkc) => pkc.getClientExtensionResults()
+  )
+};
+var credentialRequestOptions = {
+  mediation: optional(copyValue),
+  publicKey: required({
+    challenge: required(convertValue),
+    timeout: optional(copyValue),
+    rpId: optional(copyValue),
+    allowCredentials: optional([publicKeyCredentialDescriptorSchema]),
+    userVerification: optional(copyValue),
+    extensions: optional(simplifiedExtensionsSchema)
+  }),
+  signal: optional(copyValue)
+};
+var publicKeyCredentialWithAssertion = {
+  type: required(copyValue),
+  id: required(copyValue),
+  rawId: required(convertValue),
+  authenticatorAttachment: optional(copyValue),
+  response: required({
+    clientDataJSON: required(convertValue),
+    authenticatorData: required(convertValue),
+    signature: required(convertValue),
+    userHandle: required(convertValue)
+  }),
+  clientExtensionResults: derived(
+    simplifiedClientExtensionResultsSchema,
+    (pkc) => pkc.getClientExtensionResults()
+  )
+};
+function createRequestFromJSON(requestJSON) {
+  return convert(base64urlToBuffer, credentialCreationOptions, requestJSON);
+}
+function createResponseToJSON(credential) {
+  return convert(
+    bufferToBase64url,
+    publicKeyCredentialWithAttestation,
+    credential
+  );
+}
+function getRequestFromJSON(requestJSON) {
+  return convert(base64urlToBuffer, credentialRequestOptions, requestJSON);
+}
+function getResponseToJSON(credential) {
+  return convert(
+    bufferToBase64url,
+    publicKeyCredentialWithAssertion,
+    credential
+  );
+}
+async function create(options) {
+  const response = await navigator.credentials.create(
+    options
+  );
+  response.toJSON = () => createResponseToJSON(response);
+  return response;
+}
+async function get(options) {
+  const response = await navigator.credentials.get(
+    options
+  );
+  response.toJSON = () => getResponseToJSON(response);
+  return response;
+}
+function usePasskey() {
+  const authenticationStore = useAuthenticationStore();
+  const isSupported = async () => {
+    if (window.PublicKeyCredential && PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable && PublicKeyCredential.isConditionalMediationAvailable) {
+      const results = await Promise.all([
+        PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(),
+        PublicKeyCredential.isConditionalMediationAvailable()
+      ]);
+      if (results.every((r) => r === true)) {
+        return true;
+      }
+    }
+    return false;
+  };
+  const registration = (label) => {
+    return new Promise((resolve, reject) => {
+      SecurityApiResources.getInstance().passkey().fetchWebAuthnRegisterOptions().then((publicKey) => {
+        const registrationOptions = createRequestFromJSON({
+          publicKey
+        });
+        create(registrationOptions).then((registration2) => {
+          const credential = registration2.toJSON();
+          const request = {
+            publicKey: { label, credential }
+          };
+          SecurityApiResources.getInstance().passkey().webAuthnRegister(request).then(() => {
+            resolve(true);
+          });
+        });
+      }).catch(() => {
+        reject(false);
+      });
+    });
+  };
+  const authenticator = () => {
+    return new Promise((resolve, reject) => {
+      SecurityApiResources.getInstance().passkey().fetchWebAuthnAuthenticateOptions().then((publicKey) => {
+        const authenticationOptions = getRequestFromJSON({
+          publicKey
+        });
+        get(authenticationOptions).then((authentication) => {
+          const request = authentication.toJSON();
+          authenticationStore.passkey(request).then((result) => {
+            resolve(result);
+          });
+        });
+      }).catch(() => {
+        reject(false);
+      });
+    });
+  };
+  return {
+    isSupported,
+    registration,
+    authenticator
+  };
+}
 function useSystemTheme() {
   let media;
   const settings = useSettingsStore();
@@ -1324,6 +1527,7 @@ export {
   useAuthenticationStore,
   useCryptoStore,
   useEditFinish,
+  usePasskey,
   useRouterStore,
   useSettingsStore,
   useSystemTheme,

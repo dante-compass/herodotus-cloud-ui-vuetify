@@ -2,7 +2,7 @@ import type { KernelOptions } from '@/declarations';
 
 // 防止 store 类出现异常提示
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
-import { SecurityApiResources } from './security';
+import { SecurityApiResources } from './api';
 import { OptionsUtilities, RouterUtilities } from './utilities';
 
 const initializer = (options: KernelOptions) => {

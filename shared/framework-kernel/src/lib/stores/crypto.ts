@@ -5,7 +5,7 @@ import type { Session } from '@/declarations';
 import { SM2Utils, SM4Utils } from '@herodotus-cloud/core';
 
 import { OptionsUtilities } from '../utilities';
-import { SecurityApiResources } from '../security';
+import { SecurityApiResources } from '../api';
 
 export const useCryptoStore = defineStore('Crypto', {
   state: () => ({
