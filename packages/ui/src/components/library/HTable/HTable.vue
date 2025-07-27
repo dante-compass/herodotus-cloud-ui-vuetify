@@ -52,7 +52,7 @@ import { computed, shallowRef } from 'vue';
 
 import type { Entity, QTableSeparatorProps } from '@/lib/declarations';
 
-import { useSettingsStore } from '@/stores';
+import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
 import { useDictionary } from '@/composables/constants';
 
 import HTableAction from './HTableAction.vue';

@@ -35,7 +35,7 @@ import { defineComponent, computed } from 'vue';
 import type { HttpMethod } from '@/lib/declarations';
 
 import { useDisplayElement } from '@/hooks';
-import { useSettingsStore } from '@/stores';
+import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
 
 import { CONSTANTS } from '@/configurations';
 

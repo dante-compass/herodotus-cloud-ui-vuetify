@@ -38,7 +38,7 @@
 import type { PropType } from 'vue';
 import type { QTableSeparatorProps } from '@/lib/declarations';
 
-import { useSettingsStore } from '@/stores';
+import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
 
 defineProps({
   modelValue: { type: String as PropType<QTableSeparatorProps>, default: 'horizontal' },

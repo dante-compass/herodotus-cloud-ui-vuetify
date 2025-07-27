@@ -16,7 +16,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useSettingsStore } from '@/stores';
+import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
 
 import HDenseIconButton from './HDenseIconButton.vue';
 

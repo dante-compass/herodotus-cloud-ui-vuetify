@@ -6,8 +6,7 @@
 import { defineComponent, watch, nextTick, provide, ref, onMounted, onUnmounted } from 'vue';
 import { useQuasar } from 'quasar';
 import { echarts } from '@/plugins';
-import { useSettingsStore } from '@/stores';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore, useSettingsStore } from '@herodotus-cloud/framework-kernel';
 import { VARIABLES } from '@/configurations';
 import { refreshTabInjectionKey, echartsInjectionKey } from '@/lib/definitions';
 import { useWebSocketMessage } from '@/composables/messages';
