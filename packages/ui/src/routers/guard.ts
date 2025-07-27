@@ -1,7 +1,10 @@
 import type { Router } from 'vue-router';
-import { useAuthenticationStore, useRouterStore } from '@herodotus-cloud/framework-kernel';
+import {
+  useAuthenticationStore,
+  useRouterStore,
+  useSystemRoute,
+} from '@herodotus-cloud/framework-kernel';
 import { CONSTANTS, API } from '@/configurations';
-import { useSystemRoute } from '@herodotus-cloud/framework-kernel';
 
 import { Loading, QSpinnerDots } from 'quasar';
 
