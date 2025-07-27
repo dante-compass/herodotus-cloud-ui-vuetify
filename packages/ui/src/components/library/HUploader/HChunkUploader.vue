@@ -22,7 +22,7 @@ import type {
   SimpleUploaderChunk,
 } from '@/lib/declarations';
 import { API } from '@/configurations';
-import { getSystemHeaders } from '@/stores';
+import { getSystemHeaders } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HChunkUploader',

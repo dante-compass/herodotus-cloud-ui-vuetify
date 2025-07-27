@@ -7,6 +7,7 @@ export interface KernelOptions {
     config: HttpConfig;
     securityKey: string;
     redirectUri: string;
+    tenantId: string;
     isUseCrypto: boolean;
     isAutoRefreshToken: boolean;
 }

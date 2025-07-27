@@ -20,6 +20,7 @@ const setupKernel = (currentRouter: Router) => {
     },
     staticRoutes: currentRouter.getRoutes(),
     securityKey: VARIABLES.getSecretKey(),
+    tenantId: VARIABLES.getCurrentTenantId(),
     isAutoRefreshToken: VARIABLES.getAutoRefreshToken(),
     isUseCrypto: VARIABLES.isUseCrypto(),
     redirectUri: VARIABLES.getRedirectUri(),

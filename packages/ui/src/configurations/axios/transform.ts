@@ -11,7 +11,7 @@ import type {
 
 import { logResponse, isSuccess } from '@herodotus-cloud/core';
 
-import { getSystemHeaders } from '@/stores';
+import { getSystemHeaders } from '@herodotus-cloud/framework-kernel';
 import { processor } from './status';
 
 export const transform: AxiosTransform = {

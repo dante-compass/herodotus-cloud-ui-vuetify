@@ -71,4 +71,8 @@ export class OptionsUtilities {
   public static getRedirectUri(): string {
     return this.getInstance().getOptions().redirectUri;
   }
+
+  public static getTenantId(): string {
+    return this.getInstance().getOptions().tenantId;
+  }
 }

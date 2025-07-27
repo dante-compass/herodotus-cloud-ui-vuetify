@@ -1,11 +1,17 @@
 import type { SweetAlertIcon, SweetAlertResult } from '@/lib/declarations';
 
-import { clearPersistData } from '@/stores';
+import { useDictionaryStore } from '@/composables/constants';
 import { useWebSocketMessage } from '@/composables/messages';
 import { RouterUtils } from '@/configurations';
 import { Swal } from '../base';
 
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore, clearKernelPersistData } from '@herodotus-cloud/framework-kernel';
+
+const clearPersistData = () => {
+  console.log('Clear Persist Data');
+  useDictionaryStore().$reset();
+  clearKernelPersistData();
+};
 
 class ActionUtilities {
   private static instance = new ActionUtilities();

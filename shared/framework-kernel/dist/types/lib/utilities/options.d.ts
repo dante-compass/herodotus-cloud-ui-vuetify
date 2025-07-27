@@ -26,4 +26,5 @@ export declare class OptionsUtilities {
     static isUseCrypto(): boolean;
     static isAutoRefreshToken(): boolean;
     static getRedirectUri(): string;
+    static getTenantId(): string;
 }

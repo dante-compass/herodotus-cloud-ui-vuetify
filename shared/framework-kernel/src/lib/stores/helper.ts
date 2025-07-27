@@ -1,12 +1,11 @@
-import { useDictionaryStore } from '@/composables/constants';
-import { VARIABLES } from '@/configurations';
+import { useCryptoStore } from './crypto';
+import { useAuthenticationStore } from './authentication';
+import { OptionsUtilities } from '../utilities';
+import { AuthorizationTokenEnum } from '@herodotus-cloud/core';
 
-import { useCryptoStore, useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
-
-export const clearPersistData = () => {
-  console.log('Clear Persist Data');
+export const clearKernelPersistData = () => {
+  console.log('Clear Framework Kernel Data');
   useAuthenticationStore().$reset();
-  useDictionaryStore().$reset();
   useCryptoStore().$reset();
 };
 
@@ -19,14 +18,14 @@ export const getSystemHeaders = () => {
   const headers = {} as Record<string, string>;
 
   if (token) {
-    headers['Authorization'] = 'Bearer ' + token;
+    headers['Authorization'] = AuthorizationTokenEnum.BEARER + token;
   }
 
   if (sessionId) {
     headers['X-Herodotus-Session-Id'] = sessionId;
   }
 
-  const tenantId = VARIABLES.getCurrentTenantId();
+  const tenantId = OptionsUtilities.getTenantId();
   if (tenantId) {
     headers['X-Herodotus-Tenant-Id'] = tenantId;
   }

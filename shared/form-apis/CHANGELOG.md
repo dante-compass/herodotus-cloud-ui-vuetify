@@ -1,5 +1,13 @@
 # @herodotus-cloud/form-apis
 
+## 1.7.6
+
+### Patch Changes
+
+- 迁移 Pinia Helper 类
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.6
+
 ## 1.7.5
 
 ### Patch Changes
