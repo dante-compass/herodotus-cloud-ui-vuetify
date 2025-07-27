@@ -1,5 +1,13 @@
 # @herodotus-cloud/form-apis
 
+## 1.7.8
+
+### Patch Changes
+
+- 调整代码错误
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.8
+
 ## 1.7.7
 
 ### Patch Changes

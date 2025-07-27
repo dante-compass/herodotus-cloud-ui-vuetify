@@ -18,6 +18,7 @@ const setupKernel = (currentRouter: Router) => {
         signIn: { name: Path.SIGN_IN_NAME },
       },
     },
+    staticRoutes: currentRouter.getRoutes(),
     config: config,
     variables: {
       securityKey: VARIABLES.getSecretKey(),

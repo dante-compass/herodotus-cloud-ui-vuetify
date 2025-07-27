@@ -1,3 +1,4 @@
+import { RouteRecordRaw } from 'vue-router';
 import { RouterOptions } from './router';
 import { HttpConfig } from '@herodotus-cloud/core';
 interface VariableOptions {
@@ -10,6 +11,7 @@ interface VariableOptions {
 export interface KernelOptions {
     router: RouterOptions;
     variables: VariableOptions;
+    staticRoutes: Array<RouteRecordRaw>;
     config: HttpConfig;
 }
 export {};
