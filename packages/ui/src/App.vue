@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, nextTick, provide, ref, onMounted, onUnmounted } from 'vue';
+import { watch, nextTick, provide, onMounted, onUnmounted, shallowRef } from 'vue';
 import { useQuasar } from 'quasar';
 import { echarts } from '@/plugins';
 import { VARIABLES } from '@/configurations';
@@ -18,12 +18,12 @@ defineOptions({
 const settings = useSettingsStore();
 const authentication = useAuthenticationStore();
 const $q = useQuasar();
-const gapTime = ref(0);
-const beforeUnloadTime = ref(0);
+const gapTime = shallowRef(0);
+const beforeUnloadTime = shallowRef(0);
 const { connect, disconnect } = useWebSocketMessage();
 
 // 局部组件刷新
-const isRouterAlive = ref(true);
+const isRouterAlive = shallowRef(true);
 const refreshTab = () => {
   isRouterAlive.value = false;
   nextTick(() => {
