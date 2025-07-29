@@ -46,3 +46,10 @@ export interface RemoteRoute extends Tree {
 export type ModuleNamespace = Record<string, any> & {
     [Symbol.toStringTag]: 'Module';
 };
+export interface MenuItem {
+    title: string;
+    prependIcon: string;
+    to?: string;
+    value?: string;
+    children?: MenuItem[];
+}

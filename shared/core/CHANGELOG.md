@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.12
+
+### Patch Changes
+
+- 添加支持不同组件菜单定义
+
 ## 1.7.11
 
 ### Patch Changes

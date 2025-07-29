@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 1.7.12
+
+### Patch Changes
+
+- 添加支持不同组件菜单定义
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.7.12
+  - @herodotus-cloud/components@1.7.12
+  - @herodotus-cloud/form-apis@1.7.12
+  - @herodotus-cloud/core@1.7.12
+
 ## 1.7.11
 
 ### Patch Changes
