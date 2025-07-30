@@ -3,7 +3,7 @@ import type { Sort, Page, NotificationEntity, NotificationConditions } from '@/l
 
 import { NotificationCategoryEnum } from '@/lib/definitions';
 import { API } from '@/configurations';
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 
 export const useNotificationStore = defineStore('Notification', {
   state: () => ({

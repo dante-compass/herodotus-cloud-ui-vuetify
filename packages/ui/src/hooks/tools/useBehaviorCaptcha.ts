@@ -1,9 +1,12 @@
 import type { Ref } from 'vue';
 import { ref } from 'vue';
-import type { BehaviorCaptchaCategory, CaptchaResource, CaptchaData } from '@/lib/declarations';
+import type {
+  BehaviorCaptchaCategory,
+  CaptchaResource,
+  CaptchaData,
+} from '@herodotus-cloud/framework-kernel';
 
-import { API } from '@/configurations';
-import { useCryptoStore } from '@/stores';
+import { useCryptoStore, SecurityApiResources } from '@herodotus-cloud/framework-kernel';
 
 export default function useBehaviorCaptcha() {
   const timer = ref<ReturnType<typeof setTimeout> | null>(null);
@@ -32,7 +35,7 @@ export default function useBehaviorCaptcha() {
 
     const identity = crypto.sessionId;
 
-    API.core
+    SecurityApiResources.getInstance()
       .open()
       .verifyCaptcha(identity, category, data)
       .then((result) => {
@@ -64,7 +67,7 @@ export default function useBehaviorCaptcha() {
     const identity = crypto.sessionId;
 
     if (identity) {
-      API.core
+      SecurityApiResources.getInstance()
         .open()
         .createCaptcha(identity, category)
         .then((result) => {

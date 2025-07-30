@@ -34,7 +34,7 @@ import { storeToRefs } from 'pinia';
 
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 
-import { useRouterStore } from '@/stores';
+import { useRouterStore } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HAppContainer',

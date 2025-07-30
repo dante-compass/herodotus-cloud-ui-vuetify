@@ -1,1 +1,0 @@
-import{r}from"./npm-es-errors-DTEWvbA_.js";import{r as o}from"./npm-call-bound-Dk2Z5ZKv.js";import{r as t}from"./npm-is-typed-array-CJKOv8y4.js";var e,a;function n(){if(a)return e;a=1;var n=r(),p=o()("TypedArray.prototype.buffer",!0),f=t();return e=p||function(r){if(!f(r))throw new n("Not a Typed Array");return r.buffer}}export{n as r};

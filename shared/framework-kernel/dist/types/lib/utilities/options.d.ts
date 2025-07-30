@@ -1,4 +1,6 @@
+import { HttpConfig } from '@herodotus-cloud/core';
 import { KernelOptions } from '../../declarations';
+import { Router, RouteRecordRaw } from 'vue-router';
 /**
  * Framework Kernel Options 工具类，方便在代码中传递 Options
  */
@@ -20,4 +22,13 @@ export declare class OptionsUtilities {
     static getInstance(): OptionsUtilities;
     setOptions(options: KernelOptions): void;
     getOptions(): KernelOptions;
+    static axiosConfig(): HttpConfig;
+    private static getRouterOptions;
+    static getRouter(): Router;
+    static getRoutes(): RouteRecordRaw[];
+    static getSecurityKey(): string;
+    static getRedirectUri(): string;
+    static isUseCrypto(): boolean;
+    static isAutoRefreshToken(): boolean;
+    static getTenantId(): string;
 }

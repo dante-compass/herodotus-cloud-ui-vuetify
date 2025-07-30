@@ -27,16 +27,7 @@ export type {
 export type {
   AbstractEntity,
   AbstractSysEntity,
-  JigsawCaptcha,
-  WordClickCaptcha,
-  GraphicCaptcha,
-  Coordinate,
-  Session,
-  BehaviorCaptchaCategory,
-  CaptchaResource,
-  CaptchaData,
   Dictionary,
-  SignInErrorStatus,
   SysPermissionEntity,
   SysPermissionConditions,
   SysPermissionProps,
@@ -108,10 +99,6 @@ export type {
   MgtCertificateEntity,
   MgtCertificateConditions,
   MgtCertificateProps,
-  WebAuthnRegisterOptions,
-  WebAuthnRegister,
-  WebAuthnAuthenticateOptions,
-  WebAuthnAuthenticate,
 } from '@herodotus-cloud/apis';
 
 export type {

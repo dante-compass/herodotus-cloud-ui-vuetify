@@ -57,7 +57,7 @@ import useVuelidate from '@vuelidate/core';
 import { required, sameAs, helpers } from '@vuelidate/validators';
 import { toast } from '@/lib/utils';
 import { VARIABLES, API } from '@/configurations';
-import { useCryptoStore } from '@/stores';
+import { useCryptoStore } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HChangePassword',
@@ -112,7 +112,8 @@ export default defineComponent({
           const password = VARIABLES.isUseCrypto()
             ? crypto.encrypt(confirmPassword.value)
             : confirmPassword.value;
-          API.core.sysUser()
+          API.core
+            .sysUser()
             .changePassword(props.userId, password)
             .then((response) => {
               if (response) {

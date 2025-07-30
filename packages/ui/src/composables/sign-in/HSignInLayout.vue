@@ -26,7 +26,7 @@ import { computed, shallowRef } from 'vue';
 
 import { getColorPalette, mixColor } from './color';
 import { VARIABLES } from '@/configurations';
-import { useSettingsStore } from '@/stores';
+import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
 
 defineOptions({
   name: 'HSignInLayout',

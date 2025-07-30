@@ -38,6 +38,8 @@ export default defineConfig({
         'vue-router',
         'pinia',
         'pinia-plugin-persistedstate',
+        'jwt-decode',
+        '@github/webauthn-json',
         '@herodotus-cloud/core',
       ],
       output: {
@@ -49,6 +51,8 @@ export default defineConfig({
           'vue-router': 'VueRouter',
           pinia: 'Pinia',
           'pinia-plugin-persistedstate': 'PiniaPluginPersistedstate',
+          'jwt-decode': 'JwtDecode',
+          '@github/webauthn-json': 'GithubWebauthnJson',
           '@herodotus-cloud/core': 'HerodotusCore',
         },
       },

@@ -16,7 +16,7 @@ import { QUploader } from 'quasar';
 import type { QUploaderFactoryObject, QUploaderInfo } from '@/lib/declarations';
 
 import { lodash } from '@/lib/utils';
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 import { API } from '@/configurations';
 
 export default defineComponent({

@@ -72,7 +72,7 @@ import type {
 
 import { CONSTANTS, API } from '@/configurations';
 
-import { useAuthenticationStore } from '@/stores';
+import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
 import { useTable } from '@/hooks';
 
 import { HDeleteButton, HEditButton, HDenseIconButton, HTable } from '@/components';

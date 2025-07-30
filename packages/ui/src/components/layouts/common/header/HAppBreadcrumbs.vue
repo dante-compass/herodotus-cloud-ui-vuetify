@@ -15,7 +15,7 @@
 import { defineComponent } from 'vue';
 
 import { CONSTANTS } from '@/configurations';
-import { useSettingsStore } from '@/stores';
+import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HAppBreadcrumbs',

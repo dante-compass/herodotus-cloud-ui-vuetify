@@ -10,7 +10,7 @@ import type {
   QTableOnRequestParameter,
 } from '@/lib/declarations';
 
-import { useRouterStore } from '@/stores';
+import { useRouterStore } from '@herodotus-cloud/framework-kernel';
 import { OperationEnum } from '@/lib/definitions';
 
 export default function useBaseTableItems<E extends Entity, C extends Conditions>(

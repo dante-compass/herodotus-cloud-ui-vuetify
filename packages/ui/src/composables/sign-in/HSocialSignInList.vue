@@ -31,6 +31,7 @@ import type { Ref } from 'vue';
 import { defineComponent, ref, computed, onMounted } from 'vue';
 import { lodash, PKCE } from '@/lib/utils';
 import { VARIABLES, IMAGES, API } from '@/configurations';
+import { SecurityApiResources } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HSocialSignInList',
@@ -39,7 +40,8 @@ export default defineComponent({
     const list = ref({}) as Ref<Record<string, string>>;
 
     const init = () => {
-      API.core.open()
+      SecurityApiResources.getInstance()
+        .open()
         .getSocialList()
         .then((result) => {
           list.value = result.data as Record<string, string>;

@@ -4,7 +4,7 @@ import { createApi } from '@herodotus-cloud/apis';
 import { createBpmnApi } from '@herodotus-cloud/bpmn-apis';
 import { createFormApi } from '@herodotus-cloud/form-apis';
 import { createOssApi } from '@herodotus-cloud/oss-apis';
-import { Axios, ContentTypeEnum } from '@herodotus-cloud/core';
+import { Axios, ContentTypeEnum, HttpConfig } from '@herodotus-cloud/core';
 
 import { VARIABLES } from '@/configurations';
 import { transform } from './axios';
@@ -36,6 +36,8 @@ const options: HttpConfigOption = {
   clientSecret: VARIABLES.getClientSecret(),
   oidc: VARIABLES.isUseOidc(),
 };
+
+export const config = new HttpConfig(http, options);
 
 const api = createApi(http, options);
 const bpmnApi = createBpmnApi(http, options);

@@ -38,13 +38,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, onMounted, ref, computed } from 'vue';
+import { defineComponent, onMounted, ref, computed } from 'vue';
 
-import type { GraphicCaptcha } from '@/lib/declarations';
-import { CaptchaCategoryEnum } from '@/lib/definitions';
+import type { GraphicCaptcha } from '@herodotus-cloud/framework-kernel';
 
-import { useCryptoStore } from '@/stores';
-import { VARIABLES, API } from '@/configurations';
+import { useCryptoStore, SecurityApiResources, CaptchaCategoryEnum } from '@herodotus-cloud/framework-kernel';
+import { VARIABLES } from '@/configurations';
 
 export default defineComponent({
   name: 'HGraphicCaptcha',
@@ -70,7 +69,9 @@ export default defineComponent({
     });
 
     const createCaptcha = async () => {
-      const response = await API.core.open().createCaptcha(crypto.sessionId, VARIABLES.getCaptcha());
+      const response = await SecurityApiResources.getInstance()
+        .open()
+        .createCaptcha(crypto.sessionId, VARIABLES.getCaptcha());
 
       if (
         !(
@@ -85,7 +86,8 @@ export default defineComponent({
 
     const verifyCaptcha = () => {
       if (code.value && !isValid.value) {
-        API.core.open()
+        SecurityApiResources.getInstance()
+          .open()
           .verifyCaptcha(crypto.sessionId, VARIABLES.getCaptcha(), code.value)
           .then((response) => {
             const data = response.data as boolean;

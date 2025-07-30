@@ -1,5 +1,83 @@
 # @herodotus-cloud/core
 
+## 1.7.13
+
+### Patch Changes
+
+- 发布版本
+
+## 1.7.12
+
+### Patch Changes
+
+- 添加支持不同组件菜单定义
+
+## 1.7.11
+
+### Patch Changes
+
+- 框架代码迁移至模块主体完成
+
+## 1.7.10
+
+### Patch Changes
+
+- 调整代码错误
+
+## 1.7.9
+
+### Patch Changes
+
+- 迁移最后的管理代码
+
+## 1.7.8
+
+### Patch Changes
+
+- 调整代码错误
+
+## 1.7.7
+
+### Patch Changes
+
+- 调整 Kernel Options 定义
+
+## 1.7.6
+
+### Patch Changes
+
+- 迁移 Pinia Helper 类
+
+## 1.7.5
+
+### Patch Changes
+
+- [重构] 迁移前端菜单相关内容代码至模块 @herodotus-cloud/framework-kernel
+
+## 1.7.4
+
+### Patch Changes
+
+- 迁移 Passkey
+
+## 1.7.3
+
+### Patch Changes
+
+- 优化模块代码，修复错误
+
+## 1.7.2
+
+### Patch Changes
+
+- 使用 framework-kernel 代码替换或删除现有工程内容
+
+## 1.7.1
+
+### Patch Changes
+
+- 调整认证安全相关内容
+
 ## 1.7.0
 
 ### Minor Changes

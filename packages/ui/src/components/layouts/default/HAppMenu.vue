@@ -8,7 +8,7 @@
 import { reactive, onMounted, toRefs } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 
-import { useRouterStore } from '@/stores';
+import { useRouterStore } from '@herodotus-cloud/framework-kernel';
 
 import HAppMenuItems from './HAppMenuItems.vue';
 

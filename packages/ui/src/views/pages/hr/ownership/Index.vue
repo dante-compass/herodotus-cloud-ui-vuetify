@@ -68,7 +68,7 @@ import type {
 import { useRouter } from 'vue-router';
 import { OperationEnum } from '@/lib/definitions';
 import { API } from '@/configurations';
-import { useRouterStore } from '@/stores';
+import { useRouterStore } from '@herodotus-cloud/framework-kernel';
 
 import { HDeleteButton, HTable } from '@/components';
 

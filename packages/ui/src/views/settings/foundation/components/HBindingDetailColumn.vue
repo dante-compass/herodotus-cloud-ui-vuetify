@@ -16,7 +16,7 @@
 import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 
-import { useSettingsStore } from '@/stores';
+import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
 
 import type { AccessSourceEntity } from '@/lib/declarations';
 

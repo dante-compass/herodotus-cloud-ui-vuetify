@@ -1,1 +1,0 @@
-import{_ as o}from"./composables-charts-HScatterChart.vue_vue_type_script_lang.ts-B7jYTLKJ.js";import{_ as t}from"./App.vue-DTXCsRWH.js";import{r,c as s,o as e}from"./npm-@vue-runtime-core-KJlD7tNV.js";const n=t(o,[["render",function(o,t,n,a,p,c){const i=r("h-chart-container");return e(),s(i,{options:o.options},null,8,["options"])}]]);export{n as H};

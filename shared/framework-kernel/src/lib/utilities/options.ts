@@ -1,4 +1,6 @@
-import type { KernelOptions } from '@/declarations';
+import type { HttpConfig } from '@herodotus-cloud/core';
+import type { KernelOptions, RouterOptions } from '@/declarations';
+import type { Router, RouteRecordRaw } from 'vue-router';
 
 /**
  * Framework Kernel Options 工具类，方便在代码中传递 Options
@@ -49,5 +51,41 @@ export class OptionsUtilities {
 
   public getOptions(): KernelOptions {
     return this.options;
+  }
+
+  public static axiosConfig(): HttpConfig {
+    return this.getInstance().getOptions().config;
+  }
+
+  private static getRouterOptions(): RouterOptions {
+    return this.getInstance().getOptions().router;
+  }
+
+  public static getRouter(): Router {
+    return this.getRouterOptions().instance;
+  }
+
+  public static getRoutes(): RouteRecordRaw[] {
+    return this.getInstance().getOptions().staticRoutes;
+  }
+
+  public static getSecurityKey(): string {
+    return this.getInstance().getOptions().variables.securityKey;
+  }
+
+  public static getRedirectUri(): string {
+    return this.getInstance().getOptions().variables.redirectUri;
+  }
+
+  public static isUseCrypto(): boolean {
+    return this.getInstance().getOptions().variables.isUseCrypto;
+  }
+
+  public static isAutoRefreshToken(): boolean {
+    return this.getInstance().getOptions().variables.isAutoRefreshToken;
+  }
+
+  public static getTenantId(): string {
+    return this.getInstance().getOptions().variables.tenantId;
   }
 }

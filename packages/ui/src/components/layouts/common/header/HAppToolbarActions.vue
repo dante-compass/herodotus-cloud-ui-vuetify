@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
 
-import { ActionUtils } from '@/lib/utils';
+import { SignOutUtilities } from '@herodotus-cloud/framework-kernel';
 import { HAppMessageActions } from '@/composables/messages';
 
 import HAppRightDrawerControl from './HAppRightDrawerControl.vue';
@@ -60,6 +60,6 @@ defineProps({
 
 const q = useQuasar();
 const signOut = () => {
-  ActionUtils.signOutWithDialog();
+  SignOutUtilities.getInstance().signOutWithDialog();
 };
 </script>
