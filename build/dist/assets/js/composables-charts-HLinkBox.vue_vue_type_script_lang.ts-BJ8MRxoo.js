@@ -1,1 +1,0 @@
-import{d as t}from"./npm-@vue-runtime-core-KJlD7tNV.js";const r=t({name:"HSummaryBox",props:{description:{type:String},icon:{type:String},color:{type:String,default:""},link:{type:String}}});export{r as _};

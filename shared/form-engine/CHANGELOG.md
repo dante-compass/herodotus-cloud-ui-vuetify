@@ -1,5 +1,13 @@
 # @herodotus-cloud/form-engine
 
+## 1.7.13
+
+### Patch Changes
+
+- 发布版本
+- Updated dependencies
+  - @herodotus-cloud/form-apis@1.7.13
+
 ## 1.7.12
 
 ### Patch Changes

@@ -1,7 +1,7 @@
 {
   "name": "herodotus-cloud-ui",
   "private": false,
-  "version": "3.5.4.0",
+  "version": "3.5.4.1",
   "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -68,7 +68,7 @@
     "lint-staged": "^16.1.2",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
-    "rollup": "4.46.1",
+    "rollup": "4.46.2",
     "rollup-plugin-visualizer": "^6.0.3",
     "sass-embedded": "^1.89.2",
     "terser": "^5.43.1",
