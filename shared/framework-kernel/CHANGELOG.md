@@ -1,5 +1,13 @@
 # @herodotus-cloud/framework-kernel
 
+## 1.7.14
+
+### Patch Changes
+
+- [重构] 迁移前端 useApplicationStore 相关内容代码至模块 @herodotus-cloud/framework-kernel
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.14
+
 ## 1.7.13
 
 ### Patch Changes
