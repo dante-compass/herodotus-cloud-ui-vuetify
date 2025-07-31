@@ -1,5 +1,13 @@
 # @herodotus-cloud/framework-kernel
 
+## 1.7.15
+
+### Patch Changes
+
+- 修改默认参数
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.15
+
 ## 1.7.14
 
 ### Patch Changes
