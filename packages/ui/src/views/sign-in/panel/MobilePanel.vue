@@ -112,8 +112,11 @@ import { defineComponent, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { required, helpers } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-import { useApplicationStore } from '@/stores';
-import { useAuthenticationStore, SecurityApiResources } from '@herodotus-cloud/framework-kernel';
+import {
+  useAuthenticationStore,
+  SecurityApiResources,
+  useApplicationStore,
+} from '@herodotus-cloud/framework-kernel';
 import { CONSTANTS, API } from '@/configurations';
 import { toast } from '@/lib/utils';
 
