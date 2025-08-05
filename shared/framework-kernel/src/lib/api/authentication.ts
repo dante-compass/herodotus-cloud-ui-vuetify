@@ -6,7 +6,13 @@ import type {
 } from '@herodotus-cloud/core';
 import type { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '@/declarations';
 
-import { Base64, lodash, ContentTypeEnum, AuthorizationGrantTypeEnum } from '@herodotus-cloud/core';
+import {
+  Base64,
+  lodash,
+  ContentTypeEnum,
+  AuthorizationGrantTypeEnum,
+  AuthorizationTokenEnum,
+} from '@herodotus-cloud/core';
 
 export class OAuth2ApiService {
   // 静态私有实例引用
@@ -41,13 +47,17 @@ export class OAuth2ApiService {
     return this.config.getUaa() + '/oauth2/device_authorization';
   }
 
+  private getOIDCConnectRegisterAddress(): string {
+    return this.config.getUaa() + '/connect/register';
+  }
+
   private createBasicHeader(clientId = '', clientSecret = ''): string {
     let data = this.config.getClientId() + ':' + this.config.getClientSecret();
     if (clientId && clientSecret) {
       data = clientId + ':' + clientSecret;
     }
 
-    return 'Basic ' + Base64.encode(data);
+    return AuthorizationTokenEnum.BASIC + Base64.encode(data);
   }
 
   private createClientData(scope = '', clientId = '', clientSecret = ''): Record<string, string> {
@@ -230,7 +240,7 @@ export class OAuth2ApiService {
    * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.1
    * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.4
    * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.5
-   * @see https://datatracker.interface   
+   * @see https://datatracker.interface
    */
   public clientCredentialsFlow(
     scope = '',
@@ -374,5 +384,23 @@ export class OAuth2ApiService {
         },
       },
     );
+  }
+
+  public oidcClientRegistrationFlow(
+    productKey: string,
+    clientName: string,
+  ): Promise<AxiosHttpResult<any>> {
+    return this.config.getHttp().post(this.getOAuth2TokenAddress(), {
+      product_key: productKey,
+      grant_types: [
+        AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS,
+        AuthorizationGrantTypeEnum.DEVICE_CODE,
+      ],
+      redirect_uris: ['http://192.168.101.10:3000'],
+      client_name: clientName,
+      // client_secret: '123456',
+      scope: 'openid email profile',
+      token_endpoint_auth_method: 'client_secret_post',
+    });
   }
 }

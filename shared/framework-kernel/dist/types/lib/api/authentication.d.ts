@@ -9,6 +9,7 @@ export declare class OAuth2ApiService {
     private getOAuth2RevokeAddress;
     private getOAuth2SignOutAddress;
     private getOAuth2DeviceAuthorizationAddress;
+    private getOIDCConnectRegisterAddress;
     private createBasicHeader;
     private createClientData;
     private createOAuth2Data;
@@ -82,4 +83,5 @@ export declare class OAuth2ApiService {
     socialCredentialsFlowBySms(mobile: string, code: string, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     socialCredentialsFlowByJustAuth(source: SocialSource, accessPrincipal: AccessPrincipal, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     webAuthnCredentialsFlow(publicKey: WebAuthnAuthenticate, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
+    oidcClientRegistrationFlow(productKey: string, clientName: string): Promise<AxiosHttpResult<any>>;
 }

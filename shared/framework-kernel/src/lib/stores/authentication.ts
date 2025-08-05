@@ -9,7 +9,7 @@ import type {
   AccessPrincipal,
 } from '@/declarations';
 
-import { moment } from '@herodotus-cloud/core';
+import { moment, AuthorizationTokenEnum } from '@herodotus-cloud/core';
 import { jwtDecode } from 'jwt-decode';
 import { useCryptoStore } from './crypto';
 import { OptionsUtilities } from '../utilities';
@@ -56,7 +56,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
   actions: {
     getBearerToken(): string {
-      return 'Bearer ' + this.token;
+      return AuthorizationTokenEnum.BEARER + this.token;
     },
 
     getAuthorizationHeader(): Record<string, string> {
@@ -149,6 +149,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           });
       });
     },
+
     refreshToken() {
       return new Promise<boolean>((resolve, reject) => {
         SecurityApiResources.getInstance()
@@ -171,6 +172,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           });
       });
     },
+
     signOut() {
       if (this.access_token) {
         SecurityApiResources.getInstance()
@@ -184,6 +186,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           });
       }
     },
+
     authorizationCode(code: string, state = '') {
       return new Promise<boolean>((resolve, reject) => {
         SecurityApiResources.getInstance()

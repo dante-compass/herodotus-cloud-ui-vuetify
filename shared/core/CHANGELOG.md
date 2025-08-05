@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.18
+
+### Patch Changes
+
+- [新增] 前端框架模块新增 OIDC 客户端动态注册 API
+
 ## 1.7.17
 
 ### Patch Changes

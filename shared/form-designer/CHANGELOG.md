@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 1.7.18
+
+### Patch Changes
+
+- [新增] 前端框架模块新增 OIDC 客户端动态注册 API
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.7.18
+  - @herodotus-cloud/components@1.7.18
+  - @herodotus-cloud/form-apis@1.7.18
+  - @herodotus-cloud/core@1.7.18
+
 ## 1.7.17
 
 ### Patch Changes
