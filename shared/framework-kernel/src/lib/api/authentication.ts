@@ -1,8 +1,12 @@
-import type { HttpConfig, AxiosHttpResult, AccessTokenResponse } from '@herodotus-cloud/core';
-
+import type {
+  HttpConfig,
+  AxiosHttpResult,
+  AccessTokenResponse,
+  DeviceAuthorizationResponse,
+} from '@herodotus-cloud/core';
 import type { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '@/declarations';
 
-import { Base64, ContentTypeEnum, AuthorizationGrantTypeEnum } from '@herodotus-cloud/core';
+import { Base64, lodash, ContentTypeEnum, AuthorizationGrantTypeEnum } from '@herodotus-cloud/core';
 
 export class OAuth2ApiService {
   // 静态私有实例引用
@@ -33,13 +37,57 @@ export class OAuth2ApiService {
     return this.config.getUaa() + '/oauth2/sign-out';
   }
 
-  private getBasicHeader(): string {
-    return (
-      'Basic ' + Base64.encode(this.config.getClientId() + ':' + this.config.getClientSecret())
-    );
+  private getOAuth2DeviceAuthorizationAddress(): string {
+    return this.config.getUaa() + '/oauth2/device_authorization';
   }
 
-  public signOut(token: string): Promise<AxiosHttpResult<string>> {
+  private createBasicHeader(clientId = '', clientSecret = ''): string {
+    let data = this.config.getClientId() + ':' + this.config.getClientSecret();
+    if (clientId && clientSecret) {
+      data = clientId + ':' + clientSecret;
+    }
+
+    return 'Basic ' + Base64.encode(data);
+  }
+
+  private createClientData(scope = '', clientId = '', clientSecret = ''): Record<string, string> {
+    const data = {
+      client_id: clientId || this.config.getClientId(),
+      client_secret: clientSecret || this.config.getClientSecret(),
+    };
+
+    if (scope) {
+      lodash.merge(data, { scope: scope });
+    }
+
+    return data;
+  }
+
+  private createOAuth2Data(
+    grantType: AuthorizationGrantTypeEnum,
+    params: Record<string, unknown>,
+    oidc = false,
+  ): Record<string, unknown> {
+    const data = {
+      grant_type: grantType,
+    };
+
+    if (!lodash.isEmpty(params)) {
+      lodash.merge(data, params);
+    }
+
+    if (oidc) {
+      lodash.merge(data, { scope: 'openid' });
+    }
+
+    return data;
+  }
+
+  public signOut(
+    token: string,
+    clientId = '',
+    clientSecret = '',
+  ): Promise<AxiosHttpResult<string>> {
     return this.config.getHttp().put(
       this.getOAuth2SignOutAddress(),
       {
@@ -50,13 +98,13 @@ export class OAuth2ApiService {
       },
       {
         headers: {
-          Authorization: this.getBasicHeader(),
+          Authorization: this.createBasicHeader(clientId, clientSecret),
         },
       },
     );
   }
 
-  public revoke(token: string): Promise<AxiosHttpResult> {
+  public revoke(token: string, clientId = '', clientSecret = ''): Promise<AxiosHttpResult> {
     return this.config.getHttp().post(
       this.getOAuth2RevokeAddress(),
       {
@@ -67,7 +115,7 @@ export class OAuth2ApiService {
       },
       {
         headers: {
-          Authorization: this.getBasicHeader(),
+          Authorization: this.createBasicHeader(clientId, clientSecret),
         },
       },
     );
@@ -76,22 +124,22 @@ export class OAuth2ApiService {
   public refreshTokenFlow(
     refreshToken: string,
     oidc = false,
+    clientId = '',
+    clientSecret = '',
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
-      oidc
-        ? {
-            refresh_token: refreshToken,
-            grant_type: AuthorizationGrantTypeEnum.REFRESH_TOKEN,
-            scope: 'openid',
-          }
-        : { refresh_token: refreshToken, grant_type: AuthorizationGrantTypeEnum.REFRESH_TOKEN },
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum.REFRESH_TOKEN,
+        { refresh_token: refreshToken },
+        oidc,
+      ),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader(),
+          Authorization: this.createBasicHeader(clientId, clientSecret),
         },
       },
     );
@@ -101,27 +149,22 @@ export class OAuth2ApiService {
     username: string,
     password: string,
     oidc = false,
+    clientId = '',
+    clientSecret = '',
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
-      oidc
-        ? {
-            username: username,
-            password: password,
-            grant_type: AuthorizationGrantTypeEnum.PASSWORD,
-            scope: 'openid',
-          }
-        : {
-            username: username,
-            password: password,
-            grant_type: AuthorizationGrantTypeEnum.PASSWORD,
-          },
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum.PASSWORD,
+        { username: username, password: password },
+        oidc,
+      ),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader(),
+          Authorization: this.createBasicHeader(clientId, clientSecret),
         },
       },
     );
@@ -132,61 +175,97 @@ export class OAuth2ApiService {
     redirect_uri: string,
     state = '',
     oidc = false,
+    clientId = '',
+    clientSecret = '',
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
-      oidc
-        ? {
-            code: code,
-            state: state,
-            redirect_uri: redirect_uri,
-            grant_type: AuthorizationGrantTypeEnum.AUTHORIZATION_CODE,
-            scope: 'openid',
-          }
-        : {
-            code: code,
-            state: state,
-            redirect_uri: redirect_uri,
-            grant_type: AuthorizationGrantTypeEnum.AUTHORIZATION_CODE,
-          },
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum.AUTHORIZATION_CODE,
+        { code: code, state: state, redirect_uri: redirect_uri },
+        oidc,
+      ),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader(),
+          Authorization: this.createBasicHeader(clientId, clientSecret),
         },
       },
     );
+  }
+
+  public clientCredentialsFlow(
+    scope = '',
+    clientId = '',
+    clientSecret = '',
+  ): Promise<AxiosHttpResult<AccessTokenResponse>> {
+    return this.config.getHttp().post(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS, {
+        ...this.createClientData(scope, clientId, clientSecret),
+      }),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED,
+      },
+    );
+  }
+
+  public deviceCodeFlow(
+    deviceCode: string,
+    scope = '',
+    clientId = '',
+    clientSecret = '',
+  ): Promise<AxiosHttpResult<AccessTokenResponse>> {
+    return this.config.getHttp().post(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(AuthorizationGrantTypeEnum.DEVICE_CODE, {
+        device_code: deviceCode,
+        ...this.createClientData(scope, clientId, clientSecret),
+      }),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED,
+      },
+    );
+  }
+
+  public deviceAuthorizationFlow(
+    scope = 'mail',
+    clientId = '',
+    clientSecret = '',
+  ): Promise<AxiosHttpResult<DeviceAuthorizationResponse>> {
+    return this.config
+      .getHttp()
+      .post(
+        this.getOAuth2DeviceAuthorizationAddress(),
+        this.createClientData(scope, clientId, clientSecret),
+        {
+          contentType: ContentTypeEnum.URL_ENCODED,
+        },
+      );
   }
 
   public socialCredentialsFlowBySms(
     mobile: string,
     code: string,
     oidc = false,
+    clientId = '',
+    clientSecret = '',
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
-      oidc
-        ? {
-            mobile,
-            code,
-            grant_type: AuthorizationGrantTypeEnum.SOCIAL_CREDENTIALS,
-            source: 'SMS',
-            scope: 'openid',
-          }
-        : {
-            mobile,
-            code,
-            grant_type: AuthorizationGrantTypeEnum.SOCIAL_CREDENTIALS,
-            source: 'SMS',
-          },
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum.SOCIAL_CREDENTIALS,
+        { mobile, code, source: 'SMS' },
+        oidc,
+      ),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader(),
+          Authorization: this.createBasicHeader(clientId, clientSecret),
         },
       },
     );
@@ -196,27 +275,22 @@ export class OAuth2ApiService {
     source: SocialSource,
     accessPrincipal: AccessPrincipal,
     oidc = false,
+    clientId = '',
+    clientSecret = '',
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
-      oidc
-        ? {
-            ...accessPrincipal,
-            grant_type: AuthorizationGrantTypeEnum.SOCIAL_CREDENTIALS,
-            source: source,
-            scope: 'openid',
-          }
-        : {
-            ...accessPrincipal,
-            grant_type: AuthorizationGrantTypeEnum.SOCIAL_CREDENTIALS,
-            source: source,
-          },
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum.SOCIAL_CREDENTIALS,
+        { ...accessPrincipal, source: source },
+        oidc,
+      ),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader(),
+          Authorization: this.createBasicHeader(clientId, clientSecret),
         },
       },
     );
@@ -225,19 +299,19 @@ export class OAuth2ApiService {
   public webAuthnCredentialsFlow(
     publicKey: WebAuthnAuthenticate,
     oidc = false,
+    clientId = '',
+    clientSecret = '',
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().postWithParams(
       this.getOAuth2TokenAddress(),
-      oidc
-        ? { grant_type: AuthorizationGrantTypeEnum.WEBAUTHN_CREDENTIALS, scope: 'openid' }
-        : { grant_type: AuthorizationGrantTypeEnum.WEBAUTHN_CREDENTIALS },
+      this.createOAuth2Data(AuthorizationGrantTypeEnum.WEBAUTHN_CREDENTIALS, {}, oidc),
       { ...publicKey },
       {
         contentType: ContentTypeEnum.JSON,
       },
       {
         headers: {
-          Authorization: this.getBasicHeader(),
+          Authorization: this.createBasicHeader(clientId, clientSecret),
         },
       },
     );

@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/components",
-  "version": "1.7.15",
+  "version": "1.7.16",
   "description": "",
   "keywords": [],
   "author": "",
@@ -34,9 +34,9 @@
   "dependencies": {
     "@herodotus-cloud/core": "workspace:^",
     "@mdi/js": "^7.4.47",
-    "@tsparticles/basic": "^3.8.1",
-    "@tsparticles/engine": "^3.8.1",
-    "@tsparticles/interaction-particles-links": "^3.8.1",
+    "@tsparticles/basic": "^3.9.1",
+    "@tsparticles/engine": "^3.9.1",
+    "@tsparticles/interaction-particles-links": "^3.9.1",
     "quasar": "^2.18.2"
   }
 }

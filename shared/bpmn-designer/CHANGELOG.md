@@ -1,5 +1,16 @@
 # @herodotus-cloud/bpmn-designer
 
+## 1.7.16
+
+### Patch Changes
+
+- [重构] 重构前端 OAuth2 各认证模式 API，提取通用代码方便代码维护
+- Updated dependencies
+  - @herodotus-cloud/components@1.7.16
+  - @herodotus-cloud/bpmn-apis@1.7.16
+  - @herodotus-cloud/form-apis@1.7.16
+  - @herodotus-cloud/core@1.7.16
+
 ## 1.7.15
 
 ### Patch Changes
