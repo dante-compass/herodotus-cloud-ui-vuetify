@@ -4,20 +4,20 @@ import { lodash, Swal, Base64, ContentTypeEnum, AuthorizationGrantTypeEnum as Au
 import { jwtDecode } from "jwt-decode";
 import { nextTick, shallowRef, watch, computed } from "vue";
 import "pinia-plugin-persistedstate";
-var LayoutModeEnum$i = /* @__PURE__ */ ((LayoutModeEnum2) => {
+var LayoutModeEnum$j = /* @__PURE__ */ ((LayoutModeEnum2) => {
   LayoutModeEnum2["DEFAULT"] = "defaults";
   LayoutModeEnum2["CLASSIC"] = "classic";
   LayoutModeEnum2["TRANSVERSE"] = "transverse";
   LayoutModeEnum2["COLUMNS"] = "transverse";
   return LayoutModeEnum2;
-})(LayoutModeEnum$i || {});
-var ThemeModeEnum$i = /* @__PURE__ */ ((ThemeModeEnum2) => {
+})(LayoutModeEnum$j || {});
+var ThemeModeEnum$j = /* @__PURE__ */ ((ThemeModeEnum2) => {
   ThemeModeEnum2["DARK"] = "dark";
   ThemeModeEnum2["LIGHT"] = "light";
   ThemeModeEnum2["SYSTEM"] = "system";
   return ThemeModeEnum2;
-})(ThemeModeEnum$i || {});
-var CaptchaCategoryEnum$i = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
+})(ThemeModeEnum$j || {});
+var CaptchaCategoryEnum$j = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["JIGSAW"] = "JIGSAW";
   CaptchaCategoryEnum2["WORD_CLICK"] = "WORD_CLICK";
   CaptchaCategoryEnum2["ARITHMETIC"] = "ARITHMETIC";
@@ -30,7 +30,7 @@ var CaptchaCategoryEnum$i = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_SHEAR"] = "HUTOOL_SHEAR";
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
-})(CaptchaCategoryEnum$i || {});
+})(CaptchaCategoryEnum$j || {});
 var SocialSourceEnum = /* @__PURE__ */ ((SocialSourceEnum2) => {
   SocialSourceEnum2[SocialSourceEnum2["INSTITUTION"] = 0] = "INSTITUTION";
   SocialSourceEnum2[SocialSourceEnum2["SMS"] = 1] = "SMS";
@@ -111,7 +111,7 @@ const useApplicationStore = defineStore("Application", {
     }
   }
 });
-class OptionsUtilities {
+let OptionsUtilities$a = class OptionsUtilities {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -177,8 +177,8 @@ class OptionsUtilities {
   static getTenantId() {
     return this.getInstance().getOptions().variables.tenantId;
   }
-}
-class RouterUtilities {
+};
+let RouterUtilities$a = class RouterUtilities {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -314,7 +314,7 @@ class RouterUtilities {
       this.goBack();
     }
   }
-}
+};
 class SignOutUtilities {
   // 静态私有实例引用
   static _instance = null;
@@ -349,14 +349,14 @@ class SignOutUtilities {
   }
   signOut(isLocal = false) {
     if (!isLocal) {
-      const authentication = useAuthenticationStore();
+      const authentication = useAuthenticationStore$1();
       authentication.signOut();
     }
     this.extension();
     console.log("Clear Framework Kernel Data");
-    useAuthenticationStore().$reset();
-    useCryptoStore$i().$reset();
-    RouterUtilities.getInstance().toSignIn();
+    useAuthenticationStore$1().$reset();
+    useCryptoStore$j().$reset();
+    RouterUtilities$a.getInstance().toSignIn();
   }
   signOutWithDialog() {
     Swal.fire({
@@ -392,7 +392,7 @@ class SignOutUtilities {
     });
   }
 }
-class OAuth2ApiService {
+let OAuth2ApiService$a = class OAuth2ApiService {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -402,6 +402,1369 @@ class OAuth2ApiService {
   static getInstance(config) {
     if (this.instance == null) {
       this.instance = new OAuth2ApiService(config);
+    }
+    return this.instance;
+  }
+  getOAuth2TokenAddress() {
+    return this.config.getUaa() + "/oauth2/token";
+  }
+  getOAuth2RevokeAddress() {
+    return this.config.getUaa() + "/oauth2/revoke";
+  }
+  getOAuth2SignOutAddress() {
+    return this.config.getUaa() + "/oauth2/sign-out";
+  }
+  getOAuth2DeviceAuthorizationAddress() {
+    return this.config.getUaa() + "/oauth2/device_authorization";
+  }
+  createBasicHeader(clientId = "", clientSecret = "") {
+    let data = this.config.getClientId() + ":" + this.config.getClientSecret();
+    if (clientId && clientSecret) {
+      data = clientId + ":" + clientSecret;
+    }
+    return "Basic " + Base64.encode(data);
+  }
+  createClientData(scope = "", clientId = "", clientSecret = "") {
+    const data = {
+      client_id: clientId || this.config.getClientId(),
+      client_secret: clientSecret || this.config.getClientSecret()
+    };
+    if (scope) {
+      lodash.merge(data, { scope });
+    }
+    return data;
+  }
+  createOAuth2Data(grantType, params, oidc = false) {
+    const data = {
+      grant_type: grantType
+    };
+    if (!lodash.isEmpty(params)) {
+      lodash.merge(data, params);
+    }
+    if (oidc) {
+      lodash.merge(data, { scope: "openid" });
+    }
+    return data;
+  }
+  signOut(token, clientId = "", clientSecret = "") {
+    return this.config.getHttp().put(
+      this.getOAuth2SignOutAddress(),
+      {
+        accessToken: token
+      },
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      },
+      {
+        headers: {
+          Authorization: this.createBasicHeader(clientId, clientSecret)
+        }
+      }
+    );
+  }
+  revoke(token, clientId = "", clientSecret = "") {
+    return this.config.getHttp().post(
+      this.getOAuth2RevokeAddress(),
+      {
+        token
+      },
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      },
+      {
+        headers: {
+          Authorization: this.createBasicHeader(clientId, clientSecret)
+        }
+      }
+    );
+  }
+  refreshTokenFlow(refreshToken, oidc = false, clientId = "", clientSecret = "") {
+    return this.config.getHttp().post(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum$1.REFRESH_TOKEN,
+        { refresh_token: refreshToken },
+        oidc
+      ),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      },
+      {
+        headers: {
+          Authorization: this.createBasicHeader(clientId, clientSecret)
+        }
+      }
+    );
+  }
+  passwordFlow(username, password, oidc = false, clientId = "", clientSecret = "") {
+    return this.config.getHttp().post(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum$1.PASSWORD,
+        { username, password },
+        oidc
+      ),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      },
+      {
+        headers: {
+          Authorization: this.createBasicHeader(clientId, clientSecret)
+        }
+      }
+    );
+  }
+  /**
+   * 授权码模式
+   * @param code 授权码
+   * @param redirect_uri 重定向地址
+   * @param state 状态
+   * @param oidc 是否开启 OIDC
+   * @param clientId 客户端 ID
+   * @param clientSecret 客户端密钥
+   * @returns Promise<AxiosHttpResult<AccessTokenResponse>> - 返回访问令牌响应
+   * @description 授权码模式是 OAuth 2.0 的核心授权流程，用户通过授权服务器获取授权码，然后使用该授权码获取访问令牌。
+   * 这种模式适用于需要用户交互的场景，例如 Web 应用程序和移动应用程序。
+   * 用户在授权服务器上登录并授权应用程序访问其资源，
+   * 授权服务器返回授权码，应用程序使用该授权码向令牌端点请求访问令牌。
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.1
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.3
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.4
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2
+   * @see https
+   */
+  authorizationCodeFlow(code, redirect_uri, state = "", oidc = false, clientId = "", clientSecret = "") {
+    return this.config.getHttp().post(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum$1.AUTHORIZATION_CODE,
+        { code, state, redirect_uri },
+        oidc
+      ),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      },
+      {
+        headers: {
+          Authorization: this.createBasicHeader(clientId, clientSecret)
+        }
+      }
+    );
+  }
+  /**
+   * 客户端凭据模式
+   * @param scope 范围(optional)
+   * @param clientId 客户端 ID(optional)
+   * @param clientSecret  客户端密钥(optional)
+   * @description 客户端凭据模式是 OAuth 2.0 的一种授权流程，允许客户端应用程序使用其自身的凭据（而不是用户的凭据）
+   * 来获取访问令牌。这种模式适用于服务器到服务器的通信场景，例如微服务之间的通信或后台任务。
+   * 客户端应用程序通过向令
+   * @returns Promise<AxiosHttpResult<AccessTokenResponse>> - 返回访问令牌响应
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.2
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.3
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.1
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.4
+   * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.5
+   * @see https://datatracker.interface   
+   */
+  clientCredentialsFlow(scope = "", clientId = "", clientSecret = "") {
+    return this.config.getHttp().post(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(AuthorizationGrantTypeEnum$1.CLIENT_CREDENTIALS, {
+        ...this.createClientData(scope, clientId, clientSecret)
+      }),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      }
+    );
+  }
+  /**
+   * 设备授权模式。获取访问令牌。
+   * @param deviceCode 设备码
+   * @param scope 范围 (optional)
+   * @param clientId 客户端 ID (optional)
+   * @param clientSecret 客户端密钥 (optional)
+   * @description 设备授权模式允许用户在一个设备上获取授权码，然后在另一个设备上使用该授权码获取访问令牌。
+   * 这种模式适用于没有浏览器或输入设备的场景，例如智能电视、游戏机等。
+   * 用户需要在一个设备上输入设备码，然后在另一个设备上输入该设备码以完成授权。
+   * @see https://datatracker.ietf.org/doc/html/rfc8628
+   * @returns Promise<AxiosHttpResult<AccessTokenResponse>> - 返回访问令牌响应
+   */
+  deviceCodeFlow(deviceCode, scope = "", clientId = "", clientSecret = "") {
+    return this.config.getHttp().post(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(AuthorizationGrantTypeEnum$1.DEVICE_CODE, {
+        device_code: deviceCode,
+        ...this.createClientData(scope, clientId, clientSecret)
+      }),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      }
+    );
+  }
+  /**
+   * 设备授权流程。获取设备码和用户码。
+   * @param scope 范围
+   * @param clientId 客户端 ID
+   * @param clientSecret 客户端密钥
+   * @returns Promise<AxiosHttpResult<DeviceAuthorizationResponse>> - 返回设备授权响应
+   * @description 设备授权流程允许用户在一个设备上获取设备码，然后在另一个设备上使用该设备码进行授权。
+   * 这种模式适用于没有浏览器或输入设备的场景，例如智能电视、游戏机等。
+   * 用户需要在一个设备上输入设备码，然后在另一个设备上输入该设备码以完成授权。
+   * @see https://datatracker.ietf.org/doc/html/rfc8628#section-3.1
+   */
+  deviceAuthorizationFlow(scope = "mail", clientId = "", clientSecret = "") {
+    return this.config.getHttp().post(
+      this.getOAuth2DeviceAuthorizationAddress(),
+      this.createClientData(scope, clientId, clientSecret),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      }
+    );
+  }
+  socialCredentialsFlowBySms(mobile, code, oidc = false, clientId = "", clientSecret = "") {
+    return this.config.getHttp().post(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum$1.SOCIAL_CREDENTIALS,
+        { mobile, code, source: "SMS" },
+        oidc
+      ),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      },
+      {
+        headers: {
+          Authorization: this.createBasicHeader(clientId, clientSecret)
+        }
+      }
+    );
+  }
+  socialCredentialsFlowByJustAuth(source, accessPrincipal, oidc = false, clientId = "", clientSecret = "") {
+    return this.config.getHttp().post(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(
+        AuthorizationGrantTypeEnum$1.SOCIAL_CREDENTIALS,
+        { ...accessPrincipal, source },
+        oidc
+      ),
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      },
+      {
+        headers: {
+          Authorization: this.createBasicHeader(clientId, clientSecret)
+        }
+      }
+    );
+  }
+  webAuthnCredentialsFlow(publicKey, oidc = false, clientId = "", clientSecret = "") {
+    return this.config.getHttp().postWithParams(
+      this.getOAuth2TokenAddress(),
+      this.createOAuth2Data(AuthorizationGrantTypeEnum$1.WEBAUTHN_CREDENTIALS, {}, oidc),
+      { ...publicKey },
+      {
+        contentType: ContentTypeEnum.JSON
+      },
+      {
+        headers: {
+          Authorization: this.createBasicHeader(clientId, clientSecret)
+        }
+      }
+    );
+  }
+};
+let OpenApiService$a = class OpenApiService {
+  // 静态私有实例引用
+  static instance = null;
+  config = {};
+  constructor(config) {
+    this.config = config;
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new OpenApiService(config);
+    }
+    return this.instance;
+  }
+  createSession(sessionId = "") {
+    const SECURE_SESSION = this.config.getUaa() + "/open/identity/session";
+    return this.config.getHttp().post(SECURE_SESSION, {
+      clientId: this.config.getClientId(),
+      clientSecret: this.config.getClientSecret(),
+      sessionId
+    });
+  }
+  exchange(sessionId = "", publicKey) {
+    const SECURE_EXCHANGE = this.config.getUaa() + "/open/identity/exchange";
+    return this.config.getHttp().post(SECURE_EXCHANGE, {
+      publicKey,
+      sessionId
+    });
+  }
+  getPrompt(username) {
+    const SECURE_PROMPT = this.config.getUaa() + "/open/identity/prompt";
+    return this.config.getHttp().post(SECURE_PROMPT, {
+      username
+    });
+  }
+  createCaptcha(sessionId, type) {
+    const SECURE_CAPTCHA = this.config.getUaa() + "/open/captcha";
+    return this.config.getHttp().get(SECURE_CAPTCHA, {
+      identity: sessionId,
+      category: type
+    });
+  }
+  verifyCaptcha(identity, category, data) {
+    const SECURE_CAPTCHA = this.config.getUaa() + "/open/captcha";
+    const verify = {
+      identity,
+      category,
+      coordinate: { x: 0, y: 0 },
+      coordinates: [],
+      characters: ""
+    };
+    if (category === CaptchaCategoryEnum$j.WORD_CLICK) {
+      verify.coordinates = data;
+    } else if (category === CaptchaCategoryEnum$j.JIGSAW) {
+      verify.coordinate = data;
+    } else {
+      verify.characters = data;
+    }
+    return this.config.getHttp().post(SECURE_CAPTCHA, verify);
+  }
+  createVerificationCode(mobile) {
+    const SECURE_VERIFICATION_CODE = this.config.getUpms() + "/open/identity/verification-code";
+    return this.config.getHttp().post(
+      SECURE_VERIFICATION_CODE,
+      {
+        mobile
+      },
+      {
+        contentType: ContentTypeEnum.URL_ENCODED
+      }
+    );
+  }
+  getSocialList() {
+    const SECURE_SOCIAL_LIST = this.config.getUpms() + "/open/identity/sources";
+    return this.config.getHttp().get(SECURE_SOCIAL_LIST);
+  }
+};
+let PasskeyApiService$a = class PasskeyApiService extends Service {
+  // 静态私有实例引用
+  static instance = null;
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new PasskeyApiService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getUaa() + "/webauthn/register";
+  }
+  getWebAuthnRegisterOptionsAddress() {
+    return this.getBaseAddress() + "/options";
+  }
+  getWebAuthnAuthenticateAddress() {
+    return this.getConfig().getUaa() + "/login/webauthn";
+  }
+  getWebAuthnAuthenticateOptionsAddress() {
+    return this.getConfig().getUaa() + "/webauthn/authenticate/options";
+  }
+  getIdPath(id) {
+    return this.getParamPath(this.getBaseAddress(), id);
+  }
+  fetchWebAuthnRegisterOptions() {
+    return this.getConfig().getHttp().post(this.getWebAuthnRegisterOptionsAddress(), "");
+  }
+  webAuthnRegister(request) {
+    return this.getConfig().getHttp().post(this.getBaseAddress(), request);
+  }
+  fetchWebAuthnAuthenticateOptions() {
+    return this.getConfig().getHttp().post(this.getWebAuthnAuthenticateOptionsAddress(), "");
+  }
+  webAuthnAuthenticate(request) {
+    return this.getConfig().getHttp().post(this.getWebAuthnAuthenticateAddress(), request);
+  }
+  delete(id) {
+    return this.getConfig().getHttp().delete(this.getIdPath(id));
+  }
+};
+let SecurityApiResources$a = class SecurityApiResources {
+  // 静态私有实例引用
+  static _instance = null;
+  // 初始化标志
+  static _initialized = false;
+  config = {};
+  // 私有构造函数防止外部实例化
+  constructor(config) {
+    this.config = config;
+  }
+  /**
+   * 初始化单例（仅允许一次）
+   * @param {KernelOptions} config 配置选项
+   * @returns {SecurityApiResources} 单例实例
+   */
+  static initialize(config) {
+    if (SecurityApiResources._initialized) {
+      throw new Error("SecurityApiResources has already been initialized");
+    }
+    SecurityApiResources._instance = new SecurityApiResources(config);
+    SecurityApiResources._initialized = true;
+    return SecurityApiResources._instance;
+  }
+  /**
+   * 获取单例实例
+   * @returns {RouterUtilities} 单例实例
+   */
+  static getInstance() {
+    if (!SecurityApiResources._instance) {
+      throw new Error("SecurityApiResources not initialized. Call initialize() first.");
+    }
+    return SecurityApiResources._instance;
+  }
+  getConfig() {
+    return this.config;
+  }
+  open() {
+    return OpenApiService$a.getInstance(this.config);
+  }
+  oauth2() {
+    return OAuth2ApiService$a.getInstance(this.config);
+  }
+  passkey() {
+    return PasskeyApiService$a.getInstance(this.config);
+  }
+};
+const useCryptoStore$j = defineStore("Crypto", {
+  state: () => ({
+    sessionId: "",
+    key: "",
+    state: ""
+  }),
+  actions: {
+    setSessionId(sessionId) {
+      this.sessionId = sessionId;
+    },
+    setKey(key) {
+      this.key = SM4Utils.encrypt(key, OptionsUtilities$a.getSecurityKey());
+    },
+    getKey() {
+      return SM4Utils.decrypt(this.key, OptionsUtilities$a.getSecurityKey());
+    },
+    encrypt(content) {
+      const key = this.getKey();
+      return SM4Utils.encrypt(content, key);
+    },
+    decrypt(content) {
+      const key = this.getKey();
+      return SM4Utils.decrypt(content, key);
+    },
+    exchange(identity = "") {
+      return new Promise((resolve, reject) => {
+        SecurityApiResources$a.getInstance().open().createSession(identity).then((response) => {
+          const data = response.data;
+          if (data) {
+            const sessionId = data.sessionId;
+            const backendPublicKey = data.publicKey;
+            this.state = data.state;
+            const pair = SM2Utils.createKeyPair();
+            const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
+            SecurityApiResources$a.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+              const confidential = response2.data;
+              const key = SM2Utils.decrypt(confidential, pair.privateKey);
+              this.setSessionId(sessionId);
+              this.setKey(key);
+              resolve(key);
+            });
+          }
+        }).catch((error) => {
+          reject(error);
+        });
+      });
+    }
+  },
+  persist: {
+    storage: sessionStorage
+  }
+});
+const useAuthenticationStore$1 = defineStore("Authentication", {
+  state: () => ({
+    access_token: "",
+    expires_in: 0,
+    refresh_token: "",
+    license: "",
+    openid: "",
+    idToken: "",
+    scope: "",
+    token_type: "",
+    errorTimes: 0,
+    remainTimes: 0,
+    locked: false,
+    userId: "",
+    username: "",
+    employeeId: "",
+    avatar: "",
+    roles: []
+  }),
+  getters: {
+    isNotExpired: (state) => {
+      const expires = moment().add(state.expires_in, "seconds").valueOf();
+      const flag = moment(expires).add(1, "seconds").diff(moment(), "seconds");
+      return flag !== 0;
+    },
+    token() {
+      if (OptionsUtilities$a.isAutoRefreshToken()) {
+        return this.access_token;
+      } else {
+        if (this.isNotExpired) {
+          return this.access_token;
+        } else {
+          return "";
+        }
+      }
+    }
+  },
+  actions: {
+    getBearerToken() {
+      return "Bearer " + this.token;
+    },
+    getAuthorizationHeader() {
+      return { Authorization: this.getBearerToken(), "X-Herodotus-Open-Id": this.userId };
+    },
+    setTokenInfo(data) {
+      this.access_token = data.access_token;
+      this.expires_in = data.expires_in;
+      this.refresh_token = data.refresh_token;
+      this.license = data.license;
+      this.scope = data.scope;
+      this.token_type = data.token_type;
+      if (data.id_token) {
+        this.idToken = data.id_token;
+        const jwt = jwtDecode(this.idToken);
+        this.userId = jwt.openid;
+        this.username = jwt.sub;
+        this.avatar = jwt.avatar;
+        this.employeeId = jwt.employeeId;
+        this.roles = jwt.roles;
+      } else if (data.openid) {
+        const crypto = useCryptoStore$j();
+        this.openid = data.openid;
+        const openid = crypto.decrypt(this.openid);
+        const details = JSON.parse(openid);
+        this.userId = details.userId;
+        this.username = details.username;
+        this.roles = details.roles;
+        this.avatar = details.avatar;
+        this.employeeId = details.employeeId;
+      } else {
+        console.error("Cannot fetch the use info from backend.");
+      }
+    },
+    setUserErrorStatus(data) {
+      this.remainTimes = data.remainTimes;
+      this.errorTimes = data.errorTimes;
+      this.locked = data.locked;
+    },
+    /**
+     * 判断是否是以非弹窗的形式显示的信息。
+     *
+     * 主要在登录页面中，将 Dialog 弹出形式的错误信息，转换为显示在输入框上部的错误信息，
+     * @param error
+     * @returns
+     */
+    isAlertMessage(error) {
+      return error.code && [40106, 40111].includes(error.code);
+    },
+    setErrorPrompt(error, principal) {
+      if (this.isAlertMessage(error)) {
+        SecurityApiResources$a.getInstance().open().getPrompt(principal).then((result) => {
+          this.setUserErrorStatus(result.data);
+        });
+      }
+    },
+    signIn(username, password) {
+      const crypto = useCryptoStore$j();
+      if (OptionsUtilities$a.isUseCrypto()) {
+        username = crypto.encrypt(username);
+        password = crypto.encrypt(password);
+      }
+      return new Promise((resolve, reject) => {
+        SecurityApiResources$a.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities$a.isUseCrypto()).then((response) => {
+          if (response) {
+            const data = response;
+            this.setTokenInfo(data);
+          }
+          if (this.access_token) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }).catch((error) => {
+          this.setErrorPrompt(error, username);
+          reject(error);
+        });
+      });
+    },
+    refreshToken() {
+      return new Promise((resolve, reject) => {
+        SecurityApiResources$a.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities$a.isUseCrypto()).then((response) => {
+          if (response) {
+            const data = response;
+            this.setTokenInfo(data);
+          }
+          if (this.access_token) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }).catch((error) => {
+          reject(error);
+        });
+      });
+    },
+    signOut() {
+      if (this.access_token) {
+        SecurityApiResources$a.getInstance().oauth2().signOut(this.access_token).then(() => {
+          console.log("Server side sign out successfully.");
+        }).catch((error) => {
+          console.log("Server side sign out has error.", error);
+        });
+      }
+    },
+    authorizationCode(code, state = "") {
+      return new Promise((resolve, reject) => {
+        SecurityApiResources$a.getInstance().oauth2().authorizationCodeFlow(
+          code,
+          OptionsUtilities$a.getRedirectUri(),
+          state,
+          OptionsUtilities$a.isUseCrypto()
+        ).then((response) => {
+          if (response) {
+            const data = response;
+            this.setTokenInfo(data);
+          }
+          if (this.access_token) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }).catch((error) => {
+          reject(error);
+        });
+      });
+    },
+    smsSignIn(mobile, code) {
+      const crypto = useCryptoStore$j();
+      if (OptionsUtilities$a.isUseCrypto()) {
+        mobile = crypto.encrypt(mobile);
+        code = crypto.encrypt(code);
+      }
+      return new Promise((resolve, reject) => {
+        SecurityApiResources$a.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities$a.isUseCrypto()).then((response) => {
+          if (response) {
+            const data = response;
+            this.setTokenInfo(data);
+          }
+          if (this.access_token) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }).catch((error) => {
+          this.setErrorPrompt(error, mobile);
+          reject(error);
+        });
+      });
+    },
+    socialSignIn(source, accessPrincipal) {
+      return new Promise((resolve, reject) => {
+        SecurityApiResources$a.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities$a.isUseCrypto()).then((response) => {
+          if (response) {
+            const data = response;
+            this.setTokenInfo(data);
+          }
+          if (this.access_token) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }).catch((error) => {
+          if (error.code && [40106, 40111].includes(error.code)) reject(error);
+        });
+      });
+    },
+    passkey(publicKey) {
+      return new Promise((resolve, reject) => {
+        SecurityApiResources$a.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities$a.isUseCrypto()).then((response) => {
+          if (response) {
+            const data = response;
+            this.setTokenInfo(data);
+          }
+          if (this.access_token) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }).catch((error) => {
+          if (error.code && [40106, 40111].includes(error.code)) reject(error);
+        });
+      });
+    }
+  },
+  persist: true
+});
+const getSystemHeaders = () => {
+  const authentication = useAuthenticationStore$1();
+  const crypto = useCryptoStore$j();
+  const token = authentication.access_token;
+  const sessionId = crypto.sessionId;
+  const headers = {};
+  if (token) {
+    headers["Authorization"] = AuthorizationTokenEnum.BEARER + token;
+  }
+  if (sessionId) {
+    headers["X-Herodotus-Session-Id"] = sessionId;
+  }
+  const tenantId = OptionsUtilities$a.getTenantId();
+  if (tenantId) {
+    headers["X-Herodotus-Tenant-Id"] = tenantId;
+  }
+  return headers;
+};
+const useRouterStore$j = defineStore("Router", {
+  state: () => ({
+    routes: [],
+    cachedRoutes: [],
+    details: /* @__PURE__ */ new Map(),
+    isRemote: true,
+    pushParams: {}
+  }),
+  getters: {
+    isDynamicRouteAdded() {
+      return !lodash.isEmpty(this.routes);
+    }
+  },
+  actions: {
+    /**
+     * 查询三级路由组件
+     * @param key 三级路由组件名称
+     * @returns 组件名称
+     */
+    getDetailComponent(key) {
+      return this.details.get(key);
+    },
+    /**
+     * 获取 Vue Router Push 类型参数
+     * @param key 组件名称
+     * @returns Push 类型参数
+     */
+    getRoutePushParam(key) {
+      return this.pushParams[key];
+    },
+    /**
+     * 添加动态路由
+     * @param routes 路由列表
+     */
+    addDynamicRoutes(routes) {
+      this.routes = routes;
+    },
+    /**
+     * 将路由添加至缓存
+     * @param route 路由
+     */
+    addCachedRoute(route) {
+      if (!route.meta?.isNotKeepAlive) {
+        const name = route.name;
+        if (!this.cachedRoutes.includes(name)) {
+          this.cachedRoutes.push(name);
+        }
+      }
+    },
+    /**
+     * 添加三级路由
+     * @param item 路由条目
+     */
+    addDetailRoutes(item) {
+      const children = item.children || [];
+      if (!lodash.isEmpty(children)) {
+        children.forEach((child) => {
+          const componentName = child.name;
+          if (componentName) {
+            this.details.set(componentName, child.component);
+          }
+        });
+      }
+    },
+    /**
+     * 判断路由中是否包含 Push 路由
+     * @param route 路由
+     * @returns true 包含参数，false 不包含参数
+     */
+    hasParameter(route) {
+      const name = route.name;
+      if (name && lodash.has(this.pushParams, name)) {
+        return true;
+      }
+      return false;
+    },
+    /**
+     * 判断是否为三级路由
+     * @param route 路由
+     * @returns true 是三级路由，false 不是三级路由
+     */
+    isDetailRoute(route) {
+      if (route.meta) {
+        if (route.meta.isDetailContent) {
+          return true;
+        }
+      }
+      return false;
+    },
+    /**
+     * 判断当前是否为有效的三级路由
+     * @param route 路由
+     * @returns true 是三级路由，false 不是三级路由
+     */
+    isValidDetailRoute(route) {
+      return this.isDetailRoute(route) && this.hasParameter(route);
+    },
+    /**
+     * 向当前缓存添加 Push 参数
+     * @param name 参数名称
+     * @param params 参数值
+     */
+    addRoutePushParam(name, params = {}) {
+      if (name) {
+        this.pushParams[name] = params;
+      }
+    },
+    /**
+     * 从当前缓存中删除 Push 参数
+     * @param name 参数名称
+     */
+    removeRoutePushParam(name) {
+      if (name) {
+        delete this.pushParams[name];
+      }
+    }
+  }
+});
+const useSettingsStore = defineStore("GlobalSettings", {
+  state: () => ({
+    /**
+     * 全局主题
+     */
+    theme: {
+      mode: ThemeModeEnum$j.SYSTEM,
+      // 默认 primary 主题颜色
+      primary: "#1867c0"
+    },
+    /**
+     * 布局切换
+     */
+    layout: LayoutModeEnum$j.DEFAULT,
+    /**
+     * 界面效果
+     */
+    effect: {
+      // 是否开启菜单手风琴效果
+      isUniqueOpened: false
+    },
+    display: {
+      // 是否开启 TabsView
+      isTabsView: true,
+      // 关闭标签页，激活左侧标签页
+      isActivateLeftTab: true,
+      // 显示面包屑
+      showBreadcrumbs: true,
+      // 显示面包屑图标
+      showBreadcrumbsIcon: true,
+      table: {
+        dense: false
+      }
+    }
+  }),
+  getters: {
+    isDark: (state) => state.theme.mode === ThemeModeEnum$j.DARK,
+    isLight: (state) => state.theme.mode === ThemeModeEnum$j.LIGHT,
+    isSystem: (state) => state.theme.mode === ThemeModeEnum$j.SYSTEM,
+    isDefaultLayout: (state) => state.layout === LayoutModeEnum$j.DEFAULT,
+    isClassicLayout: (state) => state.layout === LayoutModeEnum$j.CLASSIC
+  }
+});
+const useTabsViewStore = defineStore("TabsView", {
+  state: () => ({
+    tabs: [],
+    activatedTab: {},
+    activatedTabName: ""
+  }),
+  getters: {
+    isNotLastTab: (state) => {
+      return (index) => state.tabs.length - 1 !== index;
+    },
+    getLastTabIndex: (state) => {
+      return state.tabs.length - 1;
+    },
+    getTabIndex: (state) => {
+      return (tab) => lodash.findIndex(state.tabs, (item) => item.name === tab.name);
+    },
+    getActivatedTabIndex() {
+      return this.getTabIndex(this.activatedTab);
+    },
+    /**
+     * 最后一个Tab是否为激活状态
+     */
+    isLastTabActivated() {
+      const activatedTabIndex = this.getActivatedTabIndex;
+      return activatedTabIndex === this.getLastTabIndex;
+    },
+    isFirstTabActivated() {
+      const activatedTabIndex = this.getActivatedTabIndex;
+      return activatedTabIndex === 0;
+    },
+    disableCloseCurrentTab() {
+      return this.isLastTabActivated || this.isFirstTabActivated;
+    },
+    disableCloseLeftTabs() {
+      return this.isFirstTabActivated;
+    },
+    disableCloseRightTabs() {
+      return this.isLastTabActivated;
+    },
+    disableRefreshCurrentTab() {
+      if (this.activatedTab.meta) {
+        if (this.activatedTab.meta.isDetailContent) {
+          return true;
+        }
+      }
+      return false;
+    }
+  },
+  actions: {
+    convertRouteToTab(route) {
+      return {
+        name: route.name,
+        path: route.path,
+        meta: route.meta
+      };
+    },
+    setActivatedTab(tab) {
+      nextTick(() => {
+        this.activatedTab = tab;
+        this.activatedTabName = tab.name;
+      });
+    },
+    isNotExistInStaticRoute(tab) {
+      return lodash.findIndex(OptionsUtilities$a.getRoutes(), (item) => item.path === tab.path) === -1;
+    },
+    isTabNotOpened(tab) {
+      return this.getTabIndex(tab) === -1;
+    },
+    openTab(tab, isDetail = false) {
+      if (this.isNotExistInStaticRoute(tab)) {
+        if (this.isTabNotOpened(tab)) {
+          if (isDetail) {
+            if (this.isLastTabActivated) {
+              this.tabs.splice(this.getActivatedTabIndex, 0, tab);
+            } else {
+              this.tabs.splice(this.getActivatedTabIndex + 1, 0, tab);
+            }
+          } else {
+            this.tabs.push(tab);
+          }
+        }
+        this.setActivatedTab(tab);
+      }
+    },
+    closeTab(tab) {
+      lodash.remove(this.tabs, (item) => {
+        return item.name === tab.name;
+      });
+    },
+    smartTab(route) {
+      const store = useRouterStore$j();
+      const isDetailRoute = store.isDetailRoute(route);
+      const tab = this.convertRouteToTab(route);
+      if (isDetailRoute) {
+        if (store.hasParameter(route)) {
+          this.openTab(tab, isDetailRoute);
+        } else {
+          this.closeTab(tab);
+          RouterUtilities$a.getInstance().goBack();
+        }
+      } else {
+        this.openTab(tab, isDetailRoute);
+      }
+    },
+    deleteTab(route) {
+      const tab = this.convertRouteToTab(route);
+      this.closeTab(tab);
+    },
+    closeCurrentTab() {
+      this.closeTab(this.activatedTab);
+    },
+    closeOtherTabs() {
+      lodash.remove(this.tabs, (item) => {
+        return item.name !== this.activatedTab.name;
+      });
+    },
+    closeLeftTabs() {
+      const activatedTabIndex = this.getActivatedTabIndex;
+      lodash.remove(this.tabs, (item, index) => {
+        return index < activatedTabIndex;
+      });
+    },
+    closeRightTabs() {
+      const activatedTabIndex = this.getActivatedTabIndex;
+      lodash.remove(this.tabs, (item, index) => {
+        return index > activatedTabIndex;
+      });
+    }
+  },
+  persist: true
+});
+function useEditFinish() {
+  const route = useRoute();
+  const routeStore = useRouterStore$j();
+  const tabs = useTabsViewStore();
+  const onFinish = () => {
+    const name = route.name;
+    routeStore.removeRoutePushParam(name);
+    tabs.deleteTab(route);
+    RouterUtilities$a.getInstance().goBack();
+  };
+  return {
+    onFinish
+  };
+}
+function useDeviceAuthorize(clientId, clientSecret, deviceCode) {
+  const handler = shallowRef(0);
+  const interval = shallowRef(5);
+  const isSuccess = shallowRef(false);
+  const isFailed = shallowRef(false);
+  const successResponse = shallowRef({});
+  const pullingResponse = shallowRef([]);
+  const message = (text, isSuccess2 = false) => {
+    const id = pullingResponse.value.length + 1;
+    if (!isSuccess2) {
+      pullingResponse.value.push({ id, icon: "mdi-alert-circle", color: "error", text });
+    } else {
+      pullingResponse.value.push({ id, icon: "mdi-information", color: "green", text });
+    }
+  };
+  const pulling = (status) => {
+    if (status === "authorization_pending") {
+      message("Authorization pending, continuing to poll...");
+    } else if (status === "slow_down") {
+      message("Slowing down...");
+      slowDown();
+    } else if (status === "token_expired") {
+      message("Token expired, stopping...");
+      clear();
+      isFailed.value = true;
+    } else if (status === "access_denied") {
+      message("Access denied, stopping...");
+      clear();
+      isFailed.value = true;
+    }
+  };
+  const process = () => {
+    SecurityApiResources$a.getInstance().oauth2().deviceCodeFlow(clientId.value, clientSecret.value, deviceCode.value).then((response) => {
+      message("Authorization successful", true);
+      clear();
+      isSuccess.value = true;
+      successResponse.value = response.data;
+    }).catch((error) => {
+      const data = error.response.data;
+      pulling(data.error);
+    });
+  };
+  const schedule = () => {
+    handler.value = window.setInterval(process, interval.value * 1e3);
+  };
+  const clear = () => {
+    window.clearInterval(handler.value);
+  };
+  const slowDown = () => {
+    interval.value += 5;
+    clear();
+    schedule();
+  };
+  return {
+    pullingResponse,
+    successResponse,
+    isFailed,
+    isSuccess,
+    schedule
+  };
+}
+var LayoutModeEnum$i = /* @__PURE__ */ ((LayoutModeEnum2) => {
+  LayoutModeEnum2["DEFAULT"] = "defaults";
+  LayoutModeEnum2["CLASSIC"] = "classic";
+  LayoutModeEnum2["TRANSVERSE"] = "transverse";
+  LayoutModeEnum2["COLUMNS"] = "transverse";
+  return LayoutModeEnum2;
+})(LayoutModeEnum$i || {});
+var ThemeModeEnum$i = /* @__PURE__ */ ((ThemeModeEnum2) => {
+  ThemeModeEnum2["DARK"] = "dark";
+  ThemeModeEnum2["LIGHT"] = "light";
+  ThemeModeEnum2["SYSTEM"] = "system";
+  return ThemeModeEnum2;
+})(ThemeModeEnum$i || {});
+var CaptchaCategoryEnum$i = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
+  CaptchaCategoryEnum2["JIGSAW"] = "JIGSAW";
+  CaptchaCategoryEnum2["WORD_CLICK"] = "WORD_CLICK";
+  CaptchaCategoryEnum2["ARITHMETIC"] = "ARITHMETIC";
+  CaptchaCategoryEnum2["CHINESE"] = "CHINESE";
+  CaptchaCategoryEnum2["CHINESE_GIF"] = "CHINESE_GIF";
+  CaptchaCategoryEnum2["SPEC_GIF"] = "SPEC_GIF";
+  CaptchaCategoryEnum2["SPEC"] = "SPEC";
+  CaptchaCategoryEnum2["HUTOOL_LINE"] = "HUTOOL_LINE";
+  CaptchaCategoryEnum2["HUTOOL_CIRCLE"] = "HUTOOL_CIRCLE";
+  CaptchaCategoryEnum2["HUTOOL_SHEAR"] = "HUTOOL_SHEAR";
+  CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
+  return CaptchaCategoryEnum2;
+})(CaptchaCategoryEnum$i || {});
+defineStore("Application", {
+  state: () => ({
+    // 左侧菜单面板显示控制
+    leftDrawer: true,
+    // 右侧设置面板显示控制
+    rightDrawer: false,
+    // 登录页面面板
+    signInPanel: "account"
+  }),
+  actions: {
+    switchToMobilePanel() {
+      this.signInPanel = "mobile";
+    },
+    switchToScanPanel() {
+      this.signInPanel = "scan";
+    },
+    switchToAccountPanel() {
+      this.signInPanel = "account";
+    }
+  }
+});
+class OptionsUtilities2 {
+  // 静态私有实例引用
+  static _instance = null;
+  // 初始化标志
+  static _initialized = false;
+  options;
+  // 私有构造函数防止外部实例化
+  constructor(options) {
+    this.options = options;
+  }
+  /**
+   * 初始化单例（仅允许一次）
+   * @param {KernelOptions} options 配置选项
+   * @returns {OptionsUtilities} 单例实例
+   */
+  static initialize(options) {
+    if (OptionsUtilities2._initialized) {
+      throw new Error("RouterUtilities has already been initialized");
+    }
+    OptionsUtilities2._instance = new OptionsUtilities2(options);
+    OptionsUtilities2._initialized = true;
+    return OptionsUtilities2._instance;
+  }
+  /**
+   * 获取单例实例
+   * @returns {RouterUtilities} 单例实例
+   */
+  static getInstance() {
+    if (!OptionsUtilities2._instance) {
+      throw new Error("RouterUtilities not initialized. Call initialize() first.");
+    }
+    return OptionsUtilities2._instance;
+  }
+  setOptions(options) {
+    this.options = options;
+  }
+  getOptions() {
+    return this.options;
+  }
+  static axiosConfig() {
+    return this.getInstance().getOptions().config;
+  }
+  static getRouterOptions() {
+    return this.getInstance().getOptions().router;
+  }
+  static getRouter() {
+    return this.getRouterOptions().instance;
+  }
+  static getRoutes() {
+    return this.getInstance().getOptions().staticRoutes;
+  }
+  static getSecurityKey() {
+    return this.getInstance().getOptions().variables.securityKey;
+  }
+  static getRedirectUri() {
+    return this.getInstance().getOptions().variables.redirectUri;
+  }
+  static isUseCrypto() {
+    return this.getInstance().getOptions().variables.isUseCrypto;
+  }
+  static isAutoRefreshToken() {
+    return this.getInstance().getOptions().variables.isAutoRefreshToken;
+  }
+  static getTenantId() {
+    return this.getInstance().getOptions().variables.tenantId;
+  }
+}
+class RouterUtilities2 {
+  // 静态私有实例引用
+  static _instance = null;
+  // 初始化标志
+  static _initialized = false;
+  options;
+  router = {};
+  // 私有构造函数防止外部实例化
+  constructor(options) {
+    this.options = options;
+    this.router = options.instance;
+  }
+  /**
+   * 初始化单例（仅允许一次）
+   * @param {RouterOptions} options 配置选项
+   * @returns {RouterUtilities} 单例实例
+   */
+  static initialize(options) {
+    if (RouterUtilities2._initialized) {
+      throw new Error("RouterUtilities has already been initialized");
+    }
+    RouterUtilities2._instance = new RouterUtilities2(options);
+    RouterUtilities2._initialized = true;
+    return RouterUtilities2._instance;
+  }
+  /**
+   * 获取单例实例
+   * @returns {RouterUtilities} 单例实例
+   */
+  static getInstance() {
+    if (!RouterUtilities2._instance) {
+      throw new Error("RouterUtilities not initialized. Call initialize() first.");
+    }
+    return RouterUtilities2._instance;
+  }
+  setRouter(router) {
+    this.router = router;
+  }
+  getRouter() {
+    return this.router;
+  }
+  isRouterExist() {
+    return !lodash.isEmpty(this.router);
+  }
+  hasParameter(route) {
+    return !lodash.isEmpty(route.params) || !lodash.isEmpty(route.query);
+  }
+  /**
+   * 判断是否为三级路由页面
+   * @param route 当前路由 {@link RouteLocationNormalizedLoaded}
+   * @returns true 是三级路由，false 不是三级路由
+   */
+  isDetailRoute(route) {
+    if (route.meta) {
+      if (route.meta.isDetailContent) {
+        return true;
+      }
+    }
+    return false;
+  }
+  isValidDetailRoute(route) {
+    return this.isDetailRoute(route) && this.hasParameter(route);
+  }
+  push(to) {
+    return this.router.push(to);
+  }
+  replace(to) {
+    return this.router.replace(to);
+  }
+  /**
+   * 路由跳转
+   * @param to - 需要跳转的路由
+   * @param isNewTab - 是否在新的浏览器Tab标签打开
+   */
+  to(to, isPush = false) {
+    if (isPush) {
+      this.push(to);
+    } else {
+      this.replace(to);
+    }
+  }
+  /**
+   * 打开新页面
+   * @param to 需要跳转的路由
+   */
+  open(to) {
+    const route = this.router.resolve(to);
+    window.open(route.href, "_blank");
+  }
+  /**
+   * 返回上一级路由
+   *
+   */
+  goBack() {
+    this.router.go(-1);
+  }
+  refresh() {
+    if (this.isRouterExist()) {
+      this.router.go(0);
+    } else {
+      window.location.reload();
+    }
+  }
+  toRoot() {
+    if (this.isRouterExist()) {
+      this.to(this.options.path.root);
+    }
+  }
+  /**
+   * 跳转首页
+   */
+  toHome() {
+    if (this.isRouterExist()) {
+      this.to(this.options.path.home);
+    }
+  }
+  toSignIn() {
+    if (this.isRouterExist()) {
+      this.to(this.options.path.signIn);
+    } else {
+      this.refresh();
+    }
+  }
+  getParent(path) {
+    const array = lodash.split(path, "/");
+    const result = lodash.dropRight(array);
+    return lodash.join(result, "/");
+  }
+  toPrev(route) {
+    if (route.path) {
+      const destination = this.getParent(route.path);
+      this.to({ path: destination });
+    } else {
+      this.goBack();
+    }
+  }
+}
+class OAuth2ApiService2 {
+  // 静态私有实例引用
+  static instance = null;
+  config = {};
+  constructor(config) {
+    this.config = config;
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new OAuth2ApiService2(config);
     }
     return this.instance;
   }
@@ -616,7 +1979,7 @@ class OAuth2ApiService {
     );
   }
 }
-class OpenApiService {
+class OpenApiService2 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -625,7 +1988,7 @@ class OpenApiService {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService(config);
+      this.instance = new OpenApiService2(config);
     }
     return this.instance;
   }
@@ -692,7 +2055,7 @@ class OpenApiService {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService extends Service {
+class PasskeyApiService2 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -700,7 +2063,7 @@ class PasskeyApiService extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService(config);
+      this.instance = new PasskeyApiService2(config);
     }
     return this.instance;
   }
@@ -735,7 +2098,7 @@ class PasskeyApiService extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources {
+class SecurityApiResources2 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -751,34 +2114,34 @@ class SecurityApiResources {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources._initialized) {
+    if (SecurityApiResources2._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources._instance = new SecurityApiResources(config);
-    SecurityApiResources._initialized = true;
-    return SecurityApiResources._instance;
+    SecurityApiResources2._instance = new SecurityApiResources2(config);
+    SecurityApiResources2._initialized = true;
+    return SecurityApiResources2._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources._instance) {
+    if (!SecurityApiResources2._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources._instance;
+    return SecurityApiResources2._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService.getInstance(this.config);
+    return OpenApiService2.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService.getInstance(this.config);
+    return OAuth2ApiService2.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService.getInstance(this.config);
+    return PasskeyApiService2.getInstance(this.config);
   }
 }
 const useCryptoStore$i = defineStore("Crypto", {
@@ -792,10 +2155,10 @@ const useCryptoStore$i = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities.getSecurityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities2.getSecurityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities.getSecurityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities2.getSecurityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -807,7 +2170,7 @@ const useCryptoStore$i = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources2.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -815,7 +2178,7 @@ const useCryptoStore$i = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources2.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -859,7 +2222,7 @@ const useAuthenticationStore = defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities.isAutoRefreshToken()) {
+      if (OptionsUtilities2.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -923,19 +2286,19 @@ const useAuthenticationStore = defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources2.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore$i();
-      if (OptionsUtilities.isUseCrypto()) {
+      if (OptionsUtilities2.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities.isUseCrypto()).then((response) => {
+        SecurityApiResources2.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities2.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -953,7 +2316,7 @@ const useAuthenticationStore = defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities.isUseCrypto()).then((response) => {
+        SecurityApiResources2.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities2.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -970,7 +2333,7 @@ const useAuthenticationStore = defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources2.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -979,11 +2342,11 @@ const useAuthenticationStore = defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources2.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities.getRedirectUri(),
+          OptionsUtilities2.getRedirectUri(),
           state,
-          OptionsUtilities.isUseCrypto()
+          OptionsUtilities2.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -1001,12 +2364,12 @@ const useAuthenticationStore = defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore$i();
-      if (OptionsUtilities.isUseCrypto()) {
+      if (OptionsUtilities2.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities.isUseCrypto()).then((response) => {
+        SecurityApiResources2.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities2.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -1024,7 +2387,7 @@ const useAuthenticationStore = defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities.isUseCrypto()).then((response) => {
+        SecurityApiResources2.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities2.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -1041,7 +2404,7 @@ const useAuthenticationStore = defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities.isUseCrypto()).then((response) => {
+        SecurityApiResources2.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities2.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -1059,24 +2422,6 @@ const useAuthenticationStore = defineStore("Authentication", {
   },
   persist: true
 });
-const getSystemHeaders = () => {
-  const authentication = useAuthenticationStore();
-  const crypto = useCryptoStore$i();
-  const token = authentication.access_token;
-  const sessionId = crypto.sessionId;
-  const headers = {};
-  if (token) {
-    headers["Authorization"] = AuthorizationTokenEnum.BEARER + token;
-  }
-  if (sessionId) {
-    headers["X-Herodotus-Session-Id"] = sessionId;
-  }
-  const tenantId = OptionsUtilities.getTenantId();
-  if (tenantId) {
-    headers["X-Herodotus-Tenant-Id"] = tenantId;
-  }
-  return headers;
-};
 const useRouterStore$i = defineStore("Router", {
   state: () => ({
     routes: [],
@@ -1195,7 +2540,7 @@ const useRouterStore$i = defineStore("Router", {
     }
   }
 });
-const useSettingsStore = defineStore("GlobalSettings", {
+defineStore("GlobalSettings", {
   state: () => ({
     /**
      * 全局主题
@@ -1238,7 +2583,7 @@ const useSettingsStore = defineStore("GlobalSettings", {
     isClassicLayout: (state) => state.layout === LayoutModeEnum$i.CLASSIC
   }
 });
-const useTabsViewStore = defineStore("TabsView", {
+defineStore("TabsView", {
   state: () => ({
     tabs: [],
     activatedTab: {},
@@ -1301,7 +2646,7 @@ const useTabsViewStore = defineStore("TabsView", {
       });
     },
     isNotExistInStaticRoute(tab) {
-      return lodash.findIndex(OptionsUtilities.getRoutes(), (item) => item.path === tab.path) === -1;
+      return lodash.findIndex(OptionsUtilities2.getRoutes(), (item) => item.path === tab.path) === -1;
     },
     isTabNotOpened(tab) {
       return this.getTabIndex(tab) === -1;
@@ -1336,7 +2681,7 @@ const useTabsViewStore = defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities.getInstance().goBack();
+          RouterUtilities2.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -1369,20 +2714,6 @@ const useTabsViewStore = defineStore("TabsView", {
   },
   persist: true
 });
-function useEditFinish() {
-  const route = useRoute();
-  const routeStore = useRouterStore$i();
-  const tabs = useTabsViewStore();
-  const onFinish = () => {
-    const name = route.name;
-    routeStore.removeRoutePushParam(name);
-    tabs.deleteTab(route);
-    RouterUtilities.getInstance().goBack();
-  };
-  return {
-    onFinish
-  };
-}
 var LayoutModeEnum$h = /* @__PURE__ */ ((LayoutModeEnum2) => {
   LayoutModeEnum2["DEFAULT"] = "defaults";
   LayoutModeEnum2["CLASSIC"] = "classic";
@@ -1431,7 +2762,7 @@ defineStore("Application", {
     }
   }
 });
-let OptionsUtilities$9 = class OptionsUtilities2 {
+let OptionsUtilities$9 = class OptionsUtilities22 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -1447,22 +2778,22 @@ let OptionsUtilities$9 = class OptionsUtilities2 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities2._initialized) {
+    if (OptionsUtilities22._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities2._instance = new OptionsUtilities2(options);
-    OptionsUtilities2._initialized = true;
-    return OptionsUtilities2._instance;
+    OptionsUtilities22._instance = new OptionsUtilities22(options);
+    OptionsUtilities22._initialized = true;
+    return OptionsUtilities22._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities2._instance) {
+    if (!OptionsUtilities22._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities2._instance;
+    return OptionsUtilities22._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -1498,7 +2829,7 @@ let OptionsUtilities$9 = class OptionsUtilities2 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 };
-let RouterUtilities$9 = class RouterUtilities2 {
+let RouterUtilities$9 = class RouterUtilities22 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -1516,22 +2847,22 @@ let RouterUtilities$9 = class RouterUtilities2 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities2._initialized) {
+    if (RouterUtilities22._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities2._instance = new RouterUtilities2(options);
-    RouterUtilities2._initialized = true;
-    return RouterUtilities2._instance;
+    RouterUtilities22._instance = new RouterUtilities22(options);
+    RouterUtilities22._initialized = true;
+    return RouterUtilities22._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities2._instance) {
+    if (!RouterUtilities22._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities2._instance;
+    return RouterUtilities22._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -1635,7 +2966,7 @@ let RouterUtilities$9 = class RouterUtilities2 {
     }
   }
 };
-let OAuth2ApiService$9 = class OAuth2ApiService2 {
+let OAuth2ApiService$9 = class OAuth2ApiService22 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -1644,7 +2975,7 @@ let OAuth2ApiService$9 = class OAuth2ApiService2 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService2(config);
+      this.instance = new OAuth2ApiService22(config);
     }
     return this.instance;
   }
@@ -1822,7 +3153,7 @@ let OAuth2ApiService$9 = class OAuth2ApiService2 {
     );
   }
 };
-let OpenApiService$9 = class OpenApiService2 {
+let OpenApiService$9 = class OpenApiService22 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -1831,7 +3162,7 @@ let OpenApiService$9 = class OpenApiService2 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService2(config);
+      this.instance = new OpenApiService22(config);
     }
     return this.instance;
   }
@@ -1898,7 +3229,7 @@ let OpenApiService$9 = class OpenApiService2 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 };
-let PasskeyApiService$9 = class PasskeyApiService2 extends Service {
+let PasskeyApiService$9 = class PasskeyApiService22 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -1906,7 +3237,7 @@ let PasskeyApiService$9 = class PasskeyApiService2 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService2(config);
+      this.instance = new PasskeyApiService22(config);
     }
     return this.instance;
   }
@@ -1941,7 +3272,7 @@ let PasskeyApiService$9 = class PasskeyApiService2 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 };
-let SecurityApiResources$9 = class SecurityApiResources2 {
+let SecurityApiResources$9 = class SecurityApiResources22 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -1957,22 +3288,22 @@ let SecurityApiResources$9 = class SecurityApiResources2 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources2._initialized) {
+    if (SecurityApiResources22._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources2._instance = new SecurityApiResources2(config);
-    SecurityApiResources2._initialized = true;
-    return SecurityApiResources2._instance;
+    SecurityApiResources22._instance = new SecurityApiResources22(config);
+    SecurityApiResources22._initialized = true;
+    return SecurityApiResources22._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources2._instance) {
+    if (!SecurityApiResources22._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources2._instance;
+    return SecurityApiResources22._instance;
   }
   getConfig() {
     return this.config;
@@ -2039,7 +3370,7 @@ const useCryptoStore$h = defineStore("Crypto", {
     storage: sessionStorage
   }
 });
-const useAuthenticationStore$1 = defineStore("Authentication", {
+defineStore("Authentication", {
   state: () => ({
     access_token: "",
     expires_in: 0,
@@ -2605,7 +3936,7 @@ defineStore("Application", {
     }
   }
 });
-class OptionsUtilities22 {
+class OptionsUtilities222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -2621,22 +3952,22 @@ class OptionsUtilities22 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities22._initialized) {
+    if (OptionsUtilities222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities22._instance = new OptionsUtilities22(options);
-    OptionsUtilities22._initialized = true;
-    return OptionsUtilities22._instance;
+    OptionsUtilities222._instance = new OptionsUtilities222(options);
+    OptionsUtilities222._initialized = true;
+    return OptionsUtilities222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities22._instance) {
+    if (!OptionsUtilities222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities22._instance;
+    return OptionsUtilities222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -2672,7 +4003,7 @@ class OptionsUtilities22 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 }
-class RouterUtilities22 {
+class RouterUtilities222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -2690,22 +4021,22 @@ class RouterUtilities22 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities22._initialized) {
+    if (RouterUtilities222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities22._instance = new RouterUtilities22(options);
-    RouterUtilities22._initialized = true;
-    return RouterUtilities22._instance;
+    RouterUtilities222._instance = new RouterUtilities222(options);
+    RouterUtilities222._initialized = true;
+    return RouterUtilities222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities22._instance) {
+    if (!RouterUtilities222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities22._instance;
+    return RouterUtilities222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -2809,7 +4140,7 @@ class RouterUtilities22 {
     }
   }
 }
-class OAuth2ApiService22 {
+class OAuth2ApiService222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -2818,7 +4149,7 @@ class OAuth2ApiService22 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService22(config);
+      this.instance = new OAuth2ApiService222(config);
     }
     return this.instance;
   }
@@ -2996,7 +4327,7 @@ class OAuth2ApiService22 {
     );
   }
 }
-class OpenApiService22 {
+class OpenApiService222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -3005,7 +4336,7 @@ class OpenApiService22 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService22(config);
+      this.instance = new OpenApiService222(config);
     }
     return this.instance;
   }
@@ -3072,7 +4403,7 @@ class OpenApiService22 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService22 extends Service {
+class PasskeyApiService222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -3080,7 +4411,7 @@ class PasskeyApiService22 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService22(config);
+      this.instance = new PasskeyApiService222(config);
     }
     return this.instance;
   }
@@ -3115,7 +4446,7 @@ class PasskeyApiService22 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources22 {
+class SecurityApiResources222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -3131,34 +4462,34 @@ class SecurityApiResources22 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources22._initialized) {
+    if (SecurityApiResources222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources22._instance = new SecurityApiResources22(config);
-    SecurityApiResources22._initialized = true;
-    return SecurityApiResources22._instance;
+    SecurityApiResources222._instance = new SecurityApiResources222(config);
+    SecurityApiResources222._initialized = true;
+    return SecurityApiResources222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources22._instance) {
+    if (!SecurityApiResources222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources22._instance;
+    return SecurityApiResources222._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService22.getInstance(this.config);
+    return OpenApiService222.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService22.getInstance(this.config);
+    return OAuth2ApiService222.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService22.getInstance(this.config);
+    return PasskeyApiService222.getInstance(this.config);
   }
 }
 const useCryptoStore$g = defineStore("Crypto", {
@@ -3172,10 +4503,10 @@ const useCryptoStore$g = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities22.getSecurityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities222.getSecurityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities22.getSecurityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities222.getSecurityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -3187,7 +4518,7 @@ const useCryptoStore$g = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources222.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -3195,7 +4526,7 @@ const useCryptoStore$g = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources22.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -3239,7 +4570,7 @@ defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities22.isAutoRefreshToken()) {
+      if (OptionsUtilities222.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -3303,19 +4634,19 @@ defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources22.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources222.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore$g();
-      if (OptionsUtilities22.isUseCrypto()) {
+      if (OptionsUtilities222.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources22.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities22.isUseCrypto()).then((response) => {
+        SecurityApiResources222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -3333,7 +4664,7 @@ defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities22.isUseCrypto()).then((response) => {
+        SecurityApiResources222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -3350,7 +4681,7 @@ defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources22.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources222.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -3359,11 +4690,11 @@ defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources222.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities22.getRedirectUri(),
+          OptionsUtilities222.getRedirectUri(),
           state,
-          OptionsUtilities22.isUseCrypto()
+          OptionsUtilities222.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -3381,12 +4712,12 @@ defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore$g();
-      if (OptionsUtilities22.isUseCrypto()) {
+      if (OptionsUtilities222.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources22.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities22.isUseCrypto()).then((response) => {
+        SecurityApiResources222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -3404,7 +4735,7 @@ defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities22.isUseCrypto()).then((response) => {
+        SecurityApiResources222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -3421,7 +4752,7 @@ defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities22.isUseCrypto()).then((response) => {
+        SecurityApiResources222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -3663,7 +4994,7 @@ defineStore("TabsView", {
       });
     },
     isNotExistInStaticRoute(tab) {
-      return lodash.findIndex(OptionsUtilities22.getRoutes(), (item) => item.path === tab.path) === -1;
+      return lodash.findIndex(OptionsUtilities222.getRoutes(), (item) => item.path === tab.path) === -1;
     },
     isTabNotOpened(tab) {
       return this.getTabIndex(tab) === -1;
@@ -3698,7 +5029,7 @@ defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities22.getInstance().goBack();
+          RouterUtilities222.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -3758,7 +5089,7 @@ var CaptchaCategoryEnum$f = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$f || {});
-let OptionsUtilities$8 = class OptionsUtilities222 {
+let OptionsUtilities$8 = class OptionsUtilities2222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -3774,22 +5105,22 @@ let OptionsUtilities$8 = class OptionsUtilities222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities222._initialized) {
+    if (OptionsUtilities2222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities222._instance = new OptionsUtilities222(options);
-    OptionsUtilities222._initialized = true;
-    return OptionsUtilities222._instance;
+    OptionsUtilities2222._instance = new OptionsUtilities2222(options);
+    OptionsUtilities2222._initialized = true;
+    return OptionsUtilities2222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities222._instance) {
+    if (!OptionsUtilities2222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities222._instance;
+    return OptionsUtilities2222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -3825,7 +5156,7 @@ let OptionsUtilities$8 = class OptionsUtilities222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 };
-let RouterUtilities$8 = class RouterUtilities222 {
+let RouterUtilities$8 = class RouterUtilities2222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -3843,22 +5174,22 @@ let RouterUtilities$8 = class RouterUtilities222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities222._initialized) {
+    if (RouterUtilities2222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities222._instance = new RouterUtilities222(options);
-    RouterUtilities222._initialized = true;
-    return RouterUtilities222._instance;
+    RouterUtilities2222._instance = new RouterUtilities2222(options);
+    RouterUtilities2222._initialized = true;
+    return RouterUtilities2222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities222._instance) {
+    if (!RouterUtilities2222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities222._instance;
+    return RouterUtilities2222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -3962,7 +5293,7 @@ let RouterUtilities$8 = class RouterUtilities222 {
     }
   }
 };
-let OAuth2ApiService$8 = class OAuth2ApiService222 {
+let OAuth2ApiService$8 = class OAuth2ApiService2222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -3971,7 +5302,7 @@ let OAuth2ApiService$8 = class OAuth2ApiService222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService222(config);
+      this.instance = new OAuth2ApiService2222(config);
     }
     return this.instance;
   }
@@ -4149,7 +5480,7 @@ let OAuth2ApiService$8 = class OAuth2ApiService222 {
     );
   }
 };
-let OpenApiService$8 = class OpenApiService222 {
+let OpenApiService$8 = class OpenApiService2222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -4158,7 +5489,7 @@ let OpenApiService$8 = class OpenApiService222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService222(config);
+      this.instance = new OpenApiService2222(config);
     }
     return this.instance;
   }
@@ -4225,7 +5556,7 @@ let OpenApiService$8 = class OpenApiService222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 };
-let PasskeyApiService$8 = class PasskeyApiService222 extends Service {
+let PasskeyApiService$8 = class PasskeyApiService2222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -4233,7 +5564,7 @@ let PasskeyApiService$8 = class PasskeyApiService222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService222(config);
+      this.instance = new PasskeyApiService2222(config);
     }
     return this.instance;
   }
@@ -4268,7 +5599,7 @@ let PasskeyApiService$8 = class PasskeyApiService222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 };
-let SecurityApiResources$8 = class SecurityApiResources222 {
+let SecurityApiResources$8 = class SecurityApiResources2222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -4284,22 +5615,22 @@ let SecurityApiResources$8 = class SecurityApiResources222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources222._initialized) {
+    if (SecurityApiResources2222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources222._instance = new SecurityApiResources222(config);
-    SecurityApiResources222._initialized = true;
-    return SecurityApiResources222._instance;
+    SecurityApiResources2222._instance = new SecurityApiResources2222(config);
+    SecurityApiResources2222._initialized = true;
+    return SecurityApiResources2222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources222._instance) {
+    if (!SecurityApiResources2222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources222._instance;
+    return SecurityApiResources2222._instance;
   }
   getConfig() {
     return this.config;
@@ -4911,7 +6242,7 @@ var CaptchaCategoryEnum$e = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$e || {});
-class OptionsUtilities2222 {
+class OptionsUtilities22222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -4927,22 +6258,22 @@ class OptionsUtilities2222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities2222._initialized) {
+    if (OptionsUtilities22222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities2222._instance = new OptionsUtilities2222(options);
-    OptionsUtilities2222._initialized = true;
-    return OptionsUtilities2222._instance;
+    OptionsUtilities22222._instance = new OptionsUtilities22222(options);
+    OptionsUtilities22222._initialized = true;
+    return OptionsUtilities22222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities2222._instance) {
+    if (!OptionsUtilities22222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities2222._instance;
+    return OptionsUtilities22222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -4978,7 +6309,7 @@ class OptionsUtilities2222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 }
-class RouterUtilities2222 {
+class RouterUtilities22222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -4996,22 +6327,22 @@ class RouterUtilities2222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities2222._initialized) {
+    if (RouterUtilities22222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities2222._instance = new RouterUtilities2222(options);
-    RouterUtilities2222._initialized = true;
-    return RouterUtilities2222._instance;
+    RouterUtilities22222._instance = new RouterUtilities22222(options);
+    RouterUtilities22222._initialized = true;
+    return RouterUtilities22222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities2222._instance) {
+    if (!RouterUtilities22222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities2222._instance;
+    return RouterUtilities22222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -5115,7 +6446,7 @@ class RouterUtilities2222 {
     }
   }
 }
-class OAuth2ApiService2222 {
+class OAuth2ApiService22222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -5124,7 +6455,7 @@ class OAuth2ApiService2222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService2222(config);
+      this.instance = new OAuth2ApiService22222(config);
     }
     return this.instance;
   }
@@ -5302,7 +6633,7 @@ class OAuth2ApiService2222 {
     );
   }
 }
-class OpenApiService2222 {
+class OpenApiService22222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -5311,7 +6642,7 @@ class OpenApiService2222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService2222(config);
+      this.instance = new OpenApiService22222(config);
     }
     return this.instance;
   }
@@ -5378,7 +6709,7 @@ class OpenApiService2222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService2222 extends Service {
+class PasskeyApiService22222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -5386,7 +6717,7 @@ class PasskeyApiService2222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService2222(config);
+      this.instance = new PasskeyApiService22222(config);
     }
     return this.instance;
   }
@@ -5421,7 +6752,7 @@ class PasskeyApiService2222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources2222 {
+class SecurityApiResources22222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -5437,34 +6768,34 @@ class SecurityApiResources2222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources2222._initialized) {
+    if (SecurityApiResources22222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources2222._instance = new SecurityApiResources2222(config);
-    SecurityApiResources2222._initialized = true;
-    return SecurityApiResources2222._instance;
+    SecurityApiResources22222._instance = new SecurityApiResources22222(config);
+    SecurityApiResources22222._initialized = true;
+    return SecurityApiResources22222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources2222._instance) {
+    if (!SecurityApiResources22222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources2222._instance;
+    return SecurityApiResources22222._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService2222.getInstance(this.config);
+    return OpenApiService22222.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService2222.getInstance(this.config);
+    return OAuth2ApiService22222.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService2222.getInstance(this.config);
+    return PasskeyApiService22222.getInstance(this.config);
   }
 }
 const useCryptoStore$e = defineStore("Crypto", {
@@ -5478,10 +6809,10 @@ const useCryptoStore$e = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities2222.getSecurityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities22222.getSecurityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities2222.getSecurityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities22222.getSecurityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -5493,7 +6824,7 @@ const useCryptoStore$e = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources22222.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -5501,7 +6832,7 @@ const useCryptoStore$e = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources2222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources22222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -5545,7 +6876,7 @@ defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities2222.isAutoRefreshToken()) {
+      if (OptionsUtilities22222.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -5609,19 +6940,19 @@ defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources2222.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources22222.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore$e();
-      if (OptionsUtilities2222.isUseCrypto()) {
+      if (OptionsUtilities22222.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities2222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities22222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -5639,7 +6970,7 @@ defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities2222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities22222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -5656,7 +6987,7 @@ defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources2222.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources22222.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -5665,11 +6996,11 @@ defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources22222.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities2222.getRedirectUri(),
+          OptionsUtilities22222.getRedirectUri(),
           state,
-          OptionsUtilities2222.isUseCrypto()
+          OptionsUtilities22222.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -5687,12 +7018,12 @@ defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore$e();
-      if (OptionsUtilities2222.isUseCrypto()) {
+      if (OptionsUtilities22222.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities2222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities22222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -5710,7 +7041,7 @@ defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities2222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities22222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -5727,7 +7058,7 @@ defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities2222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities22222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -5969,7 +7300,7 @@ defineStore("TabsView", {
       });
     },
     isNotExistInStaticRoute(tab) {
-      return lodash.findIndex(OptionsUtilities2222.getRoutes(), (item) => item.path === tab.path) === -1;
+      return lodash.findIndex(OptionsUtilities22222.getRoutes(), (item) => item.path === tab.path) === -1;
     },
     isTabNotOpened(tab) {
       return this.getTabIndex(tab) === -1;
@@ -6004,7 +7335,7 @@ defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities2222.getInstance().goBack();
+          RouterUtilities22222.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -6064,7 +7395,7 @@ var CaptchaCategoryEnum$d = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$d || {});
-let OptionsUtilities$7 = class OptionsUtilities22222 {
+let OptionsUtilities$7 = class OptionsUtilities222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -6080,22 +7411,22 @@ let OptionsUtilities$7 = class OptionsUtilities22222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities22222._initialized) {
+    if (OptionsUtilities222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities22222._instance = new OptionsUtilities22222(options);
-    OptionsUtilities22222._initialized = true;
-    return OptionsUtilities22222._instance;
+    OptionsUtilities222222._instance = new OptionsUtilities222222(options);
+    OptionsUtilities222222._initialized = true;
+    return OptionsUtilities222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities22222._instance) {
+    if (!OptionsUtilities222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities22222._instance;
+    return OptionsUtilities222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -6131,7 +7462,7 @@ let OptionsUtilities$7 = class OptionsUtilities22222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 };
-let RouterUtilities$7 = class RouterUtilities22222 {
+let RouterUtilities$7 = class RouterUtilities222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -6149,22 +7480,22 @@ let RouterUtilities$7 = class RouterUtilities22222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities22222._initialized) {
+    if (RouterUtilities222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities22222._instance = new RouterUtilities22222(options);
-    RouterUtilities22222._initialized = true;
-    return RouterUtilities22222._instance;
+    RouterUtilities222222._instance = new RouterUtilities222222(options);
+    RouterUtilities222222._initialized = true;
+    return RouterUtilities222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities22222._instance) {
+    if (!RouterUtilities222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities22222._instance;
+    return RouterUtilities222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -6268,7 +7599,7 @@ let RouterUtilities$7 = class RouterUtilities22222 {
     }
   }
 };
-let OAuth2ApiService$7 = class OAuth2ApiService22222 {
+let OAuth2ApiService$7 = class OAuth2ApiService222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -6277,7 +7608,7 @@ let OAuth2ApiService$7 = class OAuth2ApiService22222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService22222(config);
+      this.instance = new OAuth2ApiService222222(config);
     }
     return this.instance;
   }
@@ -6455,7 +7786,7 @@ let OAuth2ApiService$7 = class OAuth2ApiService22222 {
     );
   }
 };
-let OpenApiService$7 = class OpenApiService22222 {
+let OpenApiService$7 = class OpenApiService222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -6464,7 +7795,7 @@ let OpenApiService$7 = class OpenApiService22222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService22222(config);
+      this.instance = new OpenApiService222222(config);
     }
     return this.instance;
   }
@@ -6531,7 +7862,7 @@ let OpenApiService$7 = class OpenApiService22222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 };
-let PasskeyApiService$7 = class PasskeyApiService22222 extends Service {
+let PasskeyApiService$7 = class PasskeyApiService222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -6539,7 +7870,7 @@ let PasskeyApiService$7 = class PasskeyApiService22222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService22222(config);
+      this.instance = new PasskeyApiService222222(config);
     }
     return this.instance;
   }
@@ -6574,7 +7905,7 @@ let PasskeyApiService$7 = class PasskeyApiService22222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 };
-let SecurityApiResources$7 = class SecurityApiResources22222 {
+let SecurityApiResources$7 = class SecurityApiResources222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -6590,22 +7921,22 @@ let SecurityApiResources$7 = class SecurityApiResources22222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources22222._initialized) {
+    if (SecurityApiResources222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources22222._instance = new SecurityApiResources22222(config);
-    SecurityApiResources22222._initialized = true;
-    return SecurityApiResources22222._instance;
+    SecurityApiResources222222._instance = new SecurityApiResources222222(config);
+    SecurityApiResources222222._initialized = true;
+    return SecurityApiResources222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources22222._instance) {
+    if (!SecurityApiResources222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources22222._instance;
+    return SecurityApiResources222222._instance;
   }
   getConfig() {
     return this.config;
@@ -7217,7 +8548,7 @@ var CaptchaCategoryEnum$c = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$c || {});
-class OptionsUtilities222222 {
+class OptionsUtilities2222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -7233,22 +8564,22 @@ class OptionsUtilities222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities222222._initialized) {
+    if (OptionsUtilities2222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities222222._instance = new OptionsUtilities222222(options);
-    OptionsUtilities222222._initialized = true;
-    return OptionsUtilities222222._instance;
+    OptionsUtilities2222222._instance = new OptionsUtilities2222222(options);
+    OptionsUtilities2222222._initialized = true;
+    return OptionsUtilities2222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities222222._instance) {
+    if (!OptionsUtilities2222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities222222._instance;
+    return OptionsUtilities2222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -7284,7 +8615,7 @@ class OptionsUtilities222222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 }
-class RouterUtilities222222 {
+class RouterUtilities2222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -7302,22 +8633,22 @@ class RouterUtilities222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities222222._initialized) {
+    if (RouterUtilities2222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities222222._instance = new RouterUtilities222222(options);
-    RouterUtilities222222._initialized = true;
-    return RouterUtilities222222._instance;
+    RouterUtilities2222222._instance = new RouterUtilities2222222(options);
+    RouterUtilities2222222._initialized = true;
+    return RouterUtilities2222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities222222._instance) {
+    if (!RouterUtilities2222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities222222._instance;
+    return RouterUtilities2222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -7421,7 +8752,7 @@ class RouterUtilities222222 {
     }
   }
 }
-class OAuth2ApiService222222 {
+class OAuth2ApiService2222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -7430,7 +8761,7 @@ class OAuth2ApiService222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService222222(config);
+      this.instance = new OAuth2ApiService2222222(config);
     }
     return this.instance;
   }
@@ -7608,7 +8939,7 @@ class OAuth2ApiService222222 {
     );
   }
 }
-class OpenApiService222222 {
+class OpenApiService2222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -7617,7 +8948,7 @@ class OpenApiService222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService222222(config);
+      this.instance = new OpenApiService2222222(config);
     }
     return this.instance;
   }
@@ -7684,7 +9015,7 @@ class OpenApiService222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService222222 extends Service {
+class PasskeyApiService2222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -7692,7 +9023,7 @@ class PasskeyApiService222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService222222(config);
+      this.instance = new PasskeyApiService2222222(config);
     }
     return this.instance;
   }
@@ -7727,7 +9058,7 @@ class PasskeyApiService222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources222222 {
+class SecurityApiResources2222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -7743,34 +9074,34 @@ class SecurityApiResources222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources222222._initialized) {
+    if (SecurityApiResources2222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources222222._instance = new SecurityApiResources222222(config);
-    SecurityApiResources222222._initialized = true;
-    return SecurityApiResources222222._instance;
+    SecurityApiResources2222222._instance = new SecurityApiResources2222222(config);
+    SecurityApiResources2222222._initialized = true;
+    return SecurityApiResources2222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources222222._instance) {
+    if (!SecurityApiResources2222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources222222._instance;
+    return SecurityApiResources2222222._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService222222.getInstance(this.config);
+    return OpenApiService2222222.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService222222.getInstance(this.config);
+    return OAuth2ApiService2222222.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService222222.getInstance(this.config);
+    return PasskeyApiService2222222.getInstance(this.config);
   }
 }
 const useCryptoStore$c = defineStore("Crypto", {
@@ -7784,10 +9115,10 @@ const useCryptoStore$c = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities222222.getSecurityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities2222222.getSecurityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities222222.getSecurityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities2222222.getSecurityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -7799,7 +9130,7 @@ const useCryptoStore$c = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources2222222.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -7807,7 +9138,7 @@ const useCryptoStore$c = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources2222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -7851,7 +9182,7 @@ defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities222222.isAutoRefreshToken()) {
+      if (OptionsUtilities2222222.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -7915,19 +9246,19 @@ defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources222222.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources2222222.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore$c();
-      if (OptionsUtilities222222.isUseCrypto()) {
+      if (OptionsUtilities2222222.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities2222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -7945,7 +9276,7 @@ defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities2222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -7962,7 +9293,7 @@ defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources222222.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources2222222.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -7971,11 +9302,11 @@ defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources2222222.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities222222.getRedirectUri(),
+          OptionsUtilities2222222.getRedirectUri(),
           state,
-          OptionsUtilities222222.isUseCrypto()
+          OptionsUtilities2222222.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -7993,12 +9324,12 @@ defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore$c();
-      if (OptionsUtilities222222.isUseCrypto()) {
+      if (OptionsUtilities2222222.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities2222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -8016,7 +9347,7 @@ defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities2222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -8033,7 +9364,7 @@ defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities2222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -8275,7 +9606,7 @@ defineStore("TabsView", {
       });
     },
     isNotExistInStaticRoute(tab) {
-      return lodash.findIndex(OptionsUtilities222222.getRoutes(), (item) => item.path === tab.path) === -1;
+      return lodash.findIndex(OptionsUtilities2222222.getRoutes(), (item) => item.path === tab.path) === -1;
     },
     isTabNotOpened(tab) {
       return this.getTabIndex(tab) === -1;
@@ -8310,7 +9641,7 @@ defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities222222.getInstance().goBack();
+          RouterUtilities2222222.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -8370,7 +9701,7 @@ var CaptchaCategoryEnum$b = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$b || {});
-let OptionsUtilities$6 = class OptionsUtilities2222222 {
+let OptionsUtilities$6 = class OptionsUtilities22222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -8386,22 +9717,22 @@ let OptionsUtilities$6 = class OptionsUtilities2222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities2222222._initialized) {
+    if (OptionsUtilities22222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities2222222._instance = new OptionsUtilities2222222(options);
-    OptionsUtilities2222222._initialized = true;
-    return OptionsUtilities2222222._instance;
+    OptionsUtilities22222222._instance = new OptionsUtilities22222222(options);
+    OptionsUtilities22222222._initialized = true;
+    return OptionsUtilities22222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities2222222._instance) {
+    if (!OptionsUtilities22222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities2222222._instance;
+    return OptionsUtilities22222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -8437,7 +9768,7 @@ let OptionsUtilities$6 = class OptionsUtilities2222222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 };
-let RouterUtilities$6 = class RouterUtilities2222222 {
+let RouterUtilities$6 = class RouterUtilities22222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -8455,22 +9786,22 @@ let RouterUtilities$6 = class RouterUtilities2222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities2222222._initialized) {
+    if (RouterUtilities22222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities2222222._instance = new RouterUtilities2222222(options);
-    RouterUtilities2222222._initialized = true;
-    return RouterUtilities2222222._instance;
+    RouterUtilities22222222._instance = new RouterUtilities22222222(options);
+    RouterUtilities22222222._initialized = true;
+    return RouterUtilities22222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities2222222._instance) {
+    if (!RouterUtilities22222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities2222222._instance;
+    return RouterUtilities22222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -8574,7 +9905,7 @@ let RouterUtilities$6 = class RouterUtilities2222222 {
     }
   }
 };
-let OAuth2ApiService$6 = class OAuth2ApiService2222222 {
+let OAuth2ApiService$6 = class OAuth2ApiService22222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -8583,7 +9914,7 @@ let OAuth2ApiService$6 = class OAuth2ApiService2222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService2222222(config);
+      this.instance = new OAuth2ApiService22222222(config);
     }
     return this.instance;
   }
@@ -8761,7 +10092,7 @@ let OAuth2ApiService$6 = class OAuth2ApiService2222222 {
     );
   }
 };
-let OpenApiService$6 = class OpenApiService2222222 {
+let OpenApiService$6 = class OpenApiService22222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -8770,7 +10101,7 @@ let OpenApiService$6 = class OpenApiService2222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService2222222(config);
+      this.instance = new OpenApiService22222222(config);
     }
     return this.instance;
   }
@@ -8837,7 +10168,7 @@ let OpenApiService$6 = class OpenApiService2222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 };
-let PasskeyApiService$6 = class PasskeyApiService2222222 extends Service {
+let PasskeyApiService$6 = class PasskeyApiService22222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -8845,7 +10176,7 @@ let PasskeyApiService$6 = class PasskeyApiService2222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService2222222(config);
+      this.instance = new PasskeyApiService22222222(config);
     }
     return this.instance;
   }
@@ -8880,7 +10211,7 @@ let PasskeyApiService$6 = class PasskeyApiService2222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 };
-let SecurityApiResources$6 = class SecurityApiResources2222222 {
+let SecurityApiResources$6 = class SecurityApiResources22222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -8896,22 +10227,22 @@ let SecurityApiResources$6 = class SecurityApiResources2222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources2222222._initialized) {
+    if (SecurityApiResources22222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources2222222._instance = new SecurityApiResources2222222(config);
-    SecurityApiResources2222222._initialized = true;
-    return SecurityApiResources2222222._instance;
+    SecurityApiResources22222222._instance = new SecurityApiResources22222222(config);
+    SecurityApiResources22222222._initialized = true;
+    return SecurityApiResources22222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources2222222._instance) {
+    if (!SecurityApiResources22222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources2222222._instance;
+    return SecurityApiResources22222222._instance;
   }
   getConfig() {
     return this.config;
@@ -9523,7 +10854,7 @@ var CaptchaCategoryEnum$a = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$a || {});
-class OptionsUtilities22222222 {
+class OptionsUtilities222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -9539,22 +10870,22 @@ class OptionsUtilities22222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities22222222._initialized) {
+    if (OptionsUtilities222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities22222222._instance = new OptionsUtilities22222222(options);
-    OptionsUtilities22222222._initialized = true;
-    return OptionsUtilities22222222._instance;
+    OptionsUtilities222222222._instance = new OptionsUtilities222222222(options);
+    OptionsUtilities222222222._initialized = true;
+    return OptionsUtilities222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities22222222._instance) {
+    if (!OptionsUtilities222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities22222222._instance;
+    return OptionsUtilities222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -9590,7 +10921,7 @@ class OptionsUtilities22222222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 }
-class RouterUtilities22222222 {
+class RouterUtilities222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -9608,22 +10939,22 @@ class RouterUtilities22222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities22222222._initialized) {
+    if (RouterUtilities222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities22222222._instance = new RouterUtilities22222222(options);
-    RouterUtilities22222222._initialized = true;
-    return RouterUtilities22222222._instance;
+    RouterUtilities222222222._instance = new RouterUtilities222222222(options);
+    RouterUtilities222222222._initialized = true;
+    return RouterUtilities222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities22222222._instance) {
+    if (!RouterUtilities222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities22222222._instance;
+    return RouterUtilities222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -9727,7 +11058,7 @@ class RouterUtilities22222222 {
     }
   }
 }
-class OAuth2ApiService22222222 {
+class OAuth2ApiService222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -9736,7 +11067,7 @@ class OAuth2ApiService22222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService22222222(config);
+      this.instance = new OAuth2ApiService222222222(config);
     }
     return this.instance;
   }
@@ -9914,7 +11245,7 @@ class OAuth2ApiService22222222 {
     );
   }
 }
-class OpenApiService22222222 {
+class OpenApiService222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -9923,7 +11254,7 @@ class OpenApiService22222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService22222222(config);
+      this.instance = new OpenApiService222222222(config);
     }
     return this.instance;
   }
@@ -9990,7 +11321,7 @@ class OpenApiService22222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService22222222 extends Service {
+class PasskeyApiService222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -9998,7 +11329,7 @@ class PasskeyApiService22222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService22222222(config);
+      this.instance = new PasskeyApiService222222222(config);
     }
     return this.instance;
   }
@@ -10033,7 +11364,7 @@ class PasskeyApiService22222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources22222222 {
+class SecurityApiResources222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -10049,34 +11380,34 @@ class SecurityApiResources22222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources22222222._initialized) {
+    if (SecurityApiResources222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources22222222._instance = new SecurityApiResources22222222(config);
-    SecurityApiResources22222222._initialized = true;
-    return SecurityApiResources22222222._instance;
+    SecurityApiResources222222222._instance = new SecurityApiResources222222222(config);
+    SecurityApiResources222222222._initialized = true;
+    return SecurityApiResources222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources22222222._instance) {
+    if (!SecurityApiResources222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources22222222._instance;
+    return SecurityApiResources222222222._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService22222222.getInstance(this.config);
+    return OpenApiService222222222.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService22222222.getInstance(this.config);
+    return OAuth2ApiService222222222.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService22222222.getInstance(this.config);
+    return PasskeyApiService222222222.getInstance(this.config);
   }
 }
 const useCryptoStore$a = defineStore("Crypto", {
@@ -10090,10 +11421,10 @@ const useCryptoStore$a = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities22222222.getSecurityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities222222222.getSecurityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities22222222.getSecurityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities222222222.getSecurityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -10105,7 +11436,7 @@ const useCryptoStore$a = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources222222222.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -10113,7 +11444,7 @@ const useCryptoStore$a = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources22222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -10157,7 +11488,7 @@ defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities22222222.isAutoRefreshToken()) {
+      if (OptionsUtilities222222222.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -10221,19 +11552,19 @@ defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources22222222.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources222222222.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore$a();
-      if (OptionsUtilities22222222.isUseCrypto()) {
+      if (OptionsUtilities222222222.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities22222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -10251,7 +11582,7 @@ defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities22222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -10268,7 +11599,7 @@ defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources22222222.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -10277,11 +11608,11 @@ defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources222222222.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities22222222.getRedirectUri(),
+          OptionsUtilities222222222.getRedirectUri(),
           state,
-          OptionsUtilities22222222.isUseCrypto()
+          OptionsUtilities222222222.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -10299,12 +11630,12 @@ defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore$a();
-      if (OptionsUtilities22222222.isUseCrypto()) {
+      if (OptionsUtilities222222222.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities22222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -10322,7 +11653,7 @@ defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities22222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -10339,7 +11670,7 @@ defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities22222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -10581,7 +11912,7 @@ defineStore("TabsView", {
       });
     },
     isNotExistInStaticRoute(tab) {
-      return lodash.findIndex(OptionsUtilities22222222.getRoutes(), (item) => item.path === tab.path) === -1;
+      return lodash.findIndex(OptionsUtilities222222222.getRoutes(), (item) => item.path === tab.path) === -1;
     },
     isTabNotOpened(tab) {
       return this.getTabIndex(tab) === -1;
@@ -10616,7 +11947,7 @@ defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities22222222.getInstance().goBack();
+          RouterUtilities222222222.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -10676,7 +12007,7 @@ var CaptchaCategoryEnum$9 = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$9 || {});
-let OptionsUtilities$5 = class OptionsUtilities222222222 {
+let OptionsUtilities$5 = class OptionsUtilities2222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -10692,22 +12023,22 @@ let OptionsUtilities$5 = class OptionsUtilities222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities222222222._initialized) {
+    if (OptionsUtilities2222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities222222222._instance = new OptionsUtilities222222222(options);
-    OptionsUtilities222222222._initialized = true;
-    return OptionsUtilities222222222._instance;
+    OptionsUtilities2222222222._instance = new OptionsUtilities2222222222(options);
+    OptionsUtilities2222222222._initialized = true;
+    return OptionsUtilities2222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities222222222._instance) {
+    if (!OptionsUtilities2222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities222222222._instance;
+    return OptionsUtilities2222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -10743,7 +12074,7 @@ let OptionsUtilities$5 = class OptionsUtilities222222222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 };
-let RouterUtilities$5 = class RouterUtilities222222222 {
+let RouterUtilities$5 = class RouterUtilities2222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -10761,22 +12092,22 @@ let RouterUtilities$5 = class RouterUtilities222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities222222222._initialized) {
+    if (RouterUtilities2222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities222222222._instance = new RouterUtilities222222222(options);
-    RouterUtilities222222222._initialized = true;
-    return RouterUtilities222222222._instance;
+    RouterUtilities2222222222._instance = new RouterUtilities2222222222(options);
+    RouterUtilities2222222222._initialized = true;
+    return RouterUtilities2222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities222222222._instance) {
+    if (!RouterUtilities2222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities222222222._instance;
+    return RouterUtilities2222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -10880,7 +12211,7 @@ let RouterUtilities$5 = class RouterUtilities222222222 {
     }
   }
 };
-let OAuth2ApiService$5 = class OAuth2ApiService222222222 {
+let OAuth2ApiService$5 = class OAuth2ApiService2222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -10889,7 +12220,7 @@ let OAuth2ApiService$5 = class OAuth2ApiService222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService222222222(config);
+      this.instance = new OAuth2ApiService2222222222(config);
     }
     return this.instance;
   }
@@ -11067,7 +12398,7 @@ let OAuth2ApiService$5 = class OAuth2ApiService222222222 {
     );
   }
 };
-let OpenApiService$5 = class OpenApiService222222222 {
+let OpenApiService$5 = class OpenApiService2222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -11076,7 +12407,7 @@ let OpenApiService$5 = class OpenApiService222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService222222222(config);
+      this.instance = new OpenApiService2222222222(config);
     }
     return this.instance;
   }
@@ -11143,7 +12474,7 @@ let OpenApiService$5 = class OpenApiService222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 };
-let PasskeyApiService$5 = class PasskeyApiService222222222 extends Service {
+let PasskeyApiService$5 = class PasskeyApiService2222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -11151,7 +12482,7 @@ let PasskeyApiService$5 = class PasskeyApiService222222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService222222222(config);
+      this.instance = new PasskeyApiService2222222222(config);
     }
     return this.instance;
   }
@@ -11186,7 +12517,7 @@ let PasskeyApiService$5 = class PasskeyApiService222222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 };
-let SecurityApiResources$5 = class SecurityApiResources222222222 {
+let SecurityApiResources$5 = class SecurityApiResources2222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -11202,22 +12533,22 @@ let SecurityApiResources$5 = class SecurityApiResources222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources222222222._initialized) {
+    if (SecurityApiResources2222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources222222222._instance = new SecurityApiResources222222222(config);
-    SecurityApiResources222222222._initialized = true;
-    return SecurityApiResources222222222._instance;
+    SecurityApiResources2222222222._instance = new SecurityApiResources2222222222(config);
+    SecurityApiResources2222222222._initialized = true;
+    return SecurityApiResources2222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources222222222._instance) {
+    if (!SecurityApiResources2222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources222222222._instance;
+    return SecurityApiResources2222222222._instance;
   }
   getConfig() {
     return this.config;
@@ -11829,7 +13160,7 @@ var CaptchaCategoryEnum$8 = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$8 || {});
-class OptionsUtilities2222222222 {
+class OptionsUtilities22222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -11845,22 +13176,22 @@ class OptionsUtilities2222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities2222222222._initialized) {
+    if (OptionsUtilities22222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities2222222222._instance = new OptionsUtilities2222222222(options);
-    OptionsUtilities2222222222._initialized = true;
-    return OptionsUtilities2222222222._instance;
+    OptionsUtilities22222222222._instance = new OptionsUtilities22222222222(options);
+    OptionsUtilities22222222222._initialized = true;
+    return OptionsUtilities22222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities2222222222._instance) {
+    if (!OptionsUtilities22222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities2222222222._instance;
+    return OptionsUtilities22222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -11896,7 +13227,7 @@ class OptionsUtilities2222222222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 }
-class RouterUtilities2222222222 {
+class RouterUtilities22222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -11914,22 +13245,22 @@ class RouterUtilities2222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities2222222222._initialized) {
+    if (RouterUtilities22222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities2222222222._instance = new RouterUtilities2222222222(options);
-    RouterUtilities2222222222._initialized = true;
-    return RouterUtilities2222222222._instance;
+    RouterUtilities22222222222._instance = new RouterUtilities22222222222(options);
+    RouterUtilities22222222222._initialized = true;
+    return RouterUtilities22222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities2222222222._instance) {
+    if (!RouterUtilities22222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities2222222222._instance;
+    return RouterUtilities22222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -12033,7 +13364,7 @@ class RouterUtilities2222222222 {
     }
   }
 }
-class OAuth2ApiService2222222222 {
+class OAuth2ApiService22222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -12042,7 +13373,7 @@ class OAuth2ApiService2222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService2222222222(config);
+      this.instance = new OAuth2ApiService22222222222(config);
     }
     return this.instance;
   }
@@ -12220,7 +13551,7 @@ class OAuth2ApiService2222222222 {
     );
   }
 }
-class OpenApiService2222222222 {
+class OpenApiService22222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -12229,7 +13560,7 @@ class OpenApiService2222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService2222222222(config);
+      this.instance = new OpenApiService22222222222(config);
     }
     return this.instance;
   }
@@ -12296,7 +13627,7 @@ class OpenApiService2222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService2222222222 extends Service {
+class PasskeyApiService22222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -12304,7 +13635,7 @@ class PasskeyApiService2222222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService2222222222(config);
+      this.instance = new PasskeyApiService22222222222(config);
     }
     return this.instance;
   }
@@ -12339,7 +13670,7 @@ class PasskeyApiService2222222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources2222222222 {
+class SecurityApiResources22222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -12355,34 +13686,34 @@ class SecurityApiResources2222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources2222222222._initialized) {
+    if (SecurityApiResources22222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources2222222222._instance = new SecurityApiResources2222222222(config);
-    SecurityApiResources2222222222._initialized = true;
-    return SecurityApiResources2222222222._instance;
+    SecurityApiResources22222222222._instance = new SecurityApiResources22222222222(config);
+    SecurityApiResources22222222222._initialized = true;
+    return SecurityApiResources22222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources2222222222._instance) {
+    if (!SecurityApiResources22222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources2222222222._instance;
+    return SecurityApiResources22222222222._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService2222222222.getInstance(this.config);
+    return OpenApiService22222222222.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService2222222222.getInstance(this.config);
+    return OAuth2ApiService22222222222.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService2222222222.getInstance(this.config);
+    return PasskeyApiService22222222222.getInstance(this.config);
   }
 }
 const useCryptoStore$8 = defineStore("Crypto", {
@@ -12396,10 +13727,10 @@ const useCryptoStore$8 = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities2222222222.getSecurityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities22222222222.getSecurityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities2222222222.getSecurityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities22222222222.getSecurityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -12411,7 +13742,7 @@ const useCryptoStore$8 = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources22222222222.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -12419,7 +13750,7 @@ const useCryptoStore$8 = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources2222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources22222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -12463,7 +13794,7 @@ defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities2222222222.isAutoRefreshToken()) {
+      if (OptionsUtilities22222222222.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -12527,19 +13858,19 @@ defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources2222222222.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources22222222222.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore$8();
-      if (OptionsUtilities2222222222.isUseCrypto()) {
+      if (OptionsUtilities22222222222.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities2222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities22222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -12557,7 +13888,7 @@ defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities2222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities22222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -12574,7 +13905,7 @@ defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources2222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources22222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -12583,11 +13914,11 @@ defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources22222222222.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities2222222222.getRedirectUri(),
+          OptionsUtilities22222222222.getRedirectUri(),
           state,
-          OptionsUtilities2222222222.isUseCrypto()
+          OptionsUtilities22222222222.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -12605,12 +13936,12 @@ defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore$8();
-      if (OptionsUtilities2222222222.isUseCrypto()) {
+      if (OptionsUtilities22222222222.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities2222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities22222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -12628,7 +13959,7 @@ defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities2222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities22222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -12645,7 +13976,7 @@ defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities2222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities22222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -12887,7 +14218,7 @@ defineStore("TabsView", {
       });
     },
     isNotExistInStaticRoute(tab) {
-      return lodash.findIndex(OptionsUtilities2222222222.getRoutes(), (item) => item.path === tab.path) === -1;
+      return lodash.findIndex(OptionsUtilities22222222222.getRoutes(), (item) => item.path === tab.path) === -1;
     },
     isTabNotOpened(tab) {
       return this.getTabIndex(tab) === -1;
@@ -12922,7 +14253,7 @@ defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities2222222222.getInstance().goBack();
+          RouterUtilities22222222222.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -12982,7 +14313,7 @@ var CaptchaCategoryEnum$7 = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$7 || {});
-let OptionsUtilities$4 = class OptionsUtilities22222222222 {
+let OptionsUtilities$4 = class OptionsUtilities222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -12998,22 +14329,22 @@ let OptionsUtilities$4 = class OptionsUtilities22222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities22222222222._initialized) {
+    if (OptionsUtilities222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities22222222222._instance = new OptionsUtilities22222222222(options);
-    OptionsUtilities22222222222._initialized = true;
-    return OptionsUtilities22222222222._instance;
+    OptionsUtilities222222222222._instance = new OptionsUtilities222222222222(options);
+    OptionsUtilities222222222222._initialized = true;
+    return OptionsUtilities222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities22222222222._instance) {
+    if (!OptionsUtilities222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities22222222222._instance;
+    return OptionsUtilities222222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -13058,7 +14389,7 @@ let OptionsUtilities$4 = class OptionsUtilities22222222222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 };
-let RouterUtilities$4 = class RouterUtilities22222222222 {
+let RouterUtilities$4 = class RouterUtilities222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -13076,22 +14407,22 @@ let RouterUtilities$4 = class RouterUtilities22222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities22222222222._initialized) {
+    if (RouterUtilities222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities22222222222._instance = new RouterUtilities22222222222(options);
-    RouterUtilities22222222222._initialized = true;
-    return RouterUtilities22222222222._instance;
+    RouterUtilities222222222222._instance = new RouterUtilities222222222222(options);
+    RouterUtilities222222222222._initialized = true;
+    return RouterUtilities222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities22222222222._instance) {
+    if (!RouterUtilities222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities22222222222._instance;
+    return RouterUtilities222222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -13195,7 +14526,7 @@ let RouterUtilities$4 = class RouterUtilities22222222222 {
     }
   }
 };
-let OAuth2ApiService$4 = class OAuth2ApiService22222222222 {
+let OAuth2ApiService$4 = class OAuth2ApiService222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -13204,7 +14535,7 @@ let OAuth2ApiService$4 = class OAuth2ApiService22222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService22222222222(config);
+      this.instance = new OAuth2ApiService222222222222(config);
     }
     return this.instance;
   }
@@ -13382,7 +14713,7 @@ let OAuth2ApiService$4 = class OAuth2ApiService22222222222 {
     );
   }
 };
-let OpenApiService$4 = class OpenApiService22222222222 {
+let OpenApiService$4 = class OpenApiService222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -13391,7 +14722,7 @@ let OpenApiService$4 = class OpenApiService22222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService22222222222(config);
+      this.instance = new OpenApiService222222222222(config);
     }
     return this.instance;
   }
@@ -13458,7 +14789,7 @@ let OpenApiService$4 = class OpenApiService22222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 };
-let PasskeyApiService$4 = class PasskeyApiService22222222222 extends Service {
+let PasskeyApiService$4 = class PasskeyApiService222222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -13466,7 +14797,7 @@ let PasskeyApiService$4 = class PasskeyApiService22222222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService22222222222(config);
+      this.instance = new PasskeyApiService222222222222(config);
     }
     return this.instance;
   }
@@ -13501,7 +14832,7 @@ let PasskeyApiService$4 = class PasskeyApiService22222222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 };
-let SecurityApiResources$4 = class SecurityApiResources22222222222 {
+let SecurityApiResources$4 = class SecurityApiResources222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -13517,22 +14848,22 @@ let SecurityApiResources$4 = class SecurityApiResources22222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources22222222222._initialized) {
+    if (SecurityApiResources222222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources22222222222._instance = new SecurityApiResources22222222222(config);
-    SecurityApiResources22222222222._initialized = true;
-    return SecurityApiResources22222222222._instance;
+    SecurityApiResources222222222222._instance = new SecurityApiResources222222222222(config);
+    SecurityApiResources222222222222._initialized = true;
+    return SecurityApiResources222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources22222222222._instance) {
+    if (!SecurityApiResources222222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources22222222222._instance;
+    return SecurityApiResources222222222222._instance;
   }
   getConfig() {
     return this.config;
@@ -14144,7 +15475,7 @@ var CaptchaCategoryEnum$6 = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$6 || {});
-class OptionsUtilities222222222222 {
+class OptionsUtilities2222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -14160,22 +15491,22 @@ class OptionsUtilities222222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities222222222222._initialized) {
+    if (OptionsUtilities2222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities222222222222._instance = new OptionsUtilities222222222222(options);
-    OptionsUtilities222222222222._initialized = true;
-    return OptionsUtilities222222222222._instance;
+    OptionsUtilities2222222222222._instance = new OptionsUtilities2222222222222(options);
+    OptionsUtilities2222222222222._initialized = true;
+    return OptionsUtilities2222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities222222222222._instance) {
+    if (!OptionsUtilities2222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities222222222222._instance;
+    return OptionsUtilities2222222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -14220,7 +15551,7 @@ class OptionsUtilities222222222222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 }
-class RouterUtilities222222222222 {
+class RouterUtilities2222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -14238,22 +15569,22 @@ class RouterUtilities222222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities222222222222._initialized) {
+    if (RouterUtilities2222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities222222222222._instance = new RouterUtilities222222222222(options);
-    RouterUtilities222222222222._initialized = true;
-    return RouterUtilities222222222222._instance;
+    RouterUtilities2222222222222._instance = new RouterUtilities2222222222222(options);
+    RouterUtilities2222222222222._initialized = true;
+    return RouterUtilities2222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities222222222222._instance) {
+    if (!RouterUtilities2222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities222222222222._instance;
+    return RouterUtilities2222222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -14357,7 +15688,7 @@ class RouterUtilities222222222222 {
     }
   }
 }
-class OAuth2ApiService222222222222 {
+class OAuth2ApiService2222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -14366,7 +15697,7 @@ class OAuth2ApiService222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService222222222222(config);
+      this.instance = new OAuth2ApiService2222222222222(config);
     }
     return this.instance;
   }
@@ -14544,7 +15875,7 @@ class OAuth2ApiService222222222222 {
     );
   }
 }
-class OpenApiService222222222222 {
+class OpenApiService2222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -14553,7 +15884,7 @@ class OpenApiService222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService222222222222(config);
+      this.instance = new OpenApiService2222222222222(config);
     }
     return this.instance;
   }
@@ -14620,7 +15951,7 @@ class OpenApiService222222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService222222222222 extends Service {
+class PasskeyApiService2222222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -14628,7 +15959,7 @@ class PasskeyApiService222222222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService222222222222(config);
+      this.instance = new PasskeyApiService2222222222222(config);
     }
     return this.instance;
   }
@@ -14663,7 +15994,7 @@ class PasskeyApiService222222222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources222222222222 {
+class SecurityApiResources2222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -14679,34 +16010,34 @@ class SecurityApiResources222222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources222222222222._initialized) {
+    if (SecurityApiResources2222222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources222222222222._instance = new SecurityApiResources222222222222(config);
-    SecurityApiResources222222222222._initialized = true;
-    return SecurityApiResources222222222222._instance;
+    SecurityApiResources2222222222222._instance = new SecurityApiResources2222222222222(config);
+    SecurityApiResources2222222222222._initialized = true;
+    return SecurityApiResources2222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources222222222222._instance) {
+    if (!SecurityApiResources2222222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources222222222222._instance;
+    return SecurityApiResources2222222222222._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService222222222222.getInstance(this.config);
+    return OpenApiService2222222222222.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService222222222222.getInstance(this.config);
+    return OAuth2ApiService2222222222222.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService222222222222.getInstance(this.config);
+    return PasskeyApiService2222222222222.getInstance(this.config);
   }
 }
 const useCryptoStore$6 = defineStore("Crypto", {
@@ -14720,10 +16051,10 @@ const useCryptoStore$6 = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities222222222222.getSecurityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities2222222222222.getSecurityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities222222222222.getSecurityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities2222222222222.getSecurityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -14735,7 +16066,7 @@ const useCryptoStore$6 = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources2222222222222.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -14743,7 +16074,7 @@ const useCryptoStore$6 = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources222222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources2222222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -14787,7 +16118,7 @@ defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities222222222222.isAutoRefreshToken()) {
+      if (OptionsUtilities2222222222222.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -14851,19 +16182,19 @@ defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources222222222222.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources2222222222222.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore$6();
-      if (OptionsUtilities222222222222.isUseCrypto()) {
+      if (OptionsUtilities2222222222222.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities2222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -14881,7 +16212,7 @@ defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities2222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -14898,7 +16229,7 @@ defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources222222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources2222222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -14907,11 +16238,11 @@ defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources2222222222222.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities222222222222.getRedirectUri(),
+          OptionsUtilities2222222222222.getRedirectUri(),
           state,
-          OptionsUtilities222222222222.isUseCrypto()
+          OptionsUtilities2222222222222.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -14929,12 +16260,12 @@ defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore$6();
-      if (OptionsUtilities222222222222.isUseCrypto()) {
+      if (OptionsUtilities2222222222222.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities2222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -14952,7 +16283,7 @@ defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities2222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -14969,7 +16300,7 @@ defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities2222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -15211,7 +16542,7 @@ defineStore("TabsView", {
       });
     },
     isNotExistInStaticRoute(tab) {
-      return lodash.findIndex(OptionsUtilities222222222222.getRoutes(), (item) => item.path === tab.path) === -1;
+      return lodash.findIndex(OptionsUtilities2222222222222.getRoutes(), (item) => item.path === tab.path) === -1;
     },
     isTabNotOpened(tab) {
       return this.getTabIndex(tab) === -1;
@@ -15246,7 +16577,7 @@ defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities222222222222.getInstance().goBack();
+          RouterUtilities2222222222222.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -15306,7 +16637,7 @@ var CaptchaCategoryEnum$5 = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$5 || {});
-let OptionsUtilities$3 = class OptionsUtilities2222222222222 {
+let OptionsUtilities$3 = class OptionsUtilities22222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -15322,22 +16653,22 @@ let OptionsUtilities$3 = class OptionsUtilities2222222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities2222222222222._initialized) {
+    if (OptionsUtilities22222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities2222222222222._instance = new OptionsUtilities2222222222222(options);
-    OptionsUtilities2222222222222._initialized = true;
-    return OptionsUtilities2222222222222._instance;
+    OptionsUtilities22222222222222._instance = new OptionsUtilities22222222222222(options);
+    OptionsUtilities22222222222222._initialized = true;
+    return OptionsUtilities22222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities2222222222222._instance) {
+    if (!OptionsUtilities22222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities2222222222222._instance;
+    return OptionsUtilities22222222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -15364,7 +16695,7 @@ let OptionsUtilities$3 = class OptionsUtilities2222222222222 {
     return this.getInstance().getOptions().variables.tenantId;
   }
 };
-let RouterUtilities$3 = class RouterUtilities2222222222222 {
+let RouterUtilities$3 = class RouterUtilities22222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -15382,22 +16713,22 @@ let RouterUtilities$3 = class RouterUtilities2222222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities2222222222222._initialized) {
+    if (RouterUtilities22222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities2222222222222._instance = new RouterUtilities2222222222222(options);
-    RouterUtilities2222222222222._initialized = true;
-    return RouterUtilities2222222222222._instance;
+    RouterUtilities22222222222222._instance = new RouterUtilities22222222222222(options);
+    RouterUtilities22222222222222._initialized = true;
+    return RouterUtilities22222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities2222222222222._instance) {
+    if (!RouterUtilities22222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities2222222222222._instance;
+    return RouterUtilities22222222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -15501,7 +16832,7 @@ let RouterUtilities$3 = class RouterUtilities2222222222222 {
     }
   }
 };
-let OAuth2ApiService$3 = class OAuth2ApiService2222222222222 {
+let OAuth2ApiService$3 = class OAuth2ApiService22222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -15510,7 +16841,7 @@ let OAuth2ApiService$3 = class OAuth2ApiService2222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService2222222222222(config);
+      this.instance = new OAuth2ApiService22222222222222(config);
     }
     return this.instance;
   }
@@ -15688,7 +17019,7 @@ let OAuth2ApiService$3 = class OAuth2ApiService2222222222222 {
     );
   }
 };
-let OpenApiService$3 = class OpenApiService2222222222222 {
+let OpenApiService$3 = class OpenApiService22222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -15697,7 +17028,7 @@ let OpenApiService$3 = class OpenApiService2222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService2222222222222(config);
+      this.instance = new OpenApiService22222222222222(config);
     }
     return this.instance;
   }
@@ -15764,7 +17095,7 @@ let OpenApiService$3 = class OpenApiService2222222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 };
-let PasskeyApiService$3 = class PasskeyApiService2222222222222 extends Service {
+let PasskeyApiService$3 = class PasskeyApiService22222222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -15772,7 +17103,7 @@ let PasskeyApiService$3 = class PasskeyApiService2222222222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService2222222222222(config);
+      this.instance = new PasskeyApiService22222222222222(config);
     }
     return this.instance;
   }
@@ -15807,7 +17138,7 @@ let PasskeyApiService$3 = class PasskeyApiService2222222222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 };
-let SecurityApiResources$3 = class SecurityApiResources2222222222222 {
+let SecurityApiResources$3 = class SecurityApiResources22222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -15823,22 +17154,22 @@ let SecurityApiResources$3 = class SecurityApiResources2222222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources2222222222222._initialized) {
+    if (SecurityApiResources22222222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources2222222222222._instance = new SecurityApiResources2222222222222(config);
-    SecurityApiResources2222222222222._initialized = true;
-    return SecurityApiResources2222222222222._instance;
+    SecurityApiResources22222222222222._instance = new SecurityApiResources22222222222222(config);
+    SecurityApiResources22222222222222._initialized = true;
+    return SecurityApiResources22222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources2222222222222._instance) {
+    if (!SecurityApiResources22222222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources2222222222222._instance;
+    return SecurityApiResources22222222222222._instance;
   }
   getConfig() {
     return this.config;
@@ -16453,7 +17784,7 @@ var CaptchaCategoryEnum$4 = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$4 || {});
-class OptionsUtilities22222222222222 {
+class OptionsUtilities222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -16469,22 +17800,22 @@ class OptionsUtilities22222222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities22222222222222._initialized) {
+    if (OptionsUtilities222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities22222222222222._instance = new OptionsUtilities22222222222222(options);
-    OptionsUtilities22222222222222._initialized = true;
-    return OptionsUtilities22222222222222._instance;
+    OptionsUtilities222222222222222._instance = new OptionsUtilities222222222222222(options);
+    OptionsUtilities222222222222222._initialized = true;
+    return OptionsUtilities222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities22222222222222._instance) {
+    if (!OptionsUtilities222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities22222222222222._instance;
+    return OptionsUtilities222222222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -16511,7 +17842,7 @@ class OptionsUtilities22222222222222 {
     return this.getInstance().getOptions().tenantId;
   }
 }
-class RouterUtilities22222222222222 {
+class RouterUtilities222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -16529,22 +17860,22 @@ class RouterUtilities22222222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities22222222222222._initialized) {
+    if (RouterUtilities222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities22222222222222._instance = new RouterUtilities22222222222222(options);
-    RouterUtilities22222222222222._initialized = true;
-    return RouterUtilities22222222222222._instance;
+    RouterUtilities222222222222222._instance = new RouterUtilities222222222222222(options);
+    RouterUtilities222222222222222._initialized = true;
+    return RouterUtilities222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities22222222222222._instance) {
+    if (!RouterUtilities222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities22222222222222._instance;
+    return RouterUtilities222222222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -16648,7 +17979,7 @@ class RouterUtilities22222222222222 {
     }
   }
 }
-class OAuth2ApiService22222222222222 {
+class OAuth2ApiService222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -16657,7 +17988,7 @@ class OAuth2ApiService22222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService22222222222222(config);
+      this.instance = new OAuth2ApiService222222222222222(config);
     }
     return this.instance;
   }
@@ -16835,7 +18166,7 @@ class OAuth2ApiService22222222222222 {
     );
   }
 }
-class OpenApiService22222222222222 {
+class OpenApiService222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -16844,7 +18175,7 @@ class OpenApiService22222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService22222222222222(config);
+      this.instance = new OpenApiService222222222222222(config);
     }
     return this.instance;
   }
@@ -16911,7 +18242,7 @@ class OpenApiService22222222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService22222222222222 extends Service {
+class PasskeyApiService222222222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -16919,7 +18250,7 @@ class PasskeyApiService22222222222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService22222222222222(config);
+      this.instance = new PasskeyApiService222222222222222(config);
     }
     return this.instance;
   }
@@ -16954,7 +18285,7 @@ class PasskeyApiService22222222222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources22222222222222 {
+class SecurityApiResources222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -16970,34 +18301,34 @@ class SecurityApiResources22222222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources22222222222222._initialized) {
+    if (SecurityApiResources222222222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources22222222222222._instance = new SecurityApiResources22222222222222(config);
-    SecurityApiResources22222222222222._initialized = true;
-    return SecurityApiResources22222222222222._instance;
+    SecurityApiResources222222222222222._instance = new SecurityApiResources222222222222222(config);
+    SecurityApiResources222222222222222._initialized = true;
+    return SecurityApiResources222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources22222222222222._instance) {
+    if (!SecurityApiResources222222222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources22222222222222._instance;
+    return SecurityApiResources222222222222222._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService22222222222222.getInstance(this.config);
+    return OpenApiService222222222222222.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService22222222222222.getInstance(this.config);
+    return OAuth2ApiService222222222222222.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService22222222222222.getInstance(this.config);
+    return PasskeyApiService222222222222222.getInstance(this.config);
   }
 }
 const useCryptoStore$4 = defineStore("Crypto", {
@@ -17011,10 +18342,10 @@ const useCryptoStore$4 = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities22222222222222.securityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities222222222222222.securityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities22222222222222.securityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities222222222222222.securityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -17026,7 +18357,7 @@ const useCryptoStore$4 = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222222222.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources222222222222222.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -17034,7 +18365,7 @@ const useCryptoStore$4 = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources22222222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources222222222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -17078,7 +18409,7 @@ defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities22222222222222.isAutoRefreshToken()) {
+      if (OptionsUtilities222222222222222.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -17142,19 +18473,19 @@ defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources22222222222222.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources222222222222222.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore$4();
-      if (OptionsUtilities22222222222222.isUseCrypto()) {
+      if (OptionsUtilities222222222222222.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities22222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -17172,7 +18503,7 @@ defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities22222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -17189,7 +18520,7 @@ defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources22222222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources222222222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -17198,11 +18529,11 @@ defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222222222.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources222222222222222.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities22222222222222.getRedirectUri(),
+          OptionsUtilities222222222222222.getRedirectUri(),
           state,
-          OptionsUtilities22222222222222.isUseCrypto()
+          OptionsUtilities222222222222222.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -17220,12 +18551,12 @@ defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore$4();
-      if (OptionsUtilities22222222222222.isUseCrypto()) {
+      if (OptionsUtilities222222222222222.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities22222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -17243,7 +18574,7 @@ defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities22222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -17260,7 +18591,7 @@ defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources22222222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities22222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources222222222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -17503,7 +18834,7 @@ defineStore("TabsView", {
     },
     isNotExistInStaticRoute(tab) {
       return lodash.findIndex(
-        OptionsUtilities22222222222222.getInstance().getOptions().staticRoutes,
+        OptionsUtilities222222222222222.getInstance().getOptions().staticRoutes,
         (item) => item.path === tab.path
       ) === -1;
     },
@@ -17540,7 +18871,7 @@ defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities22222222222222.getInstance().goBack();
+          RouterUtilities222222222222222.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -17600,7 +18931,7 @@ var CaptchaCategoryEnum$3 = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   CaptchaCategoryEnum2["HUTOOL_GIF"] = "HUTOOL_GIF";
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum$3 || {});
-let OptionsUtilities$2 = class OptionsUtilities222222222222222 {
+let OptionsUtilities$2 = class OptionsUtilities2222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -17616,22 +18947,22 @@ let OptionsUtilities$2 = class OptionsUtilities222222222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities222222222222222._initialized) {
+    if (OptionsUtilities2222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities222222222222222._instance = new OptionsUtilities222222222222222(options);
-    OptionsUtilities222222222222222._initialized = true;
-    return OptionsUtilities222222222222222._instance;
+    OptionsUtilities2222222222222222._instance = new OptionsUtilities2222222222222222(options);
+    OptionsUtilities2222222222222222._initialized = true;
+    return OptionsUtilities2222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities222222222222222._instance) {
+    if (!OptionsUtilities2222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities222222222222222._instance;
+    return OptionsUtilities2222222222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -17658,7 +18989,7 @@ let OptionsUtilities$2 = class OptionsUtilities222222222222222 {
     return this.getInstance().getOptions().tenantId;
   }
 };
-let RouterUtilities$2 = class RouterUtilities222222222222222 {
+let RouterUtilities$2 = class RouterUtilities2222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -17676,22 +19007,22 @@ let RouterUtilities$2 = class RouterUtilities222222222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities222222222222222._initialized) {
+    if (RouterUtilities2222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities222222222222222._instance = new RouterUtilities222222222222222(options);
-    RouterUtilities222222222222222._initialized = true;
-    return RouterUtilities222222222222222._instance;
+    RouterUtilities2222222222222222._instance = new RouterUtilities2222222222222222(options);
+    RouterUtilities2222222222222222._initialized = true;
+    return RouterUtilities2222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities222222222222222._instance) {
+    if (!RouterUtilities2222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities222222222222222._instance;
+    return RouterUtilities2222222222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -17795,7 +19126,7 @@ let RouterUtilities$2 = class RouterUtilities222222222222222 {
     }
   }
 };
-let OAuth2ApiService$2 = class OAuth2ApiService222222222222222 {
+let OAuth2ApiService$2 = class OAuth2ApiService2222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -17804,7 +19135,7 @@ let OAuth2ApiService$2 = class OAuth2ApiService222222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService222222222222222(config);
+      this.instance = new OAuth2ApiService2222222222222222(config);
     }
     return this.instance;
   }
@@ -17982,7 +19313,7 @@ let OAuth2ApiService$2 = class OAuth2ApiService222222222222222 {
     );
   }
 };
-let OpenApiService$2 = class OpenApiService222222222222222 {
+let OpenApiService$2 = class OpenApiService2222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -17991,7 +19322,7 @@ let OpenApiService$2 = class OpenApiService222222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService222222222222222(config);
+      this.instance = new OpenApiService2222222222222222(config);
     }
     return this.instance;
   }
@@ -18058,7 +19389,7 @@ let OpenApiService$2 = class OpenApiService222222222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 };
-let PasskeyApiService$2 = class PasskeyApiService222222222222222 extends Service {
+let PasskeyApiService$2 = class PasskeyApiService2222222222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -18066,7 +19397,7 @@ let PasskeyApiService$2 = class PasskeyApiService222222222222222 extends Service
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService222222222222222(config);
+      this.instance = new PasskeyApiService2222222222222222(config);
     }
     return this.instance;
   }
@@ -18101,7 +19432,7 @@ let PasskeyApiService$2 = class PasskeyApiService222222222222222 extends Service
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 };
-let SecurityApiResources$2 = class SecurityApiResources222222222222222 {
+let SecurityApiResources$2 = class SecurityApiResources2222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -18117,22 +19448,22 @@ let SecurityApiResources$2 = class SecurityApiResources222222222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources222222222222222._initialized) {
+    if (SecurityApiResources2222222222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources222222222222222._instance = new SecurityApiResources222222222222222(config);
-    SecurityApiResources222222222222222._initialized = true;
-    return SecurityApiResources222222222222222._instance;
+    SecurityApiResources2222222222222222._instance = new SecurityApiResources2222222222222222(config);
+    SecurityApiResources2222222222222222._initialized = true;
+    return SecurityApiResources2222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources222222222222222._instance) {
+    if (!SecurityApiResources2222222222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources222222222222222._instance;
+    return SecurityApiResources2222222222222222._instance;
   }
   getConfig() {
     return this.config;
@@ -18908,7 +20239,7 @@ const useRouterStore$2 = defineStore("Router", {
     }
   }
 });
-class OptionsUtilities2222222222222222 {
+class OptionsUtilities22222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -18924,22 +20255,22 @@ class OptionsUtilities2222222222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities2222222222222222._initialized) {
+    if (OptionsUtilities22222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities2222222222222222._instance = new OptionsUtilities2222222222222222(options);
-    OptionsUtilities2222222222222222._initialized = true;
-    return OptionsUtilities2222222222222222._instance;
+    OptionsUtilities22222222222222222._instance = new OptionsUtilities22222222222222222(options);
+    OptionsUtilities22222222222222222._initialized = true;
+    return OptionsUtilities22222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities2222222222222222._instance) {
+    if (!OptionsUtilities22222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities2222222222222222._instance;
+    return OptionsUtilities22222222222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -18963,7 +20294,7 @@ class OptionsUtilities2222222222222222 {
     return this.getInstance().getOptions().redirectUri;
   }
 }
-class RouterUtilities2222222222222222 {
+class RouterUtilities22222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -18981,22 +20312,22 @@ class RouterUtilities2222222222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities2222222222222222._initialized) {
+    if (RouterUtilities22222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities2222222222222222._instance = new RouterUtilities2222222222222222(options);
-    RouterUtilities2222222222222222._initialized = true;
-    return RouterUtilities2222222222222222._instance;
+    RouterUtilities22222222222222222._instance = new RouterUtilities22222222222222222(options);
+    RouterUtilities22222222222222222._initialized = true;
+    return RouterUtilities22222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities2222222222222222._instance) {
+    if (!RouterUtilities22222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities2222222222222222._instance;
+    return RouterUtilities22222222222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -19164,7 +20495,7 @@ defineStore("TabsView", {
     },
     isNotExistInStaticRoute(tab) {
       return lodash.findIndex(
-        OptionsUtilities2222222222222222.getInstance().getOptions().staticRoutes,
+        OptionsUtilities22222222222222222.getInstance().getOptions().staticRoutes,
         (item) => item.path === tab.path
       ) === -1;
     },
@@ -19201,7 +20532,7 @@ defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities2222222222222222.getInstance().goBack();
+          RouterUtilities22222222222222222.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -19234,7 +20565,7 @@ defineStore("TabsView", {
   },
   persist: true
 });
-class OAuth2ApiService2222222222222222 {
+class OAuth2ApiService22222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -19243,7 +20574,7 @@ class OAuth2ApiService2222222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService2222222222222222(config);
+      this.instance = new OAuth2ApiService22222222222222222(config);
     }
     return this.instance;
   }
@@ -19421,7 +20752,7 @@ class OAuth2ApiService2222222222222222 {
     );
   }
 }
-class OpenApiService2222222222222222 {
+class OpenApiService22222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -19430,7 +20761,7 @@ class OpenApiService2222222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService2222222222222222(config);
+      this.instance = new OpenApiService22222222222222222(config);
     }
     return this.instance;
   }
@@ -19497,7 +20828,7 @@ class OpenApiService2222222222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService2222222222222222 extends Service {
+class PasskeyApiService22222222222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -19505,7 +20836,7 @@ class PasskeyApiService2222222222222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService2222222222222222(config);
+      this.instance = new PasskeyApiService22222222222222222(config);
     }
     return this.instance;
   }
@@ -19540,7 +20871,7 @@ class PasskeyApiService2222222222222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources2222222222222222 {
+class SecurityApiResources22222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -19556,34 +20887,34 @@ class SecurityApiResources2222222222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources2222222222222222._initialized) {
+    if (SecurityApiResources22222222222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources2222222222222222._instance = new SecurityApiResources2222222222222222(config);
-    SecurityApiResources2222222222222222._initialized = true;
-    return SecurityApiResources2222222222222222._instance;
+    SecurityApiResources22222222222222222._instance = new SecurityApiResources22222222222222222(config);
+    SecurityApiResources22222222222222222._initialized = true;
+    return SecurityApiResources22222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources2222222222222222._instance) {
+    if (!SecurityApiResources22222222222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources2222222222222222._instance;
+    return SecurityApiResources22222222222222222._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService2222222222222222.getInstance(this.config);
+    return OpenApiService22222222222222222.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService2222222222222222.getInstance(this.config);
+    return OAuth2ApiService22222222222222222.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService2222222222222222.getInstance(this.config);
+    return PasskeyApiService22222222222222222.getInstance(this.config);
   }
 }
 const useCryptoStore$2 = defineStore("Crypto", {
@@ -19597,10 +20928,10 @@ const useCryptoStore$2 = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities2222222222222222.securityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities22222222222222222.securityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities2222222222222222.securityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities22222222222222222.securityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -19612,7 +20943,7 @@ const useCryptoStore$2 = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222222222.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources22222222222222222.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -19620,7 +20951,7 @@ const useCryptoStore$2 = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources2222222222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources22222222222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -19664,7 +20995,7 @@ defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities2222222222222222.isAutoRefreshToken()) {
+      if (OptionsUtilities22222222222222222.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -19728,19 +21059,19 @@ defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources2222222222222222.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources22222222222222222.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore$2();
-      if (OptionsUtilities2222222222222222.isUseCrypto()) {
+      if (OptionsUtilities22222222222222222.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities2222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities22222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -19758,7 +21089,7 @@ defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities2222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities22222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -19775,7 +21106,7 @@ defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources2222222222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources22222222222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -19784,11 +21115,11 @@ defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222222222.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources22222222222222222.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities2222222222222222.getRedirectUri(),
+          OptionsUtilities22222222222222222.getRedirectUri(),
           state,
-          OptionsUtilities2222222222222222.isUseCrypto()
+          OptionsUtilities22222222222222222.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -19806,12 +21137,12 @@ defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore$2();
-      if (OptionsUtilities2222222222222222.isUseCrypto()) {
+      if (OptionsUtilities22222222222222222.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities2222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities22222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -19829,7 +21160,7 @@ defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities2222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities22222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -19846,7 +21177,7 @@ defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources2222222222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities2222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources22222222222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities22222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -20052,7 +21383,7 @@ const useRouterStore$1 = defineStore("Router", {
     }
   }
 });
-let OptionsUtilities$1 = class OptionsUtilities22222222222222222 {
+let OptionsUtilities$1 = class OptionsUtilities222222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -20068,22 +21399,22 @@ let OptionsUtilities$1 = class OptionsUtilities22222222222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities22222222222222222._initialized) {
+    if (OptionsUtilities222222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities22222222222222222._instance = new OptionsUtilities22222222222222222(options);
-    OptionsUtilities22222222222222222._initialized = true;
-    return OptionsUtilities22222222222222222._instance;
+    OptionsUtilities222222222222222222._instance = new OptionsUtilities222222222222222222(options);
+    OptionsUtilities222222222222222222._initialized = true;
+    return OptionsUtilities222222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities22222222222222222._instance) {
+    if (!OptionsUtilities222222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities22222222222222222._instance;
+    return OptionsUtilities222222222222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -20107,7 +21438,7 @@ let OptionsUtilities$1 = class OptionsUtilities22222222222222222 {
     return this.getInstance().getOptions().redirectUri;
   }
 };
-let RouterUtilities$1 = class RouterUtilities22222222222222222 {
+let RouterUtilities$1 = class RouterUtilities222222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -20125,22 +21456,22 @@ let RouterUtilities$1 = class RouterUtilities22222222222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities22222222222222222._initialized) {
+    if (RouterUtilities222222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities22222222222222222._instance = new RouterUtilities22222222222222222(options);
-    RouterUtilities22222222222222222._initialized = true;
-    return RouterUtilities22222222222222222._instance;
+    RouterUtilities222222222222222222._instance = new RouterUtilities222222222222222222(options);
+    RouterUtilities222222222222222222._initialized = true;
+    return RouterUtilities222222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities22222222222222222._instance) {
+    if (!RouterUtilities222222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities22222222222222222._instance;
+    return RouterUtilities222222222222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -20378,7 +21709,7 @@ defineStore("TabsView", {
   },
   persist: true
 });
-let OAuth2ApiService$1 = class OAuth2ApiService22222222222222222 {
+let OAuth2ApiService$1 = class OAuth2ApiService222222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -20387,7 +21718,7 @@ let OAuth2ApiService$1 = class OAuth2ApiService22222222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService22222222222222222(config);
+      this.instance = new OAuth2ApiService222222222222222222(config);
     }
     return this.instance;
   }
@@ -20565,7 +21896,7 @@ let OAuth2ApiService$1 = class OAuth2ApiService22222222222222222 {
     );
   }
 };
-let OpenApiService$1 = class OpenApiService22222222222222222 {
+let OpenApiService$1 = class OpenApiService222222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -20574,7 +21905,7 @@ let OpenApiService$1 = class OpenApiService22222222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService22222222222222222(config);
+      this.instance = new OpenApiService222222222222222222(config);
     }
     return this.instance;
   }
@@ -20641,7 +21972,7 @@ let OpenApiService$1 = class OpenApiService22222222222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 };
-let PasskeyApiService$1 = class PasskeyApiService22222222222222222 extends Service {
+let PasskeyApiService$1 = class PasskeyApiService222222222222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -20649,7 +21980,7 @@ let PasskeyApiService$1 = class PasskeyApiService22222222222222222 extends Servi
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService22222222222222222(config);
+      this.instance = new PasskeyApiService222222222222222222(config);
     }
     return this.instance;
   }
@@ -20684,7 +22015,7 @@ let PasskeyApiService$1 = class PasskeyApiService22222222222222222 extends Servi
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 };
-let SecurityApiResources$1 = class SecurityApiResources22222222222222222 {
+let SecurityApiResources$1 = class SecurityApiResources222222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -20700,22 +22031,22 @@ let SecurityApiResources$1 = class SecurityApiResources22222222222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources22222222222222222._initialized) {
+    if (SecurityApiResources222222222222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources22222222222222222._instance = new SecurityApiResources22222222222222222(config);
-    SecurityApiResources22222222222222222._initialized = true;
-    return SecurityApiResources22222222222222222._instance;
+    SecurityApiResources222222222222222222._instance = new SecurityApiResources222222222222222222(config);
+    SecurityApiResources222222222222222222._initialized = true;
+    return SecurityApiResources222222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources22222222222222222._instance) {
+    if (!SecurityApiResources222222222222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources22222222222222222._instance;
+    return SecurityApiResources222222222222222222._instance;
   }
   getConfig() {
     return this.config;
@@ -21196,7 +22527,7 @@ const useRouterStore = defineStore("Router", {
     }
   }
 });
-class OptionsUtilities222222222222222222 {
+class OptionsUtilities2222222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -21212,22 +22543,22 @@ class OptionsUtilities222222222222222222 {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(options) {
-    if (OptionsUtilities222222222222222222._initialized) {
+    if (OptionsUtilities2222222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    OptionsUtilities222222222222222222._instance = new OptionsUtilities222222222222222222(options);
-    OptionsUtilities222222222222222222._initialized = true;
-    return OptionsUtilities222222222222222222._instance;
+    OptionsUtilities2222222222222222222._instance = new OptionsUtilities2222222222222222222(options);
+    OptionsUtilities2222222222222222222._initialized = true;
+    return OptionsUtilities2222222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!OptionsUtilities222222222222222222._instance) {
+    if (!OptionsUtilities2222222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return OptionsUtilities222222222222222222._instance;
+    return OptionsUtilities2222222222222222222._instance;
   }
   setOptions(options) {
     this.options = options;
@@ -21251,7 +22582,7 @@ class OptionsUtilities222222222222222222 {
     return this.getInstance().getOptions().redirectUri;
   }
 }
-class RouterUtilities222222222222222222 {
+class RouterUtilities2222222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -21269,22 +22600,22 @@ class RouterUtilities222222222222222222 {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(options) {
-    if (RouterUtilities222222222222222222._initialized) {
+    if (RouterUtilities2222222222222222222._initialized) {
       throw new Error("RouterUtilities has already been initialized");
     }
-    RouterUtilities222222222222222222._instance = new RouterUtilities222222222222222222(options);
-    RouterUtilities222222222222222222._initialized = true;
-    return RouterUtilities222222222222222222._instance;
+    RouterUtilities2222222222222222222._instance = new RouterUtilities2222222222222222222(options);
+    RouterUtilities2222222222222222222._initialized = true;
+    return RouterUtilities2222222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!RouterUtilities222222222222222222._instance) {
+    if (!RouterUtilities2222222222222222222._instance) {
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
-    return RouterUtilities222222222222222222._instance;
+    return RouterUtilities2222222222222222222._instance;
   }
   setRouter(router) {
     this.router = router;
@@ -21452,7 +22783,7 @@ defineStore("TabsView", {
     },
     isNotExistInStaticRoute(tab) {
       return lodash.findIndex(
-        OptionsUtilities222222222222222222.getInstance().getOptions().staticRoutes,
+        OptionsUtilities2222222222222222222.getInstance().getOptions().staticRoutes,
         (item) => item.path === tab.path
       ) === -1;
     },
@@ -21489,7 +22820,7 @@ defineStore("TabsView", {
           this.openTab(tab, isDetailRoute);
         } else {
           this.closeTab(tab);
-          RouterUtilities222222222222222222.getInstance().goBack();
+          RouterUtilities2222222222222222222.getInstance().goBack();
         }
       } else {
         this.openTab(tab, isDetailRoute);
@@ -21522,7 +22853,7 @@ defineStore("TabsView", {
   },
   persist: true
 });
-class OAuth2ApiService222222222222222222 {
+class OAuth2ApiService2222222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -21531,7 +22862,7 @@ class OAuth2ApiService222222222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OAuth2ApiService222222222222222222(config);
+      this.instance = new OAuth2ApiService2222222222222222222(config);
     }
     return this.instance;
   }
@@ -21709,7 +23040,7 @@ class OAuth2ApiService222222222222222222 {
     );
   }
 }
-class OpenApiService222222222222222222 {
+class OpenApiService2222222222222222222 {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -21718,7 +23049,7 @@ class OpenApiService222222222222222222 {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new OpenApiService222222222222222222(config);
+      this.instance = new OpenApiService2222222222222222222(config);
     }
     return this.instance;
   }
@@ -21785,7 +23116,7 @@ class OpenApiService222222222222222222 {
     return this.config.getHttp().get(SECURE_SOCIAL_LIST);
   }
 }
-class PasskeyApiService222222222222222222 extends Service {
+class PasskeyApiService2222222222222222222 extends Service {
   // 静态私有实例引用
   static instance = null;
   constructor(config) {
@@ -21793,7 +23124,7 @@ class PasskeyApiService222222222222222222 extends Service {
   }
   static getInstance(config) {
     if (this.instance == null) {
-      this.instance = new PasskeyApiService222222222222222222(config);
+      this.instance = new PasskeyApiService2222222222222222222(config);
     }
     return this.instance;
   }
@@ -21828,7 +23159,7 @@ class PasskeyApiService222222222222222222 extends Service {
     return this.getConfig().getHttp().delete(this.getIdPath(id));
   }
 }
-class SecurityApiResources222222222222222222 {
+class SecurityApiResources2222222222222222222 {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -21844,34 +23175,34 @@ class SecurityApiResources222222222222222222 {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(config) {
-    if (SecurityApiResources222222222222222222._initialized) {
+    if (SecurityApiResources2222222222222222222._initialized) {
       throw new Error("SecurityApiResources has already been initialized");
     }
-    SecurityApiResources222222222222222222._instance = new SecurityApiResources222222222222222222(config);
-    SecurityApiResources222222222222222222._initialized = true;
-    return SecurityApiResources222222222222222222._instance;
+    SecurityApiResources2222222222222222222._instance = new SecurityApiResources2222222222222222222(config);
+    SecurityApiResources2222222222222222222._initialized = true;
+    return SecurityApiResources2222222222222222222._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!SecurityApiResources222222222222222222._instance) {
+    if (!SecurityApiResources2222222222222222222._instance) {
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
     }
-    return SecurityApiResources222222222222222222._instance;
+    return SecurityApiResources2222222222222222222._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return OpenApiService222222222222222222.getInstance(this.config);
+    return OpenApiService2222222222222222222.getInstance(this.config);
   }
   oauth2() {
-    return OAuth2ApiService222222222222222222.getInstance(this.config);
+    return OAuth2ApiService2222222222222222222.getInstance(this.config);
   }
   passkey() {
-    return PasskeyApiService222222222222222222.getInstance(this.config);
+    return PasskeyApiService2222222222222222222.getInstance(this.config);
   }
 }
 const useCryptoStore = defineStore("Crypto", {
@@ -21885,10 +23216,10 @@ const useCryptoStore = defineStore("Crypto", {
       this.sessionId = sessionId;
     },
     setKey(key) {
-      this.key = SM4Utils.encrypt(key, OptionsUtilities222222222222222222.securityKey());
+      this.key = SM4Utils.encrypt(key, OptionsUtilities2222222222222222222.securityKey());
     },
     getKey() {
-      return SM4Utils.decrypt(this.key, OptionsUtilities222222222222222222.securityKey());
+      return SM4Utils.decrypt(this.key, OptionsUtilities2222222222222222222.securityKey());
     },
     encrypt(content) {
       const key = this.getKey();
@@ -21900,7 +23231,7 @@ const useCryptoStore = defineStore("Crypto", {
     },
     exchange(identity = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222222222.getInstance().open().createSession(identity).then((response) => {
+        SecurityApiResources2222222222222222222.getInstance().open().createSession(identity).then((response) => {
           const data = response.data;
           if (data) {
             const sessionId = data.sessionId;
@@ -21908,7 +23239,7 @@ const useCryptoStore = defineStore("Crypto", {
             this.state = data.state;
             const pair = SM2Utils.createKeyPair();
             const encryptData = SM2Utils.encrypt(pair.publicKey, backendPublicKey);
-            SecurityApiResources222222222222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
+            SecurityApiResources2222222222222222222.getInstance().open().exchange(sessionId, encryptData).then((response2) => {
               const confidential = response2.data;
               const key = SM2Utils.decrypt(confidential, pair.privateKey);
               this.setSessionId(sessionId);
@@ -21952,7 +23283,7 @@ defineStore("Authentication", {
       return flag !== 0;
     },
     token() {
-      if (OptionsUtilities222222222222222222.isAutoRefreshToken()) {
+      if (OptionsUtilities2222222222222222222.isAutoRefreshToken()) {
         return this.access_token;
       } else {
         if (this.isNotExpired) {
@@ -22016,19 +23347,19 @@ defineStore("Authentication", {
     },
     setErrorPrompt(error, principal) {
       if (this.isAlertMessage(error)) {
-        SecurityApiResources222222222222222222.getInstance().open().getPrompt(principal).then((result) => {
+        SecurityApiResources2222222222222222222.getInstance().open().getPrompt(principal).then((result) => {
           this.setUserErrorStatus(result.data);
         });
       }
     },
     signIn(username, password) {
       const crypto = useCryptoStore();
-      if (OptionsUtilities222222222222222222.isUseCrypto()) {
+      if (OptionsUtilities2222222222222222222.isUseCrypto()) {
         username = crypto.encrypt(username);
         password = crypto.encrypt(password);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities222222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222222222.getInstance().oauth2().passwordFlow(username, password, OptionsUtilities2222222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -22046,7 +23377,7 @@ defineStore("Authentication", {
     },
     refreshToken() {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities222222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222222222.getInstance().oauth2().refreshTokenFlow(this.refresh_token, OptionsUtilities2222222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -22063,7 +23394,7 @@ defineStore("Authentication", {
     },
     signOut() {
       if (this.access_token) {
-        SecurityApiResources222222222222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
+        SecurityApiResources2222222222222222222.getInstance().oauth2().signOut(this.access_token).then(() => {
           console.log("Server side sign out successfully.");
         }).catch((error) => {
           console.log("Server side sign out has error.", error);
@@ -22072,11 +23403,11 @@ defineStore("Authentication", {
     },
     authorizationCode(code, state = "") {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222222222.getInstance().oauth2().authorizationCodeFlow(
+        SecurityApiResources2222222222222222222.getInstance().oauth2().authorizationCodeFlow(
           code,
-          OptionsUtilities222222222222222222.getRedirectUri(),
+          OptionsUtilities2222222222222222222.getRedirectUri(),
           state,
-          OptionsUtilities222222222222222222.isUseCrypto()
+          OptionsUtilities2222222222222222222.isUseCrypto()
         ).then((response) => {
           if (response) {
             const data = response;
@@ -22094,12 +23425,12 @@ defineStore("Authentication", {
     },
     smsSignIn(mobile, code) {
       const crypto = useCryptoStore();
-      if (OptionsUtilities222222222222222222.isUseCrypto()) {
+      if (OptionsUtilities2222222222222222222.isUseCrypto()) {
         mobile = crypto.encrypt(mobile);
         code = crypto.encrypt(code);
       }
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities222222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222222222.getInstance().oauth2().socialCredentialsFlowBySms(mobile, code, OptionsUtilities2222222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -22117,7 +23448,7 @@ defineStore("Authentication", {
     },
     socialSignIn(source, accessPrincipal) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities222222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222222222.getInstance().oauth2().socialCredentialsFlowByJustAuth(source, accessPrincipal, OptionsUtilities2222222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -22134,7 +23465,7 @@ defineStore("Authentication", {
     },
     passkey(publicKey) {
       return new Promise((resolve, reject) => {
-        SecurityApiResources222222222222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities222222222222222222.isUseCrypto()).then((response) => {
+        SecurityApiResources2222222222222222222.getInstance().oauth2().webAuthnCredentialsFlow(publicKey, OptionsUtilities2222222222222222222.isUseCrypto()).then((response) => {
           if (response) {
             const data = response;
             this.setTokenInfo(data);
@@ -22153,8 +23484,8 @@ defineStore("Authentication", {
   persist: true
 });
 function useQuasarMenu() {
-  const store = useRouterStore$h();
-  const authentication = useAuthenticationStore$1();
+  const store = useRouterStore$i();
+  const authentication = useAuthenticationStore();
   const getItemTitle = (item) => {
     return item.meta?.title;
   };
@@ -22247,7 +23578,7 @@ function useVuetifyMenu() {
     });
   };
   const getMenuItems = () => {
-    const routers = RouterUtilities.getInstance().getRouter().getRoutes();
+    const routers = RouterUtilities$a.getInstance().getRouter().getRoutes();
     const available = findAvailableRoutes(routers);
     return convert2(available);
   };
@@ -22455,7 +23786,7 @@ async function get(options) {
   return response;
 }
 function usePasskey() {
-  const authenticationStore = useAuthenticationStore();
+  const authenticationStore = useAuthenticationStore$1();
   const isSupported = async () => {
     if (window.PublicKeyCredential && PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable && PublicKeyCredential.isConditionalMediationAvailable) {
       const results = await Promise.all([
@@ -22470,7 +23801,7 @@ function usePasskey() {
   };
   const registration = (label) => {
     return new Promise((resolve, reject) => {
-      SecurityApiResources.getInstance().passkey().fetchWebAuthnRegisterOptions().then((publicKey) => {
+      SecurityApiResources$a.getInstance().passkey().fetchWebAuthnRegisterOptions().then((publicKey) => {
         const registrationOptions = createRequestFromJSON({
           publicKey
         });
@@ -22479,7 +23810,7 @@ function usePasskey() {
           const request = {
             publicKey: { label, credential }
           };
-          SecurityApiResources.getInstance().passkey().webAuthnRegister(request).then(() => {
+          SecurityApiResources$a.getInstance().passkey().webAuthnRegister(request).then(() => {
             resolve(true);
           });
         });
@@ -22490,7 +23821,7 @@ function usePasskey() {
   };
   const authenticator = () => {
     return new Promise((resolve, reject) => {
-      SecurityApiResources.getInstance().passkey().fetchWebAuthnAuthenticateOptions().then((publicKey) => {
+      SecurityApiResources$a.getInstance().passkey().fetchWebAuthnAuthenticateOptions().then((publicKey) => {
         const authenticationOptions = getRequestFromJSON({
           publicKey
         });
@@ -22577,7 +23908,7 @@ function useSystemRoute(routeModules, vueModules, locate, getRoutesFromServer) {
     console.log("[Herodotus] |- Dynamic routes add success!");
   };
   const addRoutes = (router, routes) => {
-    const store = useRouterStore$i();
+    const store = useRouterStore$j();
     console.log("[Herodotus] |- Begin add dynamic routes");
     if (!lodash.isEmpty(routes)) {
       store.addDynamicRoutes(routes);
@@ -22606,19 +23937,19 @@ function useSystemRoute(routeModules, vueModules, locate, getRoutesFromServer) {
 function useSystemTheme() {
   let media;
   const settings = useSettingsStore();
-  const systemTheme = shallowRef(ThemeModeEnum$i.DARK);
+  const systemTheme = shallowRef(ThemeModeEnum$j.DARK);
   const IN_BROWSER = typeof window !== "undefined";
   const getMatchMedia = () => {
     if (!IN_BROWSER) return;
     return window.matchMedia("(prefers-color-scheme: dark)");
   };
   const onThemeChange = () => {
-    systemTheme.value = media.matches ? ThemeModeEnum$i.DARK : ThemeModeEnum$i.LIGHT;
+    systemTheme.value = media.matches ? ThemeModeEnum$j.DARK : ThemeModeEnum$j.LIGHT;
   };
   watch(
     () => settings.theme.mode,
     (val) => {
-      if (val === ThemeModeEnum$i.SYSTEM) {
+      if (val === ThemeModeEnum$j.SYSTEM) {
         media = getMatchMedia();
         media.addEventListener("change", onThemeChange);
         onThemeChange();
@@ -22636,31 +23967,32 @@ function useSystemTheme() {
   };
 }
 const initializer = (options) => {
-  OptionsUtilities.initialize(options);
-  RouterUtilities.initialize(options.router);
-  SecurityApiResources.initialize(options.config);
+  OptionsUtilities$a.initialize(options);
+  RouterUtilities$a.initialize(options.router);
+  SecurityApiResources$a.initialize(options.config);
   SignOutUtilities.initialize(options.signOutExtension);
 };
 export {
   AuthorizationGrantTypeEnum,
-  CaptchaCategoryEnum$i as CaptchaCategoryEnum,
-  LayoutModeEnum$i as LayoutModeEnum,
-  OptionsUtilities,
-  RouterUtilities,
-  SecurityApiResources,
+  CaptchaCategoryEnum$j as CaptchaCategoryEnum,
+  LayoutModeEnum$j as LayoutModeEnum,
+  OptionsUtilities$a as OptionsUtilities,
+  RouterUtilities$a as RouterUtilities,
+  SecurityApiResources$a as SecurityApiResources,
   SignOutUtilities,
   SocialSourceEnum,
-  ThemeModeEnum$i as ThemeModeEnum,
+  ThemeModeEnum$j as ThemeModeEnum,
   getSystemHeaders,
   initializer,
   useApplicationStore,
-  useAuthenticationStore,
-  useCryptoStore$i as useCryptoStore,
+  useAuthenticationStore$1 as useAuthenticationStore,
+  useCryptoStore$j as useCryptoStore,
+  useDeviceAuthorize,
   useEditFinish,
   useQuasarMenu as useMenuForQuasar,
   useVuetifyMenu as useMenuForVuetify,
   usePasskey,
-  useRouterStore$i as useRouterStore,
+  useRouterStore$j as useRouterStore,
   useSettingsStore,
   useSystemRoute,
   useSystemTheme,

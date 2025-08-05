@@ -17,3 +17,9 @@ export interface AccessPrincipal {
     oauth_verifier?: string;
     mobile?: string;
 }
+export type PingResponse = {
+    id: number;
+    icon: string;
+    color: string;
+    text: string;
+};

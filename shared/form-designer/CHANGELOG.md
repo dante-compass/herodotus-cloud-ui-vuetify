@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 1.7.17
+
+### Patch Changes
+
+- [新增] 前端框架模块新增设备码授权模式获取 Access Token 轮询验证逻辑
+- Updated dependencies
+  - @herodotus-cloud/form-engine@1.7.17
+  - @herodotus-cloud/components@1.7.17
+  - @herodotus-cloud/form-apis@1.7.17
+  - @herodotus-cloud/core@1.7.17
+
 ## 1.7.16
 
 ### Patch Changes
