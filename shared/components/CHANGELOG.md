@@ -1,5 +1,13 @@
 # @herodotus-cloud/components
 
+## 1.7.21
+
+### Patch Changes
+
+- 升级依赖版本
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.21
+
 ## 1.7.20
 
 ### Patch Changes

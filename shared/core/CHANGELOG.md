@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.21
+
+### Patch Changes
+
+- 升级依赖版本
+
 ## 1.7.20
 
 ### Patch Changes
