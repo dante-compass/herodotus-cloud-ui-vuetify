@@ -60,7 +60,7 @@ export class OAuth2ApiService {
     return AuthorizationTokenEnum.BASIC + Base64.encode(data);
   }
 
-  private createClientData(scope = '', clientId = '', clientSecret = ''): Record<string, string> {
+  private createClientData(clientId = '', clientSecret = '', scope = ''): Record<string, string> {
     const data = {
       client_id: clientId || this.config.getClientId(),
       client_secret: clientSecret || this.config.getClientSecret(),
@@ -227,9 +227,9 @@ export class OAuth2ApiService {
 
   /**
    * 客户端凭据模式
+   * @param clientId 客户端 ID(optional)。如果不传递该参数则使用系统配置的客户端 ID。
+   * @param clientSecret  客户端密钥(optional)。如果不传递该参数则使用系统配置的客户端密钥。
    * @param scope 范围(optional)
-   * @param clientId 客户端 ID(optional)
-   * @param clientSecret  客户端密钥(optional)
    * @description 客户端凭据模式是 OAuth 2.0 的一种授权流程，允许客户端应用程序使用其自身的凭据（而不是用户的凭据）
    * 来获取访问令牌。这种模式适用于服务器到服务器的通信场景，例如微服务之间的通信或后台任务。
    * 客户端应用程序通过向令
@@ -243,14 +243,14 @@ export class OAuth2ApiService {
    * @see https://datatracker.interface
    */
   public clientCredentialsFlow(
-    scope = '',
     clientId = '',
     clientSecret = '',
+    scope = '',
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
       this.createOAuth2Data(AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS, {
-        ...this.createClientData(scope, clientId, clientSecret),
+        ...this.createClientData(clientId, clientSecret, scope),
       }),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
@@ -261,9 +261,9 @@ export class OAuth2ApiService {
   /**
    * 设备授权模式。获取访问令牌。
    * @param deviceCode 设备码
+   * @param clientId 客户端 ID(optional)。如果不传递该参数则使用系统配置的客户端 ID。
+   * @param clientSecret  客户端密钥(optional)。如果不传递该参数则使用系统配置的客户端密钥。
    * @param scope 范围 (optional)
-   * @param clientId 客户端 ID (optional)
-   * @param clientSecret 客户端密钥 (optional)
    * @description 设备授权模式允许用户在一个设备上获取授权码，然后在另一个设备上使用该授权码获取访问令牌。
    * 这种模式适用于没有浏览器或输入设备的场景，例如智能电视、游戏机等。
    * 用户需要在一个设备上输入设备码，然后在另一个设备上输入该设备码以完成授权。
@@ -272,15 +272,15 @@ export class OAuth2ApiService {
    */
   public deviceCodeFlow(
     deviceCode: string,
-    scope = '',
     clientId = '',
     clientSecret = '',
+    scope = '',
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
       this.createOAuth2Data(AuthorizationGrantTypeEnum.DEVICE_CODE, {
         device_code: deviceCode,
-        ...this.createClientData(scope, clientId, clientSecret),
+        ...this.createClientData(clientId, clientSecret, scope),
       }),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
@@ -291,8 +291,8 @@ export class OAuth2ApiService {
   /**
    * 设备授权流程。获取设备码和用户码。
    * @param scope 范围
-   * @param clientId 客户端 ID
-   * @param clientSecret 客户端密钥
+   * @param clientId 客户端 ID(optional)。如果不传递该参数则使用系统配置的客户端 ID。
+   * @param clientSecret  客户端密钥(optional)。如果不传递该参数则使用系统配置的客户端密钥。
    * @returns Promise<AxiosHttpResult<DeviceAuthorizationResponse>> - 返回设备授权响应
    * @description 设备授权流程允许用户在一个设备上获取设备码，然后在另一个设备上使用该设备码进行授权。
    * 这种模式适用于没有浏览器或输入设备的场景，例如智能电视、游戏机等。
@@ -300,15 +300,15 @@ export class OAuth2ApiService {
    * @see https://datatracker.ietf.org/doc/html/rfc8628#section-3.1
    */
   public deviceAuthorizationFlow(
-    scope = 'mail',
     clientId = '',
     clientSecret = '',
+    scope = 'mail',
   ): Promise<AxiosHttpResult<DeviceAuthorizationResponse>> {
     return this.config
       .getHttp()
       .post(
         this.getOAuth2DeviceAuthorizationAddress(),
-        this.createClientData(scope, clientId, clientSecret),
+        this.createClientData(clientId, clientSecret, scope),
         {
           contentType: ContentTypeEnum.URL_ENCODED,
         },

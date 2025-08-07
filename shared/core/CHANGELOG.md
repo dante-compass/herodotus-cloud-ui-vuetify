@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.19
+
+### Patch Changes
+
+- [优化] 优化前端 OAuth2 各认证模式 API，调整参数顺序和默认值，提升 API 合理性
+
 ## 1.7.18
 
 ### Patch Changes
