@@ -1,5 +1,13 @@
 # @herodotus-cloud/bpmn-apis
 
+## 1.7.20
+
+### Patch Changes
+
+- 优化方法命名
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.20
+
 ## 1.7.19
 
 ### Patch Changes

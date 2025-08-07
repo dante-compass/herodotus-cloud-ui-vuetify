@@ -63,7 +63,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       return { Authorization: this.getBearerToken(), 'X-Herodotus-Open-Id': this.userId };
     },
 
-    setTokenInfo(data: AccessTokenResponse): void {
+    saveAccessToken(data: AccessTokenResponse): void {
       this.access_token = data.access_token;
       this.expires_in = data.expires_in;
       this.refresh_token = data.refresh_token;
@@ -134,7 +134,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -158,7 +158,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -200,7 +200,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -228,7 +228,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as unknown as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -252,7 +252,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -275,7 +275,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {

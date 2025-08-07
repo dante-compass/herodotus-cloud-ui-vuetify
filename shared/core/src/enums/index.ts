@@ -36,6 +36,17 @@ export enum AuthorizationGrantTypeEnum {
   TOKEN_EXCHANGE = 'urn:ietf:params:oauth:grant-type:token-exchange',
 }
 
+export enum BuildInScopeEnum {
+  OPENID = 'openid',
+  EMAIL = 'email',
+  PROFILE = 'profile',
+  PHONE = 'phone',
+  ADDRESS = 'address',
+  ROLES = 'roles',
+  CLIENT_CREATE = 'client.create',
+  CLIENT_READ = 'client.read',
+}
+
 export enum OperationEnum {
   CREATE = 'create',
   EDIT = 'edit',

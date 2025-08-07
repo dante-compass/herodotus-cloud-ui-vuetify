@@ -53,6 +53,17 @@ var AuthorizationGrantTypeEnum = /* @__PURE__ */ ((AuthorizationGrantTypeEnum2) 
   AuthorizationGrantTypeEnum2["TOKEN_EXCHANGE"] = "urn:ietf:params:oauth:grant-type:token-exchange";
   return AuthorizationGrantTypeEnum2;
 })(AuthorizationGrantTypeEnum || {});
+var BuildInScopeEnum = /* @__PURE__ */ ((BuildInScopeEnum2) => {
+  BuildInScopeEnum2["OPENID"] = "openid";
+  BuildInScopeEnum2["EMAIL"] = "email";
+  BuildInScopeEnum2["PROFILE"] = "profile";
+  BuildInScopeEnum2["PHONE"] = "phone";
+  BuildInScopeEnum2["ADDRESS"] = "address";
+  BuildInScopeEnum2["ROLES"] = "roles";
+  BuildInScopeEnum2["CLIENT_CREATE"] = "client.create";
+  BuildInScopeEnum2["CLIENT_READ"] = "client.read";
+  return BuildInScopeEnum2;
+})(BuildInScopeEnum || {});
 var OperationEnum = /* @__PURE__ */ ((OperationEnum2) => {
   OperationEnum2["CREATE"] = "create";
   OperationEnum2["EDIT"] = "edit";
@@ -953,6 +964,7 @@ export {
   AvatarUtils,
   Axios,
   Base642 as Base64,
+  BuildInScopeEnum,
   ContentTypeEnum,
   default3 as DayJs,
   HttpConfig,
