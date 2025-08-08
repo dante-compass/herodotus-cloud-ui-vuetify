@@ -62,9 +62,17 @@ export class OAuth2ApiService {
 
   private createClientData(clientId = '', clientSecret = '', scope = ''): Record<string, string> {
     const data = {
-      client_id: clientId || this.config.getClientId(),
-      client_secret: clientSecret || this.config.getClientSecret(),
+      client_id: '',
+      client_secret: '',
     };
+
+    if (clientId && clientSecret) {
+      data.client_id = clientId;
+      data.client_secret = clientSecret;
+    } else {
+      data.client_id = this.config.getClientId();
+      data.client_secret = this.config.getClientSecret();
+    }
 
     if (scope) {
       lodash.merge(data, { scope: scope });
@@ -290,9 +298,9 @@ export class OAuth2ApiService {
 
   /**
    * 设备授权流程。获取设备码和用户码。
-   * @param scope 范围
    * @param clientId 客户端 ID(optional)。如果不传递该参数则使用系统配置的客户端 ID。
    * @param clientSecret  客户端密钥(optional)。如果不传递该参数则使用系统配置的客户端密钥。
+   * @param scope 范围 (optional)
    * @returns Promise<AxiosHttpResult<DeviceAuthorizationResponse>> - 返回设备授权响应
    * @description 设备授权流程允许用户在一个设备上获取设备码，然后在另一个设备上使用该设备码进行授权。
    * 这种模式适用于没有浏览器或输入设备的场景，例如智能电视、游戏机等。
@@ -390,7 +398,7 @@ export class OAuth2ApiService {
     productKey: string,
     clientName: string,
   ): Promise<AxiosHttpResult<any>> {
-    return this.config.getHttp().post(this.getOAuth2TokenAddress(), {
+    return this.config.getHttp().post(this.getOIDCConnectRegisterAddress(), {
       product_key: productKey,
       grant_types: [
         AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS,

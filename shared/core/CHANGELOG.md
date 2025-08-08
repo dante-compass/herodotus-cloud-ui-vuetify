@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.22
+
+### Patch Changes
+
+- 完善 OAuth2 API 定义
+
 ## 1.7.21
 
 ### Patch Changes

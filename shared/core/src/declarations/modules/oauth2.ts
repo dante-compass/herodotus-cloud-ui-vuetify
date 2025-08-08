@@ -1,5 +1,7 @@
 import { AuthorizationGrantTypeEnum } from '@/enums';
 
+// ------------------------------ OAuth2 Flow Request Begin  ------------------------------
+
 interface TokenRequest {
   grant_type: string;
 }
@@ -36,9 +38,12 @@ export interface OidcClientRegistrationRequest {
   token_endpoint_auth_method?: string;
 }
 
+// ------------------------------ OAuth2 Flow Request End  ------------------------------
+
+// ------------------------------ OAuth2 Flow Response Begin  ------------------------------
 interface TokenResponse {
-  license: string;
-  openid: string;
+  license?: string;
+  openid?: string;
   scope: string;
   token_type: string;
 }
@@ -46,8 +51,8 @@ interface TokenResponse {
 export interface AccessTokenResponse extends TokenResponse {
   access_token: string;
   expires_in: number;
-  refresh_token: string;
-  id_token: string;
+  refresh_token?: string;
+  id_token?: string;
 }
 
 export interface OidcIdTokenResponse extends TokenResponse {
@@ -80,3 +85,5 @@ export interface PkceCodePair {
   codeVerifier: string;
   codeChallenge: string;
 }
+
+// ------------------------------ OAuth2 Flow Response End  ------------------------------

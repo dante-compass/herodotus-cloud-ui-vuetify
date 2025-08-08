@@ -70,9 +70,9 @@ export declare class OAuth2ApiService {
     deviceCodeFlow(deviceCode: string, clientId?: string, clientSecret?: string, scope?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     /**
      * 设备授权流程。获取设备码和用户码。
-     * @param scope 范围
      * @param clientId 客户端 ID(optional)。如果不传递该参数则使用系统配置的客户端 ID。
      * @param clientSecret  客户端密钥(optional)。如果不传递该参数则使用系统配置的客户端密钥。
+     * @param scope 范围 (optional)
      * @returns Promise<AxiosHttpResult<DeviceAuthorizationResponse>> - 返回设备授权响应
      * @description 设备授权流程允许用户在一个设备上获取设备码，然后在另一个设备上使用该设备码进行授权。
      * 这种模式适用于没有浏览器或输入设备的场景，例如智能电视、游戏机等。

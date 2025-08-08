@@ -1,5 +1,16 @@
 # @herodotus-cloud/bpmn-designer
 
+## 1.7.22
+
+### Patch Changes
+
+- 完善 OAuth2 API 定义
+- Updated dependencies
+  - @herodotus-cloud/components@1.7.22
+  - @herodotus-cloud/bpmn-apis@1.7.22
+  - @herodotus-cloud/form-apis@1.7.22
+  - @herodotus-cloud/core@1.7.22
+
 ## 1.7.21
 
 ### Patch Changes

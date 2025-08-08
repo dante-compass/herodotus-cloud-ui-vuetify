@@ -66,14 +66,14 @@ export const useAuthenticationStore = defineStore('Authentication', {
     saveAccessToken(data: AccessTokenResponse): void {
       this.access_token = data.access_token;
       this.expires_in = data.expires_in;
-      this.refresh_token = data.refresh_token;
-      this.license = data.license;
+      this.refresh_token = data.refresh_token ? data.refresh_token : '';
+      this.license = data.refresh_token ? data.refresh_token : '';
       this.scope = data.scope;
       this.token_type = data.token_type;
       if (data.id_token) {
         this.idToken = data.id_token;
         const jwt: OidcIdTokenResponse = jwtDecode(this.idToken);
-        this.userId = jwt.openid;
+        this.userId = jwt.openid as string;
         this.username = jwt.sub;
         this.avatar = jwt.avatar;
         this.employeeId = jwt.employeeId;
@@ -89,7 +89,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         this.avatar = details.avatar;
         this.employeeId = details.employeeId;
       } else {
-        console.error('Cannot fetch the use info from backend.');
+        console.warn('There is no id token or openid in the data.');
       }
     },
 
