@@ -9,7 +9,7 @@ import type {
   AccessPrincipal,
 } from '@/declarations';
 
-import { moment } from '@herodotus-cloud/core';
+import { moment, AuthorizationTokenEnum } from '@herodotus-cloud/core';
 import { jwtDecode } from 'jwt-decode';
 import { useCryptoStore } from './crypto';
 import { OptionsUtilities } from '../utilities';
@@ -56,24 +56,24 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
   actions: {
     getBearerToken(): string {
-      return 'Bearer ' + this.token;
+      return AuthorizationTokenEnum.BEARER + this.token;
     },
 
     getAuthorizationHeader(): Record<string, string> {
       return { Authorization: this.getBearerToken(), 'X-Herodotus-Open-Id': this.userId };
     },
 
-    setTokenInfo(data: AccessTokenResponse): void {
+    saveAccessToken(data: AccessTokenResponse): void {
       this.access_token = data.access_token;
       this.expires_in = data.expires_in;
-      this.refresh_token = data.refresh_token;
-      this.license = data.license;
+      this.refresh_token = data.refresh_token ? data.refresh_token : '';
+      this.license = data.refresh_token ? data.refresh_token : '';
       this.scope = data.scope;
       this.token_type = data.token_type;
       if (data.id_token) {
         this.idToken = data.id_token;
         const jwt: OidcIdTokenResponse = jwtDecode(this.idToken);
-        this.userId = jwt.openid;
+        this.userId = jwt.openid as string;
         this.username = jwt.sub;
         this.avatar = jwt.avatar;
         this.employeeId = jwt.employeeId;
@@ -89,7 +89,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
         this.avatar = details.avatar;
         this.employeeId = details.employeeId;
       } else {
-        console.error('Cannot fetch the use info from backend.');
+        console.warn('There is no id token or openid in the data.');
       }
     },
 
@@ -134,7 +134,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -149,6 +149,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           });
       });
     },
+
     refreshToken() {
       return new Promise<boolean>((resolve, reject) => {
         SecurityApiResources.getInstance()
@@ -157,7 +158,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -171,6 +172,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           });
       });
     },
+
     signOut() {
       if (this.access_token) {
         SecurityApiResources.getInstance()
@@ -184,6 +186,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           });
       }
     },
+
     authorizationCode(code: string, state = '') {
       return new Promise<boolean>((resolve, reject) => {
         SecurityApiResources.getInstance()
@@ -197,7 +200,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -225,7 +228,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as unknown as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -249,7 +252,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {
@@ -272,7 +275,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;
-              this.setTokenInfo(data);
+              this.saveAccessToken(data);
             }
 
             if (this.access_token) {

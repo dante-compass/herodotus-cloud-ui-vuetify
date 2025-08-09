@@ -26,16 +26,16 @@ export interface OidcClientRegistrationRequest {
     token_endpoint_auth_method?: string;
 }
 interface TokenResponse {
-    license: string;
-    openid: string;
+    license?: string;
+    openid?: string;
     scope: string;
     token_type: string;
 }
 export interface AccessTokenResponse extends TokenResponse {
     access_token: string;
     expires_in: number;
-    refresh_token: string;
-    id_token: string;
+    refresh_token?: string;
+    id_token?: string;
 }
 export interface OidcIdTokenResponse extends TokenResponse {
     roles: Array<string>;

@@ -1,16 +1,16 @@
 import type {
-  HttpResult,
-  AxiosTransform,
-  AxiosHttpResult,
-  AxiosRequestPolicy,
-  RequestOptions,
-  Policy,
   AxiosInstance,
   AxiosResponse,
   AxiosError,
   ParamsSerializerOptions,
   RawAxiosRequestConfig,
   InternalAxiosRequestConfig,
+  HttpResult,
+  AxiosHook,
+  AxiosHttpResult,
+  AxiosHeaderStrategy,
+  AxiosRequestStrategy,
+  RequestOptions,
 } from '@/declarations';
 
 import { ContentTypeEnum, HttpMethodEnum } from '@/enums';
@@ -27,12 +27,12 @@ import { lodash } from '../../utils';
 export class Axios {
   private axiosInstance: AxiosInstance;
   private readonly axiosConfig: RawAxiosRequestConfig;
-  private readonly axiosTransform: AxiosTransform;
+  private readonly axiosHook: AxiosHook;
   private readonly defaultRequestOptions: RequestOptions;
 
-  constructor(config: RawAxiosRequestConfig, transform: AxiosTransform, options: RequestOptions) {
+  constructor(config: RawAxiosRequestConfig, hook: AxiosHook, options: RequestOptions) {
     this.axiosConfig = config;
-    this.axiosTransform = transform;
+    this.axiosHook = hook;
     this.defaultRequestOptions = options;
     this.axiosInstance = this.createAxiosInstance(config);
     this.setupInterceptors();
@@ -46,8 +46,8 @@ export class Axios {
     return this.axiosConfig;
   }
 
-  private getAxiosTransform(): AxiosTransform {
-    return this.axiosTransform;
+  private getAxiosHook(): AxiosHook {
+    return this.axiosHook;
   }
 
   private getAxiosInstance(): AxiosInstance {
@@ -58,7 +58,7 @@ export class Axios {
     return this.defaultRequestOptions;
   }
 
-  private getPolicy(contentType: ContentTypeEnum): Policy {
+  private getAxiosHeaderStrategy(contentType: ContentTypeEnum): AxiosHeaderStrategy {
     switch (contentType) {
       case ContentTypeEnum.URL_ENCODED:
         return {
@@ -87,18 +87,18 @@ export class Axios {
   }
 
   private setupInterceptors(): void {
-    const transform = this.getAxiosTransform();
+    const hook = this.getAxiosHook();
 
-    if (!transform) {
+    if (!hook) {
       return;
     }
 
     const {
       requestInterceptors,
-      requestInterceptorsCatch,
+      requestInterceptorsError,
       responseInterceptors,
-      responseInterceptorsCatch,
-    } = transform;
+      responseInterceptorsError,
+    } = hook;
 
     const axiosCanceler = new AxiosCanceler();
 
@@ -114,7 +114,7 @@ export class Axios {
         return requestInterceptors(config);
       },
       (error: AxiosError) => {
-        return requestInterceptorsCatch(this.getAxiosInstance(), error);
+        return requestInterceptorsError(this.getAxiosInstance(), error);
       },
     );
 
@@ -125,7 +125,7 @@ export class Axios {
         return responseInterceptors(response);
       },
       (error: AxiosError) => {
-        return responseInterceptorsCatch(this.getAxiosInstance(), error);
+        return responseInterceptorsError(this.getAxiosInstance(), error);
       },
     );
   }
@@ -165,40 +165,40 @@ export class Axios {
     }
   }
 
-  private setupPolicy<D = any>(
+  private setupRequestStrategy<D = any>(
     url: string,
     options: RequestOptions,
     config?: RawAxiosRequestConfig<D>,
-  ): AxiosRequestPolicy {
-    const { beforeRequestHook } = this.getAxiosTransform();
+  ): AxiosRequestStrategy {
+    const { onRequestHook } = this.getAxiosHook();
 
     // 合并 options。把当前请求的 options 与全局 options 整合获得一个完整的 options
     const requestOptions = this.mergeRequestOptions(options);
 
     // 合并 axios request config。把当前请求的 AxiosRequestConfig 与全局 AxiosRequestConfig 整合获得一个完整的 AxiosRequestConfig
     let axiosRequestConfig: RawAxiosRequestConfig = this.mergeRequestConfigs<D>(config);
-    if (beforeRequestHook && lodash.isFunction(beforeRequestHook)) {
+    if (onRequestHook && lodash.isFunction(onRequestHook)) {
       // 允许在 beforeRequestHook 中，对 AxiosRequestConfig 进行一些额外的设置
-      axiosRequestConfig = beforeRequestHook(axiosRequestConfig, requestOptions);
+      axiosRequestConfig = onRequestHook(axiosRequestConfig, requestOptions);
     }
 
     const contentType: ContentTypeEnum = requestOptions.contentType;
-    const policy = this.getPolicy(contentType);
+    const strategy = this.getAxiosHeaderStrategy(contentType);
     if (axiosRequestConfig.headers) {
-      axiosRequestConfig.headers = Object.assign(axiosRequestConfig.headers, policy.headers);
+      axiosRequestConfig.headers = Object.assign(axiosRequestConfig.headers, strategy.headers);
     } else {
-      axiosRequestConfig.headers = policy.headers;
+      axiosRequestConfig.headers = strategy.headers;
     }
 
     axiosRequestConfig.url = url;
     if (!lodash.isEmpty(axiosRequestConfig.data)) {
-      axiosRequestConfig.data = policy.dataConvert(axiosRequestConfig.data);
+      axiosRequestConfig.data = strategy.dataConvert(axiosRequestConfig.data);
     }
 
     return {
       config: axiosRequestConfig,
       options: requestOptions,
-      dataConvert: policy.dataConvert,
+      dataConvert: strategy.dataConvert,
     };
   }
 
@@ -207,7 +207,7 @@ export class Axios {
     params = {},
     options = { contentType: ContentTypeEnum.JSON },
   ): Promise<AxiosHttpResult<T>> {
-    let policy = this.setupPolicy<D>(url, options, { params, method: HttpMethodEnum.GET });
+    let policy = this.setupRequestStrategy<D>(url, options, { params, method: HttpMethodEnum.GET });
     return this.request<T, D>(policy.config, policy.options);
   }
 
@@ -229,7 +229,7 @@ export class Axios {
     options = { contentType: ContentTypeEnum.JSON },
     config?: RawAxiosRequestConfig<D>,
   ): Promise<AxiosHttpResult<T>> {
-    let policy = this.setupPolicy<D>(url, options, {
+    let policy = this.setupRequestStrategy<D>(url, options, {
       ...config,
       data,
       method: HttpMethodEnum.POST,
@@ -256,7 +256,7 @@ export class Axios {
     options = { contentType: ContentTypeEnum.JSON },
     config?: RawAxiosRequestConfig<D>,
   ): Promise<AxiosHttpResult<T>> {
-    let policy = this.setupPolicy<D>(url, options, {
+    let policy = this.setupRequestStrategy<D>(url, options, {
       ...config,
       params,
       data,
@@ -285,7 +285,11 @@ export class Axios {
     options = { contentType: ContentTypeEnum.JSON },
     config?: RawAxiosRequestConfig<D>,
   ): Promise<AxiosHttpResult<T>> {
-    let policy = this.setupPolicy<D>(url, options, { ...config, data, method: HttpMethodEnum.PUT });
+    let policy = this.setupRequestStrategy<D>(url, options, {
+      ...config,
+      data,
+      method: HttpMethodEnum.PUT,
+    });
     return this.request<T, D>(policy.config, policy.options);
   }
 
@@ -310,7 +314,7 @@ export class Axios {
     options = { contentType: ContentTypeEnum.JSON },
     config?: RawAxiosRequestConfig<D>,
   ): Promise<AxiosHttpResult<T>> {
-    let policy = this.setupPolicy<D>(url, options, {
+    let policy = this.setupRequestStrategy<D>(url, options, {
       ...config,
       params,
       data,
@@ -336,7 +340,10 @@ export class Axios {
     data = {} as D,
     options = { contentType: ContentTypeEnum.JSON },
   ): Promise<AxiosHttpResult<T>> {
-    let policy = this.setupPolicy<D>(url, options, { data, method: HttpMethodEnum.DELETE });
+    let policy = this.setupRequestStrategy<D>(url, options, {
+      data,
+      method: HttpMethodEnum.DELETE,
+    });
     return this.request<T, D>(policy.config, policy.options);
   }
 
@@ -360,7 +367,11 @@ export class Axios {
     data = {} as D,
     options = { contentType: ContentTypeEnum.JSON },
   ): Promise<AxiosHttpResult<T>> {
-    let policy = this.setupPolicy<D>(url, options, { params, data, method: HttpMethodEnum.DELETE });
+    let policy = this.setupRequestStrategy<D>(url, options, {
+      params,
+      data,
+      method: HttpMethodEnum.DELETE,
+    });
     return this.request<T, D>(policy.config, policy.options);
   }
 
@@ -375,20 +386,20 @@ export class Axios {
     options?: RequestOptions,
   ): Promise<AxiosHttpResult<T>> {
     return new Promise<AxiosHttpResult<T>>((resolve, reject) => {
-      const { requestCatchHook, transformRequestHook } = this.getAxiosTransform();
+      const { onResponseErrorHook, onResponseSuccessHook } = this.getAxiosHook();
       this.getAxiosInstance()
         .request<HttpResult<T>, AxiosResponse<HttpResult<T>>, D>(config)
         .then((response: AxiosResponse<HttpResult<T>>) => {
-          if (transformRequestHook && lodash.isFunction(transformRequestHook)) {
-            const result = transformRequestHook(response, options);
+          if (onResponseSuccessHook && lodash.isFunction(onResponseSuccessHook)) {
+            const result = onResponseSuccessHook(response, options);
             resolve(result);
           } else {
             resolve(response);
           }
         })
         .catch((error: AxiosError) => {
-          if (requestCatchHook && lodash.isFunction(requestCatchHook)) {
-            reject(requestCatchHook(error, options));
+          if (onResponseErrorHook && lodash.isFunction(onResponseErrorHook)) {
+            reject(onResponseErrorHook(error, options));
           } else {
             reject(error);
           }

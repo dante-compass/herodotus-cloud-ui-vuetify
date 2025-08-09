@@ -1,5 +1,93 @@
 # @herodotus-cloud/framework-kernel
 
+## 1.7.24
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.24
+
+## 1.7.23
+
+### Patch Changes
+
+- [重构] 重构前端 Axios 自定义封装 API 定义，方便更好的理解及使用代码
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.23
+
+## 1.7.22
+
+### Patch Changes
+
+- 完善 OAuth2 API 定义
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.22
+
+## 1.7.21
+
+### Patch Changes
+
+- 升级依赖版本
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.21
+
+## 1.7.20
+
+### Patch Changes
+
+- 优化方法命名
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.20
+
+## 1.7.19
+
+### Patch Changes
+
+- [优化] 优化前端 OAuth2 各认证模式 API，调整参数顺序和默认值，提升 API 合理性
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.19
+
+## 1.7.18
+
+### Patch Changes
+
+- [新增] 前端框架模块新增 OIDC 客户端动态注册 API
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.18
+
+## 1.7.17
+
+### Patch Changes
+
+- [新增] 前端框架模块新增设备码授权模式获取 Access Token 轮询验证逻辑
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.17
+
+## 1.7.16
+
+### Patch Changes
+
+- [重构] 重构前端 OAuth2 各认证模式 API，提取通用代码方便代码维护
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.16
+
+## 1.7.15
+
+### Patch Changes
+
+- 修改默认参数
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.15
+
+## 1.7.14
+
+### Patch Changes
+
+- [重构] 迁移前端 useApplicationStore 相关内容代码至模块 @herodotus-cloud/framework-kernel
+- Updated dependencies
+  - @herodotus-cloud/core@1.7.14
+
 ## 1.7.13
 
 ### Patch Changes

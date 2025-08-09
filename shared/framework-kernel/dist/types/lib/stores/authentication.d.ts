@@ -57,7 +57,7 @@ export declare const useAuthenticationStore: import('pinia').StoreDefinition<"Au
 }, {
     getBearerToken(): string;
     getAuthorizationHeader(): Record<string, string>;
-    setTokenInfo(data: AccessTokenResponse): void;
+    saveAccessToken(data: AccessTokenResponse): void;
     setUserErrorStatus(data: SignInErrorStatus): void;
     /**
      * 判断是否是以非弹窗的形式显示的信息。

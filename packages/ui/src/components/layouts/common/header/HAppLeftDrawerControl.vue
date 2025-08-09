@@ -11,7 +11,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useApplicationStore } from '@/stores';
+import { useApplicationStore } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HAppLeftDrawerControl',

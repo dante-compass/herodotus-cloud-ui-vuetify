@@ -7,7 +7,7 @@ import { createOssApi } from '@herodotus-cloud/oss-apis';
 import { Axios, ContentTypeEnum, HttpConfig } from '@herodotus-cloud/core';
 
 import { VARIABLES } from '@/configurations';
-import { transform } from './axios';
+import { axiosHook } from './axios';
 import { BpmnDesignerStorage, FormDesignerStorage } from './resources';
 
 const http = new Axios(
@@ -15,7 +15,7 @@ const http = new Axios(
     timeout: 1000 * 12,
     withCredentials: true,
   },
-  transform,
+  axiosHook,
   {
     contentType: ContentTypeEnum.JSON,
     // 是否阻止重复请求，
@@ -24,7 +24,6 @@ const http = new Axios(
     isTransformResponse: true,
     // 消息提示类型
     errorMessageMode: 'message',
-
     // 是否携带token
     withToken: true,
   },

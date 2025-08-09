@@ -1,4 +1,4 @@
-import { RawAxiosRequestConfig, RawAxiosRequestHeaders, AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from '../base';
+import { RawAxiosRequestConfig, RawAxiosRequestHeaders, AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from '..';
 import { HttpResult, AxiosHttpResult } from '../modules';
 import { ContentTypeEnum } from '../../enums';
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
@@ -10,19 +10,19 @@ export interface RequestOptions {
     errorMessageMode?: ErrorMessageMode;
     withToken?: boolean;
 }
-export interface AxiosTransform {
+export interface AxiosHook {
     /**
      * @description: 请求前处理配置
      */
-    beforeRequestHook?: (config: RawAxiosRequestConfig, options: RequestOptions) => RawAxiosRequestConfig;
+    onRequestHook?: (config: RawAxiosRequestConfig, options: RequestOptions) => RawAxiosRequestConfig;
     /**
      * @description: 请求成功处理
      */
-    transformRequestHook?: <D = unknown>(response: AxiosResponse<HttpResult<D>>, options?: RequestOptions) => AxiosHttpResult<D>;
+    onResponseSuccessHook?: <D = unknown>(response: AxiosResponse<HttpResult<D>>, options?: RequestOptions) => AxiosHttpResult<D>;
     /**
      * @description: 请求失败处理
      */
-    requestCatchHook?: <D = unknown>(error: AxiosError, options?: RequestOptions) => HttpResult<D>;
+    onResponseErrorHook?: <D = unknown>(error: AxiosError, options?: RequestOptions) => HttpResult<D>;
     /**
      * @description: 请求之前的拦截器
      */
@@ -34,23 +34,25 @@ export interface AxiosTransform {
     /**
      * @description: 请求之前的拦截器错误处理
      */
-    requestInterceptorsCatch: (axiosInstance: AxiosInstance, error: AxiosError) => Promise<any>;
+    requestInterceptorsError: (axiosInstance: AxiosInstance, error: AxiosError) => Promise<any>;
     /**
      * @description: 请求之后的拦截器错误处理
      */
-    responseInterceptorsCatch: (axiosInstance: AxiosInstance, error: AxiosError) => Promise<any>;
+    responseInterceptorsError: (axiosInstance: AxiosInstance, error: AxiosError) => Promise<any>;
 }
 export interface AxiosConfig extends RawAxiosRequestConfig {
     authenticationScheme?: string;
-    transform?: AxiosTransform;
+    hook?: AxiosHook;
     requestOptions?: RequestOptions;
 }
-export interface Policy {
-    headers: RawAxiosRequestHeaders;
+interface AxiosParameterConverter {
     dataConvert: (params: Record<string, any>) => any;
 }
-export interface AxiosRequestPolicy {
+export interface AxiosHeaderStrategy extends AxiosParameterConverter {
+    headers: RawAxiosRequestHeaders;
+}
+export interface AxiosRequestStrategy extends AxiosParameterConverter {
     config: RawAxiosRequestConfig;
     options: RequestOptions;
-    dataConvert: (params: Record<string, any>) => any;
 }
+export {};
