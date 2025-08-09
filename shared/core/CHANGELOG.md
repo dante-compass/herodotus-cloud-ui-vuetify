@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 1.7.23
+
+### Patch Changes
+
+- [重构] 重构前端 Axios 自定义封装 API 定义，方便更好的理解及使用代码
+
 ## 1.7.22
 
 ### Patch Changes

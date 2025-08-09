@@ -1,4 +1,4 @@
-import { AxiosTransform, AxiosHttpResult, RequestOptions, RawAxiosRequestConfig } from '../../../declarations';
+import { RawAxiosRequestConfig, AxiosHook, AxiosHttpResult, RequestOptions } from '../../../declarations';
 import { ContentTypeEnum } from '../../../enums';
 /**
  * @description:  axios module
@@ -6,15 +6,15 @@ import { ContentTypeEnum } from '../../../enums';
 export declare class Axios {
     private axiosInstance;
     private readonly axiosConfig;
-    private readonly axiosTransform;
+    private readonly axiosHook;
     private readonly defaultRequestOptions;
-    constructor(config: RawAxiosRequestConfig, transform: AxiosTransform, options: RequestOptions);
+    constructor(config: RawAxiosRequestConfig, hook: AxiosHook, options: RequestOptions);
     private createAxiosInstance;
     private getAxiosConfig;
-    private getAxiosTransform;
+    private getAxiosHook;
     private getAxiosInstance;
     private getDefaultRequestOptions;
-    private getPolicy;
+    private getAxiosHeaderStrategy;
     private setupInterceptors;
     /**
      * 把当前请求的 options 与全局 options 整合获得一个完整的 options
@@ -24,7 +24,7 @@ export declare class Axios {
      * 把当前请求的 AxiosRequestConfig 与全局 AxiosRequestConfig 整合获得一个完整的 AxiosRequestConfig
      */
     private mergeRequestConfigs;
-    private setupPolicy;
+    private setupRequestStrategy;
     get<T = any, D = any>(url: string, params?: {}, options?: {
         contentType: ContentTypeEnum;
     }): Promise<AxiosHttpResult<T>>;

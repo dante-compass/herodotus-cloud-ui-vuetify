@@ -1,7 +1,7 @@
 import type {
   HttpResult,
   AxiosHttpResult,
-  AxiosTransform,
+  AxiosHook,
   AxiosResponse,
   RequestOptions,
   AxiosError,
@@ -14,16 +14,16 @@ import { logResponse, isSuccess } from '@herodotus-cloud/core';
 import { getSystemHeaders } from '@herodotus-cloud/framework-kernel';
 import { processor } from './status';
 
-export const transform: AxiosTransform = {
+export const axiosHook: AxiosHook = {
   // 请求之前处理config
-  beforeRequestHook(config, options) {
+  onRequestHook(config, options) {
     return config;
   },
 
   /**
    * @description: 请求成功处理
    */
-  transformRequestHook<D = unknown>(
+  onResponseSuccessHook<D = unknown>(
     response: AxiosResponse<HttpResult<D>>,
     options?: RequestOptions,
   ): AxiosHttpResult<D> {
@@ -40,7 +40,7 @@ export const transform: AxiosTransform = {
     return response;
   },
 
-  requestCatchHook<D = any>(error: AxiosError, options?: RequestOptions): HttpResult<D> {
+  onResponseErrorHook<D = any>(error: AxiosError, options?: RequestOptions): HttpResult<D> {
     return error?.response?.data as HttpResult<D>;
   },
 
@@ -75,11 +75,11 @@ export const transform: AxiosTransform = {
     }
   },
 
-  requestInterceptorsCatch(axiosInstance: AxiosInstance, error: AxiosError): Promise<any> {
+  requestInterceptorsError(axiosInstance: AxiosInstance, error: AxiosError): Promise<any> {
     return Promise.reject(error);
   },
 
-  responseInterceptorsCatch(axiosInstance: AxiosInstance, error: AxiosError): Promise<any> {
+  responseInterceptorsError(axiosInstance: AxiosInstance, error: AxiosError): Promise<any> {
     return processor(axiosInstance, error);
   },
 };

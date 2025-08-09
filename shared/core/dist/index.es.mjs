@@ -123,11 +123,11 @@ class AxiosCanceler {
 class Axios {
   axiosInstance;
   axiosConfig;
-  axiosTransform;
+  axiosHook;
   defaultRequestOptions;
-  constructor(config, transform, options) {
+  constructor(config, hook, options) {
     this.axiosConfig = config;
-    this.axiosTransform = transform;
+    this.axiosHook = hook;
     this.defaultRequestOptions = options;
     this.axiosInstance = this.createAxiosInstance(config);
     this.setupInterceptors();
@@ -138,8 +138,8 @@ class Axios {
   getAxiosConfig() {
     return this.axiosConfig;
   }
-  getAxiosTransform() {
-    return this.axiosTransform;
+  getAxiosHook() {
+    return this.axiosHook;
   }
   getAxiosInstance() {
     return this.axiosInstance;
@@ -147,7 +147,7 @@ class Axios {
   getDefaultRequestOptions() {
     return this.defaultRequestOptions;
   }
-  getPolicy(contentType) {
+  getAxiosHeaderStrategy(contentType) {
     switch (contentType) {
       case ContentTypeEnum.URL_ENCODED:
         return {
@@ -175,16 +175,16 @@ class Axios {
     }
   }
   setupInterceptors() {
-    const transform = this.getAxiosTransform();
-    if (!transform) {
+    const hook = this.getAxiosHook();
+    if (!hook) {
       return;
     }
     const {
       requestInterceptors,
-      requestInterceptorsCatch,
+      requestInterceptorsError,
       responseInterceptors,
-      responseInterceptorsCatch
-    } = transform;
+      responseInterceptorsError
+    } = hook;
     const axiosCanceler = new AxiosCanceler();
     this.getAxiosInstance().interceptors.request.use(
       (config) => {
@@ -195,7 +195,7 @@ class Axios {
         return requestInterceptors(config);
       },
       (error) => {
-        return requestInterceptorsCatch(this.getAxiosInstance(), error);
+        return requestInterceptorsError(this.getAxiosInstance(), error);
       }
     );
     this.getAxiosInstance().interceptors.response.use(
@@ -204,7 +204,7 @@ class Axios {
         return responseInterceptors(response);
       },
       (error) => {
-        return responseInterceptorsCatch(this.getAxiosInstance(), error);
+        return responseInterceptorsError(this.getAxiosInstance(), error);
       }
     );
   }
@@ -236,32 +236,32 @@ class Axios {
       return requestConfigs;
     }
   }
-  setupPolicy(url, options, config) {
-    const { beforeRequestHook } = this.getAxiosTransform();
+  setupRequestStrategy(url, options, config) {
+    const { onRequestHook } = this.getAxiosHook();
     const requestOptions = this.mergeRequestOptions(options);
     let axiosRequestConfig = this.mergeRequestConfigs(config);
-    if (beforeRequestHook && lodash.isFunction(beforeRequestHook)) {
-      axiosRequestConfig = beforeRequestHook(axiosRequestConfig, requestOptions);
+    if (onRequestHook && lodash.isFunction(onRequestHook)) {
+      axiosRequestConfig = onRequestHook(axiosRequestConfig, requestOptions);
     }
     const contentType = requestOptions.contentType;
-    const policy = this.getPolicy(contentType);
+    const strategy = this.getAxiosHeaderStrategy(contentType);
     if (axiosRequestConfig.headers) {
-      axiosRequestConfig.headers = Object.assign(axiosRequestConfig.headers, policy.headers);
+      axiosRequestConfig.headers = Object.assign(axiosRequestConfig.headers, strategy.headers);
     } else {
-      axiosRequestConfig.headers = policy.headers;
+      axiosRequestConfig.headers = strategy.headers;
     }
     axiosRequestConfig.url = url;
     if (!lodash.isEmpty(axiosRequestConfig.data)) {
-      axiosRequestConfig.data = policy.dataConvert(axiosRequestConfig.data);
+      axiosRequestConfig.data = strategy.dataConvert(axiosRequestConfig.data);
     }
     return {
       config: axiosRequestConfig,
       options: requestOptions,
-      dataConvert: policy.dataConvert
+      dataConvert: strategy.dataConvert
     };
   }
   get(url, params = {}, options = { contentType: ContentTypeEnum.JSON }) {
-    let policy = this.setupPolicy(url, options, { params, method: HttpMethodEnum.GET });
+    let policy = this.setupRequestStrategy(url, options, { params, method: HttpMethodEnum.GET });
     return this.request(policy.config, policy.options);
   }
   /**
@@ -277,7 +277,7 @@ class Axios {
    * @returns
    */
   post(url, data, options = { contentType: ContentTypeEnum.JSON }, config) {
-    let policy = this.setupPolicy(url, options, {
+    let policy = this.setupRequestStrategy(url, options, {
       ...config,
       data,
       method: HttpMethodEnum.POST
@@ -297,7 +297,7 @@ class Axios {
    * @returns
    */
   postWithParams(url, params = {}, data = {}, options = { contentType: ContentTypeEnum.JSON }, config) {
-    let policy = this.setupPolicy(url, options, {
+    let policy = this.setupRequestStrategy(url, options, {
       ...config,
       params,
       data,
@@ -320,7 +320,11 @@ class Axios {
    * @returns 响应数据
    */
   put(url, data, options = { contentType: ContentTypeEnum.JSON }, config) {
-    let policy = this.setupPolicy(url, options, { ...config, data, method: HttpMethodEnum.PUT });
+    let policy = this.setupRequestStrategy(url, options, {
+      ...config,
+      data,
+      method: HttpMethodEnum.PUT
+    });
     return this.request(policy.config, policy.options);
   }
   /**
@@ -338,7 +342,7 @@ class Axios {
    * @returns 响应数据
    */
   putWithParams(url, params = {}, data = {}, options = { contentType: ContentTypeEnum.JSON }, config) {
-    let policy = this.setupPolicy(url, options, {
+    let policy = this.setupRequestStrategy(url, options, {
       ...config,
       params,
       data,
@@ -359,7 +363,10 @@ class Axios {
    * @returns 响应数据
    */
   delete(url, data = {}, options = { contentType: ContentTypeEnum.JSON }) {
-    let policy = this.setupPolicy(url, options, { data, method: HttpMethodEnum.DELETE });
+    let policy = this.setupRequestStrategy(url, options, {
+      data,
+      method: HttpMethodEnum.DELETE
+    });
     return this.request(policy.config, policy.options);
   }
   /**
@@ -377,7 +384,11 @@ class Axios {
    * @returns 响应数据
    */
   deleteWithParams(url, params = {}, data = {}, options = { contentType: ContentTypeEnum.JSON }) {
-    let policy = this.setupPolicy(url, options, { params, data, method: HttpMethodEnum.DELETE });
+    let policy = this.setupRequestStrategy(url, options, {
+      params,
+      data,
+      method: HttpMethodEnum.DELETE
+    });
     return this.request(policy.config, policy.options);
   }
   /**
@@ -388,17 +399,17 @@ class Axios {
    */
   request(config, options) {
     return new Promise((resolve, reject) => {
-      const { requestCatchHook, transformRequestHook } = this.getAxiosTransform();
+      const { onResponseErrorHook, onResponseSuccessHook } = this.getAxiosHook();
       this.getAxiosInstance().request(config).then((response) => {
-        if (transformRequestHook && lodash.isFunction(transformRequestHook)) {
-          const result = transformRequestHook(response, options);
+        if (onResponseSuccessHook && lodash.isFunction(onResponseSuccessHook)) {
+          const result = onResponseSuccessHook(response, options);
           resolve(result);
         } else {
           resolve(response);
         }
       }).catch((error) => {
-        if (requestCatchHook && lodash.isFunction(requestCatchHook)) {
-          reject(requestCatchHook(error, options));
+        if (onResponseErrorHook && lodash.isFunction(onResponseErrorHook)) {
+          reject(onResponseErrorHook(error, options));
         } else {
           reject(error);
         }
