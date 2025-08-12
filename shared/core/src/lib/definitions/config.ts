@@ -1,4 +1,4 @@
-import type { HttpConfigOption } from '@/declarations';
+import type { HttpClientOptions } from '@/declarations';
 import { Axios } from './axios';
 import { lodash } from '../utils';
 
@@ -18,7 +18,7 @@ class HttpConfig {
   private manageAddress = '';
   private proxy = '';
 
-  public constructor(http: Axios, options: HttpConfigOption) {
+  public constructor(http: Axios, options: HttpClientOptions) {
     this.http = http;
     this.project = options.project;
     this.clientId = options.clientId;

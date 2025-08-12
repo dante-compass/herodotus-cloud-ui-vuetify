@@ -1,1 +1,0 @@
-import{c as t}from"./App.vue_vue_type_script_setup_true_lang.ts-DTp-eiQU.js";import{d as e}from"./npm-@vue-runtime-core-Bt_zY50d.js";import{r as p}from"./npm-@vue-reactivity-CpSUo9wN.js";const r=e({name:"ScanPanel",setup:()=>({application:t(),url:p("https://placeimg.com/500/300/nature")})});export{r as _};

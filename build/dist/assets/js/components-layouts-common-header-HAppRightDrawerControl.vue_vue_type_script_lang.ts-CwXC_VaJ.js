@@ -1,1 +1,0 @@
-import{c as p}from"./App.vue_vue_type_script_setup_true_lang.ts-DTp-eiQU.js";import{d as t}from"./npm-@vue-runtime-core-Bt_zY50d.js";const r=t({name:"HAppRightDrawerControl",setup:t=>({application:p()})});export{r as _};

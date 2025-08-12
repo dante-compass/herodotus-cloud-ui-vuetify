@@ -122,32 +122,32 @@ class AxiosCanceler {
 }
 class Axios {
   axiosInstance;
-  axiosConfig;
-  axiosHook;
+  defaultAxiosRequestConfig;
   defaultRequestOptions;
-  constructor(config, hook, options) {
-    this.axiosConfig = config;
-    this.axiosHook = hook;
-    this.defaultRequestOptions = options;
-    this.axiosInstance = this.createAxiosInstance(config);
+  axiosInstanceHooks;
+  constructor(defaultAxiosRequestConfig, axiosInstanceHooks, defaultRequestOptions) {
+    this.defaultAxiosRequestConfig = defaultAxiosRequestConfig;
+    this.defaultRequestOptions = defaultRequestOptions;
+    this.axiosInstanceHooks = axiosInstanceHooks;
+    this.axiosInstance = this.createAxiosInstance(defaultAxiosRequestConfig);
     this.setupInterceptors();
   }
   createAxiosInstance(config) {
     return axios.create(config);
   }
-  getAxiosConfig() {
-    return this.axiosConfig;
-  }
-  getAxiosHook() {
-    return this.axiosHook;
-  }
-  getAxiosInstance() {
-    return this.axiosInstance;
+  getDefaultAxiosRequestConfig() {
+    return this.defaultAxiosRequestConfig;
   }
   getDefaultRequestOptions() {
     return this.defaultRequestOptions;
   }
-  getAxiosHeaderStrategy(contentType) {
+  getAxiosInstanceHooks() {
+    return this.axiosInstanceHooks;
+  }
+  getAxiosInstance() {
+    return this.axiosInstance;
+  }
+  createHttpHeaderPolicy(contentType) {
     switch (contentType) {
       case ContentTypeEnum.URL_ENCODED:
         return {
@@ -175,8 +175,8 @@ class Axios {
     }
   }
   setupInterceptors() {
-    const hook = this.getAxiosHook();
-    if (!hook) {
+    const instanceHooks = this.getAxiosInstanceHooks();
+    if (!instanceHooks) {
       return;
     }
     const {
@@ -184,7 +184,7 @@ class Axios {
       requestInterceptorsError,
       responseInterceptors,
       responseInterceptorsError
-    } = hook;
+    } = instanceHooks;
     const axiosCanceler = new AxiosCanceler();
     this.getAxiosInstance().interceptors.request.use(
       (config) => {
@@ -210,62 +210,123 @@ class Axios {
   }
   /**
    * 把当前请求的 options 与全局 options 整合获得一个完整的 options
+   * @param currentRequestOptions 当前请求的 options
+   * @returns 合并后的 options
    */
-  mergeRequestOptions(options) {
-    const requestOptions = this.getDefaultRequestOptions();
-    if (!lodash.isEmpty(options)) {
-      return Object.assign({}, requestOptions, options);
+  mergeHttpRequestOptions(currentRequestOptions) {
+    const defaultRequestOptions = this.getDefaultRequestOptions();
+    if (!lodash.isEmpty(currentRequestOptions)) {
+      return lodash.merge({}, defaultRequestOptions, currentRequestOptions);
     } else {
-      return requestOptions;
+      return defaultRequestOptions;
     }
   }
   /**
    * 把当前请求的 AxiosRequestConfig 与全局 AxiosRequestConfig 整合获得一个完整的 AxiosRequestConfig
+   * @param currentAxiosRequestConfig 当前请求的 AxiosRequestConfig
+   * @returns 合并后的 AxiosRequestConfig
    */
-  mergeRequestConfigs(config) {
-    const axiosConfig = this.getAxiosConfig();
+  mergeAxiosRequestConfigs(currentAxiosRequestConfig) {
+    const defaultAxiosRequestConfig = this.getDefaultAxiosRequestConfig();
     const paramsSerializer = {
       serialize(params) {
         return Object.keys(params).map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`).join("&");
       }
     };
-    const requestConfigs = Object.assign({ paramsSerializer }, axiosConfig);
-    if (config) {
-      return Object.assign({}, requestConfigs, config);
+    const result = lodash.merge({ paramsSerializer }, defaultAxiosRequestConfig);
+    if (!lodash.isEmpty(currentAxiosRequestConfig)) {
+      return lodash.merge({}, result, currentAxiosRequestConfig);
     } else {
-      return requestConfigs;
+      return result;
     }
   }
-  setupRequestStrategy(url, options, config) {
-    const { onRequestHook } = this.getAxiosHook();
-    const requestOptions = this.mergeRequestOptions(options);
-    let axiosRequestConfig = this.mergeRequestConfigs(config);
+  setupRequestStrategy(url, currentAxiosRequestConfig, currentHttpRequestOptions) {
+    const { onRequestHook } = this.getAxiosInstanceHooks();
+    const httpRequestOptions = this.mergeHttpRequestOptions(currentHttpRequestOptions);
+    let axiosRequestConfig = this.mergeAxiosRequestConfigs(currentAxiosRequestConfig);
     if (onRequestHook && lodash.isFunction(onRequestHook)) {
-      axiosRequestConfig = onRequestHook(axiosRequestConfig, requestOptions);
+      axiosRequestConfig = onRequestHook(axiosRequestConfig, httpRequestOptions);
     }
-    const contentType = requestOptions.contentType;
-    const strategy = this.getAxiosHeaderStrategy(contentType);
+    const httpHeaderPolicy = this.createHttpHeaderPolicy(httpRequestOptions.contentType);
     if (axiosRequestConfig.headers) {
-      axiosRequestConfig.headers = Object.assign(axiosRequestConfig.headers, strategy.headers);
+      axiosRequestConfig.headers = lodash.merge(
+        axiosRequestConfig.headers,
+        httpHeaderPolicy.headers
+      );
     } else {
-      axiosRequestConfig.headers = strategy.headers;
+      axiosRequestConfig.headers = httpHeaderPolicy.headers;
     }
     axiosRequestConfig.url = url;
     if (!lodash.isEmpty(axiosRequestConfig.data)) {
-      axiosRequestConfig.data = strategy.dataConvert(axiosRequestConfig.data);
+      axiosRequestConfig.data = httpHeaderPolicy.dataConvert(axiosRequestConfig.data);
     }
     return {
       config: axiosRequestConfig,
-      options: requestOptions,
-      dataConvert: strategy.dataConvert
+      options: httpRequestOptions
     };
   }
+  /**
+   * 请求核心方法
+   * @param config axios request 必要参数
+   * @param options 针对每个请求特别指定的参数
+   * @returns 响应数据
+   */
+  request(config, options) {
+    return new Promise((resolve, reject) => {
+      const { onResponseErrorHook, onResponseSuccessHook } = this.getAxiosInstanceHooks();
+      this.getAxiosInstance().request(config).then((response) => {
+        if (onResponseSuccessHook && lodash.isFunction(onResponseSuccessHook)) {
+          const result = onResponseSuccessHook(response, options);
+          resolve(result);
+        } else {
+          resolve(response);
+        }
+      }).catch((error) => {
+        if (onResponseErrorHook && lodash.isFunction(onResponseErrorHook)) {
+          const result = onResponseErrorHook(error, options);
+          reject(result);
+        } else {
+          reject(error);
+        }
+      });
+    });
+  }
+  /**
+   * 处理请求。提取公共代码，避免每个方法中都要写一遍
+   * @param url 请求地址
+   * @param config axios request 必要参数
+   * @param options 针对每个请求特别指定的参数
+   * @returns 响应数据
+   */
+  process(url, config, options = {}) {
+    let strategy = this.setupRequestStrategy(url, config, options);
+    return this.request(strategy.config, strategy.options);
+  }
+  /**
+   * GET
+   *
+   * <T> 返回响应中实际 data 中的内容类型
+   * <D> RequestBody 中的数据类型，实际对应 axios config 中的 data
+   *
+   * @param url 请求地址
+   * @param params 拼接在请求地址路径后面的参数，根据实际情况也可能不需要。
+   * @param options 对当前请求设置的参数
+   * @returns
+   */
   get(url, params = {}, options = { contentType: ContentTypeEnum.JSON }) {
-    let policy = this.setupRequestStrategy(url, options, { params, method: HttpMethodEnum.GET });
-    return this.request(policy.config, policy.options);
+    return this.process(
+      url,
+      {
+        params,
+        method: HttpMethodEnum.GET
+      },
+      options
+    );
   }
   /**
    * POST
+   *
+   * 针对 url 中有参数同时 request body 中也有数据的情况。额外增加一个方法，以防对现有的代码产生影响。
    *
    * <T> 返回响应中实际 data 中的内容类型
    * <D> RequestBody 中的数据类型，实际对应 axios config 中的 data
@@ -273,16 +334,19 @@ class Axios {
    * @param url 请求地址
    * @param data 放置在 RequestBody 中的数据
    * @param options 对当前请求设置的参数。
-   * @param config 当前请求对 axios 特殊设置
+   * @param config 当前请求对 axios 特殊设置。POST 操作会有不同的 Content Type，以及不同的设置。
    * @returns
    */
   post(url, data, options = { contentType: ContentTypeEnum.JSON }, config) {
-    let policy = this.setupRequestStrategy(url, options, {
-      ...config,
-      data,
-      method: HttpMethodEnum.POST
-    });
-    return this.request(policy.config, policy.options);
+    return this.process(
+      url,
+      {
+        ...config,
+        data,
+        method: HttpMethodEnum.POST
+      },
+      options
+    );
   }
   /**
    * POST
@@ -296,17 +360,20 @@ class Axios {
    * @param config 当前请求对 axios 特殊设置
    * @returns
    */
-  postWithParams(url, params = {}, data = {}, options = { contentType: ContentTypeEnum.JSON }, config) {
-    let policy = this.setupRequestStrategy(url, options, {
-      ...config,
-      params,
-      data,
-      method: HttpMethodEnum.POST
-    });
-    return this.request(policy.config, policy.options);
+  postWithParams(url, params, data = {}, options = { contentType: ContentTypeEnum.JSON }, config) {
+    return this.process(
+      url,
+      {
+        ...config,
+        params,
+        data,
+        method: HttpMethodEnum.POST
+      },
+      options
+    );
   }
   /**
-   * 更新操作。
+   * PUT。更新操作。
    *
    * 针对 url 中有参数同时 request body 中也有数据的情况。额外增加一个方法，以防对现有的代码产生影响。
    *
@@ -320,15 +387,18 @@ class Axios {
    * @returns 响应数据
    */
   put(url, data, options = { contentType: ContentTypeEnum.JSON }, config) {
-    let policy = this.setupRequestStrategy(url, options, {
-      ...config,
-      data,
-      method: HttpMethodEnum.PUT
-    });
-    return this.request(policy.config, policy.options);
+    return this.process(
+      url,
+      {
+        ...config,
+        data,
+        method: HttpMethodEnum.PUT
+      },
+      options
+    );
   }
   /**
-   * 更新操作。
+   * PUT。更新操作。
    *
    * 针对 url 中有参数同时 request body 中也有数据的情况。额外增加一个方法，以防对现有的代码产生影响。
    *
@@ -341,17 +411,20 @@ class Axios {
    * @param config 当前请求对 axios 特殊设置
    * @returns 响应数据
    */
-  putWithParams(url, params = {}, data = {}, options = { contentType: ContentTypeEnum.JSON }, config) {
-    let policy = this.setupRequestStrategy(url, options, {
-      ...config,
-      params,
-      data,
-      method: HttpMethodEnum.PUT
-    });
-    return this.request(policy.config, policy.options);
+  putWithParams(url, params, data = {}, options = { contentType: ContentTypeEnum.JSON }, config) {
+    return this.process(
+      url,
+      {
+        ...config,
+        params,
+        data,
+        method: HttpMethodEnum.PUT
+      },
+      options
+    );
   }
   /**
-   * 删除操作
+   * DELETE。删除操作
    *
    * <T> 返回响应中实际 data 中的内容类型
    * <D> RequestBody 中的数据类型，实际对应 axios config 中的 data
@@ -363,14 +436,17 @@ class Axios {
    * @returns 响应数据
    */
   delete(url, data = {}, options = { contentType: ContentTypeEnum.JSON }) {
-    let policy = this.setupRequestStrategy(url, options, {
-      data,
-      method: HttpMethodEnum.DELETE
-    });
-    return this.request(policy.config, policy.options);
+    return this.process(
+      url,
+      {
+        data,
+        method: HttpMethodEnum.DELETE
+      },
+      options
+    );
   }
   /**
-   * 删除操作。
+   * DELETE。删除操作
    *
    * 针对 url 中有参数同时 request body 中也有数据的情况。额外增加一个方法，以防对现有的代码产生影响。
    *
@@ -383,45 +459,27 @@ class Axios {
    * @param options 对当前请求设置的参数。
    * @returns 响应数据
    */
-  deleteWithParams(url, params = {}, data = {}, options = { contentType: ContentTypeEnum.JSON }) {
-    let policy = this.setupRequestStrategy(url, options, {
-      params,
-      data,
-      method: HttpMethodEnum.DELETE
-    });
-    return this.request(policy.config, policy.options);
-  }
-  /**
-   * 请求核心方法
-   * @param config axios request 必要参数
-   * @param options 针对每个请求特别指定的参数
-   * @returns 响应数据
-   */
-  request(config, options) {
-    return new Promise((resolve, reject) => {
-      const { onResponseErrorHook, onResponseSuccessHook } = this.getAxiosHook();
-      this.getAxiosInstance().request(config).then((response) => {
-        if (onResponseSuccessHook && lodash.isFunction(onResponseSuccessHook)) {
-          const result = onResponseSuccessHook(response, options);
-          resolve(result);
-        } else {
-          resolve(response);
-        }
-      }).catch((error) => {
-        if (onResponseErrorHook && lodash.isFunction(onResponseErrorHook)) {
-          reject(onResponseErrorHook(error, options));
-        } else {
-          reject(error);
-        }
-      });
-    });
+  deleteWithParams(url, params, data = {}, options = { contentType: ContentTypeEnum.JSON }) {
+    return this.process(
+      url,
+      {
+        params,
+        data,
+        method: HttpMethodEnum.DELETE
+      },
+      options
+    );
   }
 }
 const parseResponseStatus = (response, message) => {
-  const data = response.data;
-  const responseStatus = {};
-  responseStatus.status = response.status;
-  responseStatus.code = response.data && response.data.code ? response.data.code : 0;
+  let data = {};
+  if ("statusText" in response) {
+    data = response.data;
+  } else {
+    data = response;
+  }
+  const responseStatus = { status: response.status, code: 0, detail: "" };
+  responseStatus.code = data && data.code ? data.code : 0;
   responseStatus.detail = data.error && data.error.detail ? data.error.detail : "";
   if (data.message) {
     responseStatus.message = data.message;
@@ -444,17 +502,23 @@ const logResponse = (response) => {
     "%c┍------------------------------------------------------------------------------------------┑",
     `color:${randomColor};`
   );
-  console.log("| 请求地址：", response.config.url);
-  console.log("| 请求类型：", lodash.toUpper(response.config.method));
-  console.log("| 请求参数：", qs.parse(response.config.params));
-  console.log("| 响应数据：", response.data);
+  if ("config" in response) {
+    console.log("| 请求地址：", response.config.url);
+    console.log("| 请求类型：", lodash.toUpper(response.config.method));
+    console.log("| 请求参数：", qs.parse(response.config.params));
+    console.log("| 响应数据：", response.data);
+  } else if ("status" in response) {
+    console.log("| 响应数据：", response.data);
+  } else {
+    console.log("| 响应数据：", response);
+  }
   console.log(
     "%c┕------------------------------------------------------------------------------------------┙",
     `color:${randomColor};`
   );
 };
 const isSuccess = (response) => {
-  if (response && response.status) {
+  if (response && "statusText" in response) {
     return /^(2|3)\d{2}$/.test(String(response.status));
   } else {
     return false;

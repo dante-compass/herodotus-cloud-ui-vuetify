@@ -4,5 +4,5 @@ export type {
   Entity,
   Conditions,
   Dictionary,
-  HttpConfigOption,
+  HttpClientOptions,
 } from '@herodotus-cloud/core';

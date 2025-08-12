@@ -1,4 +1,4 @@
-import type { HttpConfigOption } from '@/declarations';
+import type { HttpClientOptions } from '@/declarations';
 
 import { Axios, HttpConfig } from './base';
 import {
@@ -151,7 +151,7 @@ export class ApiResources {
   }
 }
 
-const createApi = (http: Axios, options: HttpConfigOption): ApiResources => {
+const createApi = (http: Axios, options: HttpClientOptions): ApiResources => {
   const config = new HttpConfig(http, options);
   return ApiResources.getInstance(config);
 };

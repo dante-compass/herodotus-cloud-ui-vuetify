@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 2.0.0
+
+### Major Changes
+
+- [重构] 重构前端 Axios 组件抽象定义中的类型，让类型验证更准确，减少不必要的类型转换
+
 ## 1.7.24
 
 ### Patch Changes

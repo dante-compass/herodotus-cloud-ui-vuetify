@@ -1,4 +1,4 @@
-import { HttpConfigOption } from '../declarations';
+import { HttpClientOptions } from '../declarations';
 import { Axios, HttpConfig } from './base';
 import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService } from './modules';
 import { DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './settings';
@@ -34,5 +34,5 @@ export declare class ApiResources {
     task(): ExtendedTaskService;
     mgtCertificate(): MgtCertificateService;
 }
-declare const createApi: (http: Axios, options: HttpConfigOption) => ApiResources;
+declare const createApi: (http: Axios, options: HttpClientOptions) => ApiResources;
 export { createApi };

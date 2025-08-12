@@ -1,9 +1,8 @@
 import type {
   HttpResult,
   AxiosHttpResult,
-  AxiosHook,
-  AxiosResponse,
-  RequestOptions,
+  AxiosInstanceHooks,
+  HttpRequestOptions,
   AxiosError,
   InternalAxiosRequestConfig,
   AxiosInstance,
@@ -13,8 +12,9 @@ import { logResponse, isSuccess } from '@herodotus-cloud/core';
 
 import { getSystemHeaders } from '@herodotus-cloud/framework-kernel';
 import { processor } from './status';
+import { IS_DEV } from '../constants';
 
-export const axiosHook: AxiosHook = {
+export const axiosInstanceHooks: AxiosInstanceHooks = {
   // 请求之前处理config
   onRequestHook(config, options) {
     return config;
@@ -23,16 +23,16 @@ export const axiosHook: AxiosHook = {
   /**
    * @description: 请求成功处理
    */
-  onResponseSuccessHook<D = unknown>(
-    response: AxiosResponse<HttpResult<D>>,
-    options?: RequestOptions,
-  ): AxiosHttpResult<D> {
+  onResponseSuccessHook<T = unknown>(
+    response: AxiosHttpResult<T>,
+    options?: HttpRequestOptions,
+  ): AxiosHttpResult<T> {
     if (isSuccess(response)) {
       if (options) {
         const { isTransformResponse } = options;
         // 不进行任何处理，直接返回
         // 用于页面代码可能需要直接获取code，data，message这些信息时开启
-        if (isTransformResponse) {
+        if (isTransformResponse && 'statusText' in response) {
           return response.data;
         }
       }
@@ -40,7 +40,7 @@ export const axiosHook: AxiosHook = {
     return response;
   },
 
-  onResponseErrorHook<D = any>(error: AxiosError, options?: RequestOptions): HttpResult<D> {
+  onResponseErrorHook<D = any>(error: AxiosError, options?: HttpRequestOptions): HttpResult<D> {
     return error?.response?.data as HttpResult<D>;
   },
 
@@ -62,8 +62,8 @@ export const axiosHook: AxiosHook = {
   /**
    * @description: 响应拦截器处理
    */
-  responseInterceptors(response: AxiosResponse<any>): Promise<any> {
-    if (process.env.NODE_ENV === 'development') {
+  responseInterceptors<T = unknown>(response: AxiosHttpResult<T>): Promise<AxiosHttpResult<T>> {
+    if (IS_DEV) {
       logResponse(response);
     }
     // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据

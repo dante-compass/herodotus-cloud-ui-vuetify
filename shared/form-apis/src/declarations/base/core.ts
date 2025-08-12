@@ -1,7 +1,7 @@
 export type {
   Entity,
   Conditions,
-  HttpConfigOption,
+  HttpClientOptions,
   AxiosHttpResult,
   Page,
   Pageable,
