@@ -408,8 +408,15 @@ export class OAuth2ApiService {
       client_name: clientName,
       // client_secret: '123456',
       scope: 'openid email profile',
-      // 如果 response_type 包含 code 则会添加 authorization_code 授权模式
-      response_type: ['token'],
+      // 如果 response_types 包含 code 则会添加 authorization_code 授权模式
+      // token 是 OAuth2.0 规范中隐式模式的值，但是在 OAuth2.1 中隐式模式被取消。目前临时使用一下
+      // 可以考虑使用 id_token
+      // "response_types": [
+      //   "code",                // 允许：标准授权码流程
+      //   "code id_token",       // 允许：OIDC 混合流程（仅返回 code + id_token）
+      //   "id_token"             // 允许但不推荐：纯 OIDC 流程（无访问令牌）
+      // ],
+      response_types: ['token'],
       token_endpoint_auth_method: 'client_secret_post',
     });
   }

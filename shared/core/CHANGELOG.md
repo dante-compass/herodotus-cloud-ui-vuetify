@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 2.0.2
+
+### Patch Changes
+
+- [优化] 优化前端客户端动态注册默认参数，避免注册时生成不必要的授权模式
+
 ## 2.0.1
 
 ### Patch Changes
