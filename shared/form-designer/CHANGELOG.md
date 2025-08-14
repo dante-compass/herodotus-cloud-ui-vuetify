@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 2.0.1
+
+### Patch Changes
+
+- [优化] 优化前端客户端动态注册默认参数，避免注册时生成不必要的授权模式
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.0.1
+  - @herodotus-cloud/components@2.0.1
+  - @herodotus-cloud/form-apis@2.0.1
+  - @herodotus-cloud/core@2.0.1
+
 ## 2.0.0
 
 ### Major Changes

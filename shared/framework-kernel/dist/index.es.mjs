@@ -683,6 +683,8 @@ class OAuth2ApiService {
       client_name: clientName,
       // client_secret: '123456',
       scope: "openid email profile",
+      // 如果 response_type 包含 code 则会添加 authorization_code 授权模式
+      response_type: ["token"],
       token_endpoint_auth_method: "client_secret_post"
     });
   }

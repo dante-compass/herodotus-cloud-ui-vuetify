@@ -104,10 +104,10 @@ function isFunction(value) {
   return tag == funcTag$2 || tag == genTag$1 || tag == asyncTag || tag == proxyTag;
 }
 var coreJsData = root["__core-js_shared__"];
-var maskSrcKey = function() {
+var maskSrcKey = (function() {
   var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
   return uid ? "Symbol(src)_1." + uid : "";
-}();
+})();
 function isMasked(func) {
   return !!maskSrcKey && maskSrcKey in func;
 }
@@ -150,7 +150,7 @@ function getNative(object, key) {
 }
 var WeakMap = getNative(root, "WeakMap");
 var objectCreate = Object.create;
-var baseCreate = /* @__PURE__ */ function() {
+var baseCreate = /* @__PURE__ */ (function() {
   function object() {
   }
   return function(proto) {
@@ -165,15 +165,15 @@ var baseCreate = /* @__PURE__ */ function() {
     object.prototype = void 0;
     return result;
   };
-}();
-var defineProperty = function() {
+})();
+var defineProperty = (function() {
   try {
     var func = getNative(Object, "defineProperty");
     func({}, "", {});
     return func;
   } catch (e) {
   }
-}();
+})();
 function arrayEach(array, iteratee) {
   var index2 = -1, length = array == null ? 0 : array.length;
   while (++index2 < length) {
@@ -239,9 +239,9 @@ function baseIsArguments(value) {
 var objectProto$7 = Object.prototype;
 var hasOwnProperty$6 = objectProto$7.hasOwnProperty;
 var propertyIsEnumerable$1 = objectProto$7.propertyIsEnumerable;
-var isArguments = baseIsArguments(/* @__PURE__ */ function() {
+var isArguments = baseIsArguments(/* @__PURE__ */ (function() {
   return arguments;
-}()) ? baseIsArguments : function(value) {
+})()) ? baseIsArguments : function(value) {
   return isObjectLike(value) && hasOwnProperty$6.call(value, "callee") && !propertyIsEnumerable$1.call(value, "callee");
 };
 function stubFalse() {
@@ -270,7 +270,7 @@ var freeExports$1 = typeof exports == "object" && exports && !exports.nodeType &
 var freeModule$1 = freeExports$1 && typeof module == "object" && module && !module.nodeType && module;
 var moduleExports$1 = freeModule$1 && freeModule$1.exports === freeExports$1;
 var freeProcess = moduleExports$1 && freeGlobal.process;
-var nodeUtil = function() {
+var nodeUtil = (function() {
   try {
     var types = freeModule$1 && freeModule$1.require && freeModule$1.require("util").types;
     if (types) {
@@ -279,7 +279,7 @@ var nodeUtil = function() {
     return freeProcess && freeProcess.binding && freeProcess.binding("util");
   } catch (e) {
   }
-}();
+})();
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
 var isTypedArray = nodeIsTypedArray ? baseUnary(nodeIsTypedArray) : baseIsTypedArray;
 var objectProto$6 = Object.prototype;
