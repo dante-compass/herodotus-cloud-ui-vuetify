@@ -1,7 +1,7 @@
 <template>
   <q-list bordered>
     <h-expansion-item icon="mdi-information" label="常规" default-opened>
-      <h-text-field v-model="models.modelValue.name" dense label="名称" />
+      <h-text-field v-model="models.modelValue!.name" dense label="名称" />
       <h-text-field v-model="properties.label" dense label="Label" />
     </h-expansion-item>
     <h-expansion-item icon="mdi-eject-circle" label="状态">

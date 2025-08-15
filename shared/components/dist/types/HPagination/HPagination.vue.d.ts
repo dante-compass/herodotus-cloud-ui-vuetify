@@ -27,7 +27,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: number;
     };
 }>> & Readonly<{
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: (...args: any[]) => any;
 }>, {
     max: number;
     maxPage: number;

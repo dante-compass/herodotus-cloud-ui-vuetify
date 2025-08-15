@@ -19,9 +19,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { PropType, Ref } from 'vue';
-import { defineComponent, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 
 import type { UserEntity } from '@/declarations';
 
@@ -31,75 +31,57 @@ import { HDialog } from '@/components/widgets';
 import { HTextField } from '@/components/base';
 import HUserSelectTable from './HUserSelectTable.vue';
 
-export default defineComponent({
+defineOptions({
   name: 'HCandidateUserTextField',
-
   components: {
     HDialog,
     HTextField,
     HUserSelectTable,
   },
-
-  props: {
-    modelValue: { type: String, default: '' },
-    selection: { type: String as PropType<'single' | 'multiple'>, default: 'multiple' },
-    label: { type: String },
-    title: { type: String },
-  },
-
-  emits: ['update:modelValue'],
-
-  setup(props, { emit }) {
-    const assignee = computed({
-      get: () => props.modelValue,
-      set: (newValue) => {
-        emit('update:modelValue', newValue);
-      },
-    });
-
-    const isOpen = ref(false);
-    const selected = ref([]) as Ref<Array<UserEntity>>;
-
-    const isDisabled = computed(() => {
-      return lodash.isEmpty(selected.value);
-    });
-
-    const onClose = () => {
-      isOpen.value = false;
-    };
-
-    const onSave = () => {
-      onClose();
-      if (!lodash.isEmpty(selected.value)) {
-        assignee.value = lodash.join(
-          lodash.map(selected.value, (item) => item.id),
-          ',',
-        );
-      } else {
-        assignee.value = '';
-      }
-    };
-
-    const onOpen = () => {
-      if (assignee.value) {
-        const items = lodash.split(assignee.value);
-        selected.value = lodash.map(items, (item) => {
-          return { id: item, firstName: '', lastName: '', email: '' };
-        });
-      }
-
-      isOpen.value = true;
-    };
-
-    return {
-      isOpen,
-      isDisabled,
-      selected,
-      assignee,
-      onClose,
-      onSave,
-      onOpen,
-    };
-  },
 });
+
+defineProps({
+  selection: { type: String as PropType<'single' | 'multiple'>, default: 'multiple' },
+  label: { type: String, default: '' },
+  title: { type: String, default: '' },
+});
+
+const assignee = defineModel({
+  type: String,
+  default: '',
+});
+
+const isOpen = ref(false);
+const selected = ref([]) as Ref<Array<UserEntity>>;
+
+const isDisabled = computed(() => {
+  return lodash.isEmpty(selected.value);
+});
+
+const onClose = () => {
+  isOpen.value = false;
+};
+
+const onSave = () => {
+  onClose();
+  if (!lodash.isEmpty(selected.value)) {
+    assignee.value = lodash.join(
+      lodash.map(selected.value, (item) => item.id),
+      ',',
+    );
+  } else {
+    assignee.value = '';
+  }
+};
+
+const onOpen = () => {
+  if (assignee.value) {
+    const items = lodash.split(assignee.value);
+    selected.value = lodash.map(items, (item) => {
+      return { id: item, firstName: '', lastName: '', email: '' };
+    });
+  }
+
+  isOpen.value = true;
+};
 </script>

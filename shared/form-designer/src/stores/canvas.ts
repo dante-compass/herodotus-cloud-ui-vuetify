@@ -76,7 +76,7 @@ export const useFormCanvasStore = defineStore('FormDesignerCanvas', {
 
     selectFirstElement() {
       if (!lodash.isEmpty(this.canvasElements)) {
-        this.selectElement(this.canvasElements[0]);
+        this.selectElement(this.canvasElements[0]!);
       }
     },
 

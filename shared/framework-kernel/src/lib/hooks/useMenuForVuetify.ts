@@ -14,7 +14,7 @@ export default function useVuetifyMenu() {
   const findRouteElement = (item: RouteRecordRaw): RouteRecordRaw => {
     if (!lodash.isEmpty(item.children)) {
       const data = item.children as Array<RouteRecordRaw>;
-      return data[0];
+      return data[0]!;
     } else {
       return item;
     }
@@ -37,7 +37,8 @@ export default function useVuetifyMenu() {
         const [root, leaf] = lodash.partition(element.children, (router) =>
           lodash.isEmpty(router.path),
         );
-        const route = root[0];
+        // 非空断言（!）（谨慎使用）仅在确保值一定存在时使用.
+        const route = root[0]!;
         return {
           title: route.meta?.title,
           prependIcon: route.meta?.icon,
@@ -48,7 +49,7 @@ export default function useVuetifyMenu() {
   };
 
   const getMenuItems = (): Array<MenuItem> => {
-    const routers = RouterUtilities.getInstance().getRouter().getRoutes();
+    const routers = RouterUtilities.getInstance().getRouter().getRoutes() as Array<RouteRecordRaw>;
     const available = findAvailableRoutes(routers);
     return convert(available);
   };

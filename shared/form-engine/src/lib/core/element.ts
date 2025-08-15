@@ -18,7 +18,7 @@ class ElementUtilities {
   }
 
   private getDefinition(schema: string): SchemaDefinition {
-    return SCHEMA_DEFINITIONS[schema];
+    return SCHEMA_DEFINITIONS[schema] as SchemaDefinition;
   }
 
   private setIdentityValues(element: Element, widgetName: string): void {

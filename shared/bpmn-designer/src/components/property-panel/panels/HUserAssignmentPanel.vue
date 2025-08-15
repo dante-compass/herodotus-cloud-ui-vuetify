@@ -80,7 +80,7 @@ export default defineComponent({
     const candidateGroups = ref<string>('');
     const dueDate = ref<string>('');
     const followUpDate = ref<string>('');
-    const priority = ref<string>();
+    const priority = ref<string>('');
 
     const updateAssignee = (value: string | number | null) => {
       setAssigneeValue(designer.activeElement, value as string);

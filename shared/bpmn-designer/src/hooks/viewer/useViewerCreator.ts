@@ -6,7 +6,7 @@ import { lodash } from '@/lib/utils';
 
 export default function useViewerCreator(
   containerHtmlId: string,
-  height: string | number | undefined,
+  height: string | number,
   highlightNodes: Array<string>,
 ) {
   let bpmnViewer = {} as Viewer;

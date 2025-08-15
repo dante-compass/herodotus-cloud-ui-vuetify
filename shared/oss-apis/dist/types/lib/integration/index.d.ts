@@ -22,8 +22,8 @@ declare class ObjectService extends Service {
     getUploadAddress(): string;
     listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>>;
     delete(request: DeleteObjectArgument): Promise<AxiosHttpResult<DeleteObjectResult>>;
-    upload(bucketName: string, file: File, onProgress?: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<PutObjectResult>>;
-    download(request: GetObjectArgument, onProgress?: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<Blob>>;
+    upload(bucketName: string, file: File, onProgress: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<PutObjectResult>>;
+    download(request: GetObjectArgument, onProgress: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<Blob>>;
     display(request: GetObjectArgument): Promise<AxiosHttpResult<Blob>>;
     batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>>;
 }

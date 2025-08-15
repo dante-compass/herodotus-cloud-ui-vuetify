@@ -13,8 +13,8 @@
   </q-drawer>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
 import { storeToRefs } from 'pinia';
 
@@ -58,9 +58,8 @@ import {
   HUserAssignmentPanel,
 } from './panels';
 
-export default defineComponent({
+defineOptions({
   name: 'HBpmnPropertyPanel',
-
   components: {
     HAsynchronousContinuationsPanel,
     HCalledElementPanel,
@@ -97,48 +96,39 @@ export default defineComponent({
     HTimerPanel,
     HUserAssignmentPanel,
   },
-
-  props: {
-    title: { type: String, required: true },
-    icon: { type: String, required: true },
-    type: { type: String, required: true },
-    label: { type: String },
-  },
-
-  setup() {
-    const isShow = ref<boolean>(true);
-
-    const designer = useDesignerStore();
-
-    const { panelGroups } = storeToRefs(designer);
-
-    const parsePropertyPanelName = (id: string) => {
-      let result = id;
-
-      const index = id.indexOf('__');
-      if (index !== -1) {
-        result = id.substring(index + 2);
-      }
-
-      result = lodash.upperFirst(result);
-
-      return 'H' + result + 'Panel';
-    };
-
-    const thumbStyle = {
-      right: '2px',
-      borderRadius: '5px',
-      backgroundColor: '#027be3',
-      width: '5px',
-      opacity: '0.75',
-    };
-
-    return {
-      thumbStyle,
-      isShow,
-      panelGroups,
-      parsePropertyPanelName,
-    };
-  },
 });
+
+defineProps({
+  title: { type: String, required: true },
+  icon: { type: String, required: true },
+  type: { type: String, required: true },
+  label: { type: String, default: '' },
+});
+
+const isShow = ref<boolean>(true);
+
+const designer = useDesignerStore();
+
+const { panelGroups } = storeToRefs(designer);
+
+const parsePropertyPanelName = (id: string) => {
+  let result = id;
+
+  const index = id.indexOf('__');
+  if (index !== -1) {
+    result = id.substring(index + 2);
+  }
+
+  result = lodash.upperFirst(result);
+
+  return 'H' + result + 'Panel';
+};
+
+const thumbStyle = {
+  right: '2px',
+  borderRadius: '5px',
+  backgroundColor: '#027be3',
+  width: '5px',
+  opacity: '0.75',
+};
 </script>

@@ -20,7 +20,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         defalut: string;
     };
 }>> & Readonly<{
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: (...args: any[]) => any;
 }>, {}, {}, {
     HSelect: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         modelValue: {
@@ -56,7 +56,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             type: StringConstructor;
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+        "onUpdate:modelValue"?: (...args: any[]) => any;
     }>, {
         optionLabel: string;
         optionValue: string;
@@ -72,7 +72,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             type: (StringConstructor | NumberConstructor)[];
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+        "onUpdate:modelValue"?: (...args: any[]) => any;
     }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     HContainer: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         mode: {
@@ -112,7 +112,103 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         mode: "two" | "three";
         wider: "default" | "center" | "start" | "end";
     }, {}, {
-        HRow: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+        HRow: {
+            new (...args: any[]): import('vue').CreateComponentPublicInstanceWithMixins<Readonly<import('vue').ExtractPropTypes<{
+                column: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                self: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                align: {
+                    type: import('vue').PropType<"none" | "start" | "center" | "end">;
+                    default: string;
+                };
+                justify: {
+                    type: import('vue').PropType<"none" | "center" | "end" | "around" | "between" | "evenly">;
+                    default: string;
+                };
+                gutter: {
+                    type: import('vue').PropType<"none" | "xs" | "sm" | "md" | "lg" | "xl">;
+                    default: string;
+                };
+                gutterCol: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                horizontal: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                vertical: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, import('vue').PublicProps, {
+                align: "center" | "none" | "start" | "end";
+                self: boolean;
+                horizontal: boolean;
+                vertical: boolean;
+                justify: "center" | "none" | "end" | "around" | "between" | "evenly";
+                column: boolean;
+                gutter: "xs" | "sm" | "md" | "lg" | "xl" | "none";
+                gutterCol: boolean;
+            }, true, {}, {}, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, {}, HTMLDivElement, import('vue').ComponentProvideOptions, {
+                P: {};
+                B: {};
+                D: {};
+                C: {};
+                M: {};
+                Defaults: {};
+            }, Readonly<import('vue').ExtractPropTypes<{
+                column: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                self: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                align: {
+                    type: import('vue').PropType<"none" | "start" | "center" | "end">;
+                    default: string;
+                };
+                justify: {
+                    type: import('vue').PropType<"none" | "center" | "end" | "around" | "between" | "evenly">;
+                    default: string;
+                };
+                gutter: {
+                    type: import('vue').PropType<"none" | "xs" | "sm" | "md" | "lg" | "xl">;
+                    default: string;
+                };
+                gutterCol: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                horizontal: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                vertical: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>> & Readonly<{}>, {}, {}, {}, {}, {
+                align: "center" | "none" | "start" | "end";
+                self: boolean;
+                horizontal: boolean;
+                vertical: boolean;
+                justify: "center" | "none" | "end" | "around" | "between" | "evenly";
+                column: boolean;
+                gutter: "xs" | "sm" | "md" | "lg" | "xl" | "none";
+                gutterCol: boolean;
+            }>;
+            __isFragment?: never;
+            __isTeleport?: never;
+            __isSuspense?: never;
+        } & import('vue').ComponentOptionsBase<Readonly<import('vue').ExtractPropTypes<{
             column: {
                 type: BooleanConstructor;
                 default: boolean;
@@ -145,42 +241,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 type: BooleanConstructor;
                 default: boolean;
             };
-        }>, {
-            getClasses: () => string;
-        }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
-            column: {
-                type: BooleanConstructor;
-                default: boolean;
-            };
-            self: {
-                type: BooleanConstructor;
-                default: boolean;
-            };
-            align: {
-                type: import('vue').PropType<"none" | "start" | "center" | "end">;
-                default: string;
-            };
-            justify: {
-                type: import('vue').PropType<"none" | "center" | "end" | "around" | "between" | "evenly">;
-                default: string;
-            };
-            gutter: {
-                type: import('vue').PropType<"none" | "xs" | "sm" | "md" | "lg" | "xl">;
-                default: string;
-            };
-            gutterCol: {
-                type: BooleanConstructor;
-                default: boolean;
-            };
-            horizontal: {
-                type: BooleanConstructor;
-                default: boolean;
-            };
-            vertical: {
-                type: BooleanConstructor;
-                default: boolean;
-            };
-        }>> & Readonly<{}>, {
+        }>> & Readonly<{}>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, {
             align: "center" | "none" | "start" | "end";
             self: boolean;
             horizontal: boolean;
@@ -189,7 +250,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             column: boolean;
             gutter: "xs" | "sm" | "md" | "lg" | "xl" | "none";
             gutterCol: boolean;
-        }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+        }, {}, string, {}, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, import('vue').ComponentProvideOptions> & import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps & (new () => {
+            $slots: {
+                default?(_: {}): any;
+            };
+        });
         HColumn: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
             cols: {
                 type: (StringConstructor | NumberConstructor)[];

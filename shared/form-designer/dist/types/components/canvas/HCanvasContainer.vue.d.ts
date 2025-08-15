@@ -14,8 +14,8 @@ declare const _default: import('vue').DefineComponent<{}, {
             tag: string;
             attrs: Record<string, any>;
             models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
-            children?: /*elided*/ any[] | undefined;
-            text?: string | undefined;
+            children?: /*elided*/ any[];
+            text?: string;
         };
     }[];
     onSelectedItem: (element: Element) => void;

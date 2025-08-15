@@ -53,8 +53,8 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: string;
     };
 }>> & Readonly<{
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    onSave?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: (...args: any[]) => any;
+    onSave?: (...args: any[]) => any;
 }>, {
     width: string;
     title: string;

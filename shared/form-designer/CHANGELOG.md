@@ -1,5 +1,19 @@
 # @herodotus-cloud/form-designer
 
+## 2.1.0
+
+### Minor Changes
+
+- [修复] 修复 @vue/tsconfig 升级至 0.8.0导致打包编译时出现错误提示问题
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.1.0
+  - @herodotus-cloud/components@2.1.0
+  - @herodotus-cloud/form-apis@2.1.0
+  - @herodotus-cloud/core@2.1.0
+
 ## 2.0.3
 
 ### Patch Changes

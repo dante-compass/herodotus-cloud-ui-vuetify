@@ -102,7 +102,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             type: (StringConstructor | NumberConstructor)[];
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+        "onUpdate:modelValue"?: (...args: any[]) => any;
     }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     HSelect: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
         modelValue: {
@@ -138,7 +138,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             type: StringConstructor;
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+        "onUpdate:modelValue"?: (...args: any[]) => any;
     }>, {
         optionLabel: string;
         optionValue: string;

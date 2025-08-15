@@ -870,7 +870,10 @@ class PkceUtilities {
       const arr = this.toBytesInt32(word);
       const fourByteWord = new Uint8Array(arr);
       for (let i = 0; i < 4; i++) {
-        randoms1byte.push(fourByteWord[i]);
+        let word2 = fourByteWord[i];
+        if (word2 !== void 0) {
+          randoms1byte.push(word2);
+        }
       }
     });
     return randoms1byte;
@@ -884,8 +887,11 @@ class PkceUtilities {
     let result = "";
     const randomUints = this.getRandomValues(size);
     for (let i = 0; i < size; i++) {
-      const randomIndex = randomUints[i] % mask.length;
-      result += mask[randomIndex];
+      let randomUint = randomUints[i];
+      if (randomUint !== void 0) {
+        const randomIndex = randomUint % mask.length;
+        result += mask[randomIndex];
+      }
     }
     return result;
   }

@@ -1,5 +1,5 @@
 declare const _default: import('vue').DefineComponent<{}, {
-    initiator: import('vue').Ref<string | undefined, string | undefined>;
+    initiator: import('vue').Ref<string, string>;
     updateInitiator: (value: string | number | null) => void;
 }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {
     HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -71,7 +71,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             type: (StringConstructor | NumberConstructor)[];
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+        "onUpdate:modelValue"?: (...args: any[]) => any;
     }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;
