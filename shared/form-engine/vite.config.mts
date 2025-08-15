@@ -14,7 +14,6 @@ export default defineConfig({
       template: { transformAssetUrls },
     }),
     Components({
-      dts: true,
       resolvers: [QuasarResolver()],
     }),
     dts({
@@ -24,9 +23,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '#': fileURLToPath(new URL('./types', import.meta.url)),
+      '@': fileURLToPath(new URL('src', import.meta.url)),
     },
+    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
   },
   build: {
     lib: {

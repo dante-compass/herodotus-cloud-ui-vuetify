@@ -662,9 +662,33 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 }>> & Readonly<{}>, {
                     modelValue: import('@herodotus-cloud/bpmn-apis').GroupEntity[];
                 }, {}, {
-                    HTextField: any;
+                    HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                        modelValue: {
+                            type: (StringConstructor | NumberConstructor)[];
+                        };
+                    }>, {
+                        text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+                    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                        modelValue: {
+                            type: (StringConstructor | NumberConstructor)[];
+                        };
+                    }>> & Readonly<{
+                        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                    }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
                 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-                HTextField: any;
+                HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: (StringConstructor | NumberConstructor)[];
+                    };
+                }>, {
+                    text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: (StringConstructor | NumberConstructor)[];
+                    };
+                }>> & Readonly<{
+                    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
             }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
             HCandidateUserTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
                 modelValue: {
@@ -775,7 +799,19 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     confirmLabel: string;
                     confirmDisable: boolean;
                 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-                HTextField: any;
+                HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: (StringConstructor | NumberConstructor)[];
+                    };
+                }>, {
+                    text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: (StringConstructor | NumberConstructor)[];
+                    };
+                }>> & Readonly<{
+                    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
                 HUserSelectTable: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
                     modelValue: {
                         type: PropType<Array<import('@herodotus-cloud/bpmn-apis').UserEntity>>;
@@ -842,7 +878,19 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     modelValue: import('@herodotus-cloud/bpmn-apis').UserEntity[];
                     selection: "single" | "multiple";
                 }, {}, {
-                    HTextField: any;
+                    HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                        modelValue: {
+                            type: (StringConstructor | NumberConstructor)[];
+                        };
+                    }>, {
+                        text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+                    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                        modelValue: {
+                            type: (StringConstructor | NumberConstructor)[];
+                        };
+                    }>> & Readonly<{
+                        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                    }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
                 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
             }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
             HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -1057,8 +1105,58 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 count: number;
                 defaultOpend: boolean;
             }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-            HTextField: any;
-            HSelect: any;
+            HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | NumberConstructor)[];
+                };
+            }>, {
+                text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | NumberConstructor)[];
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HSelect: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | ObjectConstructor | NumberConstructor | ArrayConstructor)[];
+                };
+                optionLabel: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                optionValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                errorMessage: {
+                    type: StringConstructor;
+                };
+            }>, {
+                selectedValue: import('vue').WritableComputedRef<string | number | Record<string, any> | unknown[] | undefined, string | number | Record<string, any> | unknown[] | undefined>;
+                hasError: import('vue').ComputedRef<boolean>;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | ObjectConstructor | NumberConstructor | ArrayConstructor)[];
+                };
+                optionLabel: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                optionValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                errorMessage: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {
+                optionLabel: string;
+                optionValue: string;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         HDocumentationPanel: import('vue').DefineComponent<{}, {
             document: import('vue').Ref<string, string>;
@@ -1516,8 +1614,58 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 count: number;
                 defaultOpend: boolean;
             }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-            HSelect: any;
-            HTextField: any;
+            HSelect: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | ObjectConstructor | NumberConstructor | ArrayConstructor)[];
+                };
+                optionLabel: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                optionValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                errorMessage: {
+                    type: StringConstructor;
+                };
+            }>, {
+                selectedValue: import('vue').WritableComputedRef<string | number | Record<string, any> | unknown[] | undefined, string | number | Record<string, any> | unknown[] | undefined>;
+                hasError: import('vue').ComputedRef<boolean>;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | ObjectConstructor | NumberConstructor | ArrayConstructor)[];
+                };
+                optionLabel: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                optionValue: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                errorMessage: {
+                    type: StringConstructor;
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {
+                optionLabel: string;
+                optionValue: string;
+            }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
+            HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | NumberConstructor)[];
+                };
+            }>, {
+                text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | NumberConstructor)[];
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
             HFormSelect: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
                 modelValue: {
                     type: StringConstructor;
@@ -2659,7 +2807,19 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 count: number;
                 defaultOpend: boolean;
             }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-            HTextField: any;
+            HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | NumberConstructor)[];
+                };
+            }>, {
+                text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | NumberConstructor)[];
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         HTaskListenerPanel: import('vue').DefineComponent<{}, {
             count: import('vue').ComputedRef<number>;
@@ -3014,9 +3174,33 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 }>> & Readonly<{}>, {
                     modelValue: import('@herodotus-cloud/bpmn-apis').GroupEntity[];
                 }, {}, {
-                    HTextField: any;
+                    HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                        modelValue: {
+                            type: (StringConstructor | NumberConstructor)[];
+                        };
+                    }>, {
+                        text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+                    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                        modelValue: {
+                            type: (StringConstructor | NumberConstructor)[];
+                        };
+                    }>> & Readonly<{
+                        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                    }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
                 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-                HTextField: any;
+                HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: (StringConstructor | NumberConstructor)[];
+                    };
+                }>, {
+                    text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: (StringConstructor | NumberConstructor)[];
+                    };
+                }>> & Readonly<{
+                    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
             }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
             HCandidateUserTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
                 modelValue: {
@@ -3127,7 +3311,19 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     confirmLabel: string;
                     confirmDisable: boolean;
                 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-                HTextField: any;
+                HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: (StringConstructor | NumberConstructor)[];
+                    };
+                }>, {
+                    text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+                }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                    modelValue: {
+                        type: (StringConstructor | NumberConstructor)[];
+                    };
+                }>> & Readonly<{
+                    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
                 HUserSelectTable: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
                     modelValue: {
                         type: PropType<Array<import('@herodotus-cloud/bpmn-apis').UserEntity>>;
@@ -3194,7 +3390,19 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     modelValue: import('@herodotus-cloud/bpmn-apis').UserEntity[];
                     selection: "single" | "multiple";
                 }, {}, {
-                    HTextField: any;
+                    HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                        modelValue: {
+                            type: (StringConstructor | NumberConstructor)[];
+                        };
+                    }>, {
+                        text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+                    }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                        modelValue: {
+                            type: (StringConstructor | NumberConstructor)[];
+                        };
+                    }>> & Readonly<{
+                        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+                    }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
                 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
             }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
             HExpansionItem: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -3255,7 +3463,19 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                 count: number;
                 defaultOpend: boolean;
             }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-            HTextField: any;
+            HTextField: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | NumberConstructor)[];
+                };
+            }>, {
+                text: import('vue').WritableComputedRef<string | number | undefined, string | number | undefined>;
+            }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<{
+                modelValue: {
+                    type: (StringConstructor | NumberConstructor)[];
+                };
+            }>> & Readonly<{
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+            }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;

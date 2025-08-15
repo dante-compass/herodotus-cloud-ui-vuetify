@@ -1,5 +1,13 @@
 # @herodotus-cloud/components
 
+## 2.0.3
+
+### Patch Changes
+
+- [优化] 优化前端 vite.config.mts 和 tsconfig.json 配置，采用更合理的定义配置，同时去除无用或过时的配置内容
+- Updated dependencies
+  - @herodotus-cloud/core@2.0.3
+
 ## 2.0.2
 
 ### Patch Changes
