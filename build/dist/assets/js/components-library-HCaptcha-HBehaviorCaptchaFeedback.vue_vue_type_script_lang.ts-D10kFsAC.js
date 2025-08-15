@@ -1,0 +1,1 @@
+import{d as e}from"./npm-@vue-runtime-core-BvZCgQCM.js";const a=e({name:"HBehaviorCaptchaFeedback",emits:["reset"],props:{canvasWidth:{type:Number,default:310},canvasHeight:{type:Number,default:155},loading:{type:Boolean,default:!1},success:{type:Boolean,default:!1},showMessage:{type:Boolean,default:!1},message:{type:String,default:""}}});export{a as _};
