@@ -101,12 +101,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     define: { 'process.env': env },
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
-        '#': fileURLToPath(new URL('./types', import.meta.url)),
-        // 解决 vue-i18n : No known conditions for "." entry in "@intlify/shared" package 错误
-        // "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js", // 修改前
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js', // 修改后
+        '@': fileURLToPath(new URL('src', import.meta.url)),
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js',
       },
+      extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
     },
     server: {
       port: 3000,
