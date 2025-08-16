@@ -110,6 +110,12 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     },
     optimizeDeps: {
       exclude: ['vue-router'],
+      include: [
+        'vconsole',
+        'vite-plugin-node-polyfills/shims/buffer',
+        'vite-plugin-node-polyfills/shims/global',
+        'vite-plugin-node-polyfills/shims/process',
+      ],
     },
     define: { 'process.env': env },
     resolve: {
