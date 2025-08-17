@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 2.2.0
+
+### Minor Changes
+
+- [优化] 优化 Gitee ISSUE Template
+
 ## 2.1.0
 
 ### Minor Changes

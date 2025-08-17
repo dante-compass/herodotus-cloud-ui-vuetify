@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-engine
 
+## 2.2.0
+
+### Minor Changes
+
+- [优化] 优化 Gitee ISSUE Template
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-apis@2.2.0
+
 ## 2.1.0
 
 ### Minor Changes
