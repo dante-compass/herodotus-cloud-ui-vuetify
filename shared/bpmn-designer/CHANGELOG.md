@@ -1,5 +1,16 @@
 # @herodotus-cloud/bpmn-designer
 
+## 2.2.2
+
+### Patch Changes
+
+- [优化] 优化前端应用 Vite 配置，调整自动生成配置文件位置，优化自动导入配置
+- Updated dependencies
+  - @herodotus-cloud/components@2.2.2
+  - @herodotus-cloud/bpmn-apis@2.2.2
+  - @herodotus-cloud/form-apis@2.2.2
+  - @herodotus-cloud/core@2.2.2
+
 ## 2.2.1
 
 ### Patch Changes
