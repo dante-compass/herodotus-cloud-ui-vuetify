@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/core",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "",
   "keywords": [],
   "author": "",
@@ -25,7 +25,7 @@
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
-    "./dist/assets/style.css": "./dist/assets/css/core.css",
+    "./style.css": "./dist/assets/css/core.css",
     "./package.json": "./package.json"
   },
   "publishConfig": {

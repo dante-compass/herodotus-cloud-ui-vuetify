@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/form-designer",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "",
   "keywords": [],
   "author": "",
@@ -25,7 +25,7 @@
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
-    "./dist/assets/style.css": "./dist/assets/css/form-designer.css",
+    "./style.css": "./dist/assets/css/form-designer.css",
     "./package.json": "./package.json"
   },
   "publishConfig": {

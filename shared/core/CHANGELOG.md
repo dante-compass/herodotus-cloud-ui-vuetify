@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 2.2.1
+
+### Patch Changes
+
+- [优化] 优化前端模块 package.json 导出配置，简化模块样式引入路径长途
+
 ## 2.2.0
 
 ### Minor Changes

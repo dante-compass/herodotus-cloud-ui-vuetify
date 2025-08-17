@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 2.2.1
+
+### Patch Changes
+
+- [优化] 优化前端模块 package.json 导出配置，简化模块样式引入路径长途
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.1
+  - @herodotus-cloud/components@2.2.1
+  - @herodotus-cloud/form-apis@2.2.1
+  - @herodotus-cloud/core@2.2.1
+
 ## 2.2.0
 
 ### Minor Changes
