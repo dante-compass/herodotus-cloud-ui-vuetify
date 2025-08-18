@@ -20,8 +20,8 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             tag: string;
             attrs: Record<string, any>;
             models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
-            children?: /*elided*/ any[];
-            text?: string;
+            children?: /*elided*/ any[] | undefined;
+            text?: string | undefined;
         };
     }[];
     onClose: () => void;
@@ -31,7 +31,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: boolean;
     };
 }>> & Readonly<{
-    "onUpdate:modelValue"?: (...args: any[]) => any;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }>, {
     modelValue: boolean;
 }, {}, {
@@ -60,7 +60,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
             required: true;
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: (...args: any[]) => any;
+        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     }>, {
         modelValue: Record<string, any>;
     }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;

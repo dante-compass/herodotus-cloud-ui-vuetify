@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 2.2.4
+
+### Patch Changes
+
+- [新增] 前端工程新增主题切换特效
+
 ## 2.2.3
 
 ### Patch Changes

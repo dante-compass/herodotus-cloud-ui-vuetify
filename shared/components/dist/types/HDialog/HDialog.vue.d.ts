@@ -97,11 +97,11 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: boolean;
     };
 }>> & Readonly<{
-    "onUpdate:modelValue"?: (...args: any[]) => any;
-    "onUpdate:loading"?: (...args: any[]) => any;
-    onConfirm?: (...args: any[]) => any;
-    onCancel?: (...args: any[]) => any;
-    onClose?: (...args: any[]) => any;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    "onUpdate:loading"?: ((...args: any[]) => any) | undefined;
+    onConfirm?: ((...args: any[]) => any) | undefined;
+    onCancel?: ((...args: any[]) => any) | undefined;
+    onClose?: ((...args: any[]) => any) | undefined;
 }>, {
     loading: boolean;
     title: string;

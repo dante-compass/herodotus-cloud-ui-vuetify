@@ -1,5 +1,13 @@
 # @herodotus-cloud/form-engine
 
+## 2.2.4
+
+### Patch Changes
+
+- [新增] 前端工程新增主题切换特效
+- Updated dependencies
+  - @herodotus-cloud/form-apis@2.2.4
+
 ## 2.2.3
 
 ### Patch Changes

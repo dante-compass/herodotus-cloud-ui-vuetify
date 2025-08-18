@@ -113,9 +113,9 @@ declare const _default: import('vue').DefineComponent<{}, {
             default: boolean;
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: (...args: any[]) => any;
-        onSave?: (...args: any[]) => any;
-        "onUpdate:open"?: (...args: any[]) => any;
+        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+        onSave?: ((...args: any[]) => any) | undefined;
+        "onUpdate:open"?: ((...args: any[]) => any) | undefined;
     }>, {
         modelValue: boolean;
     }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;

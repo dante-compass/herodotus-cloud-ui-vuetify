@@ -21,7 +21,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             default: string;
         };
         modelValue: {
-            type: import('vue').PropType<string | undefined>;
+            type: import('vue').PropType<string>;
         };
     }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
         "update:modelValue": (value: string) => any;
@@ -34,10 +34,10 @@ declare const _default: import('vue').DefineComponent<{}, {
             default: string;
         };
         modelValue: {
-            type: import('vue').PropType<string | undefined>;
+            type: import('vue').PropType<string>;
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: (value: string) => any;
+        "onUpdate:modelValue"?: ((value: string) => any) | undefined;
     }>, {
         title: string;
     }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;
@@ -55,7 +55,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             default: string;
         };
         modelValue: {
-            type: import('vue').PropType<string | undefined>;
+            type: import('vue').PropType<string>;
         };
     }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
         "update:modelValue": (value: string) => any;
@@ -73,10 +73,10 @@ declare const _default: import('vue').DefineComponent<{}, {
             default: string;
         };
         modelValue: {
-            type: import('vue').PropType<string | undefined>;
+            type: import('vue').PropType<string>;
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: (value: string) => any;
+        "onUpdate:modelValue"?: ((value: string) => any) | undefined;
     }>, {
         label: string;
         title: string;
@@ -151,7 +151,7 @@ declare const _default: import('vue').DefineComponent<{}, {
             type: (StringConstructor | NumberConstructor)[];
         };
     }>> & Readonly<{
-        "onUpdate:modelValue"?: (...args: any[]) => any;
+        "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1990,6 +1990,66 @@ function useSystemTheme() {
   const onThemeChange = () => {
     systemTheme.value = media.matches ? ThemeModeEnum.DARK : ThemeModeEnum.LIGHT;
   };
+  const hasScrollbar = (el) => {
+    if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
+    const style = window.getComputedStyle(el);
+    return style.overflowY === "scroll" || style.overflowY === "auto" && el.scrollHeight > el.clientHeight;
+  };
+  const themeTransition = () => {
+    const x = performance.now();
+    if (performance.now() - x > 10) return;
+    const el = document.querySelector("[data-v-app]");
+    const children = el.querySelectorAll("*");
+    children.forEach((el2) => {
+      if (hasScrollbar(el2)) {
+        el2.dataset.scrollX = String(el2.scrollLeft);
+        el2.dataset.scrollY = String(el2.scrollTop);
+      }
+    });
+    const copy = el.cloneNode(true);
+    copy.classList.add("app-copy");
+    const rect = el.getBoundingClientRect();
+    copy.style.top = rect.top + "px";
+    copy.style.left = rect.left + "px";
+    copy.style.width = rect.width + "px";
+    copy.style.height = rect.height + "px";
+    const targetEl = document.activeElement;
+    const targetRect = targetEl.getBoundingClientRect();
+    const left = targetRect.left + targetRect.width / 2 + window.scrollX;
+    const top = targetRect.top + targetRect.height / 2 + window.scrollY;
+    el.style.setProperty("--clip-pos", `${left}px ${top}px`);
+    el.style.removeProperty("--clip-size");
+    nextTick(() => {
+      el.classList.add("app-transition");
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.setProperty(
+            "--clip-size",
+            Math.hypot(window.innerWidth, window.innerHeight) + "px"
+          );
+        });
+      });
+    });
+    document.body.append(copy);
+    copy.querySelectorAll("[data-scroll-x], [data-scroll-y]").forEach(
+      (el2) => {
+        el2.scrollLeft = Number(el2.dataset.scrollX);
+        el2.scrollTop = Number(el2.dataset.scrollY);
+      }
+    );
+    function onTransitionend(e) {
+      if (e.target === e.currentTarget) {
+        copy.remove();
+        el.removeEventListener("transitionend", onTransitionend);
+        el.removeEventListener("transitioncancel", onTransitionend);
+        el.classList.remove("app-transition");
+        el.style.removeProperty("--clip-size");
+        el.style.removeProperty("--clip-pos");
+      }
+    }
+    el.addEventListener("transitionend", onTransitionend);
+    el.addEventListener("transitioncancel", onTransitionend);
+  };
   watch(
     () => settings.theme.mode,
     (val) => {
@@ -2006,6 +2066,7 @@ function useSystemTheme() {
   const theme = computed(() => {
     return settings.isSystem ? systemTheme.value : settings.theme.mode;
   });
+  watch(theme, themeTransition);
   return {
     theme
   };

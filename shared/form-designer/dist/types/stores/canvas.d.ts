@@ -23,8 +23,8 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 tag: string;
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
-                children?: /*elided*/ any[];
-                text?: string;
+                children?: /*elided*/ any[] | undefined;
+                text?: string | undefined;
             };
         }[];
         sheet: {
@@ -34,7 +34,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                     label: string;
                     value: boolean;
                 }[];
-            };
+            } | undefined;
         };
         selectedElement: {
             id: string;
@@ -49,8 +49,8 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 tag: string;
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
-                children?: /*elided*/ any[];
-                text?: string;
+                children?: /*elided*/ any[] | undefined;
+                text?: string | undefined;
             };
         };
         id: string;
@@ -80,8 +80,8 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 tag: string;
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
-                children?: /*elided*/ any[];
-                text?: string;
+                children?: /*elided*/ any[] | undefined;
+                text?: string | undefined;
             };
         }[];
         sheet: {
@@ -91,7 +91,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                     label: string;
                     value: boolean;
                 }[];
-            };
+            } | undefined;
         };
         selectedElement: {
             id: string;
@@ -106,8 +106,8 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 tag: string;
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
-                children?: /*elided*/ any[];
-                text?: string;
+                children?: /*elided*/ any[] | undefined;
+                text?: string | undefined;
             };
         };
         id: string;
@@ -137,8 +137,8 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 tag: string;
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
-                children?: /*elided*/ any[];
-                text?: string;
+                children?: /*elided*/ any[] | undefined;
+                text?: string | undefined;
             };
         }[];
         sheet: {
@@ -148,7 +148,7 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                     label: string;
                     value: boolean;
                 }[];
-            };
+            } | undefined;
         };
         selectedElement: {
             id: string;
@@ -163,8 +163,8 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
                 tag: string;
                 attrs: Record<string, any>;
                 models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
-                children?: /*elided*/ any[];
-                text?: string;
+                children?: /*elided*/ any[] | undefined;
+                text?: string | undefined;
             };
         };
         id: string;
@@ -191,8 +191,8 @@ export declare const useFormCanvasStore: import('pinia').StoreDefinition<"FormDe
             tag: string;
             attrs: Record<string, any>;
             models: Record<string, import('@herodotus-cloud/form-apis').VModel>;
-            children?: /*elided*/ any[];
-            text?: string;
+            children?: /*elided*/ any[] | undefined;
+            text?: string | undefined;
         };
     }[];
     currentSchema(): Schema;

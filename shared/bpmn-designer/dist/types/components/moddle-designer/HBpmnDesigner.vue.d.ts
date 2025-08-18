@@ -25,7 +25,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: string;
     };
 }>> & Readonly<{
-    onClose?: (...args: any[]) => any;
+    onClose?: ((...args: any[]) => any) | undefined;
 }>, {
     height: string;
 }, {}, {
@@ -248,7 +248,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
                     default: string;
                 };
             }>> & Readonly<{
-                "onUpdate:modelValue"?: (...args: any[]) => any;
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
             }>, {
                 title: string;
                 maxWidth: string;

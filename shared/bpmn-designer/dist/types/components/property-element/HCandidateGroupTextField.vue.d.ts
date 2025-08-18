@@ -7,7 +7,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: string;
     };
     modelValue: {
-        type: import('vue').PropType<string | undefined>;
+        type: import('vue').PropType<string>;
     };
 }>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     "update:modelValue": (value: string) => any;
@@ -20,10 +20,10 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         default: string;
     };
     modelValue: {
-        type: import('vue').PropType<string | undefined>;
+        type: import('vue').PropType<string>;
     };
 }>> & Readonly<{
-    "onUpdate:modelValue"?: (value: string) => any;
+    "onUpdate:modelValue"?: ((value: string) => any) | undefined;
 }>, {
     title: string;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, HTMLDivElement>;

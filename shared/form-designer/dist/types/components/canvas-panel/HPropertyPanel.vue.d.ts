@@ -51,7 +51,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                     type: (StringConstructor | NumberConstructor)[];
                 };
             }>> & Readonly<{
-                "onUpdate:modelValue"?: (...args: any[]) => any;
+                "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
             }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
         }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
@@ -131,7 +131,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 default: string;
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {
             color: string;
             modelValue: string | number | boolean;
@@ -149,7 +149,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 type: (StringConstructor | NumberConstructor)[];
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     PASSWORD: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -220,7 +220,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 default: string;
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {
             color: string;
             modelValue: string | number | boolean;
@@ -238,7 +238,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 type: (StringConstructor | NumberConstructor)[];
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     TEXT_AREA: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -309,7 +309,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 default: string;
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {
             color: string;
             modelValue: string | number | boolean;
@@ -327,7 +327,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 type: (StringConstructor | NumberConstructor)[];
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     TEXT_FIELD: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -398,7 +398,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 default: string;
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {
             color: string;
             modelValue: string | number | boolean;
@@ -416,7 +416,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 type: (StringConstructor | NumberConstructor)[];
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     TIME_PICKER: import('vue').DefineComponent<import('vue').ExtractPropTypes<{
@@ -487,7 +487,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 default: string;
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {
             color: string;
             modelValue: string | number | boolean;
@@ -505,7 +505,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 type: (StringConstructor | NumberConstructor)[];
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;

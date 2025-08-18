@@ -44,7 +44,7 @@ declare const _default: import('vue').DefineComponent<{}, {}, {}, {}, {}, import
                 type: (StringConstructor | NumberConstructor)[];
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
     }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
 }, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;

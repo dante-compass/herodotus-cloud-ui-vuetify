@@ -217,7 +217,7 @@ declare const _default: import('vue').DefineComponent<{}, void, {}, {}, {}, impo
                 default: string;
             };
         }>> & Readonly<{
-            "onUpdate:modelValue"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
         }>, {
             title: string;
             maxWidth: string;

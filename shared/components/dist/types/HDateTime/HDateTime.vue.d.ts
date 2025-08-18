@@ -14,7 +14,7 @@ declare const _default: import('vue').DefineComponent<import('vue').ExtractPropT
         required: true;
     };
 }>> & Readonly<{
-    "onUpdate:modelValue"?: (...args: any[]) => any;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }>, {
     modelValue: string;
 }, {}, {}, {

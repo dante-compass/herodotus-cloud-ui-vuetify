@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/framework-kernel",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "",
   "keywords": [],
   "author": "",
@@ -25,6 +25,7 @@
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
+    "./style.css": "./dist/assets/css/framework-kernel.css",
     "./package.json": "./package.json"
   },
   "publishConfig": {
