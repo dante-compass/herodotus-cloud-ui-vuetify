@@ -1,5 +1,13 @@
 # @herodotus-cloud/apis
 
+## 2.2.3
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @herodotus-cloud/core@2.2.3
+
 ## 2.2.2
 
 ### Patch Changes

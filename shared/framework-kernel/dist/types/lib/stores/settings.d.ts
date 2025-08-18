@@ -3,6 +3,7 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
     isDark: (state: {
         theme: {
             mode: ThemeModeEnum;
+            isMixed: boolean;
             primary: string;
         };
         layout: LayoutModeEnum;
@@ -22,6 +23,7 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
     isLight: (state: {
         theme: {
             mode: ThemeModeEnum;
+            isMixed: boolean;
             primary: string;
         };
         layout: LayoutModeEnum;
@@ -41,6 +43,7 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
     isSystem: (state: {
         theme: {
             mode: ThemeModeEnum;
+            isMixed: boolean;
             primary: string;
         };
         layout: LayoutModeEnum;
@@ -60,6 +63,7 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
     isDefaultLayout: (state: {
         theme: {
             mode: ThemeModeEnum;
+            isMixed: boolean;
             primary: string;
         };
         layout: LayoutModeEnum;
@@ -79,6 +83,7 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
     isClassicLayout: (state: {
         theme: {
             mode: ThemeModeEnum;
+            isMixed: boolean;
             primary: string;
         };
         layout: LayoutModeEnum;

@@ -2,6 +2,7 @@ import { ThemeModeEnum, LayoutModeEnum } from '../enums';
 
 export interface Theme {
   mode: ThemeModeEnum;
+  isMixed: boolean;
   primary: string;
 }
 
