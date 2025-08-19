@@ -5,7 +5,12 @@ import { shallowRef, ref } from 'vue';
 
 import { SecurityApiResources } from '../api';
 
-export default function useDeviceAuthorize(deviceCode: string, clientId: '', clientSecret: '') {
+export default function useDeviceAuthorize(
+  deviceCode: string,
+  clientId = '',
+  clientSecret = '',
+  scope = '',
+) {
   const handler = shallowRef(0);
   const interval = shallowRef(5);
   const isSuccess = shallowRef(false);
@@ -42,7 +47,7 @@ export default function useDeviceAuthorize(deviceCode: string, clientId: '', cli
   const process = () => {
     SecurityApiResources.getInstance()
       .oauth2()
-      .deviceCodeFlow(deviceCode, clientId, clientSecret)
+      .deviceCodeFlow(deviceCode, clientId, clientSecret, scope)
       .then((response) => {
         message('Authorization successful', true);
         clear();

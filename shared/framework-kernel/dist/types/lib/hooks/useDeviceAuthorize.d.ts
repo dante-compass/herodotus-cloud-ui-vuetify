@@ -1,6 +1,6 @@
 import { Ref } from 'vue';
 import { PingResponse } from '../../declarations';
-export default function useDeviceAuthorize(deviceCode: string, clientId: '', clientSecret: ''): {
+export default function useDeviceAuthorize(deviceCode: string, clientId?: string, clientSecret?: string, scope?: string): {
     pullingResponse: Ref<PingResponse[], PingResponse[]>;
     successResponse: import('vue').ShallowRef<{}, {}>;
     isFailed: import('vue').ShallowRef<boolean, boolean>;
