@@ -1502,9 +1502,9 @@ function useDeviceAuthorize(clientId, clientSecret, deviceCode) {
       message("Authorization successful", true);
       clear();
       isSuccess.value = true;
-      successResponse.value = response.data;
+      successResponse.value = response;
     }).catch((error) => {
-      const data = error.response.data;
+      const data = error.response;
       pulling(data.error);
     });
   };
