@@ -679,8 +679,8 @@ packages:
   '@bpmn-io/properties-panel@3.32.0':
     resolution: {integrity: sha512-CJ/KLC3N7FZPDy0EQGioHvwWx9y4g7N0jP312Xp5d8QKxHK61Ub+kOrZMLPqRHwi/+Slhe4b/7EvyUlgNHqxbQ==}
 
-  '@bufbuild/protobuf@2.6.3':
-    resolution: {integrity: sha512-w/gJKME9mYN7ZoUAmSMAWXk4hkVpxRKvEJCb3dV5g9wwWdxTJJ0ayOJAVcNxtdqaxDyFuC0uz4RSGVacJ030PQ==}
+  '@bufbuild/protobuf@2.7.0':
+    resolution: {integrity: sha512-qn6tAIZEw5i/wiESBF4nQxZkl86aY4KoO0IkUa2Lh+rya64oTOdJQFlZuMwI1Qz9VBJQrQC4QlSA2DNek5gCOA==}
 
   '@camunda/feel-builtins@0.2.0':
     resolution: {integrity: sha512-Jusm8x3Onqze9E5Y0lGGdPj66bnFKLYNwDz+uG4otsEXgSL0FpF+koGHK48LkF9Jqo67KaP1y3zr2y/HIWRePw==}
@@ -5935,7 +5935,7 @@ snapshots:
       min-dash: 4.2.3
       min-dom: 4.2.1
 
-  '@bufbuild/protobuf@2.6.3': {}
+  '@bufbuild/protobuf@2.7.0': {}
 
   '@camunda/feel-builtins@0.2.0': {}
 
@@ -10385,7 +10385,7 @@ snapshots:
 
   sass-embedded@1.90.0:
     dependencies:
-      '@bufbuild/protobuf': 2.6.3
+      '@bufbuild/protobuf': 2.7.0
       buffer-builder: 0.2.0
       colorjs.io: 0.5.2
       immutable: 5.1.3

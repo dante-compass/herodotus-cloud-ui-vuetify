@@ -1466,7 +1466,7 @@ function useEditFinish() {
     onFinish
   };
 }
-function useDeviceAuthorize(clientId, clientSecret, deviceCode) {
+function useDeviceAuthorize(deviceCode, clientId, clientSecret) {
   const handler = shallowRef(0);
   const interval = shallowRef(5);
   const isSuccess = shallowRef(false);
@@ -1498,7 +1498,7 @@ function useDeviceAuthorize(clientId, clientSecret, deviceCode) {
     }
   };
   const process = () => {
-    SecurityApiResources.getInstance().oauth2().deviceCodeFlow(clientId.value, clientSecret.value, deviceCode.value).then((response) => {
+    SecurityApiResources.getInstance().oauth2().deviceCodeFlow(deviceCode, clientId, clientSecret).then((response) => {
       message("Authorization successful", true);
       clear();
       isSuccess.value = true;
