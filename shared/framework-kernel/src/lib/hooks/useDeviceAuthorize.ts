@@ -1,4 +1,4 @@
-import type { ShallowRef, Ref } from 'vue';
+import type { Ref } from 'vue';
 import type { PingResponse } from '@/declarations';
 
 import { shallowRef, ref } from 'vue';

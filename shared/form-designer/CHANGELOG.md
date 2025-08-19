@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-designer
 
+## 2.2.10
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.10
+  - @herodotus-cloud/components@2.2.10
+  - @herodotus-cloud/form-apis@2.2.10
+  - @herodotus-cloud/core@2.2.10
+
 ## 2.2.9
 
 ### Patch Changes
