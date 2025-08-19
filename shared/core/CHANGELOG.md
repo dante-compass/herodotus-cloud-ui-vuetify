@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 2.2.8
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+
 ## 2.2.7
 
 ### Patch Changes

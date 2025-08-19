@@ -2,7 +2,7 @@ import { useRoute } from "vue-router";
 import { defineStore } from "pinia";
 import { lodash, Swal, AuthorizationTokenEnum, Base64, ContentTypeEnum, AuthorizationGrantTypeEnum, BuildInScopeEnum, ClientAuthenticationMethodEnum, Service, SM2Utils, SM4Utils, moment } from "@herodotus-cloud/core";
 import { jwtDecode } from "jwt-decode";
-import { nextTick, shallowRef, watch, computed } from "vue";
+import { nextTick, shallowRef, ref, watch, computed } from "vue";
 import "pinia-plugin-persistedstate";
 var LayoutModeEnum = /* @__PURE__ */ ((LayoutModeEnum2) => {
   LayoutModeEnum2["DEFAULT"] = "defaults";
@@ -1472,7 +1472,7 @@ function useDeviceAuthorize(clientId, clientSecret, deviceCode) {
   const isSuccess = shallowRef(false);
   const isFailed = shallowRef(false);
   const successResponse = shallowRef({});
-  const pullingResponse = shallowRef([]);
+  const pullingResponse = ref([]);
   const message = (text, isSuccess2 = false) => {
     const id = pullingResponse.value.length + 1;
     if (!isSuccess2) {
@@ -1524,7 +1524,9 @@ function useDeviceAuthorize(clientId, clientSecret, deviceCode) {
     successResponse,
     isFailed,
     isSuccess,
-    schedule
+    schedule,
+    clear,
+    slowDown
   };
 }
 function useQuasarMenu() {

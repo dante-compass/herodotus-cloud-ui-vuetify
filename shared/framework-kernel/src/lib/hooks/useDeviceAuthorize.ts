@@ -1,7 +1,7 @@
-import type { ShallowRef } from 'vue';
+import type { ShallowRef, Ref } from 'vue';
 import type { PingResponse } from '@/declarations';
 
-import { shallowRef } from 'vue';
+import { shallowRef, ref } from 'vue';
 
 import { SecurityApiResources } from '../api';
 
@@ -15,7 +15,7 @@ export default function useDeviceAuthorize(
   const isSuccess = shallowRef(false);
   const isFailed = shallowRef(false);
   const successResponse = shallowRef({});
-  const pullingResponse = shallowRef([]) as ShallowRef<Array<PingResponse>>;
+  const pullingResponse = ref([]) as Ref<Array<PingResponse>>;
 
   const message = (text: string, isSuccess = false) => {
     const id = pullingResponse.value.length + 1;
@@ -79,5 +79,7 @@ export default function useDeviceAuthorize(
     isFailed,
     isSuccess,
     schedule,
+    clear,
+    slowDown,
   };
 }
