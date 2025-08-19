@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 2.2.6
+
+### Patch Changes
+
+- 升级依赖
+
 ## 2.2.5
 
 ### Patch Changes
