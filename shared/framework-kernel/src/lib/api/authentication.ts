@@ -296,6 +296,7 @@ export class OAuth2ApiService {
       }),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
+        
       },
     );
   }

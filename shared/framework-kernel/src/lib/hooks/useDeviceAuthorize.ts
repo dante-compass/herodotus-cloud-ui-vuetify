@@ -55,8 +55,7 @@ export default function useDeviceAuthorize(
         successResponse.value = response;
       })
       .catch((error) => {
-        const data = error.response;
-        pulling(data.error);
+        pulling(error);
       });
   };
 

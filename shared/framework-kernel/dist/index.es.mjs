@@ -1504,8 +1504,7 @@ function useDeviceAuthorize(deviceCode, clientId, clientSecret, scope = "") {
       isSuccess.value = true;
       successResponse.value = response;
     }).catch((error) => {
-      const data = error.response;
-      pulling(data.error);
+      pulling(error);
     });
   };
   const schedule = () => {
