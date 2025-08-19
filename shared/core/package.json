@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/core",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "",
   "keywords": [],
   "author": "",
@@ -32,7 +32,7 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "@vueuse/integrations": "^13.6.0",
+    "@vueuse/integrations": "^13.7.0",
     "axios": "^1.11.0",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",

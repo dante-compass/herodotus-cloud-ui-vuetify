@@ -12,7 +12,11 @@ import {
   ContentTypeEnum,
   AuthorizationGrantTypeEnum,
   AuthorizationTokenEnum,
+  BuildInScopeEnum,
+  ClientAuthenticationMethodEnum,
 } from '@herodotus-cloud/core';
+
+import { SocialSourceEnum } from '@/declarations';
 
 export class OAuth2ApiService {
   // 静态私有实例引用
@@ -310,7 +314,7 @@ export class OAuth2ApiService {
   public deviceAuthorizationFlow(
     clientId = '',
     clientSecret = '',
-    scope = 'mail',
+    scope = BuildInScopeEnum.EMAIL,
   ): Promise<AxiosHttpResult<DeviceAuthorizationResponse>> {
     return this.config
       .getHttp()
@@ -334,7 +338,7 @@ export class OAuth2ApiService {
       this.getOAuth2TokenAddress(),
       this.createOAuth2Data(
         AuthorizationGrantTypeEnum.SOCIAL_CREDENTIALS,
-        { mobile, code, source: 'SMS' },
+        { mobile, code, source: SocialSourceEnum.SMS },
         oidc,
       ),
       {
@@ -407,7 +411,7 @@ export class OAuth2ApiService {
       redirect_uris: ['http://192.168.101.10:3000'],
       client_name: clientName,
       // client_secret: '123456',
-      scope: 'openid email profile',
+      scope: [BuildInScopeEnum.OPENID, BuildInScopeEnum.EMAIL, BuildInScopeEnum.PROFILE].join(' '),
       // 如果 response_types 包含 code 则会添加 authorization_code 授权模式
       // token 是 OAuth2.0 规范中隐式模式的值，但是在 OAuth2.1 中隐式模式被取消。目前临时使用一下
       // 可以考虑使用 id_token
@@ -417,7 +421,7 @@ export class OAuth2ApiService {
       //   "id_token"             // 允许但不推荐：纯 OIDC 流程（无访问令牌）
       // ],
       response_types: ['token'],
-      token_endpoint_auth_method: 'client_secret_post',
+      token_endpoint_auth_method: ClientAuthenticationMethodEnum.CLIENT_SECRET_POST,
     });
   }
 }

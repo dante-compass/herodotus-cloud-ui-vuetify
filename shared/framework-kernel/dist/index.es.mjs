@@ -1,6 +1,6 @@
 import { useRoute } from "vue-router";
 import { defineStore } from "pinia";
-import { lodash, Swal, AuthorizationTokenEnum, Base64, ContentTypeEnum, AuthorizationGrantTypeEnum, Service, SM2Utils, SM4Utils, moment } from "@herodotus-cloud/core";
+import { lodash, Swal, AuthorizationTokenEnum, Base64, ContentTypeEnum, AuthorizationGrantTypeEnum, BuildInScopeEnum, ClientAuthenticationMethodEnum, Service, SM2Utils, SM4Utils, moment } from "@herodotus-cloud/core";
 import { jwtDecode } from "jwt-decode";
 import { nextTick, shallowRef, watch, computed } from "vue";
 import "pinia-plugin-persistedstate";
@@ -32,50 +32,50 @@ var CaptchaCategoryEnum = /* @__PURE__ */ ((CaptchaCategoryEnum2) => {
   return CaptchaCategoryEnum2;
 })(CaptchaCategoryEnum || {});
 var SocialSourceEnum = /* @__PURE__ */ ((SocialSourceEnum2) => {
-  SocialSourceEnum2[SocialSourceEnum2["INSTITUTION"] = 0] = "INSTITUTION";
-  SocialSourceEnum2[SocialSourceEnum2["SMS"] = 1] = "SMS";
-  SocialSourceEnum2[SocialSourceEnum2["WXAPP"] = 2] = "WXAPP";
-  SocialSourceEnum2[SocialSourceEnum2["QQ"] = 3] = "QQ";
-  SocialSourceEnum2[SocialSourceEnum2["WEIBO"] = 4] = "WEIBO";
-  SocialSourceEnum2[SocialSourceEnum2["BAIDU"] = 5] = "BAIDU";
-  SocialSourceEnum2[SocialSourceEnum2["WECHAT_OPEN"] = 6] = "WECHAT_OPEN";
-  SocialSourceEnum2[SocialSourceEnum2["WECHAT_MP"] = 7] = "WECHAT_MP";
-  SocialSourceEnum2[SocialSourceEnum2["WECHAT_ENTERPRISE"] = 8] = "WECHAT_ENTERPRISE";
-  SocialSourceEnum2[SocialSourceEnum2["WECHAT_ENTERPRISE_WEB"] = 9] = "WECHAT_ENTERPRISE_WEB";
-  SocialSourceEnum2[SocialSourceEnum2["DINGTALK"] = 10] = "DINGTALK";
-  SocialSourceEnum2[SocialSourceEnum2["DINGTALK_ACCOUNT"] = 11] = "DINGTALK_ACCOUNT";
-  SocialSourceEnum2[SocialSourceEnum2["ALIYUN"] = 12] = "ALIYUN";
-  SocialSourceEnum2[SocialSourceEnum2["TAOBAO"] = 13] = "TAOBAO";
-  SocialSourceEnum2[SocialSourceEnum2["ALIPAY"] = 14] = "ALIPAY";
-  SocialSourceEnum2[SocialSourceEnum2["TEAMBITION"] = 15] = "TEAMBITION";
-  SocialSourceEnum2[SocialSourceEnum2["HUAWEI_V2"] = 16] = "HUAWEI_V2";
-  SocialSourceEnum2[SocialSourceEnum2["FEISHU"] = 17] = "FEISHU";
-  SocialSourceEnum2[SocialSourceEnum2["JD"] = 18] = "JD";
-  SocialSourceEnum2[SocialSourceEnum2["DOUYIN"] = 19] = "DOUYIN";
-  SocialSourceEnum2[SocialSourceEnum2["TOUTIAO"] = 20] = "TOUTIAO";
-  SocialSourceEnum2[SocialSourceEnum2["MI"] = 21] = "MI";
-  SocialSourceEnum2[SocialSourceEnum2["RENREN"] = 22] = "RENREN";
-  SocialSourceEnum2[SocialSourceEnum2["MEITUAN"] = 23] = "MEITUAN";
-  SocialSourceEnum2[SocialSourceEnum2["ELEME"] = 24] = "ELEME";
-  SocialSourceEnum2[SocialSourceEnum2["KUJIALE"] = 25] = "KUJIALE";
-  SocialSourceEnum2[SocialSourceEnum2["XMLY"] = 26] = "XMLY";
-  SocialSourceEnum2[SocialSourceEnum2["GITEE"] = 27] = "GITEE";
-  SocialSourceEnum2[SocialSourceEnum2["OSCHINA"] = 28] = "OSCHINA";
-  SocialSourceEnum2[SocialSourceEnum2["CSDN"] = 29] = "CSDN";
-  SocialSourceEnum2[SocialSourceEnum2["GITHUB"] = 30] = "GITHUB";
-  SocialSourceEnum2[SocialSourceEnum2["GITLAB"] = 31] = "GITLAB";
-  SocialSourceEnum2[SocialSourceEnum2["STACK_OVERFLOW"] = 32] = "STACK_OVERFLOW";
-  SocialSourceEnum2[SocialSourceEnum2["CODING"] = 33] = "CODING";
-  SocialSourceEnum2[SocialSourceEnum2["GOOGLE"] = 34] = "GOOGLE";
-  SocialSourceEnum2[SocialSourceEnum2["MICROSOFT"] = 35] = "MICROSOFT";
-  SocialSourceEnum2[SocialSourceEnum2["FACEBOOK"] = 36] = "FACEBOOK";
-  SocialSourceEnum2[SocialSourceEnum2["LINKEDIN"] = 37] = "LINKEDIN";
-  SocialSourceEnum2[SocialSourceEnum2["TWITTER"] = 38] = "TWITTER";
-  SocialSourceEnum2[SocialSourceEnum2["AMAZON"] = 39] = "AMAZON";
-  SocialSourceEnum2[SocialSourceEnum2["SLACK"] = 40] = "SLACK";
-  SocialSourceEnum2[SocialSourceEnum2["LINE"] = 41] = "LINE";
-  SocialSourceEnum2[SocialSourceEnum2["OKTA"] = 42] = "OKTA";
-  SocialSourceEnum2[SocialSourceEnum2["PINTEREST"] = 43] = "PINTEREST";
+  SocialSourceEnum2["INSTITUTION"] = "INSTITUTION";
+  SocialSourceEnum2["SMS"] = "SMS";
+  SocialSourceEnum2["WXAPP"] = "WXAPP";
+  SocialSourceEnum2["QQ"] = "QQ";
+  SocialSourceEnum2["WEIBO"] = "WEIBO";
+  SocialSourceEnum2["BAIDU"] = "BAIDU";
+  SocialSourceEnum2["WECHAT_OPEN"] = "WECHAT_OPEN";
+  SocialSourceEnum2["WECHAT_MP"] = "WECHAT_MP";
+  SocialSourceEnum2["WECHAT_ENTERPRISE"] = "WECHAT_ENTERPRISE";
+  SocialSourceEnum2["WECHAT_ENTERPRISE_WEB"] = "WECHAT_ENTERPRISE_WEB";
+  SocialSourceEnum2["DINGTALK"] = "DINGTALK";
+  SocialSourceEnum2["DINGTALK_ACCOUNT"] = "DINGTALK_ACCOUNT";
+  SocialSourceEnum2["ALIYUN"] = "ALIYUN";
+  SocialSourceEnum2["TAOBAO"] = "TAOBAO";
+  SocialSourceEnum2["ALIPAY"] = "ALIPAY";
+  SocialSourceEnum2["TEAMBITION"] = "TEAMBITION";
+  SocialSourceEnum2["HUAWEI_V2"] = "HUAWEI_V2";
+  SocialSourceEnum2["FEISHU"] = "FEISHU";
+  SocialSourceEnum2["JD"] = "JD";
+  SocialSourceEnum2["DOUYIN"] = "DOUYIN";
+  SocialSourceEnum2["TOUTIAO"] = "TOUTIAO";
+  SocialSourceEnum2["MI"] = "MI";
+  SocialSourceEnum2["RENREN"] = "RENREN";
+  SocialSourceEnum2["MEITUAN"] = "MEITUAN";
+  SocialSourceEnum2["ELEME"] = "ELEME";
+  SocialSourceEnum2["KUJIALE"] = "KUJIALE";
+  SocialSourceEnum2["XMLY"] = "XMLY";
+  SocialSourceEnum2["GITEE"] = "GITEE";
+  SocialSourceEnum2["OSCHINA"] = "OSCHINA";
+  SocialSourceEnum2["CSDN"] = "CSDN";
+  SocialSourceEnum2["GITHUB"] = "GITHUB";
+  SocialSourceEnum2["GITLAB"] = "GITLAB";
+  SocialSourceEnum2["STACK_OVERFLOW"] = "STACK_OVERFLOW";
+  SocialSourceEnum2["CODING"] = "CODING";
+  SocialSourceEnum2["GOOGLE"] = "GOOGLE";
+  SocialSourceEnum2["MICROSOFT"] = "MICROSOFT";
+  SocialSourceEnum2["FACEBOOK"] = "FACEBOOK";
+  SocialSourceEnum2["LINKEDIN"] = "LINKEDIN";
+  SocialSourceEnum2["TWITTER"] = "TWITTER";
+  SocialSourceEnum2["AMAZON"] = "AMAZON";
+  SocialSourceEnum2["SLACK"] = "SLACK";
+  SocialSourceEnum2["LINE"] = "LINE";
+  SocialSourceEnum2["OKTA"] = "OKTA";
+  SocialSourceEnum2["PINTEREST"] = "PINTEREST";
   return SocialSourceEnum2;
 })(SocialSourceEnum || {});
 const useApplicationStore = defineStore("Application", {
@@ -612,7 +612,7 @@ class OAuth2ApiService {
    * 用户需要在一个设备上输入设备码，然后在另一个设备上输入该设备码以完成授权。
    * @see https://datatracker.ietf.org/doc/html/rfc8628#section-3.1
    */
-  deviceAuthorizationFlow(clientId = "", clientSecret = "", scope = "mail") {
+  deviceAuthorizationFlow(clientId = "", clientSecret = "", scope = BuildInScopeEnum.EMAIL) {
     return this.config.getHttp().post(
       this.getOAuth2DeviceAuthorizationAddress(),
       this.createClientData(clientId, clientSecret, scope),
@@ -626,7 +626,7 @@ class OAuth2ApiService {
       this.getOAuth2TokenAddress(),
       this.createOAuth2Data(
         AuthorizationGrantTypeEnum.SOCIAL_CREDENTIALS,
-        { mobile, code, source: "SMS" },
+        { mobile, code, source: SocialSourceEnum.SMS },
         oidc
       ),
       {
@@ -682,7 +682,7 @@ class OAuth2ApiService {
       redirect_uris: ["http://192.168.101.10:3000"],
       client_name: clientName,
       // client_secret: '123456',
-      scope: "openid email profile",
+      scope: [BuildInScopeEnum.OPENID, BuildInScopeEnum.EMAIL, BuildInScopeEnum.PROFILE].join(" "),
       // 如果 response_types 包含 code 则会添加 authorization_code 授权模式
       // token 是 OAuth2.0 规范中隐式模式的值，但是在 OAuth2.1 中隐式模式被取消。目前临时使用一下
       // 可以考虑使用 id_token
@@ -692,7 +692,7 @@ class OAuth2ApiService {
       //   "id_token"             // 允许但不推荐：纯 OIDC 流程（无访问令牌）
       // ],
       response_types: ["token"],
-      token_endpoint_auth_method: "client_secret_post"
+      token_endpoint_auth_method: ClientAuthenticationMethodEnum.CLIENT_SECRET_POST
     });
   }
 }

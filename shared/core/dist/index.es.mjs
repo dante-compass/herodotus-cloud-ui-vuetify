@@ -53,6 +53,16 @@ var AuthorizationGrantTypeEnum = /* @__PURE__ */ ((AuthorizationGrantTypeEnum2) 
   AuthorizationGrantTypeEnum2["TOKEN_EXCHANGE"] = "urn:ietf:params:oauth:grant-type:token-exchange";
   return AuthorizationGrantTypeEnum2;
 })(AuthorizationGrantTypeEnum || {});
+var ClientAuthenticationMethodEnum = /* @__PURE__ */ ((ClientAuthenticationMethodEnum2) => {
+  ClientAuthenticationMethodEnum2["CLIENT_SECRET_BASIC"] = "client_secret_basic";
+  ClientAuthenticationMethodEnum2["CLIENT_SECRET_POST"] = "client_secret_post";
+  ClientAuthenticationMethodEnum2["CLIENT_SECRET_JWT"] = "client_secret_jwt";
+  ClientAuthenticationMethodEnum2["PRIVATE_KEY_JWT"] = "private_key_jwt";
+  ClientAuthenticationMethodEnum2["NONE"] = "none";
+  ClientAuthenticationMethodEnum2["TLS_CLIENT_AUTH"] = "tls_client_auth";
+  ClientAuthenticationMethodEnum2["SELF_SIGNED_TLS_CLIENT_AUTH"] = "self_signed_tls_client_auth";
+  return ClientAuthenticationMethodEnum2;
+})(ClientAuthenticationMethodEnum || {});
 var BuildInScopeEnum = /* @__PURE__ */ ((BuildInScopeEnum2) => {
   BuildInScopeEnum2["OPENID"] = "openid";
   BuildInScopeEnum2["EMAIL"] = "email";
@@ -1046,6 +1056,7 @@ export {
   Axios,
   Base642 as Base64,
   BuildInScopeEnum,
+  ClientAuthenticationMethodEnum,
   ContentTypeEnum,
   default3 as DayJs,
   HttpConfig,
