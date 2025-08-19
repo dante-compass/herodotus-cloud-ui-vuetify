@@ -1,4 +1,4 @@
-import type { Ref } from 'vue';
+import type { ShallowRef, Ref } from 'vue';
 import type { PingResponse } from '@/declarations';
 
 import { shallowRef, ref } from 'vue';
@@ -6,9 +6,9 @@ import { shallowRef, ref } from 'vue';
 import { SecurityApiResources } from '../api';
 
 export default function useDeviceAuthorize(
-  deviceCode: string,
-  clientId = '',
-  clientSecret = '',
+  deviceCode: ShallowRef<string>,
+  clientId: ShallowRef<string>,
+  clientSecret: ShallowRef<string>,
   scope = '',
 ) {
   const handler = shallowRef(0);
@@ -47,7 +47,7 @@ export default function useDeviceAuthorize(
   const process = () => {
     SecurityApiResources.getInstance()
       .oauth2()
-      .deviceCodeFlow(deviceCode, clientId, clientSecret, scope)
+      .deviceCodeFlow(deviceCode.value, clientId.value, clientSecret.value, scope)
       .then((response) => {
         message('Authorization successful', true);
         clear();
