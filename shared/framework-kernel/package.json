@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/framework-kernel",
-  "version": "1.7.24",
+  "version": "2.3.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -25,6 +25,7 @@
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
+    "./style.css": "./dist/assets/css/framework-kernel.css",
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -35,8 +36,8 @@
     "@herodotus-cloud/core": "workspace:^",
     "jwt-decode": "^4.0.0",
     "pinia": "^3.0.3",
-    "pinia-plugin-persistedstate": "4.4.1",
-    "vue": "^3.5.18",
+    "pinia-plugin-persistedstate": "4.5.0",
+    "vue": "^3.5.19",
     "vue-router": "^4.5.1"
   }
 }

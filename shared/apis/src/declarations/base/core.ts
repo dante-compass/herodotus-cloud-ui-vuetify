@@ -12,7 +12,7 @@ import type {
   AbstractEntity,
   AbstractSysEntity,
   AbstractAuditEntity,
-  HttpConfigOption,
+  HttpClientOptions,
 } from '@herodotus-cloud/core';
 
 import { ApplicationEnum } from '@/enums';
@@ -44,5 +44,5 @@ export type {
   AbstractEntity,
   AbstractSysEntity,
   AbstractAuditEntity,
-  HttpConfigOption,
+  HttpClientOptions,
 };

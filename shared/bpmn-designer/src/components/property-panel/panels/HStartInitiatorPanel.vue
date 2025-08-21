@@ -26,7 +26,7 @@ export default defineComponent({
 
     const { getInitiatorValue, setInitiatorValue } = useStartInitiatorProperties();
 
-    const initiator = ref<string>();
+    const initiator = ref<string>('');
 
     const updateInitiator = (value: string | number | null) => {
       setInitiatorValue(designer.activeElement, value as string);

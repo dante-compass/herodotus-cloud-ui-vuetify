@@ -1,4 +1,4 @@
-import type { HttpConfigOption } from '@/declarations';
+import type { HttpClientOptions } from '@/declarations';
 
 import { Axios, HttpConfig } from './base';
 import {
@@ -89,7 +89,7 @@ export class BpmnApiResources {
   }
 }
 
-const createBpmnApi = (http: Axios, options: HttpConfigOption): BpmnApiResources => {
+const createBpmnApi = (http: Axios, options: HttpClientOptions): BpmnApiResources => {
   const config = new HttpConfig(http, options);
   return BpmnApiResources.getInstance(config);
 };

@@ -1,7 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
 
 import { defineConfig, loadEnv, UserConfigExport, ConfigEnv } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import Vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import UnoCSS from 'unocss/vite';
 
@@ -16,7 +16,7 @@ import { compression } from 'vite-plugin-compression2';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { viteVConsole } from 'vite-plugin-vconsole';
-import vueDevTools from 'vite-plugin-vue-devtools';
+import VueDevTools from 'vite-plugin-vue-devtools';
 
 import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -38,8 +38,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       UnoCSS({
         configFile: './uno.config.ts',
       }),
-      vueDevTools(),
-      vue({
+      VueDevTools(),
+      Vue({
         template: { transformAssetUrls },
       }),
       quasar({
@@ -48,11 +48,21 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         ),
       }),
       AutoImport({
-        dts: true,
-        imports: ['quasar'],
+        dts: 'types/auto-imports.d.ts',
+        imports: [
+          'vue',
+          'quasar',
+          {
+            pinia: ['defineStore', 'storeToRefs'],
+          },
+        ],
+        eslintrc: {
+          enabled: true,
+        },
+        vueTemplate: true,
       }),
       Components({
-        dts: true,
+        dts: 'types/components.d.ts',
         resolvers: [
           QuasarResolver(),
           IconsResolver({
@@ -98,15 +108,22 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
       },
     },
+    optimizeDeps: {
+      exclude: ['vue-router'],
+      include: [
+        'vconsole',
+        'vite-plugin-node-polyfills/shims/buffer',
+        'vite-plugin-node-polyfills/shims/global',
+        'vite-plugin-node-polyfills/shims/process',
+      ],
+    },
     define: { 'process.env': env },
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
-        '#': fileURLToPath(new URL('./types', import.meta.url)),
-        // 解决 vue-i18n : No known conditions for "." entry in "@intlify/shared" package 错误
-        // "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js", // 修改前
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js', // 修改后
+        '@': fileURLToPath(new URL('src', import.meta.url)),
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-bundler.js',
       },
+      extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
     },
     server: {
       port: 3000,

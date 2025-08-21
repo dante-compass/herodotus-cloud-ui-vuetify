@@ -20,7 +20,7 @@ export declare const useRouterStore: import('pinia').StoreDefinition<"Router", {
      * @param key 组件名称
      * @returns Push 类型参数
      */
-    getRoutePushParam(key: string): PushParam;
+    getRoutePushParam(key: string): PushParam | undefined;
     /**
      * 添加动态路由
      * @param routes 路由列表

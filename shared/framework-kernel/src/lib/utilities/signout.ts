@@ -2,7 +2,7 @@ import type { SweetAlertIcon, SweetAlertResult } from '@herodotus-cloud/core';
 import { Swal } from '@herodotus-cloud/core';
 import { RouterUtilities } from './router';
 
-import { useAuthenticationStore, useCryptoStore } from '../stores';
+import { useCryptoStore, useAuthenticationStore } from '../stores';
 
 export class SignOutUtilities {
   // 静态私有实例引用

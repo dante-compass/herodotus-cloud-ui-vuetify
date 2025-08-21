@@ -14,7 +14,7 @@ const getEventDefinition = (businessObject: any) => {
 };
 
 const getEventDefinitionRawType = (eventDefinition: any): string => {
-  const rawType = getRawType(eventDefinition.$type);
+  const rawType = getRawType(eventDefinition.$type) as string;
   return rawType.replace('EventDefinition', '');
 };
 
@@ -81,7 +81,7 @@ const parseElementType = (element: Element): string => {
     type = 'ConditionalFlow';
   }
 
-  return type;
+  return type as string;
 };
 
 export { parseElementType, getRawType, getBusinessObject };

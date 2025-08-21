@@ -1,21 +1,22 @@
-import type { ShallowRef } from 'vue';
+import type { ShallowRef, Ref } from 'vue';
 import type { PingResponse } from '@/declarations';
 
-import { shallowRef } from 'vue';
+import { shallowRef, ref } from 'vue';
 
 import { SecurityApiResources } from '../api';
 
 export default function useDeviceAuthorize(
+  deviceCode: ShallowRef<string>,
   clientId: ShallowRef<string>,
   clientSecret: ShallowRef<string>,
-  deviceCode: ShallowRef<string>,
+  scope = '',
 ) {
   const handler = shallowRef(0);
   const interval = shallowRef(5);
   const isSuccess = shallowRef(false);
   const isFailed = shallowRef(false);
   const successResponse = shallowRef({});
-  const pullingResponse = shallowRef([]) as ShallowRef<Array<PingResponse>>;
+  const pullingResponse = ref([]) as Ref<Array<PingResponse>>;
 
   const message = (text: string, isSuccess = false) => {
     const id = pullingResponse.value.length + 1;
@@ -46,16 +47,15 @@ export default function useDeviceAuthorize(
   const process = () => {
     SecurityApiResources.getInstance()
       .oauth2()
-      .deviceCodeFlow(clientId.value, clientSecret.value, deviceCode.value)
+      .deviceCodeFlow(deviceCode.value, clientId.value, clientSecret.value, scope)
       .then((response) => {
         message('Authorization successful', true);
         clear();
         isSuccess.value = true;
-        successResponse.value = response.data;
+        successResponse.value = response;
       })
       .catch((error) => {
-        const data = error.response.data;
-        pulling(data.error);
+        pulling(error.error);
       });
   };
 
@@ -79,5 +79,7 @@ export default function useDeviceAuthorize(
     isFailed,
     isSuccess,
     schedule,
+    clear,
+    slowDown,
   };
 }

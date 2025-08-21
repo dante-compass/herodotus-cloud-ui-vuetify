@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/bpmn-designer",
-  "version": "1.7.24",
+  "version": "2.3.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -25,7 +25,7 @@
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
-    "./dist/assets/style.css": "./dist/assets/css/bpmn-designer.css",
+    "./style.css": "./dist/assets/css/bpmn-designer.css",
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -33,18 +33,18 @@
   },
   "dependencies": {
     "@bpmn-io/element-template-chooser": "^2.0.0",
-    "@bpmn-io/properties-panel": "3.31.0",
+    "@bpmn-io/properties-panel": "3.32.0",
     "@herodotus-cloud/bpmn-apis": "workspace:^",
     "@herodotus-cloud/components": "workspace:^",
     "@herodotus-cloud/core": "workspace:^",
     "@herodotus-cloud/form-apis": "workspace:^",
     "@highlightjs/vue-plugin": "^2.1.0",
-    "bpmn-js": "^18.6.2",
+    "bpmn-js": "^18.6.3",
     "bpmn-js-bpmnlint": "^0.23.0",
     "bpmn-js-connectors-extension": "^0.4.6",
-    "bpmn-js-properties-panel": "^5.39.0",
+    "bpmn-js-properties-panel": "^5.41.3",
     "bpmn-js-token-simulation": "^0.38.1",
-    "bpmn-moddle": "^9.0.2",
+    "bpmn-moddle": "^9.0.3",
     "bpmnlint": "^11.6.0",
     "camunda-bpmn-moddle": "^7.0.1",
     "diagram-js": "^15.3.0",
@@ -54,7 +54,7 @@
     "highlight.js": "^11.11.1",
     "ids": "^1.0.5",
     "pinia": "^3.0.3",
-    "preact": "^10.27.0",
-    "vue": "^3.5.18"
+    "preact": "^10.27.1",
+    "vue": "^3.5.19"
   }
 }

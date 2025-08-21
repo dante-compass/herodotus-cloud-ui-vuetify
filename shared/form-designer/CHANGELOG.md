@@ -1,5 +1,248 @@
 # @herodotus-cloud/form-designer
 
+## 2.3.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.3.0
+  - @herodotus-cloud/components@2.3.0
+  - @herodotus-cloud/form-apis@2.3.0
+  - @herodotus-cloud/core@2.3.0
+
+## 2.2.14
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.14
+  - @herodotus-cloud/components@2.2.14
+  - @herodotus-cloud/form-apis@2.2.14
+  - @herodotus-cloud/core@2.2.14
+
+## 2.2.13
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.13
+  - @herodotus-cloud/components@2.2.13
+  - @herodotus-cloud/form-apis@2.2.13
+  - @herodotus-cloud/core@2.2.13
+
+## 2.2.12
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.12
+  - @herodotus-cloud/components@2.2.12
+  - @herodotus-cloud/form-apis@2.2.12
+  - @herodotus-cloud/core@2.2.12
+
+## 2.2.11
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.11
+  - @herodotus-cloud/components@2.2.11
+  - @herodotus-cloud/form-apis@2.2.11
+  - @herodotus-cloud/core@2.2.11
+
+## 2.2.10
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.10
+  - @herodotus-cloud/components@2.2.10
+  - @herodotus-cloud/form-apis@2.2.10
+  - @herodotus-cloud/core@2.2.10
+
+## 2.2.9
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.9
+  - @herodotus-cloud/components@2.2.9
+  - @herodotus-cloud/form-apis@2.2.9
+  - @herodotus-cloud/core@2.2.9
+
+## 2.2.8
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.8
+  - @herodotus-cloud/components@2.2.8
+  - @herodotus-cloud/form-apis@2.2.8
+  - @herodotus-cloud/core@2.2.8
+
+## 2.2.7
+
+### Patch Changes
+
+- [修复] 修复前端设备码验证轮询 API 返回信息错误
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.7
+  - @herodotus-cloud/components@2.2.7
+  - @herodotus-cloud/form-apis@2.2.7
+  - @herodotus-cloud/core@2.2.7
+
+## 2.2.6
+
+### Patch Changes
+
+- 升级依赖
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.6
+  - @herodotus-cloud/components@2.2.6
+  - @herodotus-cloud/form-apis@2.2.6
+  - @herodotus-cloud/core@2.2.6
+
+## 2.2.5
+
+### Patch Changes
+
+- 升级依赖
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.5
+  - @herodotus-cloud/components@2.2.5
+  - @herodotus-cloud/form-apis@2.2.5
+  - @herodotus-cloud/core@2.2.5
+
+## 2.2.4
+
+### Patch Changes
+
+- [新增] 前端工程新增主题切换特效
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.4
+  - @herodotus-cloud/components@2.2.4
+  - @herodotus-cloud/form-apis@2.2.4
+  - @herodotus-cloud/core@2.2.4
+
+## 2.2.3
+
+### Patch Changes
+
+- 更新依赖
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.3
+  - @herodotus-cloud/components@2.2.3
+  - @herodotus-cloud/form-apis@2.2.3
+  - @herodotus-cloud/core@2.2.3
+
+## 2.2.2
+
+### Patch Changes
+
+- [优化] 优化前端应用 Vite 配置，调整自动生成配置文件位置，优化自动导入配置
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.2
+  - @herodotus-cloud/components@2.2.2
+  - @herodotus-cloud/form-apis@2.2.2
+  - @herodotus-cloud/core@2.2.2
+
+## 2.2.1
+
+### Patch Changes
+
+- [优化] 优化前端模块 package.json 导出配置，简化模块样式引入路径长途
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.1
+  - @herodotus-cloud/components@2.2.1
+  - @herodotus-cloud/form-apis@2.2.1
+  - @herodotus-cloud/core@2.2.1
+
+## 2.2.0
+
+### Minor Changes
+
+- [优化] 优化 Gitee ISSUE Template
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.2.0
+  - @herodotus-cloud/components@2.2.0
+  - @herodotus-cloud/form-apis@2.2.0
+  - @herodotus-cloud/core@2.2.0
+
+## 2.1.0
+
+### Minor Changes
+
+- [修复] 修复 @vue/tsconfig 升级至 0.8.0导致打包编译时出现错误提示问题
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.1.0
+  - @herodotus-cloud/components@2.1.0
+  - @herodotus-cloud/form-apis@2.1.0
+  - @herodotus-cloud/core@2.1.0
+
+## 2.0.3
+
+### Patch Changes
+
+- [优化] 优化前端 vite.config.mts 和 tsconfig.json 配置，采用更合理的定义配置，同时去除无用或过时的配置内容
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.0.3
+  - @herodotus-cloud/components@2.0.3
+  - @herodotus-cloud/form-apis@2.0.3
+  - @herodotus-cloud/core@2.0.3
+
+## 2.0.2
+
+### Patch Changes
+
+- [优化] 优化前端客户端动态注册默认参数，避免注册时生成不必要的授权模式
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.0.2
+  - @herodotus-cloud/components@2.0.2
+  - @herodotus-cloud/form-apis@2.0.2
+  - @herodotus-cloud/core@2.0.2
+
+## 2.0.1
+
+### Patch Changes
+
+- [优化] 优化前端客户端动态注册默认参数，避免注册时生成不必要的授权模式
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.0.1
+  - @herodotus-cloud/components@2.0.1
+  - @herodotus-cloud/form-apis@2.0.1
+  - @herodotus-cloud/core@2.0.1
+
+## 2.0.0
+
+### Major Changes
+
+- [重构] 重构前端 Axios 组件抽象定义中的类型，让类型验证更准确，减少不必要的类型转换
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.0.0
+  - @herodotus-cloud/components@2.0.0
+  - @herodotus-cloud/form-apis@2.0.0
+  - @herodotus-cloud/core@2.0.0
+
 ## 1.7.24
 
 ### Patch Changes

@@ -1,4 +1,4 @@
-import type { HttpConfigOption } from '@herodotus-cloud/core';
+import type { HttpClientOptions } from '@herodotus-cloud/core';
 
 import { createApi } from '@herodotus-cloud/apis';
 import { createBpmnApi } from '@herodotus-cloud/bpmn-apis';
@@ -7,7 +7,7 @@ import { createOssApi } from '@herodotus-cloud/oss-apis';
 import { Axios, ContentTypeEnum, HttpConfig } from '@herodotus-cloud/core';
 
 import { VARIABLES } from '@/configurations';
-import { axiosHook } from './axios';
+import { axiosInstanceHooks } from './axios';
 import { BpmnDesignerStorage, FormDesignerStorage } from './resources';
 
 const http = new Axios(
@@ -15,7 +15,7 @@ const http = new Axios(
     timeout: 1000 * 12,
     withCredentials: true,
   },
-  axiosHook,
+  axiosInstanceHooks,
   {
     contentType: ContentTypeEnum.JSON,
     // 是否阻止重复请求，
@@ -29,7 +29,7 @@ const http = new Axios(
   },
 );
 
-const options: HttpConfigOption = {
+const options: HttpClientOptions = {
   project: VARIABLES.getProject(),
   clientId: VARIABLES.getClientId(),
   clientSecret: VARIABLES.getClientSecret(),

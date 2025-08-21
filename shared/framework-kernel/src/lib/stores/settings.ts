@@ -10,6 +10,8 @@ export const useSettingsStore = defineStore('GlobalSettings', {
      */
     theme: {
       mode: ThemeModeEnum.SYSTEM,
+      // 是否为混合主题，预留属性
+      isMixed: true,
       // 默认 primary 主题颜色
       primary: '#1867c0',
     },
@@ -50,4 +52,5 @@ export const useSettingsStore = defineStore('GlobalSettings', {
 
     isClassicLayout: (state) => state.layout === LayoutModeEnum.CLASSIC,
   },
+  persist: true,
 });

@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 import { lodash } from '@herodotus-cloud/core';
-import { useRouterStore, useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useRouterStore, useAuthenticationStore } from '../stores';
 
 export default function useQuasarMenu() {
   const store = useRouterStore();

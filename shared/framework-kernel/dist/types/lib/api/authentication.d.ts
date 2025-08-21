@@ -1,4 +1,4 @@
-import { HttpConfig, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse } from '@herodotus-cloud/core';
+import { HttpConfig, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse, BuildInScopeEnum } from '@herodotus-cloud/core';
 import { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '../../declarations';
 export declare class OAuth2ApiService {
     private static instance;
@@ -79,7 +79,7 @@ export declare class OAuth2ApiService {
      * 用户需要在一个设备上输入设备码，然后在另一个设备上输入该设备码以完成授权。
      * @see https://datatracker.ietf.org/doc/html/rfc8628#section-3.1
      */
-    deviceAuthorizationFlow(clientId?: string, clientSecret?: string, scope?: string): Promise<AxiosHttpResult<DeviceAuthorizationResponse>>;
+    deviceAuthorizationFlow(clientId?: string, clientSecret?: string, scope?: BuildInScopeEnum): Promise<AxiosHttpResult<DeviceAuthorizationResponse>>;
     socialCredentialsFlowBySms(mobile: string, code: string, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     socialCredentialsFlowByJustAuth(source: SocialSource, accessPrincipal: AccessPrincipal, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     webAuthnCredentialsFlow(publicKey: WebAuthnAuthenticate, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;

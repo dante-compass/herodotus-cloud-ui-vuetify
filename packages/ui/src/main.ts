@@ -7,9 +7,9 @@ import 'animate.css/animate.min.css';
 
 import './static/styles/index.scss';
 
-import '@herodotus-cloud/components/dist/assets/style.css';
-import '@herodotus-cloud/bpmn-designer/dist/assets/style.css';
-import '@herodotus-cloud/form-designer/dist/assets/style.css';
+import '@herodotus-cloud/components/style.css';
+import '@herodotus-cloud/bpmn-designer/style.css';
+import '@herodotus-cloud/form-designer/style.css';
 import HerodotusComponents from '@herodotus-cloud/components';
 import HerodotusBpmnDesigner from '@herodotus-cloud/bpmn-designer';
 import HerodotusFormDesigner from '@herodotus-cloud/form-designer';

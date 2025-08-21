@@ -19,9 +19,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { Ref } from 'vue';
-import { defineComponent, ref, computed } from 'vue';
+import { ref } from 'vue';
 
 import type { GroupEntity } from '@/declarations';
 
@@ -31,74 +31,52 @@ import { HDialog } from '@/components/widgets';
 import { HTextField } from '@/components/base';
 import HGroupSelectTable from './HGroupSelectTable.vue';
 
-export default defineComponent({
+defineOptions({
   name: 'HCandidateGroupTextField',
-
   components: {
     HDialog,
     HGroupSelectTable,
     HTextField,
   },
-
-  props: {
-    modelValue: { type: String, default: '' },
-    label: { type: String },
-    title: { type: String },
-  },
-
-  emits: ['update:modelValue'],
-
-  setup(props, { emit }) {
-    const assignee = computed({
-      get: () => props.modelValue,
-      set: (newValue) => {
-        emit('update:modelValue', newValue);
-      },
-    });
-
-    const isOpen = ref(false);
-    const selected = ref([]) as Ref<Array<GroupEntity>>;
-
-    const isDisabled = computed(() => {
-      return lodash.isEmpty(selected.value);
-    });
-
-    const onClose = () => {
-      isOpen.value = false;
-    };
-
-    const onSave = () => {
-      onClose();
-      if (!lodash.isEmpty(selected.value)) {
-        assignee.value = lodash.join(
-          lodash.map(selected.value, (item) => item.id),
-          ',',
-        );
-      } else {
-        assignee.value = '';
-      }
-    };
-
-    const onOpen = () => {
-      if (assignee.value) {
-        const items = lodash.split(assignee.value);
-        selected.value = lodash.map(items, (item) => {
-          return { id: item, name: '', type: '' };
-        });
-      }
-
-      isOpen.value = true;
-    };
-
-    return {
-      isOpen,
-      isDisabled,
-      selected,
-      assignee,
-      onClose,
-      onSave,
-      onOpen,
-    };
-  },
 });
+
+defineProps({
+  label: { type: String },
+  title: { type: String, default: '' },
+});
+
+const assignee = defineModel({
+  type: String,
+  default: '',
+});
+
+const isOpen = ref(false);
+const selected = ref([]) as Ref<Array<GroupEntity>>;
+
+const onClose = () => {
+  isOpen.value = false;
+};
+
+const onSave = () => {
+  onClose();
+  if (!lodash.isEmpty(selected.value)) {
+    assignee.value = lodash.join(
+      lodash.map(selected.value, (item) => item.id),
+      ',',
+    );
+  } else {
+    assignee.value = '';
+  }
+};
+
+const onOpen = () => {
+  if (assignee.value) {
+    const items = lodash.split(assignee.value);
+    selected.value = lodash.map(items, (item) => {
+      return { id: item, name: '', type: '' };
+    });
+  }
+
+  isOpen.value = true;
+};
 </script>

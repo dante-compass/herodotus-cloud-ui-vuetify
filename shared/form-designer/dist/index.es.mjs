@@ -271,8 +271,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
                 onClick: _cache[0] || (_cache[0] = ($event) => _ctx.isOpen = false)
               })
             ]),
-            _: 1,
-            __: [4]
+            _: 1
           }),
           createVNode(_component_q_card_section, null, {
             default: withCtx(() => [
@@ -419,8 +418,7 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
                 onClick: _cache[0] || (_cache[0] = ($event) => _ctx.onClose())
               })
             ]),
-            _: 1,
-            __: [4]
+            _: 1
           }),
           createVNode(_component_q_card_section, null, {
             default: withCtx(() => [

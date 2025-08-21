@@ -1,7 +1,7 @@
 <template>
   <div v-for="item in elements" :key="item.id">
     <h-renderer-engine
-      v-model="state[getDefaultModel(item).name]"
+      v-model="state[getDefaultModel(item)!.name]"
       :schemas="[item.schema]"
     ></h-renderer-engine>
   </div>
@@ -58,7 +58,7 @@ export default defineComponent({
       const models = {} as Record<string, any>;
       if (props.elements) {
         props.elements.map((item) => {
-          const model = getDefaultModel(item);
+          const model = getDefaultModel(item)!;
           if (model.name) {
             models[model.name] = getModelDefaultValue(model.type);
           }

@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import Vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 import { transformAssetUrls } from '@quasar/vite-plugin';
 
@@ -10,7 +10,7 @@ import { QuasarResolver } from 'unplugin-vue-components/resolvers';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue({
+    Vue({
       template: { transformAssetUrls },
     }),
     Components({
@@ -20,9 +20,9 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '#': fileURLToPath(new URL('./types', import.meta.url)),
+      '@': fileURLToPath(new URL('src', import.meta.url)),
     },
+    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
   },
   build: {
     lib: {

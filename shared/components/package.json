@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/components",
-  "version": "1.7.24",
+  "version": "2.3.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -25,7 +25,7 @@
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
-    "./dist/assets/style.css": "./dist/assets/css/components.css",
+    "./style.css": "./dist/assets/css/components.css",
     "./package.json": "./package.json"
   },
   "publishConfig": {

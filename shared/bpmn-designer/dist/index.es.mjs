@@ -1,5 +1,5 @@
-import { QDialog, QCard, QCardSection, QSpace, QBtn, QSeparator, copyToClipboard, QItem, QItemSection, QAvatar, QItemLabel, QExpansionItem, QIcon, QBadge, QTooltip, QBtnDropdown, QList, QBtnGroup, QCardActions, QCheckbox, QTable, QInput, QSelect, QTr, QTd, QPopupEdit, QToggle, QDrawer, QScrollArea, useQuasar, QSpinnerGears, QFile, QToolbar, QLayout, QPageContainer, QPage } from "quasar";
-import { markRaw, ref, onMounted, watch, defineComponent, onBeforeUnmount, createElementBlock, openBlock, computed, createBlock, withCtx, createVNode, normalizeStyle, createElementVNode, toDisplayString, createCommentVNode, resolveComponent, createTextVNode, renderSlot, mergeProps, createSlots, normalizeProps, guardReactiveProps, resolveDirective, withDirectives, Fragment, renderList, resolveDynamicComponent, nextTick, withModifiers } from "vue";
+import { QDialog, QCard, QCardSection, QSpace, QBtn, QSeparator, copyToClipboard, QExpansionItem, QItemSection, QIcon, QBadge, QTooltip, QBtnDropdown, QList, QBtnGroup, QCardActions, QItem, QAvatar, QItemLabel, QCheckbox, QTable, QInput, QSelect, QTr, QTd, QPopupEdit, QToggle, QDrawer, QScrollArea, useQuasar, QSpinnerGears, QFile, QToolbar, QLayout, QPageContainer, QPage } from "quasar";
+import { markRaw, ref, onMounted, watch, defineComponent, onBeforeUnmount, createElementBlock, openBlock, computed, createBlock, withCtx, createVNode, normalizeStyle, createElementVNode, toDisplayString, createCommentVNode, resolveComponent, renderSlot, createTextVNode, mergeProps, createSlots, normalizeProps, guardReactiveProps, resolveDirective, withDirectives, mergeModels, useModel, unref, Fragment, renderList, resolveDynamicComponent, nextTick, withModifiers } from "vue";
 import { lodash, toast, Swal } from "@herodotus-cloud/core";
 import { Swal as Swal2, lodash as lodash2, toast as toast2 } from "@herodotus-cloud/core";
 import { getBusinessObject, is, isAny } from "bpmn-js/lib/util/ModelUtil";
@@ -1750,10 +1750,10 @@ const _hoisted_1$4 = {
   id: "bpmn-viewer",
   class: "bpmn-viewer-canvas"
 };
-function _sfc_render$_(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$X(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", _hoisted_1$4);
 }
-const __unplugin_components_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["render", _sfc_render$_]]);
+const __unplugin_components_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["render", _sfc_render$X]]);
 const _sfc_main$Z = defineComponent({
   name: "HBpmnDiagramViewer",
   components: {
@@ -1795,7 +1795,7 @@ const _sfc_main$Z = defineComponent({
   }
 });
 const _hoisted_1$3 = { class: "text-h6" };
-function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$W(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_space = QSpace;
   const _component_q_btn = QBtn;
   const _component_q_card_section = QCardSection;
@@ -1846,7 +1846,7 @@ function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["modelValue"]);
 }
-const HBpmnDiagramViewer = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [["render", _sfc_render$Z]]);
+const HBpmnDiagramViewer = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [["render", _sfc_render$W]]);
 hljs.registerLanguage("xml", xml);
 hljs.registerLanguage("json", json);
 const _sfc_main$Y = defineComponent({
@@ -1898,7 +1898,7 @@ const _sfc_main$Y = defineComponent({
   }
 });
 const _hoisted_1$2 = { class: "text-h6" };
-function _sfc_render$Y(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_space = QSpace;
   const _component_q_btn = QBtn;
   const _component_q_card_section = QCardSection;
@@ -1960,7 +1960,7 @@ function _sfc_render$Y(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["modelValue"]);
 }
-const HBpmnCodePreviewer = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["render", _sfc_render$Y]]);
+const HBpmnCodePreviewer = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["render", _sfc_render$V]]);
 HBpmnDiagramViewer.install = (app) => {
   app.component(HBpmnDiagramViewer.name, HBpmnDiagramViewer);
 };
@@ -1968,58 +1968,6 @@ HBpmnCodePreviewer.install = (app) => {
   app.component(HBpmnCodePreviewer.name, HBpmnCodePreviewer);
 };
 const _sfc_main$X = defineComponent({
-  name: "HHeadPanel",
-  props: {
-    title: { type: String, required: true },
-    icon: { type: String, required: true },
-    name: { type: String }
-  }
-});
-const _hoisted_1$1 = ["src"];
-function _sfc_render$X(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_avatar = QAvatar;
-  const _component_q_item_section = QItemSection;
-  const _component_q_item_label = QItemLabel;
-  const _component_q_item = QItem;
-  return openBlock(), createBlock(_component_q_item, { class: "bg-grey-3" }, {
-    default: withCtx(() => [
-      createVNode(_component_q_item_section, { avatar: "" }, {
-        default: withCtx(() => [
-          createVNode(_component_q_avatar, { rounded: "" }, {
-            default: withCtx(() => [
-              createElementVNode("img", { src: _ctx.icon }, null, 8, _hoisted_1$1)
-            ]),
-            _: 1
-          })
-        ]),
-        _: 1
-      }),
-      createVNode(_component_q_item_section, null, {
-        default: withCtx(() => [
-          createVNode(_component_q_item_label, { class: "text-weight-bolder" }, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString(_ctx.title), 1)
-            ]),
-            _: 1
-          }),
-          _ctx.name ? (openBlock(), createBlock(_component_q_item_label, {
-            key: 0,
-            caption: ""
-          }, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString(_ctx.name), 1)
-            ]),
-            _: 1
-          })) : createCommentVNode("", true)
-        ]),
-        _: 1
-      })
-    ]),
-    _: 1
-  });
-}
-const __unplugin_components_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["render", _sfc_render$X]]);
-const _sfc_main$W = defineComponent({
   name: "HExpansionItem",
   props: {
     icon: { type: String, default: "" },
@@ -2030,7 +1978,7 @@ const _sfc_main$W = defineComponent({
     defaultOpend: { type: Boolean, default: false }
   }
 });
-function _sfc_render$W(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$U(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_icon = QIcon;
   const _component_q_item_section = QItemSection;
   const _component_q_badge = QBadge;
@@ -2087,14 +2035,14 @@ function _sfc_render$W(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   }, 8, ["default-opened"]);
 }
-const __unplugin_components_2$3 = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$W]]);
-const _sfc_main$V = defineComponent({
+const __unplugin_components_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["render", _sfc_render$U]]);
+const _sfc_main$W = defineComponent({
   name: "HButton",
   props: {
     tooltip: { type: String, default: "" }
   }
 });
-function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$T(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_tooltip = QTooltip;
   const _component_q_btn = QBtn;
   return openBlock(), createBlock(_component_q_btn, mergeProps({
@@ -2116,15 +2064,15 @@ function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
     } : void 0
   ]), 1040);
 }
-const __unplugin_components_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$V]]);
-const _sfc_main$U = defineComponent({
+const __unplugin_components_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$T]]);
+const _sfc_main$V = defineComponent({
   name: "HButtonDropdown",
   props: {
     label: { type: String },
     icon: { type: String }
   }
 });
-function _sfc_render$U(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_list = QList;
   const _component_q_btn_dropdown = QBtnDropdown;
   return openBlock(), createBlock(_component_q_btn_dropdown, {
@@ -2150,11 +2098,11 @@ function _sfc_render$U(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   }, 8, ["label", "icon"]);
 }
-const __unplugin_components_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["render", _sfc_render$U]]);
-const _sfc_main$T = defineComponent({
+const __unplugin_components_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$S]]);
+const _sfc_main$U = defineComponent({
   name: "HButtonGroup"
 });
-function _sfc_render$T(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_btn_group = QBtnGroup;
   return openBlock(), createBlock(_component_q_btn_group, { class: "q-ml-xs" }, {
     default: withCtx(() => [
@@ -2163,8 +2111,8 @@ function _sfc_render$T(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   });
 }
-const __unplugin_components_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["render", _sfc_render$T]]);
-const _sfc_main$S = defineComponent({
+const __unplugin_components_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["render", _sfc_render$R]]);
+const _sfc_main$T = defineComponent({
   name: "HDialog",
   props: {
     modelValue: { type: Boolean, default: false },
@@ -2195,11 +2143,11 @@ const _sfc_main$S = defineComponent({
     };
   }
 });
-const _hoisted_1 = {
+const _hoisted_1$1 = {
   key: 0,
   class: "text-h6"
 };
-function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_space = QSpace;
   const _component_q_btn = QBtn;
   const _component_q_card_section = QCardSection;
@@ -2220,7 +2168,7 @@ function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode(_component_q_card_section, { class: "row items-center q-pb-none" }, {
             default: withCtx(() => [
-              _ctx.title ? (openBlock(), createElementBlock("div", _hoisted_1, toDisplayString(_ctx.title), 1)) : createCommentVNode("", true),
+              _ctx.title ? (openBlock(), createElementBlock("div", _hoisted_1$1, toDisplayString(_ctx.title), 1)) : createCommentVNode("", true),
               createVNode(_component_q_space),
               createVNode(_component_q_btn, {
                 icon: "close",
@@ -2261,15 +2209,15 @@ function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   }, 8, ["modelValue"]);
 }
-const __unplugin_components_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$S]]);
-const _sfc_main$R = defineComponent({
+const HDialog = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["render", _sfc_render$Q]]);
+const _sfc_main$S = defineComponent({
   name: "HListItem",
   props: {
     label: { type: String },
     icon: { type: String }
   }
 });
-function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_avatar = QAvatar;
   const _component_q_item_section = QItemSection;
   const _component_q_item_label = QItemLabel;
@@ -2312,25 +2260,25 @@ function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
     [_directive_ripple]
   ]);
 }
-const __unplugin_components_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$R]]);
-const _sfc_main$Q = defineComponent({
+const __unplugin_components_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$P]]);
+const _sfc_main$R = defineComponent({
   name: "HSeparator"
 });
-function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_separator = QSeparator;
   return openBlock(), createBlock(_component_q_separator, {
     vertical: "",
     color: "grey-6"
   });
 }
-const __unplugin_components_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$Q]]);
-const _sfc_main$P = defineComponent({
+const __unplugin_components_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$O]]);
+const _sfc_main$Q = defineComponent({
   name: "HTableActionButton",
   props: {
     tooltip: { type: String, default: "" }
   }
 });
-function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_tooltip = QTooltip;
   const _component_q_btn = QBtn;
   return openBlock(), createBlock(_component_q_btn, mergeProps({
@@ -2353,32 +2301,32 @@ function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
     } : void 0
   ]), 1040);
 }
-const __unplugin_components_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$P]]);
-const _sfc_main$O = defineComponent({
+const __unplugin_components_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$N]]);
+const _sfc_main$P = defineComponent({
   name: "HTableItemDeleteButton",
   components: {
-    HTableActionButton: __unplugin_components_0$4
+    HTableActionButton: __unplugin_components_0$3
   }
 });
-function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_table_action_button = __unplugin_components_0$4;
+function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_table_action_button = __unplugin_components_0$3;
   return openBlock(), createBlock(_component_h_table_action_button, mergeProps({
     icon: "mdi-delete",
     tooltip: "删除",
     color: "red"
   }, _ctx.$attrs), null, 16);
 }
-const __unplugin_components_5$1 = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$O]]);
+const __unplugin_components_5$1 = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$M]]);
 defineComponent({
   name: "HTableItemEditButton",
   components: {
-    HTableActionButton: __unplugin_components_0$4
+    HTableActionButton: __unplugin_components_0$3
   }
 });
-const _sfc_main$N = defineComponent({
+const _sfc_main$O = defineComponent({
   name: "HAsynchronousContinuationsPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -2441,9 +2389,9 @@ const _sfc_main$N = defineComponent({
     };
   }
 });
-function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_checkbox = QCheckbox;
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-shuffle-variant",
     label: "异步属性"
@@ -2478,11 +2426,11 @@ function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const HAsynchronousContinuationsPanel = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$N]]);
-const _sfc_main$M = defineComponent({
+const HAsynchronousContinuationsPanel = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$L]]);
+const _sfc_main$N = defineComponent({
   name: "HTimerPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -2494,15 +2442,15 @@ const _sfc_main$M = defineComponent({
     );
   }
 });
-function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-call-missed",
     label: "被调用元素"
   });
 }
-const HCalledElementPanel = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$M]]);
-const _sfc_main$L = defineComponent({
+const HCalledElementPanel = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$K]]);
+const _sfc_main$M = defineComponent({
   name: "HUserSelectTable",
   components: {
     HTextField
@@ -2554,7 +2502,7 @@ const _sfc_main$L = defineComponent({
     };
   }
 });
-function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_text_field = resolveComponent("h-text-field");
   const _component_q_table = QTable;
   return openBlock(), createBlock(_component_q_table, {
@@ -2584,31 +2532,34 @@ function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["rows", "columns", "row-key", "selection", "selected", "pagination", "loading", "onRequest"]);
 }
-const __unplugin_components_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$L]]);
-const _sfc_main$K = defineComponent({
-  name: "HCandidateUserTextField",
-  components: {
-    HDialog: __unplugin_components_2$1,
-    HTextField,
-    HUserSelectTable: __unplugin_components_1$3
+const HUserSelectTable = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$J]]);
+const _sfc_main$L = /* @__PURE__ */ defineComponent({
+  ...{
+    name: "HCandidateUserTextField",
+    components: {
+      HDialog,
+      HTextField,
+      HUserSelectTable
+    }
   },
-  props: {
-    modelValue: { type: String, default: "" },
+  __name: "HCandidateUserTextField",
+  props: /* @__PURE__ */ mergeModels({
     selection: { type: String, default: "multiple" },
-    label: { type: String },
-    title: { type: String }
-  },
+    label: { type: String, default: "" },
+    title: { type: String, default: "" }
+  }, {
+    "modelValue": {
+      type: String,
+      default: ""
+    },
+    "modelModifiers": {}
+  }),
   emits: ["update:modelValue"],
-  setup(props, { emit }) {
-    const assignee = computed({
-      get: () => props.modelValue,
-      set: (newValue) => {
-        emit("update:modelValue", newValue);
-      }
-    });
+  setup(__props) {
+    const assignee = useModel(__props, "modelValue");
     const isOpen = ref(false);
     const selected = ref([]);
-    const isDisabled = computed(() => {
+    computed(() => {
       return lodash.isEmpty(selected.value);
     });
     const onClose = () => {
@@ -2634,61 +2585,48 @@ const _sfc_main$K = defineComponent({
       }
       isOpen.value = true;
     };
-    return {
-      isOpen,
-      isDisabled,
-      selected,
-      assignee,
-      onClose,
-      onSave,
-      onOpen
+    return (_ctx, _cache) => {
+      const _component_q_btn = QBtn;
+      return openBlock(), createElementBlock("div", null, [
+        createVNode(unref(HTextField), {
+          modelValue: assignee.value,
+          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => assignee.value = $event),
+          dense: "",
+          label: __props.label
+        }, {
+          append: withCtx(() => [
+            createVNode(_component_q_btn, {
+              round: "",
+              dense: "",
+              flat: "",
+              icon: "mdi-text-box-search-outline",
+              color: "red",
+              class: "cursor-pointer",
+              onClick: _cache[0] || (_cache[0] = ($event) => onOpen())
+            })
+          ]),
+          _: 1
+        }, 8, ["modelValue", "label"]),
+        createVNode(unref(HDialog), {
+          modelValue: isOpen.value,
+          "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => isOpen.value = $event),
+          onConfirm: _cache[4] || (_cache[4] = ($event) => onSave()),
+          title: __props.title
+        }, {
+          default: withCtx(() => [
+            createVNode(HUserSelectTable, {
+              modelValue: selected.value,
+              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => selected.value = $event),
+              selection: __props.selection
+            }, null, 8, ["modelValue", "selection"])
+          ]),
+          _: 1
+        }, 8, ["modelValue", "title"])
+      ]);
     };
   }
 });
-function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_btn = QBtn;
-  const _component_h_text_field = resolveComponent("h-text-field");
-  const _component_h_user_select_table = __unplugin_components_1$3;
-  const _component_h_dialog = __unplugin_components_2$1;
-  return openBlock(), createElementBlock("div", null, [
-    createVNode(_component_h_text_field, {
-      modelValue: _ctx.assignee,
-      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.assignee = $event),
-      dense: "",
-      label: _ctx.label
-    }, {
-      append: withCtx(() => [
-        createVNode(_component_q_btn, {
-          round: "",
-          dense: "",
-          flat: "",
-          icon: "mdi-text-box-search-outline",
-          color: "red",
-          class: "cursor-pointer",
-          onClick: _cache[0] || (_cache[0] = ($event) => _ctx.onOpen())
-        })
-      ]),
-      _: 1
-    }, 8, ["modelValue", "label"]),
-    createVNode(_component_h_dialog, {
-      modelValue: _ctx.isOpen,
-      "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => _ctx.isOpen = $event),
-      onConfirm: _cache[4] || (_cache[4] = ($event) => _ctx.onSave()),
-      title: _ctx.title
-    }, {
-      default: withCtx(() => [
-        createVNode(_component_h_user_select_table, {
-          modelValue: _ctx.selected,
-          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => _ctx.selected = $event),
-          selection: _ctx.selection
-        }, null, 8, ["modelValue", "selection"])
-      ]),
-      _: 1
-    }, 8, ["modelValue", "title"])
-  ]);
-}
-const __unplugin_components_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$K]]);
-const _sfc_main$J = defineComponent({
+const _sfc_main$K = defineComponent({
   name: "HGroupSelectTable",
   components: {
     HTextField
@@ -2740,7 +2678,7 @@ const _sfc_main$J = defineComponent({
     };
   }
 });
-function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_text_field = resolveComponent("h-text-field");
   const _component_q_table = QTable;
   return openBlock(), createBlock(_component_q_table, {
@@ -2770,32 +2708,32 @@ function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["rows", "columns", "row-key", "selected", "pagination", "loading", "onRequest"]);
 }
-const __unplugin_components_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$J]]);
-const _sfc_main$I = defineComponent({
-  name: "HCandidateGroupTextField",
-  components: {
-    HDialog: __unplugin_components_2$1,
-    HGroupSelectTable: __unplugin_components_1$2,
-    HTextField
+const HGroupSelectTable = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$I]]);
+const _sfc_main$J = /* @__PURE__ */ defineComponent({
+  ...{
+    name: "HCandidateGroupTextField",
+    components: {
+      HDialog,
+      HGroupSelectTable,
+      HTextField
+    }
   },
-  props: {
-    modelValue: { type: String, default: "" },
+  __name: "HCandidateGroupTextField",
+  props: /* @__PURE__ */ mergeModels({
     label: { type: String },
-    title: { type: String }
-  },
+    title: { type: String, default: "" }
+  }, {
+    "modelValue": {
+      type: String,
+      default: ""
+    },
+    "modelModifiers": {}
+  }),
   emits: ["update:modelValue"],
-  setup(props, { emit }) {
-    const assignee = computed({
-      get: () => props.modelValue,
-      set: (newValue) => {
-        emit("update:modelValue", newValue);
-      }
-    });
+  setup(__props) {
+    const assignee = useModel(__props, "modelValue");
     const isOpen = ref(false);
     const selected = ref([]);
-    const isDisabled = computed(() => {
-      return lodash.isEmpty(selected.value);
-    });
     const onClose = () => {
       isOpen.value = false;
     };
@@ -2819,60 +2757,47 @@ const _sfc_main$I = defineComponent({
       }
       isOpen.value = true;
     };
-    return {
-      isOpen,
-      isDisabled,
-      selected,
-      assignee,
-      onClose,
-      onSave,
-      onOpen
+    return (_ctx, _cache) => {
+      const _component_q_btn = QBtn;
+      return openBlock(), createElementBlock("div", null, [
+        createVNode(unref(HTextField), {
+          modelValue: assignee.value,
+          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => assignee.value = $event),
+          dense: "",
+          label: __props.label
+        }, {
+          append: withCtx(() => [
+            createVNode(_component_q_btn, {
+              round: "",
+              dense: "",
+              flat: "",
+              icon: "mdi-text-box-search-outline",
+              color: "red",
+              class: "cursor-pointer",
+              onClick: _cache[0] || (_cache[0] = ($event) => onOpen())
+            })
+          ]),
+          _: 1
+        }, 8, ["modelValue", "label"]),
+        createVNode(unref(HDialog), {
+          modelValue: isOpen.value,
+          "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => isOpen.value = $event),
+          onConfirm: _cache[4] || (_cache[4] = ($event) => onSave()),
+          title: __props.title
+        }, {
+          default: withCtx(() => [
+            createVNode(HGroupSelectTable, {
+              modelValue: selected.value,
+              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => selected.value = $event)
+            }, null, 8, ["modelValue"])
+          ]),
+          _: 1
+        }, 8, ["modelValue", "title"])
+      ]);
     };
   }
 });
-function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_q_btn = QBtn;
-  const _component_h_text_field = resolveComponent("h-text-field");
-  const _component_h_group_select_table = __unplugin_components_1$2;
-  const _component_h_dialog = __unplugin_components_2$1;
-  return openBlock(), createElementBlock("div", null, [
-    createVNode(_component_h_text_field, {
-      modelValue: _ctx.assignee,
-      "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.assignee = $event),
-      dense: "",
-      label: _ctx.label
-    }, {
-      append: withCtx(() => [
-        createVNode(_component_q_btn, {
-          round: "",
-          dense: "",
-          flat: "",
-          icon: "mdi-text-box-search-outline",
-          color: "red",
-          class: "cursor-pointer",
-          onClick: _cache[0] || (_cache[0] = ($event) => _ctx.onOpen())
-        })
-      ]),
-      _: 1
-    }, 8, ["modelValue", "label"]),
-    createVNode(_component_h_dialog, {
-      modelValue: _ctx.isOpen,
-      "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => _ctx.isOpen = $event),
-      onConfirm: _cache[4] || (_cache[4] = ($event) => _ctx.onSave()),
-      title: _ctx.title
-    }, {
-      default: withCtx(() => [
-        createVNode(_component_h_group_select_table, {
-          modelValue: _ctx.selected,
-          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => _ctx.selected = $event)
-        }, null, 8, ["modelValue"])
-      ]),
-      _: 1
-    }, 8, ["modelValue", "title"])
-  ]);
-}
-const __unplugin_components_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$I]]);
-const _sfc_main$H = defineComponent({
+const _sfc_main$I = defineComponent({
   name: "HExtensionPropertyDialog",
   props: {
     modelValue: { type: Boolean, default: false }
@@ -2939,8 +2864,7 @@ function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
                 onClick: _cache[0] || (_cache[0] = ($event) => _ctx.isOpen = false)
               })
             ]),
-            _: 1,
-            __: [6]
+            _: 1
           }),
           createVNode(_component_q_card_section, null, {
             default: withCtx(() => [
@@ -2990,8 +2914,8 @@ function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["modelValue"]);
 }
-const __unplugin_components_8 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$H]]);
-const _sfc_main$G = defineComponent({
+const __unplugin_components_8 = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H]]);
+const _sfc_main$H = defineComponent({
   name: "HFormSelect",
   props: {
     modelValue: { type: String }
@@ -3055,11 +2979,10 @@ function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
       createVNode(_component_q_item, null, {
         default: withCtx(() => [
           createVNode(_component_q_item_section, { class: "text-grey" }, {
-            default: withCtx(() => _cache[1] || (_cache[1] = [
+            default: withCtx(() => [..._cache[1] || (_cache[1] = [
               createTextVNode("没有数据", -1)
-            ])),
-            _: 1,
-            __: [1]
+            ])]),
+            _: 1
           })
         ]),
         _: 1
@@ -3068,13 +2991,13 @@ function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 16, ["modelValue", "options", "onFilter"]);
 }
-const __unplugin_components_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$G]]);
-const _sfc_main$F = defineComponent({
+const __unplugin_components_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G]]);
+const _sfc_main$G = defineComponent({
   name: "HCandidateStarterPanel",
   components: {
-    HCandidateGroupTextField: __unplugin_components_1$1,
-    HCandidateUserTextField: __unplugin_components_0$3,
-    HExpansionItem: __unplugin_components_2$3
+    HCandidateGroupTextField: _sfc_main$J,
+    HCandidateUserTextField: _sfc_main$L,
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -3112,9 +3035,9 @@ const _sfc_main$F = defineComponent({
   }
 });
 function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_candidate_group_text_field = __unplugin_components_1$1;
-  const _component_h_candidate_user_text_field = __unplugin_components_0$3;
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_candidate_group_text_field = _sfc_main$J;
+  const _component_h_candidate_user_text_field = _sfc_main$L;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-account-reactivate-outline",
     label: "候选启动"
@@ -3144,11 +3067,11 @@ function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const HCandidateStarterPanel = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$F]]);
-const _sfc_main$E = defineComponent({
+const HCandidateStarterPanel = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F]]);
+const _sfc_main$F = defineComponent({
   name: "HCompensationPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -3161,17 +3084,17 @@ const _sfc_main$E = defineComponent({
   }
 });
 function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-archive-plus",
     label: "补偿"
   });
 }
-const HCompensationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$E]]);
-const _sfc_main$D = defineComponent({
+const HCompensationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E]]);
+const _sfc_main$E = defineComponent({
   name: "HConditionPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3,
+    HExpansionItem: __unplugin_components_2$2,
     HTextField,
     HSelect
   },
@@ -3291,7 +3214,7 @@ const _sfc_main$D = defineComponent({
 function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_select = resolveComponent("h-select");
   const _component_h_text_field = resolveComponent("h-text-field");
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-call-split",
     label: "条件"
@@ -3359,11 +3282,11 @@ function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const HConditionPanel = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$D]]);
-const _sfc_main$C = defineComponent({
+const HConditionPanel = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D]]);
+const _sfc_main$D = defineComponent({
   name: "HDocumentationPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -3390,7 +3313,7 @@ const _sfc_main$C = defineComponent({
 });
 function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_input = QInput;
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-file-document-outline",
     label: "附加文档"
@@ -3411,11 +3334,11 @@ function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const HDocumentationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$C]]);
-const _sfc_main$B = defineComponent({
+const HDocumentationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C]]);
+const _sfc_main$C = defineComponent({
   name: "HErrorPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -3428,17 +3351,17 @@ const _sfc_main$B = defineComponent({
   }
 });
 function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-close-octagon",
     label: "错误"
   });
 }
-const HErrorPanel = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$B]]);
-const _sfc_main$A = defineComponent({
+const HErrorPanel = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B]]);
+const _sfc_main$B = defineComponent({
   name: "HTimerPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -3451,17 +3374,17 @@ const _sfc_main$A = defineComponent({
   }
 });
 function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-escalator-box",
     label: "上报"
   });
 }
-const HEscalationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$A]]);
-const _sfc_main$z = defineComponent({
+const HEscalationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A]]);
+const _sfc_main$A = defineComponent({
   name: "HExecutionListenerPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const tableRows = ref([]);
@@ -3474,7 +3397,7 @@ const _sfc_main$z = defineComponent({
   }
 });
 function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-access-point",
     label: "执行监听",
@@ -3482,11 +3405,11 @@ function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
     count: _ctx.count
   }, null, 8, ["count"]);
 }
-const HExecutionListenerPanel = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$z]]);
-const _sfc_main$y = defineComponent({
+const HExecutionListenerPanel = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z]]);
+const _sfc_main$z = defineComponent({
   name: "HExtensionPropertiesPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3,
+    HExpansionItem: __unplugin_components_2$2,
     HTableItemDeleteButton: __unplugin_components_5$1,
     HExtensionPropertyDialog: __unplugin_components_8
   },
@@ -3552,7 +3475,7 @@ function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_tr = QTr;
   const _component_q_table = QTable;
   const _component_h_extension_property_dialog = __unplugin_components_8;
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-note-plus",
     label: "扩展属性",
@@ -3665,11 +3588,11 @@ function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   }, 8, ["count"]);
 }
-const HExtensionPropertiesPanel = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$y]]);
-const _sfc_main$x = defineComponent({
+const HExtensionPropertiesPanel = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y]]);
+const _sfc_main$y = defineComponent({
   name: "HExternalTaskPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -3682,17 +3605,17 @@ const _sfc_main$x = defineComponent({
   }
 });
 function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-transfer",
     label: "外部任务"
   });
 }
-const HExternalTaskPanel = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$x]]);
-const _sfc_main$w = defineComponent({
+const HExternalTaskPanel = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x]]);
+const _sfc_main$x = defineComponent({
   name: "HFieldInjectionPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const tableRows = ref([]);
@@ -3705,7 +3628,7 @@ const _sfc_main$w = defineComponent({
   }
 });
 function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-focus-field-horizontal",
     label: "字段注入",
@@ -3713,7 +3636,7 @@ function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
     count: _ctx.count
   }, null, 8, ["count"]);
 }
-const HFieldInjectionPanel = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$w]]);
+const HFieldInjectionPanel = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w]]);
 var FormTypeEnum = /* @__PURE__ */ ((FormTypeEnum2) => {
   FormTypeEnum2["NONE"] = "NONE";
   FormTypeEnum2["CAMUNDA_FORMS"] = "CAMUNDA_FORMS";
@@ -3727,10 +3650,10 @@ var BindingTypeEnum = /* @__PURE__ */ ((BindingTypeEnum2) => {
   BindingTypeEnum2["VERSION"] = "version";
   return BindingTypeEnum2;
 })(BindingTypeEnum || {});
-const _sfc_main$v = defineComponent({
+const _sfc_main$w = defineComponent({
   name: "HFormPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3,
+    HExpansionItem: __unplugin_components_2$2,
     HSelect,
     HTextField,
     HFormSelect: __unplugin_components_0$2
@@ -3870,7 +3793,7 @@ function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_select = resolveComponent("h-select");
   const _component_h_text_field = resolveComponent("h-text-field");
   const _component_h_form_select = __unplugin_components_0$2;
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-clipboard-text",
     label: "表单"
@@ -3927,11 +3850,11 @@ function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const HFormPanel = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$v]]);
-const _sfc_main$u = defineComponent({
+const HFormPanel = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v]]);
+const _sfc_main$v = defineComponent({
   name: "HElementGeneral",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const elementId = ref("");
@@ -4006,7 +3929,7 @@ const _sfc_main$u = defineComponent({
 function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_q_input = QInput;
   const _component_q_toggle = QToggle;
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-information-outline",
     label: "常规信息",
@@ -4062,34 +3985,63 @@ function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const HGeneralPanel = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$u]]);
+const HGeneralPanel = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u]]);
+const _sfc_main$u = defineComponent({
+  name: "HHeadPanel",
+  props: {
+    title: { type: String, required: true },
+    icon: { type: String, required: true },
+    name: { type: String }
+  }
+});
+const _hoisted_1 = ["src"];
+function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_q_avatar = QAvatar;
+  const _component_q_item_section = QItemSection;
+  const _component_q_item_label = QItemLabel;
+  const _component_q_item = QItem;
+  return openBlock(), createBlock(_component_q_item, { class: "bg-grey-3" }, {
+    default: withCtx(() => [
+      createVNode(_component_q_item_section, { avatar: "" }, {
+        default: withCtx(() => [
+          createVNode(_component_q_avatar, { rounded: "" }, {
+            default: withCtx(() => [
+              createElementVNode("img", { src: _ctx.icon }, null, 8, _hoisted_1)
+            ]),
+            _: 1
+          })
+        ]),
+        _: 1
+      }),
+      createVNode(_component_q_item_section, null, {
+        default: withCtx(() => [
+          createVNode(_component_q_item_label, { class: "text-weight-bolder" }, {
+            default: withCtx(() => [
+              createTextVNode(toDisplayString(_ctx.title), 1)
+            ]),
+            _: 1
+          }),
+          _ctx.name ? (openBlock(), createBlock(_component_q_item_label, {
+            key: 0,
+            caption: ""
+          }, {
+            default: withCtx(() => [
+              createTextVNode(toDisplayString(_ctx.name), 1)
+            ]),
+            _: 1
+          })) : createCommentVNode("", true)
+        ]),
+        _: 1
+      })
+    ]),
+    _: 1
+  });
+}
+const HHeadPanel = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t]]);
 const _sfc_main$t = defineComponent({
   name: "HHistoryCleanupPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
-  },
-  setup() {
-    const designer = useDesignerStore();
-    watch(
-      () => designer.activeElement.id,
-      () => {
-      },
-      { immediate: true, deep: true }
-    );
-  }
-});
-function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
-  return openBlock(), createBlock(_component_h_expansion_item, {
-    icon: "mdi-delete-clock-outline",
-    label: "历史清理"
-  });
-}
-const HHistoryCleanupPanel = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$t]]);
-const _sfc_main$s = defineComponent({
-  name: "HImplementationPanel",
-  components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -4102,17 +4054,40 @@ const _sfc_main$s = defineComponent({
   }
 });
 function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
+  return openBlock(), createBlock(_component_h_expansion_item, {
+    icon: "mdi-delete-clock-outline",
+    label: "历史清理"
+  });
+}
+const HHistoryCleanupPanel = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s]]);
+const _sfc_main$s = defineComponent({
+  name: "HImplementationPanel",
+  components: {
+    HExpansionItem: __unplugin_components_2$2
+  },
+  setup() {
+    const designer = useDesignerStore();
+    watch(
+      () => designer.activeElement.id,
+      () => {
+      },
+      { immediate: true, deep: true }
+    );
+  }
+});
+function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-code-braces-box",
     label: "实现"
   });
 }
-const HImplementationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$s]]);
+const HImplementationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r]]);
 const _sfc_main$r = defineComponent({
   name: "HInMappingPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const tableRows = ref([]);
@@ -4124,8 +4099,8 @@ const _sfc_main$r = defineComponent({
     };
   }
 });
-function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-file-import",
     label: "输入映射",
@@ -4133,11 +4108,11 @@ function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
     count: _ctx.count
   }, null, 8, ["count"]);
 }
-const HInMappingPanel = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$r]]);
+const HInMappingPanel = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q]]);
 const _sfc_main$q = defineComponent({
   name: "HInMappingPropagationPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -4149,18 +4124,18 @@ const _sfc_main$q = defineComponent({
     );
   }
 });
-function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-file-import",
     label: "输入映射分页"
   });
 }
-const HInMappingPropagationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$q]]);
+const HInMappingPropagationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p]]);
 const _sfc_main$p = defineComponent({
   name: "HInputPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const tableRows = ref([]);
@@ -4172,8 +4147,8 @@ const _sfc_main$p = defineComponent({
     };
   }
 });
-function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-application-import",
     label: "输入",
@@ -4181,34 +4156,11 @@ function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     count: _ctx.count
   }, null, 8, ["count"]);
 }
-const HInputPanel = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$p]]);
+const HInputPanel = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o]]);
 const _sfc_main$o = defineComponent({
   name: "HJobExecutionPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
-  },
-  setup() {
-    const designer = useDesignerStore();
-    watch(
-      () => designer.activeElement.id,
-      () => {
-      },
-      { immediate: true, deep: true }
-    );
-  }
-});
-function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
-  return openBlock(), createBlock(_component_h_expansion_item, {
-    icon: "mdi-timer-play",
-    label: "作业执行"
-  });
-}
-const HJobExecutionPanel = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$o]]);
-const _sfc_main$n = defineComponent({
-  name: "HLinkPanel",
-  components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -4221,17 +4173,17 @@ const _sfc_main$n = defineComponent({
   }
 });
 function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
-    icon: "mdi-link",
-    label: "链接"
+    icon: "mdi-timer-play",
+    label: "作业执行"
   });
 }
-const HLinkPanel = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$n]]);
-const _sfc_main$m = defineComponent({
-  name: "HMessagePanel",
+const HJobExecutionPanel = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n]]);
+const _sfc_main$n = defineComponent({
+  name: "HLinkPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -4244,17 +4196,17 @@ const _sfc_main$m = defineComponent({
   }
 });
 function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
-    icon: "mdi-message",
-    label: "消息"
+    icon: "mdi-link",
+    label: "链接"
   });
 }
-const HMessagePanel = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$m]]);
-const _sfc_main$l = defineComponent({
-  name: "HMultiInstancePanel",
+const HLinkPanel = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m]]);
+const _sfc_main$m = defineComponent({
+  name: "HMessagePanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -4267,17 +4219,40 @@ const _sfc_main$l = defineComponent({
   }
 });
 function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
+  return openBlock(), createBlock(_component_h_expansion_item, {
+    icon: "mdi-message",
+    label: "消息"
+  });
+}
+const HMessagePanel = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l]]);
+const _sfc_main$l = defineComponent({
+  name: "HMultiInstancePanel",
+  components: {
+    HExpansionItem: __unplugin_components_2$2
+  },
+  setup() {
+    const designer = useDesignerStore();
+    watch(
+      () => designer.activeElement.id,
+      () => {
+      },
+      { immediate: true, deep: true }
+    );
+  }
+});
+function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-hexagon-multiple",
     label: "多实例"
   });
 }
-const HMultiInstancePanel = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$l]]);
+const HMultiInstancePanel = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k]]);
 const _sfc_main$k = defineComponent({
   name: "HOutMappingPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const tableRows = ref([]);
@@ -4289,8 +4264,8 @@ const _sfc_main$k = defineComponent({
     };
   }
 });
-function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-file-export",
     label: "输出映射",
@@ -4298,11 +4273,11 @@ function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     count: _ctx.count
   }, null, 8, ["count"]);
 }
-const HOutMappingPanel = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$k]]);
+const HOutMappingPanel = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j]]);
 const _sfc_main$j = defineComponent({
   name: "HOutMappingPropagationPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -4314,18 +4289,18 @@ const _sfc_main$j = defineComponent({
     );
   }
 });
-function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-file-export-outline",
     label: "输出映射分页"
   });
 }
-const HOutMappingPropagationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j]]);
+const HOutMappingPropagationPanel = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i]]);
 const _sfc_main$i = defineComponent({
   name: "HOutputPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const tableRows = ref([]);
@@ -4337,8 +4312,8 @@ const _sfc_main$i = defineComponent({
     };
   }
 });
-function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-application-export",
     label: "输出",
@@ -4346,34 +4321,11 @@ function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     count: _ctx.count
   }, null, 8, ["count"]);
 }
-const HOutputPanel = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$i]]);
+const HOutputPanel = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h]]);
 const _sfc_main$h = defineComponent({
   name: "HScriptPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
-  },
-  setup() {
-    const designer = useDesignerStore();
-    watch(
-      () => designer.activeElement.id,
-      () => {
-      },
-      { immediate: true, deep: true }
-    );
-  }
-});
-function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
-  return openBlock(), createBlock(_component_h_expansion_item, {
-    icon: "mdi-script-text",
-    label: "脚本"
-  });
-}
-const HScriptPanel = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$h]]);
-const _sfc_main$g = defineComponent({
-  name: "HSignalPanel",
-  components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -4386,23 +4338,46 @@ const _sfc_main$g = defineComponent({
   }
 });
 function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
+  return openBlock(), createBlock(_component_h_expansion_item, {
+    icon: "mdi-script-text",
+    label: "脚本"
+  });
+}
+const HScriptPanel = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g]]);
+const _sfc_main$g = defineComponent({
+  name: "HSignalPanel",
+  components: {
+    HExpansionItem: __unplugin_components_2$2
+  },
+  setup() {
+    const designer = useDesignerStore();
+    watch(
+      () => designer.activeElement.id,
+      () => {
+      },
+      { immediate: true, deep: true }
+    );
+  }
+});
+function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-signal",
     label: "信号"
   });
 }
-const HSignalPanel = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$g]]);
+const HSignalPanel = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f]]);
 const _sfc_main$f = defineComponent({
   name: "HStartInitiatorPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3,
+    HExpansionItem: __unplugin_components_2$2,
     HTextField
   },
   setup() {
     const designer = useDesignerStore();
     const { getInitiatorValue, setInitiatorValue } = useStartInitiatorProperties();
-    const initiator = ref();
+    const initiator = ref("");
     const updateInitiator = (value) => {
       setInitiatorValue(designer.activeElement, value);
     };
@@ -4422,9 +4397,9 @@ const _sfc_main$f = defineComponent({
     };
   }
 });
-function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_text_field = resolveComponent("h-text-field");
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-account-cog",
     label: "启动发起人"
@@ -4443,11 +4418,11 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const HStartInitiatorPanel = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$f]]);
+const HStartInitiatorPanel = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e]]);
 const _sfc_main$e = defineComponent({
   name: "HTasklistPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -4459,18 +4434,18 @@ const _sfc_main$e = defineComponent({
     );
   }
 });
-function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-list-status",
     label: "任务列表"
   });
 }
-const HTasklistPanel = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$e]]);
+const HTasklistPanel = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d]]);
 const _sfc_main$d = defineComponent({
   name: "HTaskListenerPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const tableRows = ref([]);
@@ -4482,8 +4457,8 @@ const _sfc_main$d = defineComponent({
     };
   }
 });
-function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-account-tie-voice",
     label: "任务监听",
@@ -4491,11 +4466,11 @@ function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     count: _ctx.count
   }, null, 8, ["count"]);
 }
-const HTaskListenerPanel = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$d]]);
+const HTaskListenerPanel = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c]]);
 const _sfc_main$c = defineComponent({
   name: "HTimerPanel",
   components: {
-    HExpansionItem: __unplugin_components_2$3
+    HExpansionItem: __unplugin_components_2$2
   },
   setup() {
     const designer = useDesignerStore();
@@ -4507,20 +4482,20 @@ const _sfc_main$c = defineComponent({
     );
   }
 });
-function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_expansion_item = __unplugin_components_2$3;
+function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-timer",
     label: "计时器"
   });
 }
-const HTimerPanel = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$c]]);
+const HTimerPanel = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b]]);
 const _sfc_main$b = defineComponent({
   name: "HUserAssignmentPanel",
   components: {
-    HCandidateGroupTextField: __unplugin_components_1$1,
-    HCandidateUserTextField: __unplugin_components_0$3,
-    HExpansionItem: __unplugin_components_2$3,
+    HCandidateGroupTextField: _sfc_main$J,
+    HCandidateUserTextField: _sfc_main$L,
+    HExpansionItem: __unplugin_components_2$2,
     HTextField
   },
   setup() {
@@ -4544,7 +4519,7 @@ const _sfc_main$b = defineComponent({
     const candidateGroups = ref("");
     const dueDate = ref("");
     const followUpDate = ref("");
-    const priority = ref();
+    const priority = ref("");
     const updateAssignee = (value) => {
       setAssigneeValue(designer.activeElement, value);
     };
@@ -4594,11 +4569,11 @@ const _sfc_main$b = defineComponent({
     };
   }
 });
-function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_candidate_user_text_field = __unplugin_components_0$3;
-  const _component_h_candidate_group_text_field = __unplugin_components_1$1;
+function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_h_candidate_user_text_field = _sfc_main$L;
+  const _component_h_candidate_group_text_field = _sfc_main$J;
   const _component_h_text_field = resolveComponent("h-text-field");
-  const _component_h_expansion_item = __unplugin_components_2$3;
+  const _component_h_expansion_item = __unplugin_components_2$2;
   return openBlock(), createBlock(_component_h_expansion_item, {
     icon: "mdi-account-supervisor",
     label: "用户分配"
@@ -4665,52 +4640,55 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-const HUserAssignmentPanel = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b]]);
-const _sfc_main$a = defineComponent({
-  name: "HBpmnPropertyPanel",
-  components: {
-    HAsynchronousContinuationsPanel,
-    HCalledElementPanel,
-    HCandidateStarterPanel,
-    HCompensationPanel,
-    HConditionPanel,
-    HDocumentationPanel,
-    HErrorPanel,
-    HEscalationPanel,
-    HExecutionListenerPanel,
-    HExtensionPropertiesPanel,
-    HFormPanel,
-    HFieldInjectionPanel,
-    HExternalTaskPanel,
-    HGeneralPanel,
-    HHeadPanel: __unplugin_components_0$7,
-    HHistoryCleanupPanel,
-    HImplementationPanel,
-    HInMappingPanel,
-    HInMappingPropagationPanel,
-    HInputPanel,
-    HJobExecutionPanel,
-    HLinkPanel,
-    HMessagePanel,
-    HMultiInstancePanel,
-    HOutMappingPanel,
-    HOutMappingPropagationPanel,
-    HOutputPanel,
-    HScriptPanel,
-    HSignalPanel,
-    HStartInitiatorPanel,
-    HTaskListenerPanel,
-    HTasklistPanel,
-    HTimerPanel,
-    HUserAssignmentPanel
+const HUserAssignmentPanel = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a]]);
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
+  ...{
+    name: "HBpmnPropertyPanel",
+    components: {
+      HAsynchronousContinuationsPanel,
+      HCalledElementPanel,
+      HCandidateStarterPanel,
+      HCompensationPanel,
+      HConditionPanel,
+      HDocumentationPanel,
+      HErrorPanel,
+      HEscalationPanel,
+      HExecutionListenerPanel,
+      HExtensionPropertiesPanel,
+      HFormPanel,
+      HFieldInjectionPanel,
+      HExternalTaskPanel,
+      HGeneralPanel,
+      HHeadPanel,
+      HHistoryCleanupPanel,
+      HImplementationPanel,
+      HInMappingPanel,
+      HInMappingPropagationPanel,
+      HInputPanel,
+      HJobExecutionPanel,
+      HLinkPanel,
+      HMessagePanel,
+      HMultiInstancePanel,
+      HOutMappingPanel,
+      HOutMappingPropagationPanel,
+      HOutputPanel,
+      HScriptPanel,
+      HSignalPanel,
+      HStartInitiatorPanel,
+      HTaskListenerPanel,
+      HTasklistPanel,
+      HTimerPanel,
+      HUserAssignmentPanel
+    }
   },
+  __name: "HBpmnPropertyPanel",
   props: {
     title: { type: String, required: true },
     icon: { type: String, required: true },
     type: { type: String, required: true },
-    label: { type: String }
+    label: { type: String, default: "" }
   },
-  setup() {
+  setup(__props) {
     const isShow = ref(true);
     const designer = useDesignerStore();
     const { panelGroups } = storeToRefs(designer);
@@ -4723,67 +4701,52 @@ const _sfc_main$a = defineComponent({
       result = lodash.upperFirst(result);
       return "H" + result + "Panel";
     };
-    const thumbStyle = {
-      right: "2px",
-      borderRadius: "5px",
-      backgroundColor: "#027be3",
-      width: "5px",
-      opacity: "0.75"
-    };
-    return {
-      thumbStyle,
-      isShow,
-      panelGroups,
-      parsePropertyPanelName
-    };
-  }
-});
-function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_head_panel = __unplugin_components_0$7;
-  const _component_q_list = QList;
-  const _component_q_scroll_area = QScrollArea;
-  const _component_q_drawer = QDrawer;
-  return openBlock(), createBlock(_component_q_drawer, {
-    modelValue: _ctx.isShow,
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.isShow = $event),
-    side: "right",
-    "show-if-above": "",
-    bordered: "",
-    width: 400
-  }, {
-    default: withCtx(() => [
-      createVNode(_component_q_scroll_area, { class: "fit" }, {
+    return (_ctx, _cache) => {
+      const _component_q_list = QList;
+      const _component_q_scroll_area = QScrollArea;
+      const _component_q_drawer = QDrawer;
+      return openBlock(), createBlock(_component_q_drawer, {
+        modelValue: isShow.value,
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isShow.value = $event),
+        side: "right",
+        "show-if-above": "",
+        bordered: "",
+        width: 400
+      }, {
         default: withCtx(() => [
-          createVNode(_component_q_list, {
-            bordered: "",
-            class: "rounded-borders"
-          }, {
+          createVNode(_component_q_scroll_area, { class: "fit" }, {
             default: withCtx(() => [
-              createVNode(_component_h_head_panel, {
-                title: _ctx.title,
-                icon: _ctx.icon,
-                name: _ctx.label
-              }, null, 8, ["title", "icon", "name"]),
-              (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.panelGroups, (element, index2) => {
-                return openBlock(), createBlock(resolveDynamicComponent(_ctx.parsePropertyPanelName(element.id)), { key: index2 });
-              }), 128))
+              createVNode(_component_q_list, {
+                bordered: "",
+                class: "rounded-borders"
+              }, {
+                default: withCtx(() => [
+                  createVNode(unref(HHeadPanel), {
+                    title: __props.title,
+                    icon: __props.icon,
+                    name: __props.label
+                  }, null, 8, ["title", "icon", "name"]),
+                  (openBlock(true), createElementBlock(Fragment, null, renderList(unref(panelGroups), (element, index2) => {
+                    return openBlock(), createBlock(resolveDynamicComponent(parsePropertyPanelName(element.id)), { key: index2 });
+                  }), 128))
+                ]),
+                _: 1
+              })
             ]),
             _: 1
           })
         ]),
         _: 1
-      })
-    ]),
-    _: 1
-  }, 8, ["modelValue"]);
-}
-const __unplugin_components_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a]]);
+      }, 8, ["modelValue"]);
+    };
+  }
+});
 const _sfc_main$9 = defineComponent({
   name: "HToolGroup",
   components: {
-    HButton: __unplugin_components_0$6,
-    HButtonGroup: __unplugin_components_1$5,
-    HSeparator: __unplugin_components_1$4
+    HButton: __unplugin_components_0$5,
+    HButtonGroup: __unplugin_components_1$2,
+    HSeparator: __unplugin_components_1$1
   },
   setup() {
     const designer = useDesignerStore();
@@ -4811,9 +4774,9 @@ const _sfc_main$9 = defineComponent({
   }
 });
 function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_button = __unplugin_components_0$6;
-  const _component_h_separator = __unplugin_components_1$4;
-  const _component_h_button_group = __unplugin_components_1$5;
+  const _component_h_button = __unplugin_components_0$5;
+  const _component_h_separator = __unplugin_components_1$1;
+  const _component_h_button_group = __unplugin_components_1$2;
   return openBlock(), createBlock(_component_h_button_group, null, {
     default: withCtx(() => [
       createVNode(_component_h_button, {
@@ -4843,9 +4806,9 @@ const __unplugin_components_7 = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["rend
 const _sfc_main$8 = defineComponent({
   name: "HCommandGroup",
   components: {
-    HButton: __unplugin_components_0$6,
-    HButtonGroup: __unplugin_components_1$5,
-    HSeparator: __unplugin_components_1$4
+    HButton: __unplugin_components_0$5,
+    HButtonGroup: __unplugin_components_1$2,
+    HSeparator: __unplugin_components_1$1
   },
   setup() {
     const { createNewDiagram } = useModelerCreator();
@@ -4874,9 +4837,9 @@ const _sfc_main$8 = defineComponent({
   }
 });
 function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_button = __unplugin_components_0$6;
-  const _component_h_separator = __unplugin_components_1$4;
-  const _component_h_button_group = __unplugin_components_1$5;
+  const _component_h_button = __unplugin_components_0$5;
+  const _component_h_separator = __unplugin_components_1$1;
+  const _component_h_button_group = __unplugin_components_1$2;
   return openBlock(), createBlock(_component_h_button_group, null, {
     default: withCtx(() => [
       createVNode(_component_h_button, {
@@ -4904,9 +4867,9 @@ const __unplugin_components_6 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["rend
 const _sfc_main$7 = defineComponent({
   name: "HZoomGroup",
   components: {
-    HButton: __unplugin_components_0$6,
-    HButtonGroup: __unplugin_components_1$5,
-    HSeparator: __unplugin_components_1$4
+    HButton: __unplugin_components_0$5,
+    HButtonGroup: __unplugin_components_1$2,
+    HSeparator: __unplugin_components_1$1
   },
   setup() {
     const currentScale = ref(1);
@@ -4943,9 +4906,9 @@ const _sfc_main$7 = defineComponent({
   }
 });
 function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_button = __unplugin_components_0$6;
-  const _component_h_separator = __unplugin_components_1$4;
-  const _component_h_button_group = __unplugin_components_1$5;
+  const _component_h_button = __unplugin_components_0$5;
+  const _component_h_separator = __unplugin_components_1$1;
+  const _component_h_button_group = __unplugin_components_1$2;
   return openBlock(), createBlock(_component_h_button_group, null, {
     default: withCtx(() => [
       createVNode(_component_h_button, {
@@ -4978,9 +4941,9 @@ const __unplugin_components_5 = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["rend
 const _sfc_main$6 = defineComponent({
   name: "HAlignGroup",
   components: {
-    HButton: __unplugin_components_0$6,
-    HButtonGroup: __unplugin_components_1$5,
-    HSeparator: __unplugin_components_1$4
+    HButton: __unplugin_components_0$5,
+    HButtonGroup: __unplugin_components_1$2,
+    HSeparator: __unplugin_components_1$1
   },
   setup() {
     const designer = useDesignerStore();
@@ -5033,9 +4996,9 @@ const _sfc_main$6 = defineComponent({
   }
 });
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_button = __unplugin_components_0$6;
-  const _component_h_separator = __unplugin_components_1$4;
-  const _component_h_button_group = __unplugin_components_1$5;
+  const _component_h_button = __unplugin_components_0$5;
+  const _component_h_separator = __unplugin_components_1$1;
+  const _component_h_button_group = __unplugin_components_1$2;
   return openBlock(), createBlock(_component_h_button_group, null, {
     default: withCtx(() => [
       createVNode(_component_h_button, {
@@ -5081,8 +5044,8 @@ const __unplugin_components_4 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["rend
 const _sfc_main$5 = defineComponent({
   name: "HUploadDialog",
   components: {
-    HButton: __unplugin_components_0$6,
-    HButtonGroup: __unplugin_components_1$5
+    HButton: __unplugin_components_0$5,
+    HButtonGroup: __unplugin_components_1$2
   },
   props: {
     tooltip: { type: String, default: "" }
@@ -5171,8 +5134,8 @@ const _sfc_main$5 = defineComponent({
   }
 });
 function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_button = __unplugin_components_0$6;
-  const _component_h_button_group = __unplugin_components_1$5;
+  const _component_h_button = __unplugin_components_0$5;
+  const _component_h_button_group = __unplugin_components_1$2;
   const _component_q_card_section = QCardSection;
   const _component_q_input = QInput;
   const _component_q_toggle = QToggle;
@@ -5202,11 +5165,10 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
         createVNode(_component_q_card, null, {
           default: withCtx(() => [
             createVNode(_component_q_card_section, null, {
-              default: withCtx(() => _cache[7] || (_cache[7] = [
+              default: withCtx(() => [..._cache[7] || (_cache[7] = [
                 createElementVNode("div", { class: "text-h6" }, "模型信息", -1)
-              ])),
-              _: 1,
-              __: [7]
+              ])]),
+              _: 1
             }),
             createVNode(_component_q_card_section, {
               style: { "max-height": "50vh" },
@@ -5267,8 +5229,8 @@ const __unplugin_components_3 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["rend
 const _sfc_main$4 = defineComponent({
   name: "HPreviewDropdown",
   components: {
-    HButtonDropdown: __unplugin_components_2$2,
-    HListItem: __unplugin_components_0$5,
+    HButtonDropdown: __unplugin_components_2$1,
+    HListItem: __unplugin_components_0$4,
     HBpmnCodePreviewer
   },
   setup() {
@@ -5322,9 +5284,9 @@ const _sfc_main$4 = defineComponent({
   }
 });
 function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_list_item = __unplugin_components_0$5;
+  const _component_h_list_item = __unplugin_components_0$4;
   const _component_q_separator = QSeparator;
-  const _component_h_button_dropdown = __unplugin_components_2$2;
+  const _component_h_button_dropdown = __unplugin_components_2$1;
   const _component_h_bpmn_code_previewer = HBpmnCodePreviewer;
   return openBlock(), createElementBlock(Fragment, null, [
     createVNode(_component_h_button_dropdown, {
@@ -5361,8 +5323,8 @@ const __unplugin_components_2 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["rend
 const _sfc_main$3 = defineComponent({
   name: "HDownloadDropdown",
   components: {
-    HButtonDropdown: __unplugin_components_2$2,
-    HListItem: __unplugin_components_0$5
+    HButtonDropdown: __unplugin_components_2$1,
+    HListItem: __unplugin_components_0$4
   },
   setup() {
     const designer = useDesignerStore();
@@ -5415,9 +5377,9 @@ const _sfc_main$3 = defineComponent({
   }
 });
 function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_h_list_item = __unplugin_components_0$5;
+  const _component_h_list_item = __unplugin_components_0$4;
   const _component_q_separator = QSeparator;
-  const _component_h_button_dropdown = __unplugin_components_2$2;
+  const _component_h_button_dropdown = __unplugin_components_2$1;
   return openBlock(), createBlock(_component_h_button_dropdown, {
     label: "下载",
     icon: "mdi-download-box"
@@ -5558,7 +5520,7 @@ const _sfc_main = defineComponent({
   name: "HBpmnDesigner",
   components: {
     HBpmnDesignerToolbar: __unplugin_components_0,
-    HBpmnPropertyPanel: __unplugin_components_3$1
+    HBpmnPropertyPanel: _sfc_main$a
   },
   emits: ["close"],
   props: {
@@ -5605,7 +5567,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_h_bpmn_designer_toolbar = __unplugin_components_0;
   const _component_q_page = QPage;
   const _component_q_page_container = QPageContainer;
-  const _component_h_bpmn_property_panel = __unplugin_components_3$1;
+  const _component_h_bpmn_property_panel = _sfc_main$a;
   const _component_q_layout = QLayout;
   return openBlock(), createBlock(_component_q_layout, {
     view: "hHr lpR fFr",
