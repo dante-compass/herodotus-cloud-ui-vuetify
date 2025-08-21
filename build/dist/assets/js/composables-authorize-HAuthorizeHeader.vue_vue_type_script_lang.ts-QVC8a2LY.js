@@ -1,1 +1,0 @@
-import{d as e}from"./npm-@vue-runtime-core-BvZCgQCM.js";const r=e({name:"HAuthorizeHeader",emits:["save","clear"],setup:(e,{emit:r})=>({onSave:()=>{r("save")},onClear:()=>{r("clear")}})});export{r as _};

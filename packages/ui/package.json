@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/ui",
-  "version": "3.5.4.2",
+  "version": "",
   "description": "",
   "keywords": [],
   "author": "",
@@ -43,7 +43,7 @@
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",
     "simple-uploader.js": "^0.6.0",
-    "vue": "^3.5.18",
+    "vue": "^3.5.19",
     "vue-cookies": "^1.8.6",
     "vue-i18n": "^11.1.11",
     "vue-router": "^4.5.1",

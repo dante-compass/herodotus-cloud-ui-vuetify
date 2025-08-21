@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/bpmn-designer",
-  "version": "2.2.14",
+  "version": "2.3.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -42,7 +42,7 @@
     "bpmn-js": "^18.6.3",
     "bpmn-js-bpmnlint": "^0.23.0",
     "bpmn-js-connectors-extension": "^0.4.6",
-    "bpmn-js-properties-panel": "^5.41.2",
+    "bpmn-js-properties-panel": "^5.41.3",
     "bpmn-js-token-simulation": "^0.38.1",
     "bpmn-moddle": "^9.0.3",
     "bpmnlint": "^11.6.0",
@@ -55,6 +55,6 @@
     "ids": "^1.0.5",
     "pinia": "^3.0.3",
     "preact": "^10.27.1",
-    "vue": "^3.5.18"
+    "vue": "^3.5.19"
   }
 }

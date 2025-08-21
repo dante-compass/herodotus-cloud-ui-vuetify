@@ -2864,8 +2864,7 @@ function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
                 onClick: _cache[0] || (_cache[0] = ($event) => _ctx.isOpen = false)
               })
             ]),
-            _: 1,
-            __: [6]
+            _: 1
           }),
           createVNode(_component_q_card_section, null, {
             default: withCtx(() => [
@@ -2980,11 +2979,10 @@ function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
       createVNode(_component_q_item, null, {
         default: withCtx(() => [
           createVNode(_component_q_item_section, { class: "text-grey" }, {
-            default: withCtx(() => _cache[1] || (_cache[1] = [
+            default: withCtx(() => [..._cache[1] || (_cache[1] = [
               createTextVNode("没有数据", -1)
-            ])),
-            _: 1,
-            __: [1]
+            ])]),
+            _: 1
           })
         ]),
         _: 1
@@ -5167,11 +5165,10 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
         createVNode(_component_q_card, null, {
           default: withCtx(() => [
             createVNode(_component_q_card_section, null, {
-              default: withCtx(() => _cache[7] || (_cache[7] = [
+              default: withCtx(() => [..._cache[7] || (_cache[7] = [
                 createElementVNode("div", { class: "text-h6" }, "模型信息", -1)
-              ])),
-              _: 1,
-              __: [7]
+              ])]),
+              _: 1
             }),
             createVNode(_component_q_card_section, {
               style: { "max-height": "50vh" },
