@@ -1,5 +1,13 @@
 # @herodotus-cloud/oss-apis
 
+## 2.3.1
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus-cloud/core@2.3.1
+
 ## 2.3.0
 
 ### Minor Changes
