@@ -35,7 +35,7 @@
     "@vueuse/integrations": "^13.8.0",
     "axios": "^1.11.0",
     "crypto-js": "^4.2.0",
-    "dayjs": "^1.11.14",
+    "dayjs": "^1.11.18",
     "generate-avatar": "^1.4.10",
     "js-base64": "^3.7.8",
     "lodash-es": "^4.17.21",
