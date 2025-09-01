@@ -1,5 +1,27 @@
 # @herodotus-cloud/form-designer
 
+## 2.3.3
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.3.3
+  - @herodotus-cloud/components@2.3.3
+  - @herodotus-cloud/form-apis@2.3.3
+  - @herodotus-cloud/core@2.3.3
+
+## 2.3.2
+
+### Patch Changes
+
+- 升级依赖
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.3.2
+  - @herodotus-cloud/components@2.3.2
+  - @herodotus-cloud/form-apis@2.3.2
+  - @herodotus-cloud/core@2.3.2
+
 ## 2.3.1
 
 ### Patch Changes
