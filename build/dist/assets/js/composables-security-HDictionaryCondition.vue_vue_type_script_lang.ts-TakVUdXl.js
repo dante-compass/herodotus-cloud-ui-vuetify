@@ -1,0 +1,1 @@
+import{d as e,l as t}from"./npm-@vue-runtime-core-FgdEu6T8.js";const o=e({name:"HElementCondition",props:{conditions:{type:Object,required:!0}},emits:["update:conditions"],setup(e,{emit:o}){const n=t({get:()=>e.conditions,set:e=>{o("update:conditions",e)}});return{conditionsModelValue:n,onClear:()=>{n.value={}}}}});export{o as _};

@@ -1,5 +1,19 @@
 # @herodotus-cloud/bpmn-designer
 
+## 2.4.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/components@2.4.0
+  - @herodotus-cloud/bpmn-apis@2.4.0
+  - @herodotus-cloud/form-apis@2.4.0
+  - @herodotus-cloud/core@2.4.0
+
 ## 2.3.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/bpmn-designer",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -55,6 +55,6 @@
     "ids": "^1.0.5",
     "pinia": "^3.0.3",
     "preact": "^10.27.1",
-    "vue": "^3.5.20"
+    "vue": "^3.5.21"
   }
 }

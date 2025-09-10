@@ -1,0 +1,1 @@
+import{b as t}from"./App.vue_vue_type_script_setup_true_lang.ts-vrtdUWpb.js";import{d as e}from"./npm-@vue-runtime-core-FgdEu6T8.js";const r=e({name:"HDenseIconButton",props:{color:{type:String,default:"grey-8"}},setup:e=>({settings:t()})});export{r as _};
