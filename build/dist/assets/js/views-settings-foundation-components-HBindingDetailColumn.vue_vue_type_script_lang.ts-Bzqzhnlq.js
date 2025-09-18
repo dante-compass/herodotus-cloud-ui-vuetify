@@ -1,0 +1,1 @@
+import{b as e}from"./App.vue_vue_type_script_setup_true_lang.ts-DiUUEiGj.js";import{d as t}from"./npm-@vue-runtime-core-FgdEu6T8.js";const p=t({name:"HBindingDetailColumn",props:{item:{type:Object,required:!0}},setup:t=>({settings:e()})});export{p as _};
