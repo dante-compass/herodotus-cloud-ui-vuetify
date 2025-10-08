@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/ui",
-  "version": "3.5.6.1",
+  "version": "3.5.6.2",
   "description": "",
   "keywords": [],
   "author": "",
@@ -51,6 +51,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "24.5.2"
+    "@types/node": "24.7.0"
   }
 }
