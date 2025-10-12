@@ -1,6 +1,6 @@
 <template>
   <q-toolbar>
-    <q-tabs shrink inline-label outside-arrows mobile-arrows dense active-color="primary">
+    <q-tabs shrink stretch inline-label outside-arrows mobile-arrows dense active-color="primary">
       <q-route-tab
         v-for="(tab, i) in tabs"
         :key="i"
