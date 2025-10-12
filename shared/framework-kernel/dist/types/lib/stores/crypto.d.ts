@@ -5,8 +5,8 @@ export declare const useCryptoStore: import('pinia').StoreDefinition<"Crypto", {
 }, {}, {
     setSessionId(sessionId: string): void;
     setKey(key: string): void;
-    getKey(): any;
-    encrypt(content: string): any;
-    decrypt(content: string): any;
+    getKey(): string;
+    encrypt(content: string): string;
+    decrypt(content: string): string;
     exchange(identity?: string): Promise<string>;
 }>;
