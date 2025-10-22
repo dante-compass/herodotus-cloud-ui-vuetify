@@ -1,0 +1,25 @@
+{
+  "name": "herodotus-cloud-ui-vuetify",
+  "private": true,
+  "type": "module",
+  "version": "3.5.6.3",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "@fontsource/roboto": "5.2.8",
+    "@mdi/font": "7.4.47",
+    "vue": "^3.5.22",
+    "vue-i18n": "^11.1.12",
+    "vue-json-pretty": "^2.5.0"
+  },
+  "devDependencies": {
+    "@mdi/js": "^7.4.47",
+    "@types/crypto-js": "^4.2.2"
+  }
+}

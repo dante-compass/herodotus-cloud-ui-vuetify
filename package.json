@@ -2,37 +2,64 @@
   "name": "herodotus-cloud-ui-vuetify",
   "private": true,
   "type": "module",
-  "version": "0.0.0",
+  "version": "3.5.6.3",
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --build --force",
-    "lint": "eslint . --fix"
+    "preinstall": "npx only-allow pnpm",
+    "commit": "git add . && git status && git-cz",
+    "push": "pnpm run commit && git push --set-upstream origin develop",
+    "dev": "pnpm run --filter=@herodotus/main dev",
+    "prod": "pnpm run --filter=@herodotus/main prod",
+    "shared:build": "pnpm -r --filter=@herodotus-cloud/* run build"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky-run": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(js|json|md|scss|ts|vue)": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
-    "@fontsource/roboto": "5.2.7",
-    "@mdi/font": "7.4.47",
-    "vue": "^3.5.21",
-    "vue-router": "^4.5.1",
-    "vuetify": "^3.10.1"
+    "pinia": "^3.0.3",
+    "pinia-plugin-persistedstate": "^4.5.0",
+    "vue": "^3.5.22",
+    "vuetify": "^3.10.5"
   },
   "devDependencies": {
-    "@tsconfig/node22": "^22.0.0",
-    "@types/node": "^22.9.0",
+    "@tsconfig/node22": "^22.0.2",
+    "@types/node": "^24.7.2",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/tsconfig": "^0.8.1",
-    "eslint": "^9.35.0",
+    "commitizen": "^4.3.1",
+    "cross-env": "^10.1.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.37.0",
     "eslint-config-vuetify": "^4.2.0",
+    "husky": "^9.1.7",
     "npm-run-all2": "^8.0.4",
-    "sass-embedded": "^1.92.1",
-    "typescript": "~5.9.2",
+    "prettier": "^3.6.2",
+    "sass-embedded": "^1.93.2",
+    "terser": "^5.44.0",
+    "typescript": "~5.9.3",
+    "unplugin-auto-import": "^20.2.0",
     "unplugin-fonts": "^1.4.0",
-    "unplugin-vue-components": "^29.0.0",
-    "unplugin-vue-router": "^0.15.0",
-    "vite": "^7.1.5",
+    "unplugin-vue-components": "^29.1.0",
+    "vite": "^7.1.10",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-vue-devtools": "^8.0.2",
+    "vite-plugin-vue-layouts-next": "^1.0.0",
     "vite-plugin-vuetify": "^2.1.2",
-    "vue-tsc": "^3.0.7"
+    "vue-router": "^4.6.2",
+    "vue-tsc": "^3.1.1"
   }
 }
