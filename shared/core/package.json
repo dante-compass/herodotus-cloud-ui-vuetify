@@ -1,5 +1,5 @@
 {
-  "name": "@herodotus-cloud/core",
+  "name": "@herodotus/core",
   "version": "0.0.1",
   "description": "",
   "keywords": [],
@@ -37,7 +37,6 @@
     "dayjs": "^1.11.18",
     "generate-avatar": "^1.4.10",
     "js-base64": "^3.7.8",
-    "lodash-es": "^4.17.21",
     "moment": "^2.30.1",
     "qs": "^6.14.0",
     "sm-crypto-v2": "^1.15.0",
@@ -45,6 +44,6 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
-    "@types/lodash-es": "^4.17.12"
+    "@types/qs": "^6.14.0"
   }
 }
