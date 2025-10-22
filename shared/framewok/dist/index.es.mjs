@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { nextTick, shallowRef, ref, watch, computed } from "vue";
 import { Base64 } from "js-base64";
 import { parseCreationOptionsFromJSON, create, parseRequestOptionsFromJSON, get } from "@github/webauthn-json/browser-ponyfill";
-import "pinia-plugin-persistedstate";
+import { default as default2 } from "pinia-plugin-persistedstate";
 var LayoutModeEnum = /* @__PURE__ */ ((LayoutModeEnum2) => {
   LayoutModeEnum2["DEFAULT"] = "defaults";
   LayoutModeEnum2["CLASSIC"] = "classic";
@@ -16094,6 +16094,7 @@ export {
   ThemeModeEnum,
   getSystemHeaders,
   initializer,
+  default2 as piniaPluginPersistedstate,
   useApplicationStore,
   useAuthenticationStore,
   useCryptoStore,
