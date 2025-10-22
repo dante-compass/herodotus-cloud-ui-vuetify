@@ -1,13 +1,21 @@
-export const PATH = {
-  ROOT: '/',
-  // 登录
-  SIGN_IN: '/sign-in',
-  SIGN_IN_NAME: 'SignIn',
-  // 首页
-  HOME: '/dashboard',
-  HOME_NAME: 'Dashboard',
-  HOME_TITLE: '首页',
-  // 错误
-  NOT_FOUND: '/:path(.*)*',
-  NOT_FOUND_NAME: 'PageNotFound',
+export const DEAULT_ROUTER_LINK = {
+  root: {
+    path: '/',
+    name: 'Root',
+    title: 'Root',
+  },
+  sign_in: {
+    path: '/sign-in',
+    name: 'SignIn',
+  },
+  home: {
+    path: '/dashboard',
+    name: 'Dashboard',
+    title: '首页',
+  },
+  not_found: {
+    path: '/:path(.*)*',
+    name: 'PageNotFound',
+    title: 'Page Not Found',
+  },
 };

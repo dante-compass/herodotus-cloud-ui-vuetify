@@ -1,19 +1,31 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { PATH } from '@/configurations/constants';
+import { DEAULT_ROUTER_LINK } from '@/configurations/constants';
+
+const RootRoute: RouteRecordRaw = {
+  path: DEAULT_ROUTER_LINK.root.path,
+  name: DEAULT_ROUTER_LINK.root.name,
+  redirect: DEAULT_ROUTER_LINK.home.path,
+  meta: {
+    title: DEAULT_ROUTER_LINK.root.title,
+  },
+};
+
+const SignInRoute: RouteRecordRaw = {
+  path: DEAULT_ROUTER_LINK.sign_in.path,
+  name: DEAULT_ROUTER_LINK.sign_in.name,
+  component: () => import('@/views/sign-in/index.vue'),
+  meta: {
+    title: '登录',
+    isIgnoreAuth: true,
+  },
+};
 
 const NoPermissionRoute: RouteRecordRaw = {
   path: '/403',
   name: 'NoPermission',
   component: () => import('@/components/application/error/403.vue'),
   meta: { title: 'No Permission' },
-};
-
-const NotFoundRoute: RouteRecordRaw = {
-  path: '/404',
-  name: 'NotFound',
-  component: () => import('@/components/application/error/404.vue'),
-  meta: { title: 'Not Found' },
 };
 
 const ServiceErrorRoute: RouteRecordRaw = {
@@ -23,19 +35,20 @@ const ServiceErrorRoute: RouteRecordRaw = {
   meta: { title: 'Service Error' },
 };
 
-const PageNotFoundRoute: RouteRecordRaw = {
-  path: PATH.NOT_FOUND,
-  name: PATH.NOT_FOUND_NAME,
+const NotFoundRoute: RouteRecordRaw = {
+  path: DEAULT_ROUTER_LINK.not_found.path,
+  name: DEAULT_ROUTER_LINK.not_found.name,
   component: () => import('@/components/application/error/404.vue'),
   meta: {
-    title: 'ErrorPage',
+    title: DEAULT_ROUTER_LINK.not_found.title,
   },
 };
 
 //普通路由 无需验证权限
 export const staticRoutes: Array<RouteRecordRaw> = [
+  RootRoute,
+  SignInRoute,
   NoPermissionRoute,
-  NotFoundRoute,
   ServiceErrorRoute,
-  PageNotFoundRoute,
+  NotFoundRoute,
 ];
