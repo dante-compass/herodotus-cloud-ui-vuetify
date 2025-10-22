@@ -14,7 +14,7 @@ const RootRoute: RouteRecordRaw = {
 const SignInRoute: RouteRecordRaw = {
   path: DEAULT_ROUTER_LINK.sign_in.path,
   name: DEAULT_ROUTER_LINK.sign_in.name,
-  component: () => import('@/views/sign-in/index.vue'),
+  component: () => import('@/views/sign-in/Index.vue'),
   meta: {
     title: '登录',
     isIgnoreAuth: true,
