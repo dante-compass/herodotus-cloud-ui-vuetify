@@ -7,9 +7,9 @@
     "preinstall": "npx only-allow pnpm",
     "commit": "git add . && git status && git-cz",
     "push": "pnpm run commit && git push --set-upstream origin develop",
-    "dev": "pnpm run --filter=@herodotus/main dev",
-    "prod": "pnpm run --filter=@herodotus/main prod",
-    "shared:build": "pnpm -r --filter=@herodotus-cloud/* run build"
+    "dev": "pnpm run --filter=@herodotus-cloud/main dev",
+    "prod": "pnpm run --filter=@herodotus-cloud/main prod",
+    "shared:build": "pnpm -r --filter=@herodotus/* run build"
   },
   "config": {
     "commitizen": {

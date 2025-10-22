@@ -1,23 +1,28 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
-
 // Plugins
-import { registerPlugins } from '@/plugins'
+import { setupVuetify } from '@/plugins';
 
 // Components
-import App from './App.vue'
+import App from './App.vue';
 
 // Composables
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 
 // Styles
-import 'unfonts.css'
+import 'unfonts.css';
 
-const app = createApp(App)
+async function setupApp() {
+  const app = createApp(App);
 
-registerPlugins(app)
+  // 注册 Vuetify 组件库
+  setupVuetify(app);
 
-app.mount('#app')
+  // 注册状态管理
+  // setupPinia(app);
+
+  // 挂载路由
+  // setupRouter(app);
+
+  app.mount('#app', true);
+}
+
+setupApp();
