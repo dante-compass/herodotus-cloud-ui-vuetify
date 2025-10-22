@@ -1,5 +1,5 @@
 import type { Router, RouteLocationRaw, RouteLocationNormalizedLoaded } from 'vue-router';
-import type { OperationEnum, Tree } from '@herodotus-cloud/core';
+import type { OperationEnum, Tree } from '@herodotus/core';
 
 export interface RouterOptions {
   instance: Router;

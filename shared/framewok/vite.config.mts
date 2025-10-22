@@ -18,7 +18,10 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+      entry: [
+        fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+        fileURLToPath(new URL('./src/static/styles/index.scss', import.meta.url)),
+      ],
       name: '@herodotus/framework',
       fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
@@ -34,14 +37,34 @@ export default defineConfig({
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: [
-
+        'crypto',
+        'lodash-es',
+        'js-base64',
+        'jwt-decode',
+        'pinia',
+        'pinia-plugin-persistedstate',
+        'vue',
+        'vue-router',
+        '@github/webauthn-json',
+        '@github/webauthn-json/browser-ponyfill',
+        '@herodotus-cloud/core',
       ],
       output: {
         exports: 'named',
         assetFileNames: `assets/[ext]/[name][extname]`,
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
+          'lodash-es': 'LodashEs',
 
+          'js-base64': 'JsBase64',
+          'jwt-decode': 'JwtDecode',
+          pinia: 'Pinia',
+          'pinia-plugin-persistedstate': 'PiniaPluginPersistedstate',
+          vue: 'Vue',
+          'vue-router': 'VueRouter',
+          '@github/webauthn-json': 'GithubWebauthnJson',
+          '@github/webauthn-json/browser-ponyfill': 'GithubWebauthnJsonBrowserPonyfill',
+          '@herodotus-cloud/core': 'HerodotusCore',
         },
       },
     },

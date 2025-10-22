@@ -9,9 +9,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --fix"
   },
   "main": "dist/index.umd.js",
   "module": "dist/index.es.mjs",
@@ -25,13 +27,16 @@
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.umd.js"
     },
-    "./style.css": "./dist/assets/css/core.css",
+    "./style.css": "./dist/assets/css/framework.css",
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "@herodotus/core": "workspace:^"
+    "@github/webauthn-json": "^2.1.1",
+    "@herodotus/core": "workspace:^",
+    "js-base64": "^3.7.8",
+    "jwt-decode": "^4.0.0"
   }
 }
