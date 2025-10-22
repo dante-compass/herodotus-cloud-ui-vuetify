@@ -30,7 +30,7 @@ export default function useSystemTheme() {
     );
   };
 
-  const themeTransition = () => {
+  const themeTransition = (): void => {
     const x = performance.now();
     for (let i = 0; i++ < 1e7; (i << 9) & ((9 % 9) * 9 + 9));
     if (performance.now() - x > 10) return;
