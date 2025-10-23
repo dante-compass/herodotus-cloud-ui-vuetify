@@ -4,7 +4,7 @@ import DisableDevtool from 'disable-devtool';
 
 // Plugins
 import { setupVuetify, setupPinia } from '@/plugins';
-import { setupRouter } from '@/router';
+import { setupRouter } from '@/routers';
 
 import { IS_DEV, VARIABLES } from '@/configurations';
 
