@@ -1,9 +1,12 @@
 import App from './App.vue';
 import { createApp } from 'vue';
+import DisableDevtool from 'disable-devtool';
 
 // Plugins
 import { setupVuetify, setupPinia } from '@/plugins';
 import { setupRouter } from '@/router';
+
+import { IS_DEV, VARIABLES } from '@/configurations';
 
 import '@herodotus/core/style.css';
 import '@herodotus/framework/style.css';
@@ -12,6 +15,11 @@ import '@herodotus/framework/style.css';
 import 'unfonts.css';
 
 async function setupApp() {
+  if (IS_DEV) {
+    const view = document.createElement('div');
+    document.body.appendChild(view);
+  }
+
   const app = createApp(App);
 
   // 注册 Vuetify 组件库
@@ -24,6 +32,21 @@ async function setupApp() {
   setupRouter(app);
 
   app.mount('#app', true);
+
+  if (!IS_DEV) {
+    if (VARIABLES.getUseDisableDevtool()) {
+      const url =
+        import.meta.env.VITE_BASE_PATH === '/'
+          ? '/static/forbidden.html'
+          : import.meta.env.VITE_BASE_PATH + 'static/forbidden.html';
+
+      DisableDevtool({
+        url: url,
+        timeOutUrl: url,
+        disableMenu: true,
+      });
+    }
+  }
 }
 
 setupApp();

@@ -1,9 +1,19 @@
+import type { RouteRecordRaw, Router } from 'vue-router';
+
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-import type { RouteRecordRaw, Router } from 'vue-router';
 import { useAuthenticationStore, useRouterStore, useSystemRoute } from '@herodotus/framework';
 import { DEAULT_ROUTER_LINK } from '@/configurations';
+
+const NotFoundRoute: RouteRecordRaw = {
+  path: DEAULT_ROUTER_LINK.not_found.path,
+  name: DEAULT_ROUTER_LINK.not_found.name,
+  component: () => import('@/components/application/error/404.vue'),
+  meta: {
+    title: DEAULT_ROUTER_LINK.not_found.title,
+  },
+};
 
 const routeModules = import.meta.glob('./modules/**/*.ts', {
   eager: true,
@@ -50,6 +60,8 @@ export const createRouterGuard = (router: Router) => {
           //   await initFrontEndRoutes(router);
           // }
           await initFrontEndRoutes(router);
+
+          router.addRoute(NotFoundRoute);
           const redirectPath = (from.query.redirect || to.path) as string;
           const redirectURI = decodeURIComponent(redirectPath);
           const nextPath =

@@ -35,20 +35,10 @@ const ServiceErrorRoute: RouteRecordRaw = {
   meta: { title: 'Service Error' },
 };
 
-const NotFoundRoute: RouteRecordRaw = {
-  path: DEAULT_ROUTER_LINK.not_found.path,
-  name: DEAULT_ROUTER_LINK.not_found.name,
-  component: () => import('@/components/application/error/404.vue'),
-  meta: {
-    title: DEAULT_ROUTER_LINK.not_found.title,
-  },
-};
-
 //普通路由 无需验证权限
 export const staticRoutes: Array<RouteRecordRaw> = [
   RootRoute,
   SignInRoute,
   NoPermissionRoute,
   ServiceErrorRoute,
-  NotFoundRoute,
 ];

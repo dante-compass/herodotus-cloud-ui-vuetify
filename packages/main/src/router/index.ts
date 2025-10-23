@@ -1,4 +1,5 @@
 import type { App } from 'vue';
+
 import { createRouter, createWebHistory } from 'vue-router';
 import { staticRoutes } from './logic';
 import { createRouterGuard } from './guard';

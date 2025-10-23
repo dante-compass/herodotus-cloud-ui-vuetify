@@ -10,6 +10,11 @@ import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 
+import { compression } from 'vite-plugin-compression2';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import { viteVConsole } from 'vite-plugin-vconsole';
+import VueDevTools from 'vite-plugin-vue-devtools';
+
 // Utilities
 import { defineConfig, loadEnv } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
@@ -21,6 +26,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   // https://vite.dev/config/
   return defineConfig({
     plugins: [
+      VueDevTools(),
       Vue({
         template: { transformAssetUrls },
       }),
@@ -33,6 +39,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       }),
       Components({
         dts: 'types/components.d.ts',
+        resolvers: [
+          IconsResolver({
+            customCollections: ['custom'],
+          }),
+        ],
       }),
       AutoImport({
         imports: [
@@ -66,9 +77,29 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           ],
         },
       }),
+      compression(),
+      // VConsole 调试工具配置，若没有此配置，则调试工具控制台不会打印日志
+      viteVConsole({
+        entry: [fileURLToPath(new URL('./src/main.ts', import.meta.url))], // entry file
+        enabled: command !== 'build' || mode === 'development', // build production
+        config: {
+          // vconsole options
+          maxLogNumber: 1000,
+          theme: 'light',
+        },
+      }),
+      createHtmlPlugin({
+        inject: {
+          data: {
+            // 查找.env.test文件里面的VITE_PROJECT_TITLE，请以VITE_标识开头
+            title: env.VITE_PROJECT_NAME,
+          },
+        },
+      }),
     ],
     optimizeDeps: {
       exclude: ['vuetify', 'vue-router'],
+      include: ['vconsole'],
     },
     define: { 'process.env': {} },
     resolve: {

@@ -19,7 +19,7 @@ export const DEAULT_ROUTER_LINK = {
     title: '首页',
   },
   not_found: {
-    path: '/:path(.*)*',
+    path: '/:pathMatch(.*)*',
     name: 'PageNotFound',
     title: 'Page Not Found',
   },
