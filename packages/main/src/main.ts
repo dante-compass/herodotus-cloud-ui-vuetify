@@ -1,17 +1,17 @@
 import App from './App.vue';
 import { createApp } from 'vue';
+
 import DisableDevtool from 'disable-devtool';
+import { IS_DEV, VARIABLES } from '@/configurations';
 
 // Plugins
 import { setupVuetify, setupPinia } from '@/plugins';
 import { setupRouter } from '@/routers';
 
-import { IS_DEV, VARIABLES } from '@/configurations';
-
+// Styles
 import '@herodotus/core/style.css';
 import '@herodotus/framework/style.css';
-
-// Styles
+import 'animate.css/animate.min.css';
 import 'unfonts.css';
 
 async function setupApp() {

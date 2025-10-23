@@ -11,15 +11,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    403: typeof import('./../src/components/application/error/403.vue')['default']
-    404: typeof import('./../src/components/application/error/404.vue')['default']
-    500: typeof import('./../src/components/application/error/500.vue')['default']
-    HAppContainer: typeof import('./../src/components/application/layout/HAppContainer.vue')['default']
-    HAppLeftDrawer: typeof import('./../src/components/application/layout/HAppLeftDrawer.vue')['default']
-    HAppRightDrawer: typeof import('./../src/components/application/layout/HAppRightDrawer.vue')['default']
-    HAppToolbar: typeof import('./../src/components/application/layout/HAppToolbar.vue')['default']
+    403: typeof import('./../src/components/framework/error/403.vue')['default']
+    404: typeof import('./../src/components/framework/error/404.vue')['default']
+    500: typeof import('./../src/components/framework/error/500.vue')['default']
+    HAppContainer: typeof import('./../src/components/framework/layout/HAppContainer.vue')['default']
+    HAppLeftDrawer: typeof import('./../src/components/framework/layout/HAppLeftDrawer.vue')['default']
+    HAppRightDrawer: typeof import('./../src/components/framework/layout/HAppRightDrawer.vue')['default']
+    HAppToolbar: typeof import('./../src/components/framework/layout/HAppToolbar.vue')['default']
     HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default']
-    HErrorLayout: typeof import('./../src/components/application/error/HErrorLayout.vue')['default']
+    HErrorLayout: typeof import('./../src/components/framework/error/HErrorLayout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -20,7 +20,7 @@ import {
   HAppLeftDrawer,
   HAppRightDrawer,
   HAppToolbar,
-} from '@/components/application/layout';
+} from '@/components/framework/layout';
 import { useSettingsStore } from '@herodotus/framework';
 
 defineOptions({

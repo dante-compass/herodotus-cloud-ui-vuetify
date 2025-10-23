@@ -45,19 +45,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           }),
         ],
       }),
-      AutoImport({
-        imports: [
-          'vue',
-          {
-            pinia: ['defineStore', 'storeToRefs'],
-          },
-        ],
-        dts: 'types/auto-imports.d.ts',
-        eslintrc: {
-          enabled: true,
-        },
-        vueTemplate: true,
-      }),
       Icons({
         compiler: 'vue3',
         autoInstall: true,
