@@ -41,16 +41,29 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         dts: 'types/components.d.ts',
         resolvers: [
           IconsResolver({
-            customCollections: ['custom'],
+            customCollections: ['herodotus'],
           }),
         ],
+      }),
+      AutoImport({
+        dts: 'types/auto-imports.d.ts',
+        imports: [
+          'vue',
+          {
+            pinia: ['defineStore', 'storeToRefs'],
+          },
+        ],
+        eslintrc: {
+          enabled: true,
+        },
+        vueTemplate: true,
       }),
       Icons({
         compiler: 'vue3',
         autoInstall: true,
         customCollections: {
-          // 这里是存放svg图标的文件地址，custom是自定义图标库的名称
-          custom: FileSystemIconLoader('./src/assets/svg'),
+          // 这里是存放svg图标的文件地址，herodotus是自定义图标库的名称
+          herodotus: FileSystemIconLoader('./src/assets/svg'),
         },
       }),
       Fonts({

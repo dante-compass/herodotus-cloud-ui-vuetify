@@ -4,18 +4,8 @@
   </h-error-layout>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import IconHerodotusNoPermission from '~icons/herodotus/no-permission';
 
-import HErrorLayout from './HErrorLayout.vue';
-import IconNoPermission from '~icons/custom/no-permission';
-
-export default defineComponent({
-  name: 'NoPermission',
-
-  components: {
-    IconNoPermission,
-    HErrorLayout,
-  },
-});
+defineOptions({ name: 'NoPermission', components: { IconHerodotusNoPermission } });
 </script>

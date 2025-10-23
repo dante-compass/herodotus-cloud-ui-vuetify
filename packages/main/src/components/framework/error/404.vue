@@ -1,21 +1,11 @@
 <template>
   <h-error-layout>
-    <icon-not-found height="80vh" width="100%" />
+    <icon-herodotus-not-found height="80vh" width="100%" />
   </h-error-layout>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import IconHerodotusNotFound from '~icons/herodotus/not-found';
 
-import HErrorLayout from './HErrorLayout.vue';
-import IconNotFound from '~icons/custom/not-found';
-
-export default defineComponent({
-  name: 'NotFound',
-
-  components: {
-    IconNotFound,
-    HErrorLayout,
-  },
-});
+defineOptions({ name: 'NotFound', components: { IconHerodotusNotFound } });
 </script>

@@ -1,21 +1,11 @@
 <template>
   <h-error-layout>
-    <icon-service-error height="80vh" width="100%" />
+    <icon-herodotus-service-error height="80vh" width="100%" />
   </h-error-layout>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import IconHerodotusServiceError from '~icons/herodotus/service-error';
 
-import HErrorLayout from './HErrorLayout.vue';
-import IconServiceError from '~icons/custom/service-error';
-
-export default defineComponent({
-  name: 'ServiceError',
-
-  components: {
-    IconServiceError,
-    HErrorLayout,
-  },
-});
+defineOptions({ name: 'ServiceError', components: { IconHerodotusServiceError } });
 </script>
