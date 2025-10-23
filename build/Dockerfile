@@ -2,6 +2,10 @@ FROM nginx:latest
 
 LABEL cn.herodotus.image.authors="herodotus@aliyun.com"
 
+# 验证realip模块
+RUN nginx -V 2>&1 | grep -o with-http_realip_module && \
+    echo "RealIP module is available"
+
 ENV LISTEN_PORT=8000
 ENV SERVER_NAME=localhost
 ENV HERODOTUS_SERVER_ADDR=192.168.101.10:8847

@@ -37,12 +37,14 @@ export default defineConfig({
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: [
+        'crypto',
         'vue',
         'vue-router',
         'pinia',
         'pinia-plugin-persistedstate',
         'jwt-decode',
         '@github/webauthn-json',
+        '@github/webauthn-json/browser-ponyfill',
         '@herodotus-cloud/core',
       ],
       output: {
@@ -56,6 +58,7 @@ export default defineConfig({
           'pinia-plugin-persistedstate': 'PiniaPluginPersistedstate',
           'jwt-decode': 'JwtDecode',
           '@github/webauthn-json': 'GithubWebauthnJson',
+          '@github/webauthn-json/browser-ponyfill': 'GithubWebauthnJsonBrowserPonyfill',
           '@herodotus-cloud/core': 'HerodotusCore',
         },
       },

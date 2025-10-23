@@ -1,1 +1,0 @@
-import{d as t,l as p}from"./npm-@vue-runtime-core-dITdE_UN.js";const r=t({name:"HBehaviorCaptchaControl",props:{size:{type:Number,default:30},description:{type:String,required:!0},prompt:{type:String,default:""}},setup:t=>({tips:p(()=>t.prompt?t.description+"【"+t.prompt+"】":t.description)})});export{r as _};

@@ -1,5 +1,16 @@
 # @herodotus-cloud/framework-kernel
 
+## 2.6.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/core@2.6.0
+
 ## 2.5.3
 
 ### Patch Changes
