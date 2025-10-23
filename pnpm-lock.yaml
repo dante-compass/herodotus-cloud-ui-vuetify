@@ -117,6 +117,12 @@ importers:
       '@fontsource/roboto':
         specifier: 5.2.8
         version: 5.2.8
+      '@herodotus/core':
+        specifier: workspace:^
+        version: link:../../shared/core
+      '@herodotus/framework':
+        specifier: workspace:^
+        version: link:../../shared/framewok
       '@mdi/font':
         specifier: 7.4.47
         version: 7.4.47

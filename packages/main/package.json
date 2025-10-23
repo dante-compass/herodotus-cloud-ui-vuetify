@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@fontsource/roboto": "5.2.8",
+    "@herodotus/core": "workspace:^",
+    "@herodotus/framework": "workspace:^",
     "@mdi/font": "7.4.47",
     "vue": "^3.5.22",
     "vue-i18n": "^11.1.12"
