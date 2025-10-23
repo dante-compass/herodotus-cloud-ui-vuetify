@@ -16,8 +16,10 @@
     "@herodotus/core": "workspace:^",
     "@herodotus/framework": "workspace:^",
     "@mdi/font": "7.4.47",
+    "nprogress": "^0.2.0",
     "vue": "^3.5.22",
-    "vue-i18n": "^11.1.12"
+    "vue-i18n": "^11.1.12",
+    "vue-router": "^4.6.3"
   },
   "devDependencies": {
     "@mdi/js": "^7.4.47"

@@ -36,7 +36,7 @@ const vuetify = createVuetify({
     adapter: createVueI18nAdapter({ i18n, useI18n }),
   },
 
-  blueprint: md3,
+  // blueprint: md3,
 });
 
 export const setupVuetify = (app: App<Element>) => {

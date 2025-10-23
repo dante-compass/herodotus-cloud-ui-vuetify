@@ -1,11 +1,12 @@
-// Plugins
-import { setupVuetify } from '@/plugins';
-
-// Components
 import App from './App.vue';
-
-// Composables
 import { createApp } from 'vue';
+
+// Plugins
+import { setupVuetify, setupPinia } from '@/plugins';
+import { setupRouter } from '@/router';
+
+import '@herodotus/core/style.css';
+import '@herodotus/framework/style.css';
 
 // Styles
 import 'unfonts.css';
@@ -17,10 +18,10 @@ async function setupApp() {
   setupVuetify(app);
 
   // 注册状态管理
-  // setupPinia(app);
+  setupPinia(app);
 
   // 挂载路由
-  // setupRouter(app);
+  setupRouter(app);
 
   app.mount('#app', true);
 }

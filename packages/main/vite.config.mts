@@ -1,10 +1,14 @@
 import type { ConfigEnv, UserConfigExport } from 'vite';
 
 // Plugins
-import Components from 'unplugin-vue-components/vite';
 import Vue from '@vitejs/plugin-vue';
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 import Fonts from 'unplugin-fonts/vite';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
+import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 
 // Utilities
 import { defineConfig, loadEnv } from 'vite';
@@ -29,6 +33,27 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       }),
       Components({
         dts: 'types/components.d.ts',
+      }),
+      AutoImport({
+        imports: [
+          'vue',
+          {
+            pinia: ['defineStore', 'storeToRefs'],
+          },
+        ],
+        dts: 'types/auto-imports.d.ts',
+        eslintrc: {
+          enabled: true,
+        },
+        vueTemplate: true,
+      }),
+      Icons({
+        compiler: 'vue3',
+        autoInstall: true,
+        customCollections: {
+          // 这里是存放svg图标的文件地址，custom是自定义图标库的名称
+          custom: FileSystemIconLoader('./src/assets/svg'),
+        },
       }),
       Fonts({
         fontsource: {

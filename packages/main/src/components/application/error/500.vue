@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { HErrorLayout } from '@/components';
+import HErrorLayout from './HErrorLayout.vue';
 import IconServiceError from '~icons/custom/service-error';
 
 export default defineComponent({

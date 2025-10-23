@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { HErrorLayout } from '@/components';
+import HErrorLayout from './HErrorLayout.vue';
 import IconNoPermission from '~icons/custom/no-permission';
 
 export default defineComponent({
