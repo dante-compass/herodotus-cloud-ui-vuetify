@@ -45,15 +45,15 @@ export default defineConfig({
         'pinia-plugin-persistedstate',
         'vue',
         'vue-router',
-        '@github/webauthn-json',
         '@github/webauthn-json/browser-ponyfill',
-        '@herodotus-cloud/core',
+        '@herodotus/core',
       ],
       output: {
         exports: 'named',
         assetFileNames: `assets/[ext]/[name][extname]`,
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
+          crypto: 'Crypto',
           'lodash-es': 'LodashEs',
           'js-base64': 'JsBase64',
           'jwt-decode': 'JwtDecode',
@@ -61,9 +61,8 @@ export default defineConfig({
           'pinia-plugin-persistedstate': 'PiniaPluginPersistedstate',
           vue: 'Vue',
           'vue-router': 'VueRouter',
-          '@github/webauthn-json': 'GithubWebauthnJson',
           '@github/webauthn-json/browser-ponyfill': 'GithubWebauthnJsonBrowserPonyfill',
-          '@herodotus-cloud/core': 'HerodotusCore',
+          '@herodotus/core': 'HerodotusCore',
         },
       },
     },
