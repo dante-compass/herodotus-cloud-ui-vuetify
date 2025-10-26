@@ -1,0 +1,41 @@
+{
+  "name": "@herodotus/components",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --fix"
+  },
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.mjs",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.es.mjs",
+      "require": "./dist/index.umd.js"
+    },
+    "./style.css": "./dist/assets/css/components.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
+  },
+  "dependencies": {
+    "@herodotus/core": "workspace:^",
+    "vue": "^3.5.22",
+    "vuetify": "^3.10.7"
+  }
+}

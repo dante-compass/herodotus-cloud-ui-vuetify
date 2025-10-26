@@ -1,6 +1,7 @@
 <template>
   <v-app-bar id="tool-bar" app class="border-b" flat :priority="priority">
     <v-app-bar-nav-icon
+      color="white"
       :icon="application.leftDrawer ? 'mdi-menu-open' : 'mdi-menu-close'"
       @click="application.leftDrawer = !application.leftDrawer"
     />
@@ -10,9 +11,9 @@
     <v-spacer></v-spacer>
 
     <template v-if="mdAndUp">
+      <v-btn aria-label="Refresh" icon="mdi-refresh"></v-btn>
       <v-btn
-        icon
-        icon-name="mdi-cog-outline"
+        icon="mdi-cog-outline"
         tooltip="设置"
         @click.stop="application.rightDrawer = !application.rightDrawer"
       ></v-btn>

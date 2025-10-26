@@ -8,7 +8,7 @@ import { createVuetify } from 'vuetify';
 import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n';
 import { createI18n, useI18n } from 'vue-i18n';
 import { md3 } from 'vuetify/blueprints';
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
+import { aliases, mdi } from 'vuetify/iconsets/mdi';
 import * as VuetifyI18n from '@/i18n/vuetify';
 
 const i18n = createI18n({

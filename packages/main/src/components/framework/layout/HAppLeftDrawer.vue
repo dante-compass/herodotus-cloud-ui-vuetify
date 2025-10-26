@@ -13,7 +13,7 @@
     </v-list>
 
     <v-divider></v-divider>
-    <h-app-menu nav></h-app-menu>
+    <!-- <h-app-menu nav></h-app-menu> -->
   </v-navigation-drawer>
 </template>
 

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import IconHerodotusNoPermission from '~icons/herodotus/no-permission';
+import IconNoPermission from '~icons/herodotus/no-permission';
 
-defineOptions({ name: 'NoPermission', components: { IconHerodotusNoPermission } });
+defineOptions({ name: 'NoPermission', components: { IconNoPermission } });
 </script>
