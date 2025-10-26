@@ -1,0 +1,1 @@
+"use strict";function e(){return{type:"component",resolve:e=>{if(e.startsWith("H")){const t=[];return{name:e,from:"@herodotus/components",sideEffects:t.length>0?t:void 0}}}}}Object.defineProperties(exports,{__esModule:{value:!0},[Symbol.toStringTag]:{value:"Module"}}),exports.HerodotusResolver=e,exports.default=e;

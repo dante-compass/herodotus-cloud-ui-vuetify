@@ -2,7 +2,7 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 
 import Vue from '@vitejs/plugin-vue';
-import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
+import { transformAssetUrls } from 'vite-plugin-vuetify';
 import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
@@ -10,10 +10,6 @@ export default defineConfig({
   plugins: [
     Vue({
       template: { transformAssetUrls },
-    }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
-    Vuetify({
-      autoImport: true,
     }),
     dts({
       insertTypesEntry: true,
@@ -28,9 +24,13 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+      entry: {
+        index: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+        resolver: fileURLToPath(new URL('./src/resolver.ts', import.meta.url)),
+      },
       name: '@herodotus/components',
-      fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
+      fileName: (format, entry) =>
+        format === 'es' ? `${entry}.${format}.mjs` : `${entry}.${format}.js`,
     },
     minify: 'terser',
     terserOptions: {
@@ -43,7 +43,12 @@ export default defineConfig({
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
-      external: ['lodash-es', 'vue', 'vuetify', '@herodotus-cloud/core'],
+      external: [
+        'lodash-es',
+        'vue',
+        'vuetify/components',
+        '@herodotus-cloud/core',
+      ],
       output: {
         exports: 'named',
         assetFileNames: `assets/[ext]/[name][extname]`,
@@ -51,7 +56,7 @@ export default defineConfig({
         globals: {
           'lodash-es': 'LodashEs',
           vue: 'Vue',
-          vuetify: 'Vuetify',
+          'vuetify/components': 'VuetifyComponents',
           '@herodotus-cloud/core': 'HerodotusCore',
         },
       },

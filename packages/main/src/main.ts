@@ -13,7 +13,6 @@ import HerodotusComponents from '@herodotus/components';
 // Styles
 import '@herodotus/core/style.css';
 import '@herodotus/framework/style.css';
-import '@herodotus/components/style.css';
 import 'animate.css/animate.min.css';
 import 'unfonts.css';
 
@@ -33,8 +32,6 @@ async function setupApp() {
 
   // 挂载路由
   setupRouter(app);
-
-  app.use(HerodotusComponents);
 
   app.mount('#app', true);
 

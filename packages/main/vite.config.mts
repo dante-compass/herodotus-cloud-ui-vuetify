@@ -9,6 +9,7 @@ import Components from 'unplugin-vue-components/vite';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
+import { HerodotusResolver } from '@herodotus/components/resolver';
 
 import { compression } from 'vite-plugin-compression2';
 import { createHtmlPlugin } from 'vite-plugin-html';
@@ -40,6 +41,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       Components({
         dts: 'types/components.d.ts',
         resolvers: [
+          HerodotusResolver(),
           IconsResolver({
             customCollections: ['herodotus'],
           }),

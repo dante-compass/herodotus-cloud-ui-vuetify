@@ -4,9 +4,9 @@
     "declaration": true,
     "typeRoots": [
       "packages/**/types",
-      "packages/**/node_modules/@types",
+      "packages/**/node_modules/types",
       "shared/**/types",
-      "shared/**/node_modules/@types"
+      "shared/**/node_modules/types"
     ]
   },
   "exclude": [

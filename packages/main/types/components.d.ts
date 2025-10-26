@@ -18,6 +18,7 @@ declare module 'vue' {
     HAppLeftDrawer: typeof import('./../src/components/framework/layout/HAppLeftDrawer.vue')['default']
     HAppRightDrawer: typeof import('./../src/components/framework/layout/HAppRightDrawer.vue')['default']
     HAppToolbar: typeof import('./../src/components/framework/layout/HAppToolbar.vue')['default']
+    HButton: typeof import('@herodotus/components')['HButton']
     HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default']
     HErrorLayout: typeof import('./../src/components/framework/error/HErrorLayout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

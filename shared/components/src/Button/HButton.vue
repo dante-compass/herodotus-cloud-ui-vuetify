@@ -1,22 +1,34 @@
 <template>
-  <v-btn v-bind="$attrs">
-    {{ label }}
-    <v-tooltip v-if="tooltip" :location="location" :open-delay="openDelay" activator="parent">
+  <v-btn :icon="isIcon" v-bind="$attrs">
+    <template v-if="!icon">
+      {{ label }}
+    </template>
+    <v-icon v-else :color="color ? color : undefined" :icon="icon"></v-icon>
+
+    <v-tooltip v-if="tooltip" :location="location" activator="parent">
       {{ tooltip }}
     </v-tooltip>
   </v-btn>
 </template>
 
 <script lang="ts" setup>
-import type { VTooltip } from 'vuetify/components';
+import { VBtn, VIcon, VTooltip } from 'vuetify/components';
+
+import { computed } from 'vue';
+import { isEmpty } from 'lodash-es';
 
 interface Props {
   label: string;
+  icon?: string;
   tooltip?: string;
-  location: VTooltip['location'];
-  openDelay: string | number;
+  color?: string;
+  location?: VTooltip['location'];
 }
 
-defineOptions({ name: 'HButton' });
-withDefaults(defineProps<Props>(), { location: 'bottom', openDelay: 200 });
+defineOptions({ name: 'HButton', components: { VBtn, VIcon } });
+const props = withDefaults(defineProps<Props>(), { location: 'bottom' });
+
+const isIcon = computed(() => {
+  return !isEmpty(props.icon);
+});
 </script>
