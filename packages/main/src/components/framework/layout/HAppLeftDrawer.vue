@@ -1,10 +1,5 @@
 <template>
   <v-navigation-drawer v-model="application.leftDrawer" width="300" theme="dark">
-    <v-list>
-      <h-app-logo></h-app-logo>
-    </v-list>
-
-    <v-divider></v-divider>
     <!-- <h-app-menu nav></h-app-menu> -->
 
     <template #append>

@@ -1,7 +1,7 @@
-import { defineComponent, computed, createBlock, openBlock, unref, mergeProps, withCtx, createElementBlock, createCommentVNode, Fragment, createTextVNode, toDisplayString } from "vue";
+import { defineComponent, computed, createBlock, openBlock, unref, mergeProps, withCtx, createElementBlock, createCommentVNode, Fragment, createTextVNode, toDisplayString, resolveComponent, createElementVNode, renderSlot, createVNode } from "vue";
 import { VIcon, VBtn, VTooltip } from "vuetify/components";
 import { isEmpty } from "lodash-es";
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   ...{ name: "HButton", components: { VBtn, VIcon } },
   __name: "HButton",
   props: {
@@ -42,10 +42,47 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
+_sfc_main$1.install = (app) => {
+  app.component(_sfc_main$1.name, _sfc_main$1);
+};
+const _hoisted_1 = { class: "d-flex mb-3 w-100" };
+const _hoisted_2 = { class: "flex-1-1-0" };
+const _sfc_main = /* @__PURE__ */ defineComponent({
+  ...{ name: "HSettingLabel" },
+  __name: "HSettingLabel",
+  props: {
+    title: {},
+    text: {}
+  },
+  setup(__props) {
+    return (_ctx, _cache) => {
+      const _component_v_label = resolveComponent("v-label");
+      const _component_v_messages = resolveComponent("v-messages");
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createElementVNode("div", _hoisted_2, [
+          createVNode(_component_v_label, {
+            text: __props.title,
+            class: "mb-1 font-weight-medium"
+          }, {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "title")
+            ]),
+            _: 3
+          }, 8, ["text"]),
+          createVNode(_component_v_messages, {
+            messages: __props.text,
+            active: ""
+          }, null, 8, ["messages"])
+        ]),
+        renderSlot(_ctx.$slots, "default")
+      ]);
+    };
+  }
+});
 _sfc_main.install = (app) => {
   app.component(_sfc_main.name, _sfc_main);
 };
-const components = [_sfc_main];
+const components = [_sfc_main$1, _sfc_main];
 const install = (app) => {
   components.map((component) => component.install(app));
 };
@@ -53,6 +90,7 @@ const index = {
   install
 };
 export {
-  _sfc_main as HButton,
+  _sfc_main$1 as HButton,
+  _sfc_main as HSettingLabel,
   index as default
 };
