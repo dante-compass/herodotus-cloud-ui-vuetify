@@ -1,10 +1,8 @@
 <template>
   <v-app>
     <h-app-right-drawer></h-app-right-drawer>
-
-    <h-app-left-drawer></h-app-left-drawer>
-
     <h-app-toolbar></h-app-toolbar>
+    <h-app-left-drawer></h-app-left-drawer>
 
     <v-main :class="backgroundColor">
       <h-app-container></h-app-container>

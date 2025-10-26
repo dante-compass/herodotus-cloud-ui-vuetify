@@ -16,6 +16,7 @@ declare module 'vue' {
     500: typeof import('./../src/components/framework/error/500.vue')['default']
     HAppContainer: typeof import('./../src/components/framework/layout/HAppContainer.vue')['default']
     HAppLeftDrawer: typeof import('./../src/components/framework/layout/HAppLeftDrawer.vue')['default']
+    HAppLogo: typeof import('./../src/components/framework/layout/HAppLogo.vue')['default']
     HAppRightDrawer: typeof import('./../src/components/framework/layout/HAppRightDrawer.vue')['default']
     HAppToolbar: typeof import('./../src/components/framework/layout/HAppToolbar.vue')['default']
     HButton: typeof import('@herodotus/components')['HButton']

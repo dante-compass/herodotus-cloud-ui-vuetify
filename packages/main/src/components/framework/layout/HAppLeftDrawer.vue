@@ -1,19 +1,28 @@
 <template>
   <v-navigation-drawer v-model="application.leftDrawer" width="300" theme="dark">
     <v-list>
-      <v-list-item
-        prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
-        subtitle="john@google.com"
-        title="John Leider"
-      >
-        <template v-slot:append>
-          <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn>
-        </template>
-      </v-list-item>
+      <h-app-logo></h-app-logo>
     </v-list>
 
     <v-divider></v-divider>
     <!-- <h-app-menu nav></h-app-menu> -->
+
+    <template #append>
+      <v-divider></v-divider>
+      <div class="d-flex align-center text-caption text-medium-emphasis pa-2">
+        <div class="d-flex ms-auto overflow-hidden">
+          <v-btn
+            :text="version"
+            :to="`https://gitee.com/dromara/dante-cloud/releases/tag/v${version}`"
+            class="text-caption"
+            prepend-icon="mdi-tag-outline"
+            size="small"
+            variant="text"
+            slim
+          ></v-btn>
+        </div>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -24,4 +33,6 @@ import { useApplicationStore } from '@herodotus/framework';
 defineOptions({ name: 'HAppLeftDrawer' });
 
 const application = useApplicationStore();
+
+const version = shallowRef('3.5.7.6');
 </script>

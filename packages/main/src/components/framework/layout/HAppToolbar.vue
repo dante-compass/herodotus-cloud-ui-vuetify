@@ -1,29 +1,41 @@
 <template>
-  <v-app-bar id="tool-bar" app class="border-b" flat :priority="priority">
+  <v-app-bar class="border-b px-md-3" flat>
+    <div class="px-1" />
+
     <v-app-bar-nav-icon
+      class="ml-12"
       color="white"
       :icon="application.leftDrawer ? 'mdi-menu-open' : 'mdi-menu-close'"
       @click="application.leftDrawer = !application.leftDrawer"
     />
 
+    <template #prepend>
+      <v-img :src="logo" width="180" />
+    </template>
+
     <!-- <h-app-breadcrumbs v-if="showBreadcrumbs"></h-app-breadcrumbs> -->
 
     <v-spacer></v-spacer>
 
-    <template v-if="mdAndUp">
+    <div class="d-flex ga-1">
+      <template v-if="mdAndUp">
+        <h-button
+          icon="mdi-cog-outline"
+          tooltip="设置"
+          @click.stop="application.rightDrawer = !application.rightDrawer"
+        ></h-button>
+      </template>
+
+      <v-divider vertical></v-divider>
+
       <v-btn aria-label="Refresh" icon="mdi-refresh"></v-btn>
-      <h-button
-        icon="mdi-cog-outline"
-        tooltip="设置"
-        @click.stop="application.rightDrawer = !application.rightDrawer"
-      ></h-button>
-    </template>
+    </div>
   </v-app-bar>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { useDisplay } from 'vuetify';
+import { useDisplay, useTheme } from 'vuetify';
 
 import { useApplicationStore, useSettingsStore } from '@herodotus/framework';
 
@@ -35,5 +47,11 @@ const settings = useSettingsStore();
 
 const priority = computed(() => {
   return settings.isClassicLayout ? -2 : 0;
+});
+
+const theme = useTheme();
+
+const logo = computed(() => {
+  return `/images/layouts/dante-cloud-${theme.current.value.dark ? 'dark' : 'light'}.png`;
 });
 </script>
