@@ -1,5 +1,5 @@
 <template>
-  <v-btn variant="text" v-bind="$attrs">
+  <v-btn v-bind="$attrs">
     {{ label }}
     <v-tooltip v-if="tooltip" :location="location" :open-delay="openDelay" activator="parent">
       {{ tooltip }}

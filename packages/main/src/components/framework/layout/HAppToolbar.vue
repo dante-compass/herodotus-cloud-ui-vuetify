@@ -12,11 +12,11 @@
 
     <template v-if="mdAndUp">
       <v-btn aria-label="Refresh" icon="mdi-refresh"></v-btn>
-      <v-btn
+      <h-button
         icon="mdi-cog-outline"
         tooltip="设置"
         @click.stop="application.rightDrawer = !application.rightDrawer"
-      ></v-btn>
+      ></h-button>
     </template>
   </v-app-bar>
 </template>

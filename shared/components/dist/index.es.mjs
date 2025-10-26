@@ -1,4 +1,4 @@
-import { reactive, watchEffect, toRef, capitalize, Fragment, shallowRef, warn, getCurrentInstance as getCurrentInstance$1, inject, computed, provide, ref, unref, defineComponent as defineComponent$1, isRef, toValue, createElementVNode, normalizeClass, createVNode, normalizeStyle, watch, onScopeDispose, effectScope, toRaw, useId, onBeforeUnmount, onMounted, onUpdated, mergeProps, toRefs, Text, readonly, resolveDynamicComponent, nextTick, withDirectives, toDisplayString, TransitionGroup, Transition, h, Teleport, vShow, createBlock, openBlock, withCtx, createTextVNode, createCommentVNode } from "vue";
+import { reactive, watchEffect, toRef, capitalize, Fragment, shallowRef, warn, getCurrentInstance as getCurrentInstance$1, inject, computed, provide, ref, unref, defineComponent as defineComponent$1, isRef, toValue, createElementVNode, normalizeClass, createVNode, normalizeStyle, watch, onScopeDispose, effectScope, toRaw, useId, onBeforeUnmount, onMounted, onUpdated, mergeProps, toRefs, Text, readonly, resolveDynamicComponent, nextTick, withDirectives, toDisplayString, TransitionGroup, Transition, h, Teleport, vShow, createBlock, openBlock, normalizeProps, guardReactiveProps, withCtx, createTextVNode, createCommentVNode } from "vue";
 const IN_BROWSER = typeof window !== "undefined";
 const SUPPORTS_INTERSECTION = IN_BROWSER && "IntersectionObserver" in window;
 const SUPPORTS_MATCH_MEDIA = IN_BROWSER && "matchMedia" in window && typeof window.matchMedia === "function";
@@ -4214,7 +4214,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent$1({
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(VBtn, mergeProps({ variant: "text" }, _ctx.$attrs), {
+      return openBlock(), createBlock(VBtn, normalizeProps(guardReactiveProps(_ctx.$attrs)), {
         default: withCtx(() => [
           createTextVNode(toDisplayString(__props.label) + " ", 1),
           __props.tooltip ? (openBlock(), createBlock(VTooltip, {
