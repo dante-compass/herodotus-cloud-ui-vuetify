@@ -18,7 +18,7 @@ import { computed } from 'vue';
 import { isEmpty } from 'lodash-es';
 
 interface Props {
-  label: string;
+  label?: string;
   icon?: string;
   tooltip?: string;
   color?: string;
