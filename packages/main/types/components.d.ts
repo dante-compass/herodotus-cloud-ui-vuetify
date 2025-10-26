@@ -18,10 +18,13 @@ declare module 'vue' {
     HAppLeftDrawer: typeof import('./../src/components/framework/layout/HAppLeftDrawer.vue')['default']
     HAppLogo: typeof import('./../src/components/framework/layout/HAppLogo.vue')['default']
     HAppRightDrawer: typeof import('./../src/components/framework/layout/HAppRightDrawer.vue')['default']
+    HAppSettingOptions: typeof import('./../src/components/framework/layout/settings/HAppSettingOptions.vue')['default']
+    HAppThemeOption: typeof import('./../src/components/framework/layout/settings/HAppThemeOption.vue')['default']
     HAppToolbar: typeof import('./../src/components/framework/layout/HAppToolbar.vue')['default']
     HButton: typeof import('@herodotus/components')['HButton']
     HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default']
     HErrorLayout: typeof import('./../src/components/framework/error/HErrorLayout.vue')['default']
+    HSettingLabel: typeof import('@herodotus/components')['HSettingLabel']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

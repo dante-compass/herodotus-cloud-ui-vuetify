@@ -12,7 +12,9 @@
 </template>
 
 <script lang="ts" setup>
-defineOptions({ name: 'HSettingLabel' });
+import { VLabel, VMessages } from 'vuetify/components';
+
+defineOptions({ name: 'HSettingLabel', components: { VLabel, VMessages } });
 
 interface Props {
   title: string;

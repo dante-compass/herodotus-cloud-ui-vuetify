@@ -1,5 +1,5 @@
-import { defineComponent, computed, createBlock, openBlock, unref, mergeProps, withCtx, createElementBlock, createCommentVNode, Fragment, createTextVNode, toDisplayString, resolveComponent, createElementVNode, renderSlot, createVNode } from "vue";
-import { VIcon, VBtn, VTooltip } from "vuetify/components";
+import { defineComponent, computed, createBlock, openBlock, unref, mergeProps, withCtx, createElementBlock, createCommentVNode, Fragment, createTextVNode, toDisplayString, createElementVNode, renderSlot, createVNode } from "vue";
+import { VIcon, VBtn, VTooltip, VMessages, VLabel } from "vuetify/components";
 import { isEmpty } from "lodash-es";
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   ...{ name: "HButton", components: { VBtn, VIcon } },
@@ -48,7 +48,7 @@ _sfc_main$1.install = (app) => {
 const _hoisted_1 = { class: "d-flex mb-3 w-100" };
 const _hoisted_2 = { class: "flex-1-1-0" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  ...{ name: "HSettingLabel" },
+  ...{ name: "HSettingLabel", components: { VLabel, VMessages } },
   __name: "HSettingLabel",
   props: {
     title: {},
@@ -56,11 +56,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      const _component_v_label = resolveComponent("v-label");
-      const _component_v_messages = resolveComponent("v-messages");
       return openBlock(), createElementBlock("div", _hoisted_1, [
         createElementVNode("div", _hoisted_2, [
-          createVNode(_component_v_label, {
+          createVNode(unref(VLabel), {
             text: __props.title,
             class: "mb-1 font-weight-medium"
           }, {
@@ -69,7 +67,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ]),
             _: 3
           }, 8, ["text"]),
-          createVNode(_component_v_messages, {
+          createVNode(unref(VMessages), {
             messages: __props.text,
             active: ""
           }, null, 8, ["messages"])
