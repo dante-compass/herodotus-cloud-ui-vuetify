@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fontsource/roboto": "5.2.8",
+    "@herodotus/components": "workspace:^",
     "@herodotus/core": "workspace:^",
     "@herodotus/framework": "workspace:^",
     "@mdi/font": "7.4.47",
