@@ -1,7 +1,9 @@
 import { App } from 'vue';
 import { HButton } from './Button';
 import { HSettingLabel } from './Label';
-export { HButton, HSettingLabel };
+import { HSignInBackground } from './SignInBackground';
+export { HButton, HSettingLabel, HSignInBackground };
+export * from './declarations';
 declare const _default: {
     install: (app: App) => void;
 };
