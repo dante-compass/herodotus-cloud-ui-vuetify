@@ -1,7 +1,10 @@
-import { defineComponent, computed, createBlock, openBlock, unref, mergeProps, withCtx, createElementBlock, createCommentVNode, Fragment, createTextVNode, toDisplayString, createElementVNode, renderSlot, createVNode } from "vue";
+import { defineComponent, computed, createBlock, openBlock, unref, mergeProps, withCtx, createElementBlock, createCommentVNode, Fragment, createTextVNode, toDisplayString, shallowRef, onMounted, nextTick, onUnmounted, renderSlot, createElementVNode, createVNode } from "vue";
 import { VIcon, VBtn, VTooltip, VMessages, VLabel } from "vuetify/components";
 import { isEmpty } from "lodash-es";
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+import { tsParticles } from "@tsparticles/engine";
+import { loadBasic } from "@tsparticles/basic";
+import { loadParticlesLinksInteraction } from "@tsparticles/interaction-particles-links";
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   ...{ name: "HButton", components: { VBtn, VIcon } },
   __name: "HButton",
   props: {
@@ -39,6 +42,79 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
         ]),
         _: 1
       }, 16, ["icon"]);
+    };
+  }
+});
+_sfc_main$5.install = (app) => {
+  app.component(_sfc_main$5.name, _sfc_main$5);
+};
+const options = {
+  particles: {
+    number: {
+      density: {
+        enable: true,
+        width: 1920,
+        height: 1080
+      },
+      value: 100
+    },
+    links: {
+      distance: 125,
+      enable: true,
+      triangles: {
+        enable: true,
+        opacity: 0.1
+      }
+    },
+    move: {
+      enable: true,
+      speed: 5
+    },
+    size: {
+      value: 1
+    },
+    shape: {
+      type: "circle"
+    }
+  }
+};
+const _hoisted_1$4 = ["id"];
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+  ...{ name: "HParticles" },
+  __name: "HParticles",
+  setup(__props) {
+    const id = shallowRef("HParticles");
+    let container;
+    const loadTrianglesPreset = async (engine, refresh = true) => {
+      await loadBasic(engine, false);
+      await loadParticlesLinksInteraction(engine, false);
+      await engine.addPreset("triangles", options, refresh);
+    };
+    onMounted(() => {
+      nextTick(async () => {
+        tsParticles.init();
+        await loadTrianglesPreset(tsParticles);
+        container = await tsParticles.load({
+          id: id.value,
+          options: {
+            fullScreen: {
+              zIndex: 1
+            },
+            preset: "triangles"
+          }
+        });
+      });
+    });
+    onUnmounted(() => {
+      if (container) {
+        container.destroy();
+        container = void 0;
+      }
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", { id: id.value }, [
+        renderSlot(_ctx.$slots, "default")
+      ], 8, _hoisted_1$4);
     };
   }
 });
@@ -232,11 +308,11 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const HSignInBackground = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6e91eaf1"]]);
+const HSignInBackground = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-5a605243"]]);
 HSignInBackground.install = (app) => {
   app.component(HSignInBackground.name, HSignInBackground);
 };
-const components = [_sfc_main$4, _sfc_main$3, HSignInBackground];
+const components = [_sfc_main$5, _sfc_main$4, _sfc_main$3, HSignInBackground];
 const install = (app) => {
   components.map((component) => component.install(app));
 };
@@ -244,7 +320,8 @@ const index = {
   install
 };
 export {
-  _sfc_main$4 as HButton,
+  _sfc_main$5 as HButton,
+  _sfc_main$4 as HParticles,
   _sfc_main$3 as HSettingLabel,
   HSignInBackground,
   index as default

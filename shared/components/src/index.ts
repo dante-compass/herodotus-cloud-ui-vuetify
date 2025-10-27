@@ -1,16 +1,17 @@
 import type { App } from 'vue';
 
-import { HButton } from './Button';
-import { HSettingLabel } from './Label';
-import { HSignInBackground } from './SignIn';
+import { HButton } from './HButton';
+import { HParticles } from './HParticles';
+import { HSettingLabel } from './HLabel';
+import { HSignInBackground } from './HSignIn';
 
-const components = [HButton, HSettingLabel, HSignInBackground];
+const components = [HButton, HParticles, HSettingLabel, HSignInBackground];
 
 const install = (app: App) => {
   components.map((component) => component.install(app));
 };
 
-export { HButton, HSettingLabel, HSignInBackground };
+export { HButton, HParticles, HSettingLabel, HSignInBackground };
 
 export * from './declarations';
 

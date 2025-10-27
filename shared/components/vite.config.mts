@@ -47,6 +47,9 @@ export default defineConfig({
         'lodash-es',
         'vue',
         'vuetify/components',
+        '@tsparticles/basic',
+        '@tsparticles/engine',
+        '@tsparticles/interaction-particles-links',
         '@herodotus-cloud/core',
       ],
       output: {
@@ -56,6 +59,9 @@ export default defineConfig({
         globals: {
           'lodash-es': 'LodashEs',
           vue: 'Vue',
+          '@tsparticles/basic': 'TsparticlesBasic',
+          '@tsparticles/engine': 'TsparticlesEngine',
+          '@tsparticles/interaction-particles-links': 'TsparticlesInteractionParticlesLinkss',
           'vuetify/components': 'VuetifyComponents',
           '@herodotus-cloud/core': 'HerodotusCore',
         },
