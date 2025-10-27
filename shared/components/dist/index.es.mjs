@@ -232,7 +232,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const HSignInBackground = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-578ff58d"]]);
+const HSignInBackground = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-6e91eaf1"]]);
 HSignInBackground.install = (app) => {
   app.component(HSignInBackground.name, HSignInBackground);
 };

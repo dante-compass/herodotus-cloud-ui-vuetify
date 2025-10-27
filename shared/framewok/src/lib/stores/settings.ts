@@ -13,7 +13,7 @@ export const useSettingsStore = defineStore('GlobalSettings', {
       // 是否为混合主题，预留属性
       isMixed: true,
       // 默认 primary 主题颜色
-      primary: '#1867c0',
+      primary: '#2563eb',
     },
     /**
      * 布局切换
@@ -42,11 +42,11 @@ export const useSettingsStore = defineStore('GlobalSettings', {
   }),
 
   getters: {
-    isDark: (state) => state.theme.mode === ThemeModeEnum.DARK,
+    isDarkMode: (state) => state.theme.mode != ThemeModeEnum.LIGHT,
 
-    isLight: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
+    isLightMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
 
-    isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
+    isSystemMode: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
 
     isDefaultLayout: (state) => state.layout === LayoutModeEnum.DEFAULT,
 

@@ -13,7 +13,7 @@ export function HerodotusResolver(): ComponentResolver {
         const from = `@herodotus/components`;
 
         // 构建 side effects 配置
-        const sideEffects: string[] = [];
+        const sideEffects: string[] = ['@herodotus/components/style.css'];
 
         return {
           name: componentName,

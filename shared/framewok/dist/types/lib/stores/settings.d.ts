@@ -1,6 +1,6 @@
 import { GlobalSetting, ThemeModeEnum, LayoutModeEnum } from '../../declarations';
 export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSettings", GlobalSetting, {
-    isDark: (state: {
+    isDarkMode: (state: {
         theme: {
             mode: ThemeModeEnum;
             isMixed: boolean;
@@ -20,7 +20,7 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
             };
         };
     } & import('pinia').PiniaCustomStateProperties<GlobalSetting>) => boolean;
-    isLight: (state: {
+    isLightMode: (state: {
         theme: {
             mode: ThemeModeEnum;
             isMixed: boolean;
@@ -40,7 +40,7 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
             };
         };
     } & import('pinia').PiniaCustomStateProperties<GlobalSetting>) => boolean;
-    isSystem: (state: {
+    isSystemMode: (state: {
         theme: {
             mode: ThemeModeEnum;
             isMixed: boolean;

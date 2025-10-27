@@ -2,7 +2,7 @@ import type { App } from 'vue';
 
 import { HButton } from './Button';
 import { HSettingLabel } from './Label';
-import { HSignInBackground } from './SignInBackground';
+import { HSignInBackground } from './SignIn';
 
 const components = [HButton, HSettingLabel, HSignInBackground];
 

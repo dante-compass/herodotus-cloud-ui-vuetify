@@ -109,7 +109,7 @@ export default function useSystemTheme() {
   );
 
   const theme = computed(() => {
-    return settings.isSystem ? systemTheme.value : settings.theme.mode;
+    return settings.isSystemMode ? systemTheme.value : settings.theme.mode;
   });
 
   watch(theme, themeTransition);

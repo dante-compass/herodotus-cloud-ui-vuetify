@@ -1288,7 +1288,7 @@ const useSettingsStore = defineStore("GlobalSettings", {
       // 是否为混合主题，预留属性
       isMixed: true,
       // 默认 primary 主题颜色
-      primary: "#1867c0"
+      primary: "#2563eb"
     },
     /**
      * 布局切换
@@ -1316,9 +1316,9 @@ const useSettingsStore = defineStore("GlobalSettings", {
     }
   }),
   getters: {
-    isDark: (state) => state.theme.mode === ThemeModeEnum.DARK,
-    isLight: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
-    isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
+    isDarkMode: (state) => state.theme.mode != ThemeModeEnum.LIGHT,
+    isLightMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
+    isSystemMode: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
     isDefaultLayout: (state) => state.layout === LayoutModeEnum.DEFAULT,
     isClassicLayout: (state) => state.layout === LayoutModeEnum.CLASSIC
   },
@@ -1866,7 +1866,7 @@ function useSystemTheme() {
     { immediate: true }
   );
   const theme = computed(() => {
-    return settings.isSystem ? systemTheme.value : settings.theme.mode;
+    return settings.isSystemMode ? systemTheme.value : settings.theme.mode;
   });
   watch(theme, themeTransition);
   return {

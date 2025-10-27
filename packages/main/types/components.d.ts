@@ -25,6 +25,7 @@ declare module 'vue' {
     HelloWorld: typeof import('./../src/components/HelloWorld.vue')['default']
     HErrorLayout: typeof import('./../src/components/framework/error/HErrorLayout.vue')['default']
     HSettingLabel: typeof import('@herodotus/components')['HSettingLabel']
+    HSignInBackground: typeof import('@herodotus/components')['HSignInBackground']
     HSignInLayout: typeof import('@herodotus/components')['HSignInLayout']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
