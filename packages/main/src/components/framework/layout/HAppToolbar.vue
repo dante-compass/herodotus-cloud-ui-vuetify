@@ -4,7 +4,6 @@
 
     <v-app-bar-nav-icon
       class="ml-12"
-      color="white"
       :icon="application.leftDrawer ? 'mdi-menu-open' : 'mdi-menu-close'"
       @click="application.leftDrawer = !application.leftDrawer"
     />
@@ -37,17 +36,12 @@
 import { computed } from 'vue';
 import { useDisplay, useTheme } from 'vuetify';
 
-import { useApplicationStore, useSettingsStore } from '@herodotus/framework';
+import { useApplicationStore } from '@herodotus/framework';
 
 defineOptions({ name: 'HAppToolbar' });
 
 const { mdAndUp } = useDisplay();
 const application = useApplicationStore();
-const settings = useSettingsStore();
-
-const priority = computed(() => {
-  return settings.isClassicLayout ? -2 : 0;
-});
 
 const theme = useTheme();
 

@@ -18,6 +18,7 @@
 
     <v-container class="px-3 py-3">
       <h-app-setting-options></h-app-setting-options>
+      <v-divider class="mt-4 mb-3" />
       <!-- <h-text-divider justify="start" label="界面效果"></h-text-divider>
       <h-setting-switch
         v-model="settings.effect.isUniqueOpened"
