@@ -19,7 +19,7 @@ import HSignInCornerBottom from './HSignInCornerBottom.vue';
 import HSignInCornerTop from './HSignInCornerTop.vue';
 
 defineOptions({
-  name: 'HSignInCornerBottom',
+  name: 'HSignInBackground',
   components: {
     HSignInCornerBottom,
     HSignInCornerTop,

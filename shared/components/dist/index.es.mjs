@@ -195,7 +195,7 @@ const _hoisted_1 = { class: "corner-top" };
 const _hoisted_2 = { class: "corner-bottom" };
 const _sfc_main = /* @__PURE__ */ defineComponent({
   ...{
-    name: "HSignInCornerBottom",
+    name: "HSignInBackground",
     components: {
       HSignInCornerBottom: _sfc_main$2,
       HSignInCornerTop: _sfc_main$1
@@ -232,7 +232,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const HSignInBackground = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-8c294390"]]);
+const HSignInBackground = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-578ff58d"]]);
 HSignInBackground.install = (app) => {
   app.component(HSignInBackground.name, HSignInBackground);
 };

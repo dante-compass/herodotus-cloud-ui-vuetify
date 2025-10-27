@@ -43,7 +43,7 @@ export const createRouterGuard = (router: Router) => {
     const authStore = useAuthenticationStore();
     const routeStore = useRouterStore();
 
-    const token = 'aaa';
+    const token = authStore.token;
 
     // 有 Token
     if (token) {
@@ -54,12 +54,11 @@ export const createRouterGuard = (router: Router) => {
       } else {
         // 判断动态路由是否已经添加，没有添加则进行添加
         if (!routeStore.isDynamicRouteAdded) {
-          // if (routeStore.isRemote) {
-          //   await initBackEndRoutes(router);
-          // } else {
-          //   await initFrontEndRoutes(router);
-          // }
-          await initFrontEndRoutes(router);
+          if (routeStore.isRemote) {
+            await initBackEndRoutes(router);
+          } else {
+            await initFrontEndRoutes(router);
+          }
 
           router.addRoute(NotFoundRoute);
           const redirectPath = (from.query.redirect || to.path) as string;
