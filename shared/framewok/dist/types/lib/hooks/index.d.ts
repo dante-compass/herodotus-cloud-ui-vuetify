@@ -5,5 +5,5 @@ import { default as useMenuForVuetify } from './useMenuForVuetify';
 import { default as usePasskey } from './usePasskey';
 import { default as useSignInTheme } from './useSignTheme';
 import { default as useSystemRoute } from './useSystemRoute';
-import { default as useSystemTheme } from './useSystemTheme';
-export { useEditFinish, useDeviceAuthorize, usePasskey, useSignInTheme, useMenuForQuasar, useMenuForVuetify, useSystemRoute, useSystemTheme, };
+import { default as useThemeTransition } from './useThemeTransition';
+export { useEditFinish, useDeviceAuthorize, usePasskey, useSignInTheme, useMenuForQuasar, useMenuForVuetify, useSystemRoute, useThemeTransition, };

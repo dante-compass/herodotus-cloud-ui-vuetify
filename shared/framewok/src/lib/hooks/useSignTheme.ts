@@ -7,7 +7,7 @@ export default function useSignInTheme() {
   const settings = useSettingsStore();
 
   const backgroundThemeColor = computed(() => {
-    return settings.isDarkMode
+    return settings.isDarkenMode
       ? getColorPalette(settings.theme.primary, 7)
       : settings.theme.primary;
   });
@@ -22,7 +22,7 @@ export default function useSignInTheme() {
 
   const backgroundColor = computed(() => {
     const COLOR_WHITE = '#ffffff';
-    const ratio = settings.isDarkMode ? 0.5 : 0.2;
+    const ratio = settings.isDarkenMode ? 0.5 : 0.2;
     return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
   });
 

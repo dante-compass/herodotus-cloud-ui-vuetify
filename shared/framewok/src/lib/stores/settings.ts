@@ -42,15 +42,11 @@ export const useSettingsStore = defineStore('GlobalSettings', {
   }),
 
   getters: {
-    isDarkMode: (state) => state.theme.mode != ThemeModeEnum.LIGHT,
-
+    isDark: (state) => state.theme.mode === ThemeModeEnum.DARK,
+    isLight: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
+    isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
+    isDarkenMode: (state) => state.theme.mode !== ThemeModeEnum.LIGHT,
     isLightMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
-
-    isSystemMode: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
-
-    isDefaultLayout: (state) => state.layout === LayoutModeEnum.DEFAULT,
-
-    isClassicLayout: (state) => state.layout === LayoutModeEnum.CLASSIC,
   },
   persist: true,
 });

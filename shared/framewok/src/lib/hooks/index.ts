@@ -5,7 +5,7 @@ import useMenuForVuetify from './useMenuForVuetify';
 import usePasskey from './usePasskey';
 import useSignInTheme from './useSignTheme';
 import useSystemRoute from './useSystemRoute';
-import useSystemTheme from './useSystemTheme';
+import useThemeTransition from './useThemeTransition';
 
 export {
   useEditFinish,
@@ -15,5 +15,5 @@ export {
   useMenuForQuasar,
   useMenuForVuetify,
   useSystemRoute,
-  useSystemTheme,
+  useThemeTransition,
 };

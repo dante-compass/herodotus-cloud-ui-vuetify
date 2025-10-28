@@ -1397,11 +1397,11 @@ const useSettingsStore = defineStore("GlobalSettings", {
     }
   }),
   getters: {
-    isDarkMode: (state) => state.theme.mode != ThemeModeEnum.LIGHT,
-    isLightMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
-    isSystemMode: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
-    isDefaultLayout: (state) => state.layout === LayoutModeEnum.DEFAULT,
-    isClassicLayout: (state) => state.layout === LayoutModeEnum.CLASSIC
+    isDark: (state) => state.theme.mode === ThemeModeEnum.DARK,
+    isLight: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
+    isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
+    isDarkenMode: (state) => state.theme.mode !== ThemeModeEnum.LIGHT,
+    isLightMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT
   },
   persist: true
 });
@@ -1772,7 +1772,7 @@ function usePasskey() {
 function useSignInTheme() {
   const settings = useSettingsStore();
   const backgroundThemeColor = computed(() => {
-    return settings.isDarkMode ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
+    return settings.isDarkenMode ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
   });
   const lightColor = computed(() => {
     return getColorPalette(backgroundThemeColor.value, 3);
@@ -1782,7 +1782,7 @@ function useSignInTheme() {
   });
   const backgroundColor = computed(() => {
     const COLOR_WHITE = "#ffffff";
-    const ratio = settings.isDarkMode ? 0.5 : 0.2;
+    const ratio = settings.isDarkenMode ? 0.5 : 0.2;
     return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
   });
   return {
@@ -1883,7 +1883,7 @@ function useSystemRoute(routeModules, vueModules, locate, getRoutesFromServer) {
     initFrontEndRoutes
   };
 }
-function useSystemTheme() {
+function useThemeTransition() {
   let media;
   const settings = useSettingsStore();
   const systemTheme = shallowRef(ThemeModeEnum.DARK);
@@ -1969,7 +1969,7 @@ function useSystemTheme() {
     { immediate: true }
   );
   const theme = computed(() => {
-    return settings.isSystemMode ? systemTheme.value : settings.theme.mode;
+    return settings.isSystem ? systemTheme.value : settings.theme.mode;
   });
   watch(theme, themeTransition);
   return {
@@ -2011,6 +2011,6 @@ export {
   useSettingsStore,
   useSignInTheme,
   useSystemRoute,
-  useSystemTheme,
-  useTabsViewStore
+  useTabsViewStore,
+  useThemeTransition
 };

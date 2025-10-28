@@ -30,32 +30,14 @@
 </template>
 
 <script setup lang="ts">
-import { useSettingsStore } from '@herodotus/framework';
-import { mixColor, getColorPalette } from './color';
+import { useSignInTheme } from '@herodotus/framework';
 
 defineOptions({
   name: 'HSignInLayout',
 });
 
-const settings = useSettingsStore();
+const {lightColor, darkColor, backgroundColor} = useSignInTheme();
 
-const backgroundThemeColor = computed(() => {
-  return settings.isDarkMode ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
-});
-
-const lightColor = computed(() => {
-  return getColorPalette(backgroundThemeColor.value as string, 3);
-});
-
-const darkColor = computed(() => {
-  return getColorPalette(backgroundThemeColor.value as string, 6);
-});
-
-const backgroundColor = computed(() => {
-  const COLOR_WHITE = '#ffffff';
-  const ratio = settings.isDarkMode ? 0.5 : 0.2;
-  return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
-});
 
 const themeIcon = computed(() => {
   if (settings.isLightMode) {

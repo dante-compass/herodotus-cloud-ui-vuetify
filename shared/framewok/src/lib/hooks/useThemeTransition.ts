@@ -3,7 +3,7 @@ import { watch, shallowRef, computed, nextTick } from 'vue';
 import { ThemeModeEnum } from '@/declarations';
 import { useSettingsStore } from '../stores';
 
-export default function useSystemTheme() {
+export default function useThemeTransition() {
   let media: MediaQueryList;
 
   const settings = useSettingsStore();
@@ -109,7 +109,7 @@ export default function useSystemTheme() {
   );
 
   const theme = computed(() => {
-    return settings.isSystemMode ? systemTheme.value : settings.theme.mode;
+    return settings.isSystem ? systemTheme.value : settings.theme.mode;
   });
 
   watch(theme, themeTransition);
