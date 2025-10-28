@@ -1,9 +1,13 @@
 import { ThemeModeEnum, LayoutModeEnum } from '../enums';
 
+export interface ThemeColor {
+  primary: string;
+}
+
 export interface Theme {
   mode: ThemeModeEnum;
-  isMixed: boolean;
-  primary: string;
+  dark: ThemeColor;
+  light: ThemeColor;
 }
 
 export interface Effect {
@@ -22,7 +26,7 @@ export interface Display {
   table: TableDisplay;
 }
 
-export interface GlobalSetting {
+export interface SystemSetting {
   theme: Theme;
   layout: LayoutModeEnum;
   effect: Effect;

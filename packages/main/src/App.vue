@@ -1,11 +1,9 @@
 <template>
-  <v-theme-provider :theme="theme">
+  <v-theme-provider>
     <router-view />
   </v-theme-provider>
 </template>
 
 <script lang="ts" setup>
-import { useThemeTransition } from '@herodotus/framework';
-
-const { theme } = useThemeTransition();
+defineOptions({ name: 'App' });
 </script>

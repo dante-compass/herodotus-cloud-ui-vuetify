@@ -1,19 +1,22 @@
 import { defineStore } from 'pinia';
 
-import type { GlobalSetting } from '@/declarations';
+import type { SystemSetting } from '@/declarations';
 import { ThemeModeEnum, LayoutModeEnum } from '@/declarations';
 
-export const useSettingsStore = defineStore('GlobalSettings', {
-  state: (): GlobalSetting => ({
+export const useSettingsStore = defineStore('SystemSetting', {
+  state: (): SystemSetting => ({
     /**
      * 全局主题
      */
     theme: {
       mode: ThemeModeEnum.SYSTEM,
-      // 是否为混合主题，预留属性
-      isMixed: true,
       // 默认 primary 主题颜色
-      primary: '#2563eb',
+      dark: {
+        primary: '#2563eb',
+      },
+      light: {
+        primary: '#6750A4',
+      },
     },
     /**
      * 布局切换

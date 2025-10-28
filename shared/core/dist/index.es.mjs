@@ -689,6 +689,7 @@ class AbstractService extends Service {
     });
   }
 }
+const IN_BROWSER = typeof window !== "undefined";
 dayjs.locale("zh-cn");
 class AvatarUtilities {
   static instance = new AvatarUtilities();
@@ -947,6 +948,7 @@ export {
   default2 as DayJs,
   HttpConfig,
   HttpMethodEnum,
+  IN_BROWSER,
   OperationEnum,
   PKCE,
   SM2Utils,

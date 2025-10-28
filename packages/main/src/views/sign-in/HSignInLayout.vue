@@ -8,7 +8,7 @@
           <v-card class="elevation-20 mx-auto rounded-xl" style="z-index: 5">
             <v-toolbar>
               <template v-slot:prepend>
-                <v-btn icon="mdi-google-nearby"></v-btn>
+                <v-btn icon="mdi-google-nearby" class="mx-2"></v-btn>
               </template>
 
               <v-divider vertical></v-divider>
@@ -16,7 +16,11 @@
               <v-toolbar-title class="text-h6">欢迎使用</v-toolbar-title>
 
               <template v-slot:append>
-                <v-btn :icon="themeIcon" @click="onChangeTheme"></v-btn>
+                <v-btn
+                  :icon="cycleChangeThemeIcon"
+                  @click="onCycleChangeTheme()"
+                  class="mx-2"
+                ></v-btn>
               </template>
             </v-toolbar>
             <slot></slot>
@@ -30,11 +34,12 @@
 </template>
 
 <script setup lang="ts">
-import { useSignInTheme, useSettingsStore } from '@herodotus/framework';
+import { useSystemTheme } from '@herodotus/framework';
 
 defineOptions({
   name: 'HSignInLayout',
 });
 
-const { lightColor, darkColor, backgroundColor, onChangeTheme, themeIcon } = useSignInTheme();
+const { lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeThemeIcon } =
+  useSystemTheme();
 </script>

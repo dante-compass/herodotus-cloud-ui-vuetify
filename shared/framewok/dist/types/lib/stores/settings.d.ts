@@ -1,10 +1,14 @@
-import { GlobalSetting, ThemeModeEnum, LayoutModeEnum } from '../../declarations';
-export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSettings", GlobalSetting, {
+import { SystemSetting, ThemeModeEnum, LayoutModeEnum } from '../../declarations';
+export declare const useSettingsStore: import('pinia').StoreDefinition<"SystemSetting", SystemSetting, {
     isDark: (state: {
         theme: {
             mode: ThemeModeEnum;
-            isMixed: boolean;
-            primary: string;
+            dark: {
+                primary: string;
+            };
+            light: {
+                primary: string;
+            };
         };
         layout: LayoutModeEnum;
         effect: {
@@ -19,12 +23,16 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
                 dense: boolean;
             };
         };
-    } & import('pinia').PiniaCustomStateProperties<GlobalSetting>) => boolean;
+    } & import('pinia').PiniaCustomStateProperties<SystemSetting>) => boolean;
     isLight: (state: {
         theme: {
             mode: ThemeModeEnum;
-            isMixed: boolean;
-            primary: string;
+            dark: {
+                primary: string;
+            };
+            light: {
+                primary: string;
+            };
         };
         layout: LayoutModeEnum;
         effect: {
@@ -39,12 +47,16 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
                 dense: boolean;
             };
         };
-    } & import('pinia').PiniaCustomStateProperties<GlobalSetting>) => boolean;
+    } & import('pinia').PiniaCustomStateProperties<SystemSetting>) => boolean;
     isSystem: (state: {
         theme: {
             mode: ThemeModeEnum;
-            isMixed: boolean;
-            primary: string;
+            dark: {
+                primary: string;
+            };
+            light: {
+                primary: string;
+            };
         };
         layout: LayoutModeEnum;
         effect: {
@@ -59,12 +71,16 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
                 dense: boolean;
             };
         };
-    } & import('pinia').PiniaCustomStateProperties<GlobalSetting>) => boolean;
+    } & import('pinia').PiniaCustomStateProperties<SystemSetting>) => boolean;
     isDarkenMode: (state: {
         theme: {
             mode: ThemeModeEnum;
-            isMixed: boolean;
-            primary: string;
+            dark: {
+                primary: string;
+            };
+            light: {
+                primary: string;
+            };
         };
         layout: LayoutModeEnum;
         effect: {
@@ -79,12 +95,16 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
                 dense: boolean;
             };
         };
-    } & import('pinia').PiniaCustomStateProperties<GlobalSetting>) => boolean;
+    } & import('pinia').PiniaCustomStateProperties<SystemSetting>) => boolean;
     isLightMode: (state: {
         theme: {
             mode: ThemeModeEnum;
-            isMixed: boolean;
-            primary: string;
+            dark: {
+                primary: string;
+            };
+            light: {
+                primary: string;
+            };
         };
         layout: LayoutModeEnum;
         effect: {
@@ -99,7 +119,7 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
                 dense: boolean;
             };
         };
-    } & import('pinia').PiniaCustomStateProperties<GlobalSetting>) => boolean;
+    } & import('pinia').PiniaCustomStateProperties<SystemSetting>) => boolean;
 }, {
     toDark(): void;
     toLight(): void;

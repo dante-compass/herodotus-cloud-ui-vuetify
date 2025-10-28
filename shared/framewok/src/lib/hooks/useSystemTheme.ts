@@ -1,4 +1,7 @@
-import { watch, shallowRef, computed, nextTick } from 'vue';
+import { watch, shallowRef, computed, nextTick, watchEffect } from 'vue';
+import { useTheme } from 'vuetify';
+
+import { IN_BROWSER } from '@herodotus/core';
 
 import { ThemeModeEnum } from '@/declarations';
 import { useSettingsStore } from '../stores';
@@ -6,25 +9,19 @@ import { getColorPalette, mixColor } from '@/lib/utilities';
 
 export default function useSystemTheme() {
   const settings = useSettingsStore();
+  const vuetifyTheme = useTheme();
 
   // ---------- Theme 切换效果 ----------
   let media: MediaQueryList;
   const systemTheme = shallowRef(ThemeModeEnum.DARK);
-  const IN_BROWSER = typeof window !== 'undefined';
 
   const getMatchMedia = () => {
     if (!IN_BROWSER) return;
-
     return window.matchMedia('(prefers-color-scheme: dark)');
-  };
-
-  const onThemeChange = () => {
-    systemTheme.value = media!.matches ? ThemeModeEnum.DARK : ThemeModeEnum.LIGHT;
   };
 
   const hasScrollbar = (el?: Element | null) => {
     if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
-
     const style = window.getComputedStyle(el);
     return (
       style.overflowY === 'scroll' ||
@@ -32,7 +29,7 @@ export default function useSystemTheme() {
     );
   };
 
-  const themeTransition = (): void => {
+  const themeTransition = () => {
     const x = performance.now();
     for (let i = 0; i++ < 1e7; (i << 9) & ((9 % 9) * 9 + 9));
     if (performance.now() - x > 10) return;
@@ -107,20 +104,21 @@ export default function useSystemTheme() {
         media.removeEventListener('change', onThemeChange);
       }
     },
-    { immediate: true },
   );
 
-  const currentSystemTheme = computed(() => {
-    return settings.isSystem ? systemTheme.value : settings.theme.mode;
+  const onThemeChange = () => {
+    systemTheme.value = media!.matches ? ThemeModeEnum.DARK : ThemeModeEnum.LIGHT;
+  };
+
+  watchEffect(() => {
+    vuetifyTheme.change(settings.isSystem ? systemTheme.value : settings.theme.mode);
   });
 
-  watch(currentSystemTheme, themeTransition);
+  watch(vuetifyTheme.global.name, themeTransition);
 
   // ---------- 登录页面 Theme ----------
   const backgroundThemeColor = computed(() => {
-    return settings.isDarkenMode
-      ? getColorPalette(settings.theme.primary, 7)
-      : settings.theme.primary;
+    return settings.isDarkenMode ? settings.theme.dark.primary : settings.theme.light.primary;
   });
 
   const lightColor = computed(() => {
@@ -134,23 +132,26 @@ export default function useSystemTheme() {
   const backgroundColor = computed(() => {
     const COLOR_WHITE = '#ffffff';
     const ratio = settings.isDarkenMode ? 0.5 : 0.2;
-    return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
+    return mixColor(COLOR_WHITE, backgroundThemeColor.value, ratio);
   });
 
   /**
    * 登录页面循环切换系统主题按钮事件
    */
-  const onCycleChangeTheme = (): void => {
+  const onCycleChangeTheme = () => {
     if (settings.isDark) {
       settings.toSystem();
+      return;
     }
 
     if (settings.isSystem) {
       settings.toLight();
+      return;
     }
 
     if (settings.isLight) {
       settings.toDark();
+      return;
     }
   };
 
@@ -159,17 +160,16 @@ export default function useSystemTheme() {
    */
   const cycleChangeThemeIcon = computed((): string => {
     switch (settings.theme.mode) {
+      case ThemeModeEnum.SYSTEM:
+        return 'mdi-brightness-5';
       case ThemeModeEnum.DARK:
         return 'mdi-brightness-auto';
-      case ThemeModeEnum.SYSTEM:
-        return 'mdi-brightness-4';
       default:
         return 'mdi-brightness-4';
     }
   });
 
   return {
-    currentSystemTheme,
     lightColor,
     darkColor,
     backgroundColor,

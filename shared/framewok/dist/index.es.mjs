@@ -1,11 +1,11 @@
 import { useRoute } from "vue-router";
 import { defineStore } from "pinia";
-import { Swal, AuthorizationTokenEnum, ContentTypeEnum, AuthorizationGrantTypeEnum, BuildInScopeEnum, ClientAuthenticationMethodEnum, Service, SM2Utils, SM4Utils, DayJs } from "@herodotus/core";
+import { Swal, AuthorizationTokenEnum, ContentTypeEnum, AuthorizationGrantTypeEnum, BuildInScopeEnum, ClientAuthenticationMethodEnum, Service, SM2Utils, SM4Utils, DayJs, IN_BROWSER } from "@herodotus/core";
 import { jwtDecode } from "jwt-decode";
 import { extend, colord } from "colord";
 import mixPlugin from "colord/plugins/mix";
 import { isEmpty, split, dropRight, join, merge, has, remove, findIndex, intersection, partition } from "lodash-es";
-import { nextTick, shallowRef, ref, watch, computed } from "vue";
+import { nextTick, shallowRef, ref, getCurrentInstance as getCurrentInstance$1, inject, watch, watchEffect, computed } from "vue";
 import { Base64 } from "js-base64";
 import { parseCreationOptionsFromJSON, create, parseRequestOptionsFromJSON, get } from "@github/webauthn-json/browser-ponyfill";
 import { default as default2 } from "pinia-plugin-persistedstate";
@@ -1359,17 +1359,20 @@ const useRouterStore = defineStore("Router", {
     }
   }
 });
-const useSettingsStore = defineStore("GlobalSettings", {
+const useSettingsStore = defineStore("SystemSetting", {
   state: () => ({
     /**
      * 全局主题
      */
     theme: {
       mode: ThemeModeEnum.SYSTEM,
-      // 是否为混合主题，预留属性
-      isMixed: true,
       // 默认 primary 主题颜色
-      primary: "#2563eb"
+      dark: {
+        primary: "#2563eb"
+      },
+      light: {
+        primary: "#6750A4"
+      }
     },
     /**
      * 布局切换
@@ -1872,17 +1875,28 @@ function useSystemRoute(routeModules, vueModules, locate, getRoutesFromServer) {
     initFrontEndRoutes
   };
 }
+function getCurrentInstance(name, message) {
+  const vm = getCurrentInstance$1();
+  if (!vm) {
+    throw new Error(`[Vuetify] ${name} ${"must be called from inside a setup function"}`);
+  }
+  return vm;
+}
+const ThemeSymbol = Symbol.for("vuetify:theme");
+function useTheme() {
+  getCurrentInstance("useTheme");
+  const theme = inject(ThemeSymbol, null);
+  if (!theme) throw new Error("Could not find Vuetify theme injection");
+  return theme;
+}
 function useSystemTheme() {
   const settings = useSettingsStore();
+  const vuetifyTheme = useTheme();
   let media;
   const systemTheme = shallowRef(ThemeModeEnum.DARK);
-  const IN_BROWSER = typeof window !== "undefined";
   const getMatchMedia = () => {
     if (!IN_BROWSER) return;
     return window.matchMedia("(prefers-color-scheme: dark)");
-  };
-  const onThemeChange = () => {
-    systemTheme.value = media.matches ? ThemeModeEnum.DARK : ThemeModeEnum.LIGHT;
   };
   const hasScrollbar = (el) => {
     if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
@@ -1954,15 +1968,17 @@ function useSystemTheme() {
       } else if (media) {
         media.removeEventListener("change", onThemeChange);
       }
-    },
-    { immediate: true }
+    }
   );
-  const currentSystemTheme = computed(() => {
-    return settings.isSystem ? systemTheme.value : settings.theme.mode;
+  const onThemeChange = () => {
+    systemTheme.value = media.matches ? ThemeModeEnum.DARK : ThemeModeEnum.LIGHT;
+  };
+  watchEffect(() => {
+    vuetifyTheme.change(settings.isSystem ? systemTheme.value : settings.theme.mode);
   });
-  watch(currentSystemTheme, themeTransition);
+  watch(vuetifyTheme.global.name, themeTransition);
   const backgroundThemeColor = computed(() => {
-    return settings.isDarkenMode ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
+    return settings.isDarkenMode ? settings.theme.dark.primary : settings.theme.light.primary;
   });
   const lightColor = computed(() => {
     return getColorPalette(backgroundThemeColor.value, 3);
@@ -1972,32 +1988,33 @@ function useSystemTheme() {
   });
   const backgroundColor = computed(() => {
     const COLOR_WHITE = "#ffffff";
-    const ratio = settings.isDarkenMode ? 0.5 : 0.2;
-    return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
+    return mixColor(COLOR_WHITE, backgroundThemeColor.value, 0.2);
   });
   const onCycleChangeTheme = () => {
     if (settings.isDark) {
       settings.toSystem();
+      return;
     }
     if (settings.isSystem) {
       settings.toLight();
+      return;
     }
     if (settings.isLight) {
       settings.toDark();
+      return;
     }
   };
   const cycleChangeThemeIcon = computed(() => {
     switch (settings.theme.mode) {
+      case ThemeModeEnum.SYSTEM:
+        return "mdi-brightness-5";
       case ThemeModeEnum.DARK:
         return "mdi-brightness-auto";
-      case ThemeModeEnum.SYSTEM:
-        return "mdi-brightness-4";
       default:
         return "mdi-brightness-4";
     }
   });
   return {
-    currentSystemTheme,
     lightColor,
     darkColor,
     backgroundColor,

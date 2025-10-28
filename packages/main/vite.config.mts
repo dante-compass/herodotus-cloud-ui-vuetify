@@ -27,7 +27,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   // https://vite.dev/config/
   return defineConfig({
     plugins: [
-      VueDevTools(),
       Vue({
         template: { transformAssetUrls },
       }),
