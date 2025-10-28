@@ -49,7 +49,7 @@ export const useSettingsStore = defineStore('SystemSetting', {
     isLight: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
     isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
     isDarkenMode: (state) => state.theme.mode !== ThemeModeEnum.LIGHT,
-    isLightMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
+    isLightenMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
   },
 
   actions: {

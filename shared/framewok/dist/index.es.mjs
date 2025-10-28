@@ -1404,7 +1404,7 @@ const useSettingsStore = defineStore("SystemSetting", {
     isLight: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
     isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
     isDarkenMode: (state) => state.theme.mode !== ThemeModeEnum.LIGHT,
-    isLightMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT
+    isLightenMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT
   },
   actions: {
     toDark() {
@@ -1988,7 +1988,8 @@ function useSystemTheme() {
   });
   const backgroundColor = computed(() => {
     const COLOR_WHITE = "#ffffff";
-    return mixColor(COLOR_WHITE, backgroundThemeColor.value, 0.2);
+    const ratio = settings.isDarkenMode ? 0.5 : 0.2;
+    return mixColor(COLOR_WHITE, backgroundThemeColor.value, ratio);
   });
   const onCycleChangeTheme = () => {
     if (settings.isDark) {

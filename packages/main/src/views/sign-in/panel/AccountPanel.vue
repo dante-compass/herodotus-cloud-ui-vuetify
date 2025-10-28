@@ -15,7 +15,7 @@
           label="用户名"
           placeholder="请输入用户名"
           :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
-          class="mt-6"
+          class="mt-4"
         ></v-text-field>
         <v-text-field
           v-model="password"
@@ -23,7 +23,7 @@
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           placeholder="请输入密码"
-          :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
+          :rules="[(v) => !!v || '密码不能为空，请输入密码！']"
           label="密码"
           class="mt-2"
         ></v-text-field>

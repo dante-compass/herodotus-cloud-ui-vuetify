@@ -6,7 +6,7 @@
         <v-col></v-col>
         <v-col align-self="center">
           <v-card class="elevation-20 mx-auto rounded-xl" style="z-index: 5">
-            <v-toolbar>
+            <v-toolbar :color="toolbarColor">
               <template v-slot:prepend>
                 <v-btn icon="mdi-google-nearby" class="mx-2"></v-btn>
               </template>
@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { useSystemTheme } from '@herodotus/framework';
+import { useSystemTheme, useSettingsStore } from '@herodotus/framework';
 
 defineOptions({
   name: 'HSignInLayout',
@@ -44,4 +44,9 @@ defineOptions({
 
 const { lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeThemeIcon } =
   useSystemTheme();
+const settings = useSettingsStore();
+
+const toolbarColor = computed(() => {
+  return settings.isLightenMode ? 'primary' : undefined;
+});
 </script>

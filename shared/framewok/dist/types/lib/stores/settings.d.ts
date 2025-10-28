@@ -96,7 +96,7 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"SystemSe
             };
         };
     } & import('pinia').PiniaCustomStateProperties<SystemSetting>) => boolean;
-    isLightMode: (state: {
+    isLightenMode: (state: {
         theme: {
             mode: ThemeModeEnum;
             dark: {
