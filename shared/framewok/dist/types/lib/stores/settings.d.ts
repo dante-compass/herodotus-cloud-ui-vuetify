@@ -100,4 +100,8 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"GlobalSe
             };
         };
     } & import('pinia').PiniaCustomStateProperties<GlobalSetting>) => boolean;
-}, {}>;
+}, {
+    toDark(): void;
+    toLight(): void;
+    toSystem(): void;
+}>;

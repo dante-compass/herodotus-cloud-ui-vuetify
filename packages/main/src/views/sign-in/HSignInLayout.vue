@@ -16,7 +16,7 @@
               <v-toolbar-title class="text-h6">欢迎使用</v-toolbar-title>
 
               <template v-slot:append>
-                <v-btn icon="mdi-dots-vertical"></v-btn>
+                <v-btn :icon="themeIcon" @click="onChangeTheme"></v-btn>
               </template>
             </v-toolbar>
             <slot></slot>
@@ -30,24 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import { useSignInTheme } from '@herodotus/framework';
+import { useSignInTheme, useSettingsStore } from '@herodotus/framework';
 
 defineOptions({
   name: 'HSignInLayout',
 });
 
-const {lightColor, darkColor, backgroundColor} = useSignInTheme();
-
-
-const themeIcon = computed(() => {
-  if (settings.isLightMode) {
-    return 'mdi-brightness-auto';
-  } else {
-    if (settings.isSystemMode) {
-      return 'mdi-brightness-4';
-    } else {
-      return 'mdi-brightness-5';
-    }
-  }
-});
+const { lightColor, darkColor, backgroundColor, onChangeTheme, themeIcon } = useSignInTheme();
 </script>

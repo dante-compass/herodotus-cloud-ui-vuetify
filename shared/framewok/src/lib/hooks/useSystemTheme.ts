@@ -2,11 +2,13 @@ import { watch, shallowRef, computed, nextTick } from 'vue';
 
 import { ThemeModeEnum } from '@/declarations';
 import { useSettingsStore } from '../stores';
+import { getColorPalette, mixColor } from '@/lib/utilities';
 
-export default function useThemeTransition() {
-  let media: MediaQueryList;
-
+export default function useSystemTheme() {
   const settings = useSettingsStore();
+
+  // ---------- Theme 切换效果 ----------
+  let media: MediaQueryList;
   const systemTheme = shallowRef(ThemeModeEnum.DARK);
   const IN_BROWSER = typeof window !== 'undefined';
 
@@ -108,13 +110,70 @@ export default function useThemeTransition() {
     { immediate: true },
   );
 
-  const theme = computed(() => {
+  const currentSystemTheme = computed(() => {
     return settings.isSystem ? systemTheme.value : settings.theme.mode;
   });
 
-  watch(theme, themeTransition);
+  watch(currentSystemTheme, themeTransition);
+
+  // ---------- 登录页面 Theme ----------
+  const backgroundThemeColor = computed(() => {
+    return settings.isDarkenMode
+      ? getColorPalette(settings.theme.primary, 7)
+      : settings.theme.primary;
+  });
+
+  const lightColor = computed(() => {
+    return getColorPalette(backgroundThemeColor.value as string, 3);
+  });
+
+  const darkColor = computed(() => {
+    return getColorPalette(backgroundThemeColor.value as string, 6);
+  });
+
+  const backgroundColor = computed(() => {
+    const COLOR_WHITE = '#ffffff';
+    const ratio = settings.isDarkenMode ? 0.5 : 0.2;
+    return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
+  });
+
+  /**
+   * 登录页面循环切换系统主题按钮事件
+   */
+  const onCycleChangeTheme = (): void => {
+    if (settings.isDark) {
+      settings.toSystem();
+    }
+
+    if (settings.isSystem) {
+      settings.toLight();
+    }
+
+    if (settings.isLight) {
+      settings.toDark();
+    }
+  };
+
+  /**
+   * 登录页面循环切换系统主题按钮 Icon
+   */
+  const cycleChangeThemeIcon = computed((): string => {
+    switch (settings.theme.mode) {
+      case ThemeModeEnum.DARK:
+        return 'mdi-brightness-auto';
+      case ThemeModeEnum.SYSTEM:
+        return 'mdi-brightness-4';
+      default:
+        return 'mdi-brightness-4';
+    }
+  });
 
   return {
-    theme,
+    currentSystemTheme,
+    lightColor,
+    darkColor,
+    backgroundColor,
+    onCycleChangeTheme,
+    cycleChangeThemeIcon,
   };
 }

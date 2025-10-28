@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { extend, colord } from "colord";
 import mixPlugin from "colord/plugins/mix";
 import { isEmpty, split, dropRight, join, merge, has, remove, findIndex, intersection, partition } from "lodash-es";
-import { nextTick, shallowRef, ref, computed, watch } from "vue";
+import { nextTick, shallowRef, ref, watch, computed } from "vue";
 import { Base64 } from "js-base64";
 import { parseCreationOptionsFromJSON, create, parseRequestOptionsFromJSON, get } from "@github/webauthn-json/browser-ponyfill";
 import { default as default2 } from "pinia-plugin-persistedstate";
@@ -1403,6 +1403,17 @@ const useSettingsStore = defineStore("GlobalSettings", {
     isDarkenMode: (state) => state.theme.mode !== ThemeModeEnum.LIGHT,
     isLightMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT
   },
+  actions: {
+    toDark() {
+      this.theme.mode = ThemeModeEnum.DARK;
+    },
+    toLight() {
+      this.theme.mode = ThemeModeEnum.LIGHT;
+    },
+    toSystem() {
+      this.theme.mode = ThemeModeEnum.SYSTEM;
+    }
+  },
   persist: true
 });
 const useTabsViewStore = defineStore("TabsView", {
@@ -1769,28 +1780,6 @@ function usePasskey() {
     authenticator
   };
 }
-function useSignInTheme() {
-  const settings = useSettingsStore();
-  const backgroundThemeColor = computed(() => {
-    return settings.isDarkenMode ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
-  });
-  const lightColor = computed(() => {
-    return getColorPalette(backgroundThemeColor.value, 3);
-  });
-  const darkColor = computed(() => {
-    return getColorPalette(backgroundThemeColor.value, 6);
-  });
-  const backgroundColor = computed(() => {
-    const COLOR_WHITE = "#ffffff";
-    const ratio = settings.isDarkenMode ? 0.5 : 0.2;
-    return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
-  });
-  return {
-    lightColor,
-    darkColor,
-    backgroundColor
-  };
-}
 function useSystemRoute(routeModules, vueModules, locate, getRoutesFromServer) {
   const convert = (data) => {
     const modules = vueModules;
@@ -1883,9 +1872,9 @@ function useSystemRoute(routeModules, vueModules, locate, getRoutesFromServer) {
     initFrontEndRoutes
   };
 }
-function useThemeTransition() {
-  let media;
+function useSystemTheme() {
   const settings = useSettingsStore();
+  let media;
   const systemTheme = shallowRef(ThemeModeEnum.DARK);
   const IN_BROWSER = typeof window !== "undefined";
   const getMatchMedia = () => {
@@ -1968,12 +1957,52 @@ function useThemeTransition() {
     },
     { immediate: true }
   );
-  const theme = computed(() => {
+  const currentSystemTheme = computed(() => {
     return settings.isSystem ? systemTheme.value : settings.theme.mode;
   });
-  watch(theme, themeTransition);
+  watch(currentSystemTheme, themeTransition);
+  const backgroundThemeColor = computed(() => {
+    return settings.isDarkenMode ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
+  });
+  const lightColor = computed(() => {
+    return getColorPalette(backgroundThemeColor.value, 3);
+  });
+  const darkColor = computed(() => {
+    return getColorPalette(backgroundThemeColor.value, 6);
+  });
+  const backgroundColor = computed(() => {
+    const COLOR_WHITE = "#ffffff";
+    const ratio = settings.isDarkenMode ? 0.5 : 0.2;
+    return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
+  });
+  const onCycleChangeTheme = () => {
+    if (settings.isDark) {
+      settings.toSystem();
+    }
+    if (settings.isSystem) {
+      settings.toLight();
+    }
+    if (settings.isLight) {
+      settings.toDark();
+    }
+  };
+  const cycleChangeThemeIcon = computed(() => {
+    switch (settings.theme.mode) {
+      case ThemeModeEnum.DARK:
+        return "mdi-brightness-auto";
+      case ThemeModeEnum.SYSTEM:
+        return "mdi-brightness-4";
+      default:
+        return "mdi-brightness-4";
+    }
+  });
   return {
-    theme
+    currentSystemTheme,
+    lightColor,
+    darkColor,
+    backgroundColor,
+    onCycleChangeTheme,
+    cycleChangeThemeIcon
   };
 }
 const initializer = (options) => {
@@ -2009,8 +2038,7 @@ export {
   usePasskey,
   useRouterStore,
   useSettingsStore,
-  useSignInTheme,
   useSystemRoute,
-  useTabsViewStore,
-  useThemeTransition
+  useSystemTheme,
+  useTabsViewStore
 };

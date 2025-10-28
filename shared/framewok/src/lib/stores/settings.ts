@@ -48,5 +48,19 @@ export const useSettingsStore = defineStore('GlobalSettings', {
     isDarkenMode: (state) => state.theme.mode !== ThemeModeEnum.LIGHT,
     isLightMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
   },
+
+  actions: {
+    toDark() {
+      this.theme.mode = ThemeModeEnum.DARK;
+    },
+
+    toLight() {
+      this.theme.mode = ThemeModeEnum.LIGHT;
+    },
+
+    toSystem() {
+      this.theme.mode = ThemeModeEnum.SYSTEM;
+    },
+  },
   persist: true,
 });

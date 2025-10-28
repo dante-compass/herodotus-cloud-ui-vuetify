@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useSystemTheme } from '@herodotus/framework';
+import { useThemeTransition } from '@herodotus/framework';
 
-const { theme } = useSystemTheme();
+const { theme } = useThemeTransition();
 </script>
