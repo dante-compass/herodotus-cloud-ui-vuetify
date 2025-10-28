@@ -2,8 +2,10 @@ import { useRoute } from "vue-router";
 import { defineStore } from "pinia";
 import { Swal, AuthorizationTokenEnum, ContentTypeEnum, AuthorizationGrantTypeEnum, BuildInScopeEnum, ClientAuthenticationMethodEnum, Service, SM2Utils, SM4Utils, DayJs } from "@herodotus/core";
 import { jwtDecode } from "jwt-decode";
+import { extend, colord } from "colord";
+import mixPlugin from "colord/plugins/mix";
 import { isEmpty, split, dropRight, join, merge, has, remove, findIndex, intersection, partition } from "lodash-es";
-import { nextTick, shallowRef, ref, watch, computed } from "vue";
+import { nextTick, shallowRef, ref, computed, watch } from "vue";
 import { Base64 } from "js-base64";
 import { parseCreationOptionsFromJSON, create, parseRequestOptionsFromJSON, get } from "@github/webauthn-json/browser-ponyfill";
 import { default as default2 } from "pinia-plugin-persistedstate";
@@ -102,6 +104,85 @@ const useApplicationStore = defineStore("Application", {
     }
   }
 });
+extend([mixPlugin]);
+const hueStep = 2;
+const saturationStep = 16;
+const saturationStep2 = 5;
+const brightnessStep1 = 5;
+const brightnessStep2 = 15;
+const lightColorCount = 5;
+const darkColorCount = 4;
+function getColorPalette(color, index) {
+  if (index === 6) return color;
+  const isLight = index < 6;
+  const hsv = colord(color).toHsv();
+  const i = isLight ? lightColorCount + 1 - index : index - lightColorCount - 1;
+  const newHsv = {
+    h: getHue(hsv, i, isLight),
+    s: getSaturation(hsv, i, isLight),
+    v: getValue(hsv, i, isLight)
+  };
+  return colord(newHsv).toHex();
+}
+function getAllColorPalette(color) {
+  const indexs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  return indexs.map((index) => getColorPalette(color, index));
+}
+function getHue(hsv, i, isLight) {
+  let hue;
+  if (hsv.h >= 60 && hsv.h <= 240) {
+    hue = isLight ? hsv.h - hueStep * i : hsv.h + hueStep * i;
+  } else {
+    hue = isLight ? hsv.h + hueStep * i : hsv.h - hueStep * i;
+  }
+  if (hue < 0) {
+    hue += 360;
+  } else if (hue >= 360) {
+    hue -= 360;
+  }
+  return hue;
+}
+function getSaturation(hsv, i, isLight) {
+  let saturation;
+  if (isLight) {
+    saturation = hsv.s - saturationStep * i;
+  } else if (i === darkColorCount) {
+    saturation = hsv.s + saturationStep;
+  } else {
+    saturation = hsv.s + saturationStep2 * i;
+  }
+  if (saturation > 100) {
+    saturation = 100;
+  }
+  if (isLight && i === lightColorCount && saturation > 10) {
+    saturation = 10;
+  }
+  if (saturation < 6) {
+    saturation = 6;
+  }
+  return saturation;
+}
+function getValue(hsv, i, isLight) {
+  let value;
+  if (isLight) {
+    value = hsv.v + brightnessStep1 * i;
+  } else {
+    value = hsv.v - brightnessStep2 * i;
+  }
+  if (value > 100) {
+    value = 100;
+  }
+  return value;
+}
+function addColorAlpha(color, alpha) {
+  return colord(color).alpha(alpha).toHex();
+}
+function mixColor(firstColor, secondColor, ratio) {
+  return colord(firstColor).mix(secondColor, ratio).toHex();
+}
+function isWhiteColor(color) {
+  return colord(color).isEqual("#ffffff");
+}
 class OptionsUtilities {
   // 静态私有实例引用
   static _instance = null;
@@ -1688,6 +1769,28 @@ function usePasskey() {
     authenticator
   };
 }
+function useSignInTheme() {
+  const settings = useSettingsStore();
+  const backgroundThemeColor = computed(() => {
+    return settings.isDarkMode ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
+  });
+  const lightColor = computed(() => {
+    return getColorPalette(backgroundThemeColor.value, 3);
+  });
+  const darkColor = computed(() => {
+    return getColorPalette(backgroundThemeColor.value, 6);
+  });
+  const backgroundColor = computed(() => {
+    const COLOR_WHITE = "#ffffff";
+    const ratio = settings.isDarkMode ? 0.5 : 0.2;
+    return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
+  });
+  return {
+    lightColor,
+    darkColor,
+    backgroundColor
+  };
+}
 function useSystemRoute(routeModules, vueModules, locate, getRoutesFromServer) {
   const convert = (data) => {
     const modules = vueModules;
@@ -1888,8 +1991,13 @@ export {
   SignOutUtilities,
   SocialSourceEnum,
   ThemeModeEnum,
+  addColorAlpha,
+  getAllColorPalette,
+  getColorPalette,
   getSystemHeaders,
   initializer,
+  isWhiteColor,
+  mixColor,
   default2 as piniaPluginPersistedstate,
   useApplicationStore,
   useAuthenticationStore,
@@ -1901,6 +2009,7 @@ export {
   usePasskey,
   useRouterStore,
   useSettingsStore,
+  useSignInTheme,
   useSystemRoute,
   useSystemTheme,
   useTabsViewStore

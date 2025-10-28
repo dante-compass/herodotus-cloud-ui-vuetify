@@ -25,11 +25,7 @@
         <v-col></v-col>
       </v-row>
     </v-container>
-    <h-sign-in-background
-      :start-color="lightColor"
-      :end-color="darkColor"
-      st
-    ></h-sign-in-background>
+    <h-sign-in-background :start-color="lightColor" :end-color="darkColor"></h-sign-in-background>
   </v-parallax>
 </template>
 
@@ -59,5 +55,17 @@ const backgroundColor = computed(() => {
   const COLOR_WHITE = '#ffffff';
   const ratio = settings.isDarkMode ? 0.5 : 0.2;
   return mixColor(COLOR_WHITE, settings.theme.primary, ratio);
+});
+
+const themeIcon = computed(() => {
+  if (settings.isLightMode) {
+    return 'mdi-brightness-auto';
+  } else {
+    if (settings.isSystemMode) {
+      return 'mdi-brightness-4';
+    } else {
+      return 'mdi-brightness-5';
+    }
+  }
 });
 </script>

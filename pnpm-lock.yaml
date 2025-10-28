@@ -153,9 +153,6 @@ importers:
       animate.css:
         specifier: ^4.1.1
         version: 4.1.1
-      colord:
-        specifier: ^2.9.3
-        version: 2.9.3
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -233,6 +230,9 @@ importers:
       '@herodotus/core':
         specifier: workspace:^
         version: link:../core
+      colord:
+        specifier: ^2.9.3
+        version: 2.9.3
       js-base64:
         specifier: ^3.7.8
         version: 3.7.8
