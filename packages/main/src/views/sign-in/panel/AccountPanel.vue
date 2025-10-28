@@ -10,22 +10,26 @@
           <v-alert border="start" type="error" variant="outlined" density="compact">
             Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis
           </v-alert>
-          <v-text-field
-            v-model="username"
-            prepend-inner-icon="mdi-account"
-            label="用户名"
-            placeholder="请输入用户名"
-            class="mt-6"
-          ></v-text-field>
-          <v-text-field
-            v-model="password"
-            prepend-inner-icon="mdi-lock-outline"
-            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-            :type="visible ? 'text' : 'password'"
-            placeholder="请输入密码"
-            label="密码"
-          ></v-text-field>
-          <h-button label="登录" block></h-button>
+          <v-form ref="loginForm">
+            <v-text-field
+              v-model="username"
+              prepend-inner-icon="mdi-account"
+              label="用户名"
+              placeholder="请输入用户名"
+              :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
+              class="mt-6"
+            ></v-text-field>
+            <v-text-field
+              v-model="password"
+              prepend-inner-icon="mdi-lock-outline"
+              :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+              :type="visible ? 'text' : 'password'"
+              placeholder="请输入密码"
+              :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
+              label="密码"
+            ></v-text-field>
+          </v-form>
+          <h-button label="登录" block @click="onSignIn"></h-button>
           <h-text-divider label="OR"></h-text-divider>
           <h-button
             label="Passkey 快速登录"
@@ -42,7 +46,16 @@
 <script setup lang="ts">
 defineOptions({ name: 'AccountPanel' });
 
+const loginForm = ref();
+
 const username = shallowRef('');
 const password = shallowRef('');
 const visible = shallowRef(false);
+
+const onSignIn = async () => {
+  const { valid } = await loginForm.value.validate();
+  if (valid) {
+    loginForm;
+  }
+};
 </script>
