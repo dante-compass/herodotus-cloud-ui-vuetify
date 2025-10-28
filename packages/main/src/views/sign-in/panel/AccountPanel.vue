@@ -25,9 +25,10 @@
           placeholder="请输入密码"
           :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
           label="密码"
+          class="mt-2"
         ></v-text-field>
       </v-form>
-      <h-button label="登录" block @click="onSignIn"></h-button>
+      <h-button label="登录" block @click="onSignIn" class="mt-2"></h-button>
       <h-text-divider label="OR"></h-text-divider>
       <h-button
         label="Passkey 快速登录"

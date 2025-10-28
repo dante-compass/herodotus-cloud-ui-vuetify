@@ -22,6 +22,12 @@ const i18n = createI18n({
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 const vuetify = createVuetify({
+  defaults: {
+    VTextField: {
+      color: 'primary',
+    },
+  },
+
   theme: {
     defaultTheme: 'system',
   },

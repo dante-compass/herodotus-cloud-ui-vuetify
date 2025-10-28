@@ -15,6 +15,8 @@
 
               <v-toolbar-title class="text-h6">欢迎使用</v-toolbar-title>
 
+              <v-divider vertical></v-divider>
+
               <template v-slot:append>
                 <v-btn
                   :icon="cycleChangeThemeIcon"
