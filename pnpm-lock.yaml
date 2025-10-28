@@ -167,6 +167,12 @@ importers:
         specifier: ^7.4.47
         version: 7.4.47
 
+  shared/api:
+    dependencies:
+      '@herodotus/core':
+        specifier: workspace:^
+        version: link:../core
+
   shared/components:
     dependencies:
       '@herodotus/core':

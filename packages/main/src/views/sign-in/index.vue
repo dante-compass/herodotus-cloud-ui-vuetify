@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { useCryptoStore, useAuthenticationStore, useApplicationStore } from '@herodotus/framework';
+import { useApplicationStore } from '@herodotus/framework';
 
 import HSignInLayout from './HSignInLayout.vue';
 import AccountPanel from './panel/AccountPanel.vue';
