@@ -4,7 +4,7 @@ function HerodotusResolver() {
     resolve: (name) => {
       if (name.startsWith("H")) {
         const componentName = name;
-        const from = `@herodotus/components`;
+        const from = "@herodotus/components";
         const sideEffects = ["@herodotus/components/style.css"];
         return {
           name: componentName,

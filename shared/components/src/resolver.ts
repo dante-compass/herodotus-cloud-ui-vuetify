@@ -10,7 +10,7 @@ export function HerodotusResolver(): ComponentResolver {
       // 只处理指定前缀的组件
       if (name.startsWith('H')) {
         const componentName = name;
-        const from = `@herodotus/components`;
+        const from = '@herodotus/components';
 
         // 构建 side effects 配置
         const sideEffects: string[] = ['@herodotus/components/style.css'];

@@ -36,6 +36,7 @@
         tooltip="Passkey 仅在服务为 localhost 或者 https 形式下才能正常使用"
       ></h-button>
       <h-text-divider label="其它登录方式"></h-text-divider>
+      <social-sign-in-list></social-sign-in-list>
     </v-card-text>
   </v-card>
 </template>
