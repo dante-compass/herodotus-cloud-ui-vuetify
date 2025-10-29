@@ -52,6 +52,10 @@ export class OAuth2ApiService {
     return this.config.getUaa() + '/oauth2/device_authorization';
   }
 
+  private getOAuth2AuthorizationCodeRequestAddress(): string {
+    return this.config.getUaa() + '/oauth2/authorize';
+  }
+
   private getOIDCConnectRegisterAddress(): string {
     return this.config.getUaa() + '/connect/register';
   }
@@ -191,6 +195,11 @@ export class OAuth2ApiService {
         },
       },
     );
+  }
+
+  public authorizationCodeRequestFlow(redirectUri: string, scope = 'openid'): string {
+    const param = `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${redirectUri}&scope=${scope}`;
+    return this.getOAuth2AuthorizationCodeRequestAddress() + param;
   }
 
   /**
