@@ -489,6 +489,9 @@ class OAuth2ApiService {
   getOAuth2DeviceAuthorizationAddress() {
     return this.config.getUaa() + "/oauth2/device_authorization";
   }
+  getOAuth2AuthorizationCodeRequestAddress() {
+    return this.config.getUaa() + "/oauth2/authorize";
+  }
   getOIDCConnectRegisterAddress() {
     return this.config.getUaa() + "/connect/register";
   }
@@ -595,6 +598,10 @@ class OAuth2ApiService {
         }
       }
     );
+  }
+  authorizationCodeRequestFlow(redirectUri, scope = "openid") {
+    const param = `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${redirectUri}&scope=${scope}`;
+    return this.getOAuth2AuthorizationCodeRequestAddress() + param;
   }
   /**
    * 授权码模式

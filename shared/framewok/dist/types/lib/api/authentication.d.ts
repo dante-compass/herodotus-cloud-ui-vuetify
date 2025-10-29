@@ -9,6 +9,7 @@ export declare class OAuth2ApiService {
     private getOAuth2RevokeAddress;
     private getOAuth2SignOutAddress;
     private getOAuth2DeviceAuthorizationAddress;
+    private getOAuth2AuthorizationCodeRequestAddress;
     private getOIDCConnectRegisterAddress;
     private createBasicHeader;
     private createClientData;
@@ -17,6 +18,7 @@ export declare class OAuth2ApiService {
     revoke(token: string, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult>;
     refreshTokenFlow(refreshToken: string, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     passwordFlow(username: string, password: string, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
+    authorizationCodeRequestFlow(redirectUri: string, scope?: string): string;
     /**
      * 授权码模式
      * @param code 授权码
