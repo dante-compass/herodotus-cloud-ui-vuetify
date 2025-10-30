@@ -1,1 +1,0 @@
-import{_ as o}from"./components-library-HTable-HDenseIconButton.vue-EA_K6-P-.js";import{d as t}from"./npm-@vue-runtime-core-DV89usjJ.js";const e=t({name:"HDeleteButton",components:{HDenseIconButton:o},props:{tooltip:{type:String,default:"删除"}}});export{e as _};
