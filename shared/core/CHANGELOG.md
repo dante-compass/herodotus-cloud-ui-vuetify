@@ -1,5 +1,11 @@
 # @herodotus-cloud/core
 
+## 2.6.1
+
+### Patch Changes
+
+- 版本发布
+
 ## 2.6.0
 
 ### Minor Changes

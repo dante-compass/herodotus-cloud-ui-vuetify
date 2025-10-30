@@ -35,7 +35,7 @@ defineOptions({
 const settings = useSettingsStore();
 
 const backgroundThemeColor = computed(() => {
-  return settings.isDark ? getColorPalette(settings.theme.primary, 7) : settings.theme.primary;
+  return settings.isLight ? settings.theme.primary : getColorPalette(settings.theme.primary, 7);
 });
 
 const backgroundColor = computed(() => {

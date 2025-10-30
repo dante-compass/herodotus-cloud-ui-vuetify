@@ -1,5 +1,13 @@
 # @herodotus-cloud/form-engine
 
+## 2.6.1
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus-cloud/form-apis@2.6.1
+
 ## 2.6.0
 
 ### Minor Changes
