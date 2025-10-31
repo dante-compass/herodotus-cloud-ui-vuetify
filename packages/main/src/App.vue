@@ -1,7 +1,5 @@
 <template>
-  <v-theme-provider>
-    <router-view />
-  </v-theme-provider>
+  <v-theme-provider> <router-view /> </v-theme-provider>
 </template>
 
 <script lang="ts" setup>

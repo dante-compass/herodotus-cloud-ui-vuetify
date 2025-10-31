@@ -4,7 +4,7 @@ import { Swal, AuthorizationTokenEnum, ContentTypeEnum, AuthorizationGrantTypeEn
 import { jwtDecode } from "jwt-decode";
 import { extend, colord } from "colord";
 import mixPlugin from "colord/plugins/mix";
-import { isEmpty, split, dropRight, join, merge, has, remove, findIndex, intersection, partition } from "lodash-es";
+import { isEmpty, split, dropRight, join, merge, endsWith, has, remove, findIndex, intersection, partition } from "lodash-es";
 import { nextTick, shallowRef, ref, getCurrentInstance as getCurrentInstance$1, inject, watch, watchEffect, computed } from "vue";
 import { Base64 } from "js-base64";
 import { parseCreationOptionsFromJSON, create, parseRequestOptionsFromJSON, get } from "@github/webauthn-json/browser-ponyfill";
@@ -489,9 +489,6 @@ class OAuth2ApiService {
   getOAuth2DeviceAuthorizationAddress() {
     return this.config.getUaa() + "/oauth2/device_authorization";
   }
-  getOAuth2AuthorizationCodeRequestAddress() {
-    return this.config.getUaa() + "/oauth2/authorize";
-  }
   getOIDCConnectRegisterAddress() {
     return this.config.getUaa() + "/connect/register";
   }
@@ -599,9 +596,19 @@ class OAuth2ApiService {
       }
     );
   }
-  authorizationCodeRequestFlow(redirectUri, scope = "openid") {
+  authorizationCodeRequestFlow(api, redirectUri, scope = "openid") {
+    console.log("-------api---------", api);
+    console.log("--------config--------", this.config);
     const param = `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${redirectUri}&scope=${scope}`;
-    return this.getOAuth2AuthorizationCodeRequestAddress() + param;
+    const project = this.config.getProject();
+    let address = api;
+    if (endsWith(address, "/")) {
+      address = address.substring(0, address.length - 1);
+    }
+    if (project && (project === "dante" || project === "herodotus")) {
+      address += this.config.getUaa(false);
+    }
+    return address + "/oauth2/authorize" + param;
   }
   /**
    * 授权码模式

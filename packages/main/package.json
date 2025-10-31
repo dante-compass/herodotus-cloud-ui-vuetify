@@ -4,7 +4,8 @@
   "type": "module",
   "version": "3.5.6.3",
   "scripts": {
-    "dev": "vite",
+    "dev": "cross-env vite --force --host --mode development",
+    "prod": "cross-env vite build --mode production",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",

@@ -15,7 +15,7 @@ import {
 } from '@herodotus/core';
 
 import { Base64 } from 'js-base64';
-import { merge, isEmpty } from 'lodash-es';
+import { merge, isEmpty, endsWith } from 'lodash-es';
 
 import { SocialSourceEnum } from '@/declarations';
 
@@ -50,10 +50,6 @@ export class OAuth2ApiService {
 
   private getOAuth2DeviceAuthorizationAddress(): string {
     return this.config.getUaa() + '/oauth2/device_authorization';
-  }
-
-  private getOAuth2AuthorizationCodeRequestAddress(): string {
-    return this.config.getUaa() + '/oauth2/authorize';
   }
 
   private getOIDCConnectRegisterAddress(): string {
@@ -197,9 +193,23 @@ export class OAuth2ApiService {
     );
   }
 
-  public authorizationCodeRequestFlow(redirectUri: string, scope = 'openid'): string {
+  public authorizationCodeRequestFlow(api: string, redirectUri: string, scope = 'openid'): string {
+    console.log('-------api---------', api);
+    console.log('--------config--------', this.config);
+
     const param = `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${redirectUri}&scope=${scope}`;
-    return this.getOAuth2AuthorizationCodeRequestAddress() + param;
+
+    const project = this.config.getProject();
+    let address = api;
+    if (endsWith(address, '/')) {
+      address = address.substring(0, address.length - 1);
+    }
+
+    if (project && (project === 'dante' || project === 'herodotus')) {
+      address += this.config.getUaa(false);
+    }
+
+    return address + '/oauth2/authorize' + param;
   }
 
   /**

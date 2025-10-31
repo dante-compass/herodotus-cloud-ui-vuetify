@@ -47,7 +47,6 @@ const init = () => {
 };
 
 const find = (name: string, suffix = 'png') => {
-  console.log('===========', name);
   return `/images/social/${toLower(name)}.${suffix}`;
 };
 
@@ -58,7 +57,7 @@ const hasConfig = computed(() => {
 const authorizationCodeUrl = computed(() => {
   return SecurityApiResources.getInstance()
     .oauth2()
-    .authorizationCodeRequestFlow(VARIABLES.getRedirectUri());
+    .authorizationCodeRequestFlow(VARIABLES.getApiUrl(), VARIABLES.getRedirectUri());
 });
 
 onMounted(() => {

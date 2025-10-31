@@ -92,8 +92,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       createHtmlPlugin({
         inject: {
           data: {
-            // 查找.env.test文件里面的VITE_PROJECT_TITLE，请以VITE_标识开头
-            title: env.VITE_PROJECT_NAME,
+            // 查找.env.test文件里面的APPLICATION_NAME，请以VITE_标识开头
+            title: env.VITE_APPLICATION_NAME,
           },
         },
       }),
@@ -102,7 +102,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       exclude: ['vuetify', 'vue-router'],
       include: ['vconsole'],
     },
-    define: { 'process.env': {} },
+    define: { 'process.env': { env } },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('src', import.meta.url)),
