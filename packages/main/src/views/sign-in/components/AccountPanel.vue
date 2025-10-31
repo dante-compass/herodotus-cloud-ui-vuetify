@@ -1,9 +1,13 @@
 <template>
-  <v-card>
-    <v-card-title class="text-h6 text-md-h5 text-lg-h5 pt-4 pb-4"> 账号密码登录 </v-card-title>
-
-    <v-divider></v-divider>
-
+  <v-card class="px-12" flat>
+    <v-card-text>
+      <v-card variant="tonal" rounded="xl" class="mx-auto" max-width="400">
+        <v-tabs align-tabs="center" fixed-tabs>
+          <v-tab>账号密码登录</v-tab>
+          <v-tab>手机短信登录</v-tab>
+        </v-tabs>
+      </v-card>
+    </v-card-text>
     <v-card-text class="ma-4">
       <v-alert
         v-if="prompt"
@@ -21,6 +25,8 @@
           label="用户名"
           placeholder="请输入用户名"
           prepend-inner-icon="mdi-account"
+          clearable
+          rounded="xl"
           :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
           :disabled="isDisabled"
           tabindex="1"
@@ -31,12 +37,14 @@
           label="密码"
           placeholder="请输入密码"
           prepend-inner-icon="mdi-lock-outline"
+          clearable
+          rounded="xl"
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           :rules="[(v) => !!v || '密码不能为空，请输入密码！']"
           :disabled="isDisabled"
           tabindex="2"
-          class="mt-2"
+          class="mt-4"
           @change="onResetError()"
         ></v-text-field>
       </v-form>
@@ -45,7 +53,7 @@
         block
         @click="onShowCaptcha()"
         @keyup.enter="onShowCaptcha()"
-        class="mt-2"
+        class="mt-6"
         >登录</h-button
       >
       <h-behavior-captcha

@@ -1,5 +1,5 @@
 <template>
-  <v-img height="50" :src="logo" width="280" alt="Vuetify Logo" class="mx-auto" max-width="100%" />
+  <v-img :src="logo" v-bind="$attrs" />
 </template>
 
 <script setup lang="ts">

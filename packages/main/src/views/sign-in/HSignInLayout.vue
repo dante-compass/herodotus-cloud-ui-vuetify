@@ -7,25 +7,14 @@
         <v-col></v-col>
         <v-col align-self="center">
           <v-card class="elevation-20 mx-auto rounded-xl" style="z-index: 5">
-            <v-toolbar :color="toolbarColor">
-              <template v-slot:prepend>
-                <v-btn icon="mdi-google-nearby" class="mx-2"></v-btn>
-              </template>
-
-              <v-divider vertical></v-divider>
-
-              <v-toolbar-title class="text-h6">欢迎使用</v-toolbar-title>
-
-              <v-divider vertical></v-divider>
-
-              <template v-slot:append>
-                <v-btn
-                  :icon="cycleChangeThemeIcon"
-                  @click="onCycleChangeTheme()"
-                  class="mx-2"
-                ></v-btn>
-              </template>
-            </v-toolbar>
+            <template v-slot:append>
+              <v-btn
+                :icon="cycleChangeThemeIcon"
+                @click="onCycleChangeTheme()"
+                class="mx-2"
+              ></v-btn>
+            </template>
+            <h-app-logo height="15vh"></h-app-logo>
             <slot></slot>
           </v-card>
         </v-col>
