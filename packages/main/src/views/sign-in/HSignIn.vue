@@ -8,12 +8,12 @@
 import { useApplicationStore } from '@herodotus/framework';
 
 import HSignInLayout from './HSignInLayout.vue';
-import AccountPanel from './panel/AccountPanel.vue';
-import MobilePanel from './panel/MobilePanel.vue';
-import ScanPanel from './panel/ScanPanel.vue';
+import AccountPanel from './components/AccountPanel.vue';
+import MobilePanel from './components/MobilePanel.vue';
+import ScanPanel from './components/ScanPanel.vue';
 
 defineOptions({
-  name: 'SignIn',
+  name: 'HSignIn',
   components: { HSignInLayout, account: AccountPanel, mobile: MobilePanel, scan: ScanPanel },
 });
 

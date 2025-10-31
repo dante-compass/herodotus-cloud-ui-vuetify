@@ -1,18 +1,18 @@
 class EnvironmentVariable {
+  private static PROJECT: string = import.meta.env.VITE_PROJECT;
+  private static APPLICATION_NAME: string = import.meta.env.VITE_APPLICATION_NAME;
   private static API_URL: string = import.meta.env.VITE_API_URL;
   private static WS_URL: string = import.meta.env.VITE_WS_URL;
-  private static CAPTCHA: string = import.meta.env.VITE_CAPTCHA;
-  private static PROJECT: string = import.meta.env.VITE_PROJECT;
-  private static PROJECT_NAME: string = import.meta.env.VITE_PROJECT_NAME;
-  private static SECRET_KEY: string = import.meta.env.VITE_SECRET_KEY;
+  private static OAUTH2_CLIENT_ID: string = import.meta.env.VITE_OAUTH2_CLIENT_ID;
+  private static OAUTH2_CLIENT_SECRET: string = import.meta.env.VITE_OAUTH2_CLIENT_SECRET;
+  private static OAUTH2_REDIRECT_URI: string = import.meta.env.VITE_OAUTH2_REDIRECT_URI;
   private static AUTO_REFRESH_TOKEN: string = import.meta.env.VITE_AUTO_REFRESH_TOKEN;
-  private static MULTI_TENANCY_ID: string = import.meta.env.VITE_MULTI_TENANCY_ID;
-  private static USE_CRYPTO: string = import.meta.env.VITE_USE_CRYPTO;
   private static USE_OIDC: string = import.meta.env.VITE_USE_OIDC;
   private static USE_WEBSOCKET: string = import.meta.env.VITE_USE_WEBSOCKET;
-  private static CLIENT_ID: string = import.meta.env.VITE_OAUTH2_CLIENT_ID;
-  private static CLIENT_SECRET: string = import.meta.env.VITE_OAUTH2_CLIENT_SECRET;
-  private static REDIRECT_URI: string = import.meta.env.VITE_OAUTH2_REDIRECT_URI;
+  private static USE_CRYPTO: string = import.meta.env.VITE_USE_CRYPTO;
+  private static SECRET_KEY: string = import.meta.env.VITE_SECRET_KEY;
+  private static CAPTCHA: string = import.meta.env.VITE_CAPTCHA;
+  private static MULTI_TENANCY_ID: string = import.meta.env.VITE_MULTI_TENANCY_ID;
   private static USE_DISABLE_DEVTOOL: string = import.meta.env.VITE_USE_DISABLE_DEVTOOL;
 
   private static instance = new EnvironmentVariable();
@@ -50,8 +50,12 @@ class EnvironmentVariable {
     }
   }
 
-  public getCaptcha(): string {
-    return EnvironmentVariable.CAPTCHA;
+  private getEnvironmentVariableBoolean(docker: string, vite: string): boolean {
+    if (this.useDockerEnvironmentVariable(docker)) {
+      return this.toBoolean(docker);
+    } else {
+      return this.toBoolean(vite);
+    }
   }
 
   public getProject(): string {
@@ -63,34 +67,50 @@ class EnvironmentVariable {
     }
   }
 
-  public isReactiveProject(): boolean {
-    const project = this.getProject();
-
-    if (project) {
-      if (project === 'dante' || project === 'herodotus') {
-        return true;
-      }
-    }
-
-    return false;
+  public getProjectName(): string {
+    return this.getEnvironmentVariable(
+      window.APPLICATION_ENVIRONMENT_VARIABLES_APPLICATION_NAME,
+      EnvironmentVariable.APPLICATION_NAME,
+    );
   }
 
-  public getSecretKey(): string {
-    return EnvironmentVariable.SECRET_KEY;
+  public getApiUrl(): string {
+    return this.getEnvironmentVariable(
+      window.APPLICATION_ENVIRONMENT_VARIABLES_API_URL,
+      EnvironmentVariable.API_URL,
+    );
+  }
+
+  public getWebSocketUrl(): string {
+    return this.getEnvironmentVariable(
+      window.APPLICATION_ENVIRONMENT_VARIABLES_WS_URL,
+      EnvironmentVariable.WS_URL,
+    );
   }
 
   public getClientId(): string {
     return this.getEnvironmentVariable(
       window.APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_CLIENT_ID,
-      EnvironmentVariable.CLIENT_ID,
+      EnvironmentVariable.OAUTH2_CLIENT_ID,
     );
   }
 
   public getClientSecret(): string {
     return this.getEnvironmentVariable(
       window.APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_CLIENT_SECRET,
-      EnvironmentVariable.CLIENT_SECRET,
+      EnvironmentVariable.OAUTH2_CLIENT_SECRET,
     );
+  }
+
+  public getRedirectUri(): string {
+    return this.getEnvironmentVariable(
+      window.APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_REDIRECT_URI,
+      EnvironmentVariable.OAUTH2_REDIRECT_URI,
+    );
+  }
+
+  public isAutoRefreshToken(): boolean {
+    return this.toBoolean(EnvironmentVariable.AUTO_REFRESH_TOKEN);
   }
 
   public isUseOidc(): boolean {
@@ -105,49 +125,35 @@ class EnvironmentVariable {
     return this.toBoolean(EnvironmentVariable.USE_CRYPTO);
   }
 
-  public getApiUrl(): string {
-    return EnvironmentVariable.API_URL;
+  public getSecretKey(): string {
+    return EnvironmentVariable.SECRET_KEY;
   }
 
-  public getWebSocketUrl(): string {
-    return EnvironmentVariable.WS_URL;
-  }
-
-  public getProjectName(): string {
-    return this.getEnvironmentVariable(
-      window.APPLICATION_ENVIRONMENT_VARIABLES_PROJECT_NAME,
-      EnvironmentVariable.PROJECT_NAME,
-    );
-  }
-
-  public getAutoRefreshToken(): boolean {
-    return this.toBoolean(EnvironmentVariable.AUTO_REFRESH_TOKEN);
+  public getCaptcha(): string {
+    return EnvironmentVariable.CAPTCHA;
   }
 
   public getCurrentTenantId(): string {
     return EnvironmentVariable.MULTI_TENANCY_ID;
   }
 
-  public getRedirectUri(): string {
-    return this.getEnvironmentVariable(
-      window.APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_REDIRECT_URI,
-      EnvironmentVariable.REDIRECT_URI,
-    );
-  }
-
-  private getEnvironmentVariableBoolean(docker: string, vite: string): boolean {
-    if (this.useDockerEnvironmentVariable(docker)) {
-      return this.toBoolean(docker);
-    } else {
-      return this.toBoolean(vite);
-    }
-  }
-
-  public getUseDisableDevtool(): boolean {
+  public isUseDisableDevtool(): boolean {
     return this.getEnvironmentVariableBoolean(
       window.APPLICATION_ENVIRONMENT_VARIABLES_USE_DISABLE_DEVTOOL,
       EnvironmentVariable.USE_DISABLE_DEVTOOL,
     );
+  }
+
+  public isReactiveProject(): boolean {
+    const project = this.getProject();
+
+    if (project) {
+      if (project === 'dante' || project === 'herodotus') {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
 

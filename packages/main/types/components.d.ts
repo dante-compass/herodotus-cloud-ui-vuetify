@@ -24,7 +24,6 @@ declare module 'vue' {
     HButton: typeof import('@herodotus/components')['HButton']
     HErrorLayout: typeof import('./../src/components/framework/error/HErrorLayout.vue')['default']
     HParticles: typeof import('@herodotus/components')['HParticles']
-    HSettingLabel: typeof import('@herodotus/components')['HSettingLabel']
     HSignInBackground: typeof import('@herodotus/components')['HSignInBackground']
     HTextDivider: typeof import('./../src/components/library/Divider/HTextDivider.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

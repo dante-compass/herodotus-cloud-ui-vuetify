@@ -1,9 +1,21 @@
 <template>
-  <v-btn :icon="isIcon" v-bind="$attrs">
-    <template v-if="!icon">
-      {{ label }}
+  <v-btn :icon="icon" v-bind="$attrs">
+    <template #append>
+      <slot name="append"></slot>
     </template>
-    <v-icon v-else :color="color ? color : undefined" :icon="icon"></v-icon>
+
+    <template #prepend>
+      <slot name="prepend"></slot>
+    </template>
+
+    <template #loader>
+      <slot name="loader"></slot>
+    </template>
+
+    <template v-if="!$slots.default && hasIcon">
+      <v-icon>{{ icon }}</v-icon>
+    </template>
+    <slot v-else></slot>
 
     <v-tooltip v-if="tooltip" :location="location" activator="parent">
       {{ tooltip }}
@@ -14,21 +26,14 @@
 <script lang="ts" setup>
 import { VBtn, VIcon, VTooltip } from 'vuetify/components';
 
-import { computed } from 'vue';
-import { isEmpty } from 'lodash-es';
-
 interface Props {
-  label?: string;
-  icon?: string;
+  icon?: string | boolean;
   tooltip?: string;
-  color?: string;
   location?: VTooltip['location'];
 }
 
 defineOptions({ name: 'HButton', components: { VBtn, VIcon } });
 const props = withDefaults(defineProps<Props>(), { location: 'bottom' });
 
-const isIcon = computed(() => {
-  return !isEmpty(props.icon);
-});
+const hasIcon = !!(props.icon && props.icon !== true);
 </script>

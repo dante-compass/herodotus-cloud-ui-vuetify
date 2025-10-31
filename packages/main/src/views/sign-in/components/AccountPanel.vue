@@ -42,7 +42,9 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'AccountPanel' });
+import SocialSignInList from './SocialSignInList.vue';
+
+defineOptions({ name: 'AccountPanel', components: { SocialSignInList } });
 
 const loginForm = ref();
 

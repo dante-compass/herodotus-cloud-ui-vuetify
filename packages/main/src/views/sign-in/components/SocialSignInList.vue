@@ -2,32 +2,33 @@
   <v-row justify="center">
     <h-button v-if="!hasConfig" rounded icon="mdi-wechat"></h-button>
     <template v-else>
-      <q-btn
+      <h-button
+        icon
+        color="accent"
         v-for="(value, key, index) in list"
-        flat
-        round
         :key="index"
         :href="value"
         target="_blank"
+        class="ma-2"
       >
-        <q-avatar size="30px">
-          <img :src="find(key)" />
-        </q-avatar>
-      </q-btn>
+        <v-avatar>
+          <v-img :src="find(key)" />
+        </v-avatar>
+      </h-button>
     </template>
     <h-button
-      color="primary"
-      icon="mdi-login"
-      round
-      flat
+      color="accent"
+      icon="mdi-login-variant"
       :href="authorizationCodeUrl"
       tooltip="授权码模式登录"
-    ></h-button>
+      class="ma-2"
+    >
+    </h-button>
   </v-row>
 </template>
 
 <script setup lang="ts">
-import { isEmpty } from 'lodash-es';
+import { isEmpty, toLower } from 'lodash-es';
 import { SecurityApiResources } from '@herodotus/framework';
 
 import { VARIABLES } from '@/configurations';
@@ -46,7 +47,8 @@ const init = () => {
 };
 
 const find = (name: string, suffix = 'png') => {
-  return `/images/social/${name}.${suffix}`;
+  console.log('===========', name);
+  return `/images/social/${toLower(name)}.${suffix}`;
 };
 
 const hasConfig = computed(() => {

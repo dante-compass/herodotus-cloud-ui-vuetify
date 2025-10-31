@@ -1,6 +1,5 @@
-import { defineComponent, computed, createBlock, openBlock, unref, mergeProps, withCtx, createElementBlock, createCommentVNode, Fragment, createTextVNode, toDisplayString, shallowRef, onMounted, nextTick, onUnmounted, renderSlot, createElementVNode, createVNode } from "vue";
+import { defineComponent, createBlock, openBlock, unref, mergeProps, withCtx, renderSlot, createCommentVNode, createTextVNode, toDisplayString, shallowRef, onMounted, nextTick, onUnmounted, createElementBlock, createElementVNode, createVNode } from "vue";
 import { VIcon, VBtn, VTooltip, VMessages, VLabel } from "vuetify/components";
-import { isEmpty } from "lodash-es";
 import { tsParticles } from "@tsparticles/engine";
 import { loadBasic } from "@tsparticles/basic";
 import { loadParticlesLinksInteraction } from "@tsparticles/interaction-particles-links";
@@ -8,27 +7,31 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   ...{ name: "HButton", components: { VBtn, VIcon } },
   __name: "HButton",
   props: {
-    label: {},
-    icon: {},
+    icon: { type: [String, Boolean] },
     tooltip: {},
-    color: {},
     location: { default: "bottom" }
   },
   setup(__props) {
     const props = __props;
-    const isIcon = computed(() => {
-      return !isEmpty(props.icon);
-    });
+    const hasIcon = !!(props.icon && props.icon !== true);
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(VBtn), mergeProps({ icon: isIcon.value }, _ctx.$attrs), {
+      return openBlock(), createBlock(unref(VBtn), mergeProps({ icon: __props.icon }, _ctx.$attrs), {
+        append: withCtx(() => [
+          renderSlot(_ctx.$slots, "append")
+        ]),
+        prepend: withCtx(() => [
+          renderSlot(_ctx.$slots, "prepend")
+        ]),
+        loader: withCtx(() => [
+          renderSlot(_ctx.$slots, "loader")
+        ]),
         default: withCtx(() => [
-          !__props.icon ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
-            createTextVNode(toDisplayString(__props.label), 1)
-          ], 64)) : (openBlock(), createBlock(unref(VIcon), {
-            key: 1,
-            color: __props.color ? __props.color : void 0,
-            icon: __props.icon
-          }, null, 8, ["color", "icon"])),
+          !_ctx.$slots.default && hasIcon ? (openBlock(), createBlock(unref(VIcon), { key: 0 }, {
+            default: withCtx(() => [
+              createTextVNode(toDisplayString(__props.icon), 1)
+            ]),
+            _: 1
+          })) : renderSlot(_ctx.$slots, "default", { key: 1 }),
           __props.tooltip ? (openBlock(), createBlock(unref(VTooltip), {
             key: 2,
             location: __props.location,
@@ -40,7 +43,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
             _: 1
           }, 8, ["location"])) : createCommentVNode("", true)
         ]),
-        _: 1
+        _: 3
       }, 16, ["icon"]);
     };
   }
