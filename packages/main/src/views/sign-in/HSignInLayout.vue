@@ -1,6 +1,7 @@
 <template>
   <v-parallax :style="{ backgroundColor: backgroundColor }">
     <h-particles></h-particles>
+
     <v-container fluid>
       <v-row class="h-screen" justify="center">
         <v-col></v-col>

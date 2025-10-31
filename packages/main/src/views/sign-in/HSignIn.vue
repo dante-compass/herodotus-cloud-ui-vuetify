@@ -1,6 +1,14 @@
 <template>
   <h-sign-in-layout>
-    <component :is="application.signInPanel"></component>
+    <transition
+      appear
+      mode="out-in"
+      :duration="1000"
+      enter-active-class="animate__animated animate__fadeIn"
+      leave-active-class="animate__animated animate__fadeOut"
+    >
+      <component :is="application.signInPanel"></component>
+    </transition>
   </h-sign-in-layout>
 </template>
 
