@@ -60,6 +60,8 @@ export default function useBehaviorCaptcha() {
 
     const identity = crypto.sessionId;
 
+    console.log('-----------------', identity);
+
     if (identity) {
       SecurityApiResources.getInstance()
         .open()

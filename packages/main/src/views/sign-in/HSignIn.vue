@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useApplicationStore } from '@herodotus/framework';
+import { useApplicationStore, useAuthenticationStore, useCryptoStore } from '@herodotus/framework';
 
 import HSignInLayout from './HSignInLayout.vue';
 import AccountPanel from './components/AccountPanel.vue';
@@ -26,4 +26,11 @@ defineOptions({
 });
 
 const application = useApplicationStore();
+const authentication = useAuthenticationStore();
+const crypto = useCryptoStore();
+
+onMounted(() => {
+  crypto.exchange();
+  authentication.errorTimes = 0;
+});
 </script>

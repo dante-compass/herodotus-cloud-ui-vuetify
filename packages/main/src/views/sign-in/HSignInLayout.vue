@@ -47,6 +47,7 @@ const { lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeT
   useSystemTheme();
 const settings = useSettingsStore();
 
+const item = shallowRef(0);
 const toolbarColor = computed(() => {
   return settings.isLightenMode ? 'primary' : undefined;
 });
