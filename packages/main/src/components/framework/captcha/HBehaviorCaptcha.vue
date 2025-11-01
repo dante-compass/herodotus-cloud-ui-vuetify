@@ -35,7 +35,7 @@
 import HJigsawCaptcha from './HJigsawCaptcha.vue';
 import HWordClickCaptcha from './HWordClickCaptcha.vue';
 
-import { useBehaviorCaptcha } from '@/hooks';
+import { useBehaviorCaptcha } from '@/composables/hooks';
 
 defineOptions({
   name: 'HBehaviorCaptcha',

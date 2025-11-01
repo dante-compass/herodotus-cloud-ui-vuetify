@@ -84,7 +84,7 @@
 <script setup lang="ts">
 import { SecurityApiResources } from '@herodotus/framework';
 
-import { useSignIn } from '@/hooks';
+import { useSignIn } from '@/composables/hooks';
 
 import SocialSignInList from './SocialSignInList.vue';
 

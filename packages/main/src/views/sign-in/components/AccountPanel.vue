@@ -72,7 +72,7 @@
 <script setup lang="ts">
 import SocialSignInList from './SocialSignInList.vue';
 
-import { useSignIn } from '@/hooks';
+import { useSignIn } from '@/composables/hooks';
 
 defineOptions({ name: 'AccountPanel', components: { SocialSignInList } });
 

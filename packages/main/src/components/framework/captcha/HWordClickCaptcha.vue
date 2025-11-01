@@ -46,7 +46,7 @@
 <script setup lang="ts">
 import type { WordClickCaptcha, Coordinate } from '@herodotus/framework';
 
-import { useBehaviorCaptcha } from '@/hooks';
+import { useBehaviorCaptcha } from '@/composables/hooks';
 import HBehaviorCaptchaBackground from './HBehaviorCaptchaBackground.vue';
 import HBehaviorCaptchaControl from './HBehaviorCaptchaControl.vue';
 
