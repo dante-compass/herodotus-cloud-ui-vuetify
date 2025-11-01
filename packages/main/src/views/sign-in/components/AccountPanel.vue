@@ -1,13 +1,5 @@
 <template>
   <v-card class="px-12" flat>
-    <v-card-text>
-      <v-card variant="tonal" rounded="xl" class="mx-auto" max-width="400">
-        <v-tabs align-tabs="center" fixed-tabs>
-          <v-tab>账号密码登录</v-tab>
-          <v-tab>手机短信登录</v-tab>
-        </v-tabs>
-      </v-card>
-    </v-card-text>
     <v-card-text class="ma-4">
       <v-alert
         v-if="prompt"
@@ -69,7 +61,7 @@
         @keyup.enter="passkeySignIn()"
         >Passkey 快速登录</h-button
       >
-      <h-text-divider label="其它登录方式"></h-text-divider>
+      <h-text-divider label="其它登录方式" class="my-4"></h-text-divider>
       <social-sign-in-list></social-sign-in-list>
     </v-card-text>
   </v-card>

@@ -15,6 +15,15 @@
               ></v-btn>
             </template>
             <h-app-logo height="15vh"></h-app-logo>
+            <v-card-text>
+              <v-card variant="tonal" rounded="xl" class="mx-auto" max-width="420">
+                <v-tabs align-tabs="center">
+                  <v-tab class="font-weight-bold">账号密码登录</v-tab>
+                  <v-tab class="font-weight-bold">手机短信登录</v-tab>
+                  <v-tab class="font-weight-bold">微信扫码登录</v-tab>
+                </v-tabs>
+              </v-card>
+            </v-card-text>
             <slot></slot>
           </v-card>
         </v-col>

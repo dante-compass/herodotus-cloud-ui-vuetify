@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <h-button v-if="!hasConfig" rounded icon="mdi-wechat"></h-button>
+    <h-button v-if="!hasConfig" icon="mdi-wechat" class="ma-2"></h-button>
     <template v-else>
       <h-button
         icon
@@ -17,7 +17,6 @@
       </h-button>
     </template>
     <h-button
-      color="accent"
       icon="mdi-login-variant"
       :href="authorizationCodeUrl"
       tooltip="授权码模式登录"
