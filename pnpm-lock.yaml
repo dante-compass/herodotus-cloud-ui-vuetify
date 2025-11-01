@@ -138,6 +138,9 @@ importers:
       '@fontsource/roboto':
         specifier: 5.2.8
         version: 5.2.8
+      '@herodotus/api':
+        specifier: workspace:^
+        version: link:../../shared/api
       '@herodotus/components':
         specifier: workspace:^
         version: link:../../shared/components
