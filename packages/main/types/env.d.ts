@@ -1,5 +1,14 @@
 /// <reference types="vite/client" />
 
+declare namespace NodeJS {
+  type Timeout = any;
+  interface ProcessEnv {
+    NODE_ENV: string;
+    VUE_ROUTER_MODE: 'hash' | 'history' | 'abstract' | undefined;
+    VUE_ROUTER_BASE: string | undefined;
+  }
+}
+
 declare interface ImportMetaEnv {
   readonly VITE_BASE_URL: string;
   readonly VITE_PROJECT;

@@ -1,3 +1,4 @@
 import useBehaviorCaptcha from './useBehaviorCaptcha';
+import useSignIn from './useSignIn';
 
-export { useBehaviorCaptcha };
+export { useBehaviorCaptcha, useSignIn };

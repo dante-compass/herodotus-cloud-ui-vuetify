@@ -14,18 +14,20 @@
       <v-form ref="loginForm">
         <v-text-field
           v-model="username"
+          tabindex="1"
           label="用户名"
           placeholder="请输入用户名"
           prepend-inner-icon="mdi-account"
           clearable
           rounded="xl"
           :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
-          :disabled="isDisabled"
-          tabindex="1"
+          :disabled="isSubmittingProtected"
           @change="onResetError()"
         ></v-text-field>
         <v-text-field
           v-model="password"
+          tabindex="2"
+          class="mt-4"
           label="密码"
           placeholder="请输入密码"
           prepend-inner-icon="mdi-lock-outline"
@@ -34,18 +36,17 @@
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           :rules="[(v) => !!v || '密码不能为空，请输入密码！']"
-          :disabled="isDisabled"
-          tabindex="2"
-          class="mt-4"
+          :disabled="isSubmittingProtected"
           @change="onResetError()"
         ></v-text-field>
       </v-form>
       <h-button
         tabindex="3"
         block
+        class="mt-6"
+        :disabled="isSubmittingProtected"
         @click="onShowCaptcha()"
         @keyup.enter="onShowCaptcha()"
-        class="mt-6"
         >登录</h-button
       >
       <h-behavior-captcha
@@ -54,9 +55,10 @@
       ></h-behavior-captcha>
       <h-text-divider label="OR"></h-text-divider>
       <h-button
+        tabindex="4"
         block
         tooltip="Passkey 仅在服务为 localhost 或者 https 形式下才能正常使用"
-        tabindex="4"
+        :disabled="isSubmittingProtected"
         @click="passkeySignIn()"
         @keyup.enter="passkeySignIn()"
         >Passkey 快速登录</h-button
@@ -70,102 +72,31 @@
 <script setup lang="ts">
 import SocialSignInList from './SocialSignInList.vue';
 
-import { useRouter } from 'vue-router';
-import { toast } from '@herodotus/core';
-import {
-  useApplicationStore,
-  useAuthenticationStore,
-  useCryptoStore,
-  usePasskey,
-} from '@herodotus/framework';
-import { DEAULT_ROUTER_LINK } from '@/configurations';
+import { useSignIn } from '@/hooks';
 
 defineOptions({ name: 'AccountPanel', components: { SocialSignInList } });
 
 const loginForm = ref();
 
+const {
+  passwordSignIn,
+  passkeySignIn,
+  onResetError,
+  isSubmittingProtected,
+  prompt,
+  promptMessage,
+} = useSignIn();
+
 const username = shallowRef('');
 const password = shallowRef('');
 const isShowCaptcha = shallowRef(false);
-const isSubmitDisabled = shallowRef(false);
-const errorMessage = shallowRef('');
-const hasError = shallowRef(false);
 const visible = shallowRef(false);
-
-const application = useApplicationStore();
-const authentication = useAuthenticationStore();
-const crypto = useCryptoStore();
-
-const router = useRouter();
-const { authenticator } = usePasskey();
-
-const signIn = async () => {
-  isSubmitDisabled.value = true;
-
-  authentication
-    .signIn(username.value, password.value)
-    .then((response) => {
-      if (response) {
-        isSubmitDisabled.value = false;
-        toast.success('欢迎回来！');
-        router.push({
-          path: DEAULT_ROUTER_LINK.home.path,
-        });
-      }
-    })
-    .catch((error) => {
-      isSubmitDisabled.value = false;
-      if (error.message) {
-        errorMessage.value = error.message;
-        hasError.value = true;
-      }
-    });
-};
-
-const passkeySignIn = () => {
-  isSubmitDisabled.value = true;
-
-  authenticator()
-    .then((response) => {
-      if (response) {
-        isSubmitDisabled.value = false;
-        toast.success('欢迎回来！');
-        router.push({
-          path: DEAULT_ROUTER_LINK.home.path,
-        });
-      }
-    })
-    .catch((error) => {
-      isSubmitDisabled.value = false;
-      if (error.message) {
-        errorMessage.value = error.message;
-        hasError.value = true;
-      }
-    });
-};
-
-const prompt = computed(() => {
-  return authentication.remainTimes !== 0 && hasError.value;
-});
-
-const promptMessage = computed(() => {
-  return '您还有【' + authentication.remainTimes + '】次尝试机会，之后将会锁定该账户';
-});
-
-const isDisabled = computed(() => {
-  return crypto.sessionId ? false : true;
-});
 
 const onCaptchaVerify = ($event: boolean) => {
   if ($event) {
     isShowCaptcha.value = false;
-    signIn();
+    passwordSignIn(username.value, password.value);
   }
-};
-
-const onResetError = () => {
-  errorMessage.value = '';
-  hasError.value = false;
 };
 
 const onShowCaptcha = async () => {

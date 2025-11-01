@@ -14,13 +14,13 @@
                 class="mx-2"
               ></v-btn>
             </template>
-            <h-app-logo height="15vh"></h-app-logo>
+            <h-app-logo height="10vh" class="mb-2"></h-app-logo>
             <v-card-text>
               <v-card variant="tonal" rounded="xl" class="mx-auto" max-width="420">
-                <v-tabs align-tabs="center">
-                  <v-tab class="font-weight-bold">账号密码登录</v-tab>
-                  <v-tab class="font-weight-bold">手机短信登录</v-tab>
-                  <v-tab class="font-weight-bold">微信扫码登录</v-tab>
+                <v-tabs v-model="tabs" align-tabs="center">
+                  <v-tab value="account" class="font-weight-bold">账号密码登录</v-tab>
+                  <v-tab value="mobile" class="font-weight-bold">手机短信登录</v-tab>
+                  <!-- <v-tab value="scan" class="font-weight-bold">微信扫码登录</v-tab> -->
                 </v-tabs>
               </v-card>
             </v-card-text>
@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { useSystemTheme, useSettingsStore } from '@herodotus/framework';
+import { useSystemTheme, useApplicationStore } from '@herodotus/framework';
 
 defineOptions({
   name: 'HSignInLayout',
@@ -43,10 +43,11 @@ defineOptions({
 
 const { lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeThemeIcon } =
   useSystemTheme();
-const settings = useSettingsStore();
+const application = useApplicationStore();
 
-const item = shallowRef(0);
-const toolbarColor = computed(() => {
-  return settings.isLightenMode ? 'primary' : undefined;
+const tabs = shallowRef('account');
+
+watch(tabs, (newValue) => {
+  application.signInPanel = newValue;
 });
 </script>
