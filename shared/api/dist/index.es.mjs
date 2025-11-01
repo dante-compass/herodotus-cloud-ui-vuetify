@@ -1,4 +1,4 @@
-import { AbstractService, ContentTypeEnum, HttpConfig } from "@herodotus/core";
+import { AbstractService, ContentTypeEnum, Service, HttpConfig } from "@herodotus/core";
 import { ContentTypeEnum as ContentTypeEnum2 } from "@herodotus/core";
 var GenderEnum = /* @__PURE__ */ ((GenderEnum2) => {
   GenderEnum2[GenderEnum2["OTHERS"] = 0] = "OTHERS";
@@ -524,6 +524,108 @@ class WebSocketMessageService {
     return this.config.getHttp().get(this.getStatAddress());
   }
 }
+class BucketService extends Service {
+  static instance;
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new BucketService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getOss() + "/oss/bucket";
+  }
+  getListAddress() {
+    return this.getBaseAddress() + "/list";
+  }
+  listBuckets() {
+    return this.getConfig().getHttp().get(this.getListAddress());
+  }
+  createBucket(request) {
+    return this.getConfig().getHttp().post(this.getBaseAddress(), request);
+  }
+  deleteBucket(request) {
+    return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
+  }
+}
+class ObjectService extends Service {
+  static instance;
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new ObjectService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getOss() + "/oss/object";
+  }
+  getListV2Address() {
+    return this.getBaseAddress() + "/list";
+  }
+  getMultiDeleteAddress() {
+    return this.getBaseAddress() + "/multi";
+  }
+  getDownloadAddress() {
+    return this.getBaseAddress() + "/download";
+  }
+  getDisplayAddress() {
+    return this.getBaseAddress() + "/display";
+  }
+  getUploadAddress() {
+    return this.getBaseAddress() + "/upload";
+  }
+  listObjectsV2(request) {
+    return this.getConfig().getHttp().get(this.getListV2Address(), request);
+  }
+  delete(request) {
+    return this.getConfig().getHttp().delete(this.getBaseAddress(), request);
+  }
+  upload(bucketName, file, onProgress) {
+    return this.getConfig().getHttp().post(this.getUploadAddress(), { bucketName, file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
+  }
+  download(request, onProgress) {
+    return this.getConfig().getHttp().post(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: "blob", onDownloadProgress: onProgress });
+  }
+  display(request) {
+    return this.getConfig().getHttp().post(this.getDisplayAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: "blob" });
+  }
+  batchDelete(request) {
+    return this.getConfig().getHttp().delete(this.getMultiDeleteAddress(), request);
+  }
+}
+class MultipartUploadService extends Service {
+  static instance;
+  constructor(config) {
+    super(config);
+  }
+  static getInstance(config) {
+    if (this.instance == null) {
+      this.instance = new MultipartUploadService(config);
+    }
+    return this.instance;
+  }
+  getBaseAddress() {
+    return this.getConfig().getOss() + "/oss/multipart-upload";
+  }
+  getCreateMultipartUploadAddress() {
+    return this.getBaseAddress() + "/create";
+  }
+  getCompleteMultipartUploadAddress() {
+    return this.getBaseAddress() + "/complete";
+  }
+  createChunkUpload(request) {
+    return this.getConfig().getHttp().post(this.getCreateMultipartUploadAddress(), request);
+  }
+  completeChunkUpload(request) {
+    return this.getConfig().getHttp().post(this.getCompleteMultipartUploadAddress(), request);
+  }
+}
 class ApiResources {
   static instance;
   config = {};
@@ -614,6 +716,15 @@ class ApiResources {
   mgtCertificate() {
     return MgtCertificateService.getInstance(this.config);
   }
+  ossBucket() {
+    return BucketService.getInstance(this.config);
+  }
+  ossObject() {
+    return ObjectService.getInstance(this.config);
+  }
+  ossMultipartUpload() {
+    return MultipartUploadService.getInstance(this.config);
+  }
 }
 const createApi = (http, options) => {
   const config = new HttpConfig(http, options);
@@ -621,12 +732,14 @@ const createApi = (http, options) => {
 };
 export {
   ApiResources,
+  BucketService,
   ContentTypeEnum2 as ContentTypeEnum,
   DialogueContactService,
   DialogueDetailService,
   ExtendedTaskService,
   GenderEnum,
   MgtCertificateService,
+  MultipartUploadService,
   NotificationCategoryEnum,
   NotificationService,
   OAuth2ApplicationService,
@@ -635,6 +748,7 @@ export {
   OAuth2InterfaceAuditService,
   OAuth2ScopeService,
   OAuth2UserLoggingService,
+  ObjectService,
   SocialBindingService,
   SysAttributeService,
   SysDefaultRoleService,

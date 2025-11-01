@@ -29,6 +29,8 @@ import {
   WebSocketMessageService,
 } from './modules';
 
+import { BucketService, ObjectService, MultipartUploadService } from './oss';
+
 export class ApiResources {
   private static instance: ApiResources;
   private config = {} as HttpConfig;
@@ -145,6 +147,18 @@ export class ApiResources {
 
   public mgtCertificate(): MgtCertificateService {
     return MgtCertificateService.getInstance(this.config);
+  }
+
+  public ossBucket(): BucketService {
+    return BucketService.getInstance(this.config);
+  }
+
+  public ossObject(): ObjectService {
+    return ObjectService.getInstance(this.config);
+  }
+
+  public ossMultipartUpload(): MultipartUploadService {
+    return MultipartUploadService.getInstance(this.config);
   }
 }
 
