@@ -44,7 +44,6 @@ export const createRouterGuard = (router: Router) => {
     const routeStore = useRouterStore();
 
     const token = authStore.token;
-    // const token = 'aaaaa';
 
     // 有 Token
     if (token) {
