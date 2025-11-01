@@ -4,7 +4,7 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
 import { useAuthenticationStore, useRouterStore, useSystemRoute } from '@herodotus/framework';
-import { DEAULT_ROUTER_LINK } from '@/configurations';
+import { DEAULT_ROUTER_LINK, API } from '@/configurations';
 
 const NotFoundRoute: RouteRecordRaw = {
   path: DEAULT_ROUTER_LINK.not_found.path,
@@ -26,7 +26,7 @@ const locate = (item: string) => {
 };
 
 const getRoutesFromServer = () => {
-  return new Promise((resolve, reject) => {});
+  return API.core.sysElement().fetchTree();
 };
 
 const { initBackEndRoutes, initFrontEndRoutes } = useSystemRoute(
