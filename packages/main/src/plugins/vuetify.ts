@@ -26,6 +26,9 @@ const vuetify = createVuetify({
     VTextField: {
       color: 'primary',
     },
+    VList: {
+      color: 'primary',
+    },
   },
 
   theme: {

@@ -1,6 +1,6 @@
 <template>
   <v-radio-group
-    v-model="settings.theme.mode"
+    v-model="systemTheme"
     class="mb-2"
     color="primary"
     true-icon="mdi-check-circle-outline"
@@ -17,11 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import { useSettingsStore } from '@herodotus/framework';
+import { useSystemTheme } from '@herodotus/framework';
 
 defineOptions({ name: 'HAppThemeOption' });
 
-const settings = useSettingsStore();
+const { systemTheme } = useSystemTheme();
 
 const items = [
   {

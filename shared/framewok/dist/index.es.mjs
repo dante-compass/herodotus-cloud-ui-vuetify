@@ -1,11 +1,11 @@
 import { useRoute } from "vue-router";
 import { defineStore } from "pinia";
-import { Swal, AuthorizationTokenEnum, ContentTypeEnum, AuthorizationGrantTypeEnum, BuildInScopeEnum, ClientAuthenticationMethodEnum, Service, SM2Utils, SM4Utils, DayJs, IN_BROWSER } from "@herodotus/core";
+import { Swal, AuthorizationTokenEnum, ContentTypeEnum, AuthorizationGrantTypeEnum, BuildInScopeEnum, ClientAuthenticationMethodEnum, Service, SM2Utils, SM4Utils, DayJs } from "@herodotus/core";
 import { jwtDecode } from "jwt-decode";
 import { extend, colord } from "colord";
 import mixPlugin from "colord/plugins/mix";
 import { isEmpty, split, dropRight, join, merge, endsWith, has, remove, findIndex, intersection } from "lodash-es";
-import { nextTick, shallowRef, ref, getCurrentInstance as getCurrentInstance$1, inject, watch, watchEffect, computed } from "vue";
+import { nextTick, shallowRef, ref, getCurrentInstance as getCurrentInstance$1, inject, watchEffect, watch, computed } from "vue";
 import { Base64 } from "js-base64";
 import { parseCreationOptionsFromJSON, create, parseRequestOptionsFromJSON, get } from "@github/webauthn-json/browser-ponyfill";
 import { default as default2 } from "pinia-plugin-persistedstate";
@@ -1885,12 +1885,7 @@ function useTheme() {
 function useSystemTheme() {
   const settings = useSettingsStore();
   const vuetifyTheme = useTheme();
-  let media;
   const systemTheme = shallowRef(ThemeModeEnum.DARK);
-  const getMatchMedia = () => {
-    if (!IN_BROWSER) return;
-    return window.matchMedia("(prefers-color-scheme: dark)");
-  };
   const hasScrollbar = (el) => {
     if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
     const style = window.getComputedStyle(el);
@@ -1951,21 +1946,6 @@ function useSystemTheme() {
     el.addEventListener("transitionend", onTransitionend);
     el.addEventListener("transitioncancel", onTransitionend);
   };
-  watch(
-    () => settings.theme.mode,
-    (val) => {
-      if (val === ThemeModeEnum.SYSTEM) {
-        media = getMatchMedia();
-        media.addEventListener("change", onThemeChange);
-        onThemeChange();
-      } else if (media) {
-        media.removeEventListener("change", onThemeChange);
-      }
-    }
-  );
-  const onThemeChange = () => {
-    systemTheme.value = media.matches ? ThemeModeEnum.DARK : ThemeModeEnum.LIGHT;
-  };
   watchEffect(() => {
     vuetifyTheme.change(settings.isSystem ? systemTheme.value : settings.theme.mode);
   });
@@ -2013,7 +1993,8 @@ function useSystemTheme() {
     darkColor,
     backgroundColor,
     onCycleChangeTheme,
-    cycleChangeThemeIcon
+    cycleChangeThemeIcon,
+    systemTheme
   };
 }
 const initializer = (options) => {

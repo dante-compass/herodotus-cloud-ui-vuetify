@@ -1,8 +1,6 @@
 import { watch, shallowRef, computed, nextTick, watchEffect } from 'vue';
 import { useTheme } from 'vuetify';
 
-import { IN_BROWSER } from '@herodotus/core';
-
 import { ThemeModeEnum } from '@/declarations';
 import { useSettingsStore } from '../stores';
 import { getColorPalette, mixColor } from '@/lib/utilities';
@@ -12,13 +10,7 @@ export default function useSystemTheme() {
   const vuetifyTheme = useTheme();
 
   // ---------- Theme 切换效果 ----------
-  let media: MediaQueryList;
   const systemTheme = shallowRef(ThemeModeEnum.DARK);
-
-  const getMatchMedia = () => {
-    if (!IN_BROWSER) return;
-    return window.matchMedia('(prefers-color-scheme: dark)');
-  };
 
   const hasScrollbar = (el?: Element | null) => {
     if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
@@ -93,23 +85,6 @@ export default function useSystemTheme() {
     el.addEventListener('transitioncancel', onTransitionend);
   };
 
-  watch(
-    () => settings.theme.mode,
-    (val) => {
-      if (val === ThemeModeEnum.SYSTEM) {
-        media = getMatchMedia()!;
-        media.addEventListener('change', onThemeChange);
-        onThemeChange();
-      } else if (media) {
-        media.removeEventListener('change', onThemeChange);
-      }
-    },
-  );
-
-  const onThemeChange = () => {
-    systemTheme.value = media!.matches ? ThemeModeEnum.DARK : ThemeModeEnum.LIGHT;
-  };
-
   watchEffect(() => {
     vuetifyTheme.change(settings.isSystem ? systemTheme.value : settings.theme.mode);
   });
@@ -175,5 +150,6 @@ export default function useSystemTheme() {
     backgroundColor,
     onCycleChangeTheme,
     cycleChangeThemeIcon,
+    systemTheme,
   };
 }

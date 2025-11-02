@@ -4,7 +4,6 @@
     :nav="nav"
     :lines="false"
     :items="menuItems"
-    color="primary"
     active-strategy="single-leaf"
     open-strategy="list"
     select-strategy="classic"
@@ -12,13 +11,13 @@
     activatable
     mandatory
     slim
-    density="compact"
+    density="comfortable"
   >
     <template #header="{ props }">
-      <v-list-item v-bind="props" class="rounded-pill"> </v-list-item>
+      <v-list-item v-bind="props" class="rounded-e-xl"> </v-list-item>
     </template>
     <template #item="{ props }">
-      <v-list-item v-bind="props" class="rounded-pill"> </v-list-item>
+      <v-list-item v-bind="props" class="rounded-e-xl"> </v-list-item>
     </template>
 
     <template #subheader="{ props: subheaderProps }">
@@ -36,7 +35,7 @@
 
 <script lang="ts" setup>
 import { computed, shallowRef } from 'vue';
-import { useMenuForVuetify } from '@herodotus/framework';
+import { useSystemMenu } from '@herodotus/framework';
 
 defineOptions({ name: 'HAppMenu' });
 
@@ -44,7 +43,7 @@ defineProps({
   nav: { type: Boolean, default: false },
 });
 
-const { getMenuItems } = useMenuForVuetify();
+const { getMenuItems } = useSystemMenu();
 
 const active = shallowRef([]);
 

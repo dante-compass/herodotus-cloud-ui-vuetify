@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="application.leftDrawer" width="300" theme="dark">
+  <v-navigation-drawer v-model="application.leftDrawer" width="300">
     <h-app-menu nav></h-app-menu>
 
     <template #append>
