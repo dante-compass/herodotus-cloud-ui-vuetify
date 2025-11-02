@@ -14,6 +14,7 @@ declare module 'vue' {
     403: typeof import('./../src/components/framework/error/403.vue')['default']
     404: typeof import('./../src/components/framework/error/404.vue')['default']
     500: typeof import('./../src/components/framework/error/500.vue')['default']
+    HAppBreadcrumbs: typeof import('./../src/components/framework/layout/HAppBreadcrumbs.vue')['default']
     HAppContainer: typeof import('./../src/components/framework/layout/HAppContainer.vue')['default']
     HAppLeftDrawer: typeof import('./../src/components/framework/layout/HAppLeftDrawer.vue')['default']
     HAppLogo: typeof import('./../src/components/framework/layout/HAppLogo.vue')['default']

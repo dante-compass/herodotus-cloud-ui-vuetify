@@ -12,7 +12,7 @@
       <v-img :src="logo" width="180" />
     </template>
 
-    <!-- <h-app-breadcrumbs v-if="showBreadcrumbs"></h-app-breadcrumbs> -->
+    <h-app-breadcrumbs></h-app-breadcrumbs>
 
     <v-spacer></v-spacer>
 
