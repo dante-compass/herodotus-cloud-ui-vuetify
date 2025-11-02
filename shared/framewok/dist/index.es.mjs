@@ -4,7 +4,7 @@ import { Swal, AuthorizationTokenEnum, ContentTypeEnum, AuthorizationGrantTypeEn
 import { jwtDecode } from "jwt-decode";
 import { extend, colord } from "colord";
 import mixPlugin from "colord/plugins/mix";
-import { isEmpty, split, dropRight, join, merge, endsWith, has, remove, findIndex, intersection, partition } from "lodash-es";
+import { isEmpty, split, dropRight, join, merge, endsWith, has, remove, findIndex, intersection } from "lodash-es";
 import { nextTick, shallowRef, ref, getCurrentInstance as getCurrentInstance$1, inject, watch, watchEffect, computed } from "vue";
 import { Base64 } from "js-base64";
 import { parseCreationOptionsFromJSON, create, parseRequestOptionsFromJSON, get } from "@github/webauthn-json/browser-ponyfill";
@@ -1640,106 +1640,6 @@ function useDeviceAuthorize(deviceCode, clientId, clientSecret, scope = "") {
     slowDown
   };
 }
-function useQuasarMenu() {
-  const store = useRouterStore();
-  const authentication = useAuthenticationStore();
-  const getItemTitle = (item) => {
-    return item.meta?.title;
-  };
-  const getItemIcon = (item) => {
-    return item.meta?.icon;
-  };
-  const getItemHideAllChild = (item) => {
-    return item.meta?.isHideAllChild;
-  };
-  const getItemChildren = (item) => {
-    return item.children;
-  };
-  const hasChildren = (item) => {
-    return !!getItemChildren(item);
-  };
-  const hasPermission = (item) => {
-    const userRoles = authentication.roles;
-    const routeRoles = item.meta?.roles;
-    if (isEmpty(routeRoles)) {
-      return true;
-    }
-    if (isEmpty(userRoles)) {
-      return false;
-    }
-    const result = intersection(userRoles, routeRoles);
-    if (isEmpty(result)) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-  const isDisplayAsItem = (item) => {
-    if (!hasChildren(item)) {
-      return true;
-    } else {
-      if (getItemHideAllChild(item)) {
-        store.addDetailRoutes(item);
-        return true;
-      } else {
-        return false;
-      }
-    }
-  };
-  return {
-    hasPermission,
-    getItemTitle,
-    getItemIcon,
-    getItemChildren,
-    isDisplayAsItem
-  };
-}
-function useVuetifyMenu() {
-  const findAvailableRoutes = (routes) => {
-    return routes.filter((item) => {
-      return isEmpty(item.name);
-    });
-  };
-  const findRouteElement = (item) => {
-    if (!isEmpty(item.children)) {
-      const data = item.children;
-      return data[0];
-    } else {
-      return item;
-    }
-  };
-  const toLeaf = (item) => {
-    return {
-      title: item.meta?.title,
-      prependIcon: item.meta?.icon,
-      to: item.name
-    };
-  };
-  const convert = (routes) => {
-    return routes.map((item) => {
-      const element = findRouteElement(item);
-      if (isEmpty(element.children)) {
-        return toLeaf(element);
-      } else {
-        const [root, leaf] = partition(element.children, (router) => isEmpty(router.path));
-        const route = root[0];
-        return {
-          title: route.meta?.title,
-          prependIcon: route.meta?.icon,
-          children: leaf.map((l) => toLeaf(l))
-        };
-      }
-    });
-  };
-  const getMenuItems = () => {
-    const routers = RouterUtilities.getInstance().getRouter().getRoutes();
-    const available = findAvailableRoutes(routers);
-    return convert(available);
-  };
-  return {
-    getMenuItems
-  };
-}
 function usePasskey() {
   const authenticationStore = useAuthenticationStore();
   const isSupported = async () => {
@@ -1795,6 +1695,85 @@ function usePasskey() {
     isSupported,
     registration,
     authenticator
+  };
+}
+function useSystemMenu() {
+  const router = useRouterStore();
+  const authentication = useAuthenticationStore();
+  const getTitle = (item) => {
+    return item.meta?.title;
+  };
+  const getIcon = (item) => {
+    return item.meta?.icon;
+  };
+  const getChildren = (item) => {
+    return item.children;
+  };
+  const hasChildren = (item) => {
+    return !!getChildren(item);
+  };
+  const isHideAllChild = (item) => {
+    return item.meta?.isHideAllChild;
+  };
+  const toLeaf = (item) => {
+    return {
+      title: getTitle(item),
+      prependIcon: getIcon(item),
+      to: item.path
+    };
+  };
+  const isDisplayedItem = (item) => {
+    if (!hasChildren(item)) {
+      return true;
+    } else {
+      if (isHideAllChild(item)) {
+        router.addDetailRoutes(item);
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+  const hasPermission = (item) => {
+    const userRoles = authentication.roles;
+    const routeRoles = item.meta?.roles;
+    if (isEmpty(routeRoles)) {
+      return true;
+    }
+    if (isEmpty(userRoles)) {
+      return false;
+    }
+    const result = intersection(userRoles, routeRoles);
+    if (isEmpty(result)) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  const convert = (routes) => {
+    return routes.map((item) => {
+      if (isDisplayedItem(item)) {
+        return toLeaf(item);
+      } else {
+        return {
+          title: getTitle(item),
+          prependIcon: getIcon(item),
+          children: convert(getChildren(item))
+        };
+      }
+    });
+  };
+  const getMenuItems = () => {
+    const routers = router.routes;
+    return convert(routers);
+  };
+  return {
+    getMenuItems,
+    hasPermission,
+    getTitle,
+    getIcon,
+    getChildren,
+    isDisplayedItem
   };
 }
 function useSystemRoute(routeModules, vueModules, locate, getRoutesFromServer) {
@@ -2065,11 +2044,10 @@ export {
   useCryptoStore,
   useDeviceAuthorize,
   useEditFinish,
-  useQuasarMenu as useMenuForQuasar,
-  useVuetifyMenu as useMenuForVuetify,
   usePasskey,
   useRouterStore,
   useSettingsStore,
+  useSystemMenu,
   useSystemRoute,
   useSystemTheme,
   useTabsViewStore
