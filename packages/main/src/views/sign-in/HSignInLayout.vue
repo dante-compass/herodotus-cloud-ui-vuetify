@@ -37,8 +37,13 @@
 <script setup lang="ts">
 import { useSystemTheme, useApplicationStore } from '@herodotus/framework';
 
+import { HAppLogo } from '@/components/library/Logo';
+
 defineOptions({
   name: 'HSignInLayout',
+  components: {
+    HAppLogo,
+  },
 });
 
 const { lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeThemeIcon } =
