@@ -9,7 +9,6 @@
     <v-radio v-for="(item, i) in items" :key="i" :value="item.value">
       <template #label>
         <v-icon :icon="item.icon" start />
-
         {{ item.text }}
       </template>
     </v-radio>
@@ -19,7 +18,7 @@
 <script setup lang="ts">
 import { useSystemTheme } from '@herodotus/framework';
 
-defineOptions({ name: 'HAppThemeOption' });
+defineOptions({ name: 'HSettingThemeOption' });
 
 const { systemTheme } = useSystemTheme();
 

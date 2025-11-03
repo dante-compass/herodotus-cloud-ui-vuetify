@@ -9,7 +9,7 @@
     />
 
     <template #prepend>
-      <v-img :src="logo" width="180" />
+      <h-app-logo width="180"></h-app-logo>
     </template>
 
     <h-app-breadcrumbs></h-app-breadcrumbs>
@@ -38,7 +38,9 @@ import { useDisplay, useTheme } from 'vuetify';
 
 import { useApplicationStore } from '@herodotus/framework';
 
-defineOptions({ name: 'HAppToolbar' });
+import { HAppLogo } from '../../library/Logo';
+
+defineOptions({ name: 'HAppBar', components: { HAppLogo } });
 
 const { mdAndUp } = useDisplay();
 const application = useApplicationStore();

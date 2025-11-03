@@ -1,34 +1,12 @@
 <template>
-  <v-app>
-    <h-app-right-drawer></h-app-right-drawer>
-    <h-app-toolbar></h-app-toolbar>
-    <h-app-left-drawer></h-app-left-drawer>
-
-    <v-main :class="backgroundColor">
-      <h-app-container></h-app-container>
-    </v-main>
-  </v-app>
+  <h-app-default-layout></h-app-default-layout>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-
-import {
-  HAppContainer,
-  HAppLeftDrawer,
-  HAppRightDrawer,
-  HAppToolbar,
-} from '@/components/framework/layout';
-import { useSettingsStore } from '@herodotus/framework';
+import { HAppDefaultLayout } from '@/components/layouts';
 
 defineOptions({
-  name: 'HAppDefaultLayout',
-  components: { HAppContainer, HAppLeftDrawer, HAppRightDrawer, HAppToolbar },
-});
-
-const settings = useSettingsStore();
-
-const backgroundColor = computed(() => {
-  return settings.isLight ? 'bg-grey-lighten-3' : '';
+  name: 'HAppLayout',
+  components: { HAppDefaultLayout },
 });
 </script>
