@@ -5,6 +5,7 @@
     <h-app-left-drawer></h-app-left-drawer>
 
     <v-main :class="backgroundColor">
+      <h-app-tab-view></h-app-tab-view>
       <h-app-container></h-app-container>
     </v-main>
   </v-app>
@@ -18,10 +19,11 @@ import { useSettingsStore } from '@herodotus/framework';
 import { HAppLeftDrawer, HAppRightDrawer } from './drawer';
 import { HAppBar } from './header';
 import HAppContainer from './HAppContainer.vue';
+import HAppTabView from './HAppTabView.vue';
 
 defineOptions({
   name: 'HAppDefaultLayout',
-  components: { HAppLeftDrawer, HAppRightDrawer, HAppContainer, HAppBar },
+  components: { HAppLeftDrawer, HAppRightDrawer, HAppContainer, HAppBar, HAppTabView },
 });
 
 const settings = useSettingsStore();

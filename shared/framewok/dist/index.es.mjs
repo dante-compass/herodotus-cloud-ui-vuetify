@@ -1373,7 +1373,7 @@ const useRouterStore = defineStore("Router", {
     }
   }
 });
-const useSettingsStore = defineStore("SystemSetting", {
+const useSettingsStore = defineStore("SystemSettings", {
   state: () => ({
     /**
      * 全局主题

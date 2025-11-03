@@ -12,6 +12,7 @@
     mandatory
     slim
     density="comfortable"
+    active-class="active_item_border"
   >
     <template #header="{ props }">
       <v-list-item v-bind="props" class="rounded-e-xl"> </v-list-item>
@@ -51,3 +52,10 @@ const menuItems = computed(() => {
   return getMenuItems();
 });
 </script>
+
+<style lang="scss" scoped>
+.active_item_border {
+  border-left: 3px solid rgb(var(--v-theme-on-surface-variant));
+  border-left-color: currentColor;
+}
+</style>

@@ -1,5 +1,5 @@
 import { SystemSetting, ThemeModeEnum, LayoutModeEnum } from '../../declarations';
-export declare const useSettingsStore: import('pinia').StoreDefinition<"SystemSetting", SystemSetting, {
+export declare const useSettingsStore: import('pinia').StoreDefinition<"SystemSettings", SystemSetting, {
     isDark: (state: {
         theme: {
             mode: ThemeModeEnum;

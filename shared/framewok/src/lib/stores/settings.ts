@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import type { SystemSetting } from '@/declarations';
 import { ThemeModeEnum, LayoutModeEnum } from '@/declarations';
 
-export const useSettingsStore = defineStore('SystemSetting', {
+export const useSettingsStore = defineStore('SystemSettings', {
   state: (): SystemSetting => ({
     /**
      * 全局主题

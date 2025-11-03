@@ -1,7 +1,7 @@
 <template>
-  <div>Application</div>
+  <div>SysTenantDataSource</div>
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'OAuth2Application' });
+defineOptions({ name: 'SysTenantDataSource' });
 </script>

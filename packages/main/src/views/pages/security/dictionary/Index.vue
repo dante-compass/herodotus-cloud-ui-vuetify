@@ -1,7 +1,7 @@
 <template>
-  <div>Application</div>
+  <div>SysDictionary</div>
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'OAuth2Application' });
+defineOptions({ name: 'SysDictionary' });
 </script>

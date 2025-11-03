@@ -1,7 +1,7 @@
 <template>
-  <div>Application</div>
+  <div>SysAttribute</div>
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'OAuth2Application' });
+defineOptions({ name: 'SysAttribute' });
 </script>

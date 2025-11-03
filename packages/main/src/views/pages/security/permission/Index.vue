@@ -1,7 +1,7 @@
 <template>
-  <div>Application</div>
+  <div>SysPermission</div>
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'OAuth2Application' });
+defineOptions({ name: 'SysPermission' });
 </script>
