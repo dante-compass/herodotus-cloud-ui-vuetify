@@ -1,7 +1,6 @@
 <template>
   <v-list
     v-model:activated="active"
-    :nav="nav"
     :lines="false"
     :items="menuItems"
     active-strategy="single-leaf"
@@ -11,6 +10,7 @@
     activatable
     mandatory
     slim
+    nav
     density="comfortable"
     active-class="active_item_border"
   >
@@ -39,10 +39,6 @@ import { computed, shallowRef } from 'vue';
 import { useSystemMenu } from '@herodotus/framework';
 
 defineOptions({ name: 'HAppMenu' });
-
-defineProps({
-  nav: { type: Boolean, default: false },
-});
 
 const { getMenuItems } = useSystemMenu();
 
