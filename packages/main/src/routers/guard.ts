@@ -9,7 +9,7 @@ import { DEAULT_ROUTER_LINK, API } from '@/configurations';
 const NotFoundRoute: RouteRecordRaw = {
   path: DEAULT_ROUTER_LINK.not_found.path,
   name: DEAULT_ROUTER_LINK.not_found.name,
-  component: () => import('@/components/framework/error/404.vue'),
+  component: () => import('@/components/error/404.vue'),
   meta: {
     title: DEAULT_ROUTER_LINK.not_found.title,
   },

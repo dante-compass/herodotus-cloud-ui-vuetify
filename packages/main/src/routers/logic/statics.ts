@@ -24,14 +24,14 @@ const SignInRoute: RouteRecordRaw = {
 const NoPermissionRoute: RouteRecordRaw = {
   path: '/403',
   name: 'NoPermission',
-  component: () => import('@/components/framework/error/403.vue'),
+  component: () => import('@/components/error/403.vue'),
   meta: { title: 'No Permission' },
 };
 
 const ServiceErrorRoute: RouteRecordRaw = {
   path: '/500',
   name: 'ServiceError',
-  component: () => import('@/components/framework/error/500.vue'),
+  component: () => import('@/components/error/500.vue'),
   meta: { title: 'Service Error' },
 };
 

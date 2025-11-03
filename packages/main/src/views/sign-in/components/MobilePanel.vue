@@ -24,7 +24,7 @@
           :rules="[(v) => !!v || '手机号码不能为空，请输入手机号码！']"
           @change="onResetError()"
         ></v-text-field>
-        <v-container class="px-0">
+        <v-container class="px-0 pb-0">
           <v-row>
             <v-col cols="8"
               ><v-text-field
@@ -57,6 +57,7 @@
       <h-button
         tabindex="3"
         block
+        class="mt-6"
         :disabled="isSubmittingProtected"
         @click="onShowCaptcha()"
         @keyup.enter="onShowCaptcha()"
@@ -66,6 +67,9 @@
         v-model="isShowCaptcha"
         @verify="onCaptchaVerify($event)"
       ></h-behavior-captcha>
+
+      <h-text-divider label="OR"></h-text-divider>
+
       <h-button
         tabindex="4"
         block
@@ -75,7 +79,9 @@
         @keyup.enter="passkeySignIn()"
         >Passkey 快速登录</h-button
       >
-      <h-text-divider label="其它登录方式" class="my-4"></h-text-divider>
+
+      <h-text-divider label="其它登录方式"></h-text-divider>
+
       <social-sign-in-list></social-sign-in-list>
     </v-card-text>
   </v-card>
