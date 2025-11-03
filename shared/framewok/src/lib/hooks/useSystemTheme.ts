@@ -130,6 +130,15 @@ export default function useSystemTheme() {
     }
   };
 
+  const currentTheme = computed({
+    get() {
+      return settings.theme.mode;
+    },
+    set(newValue) {
+      settings.theme.mode = newValue;
+    },
+  });
+
   /**
    * 登录页面循环切换系统主题按钮 Icon
    */
@@ -149,6 +158,7 @@ export default function useSystemTheme() {
     darkColor,
     backgroundColor,
     onCycleChangeTheme,
+    currentTheme,
     cycleChangeThemeIcon,
     systemTheme,
   };

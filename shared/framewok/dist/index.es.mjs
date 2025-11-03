@@ -1978,6 +1978,14 @@ function useSystemTheme() {
       return;
     }
   };
+  const currentTheme = computed({
+    get() {
+      return settings.theme.mode;
+    },
+    set(newValue) {
+      settings.theme.mode = newValue;
+    }
+  });
   const cycleChangeThemeIcon = computed(() => {
     switch (settings.theme.mode) {
       case ThemeModeEnum.SYSTEM:
@@ -1993,6 +2001,7 @@ function useSystemTheme() {
     darkColor,
     backgroundColor,
     onCycleChangeTheme,
+    currentTheme,
     cycleChangeThemeIcon,
     systemTheme
   };

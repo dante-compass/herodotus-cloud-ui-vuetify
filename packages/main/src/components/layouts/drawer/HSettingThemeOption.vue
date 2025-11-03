@@ -1,6 +1,6 @@
 <template>
   <v-radio-group
-    v-model="systemTheme"
+    v-model="currentTheme"
     class="mb-2"
     color="primary"
     true-icon="mdi-check-circle-outline"
@@ -20,7 +20,7 @@ import { useSystemTheme } from '@herodotus/framework';
 
 defineOptions({ name: 'HSettingThemeOption' });
 
-const { systemTheme } = useSystemTheme();
+const { currentTheme } = useSystemTheme();
 
 const items = [
   {
