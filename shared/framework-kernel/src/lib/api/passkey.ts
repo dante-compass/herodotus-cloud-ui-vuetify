@@ -1,9 +1,7 @@
 import type { HttpConfig, AxiosHttpResult } from '@herodotus-cloud/core';
 
 import type {
-  WebAuthnRegisterOptions,
   WebAuthnRegister,
-  WebAuthnAuthenticateOptions,
   WebAuthnAuthenticate,
 } from '@/declarations';
 
@@ -29,7 +27,7 @@ export class PasskeyApiService extends Service {
     return this.getConfig().getUaa() + '/webauthn/register';
   }
 
-  private getWebAuthnRegisterOptionsAddress(): string {
+  private getPublicKeyCredentialCreationOptionsAddress(): string {
     return this.getBaseAddress() + '/options';
   }
 
@@ -37,7 +35,7 @@ export class PasskeyApiService extends Service {
     return this.getConfig().getUaa() + '/login/webauthn';
   }
 
-  private getWebAuthnAuthenticateOptionsAddress(): string {
+  private getPublicKeyCredentialRequestOptionsAddress(): string {
     return this.getConfig().getUaa() + '/webauthn/authenticate/options';
   }
 
@@ -45,10 +43,15 @@ export class PasskeyApiService extends Service {
     return this.getParamPath(this.getBaseAddress(), id);
   }
 
-  public fetchWebAuthnRegisterOptions(): Promise<AxiosHttpResult<WebAuthnRegisterOptions>> {
+  public getPublicKeyCredentialCreationOptions(): Promise<
+    AxiosHttpResult<PublicKeyCredentialCreationOptions>
+  > {
     return this.getConfig()
       .getHttp()
-      .post<WebAuthnRegisterOptions, string>(this.getWebAuthnRegisterOptionsAddress(), '');
+      .post<
+        PublicKeyCredentialCreationOptions,
+        string
+      >(this.getPublicKeyCredentialCreationOptionsAddress(), '');
   }
 
   public webAuthnRegister(request: WebAuthnRegister): Promise<AxiosHttpResult<boolean>> {
@@ -57,10 +60,15 @@ export class PasskeyApiService extends Service {
       .post<boolean, WebAuthnRegister>(this.getBaseAddress(), request);
   }
 
-  public fetchWebAuthnAuthenticateOptions(): Promise<AxiosHttpResult<WebAuthnAuthenticateOptions>> {
+  public getPublicKeyCredentialRequestOptions(): Promise<
+    AxiosHttpResult<PublicKeyCredentialRequestOptions>
+  > {
     return this.getConfig()
       .getHttp()
-      .post<WebAuthnAuthenticateOptions, string>(this.getWebAuthnAuthenticateOptionsAddress(), '');
+      .post<
+        PublicKeyCredentialRequestOptions,
+        string
+      >(this.getPublicKeyCredentialRequestOptionsAddress(), '');
   }
 
   public webAuthnAuthenticate(request: WebAuthnAuthenticate): Promise<AxiosHttpResult<boolean>> {

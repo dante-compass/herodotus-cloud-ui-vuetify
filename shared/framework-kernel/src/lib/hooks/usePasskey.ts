@@ -1,17 +1,3 @@
-import type {
-  CredentialCreationOptionsJSON,
-  CredentialRequestOptionsJSON,
-} from '@github/webauthn-json/browser-ponyfill';
-
-import {
-  create,
-  parseCreationOptionsFromJSON,
-  parseRequestOptionsFromJSON,
-  get,
-} from '@github/webauthn-json/browser-ponyfill';
-
-import type { WebAuthnRegister } from '@/declarations';
-
 import { useAuthenticationStore } from '../stores';
 import { SecurityApiResources } from '../api';
 
@@ -43,14 +29,11 @@ export default function usePasskey() {
     return new Promise((resolve, reject) => {
       SecurityApiResources.getInstance()
         .passkey()
-        .fetchWebAuthnRegisterOptions()
-        .then((publicKey) => {
-          const registrationOptions = parseCreationOptionsFromJSON({
-            publicKey,
-          } as CredentialCreationOptionsJSON);
-          create(registrationOptions).then((registration) => {
-            const credential = registration.toJSON();
-            const request: WebAuthnRegister = {
+        .getPublicKeyCredentialCreationOptions()
+        .then(async (response) => {
+          const options = response as PublicKeyCredentialCreationOptions;
+          navigator.credentials.create({ publicKey: options }).then((credential) => {
+            const request = {
               publicKey: { label: label, credential: credential },
             };
             SecurityApiResources.getInstance()
@@ -80,17 +63,16 @@ export default function usePasskey() {
   };
 
   const authenticator = (): Promise<boolean> => {
+    PublicKeyCredential.parseRequestOptionsFromJSON;
+
     return new Promise((resolve, reject) => {
       SecurityApiResources.getInstance()
         .passkey()
-        .fetchWebAuthnAuthenticateOptions()
-        .then((publicKey) => {
-          const authenticationOptions = parseRequestOptionsFromJSON({
-            publicKey,
-          } as CredentialRequestOptionsJSON);
-          get(authenticationOptions).then((authentication) => {
-            const request = authentication.toJSON();
-            authenticationStore.passkey(request).then((result) => {
+        .getPublicKeyCredentialRequestOptions()
+        .then((response) => {
+          const options = response as PublicKeyCredentialRequestOptions;
+          navigator.credentials.get({ publicKey: options }).then((authentication) => {
+            authenticationStore.passkey(authentication).then((result) => {
               resolve(result);
             });
           });

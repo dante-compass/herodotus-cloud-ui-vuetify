@@ -1,17 +1,17 @@
 import { HttpConfig, AxiosHttpResult, Service } from '@herodotus-cloud/core';
-import { WebAuthnRegisterOptions, WebAuthnRegister, WebAuthnAuthenticateOptions, WebAuthnAuthenticate } from '../../declarations';
+import { WebAuthnRegister, WebAuthnAuthenticate } from '../../declarations';
 export declare class PasskeyApiService extends Service {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): PasskeyApiService;
     getBaseAddress(): string;
-    private getWebAuthnRegisterOptionsAddress;
+    private getPublicKeyCredentialCreationOptionsAddress;
     private getWebAuthnAuthenticateAddress;
-    private getWebAuthnAuthenticateOptionsAddress;
+    private getPublicKeyCredentialRequestOptionsAddress;
     protected getIdPath(id: string): string;
-    fetchWebAuthnRegisterOptions(): Promise<AxiosHttpResult<WebAuthnRegisterOptions>>;
+    getPublicKeyCredentialCreationOptions(): Promise<AxiosHttpResult<PublicKeyCredentialCreationOptions>>;
     webAuthnRegister(request: WebAuthnRegister): Promise<AxiosHttpResult<boolean>>;
-    fetchWebAuthnAuthenticateOptions(): Promise<AxiosHttpResult<WebAuthnAuthenticateOptions>>;
+    getPublicKeyCredentialRequestOptions(): Promise<AxiosHttpResult<PublicKeyCredentialRequestOptions>>;
     webAuthnAuthenticate(request: WebAuthnAuthenticate): Promise<AxiosHttpResult<boolean>>;
     delete(id: string): Promise<AxiosHttpResult<string>>;
 }

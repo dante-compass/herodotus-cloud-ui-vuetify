@@ -32,12 +32,11 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "@github/webauthn-json": "^2.1.1",
     "@herodotus-cloud/core": "workspace:^",
     "jwt-decode": "^4.0.0",
-    "pinia": "^3.0.3",
-    "pinia-plugin-persistedstate": "4.5.0",
-    "vue": "^3.5.22",
+    "pinia": "^3.0.4",
+    "pinia-plugin-persistedstate": "4.7.1",
+    "vue": "^3.5.23",
     "vue-router": "^4.6.3"
   }
 }
