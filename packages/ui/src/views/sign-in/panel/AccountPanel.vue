@@ -119,7 +119,12 @@ import { required, helpers } from '@vuelidate/validators';
 
 import { CONSTANTS } from '@/configurations';
 import { toast } from '@/lib/utils';
-import { useCryptoStore, useAuthenticationStore, usePasskey, useApplicationStore } from '@herodotus-cloud/framework-kernel';
+import {
+  useCryptoStore,
+  useAuthenticationStore,
+  usePasskey,
+  useApplicationStore,
+} from '@herodotus-cloud/framework-kernel';
 import { HSocialSignInList } from '@/composables/sign-in';
 
 export default defineComponent({
@@ -142,7 +147,7 @@ export default defineComponent({
     const errorMessage = ref('');
     const isShowPassword = ref(false);
     const isShowCaptcha = ref(false);
-    const isSubmitDisabled = ref(false);
+    const isSubmitDisabled = shallowRef(false);
     const hasError = ref(false);
 
     const rules = {
@@ -199,6 +204,7 @@ export default defineComponent({
         })
         .catch((error) => {
           isSubmitDisabled.value = false;
+          console.log('---eee', error);
           if (error.message) {
             errorMessage.value = error.message;
             hasError.value = true;
