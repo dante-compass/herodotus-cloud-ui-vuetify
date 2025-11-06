@@ -47,7 +47,6 @@ export default defineConfig({
         'pinia-plugin-persistedstate',
         'vue',
         'vue-router',
-        '@github/webauthn-json/browser-ponyfill',
         '@herodotus/core',
       ],
       output: {
@@ -65,7 +64,6 @@ export default defineConfig({
           'pinia-plugin-persistedstate': 'PiniaPluginPersistedstate',
           vue: 'Vue',
           'vue-router': 'VueRouter',
-          '@github/webauthn-json/browser-ponyfill': 'GithubWebauthnJsonBrowserPonyfill',
           '@herodotus/core': 'HerodotusCore',
         },
       },

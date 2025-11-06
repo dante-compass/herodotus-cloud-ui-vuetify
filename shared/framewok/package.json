@@ -34,7 +34,6 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "@github/webauthn-json": "^2.1.1",
     "@herodotus/core": "workspace:^",
     "colord": "^2.9.3",
     "js-base64": "^3.7.8",
