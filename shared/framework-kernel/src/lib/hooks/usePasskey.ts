@@ -30,8 +30,10 @@ export default function usePasskey() {
       SecurityApiResources.getInstance()
         .passkey()
         .getPublicKeyCredentialCreationOptions()
-        .then(async (response) => {
-          const options = response as PublicKeyCredentialCreationOptions;
+        .then((response) => {
+          const options = PublicKeyCredential.parseCreationOptionsFromJSON(
+            response as PublicKeyCredentialCreationOptionsJSON,
+          );
           navigator.credentials.create({ publicKey: options }).then((credential) => {
             const request = {
               publicKey: { label: label, credential: credential },
@@ -63,18 +65,21 @@ export default function usePasskey() {
   };
 
   const authenticator = (): Promise<boolean> => {
-    PublicKeyCredential.parseRequestOptionsFromJSON;
-
     return new Promise((resolve, reject) => {
       SecurityApiResources.getInstance()
         .passkey()
         .getPublicKeyCredentialRequestOptions()
         .then((response) => {
-          const options = response as PublicKeyCredentialRequestOptions;
+          const options = PublicKeyCredential.parseRequestOptionsFromJSON(
+            response as PublicKeyCredentialRequestOptionsJSON,
+          ) as PublicKeyCredentialRequestOptions;
           navigator.credentials.get({ publicKey: options }).then((authentication) => {
-            authenticationStore.passkey(authentication).then((result) => {
-              resolve(result);
-            });
+            if (authentication) {
+              const request = authentication as PublicKeyCredential;
+              authenticationStore.passkey(request.toJSON()).then((result) => {
+                resolve(result);
+              });
+            }
           });
         })
         .catch(() => {

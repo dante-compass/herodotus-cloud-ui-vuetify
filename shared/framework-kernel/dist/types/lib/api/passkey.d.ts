@@ -9,9 +9,9 @@ export declare class PasskeyApiService extends Service {
     private getWebAuthnAuthenticateAddress;
     private getPublicKeyCredentialRequestOptionsAddress;
     protected getIdPath(id: string): string;
-    getPublicKeyCredentialCreationOptions(): Promise<AxiosHttpResult<PublicKeyCredentialCreationOptions>>;
+    getPublicKeyCredentialCreationOptions(): Promise<AxiosHttpResult<PublicKeyCredentialCreationOptionsJSON>>;
     webAuthnRegister(request: WebAuthnRegister): Promise<AxiosHttpResult<boolean>>;
-    getPublicKeyCredentialRequestOptions(): Promise<AxiosHttpResult<PublicKeyCredentialRequestOptions>>;
+    getPublicKeyCredentialRequestOptions(): Promise<AxiosHttpResult<PublicKeyCredentialRequestOptionsJSON>>;
     webAuthnAuthenticate(request: WebAuthnAuthenticate): Promise<AxiosHttpResult<boolean>>;
     delete(id: string): Promise<AxiosHttpResult<string>>;
 }

@@ -1,9 +1,6 @@
 import type { HttpConfig, AxiosHttpResult } from '@herodotus-cloud/core';
 
-import type {
-  WebAuthnRegister,
-  WebAuthnAuthenticate,
-} from '@/declarations';
+import type { WebAuthnRegister, WebAuthnAuthenticate } from '@/declarations';
 
 import { Service } from '@herodotus-cloud/core';
 
@@ -44,12 +41,12 @@ export class PasskeyApiService extends Service {
   }
 
   public getPublicKeyCredentialCreationOptions(): Promise<
-    AxiosHttpResult<PublicKeyCredentialCreationOptions>
+    AxiosHttpResult<PublicKeyCredentialCreationOptionsJSON>
   > {
     return this.getConfig()
       .getHttp()
       .post<
-        PublicKeyCredentialCreationOptions,
+        PublicKeyCredentialCreationOptionsJSON,
         string
       >(this.getPublicKeyCredentialCreationOptionsAddress(), '');
   }
@@ -61,12 +58,12 @@ export class PasskeyApiService extends Service {
   }
 
   public getPublicKeyCredentialRequestOptions(): Promise<
-    AxiosHttpResult<PublicKeyCredentialRequestOptions>
+    AxiosHttpResult<PublicKeyCredentialRequestOptionsJSON>
   > {
     return this.getConfig()
       .getHttp()
       .post<
-        PublicKeyCredentialRequestOptions,
+        PublicKeyCredentialRequestOptionsJSON,
         string
       >(this.getPublicKeyCredentialRequestOptionsAddress(), '');
   }
