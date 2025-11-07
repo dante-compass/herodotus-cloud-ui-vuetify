@@ -4,6 +4,16 @@ import { SecurityApiResources } from '../api';
 export default function usePasskey() {
   const authenticationStore = useAuthenticationStore();
 
+  // AbortController 实例
+  let abortController: AbortController | null = null;
+
+  // 清理函数
+  const cleanup = () => {
+    if (abortController) {
+      abortController = null;
+    }
+  };
+
   // Availability of `window.PublicKeyCredential` means WebAuthn is usable.
   // `isUserVerifyingPlatformAuthenticatorAvailable` means the feature detection is usable.
   // `isConditionalMediationAvailable` means the feature detection is usable.
@@ -26,7 +36,8 @@ export default function usePasskey() {
   };
 
   const registration = (label: string): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
+    abortController = new AbortController();
+    return new Promise<boolean>((resolve, reject) => {
       SecurityApiResources.getInstance()
         .passkey()
         .getPublicKeyCredentialCreationOptions()
@@ -34,40 +45,30 @@ export default function usePasskey() {
           const options = PublicKeyCredential.parseCreationOptionsFromJSON(
             response as PublicKeyCredentialCreationOptionsJSON,
           );
-          navigator.credentials.create({ publicKey: options }).then((credential) => {
-            const request = {
-              publicKey: { label: label, credential: credential },
-            };
-            SecurityApiResources.getInstance()
-              .passkey()
-              .webAuthnRegister(request)
-              .then(() => {
-                resolve(true);
-              });
-          });
+          return navigator.credentials.create({ publicKey: options });
         })
-        .catch(() => {
-          reject(false);
+        .then((credential) => {
+          const request = {
+            publicKey: { label: label, credential: credential },
+          };
+          return SecurityApiResources.getInstance().passkey().webAuthnRegister(request);
+        })
+        .then((result) => {
+          resolve(result as boolean);
+        })
+        .catch((error) => {
+          reject(error);
+        })
+        .finally(() => {
+          cleanup();
         });
     });
-
-    // const publicKey = (await API.passkey().fetchWebAuthnRegisterOptions()) as WebAuthnRegisterOptions;
-
-    // const registrationOptions = parseCreationOptionsFromJSON({ publicKey } as CredentialCreationOptionsJSON);
-
-    // const registration = await create(registrationOptions);
-
-    // const credential = registration.toJSON();
-
-    // const request: WebAuthnRegister = { publicKey: { label: label, credential: credential } };
-
-    // return (await API.passkey().webAuthnRegister(request)) as boolean;
   };
 
   const authenticator = (): Promise<boolean> => {
-    PublicKeyCredential.parseRequestOptionsFromJSON;
+    abortController = new AbortController();
 
-    return new Promise((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       SecurityApiResources.getInstance()
         .passkey()
         .getPublicKeyCredentialRequestOptions()
@@ -75,29 +76,28 @@ export default function usePasskey() {
           const options = PublicKeyCredential.parseRequestOptionsFromJSON(
             response as PublicKeyCredentialRequestOptionsJSON,
           ) as PublicKeyCredentialRequestOptions;
-          navigator.credentials.get({ publicKey: options }).then((authentication) => {
-            if (authentication) {
-              const request = authentication as PublicKeyCredential;
-              authenticationStore.passkey(request.toJSON()).then((result) => {
-                resolve(result);
-              });
-            }
-          });
+          return navigator.credentials.get({ publicKey: options, signal: abortController?.signal });
         })
-        .catch(() => {
-          reject(false);
+        .then((authentication) => {
+          if (abortController?.signal.aborted) {
+            return false;
+          }
+          if (authentication) {
+            const request = authentication as PublicKeyCredential;
+            return authenticationStore.passkey(request.toJSON());
+          }
+          return false;
+        })
+        .then((result) => {
+          resolve(result);
+        })
+        .catch((error) => {
+          reject(error);
+        })
+        .finally(() => {
+          cleanup();
         });
     });
-
-    // const publicKey = (await API.passkey().fetchWebAuthnAuthenticateOptions()) as WebAuthnAuthenticateOptions;
-
-    // const authenticationOptions = parseRequestOptionsFromJSON({ publicKey } as CredentialRequestOptionsJSON);
-
-    // const authentication = await get(authenticationOptions);
-
-    // const request = authentication.toJSON();
-
-    // return (await API.passkey().webAuthnAuthenticate(request)) as boolean;
   };
 
   return {
