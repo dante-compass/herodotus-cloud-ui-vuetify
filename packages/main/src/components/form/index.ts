@@ -1,4 +1,4 @@
-import HCenterLayoutConstainer from './HCenterLayoutConstainer.vue';
+import HCenterLayoutContainer from './HCenterLayoutContainer.vue';
 import HDetailContainer from './HDetailContainer.vue';
 
-export { HCenterLayoutConstainer, HDetailContainer };
+export { HCenterLayoutContainer, HDetailContainer };

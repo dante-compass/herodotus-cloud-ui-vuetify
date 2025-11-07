@@ -98,17 +98,10 @@ const refreshTab = inject<Function>(refreshTabInjectionKey);
 watch(
   () => route.path,
   () => {
-    console.log('----------', route);
     smartTab(route);
   },
   { immediate: true },
 );
-
-onMounted(() => {
-  for (let tab in store.tabs) {
-    console.log('----tab----', tab);
-  }
-});
 
 const onCloseTab = (tab: Tab) => {
   closeTab(tab);

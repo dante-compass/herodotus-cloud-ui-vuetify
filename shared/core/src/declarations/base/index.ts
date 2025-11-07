@@ -9,3 +9,8 @@ export type Dictionary = {
   value: string;
   label: string;
 };
+
+/**
+ * 数据排序类型定义
+ */
+export type Direction = 'DESC' | 'ASC';

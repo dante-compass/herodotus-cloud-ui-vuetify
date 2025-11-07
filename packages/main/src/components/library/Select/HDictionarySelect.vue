@@ -1,5 +1,11 @@
 <template>
-  <v-select v-model="selectedValue" :items="options" v-bind="$attrs"></v-select>
+  <v-select
+    v-model="selectedValue"
+    :items="options"
+    item-title="label"
+    item-value="value"
+    v-bind="$attrs"
+  ></v-select>
 </template>
 
 <script setup lang="ts">

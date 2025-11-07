@@ -1,15 +1,34 @@
-import type { Page, Sort, Entity, Conditions, HttpResult, AbstractService } from '@herodotus/core';
+import type {
+  Page,
+  Sort,
+  Entity,
+  Conditions,
+  HttpResult,
+  AbstractService,
+  Direction,
+} from '@herodotus/core';
 
 import { concat, isBoolean, isEmpty, isString, map } from 'lodash-es';
 import { toast, standardDeleteNotify } from '@herodotus/core';
 import useBaseTable from './useBaseTable';
 import type { SortItem } from '../../declarations';
 
+/**
+ * 数据表格通用操作定义
+ * @param service 后端 API 对应服务
+ * @param name 表格页面 Index.vue 对应组件名称
+ * @param fetchAll 是否为查询全部数据
+ * @param sorted 排序字段
+ * @param direction 排序方向
+ * @param loadOnMount 是否在 onMount 阶段加载
+ * @returns
+ */
 export default function <E extends Entity, C extends Conditions>(
   service: AbstractService<E>,
   name: string,
   fetchAll = false,
-  sort = [] as SortItem[],
+  sorted = [] as Array<string>,
+  direction = 'DESC' as Direction,
   loadOnMount = true,
 ) {
   const {
@@ -29,11 +48,11 @@ export default function <E extends Entity, C extends Conditions>(
     resetPageData,
   } = useBaseTable<E, C>(name);
 
-  const pageNumber = shallowRef(0);
+  const pageNumber = shallowRef(1);
   const pageSize = shallowRef(10);
   const sortBy = ref([]) as Ref<Array<SortItem>>;
 
-  const parseDirection = (sortBy: Array<SortItem>): 'DESC' | 'ASC' => {
+  const parseDirection = (sortBy: Array<SortItem>): Direction => {
     const flag = sortBy[0];
     if (flag && flag.order) {
       if (isBoolean(flag.order)) {
@@ -49,13 +68,20 @@ export default function <E extends Entity, C extends Conditions>(
   };
 
   const createSort = (sortBy: Array<SortItem>): Sort => {
-    if (!isEmpty(sort)) {
+    if (!isEmpty(sortBy)) {
       return {
         properties: concat(map(sortBy, 'key'), 'updateTime'),
         direction: parseDirection(sortBy),
       };
     } else {
-      return { properties: ['updateTime'], direction: 'DESC' };
+      if (!isEmpty(sorted)) {
+        return {
+          properties: sorted,
+          direction: direction,
+        };
+      } else {
+        return { properties: ['updateTime'], direction: 'DESC' };
+      }
     }
   };
 

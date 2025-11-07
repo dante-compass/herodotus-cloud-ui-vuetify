@@ -1,6 +1,6 @@
 <template>
-  <v-card class="mx-auto">
-    <v-toolbar>
+  <v-card class="mx-auto" rounded="xl">
+    <v-toolbar flat>
       <template #prepend>
         <h-button
           color="red"
@@ -11,7 +11,10 @@
         ></h-button>
       </template>
 
-      <v-toolbar-title class="text-h6" :text="title"></v-toolbar-title>
+      <v-toolbar-title
+        class="text-high-emphasis font-weight-black"
+        :text="title"
+      ></v-toolbar-title>
     </v-toolbar>
 
     <v-card-text>

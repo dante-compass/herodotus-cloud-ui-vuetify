@@ -44,7 +44,7 @@ import HDetailContainer from './HDetailContainer.vue';
 import { HDictionarySelect } from '../library/Select';
 
 defineOptions({
-  name: 'HCenterLayoutConstainer',
+  name: 'HCenterLayoutContainer',
   components: { HDetailContainer, HDictionarySelect },
 });
 
