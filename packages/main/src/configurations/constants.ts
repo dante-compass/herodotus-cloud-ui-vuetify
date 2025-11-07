@@ -1,3 +1,5 @@
+import type { DisplayElement } from '@/composables/declarations';
+
 export const IS_PROD = import.meta.env.PROD;
 export const IS_DEV = import.meta.env.DEV;
 export const IS_SERVER = import.meta.env.SSR;
@@ -65,3 +67,10 @@ export const PAGE_NAME = {
   IOT_TSL_UNIT: 'IotTslUnit',
   MGT_CERTIFICATE: 'MgtCertificate',
 };
+
+export const DATA_ITEM_STATUS: Array<DisplayElement> = [
+  { color: 'success', icon: 'mdi-circle' },
+  { color: 'error', icon: 'mdi-circle' },
+  { color: 'warning', icon: 'mdi-circle' },
+  { color: 'info', icon: 'mdi-circle' },
+];

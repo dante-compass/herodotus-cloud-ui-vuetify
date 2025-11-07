@@ -8,7 +8,6 @@
     :items="tableRows"
     :item-value="rowKey"
     :loading="loading"
-    density="comfortable"
     @update:options="findItems"
   >
     <template v-slot:item.actions="{ item }">
@@ -16,10 +15,9 @@
         color="amber"
         icon="mdi-shield-key"
         tooltip="配置归属权限"
-        @click="toAuthorize(item.row)"
+        @click="toAuthorize(item)"
       ></h-action-button>
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button></h-action-delete-button>
     </template>
   </h-data-table>
 </template>
@@ -52,7 +50,6 @@ const {
   totalPages,
   totalItems,
   toEdit,
-  toCreate,
   toAuthorize,
   findItems,
 } = useTable<SysAttributeEntity, SysAttributeConditions>(
