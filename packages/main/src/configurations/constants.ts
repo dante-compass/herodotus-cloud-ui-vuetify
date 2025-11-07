@@ -1,4 +1,4 @@
-import type { DisplayElement } from '@/composables/declarations';
+import type { DisplayElement, DisplayElementGroup } from '@/composables/declarations';
 
 export const IS_PROD = import.meta.env.PROD;
 export const IS_DEV = import.meta.env.DEV;
@@ -74,3 +74,11 @@ export const DATA_ITEM_STATUS: Array<DisplayElement> = [
   { color: 'warning', icon: 'mdi-circle' },
   { color: 'info', icon: 'mdi-circle' },
 ];
+
+export const HTTP_METHOD_STYLE_GROUP: DisplayElementGroup = {
+  PUT: { color: 'orange', icon: 'mdi-book-remove-multiple' },
+  DELETE: { color: 'red', icon: 'mdi-book-minus-multiple' },
+  POST: { color: 'green', icon: 'mdi-book-plus-multiple' },
+  GET: { color: 'blue', icon: 'mdi-book-multiple' },
+  ALL: { color: 'brown', icon: 'mdi-book-cog' },
+};

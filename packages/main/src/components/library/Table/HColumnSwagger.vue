@@ -1,70 +1,55 @@
 <template>
-  <q-btn outline :color="color(method)" class="full-width" :dense="dense" :size="size">
-    <div class="row justify-center full-width">
-      <div class="col-2">
-        <q-chip square :color="color(method)" text-color="white" :dense="dense" :size="size">
-          {{ method }}
-        </q-chip>
-      </div>
-      <div class="col-5">
-        <div class="column items-start">
-          <div class="col">
-            <q-btn
-              flat
-              :label="url"
-              :dense="dense"
-              :size="size"
-              class="text-weight-bold text-lowercase"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="col-5">
-        <div class="column items-end">
-          <div class="col"><q-btn flat :dense="dense" :size="size" :label="description" /></div>
-        </div>
-      </div>
-    </div>
-  </q-btn>
+  <v-alert :color="color(method)" variant="outlined" density="compact" class="my-3">
+    <v-row>
+      <v-col cols="2">
+        <div class="d-flex justify-center">
+          <v-chip :color="color(method)" density="compact">
+            {{ method }}
+          </v-chip>
+        </div></v-col
+      >
+      <v-col cols="5"
+        ><div class="d-flex justify-start">{{ url }}</div></v-col
+      >
+      <v-col cols="5"
+        ><div class="d-flex justify-end">{{ description }}</div></v-col
+      >
+    </v-row>
+  </v-alert>
 </template>
 
-<script lang="ts">
-import type { PropType } from 'vue';
-import { defineComponent, computed } from 'vue';
+<script setup lang="ts">
+import type { HttpMethod } from '@herodotus/core';
 
-import type { HttpMethod } from '@/lib/declarations';
+import { useSettingsStore } from '@herodotus/framework';
 
-import { useDisplayElement } from '@/hooks';
-import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
+import { HTTP_METHOD_STYLE_GROUP } from '@/configurations';
+import { useDisplayElement } from '@/composables/hooks';
 
-import { CONSTANTS } from '@/configurations';
+defineOptions({ name: 'HColumnSwagger' });
 
-export default defineComponent({
-  name: 'HSwaggerColumn',
+interface Props {
+  method: HttpMethod;
+  url: string;
+  description?: string;
+}
 
-  props: {
-    method: { type: String as PropType<HttpMethod>, required: true },
-    url: { type: String, required: true },
-    description: { type: String },
-  },
+defineProps<Props>();
 
-  setup() {
-    const { color } = useDisplayElement(CONSTANTS.HTTP_METHOD_STYLE_GROUP);
-    const settings = useSettingsStore();
+const { color } = useDisplayElement(HTTP_METHOD_STYLE_GROUP);
+const settings = useSettingsStore();
 
-    const dense = computed(() => {
-      return settings.display.table.dense;
-    });
+const dense = computed(() => {
+  return settings.display.table.dense;
+});
 
-    const size = computed(() => {
-      return settings.display.table.dense ? 'sm' : 'md';
-    });
-
-    return {
-      color,
-      dense,
-      size,
-    };
-  },
+const size = computed(() => {
+  return settings.display.table.dense ? 'small' : 'default';
 });
 </script>
+
+<style lang="scss" scoped>
+.v-alert__append {
+  align-self: center !important;
+}
+</style>

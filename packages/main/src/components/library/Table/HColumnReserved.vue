@@ -1,13 +1,13 @@
 <template>
   <h-action-button
     v-if="status"
-    color="red"
+    color="error"
     icon="mdi-delete-forever"
     tooltip="不允许删除的数据"
   ></h-action-button>
   <h-action-button
     v-else
-    color="green"
+    color="success"
     icon="mdi-delete-empty"
     tooltip="允许删除的数据"
   ></h-action-button>

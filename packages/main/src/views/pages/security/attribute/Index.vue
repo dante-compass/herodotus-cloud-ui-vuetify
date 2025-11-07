@@ -8,9 +8,17 @@
     :items="tableRows"
     :item-value="rowKey"
     :loading="loading"
+    reserved
     @update:options="findItems"
   >
-    <template v-slot:item.actions="{ item }">
+    <template #item.requestMethod="{ item }">
+      <h-column-swagger
+        :method="item.requestMethod"
+        :url="item.url"
+        :description="item.description"
+      ></h-column-swagger>
+    </template>
+    <template #item.actions="{ item }">
       <h-action-button
         color="amber"
         icon="mdi-shield-key"
@@ -35,7 +43,6 @@ const headers = ref([
   { key: 'requestMethod', align: 'center', title: '权限接口' },
   { key: 'attributeCode', align: 'center', title: '默认权限代码' },
   { key: 'webExpression', align: 'center', title: '特定表达式' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
