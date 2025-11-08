@@ -1,6 +1,7 @@
 <template>
   <user-menu :avatar="avatar" :username="authenticationStore.username">
     <v-list density="compact" nav slim>
+      <v-list-subheader>功能菜单</v-list-subheader>
       <v-list-item
         slim
         prepend-icon="mdi-view-dashboard"
@@ -18,6 +19,7 @@
     </v-list>
     <v-divider></v-divider>
     <v-list density="compact" nav slim>
+      <v-list-subheader>系统操作</v-list-subheader>
       <v-list-item
         slim
         prepend-icon="mdi-logout-variant"
