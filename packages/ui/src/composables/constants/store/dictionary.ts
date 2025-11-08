@@ -12,12 +12,12 @@ export const useDictionaryStore = defineStore('Dictionary', {
 
   getters: {
     getDictionary(state) {
-      return (key: string): Dictionary[] => (key ? state.dictionaries[key] : []);
+      return (key: string): Dictionary[] | undefined => (key ? state.dictionaries[key] : []);
     },
 
-    getDictionaryItem(state) {
+    getDictionaryItem() {
       return (key: string, value: string): Dictionary => {
-        const items: Dictionary[] = state.dictionaries[key];
+        const items: Dictionary[] | undefined = this.getDictionary(key);
 
         if (items) {
           const item = lodash.find(items, { value: value });
@@ -28,9 +28,9 @@ export const useDictionaryStore = defineStore('Dictionary', {
         }
       };
     },
-    getDictionaryItemDisplay(state) {
+    getDictionaryItemDisplay() {
       return (key: string, value: string): string => {
-        const items: Dictionary[] = state.dictionaries[key];
+        const items: Dictionary[] | undefined = this.getDictionary(key);
 
         if (items) {
           const item = lodash.find(items, { value: value });
@@ -58,7 +58,7 @@ export const useDictionaryStore = defineStore('Dictionary', {
       return result;
     },
 
-    convertCategory(items: Array<SysDictionaryEntity>): Array<Dictionary> {
+    convertCategory(items: Array<SysDictionaryEntity> | undefined): Array<Dictionary> {
       if (items) {
         return lodash.orderBy(
           items.map((item) => this.toDictionary(item)),
@@ -95,7 +95,8 @@ export const useDictionaryStore = defineStore('Dictionary', {
         if (!lodash.isEmpty(items)) {
           reject(items);
         } else {
-          API.core.sysDictionary()
+          API.core
+            .sysDictionary()
             .fetchByCategory(category)
             .then((response) => {
               const data = response.data;
@@ -119,7 +120,8 @@ export const useDictionaryStore = defineStore('Dictionary', {
         if (lodash.isEmpty(keys)) {
           resolve(this.dictionaries);
         } else {
-          API.core.sysDictionary()
+          API.core
+            .sysDictionary()
             .fetchCategories(keys.join(','))
             .then((response) => {
               const data = response.data;
