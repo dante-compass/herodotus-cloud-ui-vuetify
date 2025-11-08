@@ -20,6 +20,7 @@
           prepend-inner-icon="mdi-cellphone"
           clearable
           rounded="xl"
+          variant="solo-filled"
           :disabled="isSubmittingProtected"
           :rules="[(v) => !!v || '手机号码不能为空，请输入手机号码！']"
           @change="onResetError()"
@@ -36,6 +37,7 @@
                 prepend-inner-icon="mdi-message-bulleted"
                 clearable
                 rounded="xl"
+                variant="solo-filled"
                 :disabled="isSubmittingProtected"
                 @change="onResetError()"
               ></v-text-field

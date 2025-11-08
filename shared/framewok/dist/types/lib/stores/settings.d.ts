@@ -120,6 +120,54 @@ export declare const useSettingsStore: import('pinia').StoreDefinition<"SystemSe
             };
         };
     } & import('pinia').PiniaCustomStateProperties<SystemSetting>) => boolean;
+    density: (state: {
+        theme: {
+            mode: ThemeModeEnum;
+            dark: {
+                primary: string;
+            };
+            light: {
+                primary: string;
+            };
+        };
+        layout: LayoutModeEnum;
+        effect: {
+            isUniqueOpened: boolean;
+        };
+        display: {
+            isTabsView: boolean;
+            isActivateLeftTab: boolean;
+            showBreadcrumbs: boolean;
+            showBreadcrumbsIcon: boolean;
+            table: {
+                dense: boolean;
+            };
+        };
+    } & import('pinia').PiniaCustomStateProperties<SystemSetting>) => "compact" | "default";
+    densitySwitch: (state: {
+        theme: {
+            mode: ThemeModeEnum;
+            dark: {
+                primary: string;
+            };
+            light: {
+                primary: string;
+            };
+        };
+        layout: LayoutModeEnum;
+        effect: {
+            isUniqueOpened: boolean;
+        };
+        display: {
+            isTabsView: boolean;
+            isActivateLeftTab: boolean;
+            showBreadcrumbs: boolean;
+            showBreadcrumbsIcon: boolean;
+            table: {
+                dense: boolean;
+            };
+        };
+    } & import('pinia').PiniaCustomStateProperties<SystemSetting>) => (trueValue: string, falseValue: string) => string;
 }, {
     toDark(): void;
     toLight(): void;

@@ -20,6 +20,7 @@
           prepend-inner-icon="mdi-account"
           clearable
           rounded="xl"
+          variant="solo-filled"
           :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
           :disabled="isSubmittingProtected"
           @change="onResetError()"
@@ -32,7 +33,9 @@
           placeholder="请输入密码"
           prepend-inner-icon="mdi-lock-outline"
           clearable
+          focused
           rounded="xl"
+          variant="solo-filled"
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           :rules="[(v) => !!v || '密码不能为空，请输入密码！']"

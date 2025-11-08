@@ -50,6 +50,11 @@ export const useSettingsStore = defineStore('SystemSettings', {
     isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
     isDarkenMode: (state) => state.theme.mode !== ThemeModeEnum.LIGHT,
     isLightenMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
+    density: (state) => (state.display.table.dense ? 'compact' : 'default'),
+    densitySwitch: (state) => {
+      return (trueValue: string, falseValue: string) =>
+        state.display.table.dense ? trueValue : falseValue;
+    },
   },
 
   actions: {

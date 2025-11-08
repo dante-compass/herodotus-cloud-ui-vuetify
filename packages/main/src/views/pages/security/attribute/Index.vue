@@ -11,6 +11,10 @@
     reserved
     @update:options="findItems"
   >
+    <template #control>
+      <v-btn>新建</v-btn>
+    </template>
+
     <template #item.requestMethod="{ item }">
       <h-column-swagger
         :method="item.requestMethod"

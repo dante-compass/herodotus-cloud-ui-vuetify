@@ -1,16 +1,12 @@
 <template>
   <use-fullscreen v-slot="{ toggle, isFullscreen }">
     <v-card rounded="xl">
-      <v-card-title class="d-flex align-center ml-2">
-        <slot></slot>
+      <v-card-title class="d-flex align-center ma-2">
+        <slot name="control"></slot>
         <v-spacer></v-spacer>
         <h-action-button
-          :icon="
-            settings.display.table.dense
-              ? 'mdi-arrow-expand-vertical'
-              : 'mdi-arrow-collapse-vertical'
-          "
-          :tooltip="settings.display.table.dense ? '宽松' : '紧凑'"
+          :icon="settings.densitySwitch('mdi-arrow-expand-vertical', 'mdi-arrow-collapse-vertical')"
+          :tooltip="settings.densitySwitch('宽松', '紧凑')"
           @click="settings.display.table.dense = !settings.display.table.dense"
         ></h-action-button>
         <h-action-button
@@ -25,7 +21,7 @@
           v-model:items-per-page="pageSize"
           v-model:page="pageNumber"
           :items-length="totalItems"
-          :density="settings.display.table.dense ? 'default' : 'comfortable'"
+          :density="settings.density"
           show-select
           select-strategy="single"
           striped="even"
