@@ -1,12 +1,12 @@
 <template>
-  <h-app-default-layout></h-app-default-layout>
+  <app-default-layout></app-default-layout>
 </template>
 
 <script lang="ts" setup>
-import { HAppDefaultLayout } from '@/components/layouts';
+import { AppDefaultLayout } from '@/components/layouts';
 
 defineOptions({
-  name: 'HAppLayout',
-  components: { HAppDefaultLayout },
+  name: 'AppLayout',
+  components: { AppDefaultLayout },
 });
 </script>

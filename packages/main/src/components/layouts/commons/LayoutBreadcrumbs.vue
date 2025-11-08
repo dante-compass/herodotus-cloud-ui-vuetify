@@ -15,7 +15,7 @@ import { isEmpty, split } from 'lodash-es';
 
 import { DEAULT_ROUTER_LINK } from '@/configurations';
 
-defineOptions({ name: 'HAppBreadcrumbs' });
+defineOptions({ name: 'LayoutBreadcrumbs' });
 
 const route = useRoute();
 

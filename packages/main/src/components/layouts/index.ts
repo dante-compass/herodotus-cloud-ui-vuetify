@@ -1,3 +1,2 @@
-import HAppDefaultLayout from './HAppDefaultLayout.vue';
-
-export { HAppDefaultLayout };
+export * from './app';
+export * from './profile';

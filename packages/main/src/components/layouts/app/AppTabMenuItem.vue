@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'HAppTabMenuItem' });
+defineOptions({ name: 'AppTabMenuItem' });
 
 interface Props {
   icon: string;

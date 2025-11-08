@@ -12,7 +12,7 @@
       <h-app-logo width="180"></h-app-logo>
     </template>
 
-    <h-app-breadcrumbs></h-app-breadcrumbs>
+    <layout-breadcrumbs v-if="!profile"></layout-breadcrumbs>
 
     <v-spacer></v-spacer>
 
@@ -32,22 +32,24 @@
   </v-app-bar>
 </template>
 
-<script lang="ts" setup>
-import { computed } from 'vue';
-import { useDisplay, useTheme } from 'vuetify';
+<script setup lang="ts">
+import { useDisplay } from 'vuetify';
 
 import { useApplicationStore } from '@herodotus/framework';
 
 import { HAppLogo } from '../../library/Logo';
+import LayoutBreadcrumbs from './LayoutBreadcrumbs.vue';
 
-defineOptions({ name: 'HAppBar', components: { HAppLogo } });
+defineOptions({ name: 'LayoutBar', components: { HAppLogo, LayoutBreadcrumbs } });
 
 const { mdAndUp } = useDisplay();
 const application = useApplicationStore();
 
-const theme = useTheme();
+interface Props {
+  profile?: boolean;
+}
 
-const logo = computed(() => {
-  return `/images/layouts/dante-cloud-${theme.current.value.dark ? 'dark' : 'light'}.png`;
+withDefaults(defineProps<Props>(), {
+  profile: false,
 });
 </script>

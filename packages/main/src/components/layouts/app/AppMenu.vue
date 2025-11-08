@@ -38,7 +38,7 @@
 import { computed, shallowRef } from 'vue';
 import { useSystemMenu } from '@herodotus/framework';
 
-defineOptions({ name: 'HAppMenu' });
+defineOptions({ name: 'AppMenu' });
 
 const { getMenuItems } = useSystemMenu();
 

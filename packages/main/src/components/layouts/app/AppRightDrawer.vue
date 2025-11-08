@@ -34,9 +34,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useApplicationStore, useSettingsStore, ThemeModeEnum } from '@herodotus/framework';
+import { useApplicationStore, useSettingsStore } from '@herodotus/framework';
 
-defineOptions({ name: 'HAppRightDrawer' });
+import { SettingOptions } from '../setting';
+
+defineOptions({ name: 'AppRightDrawer', components: { SettingOptions } });
 
 const application = useApplicationStore();
 const settings = useSettingsStore();

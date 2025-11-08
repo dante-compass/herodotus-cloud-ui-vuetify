@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { useSystemTheme } from '@herodotus/framework';
 
-defineOptions({ name: 'HSettingThemeOption' });
+defineOptions({ name: 'SettingThemeOption' });
 
 const { currentTheme } = useSystemTheme();
 

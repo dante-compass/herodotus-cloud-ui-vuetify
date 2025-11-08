@@ -26,7 +26,8 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router';
 
 import { useRoute } from 'vue-router';
 import { useRouterStore } from '@herodotus/framework';
-defineOptions({ name: 'HAppContainer' });
+
+defineOptions({ name: 'LayoutContainer' });
 
 const route = useRoute();
 const store = useRouterStore();

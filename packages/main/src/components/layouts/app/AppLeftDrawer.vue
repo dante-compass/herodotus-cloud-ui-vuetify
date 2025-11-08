@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer v-model="application.leftDrawer" width="300">
-    <h-app-menu></h-app-menu>
+    <app-menu></app-menu>
 
     <template #append>
       <v-divider></v-divider>
@@ -23,9 +23,9 @@
 
 <script lang="ts" setup>
 import { useApplicationStore } from '@herodotus/framework';
-import HAppMenu from './HAppMenu.vue';
+import AppMenu from './AppMenu.vue';
 
-defineOptions({ name: 'HAppLeftDrawer', components: { HAppMenu } });
+defineOptions({ name: 'AppLeftDrawer', components: { AppMenu } });
 
 const application = useApplicationStore();
 

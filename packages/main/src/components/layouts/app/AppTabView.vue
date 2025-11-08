@@ -75,9 +75,9 @@ import { useRoute } from 'vue-router';
 import { useTabsViewStore } from '@herodotus/framework';
 import { refreshTabInjectionKey } from '@/composables/symbols';
 
-import HAppTabMenuItem from './HAppTabMenuItem.vue';
+import AppTabMenuItem from './AppTabMenuItem.vue';
 
-defineOptions({ name: 'HAppTabView', components: { HAppTabMenuItem } });
+defineOptions({ name: 'HAppTabView', components: { AppTabMenuItem } });
 
 const route = useRoute();
 
