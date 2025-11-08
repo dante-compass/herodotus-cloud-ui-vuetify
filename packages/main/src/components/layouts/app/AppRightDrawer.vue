@@ -17,7 +17,7 @@
     <v-divider></v-divider>
 
     <v-container class="px-3 py-3">
-      <h-app-setting-options></h-app-setting-options>
+      <setting-options></setting-options>
       <v-divider class="mt-4 mb-3" />
       <!-- <h-text-divider justify="start" label="界面效果"></h-text-divider>
       <h-setting-switch
@@ -34,12 +34,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useApplicationStore, useSettingsStore } from '@herodotus/framework';
+import { useApplicationStore } from '@herodotus/framework';
 
 import { SettingOptions } from '../setting';
 
 defineOptions({ name: 'AppRightDrawer', components: { SettingOptions } });
 
 const application = useApplicationStore();
-const settings = useSettingsStore();
 </script>

@@ -32,35 +32,35 @@
           </template>
 
           <v-list>
-            <h-app-tab-menu-item
+            <app-tab-menu-item
               title="刷新当前"
               icon="mdi-refresh"
               :disabled="disableRefreshCurrentTab"
               @click="onRefresh"
-            ></h-app-tab-menu-item>
-            <h-app-tab-menu-item
+            ></app-tab-menu-item>
+            <app-tab-menu-item
               title="关闭当前"
               icon="mdi-close"
               :disabled="disableCloseCurrentTab"
               @click="onCloseCurrentTab()"
-            ></h-app-tab-menu-item>
-            <h-app-tab-menu-item
+            ></app-tab-menu-item>
+            <app-tab-menu-item
               title="关闭其它"
               icon="mdi-format-horizontal-align-center"
               @click="onCloseOtherTabs()"
-            ></h-app-tab-menu-item>
-            <h-app-tab-menu-item
+            ></app-tab-menu-item>
+            <app-tab-menu-item
               title="关闭左侧"
               icon="mdi-format-horizontal-align-right"
               :disabled="disableCloseLeftTabs"
               @click="onCloseLeftTabs()"
-            ></h-app-tab-menu-item>
-            <h-app-tab-menu-item
+            ></app-tab-menu-item>
+            <app-tab-menu-item
               title="关闭右侧"
               icon="mdi-format-horizontal-align-left"
               :disabled="disableCloseRightTabs"
               @click="onCloseRightTabs()"
-            ></h-app-tab-menu-item>
+            ></app-tab-menu-item>
           </v-list>
         </v-menu>
       </template>
