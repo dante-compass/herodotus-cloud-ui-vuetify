@@ -33,7 +33,6 @@
           placeholder="请输入密码"
           prepend-inner-icon="mdi-lock-outline"
           clearable
-          focused
           rounded="xl"
           variant="solo-filled"
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"

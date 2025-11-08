@@ -54,5 +54,8 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SettingOptions: typeof import('./../src/components/layouts/setting/SettingOptions.vue')['default']
     SettingThemeOption: typeof import('./../src/components/layouts/setting/SettingThemeOption.vue')['default']
+    UserAvatar: typeof import('./../src/components/layouts/commons/UserAvatar.vue')['default']
+    UserAvatarButton: typeof import('./../src/components/layouts/commons/UserAvatarButton.vue')['default']
+    UserMenu: typeof import('./../src/components/layouts/commons/UserMenu.vue')['default']
   }
 }
