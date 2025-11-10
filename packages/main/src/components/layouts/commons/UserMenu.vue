@@ -15,8 +15,7 @@
         flat
         height="88"
         rounded="0"
-      >
-      </v-img>
+      ></v-img>
       <div class="text-center mt-n9 mb-4">
         <div>
           <v-avatar

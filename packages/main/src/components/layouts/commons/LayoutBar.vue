@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar class="border-b">
+  <v-app-bar class="border-b px-md-3" flat>
     <div class="px-1" />
 
     <v-app-bar-nav-icon
