@@ -13,7 +13,7 @@
         slim
         prepend-icon="mdi-square-edit-outline"
         title="个人设置"
-        to="/dashboard/console"
+        to="/personal/setting"
         :active="false"
       ></v-list-item>
     </v-list>

@@ -3,6 +3,7 @@
     <div class="px-1" />
 
     <v-app-bar-nav-icon
+      v-if="!personal"
       class="ml-12"
       :icon="application.leftDrawer ? 'mdi-menu-open' : 'mdi-menu-close'"
       @click="application.leftDrawer = !application.leftDrawer"
@@ -12,7 +13,7 @@
       <h-app-logo width="180"></h-app-logo>
     </template>
 
-    <layout-breadcrumbs v-if="!profile"></layout-breadcrumbs>
+    <layout-breadcrumbs v-if="!personal"></layout-breadcrumbs>
 
     <v-spacer></v-spacer>
 
@@ -46,10 +47,10 @@ const { mdAndUp } = useDisplay();
 const application = useApplicationStore();
 
 interface Props {
-  profile?: boolean;
+  personal?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
-  profile: false,
+  personal: false,
 });
 </script>

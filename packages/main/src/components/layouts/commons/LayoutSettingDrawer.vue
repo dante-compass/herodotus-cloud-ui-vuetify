@@ -38,7 +38,7 @@ import { useApplicationStore } from '@herodotus/framework';
 
 import { SettingOptions } from '../setting';
 
-defineOptions({ name: 'AppRightDrawer', components: { SettingOptions } });
+defineOptions({ name: 'LayoutSettingDrawer', components: { SettingOptions } });
 
 const application = useApplicationStore();
 </script>

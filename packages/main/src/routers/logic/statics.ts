@@ -35,10 +35,32 @@ const ServiceErrorRoute: RouteRecordRaw = {
   meta: { title: 'Service Error' },
 };
 
+const PersonalSettingRoute: RouteRecordRaw = {
+  path: '/personal',
+  name: 'Personal',
+  component: () => import('@/views/layouts/Personal.vue'),
+  redirect: '/personal/setting',
+  meta: {
+    title: 'Dashboard',
+    sort: 0,
+    icon: 'mdi-view-dashboard',
+    group: 'herodotus',
+  },
+  children: [
+    {
+      path: '/personal/setting',
+      name: 'PersonalSetting',
+      meta: { title: '主控台', icon: 'mdi-sign-text', isHideAllChild: true },
+      component: () => import('@/views/personal/setting/Index.vue'),
+    },
+  ],
+};
+
 //普通路由 无需验证权限
 export const staticRoutes: Array<RouteRecordRaw> = [
   RootRoute,
   SignInRoute,
   NoPermissionRoute,
   ServiceErrorRoute,
+  PersonalSettingRoute,
 ];

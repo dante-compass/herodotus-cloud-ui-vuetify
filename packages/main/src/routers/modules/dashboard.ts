@@ -23,6 +23,27 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+
+  {
+    path: '/personal',
+    name: 'Personal',
+    component: () => import('@/views/layouts/Personal.vue'),
+    redirect: '/personal/setting',
+    meta: {
+      title: 'Dashboard',
+      sort: 0,
+      icon: 'mdi-view-dashboard',
+      group: 'herodotus',
+    },
+    children: [
+      {
+        path: '/personal/setting',
+        name: 'PersonalSetting',
+        meta: { title: '主控台', icon: 'mdi-sign-text', isHideAllChild: true },
+        component: () => import('@/views/personal/setting/Index.vue'),
+      },
+    ],
+  },
 ];
 
 export default routes;

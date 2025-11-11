@@ -1,23 +1,21 @@
 <template>
-  <v-container class="pt-0" fluid>
-    <router-view v-slot="{ Component, route }">
-      <keep-alive :include="keepAlives">
-        <suspense>
-          <template #default>
-            <transition
-              appear
-              mode="out-in"
-              :duration="500"
-              enter-active-class="animate__animated animate__fadeIn"
-              leave-active-class="animate__animated animate__fadeOut"
-            >
-              <component :is="getComponent(Component, route)" />
-            </transition>
-          </template>
-        </suspense>
-      </keep-alive>
-    </router-view>
-  </v-container>
+  <router-view v-slot="{ Component, route }">
+    <keep-alive :include="keepAlives">
+      <suspense>
+        <template #default>
+          <transition
+            appear
+            mode="out-in"
+            :duration="500"
+            enter-active-class="animate__animated animate__fadeIn"
+            leave-active-class="animate__animated animate__fadeOut"
+          >
+            <component :is="getComponent(Component, route)" />
+          </transition>
+        </template>
+      </suspense>
+    </keep-alive>
+  </router-view>
 </template>
 
 <script setup lang="ts">
@@ -27,7 +25,7 @@ import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { useRoute } from 'vue-router';
 import { useRouterStore } from '@herodotus/framework';
 
-defineOptions({ name: 'LayoutContainer' });
+defineOptions({ name: 'LayoutContent' });
 
 const route = useRoute();
 const store = useRouterStore();

@@ -1,4 +1,5 @@
 import LayoutBar from './LayoutBar.vue';
-import LayoutContainer from './LayoutContainer.vue';
+import LayoutContent from './LayoutContent.vue';
+import LayoutSettingDrawer from './LayoutSettingDrawer.vue';
 
-export { LayoutBar, LayoutContainer };
+export { LayoutBar, LayoutContent, LayoutSettingDrawer };
