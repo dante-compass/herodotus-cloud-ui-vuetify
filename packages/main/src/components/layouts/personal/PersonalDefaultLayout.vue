@@ -6,18 +6,16 @@
     <v-main :class="backgroundColor">
       <v-container>
         <v-row>
-          <v-col cols="1"></v-col>
-          <v-col cols="3">
+          <v-col cols="2">
             <v-sheet rounded="lg">
               <v-list rounded="lg"></v-list>
             </v-sheet>
           </v-col>
-          <v-col cols="7">
+          <v-col>
             <v-sheet min-height="70vh" rounded="lg">
               <layout-content></layout-content>
             </v-sheet>
           </v-col>
-          <v-col cols="1"></v-col>
         </v-row>
       </v-container>
     </v-main>
