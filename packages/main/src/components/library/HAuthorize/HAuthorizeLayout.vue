@@ -2,10 +2,10 @@
   <h-detail-container :title="title">
     <v-container>
       <v-row>
-        <v-col>
+        <v-col cols="8">
           <slot></slot>
         </v-col>
-        <v-col>
+        <v-col cols="4">
           <slot name="right"></slot>
         </v-col>
       </v-row>

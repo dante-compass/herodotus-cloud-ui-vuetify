@@ -1,8 +1,8 @@
 <template>
   <v-card>
     <h-authorize-header @save="onSave()" @clear="onClear()"></h-authorize-header>
-    <v-list lines="two">
-      <v-list-item v-for="(item, i) in selectedItems" :key="i">
+    <v-list lines="two" density="compact" selectable class="mx-2">
+      <v-list-item v-for="(item, i) in selectedItems" :key="i" rounded="lg">
         <template v-if="httpMethod" #prepend>
           <h-http-method-avatar :method="getHttpMethod(item)"></h-http-method-avatar>
         </template>
