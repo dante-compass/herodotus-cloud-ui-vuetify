@@ -37,7 +37,7 @@ import { useDisplay } from 'vuetify';
 
 import { useApplicationStore } from '@herodotus/framework';
 
-import { HAppLogo } from '../../library/Logo';
+import { HAppLogo } from '../../library/HLogo';
 import LayoutBreadcrumbs from './LayoutBreadcrumbs.vue';
 import UserAvatar from './UserAvatar.vue';
 

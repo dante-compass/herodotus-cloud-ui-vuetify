@@ -41,7 +41,7 @@ import type { AbstractSysEntity } from '@herodotus/core';
 import { useEditFinish } from '@herodotus/framework';
 
 import HDetailContainer from './HDetailContainer.vue';
-import { HDictionarySelect } from '../library/Select';
+import { HDictionarySelect } from '../../library/HSelect';
 
 defineOptions({
   name: 'HCenterLayoutContainer',

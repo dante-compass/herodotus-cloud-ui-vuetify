@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import { useSystemTheme, useApplicationStore } from '@herodotus/framework';
 
-import { HAppLogo } from '@/components/library/Logo';
+import { HAppLogo } from '@/components/library/HLogo';
 
 defineOptions({
   name: 'HSignInLayout',
