@@ -13,7 +13,7 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn>新建</v-btn>
+      <v-btn>新建应用</v-btn>
     </template>
 
     <template #item.accessTokenTimeToLive="{ value }">
@@ -32,13 +32,11 @@
       {{ formatDuration(value) }}
     </template>
 
+    <template #item.authorizationGrantTypes="{ item }">
+      <h-column-grant-type :items="item.authorizationGrantTypes"></h-column-grant-type>
+    </template>
+
     <template #item.actions="{ item }">
-      <h-action-button
-        color="amber"
-        icon="mdi-shield-edit"
-        tooltip="配置角色"
-        @click="toAuthorize(item)"
-      ></h-action-button>
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
       <h-action-delete-button
         v-if="!item.reserved"
@@ -56,7 +54,7 @@ import type {
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { dayjs } from '@herodotus/core';
+import { moment } from '@herodotus/core';
 import { useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
@@ -105,7 +103,6 @@ const {
   totalPages,
   totalItems,
   toEdit,
-  toAuthorize,
   deleteItemById,
   findItems,
 } = useTable<OAuth2ApplicationEntity, OAuth2ApplicationConditions>(
@@ -114,6 +111,6 @@ const {
 );
 
 const formatDuration = (date: string): string => {
-  return dayjs.duration(date, 'seconds').humanize();
+  return moment.duration(date, 'seconds').humanize();
 };
 </script>

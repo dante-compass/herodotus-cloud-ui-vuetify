@@ -82,3 +82,26 @@ export const HTTP_METHOD_STYLE_GROUP: DisplayElementGroup = {
   GET: { color: 'blue', icon: 'mdi-book-multiple' },
   ALL: { color: 'brown', icon: 'mdi-book-cog' },
 };
+
+export const GRANT_TYPE_STYLE_GROUP: DisplayElementGroup = {
+  authorization_code: { color: 'pink', icon: 'mdi-security', text: '授权码认证' },
+  client_credentials: { color: 'orange', icon: 'mdi-arrow-decision-auto', text: '客户端凭证认证' },
+  refresh_token: { color: 'indigo', icon: 'mdi-cog-refresh', text: '刷新令牌认证' },
+  password: { color: 'cyan', icon: 'mdi-file-key', text: '密码认证' },
+  social_credentials: { color: 'light-blue', icon: 'mdi-charity', text: '社交化认证' },
+  webauthn_credentials: {
+    color: 'secondary',
+    icon: 'mdi-account-key',
+    text: 'Passkey 通行密钥认证',
+  },
+  'urn:ietf:params:oauth:grant-type:device_code': {
+    color: 'primary',
+    icon: 'mdi-devices',
+    text: '设备激活码认证',
+  },
+  'urn:ietf:params:oauth:grant-type:jwt-bearer': {
+    color: 'purple',
+    icon: 'mdi-file-hidden',
+    text: 'JWT Bearer 认证',
+  },
+};
