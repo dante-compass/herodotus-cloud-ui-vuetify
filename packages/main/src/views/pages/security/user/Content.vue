@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'OAuth2ApplicationContent' });
+defineOptions({ name: 'SysUserContent' });
 </script>

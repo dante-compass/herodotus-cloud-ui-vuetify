@@ -42,7 +42,7 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 import { useTableItem, useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
-defineOptions({ name: 'SysUserContent' });
+defineOptions({ name: 'SysUserAuthorize' });
 
 const { editedItem, title, assign } = useTableItem<SysUserEntity>(API.core.sysUser());
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
