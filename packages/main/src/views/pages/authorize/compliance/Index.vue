@@ -9,59 +9,93 @@
     :item-value="rowKey"
     :loading="loading"
     disable-sort
-    reserved
     @update:options="findItems"
   >
     <template #control>
-      <v-btn>新建</v-btn>
+      <v-btn @click="onExportExcel">导出Excel</v-btn>
     </template>
 
-    <template #item.actions="{ item }">
-      <h-action-button
-        color="amber"
-        icon="mdi-shield-edit"
-        tooltip="配置角色"
-        @click="toAuthorize(item)"
-      ></h-action-button>
-      <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+    <template #item.createTime="{ value }">
+      {{ dateFormat(value) }}
+    </template>
+
+    <template #item.mobile="{ item }">
+      <h-column-boolean :value="item.mobile"></h-column-boolean>
+    </template>
+
+    <template #item.mobileBrowser="{ item }">
+      <h-column-boolean :value="item.mobileBrowser"></h-column-boolean>
     </template>
   </h-data-table>
 </template>
 
 <script setup lang="ts">
-import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from '@herodotus/api';
+import type { EntityTitle } from '@herodotus/core';
+import type {
+  OAuth2UserLoggingEntity,
+  OAuth2UserLoggingConditions,
+  OAuth2UserLoggingProps,
+} from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTable } from '@/composables/hooks';
+import { moment } from '@herodotus/core';
+import { useTable, useXlsx } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.OAUTH2_COMPLIANCE });
 
 const headers = ref([
-  { key: 'roleName', align: 'center', title: '角色名称' },
-  { key: 'roleCode', align: 'center', title: '角色代码' },
-  { key: 'description', align: 'center', title: '备注' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
-  { key: 'status', align: 'center', title: '状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: 'principalName', align: 'center', title: '用户名' },
+  { key: 'clientId', field: 'clientId', align: 'center', title: '客户端ID' },
+  { key: 'ip', field: 'ip', align: 'center', title: 'IP地址' },
+  { key: 'location', align: 'center', title: '位置' },
+  { key: 'mobile', align: 'center', title: '移动端？' },
+  { key: 'mobileBrowser', align: 'center', title: '是移动端浏览器' },
+  { key: 'platformName', align: 'center', title: '平台' },
+  { key: 'osName', align: 'center', title: '操作系统' },
+  { key: 'browserName', align: 'center', title: '浏览器' },
+  { key: 'browserEngineName', align: 'center', title: '浏览器引擎' },
+  { key: 'operation', align: 'center', title: '操作' },
+  { key: 'createTime', align: 'center', title: '时间' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysRoleProps = 'roleId';
+const rowKey: OAuth2UserLoggingProps = 'loggingId';
 
-const {
-  loading,
-  pageNumber,
-  pageSize,
-  tableRows,
-  totalPages,
-  totalItems,
-  toEdit,
-  toAuthorize,
-  deleteItemById,
-  findItems,
-} = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.OAUTH2_COMPLIANCE);
+const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, findItems } = useTable<
+  OAuth2UserLoggingEntity,
+  OAuth2UserLoggingConditions
+>(API.core.oauth2UserLogging(), PAGE_NAME.OAUTH2_COMPLIANCE, false, ['createTime'], 'DESC');
+const { postExport } = useXlsx<OAuth2UserLoggingEntity>();
+
+const dateFormat = (date: string) => {
+  if (date) {
+    return moment(date).format('YYYY-MM-DD HH:mm:ss');
+  } else {
+    return '';
+  }
+};
+
+const title: EntityTitle<OAuth2UserLoggingEntity> = {
+  createTime: '创建时间',
+  updateTime: '更新时间',
+  loggingId: 'ID',
+  principalName: '用户名',
+  clientId: 'OAuth2 客户端ID',
+  ip: 'IP地址',
+  mobile: '是移动端 ?',
+  browserName: '浏览器',
+  mobileBrowser: '是移动端浏览器 ?',
+  browserVersion: '浏览器版本',
+  platformName: '平台',
+  osName: '操作系统',
+  osVersion: '操作系统版本',
+  browserEngineName: '浏览器引擎',
+  browserEngineVersion: '浏览器引擎版本',
+  operation: '执行操作',
+  location: '登录位置',
+};
+
+const onExportExcel = () => {
+  postExport(tableRows.value, title, '日志审计');
+};
 </script>

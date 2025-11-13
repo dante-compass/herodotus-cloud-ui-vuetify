@@ -11,6 +11,10 @@
     disable-sort
     @update:options="findItems"
   >
+    <template #control>
+      <v-btn @click="onExportExcel">导出Excel</v-btn>
+    </template>
+
     <template #item.createTime="{ value }">
       {{ dateFormat(value) }}
     </template>
