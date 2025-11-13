@@ -13,7 +13,7 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn>新建</v-btn>
+      <v-btn>新建用户</v-btn>
     </template>
 
     <template #item.actions="{ item }">
@@ -34,7 +34,6 @@
 
 <script setup lang="ts">
 import type { SysUserEntity, SysUserProps, SysUserConditions } from '@herodotus/api';
-
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable } from '@/composables/hooks';
