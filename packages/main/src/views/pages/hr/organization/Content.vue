@@ -8,7 +8,7 @@ import type { SysAttributeEntity } from '@herodotus/api';
 import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
-defineOptions({ name: 'SysAttributeContent' });
+defineOptions({ name: 'SysOrganizationContent' });
 
 const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysAttributeEntity>(
   API.core.sysAttribute(),

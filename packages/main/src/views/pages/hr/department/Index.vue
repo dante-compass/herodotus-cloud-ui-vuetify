@@ -39,7 +39,7 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 import { useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
-defineOptions({ name: PAGE_NAME.SYS_ROLE });
+defineOptions({ name: PAGE_NAME.SYS_DEPARTMENT });
 
 const headers = ref([
   { key: 'roleName', align: 'center', title: '角色名称' },
@@ -63,5 +63,5 @@ const {
   toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.SYS_ROLE);
+} = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.SYS_DEPARTMENT);
 </script>
