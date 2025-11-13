@@ -36,15 +36,44 @@
 import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
+import {DayJs} from '@herodotus/core'
 import { useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.OAUTH2_APPLICATION });
 
 const headers = ref([
-  { key: 'roleName', align: 'center', title: '角色名称' },
-  { key: 'roleCode', align: 'center', title: '角色代码' },
-  { key: 'description', align: 'center', title: '备注' },
+  { key: 'applicationName', align: 'center', title: '应用名称' },
+  { key: 'abbreviation', align: 'center', title: '应用简称' },
+  {
+    key: 'authorizationGrantTypes',
+    align: 'center',
+    title: '认证模式',
+  },
+  {
+    key: 'accessTokenTimeToLive',
+    align: 'center',
+    title: '令牌有效期',
+    format: (value) => formatDuration(value),
+  },
+  {
+    key: 'refreshTokenTimeToLive',
+    align: 'center',
+    title: '刷新令牌有效期',
+    format: (value) => formatDuration(value),
+  },
+  {
+    key: 'authorizationCodeTimeToLive',
+    align: 'center',
+    title: '授权码有效期',
+    format: (value) => formatDuration(value),
+  },
+  {
+    key: 'deviceCodeTimeToLive',
+    align: 'center',
+    title: '激活码有效期',
+    format: (value) => formatDuration(value),
+  },
   { key: 'reserved', align: 'center', title: '保留数据' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
@@ -64,4 +93,8 @@ const {
   deleteItemById,
   findItems,
 } = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.OAUTH2_APPLICATION);
+
+const formatDuration = (date: string): string => {
+  return DayJs.duration(date, 'seconds').humanize();
+};
 </script>

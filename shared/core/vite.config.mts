@@ -42,6 +42,7 @@ export default defineConfig({
         'generate-avatar',
         'dayjs',
         'dayjs/locale/zh-cn',
+        'dayjs/plugin/duration',
         'lodash-es',
       ],
       output: {
@@ -57,6 +58,7 @@ export default defineConfig({
           'generate-avatar': 'GenerateAvatar',
           dayjs: 'Dayjs',
           'dayjs/locale/zh-cn': 'DayjsLocaleZhcn',
+          'dayjs/plugin/duration': 'DayjsPluginDuration',
           'lodash-es': 'LodashEs',
         },
       },

@@ -9,7 +9,7 @@ import type {
   AccessPrincipal,
 } from '@/declarations';
 
-import { DayJs, AuthorizationTokenEnum } from '@herodotus/core';
+import { dayjs, AuthorizationTokenEnum } from '@herodotus/core';
 import { jwtDecode } from 'jwt-decode';
 import { useCryptoStore } from './crypto';
 import { OptionsUtilities } from '../utilities';
@@ -37,8 +37,8 @@ export const useAuthenticationStore = defineStore('Authentication', {
 
   getters: {
     isNotExpired: (state) => {
-      const expires = DayJs().add(state.expires_in, 'seconds').valueOf();
-      const flag = DayJs(expires).add(1, 'seconds').diff(DayJs(), 'seconds');
+      const expires = dayjs().add(state.expires_in, 'seconds').valueOf();
+      const flag = dayjs(expires).add(1, 'seconds').diff(dayjs(), 'seconds');
       return flag !== 0;
     },
     token(): string {

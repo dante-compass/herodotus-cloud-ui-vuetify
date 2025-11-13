@@ -1,2 +1,2 @@
 import { default as dayjs } from 'dayjs';
-export { dayjs as DayJs };
+export { dayjs };

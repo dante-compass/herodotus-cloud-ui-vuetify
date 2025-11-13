@@ -1,6 +1,9 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn'; // 导入本地化语言
 
-dayjs.locale('zh-cn');
+import duration from 'dayjs/plugin/duration';
 
-export { dayjs as DayJs };
+dayjs.locale('zh-cn');
+dayjs.extend(duration);
+
+export { dayjs };
