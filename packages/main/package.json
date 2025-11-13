@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "@mdi/js": "^7.4.47",
-    "@types/node": "^24.10.0"
+    "@types/node": "^24.10.1"
   }
 }
