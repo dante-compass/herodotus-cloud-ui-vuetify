@@ -9,7 +9,6 @@
     :item-value="rowKey"
     :loading="loading"
     disable-sort
-    reserved
     @update:options="findItems"
   >
     <template #control>
@@ -63,31 +62,11 @@ defineOptions({ name: PAGE_NAME.OAUTH2_APPLICATION });
 const headers = ref([
   { key: 'applicationName', align: 'center', title: '应用名称' },
   { key: 'abbreviation', align: 'center', title: '应用简称' },
-  {
-    key: 'authorizationGrantTypes',
-    align: 'center',
-    title: '认证模式',
-  },
-  {
-    key: 'accessTokenTimeToLive',
-    align: 'center',
-    title: '令牌有效期',
-  },
-  {
-    key: 'refreshTokenTimeToLive',
-    align: 'center',
-    title: '刷新令牌有效期',
-  },
-  {
-    key: 'authorizationCodeTimeToLive',
-    align: 'center',
-    title: '授权码有效期',
-  },
-  {
-    key: 'deviceCodeTimeToLive',
-    align: 'center',
-    title: '激活码有效期',
-  },
+  { key: 'authorizationGrantTypes', align: 'center', title: '认证模式' },
+  { key: 'accessTokenTimeToLive', align: 'center', title: '令牌有效期' },
+  { key: 'refreshTokenTimeToLive', align: 'center', title: '刷新令牌有效期' },
+  { key: 'authorizationCodeTimeToLive', align: 'center', title: '授权码有效期' },
+  { key: 'deviceCodeTimeToLive', align: 'center', title: '激活码有效期' },
   { key: 'reserved', align: 'center', title: '保留数据' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },

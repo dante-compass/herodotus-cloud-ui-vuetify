@@ -45,3 +45,7 @@ export interface Tree {
     selector: number;
     children?: Array<Tree>;
 }
+/**
+ * 可以用于前端 excel 导出
+ */
+export type EntityTitle<E extends Entity> = Partial<Record<keyof E, string>>;
