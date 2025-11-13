@@ -16,7 +16,7 @@
     </template>
 
     <template #item.createTime="{ value }">
-      {{ dateFormat(value) }}
+      {{ defaultFormat(value) }}
     </template>
 
     <template #item.mobile="{ item }">
@@ -38,8 +38,7 @@ import type {
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { moment } from '@herodotus/core';
-import { useTable, useXlsx } from '@/composables/hooks';
+import { useTable, useXlsx, useDateTime } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.OAUTH2_AUDIT });
@@ -66,15 +65,9 @@ const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, findIt
   OAuth2InterfaceAuditEntity,
   OAuth2InterfaceAuditConditions
 >(API.core.oauth2InterfaceAudit(), PAGE_NAME.OAUTH2_AUDIT, false, ['createTime'], 'DESC');
-const { postExport } = useXlsx<OAuth2InterfaceAuditEntity>();
 
-const dateFormat = (date: string) => {
-  if (date) {
-    return moment(date).format('YYYY-MM-DD HH:mm:ss');
-  } else {
-    return '';
-  }
-};
+const { postExport } = useXlsx<OAuth2InterfaceAuditEntity>();
+const { defaultFormat } = useDateTime();
 
 const title: EntityTitle<OAuth2InterfaceAuditEntity> = {
   createTime: '创建时间',

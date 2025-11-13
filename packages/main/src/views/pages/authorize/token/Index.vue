@@ -12,45 +12,53 @@
     reserved
     @update:options="findItems"
   >
-    <template #control>
-      <v-btn>新建</v-btn>
+    <template #item.authorizationGrantType="{ value }">
+      {{ defaultFormat(value) }}
+    </template>
+
+    <template #item.accessTokenIssuedAt="{ value }">
+      {{ defaultFormat(value) }}
+    </template>
+
+    <template #item.accessTokenExpiresAt="{ value }">
+      {{ defaultFormat(value) }}
+    </template>
+
+    <template #item.refreshTokenIssuedAt="{ value }">
+      {{ defaultFormat(value) }}
     </template>
 
     <template #item.actions="{ item }">
-      <h-action-button
-        color="amber"
-        icon="mdi-shield-edit"
-        tooltip="配置角色"
-        @click="toAuthorize(item)"
-      ></h-action-button>
-      <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+      <h-action-delete-button @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>
   </h-data-table>
 </template>
 
 <script setup lang="ts">
-import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from '@herodotus/api';
+import type {
+  OAuth2AuthorizationEntity,
+  OAuth2AuthorizationConditions,
+  OAuth2AuthorizationProps,
+} from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTable } from '@/composables/hooks';
+import { useTable, useDateTime } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.OAUTH2_TOKEN });
 
 const headers = ref([
-  { key: 'roleName', align: 'center', title: '角色名称' },
-  { key: 'roleCode', align: 'center', title: '角色代码' },
-  { key: 'description', align: 'center', title: '备注' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
-  { key: 'status', align: 'center', title: '状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: 'registeredClientId', align: 'center', title: '客户端ID' },
+  { key: 'principalName', align: 'center', title: '用户名' },
+  { key: 'authorizationGrantType', align: 'center', title: '认证模式' },
+  { key: 'accessTokenIssuedAt', align: 'center', title: '访问Token颁发时间' },
+  { key: 'accessTokenExpiresAt', align: 'center', title: '访问Token过期时间' },
+  { key: 'refreshTokenIssuedAt', align: 'center', title: '刷新Token颁发时间' },
+  { key: 'refreshTokenExpiresAt', align: 'center', title: '刷新Token过期时间' },
+  { key: 'actions', field: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysRoleProps = 'roleId';
+const rowKey: OAuth2AuthorizationProps = 'id';
 
 const {
   loading,
@@ -59,9 +67,15 @@ const {
   tableRows,
   totalPages,
   totalItems,
-  toEdit,
-  toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.OAUTH2_TOKEN);
+} = useTable<OAuth2AuthorizationEntity, OAuth2AuthorizationConditions>(
+  API.core.oauth2Authorization(),
+  PAGE_NAME.OAUTH2_TOKEN,
+  false,
+  ['accessTokenIssuedAt'],
+  'DESC',
+);
+
+const { defaultFormat } = useDateTime();
 </script>

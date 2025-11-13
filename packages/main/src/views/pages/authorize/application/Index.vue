@@ -16,19 +16,19 @@
     </template>
 
     <template #item.accessTokenTimeToLive="{ value }">
-      {{ formatDuration(value) }}
+      {{ humanize(value) }}
     </template>
 
     <template #item.refreshTokenTimeToLive="{ value }">
-      {{ formatDuration(value) }}
+      {{ humanize(value) }}
     </template>
 
     <template #item.authorizationCodeTimeToLive="{ value }">
-      {{ formatDuration(value) }}
+      {{ humanize(value) }}
     </template>
 
     <template #item.deviceCodeTimeToLive="{ value }">
-      {{ formatDuration(value) }}
+      {{ humanize(value) }}
     </template>
 
     <template #item.authorizationGrantTypes="{ item }">
@@ -53,8 +53,7 @@ import type {
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { moment } from '@herodotus/core';
-import { useTable } from '@/composables/hooks';
+import { useTable, useDateTime } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.OAUTH2_APPLICATION });
@@ -89,7 +88,5 @@ const {
   PAGE_NAME.OAUTH2_APPLICATION,
 );
 
-const formatDuration = (date: string): string => {
-  return moment.duration(date, 'seconds').humanize();
-};
+const { humanize } = useDateTime();
 </script>
