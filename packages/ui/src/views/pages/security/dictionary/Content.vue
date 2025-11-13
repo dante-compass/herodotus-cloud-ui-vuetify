@@ -16,7 +16,7 @@ import { useTableItem } from '@/hooks';
 import { HCenterFormLayout } from '@/components';
 
 export default defineComponent({
-  name: 'IotProductContent',
+  name: 'SysDictionaryContent',
 
   components: {
     HCenterFormLayout,

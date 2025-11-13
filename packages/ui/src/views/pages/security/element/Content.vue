@@ -80,9 +80,11 @@ export default defineComponent({
 
   setup() {
     const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysElementEntity>(
-      API.sysElement(),
+      API.core.sysElement(),
     );
-    const { treeItems } = useTreeItems<SysElementEntity, SysElementConditions>(API.sysElement());
+    const { treeItems } = useTreeItems<SysElementEntity, SysElementConditions>(
+      API.core.sysElement(),
+    );
 
     const onSave = () => {
       saveOrUpdate();
