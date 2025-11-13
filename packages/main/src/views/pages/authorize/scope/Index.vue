@@ -13,14 +13,14 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn>新建</v-btn>
+      <v-btn @click="toCreate">新建范围</v-btn>
     </template>
 
     <template #item.actions="{ item }">
       <h-action-button
         color="amber"
         icon="mdi-shield-edit"
-        tooltip="配置角色"
+        tooltip="配置权限"
         @click="toAuthorize(item)"
       ></h-action-button>
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from '@herodotus/api';
+import type { OAuth2ScopeEntity, OAuth2ScopeConditions, OAuth2ScopeProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable } from '@/composables/hooks';
@@ -42,15 +42,15 @@ import { API, PAGE_NAME } from '@/configurations';
 defineOptions({ name: PAGE_NAME.OAUTH2_SCOPE });
 
 const headers = ref([
-  { key: 'roleName', align: 'center', title: '角色名称' },
-  { key: 'roleCode', align: 'center', title: '角色代码' },
-  { key: 'description', align: 'center', title: '备注' },
+  { key: 'scopeCode', align: 'center', title: '范围代码' },
+  { key: 'scopeName', align: 'center', title: '范围名称' },
+  { key: 'description', align: 'center', title: '说明' },
   { key: 'reserved', align: 'center', title: '保留数据' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysRoleProps = 'roleId';
+const rowKey: OAuth2ScopeProps = 'scopeId';
 
 const {
   loading,
@@ -60,8 +60,12 @@ const {
   totalPages,
   totalItems,
   toEdit,
+  toCreate,
   toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.OAUTH2_SCOPE);
+} = useTable<OAuth2ScopeEntity, OAuth2ScopeConditions>(
+  API.core.oauth2Scope(),
+  PAGE_NAME.OAUTH2_SCOPE,
+);
 </script>
