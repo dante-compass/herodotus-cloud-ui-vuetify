@@ -12,8 +12,8 @@
     reserved
     @update:options="findItems"
   >
-    <template #control>
-      <v-btn>新建</v-btn>
+    <template #item.role="{ item }">
+      {{ item.role.roleCode }}
     </template>
 
     <template #item.actions="{ item }">
@@ -23,7 +23,6 @@
         tooltip="配置角色"
         @click="toAuthorize(item)"
       ></h-action-button>
-      <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
       <h-action-delete-button
         v-if="!item.reserved"
         @click="deleteItemById(item[rowKey])"
@@ -42,9 +41,9 @@ import { API, PAGE_NAME } from '@/configurations';
 defineOptions({ name: PAGE_NAME.SYS_DEFAULT_ROLE });
 
 const headers = ref([
-  { key: 'roleName', align: 'center', title: '角色名称' },
-  { key: 'roleCode', align: 'center', title: '角色代码' },
-  { key: 'description', align: 'center', title: '备注' },
+  { key: 'description', align: 'center', title: '名称' },
+  { key: 'scene', align: 'center', title: '代码' },
+  { key: 'role', align: 'center', title: '角色代码' },
   { key: 'reserved', align: 'center', title: '保留数据' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
@@ -59,12 +58,8 @@ const {
   tableRows,
   totalPages,
   totalItems,
-  toEdit,
   toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<SysRoleEntity, SysRoleConditions>(
-  API.core.sysRole(),
-  PAGE_NAME.SYS_DEFAULT_ROLE,
-);
+} = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.SYS_DEFAULT_ROLE);
 </script>
