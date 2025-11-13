@@ -16,6 +16,22 @@
       <v-btn>新建</v-btn>
     </template>
 
+    <template #item.accessTokenTimeToLive="{ value }">
+      {{ formatDuration(value) }}
+    </template>
+
+    <template #item.refreshTokenTimeToLive="{ value }">
+      {{ formatDuration(value) }}
+    </template>
+
+    <template #item.authorizationCodeTimeToLive="{ value }">
+      {{ formatDuration(value) }}
+    </template>
+
+    <template #item.deviceCodeTimeToLive="{ value }">
+      {{ formatDuration(value) }}
+    </template>
+
     <template #item.actions="{ item }">
       <h-action-button
         color="amber"
@@ -33,7 +49,11 @@
 </template>
 
 <script setup lang="ts">
-import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from '@herodotus/api';
+import type {
+  OAuth2ApplicationEntity,
+  OAuth2ApplicationConditions,
+  OAuth2ApplicationProps,
+} from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { dayjs } from '@herodotus/core';
@@ -54,32 +74,28 @@ const headers = ref([
     key: 'accessTokenTimeToLive',
     align: 'center',
     title: '令牌有效期',
-    format: (value) => formatDuration(value),
   },
   {
     key: 'refreshTokenTimeToLive',
     align: 'center',
     title: '刷新令牌有效期',
-    format: (value) => formatDuration(value),
   },
   {
     key: 'authorizationCodeTimeToLive',
     align: 'center',
     title: '授权码有效期',
-    format: (value) => formatDuration(value),
   },
   {
     key: 'deviceCodeTimeToLive',
     align: 'center',
     title: '激活码有效期',
-    format: (value) => formatDuration(value),
   },
   { key: 'reserved', align: 'center', title: '保留数据' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysRoleProps = 'roleId';
+const rowKey: OAuth2ApplicationProps = 'applicationId';
 
 const {
   loading,
@@ -92,7 +108,10 @@ const {
   toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.OAUTH2_APPLICATION);
+} = useTable<OAuth2ApplicationEntity, OAuth2ApplicationConditions>(
+  API.core.oauth2Application(),
+  PAGE_NAME.OAUTH2_APPLICATION,
+);
 
 const formatDuration = (date: string): string => {
   return dayjs.duration(date, 'seconds').humanize();
