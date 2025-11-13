@@ -36,7 +36,7 @@
 import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import {DayJs} from '@herodotus/core'
+import { dayjs } from '@herodotus/core';
 import { useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
@@ -95,6 +95,6 @@ const {
 } = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.OAUTH2_APPLICATION);
 
 const formatDuration = (date: string): string => {
-  return DayJs.duration(date, 'seconds').humanize();
+  return dayjs.duration(date, 'seconds').humanize();
 };
 </script>
