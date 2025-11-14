@@ -153,6 +153,12 @@ importers:
       '@mdi/font':
         specifier: 7.4.47
         version: 7.4.47
+      '@rsocket/composite-metadata':
+        specifier: 1.0.0-alpha.3
+        version: 1.0.0-alpha.3
+      '@stomp/stompjs':
+        specifier: ^7.2.1
+        version: 7.2.1
       '@vueuse/components':
         specifier: ^14.0.0
         version: 14.0.0(vue@3.5.24(typescript@5.9.3))
@@ -165,6 +171,12 @@ importers:
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
+      rsocket-core:
+        specifier: 1.0.0-alpha.3
+        version: 1.0.0-alpha.3
+      rsocket-websocket-client:
+        specifier: 1.0.0-alpha.3
+        version: 1.0.0-alpha.3
       vue:
         specifier: ^3.5.24
         version: 3.5.24(typescript@5.9.3)
@@ -987,6 +999,12 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@rsocket/composite-metadata@1.0.0-alpha.3':
+    resolution: {integrity: sha512-Le03lT8ttKrAqzZEdYHzq7U77DAzZXSHXxjRlA+tlOqzUXGwMGjuZF6IWhvzySOEywLtAwVdgoC+ZvoPhRZ+JA==}
+
+  '@rsocket/core@1.0.0-alpha.3':
+    resolution: {integrity: sha512-aBI6gtQZJ6l9IbNyp0flTLDM7FoyFyNIGFALADhgNc9pOcALDvunOclbM+s59A2TazqDb6skAzUUqhgXa4vR5Q==}
+
   '@rushstack/node-core-library@5.18.0':
     resolution: {integrity: sha512-XDebtBdw5S3SuZIt+Ra2NieT8kQ3D2Ow1HxhDQ/2soinswnOu9e7S69VSwTOLlQnx5mpWbONu+5JJjDxMAb6Fw==}
     peerDependencies:
@@ -1016,6 +1034,9 @@ packages:
 
   '@rushstack/ts-command-line@5.1.3':
     resolution: {integrity: sha512-Kdv0k/BnnxIYFlMVC1IxrIS0oGQd4T4b7vKfx52Y2+wk2WZSDFIvedr7JrhenzSlm3ou5KwtoTGTGd5nbODRug==}
+
+  '@stomp/stompjs@7.2.1':
+    resolution: {integrity: sha512-DLd/WeicnHS5SsWWSk3x6/pcivqchNaEvg9UEGVqAcfYEBVmS9D6980ckXjTtfpXLjdLDsd96M7IuX4w7nzq5g==}
 
   '@stylistic/eslint-plugin@5.5.0':
     resolution: {integrity: sha512-IeZF+8H0ns6prg4VrkhgL+yrvDXWDH2cKchrbh80ejG9dQgZWp10epHMbgRuQvgchLII/lfh6Xn3lu6+6L86Hw==}
@@ -2874,6 +2895,12 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
+  rsocket-core@1.0.0-alpha.3:
+    resolution: {integrity: sha512-BzIe2w8dFJlUS5N9fGUNRkxL19kd64bxbXsT11wj7isLfKkPZeNXisB2p/LWvSjFzWStnpOiScZ0g3/8ROE0pw==}
+
+  rsocket-websocket-client@1.0.0-alpha.3:
+    resolution: {integrity: sha512-CwTwTNMGa8BKvrWde/kM3q8IHuzO8RCIfzuj25BsVe9y8eehDQHt4fXk0g1i/wpsxTm+RY6DxE6Vr5snozKVOg==}
+
   run-applescript@7.1.0:
     resolution: {integrity: sha512-DPe5pVFaAsinSaV6QjQ6gdiedWDcRCbUuiQfQa2wmWV7+xC9bGulGI8+TdRmoFkAPaBXk8CrAbnlY2ISniJ47Q==}
     engines: {node: '>=18'}
@@ -4231,6 +4258,12 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.53.2':
     optional: true
 
+  '@rsocket/composite-metadata@1.0.0-alpha.3':
+    dependencies:
+      '@rsocket/core': 1.0.0-alpha.3
+
+  '@rsocket/core@1.0.0-alpha.3': {}
+
   '@rushstack/node-core-library@5.18.0(@types/node@24.10.1)':
     dependencies:
       ajv: 8.13.0
@@ -4269,6 +4302,8 @@ snapshots:
       string-argv: 0.3.2
     transitivePeerDependencies:
       - '@types/node'
+
+  '@stomp/stompjs@7.2.1': {}
 
   '@stylistic/eslint-plugin@5.5.0(eslint@9.39.1(jiti@2.6.1))':
     dependencies:
@@ -6253,6 +6288,12 @@ snapshots:
       '@rollup/rollup-win32-x64-gnu': 4.53.2
       '@rollup/rollup-win32-x64-msvc': 4.53.2
       fsevents: 2.3.3
+
+  rsocket-core@1.0.0-alpha.3: {}
+
+  rsocket-websocket-client@1.0.0-alpha.3:
+    dependencies:
+      rsocket-core: 1.0.0-alpha.3
 
   run-applescript@7.1.0: {}
 

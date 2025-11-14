@@ -49,12 +49,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       }),
       AutoImport({
         dts: 'types/auto-imports.d.ts',
-        imports: [
-          'vue',
-          {
-            pinia: ['defineStore', 'storeToRefs'],
-          },
-        ],
+        imports: ['vue', 'pinia'],
         eslintrc: {
           enabled: true,
         },

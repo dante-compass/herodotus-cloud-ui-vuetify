@@ -5,8 +5,8 @@ import { initializer, RouterUtilities } from '@herodotus/framework';
 import { DEAULT_ROUTER_LINK } from './constants';
 import { VARIABLES } from './variables';
 import { config } from './http';
-// import { useWebSocketMessage } from '@/composables/messages';
-// import { useDictionaryStore } from '@/composables/constants';
+import { useDictionaryStore } from '@/composables/stores';
+import { useWebSocketMessage } from '@/composables/hooks';
 
 let RouterUtils = {} as RouterUtilities;
 
@@ -30,9 +30,9 @@ const setupKernel = (currentRouter: Router) => {
       redirectUri: VARIABLES.getRedirectUri(),
     },
     signOutExtension: () => {
-      // const { disconnect } = useWebSocketMessage();
-      // disconnect();
-      // useDictionaryStore().$reset();
+      const { disconnect } = useWebSocketMessage();
+      disconnect();
+      useDictionaryStore().$reset();
     },
   };
 

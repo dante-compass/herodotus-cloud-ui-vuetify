@@ -5,4 +5,10 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useRealTimeInformation } from '@/composables/hooks';
+
+defineOptions({ name: 'DashboardConsole' });
+
+const { onlineUserCount } = useRealTimeInformation();
+</script>

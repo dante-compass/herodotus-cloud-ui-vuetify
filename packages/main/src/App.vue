@@ -7,6 +7,8 @@
 <script lang="ts" setup>
 import { useAuthenticationStore, useSettingsStore } from '@herodotus/framework';
 
+import { useWebSocketMessage } from '@/composables/hooks';
+
 import { VARIABLES } from '@/configurations';
 import { refreshTabInjectionKey } from '@/composables/symbols';
 
@@ -26,6 +28,7 @@ provide(refreshTabInjectionKey, refreshTab);
 
 const gapTime = shallowRef(0);
 const beforeUnloadTime = shallowRef(0);
+const { connect, disconnect } = useWebSocketMessage();
 
 const beforeUnloadHandler = (e: any) => {
   beforeUnloadTime.value = new Date().getTime();
@@ -49,7 +52,7 @@ const unloadHandler = (e: any) => {
 
 onMounted(() => {
   if (authentication.token) {
-    // connect();
+    connect();
   }
   if (!VARIABLES.isAutoRefreshToken()) {
     // 监听浏览器关闭
@@ -60,7 +63,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (authentication.token) {
-    // disconnect();
+    disconnect();
   }
   if (!VARIABLES.isAutoRefreshToken()) {
     window.removeEventListener('beforeunload', (e) => beforeUnloadHandler(e));
