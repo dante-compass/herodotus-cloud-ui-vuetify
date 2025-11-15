@@ -19,6 +19,7 @@
 
     <template #append>
       <div class="d-flex ga-1">
+        <notification-menu v-if="isMessageEnabled"></notification-menu>
         <h-button
           icon="mdi-cog-outline"
           tooltip="设置"
@@ -36,12 +37,17 @@
 import { useDisplay } from 'vuetify';
 
 import { useApplicationStore } from '@herodotus/framework';
+import { VARIABLES } from '@/configurations';
 
 import { HAppLogo } from '../../library/HLogo';
 import LayoutBreadcrumbs from './LayoutBreadcrumbs.vue';
 import UserAvatar from './UserAvatar.vue';
+import NotificationMenu from './NotificationMenu.vue';
 
-defineOptions({ name: 'LayoutBar', components: { HAppLogo, LayoutBreadcrumbs, UserAvatar } });
+defineOptions({
+  name: 'LayoutBar',
+  components: { HAppLogo, LayoutBreadcrumbs, UserAvatar, NotificationMenu },
+});
 
 const { mdAndUp } = useDisplay();
 const application = useApplicationStore();
@@ -52,5 +58,9 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   personal: false,
+});
+
+const isMessageEnabled = computed(() => {
+  return VARIABLES.isUseWebSocket();
 });
 </script>
