@@ -1,11 +1,11 @@
 <template>
   <v-menu eager location="bottom end" :close-on-content-click="false">
     <template v-slot:activator="{ props }">
-      <v-btn icon v-bind="props">
+      <v-btn icon v-bind="props" color="medium-emphasis">
         <v-badge v-if="totalCount !== 0" location="top right" color="error" :content="totalCount">
-          <v-icon icon="mdi-bell"></v-icon>
+          <v-icon icon="mdi-bell-outline"></v-icon>
         </v-badge>
-        <v-icon v-else icon="mdi-bell"></v-icon>
+        <v-icon v-else icon="mdi-bell-outline"></v-icon>
       </v-btn>
     </template>
 
@@ -40,14 +40,10 @@
       </v-tabs>
       <v-tabs-window v-model="tab">
         <v-tabs-window-item value="dialogue">
-          <v-card>
-            <notification-dialogue></notification-dialogue>
-          </v-card>
+          <notification-dialogue></notification-dialogue>
         </v-tabs-window-item>
         <v-tabs-window-item value="announcement">
-          <v-card>
-            <notification-announcement></notification-announcement>
-          </v-card>
+          <notification-announcement></notification-announcement>
         </v-tabs-window-item>
       </v-tabs-window>
 

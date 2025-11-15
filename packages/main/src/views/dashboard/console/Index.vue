@@ -100,7 +100,40 @@
         </h-chart-card>
       </v-col>
       <v-col>
-        <h-chart-card title="运行分析"><h-bar-chart></h-bar-chart></h-chart-card>
+        <h-chart-card title="运行分析">
+          <h-bar-chart></h-bar-chart>
+        </h-chart-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="8">
+        <h-chart-card title="资源使用趋势">
+          <h-scatter-chart></h-scatter-chart>
+        </h-chart-card>
+      </v-col>
+      <v-col cols="4">
+        <h-chart-card title="服务交互效能">
+          <h-sankey-chart></h-sankey-chart>
+        </h-chart-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="7">
+        <h-chart-card title="链路终端">
+          <h-rich-chart></h-rich-chart>
+        </h-chart-card>
+      </v-col>
+      <v-col cols="5">
+        <h-chart-card title="操作类型">
+          <h-funnel-chart></h-funnel-chart>
+        </h-chart-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <h-chart-card title="接口">
+          <h-category-chart></h-category-chart>
+        </h-chart-card>
       </v-col>
     </v-row>
   </div>
@@ -111,11 +144,28 @@ import { useRealTimeInformation } from '@/composables/hooks';
 
 import { VARIABLES } from '@/configurations';
 
+import HCategoryChart from './charts/HCategoryChart.vue';
+import HFunnelChart from './charts/HFunnelChart.vue';
 import HBarChart from './charts/HBarChart.vue';
 import HPieChart from './charts/HPieChart.vue';
 import HRadarChart from './charts/HRadarChart.vue';
+import HRichChart from './charts/HRichChart.vue';
+import HSankeyChart from './charts/HSankeyChart.vue';
+import HScatterChart from './charts/HScatterChart.vue';
 
-defineOptions({ name: 'DashboardConsole', components: { HBarChart, HPieChart, HRadarChart } });
+defineOptions({
+  name: 'DashboardConsole',
+  components: {
+    HCategoryChart,
+    HFunnelChart,
+    HRichChart,
+    HBarChart,
+    HPieChart,
+    HRadarChart,
+    HSankeyChart,
+    HScatterChart,
+  },
+});
 
 const { onlineUserCount } = useRealTimeInformation();
 

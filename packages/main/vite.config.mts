@@ -113,6 +113,67 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
+        '/socket': {
+          target: env.VITE_WS_URL,
+          changeOrigin: true,
+          ws: true,
+          rewrite: (path) => path.replace(/^\/socket/, ''),
+        },
+        '/reactive': {
+          target: env.VITE_REACTIVE_WS_URL,
+          changeOrigin: true,
+          ws: true,
+          rewrite: (path) => path.replace(/^\/reactive/, ''),
+        },
+      },
+    },
+    build: {
+      // chunkSizeWarningLimit: 1000,
+      outDir: '../../build/dist',
+      emptyOutDir: true,
+      cssCodeSplit: false, // 因为使用了 Base './'，如果将该属性设置为 true，编译后 css 目录结构会产生变化，会导致 @quasar/extras 中样式找不到字体
+      minify: 'terser',
+      terserOptions: {
+        // 生产环境下移除console
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+        keep_classnames: true,
+      },
+      rollupOptions: {
+        output: {
+          assetFileNames: (assetInfo) => {
+            if (
+              assetInfo.type === 'asset' &&
+              /\.(jpe?g|png|gif|svg)$/i.test(assetInfo.name as string)
+            ) {
+              return 'assets/images/[name]-[hash].[ext]';
+            }
+            if (
+              assetInfo.type === 'asset' &&
+              /\.(ttf|woff|woff2|eot)$/i.test(assetInfo.name as string)
+            ) {
+              return 'assets/fonts/[name]-[hash].[ext]';
+            }
+            return 'assets/[ext]/[name]-[hash].[ext]';
+          },
+          manualChunks(id, { getModuleInfo }) {
+            if (id.includes('tsparticles')) {
+              return 'js/npm-tsparticles';
+            } else if (id.includes('node_modules')) {
+              const indexes = id.toString().split('node_modules/')[2].split('/');
+              let name = indexes[0];
+              if (name.includes('@')) {
+                name = name + '-' + indexes[1];
+              }
+              return 'js/npm-' + name;
+            } else if (id.includes('src')) {
+              const path = id.toString().split('src/')[1].replace(/\//g, '-');
+              return 'js/' + path;
+            }
+          },
+        },
       },
     },
   });
