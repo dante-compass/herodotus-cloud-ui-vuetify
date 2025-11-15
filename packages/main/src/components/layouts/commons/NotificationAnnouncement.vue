@@ -16,11 +16,7 @@
       </template>
     </v-list-item>
   </v-list>
-  <v-empty-state v-else>
-    <template v-slot:title>
-      <div class="text-h6 text-high-emphasis">暂没有新消息</div>
-    </template>
-  </v-empty-state>
+  <v-empty-state v-else icon="mdi-file-image-outline" title="暂没有新消息"></v-empty-state>
 </template>
 
 <script setup lang="ts">

@@ -58,6 +58,15 @@ class EnvironmentVariable {
     }
   }
 
+  public getProject(): string {
+    const project = window.APPLICATION_ENVIRONMENT_VARIABLES_PROJECT;
+    if (project === '' || project === 'athena' || project === 'dante' || project === 'herodotus') {
+      return project;
+    } else {
+      return EnvironmentVariable.PROJECT;
+    }
+  }
+
   public isDistributedArchitecture(): boolean {
     const project = this.getProject();
     if (project) {
@@ -66,15 +75,6 @@ class EnvironmentVariable {
       }
     }
     return false;
-  }
-
-  public getProject(): string {
-    const project = window.APPLICATION_ENVIRONMENT_VARIABLES_PROJECT;
-    if (project === '' || project === 'athena' || this.isDistributedArchitecture()) {
-      return project;
-    } else {
-      return EnvironmentVariable.PROJECT;
-    }
   }
 
   public getProjectName(): string {

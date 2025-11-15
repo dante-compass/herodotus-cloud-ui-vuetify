@@ -88,6 +88,21 @@
         ></h-link-box>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col>
+        <h-chart-card title="效能分布">
+          <h-pie-chart></h-pie-chart>
+        </h-chart-card>
+      </v-col>
+      <v-col>
+        <h-chart-card title="资源使用分析">
+          <h-radar-chart></h-radar-chart>
+        </h-chart-card>
+      </v-col>
+      <v-col>
+        <h-chart-card title="运行分析"><h-bar-chart></h-bar-chart></h-chart-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -96,7 +111,11 @@ import { useRealTimeInformation } from '@/composables/hooks';
 
 import { VARIABLES } from '@/configurations';
 
-defineOptions({ name: 'DashboardConsole' });
+import HBarChart from './charts/HBarChart.vue';
+import HPieChart from './charts/HPieChart.vue';
+import HRadarChart from './charts/HRadarChart.vue';
+
+defineOptions({ name: 'DashboardConsole', components: { HBarChart, HPieChart, HRadarChart } });
 
 const { onlineUserCount } = useRealTimeInformation();
 

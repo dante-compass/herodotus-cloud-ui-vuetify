@@ -32,6 +32,8 @@ declare module 'vue' {
     HBehaviorCaptchaFeedback: typeof import('./../src/components/captcha/HBehaviorCaptchaFeedback.vue')['default']
     HButton: typeof import('@herodotus/components')['HButton']
     HCenterLayoutContainer: typeof import('./../src/components/layouts/form/HCenterLayoutContainer.vue')['default']
+    HChartCard: typeof import('./../src/components/library/HChart/HChartCard.vue')['default']
+    HChartContainer: typeof import('./../src/components/library/HChart/HChartContainer.vue')['default']
     HColumnBoolean: typeof import('./../src/components/library/HTable/HColumnBoolean.vue')['default']
     HColumnGrantType: typeof import('./../src/components/library/HTable/HColumnGrantType.vue')['default']
     HColumnReserved: typeof import('./../src/components/library/HTable/HColumnReserved.vue')['default']
