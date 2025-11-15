@@ -58,9 +58,19 @@ class EnvironmentVariable {
     }
   }
 
+  public isDistributedArchitecture(): boolean {
+    const project = this.getProject();
+    if (project) {
+      if (project === 'dante' || project === 'herodotus') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public getProject(): string {
     const project = window.APPLICATION_ENVIRONMENT_VARIABLES_PROJECT;
-    if (project === '' || project === 'dante' || project === 'herodotus' || project === 'athena') {
+    if (project === '' || project === 'athena' || this.isDistributedArchitecture()) {
       return project;
     } else {
       return EnvironmentVariable.PROJECT;
@@ -145,15 +155,7 @@ class EnvironmentVariable {
   }
 
   public isReactiveProject(): boolean {
-    const project = this.getProject();
-
-    if (project) {
-      if (project === 'dante' || project === 'herodotus') {
-        return true;
-      }
-    }
-
-    return false;
+    return this.isDistributedArchitecture();
   }
 }
 

@@ -38,7 +38,7 @@
         ></h-summary-box>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="isDistributed">
       <v-col>
         <h-link-box
           color="success"
@@ -94,7 +94,13 @@
 <script lang="ts" setup>
 import { useRealTimeInformation } from '@/composables/hooks';
 
+import { VARIABLES } from '@/configurations';
+
 defineOptions({ name: 'DashboardConsole' });
 
 const { onlineUserCount } = useRealTimeInformation();
+
+const isDistributed = computed(() => {
+  return VARIABLES.isDistributedArchitecture();
+});
 </script>
