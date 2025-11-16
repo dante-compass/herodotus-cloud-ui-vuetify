@@ -1,5 +1,23 @@
 <template>
   <use-fullscreen v-slot="{ toggle, isFullscreen }">
+    <v-expansion-panels
+      v-if="$slots.search"
+      v-model="panel"
+      rounded="xl"
+      class="mb-2"
+      ripple
+      static
+    >
+      <v-expansion-panel value="search">
+        <v-expansion-panel-title expand-icon="mdi-menu-down" collapse-icon="mdi-menu-up">
+          搜索：
+        </v-expansion-panel-title>
+        <v-expansion-panel-text class="pt-3">
+          <slot name="search"></slot>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+    </v-expansion-panels>
+
     <v-card rounded="xl">
       <v-card-title class="d-flex align-center ma-2">
         <slot name="control"></slot>
@@ -95,4 +113,6 @@ withDefaults(defineProps<Props>(), {
 });
 const settings = useSettingsStore();
 const { options } = useDictionary('DataItemStatus');
+
+const panel = shallowRef('search');
 </script>

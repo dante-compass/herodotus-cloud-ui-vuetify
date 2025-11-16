@@ -7,11 +7,11 @@ import type {
   AbstractService,
   Direction,
 } from '@herodotus/core';
+import type { SortItem } from '../../declarations';
 
-import { concat, isBoolean, isEmpty, isString, map } from 'lodash-es';
+import { concat, isBoolean, isEmpty, isString, map, pickBy, isNil } from 'lodash-es';
 import { toast, standardDeleteNotify } from '@herodotus/core';
 import useBaseTable from './useBaseTable';
-import type { SortItem } from '../../declarations';
 
 /**
  * 数据表格通用操作定义
@@ -168,6 +168,10 @@ export default function <E extends Entity, C extends Conditions>(
     findItems();
   };
 
+  const removeEmptyProperties = (conditions: C) => {
+    return pickBy(conditions, (value) => !isNil(value) && value !== '');
+  };
+
   onMounted(() => {
     if (loadOnMount) {
       refresh();
@@ -178,7 +182,8 @@ export default function <E extends Entity, C extends Conditions>(
     conditions,
     (newValue) => {
       if (newValue && !fetchAll) {
-        findItemsByPage(pageNumber.value, pageSize.value, newValue);
+        const validCondtions = removeEmptyProperties(newValue);
+        findItemsByPage(pageNumber.value, pageSize.value, validCondtions);
       }
     },
     { deep: true },

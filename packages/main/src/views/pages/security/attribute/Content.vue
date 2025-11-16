@@ -12,28 +12,24 @@
     ></h-dictionary-select>
     <v-text-field
       v-model="editedItem.serviceId"
-      name="serviceId"
       label="服务ID * "
       placeholder="请输入服务ID"
       disabled
     ></v-text-field>
     <v-text-field
       v-model="editedItem.url"
-      name="url"
       label="URL * "
       placeholder="请输URL"
       disabled
     ></v-text-field>
     <v-text-field
       v-model="editedItem.requestMethod"
-      name="requestMethod"
       label="Request Method * "
       placeholder="请输入Request Method"
       disabled
     ></v-text-field>
     <v-text-field
       v-model="editedItem.attributeCode"
-      name="attributeCode"
       label="默认权限代码 * "
       placeholder="请输入默认权限代码"
       disabled

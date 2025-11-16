@@ -12,6 +12,10 @@
     reserved
     @update:options="findItems"
   >
+    <template #search>
+      <search v-model="conditions"></search>
+    </template>
+
     <template #control>
       <v-btn @click="toCreate">新建菜单</v-btn>
     </template>
@@ -63,7 +67,9 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 import { useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
-defineOptions({ name: PAGE_NAME.SYS_ELEMENT });
+import Search from './Search.vue';
+
+defineOptions({ name: PAGE_NAME.SYS_ELEMENT, components: { Search } });
 
 const headers = ref([
   { key: 'title', align: 'center', title: '标题' },
@@ -89,6 +95,7 @@ const {
   tableRows,
   totalPages,
   totalItems,
+  conditions,
   toEdit,
   toCreate,
   toAuthorize,
