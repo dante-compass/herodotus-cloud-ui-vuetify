@@ -19,7 +19,7 @@
     </v-expansion-panels>
 
     <v-card rounded="xl">
-      <v-card-title class="d-flex align-center ma-2">
+      <v-card-title class="d-flex align-center my-2">
         <slot name="control"></slot>
         <v-spacer></v-spacer>
         <h-action-button
@@ -47,7 +47,11 @@
           v-bind="$attrs"
         >
           <template v-for="slotName in Object.keys($slots)" v-slot:[slotName]="props">
-            <slot :name="slotName" v-bind="props"></slot>
+            <slot v-if="slotName !== 'loading'" :name="slotName" v-bind="props"></slot>
+          </template>
+
+          <template #loading>
+            <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
           </template>
 
           <template v-if="status && !$slots['item.status']" #item.status="{ item }">
