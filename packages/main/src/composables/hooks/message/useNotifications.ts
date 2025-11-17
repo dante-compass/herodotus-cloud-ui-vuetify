@@ -40,6 +40,7 @@ export default function useNotifications(category: NotificationCategoryEnum) {
   };
 
   onMounted(() => {
+    console.log("----onMounted message---")
     findItems();
   });
 

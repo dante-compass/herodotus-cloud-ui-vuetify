@@ -50,6 +50,8 @@ export const useNotificationStore = defineStore('Notification', {
       const sort: Sort = { direction: 'DESC', properties: ['createTime'] };
       const store = useAuthenticationStore();
 
+      console.log('----pullAllNotification---');
+
       API.core
         .notification()
         .fetchByPage(

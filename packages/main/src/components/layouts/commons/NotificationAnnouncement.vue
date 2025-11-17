@@ -1,5 +1,5 @@
 <template>
-  <v-list v-if="hasMessage" lines="two" density="compact" selectable>
+  <v-list v-if="hasAnnouncement" lines="two" density="compact" selectable>
     <v-list-item
       v-for="(item, index) in tableRows"
       :key="index"
@@ -28,24 +28,9 @@
 import { NotificationCategoryEnum } from '@herodotus/api';
 import { useNotifications } from '@/composables/hooks';
 
-defineOptions({ name: 'NotificationList' });
+defineOptions({ name: 'NotificationAnnouncement' });
 
-interface Props {
-  type: NotificationCategoryEnum;
-}
-
-const props = defineProps<Props>();
-
-const { tableRows, hasDialogue, hasAnnouncement, convertDate } = useNotifications(props.type);
-
-const hasMessage = computed(() => {
-  switch (props.type) {
-    case NotificationCategoryEnum.ANNOUNCEMENT:
-      return hasAnnouncement;
-    case NotificationCategoryEnum.DIALOGUE:
-      return hasDialogue;
-    default:
-      return false;
-  }
-});
+const { tableRows, hasAnnouncement, convertDate } = useNotifications(
+  NotificationCategoryEnum.ANNOUNCEMENT,
+);
 </script>
