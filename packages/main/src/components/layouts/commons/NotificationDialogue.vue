@@ -30,7 +30,12 @@ import { useNotifications } from '@/composables/hooks';
 
 defineOptions({ name: 'NotificationDialogue' });
 
-const { tableRows, hasDialogue, convertDate } = useNotifications(
+const { tableRows, hasDialogue, convertDate, findByCategory } = useNotifications(
+  false,
   NotificationCategoryEnum.DIALOGUE,
 );
+
+onMounted(() => {
+  findByCategory();
+});
 </script>

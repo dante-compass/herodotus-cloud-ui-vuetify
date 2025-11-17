@@ -58,13 +58,10 @@
 </template>
 
 <script setup lang="ts">
-import { NotificationCategoryEnum } from '@herodotus/api';
-
 import NotificationDialogue from './NotificationDialogue.vue';
 import NotificationAnnouncement from './NotificationAnnouncement.vue';
 
-import { useNotificationStore } from '@/composables/stores';
-import { useWebSocketMessage } from '@/composables/hooks';
+import { useWebSocketMessage, useNotifications } from '@/composables/hooks';
 
 defineOptions({
   name: 'NotificationMenu',
@@ -73,8 +70,7 @@ defineOptions({
 
 const tab = shallowRef('dialogue');
 
-const notificationStore = useNotificationStore();
-const { totalCount, dialogueCount, announcementCount } = storeToRefs(notificationStore);
+const { totalCount, dialogueCount, announcementCount, setAllRead } = useNotifications(false);
 const { connect, disconnect } = useWebSocketMessage();
 
 onMounted(() => {
@@ -86,6 +82,6 @@ onUnmounted(() => {
 });
 
 const onSetAllRead = () => {
-  notificationStore.setAllRead();
+  setAllRead();
 };
 </script>

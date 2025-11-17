@@ -1,4 +1,3 @@
-import type { Sort, Page } from '@herodotus/core';
 import type { NotificationEntity, NotificationConditions } from '@herodotus/api';
 
 import { NotificationCategoryEnum } from '@herodotus/api';
@@ -8,7 +7,7 @@ import { API } from '@/configurations';
 import { useNotificationStore } from '../../stores';
 import { useTable } from '../commons';
 
-export default function useNotifications(category: NotificationCategoryEnum) {
+export default function useNotifications(isTotal = false, category?: NotificationCategoryEnum) {
   const { tableRows, totalItems, findItemsByPage } = useTable<
     NotificationEntity,
     NotificationConditions
@@ -20,29 +19,48 @@ export default function useNotifications(category: NotificationCategoryEnum) {
     storeToRefs(notificationStore);
   const authenticationStore = useAuthenticationStore();
 
-  const findItems = () => {
+  const findByCategory = () => {
+    if (category) {
+      findItemsByPage(1, 5, {
+        userId: authenticationStore.userId,
+        category: category,
+        read: false,
+      });
+    }
+  };
+
+  const findTotalNumber = () => {
     findItemsByPage(1, 5, {
       userId: authenticationStore.userId,
-      category: category,
       read: false,
     });
+  };
+
+  const setAllRead = () => {
+    API.core
+      .notification()
+      .setAllRead(authenticationStore.userId)
+      .then(() => {
+        notificationStore.resetCount();
+      });
   };
 
   watch(
     () => totalItems.value,
     (newValue) => {
-      notificationStore.recordCount(category, newValue);
+      if (isTotal) {
+        notificationStore.recordTotal(newValue);
+      } else {
+        if (category) {
+          notificationStore.recordCount(category, newValue);
+        }
+      }
     },
   );
 
   const convertDate = (date: Date): string => {
     return moment(date).fromNow();
   };
-
-  onMounted(() => {
-    console.log("----onMounted message---")
-    findItems();
-  });
 
   return {
     tableRows,
@@ -52,5 +70,8 @@ export default function useNotifications(category: NotificationCategoryEnum) {
     dialogueCount,
     announcementCount,
     convertDate,
+    setAllRead,
+    findByCategory,
+    findTotalNumber,
   };
 }
