@@ -47,23 +47,37 @@
           v-bind="$attrs"
         >
           <template v-for="slotName in Object.keys($slots)" v-slot:[slotName]="props">
-            <slot v-if="slotName !== 'loading'" :name="slotName" v-bind="props"></slot>
+            <slot
+              v-if="!['loading', 'item.status', 'item.reserved'].includes(slotName)"
+              :name="slotName"
+              v-bind="props"
+            ></slot>
           </template>
 
-          <template #loading>
+          <!-- 单独处理 loading 插槽 -->
+          <template v-if="!$slots.loading" #loading>
             <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
           </template>
+          <template v-else #loading>
+            <slot name="loading"></slot>
+          </template>
 
-          <template v-if="status && !$slots['item.status']" #item.status="{ item }">
+          <template v-if="!$slots['item.status']" #item.status="{ item }">
             <h-column-status
               v-if="options"
               :type="item.status"
               :options="options"
             ></h-column-status>
           </template>
+          <template v-else #item.status>
+            <slot name="item.status"></slot>
+          </template>
 
-          <template v-if="reserved && !$slots['item.reserved']" #item.reserved="{ item }">
+          <template v-if="!$slots['item.reserved']" #item.reserved="{ item }">
             <h-column-reserved :status="item.reserved"></h-column-reserved>
+          </template>
+          <template v-else #item.reserved>
+            <slot name="item.reserved"></slot>
           </template>
 
           <template #bottom>
@@ -106,15 +120,6 @@ const pageSize = defineModel('pageSize', { type: Number, default: 10, required: 
 const totalPages = defineModel('totalPages', { type: Number, default: 0, required: true });
 const totalItems = defineModel('totalItems', { type: Number, default: 0, required: true });
 
-interface Props {
-  status?: boolean;
-  reserved?: boolean;
-}
-
-withDefaults(defineProps<Props>(), {
-  status: true,
-  reserved: true,
-});
 const settings = useSettingsStore();
 const { options } = useDictionary('DataItemStatus');
 

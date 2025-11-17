@@ -1,4 +1,4 @@
-import { Router, RouteLocationRaw, RouteLocationNormalizedLoaded } from 'vue-router';
+import { Router, RouteLocationRaw, RouteLocationNormalizedLoaded, RouteLocationAsRelativeGeneric, RouteLocationAsPathGeneric } from 'vue-router';
 import { OperationEnum, Tree } from '@herodotus/core';
 export interface RouterOptions {
     instance: Router;
@@ -49,7 +49,7 @@ export type ModuleNamespace = Record<string, any> & {
 export interface MenuItem {
     title: string;
     prependIcon: string;
-    to?: string;
+    to?: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric;
     value?: string;
     children?: MenuItem[];
 }

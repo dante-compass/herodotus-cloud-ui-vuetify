@@ -40,10 +40,10 @@
       </v-tabs>
       <v-tabs-window v-model="tab">
         <v-tabs-window-item value="dialogue">
-          <notification-dialogue></notification-dialogue>
+          <notification-list :type="NotificationCategoryEnum.DIALOGUE"></notification-list>
         </v-tabs-window-item>
         <v-tabs-window-item value="announcement">
-          <notification-announcement></notification-announcement>
+          <notification-list :type="NotificationCategoryEnum.ANNOUNCEMENT"></notification-list>
         </v-tabs-window-item>
       </v-tabs-window>
 
@@ -58,15 +58,16 @@
 </template>
 
 <script setup lang="ts">
-import NotificationAnnouncement from './NotificationAnnouncement.vue';
-import NotificationDialogue from './NotificationDialogue.vue';
+import { NotificationCategoryEnum } from '@herodotus/api';
+
+import NotificationList from './NotificationList.vue';
 
 import { useNotificationStore } from '@/composables/stores';
 import { useWebSocketMessage } from '@/composables/hooks';
 
 defineOptions({
   name: 'NotificationMenu',
-  components: { NotificationAnnouncement, NotificationDialogue },
+  components: { NotificationList },
 });
 
 const tab = shallowRef('dialogue');

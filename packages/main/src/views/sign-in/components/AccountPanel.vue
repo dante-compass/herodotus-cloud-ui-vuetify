@@ -39,6 +39,7 @@
           :type="visible ? 'text' : 'password'"
           :rules="[(v) => !!v || '密码不能为空，请输入密码！']"
           :disabled="isSubmittingProtected"
+          autocomplete="current-password"
           @change="onResetError()"
         ></v-text-field>
       </v-form>
@@ -49,8 +50,9 @@
         :disabled="isSubmittingProtected"
         @click="onShowCaptcha()"
         @keyup.enter="onShowCaptcha()"
-        >登录</h-button
       >
+        登录
+      </h-button>
       <h-behavior-captcha
         v-model="isShowCaptcha"
         @verify="onCaptchaVerify($event)"
@@ -65,8 +67,9 @@
         :disabled="isSubmittingProtected"
         @click="passkeySignIn()"
         @keyup.enter="passkeySignIn()"
-        >Passkey 快速登录</h-button
       >
+        Passkey 快速登录
+      </h-button>
       <h-text-divider label="其它登录方式"></h-text-divider>
 
       <social-sign-in-list></social-sign-in-list>

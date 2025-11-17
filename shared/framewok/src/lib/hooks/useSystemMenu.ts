@@ -47,7 +47,7 @@ export default function useSystemMenu() {
     return {
       title: getTitle(item),
       prependIcon: getIcon(item),
-      to: item.path,
+      to: { name: item.name, path: item.path },
     } as MenuItem;
   };
 

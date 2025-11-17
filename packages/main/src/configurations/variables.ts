@@ -77,6 +77,16 @@ class EnvironmentVariable {
     return false;
   }
 
+  public isReactiveProject(): boolean {
+    const project = this.getProject();
+    if (project) {
+      if (project === 'herodotus') {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public getProjectName(): string {
     return this.getEnvironmentVariable(
       window.APPLICATION_ENVIRONMENT_VARIABLES_APPLICATION_NAME,
@@ -152,10 +162,6 @@ class EnvironmentVariable {
       window.APPLICATION_ENVIRONMENT_VARIABLES_USE_DISABLE_DEVTOOL,
       EnvironmentVariable.USE_DISABLE_DEVTOOL,
     );
-  }
-
-  public isReactiveProject(): boolean {
-    return this.isDistributedArchitecture();
   }
 }
 
