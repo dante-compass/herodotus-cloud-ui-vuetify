@@ -5,13 +5,17 @@
     :operation="operation"
     @save="onSave()"
   >
-    <v-form ref="loginForm">
+    <v-form ref="loginForm" validate-on="submit lazy">
       <v-text-field
         v-model.lazy="editedItem.username"
         label="用户名 * "
         placeholder="请输入用户名"
         clearable
-        :rules="rules"
+        :rules="[
+          (v: string) => !!v || '用户名不能为空',
+          (v: string) => (v && v.length >= 5) || '用户名至少5个字符',
+          (v: string) => isUniqueRule(v),
+        ]"
       ></v-text-field>
       <v-text-field
         v-model="editedItem.nickname"
@@ -36,10 +40,8 @@ const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysUserEntit
   API.core.sysUser(),
 );
 
-const checkUsernameAvailability = async () => {
-  let username = editedItem.value.username;
-
-  const result = await new Promise((resolve, reject) => {
+const validateUsername = async (username: string) => {
+  return await new Promise((resolve, reject) => {
     if (username) {
       API.core
         .sysUser()
@@ -56,29 +58,21 @@ const checkUsernameAvailability = async () => {
       reject(false);
     }
   });
-
-  return result;
 };
 
-const AsyncUsernameRule = () => {
-  return checkUsernameAvailability()
-    .then((status) => {
-      if (status) {
+const isUniqueRule = (username: string) => {
+  return validateUsername(username)
+    .then((validate) => {
+      if (validate) {
         return true;
       } else {
         return '用户名已被占用，请改用其它用户名';
       }
     })
     .catch(() => {
-      return '校验服务暂时不可用';
+      return '后端服务暂时不可用';
     });
 };
-
-const rules = [
-  (v: string) => !!v || '用户名不能为空',
-  (v: string) => (v && v.length >= 5) || '用户名至少5个字符',
-  AsyncUsernameRule(),
-];
 
 const onSave = async () => {
   const { valid } = await loginForm.value.validate();
