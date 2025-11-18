@@ -1,14 +1,8 @@
 <template>
   <h-sign-in-layout>
-    <transition
-      appear
-      mode="out-in"
-      :duration="1000"
-      enter-active-class="animate__animated animate__fadeIn"
-      leave-active-class="animate__animated animate__fadeOut"
-    >
+    <v-slide-x-transition mode="out-in">
       <component :is="application.signInPanel"></component>
-    </transition>
+    </v-slide-x-transition>
   </h-sign-in-layout>
 </template>
 

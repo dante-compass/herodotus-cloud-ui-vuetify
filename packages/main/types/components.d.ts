@@ -19,6 +19,7 @@ declare module 'vue' {
     AppMenu: typeof import('./../src/components/layouts/app/AppMenu.vue')['default']
     AppTabMenuItem: typeof import('./../src/components/layouts/app/AppTabMenuItem.vue')['default']
     AppTabView: typeof import('./../src/components/layouts/app/AppTabView.vue')['default']
+    HActionAuthorizeButton: typeof import('./../src/components/library/HTable/HActionAuthorizeButton.vue')['default']
     HActionButton: typeof import('./../src/components/library/HTable/HActionButton.vue')['default']
     HActionDeleteButton: typeof import('./../src/components/library/HTable/HActionDeleteButton.vue')['default']
     HActionEditButton: typeof import('./../src/components/library/HTable/HActionEditButton.vue')['default']

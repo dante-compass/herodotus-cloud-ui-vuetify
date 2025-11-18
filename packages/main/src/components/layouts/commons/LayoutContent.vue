@@ -1,9 +1,9 @@
 <template>
   <router-view v-slot="{ Component, route }">
     <keep-alive :include="keepAlives">
-      <v-fade-transition mode="out-in">
+      <v-slide-x-transition mode="out-in">
         <component :is="getComponent(Component, route)"></component>
-      </v-fade-transition>
+      </v-slide-x-transition>
     </keep-alive>
   </router-view>
 </template>
