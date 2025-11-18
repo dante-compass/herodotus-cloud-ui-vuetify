@@ -25,6 +25,7 @@ const vuetify = createVuetify({
   defaults: {
     VTextField: {
       color: 'primary',
+      clearable: true,
     },
     VList: {
       color: 'primary',
