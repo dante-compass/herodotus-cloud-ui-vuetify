@@ -21,6 +21,7 @@
           clearable
           rounded="xl"
           variant="solo-filled"
+          autocomplete="username"
           :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
           :disabled="isSubmittingProtected"
           @change="onResetError()"
@@ -39,7 +40,7 @@
           :type="visible ? 'text' : 'password'"
           :rules="[(v) => !!v || '密码不能为空，请输入密码！']"
           :disabled="isSubmittingProtected"
-          autocomplete="current-password"
+          autocomplete="password"
           @change="onResetError()"
         ></v-text-field>
       </v-form>

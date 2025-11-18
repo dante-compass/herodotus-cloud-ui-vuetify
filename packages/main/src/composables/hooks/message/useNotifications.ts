@@ -7,11 +7,15 @@ import { API } from '@/configurations';
 import { useNotificationStore } from '../../stores';
 import { useTable } from '../commons';
 
-export default function useNotifications(isTotal = false, category?: NotificationCategoryEnum) {
+export default function useNotifications(
+  isTotal = false,
+  category?: NotificationCategoryEnum,
+  loadOnMount = true,
+) {
   const { tableRows, totalItems, findItemsByPage } = useTable<
     NotificationEntity,
     NotificationConditions
-  >(API.core.notification(), 'Notification', false, ['createTime'], 'DESC');
+  >(API.core.notification(), 'Notification', false, ['createTime'], 'DESC', loadOnMount);
 
   const notificationStore = useNotificationStore();
 

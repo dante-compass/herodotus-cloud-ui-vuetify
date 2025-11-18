@@ -164,7 +164,7 @@ export default function <E extends Entity, C extends Conditions>(
     });
   };
 
-  const refresh = () => {
+  const reloadItems = () => {
     findItems();
   };
 
@@ -174,7 +174,7 @@ export default function <E extends Entity, C extends Conditions>(
 
   onMounted(() => {
     if (loadOnMount) {
-      refresh();
+      reloadItems();
     }
   });
 
@@ -204,6 +204,6 @@ export default function <E extends Entity, C extends Conditions>(
     toInfo,
     findItemsByPage,
     deleteItemById,
-    refresh,
+    reloadItems,
   };
 }

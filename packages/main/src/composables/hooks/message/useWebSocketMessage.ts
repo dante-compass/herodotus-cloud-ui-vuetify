@@ -7,7 +7,6 @@ import {
   useRSocketWebSocketStore,
   useWebFluxWebSocketStore,
   useStompWebSocketStore,
-  useNotificationStore,
   useRealTimeInformationStore,
 } from '../../stores';
 
@@ -21,7 +20,7 @@ export default function useWebSocketMessage() {
   const rsocketWebSocketStore = useRSocketWebSocketStore();
   const realtimeStore = useRealTimeInformationStore();
 
-  const { findTotalNumber } = useNotifications(true);
+  const { findTotalNumber } = useNotifications(true, undefined, false);
 
   const webSocketOperations = {
     pullNotifications: () => {

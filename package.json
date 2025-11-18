@@ -35,7 +35,7 @@
     "vuetify": "^3.10.11"
   },
   "devDependencies": {
-    "@tsconfig/node22": "^22.0.4",
+    "@tsconfig/node22": "^22.0.5",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^24.10.1",
     "@types/nprogress": "^0.2.3",
@@ -65,7 +65,7 @@
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-html": "^3.2.2",
     "vite-plugin-vconsole": "^2.1.1",
-    "vite-plugin-vue-devtools": "^8.0.3",
+    "vite-plugin-vue-devtools": "^8.0.5",
     "vite-plugin-vue-layouts-next": "^1.2.0",
     "vite-plugin-vuetify": "^2.1.2",
     "vue-router": "^4.6.3",

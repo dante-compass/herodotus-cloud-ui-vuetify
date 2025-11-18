@@ -12,7 +12,7 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn>新建用户</v-btn>
+      <v-btn @click="toCreate">新建用户</v-btn>
     </template>
 
     <template #item.actions="{ item }">
@@ -60,6 +60,7 @@ const {
   totalItems,
   toEdit,
   toAuthorize,
+  toCreate,
   deleteItemById,
   findItems,
 } = useTable<SysUserEntity, SysUserConditions>(API.core.sysUser(), PAGE_NAME.SYS_USER);
