@@ -4,18 +4,22 @@
       :disabled="loading"
       :loading="loading"
       prepend-icon="mdi-key-chain"
-      title="设置/修改密码"
+      :title="`设置/修改【${username}】密码`"
+      rounded="xl"
     >
       <template v-slot:loader="{ isActive }">
         <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
       </template>
-      <v-card-text>
+      <v-divider></v-divider>
+      <v-card-text class="pb-2">
         <v-form ref="changePasswordForm">
           <v-text-field
             v-model="newPassword"
             label="新密码"
             placeholder="请输入新密码"
             clearable
+            density="compact"
+            class="mt-2"
             :append-inner-icon="newPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="newPasswordVisible ? 'text' : 'password'"
             :rules="[
@@ -31,6 +35,8 @@
             clearable
             :append-inner-icon="confirmPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="confirmPasswordVisible ? 'text' : 'password'"
+            density="compact"
+            class="mt-2"
             :rules="[
               (v) => !!v || '确认密码不能为空，请输入确认密码！',
               (v) =>
@@ -57,6 +63,7 @@ defineOptions({ name: 'ChangePassoword' });
 
 interface Props {
   userId: string;
+  username: string;
 }
 
 const props = defineProps<Props>();
@@ -110,4 +117,14 @@ const onSave = async () => {
       });
   }
 };
+
+watch(openDialog, (newValue) => {
+  if (!newValue) {
+    newPassword.value = '';
+    confirmPassword.value = '';
+    newPasswordVisible.value = false;
+    confirmPasswordVisible.value = false;
+    loading.value = false;
+  }
+});
 </script>

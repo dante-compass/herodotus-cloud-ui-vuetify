@@ -1,13 +1,14 @@
 <template>
   <v-dialog v-model="openDialog" max-width="500" persistent>
-    <v-card
-      :disabled="loading"
-      :loading="loading"
-      prepend-icon="mdi-email-edit"
-      :title="`向【${name}】发送消息`"
-    >
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
+    <v-card prepend-icon="mdi-email-edit" :title="`向【${name}】发送消息`" rounded="xl">
+      <template #append>
+        <h-button
+          icon="mdi-close"
+          tooltip="关闭"
+          @click="onCloseDialog"
+          size="x-small"
+          variant="text"
+        ></h-button>
       </template>
       <v-card-text>
         <h-send-message-textarea
@@ -15,7 +16,7 @@
           :receiver-name="name"
           :dialogue-id="dialogueId"
           :receiver-avatar="avatar"
-          @send="onCloseDialog()"
+          @send="onCloseDialog"
         ></h-send-message-textarea>
       </v-card-text>
     </v-card>
@@ -40,10 +41,7 @@ const openDialog = defineModel({
   required: true,
 });
 
-const loading = shallowRef(false);
-
 const onCloseDialog = () => {
-  loading.value = true;
   openDialog.value = false;
 };
 </script>

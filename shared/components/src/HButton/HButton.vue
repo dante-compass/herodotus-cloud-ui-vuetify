@@ -12,7 +12,7 @@
       <slot name="loader"></slot>
     </template>
 
-    <template v-if="!$slots.default && hasIcon">
+    <template v-if="!$slots.default && isIcon">
       <v-icon>{{ icon }}</v-icon>
     </template>
     <slot v-else></slot>
@@ -35,5 +35,5 @@ interface Props {
 defineOptions({ name: 'HButton', components: { VBtn, VIcon } });
 const props = withDefaults(defineProps<Props>(), { location: 'bottom' });
 
-const hasIcon = !!(props.icon && props.icon !== true);
+const isIcon = !props.icon || props.icon !== true;
 </script>

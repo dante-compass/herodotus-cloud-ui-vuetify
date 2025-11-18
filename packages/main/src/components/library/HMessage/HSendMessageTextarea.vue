@@ -1,15 +1,15 @@
 <template>
-  <v-form @submit.prevent="onSend">
+  <v-form ref="sendMessageForm">
     <v-textarea
       v-model="text"
       label="消息内容"
       placeholder="文明发言，真诚提问，请输入要发送的内容"
       clearable
+      class="mt-2"
       :rules="[(value: string) => !!value || '发送内容不能为空']"
     ></v-textarea>
 
-    <v-btn class="mt-2" :disable="isDisabled" type="submit">发送</v-btn>
-    <h-button text="发送" :disable="isDisabled" @click="onSend()" />
+    <v-btn :disabled="isDisabled" @click="onSend">发送</v-btn>
   </v-form>
 </template>
 
@@ -38,7 +38,8 @@ const emit = defineEmits<{
   send: [];
 }>();
 
-const text = ref('');
+const sendMessageForm = ref();
+const text = shallowRef('');
 
 const { sendToUser } = useWebSocketMessage();
 const authentication = useAuthenticationStore();
@@ -61,8 +62,11 @@ const isDisabled = computed(() => {
   return isEmpty(text.value);
 });
 
-const onSend = () => {
-  sendMessage();
-  emit('send');
+const onSend = async () => {
+  const { valid } = await sendMessageForm.value.validate();
+  if (valid) {
+    sendMessage();
+    emit('send');
+  }
 };
 </script>

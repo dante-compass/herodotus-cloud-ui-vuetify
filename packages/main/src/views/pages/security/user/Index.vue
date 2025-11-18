@@ -19,13 +19,13 @@
       <template #item.actions="{ item }">
         <h-action-button
           v-if="showMessageAction(item)"
-          color="warning"
+          color="light-blue"
           icon="mdi-email-edit"
           tooltip="发送消息"
           @click="onSendMessageToUser(item)"
         ></h-action-button>
         <h-action-button
-          color="orange"
+          color="teal"
           icon="mdi-key-chain"
           tooltip="设置/修改密码"
           @click="onChangePassword(item)"
@@ -46,6 +46,7 @@
     <change-password-dialog
       v-model="showChangePasswordDialog"
       :user-id="currentUserId"
+      :username="currentUsername"
     ></change-password-dialog>
     <send-message-dialog
       v-model="showSendMessageToUserDialog"
