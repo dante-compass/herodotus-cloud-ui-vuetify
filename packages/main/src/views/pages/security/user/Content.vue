@@ -5,7 +5,7 @@
     :operation="operation"
     @save="onSave()"
   >
-    <v-form ref="loginForm" validate-on="submit lazy">
+    <v-form ref="loginForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.username"
         label="用户名 * "
