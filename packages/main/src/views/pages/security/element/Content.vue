@@ -31,7 +31,7 @@
       placeholder="如果包含子节点，即 children 中元素的 path"
     ></v-text-field>
 
-    <h-icon-select></h-icon-select>
+    <h-mdi-icon-select v-model="editedItem.icon" label="显示图标"  placeholder:='输入图标名称...'></h-mdi-icon-select>
 
     <v-switch v-model="editedItem.isNotKeepAlive" label="该应页面不需要KeepAlive缓存"></v-switch>
     <v-switch v-model="editedItem.isIgnoreAuth" label="该页面不需要权限验证"></v-switch>
@@ -59,9 +59,8 @@ import type { SysElementEntity, SysElementConditions } from '@herodotus/api';
 import { useTableItem, useTreeItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
-import HIconSelect from './HIconSelect.vue';
 
-defineOptions({ name: 'SysElementContent', components: { HIconSelect } });
+defineOptions({ name: 'SysElementContent'});
 
 const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysElementEntity>(
   API.core.sysElement(),

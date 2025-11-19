@@ -24,11 +24,11 @@ import { shallowRef, onMounted, watch } from 'vue';
 import { isEmpty, debounce } from 'lodash-es';
 import { useMdiIconStore } from '@/lib/stores';
 
-import { VAutocomplete, VExpandXTransition, VListItem } from 'vuetify/components';
+import { VAutocomplete, VExpandXTransition, VListItem, VIcon } from 'vuetify/components';
 
 defineOptions({
   name: 'HMdiIconSelect',
-  components: { VAutocomplete, VExpandXTransition, VListItem },
+  components: { VAutocomplete, VExpandXTransition, VListItem, VIcon },
 });
 
 const selection = defineModel({

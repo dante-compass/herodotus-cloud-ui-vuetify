@@ -48,6 +48,7 @@ declare module 'vue' {
     HHttpMethodAvatar: typeof import('./../src/components/library/HAuthorize/HHttpMethodAvatar.vue')['default']
     HJigsawCaptcha: typeof import('./../src/components/captcha/HJigsawCaptcha.vue')['default']
     HLinkBox: typeof import('./../src/components/library/HChart/HLinkBox.vue')['default']
+    HMdiIconSelect: typeof import('@herodotus/components')['HMdiIconSelect']
     HParticles: typeof import('@herodotus/components')['HParticles']
     HSendMessageTextarea: typeof import('./../src/components/library/HMessage/HSendMessageTextarea.vue')['default']
     HSettingLabel: typeof import('@herodotus/components')['HSettingLabel']
