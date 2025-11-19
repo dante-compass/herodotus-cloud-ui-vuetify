@@ -1,5 +1,6 @@
 import { SweetAlertIcon, SweetAlertResult, default as Swal } from 'sweetalert2';
-declare const standardDeleteNotify: (onConfirm: () => void, onCancel?: () => void) => void;
+import { ThemeMode } from '../../declarations';
+declare const standardDeleteNotify: (onConfirm: () => void, onCancel?: () => void, theme?: ThemeMode) => void;
 /**
  * 这里使用单例模式，主要是因为将静态类，赋值给Vue.prototype会出现 Property '' is a static member of type '' 错误。
  * 参考以下文章
@@ -12,8 +13,10 @@ declare const standardDeleteNotify: (onConfirm: () => void, onCancel?: () => voi
  */
 declare class Notify {
     private static instance;
+    private theme;
     private constructor();
     static getInstance(): Notify;
+    setTheme(newTheme: ThemeMode): void;
     information(title: string, text: string, icon: SweetAlertIcon): Promise<SweetAlertResult<string>>;
     info(title: string, text?: string): Promise<SweetAlertResult<string>>;
     error(title: string, text?: string): Promise<SweetAlertResult<string>>;
@@ -24,8 +27,10 @@ declare class Notify {
 declare const notify: Notify;
 declare class Toast {
     private static instance;
+    private theme;
     private constructor();
     static getInstance(): Toast;
+    setTheme(newTheme: ThemeMode): void;
     information(title: string, icon: SweetAlertIcon): Promise<SweetAlertResult<string>>;
     info(text: string): Promise<SweetAlertResult<string>>;
     error(text: string): Promise<SweetAlertResult<string>>;

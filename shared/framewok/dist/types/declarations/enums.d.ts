@@ -4,11 +4,6 @@ export declare enum LayoutModeEnum {
     TRANSVERSE = "transverse",
     COLUMNS = "transverse"
 }
-export declare enum ThemeModeEnum {
-    DARK = "dark",
-    LIGHT = "light",
-    SYSTEM = "system"
-}
 export declare enum CaptchaCategoryEnum {
     /**
      * 滑块拼图验证码

@@ -1,7 +1,9 @@
+import type { SystemSetting } from '@/declarations';
+
 import { defineStore } from 'pinia';
 
-import type { SystemSetting } from '@/declarations';
-import { ThemeModeEnum, LayoutModeEnum } from '@/declarations';
+import { ThemeModeEnum } from '@herodotus/core';
+import { LayoutModeEnum } from '@/declarations';
 
 export const useSettingsStore = defineStore('SystemSettings', {
   state: (): SystemSetting => ({

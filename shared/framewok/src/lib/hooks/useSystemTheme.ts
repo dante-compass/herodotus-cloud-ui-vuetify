@@ -1,7 +1,10 @@
+import type { ThemeMode } from '@herodotus/core';
+
 import { watch, shallowRef, computed, nextTick, watchEffect } from 'vue';
 import { useTheme } from 'vuetify';
 
-import { ThemeModeEnum } from '@/declarations';
+import { toast, notify } from '@herodotus/core';
+import { ThemeModeEnum } from '@herodotus/core';
 import { useSettingsStore } from '../stores';
 import { getColorPalette, mixColor } from '@/lib/utilities';
 
@@ -89,7 +92,12 @@ export default function useSystemTheme() {
     vuetifyTheme.change(settings.isSystem ? systemTheme.value : settings.theme.mode);
   });
 
-  watch(vuetifyTheme.global.name, themeTransition);
+  watch(vuetifyTheme.global.name, (newValue) => {
+    themeTransition;
+    const current = newValue as ThemeMode;
+    toast.setTheme(current);
+    notify.setTheme(current);
+  });
 
   // ---------- 登录页面 Theme ----------
   const backgroundThemeColor = computed(() => {

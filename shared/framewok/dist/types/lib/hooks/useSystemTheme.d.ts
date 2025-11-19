@@ -1,4 +1,4 @@
-import { ThemeModeEnum } from '../../declarations';
+import { ThemeModeEnum } from '@herodotus/core';
 export default function useSystemTheme(): {
     lightColor: import('vue').ComputedRef<string>;
     darkColor: import('vue').ComputedRef<string>;

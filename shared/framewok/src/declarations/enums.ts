@@ -5,12 +5,6 @@ export enum LayoutModeEnum {
   COLUMNS = 'transverse',
 }
 
-export enum ThemeModeEnum {
-  DARK = 'dark',
-  LIGHT = 'light',
-  SYSTEM = 'system',
-}
-
 export enum CaptchaCategoryEnum {
   /**
    * 滑块拼图验证码

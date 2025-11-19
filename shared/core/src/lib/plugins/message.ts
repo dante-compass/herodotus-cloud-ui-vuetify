@@ -1,4 +1,6 @@
-import type { SweetAlertIcon, SweetAlertResult } from 'sweetalert2';
+import type { SweetAlertIcon, SweetAlertResult, SweetAlertTheme } from 'sweetalert2';
+import type { ThemeMode } from '@/declarations';
+
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
@@ -14,13 +16,27 @@ const SwalToast = Swal.mixin({
   },
 });
 
-const standardDeleteNotify = (onConfirm: () => void, onCancel?: () => void) => {
+const getConfirmButtonColor = (theme = 'light' as ThemeMode) => {
+  return theme === 'light' ? '#6750A4' : '#2563eb';
+};
+
+const convertThemeType = (theme: ThemeMode): SweetAlertTheme => {
+  const result = theme === 'system' ? 'auto' : theme;
+  return result as SweetAlertTheme;
+};
+
+const standardDeleteNotify = (
+  onConfirm: () => void,
+  onCancel?: () => void,
+  theme = 'light' as ThemeMode,
+) => {
   Swal.fire({
     title: '确定删除?',
     text: '您将无法恢复此操作！',
     icon: 'warning',
+    theme: convertThemeType(theme),
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
+    confirmButtonColor: getConfirmButtonColor(theme),
     cancelButtonColor: '#d33',
     confirmButtonText: '是的, 删除!',
     cancelButtonText: '取消',
@@ -48,10 +64,18 @@ const standardDeleteNotify = (onConfirm: () => void, onCancel?: () => void) => {
 class Notify {
   private static instance = new Notify();
 
-  private constructor() {}
+  private theme: SweetAlertTheme;
+
+  private constructor() {
+    this.theme = 'light';
+  }
 
   public static getInstance(): Notify {
     return this.instance;
+  }
+
+  public setTheme(newTheme: ThemeMode): void {
+    this.theme = convertThemeType(newTheme);
   }
 
   public information(
@@ -64,6 +88,7 @@ class Notify {
       text: text,
       position: 'top',
       icon: icon,
+      theme: this.theme,
       timer: 5000,
       showConfirmButton: false,
       showClass: {
@@ -100,17 +125,25 @@ const notify: Notify = Notify.getInstance();
 
 class Toast {
   private static instance = new Toast();
+  private theme: SweetAlertTheme;
 
-  private constructor() {}
+  private constructor() {
+    this.theme = 'light';
+  }
 
   public static getInstance(): Toast {
     return this.instance;
+  }
+
+  public setTheme(newTheme: ThemeMode): void {
+    this.theme = convertThemeType(newTheme);
   }
 
   public information(title: string, icon: SweetAlertIcon): Promise<SweetAlertResult<string>> {
     return SwalToast.fire({
       icon: icon,
       title: title,
+      theme: this.theme,
     });
   }
 

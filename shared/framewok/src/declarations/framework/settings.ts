@@ -1,4 +1,6 @@
-import { ThemeModeEnum, LayoutModeEnum } from '../enums';
+import { ThemeModeEnum } from '@herodotus/core';
+
+import { LayoutModeEnum } from '../enums';
 
 export interface ThemeColor {
   primary: string;

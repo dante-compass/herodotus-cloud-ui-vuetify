@@ -1,4 +1,4 @@
-import { HttpMethodEnum } from '../../enums';
+import { HttpMethodEnum, ThemeModeEnum } from '../../enums';
 /**
  * 数据字典定义
  */
@@ -13,3 +13,4 @@ export type Dictionary = {
  */
 export type Direction = 'DESC' | 'ASC';
 export type HttpMethod = keyof typeof HttpMethodEnum;
+export type ThemeMode = ThemeModeEnum.LIGHT | ThemeModeEnum.DARK | ThemeModeEnum.SYSTEM;
