@@ -31,32 +31,25 @@
       placeholder="如果包含子节点，即 children 中元素的 path"
     ></v-text-field>
 
-    <v-container fluid>
-      <v-row>
-        <v-col>
-          <v-switch
-            v-model="editedItem.isNotKeepAlive"
-            label="该应页面不需要KeepAlive缓存"
-          ></v-switch>
-          <v-switch v-model="editedItem.isIgnoreAuth" label="该页面不需要权限验证"></v-switch>
-          <v-switch
-            v-if="!editedItem.isDetailContent"
-            v-model="editedItem.isHaveChild"
-            label="该页面下包含子页面"
-          ></v-switch>
-          <v-switch
-            v-if="editedItem.isHaveChild"
-            v-model="editedItem.isHideAllChild"
-            label="在菜单中隐藏该节点下所有子节点"
-          ></v-switch>
-          <v-switch
-            v-if="!editedItem.isHaveChild"
-            v-model="editedItem.isDetailContent"
-            label="该页面是三级路由页面"
-          ></v-switch>
-        </v-col>
-      </v-row>
-    </v-container>
+    <h-icon-select></h-icon-select>
+
+    <v-switch v-model="editedItem.isNotKeepAlive" label="该应页面不需要KeepAlive缓存"></v-switch>
+    <v-switch v-model="editedItem.isIgnoreAuth" label="该页面不需要权限验证"></v-switch>
+    <v-switch
+      v-if="!editedItem.isDetailContent"
+      v-model="editedItem.isHaveChild"
+      label="该页面下包含子页面"
+    ></v-switch>
+    <v-switch
+      v-if="editedItem.isHaveChild"
+      v-model="editedItem.isHideAllChild"
+      label="在菜单中隐藏该节点下所有子节点"
+    ></v-switch>
+    <v-switch
+      v-if="!editedItem.isHaveChild"
+      v-model="editedItem.isDetailContent"
+      label="该页面是三级路由页面"
+    ></v-switch>
   </h-center-layout-container>
 </template>
 
@@ -66,7 +59,9 @@ import type { SysElementEntity, SysElementConditions } from '@herodotus/api';
 import { useTableItem, useTreeItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
-defineOptions({ name: 'SysElementContent' });
+import HIconSelect from './HIconSelect.vue';
+
+defineOptions({ name: 'SysElementContent', components: { HIconSelect } });
 
 const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysElementEntity>(
   API.core.sysElement(),

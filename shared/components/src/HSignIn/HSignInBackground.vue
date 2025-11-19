@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { BackgroundColorProps } from '@/declarations';
+import type { BackgroundColorProps } from '@/lib/declarations';
 
 import HSignInCornerBottom from './HSignInCornerBottom.vue';
 import HSignInCornerTop from './HSignInCornerTop.vue';

@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@herodotus/core": "workspace:^",
+    "@mdi/js": "^7.4.47",
     "@tsparticles/basic": "^3.9.1",
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/interaction-particles-links": "^3.9.1",

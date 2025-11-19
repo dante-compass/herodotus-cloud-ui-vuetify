@@ -47,6 +47,8 @@ export default defineConfig({
         'lodash-es',
         'vue',
         'vuetify/components',
+        'pinia',
+        '@mdi/js',
         '@tsparticles/basic',
         '@tsparticles/engine',
         '@tsparticles/interaction-particles-links',
@@ -59,6 +61,8 @@ export default defineConfig({
         globals: {
           'lodash-es': 'LodashEs',
           vue: 'Vue',
+          pinia: 'Pinia',
+          '@mdi/js': 'MdiJs',
           '@tsparticles/basic': 'TsparticlesBasic',
           '@tsparticles/engine': 'TsparticlesEngine',
           '@tsparticles/interaction-particles-links': 'TsparticlesInteractionParticlesLinkss',

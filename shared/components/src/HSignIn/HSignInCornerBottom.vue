@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { BackgroundColorProps } from '@/declarations';
+import type { BackgroundColorProps } from '@/lib/declarations';
 
 defineOptions({ name: 'HSignInCornerBottom' });
 
