@@ -2,6 +2,8 @@ import type { RouteRecordRaw } from 'vue-router';
 import type { RouterOptions } from './router';
 import type { HttpConfig } from '@herodotus/core';
 
+import { ThemeModeEnum } from '@herodotus/core';
+
 interface VariableOptions {
   securityKey: string;
   redirectUri: string;
@@ -15,5 +17,6 @@ export interface KernelOptions {
   variables: VariableOptions;
   staticRoutes: Array<RouteRecordRaw>;
   config: HttpConfig;
+  theme: ThemeModeEnum;
   signOutExtension: () => void;
 }
