@@ -10,7 +10,7 @@
   >
     <template #prepend-inner>
       <v-expand-x-transition>
-        <v-icon v-if="selection" :icon="selection" start color="primary" />
+        <v-icon v-if="selection" :icon="selection" start />
       </v-expand-x-transition>
     </template>
     <template #item="{ props, item }">
@@ -31,9 +31,7 @@ defineOptions({
   components: { VAutocomplete, VExpandXTransition, VListItem, VIcon },
 });
 
-const selection = defineModel({
-  type: String,
-  default: '',
+const selection = defineModel<string | null | undefined>({
   required: true,
 });
 
