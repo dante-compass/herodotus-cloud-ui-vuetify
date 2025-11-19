@@ -10,7 +10,7 @@ import type {
 import type { SortItem } from '../../declarations';
 
 import { concat, isBoolean, isEmpty, isString, map, pickBy, isNil } from 'lodash-es';
-import { toast, standardDeleteNotify } from '@herodotus/core';
+import { toast, notify } from '@herodotus/core';
 import useBaseTable from './useBaseTable';
 
 /**
@@ -141,7 +141,7 @@ export default function <E extends Entity, C extends Conditions>(
   };
 
   const deleteItemById = (id: string) => {
-    standardDeleteNotify(() => {
+    notify.standardDeleteNotify(() => {
       service
         .delete(id)
         .then((response) => {

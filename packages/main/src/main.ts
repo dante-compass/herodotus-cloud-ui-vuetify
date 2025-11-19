@@ -9,9 +9,10 @@ import { setupVuetify, setupPinia } from '@/plugins';
 import { setupRouter } from '@/routers';
 
 // Styles
+import 'unfonts.css';
+import 'animate.css/animate.min.css';
 import '@herodotus/core/style.css';
 import '@herodotus/framework/style.css';
-import 'unfonts.css';
 
 async function setupApp() {
   if (IS_DEV) {

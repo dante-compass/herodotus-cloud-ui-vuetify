@@ -142,6 +142,52 @@ class Notify {
       }
     });
   }
+
+  public signOutNotify(onConfirm: () => void, onCancel?: () => void): void {
+    Swal.fire({
+      title: '要走了么?',
+      text: '您确定要退出系统！',
+      icon: 'warning',
+      theme: this.theme,
+      showCancelButton: true,
+      confirmButtonColor: this.getConfirmButtonColor(),
+      cancelButtonColor: '#d33',
+      confirmButtonText: '是的',
+      cancelButtonText: '取消',
+    }).then((result: SweetAlertResult) => {
+      if (result.value) {
+        onConfirm();
+      } else {
+        if (onCancel) {
+          onCancel();
+        }
+      }
+    });
+  }
+
+  public tokenExpiresNotify(
+    title: string,
+    text: string,
+    icon: SweetAlertIcon,
+    onClose: () => void,
+  ): void {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      theme: this.theme,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+      confirmButtonText: '已阅!',
+      willClose: () => {
+        onClose();
+      },
+    });
+  }
 }
 
 const notify: Notify = Notify.initialize(ThemeModeEnum.LIGHT);

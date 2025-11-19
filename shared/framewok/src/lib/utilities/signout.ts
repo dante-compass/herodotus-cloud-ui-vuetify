@@ -1,5 +1,5 @@
 import type { SweetAlertIcon, SweetAlertResult } from '@herodotus/core';
-import { Swal } from '@herodotus/core';
+import { notify } from '@herodotus/core';
 import { RouterUtilities } from './router';
 
 import { useCryptoStore, useAuthenticationStore } from '../stores';
@@ -58,37 +58,10 @@ export class SignOutUtilities {
   }
 
   public signOutWithDialog(): void {
-    Swal.fire({
-      title: '要走了么?',
-      text: '您确定要退出系统！',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '是的',
-      cancelButtonText: '取消',
-    }).then((result: SweetAlertResult) => {
-      if (result.value) {
-        this.signOut();
-      }
-    });
+    notify.signOutNotify(() => this.signOut());
   }
 
   public tokenExpires(title: string, text: string, icon: SweetAlertIcon, isLocal = false): void {
-    Swal.fire({
-      title: title,
-      text: text,
-      icon: icon,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown',
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp',
-      },
-      confirmButtonText: '已阅!',
-      willClose: () => {
-        this.signOut(isLocal);
-      },
-    });
+    notify.tokenExpiresNotify(title, text, icon, () => this.signOut(isLocal));
   }
 }

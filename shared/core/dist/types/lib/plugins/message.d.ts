@@ -35,6 +35,8 @@ declare class Notify {
     question(title: string, text?: string): Promise<SweetAlertResult<string>>;
     private getConfirmButtonColor;
     standardDeleteNotify(onConfirm: () => void, onCancel?: () => void): void;
+    signOutNotify(onConfirm: () => void, onCancel?: () => void): void;
+    tokenExpiresNotify(title: string, text: string, icon: SweetAlertIcon, onClose: () => void): void;
 }
 declare const notify: Notify;
 declare class Toast {

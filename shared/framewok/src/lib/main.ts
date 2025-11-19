@@ -8,13 +8,13 @@ import { SecurityApiResources } from './api';
 import { OptionsUtilities, RouterUtilities, SignOutUtilities } from './utilities';
 
 const initializer = (options: KernelOptions) => {
+  const store = useSettingsStore();
+  changeSwalTheme(store.theme.mode);
+
   OptionsUtilities.initialize(options);
   RouterUtilities.initialize(options.router);
   SecurityApiResources.initialize(options.config);
   SignOutUtilities.initialize(options.signOutExtension);
-
-  const store = useSettingsStore();
-  changeSwalTheme(store.theme.mode);
 };
 
 export { initializer, piniaPluginPersistedstate };
