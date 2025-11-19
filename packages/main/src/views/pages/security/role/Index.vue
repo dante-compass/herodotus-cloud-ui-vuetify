@@ -12,7 +12,7 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn>新建</v-btn>
+      <v-btn @click="toCreate">新建角色</v-btn>
     </template>
 
     <template #item.actions="{ item }">
@@ -57,6 +57,7 @@ const {
   totalPages,
   totalItems,
   toEdit,
+  toCreate,
   toAuthorize,
   deleteItemById,
   findItems,

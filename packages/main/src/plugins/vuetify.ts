@@ -27,6 +27,10 @@ const vuetify = createVuetify({
       color: 'primary',
       clearable: true,
     },
+    VSwitch: {
+      color: 'primary',
+      inset: true,
+    },
     VList: {
       color: 'primary',
     },

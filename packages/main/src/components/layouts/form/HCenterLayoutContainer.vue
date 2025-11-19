@@ -25,7 +25,7 @@
           <v-switch v-model="entity.reserved" label="是否为保留数据"></v-switch>
           <div>
             <h-button color="red" @click="onFinish()">取消</h-button>
-            <h-button color="primary" class="ml-2" @click="onSave()">保存</h-button>
+            <h-button class="ml-2" @click="onSave()">保存</h-button>
             <slot name="button"></slot>
           </div>
         </v-col>

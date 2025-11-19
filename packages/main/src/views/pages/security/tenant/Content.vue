@@ -84,7 +84,7 @@ const isUniqueRule = (tenantId: string) => {
       if (validate) {
         return true;
       } else {
-        return '租户ID已被占用，请改用其它用户名';
+        return '租户ID已被占用，请改用其它租户ID';
       }
     })
     .catch(() => {
