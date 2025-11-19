@@ -4,5 +4,14 @@ import useDictionary from './useDictionary';
 import useDisplayElement from './useDisplayElement';
 import useTableItem from './useTableItem';
 import useTable from './useTable';
+import useTreeItem from './useTreeItem';
 
-export { useBaseTable, useBaseTableItem, useDictionary, useDisplayElement, useTable, useTableItem };
+export {
+  useBaseTable,
+  useBaseTableItem,
+  useDictionary,
+  useDisplayElement,
+  useTable,
+  useTableItem,
+  useTreeItem,
+};

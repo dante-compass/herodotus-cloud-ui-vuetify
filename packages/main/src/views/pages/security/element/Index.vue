@@ -9,7 +9,6 @@
     :item-value="rowKey"
     :loading="loading"
     disable-sort
-    reserved
     @update:options="findItems"
   >
     <template #search>
@@ -45,12 +44,10 @@
     </template>
 
     <template #item.actions="{ item }">
-      <h-action-button
-        color="amber"
-        icon="mdi-shield-edit"
+      <h-action-authorize-button
         tooltip="配置角色"
         @click="toAuthorize(item)"
-      ></h-action-button>
+      ></h-action-authorize-button>
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
       <h-action-delete-button
         v-if="!item.reserved"
