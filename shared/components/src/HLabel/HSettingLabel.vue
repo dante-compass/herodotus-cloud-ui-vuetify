@@ -4,7 +4,7 @@
       <v-label :text="title" class="mb-1 font-weight-medium">
         <slot name="title"></slot>
       </v-label>
-      <v-messages :messages="text" active />
+      <v-messages v-if="text" :messages="text" active />
     </div>
 
     <slot></slot>

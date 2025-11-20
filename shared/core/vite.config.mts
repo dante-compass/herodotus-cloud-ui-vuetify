@@ -52,6 +52,7 @@ export default defineConfig({
         globals: {
           axios: 'Axios',
           qs: 'Qs',
+          crypto: 'Crypto',
           'crypto-js': 'CryptoJs',
           'sm-crypto-v2': 'SmCryptoV2',
           sweetalert2: 'Sweetalert2',

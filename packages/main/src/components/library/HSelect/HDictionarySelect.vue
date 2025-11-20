@@ -4,6 +4,8 @@
     :items="options"
     item-title="label"
     item-value="value"
+    chips
+    closable-chips
     v-bind="$attrs"
   ></v-select>
 </template>

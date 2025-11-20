@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="pa-0">
     <v-row>
       <v-col>
         <v-number-input
@@ -8,11 +8,10 @@
           placeholder="请输入数值"
           control-variant="split"
           inset
-          hide-details
         ></v-number-input>
       </v-col>
       <v-col>
-        <v-select v-model="unit" :options="options" label="单位" hide-details></v-select>
+        <v-select v-model="unit" :items="options" label="单位" clearable></v-select>
       </v-col>
     </v-row>
   </v-container>

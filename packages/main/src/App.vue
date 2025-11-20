@@ -1,21 +1,18 @@
 <template>
   <v-theme-provider>
-    <loading></loading>
     <router-view v-if="isRouterAlive"></router-view>
   </v-theme-provider>
 </template>
 
 <script lang="ts" setup>
-import { useAuthenticationStore, useSettingsStore } from '@herodotus/framework';
+import { useAuthenticationStore } from '@herodotus/framework';
 
 import { useWebSocketMessage } from '@/composables/hooks';
 
 import { VARIABLES } from '@/configurations';
 import { refreshTabInjectionKey } from '@/composables/symbols';
 
-import Loading from '@/components/layouts/commons/Loading.vue';
-
-defineOptions({ name: 'App', components: { Loading } });
+defineOptions({ name: 'App' });
 
 const authentication = useAuthenticationStore();
 

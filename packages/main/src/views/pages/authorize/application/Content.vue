@@ -35,11 +35,6 @@
               label="应用类型"
             ></h-dictionary-select>
             <h-dictionary-select
-              v-model="editedItem.applicationType"
-              dictionary="ApplicationType"
-              label="应用类型"
-            ></h-dictionary-select>
-            <h-dictionary-select
               v-model="editedItem.authorizationGrantTypes"
               dictionary="GrantType"
               label="认证模式 * "
@@ -67,16 +62,23 @@
               label="OIDC Logout 回调地址(可多个逗号分隔)"
               placeholder="请输入OIDC Logout 回调地址"
             ></v-text-field>
-            <h-text-divider label="客户端设置(Client Settings)"></h-text-divider>
-            <v-switch v-model="editedItem.requireProofKey" label="是否需要 Proof Key"></v-switch>
+            <h-text-divider label="客户端设置"></h-text-divider>
+
+            <v-switch
+              v-model="editedItem.requireProofKey"
+              label="是否需要 Proof Key"
+              hide-details
+            ></v-switch>
             <v-switch
               v-model="editedItem.requireAuthorizationConsent"
               label="是否需要认证确认"
+              hide-details
             ></v-switch>
             <v-text-field
               v-model="editedItem.jwkSetUrl"
               label="客户端密钥集URL"
               placeholder="请输入客户端密钥集URL"
+              class="mt-2"
             ></v-text-field>
             <v-select
               v-if="isShowAuthenticationSigningAlgorithm"
@@ -84,11 +86,24 @@
               :options="authenticationSigningAlgorithmItem"
               label="令牌端点认证签名算法"
             ></v-select>
-            <h-text-divider label="令牌设置(Token Settings)"></h-text-divider>
+            <h-text-divider label="令牌设置"></h-text-divider>
             <h-setting-label title="令牌有效期"></h-setting-label>
+            <h-duration v-model="editedItem.accessTokenTimeToLive" label="令牌有效期"></h-duration>
             <h-setting-label title="刷新令牌有效期"></h-setting-label>
+            <h-duration
+              v-model="editedItem.refreshTokenTimeToLive"
+              label="刷新令牌有效期"
+            ></h-duration>
             <h-setting-label title="授权码有效期"></h-setting-label>
+            <h-duration
+              v-model="editedItem.authorizationCodeTimeToLive"
+              label="授权码有效期"
+            ></h-duration>
             <h-setting-label title="设备激活码有效期"></h-setting-label>
+            <h-duration
+              v-model="editedItem.deviceCodeTimeToLive"
+              label="设备激活码有效期"
+            ></h-duration>
             <v-switch
               v-model="editedItem.reuseRefreshTokens"
               label="是否允许重用刷新令牌"
@@ -237,21 +252,6 @@ const authenticationSigningAlgorithmItem = computed(() => {
 
   return options.value;
 });
-
-const isRedirectUrisRequired = () => {
-  let authorizationGrantTypes = editedItem.value.authorizationGrantTypes;
-  let redirectUris = editedItem.value.redirectUris;
-
-  if (
-    authorizationGrantTypes &&
-    authorizationGrantTypes.includes('authorization_code') &&
-    !redirectUris
-  ) {
-    return false;
-  } else {
-    return true;
-  }
-};
 
 const onSave = async () => {
   const { valid } = await applicationForm.value.validate();

@@ -43,6 +43,7 @@ declare module 'vue' {
     HDataTable: typeof import('./../src/components/library/HTable/HDataTable.vue')['default']
     HDetailContainer: typeof import('./../src/components/layouts/form/HDetailContainer.vue')['default']
     HDictionarySelect: typeof import('./../src/components/library/HSelect/HDictionarySelect.vue')['default']
+    HDuration: typeof import('@herodotus/components')['HDuration']
     HErrorLayout: typeof import('./../src/components/error/HErrorLayout.vue')['default']
     HGraphicCaptcha: typeof import('./../src/components/captcha/HGraphicCaptcha.vue')['default']
     HHttpMethodAvatar: typeof import('./../src/components/library/HAuthorize/HHttpMethodAvatar.vue')['default']
