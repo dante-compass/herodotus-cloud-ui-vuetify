@@ -49,7 +49,7 @@ export const COLOR_LIST: Array<string> = [
   'blue-grey',
 ];
 
-export const DEFAULT_HTTP_METHOD_STYLE: DisplayElement = HTTP_METHOD_STYLE_GROUP.GET;
+export const DEFAULT_HTTP_METHOD_STYLE: DisplayElement = HTTP_METHOD_STYLE_GROUP.GET!;
 
 export const GRANT_TYPE_STYLE_GROUP: DisplayElementGroup = {
   authorization_code: { color: 'pink', icon: 'mdi-security', text: '授权码认证' },

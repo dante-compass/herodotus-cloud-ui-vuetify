@@ -19,12 +19,6 @@
 
     <template #body-cell-actions="props">
       <q-td key="actions" :props="props">
-        <h-dense-icon-button
-          color="brown"
-          icon="mdi-shield-key"
-          tooltip="配置权限"
-          @click="toAuthorize(props.row)"
-        ></h-dense-icon-button>
         <h-edit-button @click="toEdit(props.row)"></h-edit-button>
         <h-delete-button
           v-if="!props.row.reserved"

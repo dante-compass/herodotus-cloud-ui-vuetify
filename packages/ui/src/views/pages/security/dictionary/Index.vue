@@ -19,7 +19,7 @@
         <h-button color="primary" label="新建产品" @click="toCreate" />
       </template>
       <template #body-cell-name="props">
-        <q-td key="actions" :props="props">
+        <q-td key="names" :props="props">
           <q-chip
             :color="getColor(props.row)"
             text-color="white"

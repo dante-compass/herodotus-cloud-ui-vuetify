@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/ui",
-  "version": "3.5.7.1",
+  "version": "3.5.8.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -15,7 +15,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bpmn-io/properties-panel": "3.33.1",
+    "@bpmn-io/properties-panel": "3.34.0",
     "@herodotus-cloud/apis": "workspace:^",
     "@herodotus-cloud/bpmn-apis": "workspace:^",
     "@herodotus-cloud/bpmn-designer": "workspace:^",
@@ -34,8 +34,8 @@
     "@vuelidate/validators": "^2.0.4",
     "@vueuse/core": "^14.0.0",
     "animate.css": "^4.1.1",
-    "axios": "^1.13.1",
-    "bpmn-js": "^18.8.0",
+    "axios": "^1.13.2",
+    "bpmn-js": "^18.9.0",
     "bpmn-js-token-simulation": "^0.38.1",
     "colord": "^2.9.3",
     "echarts": "^6.0.0",
@@ -43,7 +43,7 @@
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",
     "simple-uploader.js": "^0.6.0",
-    "vue": "^3.5.22",
+    "vue": "^3.5.24",
     "vue-cookies": "^1.8.6",
     "vue-i18n": "^11.1.12",
     "vue-router": "^4.6.3",
@@ -51,6 +51,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "24.9.2"
+    "@types/node": "24.10.1"
   }
 }

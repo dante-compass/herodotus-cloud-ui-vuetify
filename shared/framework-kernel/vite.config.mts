@@ -43,8 +43,6 @@ export default defineConfig({
         'pinia',
         'pinia-plugin-persistedstate',
         'jwt-decode',
-        '@github/webauthn-json',
-        '@github/webauthn-json/browser-ponyfill',
         '@herodotus-cloud/core',
       ],
       output: {
@@ -57,8 +55,6 @@ export default defineConfig({
           pinia: 'Pinia',
           'pinia-plugin-persistedstate': 'PiniaPluginPersistedstate',
           'jwt-decode': 'JwtDecode',
-          '@github/webauthn-json': 'GithubWebauthnJson',
-          '@github/webauthn-json/browser-ponyfill': 'GithubWebauthnJsonBrowserPonyfill',
           '@herodotus-cloud/core': 'HerodotusCore',
         },
       },

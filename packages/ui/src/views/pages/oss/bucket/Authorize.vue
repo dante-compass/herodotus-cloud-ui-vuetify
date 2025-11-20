@@ -90,7 +90,7 @@ import { HOssTags, HOssBucketRetention } from '@/composables/oss';
 import { useDictionary } from '@/composables/constants';
 
 export default defineComponent({
-  name: 'OssBucketContent',
+  name: 'OssBucketAuthorize',
 
   components: {
     HSimpleCenterFormLayout,

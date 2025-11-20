@@ -22,23 +22,23 @@ jobs:
           echo "##[set-output name=version;]SENTINEL_VERSION=${GITHUB_REF#$"refs/tags/v"}"
 
       - name: Check out the repo
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v5.0.1
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3.6.0
+        uses: docker/setup-qemu-action@v3.7.0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.11.1
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v3.5.0
+        uses: docker/login-action@v3.6.0
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v5.8.0
+        uses: docker/metadata-action@v5.9.0
         with:
           images: herodotus/herodotus-cloud-ui
 
@@ -58,16 +58,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v6.0.0
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3.6.0
+        uses: docker/setup-qemu-action@v3.7.0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.11.1
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v3.5.0
+        uses: docker/login-action@v3.6.0
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}

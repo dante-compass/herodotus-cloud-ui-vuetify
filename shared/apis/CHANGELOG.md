@@ -1,5 +1,16 @@
 # @herodotus-cloud/apis
 
+## 2.7.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/core@2.7.0
+
 ## 2.6.1
 
 ### Patch Changes

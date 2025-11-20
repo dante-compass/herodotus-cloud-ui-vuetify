@@ -42,7 +42,7 @@ import { useTableItem, useTable } from '@/hooks';
 import { HAuthorizeList, HAuthorizeLayout } from '@/composables/authorize';
 
 export default defineComponent({
-  name: 'SysUserAuthorize',
+  name: 'SysDefaultRoleAuthorize',
 
   components: {
     HAuthorizeList,
@@ -74,7 +74,7 @@ export default defineComponent({
     const onSave = () => {
       let defaultId = editedItem.value.defaultId;
       let role = selectedItems.value[0];
-      assign({ defaultId: defaultId, roleId: role.roleId });
+      assign({ defaultId: defaultId, roleId: role?.roleId });
     };
 
     return {

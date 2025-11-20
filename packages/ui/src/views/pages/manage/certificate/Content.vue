@@ -163,14 +163,15 @@ export default defineComponent({
 
   setup(props) {
     const { editedItem, operation, title, saveOrUpdate, overlay } =
-      useTableItem<MgtCertificateEntity>(API.mgtCertificate());
+      useTableItem<MgtCertificateEntity>(API.core.mgtCertificate());
 
     const isUnique = () => {
       let alias = editedItem.value.alias;
 
       return new Promise((resolve, reject) => {
         if (alias) {
-          API.mgtCertificate()
+          API.core
+            .mgtCertificate()
             .findByAlias(alias)
             .then((result) => {
               let cert = result.data as MgtCertificateEntity;
@@ -193,7 +194,8 @@ export default defineComponent({
     const loadOptionData = (category: string) => {
       showParentLoading.value = true;
       if (category) {
-        API.mgtCertificate()
+        API.core
+          .mgtCertificate()
           .findAllByCertificateCategory(category)
           .then((result) => {
             parentOptions.value = result.data;
