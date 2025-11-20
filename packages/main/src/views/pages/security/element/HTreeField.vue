@@ -1,22 +1,137 @@
 <template>
-  <v-text-field label="ceshi" v-bind="$attrs">
-    <v-menu activator="parent">
-      <v-list>
-        <v-list-item v-for="(item, index) in items" :key="index" :value="index">
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
+  <v-text-field
+    ref="vTextFieldRef"
+    v-model="nodeName"
+    v-model:focused="isFocused"
+    :class="[
+      'v-combobox',
+      {
+        'v-combobox--active-menu': menu,
+      },
+    ]"
+    @mousedown:control="onMousedownControl"
+    @after-leave="onAfterLeave"
+    v-bind="$attrs"
+  >
+    <v-menu
+      v-model="menu"
+      activator="parent"
+      content-class="v-combobox__content"
+      :open-on-click="false"
+      :close-on-content-click="false"
+      max-height="310"
+    >
+      <v-treeview
+        v-model:selected="selectedId"
+        :items="items"
+        item-value="id"
+        item-title="name"
+        selectable
+        select-strategy="single-independent"
+        separate-roots
+      ></v-treeview>
     </v-menu>
+
+    <template #append-inner>
+      <v-icon
+        icon="mdi-menu-down"
+        @mousedown="onMousedownMenuIcon"
+        @click="noop"
+        class="v-combobox__menu-icon"
+        tabindex="-1"
+      ></v-icon>
+    </template>
   </v-text-field>
 </template>
 
 <script setup lang="ts">
+import type { Tree } from '@herodotus/core';
+
+import { isEmpty, find } from 'lodash-es';
+
 defineOptions({ name: 'HTreeField' });
 
-const items = [
-  { title: 'Click Me' },
-  { title: 'Click Me' },
-  { title: 'Click Me' },
-  { title: 'Click Me 2' },
-];
+interface Props {
+  items: Tree[];
+}
+
+const props = defineProps<Props>();
+
+const selectedId = defineModel<string>({
+  required: true,
+});
+
+const vTextFieldRef = ref();
+
+const menu = shallowRef(false);
+const isFocused = shallowRef(false);
+const treeNodes = ref<Tree[]>([]);
+const nodeName = shallowRef('');
+
+const onMousedownControl = () => {
+  menu.value = true;
+};
+const onMousedownMenuIcon = (e: MouseEvent) => {
+  menu.value = !menu.value;
+};
+
+const onAfterLeave = () => {
+  if (isFocused.value) {
+    vTextFieldRef.value?.focus();
+  }
+};
+/**
+ * 什么都不做，增加 @click 可以让鼠标变成手指
+ */
+const noop = () => {};
+
+const treeToArray = (tree: Array<Tree>) => {
+  let result: Array<Tree> = [];
+  for (const item of tree) {
+    const { children, ...i } = item;
+    if (children && children.length) {
+      result = result.concat(treeToArray(children));
+    }
+    result.push(i);
+  }
+  return result;
+};
+
+const findNode = (id: string): void => {
+  const node = find(treeNodes.value, (i) => i.id == selectedId.value);
+  if (node) {
+    nodeName.value = node.name;
+  }
+};
+
+const init = (tree: Array<Tree>) => {
+  if (!isEmpty(tree) && isEmpty(treeNodes.value)) {
+    treeNodes.value = treeToArray(tree);
+    findNode(selectedId.value);
+  }
+};
+
+watch(
+  () => props.items,
+  (newValue) => {
+    if (!isEmpty(newValue)) {
+      init(newValue);
+    }
+  },
+  {
+    immediate: true,
+  },
+);
+
+watch(
+  () => selectedId.value,
+  (newValue: string) => {
+    if (newValue) {
+      findNode(newValue);
+    }
+  },
+  {
+    immediate: true,
+  },
+);
 </script>
