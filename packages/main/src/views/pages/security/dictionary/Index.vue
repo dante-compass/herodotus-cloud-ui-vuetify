@@ -9,11 +9,10 @@
     :item-value="rowKey"
     :loading="loading"
     disable-sort
-    reserved
     @update:options="findItems"
   >
     <template #control>
-      <v-btn @click="toCreate">新建产品</v-btn>
+      <v-btn @click="toCreate">新建字典</v-btn>
     </template>
 
     <template v-slot:item.name="{ value }">
@@ -72,7 +71,6 @@ const {
   totalItems,
   toEdit,
   toCreate,
-  toAuthorize,
   deleteItemById,
   findItems,
 } = useTable<SysDictionaryEntity, SysDictionaryConditions>(

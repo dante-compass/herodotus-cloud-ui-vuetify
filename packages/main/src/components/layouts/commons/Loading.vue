@@ -4,7 +4,7 @@
       v-model="value"
       :rotate="360"
       :size="100"
-      :width="15"
+      :width="10"
       color="primary"
       indeterminate
     >
