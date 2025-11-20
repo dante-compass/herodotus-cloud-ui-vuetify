@@ -46,7 +46,7 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 import { useTableItem, useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
-defineOptions({ name: 'SysElementAuthorize' });
+defineOptions({ name: 'SysDefaultRoleAuthorize' });
 
 const { editedItem, title, assign } = useTableItem<SysDefaultRoleEntity>(API.core.sysDefaultRole());
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
