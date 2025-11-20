@@ -11,6 +11,10 @@
     disable-sort
     @update:options="findItems"
   >
+    <template #search>
+      <search v-model="conditions"></search>
+    </template>
+
     <template #control>
       <v-btn @click="toCreate">新建字典</v-btn>
     </template>
@@ -45,7 +49,9 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 import { useTable } from '@/composables/hooks';
 import { API, PAGE_NAME, COLOR_LIST } from '@/configurations';
 
-defineOptions({ name: PAGE_NAME.SYS_DICTIONARY });
+import Search from './Search.vue';
+
+defineOptions({ name: PAGE_NAME.SYS_DICTIONARY, components: { Search } });
 
 const headers = ref([
   { key: 'category', align: 'center', title: '分类' },
@@ -69,6 +75,7 @@ const {
   tableRows,
   totalPages,
   totalItems,
+  conditions,
   toEdit,
   toCreate,
   deleteItemById,
