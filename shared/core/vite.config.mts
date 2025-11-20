@@ -36,6 +36,7 @@ export default defineConfig({
       external: [
         'axios',
         'qs',
+        'crypto',
         'crypto-js',
         'sweetalert2',
         'sm-crypto-v2',

@@ -33,6 +33,7 @@ interface Props {
 }
 
 defineOptions({ name: 'HButton', components: { VBtn, VIcon } });
+
 const props = withDefaults(defineProps<Props>(), { location: 'bottom' });
 
 const isIcon = !props.icon || props.icon !== true;

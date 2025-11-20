@@ -374,7 +374,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         hint?: string | undefined;
         "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
         "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
-    }, "disabled" | "style" | "density" | "readonly" | "direction" | "messages" | "centerAffix" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "isValid" | "maxErrors" | "persistentHint" | "reset" | "resetValidation" | "rules" | "validate"> & import('vue').ShallowUnwrapRef<{
+    }, "disabled" | "style" | "density" | "readonly" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "isValid" | "maxErrors" | "messages" | "persistentHint" | "reset" | "resetValidation" | "rules" | "validate"> & import('vue').ShallowUnwrapRef<{
         reset: () => Promise<void>;
         resetValidation: () => Promise<void>;
         validate: (silent?: boolean) => Promise<string[]>;
@@ -383,7 +383,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
         "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
-    }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "maxWidth" | "minWidth" | "width" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "color" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "direction" | "messages" | "v-slot:message" | "centerAffix" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "iconColor" | "v-slot:details">, `$${any}`> & Omit<Omit<{
+    }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "maxWidth" | "minWidth" | "width" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "color" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "messages" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "iconColor" | "v-slot:details" | "v-slot:message">, `$${any}`> & Omit<Omit<{
         $: import('vue').ComponentInternalInstance;
         $data: {};
         $props: Partial<{
@@ -1100,7 +1100,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         hint?: string | undefined;
         "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
         "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
-    }, "disabled" | "style" | "density" | "readonly" | "direction" | "messages" | "centerAffix" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "isValid" | "maxErrors" | "persistentHint" | "reset" | "resetValidation" | "rules" | "validate"> & import('vue').ShallowUnwrapRef<{
+    }, "disabled" | "style" | "density" | "readonly" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "isValid" | "maxErrors" | "messages" | "persistentHint" | "reset" | "resetValidation" | "rules" | "validate"> & import('vue').ShallowUnwrapRef<{
         reset: () => Promise<void>;
         resetValidation: () => Promise<void>;
         validate: (silent?: boolean) => Promise<string[]>;
@@ -1109,7 +1109,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
         "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
-    }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "maxWidth" | "minWidth" | "width" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "color" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "direction" | "messages" | "v-slot:message" | "centerAffix" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "iconColor" | "v-slot:details">, `$${any}`> & Omit<Omit<{
+    }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "maxWidth" | "minWidth" | "width" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "color" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "messages" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "iconColor" | "v-slot:details" | "v-slot:message">, `$${any}`> & Omit<Omit<{
         $: import('vue').ComponentInternalInstance;
         $data: {};
         $props: Partial<{
