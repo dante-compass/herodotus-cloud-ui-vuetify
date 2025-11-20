@@ -28,7 +28,6 @@
         prepend-title="roleCode"
         append-title="roleName"
         :row-key="rowKey"
-        class="q-ml-md"
         @save="onSave()"
       ></h-authorize-list>
     </template>
@@ -48,7 +47,7 @@ const { editedItem, title, assign } = useTableItem<SysUserEntity>(API.core.sysUs
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysRoleEntity,
   SysRoleConditions
->(API.core.sysRole(), PAGE_NAME.SYS_ROLE);
+>(API.core.sysRole(), PAGE_NAME.SYS_ROLE, true);
 
 const selectedItems = ref([]) as Ref<Array<SysRoleEntity>>;
 const rowKey: SysRoleProps = 'roleId';

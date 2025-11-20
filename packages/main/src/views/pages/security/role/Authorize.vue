@@ -28,7 +28,6 @@
         prepend-title="permissionCode"
         append-title="permissionName"
         :row-key="rowKey"
-        class="q-ml-md"
         @save="onSave()"
       ></h-authorize-list>
     </template>
@@ -53,7 +52,7 @@ const { editedItem, title, assign } = useTableItem<SysRoleEntity>(API.core.sysRo
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysPermissionEntity,
   SysPermissionConditions
->(API.core.sysPermission(), PAGE_NAME.SYS_PERMISSION);
+>(API.core.sysPermission(), PAGE_NAME.SYS_PERMISSION, true);
 
 const selectedItems = ref([]) as Ref<Array<SysPermissionEntity>>;
 const rowKey: SysPermissionProps = 'permissionId';

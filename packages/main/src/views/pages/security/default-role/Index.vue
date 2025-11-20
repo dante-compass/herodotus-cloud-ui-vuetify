@@ -9,7 +9,6 @@
     :item-value="rowKey"
     :loading="loading"
     disable-sort
-    reserved
     @update:options="findItems"
   >
     <template #item.role="{ item }">
@@ -17,12 +16,10 @@
     </template>
 
     <template #item.actions="{ item }">
-      <h-action-button
-        color="amber"
-        icon="mdi-shield-edit"
+      <h-action-authorize-button
         tooltip="配置角色"
         @click="toAuthorize(item)"
-      ></h-action-button>
+      ></h-action-authorize-button>
       <h-action-delete-button
         v-if="!item.reserved"
         @click="deleteItemById(item[rowKey])"
@@ -32,7 +29,11 @@
 </template>
 
 <script setup lang="ts">
-import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from '@herodotus/api';
+import type {
+  SysDefaultRoleEntity,
+  SysDefaultRoleConditions,
+  SysDefaultRoleProps,
+} from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable } from '@/composables/hooks';
@@ -49,7 +50,7 @@ const headers = ref([
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysRoleProps = 'roleId';
+const rowKey: SysDefaultRoleProps = 'defaultId';
 
 const {
   loading,
@@ -61,5 +62,8 @@ const {
   toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.SYS_DEFAULT_ROLE);
+} = useTable<SysDefaultRoleEntity, SysDefaultRoleConditions>(
+  API.core.sysDefaultRole(),
+  PAGE_NAME.SYS_DEFAULT_ROLE,
+);
 </script>
