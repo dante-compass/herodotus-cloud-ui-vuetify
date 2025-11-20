@@ -12,7 +12,7 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn>新建应用</v-btn>
+      <v-btn @click="toCreate">新建应用</v-btn>
     </template>
 
     <template #item.accessTokenTimeToLive="{ value }">
@@ -81,6 +81,7 @@ const {
   totalPages,
   totalItems,
   toEdit,
+  toCreate,
   deleteItemById,
   findItems,
 } = useTable<OAuth2ApplicationEntity, OAuth2ApplicationConditions>(

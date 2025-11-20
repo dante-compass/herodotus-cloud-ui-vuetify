@@ -9,7 +9,6 @@
     :item-value="rowKey"
     :loading="loading"
     disable-sort
-    reserved
     @update:options="findItems"
   >
     <template #item.accessTokenIssuedAt="{ value }">
