@@ -15,7 +15,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bpmn-io/properties-panel": "3.33.2",
+    "@bpmn-io/properties-panel": "3.34.0",
     "@herodotus-cloud/apis": "workspace:^",
     "@herodotus-cloud/bpmn-apis": "workspace:^",
     "@herodotus-cloud/bpmn-designer": "workspace:^",
@@ -35,7 +35,7 @@
     "@vueuse/core": "^14.0.0",
     "animate.css": "^4.1.1",
     "axios": "^1.13.2",
-    "bpmn-js": "^18.8.0",
+    "bpmn-js": "^18.9.0",
     "bpmn-js-token-simulation": "^0.38.1",
     "colord": "^2.9.3",
     "echarts": "^6.0.0",
@@ -51,6 +51,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "24.10.0"
+    "@types/node": "24.10.1"
   }
 }

@@ -1,1 +1,0 @@
-import{c as p}from"./App.vue_vue_type_script_setup_true_lang.ts-dfPuN-Mr.js";import{_ as e}from"./components-layouts-default-HAppMenu.vue_vue_type_script_setup_true_lang.ts-DtP2S0WW.js";import{d as t}from"./npm-@vue-runtime-core-DV89usjJ.js";const s=t({name:"HAppLeftDrawer",components:{HAppMenu:e},setup:()=>({application:p()})});export{s as _};

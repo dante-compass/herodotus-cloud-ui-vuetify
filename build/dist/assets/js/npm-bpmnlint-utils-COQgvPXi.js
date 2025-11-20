@@ -1,1 +1,0 @@
-import{g as t}from"./npm-@rsocket-composite-metadata-YOvRo0td.js";function e(t,e){return-1===e.indexOf(":")&&(e="bpmn:"+e),"function"==typeof t.$instanceOf?t.$instanceOf(e):t.$type===e}const n=t(Object.freeze(Object.defineProperty({__proto__:null,is:e,isAny:function(t,n){return n.some(function(n){return e(t,n)})}},Symbol.toStringTag,{value:"Module"})));export{n as r};
