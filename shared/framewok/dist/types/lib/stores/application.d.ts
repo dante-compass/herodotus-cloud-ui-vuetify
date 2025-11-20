@@ -9,8 +9,11 @@ export declare const useApplicationStore: import('pinia').StoreDefinition<"Appli
     leftDrawer: boolean;
     rightDrawer: boolean;
     signInPanel: string;
+    loading: boolean;
 }, {}, {
     switchToMobilePanel(): void;
     switchToScanPanel(): void;
     switchToAccountPanel(): void;
+    loadingStart(): void;
+    loadingEnd(): void;
 }>;

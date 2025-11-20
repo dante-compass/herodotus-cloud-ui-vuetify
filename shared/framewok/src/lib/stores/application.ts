@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { fa } from 'vuetify/locale';
 
 /**
  * Pinia Store 响应式
@@ -14,7 +15,9 @@ export const useApplicationStore = defineStore('Application', {
     // 右侧设置面板显示控制
     rightDrawer: false,
     // 登录页面面板
-    signInPanel: 'account'
+    signInPanel: 'account',
+    // 加载指示器
+    loading: false,
   }),
 
   actions: {
@@ -26,6 +29,12 @@ export const useApplicationStore = defineStore('Application', {
     },
     switchToAccountPanel() {
       this.signInPanel = 'account';
-    }
-  }
+    },
+    loadingStart() {
+      this.loading = true;
+    },
+    loadingEnd() {
+      this.loading = false;
+    },
+  },
 });

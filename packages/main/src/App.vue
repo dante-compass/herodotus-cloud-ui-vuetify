@@ -1,5 +1,6 @@
 <template>
   <v-theme-provider>
+    <loading></loading>
     <router-view v-if="isRouterAlive"></router-view>
   </v-theme-provider>
 </template>
@@ -12,7 +13,9 @@ import { useWebSocketMessage } from '@/composables/hooks';
 import { VARIABLES } from '@/configurations';
 import { refreshTabInjectionKey } from '@/composables/symbols';
 
-defineOptions({ name: 'App' });
+import Loading from '@/components/layouts/commons/Loading.vue';
+
+defineOptions({ name: 'App', components: { Loading } });
 
 const authentication = useAuthenticationStore();
 

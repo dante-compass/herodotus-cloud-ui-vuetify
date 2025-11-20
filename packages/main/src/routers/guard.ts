@@ -3,7 +3,12 @@ import type { RouteRecordRaw, Router } from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-import { useAuthenticationStore, useRouterStore, useSystemRoute } from '@herodotus/framework';
+import {
+  useAuthenticationStore,
+  useRouterStore,
+  useSystemRoute,
+  useApplicationStore,
+} from '@herodotus/framework';
 import { DEAULT_ROUTER_LINK, API } from '@/configurations';
 
 const NotFoundRoute: RouteRecordRaw = {
@@ -37,8 +42,10 @@ const { initBackEndRoutes, initFrontEndRoutes } = useSystemRoute(
 );
 
 export const createRouterGuard = (router: Router) => {
+  const application = useApplicationStore();
+
   router.beforeEach(async (to, from, next) => {
-    NProgress.start();
+    application.loadingStart();
 
     const authStore = useAuthenticationStore();
     const routeStore = useRouterStore();
@@ -92,6 +99,6 @@ export const createRouterGuard = (router: Router) => {
 
   // 路由加载后
   router.afterEach(() => {
-    NProgress.done();
+    application.loadingEnd();
   });
 };

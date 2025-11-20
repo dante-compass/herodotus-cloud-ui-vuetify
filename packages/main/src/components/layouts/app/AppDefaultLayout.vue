@@ -22,7 +22,7 @@ import AppLeftDrawer from './AppLeftDrawer.vue';
 
 defineOptions({
   name: 'AppDefaultLayout',
-  components: { LayoutContent, LayoutBar, LayoutSettingDrawer, AppLeftDrawer, AppTabView },
+  components: { LayoutContent, LayoutBar, LayoutSettingDrawer, AppLeftDrawer, AppTabView,  },
 });
 
 const settings = useSettingsStore();

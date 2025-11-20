@@ -12,10 +12,6 @@
     reserved
     @update:options="findItems"
   >
-    <template #item.authorizationGrantType="{ value }">
-      {{ defaultFormat(value) }}
-    </template>
-
     <template #item.accessTokenIssuedAt="{ value }">
       {{ defaultFormat(value) }}
     </template>
@@ -25,6 +21,10 @@
     </template>
 
     <template #item.refreshTokenIssuedAt="{ value }">
+      {{ defaultFormat(value) }}
+    </template>
+
+    <template #item.refreshTokenExpiresAt="{ value }">
       {{ defaultFormat(value) }}
     </template>
 
