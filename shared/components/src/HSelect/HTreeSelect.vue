@@ -47,9 +47,11 @@
 <script setup lang="ts">
 import type { Tree } from '@herodotus/core';
 
+import { ref, shallowRef, watch } from 'vue';
 import { isEmpty, find } from 'lodash-es';
+import { VMenu, VIcon, VTreeview, VTextField } from 'vuetify/components';
 
-defineOptions({ name: 'HTreeField' });
+defineOptions({ name: 'HTreeSelect', components: { VMenu, VIcon, VTreeview, VTextField } });
 
 interface Props {
   items: Tree[];
@@ -123,9 +125,15 @@ watch(
   },
 );
 
+watch(isFocused, (newValue, oldVal) => {
+  if (newValue || newValue === oldVal) return;
+
+  menu.value = false;
+});
+
 watch(
-  () => selectedId.value,
-  (newValue: string) => {
+  selectedId,
+  (newValue) => {
     if (newValue) {
       findNode(newValue);
     }

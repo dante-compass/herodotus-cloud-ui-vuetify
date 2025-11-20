@@ -1,2 +1,3 @@
 import { default as HMdiIconSelect } from './HMdiIconSelect.vue';
-export { HMdiIconSelect };
+import { default as HTreeSelect } from './HTreeSelect.vue';
+export { HMdiIconSelect, HTreeSelect };

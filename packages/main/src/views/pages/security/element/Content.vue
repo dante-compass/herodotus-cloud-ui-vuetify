@@ -36,7 +36,11 @@
       placeholder="如果包含子节点，即 children 中元素的 path"
     ></v-text-field>
 
-    <h-tree-field v-model="editedItem.parentId" label="上级节点" :items="treeItems"></h-tree-field>
+    <h-tree-select
+      v-model="editedItem.parentId"
+      label="上级节点"
+      :items="treeItems"
+    ></h-tree-select>
 
     <v-switch v-model="editedItem.isNotKeepAlive" label="该应页面不需要KeepAlive缓存"></v-switch>
     <v-switch v-model="editedItem.isIgnoreAuth" label="该页面不需要权限验证"></v-switch>
@@ -64,9 +68,7 @@ import type { SysElementEntity, SysElementConditions } from '@herodotus/api';
 import { useTableItem, useTreeItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
-import HTreeField from './HTreeField.vue';
-
-defineOptions({ name: 'SysElementContent', components: { HTreeField } });
+defineOptions({ name: 'SysElementContent' });
 
 const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysElementEntity>(
   API.core.sysElement(),
