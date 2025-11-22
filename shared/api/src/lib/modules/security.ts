@@ -8,6 +8,7 @@ import type {
   SysDictionaryEntity,
   SysTenantDataSourceEntity,
   AccessSourceEntity,
+  Elements,
 } from '@/declarations';
 import type { AxiosHttpResult } from '@herodotus/core';
 
@@ -156,12 +157,23 @@ class SysElementService extends AbstractService<SysElementEntity> {
     }
     return this.instance;
   }
+
   public getBaseAddress(): string {
     return this.getConfig().getUpms() + '/security/element';
   }
 
+  public getResourcesAddress(): string {
+    return this.getBaseAddress() + '/resources';
+  }
+
   public fetchById(id: string): Promise<AxiosHttpResult<SysElementEntity>> {
     return this.getConfig().getHttp().get<SysElementEntity, string>(this.getIdPath(id));
+  }
+
+  public findResourcesByUserId(roles: string[]): Promise<AxiosHttpResult<Elements>> {
+    return this.getConfig()
+      .getHttp()
+      .get<Elements, string>(this.getResourcesAddress(), { roles: roles });
   }
 }
 

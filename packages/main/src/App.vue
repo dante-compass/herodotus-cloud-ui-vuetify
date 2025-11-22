@@ -1,6 +1,6 @@
 <template>
   <v-theme-provider>
-    <router-view v-if="isRouterAlive"></router-view>
+    <router-view></router-view>
   </v-theme-provider>
 </template>
 

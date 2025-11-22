@@ -1,4 +1,4 @@
-import type { AbstractSysEntity, Conditions, Entity } from '@herodotus/core';
+import type { AbstractSysEntity, Conditions, Entity, Tree } from '@herodotus/core';
 import type { SysEmployeeEntity } from './hr';
 
 export interface SysPermissionEntity extends AbstractSysEntity {
@@ -7,11 +7,32 @@ export interface SysPermissionEntity extends AbstractSysEntity {
   permissionCode: string;
 }
 
+export interface SysElementEntity extends AbstractSysEntity {
+  elementId: string;
+  parentId: string;
+  path: string;
+  name: string;
+  component: string;
+  title: string;
+  redirect: string;
+  type: string;
+  icon: string;
+  isHaveChild: boolean;
+  isNotKeepAlive: boolean;
+  isHideAllChild: boolean;
+  isDetailContent: boolean;
+  isIgnoreAuth: boolean;
+  elementCategory: string;
+  menuScenario: string;
+  applicationType: string;
+}
+
 export interface SysRoleEntity extends AbstractSysEntity {
   roleId: string;
   roleCode: string;
   roleName: string;
   permissions: Array<SysPermissionEntity>;
+  elements: Array<SysElementEntity>;
 }
 
 export interface SysUserEntity extends AbstractSysEntity {
@@ -40,24 +61,6 @@ export interface SysDefaultRoleEntity extends AbstractSysEntity {
   defaultId: string;
   scene: string;
   role: SysRoleEntity;
-}
-
-export interface SysElementEntity extends AbstractSysEntity {
-  elementId: string;
-  parentId: string;
-  path: string;
-  name: string;
-  component: string;
-  title: string;
-  redirect: string;
-  type: string;
-  icon: string;
-  isHaveChild: boolean;
-  isNotKeepAlive: boolean;
-  isHideAllChild: boolean;
-  isDetailContent: boolean;
-  isIgnoreAuth: boolean;
-  roles: Array<SysRoleEntity>;
 }
 
 export interface SysTenantDataSourceEntity extends AbstractSysEntity {
@@ -139,3 +142,8 @@ export type SysTenantDataSourceProps = keyof SysTenantDataSourceEntity;
 export type SysDictionaryProps = keyof SysDictionaryEntity;
 
 export type AccessSourceProps = keyof AccessSourceEntity;
+
+export interface Elements extends Entity {
+  menus: Tree[];
+  buttons: SysElementEntity[];
+}

@@ -25,8 +25,8 @@ const locate = (item: string) => {
   return `../${item}`;
 };
 
-const getRoutesFromServer = () => {
-  return API.core.sysElement().fetchTree();
+const getRoutesFromServer = (roles: string[]) => {
+  return API.core.sysElement().findResourcesByUserId(roles);
 };
 
 const { initBackEndRoutes, initFrontEndRoutes } = useSystemRoute(
@@ -55,7 +55,7 @@ export const createRouterGuard = (router: Router) => {
         // 判断动态路由是否已经添加，没有添加则进行添加
         if (!routeStore.isDynamicRouteAdded) {
           if (routeStore.isRemote) {
-            await initBackEndRoutes(router);
+            await initBackEndRoutes(router, authStore.roles);
           } else {
             await initFrontEndRoutes(router);
           }

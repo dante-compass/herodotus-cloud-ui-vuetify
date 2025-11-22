@@ -8,7 +8,7 @@ export default function useSystemRoute(
   routeModules: Record<string, unknown>,
   vueModules: Record<string, unknown>,
   locate: (item: string) => string,
-  getRoutesFromServer: () => Promise<any>,
+  getRoutesFromServer: (roles: string[]) => Promise<any>,
 ) {
   /**
    * 将后端返回的路由 JSON 转换为前端可识别的格式，主要解决 vite 环境下，component 的 import 问题
@@ -106,9 +106,9 @@ export default function useSystemRoute(
     }
   };
 
-  const initBackEndRoutes = async (router: Router) => {
-    const response = await getRoutesFromServer();
-    const routeData = response.data as Array<RemoteRoute>;
+  const initBackEndRoutes = async (router: Router, roles: string[]) => {
+    const response = await getRoutesFromServer(roles);
+    const routeData = response.data.menus as Array<RemoteRoute>;
     // 将后端路由数据转换为前端可识别路由格式
     const routes = convert(routeData);
     addRoutes(router, routes);

@@ -31,6 +31,12 @@ export default function <E extends Entity, C extends Conditions>(
   direction = 'DESC' as Direction,
   loadOnMount = true,
 ) {
+  onMounted(() => {
+    if (loadOnMount) {
+      reloadItems();
+    }
+  });
+
   const {
     loading,
     tableRows,
@@ -171,12 +177,6 @@ export default function <E extends Entity, C extends Conditions>(
   const removeEmptyProperties = (conditions: C) => {
     return pickBy(conditions, (value) => !isNil(value) && value !== '');
   };
-
-  onMounted(() => {
-    if (loadOnMount) {
-      reloadItems();
-    }
-  });
 
   watch(
     conditions,
