@@ -31,7 +31,6 @@ import { useNotifications } from '@/composables/hooks';
 defineOptions({ name: 'NotificationAnnouncement' });
 
 const { tableRows, hasAnnouncement, convertDate, findByCategory } = useNotifications(
-  false,
   NotificationCategoryEnum.ANNOUNCEMENT,
 );
 

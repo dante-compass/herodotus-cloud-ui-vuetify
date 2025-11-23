@@ -7,6 +7,7 @@ import {
   useRSocketWebSocketStore,
   useWebFluxWebSocketStore,
   useStompWebSocketStore,
+  useNotificationStore,
   useRealTimeInformationStore,
 } from '../../stores';
 
@@ -18,13 +19,12 @@ export default function useWebSocketMessage() {
   const stompWebSocketStore = useStompWebSocketStore();
   const webfluxWebSocketStore = useWebFluxWebSocketStore();
   const rsocketWebSocketStore = useRSocketWebSocketStore();
+  const notificationStore = useNotificationStore();
   const realtimeStore = useRealTimeInformationStore();
-
-  const { findTotalNumber } = useNotifications(true, undefined, false);
 
   const webSocketOperations = {
     pullNotifications: () => {
-      findTotalNumber();
+      notificationStore.pullAllNotification();
     },
     syncOnlineUserCount: (data: string) => {
       const count = data as unknown as number;
