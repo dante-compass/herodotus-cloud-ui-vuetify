@@ -4,7 +4,7 @@
       <v-label :text="title" class="mb-1 font-weight-medium">
         <slot name="title"></slot>
       </v-label>
-      <v-messages v-if="text" :messages="text" active />
+      <v-messages :messages="text" :active="showMessage" />
     </div>
 
     <slot></slot>
@@ -12,6 +12,7 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import { VLabel, VMessages } from 'vuetify/components';
 
 defineOptions({ name: 'HSettingLabel', components: { VLabel, VMessages } });
@@ -21,5 +22,9 @@ interface Props {
   text?: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const showMessage = computed(() => {
+  return props.text ? true : false;
+});
 </script>
