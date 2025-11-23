@@ -1,10 +1,10 @@
 import { useRoute } from 'vue-router';
-import { useTabsViewStore, useRouterStore } from '../stores';
+import { useTabsViewStore, useElementStore } from '../stores';
 import { RouterUtilities } from '../utilities';
 
 export default function useEditFinish() {
   const route = useRoute();
-  const routeStore = useRouterStore();
+  const routeStore = useElementStore();
   const tabs = useTabsViewStore();
 
   const onFinish = () => {

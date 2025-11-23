@@ -13,12 +13,12 @@ import type { VNode, RendererNode, RendererElement } from 'vue';
 import type { RouteLocationNormalizedLoaded } from 'vue-router';
 
 import { useRoute } from 'vue-router';
-import { useRouterStore } from '@herodotus/framework';
+import { useElementStore } from '@herodotus/framework';
 
 defineOptions({ name: 'LayoutContent' });
 
 const route = useRoute();
-const store = useRouterStore();
+const store = useElementStore();
 const { cachedRoutes } = storeToRefs(store);
 
 const keepAlives = cachedRoutes.value;

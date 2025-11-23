@@ -17,7 +17,6 @@ import { IS_DEV } from '../constants';
 export const axiosInstanceHooks: AxiosInstanceHooks = {
   // 请求之前处理config
   onRequestHook(config, options) {
-    console.log('----cnfig---', config);
     return config;
   },
 

@@ -10,7 +10,7 @@ import type { Tab } from '@/declarations';
 
 import { findIndex, remove } from 'lodash-es';
 import { RouterUtilities, OptionsUtilities } from '../utilities';
-import { useRouterStore } from './router';
+import { useElementStore } from './element';
 
 /**
  * TabView 目前完全基于 Quasar 的 QRouteTab 进行构建。
@@ -129,7 +129,7 @@ export const useTabsViewStore = defineStore('TabsView', {
     },
 
     smartTab(route: RouteLocationNormalizedLoaded) {
-      const store = useRouterStore();
+      const store = useElementStore();
       const isDetailRoute = store.isDetailRoute(route);
 
       const tab = this.convertRouteToTab(route);

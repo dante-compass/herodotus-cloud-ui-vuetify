@@ -25,15 +25,15 @@ export default defineConfig({
       name: '@herodotus/framework',
       fileName: (format) => (format === 'es' ? `index.${format}.mjs` : `index.${format}.js`),
     },
-    minify: 'terser',
-    terserOptions: {
-      // 生产环境下移除console
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-      keep_classnames: true,
-    },
+    // minify: 'terser',
+    // terserOptions: {
+    //   // 生产环境下移除console
+    //   compress: {
+    //     drop_console: true,
+    //     drop_debugger: true,
+    //   },
+    //   keep_classnames: true,
+    // },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: [

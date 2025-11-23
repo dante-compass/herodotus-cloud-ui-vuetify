@@ -80,10 +80,21 @@ export default function useSystemElement(
     } as MenuItem;
   };
 
+  const getMenuChildren = (meta: ElementMeta): MenuItem[] => {
+    if (!isEmpty(meta.appMenus)) {
+      return meta.appMenus;
+    } else {
+      if (!isEmpty(meta.personalMenus)) {
+        return meta.personalMenus;
+      } else {
+        return [];
+      }
+    }
+  };
+
   const convert = (
     data: Array<ElementRouteTree>,
     modules: ModuleNamespace,
-
     isHideAllChild = false,
   ): ElementMeta => {
     const store = useElementStore();
@@ -93,6 +104,7 @@ export default function useSystemElement(
     const personalMenus: MenuItem[] = [];
 
     data.forEach((node: ElementRouteTree) => {
+      console.log('---node---', node);
       // 转换路由记录
       const raw = convertToRouteRecordRaw(node, modules);
 
@@ -103,25 +115,40 @@ export default function useSystemElement(
       let menuItem = {} as MenuItem;
 
       if (node.children && node.children.length > 0) {
-        const children = convert(node.children, modules, node.meta.isHaveChild);
+        console.log('---hasChildren---', node.children);
+        const children = convert(node.children, modules, node.meta.isHideAllChild);
         raw.children = children.routeRecords;
 
+        console.log('---isHideAllChild---', isHideAllChild);
         if (isHideAllChild) {
+          console.log('---toLeaf---');
           menuItem = convertToMenuLeaf(raw);
         } else {
-          menuItem = convertToMenuNode(raw);
-          menuItem.children =
-            node.scenario == MenuScenario.APP ? children.appMenus : children.personalMenus;
+          console.log('---isNotHideAllChild---', isHideAllChild);
+          const leaf = getMenuChildren(children);
+          if (!isEmpty(leaf)) {
+            console.log('---toNode---');
+            menuItem = convertToMenuNode(raw);
+            menuItem.children = leaf;
+          } else {
+            console.log('---toLeaf---');
+            menuItem = convertToMenuLeaf(raw);
+          }
         }
       } else {
-        menuItem = convertToMenuLeaf(raw);
+        console.log('---haveNoChildren---');
+        if (!isHideAllChild) {
+          menuItem = convertToMenuLeaf(raw);
+        }
       }
 
       routeRecords.push(raw);
-      if (node.scenario == MenuScenario.APP) {
-        appMenus.push(menuItem);
-      } else {
-        personalMenus.push(menuItem);
+      if (!isEmpty(menuItem)) {
+        if (node.scenario == MenuScenario.APP) {
+          appMenus.push(menuItem);
+        } else {
+          personalMenus.push(menuItem);
+        }
       }
     });
 
