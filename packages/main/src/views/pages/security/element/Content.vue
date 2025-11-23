@@ -5,6 +5,8 @@
     :operation="operation"
     @save="onSave()"
   >
+  
+  <h-dictionary-toggle      v-model="editedItem.applicationType"></h-dictionary-toggle>
     <v-text-field
       v-model="editedItem.path"
       label="Vue Router 请求路径"

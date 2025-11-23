@@ -53,7 +53,7 @@ export default defineConfig({
         '@tsparticles/basic',
         '@tsparticles/engine',
         '@tsparticles/interaction-particles-links',
-        '@herodotus-cloud/core',
+        '@herodotus/core',
       ],
       output: {
         exports: 'named',
@@ -69,7 +69,7 @@ export default defineConfig({
           '@tsparticles/engine': 'TsparticlesEngine',
           '@tsparticles/interaction-particles-links': 'TsparticlesInteractionParticlesLinkss',
           'vuetify/components': 'VuetifyComponents',
-          '@herodotus-cloud/core': 'HerodotusCore',
+          '@herodotus/core': 'HerodotusCore',
         },
       },
     },

@@ -1,2 +1,2 @@
-import { default as HSettingLabel } from './HSettingLabel.vue';
-export { HSettingLabel };
+import { default as HLabel } from './HLabel.vue';
+export { HLabel };

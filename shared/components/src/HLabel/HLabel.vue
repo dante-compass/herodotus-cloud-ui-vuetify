@@ -15,7 +15,7 @@
 import { computed } from 'vue';
 import { VLabel, VMessages } from 'vuetify/components';
 
-defineOptions({ name: 'HSettingLabel', components: { VLabel, VMessages } });
+defineOptions({ name: 'HLabel', components: { VLabel, VMessages } });
 
 interface Props {
   title: string;

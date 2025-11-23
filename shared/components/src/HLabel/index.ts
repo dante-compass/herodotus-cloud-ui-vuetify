@@ -1,9 +1,9 @@
 import type { App } from 'vue';
 
-import HSettingLabel from './HSettingLabel.vue';
+import HLabel from './HLabel.vue';
 
-HSettingLabel.install = (app: App): void => {
-  app.component(HSettingLabel.name as string, HSettingLabel);
+HLabel.install = (app: App): void => {
+  app.component(HLabel.name as string, HLabel);
 };
 
-export { HSettingLabel };
+export { HLabel };

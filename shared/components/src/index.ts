@@ -3,7 +3,7 @@ import type { App } from 'vue';
 import { HButton } from './HButton';
 import { HDuration } from './HDateTime';
 import { HParticles } from './HParticles';
-import { HSettingLabel } from './HLabel';
+import { HLabel } from './HLabel';
 import { HMdiIconSelect, HTreeSelect } from './HSelect';
 import { HSignInBackground } from './HSignIn';
 
@@ -12,7 +12,7 @@ const components = [
   HDuration,
   HMdiIconSelect,
   HParticles,
-  HSettingLabel,
+  HLabel,
   HSignInBackground,
   HTreeSelect,
 ];
@@ -26,7 +26,7 @@ export {
   HDuration,
   HMdiIconSelect,
   HParticles,
-  HSettingLabel,
+  HLabel,
   HSignInBackground,
   HTreeSelect,
 };
