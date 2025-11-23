@@ -34,6 +34,9 @@ const vuetify = createVuetify({
     VList: {
       color: 'primary',
     },
+    VBtnToggle: {
+      color: 'primary',
+    },
   },
 
   theme: {

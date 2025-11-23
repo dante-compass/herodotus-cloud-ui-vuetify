@@ -5,8 +5,18 @@
     :operation="operation"
     @save="onSave()"
   >
-  
-  <h-dictionary-toggle      v-model="editedItem.applicationType"></h-dictionary-toggle>
+    <h-label title="应用类型:"></h-label>
+    <h-dictionary-toggle
+      v-model="editedItem.applicationType"
+      dictionary="ApplicationType"
+      default-value="WEB"
+    ></h-dictionary-toggle>
+    <h-label title="菜单场景:"></h-label>
+    <h-dictionary-toggle
+      v-model="editedItem.menuScenario"
+      dictionary="MenuScenario"
+      default-value="APP"
+    ></h-dictionary-toggle>
     <v-text-field
       v-model="editedItem.path"
       label="Vue Router 请求路径"

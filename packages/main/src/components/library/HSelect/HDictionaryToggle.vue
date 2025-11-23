@@ -1,10 +1,19 @@
 <template>
-  <v-btn-toggle v-if="isShow" v-model="toggle" :mandatory="isMandatory" v-bind="$attrs">
+  <v-btn-toggle
+    v-if="isShow"
+    v-model="toggle"
+    :mandatory="isMandatory"
+    v-bind="$attrs"
+    border
+    divided
+    density="comfortable"
+    class="mb-4"
+  >
     <v-btn
       v-for="(option, index) in options"
       :key="index"
       :text="option.label"
-      :value="option.value"
+      :value="option.name"
     ></v-btn>
   </v-btn-toggle>
 </template>
@@ -21,7 +30,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const toggle = defineModel<string>({
+const toggle = defineModel<string | undefined>({
   required: true,
 });
 

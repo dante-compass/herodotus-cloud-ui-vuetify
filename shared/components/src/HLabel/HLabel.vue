@@ -4,9 +4,8 @@
       <v-label :text="title" class="mb-1 font-weight-medium">
         <slot name="title"></slot>
       </v-label>
-      <v-messages :messages="text" :active="showMessage" />
+      <v-messages v-if="showMessage" :messages="text" :active="showMessage" />
     </div>
-
     <slot></slot>
   </div>
 </template>
