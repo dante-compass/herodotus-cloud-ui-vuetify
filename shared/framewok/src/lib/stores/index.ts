@@ -5,3 +5,4 @@ export * from './helper';
 export * from './router';
 export * from './settings';
 export * from './tab-view';
+export * from './element';

@@ -3,7 +3,7 @@ import type { RouteRecordRaw, Router } from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-import { useAuthenticationStore, useRouterStore, useSystemRoute } from '@herodotus/framework';
+import { useAuthenticationStore, useElementStore, useSystemElement } from '@herodotus/framework';
 import { DEAULT_ROUTER_LINK, API } from '@/configurations';
 
 const NotFoundRoute: RouteRecordRaw = {
@@ -15,10 +15,6 @@ const NotFoundRoute: RouteRecordRaw = {
   },
 };
 
-const routeModules = import.meta.glob('./modules/**/*.ts', {
-  eager: true,
-});
-
 const vueModules = import.meta.glob('../views/**/*.vue');
 
 const locate = (item: string) => {
@@ -29,19 +25,14 @@ const getRoutesFromServer = (roles: string[]) => {
   return API.core.sysElement().findResourcesByUserId(roles);
 };
 
-const { initBackEndRoutes, initFrontEndRoutes } = useSystemRoute(
-  routeModules,
-  vueModules,
-  locate,
-  getRoutesFromServer,
-);
+const { initBackendSecurity } = useSystemElement(vueModules, locate, getRoutesFromServer);
 
 export const createRouterGuard = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
     NProgress.start();
 
     const authStore = useAuthenticationStore();
-    const routeStore = useRouterStore();
+    const elementStore = useElementStore();
 
     const token = authStore.token;
 
@@ -53,12 +44,8 @@ export const createRouterGuard = (router: Router) => {
         return;
       } else {
         // 判断动态路由是否已经添加，没有添加则进行添加
-        if (!routeStore.isDynamicRouteAdded) {
-          if (routeStore.isRemote) {
-            await initBackEndRoutes(router, authStore.roles);
-          } else {
-            await initFrontEndRoutes(router);
-          }
+        if (!elementStore.isDynamicRouteAdded) {
+          await initBackendSecurity(router, authStore.roles);
 
           router.addRoute(NotFoundRoute);
           const redirectPath = (from.query.redirect || to.path) as string;

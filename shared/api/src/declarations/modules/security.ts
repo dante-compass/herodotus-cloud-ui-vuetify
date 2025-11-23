@@ -142,8 +142,3 @@ export type SysTenantDataSourceProps = keyof SysTenantDataSourceEntity;
 export type SysDictionaryProps = keyof SysDictionaryEntity;
 
 export type AccessSourceProps = keyof AccessSourceEntity;
-
-export interface Elements extends Entity {
-  menus: Tree[];
-  buttons: SysElementEntity[];
-}

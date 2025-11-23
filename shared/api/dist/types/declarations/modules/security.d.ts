@@ -1,4 +1,4 @@
-import { AbstractSysEntity, Conditions, Entity, Tree } from '@herodotus/core';
+import { AbstractSysEntity, Conditions, Entity } from '@herodotus/core';
 import { SysEmployeeEntity } from './hr';
 export interface SysPermissionEntity extends AbstractSysEntity {
     permissionId: string;
@@ -120,7 +120,3 @@ export type SysElementProps = keyof SysElementEntity;
 export type SysTenantDataSourceProps = keyof SysTenantDataSourceEntity;
 export type SysDictionaryProps = keyof SysDictionaryEntity;
 export type AccessSourceProps = keyof AccessSourceEntity;
-export interface Elements extends Entity {
-    menus: Tree[];
-    buttons: SysElementEntity[];
-}

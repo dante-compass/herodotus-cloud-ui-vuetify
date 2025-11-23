@@ -1,5 +1,6 @@
 import type {
   Router,
+  RouteRecordRaw,
   RouteLocationRaw,
   RouteLocationNormalizedLoaded,
   RouteLocationAsRelativeGeneric,
@@ -35,25 +36,6 @@ export interface PushParam {
 
 export type RoutePushParam = Record<string, PushParam>;
 
-export interface RemoteRouteMeta {
-  title: string;
-  icon: string;
-  sort: number;
-  isHaveChild?: boolean;
-  isNotKeepAlive?: boolean;
-  isHideAllChild?: boolean;
-  isDetailContent?: boolean;
-  isIgnoreAuth?: boolean;
-}
-export interface RemoteRoute extends Tree {
-  componentName: string;
-  componentPath: string;
-  redirect: string;
-  meta: RemoteRouteMeta;
-  roles: Array<string>;
-  children?: Array<RemoteRoute>;
-}
-
 export type ModuleNamespace = Record<string, any> & {
   [Symbol.toStringTag]: 'Module';
 };
@@ -64,4 +46,10 @@ export interface MenuItem {
   to?: string | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric;
   value?: string;
   children?: MenuItem[];
+}
+
+export interface ElementMeta {
+  routeRecords: RouteRecordRaw[];
+  appMenus: MenuItem[];
+  personalMenus: MenuItem[];
 }

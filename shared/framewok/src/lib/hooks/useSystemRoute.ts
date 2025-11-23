@@ -1,5 +1,6 @@
 import type { RouteRecordRaw, RouteMeta, Router } from 'vue-router';
-import type { RemoteRoute, ModuleNamespace } from '@/declarations';
+import type { ElementRouteTree } from '@herodotus/core';
+import type { ModuleNamespace } from '@/declarations';
 
 import { useRouterStore } from '../stores';
 import { isEmpty } from 'lodash-es';
@@ -16,9 +17,9 @@ export default function useSystemRoute(
    * import default from './../../../vite.config';
    * @returns
    */
-  const convert = (data: Array<RemoteRoute>): Array<RouteRecordRaw> => {
+  const convert = (data: Array<ElementRouteTree>): Array<RouteRecordRaw> => {
     const modules = vueModules as ModuleNamespace;
-    return data.map((item: RemoteRoute) => {
+    return data.map((item: ElementRouteTree) => {
       const raw = {} as RouteRecordRaw;
       raw.path = item.name;
       raw.component = modules[locate(item.componentPath)];
@@ -51,11 +52,11 @@ export default function useSystemRoute(
       if (item.meta.isIgnoreAuth) {
         raw.meta['isIgnoreAuth'] = item.meta.isIgnoreAuth;
       }
-      if (item.roles) {
-        raw.meta['roles'] = item.roles;
-      }
+      // if (item.roles) {
+      //   raw.meta['roles'] = item.roles;
+      // }
       if (!isEmpty(item.children)) {
-        raw.children = convert(item.children as Array<RemoteRoute>);
+        raw.children = convert(item.children as Array<ElementRouteTree>);
       }
 
       return raw;
@@ -108,7 +109,7 @@ export default function useSystemRoute(
 
   const initBackEndRoutes = async (router: Router, roles: string[]) => {
     const response = await getRoutesFromServer(roles);
-    const routeData = response.data.menus as Array<RemoteRoute>;
+    const routeData = response.data.menus as Array<ElementRouteTree>;
     // 将后端路由数据转换为前端可识别路由格式
     const routes = convert(routeData);
     addRoutes(router, routes);

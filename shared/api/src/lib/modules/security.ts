@@ -8,9 +8,8 @@ import type {
   SysDictionaryEntity,
   SysTenantDataSourceEntity,
   AccessSourceEntity,
-  Elements,
 } from '@/declarations';
-import type { AxiosHttpResult } from '@herodotus/core';
+import type { AxiosHttpResult, Elements } from '@herodotus/core';
 
 import { ContentTypeEnum } from '@/enums';
 import { HttpConfig, AbstractService } from '@herodotus/core';

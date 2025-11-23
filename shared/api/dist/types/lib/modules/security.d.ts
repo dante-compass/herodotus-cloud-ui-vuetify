@@ -1,5 +1,5 @@
-import { SysPermissionEntity, SysRoleEntity, SysUserEntity, SysAttributeEntity, SysDefaultRoleEntity, SysElementEntity, SysDictionaryEntity, SysTenantDataSourceEntity, AccessSourceEntity, Elements } from '../../declarations';
-import { AxiosHttpResult, HttpConfig, AbstractService } from '@herodotus/core';
+import { SysPermissionEntity, SysRoleEntity, SysUserEntity, SysAttributeEntity, SysDefaultRoleEntity, SysElementEntity, SysDictionaryEntity, SysTenantDataSourceEntity, AccessSourceEntity } from '../../declarations';
+import { AxiosHttpResult, Elements, HttpConfig, AbstractService } from '@herodotus/core';
 declare class SysPermissionService extends AbstractService<SysPermissionEntity> {
     private static instance;
     private constructor();

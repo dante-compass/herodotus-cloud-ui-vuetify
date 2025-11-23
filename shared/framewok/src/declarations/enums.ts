@@ -98,3 +98,8 @@ export enum SocialSourceEnum {
   OKTA = 'OKTA',
   PINTEREST = 'PINTEREST',
 }
+
+export enum MenuScenario {
+  APP = 'APP',
+  PERSONAL = 'PERSONAL',
+}

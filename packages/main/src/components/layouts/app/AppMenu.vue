@@ -15,10 +15,10 @@
     active-class="active_item_border"
   >
     <template #header="{ props }">
-      <v-list-item v-bind="props" class="rounded-e-xl"> </v-list-item>
+      <v-list-item v-bind="props" class="rounded-e-xl"></v-list-item>
     </template>
     <template #item="{ props }">
-      <v-list-item v-bind="props" class="rounded-e-xl"> </v-list-item>
+      <v-list-item v-bind="props" class="rounded-e-xl"></v-list-item>
     </template>
 
     <template #subheader="{ props: subheaderProps }">
@@ -36,16 +36,16 @@
 
 <script lang="ts" setup>
 import { computed, shallowRef } from 'vue';
-import { useSystemMenu } from '@herodotus/framework';
+import { useElementStore } from '@herodotus/framework';
 
 defineOptions({ name: 'AppMenu' });
 
-const { getMenuItems } = useSystemMenu();
+const store = useElementStore();
 
 const active = shallowRef([]);
 
 const menuItems = computed(() => {
-  return getMenuItems();
+  return store.appMenus;
 });
 </script>
 
