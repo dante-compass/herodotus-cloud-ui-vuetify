@@ -3,13 +3,13 @@ import type { Entity } from '@herodotus/core';
 import { useRoute } from 'vue-router';
 import { OperationEnum } from '@herodotus/core';
 
-import { useEditFinish, useRouterStore } from '@herodotus/framework';
+import { useEditFinish, useElementStore } from '@herodotus/framework';
 
 export default function useBaseTableItem<E extends Entity>() {
   const { onFinish } = useEditFinish();
 
   const route = useRoute();
-  const store = useRouterStore();
+  const store = useElementStore();
 
   const editedItem = ref({}) as Ref<E>;
   const operation = shallowRef(OperationEnum.CREATE) as ShallowRef<OperationEnum>;

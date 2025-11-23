@@ -4,7 +4,7 @@ import type { SortItem } from '@/composables/declarations';
 import { useRouter } from 'vue-router';
 import { capitalize } from 'lodash-es';
 import { OperationEnum } from '@herodotus/core';
-import { useRouterStore } from '@herodotus/framework';
+import { useElementStore } from '@herodotus/framework';
 
 /**
  * 数据表格基础定义
@@ -19,7 +19,7 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(nam
   const tableRows = ref([]) as Ref<Array<E>>;
   const conditions = ref({}) as Ref<C>;
 
-  const store = useRouterStore();
+  const store = useElementStore();
   const router = useRouter();
 
   /**
