@@ -104,7 +104,6 @@ export default function useSystemElement(
     const personalMenus: MenuItem[] = [];
 
     data.forEach((node: ElementRouteTree) => {
-      console.log('---node---', node);
       // 转换路由记录
       const raw = convertToRouteRecordRaw(node, modules);
 
@@ -115,28 +114,21 @@ export default function useSystemElement(
       let menuItem = {} as MenuItem;
 
       if (node.children && node.children.length > 0) {
-        console.log('---hasChildren---', node.children);
         const children = convert(node.children, modules, node.meta.isHideAllChild);
         raw.children = children.routeRecords;
 
-        console.log('---isHideAllChild---', isHideAllChild);
         if (isHideAllChild) {
-          console.log('---toLeaf---');
           menuItem = convertToMenuLeaf(raw);
         } else {
-          console.log('---isNotHideAllChild---', isHideAllChild);
           const leaf = getMenuChildren(children);
           if (!isEmpty(leaf)) {
-            console.log('---toNode---');
             menuItem = convertToMenuNode(raw);
             menuItem.children = leaf;
           } else {
-            console.log('---toLeaf---');
             menuItem = convertToMenuLeaf(raw);
           }
         }
       } else {
-        console.log('---haveNoChildren---');
         if (!isHideAllChild) {
           menuItem = convertToMenuLeaf(raw);
         }
