@@ -8,7 +8,7 @@
         <v-row>
           <v-col cols="2">
             <v-sheet rounded="lg">
-              <v-list rounded="lg"></v-list>
+              <personal-menu></personal-menu>
             </v-sheet>
           </v-col>
           <v-col>
@@ -27,9 +27,11 @@ import { LayoutContent, LayoutBar, LayoutSettingDrawer } from '../commons';
 
 import { useSettingsStore } from '@herodotus/framework';
 
+import PersonalMenu from './PersonalMenu.vue';
+
 defineOptions({
   name: 'PersonalDefaultLayout',
-  components: { LayoutContent, LayoutBar, LayoutSettingDrawer },
+  components: { LayoutContent, LayoutBar, LayoutSettingDrawer, PersonalMenu },
 });
 
 const settings = useSettingsStore();

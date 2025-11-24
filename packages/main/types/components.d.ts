@@ -67,6 +67,7 @@ declare module 'vue' {
     NotificationDialogue: typeof import('./../src/components/layouts/commons/NotificationDialogue.vue')['default']
     NotificationMenu: typeof import('./../src/components/layouts/commons/NotificationMenu.vue')['default']
     PersonalDefaultLayout: typeof import('./../src/components/layouts/personal/PersonalDefaultLayout.vue')['default']
+    PersonalMenu: typeof import('./../src/components/layouts/personal/PersonalMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SettingOptions: typeof import('./../src/components/layouts/setting/SettingOptions.vue')['default']

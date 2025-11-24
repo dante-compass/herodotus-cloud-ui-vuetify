@@ -6,14 +6,14 @@
         slim
         prepend-icon="mdi-view-dashboard"
         title="Dashboard"
-        to="/dashboard/console"
+        to="/dashboard"
         :active="false"
       ></v-list-item>
       <v-list-item
         slim
         prepend-icon="mdi-square-edit-outline"
         title="个人设置"
-        to="/personal/setting"
+        to="/message"
         :active="false"
       ></v-list-item>
     </v-list>
