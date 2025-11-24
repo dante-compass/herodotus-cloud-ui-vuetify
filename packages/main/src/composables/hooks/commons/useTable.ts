@@ -122,6 +122,7 @@ export default function <E extends Entity, C extends Conditions>(
 
   const findItemsByPage = (pageNumber = 1, pageSize = 10, others = {}) => {
     showLoading();
+    console.log('----findItemsByPage----');
     service
       .fetchByPage(
         {
@@ -132,16 +133,21 @@ export default function <E extends Entity, C extends Conditions>(
         others,
       )
       .then((result) => {
+        console.log('----findItemsByPage then----');
         const data = result.data as Page<E>;
         // 用户文档列表中无结果时也要更新列表数据
         if (!isEmpty(data)) {
           setPageData(data);
+          console.log('----hideLoading then----');
+          hideLoading();
         } else {
           resetPageData();
+          console.log('----hideLoading then----');
+          hideLoading();
         }
-        hideLoading();
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log('----hideLoading error----', error);
         hideLoading();
       });
   };

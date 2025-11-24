@@ -16,6 +16,8 @@ const statusCode = (
   response?: AxiosResponse<any>,
   message?: string,
 ) => {
+  console.log(response);
+  console.log(message);
   if (response && isIncluded(response)) {
     const information = parseResponseStatus(response, message);
     const content = information.message;

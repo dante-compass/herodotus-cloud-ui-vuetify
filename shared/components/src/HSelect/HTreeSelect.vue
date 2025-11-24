@@ -22,14 +22,12 @@
       max-height="310"
     >
       <v-treeview
-        v-model:selected="selectedNodes"
-        v-model:activated="selectedNodes"
+        v-model:activated="activated"
         :items="items"
         item-value="id"
         item-title="name"
         activatable
-        selectable
-        select-strategy="single-independent"
+        indent-lines="default"
         separate-roots
         @mousedown="(e: MouseEvent) => e.preventDefault()"
       ></v-treeview>
@@ -50,8 +48,8 @@
 <script setup lang="ts">
 import type { Tree } from '@herodotus/core';
 
-import { ref, shallowRef, watch } from 'vue';
-import { isEmpty, find } from 'lodash-es';
+import { computed, onMounted, ref, shallowRef, watch } from 'vue';
+import { isEmpty, find, isArray } from 'lodash-es';
 import { VMenu, VIcon, VTreeview, VTextField } from 'vuetify/components';
 
 defineOptions({ name: 'HTreeSelect', components: { VMenu, VIcon, VTreeview, VTextField } });
@@ -71,7 +69,6 @@ const vTextFieldRef = ref();
 const menu = shallowRef(false);
 const isFocused = shallowRef(false);
 const treeNodes = ref<Tree[]>([]);
-const selectedNodes = ref<string[]>([]);
 const nodeName = shallowRef('');
 
 const onMousedownControl = () => {
@@ -113,8 +110,22 @@ const findNode = (id: string): void => {
 const init = (tree: Array<Tree>) => {
   if (!isEmpty(tree) && isEmpty(treeNodes.value)) {
     treeNodes.value = treeToArray(tree);
+    if (!nodeName.value && selectedId.value) {
+      findNode(selectedId.value);
+    }
   }
 };
+
+const activated = computed({
+  get: () => (selectedId.value ? [selectedId.value] : []),
+  set: (value: unknown) => {
+    if (value && isArray(value) && value.length > 0) {
+      selectedId.value = value[0];
+    } else {
+      selectedId.value = '';
+    }
+  },
+});
 
 watch(
   () => props.items,
@@ -130,10 +141,12 @@ watch(
 
 watch(
   selectedId,
-  (newValue) => {
+  (newValue, oldValue) => {
     if (newValue) {
       findNode(newValue);
-      selectedNodes.value = [newValue];
+      if (menu.value) {
+        menu.value = false;
+      }
     }
   },
   {

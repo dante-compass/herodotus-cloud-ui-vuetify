@@ -19,7 +19,23 @@
       <v-btn @click="toCreate">新建菜单</v-btn>
     </template>
 
-    <template #item.mobileBrowser="{ item }">
+    <template #item.applicationType="{ item }">
+      <v-chip density="compact" rounded="lg" color="teal" label>
+        {{ getDictionaryItemDisplay('ApplicationType', item.applicationType) }}
+      </v-chip>
+    </template>
+
+    <!-- <template #item.elementCategory="{ item }">
+      {{ getDictionaryItemDisplay('ElementCategory', item.elementCategory) }}
+    </template> -->
+
+    <template #item.menuScenario="{ item }">
+      <v-chip density="compact" rounded="lg" color="cyan" label>
+        {{ getDictionaryItemDisplay('MenuScenario', item.menuScenario) }}
+      </v-chip>
+    </template>
+
+    <template #item.icon="{ item }">
       <h-action-button :icon="item.icon" :tooltip="item.icon"></h-action-button>
     </template>
 
@@ -61,7 +77,7 @@
 import type { SysElementEntity, SysElementConditions, SysElementProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTable } from '@/composables/hooks';
+import { useTable, useDictionary } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 import Search from './Search.vue';
@@ -71,6 +87,9 @@ defineOptions({ name: PAGE_NAME.SYS_ELEMENT, components: { Search } });
 const headers = ref([
   { key: 'title', align: 'center', title: '标题' },
   { key: 'name', align: 'center', title: '组件名称' },
+  { key: 'path', align: 'center', title: '请求路径' },
+  { key: 'applicationType', align: 'center', title: '应用类型' },
+  { key: 'menuScenario', align: 'center', title: '菜单场景' },
   { key: 'path', align: 'center', title: '请求路径' },
   { key: 'icon', align: 'center', title: '图标' },
   { key: 'isHaveChild', align: 'center', title: '有子节点' },
@@ -84,6 +103,12 @@ const headers = ref([
 ]) as Ref<Array<VDataTableHeaders>>;
 
 const rowKey: SysElementProps = 'elementId';
+
+const { getDictionaryItemDisplay } = useDictionary(
+  'ApplicationType',
+  'ElementCategory',
+  'MenuScenario',
+);
 
 const {
   loading,
