@@ -4,10 +4,11 @@
     :lines="false"
     :items="menuItems"
     active-strategy="single-leaf"
-    open-strategy="list"
+    open-strategy="multiple"
     select-strategy="classic"
     item-props
     activatable
+    border
     mandatory
     slim
     nav
