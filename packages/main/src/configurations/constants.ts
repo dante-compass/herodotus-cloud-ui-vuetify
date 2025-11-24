@@ -51,7 +51,6 @@ export const PAGE_NAME = {
   DATABASE_ACCOUNT: 'DatabaseAccount',
   DATABASE_CATALOG: 'DatabaseCatalog',
   DATABASE_INSTANCE: 'DatabaseInstance',
-  MESSAGE_INFORMATION: 'MessageInformation',
   WORKFLOW_DYNAMIC_FORM: 'WorkflowDynamicForm',
   WIDGETS_DYNAMIC_FORM: 'WidgetsDynamicForm',
   WORKFLOW_PROCESS_START: 'WorkflowProcessStart',
@@ -66,6 +65,10 @@ export const PAGE_NAME = {
   IOT_TSL_FUNCTION: 'IotTslFunction',
   IOT_TSL_UNIT: 'IotTslUnit',
   MGT_CERTIFICATE: 'MgtCertificate',
+  FOUNDATION_ACCOUNT: 'FoundationAccount',
+  FOUNDATION_PROFILE: 'FoundationProfile',
+  MESSAGE_INFORMATION: 'MessageInformation',
+  MESSAGE_SETTING: 'MessageSetting',
 };
 
 export const DATA_ITEM_STATUS: Array<DisplayElement> = [
