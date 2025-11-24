@@ -159,13 +159,14 @@ export class Axios {
 
     const paramsSerializer: ParamsSerializerOptions = {
       serialize(params: any): string {
-        return Object.keys(params)
-          .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-          .join('&');
+        // return Object.keys(params)
+        //   .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+        //   .join('&');
+        return qs.stringify(params, { arrayFormat: 'brackets' });
       },
     };
 
-    const result = lodash.merge({ paramsSerializer }, defaultAxiosRequestConfig);
+    const result = lodash.merge({}, defaultAxiosRequestConfig, { paramsSerializer });
 
     if (!lodash.isEmpty(currentAxiosRequestConfig)) {
       return lodash.merge({}, result, currentAxiosRequestConfig);
