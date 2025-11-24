@@ -13,7 +13,7 @@
       v-for="(option, index) in options"
       :key="index"
       :text="option.label"
-      :value="option.name"
+      :value="option.value"
     ></v-btn>
   </v-btn-toggle>
 </template>

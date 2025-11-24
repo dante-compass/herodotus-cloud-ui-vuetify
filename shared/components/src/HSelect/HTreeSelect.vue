@@ -22,13 +22,16 @@
       max-height="310"
     >
       <v-treeview
-        v-model:selected="selectedId"
+        v-model:selected="selectedNodes"
+        v-model:activated="selectedNodes"
         :items="items"
         item-value="id"
         item-title="name"
+        activatable
         selectable
         select-strategy="single-independent"
         separate-roots
+        @mousedown="(e: MouseEvent) => e.preventDefault()"
       ></v-treeview>
     </v-menu>
 
@@ -68,6 +71,7 @@ const vTextFieldRef = ref();
 const menu = shallowRef(false);
 const isFocused = shallowRef(false);
 const treeNodes = ref<Tree[]>([]);
+const selectedNodes = ref<string[]>([]);
 const nodeName = shallowRef('');
 
 const onMousedownControl = () => {
@@ -100,7 +104,7 @@ const treeToArray = (tree: Array<Tree>) => {
 };
 
 const findNode = (id: string): void => {
-  const node = find(treeNodes.value, (i) => i.id == selectedId.value);
+  const node = find(treeNodes.value, (i) => i.id == id);
   if (node) {
     nodeName.value = node.name;
   }
@@ -109,7 +113,6 @@ const findNode = (id: string): void => {
 const init = (tree: Array<Tree>) => {
   if (!isEmpty(tree) && isEmpty(treeNodes.value)) {
     treeNodes.value = treeToArray(tree);
-    findNode(selectedId.value);
   }
 };
 
@@ -125,21 +128,22 @@ watch(
   },
 );
 
-watch(isFocused, (newValue, oldVal) => {
-  if (newValue || newValue === oldVal) return;
-
-  menu.value = false;
-});
-
 watch(
   selectedId,
   (newValue) => {
     if (newValue) {
       findNode(newValue);
+      selectedNodes.value = [newValue];
     }
   },
   {
     immediate: true,
   },
 );
+
+watch(isFocused, (newValue, oldValue) => {
+  if (newValue || newValue === oldValue) return;
+
+  menu.value = false;
+});
 </script>
