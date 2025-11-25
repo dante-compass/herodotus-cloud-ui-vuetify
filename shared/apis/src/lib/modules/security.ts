@@ -11,6 +11,7 @@ import type {
   AccessSourceEntity,
 } from '@/declarations';
 
+import type { Elements } from '@herodotus-cloud/core';
 import { ContentTypeEnum } from '@/enums';
 
 import { HttpConfig, AbstractService } from '../base';
@@ -161,8 +162,18 @@ class SysElementService extends AbstractService<SysElementEntity> {
     return this.getConfig().getUpms() + '/security/element';
   }
 
+  public getResourcesAddress(): string {
+    return this.getBaseAddress() + '/resources';
+  }
+
   public fetchById(id: string): Promise<AxiosHttpResult<SysElementEntity>> {
     return this.getConfig().getHttp().get<SysElementEntity, string>(this.getIdPath(id));
+  }
+
+  public findResourcesByRoles(roles: string[]): Promise<AxiosHttpResult<Elements>> {
+    return this.getConfig()
+      .getHttp()
+      .get<Elements, string>(this.getResourcesAddress(), { roles: roles });
   }
 }
 

@@ -84,7 +84,7 @@ export const Path = {
   HOME_NAME: 'Dashboard',
   HOME_TITLE: '首页',
   // 错误
-  NOT_FOUND: '/:path(.*)*',
+  NOT_FOUND: '/:pathMatch(.*)*',
   NOT_FOUND_NAME: 'PageNotFound',
 };
 

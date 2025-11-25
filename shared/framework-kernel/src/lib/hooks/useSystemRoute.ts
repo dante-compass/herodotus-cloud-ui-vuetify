@@ -1,61 +1,88 @@
 import type { RouteRecordRaw, RouteMeta, Router } from 'vue-router';
+import type { ElementRouteTree } from '@herodotus-cloud/core';
 import type { RemoteRoute, ModuleNamespace } from '@/declarations';
 
 import { useRouterStore } from '../stores';
+import { MenuScenario } from '@/declarations';
 import { lodash } from '@herodotus-cloud/core';
 
 export default function useSystemRoute(
   routeModules: Record<string, unknown>,
   vueModules: Record<string, unknown>,
   locate: (item: string) => string,
-  getRoutesFromServer: () => Promise<any>,
+  getRoutesFromServer: (roles: string[]) => Promise<any>,
 ) {
+  /**
+   * 获取路由条目中的 meta 中的 isDetailContent 属性值
+   * @param item 路由条目
+   * @returns isDetailContent 属性值
+   */
+  const isDetailContent = (item: RouteRecordRaw): boolean => {
+    return item.meta?.isDetailContent as boolean;
+  };
+
+  /**
+   * 获取路由条目中的 meta 中的 scenario 属性值
+   * @param item 路由条目
+   * @returns getMenuScenario 属性值
+   */
+  const getMenuScenario = (item: RouteRecordRaw): string => {
+    return item.meta?.scenario as string;
+  };
+  /**
+   * 将后端返回的 Element 数据条目，转换为 vue-router 格式，作为动态路由添加至 vue-router 中。
+   * @param item 数据条目
+   * @param modules 前端 Pages Vue 页面列表
+   * @returns 路由记录
+   */
+  const convertToRouteRecordRaw = (
+    item: ElementRouteTree,
+    modules: ModuleNamespace,
+  ): RouteRecordRaw => {
+    const raw = {} as RouteRecordRaw;
+    raw.path = item.name;
+    raw.component = modules[locate(item.componentPath)];
+
+    if (item.componentName) {
+      raw.name = item.componentName;
+    }
+    if (item.redirect) {
+      raw.redirect = item.redirect;
+    }
+
+    raw.meta = {
+      scenario: item.scenario,
+      icon: item.meta.icon,
+      title: item.meta.title,
+      ...(item.meta.sort && { sort: item.meta.sort }),
+      ...(item.meta.isHaveChild && { isHaveChild: item.meta.isHaveChild }),
+      ...(item.meta.isNotKeepAlive && { isNotKeepAlive: item.meta.isNotKeepAlive }),
+      ...(item.meta.isHideAllChild && { isHideAllChild: item.meta.isHideAllChild }),
+      ...(item.meta.isDetailContent && { isDetailContent: item.meta.isDetailContent }),
+      ...(item.meta.isIgnoreAuth && { isIgnoreAuth: item.meta.isIgnoreAuth }),
+    } as RouteMeta;
+
+    return raw;
+  };
+
   /**
    * 将后端返回的路由 JSON 转换为前端可识别的格式，主要解决 vite 环境下，component 的 import 问题
    * @param dataimport { ModuleNamespace } from 'vite/types/hot';
    * import default from './../../../vite.config';
    * @returns
    */
-  const convert = (data: Array<RemoteRoute>): Array<RouteRecordRaw> => {
-    const modules = vueModules as ModuleNamespace;
-    return data.map((item: RemoteRoute) => {
-      const raw = {} as RouteRecordRaw;
-      raw.path = item.name;
-      raw.component = modules[locate(item.componentPath)];
-      if (item.componentName) {
-        raw.name = item.componentName;
-      }
-      if (item.redirect) {
-        raw.redirect = item.redirect;
-      }
+  const convert = (data: ElementRouteTree[], modules: ModuleNamespace): RouteRecordRaw[] => {
+    const store = useRouterStore();
 
-      raw.meta = {} as RouteMeta;
-      raw.meta['icon'] = item.meta.icon;
-      raw.meta['title'] = item.meta.title;
+    return data.map((node: ElementRouteTree) => {
+      // 转换路由记录
+      const raw = convertToRouteRecordRaw(node, modules);
 
-      if (item.meta.sort) {
-        raw.meta['sort'] = item.meta.sort;
+      if (isDetailContent(raw)) {
+        store.addDetailRoute(raw);
       }
-      if (item.meta.isHaveChild) {
-        raw.meta['isHaveChild'] = item.meta.isHaveChild;
-      }
-      if (item.meta.isNotKeepAlive) {
-        raw.meta['isNotKeepAlive'] = item.meta.isNotKeepAlive;
-      }
-      if (item.meta.isHideAllChild) {
-        raw.meta['isHideAllChild'] = item.meta.isHideAllChild;
-      }
-      if (item.meta.isDetailContent) {
-        raw.meta['isDetailContent'] = item.meta.isDetailContent;
-      }
-      if (item.meta.isIgnoreAuth) {
-        raw.meta['isIgnoreAuth'] = item.meta.isIgnoreAuth;
-      }
-      if (item.roles) {
-        raw.meta['roles'] = item.roles;
-      }
-      if (!lodash.isEmpty(item.children)) {
-        raw.children = convert(item.children as Array<RemoteRoute>);
+      if (node.children && node.children.length > 0) {
+        raw.children = convert(node.children, modules);
       }
 
       return raw;
@@ -63,7 +90,7 @@ export default function useSystemRoute(
   };
 
   const getRoutesFromLocal = () => {
-    const routes: Array<RouteRecordRaw> = [];
+    const routes: RouteRecordRaw[] = [];
     const modules = routeModules as ModuleNamespace;
     Object.keys(modules).forEach((key) => {
       const item = modules[key];
@@ -80,37 +107,38 @@ export default function useSystemRoute(
     return (aValue as number) - (bValue as number);
   };
 
-  const dynamicAddRoutes = (router: Router, routes: Array<RouteRecordRaw>) => {
-    routes.forEach((item) => {
-      router.addRoute(item as RouteRecordRaw);
-    });
-    console.log('[Herodotus] |- Dynamic routes add success!');
-  };
-
-  const reloadDynamicRoutes = (router: Router) => {
-    const store = useRouterStore();
-    dynamicAddRoutes(router, store.routes);
-    console.log('[Herodotus] |- Dynamic routes reload success!');
-  };
-
-  const addRoutes = (router: Router, routes: Array<RouteRecordRaw>) => {
+  const addRoutes = (router: Router, routes: RouteRecordRaw[]) => {
     const store = useRouterStore();
 
     console.log('[Herodotus] |- Begin add dynamic routes');
 
     if (!lodash.isEmpty(routes)) {
-      store.addDynamicRoutes(routes);
-      dynamicAddRoutes(router, routes);
+      const appMenus: RouteRecordRaw[] = [];
+      const personalMenus: RouteRecordRaw[] = [];
+
+      routes.forEach((item) => {
+        router.addRoute(item as RouteRecordRaw);
+        if (getMenuScenario(item) === MenuScenario.APP) {
+          appMenus.push(item);
+        } else {
+          personalMenus.push(item);
+        }
+      });
+
+      store.addMenus(appMenus, personalMenus);
+      console.log('[Herodotus] |- Dynamic routes add success!');
     } else {
       console.warn('[Herodotus] |- Dynamic routes is empty, skip!');
     }
   };
 
-  const initBackEndRoutes = async (router: Router) => {
-    const response = await getRoutesFromServer();
-    const routeData = response.data as Array<RemoteRoute>;
+  const initBackEndRoutes = async (router: Router, roles: string[]) => {
+    const response = await getRoutesFromServer(roles);
+    const routeData = response.data.menus as Array<ElementRouteTree>;
+    const modules = vueModules as ModuleNamespace;
     // 将后端路由数据转换为前端可识别路由格式
-    const routes = convert(routeData);
+    const routes = convert(routeData, modules);
+    console.log('---routes---', routes);
     addRoutes(router, routes);
   };
 

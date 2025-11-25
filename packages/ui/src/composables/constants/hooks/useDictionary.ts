@@ -9,7 +9,7 @@ import { useDictionaryStore } from '../store';
 export default function useDictionary(category: string, ...others: string[]) {
   const dictionaryStore = useDictionaryStore();
 
-  const options = ref([]) as Ref<Array<Dictionary>>;
+  const options = ref<Dictionary[]>([]);
 
   onBeforeMount(async () => {
     options.value = getDictionary();
@@ -27,8 +27,10 @@ export default function useDictionary(category: string, ...others: string[]) {
     });
   });
 
-  const getDictionary = (item: string = category) => {
-    return dictionaryStore.getDictionary(item);
+  const getDictionary = (item: string = category): Dictionary[] => {
+    const result = dictionaryStore.getDictionary(item);
+    // 防止使用时 VSCODE 提示类型 Dictionary[] | undifined 问题
+    return result ? result : [];
   };
 
   const getDictionaryItem = (key: string, value: string) => {

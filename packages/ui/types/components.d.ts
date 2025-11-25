@@ -18,7 +18,7 @@ declare module 'vue' {
     HAppLeftDrawer: typeof import('./../src/components/layouts/default/HAppLeftDrawer.vue')['default']
     HAppLeftDrawerControl: typeof import('./../src/components/layouts/common/header/HAppLeftDrawerControl.vue')['default']
     HAppMenu: typeof import('./../src/components/layouts/default/HAppMenu.vue')['default']
-    HAppMenuItems: typeof import('./../src/components/layouts/default/HAppMenuItems.vue')['default']
+    HAppMenuItems: typeof import('./../src/components/layouts/common/header/HAppMenuItems.vue')['default']
     HAppRightDrawer: typeof import('./../src/components/layouts/default/HAppRightDrawer.vue')['default']
     HAppRightDrawerControl: typeof import('./../src/components/layouts/common/header/HAppRightDrawerControl.vue')['default']
     HAppTabsView: typeof import('./../src/components/layouts/common/header/HAppTabsView.vue')['default']
