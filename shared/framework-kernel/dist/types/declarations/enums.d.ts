@@ -101,3 +101,7 @@ export declare enum SocialSourceEnum {
     OKTA = "OKTA",
     PINTEREST = "PINTEREST"
 }
+export declare enum MenuScenario {
+    APP = "APP",
+    PERSONAL = "PERSONAL"
+}

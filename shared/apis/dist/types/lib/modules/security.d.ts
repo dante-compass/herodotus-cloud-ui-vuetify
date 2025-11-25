@@ -1,4 +1,5 @@
 import { SysPermissionEntity, SysRoleEntity, SysUserEntity, SysAttributeEntity, SysDefaultRoleEntity, SysElementEntity, SysDictionaryEntity, SysTenantDataSourceEntity, AxiosHttpResult, AccessSourceEntity } from '../../declarations';
+import { Elements } from '@herodotus-cloud/core';
 import { HttpConfig, AbstractService } from '../base';
 declare class SysPermissionService extends AbstractService<SysPermissionEntity> {
     private static instance;
@@ -42,7 +43,9 @@ declare class SysElementService extends AbstractService<SysElementEntity> {
     private constructor();
     static getInstance(config: HttpConfig): SysElementService;
     getBaseAddress(): string;
+    getResourcesAddress(): string;
     fetchById(id: string): Promise<AxiosHttpResult<SysElementEntity>>;
+    findResourcesByUserId(roles: string[]): Promise<AxiosHttpResult<Elements>>;
 }
 declare class SysTenantDataSourceService extends AbstractService<SysTenantDataSourceEntity> {
     private static instance;

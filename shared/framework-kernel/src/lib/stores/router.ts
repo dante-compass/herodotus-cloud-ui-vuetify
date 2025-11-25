@@ -7,7 +7,8 @@ import { lodash } from '@herodotus-cloud/core';
 
 export const useRouterStore = defineStore('Router', {
   state: () => ({
-    routes: [] as Array<RouteRecordRaw>,
+    appMenus: [] as Array<RouteRecordRaw>,
+    personalMenus: [] as Array<RouteRecordRaw>,
     cachedRoutes: [] as string[],
     details: new Map<any, any>(),
     isRemote: true,
@@ -15,8 +16,8 @@ export const useRouterStore = defineStore('Router', {
   }),
 
   getters: {
-    isDynamicRouteAdded(): boolean {
-      return !lodash.isEmpty(this.routes);
+    isDynamicRouteAdded() {
+      !lodash.isEmpty(this.appMenus) || !lodash.isEmpty(this.personalMenus);
     },
   },
 
@@ -39,12 +40,14 @@ export const useRouterStore = defineStore('Router', {
       return this.pushParams[key];
     },
 
-    /**
-     * 添加动态路由
-     * @param routes 路由列表
-     */
-    addDynamicRoutes(routes: Array<RouteRecordRaw>) {
-      this.routes = routes;
+    addMenus(appMenus: RouteRecordRaw[], personalMenus: RouteRecordRaw[]) {
+      if (!lodash.isEmpty(appMenus)) {
+        this.appMenus = appMenus;
+      }
+
+      if (!lodash.isEmpty(personalMenus)) {
+        this.personalMenus = personalMenus;
+      }
     },
 
     /**
@@ -64,15 +67,10 @@ export const useRouterStore = defineStore('Router', {
      * 添加三级路由
      * @param item 路由条目
      */
-    addDetailRoutes(item: RouteRecordRaw) {
-      const children: Array<RouteRecordRaw> = item.children || [];
-      if (!lodash.isEmpty(children)) {
-        children.forEach((child) => {
-          const componentName = child.name as string;
-          if (componentName) {
-            this.details.set(componentName, child.component);
-          }
-        });
+    addDetailRoute(item: RouteRecordRaw) {
+      const componentName = item.name as string;
+      if (componentName) {
+        this.details.set(componentName, item.component);
       }
     },
 
