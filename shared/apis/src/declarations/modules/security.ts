@@ -57,7 +57,9 @@ export interface SysElementEntity extends AbstractSysEntity {
   isHideAllChild: boolean;
   isDetailContent: boolean;
   isIgnoreAuth: boolean;
-  roles: Array<SysRoleEntity>;
+  elementCategory: string;
+  menuScenario: string;
+  applicationType: string;
 }
 
 export interface SysTenantDataSourceEntity extends AbstractSysEntity {

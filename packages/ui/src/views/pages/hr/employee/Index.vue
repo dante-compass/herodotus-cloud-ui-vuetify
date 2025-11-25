@@ -87,7 +87,7 @@ export default defineComponent({
       CONSTANTS.ComponentName.SYS_EMPLOYEE,
     );
 
-    const { getDictionaryItemDisplay } = useDictionary('Gender', 'identity');
+    const { getDictionaryItemDisplay } = useDictionary('Gender', 'Identity');
 
     const selected = ref([]);
     const rowKey: SysEmployeeProps = 'employeeId';
