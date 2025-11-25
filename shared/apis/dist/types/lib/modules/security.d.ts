@@ -45,7 +45,7 @@ declare class SysElementService extends AbstractService<SysElementEntity> {
     getBaseAddress(): string;
     getResourcesAddress(): string;
     fetchById(id: string): Promise<AxiosHttpResult<SysElementEntity>>;
-    findResourcesByUserId(roles: string[]): Promise<AxiosHttpResult<Elements>>;
+    findResourcesByRoles(roles: string[]): Promise<AxiosHttpResult<Elements>>;
 }
 declare class SysTenantDataSourceService extends AbstractService<SysTenantDataSourceEntity> {
     private static instance;

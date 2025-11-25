@@ -7,17 +7,16 @@ import { lodash } from '@herodotus-cloud/core';
 
 export const useRouterStore = defineStore('Router', {
   state: () => ({
-    appMenus: [] as Array<RouteRecordRaw>,
-    personalMenus: [] as Array<RouteRecordRaw>,
+    appMenus: [] as RouteRecordRaw[],
+    personalMenus: [] as RouteRecordRaw[],
     cachedRoutes: [] as string[],
-    details: new Map<any, any>(),
-    isRemote: true,
+    details: new Map<any, any>(new Map()),
     pushParams: {} as RoutePushParam,
   }),
 
   getters: {
-    isDynamicRouteAdded() {
-      !lodash.isEmpty(this.appMenus) || !lodash.isEmpty(this.personalMenus);
+    isDynamicRouteAdded(): boolean {
+      return !lodash.isEmpty(this.appMenus) || !lodash.isEmpty(this.personalMenus);
     },
   },
 
@@ -27,7 +26,7 @@ export const useRouterStore = defineStore('Router', {
      * @param key 三级路由组件名称
      * @returns 组件名称
      */
-    getDetailComponent(key: string) {
+    getDetailComponent(key: string): any {
       return this.details.get(key);
     },
 
@@ -36,17 +35,17 @@ export const useRouterStore = defineStore('Router', {
      * @param key 组件名称
      * @returns Push 类型参数
      */
-    getRoutePushParam(key: string) {
+    getRoutePushParam(key: string): PushParam | undefined {
       return this.pushParams[key];
     },
 
-    addMenus(appMenus: RouteRecordRaw[], personalMenus: RouteRecordRaw[]) {
-      if (!lodash.isEmpty(appMenus)) {
-        this.appMenus = appMenus;
+    addMenus(app: RouteRecordRaw[], personal: RouteRecordRaw[]): void {
+      if (!lodash.isEmpty(app)) {
+        this.appMenus = app;
       }
 
-      if (!lodash.isEmpty(personalMenus)) {
-        this.personalMenus = personalMenus;
+      if (!lodash.isEmpty(personal)) {
+        this.personalMenus = personal;
       }
     },
 
@@ -54,7 +53,7 @@ export const useRouterStore = defineStore('Router', {
      * 将路由添加至缓存
      * @param route 路由
      */
-    addCachedRoute(route: RouteLocationNormalizedLoaded) {
+    addCachedRoute(route: RouteLocationNormalizedLoaded): void {
       if (!route.meta?.isNotKeepAlive) {
         const name = route.name as string;
         if (!this.cachedRoutes.includes(name)) {
@@ -67,7 +66,7 @@ export const useRouterStore = defineStore('Router', {
      * 添加三级路由
      * @param item 路由条目
      */
-    addDetailRoute(item: RouteRecordRaw) {
+    addDetailRoute(item: RouteRecordRaw): void {
       const componentName = item.name as string;
       if (componentName) {
         this.details.set(componentName, item.component);
@@ -117,7 +116,7 @@ export const useRouterStore = defineStore('Router', {
      * @param name 参数名称
      * @param params 参数值
      */
-    addRoutePushParam(name: string, params = {} as PushParam) {
+    addRoutePushParam(name: string, params = {} as PushParam): void {
       if (name) {
         this.pushParams[name] = params;
       }
@@ -127,7 +126,7 @@ export const useRouterStore = defineStore('Router', {
      * 从当前缓存中删除 Push 参数
      * @param name 参数名称
      */
-    removeRoutePushParam(name: string) {
+    removeRoutePushParam(name: string): void {
       if (name) {
         delete this.pushParams[name];
       }

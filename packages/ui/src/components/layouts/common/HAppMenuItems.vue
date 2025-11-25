@@ -33,7 +33,7 @@ import type { RouteRecordRaw } from 'vue-router';
 
 import { useRoute } from 'vue-router';
 
-import { useMenuForQuasar } from '@herodotus-cloud/framework-kernel';
+import { useSystemMenu } from '@herodotus-cloud/framework-kernel';
 
 export default defineComponent({
   name: 'HAppMenuItems',
@@ -48,7 +48,7 @@ export default defineComponent({
 
     const thisRoute = useRoute();
     const { getItemTitle, getItemIcon, getItemChildren, hasPermission, isDisplayAsItem } =
-      useMenuForQuasar();
+      useSystemMenu();
 
     const isActive = (item: RouteRecordRaw) =>
       thisRoute.matched.some((matchedItem) => matchedItem.path === item.path);

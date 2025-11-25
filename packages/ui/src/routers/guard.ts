@@ -1,4 +1,4 @@
-import type { Router } from 'vue-router';
+import type { Router, RouteRecordRaw } from 'vue-router';
 import {
   useAuthenticationStore,
   useRouterStore,
@@ -7,6 +7,15 @@ import {
 import { CONSTANTS, API } from '@/configurations';
 
 import { Loading, QSpinnerDots } from 'quasar';
+
+const PageNotFoundRoute: RouteRecordRaw = {
+  path: CONSTANTS.Path.NOT_FOUND,
+  name: CONSTANTS.Path.NOT_FOUND_NAME,
+  component: () => import('@/composables/error/404.vue'),
+  meta: {
+    title: 'ErrorPage',
+  },
+};
 
 const routeModules = import.meta.glob('./modules/**/*.ts', {
   eager: true,
@@ -18,16 +27,11 @@ const locate = (item: string) => {
   return `../${item}`;
 };
 
-const getRoutesFromServer = () => {
-  return API.core.sysElement().fetchTree();
+const getRoutesFromServer = (roles: string[]) => {
+  return API.core.sysElement().findResourcesByRoles(roles);
 };
 
-const { initBackEndRoutes, initFrontEndRoutes } = useSystemRoute(
-  routeModules,
-  vueModules,
-  locate,
-  getRoutesFromServer,
-);
+const { initBackEndRoutes } = useSystemRoute(routeModules, vueModules, locate, getRoutesFromServer);
 
 export const createRouterGuard = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
@@ -52,11 +56,8 @@ export const createRouterGuard = (router: Router) => {
       } else {
         // 判断动态路由是否已经添加，没有添加则进行添加
         if (!routeStore.isDynamicRouteAdded) {
-          if (routeStore.isRemote) {
-            await initBackEndRoutes(router);
-          } else {
-            await initFrontEndRoutes(router);
-          }
+          await initBackEndRoutes(router, authStore.roles);
+          router.addRoute(PageNotFoundRoute);
           const redirectPath = (from.query.redirect || to.path) as string;
           const redirectURI = decodeURIComponent(redirectPath);
           const nextPath =

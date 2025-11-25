@@ -1,14 +1,13 @@
 import { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
 import { RoutePushParam, PushParam } from '../../declarations';
 export declare const useRouterStore: import('pinia').StoreDefinition<"Router", {
-    appMenus: Array<RouteRecordRaw>;
-    personalMenus: Array<RouteRecordRaw>;
+    appMenus: RouteRecordRaw[];
+    personalMenus: RouteRecordRaw[];
     cachedRoutes: string[];
     details: Map<any, any>;
-    isRemote: boolean;
     pushParams: RoutePushParam;
 }, {
-    isDynamicRouteAdded(): void;
+    isDynamicRouteAdded(): boolean;
 }, {
     /**
      * 查询三级路由组件
@@ -22,7 +21,7 @@ export declare const useRouterStore: import('pinia').StoreDefinition<"Router", {
      * @returns Push 类型参数
      */
     getRoutePushParam(key: string): PushParam | undefined;
-    addMenus(appMenus: RouteRecordRaw[], personalMenus: RouteRecordRaw[]): void;
+    addMenus(app: RouteRecordRaw[], personal: RouteRecordRaw[]): void;
     /**
      * 将路由添加至缓存
      * @param route 路由

@@ -74,9 +74,7 @@ export default function useSystemRoute(
   const convert = (data: ElementRouteTree[], modules: ModuleNamespace): RouteRecordRaw[] => {
     const store = useRouterStore();
 
-    const records: RouteRecordRaw[] = [];
-
-    data.forEach((node: ElementRouteTree) => {
+    return data.map((node: ElementRouteTree) => {
       // 转换路由记录
       const raw = convertToRouteRecordRaw(node, modules);
 
@@ -86,8 +84,9 @@ export default function useSystemRoute(
       if (node.children && node.children.length > 0) {
         raw.children = convert(node.children, modules);
       }
+
+      return raw;
     });
-    return records;
   };
 
   const getRoutesFromLocal = () => {
@@ -139,6 +138,7 @@ export default function useSystemRoute(
     const modules = vueModules as ModuleNamespace;
     // 将后端路由数据转换为前端可识别路由格式
     const routes = convert(routeData, modules);
+    console.log('---routes---', routes);
     addRoutes(router, routes);
   };
 

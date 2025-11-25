@@ -1,5 +1,4 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { CONSTANTS } from '@/configurations';
 
 const SettingRoutes: Array<RouteRecordRaw> = [
   {
@@ -12,13 +11,13 @@ const SettingRoutes: Array<RouteRecordRaw> = [
         path: '/message/information',
         name: 'MessageInformation',
         meta: { title: '我的消息', icon: 'mdi-bell', isHideAllChild: true },
-        component: () => import('@/views/persional/message/information/Index.vue'),
+        component: () => import('@/views/personal/message/information/Index.vue'),
         children: [
           {
             path: '/message/information/content',
             name: 'MessageInformationContent',
             meta: { title: '私信记录', icon: 'mdi-bank-check', isDetailContent: true },
-            component: () => import('@/views/persional/message/information/Content.vue'),
+            component: () => import('@/views/personal/message/information/Content.vue'),
           },
         ],
       },
@@ -26,7 +25,7 @@ const SettingRoutes: Array<RouteRecordRaw> = [
         path: '/message/setting',
         name: 'MessageSetting',
         meta: { title: '通知设置', icon: 'mdi-bell-cog' },
-        component: () => import('@/views/persional/message/setting/Index.vue'),
+        component: () => import('@/views/personal/message/setting/Index.vue'),
       },
     ],
   },
@@ -40,13 +39,13 @@ const SettingRoutes: Array<RouteRecordRaw> = [
         path: '/foundation/account',
         name: 'FoundationAccount',
         meta: { title: '账号管理', icon: 'mdi-card-account-details' },
-        component: () => import('@/views/persional/foundation/account/Index.vue'),
+        component: () => import('@/views/personal/foundation/account/Index.vue'),
       },
       {
         path: '/foundation/profile',
         name: 'FoundationProfile',
         meta: { title: '个人资料', icon: 'mdi-account' },
-        component: () => import('@/views/persional/foundation/profile/Index.vue'),
+        component: () => import('@/views/personal/foundation/profile/Index.vue'),
       },
     ],
   },

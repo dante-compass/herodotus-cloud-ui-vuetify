@@ -170,7 +170,7 @@ class SysElementService extends AbstractService<SysElementEntity> {
     return this.getConfig().getHttp().get<SysElementEntity, string>(this.getIdPath(id));
   }
 
-  public findResourcesByUserId(roles: string[]): Promise<AxiosHttpResult<Elements>> {
+  public findResourcesByRoles(roles: string[]): Promise<AxiosHttpResult<Elements>> {
     return this.getConfig()
       .getHttp()
       .get<Elements, string>(this.getResourcesAddress(), { roles: roles });
