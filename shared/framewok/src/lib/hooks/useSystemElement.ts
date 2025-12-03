@@ -136,7 +136,7 @@ export default function useSystemElement(
 
       routeRecords.push(raw);
       if (!isEmpty(menuItem)) {
-        if (node.scenario == MenuScenario.APP) {
+        if (node.scenario === MenuScenario.APP) {
           appMenus.push(menuItem);
         } else {
           personalMenus.push(menuItem);

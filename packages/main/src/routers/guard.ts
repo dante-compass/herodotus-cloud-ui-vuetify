@@ -29,7 +29,7 @@ const locate = (item: string) => {
 };
 
 const getRoutesFromServer = (roles: string[]) => {
-  return API.core.sysElement().findResourcesByUserId(roles);
+  return API.core.sysElement().findResourcesByRoles(roles);
 };
 
 const { initBackendSecurity } = useSystemElement(vueModules, locate, getRoutesFromServer);
