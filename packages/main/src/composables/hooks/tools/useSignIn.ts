@@ -37,7 +37,7 @@ export default function useSignIn() {
         if (response) {
           isSubmitDisabled.value = false;
           toast.success('欢迎回来！');
-          router.push({
+          router.replace({
             path: DEAULT_ROUTER_LINK.home.path,
           });
         }
@@ -60,7 +60,7 @@ export default function useSignIn() {
         if (response) {
           isSubmitDisabled.value = false;
           toast.success('欢迎回来！');
-          router.push({
+          router.replace({
             path: DEAULT_ROUTER_LINK.home.path,
           });
         }
