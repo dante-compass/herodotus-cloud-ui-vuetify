@@ -35,7 +35,16 @@ const getRoutesFromServer = (roles: string[]) => {
 const { initBackendSecurity } = useSystemElement(vueModules, locate, getRoutesFromServer);
 
 export const createRouterGuard = (router: Router) => {
+  let isFirstNavigation = true;
+
   router.beforeEach(async (to, from, next) => {
+    // 跳过初始导航的进度条（如果需要）
+    if (from.name === undefined && isFirstNavigation) {
+      isFirstNavigation = false;
+    } else {
+      NProgress.start();
+    }
+
     const authStore = useAuthenticationStore();
     const elementStore = useElementStore();
 
@@ -89,7 +98,7 @@ export const createRouterGuard = (router: Router) => {
 
   // 路由加载后
   router.afterEach(() => {
-    // NProgress.done();
+    NProgress.done();
   });
 
   // Workaround for https://github.com/vitejs/vite/issues/11804
@@ -106,7 +115,7 @@ export const createRouterGuard = (router: Router) => {
     } else {
       console.error(err);
     }
-    // NProgress.done();
+    NProgress.done();
   });
 
   router.isReady().then(() => {
