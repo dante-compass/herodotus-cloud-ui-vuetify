@@ -32,7 +32,7 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "@vueuse/integrations": "^14.0.0",
+    "@vueuse/integrations": "^14.1.0",
     "axios": "^1.13.2",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.19",
