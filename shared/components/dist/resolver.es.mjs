@@ -1,0 +1,1 @@
+function t(){return{type:"component",resolve:t=>{if(t.startsWith("H")){const e=["@herodotus/components/style.css"];return{name:t,from:"@herodotus/components",sideEffects:e.length>0?e:void 0}}}}}export{t as HerodotusResolver,t as default};

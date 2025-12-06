@@ -1,0 +1,77 @@
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
+
+import Vue from '@vitejs/plugin-vue';
+import { transformAssetUrls } from 'vite-plugin-vuetify';
+import dts from 'vite-plugin-dts';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    Vue({
+      template: { transformAssetUrls },
+    }),
+    dts({
+      insertTypesEntry: true,
+      outDir: './dist/types',
+    }),
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('src', import.meta.url)),
+    },
+    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
+  },
+  build: {
+    lib: {
+      entry: {
+        index: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
+        resolver: fileURLToPath(new URL('./src/resolver.ts', import.meta.url)),
+      },
+      name: '@herodotus/components',
+      fileName: (format, entry) =>
+        format === 'es' ? `${entry}.${format}.mjs` : `${entry}.${format}.js`,
+    },
+    minify: 'terser',
+    terserOptions: {
+      // 生产环境下移除console
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      keep_classnames: true,
+    },
+    rollupOptions: {
+      // 确保外部化处理那些你不想打包进库的依赖
+      external: [
+        'lodash-es',
+        'crypto',
+        'vue',
+        'vuetify/components',
+        'pinia',
+        '@mdi/js',
+        '@tsparticles/basic',
+        '@tsparticles/engine',
+        '@tsparticles/interaction-particles-links',
+        '@herodotus/core',
+      ],
+      output: {
+        exports: 'named',
+        assetFileNames: `assets/[ext]/[name][extname]`,
+        // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
+        globals: {
+          'lodash-es': 'LodashEs',
+          crypto: 'Crypto',
+          vue: 'Vue',
+          pinia: 'Pinia',
+          '@mdi/js': 'MdiJs',
+          '@tsparticles/basic': 'TsparticlesBasic',
+          '@tsparticles/engine': 'TsparticlesEngine',
+          '@tsparticles/interaction-particles-links': 'TsparticlesInteractionParticlesLinkss',
+          'vuetify/components': 'VuetifyComponents',
+          '@herodotus/core': 'HerodotusCore',
+        },
+      },
+    },
+  },
+});

@@ -1,0 +1,42 @@
+{
+  "name": "@herodotus/framework",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --fix"
+  },
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.mjs",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.es.mjs",
+      "require": "./dist/index.cjs.js"
+    },
+    "./style.css": "./dist/assets/css/framework.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
+  },
+  "dependencies": {
+    "@herodotus/core": "workspace:^",
+    "colord": "^2.9.3",
+    "js-base64": "^3.7.8",
+    "jwt-decode": "^4.0.0"
+  }
+}

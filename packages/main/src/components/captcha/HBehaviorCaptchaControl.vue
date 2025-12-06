@@ -1,0 +1,55 @@
+<template>
+  <div class="control-body">
+    <div class="control-box" :style="`height:${size}px`">
+      <div class="control-text">{{ tips }}</div>
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+defineOptions({
+  name: 'HBehaviorCaptchaControl',
+});
+
+interface Props {
+  size?: number;
+  description: string;
+  prompt?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  size: 30,
+  prompt: '',
+});
+
+const tips = computed(() => {
+  return props.prompt ? props.description + '【' + props.prompt + '】' : props.description;
+});
+</script>
+
+<style lang="scss">
+.control-body {
+  .control-box {
+    position: relative;
+    width: 100%;
+    background-color: #eef1f8;
+    margin-top: 20px;
+    border-radius: 3px;
+    box-shadow: 0 0 8px rgba(240, 240, 240, 0.6) inset;
+    .control-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      color: #b7bcd1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+      width: 100%;
+    }
+  }
+}
+</style>
