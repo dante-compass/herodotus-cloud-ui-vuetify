@@ -29,9 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
   category: '',
 });
 
-const selectedValue = defineModel({
-  type: String,
-});
+const selectedValue = defineModel();
 
 const options = ref([]) as Ref<Array<SysOrganizationEntity>>;
 

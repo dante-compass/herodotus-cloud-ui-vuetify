@@ -50,6 +50,7 @@ const getComponent = (
 watch(
   () => route.path,
   () => {
+    console.log('=======', route.path);
     store.addCachedRoute(route);
   },
   {

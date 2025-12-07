@@ -62,5 +62,4 @@ export const staticRoutes: Array<RouteRecordRaw> = [
   SignInRoute,
   NoPermissionRoute,
   ServiceErrorRoute,
-  MainPage,
 ];
