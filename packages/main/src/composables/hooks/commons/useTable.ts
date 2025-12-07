@@ -9,8 +9,10 @@ import type {
 } from '@herodotus/core';
 import type { SortItem } from '../../declarations';
 
+import { watchDebounced } from '@vueuse/core';
 import { concat, isBoolean, isEmpty, isString, map, pickBy, isNil } from 'lodash-es';
 import { toast, notify } from '@herodotus/core';
+
 import useBaseTable from './useBaseTable';
 
 /**
@@ -122,7 +124,6 @@ export default function <E extends Entity, C extends Conditions>(
 
   const findItemsByPage = (pageNumber = 1, pageSize = 10, others = {}) => {
     showLoading();
-    console.log('----findItemsByPage----');
     service
       .fetchByPage(
         {
@@ -133,21 +134,17 @@ export default function <E extends Entity, C extends Conditions>(
         others,
       )
       .then((result) => {
-        console.log('----findItemsByPage then----');
         const data = result.data as Page<E>;
         // 用户文档列表中无结果时也要更新列表数据
         if (!isEmpty(data)) {
           setPageData(data);
-          console.log('----hideLoading then----');
           hideLoading();
         } else {
           resetPageData();
-          console.log('----hideLoading then----');
           hideLoading();
         }
       })
       .catch((error) => {
-        console.log('----hideLoading error----', error);
         hideLoading();
       });
   };
@@ -184,7 +181,7 @@ export default function <E extends Entity, C extends Conditions>(
     return pickBy(conditions, (value) => !isNil(value) && value !== '');
   };
 
-  watch(
+  watchDebounced(
     conditions,
     (newValue) => {
       if (newValue && !fetchAll) {
@@ -192,7 +189,7 @@ export default function <E extends Entity, C extends Conditions>(
         findItemsByPage(pageNumber.value, pageSize.value, validCondtions);
       }
     },
-    { deep: true },
+    { debounce: 1000, maxWait: 2000, deep: true },
   );
 
   return {
