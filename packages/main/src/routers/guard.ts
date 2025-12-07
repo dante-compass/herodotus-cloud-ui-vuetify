@@ -3,7 +3,12 @@ import type { RouteRecordRaw, Router } from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-import { useAuthenticationStore, useElementStore, useSystemElement } from '@herodotus/framework';
+import {
+  useAuthenticationStore,
+  useApplicationStore,
+  useElementStore,
+  useSystemElement,
+} from '@herodotus/framework';
 import { DEAULT_ROUTER_LINK, API } from '@/configurations';
 
 NProgress.configure({
@@ -38,11 +43,12 @@ export const createRouterGuard = (router: Router) => {
   let isFirstNavigation = true;
 
   router.beforeEach(async (to, from, next) => {
+    const applicationStore = useApplicationStore();
     // 跳过初始导航的进度条（如果需要）
     if (from.name === undefined && isFirstNavigation) {
       isFirstNavigation = false;
     } else {
-      NProgress.start();
+      applicationStore.loadingStart();
     }
 
     const authStore = useAuthenticationStore();
@@ -98,7 +104,8 @@ export const createRouterGuard = (router: Router) => {
 
   // 路由加载后
   router.afterEach(() => {
-    NProgress.done();
+    const applicationStore = useApplicationStore();
+    applicationStore.loadingEnd();
   });
 
   // Workaround for https://github.com/vitejs/vite/issues/11804
@@ -115,7 +122,8 @@ export const createRouterGuard = (router: Router) => {
     } else {
       console.error(err);
     }
-    NProgress.done();
+    const applicationStore = useApplicationStore();
+    applicationStore.loadingEnd();
   });
 
   router.isReady().then(() => {

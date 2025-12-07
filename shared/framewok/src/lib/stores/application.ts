@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { fa } from 'vuetify/locale';
 
 /**
  * Pinia Store 响应式

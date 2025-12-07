@@ -2,8 +2,8 @@
   <v-select
     v-model="selectedValue"
     :items="options"
-    item-title="organizationName"
-    item-value="organizationId"
+    item-title="departmentName"
+    item-value="departmentId"
     chips
     closable-chips
     :error="hasError"

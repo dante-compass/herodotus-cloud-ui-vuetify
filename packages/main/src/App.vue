@@ -1,20 +1,23 @@
 <template>
   <v-theme-provider>
     <router-view v-if="isRouterAlive"></router-view>
+    <loading v-if="showLoading"></loading>
   </v-theme-provider>
 </template>
 
 <script lang="ts" setup>
-import { useAuthenticationStore } from '@herodotus/framework';
+import { useAuthenticationStore, useApplicationStore } from '@herodotus/framework';
 
 import { useWebSocketMessage } from '@/composables/hooks';
 
 import { VARIABLES } from '@/configurations';
 import { refreshTabInjectionKey } from '@/composables/symbols';
+import { Loading } from '@/components/layouts/commons';
 
 defineOptions({ name: 'App' });
 
 const authentication = useAuthenticationStore();
+const application = useApplicationStore();
 
 const isRouterAlive = shallowRef(true);
 const refreshTab = () => {
@@ -29,6 +32,10 @@ provide(refreshTabInjectionKey, refreshTab);
 const gapTime = shallowRef(0);
 const beforeUnloadTime = shallowRef(0);
 const { connect, disconnect } = useWebSocketMessage();
+
+const showLoading = computed(() => {
+  return application.loading;
+});
 
 const beforeUnloadHandler = (e: any) => {
   beforeUnloadTime.value = new Date().getTime();
