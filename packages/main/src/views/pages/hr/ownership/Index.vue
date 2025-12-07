@@ -1,8 +1,12 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col xl="3" lg="3" md="3" sm="6" xs="12"></v-col>
-      <v-col xl="3" lg="3" md="3" sm="6" xs="12"></v-col>
+      <v-col xl="3" lg="3" md="3" sm="6" xs="12">
+        <organization-tree v-model="organizationId"></organization-tree>
+      </v-col>
+      <v-col xl="3" lg="3" md="3" sm="6" xs="12">
+        <department-tree v-model="departmentId" :organization-id="organizationId"></department-tree>
+      </v-col>
       <v-col xl="6" lg="6" md="6" sm="6" xs="12">
         <h-data-table
           v-model:page-size="pageSize"
@@ -45,7 +49,9 @@ import { useDictionary } from '@/composables/hooks';
 import { PAGE_NAME } from '@/configurations';
 import useOwnershipTable from './useOwnershipTable';
 
-defineOptions({ name: PAGE_NAME.SYS_OWNERSHIP });
+import { OrganizationTree, DepartmentTree } from '../components';
+
+defineOptions({ name: PAGE_NAME.SYS_OWNERSHIP, components: { OrganizationTree, DepartmentTree } });
 
 const headers = ref([
   { key: 'employeeName', align: 'center', title: '姓名' },
@@ -64,6 +70,8 @@ const {
   tableRows,
   totalPages,
   totalItems,
+  organizationId,
+  departmentId,
   deleteAllocatable,
   findItems,
   toAllocatable,

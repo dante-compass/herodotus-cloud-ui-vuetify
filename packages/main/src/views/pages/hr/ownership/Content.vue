@@ -1,5 +1,5 @@
 <template>
-  <h-full-width-layout title="配置人员归属">
+  <h-full-width-layout title="配置人员归属" :overlay="overlay">
     <h-data-table
       v-model="selectedItems"
       v-model:page-size="pageSize"

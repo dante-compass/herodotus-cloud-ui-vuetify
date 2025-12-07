@@ -109,6 +109,8 @@ export default function useOwnershipTable(name: string) {
     totalItems,
     pageNumber,
     pageSize,
+    departmentId,
+    organizationId,
     findItems,
     deleteAllocatable,
     toAllocatable,
