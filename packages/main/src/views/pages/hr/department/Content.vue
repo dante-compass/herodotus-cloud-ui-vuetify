@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -56,7 +57,7 @@ defineOptions({
 
 const departmentForm = ref();
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysDepartmentEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysDepartmentEntity>(
   API.core.sysDepartment(),
 );
 

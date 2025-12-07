@@ -1,8 +1,9 @@
 import type { Conditions, Entity, Page } from '@herodotus/core';
-import type { SortItem } from '@/composables/declarations';
+import type { Sort, Direction } from '@herodotus/core';
+import type { SortItem } from '../../declarations';
 
 import { useRouter } from 'vue-router';
-import { capitalize } from 'lodash-es';
+import { capitalize, isBoolean, isString, isEmpty, concat, map } from 'lodash-es';
 import { OperationEnum } from '@herodotus/core';
 import { useElementStore } from '@herodotus/framework';
 
@@ -12,7 +13,11 @@ import { useElementStore } from '@herodotus/framework';
  * @param fetchAll 是否为读取全部数据
  * @returns 相关操作和定义
  */
-export default function useBaseTable<E extends Entity, C extends Conditions>(name: string) {
+export default function useBaseTable<E extends Entity, C extends Conditions>(
+  name: string,
+  sorted = [] as Array<string>,
+  direction = 'DESC' as Direction,
+) {
   const loading = shallowRef(false);
   const totalPages = shallowRef(0);
   const totalItems = shallowRef(0);
@@ -21,6 +26,20 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(nam
 
   const store = useElementStore();
   const router = useRouter();
+
+  const routePushParam = (
+    componentName: string,
+    operation: OperationEnum,
+    item = {},
+    additional: Record<string, unknown> = {},
+  ) => {
+    store.addRoutePushParam(componentName, {
+      item: JSON.stringify(item),
+      operation: operation,
+      additional: JSON.stringify(additional),
+    });
+    router.push({ name: componentName });
+  };
 
   /**
    * 进入 Table 详情页(三级路由页面)传递的参数
@@ -34,12 +53,7 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(nam
     item: E = {} as E,
     additional: Record<string, unknown> = {},
   ) => {
-    store.addRoutePushParam(componentName, {
-      item: JSON.stringify(item),
-      operation: operation,
-      additional: JSON.stringify(additional),
-    });
-    router.push({ name: componentName });
+    routePushParam(componentName, operation, item, additional);
   };
 
   const appendSuffix = (name: string, suffix: string, withSuffix = true) => {
@@ -119,6 +133,39 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(nam
     loading.value = false;
   };
 
+  const parseDirection = (sortBy: Array<SortItem>): Direction => {
+    const flag = sortBy[0];
+    if (flag && flag.order) {
+      if (isBoolean(flag.order)) {
+        return flag.order ? 'DESC' : 'ASC';
+      }
+
+      if (isString(flag.order)) {
+        return flag.order.toUpperCase() as 'DESC' | 'ASC';
+      }
+    }
+
+    return 'DESC';
+  };
+
+  const createSort = (sortBy: Array<SortItem>): Sort => {
+    if (!isEmpty(sortBy)) {
+      return {
+        properties: concat(map(sortBy, 'key'), 'updateTime'),
+        direction: parseDirection(sortBy),
+      };
+    } else {
+      if (!isEmpty(sorted)) {
+        return {
+          properties: sorted,
+          direction: direction,
+        };
+      } else {
+        return { properties: ['updateTime'], direction: 'DESC' };
+      }
+    }
+  };
+
   return {
     conditions,
     loading,
@@ -126,6 +173,7 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(nam
     totalPages,
     totalItems,
     addRoutePushParam,
+    routePushParam,
     setAllData,
     setPageData,
     resetPageData,
@@ -137,5 +185,6 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(nam
     toInfo,
     toSetup,
     toInvoke,
+    createSort,
   };
 }

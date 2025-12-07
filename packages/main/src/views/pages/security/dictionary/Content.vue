@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -33,7 +34,7 @@ defineOptions({ name: 'SysDictionaryContent' });
 
 const dictionaryForm = ref();
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysDictionaryEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysDictionaryEntity>(
   API.core.sysDictionary(),
 );
 

@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -53,7 +54,7 @@ defineOptions({ name: 'SysOrganizationContent', components: { OrganizationSelect
 
 const organizationForm = ref();
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysOrganizationEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysOrganizationEntity>(
   API.core.sysOrganization(),
 );
 

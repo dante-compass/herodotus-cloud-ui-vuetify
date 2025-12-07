@@ -1,6 +1,5 @@
 import type {
   Page,
-  Sort,
   Entity,
   Conditions,
   HttpResult,
@@ -10,7 +9,7 @@ import type {
 import type { SortItem } from '../../declarations';
 
 import { watchDebounced } from '@vueuse/core';
-import { concat, isBoolean, isEmpty, isString, map, pickBy, isNil } from 'lodash-es';
+import { isEmpty, pickBy, isNil } from 'lodash-es';
 import { toast, notify } from '@herodotus/core';
 
 import useBaseTable from './useBaseTable';
@@ -25,7 +24,7 @@ import useBaseTable from './useBaseTable';
  * @param loadOnMount 是否在 onMount 阶段加载
  * @returns
  */
-export default function <E extends Entity, C extends Conditions>(
+export default function useTable<E extends Entity, C extends Conditions>(
   service: AbstractService<E>,
   name: string,
   fetchAll = false,
@@ -54,44 +53,12 @@ export default function <E extends Entity, C extends Conditions>(
     setAllData,
     setPageData,
     resetPageData,
-  } = useBaseTable<E, C>(name);
+    createSort,
+  } = useBaseTable<E, C>(name, sorted, direction);
 
   const pageNumber = shallowRef(1);
   const pageSize = shallowRef(10);
   const sortBy = ref([]) as Ref<Array<SortItem>>;
-
-  const parseDirection = (sortBy: Array<SortItem>): Direction => {
-    const flag = sortBy[0];
-    if (flag && flag.order) {
-      if (isBoolean(flag.order)) {
-        return flag.order ? 'DESC' : 'ASC';
-      }
-
-      if (isString(flag.order)) {
-        return flag.order.toUpperCase() as 'DESC' | 'ASC';
-      }
-    }
-
-    return 'DESC';
-  };
-
-  const createSort = (sortBy: Array<SortItem>): Sort => {
-    if (!isEmpty(sortBy)) {
-      return {
-        properties: concat(map(sortBy, 'key'), 'updateTime'),
-        direction: parseDirection(sortBy),
-      };
-    } else {
-      if (!isEmpty(sorted)) {
-        return {
-          properties: sorted,
-          direction: direction,
-        };
-      } else {
-        return { properties: ['updateTime'], direction: 'DESC' };
-      }
-    }
-  };
 
   const findItems = () => {
     if (fetchAll) {

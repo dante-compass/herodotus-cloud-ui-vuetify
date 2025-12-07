@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -61,7 +62,7 @@ defineOptions({ name: 'SysUserContent' });
 
 const employeeForm = ref();
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysEmployeeEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysEmployeeEntity>(
   API.core.sysEmployee(),
 );
 

@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -34,7 +35,7 @@ defineOptions({ name: 'SysPermissionContent' });
 
 const permissionForm = ref();
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysPermissionEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysPermissionEntity>(
   API.core.sysPermission(),
 );
 

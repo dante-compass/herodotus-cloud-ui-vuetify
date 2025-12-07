@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -54,9 +55,8 @@ defineOptions({ name: 'SysTenantDataSourceContent' });
 
 const tenantForm = ref();
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysTenantDataSourceEntity>(
-  API.core.sysTenantDataSource(),
-);
+const { editedItem, operation, title, overlay, saveOrUpdate } =
+  useTableItem<SysTenantDataSourceEntity>(API.core.sysTenantDataSource());
 
 const validateTenantId = async (tenantId: string) => {
   return await new Promise((resolve, reject) => {

@@ -8,6 +8,7 @@
     :items="tableRows"
     :item-value="rowKey"
     :loading="loading"
+    select-strategy="single"
     disable-sort
     reserved
     @update:options="findItems"
@@ -17,7 +18,7 @@
     </template>
 
     <template #search>
-      <search v-model="conditions"></search>
+      <employee-search v-model="conditions"></employee-search>
     </template>
 
     <template #item.gender="{ item }">
@@ -49,9 +50,9 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 import { useTable, useDictionary } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
-import Search from './Search.vue';
+import { EmployeeSearch } from '../components';
 
-defineOptions({ name: PAGE_NAME.SYS_EMPLOYEE, components: { Search } });
+defineOptions({ name: PAGE_NAME.SYS_EMPLOYEE, components: { EmployeeSearch } });
 
 const headers = ref([
   { key: 'employeeName', align: 'center', title: '人员姓名' },

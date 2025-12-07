@@ -12,6 +12,9 @@
     <v-card-text>
       <slot></slot>
     </v-card-text>
+    <v-overlay v-model="overlay" class="align-center justify-center" contained>
+      <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
+    </v-overlay>
   </v-card>
 </template>
 
@@ -22,5 +25,12 @@ defineOptions({ name: 'HDetailContainer' });
 
 const { onFinish } = useEditFinish();
 
-defineProps({ title: String });
+interface Props {
+  title?: string;
+  overlay?: boolean;
+}
+
+withDefaults(defineProps<Props>(), {
+  overlay: false,
+});
 </script>
