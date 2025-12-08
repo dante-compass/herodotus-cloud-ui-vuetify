@@ -95,8 +95,16 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       }),
     ],
     optimizeDeps: {
-      exclude: ['vuetify', 'vue-router'],
-      include: ['vconsole'],
+      exclude: [
+        'vuetify',
+        'vuetify/components',
+        'vuetify/directives',
+        '@tsparticles/engine',
+        '@tsparticles/basic',
+        '@tsparticles/interaction-particles-links',
+        '@mdi/js',
+        '@vueuse/components',
+      ],
     },
     define: { 'process.env': { env } },
     resolve: {
