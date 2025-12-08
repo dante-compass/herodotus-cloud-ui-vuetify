@@ -5,46 +5,56 @@
         v-model="conditions.category"
         dictionary="OrganizationCategory"
         label="组织类别"
+        hide-details
       ></h-dictionary-select>
     </v-sheet>
 
-    <v-overlay v-model="loading" class="align-center justify-center" contained>
-      <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
-    </v-overlay>
-    <v-treeview
-      v-if="!loading"
-      v-model:activated="activated"
-      :items="treeItems"
-      item-value="id"
-      item-title="name"
-      activatable
-      indent-lines="default"
-      open-all
-      separate-roots
-    ></v-treeview>
+    <v-sheet>
+      <v-treeview
+        v-if="!loading"
+        v-model:activated="activated"
+        :items="treeItems"
+        item-value="id"
+        item-title="name"
+        activatable
+        indent-lines="default"
+        open-all
+        separate-roots
+        return-object
+        rounded
+      ></v-treeview>
+
+      <v-overlay v-model="loading" class="align-center justify-center" contained>
+        <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
+      </v-overlay>
+    </v-sheet>
   </v-card>
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue';
+import type { Tree } from '@herodotus/core';
 import type { SysOrganizationEntity, SysOrganizationConditions } from '@herodotus/api';
 
-import { isArray } from 'lodash-es';
+import { isArray, isEmpty } from 'lodash-es';
 import { useTreeItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'OrganizationTree' });
 
-const selectedId = defineModel<string>({
+const selectedValue = defineModel({
+  type: Object as PropType<Tree>,
   required: true,
+  default: () => {},
 });
 
 const activated = computed({
-  get: () => (selectedId.value ? [selectedId.value] : []),
+  get: () => (!isEmpty(selectedValue.value) ? [selectedValue.value] : []),
   set: (value: unknown) => {
     if (value && isArray(value) && value.length > 0) {
-      selectedId.value = value[0];
+      selectedValue.value = value[0];
     } else {
-      selectedId.value = '';
+      selectedValue.value = {} as Tree;
     }
   },
 });

@@ -45,6 +45,7 @@ declare module 'vue' {
     HDictionarySelect: typeof import('./../src/components/library/HSelect/HDictionarySelect.vue')['default']
     HDictionaryToggle: typeof import('./../src/components/library/HSelect/HDictionaryToggle.vue')['default']
     HErrorLayout: typeof import('./../src/components/error/HErrorLayout.vue')['default']
+    HFullWidthLayout: typeof import('./../src/components/layouts/form/HFullWidthLayout.vue')['default']
     HGraphicCaptcha: typeof import('./../src/components/captcha/HGraphicCaptcha.vue')['default']
     HHttpMethodAvatar: typeof import('./../src/components/library/HAuthorize/HHttpMethodAvatar.vue')['default']
     HJigsawCaptcha: typeof import('./../src/components/captcha/HJigsawCaptcha.vue')['default']

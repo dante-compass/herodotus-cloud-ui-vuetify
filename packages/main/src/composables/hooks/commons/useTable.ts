@@ -32,12 +32,6 @@ export default function useTable<E extends Entity, C extends Conditions>(
   direction = 'DESC' as Direction,
   loadOnMount = true,
 ) {
-  onMounted(() => {
-    if (loadOnMount) {
-      reloadItems();
-    }
-  });
-
   const {
     loading,
     tableRows,
@@ -148,6 +142,12 @@ export default function useTable<E extends Entity, C extends Conditions>(
     return pickBy(conditions, (value) => !isNil(value) && value !== '');
   };
 
+  onMounted(() => {
+    if (loadOnMount) {
+      reloadItems();
+    }
+  });
+
   watchDebounced(
     conditions,
     (newValue) => {
@@ -156,7 +156,7 @@ export default function useTable<E extends Entity, C extends Conditions>(
         findItemsByPage(pageNumber.value, pageSize.value, validCondtions);
       }
     },
-    { debounce: 1000, maxWait: 2000, deep: true },
+    { debounce: 500, maxWait: 1000, deep: true },
   );
 
   return {

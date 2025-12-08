@@ -4,7 +4,7 @@ import { OperationEnum, toast } from '@herodotus/core';
 import useBaseTableItem from './useBaseTableItem';
 
 export default function useTableItem<E extends Entity>(service: AbstractService<E>) {
-  const { editedItem, operation, overlay, title, onFinish } = useBaseTableItem<E>();
+  const { editedItem, operation, overlay, title, additional, onFinish } = useBaseTableItem<E>();
 
   const isEdit = computed(() => {
     return operation.value === OperationEnum.EDIT;
@@ -55,6 +55,7 @@ export default function useTableItem<E extends Entity>(service: AbstractService<
   return {
     editedItem,
     operation,
+    additional,
     title,
     overlay,
     saveOrUpdate,

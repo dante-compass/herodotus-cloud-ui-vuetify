@@ -2,12 +2,24 @@
   <v-card class="px-12" flat>
     <v-card-text class="ma-4">
       <v-alert
+        v-if="hasError"
+        border="start"
+        type="error"
+        variant="outlined"
+        density="compact"
+        class="mb-4"
+        rounded="lg"
+      >
+        {{ errorMessage }}
+      </v-alert>
+      <v-alert
         v-if="prompt"
         border="start"
         type="error"
         variant="outlined"
         density="compact"
         class="mb-4"
+        rounded="lg"
       >
         {{ promptMessage }}
       </v-alert>
@@ -94,6 +106,8 @@ const {
   isSubmittingProtected,
   prompt,
   promptMessage,
+  hasError,
+  errorMessage,
 } = useSignIn();
 
 const username = shallowRef('');

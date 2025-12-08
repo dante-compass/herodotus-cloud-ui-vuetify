@@ -14,7 +14,9 @@
 
 <script setup lang="ts">
 import type { SysDepartmentEntity } from '@herodotus/api';
+
 import { API } from '@/configurations';
+import { isEmpty } from 'lodash-es';
 
 defineOptions({ name: 'DepartmentSelect' });
 
@@ -27,19 +29,19 @@ const props = withDefaults(defineProps<Props>(), {
   organizationId: '',
 });
 
-const selectedValue = defineModel({
-  type: String,
-});
+const selectedValue = defineModel();
 
 const options = ref([]) as Ref<Array<SysDepartmentEntity>>;
 
-const loadData = (organizationId: number | string) => {
+const loadData = (organizationId: string) => {
   API.core
     .sysDepartment()
     .fetchAll({ organizationId })
     .then((result) => {
       const data = result.data as Array<SysDepartmentEntity>;
-      options.value = data;
+      if (!isEmpty(data)) {
+        options.value = data;
+      }
     });
 };
 
@@ -47,14 +49,12 @@ const hasError = computed(() => {
   return props.errorMessage ? true : false;
 });
 
-onMounted(() => {
-  loadData(props.organizationId);
-});
-
 watch(
   () => props.organizationId,
   (newValue) => {
-    loadData(newValue);
+    if (newValue) {
+      loadData(newValue);
+    }
   },
   {
     immediate: true,

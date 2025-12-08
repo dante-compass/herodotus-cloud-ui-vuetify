@@ -27,11 +27,6 @@
         label="部门简称"
         placeholder="请输入部门简称"
       ></v-text-field>
-      <organization-select
-        v-model="editedItem.organizationId"
-        label="所属单位"
-        placeholder="请设置所属单位"
-      ></organization-select>
       <department-select
         v-model="editedItem.parentId"
         :organizationId="editedItem.organizationId"
@@ -57,9 +52,8 @@ defineOptions({
 
 const departmentForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysDepartmentEntity>(
-  API.core.sysDepartment(),
-);
+const { editedItem, operation, title, overlay, additional, saveOrUpdate } =
+  useTableItem<SysDepartmentEntity>(API.core.sysDepartment());
 
 const onSave = async () => {
   const { valid } = await departmentForm.value.validate();
@@ -67,4 +61,8 @@ const onSave = async () => {
     saveOrUpdate();
   }
 };
+
+onMounted(() => {
+  editedItem.value.organizationId = additional.value.organizationId as string;
+});
 </script>

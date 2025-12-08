@@ -16,18 +16,17 @@
 
 <script setup lang="ts">
 import type { SysOrganizationEntity } from '@herodotus/api';
+
 import { API } from '@/configurations';
 
 defineOptions({ name: 'OrganizationSelect' });
 
 interface Props {
-  category?: string | number;
+  category?: number;
   errorMessage?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  category: '',
-});
+const props = defineProps<Props>();
 
 const selectedValue = defineModel();
 
@@ -47,14 +46,13 @@ const hasError = computed(() => {
   return props.errorMessage ? true : false;
 });
 
-onMounted(() => {
-  loadData(props.category);
-});
-
 watch(
   () => props.category,
   (newValue) => {
-    loadData(newValue);
+    if (newValue !== undefined) {
+      console.log('-----watch-----', newValue);
+      loadData(newValue);
+    }
   },
   {
     immediate: true,

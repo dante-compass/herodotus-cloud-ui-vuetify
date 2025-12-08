@@ -27,10 +27,12 @@ const { onFinish } = useEditFinish();
 
 interface Props {
   title?: string;
-  overlay?: boolean;
 }
 
-withDefaults(defineProps<Props>(), {
-  overlay: false,
+defineProps<Props>();
+
+const overlay = defineModel({
+  type: Boolean,
+  default: false,
 });
 </script>
