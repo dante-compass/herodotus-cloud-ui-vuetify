@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-row>
-      <v-col xl="3" lg="3" md="3" sm="6" xs="12">
+      <v-col xl="2" lg="2" md="4" sm="6" xs="12">
         <organization-tree v-model="currentOrganization"></organization-tree>
       </v-col>
-      <v-col xl="9" lg="9" md="9" sm="6" xs="12">
+      <v-col xl="10" lg="10" md="8" sm="6" xs="12">
         <h-data-table
           v-model:page-size="pageSize"
           v-model:page-number="pageNumber"
@@ -40,14 +40,12 @@
 <script setup lang="ts">
 import type { Tree } from '@herodotus/core';
 import type {
-  SysOrganizationEntity,
   SysDepartmentEntity,
   SysDepartmentConditions,
   SysDepartmentProps,
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { toast } from '@herodotus/core';
 import { useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
@@ -97,7 +95,7 @@ const isContentAvailable = computed(() => {
 
 const findItemsWithCondition = () => {
   if (isContentAvailable.value) {
-    findItems;
+    findItems();
   }
 };
 
@@ -111,7 +109,6 @@ const additionalData = computed(() => {
 watch(
   currentOrganization,
   (newValue) => {
-    console.log('====', newValue);
     conditions.value.organizationId = newValue.id;
   },
   { deep: true },

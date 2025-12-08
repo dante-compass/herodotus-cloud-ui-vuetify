@@ -6,10 +6,12 @@
         dictionary="OrganizationCategory"
         label="组织类别"
         hide-details
+        density="compact"
       ></h-dictionary-select>
     </v-sheet>
 
-    <v-sheet>
+    <v-divider></v-divider>
+    <v-sheet class="md-4">
       <v-treeview
         v-if="!loading"
         v-model:activated="activated"
@@ -18,14 +20,16 @@
         item-title="name"
         activatable
         indent-lines="default"
+        density="compact"
         open-all
         separate-roots
         return-object
         rounded
+        slim
       ></v-treeview>
 
       <v-overlay v-model="loading" class="align-center justify-center" contained>
-        <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
+        <v-progress-circular color="primary" indeterminate></v-progress-circular>
       </v-overlay>
     </v-sheet>
   </v-card>
