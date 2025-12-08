@@ -12,11 +12,7 @@
         label="人员姓名 * "
         placeholder="请输入人员姓名"
         clearable
-        :rules="[
-          (v: string) => !!v || '人员姓名不能为空',
-          (v: string) => (v && v.length >= 5) || '人员姓名至少5个字符',
-          (v: string) => isUniqueRule(v),
-        ]"
+        :rules="[(v: string) => !!v || '人员姓名不能为空', (v: string) => isUniqueRule(v)]"
       ></v-text-field>
       <v-text-field
         v-model="editedItem.employeeNo"

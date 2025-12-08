@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="pa-0">
     <v-row>
       <v-col xl="2" lg="2" md="4" sm="6" xs="12">
         <organization-tree v-model="currentOrganization"></organization-tree>

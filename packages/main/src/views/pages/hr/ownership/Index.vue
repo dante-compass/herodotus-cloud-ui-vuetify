@@ -1,13 +1,16 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="pa-0">
     <v-row>
-      <v-col xl="3" lg="3" md="3" sm="6" xs="12">
-        <organization-tree v-model="organizationId"></organization-tree>
+      <v-col xl="2" lg="2" md="3" sm="6" xs="12">
+        <organization-tree v-model="currentOrganization"></organization-tree>
       </v-col>
-      <v-col xl="3" lg="3" md="3" sm="6" xs="12">
-        <department-tree v-model="departmentId" :organization-id="organizationId"></department-tree>
+      <v-col xl="2" lg="2" md="3" sm="6" xs="12">
+        <department-tree
+          v-model="currentDepartment"
+          :organization-id="organizationId"
+        ></department-tree>
       </v-col>
-      <v-col xl="6" lg="6" md="6" sm="6" xs="12">
+      <v-col xl="8" lg="8" md="6" sm="6" xs="12">
         <h-data-table
           v-model:page-size="pageSize"
           v-model:page-number="pageNumber"
@@ -20,7 +23,7 @@
           disable-sort
           select-strategy="single"
           reserved
-          @update:options="findItems"
+          @update:options="findItemsWithCondition"
         >
           <template #control>
             <v-btn v-if="isShowOperation" @click="toAllocatable">配置人员归属</v-btn>
@@ -42,12 +45,17 @@
 </template>
 
 <script setup lang="ts">
-import type { SysEmployeeProps } from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+import type { Tree, Page } from '@herodotus/core';
+import type { SysEmployeeEntity, SysElementConditions, SysEmployeeProps } from '@herodotus/api';
+import type { VDataTableHeaders, SortItem } from '@/composables/declarations';
 
 import { useDictionary } from '@/composables/hooks';
 import { PAGE_NAME } from '@/configurations';
-import useOwnershipTable from './useOwnershipTable';
+
+import { isEmpty } from 'lodash-es';
+import { notify, toast, OperationEnum } from '@herodotus/core';
+import { useBaseTable } from '@/composables/hooks';
+import { API } from '@/configurations';
 
 import { OrganizationTree, DepartmentTree } from '../components';
 
@@ -61,20 +69,118 @@ const headers = ref([
 
 const rowKey: SysEmployeeProps = 'employeeId';
 
+const currentOrganization = ref({}) as Ref<Tree>;
+const currentDepartment = ref({}) as Ref<Tree>;
+const pageNumber = shallowRef(1);
+const pageSize = shallowRef(10);
+const sortBy = ref([]) as Ref<Array<SortItem>>;
+
 const { getDictionaryItemDisplay } = useDictionary('Identity');
 
 const {
   loading,
-  pageNumber,
-  pageSize,
   tableRows,
   totalPages,
   totalItems,
-  organizationId,
-  departmentId,
-  deleteAllocatable,
-  findItems,
-  toAllocatable,
-  isShowOperation,
-} = useOwnershipTable(PAGE_NAME.SYS_OWNERSHIP);
+  showLoading,
+  hideLoading,
+  setPageData,
+  resetPageData,
+  createSort,
+  routePushParam,
+} = useBaseTable<SysEmployeeEntity, SysElementConditions>(PAGE_NAME.SYS_EMPLOYEE);
+
+const isDepartmentAvailable = computed(() => {
+  return !isEmpty(currentDepartment) && !isEmpty(currentDepartment.value.id);
+});
+
+const findItemsWithCondition = () => {
+  if (isDepartmentAvailable.value) {
+    fetchAssignedByPage(pageNumber.value, pageSize.value, currentDepartment.value.id);
+  }
+};
+
+const organizationId = computed(() => {
+  if (!isEmpty(currentOrganization.value)) {
+    return currentOrganization.value.id;
+  } else {
+    return '';
+  }
+});
+
+const fetchAssignedByPage = (pageNumber = 1, pageSize = 10, departmentId: string) => {
+  showLoading();
+  API.core
+    .sysEmployee()
+    .fetchAssignedByPage(
+      {
+        pageNumber: pageNumber - 1,
+        pageSize: pageSize,
+        ...createSort(sortBy.value),
+      },
+      { departmentId },
+    )
+    .then((result) => {
+      const data = result.data as Page<SysEmployeeEntity>;
+      // 用户文档列表中无结果时也要更新列表数据
+      if (!isEmpty(data)) {
+        setPageData(data);
+        hideLoading();
+      } else {
+        resetPageData();
+        hideLoading();
+      }
+    })
+    .catch((error) => {
+      hideLoading();
+    });
+};
+
+const deleteAllocatable = (item: SysEmployeeEntity) => {
+  notify.standardDeleteNotify(() => {
+    API.core
+      .sysEmployee()
+      .deleteAllocatable({
+        organizationId: currentOrganization.value.id,
+        departmentId: currentDepartment.value.id,
+        employeeId: item.employeeId,
+      })
+      .then((response) => {
+        fetchAssignedByPage(pageNumber.value, pageSize.value, currentDepartment.value.id);
+      })
+      .catch((error) => {
+        if (error.message) {
+          toast.error(error.message);
+        } else {
+          toast.error('删除失败');
+        }
+      });
+  });
+};
+
+const isShowOperation = computed(() => {
+  return currentOrganization.value.id && currentDepartment.value.id;
+});
+
+const toAllocatable = () => {
+  const routeName = 'SysOwnershipContent';
+  routePushParam(routeName, OperationEnum.AUTHORIZE, {
+    organizationId: currentOrganization.value.id,
+    departmentId: currentDepartment.value.id,
+  });
+};
+
+watch(
+  currentDepartment,
+  (newValue) => {
+    if (!isEmpty(newValue) && newValue.id) {
+      fetchAssignedByPage(pageNumber.value, pageSize.value, newValue.id);
+    }
+  },
+  { deep: true },
+);
+
+watch(pageNumber, (newValue) => {
+  fetchAssignedByPage(newValue, pageSize.value, currentDepartment.value.id);
+});
 </script>

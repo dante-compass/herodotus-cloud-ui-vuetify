@@ -1,27 +1,38 @@
 <template>
-  <v-card class="mx-auto" rounded="xl" prepend-icon="mdi-warehouse" title="单位下设部门">
-    <v-overlay v-model="loading" class="align-center justify-center" contained>
-      <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
-    </v-overlay>
-    <v-treeview
-      v-if="!loading"
-      v-model:activated="activated"
-      :items="treeItems"
-      item-value="id"
-      item-title="name"
-      activatable
-      indent-lines="default"
-      separate-roots
-      open-all
-      no-data-text="请先在右侧选择单位"
-    ></v-treeview>
+  <v-card class="mx-auto" rounded="xl" prepend-icon="mdi-warehouse" title="下设部门">
+    <v-divider></v-divider>
+
+    <v-sheet>
+      <v-overlay v-model="loading" class="align-center justify-center" contained>
+        <v-progress-circular color="primary" indeterminate></v-progress-circular>
+      </v-overlay>
+      <v-treeview
+        v-if="!loading && !hasNoDepartments"
+        v-model:activated="activated"
+        :items="treeItems"
+        item-value="id"
+        item-title="name"
+        activatable
+        indent-lines="default"
+        density="compact"
+        open-all
+        separate-roots
+        return-object
+        rounded
+        slim
+      ></v-treeview>
+    </v-sheet>
+    <v-list v-if="hasNoDepartments" density="compact">
+      <v-list-item title="没有数据"></v-list-item>
+    </v-list>
   </v-card>
 </template>
 
 <script setup lang="ts">
+import type { Tree } from '@herodotus/core';
 import type { SysDepartmentEntity, SysDepartmentConditions } from '@herodotus/api';
 
-import { isArray } from 'lodash-es';
+import { isArray, isEmpty } from 'lodash-es';
 import { useTreeItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
@@ -35,24 +46,30 @@ const props = withDefaults(defineProps<Props>(), {
   organizationId: '',
 });
 
-const selectedId = defineModel<string>({
+const selectedValue = defineModel({
+  type: Object as PropType<Tree>,
   required: true,
+  default: () => {},
 });
 
 const { treeItems, conditions, loading } = useTreeItem<
   SysDepartmentEntity,
   SysDepartmentConditions
->(API.core.sysDepartment());
+>(API.core.sysDepartment(), false);
 
 const activated = computed({
-  get: () => (selectedId.value ? [selectedId.value] : []),
+  get: () => (!isEmpty(selectedValue.value) ? [selectedValue.value] : []),
   set: (value: unknown) => {
     if (value && isArray(value) && value.length > 0) {
-      selectedId.value = value[0];
+      selectedValue.value = value[0];
     } else {
-      selectedId.value = '';
+      selectedValue.value = {} as Tree;
     }
   },
+});
+
+const hasNoDepartments = computed(() => {
+  return isEmpty(treeItems.value);
 });
 
 watch(
@@ -60,7 +77,7 @@ watch(
   (newValue: string) => {
     if (newValue) {
       conditions.value.organizationId = newValue;
-      selectedId.value = '';
+      selectedValue.value = {} as Tree;
     }
   },
 );

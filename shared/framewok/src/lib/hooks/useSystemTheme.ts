@@ -93,7 +93,7 @@ export default function useSystemTheme() {
   });
 
   watch(vuetifyTheme.global.name, (newValue) => {
-    themeTransition;
+    themeTransition();
     const current = newValue as ThemeMode;
     toast.setTheme(current);
     notify.setTheme(current);

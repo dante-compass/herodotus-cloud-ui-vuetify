@@ -27,7 +27,7 @@ export default function useTreeItem<T extends Entity, C extends Conditions>(
   };
 
   watch(
-    () => conditions.value,
+    conditions,
     (newValue) => {
       fetchTree(newValue);
     },

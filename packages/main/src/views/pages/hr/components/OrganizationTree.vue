@@ -1,5 +1,7 @@
 <template>
   <v-card class="mx-auto" rounded="xl" prepend-icon="mdi-domain" title="单位列表">
+    <v-divider></v-divider>
+
     <v-sheet class="pa-4">
       <h-dictionary-select
         v-model="conditions.category"
@@ -11,6 +13,7 @@
     </v-sheet>
 
     <v-divider></v-divider>
+
     <v-sheet class="md-4">
       <v-treeview
         v-if="!loading"
@@ -36,7 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue';
 import type { Tree } from '@herodotus/core';
 import type { SysOrganizationEntity, SysOrganizationConditions } from '@herodotus/api';
 

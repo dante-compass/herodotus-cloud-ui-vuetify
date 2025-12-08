@@ -13,6 +13,7 @@
       select-strategy="page"
       disable-sort
       @update:options="findItems"
+      class="mb-4"
     >
       <template #search>
         <employee-search v-model="conditions"></employee-search>
