@@ -25,7 +25,7 @@
           </template>
 
           <template #item.actions="{ item }">
-            <h-action-edit-button @click="toEdit(item, additionalData)"></h-action-edit-button>
+            <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
             <h-action-delete-button
               v-if="!item.reserved"
               @click="deleteItemById(item[rowKey])"

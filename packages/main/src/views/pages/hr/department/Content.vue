@@ -43,11 +43,11 @@ import type { SysDepartmentEntity } from '@herodotus/api';
 import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
-import { DepartmentSelect, OrganizationSelect } from '../components';
+import { DepartmentSelect } from '../components';
 
 defineOptions({
   name: 'SysDepartmentContent',
-  components: { DepartmentSelect, OrganizationSelect },
+  components: { DepartmentSelect },
 });
 
 const departmentForm = ref();

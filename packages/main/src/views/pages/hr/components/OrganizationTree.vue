@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto" rounded="xl" prepend-icon="mdi-domain" title="单位列表">
-    <v-divider></v-divider>
+    <v-divider inset></v-divider>
 
     <v-sheet class="pa-4">
       <h-dictionary-select
@@ -12,7 +12,7 @@
       ></h-dictionary-select>
     </v-sheet>
 
-    <v-divider></v-divider>
+    <v-divider inset></v-divider>
 
     <v-sheet class="md-4">
       <v-treeview

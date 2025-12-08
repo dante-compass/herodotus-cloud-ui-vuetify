@@ -175,6 +175,8 @@ watch(
   (newValue) => {
     if (!isEmpty(newValue) && newValue.id) {
       fetchAssignedByPage(pageNumber.value, pageSize.value, newValue.id);
+    } else {
+      tableRows.value = [];
     }
   },
   { deep: true },
