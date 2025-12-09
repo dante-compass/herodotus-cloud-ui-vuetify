@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { useDictionary } from '@/composables/hooks';
 
-defineOptions({ name: 'HToggleField' });
+defineOptions({ name: 'HDictionaryToggle' });
 
 interface Props {
   dictionary: string;
