@@ -23,13 +23,13 @@ export interface SysElementEntity extends AbstractSysEntity {
     elementCategory: string;
     menuScenario: string;
     applicationType: string;
+    roles: Array<SysRoleEntity>;
 }
 export interface SysRoleEntity extends AbstractSysEntity {
     roleId: string;
     roleCode: string;
     roleName: string;
     permissions: Array<SysPermissionEntity>;
-    elements: Array<SysElementEntity>;
 }
 export interface SysUserEntity extends AbstractSysEntity {
     userId: string;
