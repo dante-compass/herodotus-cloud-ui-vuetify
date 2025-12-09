@@ -8,6 +8,7 @@
     :items="tableRows"
     :item-value="rowKey"
     :loading="loading"
+    select-strategy="single"
     reserved
     @update:options="findItems"
   >

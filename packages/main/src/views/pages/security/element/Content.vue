@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -82,7 +83,7 @@ import { API } from '@/configurations';
 
 defineOptions({ name: 'SysElementContent' });
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysElementEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysElementEntity>(
   API.core.sysElement(),
 );
 const { treeItems } = useTreeItem<SysElementEntity, SysElementConditions>(API.core.sysElement());

@@ -9,6 +9,7 @@
       :items="tableRows"
       :item-value="rowKey"
       :loading="loading"
+      select-strategy="single"
       disable-sort
       @update:options="findItems"
     >

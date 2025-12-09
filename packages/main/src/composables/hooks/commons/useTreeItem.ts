@@ -10,18 +10,24 @@ export default function useTreeItem<T extends Entity, C extends Conditions>(
   const loading = shallowRef<boolean>(false);
 
   const fetchTree = (params: Conditions = {}) => {
-    AbstractService.fetchTree(params).then((result) => {
-      const data = result.data as Array<Tree>;
-      if (data) {
-        treeItems.value = data;
-      } else {
-        treeItems.value = [];
-      }
-    });
+    loading.value = true;
+    AbstractService.fetchTree(params)
+      .then((result) => {
+        const data = result.data as Array<Tree>;
+        if (data) {
+          treeItems.value = data;
+        } else {
+          treeItems.value = [];
+        }
+        loading.value = false;
+      })
+      .catch(() => {
+        loading.value = false;
+      });
   };
 
   watch(
-    () => conditions.value,
+    conditions,
     (newValue) => {
       fetchTree(newValue);
     },

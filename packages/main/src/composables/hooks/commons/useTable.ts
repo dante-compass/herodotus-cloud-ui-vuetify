@@ -1,6 +1,5 @@
 import type {
   Page,
-  Sort,
   Entity,
   Conditions,
   HttpResult,
@@ -9,8 +8,10 @@ import type {
 } from '@herodotus/core';
 import type { SortItem } from '../../declarations';
 
-import { concat, isBoolean, isEmpty, isString, map, pickBy, isNil } from 'lodash-es';
+import { watchDebounced } from '@vueuse/core';
+import { isEmpty, pickBy, isNil } from 'lodash-es';
 import { toast, notify } from '@herodotus/core';
+
 import useBaseTable from './useBaseTable';
 
 /**
@@ -23,7 +24,7 @@ import useBaseTable from './useBaseTable';
  * @param loadOnMount 是否在 onMount 阶段加载
  * @returns
  */
-export default function <E extends Entity, C extends Conditions>(
+export default function useTable<E extends Entity, C extends Conditions>(
   service: AbstractService<E>,
   name: string,
   fetchAll = false,
@@ -31,12 +32,6 @@ export default function <E extends Entity, C extends Conditions>(
   direction = 'DESC' as Direction,
   loadOnMount = true,
 ) {
-  onMounted(() => {
-    if (loadOnMount) {
-      reloadItems();
-    }
-  });
-
   const {
     loading,
     tableRows,
@@ -52,44 +47,12 @@ export default function <E extends Entity, C extends Conditions>(
     setAllData,
     setPageData,
     resetPageData,
-  } = useBaseTable<E, C>(name);
+    createSort,
+  } = useBaseTable<E, C>(name, sorted, direction);
 
   const pageNumber = shallowRef(1);
   const pageSize = shallowRef(10);
   const sortBy = ref([]) as Ref<Array<SortItem>>;
-
-  const parseDirection = (sortBy: Array<SortItem>): Direction => {
-    const flag = sortBy[0];
-    if (flag && flag.order) {
-      if (isBoolean(flag.order)) {
-        return flag.order ? 'DESC' : 'ASC';
-      }
-
-      if (isString(flag.order)) {
-        return flag.order.toUpperCase() as 'DESC' | 'ASC';
-      }
-    }
-
-    return 'DESC';
-  };
-
-  const createSort = (sortBy: Array<SortItem>): Sort => {
-    if (!isEmpty(sortBy)) {
-      return {
-        properties: concat(map(sortBy, 'key'), 'updateTime'),
-        direction: parseDirection(sortBy),
-      };
-    } else {
-      if (!isEmpty(sorted)) {
-        return {
-          properties: sorted,
-          direction: direction,
-        };
-      } else {
-        return { properties: ['updateTime'], direction: 'DESC' };
-      }
-    }
-  };
 
   const findItems = () => {
     if (fetchAll) {
@@ -122,7 +85,6 @@ export default function <E extends Entity, C extends Conditions>(
 
   const findItemsByPage = (pageNumber = 1, pageSize = 10, others = {}) => {
     showLoading();
-    console.log('----findItemsByPage----');
     service
       .fetchByPage(
         {
@@ -133,21 +95,17 @@ export default function <E extends Entity, C extends Conditions>(
         others,
       )
       .then((result) => {
-        console.log('----findItemsByPage then----');
         const data = result.data as Page<E>;
         // 用户文档列表中无结果时也要更新列表数据
         if (!isEmpty(data)) {
           setPageData(data);
-          console.log('----hideLoading then----');
           hideLoading();
         } else {
           resetPageData();
-          console.log('----hideLoading then----');
           hideLoading();
         }
       })
       .catch((error) => {
-        console.log('----hideLoading error----', error);
         hideLoading();
       });
   };
@@ -184,7 +142,13 @@ export default function <E extends Entity, C extends Conditions>(
     return pickBy(conditions, (value) => !isNil(value) && value !== '');
   };
 
-  watch(
+  onMounted(() => {
+    if (loadOnMount) {
+      reloadItems();
+    }
+  });
+
+  watchDebounced(
     conditions,
     (newValue) => {
       if (newValue && !fetchAll) {
@@ -192,7 +156,7 @@ export default function <E extends Entity, C extends Conditions>(
         findItemsByPage(pageNumber.value, pageSize.value, validCondtions);
       }
     },
-    { deep: true },
+    { debounce: 500, maxWait: 1000, deep: true },
   );
 
   return {

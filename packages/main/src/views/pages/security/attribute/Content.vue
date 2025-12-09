@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -45,7 +46,7 @@ import { API } from '@/configurations';
 
 defineOptions({ name: 'SysAttributeContent' });
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysAttributeEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysAttributeEntity>(
   API.core.sysAttribute(),
 );
 

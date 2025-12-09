@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -39,7 +40,7 @@ defineOptions({ name: 'SysRoleContent' });
 
 const roleForm = ref();
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysRoleEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysRoleEntity>(
   API.core.sysRole(),
 );
 

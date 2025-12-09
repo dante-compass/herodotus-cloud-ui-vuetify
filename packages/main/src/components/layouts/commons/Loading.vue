@@ -30,4 +30,19 @@
 defineOptions({ name: 'loading' });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+/* 可以添加一些自定义动画 */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.v-progress-circular {
+  animation: pulse 2s ease-in-out infinite;
+}
+</style>

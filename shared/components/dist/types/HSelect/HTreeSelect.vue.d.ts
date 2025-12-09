@@ -95,11 +95,15 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 props: Record<string, any>;
             }) => import('vue').VNodeChild) | undefined;
             loader?: ((arg: import('vuetify/lib/composables/loader.mjs').LoaderSlotProps) => import('vue').VNodeChild) | undefined;
-            default?: (() => import('vue').VNodeChild) | undefined;
+            default?: ((arg: {
+                id: Readonly<import('vue').Ref<string, string>>;
+            }) => import('vue').VNodeChild) | undefined;
             counter?: ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         } | {
             $stable?: boolean | undefined;
-        } | (() => import('vue').VNodeChild) | import('vue').VNodeChild;
+        } | ((arg: {
+            id: Readonly<import('vue').Ref<string, string>>;
+        }) => import('vue').VNodeChild) | import('vue').VNodeChild;
         "v-slots"?: {
             prepend?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
             append?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
@@ -115,7 +119,9 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 props: Record<string, any>;
             }) => import('vue').VNodeChild) | undefined;
             loader?: false | ((arg: import('vuetify/lib/composables/loader.mjs').LoaderSlotProps) => import('vue').VNodeChild) | undefined;
-            default?: false | (() => import('vue').VNodeChild) | undefined;
+            default?: false | ((arg: {
+                id: Readonly<import('vue').Ref<string, string>>;
+            }) => import('vue').VNodeChild) | undefined;
             counter?: false | ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         } | undefined;
     } & {
@@ -125,7 +131,9 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             props: Record<string, any>;
         }) => import('vue').VNodeChild) | undefined;
         "v-slot:counter"?: false | ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
-        "v-slot:default"?: false | (() => import('vue').VNodeChild) | undefined;
+        "v-slot:default"?: false | ((arg: {
+            id: Readonly<import('vue').Ref<string, string>>;
+        }) => import('vue').VNodeChild) | undefined;
         "v-slot:details"?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
         "v-slot:label"?: false | ((arg: import('vuetify/lib/components/VField/VField.mjs').DefaultInputSlot & {
             label: string | undefined;
@@ -439,6 +447,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
             id?: string | undefined;
             details: boolean;
+            labelId?: string | undefined;
         } & import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps, "active" | "centerAffix" | "clearIcon" | "clearable" | "details" | "dirty" | "disabled" | "error" | "flat" | "focused" | "glow" | "persistentClear" | "reverse" | "rounded" | "singleLine" | "style" | "tile" | "variant">;
         $attrs: {
             [x: string]: unknown;
@@ -511,6 +520,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             "onClick:appendInner"?: ((args_0: MouseEvent) => void) | undefined;
             "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
             id?: string | undefined;
+            labelId?: string | undefined;
         } & {
             "onUpdate:focused"?: ((focused: boolean) => any) | undefined;
         }, {
@@ -636,6 +646,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         "onClick:appendInner"?: ((args_0: MouseEvent) => void) | undefined;
         "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
         id?: string | undefined;
+        labelId?: string | undefined;
     } & {
         "onUpdate:focused"?: ((focused: boolean) => any) | undefined;
     }, "disabled" | "style" | "reverse" | "flat" | "rounded" | "tile" | "variant" | "active" | "details" | "centerAffix" | "clearIcon" | "clearable" | "controlRef" | "dirty" | "error" | "fieldIconColor" | "focused" | "glow" | "persistentClear" | "singleLine"> & import('vue').ShallowUnwrapRef<{
@@ -644,7 +655,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
         "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
-    }, import('vuetify/lib/components/VField/VField.mjs').VFieldSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "reverse" | "flat" | "rounded" | "tile" | "color" | "variant" | "loading" | "active" | "baseColor" | "v-slot:loader" | "details" | "label" | "centerAffix" | "clearIcon" | "clearable" | "dirty" | "error" | "focused" | "glow" | "persistentClear" | "singleLine" | "onUpdate:focused" | "appendInnerIcon" | "bgColor" | "iconColor" | "prependInnerIcon" | "onClick:clear" | "onClick:appendInner" | "onClick:prependInner" | "v-slot:append-inner" | "v-slot:clear" | "v-slot:label" | "v-slot:prepend-inner">, `$${any}`> & {
+    }, import('vuetify/lib/components/VField/VField.mjs').VFieldSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "reverse" | "flat" | "rounded" | "tile" | "color" | "variant" | "loading" | "active" | "baseColor" | "v-slot:loader" | "details" | "label" | "centerAffix" | "clearIcon" | "clearable" | "dirty" | "error" | "focused" | "glow" | "persistentClear" | "singleLine" | "onUpdate:focused" | "appendInnerIcon" | "bgColor" | "iconColor" | "prependInnerIcon" | "onClick:clear" | "onClick:appendInner" | "onClick:prependInner" | "v-slot:append-inner" | "v-slot:clear" | "v-slot:label" | "v-slot:prepend-inner" | "labelId">, `$${any}`> & {
         _allExposed: {
             reset: () => Promise<void>;
             resetValidation: () => Promise<void>;
@@ -724,7 +735,9 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         loader: (arg: import('vuetify/lib/composables/loader.mjs').LoaderSlotProps) => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
             [key: string]: any;
         }>[];
-        default: () => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
+        default: (arg: {
+            id: Readonly<import('vue').Ref<string, string>>;
+        }) => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
             [key: string]: any;
         }>[];
         counter: (arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
@@ -821,11 +834,15 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 props: Record<string, any>;
             }) => import('vue').VNodeChild) | undefined;
             loader?: ((arg: import('vuetify/lib/composables/loader.mjs').LoaderSlotProps) => import('vue').VNodeChild) | undefined;
-            default?: (() => import('vue').VNodeChild) | undefined;
+            default?: ((arg: {
+                id: Readonly<import('vue').Ref<string, string>>;
+            }) => import('vue').VNodeChild) | undefined;
             counter?: ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         } | {
             $stable?: boolean | undefined;
-        } | (() => import('vue').VNodeChild) | import('vue').VNodeChild;
+        } | ((arg: {
+            id: Readonly<import('vue').Ref<string, string>>;
+        }) => import('vue').VNodeChild) | import('vue').VNodeChild;
         "v-slots"?: {
             prepend?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
             append?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
@@ -841,7 +858,9 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 props: Record<string, any>;
             }) => import('vue').VNodeChild) | undefined;
             loader?: false | ((arg: import('vuetify/lib/composables/loader.mjs').LoaderSlotProps) => import('vue').VNodeChild) | undefined;
-            default?: false | (() => import('vue').VNodeChild) | undefined;
+            default?: false | ((arg: {
+                id: Readonly<import('vue').Ref<string, string>>;
+            }) => import('vue').VNodeChild) | undefined;
             counter?: false | ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         } | undefined;
     } & {
@@ -851,7 +870,9 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             props: Record<string, any>;
         }) => import('vue').VNodeChild) | undefined;
         "v-slot:counter"?: false | ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
-        "v-slot:default"?: false | (() => import('vue').VNodeChild) | undefined;
+        "v-slot:default"?: false | ((arg: {
+            id: Readonly<import('vue').Ref<string, string>>;
+        }) => import('vue').VNodeChild) | undefined;
         "v-slot:details"?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
         "v-slot:label"?: false | ((arg: import('vuetify/lib/components/VField/VField.mjs').DefaultInputSlot & {
             label: string | undefined;
@@ -1165,6 +1186,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
             id?: string | undefined;
             details: boolean;
+            labelId?: string | undefined;
         } & import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps, "active" | "centerAffix" | "clearIcon" | "clearable" | "details" | "dirty" | "disabled" | "error" | "flat" | "focused" | "glow" | "persistentClear" | "reverse" | "rounded" | "singleLine" | "style" | "tile" | "variant">;
         $attrs: {
             [x: string]: unknown;
@@ -1237,6 +1259,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             "onClick:appendInner"?: ((args_0: MouseEvent) => void) | undefined;
             "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
             id?: string | undefined;
+            labelId?: string | undefined;
         } & {
             "onUpdate:focused"?: ((focused: boolean) => any) | undefined;
         }, {
@@ -1362,6 +1385,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         "onClick:appendInner"?: ((args_0: MouseEvent) => void) | undefined;
         "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
         id?: string | undefined;
+        labelId?: string | undefined;
     } & {
         "onUpdate:focused"?: ((focused: boolean) => any) | undefined;
     }, "disabled" | "style" | "reverse" | "flat" | "rounded" | "tile" | "variant" | "active" | "details" | "centerAffix" | "clearIcon" | "clearable" | "controlRef" | "dirty" | "error" | "fieldIconColor" | "focused" | "glow" | "persistentClear" | "singleLine"> & import('vue').ShallowUnwrapRef<{
@@ -1370,7 +1394,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
         "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
-    }, import('vuetify/lib/components/VField/VField.mjs').VFieldSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "reverse" | "flat" | "rounded" | "tile" | "color" | "variant" | "loading" | "active" | "baseColor" | "v-slot:loader" | "details" | "label" | "centerAffix" | "clearIcon" | "clearable" | "dirty" | "error" | "focused" | "glow" | "persistentClear" | "singleLine" | "onUpdate:focused" | "appendInnerIcon" | "bgColor" | "iconColor" | "prependInnerIcon" | "onClick:clear" | "onClick:appendInner" | "onClick:prependInner" | "v-slot:append-inner" | "v-slot:clear" | "v-slot:label" | "v-slot:prepend-inner">, `$${any}`> & {
+    }, import('vuetify/lib/components/VField/VField.mjs').VFieldSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "reverse" | "flat" | "rounded" | "tile" | "color" | "variant" | "loading" | "active" | "baseColor" | "v-slot:loader" | "details" | "label" | "centerAffix" | "clearIcon" | "clearable" | "dirty" | "error" | "focused" | "glow" | "persistentClear" | "singleLine" | "onUpdate:focused" | "appendInnerIcon" | "bgColor" | "iconColor" | "prependInnerIcon" | "onClick:clear" | "onClick:appendInner" | "onClick:prependInner" | "v-slot:append-inner" | "v-slot:clear" | "v-slot:label" | "v-slot:prepend-inner" | "labelId">, `$${any}`> & {
         _allExposed: {
             reset: () => Promise<void>;
             resetValidation: () => Promise<void>;

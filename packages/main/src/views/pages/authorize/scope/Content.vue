@@ -2,6 +2,7 @@
   <h-center-layout-container
     :entity="editedItem"
     :title="title"
+    :overlay="overlay"
     :operation="operation"
     @save="onSave()"
   >
@@ -36,7 +37,7 @@ defineOptions({ name: 'OAuth2ScopeContent' });
 
 const scopeForm = ref();
 
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<OAuth2ScopeEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<OAuth2ScopeEntity>(
   API.core.oauth2Scope(),
 );
 

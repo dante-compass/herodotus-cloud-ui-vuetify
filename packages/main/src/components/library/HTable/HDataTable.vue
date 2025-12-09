@@ -41,7 +41,6 @@
           :items-length="totalItems"
           :density="settings.density"
           show-select
-          select-strategy="single"
           striped="even"
           hover
           v-bind="$attrs"
