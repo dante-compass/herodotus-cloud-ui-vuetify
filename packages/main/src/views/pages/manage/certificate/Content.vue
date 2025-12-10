@@ -67,6 +67,10 @@
         dictionary="CertificateCategory"
         default-value="TRUST_ANCHOR"
       ></h-dictionary-toggle>
+
+      <h-time v-model="time"></h-time>
+      <h-date v-model="date"></h-date>
+      <h-date-time v-model="dateTime"></h-date-time>
     </v-form>
   </h-center-layout-container>
 </template>
@@ -74,12 +78,18 @@
 <script setup lang="ts">
 import type { MgtCertificateEntity } from '@herodotus/api';
 
+import { toast } from '@herodotus/core';
+
 import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysTenantDataSourceContent' });
 
 const tenantForm = ref();
+
+const time = shallowRef('');
+const date = shallowRef('');
+const dateTime = shallowRef('');
 
 const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<MgtCertificateEntity>(
   API.core.mgtCertificate(),

@@ -35,9 +35,12 @@ export const zh = {
       header: '输入日期',
       input: { placeholder: '输入日期' },
       ariaLabel: {
+        previousYear: '上一年',
         previousMonth: '上个月',
+        nextYear: '下一年',
         nextMonth: '下个月',
         selectYear: '选择年份',
+        selectMonth: '选择月份',
         selectDate: '{0}',
         currentDate: '今天，{0}',
       },
@@ -53,7 +56,14 @@ export const zh = {
     },
     fileInput: { counter: '{0} 个文件', counterSize: '{0} 个文件（共 {1}）' },
     fileUpload: { title: '拖放文件到此处', divider: '或', browse: '浏览文件' },
-    timePicker: { am: '上午', pm: '下午', title: '选择时间' },
+    timePicker: {
+      am: '上午',
+      pm: '下午',
+      title: '选择时间',
+      hour: '小时',
+      minute: '分',
+      second: '秒',
+    },
     pagination: {
       ariaLabel: {
         root: '分页导航',
