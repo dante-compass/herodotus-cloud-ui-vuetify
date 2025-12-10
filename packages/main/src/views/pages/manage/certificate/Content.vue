@@ -67,18 +67,37 @@
         dictionary="CertificateCategory"
         default-value="TRUST_ANCHOR"
       ></h-dictionary-toggle>
-
-      <h-time v-model="time"></h-time>
-      <h-date v-model="date"></h-date>
-      <h-date-time v-model="dateTime"></h-date-time>
+      <v-select
+        v-model="editedItem.parentId"
+        :items="parentOptions"
+        item-title="alias"
+        item-value="certId"
+        label="上级证书"
+        chips
+        closable-chips
+        :loading="showParentLoading"
+        :disabled="disableParentSelect"
+        :readonly="disableParentSelect"
+      ></v-select>
+      <h-date
+        v-model="editedItem.startTime"
+        label="开始时间 *"
+        placeholder="请输入开始时间"
+        :rules="[(v: string) => !!v || '开始时间不能为空']"
+      ></h-date>
+      >
+      <h-date
+        v-model="editedItem.endTime"
+        label="结束时间 *"
+        placeholder="请输入结束时间"
+        :rules="[(v: string) => !!v || '结束时间不能为空']"
+      ></h-date>
     </v-form>
   </h-center-layout-container>
 </template>
 
 <script setup lang="ts">
 import type { MgtCertificateEntity } from '@herodotus/api';
-
-import { toast } from '@herodotus/core';
 
 import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
@@ -87,9 +106,9 @@ defineOptions({ name: 'SysTenantDataSourceContent' });
 
 const tenantForm = ref();
 
-const time = shallowRef('');
-const date = shallowRef('');
-const dateTime = shallowRef('');
+const parentOptions = ref([]) as Ref<Array<MgtCertificateEntity>>;
+const showParentLoading = ref(false);
+const disableParentSelect = ref(true);
 
 const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<MgtCertificateEntity>(
   API.core.mgtCertificate(),
@@ -128,6 +147,36 @@ const isUniqueRule = (alias: string) => {
       return '后端服务暂时不可用';
     });
 };
+
+const loadOptionData = (category: string) => {
+  showParentLoading.value = true;
+  if (category) {
+    API.core
+      .mgtCertificate()
+      .findAllByCertificateCategory(category)
+      .then((result) => {
+        parentOptions.value = result.data;
+        showParentLoading.value = false;
+        disableParentSelect.value = false;
+      })
+      .catch((error) => {
+        showParentLoading.value = false;
+        disableParentSelect.value = true;
+      });
+  }
+};
+
+watch(
+  () => editedItem.value.certificateCategory,
+  (newValue) => {
+    if (newValue === 'TRUST_ANCHOR') {
+      disableParentSelect.value = true;
+      editedItem.value.parentId = '';
+    } else {
+      loadOptionData(newValue);
+    }
+  },
+);
 
 const onSave = async () => {
   const { valid } = await tenantForm.value.validate();
