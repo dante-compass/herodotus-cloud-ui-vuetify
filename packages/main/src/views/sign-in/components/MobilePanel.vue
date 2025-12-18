@@ -27,8 +27,8 @@
         ></v-text-field>
         <v-container class="px-0 pb-0">
           <v-row>
-            <v-col cols="8"
-              ><v-text-field
+            <v-col cols="8">
+              <v-text-field
                 v-model="verificationCode"
                 tabindex="2"
                 :rules="[(v) => !!v || '密码不能为空，请输入密码！']"
@@ -40,8 +40,8 @@
                 variant="solo-filled"
                 :disabled="isSubmittingProtected"
                 @change="onResetError()"
-              ></v-text-field
-            ></v-col>
+              ></v-text-field>
+            </v-col>
             <v-col cols="4">
               <h-button
                 v-if="showPrompt"
@@ -49,8 +49,9 @@
                 block
                 :disabled="!mobile"
                 @click="onGetVerificationCode()"
-                >获取验证码</h-button
               >
+                获取验证码
+              </h-button>
               <h-button v-else size="x-large" disabled readonly block>{{ readSeconds }}</h-button>
             </v-col>
           </v-row>
@@ -63,8 +64,9 @@
         :disabled="isSubmittingProtected"
         @click="onShowCaptcha()"
         @keyup.enter="onShowCaptcha()"
-        >登录</h-button
       >
+        登录
+      </h-button>
       <h-behavior-captcha
         v-model="isShowCaptcha"
         @verify="onCaptchaVerify($event)"
@@ -79,8 +81,9 @@
         :disabled="isSubmittingProtected"
         @click="passkeySignIn()"
         @keyup.enter="passkeySignIn()"
-        >Passkey 快速登录</h-button
       >
+        Passkey 快速登录
+      </h-button>
 
       <h-text-divider label="其它登录方式"></h-text-divider>
 

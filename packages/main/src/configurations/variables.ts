@@ -32,6 +32,8 @@ class EnvironmentVariable {
   }
 
   private useDockerEnvironmentVariable(value: string): boolean {
+    console.log('-------docker--------', value);
+
     if (value) {
       const variable = value.toLocaleUpperCase();
       if (variable.startsWith('HERODOTUS')) {
@@ -95,17 +97,11 @@ class EnvironmentVariable {
   }
 
   public getApiUrl(): string {
-    return this.getEnvironmentVariable(
-      window.APPLICATION_ENVIRONMENT_VARIABLES_API_URL,
-      EnvironmentVariable.API_URL,
-    );
+    return EnvironmentVariable.API_URL;
   }
 
   public getWebSocketUrl(): string {
-    return this.getEnvironmentVariable(
-      window.APPLICATION_ENVIRONMENT_VARIABLES_WS_URL,
-      EnvironmentVariable.WS_URL,
-    );
+    return EnvironmentVariable.WS_URL;
   }
 
   public getClientId(): string {
