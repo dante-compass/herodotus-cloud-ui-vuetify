@@ -29,7 +29,7 @@
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",
     "vue": "^3.5.26",
-    "vue-i18n": "^11.2.2",
+    "vue-i18n": "^11.2.7",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
