@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/core",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -32,17 +32,17 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "@vueuse/integrations": "^14.0.0",
+    "@vueuse/integrations": "^14.1.0",
     "axios": "^1.13.2",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.19",
     "generate-avatar": "^1.4.10",
     "js-base64": "^3.7.8",
-    "lodash-es": "^4.17.21",
+    "lodash-es": "^4.17.22",
     "moment": "^2.30.1",
-    "qs": "^6.14.0",
-    "sm-crypto-v2": "^1.15.0",
-    "sweetalert2": "^11.26.3"
+    "qs": "^6.14.1",
+    "sm-crypto-v2": "^1.15.1",
+    "sweetalert2": "^11.26.17"
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",

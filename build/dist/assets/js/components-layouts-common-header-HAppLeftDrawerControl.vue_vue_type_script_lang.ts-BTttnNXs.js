@@ -1,0 +1,1 @@
+import{f as p}from"./App.vue_vue_type_script_setup_true_lang.ts-Je2kgOhw.js";import{d as t}from"./npm-@vue-runtime-core-ByiIHnF6.js";const e=t({name:"HAppLeftDrawerControl",setup:t=>({application:p()})});export{e as _};
