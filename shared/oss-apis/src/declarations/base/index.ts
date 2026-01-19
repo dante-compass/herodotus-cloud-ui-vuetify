@@ -5,4 +5,4 @@ export type {
   Conditions,
   Dictionary,
   HttpClientOptions,
-} from '@herodotus-cloud/core';
+} from '@herodotus/core';
