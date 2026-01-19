@@ -1,10 +1,11 @@
 import type { RouteRecordRaw, RouteMeta, Router } from 'vue-router';
 import type { ElementRouteTree } from '@herodotus-cloud/core';
-import type { RemoteRoute, ModuleNamespace } from '@/declarations';
+import type { ModuleNamespace } from '@/declarations';
 
 import { useRouterStore } from '../stores';
 import { MenuScenario } from '@/declarations';
-import { lodash } from '@herodotus-cloud/core';
+
+import { isEmpty } from 'lodash-es';
 
 export default function useSystemRoute(
   routeModules: Record<string, unknown>,
@@ -112,7 +113,7 @@ export default function useSystemRoute(
 
     console.log('[Herodotus] |- Begin add dynamic routes');
 
-    if (!lodash.isEmpty(routes)) {
+    if (!isEmpty(routes)) {
       const appMenus: RouteRecordRaw[] = [];
       const personalMenus: RouteRecordRaw[] = [];
 
