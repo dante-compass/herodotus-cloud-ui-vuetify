@@ -1,5 +1,17 @@
 # @herodotus-cloud/core
 
+## 2.9.0
+
+### Minor Changes
+
+- 修改lodash 方法引入方式，提升代码性能
+
+## 2.8.0
+
+### Minor Changes
+
+- lodash 引用修改为外部导入
+
 ## 2.7.0
 
 ### Minor Changes
