@@ -2,7 +2,7 @@ import type { Ref } from 'vue';
 import { ref, nextTick, onBeforeMount, computed } from 'vue';
 import type { Dictionary } from '@/lib/declarations';
 
-import { lodash } from '@/lib/utils';
+import { isEmpty } from 'lodash-es';
 
 import { useDictionaryStore } from '../store';
 
@@ -13,15 +13,15 @@ export default function useDictionary(category: string, ...others: string[]) {
 
   onBeforeMount(async () => {
     options.value = getDictionary();
-    if (lodash.isEmpty(options.value)) {
-      if (lodash.isEmpty(others)) {
+    if (isEmpty(options.value)) {
+      if (isEmpty(others)) {
         await dictionaryStore.fetchByCategory(category);
       } else {
         await dictionaryStore.fetchCategory(category, ...others);
       }
     }
     nextTick(() => {
-      if (lodash.isEmpty(options.value)) {
+      if (isEmpty(options.value)) {
         options.value = getDictionary();
       }
     });
@@ -42,7 +42,7 @@ export default function useDictionary(category: string, ...others: string[]) {
   };
 
   const isShow = computed(() => {
-    return !lodash.isEmpty(options.value);
+    return !isEmpty(options.value);
   });
 
   return {

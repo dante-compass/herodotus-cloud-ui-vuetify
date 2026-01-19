@@ -1,11 +1,12 @@
-import { useRoute as J } from "vue-router";
+import { useRoute as Q } from "vue-router";
 import { defineStore as D } from "pinia";
-import { lodash as u, Swal as W, AuthorizationTokenEnum as B, Base64 as X, ContentTypeEnum as E, AuthorizationGrantTypeEnum as R, BuildInScopeEnum as L, ClientAuthenticationMethodEnum as j, Service as Q, SM2Utils as x, SM4Utils as H, moment as K } from "@herodotus-cloud/core";
-import { jwtDecode as $ } from "jwt-decode";
-import { nextTick as V, shallowRef as _, ref as Z, watch as G, computed as tt } from "vue";
+import { Swal as V, AuthorizationTokenEnum as F, Base64 as $, ContentTypeEnum as y, AuthorizationGrantTypeEnum as R, BuildInScopeEnum as L, ClientAuthenticationMethodEnum as Z, Service as tt, SM2Utils as K, SM4Utils as H, moment as z } from "@herodotus-cloud/core";
+import { jwtDecode as et } from "jwt-decode";
+import { isEmpty as O, split as st, dropRight as it, join as nt, merge as B, has as rt, remove as U, findIndex as Y, intersection as at } from "lodash-es";
+import { nextTick as J, shallowRef as _, ref as ot, watch as q, computed as ct } from "vue";
 import "pinia-plugin-persistedstate";
-var U = /* @__PURE__ */ ((t) => (t.DEFAULT = "defaults", t.CLASSIC = "classic", t.TRANSVERSE = "transverse", t.COLUMNS = "transverse", t))(U || {}), v = /* @__PURE__ */ ((t) => (t.DARK = "dark", t.LIGHT = "light", t.SYSTEM = "system", t))(v || {}), z = /* @__PURE__ */ ((t) => (t.JIGSAW = "JIGSAW", t.WORD_CLICK = "WORD_CLICK", t.ARITHMETIC = "ARITHMETIC", t.CHINESE = "CHINESE", t.CHINESE_GIF = "CHINESE_GIF", t.SPEC_GIF = "SPEC_GIF", t.SPEC = "SPEC", t.HUTOOL_LINE = "HUTOOL_LINE", t.HUTOOL_CIRCLE = "HUTOOL_CIRCLE", t.HUTOOL_SHEAR = "HUTOOL_SHEAR", t.HUTOOL_GIF = "HUTOOL_GIF", t))(z || {}), Y = /* @__PURE__ */ ((t) => (t.INSTITUTION = "INSTITUTION", t.SMS = "SMS", t.WXAPP = "WXAPP", t.QQ = "QQ", t.WEIBO = "WEIBO", t.BAIDU = "BAIDU", t.WECHAT_OPEN = "WECHAT_OPEN", t.WECHAT_MP = "WECHAT_MP", t.WECHAT_ENTERPRISE = "WECHAT_ENTERPRISE", t.WECHAT_ENTERPRISE_WEB = "WECHAT_ENTERPRISE_WEB", t.DINGTALK = "DINGTALK", t.DINGTALK_ACCOUNT = "DINGTALK_ACCOUNT", t.ALIYUN = "ALIYUN", t.TAOBAO = "TAOBAO", t.ALIPAY = "ALIPAY", t.TEAMBITION = "TEAMBITION", t.HUAWEI_V2 = "HUAWEI_V2", t.FEISHU = "FEISHU", t.JD = "JD", t.DOUYIN = "DOUYIN", t.TOUTIAO = "TOUTIAO", t.MI = "MI", t.RENREN = "RENREN", t.MEITUAN = "MEITUAN", t.ELEME = "ELEME", t.KUJIALE = "KUJIALE", t.XMLY = "XMLY", t.GITEE = "GITEE", t.OSCHINA = "OSCHINA", t.CSDN = "CSDN", t.GITHUB = "GITHUB", t.GITLAB = "GITLAB", t.STACK_OVERFLOW = "STACK_OVERFLOW", t.CODING = "CODING", t.GOOGLE = "GOOGLE", t.MICROSOFT = "MICROSOFT", t.FACEBOOK = "FACEBOOK", t.LINKEDIN = "LINKEDIN", t.TWITTER = "TWITTER", t.AMAZON = "AMAZON", t.SLACK = "SLACK", t.LINE = "LINE", t.OKTA = "OKTA", t.PINTEREST = "PINTEREST", t))(Y || {}), q = /* @__PURE__ */ ((t) => (t.APP = "APP", t.PERSONAL = "PERSONAL", t))(q || {});
-const ht = D("Application", {
+var x = /* @__PURE__ */ ((t) => (t.DEFAULT = "defaults", t.CLASSIC = "classic", t.TRANSVERSE = "transverse", t.COLUMNS = "transverse", t))(x || {}), v = /* @__PURE__ */ ((t) => (t.DARK = "dark", t.LIGHT = "light", t.SYSTEM = "system", t))(v || {}), S = /* @__PURE__ */ ((t) => (t.JIGSAW = "JIGSAW", t.WORD_CLICK = "WORD_CLICK", t.ARITHMETIC = "ARITHMETIC", t.CHINESE = "CHINESE", t.CHINESE_GIF = "CHINESE_GIF", t.SPEC_GIF = "SPEC_GIF", t.SPEC = "SPEC", t.HUTOOL_LINE = "HUTOOL_LINE", t.HUTOOL_CIRCLE = "HUTOOL_CIRCLE", t.HUTOOL_SHEAR = "HUTOOL_SHEAR", t.HUTOOL_GIF = "HUTOOL_GIF", t))(S || {}), X = /* @__PURE__ */ ((t) => (t.INSTITUTION = "INSTITUTION", t.SMS = "SMS", t.WXAPP = "WXAPP", t.QQ = "QQ", t.WEIBO = "WEIBO", t.BAIDU = "BAIDU", t.WECHAT_OPEN = "WECHAT_OPEN", t.WECHAT_MP = "WECHAT_MP", t.WECHAT_ENTERPRISE = "WECHAT_ENTERPRISE", t.WECHAT_ENTERPRISE_WEB = "WECHAT_ENTERPRISE_WEB", t.DINGTALK = "DINGTALK", t.DINGTALK_ACCOUNT = "DINGTALK_ACCOUNT", t.ALIYUN = "ALIYUN", t.TAOBAO = "TAOBAO", t.ALIPAY = "ALIPAY", t.TEAMBITION = "TEAMBITION", t.HUAWEI_V2 = "HUAWEI_V2", t.FEISHU = "FEISHU", t.JD = "JD", t.DOUYIN = "DOUYIN", t.TOUTIAO = "TOUTIAO", t.MI = "MI", t.RENREN = "RENREN", t.MEITUAN = "MEITUAN", t.ELEME = "ELEME", t.KUJIALE = "KUJIALE", t.XMLY = "XMLY", t.GITEE = "GITEE", t.OSCHINA = "OSCHINA", t.CSDN = "CSDN", t.GITHUB = "GITHUB", t.GITLAB = "GITLAB", t.STACK_OVERFLOW = "STACK_OVERFLOW", t.CODING = "CODING", t.GOOGLE = "GOOGLE", t.MICROSOFT = "MICROSOFT", t.FACEBOOK = "FACEBOOK", t.LINKEDIN = "LINKEDIN", t.TWITTER = "TWITTER", t.AMAZON = "AMAZON", t.SLACK = "SLACK", t.LINE = "LINE", t.OKTA = "OKTA", t.PINTEREST = "PINTEREST", t))(X || {}), j = /* @__PURE__ */ ((t) => (t.APP = "APP", t.PERSONAL = "PERSONAL", t))(j || {});
+const It = D("Application", {
   state: () => ({
     // 左侧菜单面板显示控制
     leftDrawer: !0,
@@ -26,7 +27,7 @@ const ht = D("Application", {
     }
   }
 });
-class g {
+class d {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -42,18 +43,18 @@ class g {
    * @returns {OptionsUtilities} 单例实例
    */
   static initialize(e) {
-    if (g._initialized)
+    if (d._initialized)
       throw new Error("RouterUtilities has already been initialized");
-    return g._instance = new g(e), g._initialized = !0, g._instance;
+    return d._instance = new d(e), d._initialized = !0, d._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!g._instance)
+    if (!d._instance)
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
-    return g._instance;
+    return d._instance;
   }
   setOptions(e) {
     this.options = e;
@@ -89,7 +90,7 @@ class g {
     return this.getInstance().getOptions().variables.tenantId;
   }
 }
-class m {
+class E {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -106,18 +107,18 @@ class m {
    * @returns {RouterUtilities} 单例实例
    */
   static initialize(e) {
-    if (m._initialized)
+    if (E._initialized)
       throw new Error("RouterUtilities has already been initialized");
-    return m._instance = new m(e), m._initialized = !0, m._instance;
+    return E._instance = new E(e), E._initialized = !0, E._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!m._instance)
+    if (!E._instance)
       throw new Error("RouterUtilities not initialized. Call initialize() first.");
-    return m._instance;
+    return E._instance;
   }
   setRouter(e) {
     this.router = e;
@@ -126,10 +127,10 @@ class m {
     return this.router;
   }
   isRouterExist() {
-    return !u.isEmpty(this.router);
+    return !O(this.router);
   }
   hasParameter(e) {
-    return !u.isEmpty(e.params) || !u.isEmpty(e.query);
+    return !O(e.params) || !O(e.query);
   }
   /**
    * 判断是否为三级路由页面
@@ -187,8 +188,8 @@ class m {
     this.isRouterExist() ? this.to(this.options.path.signIn) : this.refresh();
   }
   getParent(e) {
-    const s = u.split(e, "/"), i = u.dropRight(s);
-    return u.join(i, "/");
+    const s = st(e, "/"), i = it(s);
+    return nt(i, "/");
   }
   toPrev(e) {
     if (e.path) {
@@ -227,10 +228,10 @@ class b {
     return b._instance;
   }
   signOut(e = !1) {
-    e || N().signOut(), this.extension(), console.log("Clear Framework Kernel Data"), N().$reset(), P().$reset(), m.getInstance().toSignIn();
+    e || N().signOut(), this.extension(), console.log("Clear Framework Kernel Data"), N().$reset(), P().$reset(), E.getInstance().toSignIn();
   }
   signOutWithDialog() {
-    W.fire({
+    V.fire({
       title: "要走了么?",
       text: "您确定要退出系统！",
       icon: "warning",
@@ -244,7 +245,7 @@ class b {
     });
   }
   tokenExpires(e, s, i, n = !1) {
-    W.fire({
+    V.fire({
       title: e,
       text: s,
       icon: i,
@@ -261,7 +262,7 @@ class b {
     });
   }
 }
-class S {
+class M {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -269,7 +270,7 @@ class S {
     this.config = e;
   }
   static getInstance(e) {
-    return this.instance == null && (this.instance = new S(e)), this.instance;
+    return this.instance == null && (this.instance = new M(e)), this.instance;
   }
   getOAuth2TokenAddress() {
     return this.config.getUaa() + "/oauth2/token";
@@ -288,20 +289,20 @@ class S {
   }
   createBasicHeader(e = "", s = "") {
     let i = this.config.getClientId() + ":" + this.config.getClientSecret();
-    return e && s && (i = e + ":" + s), B.BASIC + X.encode(i);
+    return e && s && (i = e + ":" + s), F.BASIC + $.encode(i);
   }
   createClientData(e = "", s = "", i = "") {
     const n = {
       client_id: "",
       client_secret: ""
     };
-    return e && s ? (n.client_id = e, n.client_secret = s) : (n.client_id = this.config.getClientId(), n.client_secret = this.config.getClientSecret()), i && u.merge(n, { scope: i }), n;
+    return e && s ? (n.client_id = e, n.client_secret = s) : (n.client_id = this.config.getClientId(), n.client_secret = this.config.getClientSecret()), i && B(n, { scope: i }), n;
   }
   createOAuth2Data(e, s, i = !1) {
     const n = {
       grant_type: e
     };
-    return u.isEmpty(s) || u.merge(n, s), i && u.merge(n, { scope: "openid" }), n;
+    return O(s) || B(n, s), i && B(n, { scope: "openid" }), n;
   }
   signOut(e, s = "", i = "") {
     return this.config.getHttp().put(
@@ -310,7 +311,7 @@ class S {
         accessToken: e
       },
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       },
       {
         headers: {
@@ -326,7 +327,7 @@ class S {
         token: e
       },
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       },
       {
         headers: {
@@ -344,7 +345,7 @@ class S {
         s
       ),
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       },
       {
         headers: {
@@ -362,7 +363,7 @@ class S {
         i
       ),
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       },
       {
         headers: {
@@ -390,7 +391,7 @@ class S {
    * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2
    * @see https
    */
-  authorizationCodeFlow(e, s, i = "", n = !1, r = "", A = "") {
+  authorizationCodeFlow(e, s, i = "", n = !1, r = "", f = "") {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
       this.createOAuth2Data(
@@ -399,11 +400,11 @@ class S {
         n
       ),
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       },
       {
         headers: {
-          Authorization: this.createBasicHeader(r, A)
+          Authorization: this.createBasicHeader(r, f)
         }
       }
     );
@@ -432,7 +433,7 @@ class S {
         ...this.createClientData(e, s, i)
       }),
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       }
     );
   }
@@ -456,7 +457,7 @@ class S {
         ...this.createClientData(s, i, n)
       }),
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       }
     );
   }
@@ -476,7 +477,7 @@ class S {
       this.getOAuth2DeviceAuthorizationAddress(),
       this.createClientData(e, s, i),
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       }
     );
   }
@@ -485,11 +486,11 @@ class S {
       this.getOAuth2TokenAddress(),
       this.createOAuth2Data(
         R.SOCIAL_CREDENTIALS,
-        { mobile: e, code: s, source: Y.SMS },
+        { mobile: e, code: s, source: X.SMS },
         i
       ),
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       },
       {
         headers: {
@@ -507,7 +508,7 @@ class S {
         i
       ),
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       },
       {
         headers: {
@@ -522,7 +523,7 @@ class S {
       this.createOAuth2Data(R.WEBAUTHN_CREDENTIALS, {}, s),
       { ...e },
       {
-        contentType: E.JSON
+        contentType: y.JSON
       },
       {
         headers: {
@@ -551,11 +552,11 @@ class S {
       //   "id_token"             // 允许但不推荐：纯 OIDC 流程（无访问令牌）
       // ],
       response_types: ["token"],
-      token_endpoint_auth_method: j.CLIENT_SECRET_POST
+      token_endpoint_auth_method: Z.CLIENT_SECRET_POST
     });
   }
 }
-class F {
+class W {
   // 静态私有实例引用
   static instance = null;
   config = {};
@@ -563,7 +564,7 @@ class F {
     this.config = e;
   }
   static getInstance(e) {
-    return this.instance == null && (this.instance = new F(e)), this.instance;
+    return this.instance == null && (this.instance = new W(e)), this.instance;
   }
   createSession(e = "") {
     const s = this.config.getUaa() + "/open/identity/session";
@@ -601,7 +602,7 @@ class F {
       coordinates: [],
       characters: ""
     };
-    return s === z.WORD_CLICK ? r.coordinates = i : s === z.JIGSAW ? r.coordinate = i : r.characters = i, this.config.getHttp().post(n, r);
+    return s === S.WORD_CLICK ? r.coordinates = i : s === S.JIGSAW ? r.coordinate = i : r.characters = i, this.config.getHttp().post(n, r);
   }
   createVerificationCode(e) {
     const s = this.config.getUpms() + "/open/identity/verification-code";
@@ -611,7 +612,7 @@ class F {
         mobile: e
       },
       {
-        contentType: E.URL_ENCODED
+        contentType: y.URL_ENCODED
       }
     );
   }
@@ -620,14 +621,14 @@ class F {
     return this.config.getHttp().get(e);
   }
 }
-class M extends Q {
+class G extends tt {
   // 静态私有实例引用
   static instance = null;
   constructor(e) {
     super(e);
   }
   static getInstance(e) {
-    return this.instance == null && (this.instance = new M(e)), this.instance;
+    return this.instance == null && (this.instance = new G(e)), this.instance;
   }
   getBaseAddress() {
     return this.getConfig().getUaa() + "/webauthn/register";
@@ -660,7 +661,7 @@ class M extends Q {
     return this.getConfig().getHttp().delete(this.getIdPath(e));
   }
 }
-class p {
+class g {
   // 静态私有实例引用
   static _instance = null;
   // 初始化标志
@@ -676,30 +677,30 @@ class p {
    * @returns {SecurityApiResources} 单例实例
    */
   static initialize(e) {
-    if (p._initialized)
+    if (g._initialized)
       throw new Error("SecurityApiResources has already been initialized");
-    return p._instance = new p(e), p._initialized = !0, p._instance;
+    return g._instance = new g(e), g._initialized = !0, g._instance;
   }
   /**
    * 获取单例实例
    * @returns {RouterUtilities} 单例实例
    */
   static getInstance() {
-    if (!p._instance)
+    if (!g._instance)
       throw new Error("SecurityApiResources not initialized. Call initialize() first.");
-    return p._instance;
+    return g._instance;
   }
   getConfig() {
     return this.config;
   }
   open() {
-    return F.getInstance(this.config);
+    return W.getInstance(this.config);
   }
   oauth2() {
-    return S.getInstance(this.config);
+    return M.getInstance(this.config);
   }
   passkey() {
-    return M.getInstance(this.config);
+    return G.getInstance(this.config);
   }
 }
 const P = D("Crypto", {
@@ -713,10 +714,10 @@ const P = D("Crypto", {
       this.sessionId = t;
     },
     setKey(t) {
-      this.key = H.encrypt(t, g.getSecurityKey());
+      this.key = H.encrypt(t, d.getSecurityKey());
     },
     getKey() {
-      return H.decrypt(this.key, g.getSecurityKey());
+      return H.decrypt(this.key, d.getSecurityKey());
     },
     encrypt(t) {
       const e = this.getKey();
@@ -728,14 +729,14 @@ const P = D("Crypto", {
     },
     exchange(t = "") {
       return new Promise((e, s) => {
-        p.getInstance().open().createSession(t).then((i) => {
+        g.getInstance().open().createSession(t).then((i) => {
           const n = i.data;
           if (n) {
-            const r = n.sessionId, A = n.publicKey;
+            const r = n.sessionId, f = n.publicKey;
             this.state = n.state;
-            const T = x.createKeyPair(), o = x.encrypt(T.publicKey, A);
-            p.getInstance().open().exchange(r, o).then((h) => {
-              const c = h.data, w = x.decrypt(c, T.privateKey);
+            const A = K.createKeyPair(), o = K.encrypt(A.publicKey, f);
+            g.getInstance().open().exchange(r, o).then((h) => {
+              const c = h.data, w = K.decrypt(c, A.privateKey);
               this.setSessionId(r), this.setKey(w), e(w);
             });
           }
@@ -769,16 +770,16 @@ const P = D("Crypto", {
   }),
   getters: {
     isNotExpired: (t) => {
-      const e = K().add(t.expires_in, "seconds").valueOf();
-      return K(e).add(1, "seconds").diff(K(), "seconds") !== 0;
+      const e = z().add(t.expires_in, "seconds").valueOf();
+      return z(e).add(1, "seconds").diff(z(), "seconds") !== 0;
     },
     token() {
-      return g.isAutoRefreshToken() ? this.access_token : this.isNotExpired ? this.access_token : "";
+      return d.isAutoRefreshToken() ? this.access_token : this.isNotExpired ? this.access_token : "";
     }
   },
   actions: {
     getBearerToken() {
-      return B.BEARER + this.token;
+      return F.BEARER + this.token;
     },
     getAuthorizationHeader() {
       return { Authorization: this.getBearerToken(), "X-Herodotus-Open-Id": this.userId };
@@ -786,7 +787,7 @@ const P = D("Crypto", {
     saveAccessToken(t) {
       if (this.access_token = t.access_token, this.expires_in = t.expires_in, this.refresh_token = t.refresh_token ? t.refresh_token : "", this.license = t.refresh_token ? t.refresh_token : "", this.scope = t.scope, this.token_type = t.token_type, t.id_token) {
         this.idToken = t.id_token;
-        const e = $(this.idToken);
+        const e = et(this.idToken);
         this.userId = e.openid, this.username = e.sub, this.avatar = e.avatar, this.employeeId = e.employeeId, this.roles = e.roles;
       } else if (t.openid) {
         const e = P();
@@ -810,17 +811,17 @@ const P = D("Crypto", {
       return t.code && [40106, 40111].includes(t.code);
     },
     setErrorPrompt(t, e) {
-      this.isAlertMessage(t) && p.getInstance().open().getPrompt(e).then((s) => {
+      this.isAlertMessage(t) && g.getInstance().open().getPrompt(e).then((s) => {
         this.setUserErrorStatus(s.data);
       });
     },
     signIn(t, e) {
       const s = P();
-      return g.isUseCrypto() && (t = s.encrypt(t), e = s.encrypt(e)), new Promise((i, n) => {
-        p.getInstance().oauth2().passwordFlow(t, e, g.isUseCrypto()).then((r) => {
+      return d.isUseCrypto() && (t = s.encrypt(t), e = s.encrypt(e)), new Promise((i, n) => {
+        g.getInstance().oauth2().passwordFlow(t, e, d.isUseCrypto()).then((r) => {
           if (r) {
-            const A = r;
-            this.saveAccessToken(A);
+            const f = r;
+            this.saveAccessToken(f);
           }
           this.access_token ? i(!0) : i(!1);
         }).catch((r) => {
@@ -830,7 +831,7 @@ const P = D("Crypto", {
     },
     refreshToken() {
       return new Promise((t, e) => {
-        p.getInstance().oauth2().refreshTokenFlow(this.refresh_token, g.isUseCrypto()).then((s) => {
+        g.getInstance().oauth2().refreshTokenFlow(this.refresh_token, d.isUseCrypto()).then((s) => {
           if (s) {
             const i = s;
             this.saveAccessToken(i);
@@ -842,7 +843,7 @@ const P = D("Crypto", {
       });
     },
     signOut() {
-      this.access_token && p.getInstance().oauth2().signOut(this.access_token).then(() => {
+      this.access_token && g.getInstance().oauth2().signOut(this.access_token).then(() => {
         console.log("Server side sign out successfully.");
       }).catch((t) => {
         console.log("Server side sign out has error.", t);
@@ -850,11 +851,11 @@ const P = D("Crypto", {
     },
     authorizationCode(t, e = "") {
       return new Promise((s, i) => {
-        p.getInstance().oauth2().authorizationCodeFlow(
+        g.getInstance().oauth2().authorizationCodeFlow(
           t,
-          g.getRedirectUri(),
+          d.getRedirectUri(),
           e,
-          g.isUseCrypto()
+          d.isUseCrypto()
         ).then((n) => {
           if (n) {
             const r = n;
@@ -868,11 +869,11 @@ const P = D("Crypto", {
     },
     smsSignIn(t, e) {
       const s = P();
-      return g.isUseCrypto() && (t = s.encrypt(t), e = s.encrypt(e)), new Promise((i, n) => {
-        p.getInstance().oauth2().socialCredentialsFlowBySms(t, e, g.isUseCrypto()).then((r) => {
+      return d.isUseCrypto() && (t = s.encrypt(t), e = s.encrypt(e)), new Promise((i, n) => {
+        g.getInstance().oauth2().socialCredentialsFlowBySms(t, e, d.isUseCrypto()).then((r) => {
           if (r) {
-            const A = r;
-            this.saveAccessToken(A);
+            const f = r;
+            this.saveAccessToken(f);
           }
           this.access_token ? i(!0) : i(!1);
         }).catch((r) => {
@@ -882,7 +883,7 @@ const P = D("Crypto", {
     },
     socialSignIn(t, e) {
       return new Promise((s, i) => {
-        p.getInstance().oauth2().socialCredentialsFlowByJustAuth(t, e, g.isUseCrypto()).then((n) => {
+        g.getInstance().oauth2().socialCredentialsFlowByJustAuth(t, e, d.isUseCrypto()).then((n) => {
           if (n) {
             const r = n;
             this.saveAccessToken(r);
@@ -895,7 +896,7 @@ const P = D("Crypto", {
     },
     passkey(t) {
       return new Promise((e, s) => {
-        p.getInstance().oauth2().webAuthnCredentialsFlow(t, g.isUseCrypto()).then((i) => {
+        g.getInstance().oauth2().webAuthnCredentialsFlow(t, d.isUseCrypto()).then((i) => {
           if (i) {
             const n = i;
             this.saveAccessToken(n);
@@ -908,10 +909,10 @@ const P = D("Crypto", {
     }
   },
   persist: !0
-}), lt = () => {
+}), Ct = () => {
   const t = N(), e = P(), s = t.access_token, i = e.sessionId, n = {};
-  s && (n.Authorization = B.BEARER + s), i && (n["X-Herodotus-Session-Id"] = i);
-  const r = g.getTenantId();
+  s && (n.Authorization = F.BEARER + s), i && (n["X-Herodotus-Session-Id"] = i);
+  const r = d.getTenantId();
   return r && (n["X-Herodotus-Tenant-Id"] = r), n;
 }, k = D("Router", {
   state: () => ({
@@ -923,7 +924,7 @@ const P = D("Crypto", {
   }),
   getters: {
     isDynamicRouteAdded() {
-      return !u.isEmpty(this.appMenus) || !u.isEmpty(this.personalMenus);
+      return !O(this.appMenus) || !O(this.personalMenus);
     }
   },
   actions: {
@@ -944,7 +945,7 @@ const P = D("Crypto", {
       return this.pushParams[t];
     },
     addMenus(t, e) {
-      u.isEmpty(t) || (this.appMenus = t), u.isEmpty(e) || (this.personalMenus = e);
+      O(t) || (this.appMenus = t), O(e) || (this.personalMenus = e);
     },
     /**
      * 将路由添加至缓存
@@ -971,7 +972,7 @@ const P = D("Crypto", {
      */
     hasParameter(t) {
       const e = t.name;
-      return !!(e && u.has(this.pushParams, e));
+      return !!(e && rt(this.pushParams, e));
     },
     /**
      * 判断是否为三级路由
@@ -1005,7 +1006,7 @@ const P = D("Crypto", {
       t && delete this.pushParams[t];
     }
   }
-}), et = D("GlobalSettings", {
+}), ht = D("GlobalSettings", {
   state: () => ({
     /**
      * 全局主题
@@ -1020,7 +1021,7 @@ const P = D("Crypto", {
     /**
      * 布局切换
      */
-    layout: U.DEFAULT,
+    layout: x.DEFAULT,
     /**
      * 界面效果
      */
@@ -1046,11 +1047,11 @@ const P = D("Crypto", {
     isDark: (t) => t.theme.mode === v.DARK,
     isLight: (t) => t.theme.mode === v.LIGHT,
     isSystem: (t) => t.theme.mode === v.SYSTEM,
-    isDefaultLayout: (t) => t.layout === U.DEFAULT,
-    isClassicLayout: (t) => t.layout === U.CLASSIC
+    isDefaultLayout: (t) => t.layout === x.DEFAULT,
+    isClassicLayout: (t) => t.layout === x.CLASSIC
   },
   persist: !0
-}), st = D("TabsView", {
+}), lt = D("TabsView", {
   state: () => ({
     tabs: [],
     activatedTab: {},
@@ -1059,7 +1060,7 @@ const P = D("Crypto", {
   getters: {
     isNotLastTab: (t) => (e) => t.tabs.length - 1 !== e,
     getLastTabIndex: (t) => t.tabs.length - 1,
-    getTabIndex: (t) => (e) => u.findIndex(t.tabs, (s) => s.name === e.name),
+    getTabIndex: (t) => (e) => Y(t.tabs, (s) => s.name === e.name),
     getActivatedTabIndex() {
       return this.getTabIndex(this.activatedTab);
     },
@@ -1094,12 +1095,12 @@ const P = D("Crypto", {
       };
     },
     setActivatedTab(t) {
-      V(() => {
+      J(() => {
         this.activatedTab = t, this.activatedTabName = t.name;
       });
     },
     isNotExistInStaticRoute(t) {
-      return u.findIndex(g.getRoutes(), (e) => e.path === t.path) === -1;
+      return Y(d.getRoutes(), (e) => e.path === t.path) === -1;
     },
     isTabNotOpened(t) {
       return this.getTabIndex(t) === -1;
@@ -1108,11 +1109,11 @@ const P = D("Crypto", {
       this.isNotExistInStaticRoute(t) && (this.isTabNotOpened(t) && (e ? this.isLastTabActivated ? this.tabs.splice(this.getActivatedTabIndex, 0, t) : this.tabs.splice(this.getActivatedTabIndex + 1, 0, t) : this.tabs.push(t)), this.setActivatedTab(t));
     },
     closeTab(t) {
-      u.remove(this.tabs, (e) => e.name === t.name);
+      U(this.tabs, (e) => e.name === t.name);
     },
     smartTab(t) {
       const e = k(), s = e.isDetailRoute(t), i = this.convertRouteToTab(t);
-      s ? e.hasParameter(t) ? this.openTab(i, s) : (this.closeTab(i), m.getInstance().goBack()) : this.openTab(i, s);
+      s ? e.hasParameter(t) ? this.openTab(i, s) : (this.closeTab(i), E.getInstance().goBack()) : this.openTab(i, s);
     },
     deleteTab(t) {
       const e = this.convertRouteToTab(t);
@@ -1122,69 +1123,69 @@ const P = D("Crypto", {
       this.closeTab(this.activatedTab);
     },
     closeOtherTabs() {
-      u.remove(this.tabs, (t) => t.name !== this.activatedTab.name);
+      U(this.tabs, (t) => t.name !== this.activatedTab.name);
     },
     closeLeftTabs() {
       const t = this.getActivatedTabIndex;
-      u.remove(this.tabs, (e, s) => s < t);
+      U(this.tabs, (e, s) => s < t);
     },
     closeRightTabs() {
       const t = this.getActivatedTabIndex;
-      u.remove(this.tabs, (e, s) => s > t);
+      U(this.tabs, (e, s) => s > t);
     }
   },
   persist: !0
 });
-function dt() {
-  const t = J(), e = k(), s = st();
+function yt() {
+  const t = Q(), e = k(), s = lt();
   return {
     onFinish: () => {
       const n = t.name;
-      e.removeRoutePushParam(n), s.deleteTab(t), m.getInstance().goBack();
+      e.removeRoutePushParam(n), s.deleteTab(t), E.getInstance().goBack();
     }
   };
 }
-function ut(t, e, s, i = "") {
-  const n = _(0), r = _(5), A = _(!1), T = _(!1), o = _({}), h = Z([]), c = (d, C = !1) => {
-    const I = h.value.length + 1;
-    C ? h.value.push({ id: I, icon: "mdi-information", color: "green", text: d }) : h.value.push({ id: I, icon: "mdi-alert-circle", color: "error", text: d });
-  }, w = (d) => {
-    d === "authorization_pending" ? c("Authorization pending, continuing to poll...") : d === "slow_down" ? (c("Slowing down..."), l()) : d === "token_expired" ? (c("Token expired, stopping..."), f(), T.value = !0) : d === "access_denied" && (c("Access denied, stopping..."), f(), T.value = !0);
-  }, O = () => {
-    p.getInstance().oauth2().deviceCodeFlow(t.value, e.value, s.value, i).then((d) => {
-      c("Authorization successful", !0), f(), A.value = !0, o.value = d;
-    }).catch((d) => {
-      w(d.error);
+function Et(t, e, s, i = "") {
+  const n = _(0), r = _(5), f = _(!1), A = _(!1), o = _({}), h = ot([]), c = (u, I = !1) => {
+    const T = h.value.length + 1;
+    I ? h.value.push({ id: T, icon: "mdi-information", color: "green", text: u }) : h.value.push({ id: T, icon: "mdi-alert-circle", color: "error", text: u });
+  }, w = (u) => {
+    u === "authorization_pending" ? c("Authorization pending, continuing to poll...") : u === "slow_down" ? (c("Slowing down..."), l()) : u === "token_expired" ? (c("Token expired, stopping..."), p(), A.value = !0) : u === "access_denied" && (c("Access denied, stopping..."), p(), A.value = !0);
+  }, m = () => {
+    g.getInstance().oauth2().deviceCodeFlow(t.value, e.value, s.value, i).then((u) => {
+      c("Authorization successful", !0), p(), f.value = !0, o.value = u;
+    }).catch((u) => {
+      w(u.error);
     });
   }, a = () => {
-    n.value = window.setInterval(O, r.value * 1e3);
-  }, f = () => {
+    n.value = window.setInterval(m, r.value * 1e3);
+  }, p = () => {
     window.clearInterval(n.value);
   }, l = () => {
-    r.value += 5, f(), a();
+    r.value += 5, p(), a();
   };
   return {
     pullingResponse: h,
     successResponse: o,
-    isFailed: T,
-    isSuccess: A,
+    isFailed: A,
+    isSuccess: f,
     schedule: a,
-    clear: f,
+    clear: p,
     slowDown: l
   };
 }
-function gt() {
+function Ot() {
   k();
   const t = N(), e = (o) => o.meta?.title, s = (o) => o.meta?.icon, i = (o) => o.meta?.isHideAllChild, n = (o) => o.children, r = (o) => !!n(o);
   return {
     hasPermission: (o) => {
       const h = t.roles, c = o.meta?.roles;
-      if (u.isEmpty(c))
+      if (O(c))
         return !0;
-      if (u.isEmpty(h))
+      if (O(h))
         return !1;
-      const w = u.intersection(h, c);
-      return !u.isEmpty(w);
+      const w = at(h, c);
+      return !O(w);
     },
     getItemTitle: e,
     getItemIcon: s,
@@ -1192,7 +1193,7 @@ function gt() {
     isDisplayAsItem: (o) => r(o) ? !!i(o) : !0
   };
 }
-function pt() {
+function mt() {
   const t = N();
   let e = null;
   const s = () => {
@@ -1202,28 +1203,28 @@ function pt() {
     isSupported: async () => !!(window.PublicKeyCredential && PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable && PublicKeyCredential.isConditionalMediationAvailable && (await Promise.all([
       PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(),
       PublicKeyCredential.isConditionalMediationAvailable()
-    ])).every((T) => T === !0)),
-    registration: (A) => (e = new AbortController(), new Promise((T, o) => {
-      p.getInstance().passkey().getPublicKeyCredentialCreationOptions().then((h) => {
+    ])).every((A) => A === !0)),
+    registration: (f) => (e = new AbortController(), new Promise((A, o) => {
+      g.getInstance().passkey().getPublicKeyCredentialCreationOptions().then((h) => {
         const c = PublicKeyCredential.parseCreationOptionsFromJSON(
           h
         );
         return navigator.credentials.create({ publicKey: c });
       }).then((h) => {
         const c = {
-          publicKey: { label: A, credential: h }
+          publicKey: { label: f, credential: h }
         };
-        return p.getInstance().passkey().webAuthnRegister(c);
+        return g.getInstance().passkey().webAuthnRegister(c);
       }).then((h) => {
-        T(h);
+        A(h);
       }).catch((h) => {
         o(h);
       }).finally(() => {
         s();
       });
     })),
-    authenticator: () => (e = new AbortController(), new Promise((A, T) => {
-      p.getInstance().passkey().getPublicKeyCredentialRequestOptions().then((o) => {
+    authenticator: () => (e = new AbortController(), new Promise((f, A) => {
+      g.getInstance().passkey().getPublicKeyCredentialRequestOptions().then((o) => {
         const h = PublicKeyCredential.parseRequestOptionsFromJSON(
           o
         );
@@ -1237,19 +1238,19 @@ function pt() {
         }
         return !1;
       }).then((o) => {
-        A(o);
+        f(o);
       }).catch((o) => {
-        T(o);
+        A(o);
       }).finally(() => {
         s();
       });
     }))
   };
 }
-function ft(t, e, s, i) {
-  const n = (a) => a.meta?.isDetailContent, r = (a) => a.meta?.scenario, A = (a, f) => {
+function Rt(t, e, s, i) {
+  const n = (a) => a.meta?.isDetailContent, r = (a) => a.meta?.scenario, f = (a, p) => {
     const l = {};
-    return l.path = a.name, l.component = f[s(a.componentPath)], a.componentName && (l.name = a.componentName), a.redirect && (l.redirect = a.redirect), l.meta = {
+    return l.path = a.name, l.component = p[s(a.componentPath)], a.componentName && (l.name = a.componentName), a.redirect && (l.redirect = a.redirect), l.meta = {
       scenario: a.scenario,
       icon: a.meta.icon,
       title: a.meta.title,
@@ -1260,36 +1261,36 @@ function ft(t, e, s, i) {
       ...a.meta.isDetailContent && { isDetailContent: a.meta.isDetailContent },
       ...a.meta.isIgnoreAuth && { isIgnoreAuth: a.meta.isIgnoreAuth }
     }, l;
-  }, T = (a, f) => {
+  }, A = (a, p) => {
     const l = k();
-    return a.map((d) => {
-      const C = A(d, f);
-      return n(C) && l.addDetailRoute(C), d.children && d.children.length > 0 && (C.children = T(d.children, f)), C;
+    return a.map((u) => {
+      const I = f(u, p);
+      return n(I) && l.addDetailRoute(I), u.children && u.children.length > 0 && (I.children = A(u.children, p)), I;
     });
   }, o = () => {
-    const a = [], f = t;
-    return Object.keys(f).forEach((l) => {
-      const C = f[l].default || {}, I = Array.isArray(C) ? [...C] : [C];
-      a.push(...I);
+    const a = [], p = t;
+    return Object.keys(p).forEach((l) => {
+      const I = p[l].default || {}, T = Array.isArray(I) ? [...I] : [I];
+      a.push(...T);
     }), a;
-  }, h = (a, f) => {
-    const l = a.meta?.sort || 0, d = f.meta?.sort || 0;
-    return l - d;
-  }, c = (a, f) => {
+  }, h = (a, p) => {
+    const l = a.meta?.sort || 0, u = p.meta?.sort || 0;
+    return l - u;
+  }, c = (a, p) => {
     const l = k();
-    if (console.log("[Herodotus] |- Begin add dynamic routes"), u.isEmpty(f))
+    if (console.log("[Herodotus] |- Begin add dynamic routes"), O(p))
       console.warn("[Herodotus] |- Dynamic routes is empty, skip!");
     else {
-      const d = [], C = [];
-      f.forEach((I) => {
-        a.addRoute(I), r(I) === q.APP ? d.push(I) : C.push(I);
-      }), l.addMenus(d, C), console.log("[Herodotus] |- Dynamic routes add success!");
+      const u = [], I = [];
+      p.forEach((T) => {
+        a.addRoute(T), r(T) === j.APP ? u.push(T) : I.push(T);
+      }), l.addMenus(u, I), console.log("[Herodotus] |- Dynamic routes add success!");
     }
   };
   return {
-    initBackEndRoutes: async (a, f) => {
-      const d = (await i(f)).data.menus, I = T(d, e);
-      console.log("---routes---", I), c(a, I);
+    initBackEndRoutes: async (a, p) => {
+      const u = (await i(p)).data.menus, T = A(u, e);
+      console.log("---routes---", T), c(a, T);
     },
     initFrontEndRoutes: async (a) => {
       const l = o().sort(h);
@@ -1297,30 +1298,30 @@ function ft(t, e, s, i) {
     }
   };
 }
-function At() {
+function bt() {
   let t;
-  const e = et(), s = _(v.DARK), i = typeof window < "u", n = () => {
+  const e = ht(), s = _(v.DARK), i = typeof window < "u", n = () => {
     if (i)
       return window.matchMedia("(prefers-color-scheme: dark)");
   }, r = () => {
     s.value = t.matches ? v.DARK : v.LIGHT;
-  }, A = (h) => {
+  }, f = (h) => {
     if (!h || h.nodeType !== Node.ELEMENT_NODE) return !1;
     const c = window.getComputedStyle(h);
     return c.overflowY === "scroll" || c.overflowY === "auto" && h.scrollHeight > h.clientHeight;
-  }, T = () => {
+  }, A = () => {
     const h = performance.now();
     if (performance.now() - h > 10) return;
     const c = document.querySelector("[data-v-app]");
-    c.querySelectorAll("*").forEach((y) => {
-      A(y) && (y.dataset.scrollX = String(y.scrollLeft), y.dataset.scrollY = String(y.scrollTop));
+    c.querySelectorAll("*").forEach((C) => {
+      f(C) && (C.dataset.scrollX = String(C.scrollLeft), C.dataset.scrollY = String(C.scrollTop));
     });
-    const O = c.cloneNode(!0);
-    O.classList.add("app-copy");
+    const m = c.cloneNode(!0);
+    m.classList.add("app-copy");
     const a = c.getBoundingClientRect();
-    O.style.top = a.top + "px", O.style.left = a.left + "px", O.style.width = a.width + "px", O.style.height = a.height + "px";
-    const l = document.activeElement.getBoundingClientRect(), d = l.left + l.width / 2 + window.scrollX, C = l.top + l.height / 2 + window.scrollY;
-    c.style.setProperty("--clip-pos", `${d}px ${C}px`), c.style.removeProperty("--clip-size"), V(() => {
+    m.style.top = a.top + "px", m.style.left = a.left + "px", m.style.width = a.width + "px", m.style.height = a.height + "px";
+    const l = document.activeElement.getBoundingClientRect(), u = l.left + l.width / 2 + window.scrollX, I = l.top + l.height / 2 + window.scrollY;
+    c.style.setProperty("--clip-pos", `${u}px ${I}px`), c.style.removeProperty("--clip-size"), J(() => {
       c.classList.add("app-transition"), requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           c.style.setProperty(
@@ -1329,53 +1330,53 @@ function At() {
           );
         });
       });
-    }), document.body.append(O), O.querySelectorAll("[data-scroll-x], [data-scroll-y]").forEach(
-      (y) => {
-        y.scrollLeft = Number(y.dataset.scrollX), y.scrollTop = Number(y.dataset.scrollY);
+    }), document.body.append(m), m.querySelectorAll("[data-scroll-x], [data-scroll-y]").forEach(
+      (C) => {
+        C.scrollLeft = Number(C.dataset.scrollX), C.scrollTop = Number(C.dataset.scrollY);
       }
     );
-    function I(y) {
-      y.target === y.currentTarget && (O.remove(), c.removeEventListener("transitionend", I), c.removeEventListener("transitioncancel", I), c.classList.remove("app-transition"), c.style.removeProperty("--clip-size"), c.style.removeProperty("--clip-pos"));
+    function T(C) {
+      C.target === C.currentTarget && (m.remove(), c.removeEventListener("transitionend", T), c.removeEventListener("transitioncancel", T), c.classList.remove("app-transition"), c.style.removeProperty("--clip-size"), c.style.removeProperty("--clip-pos"));
     }
-    c.addEventListener("transitionend", I), c.addEventListener("transitioncancel", I);
+    c.addEventListener("transitionend", T), c.addEventListener("transitioncancel", T);
   };
-  G(
+  q(
     () => e.theme.mode,
     (h) => {
       h === v.SYSTEM ? (t = n(), t.addEventListener("change", r), r()) : t && t.removeEventListener("change", r);
     },
     { immediate: !0 }
   );
-  const o = tt(() => e.isSystem ? s.value : e.theme.mode);
-  return G(o, T), {
+  const o = ct(() => e.isSystem ? s.value : e.theme.mode);
+  return q(o, A), {
     theme: o
   };
 }
-const Tt = (t) => {
-  g.initialize(t), m.initialize(t.router), p.initialize(t.config), b.initialize(t.signOutExtension);
+const vt = (t) => {
+  d.initialize(t), E.initialize(t.router), g.initialize(t.config), b.initialize(t.signOutExtension);
 };
 export {
-  z as CaptchaCategoryEnum,
-  U as LayoutModeEnum,
-  q as MenuScenario,
-  g as OptionsUtilities,
-  m as RouterUtilities,
-  p as SecurityApiResources,
+  S as CaptchaCategoryEnum,
+  x as LayoutModeEnum,
+  j as MenuScenario,
+  d as OptionsUtilities,
+  E as RouterUtilities,
+  g as SecurityApiResources,
   b as SignOutUtilities,
-  Y as SocialSourceEnum,
+  X as SocialSourceEnum,
   v as ThemeModeEnum,
-  lt as getSystemHeaders,
-  Tt as initializer,
-  ht as useApplicationStore,
+  Ct as getSystemHeaders,
+  vt as initializer,
+  It as useApplicationStore,
   N as useAuthenticationStore,
   P as useCryptoStore,
-  ut as useDeviceAuthorize,
-  dt as useEditFinish,
-  pt as usePasskey,
+  Et as useDeviceAuthorize,
+  yt as useEditFinish,
+  mt as usePasskey,
   k as useRouterStore,
-  et as useSettingsStore,
-  gt as useSystemMenu,
-  ft as useSystemRoute,
-  At as useSystemTheme,
-  st as useTabsViewStore
+  ht as useSettingsStore,
+  Ot as useSystemMenu,
+  Rt as useSystemRoute,
+  bt as useSystemTheme,
+  lt as useTabsViewStore
 };
