@@ -72,9 +72,9 @@ import { defineComponent, ref, computed, watch } from 'vue';
 import type { QTableProps } from 'quasar';
 import type { ExtensionProperty } from '@/declarations';
 
-import { lodash } from '@/lib/utils';
 import { useExtensionProperties } from '@/hooks';
 import { useDesignerStore } from '@/stores';
+import { isEmpty } from 'lodash-es';
 
 import { HExpansionItem, HTableItemDeleteButton } from '../../widgets';
 import { HExtensionPropertyDialog } from '../../property-element';
@@ -109,7 +109,7 @@ export default defineComponent({
     });
 
     const onCreate = (item: ExtensionProperty) => {
-      if (!lodash.isEmpty(item)) {
+      if (!isEmpty(item)) {
         openDialog.value = false;
         tableRows.value.push(item);
         modifyExtensionProperty(designer.activeElement, tableRows.value);
@@ -118,7 +118,7 @@ export default defineComponent({
     };
 
     const onDelete = (item: ExtensionProperty) => {
-      if (!lodash.isEmpty(tableRows.value)) {
+      if (!isEmpty(tableRows.value)) {
         deleteExtensionProperty(designer.activeElement, item);
         loading();
       }
