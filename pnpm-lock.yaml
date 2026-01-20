@@ -189,9 +189,6 @@ importers:
       '@herodotus-cloud/form-engine':
         specifier: workspace:^
         version: link:../../shared/form-engine
-      '@herodotus-cloud/framework-kernel':
-        specifier: workspace:^
-        version: link:../../shared/framework-kernel
       '@herodotus-cloud/oss-apis':
         specifier: workspace:^
         version: link:../../shared/oss-apis
