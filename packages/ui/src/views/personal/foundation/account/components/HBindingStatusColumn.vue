@@ -16,7 +16,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
+import { useSettingsStore } from '@herodotus/framework';
 
 export default defineComponent({
   name: 'HBindingStatusColumn',

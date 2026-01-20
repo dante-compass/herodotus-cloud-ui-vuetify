@@ -66,7 +66,7 @@ import type {
 import { useRouter } from 'vue-router';
 import { OperationEnum } from '@/lib/definitions';
 import { API } from '@/configurations';
-import { useRouterStore } from '@herodotus-cloud/framework-kernel';
+import { useElementStore } from '@herodotus/framework';
 
 import { HDeleteButton, HTable } from '@/components';
 
@@ -99,7 +99,7 @@ export default defineComponent({
     const selected = ref([]);
     const rowKey: SysEmployeeProps = 'employeeId';
     const router = useRouter();
-    const store = useRouterStore();
+    const store = useElementStore();
 
     const { getDictionaryItemDisplay } = useDictionary('identity');
 

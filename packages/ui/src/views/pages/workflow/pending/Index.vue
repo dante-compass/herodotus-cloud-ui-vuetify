@@ -33,7 +33,7 @@ import type { TaskEntity, TaskQueryParams, TaskSortBy, QTableProps } from '@/lib
 
 import { moment } from '@/lib/utils';
 import { API } from '@/configurations';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore } from '@herodotus/framework';
 import { useBpmnTableItems } from '@/composables/bpmn';
 
 export default defineComponent({

@@ -9,7 +9,7 @@ import { echarts } from '@/plugins';
 import { VARIABLES } from '@/configurations';
 import { refreshTabInjectionKey, echartsInjectionKey } from '@/lib/definitions';
 import { useWebSocketMessage } from '@/composables/messages';
-import { useAuthenticationStore, useSettingsStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore, useSettingsStore } from '@herodotus/framework';
 
 defineOptions({
   name: 'App',

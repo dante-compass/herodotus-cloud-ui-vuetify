@@ -32,7 +32,7 @@ import { defineComponent, ref, computed, onMounted } from 'vue';
 import { PKCE } from '@/lib/utils';
 import { endsWith, isEmpty } from 'lodash-es';
 import { VARIABLES, IMAGES, API } from '@/configurations';
-import { SecurityApiResources } from '@herodotus-cloud/framework-kernel';
+import { SecurityApiResources } from '@herodotus/framework';
 
 export default defineComponent({
   name: 'HSocialSignInList',

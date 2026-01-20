@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-import { useCryptoStore, useAuthenticationStore, useApplicationStore } from '@herodotus-cloud/framework-kernel';
+import { useCryptoStore, useAuthenticationStore, useApplicationStore } from '@herodotus/framework';
 
 import { HSignInLayout } from '@/composables/sign-in';
 import AccountPanel from './panel/AccountPanel.vue';

@@ -41,13 +41,13 @@ export const config = new HttpConfig(http, options);
 const api = createApi(http, options);
 const bpmnApi = createBpmnApi(http, options);
 const formApi = createFormApi(http, options);
-const ossApi = createOssApi(http, options);
+// const ossApi = createOssApi(http, options);
 
 export const API = {
   core: api,
   bpmn: bpmnApi,
   form: formApi,
-  oss: ossApi,
+  // oss: ossApi,
   bpmnStorage: BpmnDesignerStorage.getInstance(bpmnApi, formApi),
   formStorage: FormDesignerStorage.getInstance(formApi),
 };

@@ -10,7 +10,7 @@ import type {
 
 import { logResponse, isSuccess } from '@herodotus-cloud/core';
 
-import { getSystemHeaders } from '@herodotus-cloud/framework-kernel';
+import { getSystemHeaders } from '@herodotus/framework';
 import { processor } from './status';
 import { IS_DEV } from '../constants';
 

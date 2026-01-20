@@ -35,7 +35,7 @@ import type {
 
 import { API } from '@/configurations';
 import { useBaseTable } from '@/hooks';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore } from '@herodotus/framework';
 
 export default defineComponent({
   name: 'HCompletedTaskTable',

@@ -4,9 +4,9 @@ import { Swal as V, AuthorizationTokenEnum as F, Base64 as $, ContentTypeEnum as
 import { jwtDecode as et } from "jwt-decode";
 import { isEmpty as O, split as st, dropRight as it, join as nt, merge as B, has as rt, remove as U, findIndex as Y, intersection as at } from "lodash-es";
 import { nextTick as J, shallowRef as _, ref as ot, watch as q, computed as ct } from "vue";
-import "pinia-plugin-persistedstate";
+import { default as _t } from "pinia-plugin-persistedstate";
 var x = /* @__PURE__ */ ((t) => (t.DEFAULT = "defaults", t.CLASSIC = "classic", t.TRANSVERSE = "transverse", t.COLUMNS = "transverse", t))(x || {}), v = /* @__PURE__ */ ((t) => (t.DARK = "dark", t.LIGHT = "light", t.SYSTEM = "system", t))(v || {}), S = /* @__PURE__ */ ((t) => (t.JIGSAW = "JIGSAW", t.WORD_CLICK = "WORD_CLICK", t.ARITHMETIC = "ARITHMETIC", t.CHINESE = "CHINESE", t.CHINESE_GIF = "CHINESE_GIF", t.SPEC_GIF = "SPEC_GIF", t.SPEC = "SPEC", t.HUTOOL_LINE = "HUTOOL_LINE", t.HUTOOL_CIRCLE = "HUTOOL_CIRCLE", t.HUTOOL_SHEAR = "HUTOOL_SHEAR", t.HUTOOL_GIF = "HUTOOL_GIF", t))(S || {}), X = /* @__PURE__ */ ((t) => (t.INSTITUTION = "INSTITUTION", t.SMS = "SMS", t.WXAPP = "WXAPP", t.QQ = "QQ", t.WEIBO = "WEIBO", t.BAIDU = "BAIDU", t.WECHAT_OPEN = "WECHAT_OPEN", t.WECHAT_MP = "WECHAT_MP", t.WECHAT_ENTERPRISE = "WECHAT_ENTERPRISE", t.WECHAT_ENTERPRISE_WEB = "WECHAT_ENTERPRISE_WEB", t.DINGTALK = "DINGTALK", t.DINGTALK_ACCOUNT = "DINGTALK_ACCOUNT", t.ALIYUN = "ALIYUN", t.TAOBAO = "TAOBAO", t.ALIPAY = "ALIPAY", t.TEAMBITION = "TEAMBITION", t.HUAWEI_V2 = "HUAWEI_V2", t.FEISHU = "FEISHU", t.JD = "JD", t.DOUYIN = "DOUYIN", t.TOUTIAO = "TOUTIAO", t.MI = "MI", t.RENREN = "RENREN", t.MEITUAN = "MEITUAN", t.ELEME = "ELEME", t.KUJIALE = "KUJIALE", t.XMLY = "XMLY", t.GITEE = "GITEE", t.OSCHINA = "OSCHINA", t.CSDN = "CSDN", t.GITHUB = "GITHUB", t.GITLAB = "GITLAB", t.STACK_OVERFLOW = "STACK_OVERFLOW", t.CODING = "CODING", t.GOOGLE = "GOOGLE", t.MICROSOFT = "MICROSOFT", t.FACEBOOK = "FACEBOOK", t.LINKEDIN = "LINKEDIN", t.TWITTER = "TWITTER", t.AMAZON = "AMAZON", t.SLACK = "SLACK", t.LINE = "LINE", t.OKTA = "OKTA", t.PINTEREST = "PINTEREST", t))(X || {}), j = /* @__PURE__ */ ((t) => (t.APP = "APP", t.PERSONAL = "PERSONAL", t))(j || {});
-const It = D("Application", {
+const Tt = D("Application", {
   state: () => ({
     // 左侧菜单面板显示控制
     leftDrawer: !0,
@@ -909,7 +909,7 @@ const P = D("Crypto", {
     }
   },
   persist: !0
-}), Ct = () => {
+}), It = () => {
   const t = N(), e = P(), s = t.access_token, i = e.sessionId, n = {};
   s && (n.Authorization = F.BEARER + s), i && (n["X-Herodotus-Session-Id"] = i);
   const r = d.getTenantId();
@@ -1136,7 +1136,7 @@ const P = D("Crypto", {
   },
   persist: !0
 });
-function yt() {
+function Ct() {
   const t = Q(), e = k(), s = lt();
   return {
     onFinish: () => {
@@ -1145,7 +1145,7 @@ function yt() {
     }
   };
 }
-function Et(t, e, s, i = "") {
+function yt(t, e, s, i = "") {
   const n = _(0), r = _(5), f = _(!1), A = _(!1), o = _({}), h = ot([]), c = (u, I = !1) => {
     const T = h.value.length + 1;
     I ? h.value.push({ id: T, icon: "mdi-information", color: "green", text: u }) : h.value.push({ id: T, icon: "mdi-alert-circle", color: "error", text: u });
@@ -1174,7 +1174,7 @@ function Et(t, e, s, i = "") {
     slowDown: l
   };
 }
-function Ot() {
+function Et() {
   k();
   const t = N(), e = (o) => o.meta?.title, s = (o) => o.meta?.icon, i = (o) => o.meta?.isHideAllChild, n = (o) => o.children, r = (o) => !!n(o);
   return {
@@ -1193,7 +1193,7 @@ function Ot() {
     isDisplayAsItem: (o) => r(o) ? !!i(o) : !0
   };
 }
-function mt() {
+function Ot() {
   const t = N();
   let e = null;
   const s = () => {
@@ -1247,7 +1247,7 @@ function mt() {
     }))
   };
 }
-function Rt(t, e, s, i) {
+function mt(t, e, s, i) {
   const n = (a) => a.meta?.isDetailContent, r = (a) => a.meta?.scenario, f = (a, p) => {
     const l = {};
     return l.path = a.name, l.component = p[s(a.componentPath)], a.componentName && (l.name = a.componentName), a.redirect && (l.redirect = a.redirect), l.meta = {
@@ -1298,7 +1298,7 @@ function Rt(t, e, s, i) {
     }
   };
 }
-function bt() {
+function Rt() {
   let t;
   const e = ht(), s = _(v.DARK), i = typeof window < "u", n = () => {
     if (i)
@@ -1352,7 +1352,7 @@ function bt() {
     theme: o
   };
 }
-const vt = (t) => {
+const bt = (t) => {
   d.initialize(t), E.initialize(t.router), g.initialize(t.config), b.initialize(t.signOutExtension);
 };
 export {
@@ -1365,18 +1365,19 @@ export {
   b as SignOutUtilities,
   X as SocialSourceEnum,
   v as ThemeModeEnum,
-  Ct as getSystemHeaders,
-  vt as initializer,
-  It as useApplicationStore,
+  It as getSystemHeaders,
+  bt as initializer,
+  _t as piniaPluginPersistedstate,
+  Tt as useApplicationStore,
   N as useAuthenticationStore,
   P as useCryptoStore,
-  Et as useDeviceAuthorize,
-  yt as useEditFinish,
-  mt as usePasskey,
+  yt as useDeviceAuthorize,
+  Ct as useEditFinish,
+  Ot as usePasskey,
   k as useRouterStore,
   ht as useSettingsStore,
-  Ot as useSystemMenu,
-  Rt as useSystemRoute,
-  bt as useSystemTheme,
+  Et as useSystemMenu,
+  mt as useSystemRoute,
+  Rt as useSystemTheme,
   lt as useTabsViewStore
 };

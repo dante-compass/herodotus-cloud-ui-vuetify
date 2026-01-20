@@ -195,6 +195,9 @@ importers:
       '@herodotus-cloud/oss-apis':
         specifier: workspace:^
         version: link:../../shared/oss-apis
+      '@herodotus/core':
+        specifier: ^0.0.2
+        version: 0.0.2
       '@herodotus/framework':
         specifier: ^0.0.2
         version: 0.0.2

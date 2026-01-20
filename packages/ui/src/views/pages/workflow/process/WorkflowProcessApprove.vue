@@ -38,7 +38,7 @@ import type { Sheet, ProcessCommentsEntity, Variables } from '@/lib/declarations
 import { useBpmnProcess } from '@/composables/bpmn';
 import { HDetailContainer, HFormSkeleton } from '@/components';
 import { CONSTANTS, API } from '@/configurations';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore } from '@herodotus/framework';
 import { toast } from '@/lib/utils';
 import { isEmpty } from 'lodash-es';
 

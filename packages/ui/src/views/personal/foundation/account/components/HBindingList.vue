@@ -52,7 +52,7 @@ import type {
 
 import { CONSTANTS, IMAGES, API } from '@/configurations';
 import { useTable } from '@/hooks';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore } from '@herodotus/framework';
 import { moment } from '@/lib/utils';
 
 import HBindingButton from './HBindingButton.vue';

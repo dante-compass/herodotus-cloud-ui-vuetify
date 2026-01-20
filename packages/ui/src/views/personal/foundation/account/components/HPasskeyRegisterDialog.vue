@@ -22,7 +22,7 @@ import { defineComponent, computed, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
-import { usePasskey } from '@herodotus-cloud/framework-kernel';
+import { usePasskey } from '@herodotus/framework';
 
 export default defineComponent({
   name: 'HPasskeyRegisterDialog',

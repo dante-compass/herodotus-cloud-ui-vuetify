@@ -15,7 +15,7 @@ import { useBaseTableItem, useEditFinish } from '@/hooks';
 import { API } from '@/configurations';
 import { toast } from '@/lib/utils';
 import { isEmpty } from 'lodash-es';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore } from '@herodotus/framework';
 
 export default function useBpmnProcess() {
   const { editedItem, title, overlay } = useBaseTableItem<ProcessSpecificsEntity>();

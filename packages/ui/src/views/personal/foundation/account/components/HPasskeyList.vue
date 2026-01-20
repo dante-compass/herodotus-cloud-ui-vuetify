@@ -49,7 +49,7 @@ import {
   useAuthenticationStore,
   SecurityApiResources,
   usePasskey,
-} from '@herodotus-cloud/framework-kernel';
+} from '@herodotus/framework';
 
 import { HDeleteButton } from '@/components';
 

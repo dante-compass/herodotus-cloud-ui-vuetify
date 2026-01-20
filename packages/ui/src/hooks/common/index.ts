@@ -4,7 +4,7 @@ import useTableItem from './useTableItem';
 import useTable from './useTable';
 import useDisplayElement from './useDisplayElement';
 import useTreeItems from './useTreeItems';
-import { useEditFinish } from '@herodotus-cloud/framework-kernel';
+import { useEditFinish } from '@herodotus/framework';
 
 export {
   useBaseTable,

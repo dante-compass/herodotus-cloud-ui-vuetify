@@ -18,7 +18,7 @@ import type { DialogueDetailEntity } from '@/lib/declarations';
 
 import { isEmpty } from 'lodash-es';
 import { useWebSocketMessage } from '../hooks';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore } from '@herodotus/framework';
 
 export default defineComponent({
   name: 'HSendMessageField',
