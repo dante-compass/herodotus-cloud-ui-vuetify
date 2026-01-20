@@ -12,4 +12,4 @@ const initializer = (options: KernelOptions) => {
   SignOutUtilities.initialize(options.signOutExtension);
 };
 
-export { initializer };
+export { initializer, piniaPluginPersistedstate };
