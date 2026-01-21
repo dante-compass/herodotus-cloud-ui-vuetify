@@ -16,6 +16,17 @@ export type {
   SweetAlertIcon,
   SweetAlertResult,
 } from '@herodotus-cloud/core';
+
+export type {
+  QBaseDataItem,
+  QTableSeparatorProps,
+  QTableColumnProps,
+  QTablePaginationProps,
+  QTableOnRequestProps,
+  QTableOnRequestParameter,
+  QUploaderInfo,
+  QNotifyPosition,
+} from '@herodotus-cloud/components';
 export type {
   AbstractEntity,
   AbstractSysEntity,

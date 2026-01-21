@@ -1,0 +1,1 @@
+import{t as o}from"./npm-@herodotus-framework-DqnMe3C2.js";import{_ as e}from"./components-library-HTable-HDenseIconButton.vue-CbvsMUTs.js";import{d as t}from"./npm-@vue-runtime-core-C2rjfyq-.js";const s=t({name:"HReservedColumn",components:{HDenseIconButton:e},props:{status:{type:Boolean,default:!1}},setup:e=>({settings:o()})});export{s as _};

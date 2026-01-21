@@ -1,0 +1,1 @@
+import{Q as s,q as a,a as n,N as r,P as i,b as o}from"./npm-quasar-OJGB8Ayx.js";import"./npm-@quasar-extras-I8FbaiHr.js";const e=e=>{e.use(s,{plugins:{Loading:o,AppFullscreen:i,Notify:r},lang:n,iconSet:a,config:{loading:{spinnerColor:"primary",spinnerSize:100,message:"正在处理中. 请稍后..."}}})};export{e as s};

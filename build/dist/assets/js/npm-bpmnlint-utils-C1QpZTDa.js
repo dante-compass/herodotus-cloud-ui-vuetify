@@ -1,0 +1,1 @@
+import{g as n}from"./npm-es-errors-CXLDMvnj.js";function e(n,e){return-1===e.indexOf(":")&&(e="bpmn:"+e),"function"==typeof n.$instanceOf?n.$instanceOf(e):n.$type===e}const t=n(Object.freeze(Object.defineProperty({__proto__:null,is:e,isAny:function(n,t){return t.some(function(t){return e(n,t)})}},Symbol.toStringTag,{value:"Module"})));export{t as r};

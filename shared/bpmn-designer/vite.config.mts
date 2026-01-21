@@ -44,10 +44,13 @@ export default defineConfig({
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: [
+        'lodash-es',
+        '@herodotus/core',
         '@bpmn-io/element-template-chooser',
         '@herodotus-cloud/bpmn-apis',
         '@herodotus-cloud/components',
         '@herodotus-cloud/core',
+
         '@highlightjs/vue-plugin',
         'bpmnlint',
         'bpmnlint/rules/conditional-flows',
@@ -91,7 +94,6 @@ export default defineConfig({
         'pinia',
         'quasar',
         'vue',
-        'lodash-es',
       ],
       output: {
         exports: 'named',
@@ -99,6 +101,7 @@ export default defineConfig({
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           'lodash-es': 'LodashEs',
+          '@herodotus/core': 'HerodotusCore',
           '@bpmn-io/element-template-chooser': 'BpmnIoElementTemplateChooser',
           '@herodotus-cloud/bpmn-apis': 'HerodotusBpmnApis',
           '@herodotus-cloud/components': 'HerodotusComponents',

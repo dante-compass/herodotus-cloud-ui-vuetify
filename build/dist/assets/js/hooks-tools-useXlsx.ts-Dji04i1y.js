@@ -1,0 +1,1 @@
+import{u as o,w as s}from"./npm-xlsx-CIl5X343.js";import{B as r}from"./npm-lodash-es-CiKRWceR.js";function t(){return{postExport:(t,e,p)=>{const a=((o,s)=>{const t=Object.keys(s),e=Array.from(t,o=>s[o]),p=Array.from(o,o=>r(o,t)),a=[];return a.push(e),a.push(...p),a})(t,e),n=o.aoa_to_sheet(a),m=o.book_new();o.book_append_sheet(m,n,p),s(m,p+".xlsx")}}}export{t as u};

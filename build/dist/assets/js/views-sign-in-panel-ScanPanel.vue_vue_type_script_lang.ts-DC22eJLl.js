@@ -1,0 +1,1 @@
+import{F as r}from"./npm-@herodotus-framework-DqnMe3C2.js";import{d as m}from"./npm-@vue-runtime-core-C2rjfyq-.js";import{q as o}from"./npm-@vue-reactivity-BHxdgU9K.js";const t=m({name:"ScanPanel",setup:()=>({application:r(),url:o("https://placeimg.com/500/300/nature")})});export{t as _};
