@@ -1,4 +1,7 @@
 export type {
+  AbstractEntity,
+  AbstractSysEntity,
+  Dictionary,
   Entity,
   Conditions,
   Page,
@@ -27,9 +30,6 @@ export type {
   QNotifyPosition,
 } from '@herodotus-cloud/components';
 export type {
-  AbstractEntity,
-  AbstractSysEntity,
-  Dictionary,
   SysPermissionEntity,
   SysPermissionConditions,
   SysPermissionProps,
@@ -101,7 +101,7 @@ export type {
   MgtCertificateEntity,
   MgtCertificateConditions,
   MgtCertificateProps,
-} from '@herodotus-cloud/apis';
+} from '@herodotus/api';
 
 export type {
   BucketDomain,

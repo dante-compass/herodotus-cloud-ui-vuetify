@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@bpmn-io/properties-panel": "3.36.0",
-    "@herodotus-cloud/apis": "workspace:^",
     "@herodotus-cloud/bpmn-apis": "workspace:^",
     "@herodotus-cloud/bpmn-designer": "workspace:^",
     "@herodotus-cloud/components": "workspace:^",
