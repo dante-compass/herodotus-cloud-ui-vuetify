@@ -422,11 +422,7 @@ importers:
         specifier: ^4.17.12
         version: 4.17.12
 
-  shared/form-apis:
-    dependencies:
-      '@herodotus-cloud/core':
-        specifier: workspace:^
-        version: link:../core
+  shared/form-apis: {}
 
   shared/form-designer:
     dependencies:

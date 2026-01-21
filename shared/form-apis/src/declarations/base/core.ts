@@ -5,7 +5,7 @@ export type {
   AxiosHttpResult,
   Page,
   Pageable,
-} from '@herodotus-cloud/core';
+} from '@herodotus/core';
 
 export interface BaseMongoEntity {
   id?: string;
