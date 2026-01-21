@@ -25,6 +25,7 @@
     "@herodotus-cloud/form-designer": "workspace:^",
     "@herodotus-cloud/form-engine": "workspace:^",
     "@herodotus-cloud/oss-apis": "workspace:^",
+    "@herodotus/api": "^0.0.2",
     "@herodotus/core": "^0.0.2",
     "@herodotus/framework": "^0.0.2",
     "@mdi/js": "^7.4.47",

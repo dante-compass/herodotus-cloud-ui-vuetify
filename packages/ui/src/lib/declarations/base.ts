@@ -15,10 +15,9 @@ export type {
   OidcIdTokenResponse,
   SweetAlertIcon,
   SweetAlertResult,
-} from '@herodotus-cloud/core';
+} from '@herodotus/core';
 
 export type {
-  QBaseDataItem,
   QTableSeparatorProps,
   QTableColumnProps,
   QTablePaginationProps,
@@ -121,6 +120,7 @@ export type {
 } from '@herodotus-cloud/oss-apis';
 
 export type {
+  QBaseDataItem,
   Element,
   FormModeler,
   Sheet,

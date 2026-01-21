@@ -1,7 +1,6 @@
-import type { AxiosResponse, AxiosInstance, AxiosError } from '@herodotus-cloud/core';
+import type { AxiosResponse, AxiosInstance, AxiosError } from '@herodotus/core';
 
-import { notify, parseResponseStatus } from '@herodotus-cloud/core';
-
+import { notify, parseResponseStatus } from '@herodotus/core';
 import { SignOutUtilities } from '@herodotus/framework';
 
 const excludedRequest = ['/open/captcha', '/oauth2/token'];
