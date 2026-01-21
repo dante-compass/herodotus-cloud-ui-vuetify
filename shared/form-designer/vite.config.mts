@@ -43,13 +43,13 @@ export default defineConfig({
       // 确保外部化处理那些你不想打包进库的依赖
       external: [
         'lodash-es',
+        '@herodotus/core',
         'vue',
         'quasar',
         'pinia',
         '@herodotus-cloud/components',
         '@herodotus-cloud/form-engine',
         '@herodotus-cloud/form-apis',
-        '@herodotus-cloud/core',
         'vuedraggable',
       ],
       output: {
@@ -58,12 +58,12 @@ export default defineConfig({
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           'lodash-es': 'LodashEs',
+          '@herodotus/core': 'HerodotusCore',
           vue: 'vue',
           quasar: 'quasar',
           pinia: 'pinia',
           '@herodotus-cloud/form-engine': 'HerodotusFormEngine',
           '@herodotus-cloud/components': 'HerodotusComponents',
-          '@herodotus-cloud/core': 'HerodotusCore',
           '@herodotus-cloud/form-apis': 'HerodotusFormApis',
           vuedraggable: 'vuedraggable',
         },
