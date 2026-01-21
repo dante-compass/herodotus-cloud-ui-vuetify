@@ -36,7 +36,6 @@
     "@bpmn-io/properties-panel": "3.36.0",
     "@herodotus-cloud/bpmn-apis": "workspace:^",
     "@herodotus-cloud/components": "workspace:^",
-    "@herodotus-cloud/core": "workspace:^",
     "@herodotus-cloud/form-apis": "workspace:^",
     "@highlightjs/vue-plugin": "^2.1.0",
     "bpmn-js": "^18.10.1",

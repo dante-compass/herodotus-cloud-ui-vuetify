@@ -49,8 +49,6 @@ export default defineConfig({
         '@bpmn-io/element-template-chooser',
         '@herodotus-cloud/bpmn-apis',
         '@herodotus-cloud/components',
-        '@herodotus-cloud/core',
-
         '@highlightjs/vue-plugin',
         'bpmnlint',
         'bpmnlint/rules/conditional-flows',
@@ -105,7 +103,6 @@ export default defineConfig({
           '@bpmn-io/element-template-chooser': 'BpmnIoElementTemplateChooser',
           '@herodotus-cloud/bpmn-apis': 'HerodotusBpmnApis',
           '@herodotus-cloud/components': 'HerodotusComponents',
-          '@herodotus-cloud/core': 'HerodotusCore',
           '@highlightjs/vue-plugin': 'HighlightjsVuePlugin',
           bpmnlint: 'Bpmnlint',
           'bpmnlint/rules/conditional-flows': 'BpmnlintRulesConditionalFlows',

@@ -297,9 +297,6 @@ importers:
       '@herodotus-cloud/components':
         specifier: workspace:^
         version: link:../components
-      '@herodotus-cloud/core':
-        specifier: workspace:^
-        version: link:../core
       '@herodotus-cloud/form-apis':
         specifier: workspace:^
         version: link:../form-apis
