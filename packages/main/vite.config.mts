@@ -104,6 +104,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         '@tsparticles/interaction-particles-links',
         '@mdi/js',
         '@vueuse/components',
+        'echarts/theme/macarons',
       ],
     },
     define: { 'process.env': { env } },

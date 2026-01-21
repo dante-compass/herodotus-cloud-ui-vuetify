@@ -1,5 +1,16 @@
 # @herodotus/components
 
+## 0.1.0
+
+### Minor Changes
+
+- 与原基于 Quasar 工程核心模块实现模块共享
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@0.1.0
+
 ## 0.0.2
 
 ### Patch Changes
