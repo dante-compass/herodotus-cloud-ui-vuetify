@@ -32,7 +32,6 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "@herodotus-cloud/core": "workspace:^",
     "@mdi/js": "^7.4.47",
     "@tsparticles/basic": "^3.9.1",
     "@tsparticles/engine": "^3.9.1",

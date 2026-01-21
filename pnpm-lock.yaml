@@ -357,9 +357,6 @@ importers:
 
   shared/components:
     dependencies:
-      '@herodotus-cloud/core':
-        specifier: workspace:^
-        version: link:../core
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
