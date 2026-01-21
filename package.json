@@ -34,6 +34,7 @@
     ]
   },
   "dependencies": {
+    "@herodotus/core": "^0.0.2",
     "@quasar/extras": "^1.17.0",
     "disable-devtool": "^0.3.9",
     "lodash-es": "^4.17.22",
