@@ -1,5 +1,11 @@
 # @herodotus-cloud/components
 
+## 3.0.0
+
+### Major Changes
+
+- 核心模块修改为引用 @herodotus/\*
+
 ## 2.9.0
 
 ### Minor Changes

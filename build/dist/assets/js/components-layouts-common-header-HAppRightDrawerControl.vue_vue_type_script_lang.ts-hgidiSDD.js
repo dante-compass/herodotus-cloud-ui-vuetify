@@ -1,0 +1,1 @@
+import{F as o}from"./npm-@herodotus-framework-DJuhH0G9.js";import{d as r}from"./npm-@vue-runtime-core-C2rjfyq-.js";const p=r({name:"HAppRightDrawerControl",setup:r=>({application:o()})});export{p as _};

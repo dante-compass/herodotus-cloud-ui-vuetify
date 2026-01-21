@@ -1,5 +1,16 @@
 # @herodotus-cloud/form-engine
 
+## 3.0.0
+
+### Major Changes
+
+- 核心模块修改为引用 @herodotus/\*
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-apis@3.0.0
+
 ## 2.9.0
 
 ### Minor Changes

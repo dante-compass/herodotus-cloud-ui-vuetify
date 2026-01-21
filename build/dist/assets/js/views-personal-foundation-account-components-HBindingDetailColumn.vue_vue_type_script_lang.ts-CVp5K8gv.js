@@ -1,1 +1,0 @@
-import{t as e}from"./npm-@herodotus-framework-B4T4eFIP.js";import{d as t}from"./npm-@vue-runtime-core-C2rjfyq-.js";const r=t({name:"HBindingDetailColumn",props:{item:{type:Object,required:!0}},setup:t=>({settings:e()})});export{r as _};
