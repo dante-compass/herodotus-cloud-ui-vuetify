@@ -177,9 +177,6 @@ importers:
       '@herodotus-cloud/components':
         specifier: workspace:^
         version: link:../../shared/components
-      '@herodotus-cloud/core':
-        specifier: workspace:^
-        version: link:../../shared/core
       '@herodotus-cloud/form-apis':
         specifier: workspace:^
         version: link:../../shared/form-apis
@@ -243,6 +240,9 @@ importers:
       element-resize-detector:
         specifier: ^1.2.4
         version: 1.2.4
+      js-base64:
+        specifier: ^3.7.8
+        version: 3.7.8
       rsocket-core:
         specifier: 1.0.0-alpha.3
         version: 1.0.0-alpha.3

@@ -1,4 +1,4 @@
-import type { HttpClientOptions } from '@herodotus-cloud/core';
+import type { HttpClientOptions } from '@herodotus/core';
 
 import { createApi } from '@herodotus/api';
 import { createBpmnApi } from '@herodotus-cloud/bpmn-apis';
