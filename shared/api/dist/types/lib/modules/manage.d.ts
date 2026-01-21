@@ -1,13 +1,17 @@
-import { MgtCertificateEntity } from '../../declarations';
-import { AxiosHttpResult, HttpConfig, AbstractService } from '@herodotus/core';
-declare class MgtCertificateService extends AbstractService<MgtCertificateEntity> {
+import { AxiosHttpResult, Pageable, Page, HttpConfig, Service } from '@herodotus/core';
+import { CertificateRequest, CertificateResponse } from '../../declarations';
+declare class MgtCertificateService extends Service {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): MgtCertificateService;
     getBaseAddress(): string;
+    private getConditionAddress;
     getAliasAddress(): string;
     getCategoryAddress(): string;
-    findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateEntity>>;
-    findAllByCertificateCategory(certificateCategory: string): Promise<AxiosHttpResult<Array<MgtCertificateEntity>>>;
+    fetchByPage(params: Pageable, others?: {}): Promise<AxiosHttpResult<Page<CertificateResponse>>>;
+    saveOrUpdate(data: CertificateRequest): Promise<AxiosHttpResult<CertificateResponse>>;
+    delete(id: string): Promise<AxiosHttpResult<string>>;
+    findByAlias(alias: string): Promise<AxiosHttpResult<CertificateResponse>>;
+    findAllByCertificateCategory(certificateCategory: string): Promise<AxiosHttpResult<Array<CertificateResponse>>>;
 }
 export { MgtCertificateService };

@@ -1,5 +1,5 @@
 import { AbstractSysEntity, Conditions } from '@herodotus/core';
-export interface MgtCertificateEntity extends AbstractSysEntity {
+export interface CertificateRequest {
     certId: string;
     alias: string;
     /**
@@ -38,17 +38,29 @@ export interface MgtCertificateEntity extends AbstractSysEntity {
      * 简称：C 字段，只能是国家字母缩写，如中国：CN 。
      */
     country: string;
-    distinguishedName: string;
     startTime: Date;
     endTime: Date;
     password: string;
+    parentId: string;
     bucketName: string;
     keystoreName: string;
-    pemName: string;
-    parentId: string;
-    keyStoreCategory: string;
     certificateCategory: string;
+    ocsp: boolean;
+}
+export interface CertificateResponse extends AbstractSysEntity {
+    certId: string;
+    alias: string;
+    password: string;
+    parentId: string;
+    certificateCategory: string;
+    serialNumber: string;
+    subjectDn: string;
+    issuerDn: string;
+    startTime: Date;
+    endTime: Date;
+    ocsp: boolean;
+    revocationReason: string;
 }
 export interface MgtCertificateConditions extends Conditions {
 }
-export type MgtCertificateProps = keyof MgtCertificateEntity;
+export type CertificateProps = keyof CertificateResponse;
