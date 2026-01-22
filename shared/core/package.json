@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/core",
-  "version": "2.8.0",
+  "version": "2.10.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -38,7 +38,7 @@
     "dayjs": "^1.11.19",
     "generate-avatar": "^1.4.10",
     "js-base64": "^3.7.8",
-    "lodash-es": "^4.17.22",
+    "lodash-es": "^4.17.23",
     "moment": "^2.30.1",
     "qs": "^6.14.1",
     "sm-crypto-v2": "^1.15.1",

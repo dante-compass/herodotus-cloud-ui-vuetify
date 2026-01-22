@@ -1,5 +1,18 @@
 # @herodotus-cloud/core
 
+## 2.10.0
+
+### Minor Changes
+
+- 版本号与服务端相同
+
+## 2.9.0
+
+### Minor Changes
+
+- 版本发布
+- 版本发布
+
 ## 2.8.0
 
 ### Minor Changes

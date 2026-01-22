@@ -1,5 +1,35 @@
 # @herodotus-cloud/form-designer
 
+## 2.10.0
+
+### Minor Changes
+
+- 版本号与服务端相同
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.10.0
+  - @herodotus-cloud/components@2.10.0
+  - @herodotus-cloud/form-apis@2.10.0
+  - @herodotus-cloud/core@2.10.0
+
+## 2.9.0
+
+### Minor Changes
+
+- 版本发布
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+- Updated dependencies
+  - @herodotus-cloud/form-engine@2.9.0
+  - @herodotus-cloud/components@2.9.0
+  - @herodotus-cloud/form-apis@2.9.0
+  - @herodotus-cloud/core@2.9.0
+
 ## 2.8.0
 
 ### Minor Changes
