@@ -1,5 +1,16 @@
 # @herodotus/api
 
+## 0.2.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes
