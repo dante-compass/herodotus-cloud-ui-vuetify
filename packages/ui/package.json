@@ -23,9 +23,9 @@
     "@herodotus-cloud/form-designer": "workspace:^",
     "@herodotus-cloud/form-engine": "workspace:^",
     "@herodotus-cloud/oss-apis": "workspace:^",
-    "@herodotus/api": "^0.0.2",
-    "@herodotus/core": "^0.0.2",
-    "@herodotus/framework": "^0.0.2",
+    "@herodotus/api": "^0.2.0",
+    "@herodotus/core": "^0.2.0",
+    "@herodotus/framework": "^0.2.0",
     "@mdi/js": "^7.4.47",
     "@quasar/extras": "^1.17.0",
     "@rsocket/composite-metadata": "1.0.0-alpha.3",
@@ -52,6 +52,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "25.0.9"
+    "@types/node": "25.0.10"
   }
 }

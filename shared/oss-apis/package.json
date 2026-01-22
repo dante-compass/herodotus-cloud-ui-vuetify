@@ -1,6 +1,6 @@
 {
   "name": "@herodotus-cloud/oss-apis",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "",
   "keywords": [],
   "author": "",
@@ -32,6 +32,6 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "@herodotus/core": "^0.0.2"
+    "@herodotus/core": "^0.2.0"
   }
 }

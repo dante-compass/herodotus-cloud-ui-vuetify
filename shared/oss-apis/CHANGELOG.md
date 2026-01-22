@@ -1,5 +1,11 @@
 # @herodotus-cloud/oss-apis
 
+## 3.0.1
+
+### Patch Changes
+
+- 版本发布
+
 ## 3.0.0
 
 ### Major Changes
