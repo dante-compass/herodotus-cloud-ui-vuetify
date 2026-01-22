@@ -58,7 +58,7 @@ import { CONSTANTS, API } from '@/configurations';
 
 import { HDeleteButton, HEditButton, HTable } from '@/components';
 import { HDictionaryCondition } from '@/composables/security';
-import { useSettingsStore } from '@herodotus-cloud/framework-kernel';
+import { useSettingsStore } from '@herodotus/framework';
 
 export default defineComponent({
   name: CONSTANTS.ComponentName.SYS_DICTIONARY,

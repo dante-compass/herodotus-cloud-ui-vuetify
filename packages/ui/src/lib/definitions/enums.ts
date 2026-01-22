@@ -1,4 +1,4 @@
-export { ContentTypeEnum, OperationEnum } from '@herodotus-cloud/core';
+export { ContentTypeEnum, OperationEnum } from '@herodotus/core';
 export {
   NotificationCategoryEnum,
-} from '@herodotus-cloud/apis';
+} from '@herodotus/api';

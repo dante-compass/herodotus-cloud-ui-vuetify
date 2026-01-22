@@ -11,8 +11,9 @@ import type {
 } from '@/lib/declarations';
 
 import { AbstractService } from '@/lib/definitions';
-import { toast, standardDeleteNotify, lodash } from '@/lib/utils';
+import { toast, notify } from '@/lib/utils';
 import useBaseTable from './useBaseTable';
+import { isEmpty, pickBy } from 'lodash-es';
 
 export default function <E extends Entity, C extends Conditions>(
   AbstractService: AbstractService<E>,
@@ -54,7 +55,7 @@ export default function <E extends Entity, C extends Conditions>(
       .then((result) => {
         const data = result.data as Array<E>;
 
-        if (!lodash.isEmpty(data)) {
+        if (!isEmpty(data)) {
           tableRows.value = data;
           pagination.value.rowsNumber = data.length;
         } else {
@@ -69,7 +70,7 @@ export default function <E extends Entity, C extends Conditions>(
 
   const findItemsByPage = (pageNumber = 1, pageSize = 10, others = {}) => {
     showLoading();
-    const params = lodash.pickBy(others);
+    const params = pickBy(others);
     AbstractService.fetchByPage(
       {
         pageNumber: pageNumber - 1,
@@ -98,7 +99,7 @@ export default function <E extends Entity, C extends Conditions>(
   };
 
   const deleteItemById = (id: string) => {
-    standardDeleteNotify(() => {
+    notify.standardDeleteNotify(() => {
       AbstractService.delete(id)
         .then((response) => {
           const result = response as HttpResult<string>;

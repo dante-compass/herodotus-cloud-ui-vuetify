@@ -1,0 +1,1 @@
+import{r}from"./npm-call-bound-D3MJCtHJ.js";import{r as e}from"./npm-is-regex-DCewKLTp.js";import{r as n}from"./npm-es-errors-CXLDMvnj.js";var o,t;function p(){if(t)return o;t=1;var p=r(),s=e(),u=p("RegExp.prototype.exec"),m=n();return o=function(r){if(!s(r))throw new m("`regex` must be a RegExp");return function(e){return null!==u(r,e)}}}export{p as r};

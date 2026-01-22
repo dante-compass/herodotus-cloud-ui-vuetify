@@ -105,7 +105,8 @@ import {
 } from '@/components';
 import { useBaseTable } from '@/hooks';
 import { CONSTANTS, API } from '@/configurations';
-import { lodash, toast, standardDeleteNotify } from '@/lib/utils';
+import { toast, notify } from '@/lib/utils';
+import { isEmpty, endsWith, trimEnd, split } from 'lodash-es';
 import { useOssDownload } from '../hooks';
 
 export default defineComponent({
@@ -161,7 +162,7 @@ export default defineComponent({
     const hasNewUploadedFiles = ref<boolean>(false);
 
     const isDisableBatchDelete = computed(() => {
-      return lodash.isEmpty(selected.value);
+      return isEmpty(selected.value);
     });
 
     const isShowOpenFolderAction = computed(() => (isDir: boolean) => {
@@ -170,8 +171,8 @@ export default defineComponent({
 
     const fetchObjects = (bucketName: string, folderName = '') => {
       showLoading();
-      API.oss
-        .object()
+      API.core
+        .ossObject()
         .listObjectsV2({ bucketName: bucketName, prefix: folderName })
         .then((result) => {
           const data = result.data.contents;
@@ -197,11 +198,11 @@ export default defineComponent({
     };
 
     const displayedObjectName = (realObjectName: string) => {
-      if (lodash.endsWith(realObjectName, '/')) {
-        return lodash.trimEnd(realObjectName, '/');
+      if (endsWith(realObjectName, '/')) {
+        return trimEnd(realObjectName, '/');
       } else {
         if (realObjectName.indexOf('/') !== -1) {
-          const names = lodash.split(realObjectName, '/');
+          const names = split(realObjectName, '/');
           return names[names.length - 1];
         } else {
           return realObjectName;
@@ -220,9 +221,9 @@ export default defineComponent({
       objects: Array<ObjectDomain>,
       onSuccess: () => void,
     ) => {
-      standardDeleteNotify(() => {
-        API.oss
-          .object()
+      notify.standardDeleteNotify(() => {
+        API.core
+          .ossObject()
           .batchDelete({ bucketName: bucketName, delete: toDeleteObjectDomain(objects) })
           .then(() => {
             toast.success('删除成功');
@@ -245,9 +246,9 @@ export default defineComponent({
      * @param onSuccess 删除成功后操作
      */
     const deleteObject = (bucketName: string, objectName: string, onSuccess: () => void) => {
-      standardDeleteNotify(() => {
-        API.oss
-          .object()
+      notify.standardDeleteNotify(() => {
+        API.core
+          .ossObject()
           .delete({ bucketName: bucketName, objectName: objectName })
           .then(() => {
             toast.success('删除成功');

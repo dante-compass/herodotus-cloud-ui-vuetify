@@ -50,7 +50,7 @@
 import type { PropType } from 'vue';
 import { defineComponent, ref, computed } from 'vue';
 
-import { standardDeleteNotify } from '@/lib/utils';
+import { notify } from '@/lib/utils';
 import { API } from '@/configurations';
 
 export default defineComponent({
@@ -140,7 +140,7 @@ export default defineComponent({
     };
 
     const onRemove = (key: string) => {
-      standardDeleteNotify(() => {
+      notify.standardDeleteNotify(() => {
         if (Object.keys(tags.value).length === 1) {
           clearTags(props.bucketName, props.objectName, tags.value);
         } else {

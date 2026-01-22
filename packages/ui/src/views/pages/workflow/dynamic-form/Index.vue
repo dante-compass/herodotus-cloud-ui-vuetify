@@ -40,7 +40,7 @@ import type {
 } from '@/lib/declarations';
 
 import { CONSTANTS, API } from '@/configurations';
-import { toast, standardDeleteNotify } from '@/lib/utils';
+import { toast, notify } from '@/lib/utils';
 import { useBaseTable } from '@/hooks';
 
 export default defineComponent({
@@ -99,7 +99,7 @@ export default defineComponent({
     };
 
     const onDeleteItemById = (id: string) => {
-      standardDeleteNotify(() => {
+      notify.standardDeleteNotify(() => {
         API.form
           .dynamicForm()
           .delete(id)

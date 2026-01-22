@@ -1,0 +1,1 @@
+import{c as r}from"./npm-es-errors-CXLDMvnj.js";import{r as n}from"./npm-possible-typed-array-names-D-Cicn17.js";var e,o;function t(){if(o)return e;o=1;var t=n(),s="undefined"==typeof globalThis?r:globalThis;return e=function(){for(var r=[],n=0;n<t.length;n++)"function"==typeof s[t[n]]&&(r[r.length]=t[n]);return r}}export{t as r};

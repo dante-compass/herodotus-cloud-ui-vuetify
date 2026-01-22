@@ -6,7 +6,7 @@ import type { NotificationEntity, NotificationConditions, Sort, Page } from '@/l
 import { NotificationCategoryEnum } from '@/lib/definitions';
 import { moment } from '@/lib/utils';
 import { API } from '@/configurations';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore } from '@herodotus/framework';
 import { useNotificationStore } from '../stores';
 
 export default function useNotifications(category: NotificationCategoryEnum) {

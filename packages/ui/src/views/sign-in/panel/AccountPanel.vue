@@ -124,7 +124,7 @@ import {
   useAuthenticationStore,
   usePasskey,
   useApplicationStore,
-} from '@herodotus-cloud/framework-kernel';
+} from '@herodotus/framework';
 import { HSocialSignInList } from '@/composables/sign-in';
 
 export default defineComponent({

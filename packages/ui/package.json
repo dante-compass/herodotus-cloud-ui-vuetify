@@ -16,16 +16,16 @@
   },
   "dependencies": {
     "@bpmn-io/properties-panel": "3.36.0",
-    "@herodotus-cloud/apis": "workspace:^",
     "@herodotus-cloud/bpmn-apis": "workspace:^",
     "@herodotus-cloud/bpmn-designer": "workspace:^",
     "@herodotus-cloud/components": "workspace:^",
-    "@herodotus-cloud/core": "workspace:^",
     "@herodotus-cloud/form-apis": "workspace:^",
     "@herodotus-cloud/form-designer": "workspace:^",
     "@herodotus-cloud/form-engine": "workspace:^",
-    "@herodotus-cloud/framework-kernel": "workspace:^",
     "@herodotus-cloud/oss-apis": "workspace:^",
+    "@herodotus/api": "^0.2.0",
+    "@herodotus/core": "^0.2.0",
+    "@herodotus/framework": "^0.2.0",
     "@mdi/js": "^7.4.47",
     "@quasar/extras": "^1.17.0",
     "@rsocket/composite-metadata": "1.0.0-alpha.3",
@@ -40,10 +40,11 @@
     "colord": "^2.9.3",
     "echarts": "^6.0.0",
     "element-resize-detector": "^1.2.4",
+    "js-base64": "^3.7.8",
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",
     "simple-uploader.js": "^0.6.0",
-    "vue": "^3.5.26",
+    "vue": "^3.5.27",
     "vue-cookies": "^1.8.6",
     "vue-i18n": "^11.2.8",
     "vue-router": "^4.6.4",
@@ -51,6 +52,6 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node": "25.0.8"
+    "@types/node": "25.0.10"
   }
 }

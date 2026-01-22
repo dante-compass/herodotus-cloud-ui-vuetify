@@ -23,7 +23,7 @@ declare const _default: import('vue').DefineComponent<{}, {
                 headerStyle?: string;
                 headerClasses?: string;
             }[];
-            tableRows: import('vue').Ref<import('@herodotus-cloud/core').QBaseDataItem<boolean>[], import('@herodotus-cloud/core').QBaseDataItem<boolean>[]>;
+            tableRows: import('vue').Ref<import('@herodotus-cloud/form-apis').QBaseDataItem<boolean>[], import('@herodotus-cloud/form-apis').QBaseDataItem<boolean>[]>;
             condition: import('@herodotus-cloud/form-apis').ConditionVariable;
             onModify: () => void;
         }, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {

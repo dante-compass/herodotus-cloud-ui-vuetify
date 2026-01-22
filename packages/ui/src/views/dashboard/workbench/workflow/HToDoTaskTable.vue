@@ -44,7 +44,7 @@ import { CONSTANTS, API } from '@/configurations';
 
 import { useBaseTable } from '@/hooks';
 import { useBpmnProcess } from '@/composables/bpmn';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { useAuthenticationStore } from '@herodotus/framework';
 import { HDenseIconButton } from '@/components';
 
 export default defineComponent({

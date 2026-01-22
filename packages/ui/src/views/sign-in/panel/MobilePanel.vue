@@ -116,7 +116,7 @@ import {
   useAuthenticationStore,
   SecurityApiResources,
   useApplicationStore,
-} from '@herodotus-cloud/framework-kernel';
+} from '@herodotus/framework';
 import { CONSTANTS, API } from '@/configurations';
 import { toast } from '@/lib/utils';
 

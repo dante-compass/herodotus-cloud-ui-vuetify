@@ -1,5 +1,46 @@
 # @herodotus-cloud/form-engine
 
+## 3.0.1
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus-cloud/form-apis@3.0.1
+
+## 3.0.0
+
+### Major Changes
+
+- 核心模块修改为引用 @herodotus/\*
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-apis@3.0.0
+
+## 2.9.0
+
+### Minor Changes
+
+- 修改lodash 方法引入方式，提升代码性能
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-apis@2.9.0
+
+## 2.8.0
+
+### Minor Changes
+
+- lodash 引用修改为外部导入
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus-cloud/form-apis@2.8.0
+
 ## 2.7.0
 
 ### Minor Changes

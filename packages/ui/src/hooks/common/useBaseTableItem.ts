@@ -6,7 +6,7 @@ import type { Entity } from '@/lib/declarations';
 
 import { OperationEnum } from '@/lib/definitions';
 
-import { useEditFinish, useRouterStore } from '@herodotus-cloud/framework-kernel';
+import { useEditFinish, useElementStore } from '@herodotus/framework';
 
 export default function useBaseTableItem<E extends Entity>() {
   const { onFinish } = useEditFinish();
@@ -18,7 +18,7 @@ export default function useBaseTableItem<E extends Entity>() {
   const additional = ref({}) as Ref<Record<string, unknown>>;
   const title = ref('');
   const overlay = ref(false);
-  const store = useRouterStore();
+  const store = useElementStore();
 
   onMounted(() => {
     parseParam();

@@ -11,7 +11,7 @@ import type {
   QTableOnRequestParameter,
 } from '@/lib/declarations';
 
-import { toast, standardDeleteNotify } from '@/lib/utils';
+import { toast, notify } from '@/lib/utils';
 
 import { useBaseTable } from '@/hooks';
 
@@ -83,7 +83,7 @@ export default function useBpmnTableItems<
   };
 
   const deleteItemById = (id: string, params = {} as D) => {
-    standardDeleteNotify(() => {
+    notify.standardDeleteNotify(() => {
       AbstractService.delete(id, params)
         .then((response) => {
           findItemsByPage(pagination.value.page, pagination.value.rowsPerPage);

@@ -57,7 +57,7 @@ import useVuelidate from '@vuelidate/core';
 import { required, sameAs, helpers } from '@vuelidate/validators';
 import { toast } from '@/lib/utils';
 import { VARIABLES, API } from '@/configurations';
-import { useCryptoStore } from '@herodotus-cloud/framework-kernel';
+import { useCryptoStore } from '@herodotus/framework';
 
 export default defineComponent({
   name: 'HChangePassword',

@@ -15,8 +15,8 @@ import { QUploader } from 'quasar';
 
 import type { QUploaderFactoryObject, QUploaderInfo } from '@/lib/declarations';
 
-import { lodash } from '@/lib/utils';
-import { useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { isEmpty } from 'lodash-es';
+import { useAuthenticationStore } from '@herodotus/framework';
 import { API } from '@/configurations';
 
 export default defineComponent({
@@ -56,7 +56,7 @@ export default defineComponent({
     };
 
     const onFileUploaded = (info: QUploaderInfo) => {
-      if (!lodash.isEmpty(info.files)) {
+      if (!isEmpty(info.files)) {
         executedUpload.value = true;
       } else {
         executedUpload.value = false;

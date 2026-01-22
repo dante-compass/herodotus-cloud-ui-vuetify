@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
 
-import { SignOutUtilities } from '@herodotus-cloud/framework-kernel';
+import { SignOutUtilities } from '@herodotus/framework';
 import { HAppMessageActions } from '@/composables/messages';
 
 import HAppRightDrawerControl from './HAppRightDrawerControl.vue';

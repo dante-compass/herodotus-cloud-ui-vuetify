@@ -1,3 +1,3 @@
-import { lodash, toast, Swal } from '@herodotus-cloud/core';
+import { toast, Swal } from '@herodotus/core';
 
-export { lodash, toast, Swal };
+export { toast, Swal };

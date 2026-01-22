@@ -7,7 +7,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { useApplicationStore } from '@herodotus-cloud/framework-kernel';
+import { useApplicationStore } from '@herodotus/framework';
 
 import HAppMenu from './HAppMenu.vue';
 

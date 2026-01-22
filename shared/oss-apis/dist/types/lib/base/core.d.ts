@@ -1,1 +1,1 @@
-export { Axios, HttpConfig, Service, AbstractService } from '@herodotus-cloud/core';
+export { Axios, HttpConfig, Service, AbstractService } from '@herodotus/core';

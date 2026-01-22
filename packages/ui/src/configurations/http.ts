@@ -1,10 +1,10 @@
-import type { HttpClientOptions } from '@herodotus-cloud/core';
+import type { HttpClientOptions } from '@herodotus/core';
 
-import { createApi } from '@herodotus-cloud/apis';
+import { createApi } from '@herodotus/api';
 import { createBpmnApi } from '@herodotus-cloud/bpmn-apis';
 import { createFormApi } from '@herodotus-cloud/form-apis';
 import { createOssApi } from '@herodotus-cloud/oss-apis';
-import { Axios, ContentTypeEnum, HttpConfig } from '@herodotus-cloud/core';
+import { Axios, ContentTypeEnum, HttpConfig } from '@herodotus/core';
 
 import { VARIABLES } from '@/configurations';
 import { axiosInstanceHooks } from './axios';
@@ -41,13 +41,13 @@ export const config = new HttpConfig(http, options);
 const api = createApi(http, options);
 const bpmnApi = createBpmnApi(http, options);
 const formApi = createFormApi(http, options);
-const ossApi = createOssApi(http, options);
+// const ossApi = createOssApi(http, options);
 
 export const API = {
   core: api,
   bpmn: bpmnApi,
   form: formApi,
-  oss: ossApi,
+  // oss: ossApi,
   bpmnStorage: BpmnDesignerStorage.getInstance(bpmnApi, formApi),
   formStorage: FormDesignerStorage.getInstance(formApi),
 };

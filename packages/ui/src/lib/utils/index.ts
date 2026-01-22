@@ -1,7 +1,7 @@
+export { Base64 } from 'js-base64';
+
 export {
-  lodash,
   moment,
-  Base64,
   Swal,
   notify,
   toast,
@@ -9,6 +9,4 @@ export {
   SM4Utils,
   AvatarUtils,
   PKCE,
-  DayJs,
-  standardDeleteNotify,
-} from '@herodotus-cloud/core';
+} from '@herodotus/core';
