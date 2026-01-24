@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import type { SysTenantDataSourceEntity } from '@herodotus/api';
 
-import { useTableItem } from '@/composables/hooks';
+import { useEntityTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysTenantDataSourceContent' });
@@ -56,7 +56,7 @@ defineOptions({ name: 'SysTenantDataSourceContent' });
 const tenantForm = ref();
 
 const { editedItem, operation, title, overlay, saveOrUpdate } =
-  useTableItem<SysTenantDataSourceEntity>(API.core.sysTenantDataSource());
+  useEntityTableItem<SysTenantDataSourceEntity>(API.core.sysTenantDataSource());
 
 const validateTenantId = async (tenantId: string) => {
   return await new Promise((resolve, reject) => {

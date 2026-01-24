@@ -1,17 +1,17 @@
-import useBaseTableItem from './useBaseTableItem';
 import useBaseTable from './useBaseTable';
 import useDictionary from './useDictionary';
 import useDisplayElement from './useDisplayElement';
-import useTableItem from './useTableItem';
+import useDtoTableItem from './useDtoTableItem';
+import useEntityTableItem from './useEntityTableItem';
 import useTable from './useTable';
 import useTreeItem from './useTreeItem';
 
 export {
   useBaseTable,
-  useBaseTableItem,
   useDictionary,
   useDisplayElement,
+  useDtoTableItem,
+  useEntityTableItem,
   useTable,
-  useTableItem,
   useTreeItem,
 };

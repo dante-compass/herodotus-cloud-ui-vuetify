@@ -48,12 +48,14 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { toast } from '@herodotus/core';
 import { useEditFinish } from '@herodotus/framework';
-import { useTableItem, useTable } from '@/composables/hooks';
+import { useEntityTableItem, useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'OAuth2ScopeAuthorize' });
 
-const { editedItem, title, overlay } = useTableItem<OAuth2ScopeEntity>(API.core.oauth2Scope());
+const { editedItem, title, overlay } = useEntityTableItem<OAuth2ScopeEntity>(
+  API.core.oauth2Scope(),
+);
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysPermissionEntity,
   SysPermissionConditions

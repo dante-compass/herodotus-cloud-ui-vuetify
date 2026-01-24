@@ -9,9 +9,12 @@ import { useElementStore } from '@herodotus/framework';
 
 /**
  * 数据表格基础定义
- * @param name 页面名称（用于定位子页面（三级路由））
- * @param fetchAll 是否为读取全部数据
- * @returns 相关操作和定义
+ * @param name 组件名称
+ * @param sorted 排序字段
+ * @param direction 排除方向
+ * @param <I> 输入类型，即请求参数类型
+ * @param <O> 输出类型，即响应结果类型
+ * @returns
  */
 export default function useBaseTable<E extends Entity, C extends Conditions>(
   name: string,

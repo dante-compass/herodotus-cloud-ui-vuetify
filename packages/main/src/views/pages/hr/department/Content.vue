@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import type { SysDepartmentEntity } from '@herodotus/api';
 
-import { useTableItem } from '@/composables/hooks';
+import { useEntityTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 import { DepartmentSelect } from '../components';
@@ -53,7 +53,7 @@ defineOptions({
 const departmentForm = ref();
 
 const { editedItem, operation, title, overlay, additional, saveOrUpdate } =
-  useTableItem<SysDepartmentEntity>(API.core.sysDepartment());
+  useEntityTableItem<SysDepartmentEntity>(API.core.sysDepartment());
 
 const onSave = async () => {
   const { valid } = await departmentForm.value.validate();

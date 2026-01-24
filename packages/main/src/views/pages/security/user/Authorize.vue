@@ -38,12 +38,12 @@
 import type { SysUserEntity, SysRoleEntity, SysRoleProps, SysRoleConditions } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTableItem, useTable } from '@/composables/hooks';
+import { useEntityTableItem, useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'SysUserAuthorize' });
 
-const { editedItem, title, assign } = useTableItem<SysUserEntity>(API.core.sysUser());
+const { editedItem, title, assign } = useEntityTableItem<SysUserEntity>(API.core.sysUser());
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysRoleEntity,
   SysRoleConditions

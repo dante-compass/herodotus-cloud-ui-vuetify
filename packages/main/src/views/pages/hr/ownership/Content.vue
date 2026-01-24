@@ -49,7 +49,7 @@ import type {
 
 import { isEmpty } from 'lodash-es';
 import { toast } from '@herodotus/core';
-import { useTableItem } from '@/composables/hooks';
+import { useEntityTableItem } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 import { useEditFinish } from '@herodotus/framework';
 import { useTable, useDictionary } from '@/composables/hooks';
@@ -74,7 +74,7 @@ const selectedItems = ref<SysEmployeeEntity[]>([]);
 
 const { onFinish } = useEditFinish();
 const { getDictionaryItemDisplay } = useDictionary('Gender', 'Identity');
-const { editedItem, overlay } = useTableItem<SysEmployeeAllocatable>(
+const { editedItem, overlay } = useEntityTableItem<SysEmployeeAllocatable>(
   API.core.sysEmployeeAllocatable(),
 );
 

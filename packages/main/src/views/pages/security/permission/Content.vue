@@ -28,16 +28,15 @@
 <script setup lang="ts">
 import type { SysPermissionEntity } from '@herodotus/api';
 
-import { useTableItem } from '@/composables/hooks';
+import { useEntityTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysPermissionContent' });
 
 const permissionForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysPermissionEntity>(
-  API.core.sysPermission(),
-);
+const { editedItem, operation, title, overlay, saveOrUpdate } =
+  useEntityTableItem<SysPermissionEntity>(API.core.sysPermission());
 
 const onSave = async () => {
   const { valid } = await permissionForm.value.validate();

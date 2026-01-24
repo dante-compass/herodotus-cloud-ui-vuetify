@@ -30,14 +30,14 @@
 <script setup lang="ts">
 import type { SysUserEntity } from '@herodotus/api';
 
-import { useTableItem } from '@/composables/hooks';
+import { useEntityTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysUserContent' });
 
 const loginForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysUserEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useEntityTableItem<SysUserEntity>(
   API.core.sysUser(),
 );
 

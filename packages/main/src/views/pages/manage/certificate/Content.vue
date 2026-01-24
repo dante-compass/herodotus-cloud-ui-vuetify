@@ -99,7 +99,7 @@
 <script setup lang="ts">
 import type { MgtCertificateEntity } from '@herodotus/api';
 
-import { useTableItem } from '@/composables/hooks';
+import { useEntityTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysTenantDataSourceContent' });
@@ -110,9 +110,8 @@ const parentOptions = ref([]) as Ref<Array<MgtCertificateEntity>>;
 const showParentLoading = ref(false);
 const disableParentSelect = ref(true);
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<MgtCertificateEntity>(
-  API.core.mgtCertificate(),
-);
+const { editedItem, operation, title, overlay, saveOrUpdate } =
+  useEntityTableItem<MgtCertificateEntity>(API.core.mgtCertificate());
 
 const validateAlias = async (alias: string) => {
   return await new Promise((resolve, reject) => {

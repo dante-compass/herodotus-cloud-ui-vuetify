@@ -44,12 +44,14 @@ import type {
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { isEmpty } from 'lodash-es';
-import { useTableItem, useTable } from '@/composables/hooks';
+import { useEntityTableItem, useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'SysAttributeAuthorize' });
 
-const { editedItem, title, assign } = useTableItem<SysAttributeEntity>(API.core.sysAttribute());
+const { editedItem, title, assign } = useEntityTableItem<SysAttributeEntity>(
+  API.core.sysAttribute(),
+);
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysPermissionEntity,
   SysPermissionConditions

@@ -30,16 +30,15 @@
 <script setup lang="ts">
 import type { OAuth2ScopeEntity } from '@herodotus/api';
 
-import { useTableItem } from '@/composables/hooks';
+import { useEntityTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'OAuth2ScopeContent' });
 
 const scopeForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<OAuth2ScopeEntity>(
-  API.core.oauth2Scope(),
-);
+const { editedItem, operation, title, overlay, saveOrUpdate } =
+  useEntityTableItem<OAuth2ScopeEntity>(API.core.oauth2Scope());
 
 const validateScopeCode = async (scopeCode: string) => {
   return await new Promise((resolve, reject) => {

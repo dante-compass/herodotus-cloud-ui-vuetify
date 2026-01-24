@@ -78,14 +78,13 @@
 <script setup lang="ts">
 import type { SysElementEntity, SysElementConditions } from '@herodotus/api';
 
-import { useTableItem, useTreeItem } from '@/composables/hooks';
+import { useEntityTableItem, useTreeItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysElementContent' });
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysElementEntity>(
-  API.core.sysElement(),
-);
+const { editedItem, operation, title, overlay, saveOrUpdate } =
+  useEntityTableItem<SysElementEntity>(API.core.sysElement());
 const { treeItems } = useTreeItem<SysElementEntity, SysElementConditions>(API.core.sysElement());
 
 watch(

@@ -5,6 +5,11 @@ import { OperationEnum } from '@herodotus/core';
 
 import { useEditFinish, useElementStore } from '@herodotus/framework';
 
+/**
+ * 表格条目基础定义
+ * @param <O> 输出类型，即响应结果类型
+ * @returns
+ */
 export default function useBaseTableItem<E extends Entity>() {
   const { onFinish } = useEditFinish();
 

@@ -43,12 +43,12 @@ import type {
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTableItem, useTable } from '@/composables/hooks';
+import { useEntityTableItem, useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'SysRoleAuthorize' });
 
-const { editedItem, title, assign } = useTableItem<SysRoleEntity>(API.core.sysRole());
+const { editedItem, title, assign } = useEntityTableItem<SysRoleEntity>(API.core.sysRole());
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysPermissionEntity,
   SysPermissionConditions

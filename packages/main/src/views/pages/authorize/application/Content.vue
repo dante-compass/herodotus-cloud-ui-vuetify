@@ -188,14 +188,13 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useEditFinish } from '@herodotus/framework';
 import { includes } from 'lodash-es';
-import { useDictionary, useTableItem, useTable } from '@/composables/hooks';
+import { useDictionary, useEntityTableItem, useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'OAuth2ApplicationContent' });
 
-const { editedItem, isEdit, title, overlay, saveOrUpdate } = useTableItem<OAuth2ApplicationEntity>(
-  API.core.oauth2Application(),
-);
+const { editedItem, isEdit, title, overlay, saveOrUpdate } =
+  useEntityTableItem<OAuth2ApplicationEntity>(API.core.oauth2Application());
 const { tableRows, loading, pageNumber, pageSize, totalItems, findItems } = useTable<
   OAuth2ScopeEntity,
   OAuth2ScopeConditions

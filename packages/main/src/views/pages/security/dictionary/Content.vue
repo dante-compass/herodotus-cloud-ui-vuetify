@@ -27,16 +27,15 @@
 <script setup lang="ts">
 import type { SysDictionaryEntity } from '@herodotus/api';
 
-import { useTableItem } from '@/composables/hooks';
+import { useEntityTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysDictionaryContent' });
 
 const dictionaryForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysDictionaryEntity>(
-  API.core.sysDictionary(),
-);
+const { editedItem, operation, title, overlay, saveOrUpdate } =
+  useEntityTableItem<SysDictionaryEntity>(API.core.sysDictionary());
 
 const onSave = async () => {
   const { valid } = await dictionaryForm.value.validate();
