@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 0.2.1
+
+### Patch Changes
+
+- 基础API定义适配后端支持Entity和Dto两种方式
+
 ## 0.2.0
 
 ### Minor Changes

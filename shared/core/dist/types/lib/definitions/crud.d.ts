@@ -16,7 +16,12 @@ export declare abstract class AbstractService<R extends Entity> extends Service 
     fetchByPage(params: Pageable, others?: {}): Promise<AxiosHttpResult<Page<R>>>;
     fetchAll(params?: Conditions): Promise<AxiosHttpResult<R[]>>;
     fetchTree(params?: Conditions): Promise<AxiosHttpResult<Tree[]>>;
-    saveOrUpdate(data: R): Promise<AxiosHttpResult<R>>;
     delete(id: string): Promise<AxiosHttpResult<string>>;
     assign(data: any): Promise<AxiosHttpResult<R>>;
+}
+export declare abstract class AbstractEntityService<R extends Entity> extends AbstractService<R> {
+    saveOrUpdate(data: R): Promise<AxiosHttpResult<R>>;
+}
+export declare abstract class AbstractDtoService<I extends Entity, O extends Entity> extends AbstractService<O> {
+    saveOrUpdate(data: I): Promise<AxiosHttpResult<O>>;
 }

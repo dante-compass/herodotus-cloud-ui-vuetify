@@ -1,10 +1,9 @@
-import type { AxiosHttpResult, Pageable, Page } from '@herodotus/core';
+import type { AxiosHttpResult } from '@herodotus/core';
 import type { CertificateRequest, CertificateResponse } from '@/declarations';
 
-import { isEmpty } from 'lodash-es';
-import { HttpConfig, Service } from '@herodotus/core';
+import { HttpConfig, AbstractDtoService } from '@herodotus/core';
 
-class MgtCertificateService extends Service {
+class MgtCertificateService extends AbstractDtoService<CertificateRequest, CertificateResponse> {
   private static instance: MgtCertificateService;
 
   private constructor(config: HttpConfig) {
@@ -22,42 +21,12 @@ class MgtCertificateService extends Service {
     return this.getConfig().getManage() + '/manage/certificate';
   }
 
-  private getConditionAddress(): string {
-    return this.getBaseAddress() + '/condition';
-  }
-
   public getAliasAddress(): string {
     return this.getBaseAddress() + '/alias';
   }
 
   public getCategoryAddress(): string {
     return this.getBaseAddress() + '/category';
-  }
-
-  public fetchByPage(
-    params: Pageable,
-    others = {},
-  ): Promise<AxiosHttpResult<Page<CertificateResponse>>> {
-    if (isEmpty(others)) {
-      return this.getConfig()
-        .getHttp()
-        .get<Page<CertificateResponse>, Pageable>(this.getBaseAddress(), params);
-    } else {
-      const fullParams = Object.assign(params, others);
-      return this.getConfig()
-        .getHttp()
-        .get<Page<CertificateResponse>, Pageable>(this.getConditionAddress(), fullParams);
-    }
-  }
-
-  public saveOrUpdate(data: CertificateRequest): Promise<AxiosHttpResult<CertificateResponse>> {
-    return this.getConfig()
-      .getHttp()
-      .post<CertificateResponse, CertificateRequest>(this.getBaseAddress(), data);
-  }
-
-  public delete(id: string): Promise<AxiosHttpResult<string>> {
-    return this.getConfig().getHttp().delete<string, string>(this.getIdPath(id));
   }
 
   public findByAlias(alias: string): Promise<AxiosHttpResult<CertificateResponse>> {

@@ -61,10 +61,6 @@ export abstract class AbstractService<R extends Entity> extends Service {
     return this.getConfig().getHttp().get<Tree[], Conditions>(this.getTreeAddress(), params);
   }
 
-  public saveOrUpdate(data: R): Promise<AxiosHttpResult<R>> {
-    return this.getConfig().getHttp().post<R, R>(this.getBaseAddress(), data);
-  }
-
   public delete(id: string): Promise<AxiosHttpResult<string>> {
     return this.getConfig().getHttp().delete<string, string>(this.getIdPath(id));
   }
@@ -73,5 +69,20 @@ export abstract class AbstractService<R extends Entity> extends Service {
     return this.getConfig().getHttp().put(this.getBaseAddress(), data, {
       contentType: ContentTypeEnum.URL_ENCODED,
     });
+  }
+}
+
+export abstract class AbstractEntityService<R extends Entity> extends AbstractService<R> {
+  public saveOrUpdate(data: R): Promise<AxiosHttpResult<R>> {
+    return this.getConfig().getHttp().post<R, R>(this.getBaseAddress(), data);
+  }
+}
+
+export abstract class AbstractDtoService<
+  I extends Entity,
+  O extends Entity,
+> extends AbstractService<O> {
+  public saveOrUpdate(data: I): Promise<AxiosHttpResult<O>> {
+    return this.getConfig().getHttp().post<O, I>(this.getBaseAddress(), data);
   }
 }

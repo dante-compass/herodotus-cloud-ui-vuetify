@@ -9,9 +9,9 @@ import type {
 } from '@/declarations';
 import type { AxiosHttpResult } from '@herodotus/core';
 
-import { HttpConfig, AbstractService } from '@herodotus/core';
+import { HttpConfig, AbstractEntityService } from '@herodotus/core';
 
-class OAuth2ApplicationService extends AbstractService<OAuth2ApplicationEntity> {
+class OAuth2ApplicationService extends AbstractEntityService<OAuth2ApplicationEntity> {
   private static instance: OAuth2ApplicationService;
 
   private constructor(config: HttpConfig) {
@@ -30,7 +30,7 @@ class OAuth2ApplicationService extends AbstractService<OAuth2ApplicationEntity> 
   }
 }
 
-class OAuth2ScopeService extends AbstractService<OAuth2ScopeEntity> {
+class OAuth2ScopeService extends AbstractEntityService<OAuth2ScopeEntity> {
   private static instance: OAuth2ScopeService;
 
   private constructor(config: HttpConfig) {
@@ -67,7 +67,7 @@ class OAuth2ScopeService extends AbstractService<OAuth2ScopeEntity> {
   }
 }
 
-class OAuth2AuthorizationService extends AbstractService<OAuth2AuthorizationEntity> {
+class OAuth2AuthorizationService extends AbstractEntityService<OAuth2AuthorizationEntity> {
   private static instance: OAuth2AuthorizationService;
 
   private constructor(config: HttpConfig) {
@@ -86,7 +86,7 @@ class OAuth2AuthorizationService extends AbstractService<OAuth2AuthorizationEnti
   }
 }
 
-class OAuth2UserLoggingService extends AbstractService<OAuth2UserLoggingEntity> {
+class OAuth2UserLoggingService extends AbstractEntityService<OAuth2UserLoggingEntity> {
   private static instance: OAuth2UserLoggingService;
 
   private constructor(config: HttpConfig) {
@@ -104,7 +104,7 @@ class OAuth2UserLoggingService extends AbstractService<OAuth2UserLoggingEntity> 
   }
 }
 
-class OAuth2InterfaceAuditService extends AbstractService<OAuth2InterfaceAuditEntity> {
+class OAuth2InterfaceAuditService extends AbstractEntityService<OAuth2InterfaceAuditEntity> {
   private static instance: OAuth2InterfaceAuditService;
 
   private constructor(config: HttpConfig) {
@@ -122,7 +122,7 @@ class OAuth2InterfaceAuditService extends AbstractService<OAuth2InterfaceAuditEn
   }
 }
 
-class OAuth2CredentialRecordService extends AbstractService<OAuth2CredentialRecordEntity> {
+class OAuth2CredentialRecordService extends AbstractEntityService<OAuth2CredentialRecordEntity> {
   private static instance: OAuth2CredentialRecordService;
 
   private constructor(config: HttpConfig) {
