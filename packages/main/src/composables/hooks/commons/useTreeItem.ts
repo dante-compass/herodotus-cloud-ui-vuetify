@@ -1,8 +1,8 @@
 import type { Entity, Conditions, Tree } from '@herodotus/core';
 import { AbstractService } from '@herodotus/core';
 
-export default function useTreeItem<T extends Entity, C extends Conditions>(
-  AbstractService: AbstractService<T>,
+export default function useTreeItem<C extends Conditions, I extends Entity>(
+  AbstractService: AbstractService<I>,
   immediate = true,
 ) {
   const treeItems = ref<Tree[]>([]) as Ref<Tree[]>;

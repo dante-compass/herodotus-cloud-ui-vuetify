@@ -80,7 +80,7 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<SysEmployeeEntity, SysEmployeeConditions>(
+} = useTable<SysEmployeeConditions, SysEmployeeEntity>(
   API.core.sysEmployee(),
   PAGE_NAME.SYS_EMPLOYEE,
 );

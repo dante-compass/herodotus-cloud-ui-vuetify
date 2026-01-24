@@ -69,7 +69,7 @@ const {
   totalItems,
   deleteItemById,
   findItems,
-} = useTable<OAuth2AuthorizationEntity, OAuth2AuthorizationConditions>(
+} = useTable<OAuth2AuthorizationConditions, OAuth2AuthorizationEntity>(
   API.core.oauth2Authorization(),
   PAGE_NAME.OAUTH2_TOKEN,
   false,

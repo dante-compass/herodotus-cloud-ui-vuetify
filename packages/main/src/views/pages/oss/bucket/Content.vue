@@ -5,12 +5,12 @@
 <script setup lang="ts">
 import type { SysAttributeEntity } from '@herodotus/api';
 
-import { useEntityTableItem } from '@/composables/hooks';
+import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'OssBucketContent' });
 
-const { editedItem, operation, title, saveOrUpdate } = useEntityTableItem<SysAttributeEntity>(
+const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysAttributeEntity>(
   API.core.sysAttribute(),
 );
 

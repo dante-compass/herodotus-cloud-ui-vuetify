@@ -53,8 +53,8 @@ const selectedValue = defineModel({
 });
 
 const { treeItems, conditions, loading } = useTreeItem<
-  SysDepartmentEntity,
-  SysDepartmentConditions
+  SysDepartmentConditions,
+  SysDepartmentEntity
 >(API.core.sysDepartment(), false);
 
 const activated = computed({

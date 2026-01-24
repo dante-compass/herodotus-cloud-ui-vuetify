@@ -24,8 +24,8 @@ import useBaseTable from './useBaseTable';
  * @param loadOnMount 是否在 onMount 阶段加载
  * @returns
  */
-export default function useTable<E extends Entity, C extends Conditions>(
-  service: AbstractService<E>,
+export default function useTable<C extends Conditions, I extends Entity, O extends Entity = I>(
+  service: AbstractService<I, O>,
   name: string,
   fetchAll = false,
   sorted = [] as Array<string>,
@@ -48,7 +48,7 @@ export default function useTable<E extends Entity, C extends Conditions>(
     setPageData,
     resetPageData,
     createSort,
-  } = useBaseTable<E, C>(name, sorted, direction);
+  } = useBaseTable<C, I, O>(name, sorted, direction);
 
   const pageNumber = shallowRef(1);
   const pageSize = shallowRef(10);
@@ -70,7 +70,7 @@ export default function useTable<E extends Entity, C extends Conditions>(
         ...conditions.value,
       })
       .then((result) => {
-        const data = result.data as Array<E>;
+        const data = result.data as Array<O>;
         if (!isEmpty(data)) {
           setAllData(data);
         } else {
@@ -95,7 +95,7 @@ export default function useTable<E extends Entity, C extends Conditions>(
         others,
       )
       .then((result) => {
-        const data = result.data as Page<E>;
+        const data = result.data as Page<O>;
         // 用户文档列表中无结果时也要更新列表数据
         if (!isEmpty(data)) {
           setPageData(data);

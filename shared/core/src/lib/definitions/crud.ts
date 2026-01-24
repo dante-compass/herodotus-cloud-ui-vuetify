@@ -25,7 +25,7 @@ export abstract class Service {
   }
 }
 
-export abstract class AbstractService<R extends Entity> extends Service {
+export abstract class AbstractService<I extends Entity, O extends Entity = I> extends Service {
   private getConditionAddress(): string {
     return this.getBaseAddress() + '/condition';
   }
@@ -38,23 +38,23 @@ export abstract class AbstractService<R extends Entity> extends Service {
     return this.getBaseAddress() + '/tree';
   }
 
-  public fetch(params = {}): Promise<AxiosHttpResult<R>> {
-    return this.getConfig().getHttp().get<R, any>(this.getBaseAddress(), params);
+  public fetch(params = {}): Promise<AxiosHttpResult<O>> {
+    return this.getConfig().getHttp().get<O, any>(this.getBaseAddress(), params);
   }
 
-  public fetchByPage(params: Pageable, others = {}): Promise<AxiosHttpResult<Page<R>>> {
+  public fetchByPage(params: Pageable, others = {}): Promise<AxiosHttpResult<Page<O>>> {
     if (isEmpty(others)) {
-      return this.getConfig().getHttp().get<Page<R>, Pageable>(this.getBaseAddress(), params);
+      return this.getConfig().getHttp().get<Page<O>, Pageable>(this.getBaseAddress(), params);
     } else {
       const fullParams = Object.assign(params, others);
       return this.getConfig()
         .getHttp()
-        .get<Page<R>, Pageable>(this.getConditionAddress(), fullParams);
+        .get<Page<O>, Pageable>(this.getConditionAddress(), fullParams);
     }
   }
 
-  public fetchAll(params: Conditions = {}): Promise<AxiosHttpResult<R[]>> {
-    return this.getConfig().getHttp().get<R[], Conditions>(this.getListAddress(), params);
+  public fetchAll(params: Conditions = {}): Promise<AxiosHttpResult<O[]>> {
+    return this.getConfig().getHttp().get<O[], Conditions>(this.getListAddress(), params);
   }
 
   public fetchTree(params: Conditions = {}): Promise<AxiosHttpResult<Tree[]>> {
@@ -64,25 +64,14 @@ export abstract class AbstractService<R extends Entity> extends Service {
   public delete(id: string): Promise<AxiosHttpResult<string>> {
     return this.getConfig().getHttp().delete<string, string>(this.getIdPath(id));
   }
+  
+  public saveOrUpdate(data: I): Promise<AxiosHttpResult<O>> {
+    return this.getConfig().getHttp().post<O, I>(this.getBaseAddress(), data);
+  }
 
-  public assign(data: any): Promise<AxiosHttpResult<R>> {
+  public assign(data: any): Promise<AxiosHttpResult<O>> {
     return this.getConfig().getHttp().put(this.getBaseAddress(), data, {
       contentType: ContentTypeEnum.URL_ENCODED,
     });
-  }
-}
-
-export abstract class AbstractEntityService<R extends Entity> extends AbstractService<R> {
-  public saveOrUpdate(data: R): Promise<AxiosHttpResult<R>> {
-    return this.getConfig().getHttp().post<R, R>(this.getBaseAddress(), data);
-  }
-}
-
-export abstract class AbstractDtoService<
-  I extends Entity,
-  O extends Entity,
-> extends AbstractService<O> {
-  public saveOrUpdate(data: I): Promise<AxiosHttpResult<O>> {
-    return this.getConfig().getHttp().post<O, I>(this.getBaseAddress(), data);
   }
 }

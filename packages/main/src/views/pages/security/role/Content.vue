@@ -33,14 +33,14 @@
 <script setup lang="ts">
 import type { SysRoleEntity } from '@herodotus/api';
 
-import { useEntityTableItem } from '@/composables/hooks';
+import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysRoleContent' });
 
 const roleForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useEntityTableItem<SysRoleEntity>(
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysRoleEntity>(
   API.core.sysRole(),
 );
 

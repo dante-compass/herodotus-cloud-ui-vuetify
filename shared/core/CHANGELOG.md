@@ -1,5 +1,17 @@
 # @herodotus/core
 
+## 0.2.3
+
+### Patch Changes
+
+- 调整基础 Service 定义
+
+## 0.2.2
+
+### Patch Changes
+
+- 基础 Service 泛型定义修改为更灵活方式
+
 ## 0.2.1
 
 ### Patch Changes

@@ -6,9 +6,9 @@ import type {
 import type { AxiosHttpResult } from '@herodotus/core';
 
 import { ContentTypeEnum } from '@/enums';
-import { HttpConfig, AbstractEntityService } from '@herodotus/core';
+import { HttpConfig, AbstractService } from '@herodotus/core';
 
-class DialogueContactService extends AbstractEntityService<DialogueContactEntity> {
+class DialogueContactService extends AbstractService<DialogueContactEntity> {
   private static instance: DialogueContactService;
 
   private constructor(config: HttpConfig) {
@@ -27,7 +27,7 @@ class DialogueContactService extends AbstractEntityService<DialogueContactEntity
   }
 }
 
-class DialogueDetailService extends AbstractEntityService<DialogueDetailEntity> {
+class DialogueDetailService extends AbstractService<DialogueDetailEntity> {
   private static instance: DialogueDetailService;
 
   private constructor(config: HttpConfig) {
@@ -54,7 +54,7 @@ class DialogueDetailService extends AbstractEntityService<DialogueDetailEntity> 
   }
 }
 
-class NotificationService extends AbstractEntityService<NotificationEntity> {
+class NotificationService extends AbstractService<NotificationEntity> {
   private static instance: NotificationService;
 
   private constructor(config: HttpConfig) {

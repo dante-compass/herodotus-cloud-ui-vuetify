@@ -51,15 +51,16 @@
 <script setup lang="ts">
 import type { SysEmployeeEntity } from '@herodotus/api';
 
-import { useEntityTableItem } from '@/composables/hooks';
+import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysUserContent' });
 
 const employeeForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } =
-  useEntityTableItem<SysEmployeeEntity>(API.core.sysEmployee());
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysEmployeeEntity>(
+  API.core.sysEmployee(),
+);
 
 const validateEmployeeName = async (employeeName: string) => {
   return await new Promise((resolve, reject) => {

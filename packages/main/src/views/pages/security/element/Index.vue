@@ -124,7 +124,7 @@ const {
   toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<SysElementEntity, SysElementConditions>(
+} = useTable<SysElementConditions, SysElementEntity>(
   API.core.sysElement(),
   PAGE_NAME.SYS_ELEMENT,
   false,

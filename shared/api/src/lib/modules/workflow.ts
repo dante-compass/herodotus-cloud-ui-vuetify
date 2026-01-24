@@ -1,9 +1,9 @@
 import type { ExtendedTaskEntity } from '@/declarations';
 import type { AxiosHttpResult, Page, Pageable, Conditions } from '@herodotus/core';
 
-import { HttpConfig, AbstractEntityService } from '@herodotus/core';
+import { HttpConfig, AbstractService } from '@herodotus/core';
 
-class ExtendedTaskService extends AbstractEntityService<ExtendedTaskEntity> {
+class ExtendedTaskService extends AbstractService<ExtendedTaskEntity> {
   private static instance: ExtendedTaskService;
 
   private constructor(config: HttpConfig) {

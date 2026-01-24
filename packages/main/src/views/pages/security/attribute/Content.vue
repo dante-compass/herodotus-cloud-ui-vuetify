@@ -41,13 +41,14 @@
 <script setup lang="ts">
 import type { SysAttributeEntity } from '@herodotus/api';
 
-import { useEntityTableItem } from '@/composables/hooks';
+import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 defineOptions({ name: 'SysAttributeContent' });
 
-const { editedItem, operation, title, overlay, saveOrUpdate } =
-  useEntityTableItem<SysAttributeEntity>(API.core.sysAttribute());
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysAttributeEntity>(
+  API.core.sysAttribute(),
+);
 
 const onSave = () => {
   saveOrUpdate();

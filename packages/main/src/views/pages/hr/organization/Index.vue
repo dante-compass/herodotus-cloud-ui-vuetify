@@ -62,7 +62,7 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<SysOrganizationEntity, SysOrganizationConditions>(
+} = useTable<SysOrganizationConditions, SysOrganizationEntity>(
   API.core.sysOrganization(),
   PAGE_NAME.SYS_ORGANIZATION,
 );

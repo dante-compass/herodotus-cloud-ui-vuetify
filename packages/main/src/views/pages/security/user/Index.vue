@@ -94,7 +94,7 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<SysUserEntity, SysUserConditions>(API.core.sysUser(), PAGE_NAME.SYS_USER);
+} = useTable<SysUserConditions, SysUserEntity>(API.core.sysUser(), PAGE_NAME.SYS_USER);
 
 const showChangePasswordDialog = shallowRef(false);
 const showSendMessageToUserDialog = shallowRef(false);

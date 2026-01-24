@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import type { SysOrganizationEntity } from '@herodotus/api';
 
-import { useEntityTableItem } from '@/composables/hooks';
+import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
 import { OrganizationSelect } from '../components';
@@ -54,8 +54,9 @@ defineOptions({ name: 'SysOrganizationContent', components: { OrganizationSelect
 
 const organizationForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } =
-  useEntityTableItem<SysOrganizationEntity>(API.core.sysOrganization());
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysOrganizationEntity>(
+  API.core.sysOrganization(),
+);
 
 const onSave = async () => {
   const { valid } = await organizationForm.value.validate();

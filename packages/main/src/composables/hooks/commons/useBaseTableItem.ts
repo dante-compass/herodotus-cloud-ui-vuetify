@@ -7,16 +7,19 @@ import { useEditFinish, useElementStore } from '@herodotus/framework';
 
 /**
  * 表格条目基础定义
- * @param <O> 输出类型，即响应结果类型
+ *
+ * 详情编辑(三级路由)页接收表格通过 vue-router push 的参数内容
+ *
+ * @param <I> 输入值类型。传递给三级路由页面操作数据类型。通常为输入和输出为相同的实体类型，也可为非实体的 Dto 类型
  * @returns
  */
-export default function useBaseTableItem<E extends Entity>() {
+export default function useBaseTableItem<I extends Entity>() {
   const { onFinish } = useEditFinish();
 
   const route = useRoute();
   const store = useElementStore();
 
-  const editedItem = ref({}) as Ref<E>;
+  const editedItem = ref({}) as Ref<I>;
   const operation = shallowRef(OperationEnum.CREATE) as ShallowRef<OperationEnum>;
   const additional = ref({}) as Ref<Record<string, unknown>>;
   const title = shallowRef('');

@@ -85,7 +85,7 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<OAuth2ApplicationEntity, OAuth2ApplicationConditions>(
+} = useTable<OAuth2ApplicationConditions, OAuth2ApplicationEntity>(
   API.core.oauth2Application(),
   PAGE_NAME.OAUTH2_APPLICATION,
 );

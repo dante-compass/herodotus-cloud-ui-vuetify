@@ -81,7 +81,7 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<SysDictionaryEntity, SysDictionaryConditions>(
+} = useTable<SysDictionaryConditions, SysDictionaryEntity>(
   API.core.sysDictionary(),
   PAGE_NAME.SYS_DICTIONARY,
 );

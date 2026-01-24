@@ -66,7 +66,7 @@ const activated = computed({
 });
 
 const { treeItems, conditions, loading } = useTreeItem<
-  SysOrganizationEntity,
-  SysOrganizationConditions
+  SysOrganizationConditions,
+  SysOrganizationEntity
 >(API.core.sysOrganization());
 </script>

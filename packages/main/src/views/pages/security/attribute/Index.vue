@@ -64,7 +64,7 @@ const {
   toEdit,
   toAuthorize,
   findItems,
-} = useTable<SysAttributeEntity, SysAttributeConditions>(
+} = useTable<SysAttributeConditions, SysAttributeEntity>(
   API.core.sysAttribute(),
   PAGE_NAME.SYS_ATTRIBUTE,
   false,

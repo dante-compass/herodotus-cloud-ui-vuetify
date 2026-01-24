@@ -63,7 +63,7 @@ const {
   toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<OAuth2ScopeEntity, OAuth2ScopeConditions>(
+} = useTable<OAuth2ScopeConditions, OAuth2ScopeEntity>(
   API.core.oauth2Scope(),
   PAGE_NAME.OAUTH2_SCOPE,
 );

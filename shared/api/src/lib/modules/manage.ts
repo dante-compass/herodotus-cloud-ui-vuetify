@@ -1,9 +1,9 @@
 import type { AxiosHttpResult } from '@herodotus/core';
 import type { CertificateRequest, CertificateResponse } from '@/declarations';
 
-import { HttpConfig, AbstractDtoService } from '@herodotus/core';
+import { HttpConfig, AbstractService } from '@herodotus/core';
 
-class MgtCertificateService extends AbstractDtoService<CertificateRequest, CertificateResponse> {
+class MgtCertificateService extends AbstractService<CertificateRequest, CertificateResponse> {
   private static instance: MgtCertificateService;
 
   private constructor(config: HttpConfig) {

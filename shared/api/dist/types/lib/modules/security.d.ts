@@ -1,12 +1,12 @@
 import { SysPermissionEntity, SysRoleEntity, SysUserEntity, SysAttributeEntity, SysDefaultRoleEntity, SysElementEntity, SysDictionaryEntity, SysTenantDataSourceEntity, AccessSourceEntity } from '../../declarations';
-import { AxiosHttpResult, Elements, HttpConfig, AbstractEntityService } from '@herodotus/core';
-declare class SysPermissionService extends AbstractEntityService<SysPermissionEntity> {
+import { AxiosHttpResult, Elements, HttpConfig, AbstractService } from '@herodotus/core';
+declare class SysPermissionService extends AbstractService<SysPermissionEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysPermissionService;
     getBaseAddress(): string;
 }
-declare class SysRoleService extends AbstractEntityService<SysRoleEntity> {
+declare class SysRoleService extends AbstractService<SysRoleEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysRoleService;
@@ -14,7 +14,7 @@ declare class SysRoleService extends AbstractEntityService<SysRoleEntity> {
     getRoleCodePath(roleCode: string): string;
     fetchByRoleCode(roleCode: string): Promise<AxiosHttpResult<SysRoleEntity>>;
 }
-declare class SysUserService extends AbstractEntityService<SysUserEntity> {
+declare class SysUserService extends AbstractService<SysUserEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysUserService;
@@ -25,19 +25,19 @@ declare class SysUserService extends AbstractEntityService<SysUserEntity> {
     fetchByUsername(username: string): Promise<AxiosHttpResult<SysUserEntity>>;
     changePassword(userId: string, password: string): Promise<AxiosHttpResult<SysUserEntity>>;
 }
-declare class SysAttributeService extends AbstractEntityService<SysAttributeEntity> {
+declare class SysAttributeService extends AbstractService<SysAttributeEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysAttributeService;
     getBaseAddress(): string;
 }
-declare class SysDefaultRoleService extends AbstractEntityService<SysDefaultRoleEntity> {
+declare class SysDefaultRoleService extends AbstractService<SysDefaultRoleEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysDefaultRoleService;
     getBaseAddress(): string;
 }
-declare class SysElementService extends AbstractEntityService<SysElementEntity> {
+declare class SysElementService extends AbstractService<SysElementEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysElementService;
@@ -46,7 +46,7 @@ declare class SysElementService extends AbstractEntityService<SysElementEntity> 
     fetchById(id: string): Promise<AxiosHttpResult<SysElementEntity>>;
     findResourcesByRoles(roles: string[]): Promise<AxiosHttpResult<Elements>>;
 }
-declare class SysTenantDataSourceService extends AbstractEntityService<SysTenantDataSourceEntity> {
+declare class SysTenantDataSourceService extends AbstractService<SysTenantDataSourceEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysTenantDataSourceService;
@@ -54,7 +54,7 @@ declare class SysTenantDataSourceService extends AbstractEntityService<SysTenant
     getTenantIdPath(tenantId: string): string;
     fetchByTenantId(tenantId: string): Promise<AxiosHttpResult<SysTenantDataSourceEntity>>;
 }
-declare class SysDictionaryService extends AbstractEntityService<SysDictionaryEntity> {
+declare class SysDictionaryService extends AbstractService<SysDictionaryEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysDictionaryService;
@@ -64,7 +64,7 @@ declare class SysDictionaryService extends AbstractEntityService<SysDictionaryEn
     fetchByCategory(category: string): Promise<AxiosHttpResult<Array<SysDictionaryEntity>>>;
     fetchCategories(categories: string): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>>;
 }
-declare class SocialBindingService extends AbstractEntityService<AccessSourceEntity> {
+declare class SocialBindingService extends AbstractService<AccessSourceEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SocialBindingService;

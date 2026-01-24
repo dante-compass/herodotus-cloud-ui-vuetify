@@ -93,7 +93,7 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<MgtCertificateEntity, MgtCertificateConditions>(
+} = useTable<MgtCertificateConditions, MgtCertificateEntity>(
   API.core.mgtCertificate(),
   PAGE_NAME.MGT_CERTIFICATE,
 );
