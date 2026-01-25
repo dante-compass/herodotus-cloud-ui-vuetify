@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 0.2.4
+
+### Patch Changes
+
+- 完善证书管理实体属性定义
+
 ## 0.2.3
 
 ### Patch Changes

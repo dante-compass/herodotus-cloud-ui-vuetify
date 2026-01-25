@@ -54,9 +54,10 @@
 
 <script setup lang="ts">
 import type {
-  MgtCertificateEntity,
+  CertificateRequest,
+  CertificateResponse,
   MgtCertificateConditions,
-  MgtCertificateProps,
+  CertificateProps,
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
@@ -81,7 +82,7 @@ const headers = ref([
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: MgtCertificateProps = 'certId';
+const rowKey: CertificateProps = 'certId';
 
 const {
   loading,
@@ -93,7 +94,7 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<MgtCertificateConditions, MgtCertificateEntity>(
+} = useTable<MgtCertificateConditions, CertificateRequest, CertificateResponse>(
   API.core.mgtCertificate(),
   PAGE_NAME.MGT_CERTIFICATE,
 );

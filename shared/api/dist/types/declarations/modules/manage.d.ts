@@ -1,6 +1,5 @@
 import { AbstractSysEntity, Conditions } from '@herodotus/core';
-export interface CertificateRequest {
-    certId: string;
+export interface MgtCertificateRequest {
     alias: string;
     /**
      * 证书所有者的公共名称
@@ -42,16 +41,13 @@ export interface CertificateRequest {
     endTime: Date;
     password: string;
     parentId: string;
-    bucketName: string;
-    keystoreName: string;
     certificateCategory: string;
     ocsp: boolean;
 }
-export interface CertificateResponse extends AbstractSysEntity {
+export interface MgtCertificateResponse extends AbstractSysEntity {
     certId: string;
     alias: string;
     password: string;
-    parentId: string;
     certificateCategory: string;
     serialNumber: string;
     subjectDn: string;
@@ -63,4 +59,4 @@ export interface CertificateResponse extends AbstractSysEntity {
 }
 export interface MgtCertificateConditions extends Conditions {
 }
-export type CertificateProps = keyof CertificateResponse;
+export type MgtCertificateProps = keyof MgtCertificateResponse;
