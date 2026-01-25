@@ -1,6 +1,6 @@
-import type { AbstractSysEntity, Conditions } from '@herodotus/core';
+import type { AbstractSysEntity, AbstractSysDto, Conditions } from '@herodotus/core';
 
-export interface MgtCertificateRequest {
+export interface MgtCertificateRequest extends AbstractSysDto {
   alias: string;
   /**
    * 证书所有者的公共名称

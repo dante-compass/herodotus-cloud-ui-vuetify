@@ -7,12 +7,6 @@
     @save="onSave()"
   >
     <v-form ref="certificateForm" validate-on="blur lazy">
-      <h-dictionary-toggle
-        class="mb-md"
-        v-model="editedItem.keyStoreCategory"
-        dictionary="KeyStoreCategory"
-        default-value="PKCS12"
-      ></h-dictionary-toggle>
       <v-text-field
         v-model="editedItem.alias"
         label="证书别名 *"
@@ -65,7 +59,7 @@
         class="mb-md"
         v-model="editedItem.certificateCategory"
         dictionary="CertificateCategory"
-        default-value="TRUST_ANCHOR"
+        default-value="ROOT_CA"
       ></h-dictionary-toggle>
       <v-select
         v-model="editedItem.parentId"
@@ -101,6 +95,7 @@ import type { MgtCertificateRequest, MgtCertificateResponse } from '@herodotus/a
 
 import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
+import { isEmpty } from 'lodash-es';
 
 defineOptions({ name: 'MgtCertificateContent' });
 
@@ -127,7 +122,7 @@ const validateAlias = async (alias: string) => {
           // 如果该roleCode 对应的 roleId 与当前 editedItem中的roleId相同
           // 则认为是编辑状态，而且employeeName 没有变化，那么就校验通过。
           // 目前能想到的解决新建空值、编辑是原值等校验问题的最优解
-          resolve(!(cert && cert.certId !== editedItem.value.certId));
+          resolve(isEmpty(cert));
         });
     } else {
       reject(false);
@@ -170,7 +165,7 @@ const loadOptionData = (category: string) => {
 watch(
   () => editedItem.value.certificateCategory,
   (newValue) => {
-    if (newValue === 'TRUST_ANCHOR') {
+    if (newValue === 'ROOT_CA') {
       disableParentSelect.value = true;
       editedItem.value.parentId = '';
     } else {

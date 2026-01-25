@@ -33,6 +33,7 @@ export interface AbstractSysDto extends Dto {
   ranking: number;
 }
 
+
 export type Page<T extends Domain> = {
   content: T[];
   totalElements: string;
