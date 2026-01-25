@@ -16,31 +16,28 @@
       <v-btn @click="toCreate">新建证书</v-btn>
     </template>
 
-    <template #item.keystoreName="{ item }">
-      <h-action-button
-        color="blue-grey"
-        icon="mdi-download-box"
-        tooltip="点击下载"
-        @click="onDownload(item.bucketName, item.keystoreName)"
-      ></h-action-button>
+    <template #item.startTime="{ value }">
+      {{ defaultFormat(value) }}
     </template>
 
-    <template #item.pemName="{ item }">
-      <h-action-button
-        v-if="item.pemName"
-        color="blue-grey"
-        icon="mdi-download-box"
-        tooltip="点击下载"
-        @click="onDownload(item.bucketName, item.pemName)"
-      ></h-action-button>
+    <template #item.endTime="{ value }">
+      {{ defaultFormat(value) }}
     </template>
 
-    <template #item.distinguishedName="{ item }">
-      <h-action-button
-        color="info"
-        icon="mdi-information-variant-box"
-        :tooltip="item.distinguishedName"
-      ></h-action-button>
+    <template #item.certificateCategory="{ item }">
+      <v-chip density="compact" rounded="lg" color="orange" label>
+        {{ getDictionaryItemDisplay('CertificateCategory', item.certificateCategory) }}
+      </v-chip>
+    </template>
+
+    <template #item.revocationReason="{ item }">
+      <v-chip density="compact" rounded="lg" color="orange" label>
+        {{ getDictionaryItemDisplay('RevocationReason', item.revocationReason) }}
+      </v-chip>
+    </template>
+
+    <template #item.ocsp="{ item }">
+      <h-column-boolean :value="item.ocsp"></h-column-boolean>
     </template>
 
     <template #item.actions="{ item }">
@@ -54,14 +51,14 @@
 
 <script setup lang="ts">
 import type {
-  CertificateRequest,
-  CertificateResponse,
+  MgtCertificateRequest,
+  MgtCertificateResponse,
   MgtCertificateConditions,
-  CertificateProps,
+  MgtCertificateProps,
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTable } from '@/composables/hooks';
+import { useTable, useDateTime, useDictionary } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.MGT_CERTIFICATE });
@@ -69,20 +66,20 @@ defineOptions({ name: PAGE_NAME.MGT_CERTIFICATE });
 const headers = ref([
   { key: 'alias', align: 'center', label: '证书名称' },
   { key: 'certificateCategory', align: 'center', title: '证书类别' },
-  { key: 'commonName', align: 'center', title: '公共名称' },
-  { key: 'distinguishedName', align: 'center', title: '区分名' },
+  { key: 'serialNumber', align: 'center', title: '证书序列号' },
+  { key: 'subjectDn', align: 'center', title: '主题 DN' },
+  { key: 'issuerDn', align: 'center', title: '颁发者 DN' },
   { key: 'startTime', align: 'center', title: '开始时间' },
   { key: 'endTime', align: 'center', title: '结束时间' },
   { key: 'password', align: 'center', title: '密码' },
-  { key: 'bucketName', align: 'center', title: '存储桶名称' },
-  { key: 'keystoreName', align: 'center', title: 'KeyStore' },
-  { key: 'pemName', field: 'pemName', align: 'center', title: 'PEM' },
+  { key: 'ocsp', align: 'center', title: 'OCSP 证书' },
+  { key: 'revocationReason', align: 'center', title: '证书吊销理由' },
   { key: 'description', align: 'center', title: '备注' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: CertificateProps = 'certId';
+const rowKey: MgtCertificateProps = 'certId';
 
 const {
   loading,
@@ -94,12 +91,11 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<MgtCertificateConditions, CertificateRequest, CertificateResponse>(
+} = useTable<MgtCertificateConditions, MgtCertificateRequest, MgtCertificateResponse>(
   API.core.mgtCertificate(),
   PAGE_NAME.MGT_CERTIFICATE,
 );
 
-const onDownload = (bucketName: string, objectName: string) => {
-  // download(bucketName, objectName);
-};
+const { defaultFormat } = useDateTime();
+const { getDictionaryItemDisplay } = useDictionary('CertificateCategory', 'RevocationReason');
 </script>

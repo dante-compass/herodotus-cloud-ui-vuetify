@@ -1,4 +1,4 @@
-import { AxiosHttpResult, Conditions, Entity, Page, Pageable, Tree } from '../../declarations';
+import { AxiosHttpResult, Conditions, Domain, Page, Pageable, Tree } from '../../declarations';
 import { HttpConfig } from './config';
 export declare abstract class Service {
     private config;
@@ -8,7 +8,7 @@ export declare abstract class Service {
     protected getParamPath(path: string, param: string): string;
     protected getIdPath(id: string): string;
 }
-export declare abstract class AbstractService<I extends Entity, O extends Entity = I> extends Service {
+export declare abstract class AbstractService<I extends Domain, O extends Domain = I> extends Service {
     private getConditionAddress;
     private getListAddress;
     getTreeAddress(): string;

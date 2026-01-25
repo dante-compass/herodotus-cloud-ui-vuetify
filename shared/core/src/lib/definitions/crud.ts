@@ -1,4 +1,4 @@
-import type { AxiosHttpResult, Conditions, Entity, Page, Pageable, Tree } from '@/declarations';
+import type { AxiosHttpResult, Conditions, Domain, Page, Pageable, Tree } from '@/declarations';
 import { ContentTypeEnum } from '@/enums';
 import { HttpConfig } from './config';
 import { isEmpty } from 'lodash-es';
@@ -25,7 +25,7 @@ export abstract class Service {
   }
 }
 
-export abstract class AbstractService<I extends Entity, O extends Entity = I> extends Service {
+export abstract class AbstractService<I extends Domain, O extends Domain = I> extends Service {
   private getConditionAddress(): string {
     return this.getBaseAddress() + '/condition';
   }
@@ -64,7 +64,7 @@ export abstract class AbstractService<I extends Entity, O extends Entity = I> ex
   public delete(id: string): Promise<AxiosHttpResult<string>> {
     return this.getConfig().getHttp().delete<string, string>(this.getIdPath(id));
   }
-  
+
   public saveOrUpdate(data: I): Promise<AxiosHttpResult<O>> {
     return this.getConfig().getHttp().post<O, I>(this.getBaseAddress(), data);
   }

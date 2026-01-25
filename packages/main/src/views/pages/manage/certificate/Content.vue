@@ -6,7 +6,7 @@
     :operation="operation"
     @save="onSave()"
   >
-    <v-form ref="tenantForm" validate-on="blur lazy">
+    <v-form ref="certificateForm" validate-on="blur lazy">
       <h-dictionary-toggle
         class="mb-md"
         v-model="editedItem.keyStoreCategory"
@@ -97,22 +97,23 @@
 </template>
 
 <script setup lang="ts">
-import type { MgtCertificateEntity } from '@herodotus/api';
+import type { MgtCertificateRequest, MgtCertificateResponse } from '@herodotus/api';
 
 import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
-defineOptions({ name: 'SysTenantDataSourceContent' });
+defineOptions({ name: 'MgtCertificateContent' });
 
-const tenantForm = ref();
+const certificateForm = ref();
 
-const parentOptions = ref([]) as Ref<Array<MgtCertificateEntity>>;
+const parentOptions = ref([]) as Ref<Array<MgtCertificateResponse>>;
 const showParentLoading = ref(false);
 const disableParentSelect = ref(true);
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<MgtCertificateEntity>(
-  API.core.mgtCertificate(),
-);
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<
+  MgtCertificateRequest,
+  MgtCertificateResponse
+>(API.core.mgtCertificate());
 
 const validateAlias = async (alias: string) => {
   return await new Promise((resolve, reject) => {
@@ -121,7 +122,7 @@ const validateAlias = async (alias: string) => {
         .mgtCertificate()
         .findByAlias(alias)
         .then((result) => {
-          let cert = result.data as MgtCertificateEntity;
+          let cert = result.data as MgtCertificateResponse;
           // 如果能够查询到roleCode
           // 如果该roleCode 对应的 roleId 与当前 editedItem中的roleId相同
           // 则认为是编辑状态，而且employeeName 没有变化，那么就校验通过。
@@ -179,7 +180,7 @@ watch(
 );
 
 const onSave = async () => {
-  const { valid } = await tenantForm.value.validate();
+  const { valid } = await certificateForm.value.validate();
   if (valid) {
     saveOrUpdate();
   }

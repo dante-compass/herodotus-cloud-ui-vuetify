@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AbstractSysEntity } from '@herodotus/core';
+import type { AbstractSysDto, AbstractSysEntity } from '@herodotus/core';
 
 import { useEditFinish } from '@herodotus/framework';
 
@@ -49,11 +49,11 @@ defineOptions({
 });
 
 interface Props {
-  entity: AbstractSysEntity;
+  entity: AbstractSysEntity | AbstractSysDto;
 }
 
 withDefaults(defineProps<Props>(), {
-  entity: () => ({}) as AbstractSysEntity,
+  entity: () => ({}) as AbstractSysEntity | AbstractSysDto,
 });
 
 const emit = defineEmits<{

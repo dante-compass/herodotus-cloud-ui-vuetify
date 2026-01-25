@@ -1,5 +1,17 @@
 # @herodotus/core
 
+## 0.2.6
+
+### Patch Changes
+
+- 修正 Typescript 定义错误
+
+## 0.2.5
+
+### Patch Changes
+
+- 优化现有 Typescript 对 Dto 类型参数和响应的支持
+
 ## 0.2.4
 
 ### Patch Changes

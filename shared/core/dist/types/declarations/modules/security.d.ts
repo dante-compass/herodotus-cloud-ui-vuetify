@@ -1,4 +1,4 @@
-import { Tree, Entity } from '../application';
+import { Tree, Domain } from '../application';
 export interface ElementRouteMeta {
     title: string;
     icon: string;
@@ -17,7 +17,7 @@ export interface ElementRouteTree extends Tree {
     scenario: string;
     children?: Array<ElementRouteTree>;
 }
-export interface Elements extends Entity {
+export interface Elements extends Domain {
     menus: ElementRouteTree[];
     buttons: string[];
 }

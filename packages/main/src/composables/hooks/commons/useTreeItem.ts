@@ -1,7 +1,7 @@
-import type { Entity, Conditions, Tree } from '@herodotus/core';
+import type { Domain, Conditions, Tree } from '@herodotus/core';
 import { AbstractService } from '@herodotus/core';
 
-export default function useTreeItem<C extends Conditions, I extends Entity>(
+export default function useTreeItem<C extends Conditions, I extends Domain>(
   AbstractService: AbstractService<I>,
   immediate = true,
 ) {

@@ -1,6 +1,6 @@
 import type {
   Page,
-  Entity,
+  Domain,
   Conditions,
   HttpResult,
   AbstractService,
@@ -24,7 +24,7 @@ import useBaseTable from './useBaseTable';
  * @param loadOnMount 是否在 onMount 阶段加载
  * @returns
  */
-export default function useTable<C extends Conditions, I extends Entity, O extends Entity = I>(
+export default function useTable<C extends Conditions, I extends Domain, O extends Domain = I>(
   service: AbstractService<I, O>,
   name: string,
   fetchAll = false,

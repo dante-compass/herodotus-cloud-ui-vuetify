@@ -1,4 +1,4 @@
-import type { Conditions, Entity, Page } from '@herodotus/core';
+import type { Conditions, Domain, Page } from '@herodotus/core';
 import type { Sort, Direction } from '@herodotus/core';
 import type { SortItem } from '../../declarations';
 
@@ -20,7 +20,7 @@ import { useElementStore } from '@herodotus/framework';
  * @param <O> 输出值类型，数据表格显示接口返回内容数据类型。通常为输入和输出为相同的实体类型，也可为非实体的 Dto 类型。
  * @returns
  */
-export default function useBaseTable<C extends Conditions, I extends Entity, O extends Entity = I>(
+export default function useBaseTable<C extends Conditions, I extends Domain, O extends Domain = I>(
   name: string,
   sorted = [] as Array<string>,
   direction = 'DESC' as Direction,
