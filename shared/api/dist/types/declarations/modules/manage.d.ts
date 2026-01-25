@@ -37,8 +37,8 @@ export interface MgtCertificateRequest extends AbstractSysDto {
      * 简称：C 字段，只能是国家字母缩写，如中国：CN 。
      */
     country: string;
-    startTime: Date;
-    endTime: Date;
+    startTime: string;
+    endTime: string;
     password: string;
     parentId: string;
     certificateCategory: string;
@@ -52,8 +52,8 @@ export interface MgtCertificateResponse extends AbstractSysEntity {
     serialNumber: string;
     subjectDn: string;
     issuerDn: string;
-    startTime: Date;
-    endTime: Date;
+    startTime: string;
+    endTime: string;
     ocsp: boolean;
     revocationReason: string;
 }

@@ -73,19 +73,18 @@
         :disabled="disableParentSelect"
         :readonly="disableParentSelect"
       ></v-select>
-      <h-date
+      <h-date-time
         v-model="editedItem.startTime"
         label="开始时间 *"
         placeholder="请输入开始时间"
         :rules="[(v: string) => !!v || '开始时间不能为空']"
-      ></h-date>
-      >
-      <h-date
+      ></h-date-time>
+      <h-date-time
         v-model="editedItem.endTime"
         label="结束时间 *"
         placeholder="请输入结束时间"
         :rules="[(v: string) => !!v || '结束时间不能为空']"
-      ></h-date>
+      ></h-date-time>
     </v-form>
   </h-center-layout-container>
 </template>
@@ -151,7 +150,9 @@ const loadOptionData = (category: string) => {
       .mgtCertificate()
       .findAllByCertificateCategory(category)
       .then((result) => {
-        parentOptions.value = result.data;
+        if (result.data) {
+          parentOptions.value = result.data;
+        }
         showParentLoading.value = false;
         disableParentSelect.value = false;
       })

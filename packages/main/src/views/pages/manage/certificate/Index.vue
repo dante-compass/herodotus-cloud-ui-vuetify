@@ -31,7 +31,7 @@
     </template>
 
     <template #item.revocationReason="{ item }">
-      <v-chip density="compact" rounded="lg" color="orange" label>
+      <v-chip v-if="item.revocationReason" density="compact" rounded="lg" color="orange" label>
         {{ getDictionaryItemDisplay('RevocationReason', item.revocationReason) }}
       </v-chip>
     </template>
@@ -41,10 +41,7 @@
     </template>
 
     <template #item.actions="{ item }">
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+      <h-action-delete-button @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>
   </h-data-table>
 </template>
@@ -74,7 +71,6 @@ const headers = ref([
   { key: 'password', align: 'center', title: '密码' },
   { key: 'ocsp', align: 'center', title: 'OCSP 证书' },
   { key: 'revocationReason', align: 'center', title: '证书吊销理由' },
-  { key: 'description', align: 'center', title: '备注' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
