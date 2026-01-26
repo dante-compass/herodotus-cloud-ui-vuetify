@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 0.3.0
+
+### Minor Changes
+
+- 版本发布
+
 ## 0.2.7
 
 ### Patch Changes

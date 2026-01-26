@@ -1,4 +1,4 @@
-import type { Tree, Domain } from '../application';
+import type { Tree, Entity } from '../application';
 
 export interface ElementRouteMeta {
   title: string;
@@ -20,7 +20,7 @@ export interface ElementRouteTree extends Tree {
   children?: Array<ElementRouteTree>;
 }
 
-export interface Elements extends Domain {
+export interface Elements extends Entity {
   menus: ElementRouteTree[];
   buttons: string[];
 }
