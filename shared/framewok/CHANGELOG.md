@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 0.2.7
+
+### Patch Changes
+
+- 证书管理完成
+- Updated dependencies
+  - @herodotus/core@0.2.7
+
 ## 0.2.6
 
 ### Patch Changes
