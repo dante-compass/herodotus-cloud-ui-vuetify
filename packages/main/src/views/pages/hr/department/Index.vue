@@ -80,7 +80,7 @@ const {
   deleteItemById,
   findItems,
   conditions,
-} = useTable<SysDepartmentEntity, SysDepartmentConditions>(
+} = useTable<SysDepartmentConditions, SysDepartmentEntity>(
   API.core.sysDepartment(),
   PAGE_NAME.SYS_DEPARTMENT,
   false,

@@ -88,7 +88,7 @@ const {
   resetPageData,
   createSort,
   routePushParam,
-} = useBaseTable<SysEmployeeEntity, SysElementConditions>(PAGE_NAME.SYS_EMPLOYEE);
+} = useBaseTable<SysElementConditions, SysEmployeeEntity>(PAGE_NAME.SYS_EMPLOYEE);
 
 const isDepartmentAvailable = computed(() => {
   return !isEmpty(currentDepartment) && !isEmpty(currentDepartment.value.id);

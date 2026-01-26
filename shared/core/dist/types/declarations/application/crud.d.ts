@@ -1,7 +1,11 @@
 import { StatusEnum } from '../../enums';
-export interface Entity {
+export interface Domain {
 }
 export interface Conditions {
+}
+export interface Entity extends Domain {
+}
+export interface Dto extends Entity {
 }
 export interface AbstractEntity extends Entity {
     createTime?: Date;
@@ -10,20 +14,26 @@ export interface AbstractEntity extends Entity {
 export interface AbstractAuditEntity extends AbstractEntity {
     createBy?: string;
     updateBy?: string;
-    ranking?: number;
+    reversion?: number;
 }
 export interface AbstractSysEntity extends AbstractAuditEntity {
     status: StatusEnum;
     reserved: boolean;
-    reversion: number;
     description: string;
+    ranking: number;
 }
-export type Page<T extends Entity> = {
+export interface AbstractSysDto extends Dto {
+    status: StatusEnum;
+    reserved: boolean;
+    description: string;
+    ranking: number;
+}
+export type Page<T extends Domain> = {
     content: T[];
     totalElements: string;
     totalPages: number;
 };
-export type Slice<T extends Entity> = {
+export type Slice<T extends Domain> = {
     content: T[];
     hasNext: boolean;
     hasPrevious: boolean;
@@ -48,4 +58,4 @@ export interface Tree {
 /**
  * 可以用于前端 excel 导出
  */
-export type EntityTitle<E extends Entity> = Partial<Record<keyof E, string>>;
+export type EntityTitle<D extends Domain> = Partial<Record<keyof D, string>>;

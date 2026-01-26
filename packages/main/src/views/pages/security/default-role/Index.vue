@@ -63,7 +63,7 @@ const {
   toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<SysDefaultRoleEntity, SysDefaultRoleConditions>(
+} = useTable<SysDefaultRoleConditions, SysDefaultRoleEntity>(
   API.core.sysDefaultRole(),
   PAGE_NAME.SYS_DEFAULT_ROLE,
 );

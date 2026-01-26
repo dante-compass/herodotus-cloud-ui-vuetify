@@ -61,7 +61,7 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<SysPermissionEntity, SysPermissionConditions>(
+} = useTable<SysPermissionConditions, SysPermissionEntity>(
   API.core.sysPermission(),
   PAGE_NAME.SYS_PERMISSION,
 );

@@ -1,4 +1,4 @@
-import type { Conditions, Entity, Page } from '@herodotus/core';
+import type { Conditions, Domain, Page } from '@herodotus/core';
 import type { Sort, Direction } from '@herodotus/core';
 import type { SortItem } from '../../declarations';
 
@@ -8,12 +8,19 @@ import { OperationEnum } from '@herodotus/core';
 import { useElementStore } from '@herodotus/framework';
 
 /**
- * 数据表格基础定义
- * @param name 页面名称（用于定位子页面（三级路由））
- * @param fetchAll 是否为读取全部数据
- * @returns 相关操作和定义
+ * 数据表格基础定义。
+ *
+ * 主要提供 Table 显示以及向详情编辑(三级路由)页传递参数的通用方法。
+ * vue-router 4 push 方法传递参数，推荐使用中间介质传递。
+ *
+ * @param name 组件名称
+ * @param sorted 排序字段
+ * @param direction 排除方向
+ * @param <I> 输入值类型。传递给三级路由页面操作数据类型。通常为输入和输出为相同的实体类型，也可为非实体的 Dto 类型。
+ * @param <O> 输出值类型，数据表格显示接口返回内容数据类型。通常为输入和输出为相同的实体类型，也可为非实体的 Dto 类型。
+ * @returns
  */
-export default function useBaseTable<E extends Entity, C extends Conditions>(
+export default function useBaseTable<C extends Conditions, I extends Domain, O extends Domain = I>(
   name: string,
   sorted = [] as Array<string>,
   direction = 'DESC' as Direction,
@@ -21,7 +28,7 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(
   const loading = shallowRef(false);
   const totalPages = shallowRef(0);
   const totalItems = shallowRef(0);
-  const tableRows = ref([]) as Ref<Array<E>>;
+  const tableRows = ref([]) as Ref<Array<O>>;
   const conditions = ref({}) as Ref<C>;
 
   const store = useElementStore();
@@ -50,7 +57,7 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(
   const addRoutePushParam = (
     componentName: string,
     operation: OperationEnum,
-    item: E = {} as E,
+    item: I = {} as I,
     additional: Record<string, unknown> = {},
   ) => {
     routePushParam(componentName, operation, item, additional);
@@ -60,32 +67,32 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(
     return withSuffix ? name + suffix : name;
   };
 
-  const toEdit = (item: E, additional: Record<string, unknown> = {}, withSuffix = true) => {
+  const toEdit = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
     const componentName = appendSuffix(name, 'Content', withSuffix);
     addRoutePushParam(componentName, OperationEnum.EDIT, item, additional);
   };
 
   const toCreate = (additional: Record<string, unknown> = {}, withSuffix = true) => {
     const componentName = appendSuffix(name, 'Content', withSuffix);
-    addRoutePushParam(componentName, OperationEnum.CREATE, {} as E, additional);
+    addRoutePushParam(componentName, OperationEnum.CREATE, {} as I, additional);
   };
 
-  const toAuthorize = (item: E, additional: Record<string, unknown> = {}, withSuffix = true) => {
+  const toAuthorize = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
     const componentName = appendSuffix(name, capitalize(OperationEnum.AUTHORIZE), withSuffix);
     addRoutePushParam(componentName, OperationEnum.AUTHORIZE, item, additional);
   };
 
-  const toInfo = (item: E, additional: Record<string, unknown> = {}, withSuffix = true) => {
+  const toInfo = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
     const componentName = appendSuffix(name, capitalize(OperationEnum.INFO), withSuffix);
     addRoutePushParam(componentName, OperationEnum.INFO, item, additional);
   };
 
-  const toSetup = (item: E, additional: Record<string, unknown> = {}, withSuffix = true) => {
+  const toSetup = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
     const componentName = appendSuffix(name, capitalize(OperationEnum.SETUP), withSuffix);
     addRoutePushParam(componentName, OperationEnum.SETUP, item, additional);
   };
 
-  const toInvoke = (item: E, additional: Record<string, unknown> = {}, withSuffix = true) => {
+  const toInvoke = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
     const componentName = appendSuffix(name, capitalize(OperationEnum.INVOKE), withSuffix);
     addRoutePushParam(componentName, OperationEnum.INVOKE, item, additional);
   };
@@ -94,7 +101,7 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(
    * 分页查询返回的结果数据
    * @param data
    */
-  const setAllData = (data: Array<E>) => {
+  const setAllData = (data: Array<O>) => {
     tableRows.value = data;
     totalPages.value = 1;
     totalItems.value = data.length;
@@ -104,7 +111,7 @@ export default function useBaseTable<E extends Entity, C extends Conditions>(
    * 分页查询返回的结果数据
    * @param data
    */
-  const setPageData = (data: Page<E>) => {
+  const setPageData = (data: Page<O>) => {
     tableRows.value = data.content;
     totalPages.value = data.totalPages;
     totalItems.value = parseInt(data.totalElements, 0);

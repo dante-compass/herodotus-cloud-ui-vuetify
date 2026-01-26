@@ -86,7 +86,7 @@ defineOptions({ name: 'SysElementContent' });
 const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysElementEntity>(
   API.core.sysElement(),
 );
-const { treeItems } = useTreeItem<SysElementEntity, SysElementConditions>(API.core.sysElement());
+const { treeItems } = useTreeItem<SysElementConditions, SysElementEntity>(API.core.sysElement());
 
 watch(
   () => editedItem.value.redirect,

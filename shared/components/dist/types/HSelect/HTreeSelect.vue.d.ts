@@ -23,7 +23,6 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         hideSpinButtons: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
-        direction: "horizontal" | "vertical";
         clearable: boolean;
         clearIcon: import('vuetify/lib/composables/icons.mjs').IconValue;
         active: boolean;
@@ -684,7 +683,6 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         hideSpinButtons: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
-        direction: "horizontal" | "vertical";
         clearable: boolean;
         clearIcon: import('vuetify/lib/composables/icons.mjs').IconValue;
         active: boolean;
@@ -762,7 +760,6 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         hideSpinButtons: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
-        direction: "horizontal" | "vertical";
         clearable: boolean;
         clearIcon: import('vuetify/lib/composables/icons.mjs').IconValue;
         active: boolean;
@@ -1418,7 +1415,6 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         hideSpinButtons: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
-        direction: "horizontal" | "vertical";
         clearable: boolean;
         clearIcon: import('vuetify/lib/composables/icons.mjs').IconValue;
         active: boolean;

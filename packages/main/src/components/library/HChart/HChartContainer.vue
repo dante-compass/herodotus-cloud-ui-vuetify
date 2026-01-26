@@ -4,7 +4,6 @@
 
 <script setup lang="ts">
 import * as echarts from 'echarts';
-import 'echarts/theme/macarons';
 
 defineOptions({ name: 'HChartContainer' });
 

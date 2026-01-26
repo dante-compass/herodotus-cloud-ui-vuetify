@@ -197,8 +197,8 @@ const { editedItem, isEdit, title, overlay, saveOrUpdate } = useTableItem<OAuth2
   API.core.oauth2Application(),
 );
 const { tableRows, loading, pageNumber, pageSize, totalItems, findItems } = useTable<
-  OAuth2ScopeEntity,
-  OAuth2ScopeConditions
+  OAuth2ScopeConditions,
+  OAuth2ScopeEntity
 >(API.core.oauth2Scope(), PAGE_NAME.OAUTH2_SCOPE, true);
 
 const headers = ref([

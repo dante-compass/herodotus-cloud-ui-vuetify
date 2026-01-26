@@ -32,8 +32,6 @@ class EnvironmentVariable {
   }
 
   private useDockerEnvironmentVariable(value: string): boolean {
-    console.log('-------docker--------', value);
-
     if (value) {
       const variable = value.toLocaleUpperCase();
       if (variable.startsWith('HERODOTUS')) {

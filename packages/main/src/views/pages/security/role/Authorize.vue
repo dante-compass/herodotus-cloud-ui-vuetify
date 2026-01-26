@@ -50,8 +50,8 @@ defineOptions({ name: 'SysRoleAuthorize' });
 
 const { editedItem, title, assign } = useTableItem<SysRoleEntity>(API.core.sysRole());
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
-  SysPermissionEntity,
-  SysPermissionConditions
+  SysPermissionConditions,
+  SysPermissionEntity
 >(API.core.sysPermission(), PAGE_NAME.SYS_PERMISSION, true);
 
 const selectedItems = ref([]) as Ref<Array<SysPermissionEntity>>;

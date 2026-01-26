@@ -6,18 +6,13 @@
     :operation="operation"
     @save="onSave()"
   >
-    <v-form ref="tenantForm" validate-on="blur lazy">
-      <h-dictionary-toggle
-        class="mb-md"
-        v-model="editedItem.keyStoreCategory"
-        dictionary="KeyStoreCategory"
-        default-value="PKCS12"
-      ></h-dictionary-toggle>
+    <v-form ref="certificateForm" validate-on="blur lazy">
       <v-text-field
         v-model="editedItem.alias"
         label="证书别名 *"
         placeholder="请输入证书别名 *"
         :rules="[(v: string) => !!v || '证书别名 *不能为空', (v: string) => isUniqueRule(v)]"
+        required
       ></v-text-field>
       <v-text-field
         v-model="editedItem.commonName"
@@ -65,54 +60,56 @@
         class="mb-md"
         v-model="editedItem.certificateCategory"
         dictionary="CertificateCategory"
-        default-value="TRUST_ANCHOR"
+        default-value="ROOT_CA"
       ></h-dictionary-toggle>
       <v-select
+        v-if="showParentSelect"
         v-model="editedItem.parentId"
         :items="parentOptions"
         item-title="alias"
         item-value="certId"
         label="上级证书"
-        chips
-        closable-chips
         :loading="showParentLoading"
-        :disabled="disableParentSelect"
-        :readonly="disableParentSelect"
       ></v-select>
-      <h-date
+      <h-date-time
         v-model="editedItem.startTime"
         label="开始时间 *"
         placeholder="请输入开始时间"
         :rules="[(v: string) => !!v || '开始时间不能为空']"
-      ></h-date>
-      >
-      <h-date
+        validate-on="submit"
+      ></h-date-time>
+      <h-date-time
         v-model="editedItem.endTime"
         label="结束时间 *"
         placeholder="请输入结束时间"
         :rules="[(v: string) => !!v || '结束时间不能为空']"
-      ></h-date>
+        validate-on="submit"
+      ></h-date-time>
+      <v-switch v-if="showOcspSwitch" v-model="editedItem.ocsp" label="是否OCSP证书"></v-switch>
     </v-form>
   </h-center-layout-container>
 </template>
 
 <script setup lang="ts">
-import type { MgtCertificateEntity } from '@herodotus/api';
+import type { MgtCertificateRequest, MgtCertificateResponse } from '@herodotus/api';
 
 import { useTableItem } from '@/composables/hooks';
 import { API } from '@/configurations';
+import { isEmpty } from 'lodash-es';
 
-defineOptions({ name: 'SysTenantDataSourceContent' });
+defineOptions({ name: 'MgtCertificateContent' });
 
-const tenantForm = ref();
+const certificateForm = ref();
 
-const parentOptions = ref([]) as Ref<Array<MgtCertificateEntity>>;
-const showParentLoading = ref(false);
-const disableParentSelect = ref(true);
+const parentOptions = ref([]) as Ref<Array<MgtCertificateResponse>>;
+const showParentLoading = shallowRef(false);
+const showParentSelect = shallowRef(false);
+const showOcspSwitch = shallowRef(false);
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<MgtCertificateEntity>(
-  API.core.mgtCertificate(),
-);
+const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<
+  MgtCertificateRequest,
+  MgtCertificateResponse
+>(API.core.mgtCertificate());
 
 const validateAlias = async (alias: string) => {
   return await new Promise((resolve, reject) => {
@@ -121,12 +118,12 @@ const validateAlias = async (alias: string) => {
         .mgtCertificate()
         .findByAlias(alias)
         .then((result) => {
-          let cert = result.data as MgtCertificateEntity;
+          let cert = result.data as MgtCertificateResponse;
           // 如果能够查询到roleCode
           // 如果该roleCode 对应的 roleId 与当前 editedItem中的roleId相同
           // 则认为是编辑状态，而且employeeName 没有变化，那么就校验通过。
           // 目前能想到的解决新建空值、编辑是原值等校验问题的最优解
-          resolve(!(cert && cert.certId !== editedItem.value.certId));
+          resolve(isEmpty(cert));
         });
     } else {
       reject(false);
@@ -155,13 +152,13 @@ const loadOptionData = (category: string) => {
       .mgtCertificate()
       .findAllByCertificateCategory(category)
       .then((result) => {
-        parentOptions.value = result.data;
+        if (result.data) {
+          parentOptions.value = result.data;
+        }
         showParentLoading.value = false;
-        disableParentSelect.value = false;
       })
       .catch((error) => {
         showParentLoading.value = false;
-        disableParentSelect.value = true;
       });
   }
 };
@@ -169,17 +166,26 @@ const loadOptionData = (category: string) => {
 watch(
   () => editedItem.value.certificateCategory,
   (newValue) => {
-    if (newValue === 'TRUST_ANCHOR') {
-      disableParentSelect.value = true;
+    if (newValue === 'ROOT_CA') {
+      showParentSelect.value = false;
       editedItem.value.parentId = '';
     } else {
       loadOptionData(newValue);
+      showParentSelect.value = true;
+    }
+
+    if (newValue === 'END_ENTITY') {
+      showOcspSwitch.value = true;
+      editedItem.value.ocsp = false;
+    } else {
+      showOcspSwitch.value = false;
+      editedItem.value.ocsp = false;
     }
   },
 );
 
 const onSave = async () => {
-  const { valid } = await tenantForm.value.validate();
+  const { valid } = await certificateForm.value.validate();
   if (valid) {
     saveOrUpdate();
   }

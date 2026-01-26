@@ -1,10 +1,12 @@
-import type { Entity, HttpResult, AbstractService } from '@herodotus/core';
+import type { Domain, HttpResult, AbstractService } from '@herodotus/core';
 
 import { OperationEnum, toast } from '@herodotus/core';
 import useBaseTableItem from './useBaseTableItem';
 
-export default function useTableItem<E extends Entity>(service: AbstractService<E>) {
-  const { editedItem, operation, overlay, title, additional, onFinish } = useBaseTableItem<E>();
+export default function useTableItem<I extends Domain, O extends Domain = I>(
+  service: AbstractService<I, O>,
+) {
+  const { editedItem, operation, overlay, title, additional, onFinish } = useBaseTableItem<I>();
 
   const isEdit = computed(() => {
     return operation.value === OperationEnum.EDIT;
@@ -15,7 +17,7 @@ export default function useTableItem<E extends Entity>(service: AbstractService<
     service
       .saveOrUpdate(editedItem.value)
       .then((response) => {
-        const result = response as HttpResult<E>;
+        const result = response as HttpResult<O>;
         overlay.value = false;
         if (result.message) {
           toast.success(result.message);
@@ -36,7 +38,7 @@ export default function useTableItem<E extends Entity>(service: AbstractService<
     service
       .assign(data)
       .then((response) => {
-        const result = response as HttpResult<E>;
+        const result = response as HttpResult<O>;
         overlay.value = false;
         onFinish();
         if (result.message) {
@@ -55,9 +57,10 @@ export default function useTableItem<E extends Entity>(service: AbstractService<
   return {
     editedItem,
     operation,
-    additional,
-    title,
     overlay,
+    title,
+    additional,
+    onFinish,
     saveOrUpdate,
     assign,
     isEdit,

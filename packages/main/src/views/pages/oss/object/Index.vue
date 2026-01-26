@@ -64,5 +64,5 @@ const {
   toAuthorize,
   deleteItemById,
   findItems,
-} = useTable<SysRoleEntity, SysRoleConditions>(API.core.sysRole(), PAGE_NAME.OSS_OBJECT);
+} = useTable<SysRoleConditions, SysRoleEntity>(API.core.sysRole(), PAGE_NAME.OSS_OBJECT);
 </script>

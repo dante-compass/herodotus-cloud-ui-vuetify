@@ -55,8 +55,8 @@ defineOptions({ name: 'OAuth2ScopeAuthorize' });
 
 const { editedItem, title, overlay } = useTableItem<OAuth2ScopeEntity>(API.core.oauth2Scope());
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
-  SysPermissionEntity,
-  SysPermissionConditions
+  SysPermissionConditions,
+  SysPermissionEntity
 >(API.core.sysPermission(), PAGE_NAME.SYS_PERMISSION, true);
 
 const selectedItems = ref([]) as Ref<Array<SysPermissionEntity>>;

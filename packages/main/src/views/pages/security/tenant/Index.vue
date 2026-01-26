@@ -64,7 +64,7 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<SysTenantDataSourceEntity, SysTenantDataSourceConditions>(
+} = useTable<SysTenantDataSourceConditions, SysTenantDataSourceEntity>(
   API.core.sysTenantDataSource(),
   PAGE_NAME.SYS_TENANT_DATA_SOURCE,
 );

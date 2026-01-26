@@ -1,9 +1,9 @@
-import type { MgtCertificateEntity } from '@/declarations';
 import type { AxiosHttpResult } from '@herodotus/core';
+import type { MgtCertificateRequest, MgtCertificateResponse } from '@/declarations';
 
 import { HttpConfig, AbstractService } from '@herodotus/core';
 
-class MgtCertificateService extends AbstractService<MgtCertificateEntity> {
+class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCertificateResponse> {
   private static instance: MgtCertificateService;
 
   private constructor(config: HttpConfig) {
@@ -29,19 +29,19 @@ class MgtCertificateService extends AbstractService<MgtCertificateEntity> {
     return this.getBaseAddress() + '/category';
   }
 
-  public findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateEntity>> {
+  public findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateResponse>> {
     return this.getConfig()
       .getHttp()
-      .get<MgtCertificateEntity, string>(this.getAliasAddress(), { alias: alias });
+      .get<MgtCertificateResponse, string>(this.getAliasAddress(), { alias: alias });
   }
 
   public findAllByCertificateCategory(
     certificateCategory: string,
-  ): Promise<AxiosHttpResult<Array<MgtCertificateEntity>>> {
+  ): Promise<AxiosHttpResult<Array<MgtCertificateResponse>>> {
     return this.getConfig()
       .getHttp()
       .get<
-        Array<MgtCertificateEntity>,
+        Array<MgtCertificateResponse>,
         string
       >(this.getCategoryAddress(), { certificateCategory: certificateCategory });
   }

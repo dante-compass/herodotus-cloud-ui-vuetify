@@ -1,17 +1,25 @@
-import type { Entity } from '@herodotus/core';
+import type { Domain } from '@herodotus/core';
 
 import { useRoute } from 'vue-router';
 import { OperationEnum } from '@herodotus/core';
 
 import { useEditFinish, useElementStore } from '@herodotus/framework';
 
-export default function useBaseTableItem<E extends Entity>() {
+/**
+ * 表格条目基础定义
+ *
+ * 详情编辑(三级路由)页接收表格通过 vue-router push 的参数内容
+ *
+ * @param <I> 输入值类型。传递给三级路由页面操作数据类型。通常为输入和输出为相同的实体类型，也可为非实体的 Dto 类型
+ * @returns
+ */
+export default function useBaseTableItem<I extends Domain>() {
   const { onFinish } = useEditFinish();
 
   const route = useRoute();
   const store = useElementStore();
 
-  const editedItem = ref({}) as Ref<E>;
+  const editedItem = ref({}) as Ref<I>;
   const operation = shallowRef(OperationEnum.CREATE) as ShallowRef<OperationEnum>;
   const additional = ref({}) as Ref<Record<string, unknown>>;
   const title = shallowRef('');

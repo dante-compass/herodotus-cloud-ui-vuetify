@@ -62,8 +62,8 @@ const headers = ref([
 const rowKey: OAuth2UserLoggingProps = 'loggingId';
 
 const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, findItems } = useTable<
-  OAuth2UserLoggingEntity,
-  OAuth2UserLoggingConditions
+  OAuth2UserLoggingConditions,
+  OAuth2UserLoggingEntity
 >(API.core.oauth2UserLogging(), PAGE_NAME.OAUTH2_COMPLIANCE, false, ['createTime'], 'DESC');
 
 const { postExport } = useXlsx<OAuth2UserLoggingEntity>();

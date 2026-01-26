@@ -63,8 +63,8 @@ const headers = ref([
 const rowKey: OAuth2InterfaceAuditProps = 'auditId';
 
 const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, findItems } = useTable<
-  OAuth2InterfaceAuditEntity,
-  OAuth2InterfaceAuditConditions
+  OAuth2InterfaceAuditConditions,
+  OAuth2InterfaceAuditEntity
 >(API.core.oauth2InterfaceAudit(), PAGE_NAME.OAUTH2_AUDIT, false, ['createTime'], 'DESC');
 
 const { postExport } = useXlsx<OAuth2InterfaceAuditEntity>();

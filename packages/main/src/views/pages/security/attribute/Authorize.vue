@@ -51,8 +51,8 @@ defineOptions({ name: 'SysAttributeAuthorize' });
 
 const { editedItem, title, assign } = useTableItem<SysAttributeEntity>(API.core.sysAttribute());
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
-  SysPermissionEntity,
-  SysPermissionConditions
+  SysPermissionConditions,
+  SysPermissionEntity
 >(API.core.sysPermission(), PAGE_NAME.SYS_PERMISSION, true);
 
 const selectedItems = ref([]) as Ref<Array<SysPermissionEntity>>;

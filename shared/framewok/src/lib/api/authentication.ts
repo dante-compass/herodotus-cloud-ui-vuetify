@@ -194,9 +194,6 @@ export class OAuth2ApiService {
   }
 
   public authorizationCodeRequestFlow(api: string, redirectUri: string, scope = 'openid'): string {
-    console.log('-------api---------', api);
-    console.log('--------config--------', this.config);
-
     const param = `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${redirectUri}&scope=${scope}`;
 
     const project = this.config.getProject();
