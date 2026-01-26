@@ -12,6 +12,7 @@
         label="证书别名 *"
         placeholder="请输入证书别名 *"
         :rules="[(v: string) => !!v || '证书别名 *不能为空', (v: string) => isUniqueRule(v)]"
+        required
       ></v-text-field>
       <v-text-field
         v-model="editedItem.commonName"
@@ -62,29 +63,29 @@
         default-value="ROOT_CA"
       ></h-dictionary-toggle>
       <v-select
+        v-if="showParentSelect"
         v-model="editedItem.parentId"
         :items="parentOptions"
         item-title="alias"
         item-value="certId"
         label="上级证书"
-        chips
-        closable-chips
         :loading="showParentLoading"
-        :disabled="disableParentSelect"
-        :readonly="disableParentSelect"
       ></v-select>
       <h-date-time
         v-model="editedItem.startTime"
         label="开始时间 *"
         placeholder="请输入开始时间"
         :rules="[(v: string) => !!v || '开始时间不能为空']"
+        validate-on="submit"
       ></h-date-time>
       <h-date-time
         v-model="editedItem.endTime"
         label="结束时间 *"
         placeholder="请输入结束时间"
         :rules="[(v: string) => !!v || '结束时间不能为空']"
+        validate-on="submit"
       ></h-date-time>
+      <v-switch v-if="showOcspSwitch" v-model="editedItem.ocsp" label="是否OCSP证书"></v-switch>
     </v-form>
   </h-center-layout-container>
 </template>
@@ -101,8 +102,9 @@ defineOptions({ name: 'MgtCertificateContent' });
 const certificateForm = ref();
 
 const parentOptions = ref([]) as Ref<Array<MgtCertificateResponse>>;
-const showParentLoading = ref(false);
-const disableParentSelect = ref(true);
+const showParentLoading = shallowRef(false);
+const showParentSelect = shallowRef(false);
+const showOcspSwitch = shallowRef(false);
 
 const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<
   MgtCertificateRequest,
@@ -154,11 +156,9 @@ const loadOptionData = (category: string) => {
           parentOptions.value = result.data;
         }
         showParentLoading.value = false;
-        disableParentSelect.value = false;
       })
       .catch((error) => {
         showParentLoading.value = false;
-        disableParentSelect.value = true;
       });
   }
 };
@@ -167,10 +167,19 @@ watch(
   () => editedItem.value.certificateCategory,
   (newValue) => {
     if (newValue === 'ROOT_CA') {
-      disableParentSelect.value = true;
+      showParentSelect.value = false;
       editedItem.value.parentId = '';
     } else {
       loadOptionData(newValue);
+      showParentSelect.value = true;
+    }
+
+    if (newValue === 'END_ENTITY') {
+      showOcspSwitch.value = true;
+      editedItem.value.ocsp = false;
+    } else {
+      showOcspSwitch.value = false;
+      editedItem.value.ocsp = false;
     }
   },
 );
