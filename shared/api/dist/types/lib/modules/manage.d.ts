@@ -1,5 +1,5 @@
-import { AxiosHttpResult, HttpConfig, AbstractWriteableService } from '@herodotus/core';
-import { MgtCertificateRequest, MgtCertificateResponse } from '../../declarations';
+import { AxiosHttpResult, AxiosProgressEvent, HttpConfig, AbstractWriteableService, AbstractReadableService } from '@herodotus/core';
+import { MgtCertificateRequest, MgtCertificateResponse, MgtCertificateFileResponse, MgtCertificateFileRequest, MgtCertificateFileDeleteRequest } from '../../declarations';
 declare class MgtCertificateService extends AbstractWriteableService<MgtCertificateRequest, MgtCertificateResponse> {
     private static instance;
     private constructor();
@@ -10,4 +10,13 @@ declare class MgtCertificateService extends AbstractWriteableService<MgtCertific
     findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateResponse>>;
     findAllByCertificateCategory(certificateCategory: string): Promise<AxiosHttpResult<Array<MgtCertificateResponse>>>;
 }
-export { MgtCertificateService };
+declare class MgtCertificateFileService extends AbstractReadableService<MgtCertificateFileResponse> {
+    private static instance;
+    private constructor();
+    static getInstance(config: HttpConfig): MgtCertificateFileService;
+    getBaseAddress(): string;
+    getDownloadAddress(): string;
+    download(request: MgtCertificateFileRequest, onProgress: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<Blob>>;
+    delete(request: MgtCertificateFileDeleteRequest): Promise<AxiosHttpResult<string>>;
+}
+export { MgtCertificateService, MgtCertificateFileService };
