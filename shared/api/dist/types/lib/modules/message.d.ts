@@ -1,12 +1,12 @@
 import { DialogueContactEntity, DialogueDetailEntity, NotificationEntity } from '../../declarations';
-import { AxiosHttpResult, HttpConfig, AbstractWriteableService } from '@herodotus/core';
-declare class DialogueContactService extends AbstractWriteableService<DialogueContactEntity> {
+import { AxiosHttpResult, HttpConfig, AbstractService } from '@herodotus/core';
+declare class DialogueContactService extends AbstractService<DialogueContactEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): DialogueContactService;
     getBaseAddress(): string;
 }
-declare class DialogueDetailService extends AbstractWriteableService<DialogueDetailEntity> {
+declare class DialogueDetailService extends AbstractService<DialogueDetailEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): DialogueDetailService;
@@ -14,7 +14,7 @@ declare class DialogueDetailService extends AbstractWriteableService<DialogueDet
     getDeleteDialoguePath(id: string): string;
     deleteDialogueById(id: string): Promise<AxiosHttpResult<string>>;
 }
-declare class NotificationService extends AbstractWriteableService<NotificationEntity> {
+declare class NotificationService extends AbstractService<NotificationEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): NotificationService;

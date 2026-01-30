@@ -1,9 +1,9 @@
-import type { Domain, HttpResult, AbstractWriteableService } from '@herodotus/core';
+import type { Domain, HttpResult, AbstractService } from '@herodotus/core';
 
 import { OperationEnum, toast } from '@herodotus/core';
 import useBaseTableItem from './useBaseTableItem';
 
-export default function useTableItem<I extends Domain, O extends Domain = I>(service: AbstractWriteableService<I, O>) {
+export default function useTableItem<I extends Domain, O extends Domain = I>(service: AbstractService<I, O>) {
   const { editedItem, operation, overlay, title, additional, onFinish } = useBaseTableItem<I>();
 
   const isEdit = computed(() => {

@@ -1,18 +1,18 @@
 import { SysDepartmentEntity, SysEmployeeEntity, SysOrganizationEntity, SysEmployeeAllocatable, AllocatableRemove, AllocatableDeploy } from '../../declarations';
-import { AxiosHttpResult, Conditions, Pageable, Page, HttpConfig, AbstractWriteableService } from '@herodotus/core';
-declare class SysOrganizationService extends AbstractWriteableService<SysOrganizationEntity> {
+import { AxiosHttpResult, Conditions, Pageable, Page, HttpConfig, AbstractService } from '@herodotus/core';
+declare class SysOrganizationService extends AbstractService<SysOrganizationEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysOrganizationService;
     getBaseAddress(): string;
 }
-declare class SysDepartmentService extends AbstractWriteableService<SysDepartmentEntity> {
+declare class SysDepartmentService extends AbstractService<SysDepartmentEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysDepartmentService;
     getBaseAddress(): string;
 }
-declare class SysEmployeeService extends AbstractWriteableService<SysEmployeeEntity> {
+declare class SysEmployeeService extends AbstractService<SysEmployeeEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysEmployeeService;
@@ -29,7 +29,7 @@ declare class SysEmployeeService extends AbstractWriteableService<SysEmployeeEnt
 /**
  * 为了在人员归属中，尽量使用已有的 hooks，临时定义的无意义service
  */
-declare class SysEmployeeAllocatableService extends AbstractWriteableService<SysEmployeeAllocatable> {
+declare class SysEmployeeAllocatableService extends AbstractService<SysEmployeeAllocatable> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): SysEmployeeAllocatableService;

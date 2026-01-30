@@ -31,7 +31,7 @@
     </template>
 
     <template #item.revocationReason="{ item }">
-      <v-chip v-if="item.revocationReason" density="compact" rounded="lg" color="orange" label>
+      <v-chip v-if="item.revocationReason" density="compact" rounded="lg" color="red" label>
         {{ getDictionaryItemDisplay('RevocationReason', item.revocationReason) }}
       </v-chip>
     </template>
@@ -47,12 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import type {
-  MgtCertificateRequest,
-  MgtCertificateResponse,
-  MgtCertificateConditions,
-  MgtCertificateProps,
-} from '@herodotus/api';
+import type { MgtCertificateRequest, MgtCertificateResponse, MgtCertificateConditions, MgtCertificateProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable, useDateTime, useDictionary } from '@/composables/hooks';
@@ -77,20 +72,11 @@ const headers = ref([
 
 const rowKey: MgtCertificateProps = 'certId';
 
-const {
-  loading,
-  pageNumber,
-  pageSize,
-  tableRows,
-  totalPages,
-  totalItems,
-  toCreate,
-  deleteItemById,
-  findItems,
-} = useTable<MgtCertificateConditions, MgtCertificateRequest, MgtCertificateResponse>(
-  API.core.mgtCertificate(),
-  PAGE_NAME.MGT_CERTIFICATE,
-);
+const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toCreate, deleteItemById, findItems } = useTable<
+  MgtCertificateConditions,
+  MgtCertificateRequest,
+  MgtCertificateResponse
+>(API.core.mgtCertificate(), PAGE_NAME.MGT_CERTIFICATE);
 
 const { defaultFormat } = useDateTime();
 const { getDictionaryItemDisplay } = useDictionary('CertificateCategory', 'RevocationReason');

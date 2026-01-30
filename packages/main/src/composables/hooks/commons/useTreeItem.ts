@@ -1,14 +1,14 @@
 import type { Domain, Conditions, Tree } from '@herodotus/core';
-import { AbstractWriteableService } from '@herodotus/core';
+import { AbstractService } from '@herodotus/core';
 
-export default function useTreeItem<C extends Conditions, I extends Domain>(AbstractWriteableService: AbstractWriteableService<I>, immediate = true) {
+export default function useTreeItem<C extends Conditions, I extends Domain>(AbstractService: AbstractService<I>, immediate = true) {
   const treeItems = ref<Tree[]>([]) as Ref<Tree[]>;
   const conditions = ref({}) as Ref<C>;
   const loading = shallowRef<boolean>(false);
 
   const fetchTree = (params: Conditions = {}) => {
     loading.value = true;
-    AbstractWriteableService.fetchTree(params)
+    AbstractService.fetchTree(params)
       .then((result) => {
         const data = result.data as Array<Tree>;
         if (data) {

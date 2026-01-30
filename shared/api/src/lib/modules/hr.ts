@@ -1,10 +1,10 @@
 import type { SysDepartmentEntity, SysEmployeeEntity, SysOrganizationEntity, SysEmployeeAllocatable, AllocatableRemove, AllocatableDeploy } from '@/declarations';
 import type { AxiosHttpResult, Conditions, Pageable, Page } from '@herodotus/core';
 
-import { HttpConfig, AbstractWriteableService } from '@herodotus/core';
+import { HttpConfig, AbstractService } from '@herodotus/core';
 import { ContentTypeEnum } from '@/enums';
 
-class SysOrganizationService extends AbstractWriteableService<SysOrganizationEntity> {
+class SysOrganizationService extends AbstractService<SysOrganizationEntity> {
   private static instance: SysOrganizationService;
 
   private constructor(config: HttpConfig) {
@@ -23,7 +23,7 @@ class SysOrganizationService extends AbstractWriteableService<SysOrganizationEnt
   }
 }
 
-class SysDepartmentService extends AbstractWriteableService<SysDepartmentEntity> {
+class SysDepartmentService extends AbstractService<SysDepartmentEntity> {
   private static instance: SysDepartmentService;
 
   private constructor(config: HttpConfig) {
@@ -42,7 +42,7 @@ class SysDepartmentService extends AbstractWriteableService<SysDepartmentEntity>
   }
 }
 
-class SysEmployeeService extends AbstractWriteableService<SysEmployeeEntity> {
+class SysEmployeeService extends AbstractService<SysEmployeeEntity> {
   private static instance: SysEmployeeService;
 
   private constructor(config: HttpConfig) {
@@ -99,7 +99,7 @@ class SysEmployeeService extends AbstractWriteableService<SysEmployeeEntity> {
 /**
  * 为了在人员归属中，尽量使用已有的 hooks，临时定义的无意义service
  */
-class SysEmployeeAllocatableService extends AbstractWriteableService<SysEmployeeAllocatable> {
+class SysEmployeeAllocatableService extends AbstractService<SysEmployeeAllocatable> {
   private static instance: SysEmployeeAllocatableService;
 
   private constructor(config: HttpConfig) {

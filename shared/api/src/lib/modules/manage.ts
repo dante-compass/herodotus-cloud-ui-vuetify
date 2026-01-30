@@ -1,9 +1,9 @@
 import type { AxiosHttpResult, AxiosProgressEvent } from '@herodotus/core';
 import type { MgtCertificateRequest, MgtCertificateResponse, MgtCertificateFileResponse, MgtCertificateFileRequest, MgtCertificateFileDeleteRequest } from '@/declarations';
 
-import { HttpConfig, AbstractWriteableService, AbstractReadableService, ContentTypeEnum } from '@herodotus/core';
+import { HttpConfig, AbstractService, ContentTypeEnum } from '@herodotus/core';
 
-class MgtCertificateService extends AbstractWriteableService<MgtCertificateRequest, MgtCertificateResponse> {
+class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCertificateResponse> {
   private static instance: MgtCertificateService;
 
   private constructor(config: HttpConfig) {
@@ -38,7 +38,7 @@ class MgtCertificateService extends AbstractWriteableService<MgtCertificateReque
   }
 }
 
-class MgtCertificateFileService extends AbstractReadableService<MgtCertificateFileResponse> {
+class MgtCertificateFileService extends AbstractService<MgtCertificateFileRequest, MgtCertificateFileResponse, MgtCertificateFileDeleteRequest> {
   private static instance: MgtCertificateFileService;
 
   private constructor(config: HttpConfig) {
@@ -64,10 +64,6 @@ class MgtCertificateFileService extends AbstractReadableService<MgtCertificateFi
     return this.getConfig()
       .getHttp()
       .post<Blob, any>(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
-  }
-
-  public delete(request: MgtCertificateFileDeleteRequest): Promise<AxiosHttpResult<string>> {
-    return this.getConfig().getHttp().delete<string, MgtCertificateFileDeleteRequest>(this.getBaseAddress(), request);
   }
 }
 

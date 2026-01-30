@@ -1,5 +1,17 @@
 # @herodotus/core
 
+## 0.4.3
+
+### Patch Changes
+
+- 重新编辑模块
+
+## 0.4.2
+
+### Patch Changes
+
+- 重构] 前端接口 Service 基础定义，增加支持读写分离的定义，以便与后端丰富的 Rest 抽象定义保持一致
+
 ## 0.4.1
 
 ### Patch Changes
