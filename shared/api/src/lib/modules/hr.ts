@@ -1,17 +1,10 @@
-import type {
-  SysDepartmentEntity,
-  SysEmployeeEntity,
-  SysOrganizationEntity,
-  SysEmployeeAllocatable,
-  AllocatableRemove,
-  AllocatableDeploy,
-} from '@/declarations';
+import type { SysDepartmentEntity, SysEmployeeEntity, SysOrganizationEntity, SysEmployeeAllocatable, AllocatableRemove, AllocatableDeploy } from '@/declarations';
 import type { AxiosHttpResult, Conditions, Pageable, Page } from '@herodotus/core';
 
-import { HttpConfig, AbstractService } from '@herodotus/core';
+import { HttpConfig, AbstractWriteableService } from '@herodotus/core';
 import { ContentTypeEnum } from '@/enums';
 
-class SysOrganizationService extends AbstractService<SysOrganizationEntity> {
+class SysOrganizationService extends AbstractWriteableService<SysOrganizationEntity> {
   private static instance: SysOrganizationService;
 
   private constructor(config: HttpConfig) {
@@ -30,7 +23,7 @@ class SysOrganizationService extends AbstractService<SysOrganizationEntity> {
   }
 }
 
-class SysDepartmentService extends AbstractService<SysDepartmentEntity> {
+class SysDepartmentService extends AbstractWriteableService<SysDepartmentEntity> {
   private static instance: SysDepartmentService;
 
   private constructor(config: HttpConfig) {
@@ -49,7 +42,7 @@ class SysDepartmentService extends AbstractService<SysDepartmentEntity> {
   }
 }
 
-class SysEmployeeService extends AbstractService<SysEmployeeEntity> {
+class SysEmployeeService extends AbstractWriteableService<SysEmployeeEntity> {
   private static instance: SysEmployeeService;
 
   private constructor(config: HttpConfig) {
@@ -80,19 +73,12 @@ class SysEmployeeService extends AbstractService<SysEmployeeEntity> {
   }
 
   public fetchByEmployeeName(employeeName: string): Promise<AxiosHttpResult<SysEmployeeEntity>> {
-    return this.getConfig()
-      .getHttp()
-      .get<SysEmployeeEntity, string>(this.getEmployeeNamePath(employeeName));
+    return this.getConfig().getHttp().get<SysEmployeeEntity, string>(this.getEmployeeNamePath(employeeName));
   }
 
-  public fetchAssignedByPage(
-    params: Pageable,
-    others: Conditions = {},
-  ): Promise<AxiosHttpResult<Page<SysEmployeeEntity>>> {
+  public fetchAssignedByPage(params: Pageable, others: Conditions = {}): Promise<AxiosHttpResult<Page<SysEmployeeEntity>>> {
     const fullParams = Object.assign(params, others);
-    return this.getConfig()
-      .getHttp()
-      .get<Page<SysEmployeeEntity>>(this.getAssignedAddress(), fullParams);
+    return this.getConfig().getHttp().get<Page<SysEmployeeEntity>>(this.getAssignedAddress(), fullParams);
   }
 
   public deleteAllocatable(data: AllocatableRemove): Promise<AxiosHttpResult<string>> {
@@ -113,7 +99,7 @@ class SysEmployeeService extends AbstractService<SysEmployeeEntity> {
 /**
  * 为了在人员归属中，尽量使用已有的 hooks，临时定义的无意义service
  */
-class SysEmployeeAllocatableService extends AbstractService<SysEmployeeAllocatable> {
+class SysEmployeeAllocatableService extends AbstractWriteableService<SysEmployeeAllocatable> {
   private static instance: SysEmployeeAllocatableService;
 
   private constructor(config: HttpConfig) {
@@ -132,9 +118,4 @@ class SysEmployeeAllocatableService extends AbstractService<SysEmployeeAllocatab
   }
 }
 
-export {
-  SysOrganizationService,
-  SysDepartmentService,
-  SysEmployeeService,
-  SysEmployeeAllocatableService,
-};
+export { SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService };

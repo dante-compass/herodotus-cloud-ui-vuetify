@@ -1,11 +1,4 @@
-import type {
-  Page,
-  Domain,
-  Conditions,
-  HttpResult,
-  AbstractService,
-  Direction,
-} from '@herodotus/core';
+import type { Page, Domain, Conditions, HttpResult, AbstractWriteableService, Direction } from '@herodotus/core';
 import type { SortItem } from '../../declarations';
 
 import { watchDebounced } from '@vueuse/core';
@@ -25,7 +18,7 @@ import useBaseTable from './useBaseTable';
  * @returns
  */
 export default function useTable<C extends Conditions, I extends Domain, O extends Domain = I>(
-  service: AbstractService<I, O>,
+  service: AbstractWriteableService<I, O>,
   name: string,
   fetchAll = false,
   sorted = [] as Array<string>,

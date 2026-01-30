@@ -8,7 +8,7 @@ export declare abstract class Service {
     protected getParamPath(path: string, param: string): string;
     protected getIdPath(id: string): string;
 }
-export declare abstract class AbstractService<I extends Domain, O extends Domain = I> extends Service {
+export declare abstract class AbstractReadableService<O extends Domain> extends Service {
     private getConditionAddress;
     private getListAddress;
     getTreeAddress(): string;
@@ -16,6 +16,8 @@ export declare abstract class AbstractService<I extends Domain, O extends Domain
     fetchByPage(params: Pageable, others?: {}): Promise<AxiosHttpResult<Page<O>>>;
     fetchAll(params?: Conditions): Promise<AxiosHttpResult<O[]>>;
     fetchTree(params?: Conditions): Promise<AxiosHttpResult<Tree[]>>;
+}
+export declare abstract class AbstractWriteableService<I extends Domain, O extends Domain = I> extends AbstractReadableService<O> {
     delete(id: string): Promise<AxiosHttpResult<string>>;
     saveOrUpdate(data: I): Promise<AxiosHttpResult<O>>;
     assign(data: any): Promise<AxiosHttpResult<O>>;

@@ -12,9 +12,9 @@ import type {
 import type { AxiosHttpResult, Elements } from '@herodotus/core';
 
 import { ContentTypeEnum } from '@/enums';
-import { HttpConfig, AbstractService } from '@herodotus/core';
+import { HttpConfig, AbstractWriteableService } from '@herodotus/core';
 
-class SysPermissionService extends AbstractService<SysPermissionEntity> {
+class SysPermissionService extends AbstractWriteableService<SysPermissionEntity> {
   private static instance: SysPermissionService;
 
   private constructor(config: HttpConfig) {
@@ -33,7 +33,7 @@ class SysPermissionService extends AbstractService<SysPermissionEntity> {
   }
 }
 
-class SysRoleService extends AbstractService<SysRoleEntity> {
+class SysRoleService extends AbstractWriteableService<SysRoleEntity> {
   private static instance: SysRoleService;
 
   private constructor(config: HttpConfig) {
@@ -60,7 +60,7 @@ class SysRoleService extends AbstractService<SysRoleEntity> {
   }
 }
 
-class SysUserService extends AbstractService<SysUserEntity> {
+class SysUserService extends AbstractWriteableService<SysUserEntity> {
   private static instance: SysUserService;
 
   private constructor(config: HttpConfig) {
@@ -105,7 +105,7 @@ class SysUserService extends AbstractService<SysUserEntity> {
   }
 }
 
-class SysAttributeService extends AbstractService<SysAttributeEntity> {
+class SysAttributeService extends AbstractWriteableService<SysAttributeEntity> {
   private static instance: SysAttributeService;
 
   private constructor(config: HttpConfig) {
@@ -124,7 +124,7 @@ class SysAttributeService extends AbstractService<SysAttributeEntity> {
   }
 }
 
-class SysDefaultRoleService extends AbstractService<SysDefaultRoleEntity> {
+class SysDefaultRoleService extends AbstractWriteableService<SysDefaultRoleEntity> {
   private static instance: SysDefaultRoleService;
 
   private constructor(config: HttpConfig) {
@@ -143,7 +143,7 @@ class SysDefaultRoleService extends AbstractService<SysDefaultRoleEntity> {
   }
 }
 
-class SysElementService extends AbstractService<SysElementEntity> {
+class SysElementService extends AbstractWriteableService<SysElementEntity> {
   private static instance: SysElementService;
 
   private constructor(config: HttpConfig) {
@@ -170,13 +170,11 @@ class SysElementService extends AbstractService<SysElementEntity> {
   }
 
   public findResourcesByRoles(roles: string[]): Promise<AxiosHttpResult<Elements>> {
-    return this.getConfig()
-      .getHttp()
-      .get<Elements, string>(this.getResourcesAddress(), { roles: roles });
+    return this.getConfig().getHttp().get<Elements, string>(this.getResourcesAddress(), { roles: roles });
   }
 }
 
-class SysTenantDataSourceService extends AbstractService<SysTenantDataSourceEntity> {
+class SysTenantDataSourceService extends AbstractWriteableService<SysTenantDataSourceEntity> {
   private static instance: SysTenantDataSourceService;
 
   private constructor(config: HttpConfig) {
@@ -198,13 +196,11 @@ class SysTenantDataSourceService extends AbstractService<SysTenantDataSourceEnti
   }
 
   public fetchByTenantId(tenantId: string): Promise<AxiosHttpResult<SysTenantDataSourceEntity>> {
-    return this.getConfig()
-      .getHttp()
-      .get<SysTenantDataSourceEntity, string>(this.getTenantIdPath(tenantId));
+    return this.getConfig().getHttp().get<SysTenantDataSourceEntity, string>(this.getTenantIdPath(tenantId));
   }
 }
 
-class SysDictionaryService extends AbstractService<SysDictionaryEntity> {
+class SysDictionaryService extends AbstractWriteableService<SysDictionaryEntity> {
   private static instance: SysDictionaryService;
 
   private constructor(config: HttpConfig) {
@@ -230,24 +226,15 @@ class SysDictionaryService extends AbstractService<SysDictionaryEntity> {
   }
 
   public fetchByCategory(category: string): Promise<AxiosHttpResult<Array<SysDictionaryEntity>>> {
-    return this.getConfig()
-      .getHttp()
-      .get<Array<SysDictionaryEntity>, string>(this.getCategoryPath(category));
+    return this.getConfig().getHttp().get<Array<SysDictionaryEntity>, string>(this.getCategoryPath(category));
   }
 
-  public fetchCategories(
-    categories: string,
-  ): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>> {
-    return this.getConfig()
-      .getHttp()
-      .get<
-        Record<string, Array<SysDictionaryEntity>>,
-        string
-      >(this.getItemsAddress(), { categories: categories });
+  public fetchCategories(categories: string): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>> {
+    return this.getConfig().getHttp().get<Record<string, Array<SysDictionaryEntity>>, string>(this.getItemsAddress(), { categories: categories });
   }
 }
 
-class SocialBindingService extends AbstractService<AccessSourceEntity> {
+class SocialBindingService extends AbstractWriteableService<AccessSourceEntity> {
   private static instance: SocialBindingService;
 
   private constructor(config: HttpConfig) {

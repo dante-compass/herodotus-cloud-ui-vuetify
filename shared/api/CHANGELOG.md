@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 0.4.1
+
+### Patch Changes
+
+- [重构] 前端接口 Service 基础定义，增加支持读写分离的定义，以便与后端丰富的 Rest 抽象定义保持一致
+- Updated dependencies
+  - @herodotus/core@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes

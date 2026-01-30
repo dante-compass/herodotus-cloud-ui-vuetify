@@ -1,9 +1,9 @@
 import type { ExtendedTaskEntity } from '@/declarations';
 import type { AxiosHttpResult, Page, Pageable, Conditions } from '@herodotus/core';
 
-import { HttpConfig, AbstractService } from '@herodotus/core';
+import { HttpConfig, AbstractWriteableService } from '@herodotus/core';
 
-class ExtendedTaskService extends AbstractService<ExtendedTaskEntity> {
+class ExtendedTaskService extends AbstractWriteableService<ExtendedTaskEntity> {
   private static instance: ExtendedTaskService;
 
   private constructor(config: HttpConfig) {
@@ -29,24 +29,14 @@ class ExtendedTaskService extends AbstractService<ExtendedTaskEntity> {
     return this.getBaseAddress() + '/completed';
   }
 
-  public fetchToDoTasksByPage(
-    params: Pageable,
-    others: Conditions = {},
-  ): Promise<AxiosHttpResult<Page<ExtendedTaskEntity>>> {
+  public fetchToDoTasksByPage(params: Pageable, others: Conditions = {}): Promise<AxiosHttpResult<Page<ExtendedTaskEntity>>> {
     const fullParams = Object.assign(params, others);
-    return this.getConfig()
-      .getHttp()
-      .get<Page<ExtendedTaskEntity>>(this.getToDoTasksAddress(), fullParams);
+    return this.getConfig().getHttp().get<Page<ExtendedTaskEntity>>(this.getToDoTasksAddress(), fullParams);
   }
 
-  public fetchCompletedTasksByPage(
-    params: Pageable,
-    others: Conditions = {},
-  ): Promise<AxiosHttpResult<Page<ExtendedTaskEntity>>> {
+  public fetchCompletedTasksByPage(params: Pageable, others: Conditions = {}): Promise<AxiosHttpResult<Page<ExtendedTaskEntity>>> {
     const fullParams = Object.assign(params, others);
-    return this.getConfig()
-      .getHttp()
-      .get<Page<ExtendedTaskEntity>>(this.getCompletedTasksAddress(), fullParams);
+    return this.getConfig().getHttp().get<Page<ExtendedTaskEntity>>(this.getCompletedTasksAddress(), fullParams);
   }
 }
 
