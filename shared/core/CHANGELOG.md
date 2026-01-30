@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 0.4.0
+
+### Minor Changes
+
+- [修复] 修复组件库 Resolver 分析范围过宽，干扰主工程相同前缀组件的自动导入问题
+
 ## 0.3.0
 
 ### Minor Changes

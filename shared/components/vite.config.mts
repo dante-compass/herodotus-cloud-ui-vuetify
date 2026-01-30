@@ -44,14 +44,13 @@ export default defineConfig({
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
       external: [
-        'crypto',
         'lodash-es',
         'pinia',
         'vue',
         'vuetify',
         'vuetify/components',
-        '@herodotus/core',
         '@mdi/js',
+        '@herodotus/core',
         '@tsparticles/basic',
         '@tsparticles/engine',
         '@tsparticles/interaction-particles-links',
@@ -61,14 +60,13 @@ export default defineConfig({
         assetFileNames: `assets/[ext]/[name][extname]`,
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
-          crypto: 'Crypto',
           'lodash-es': 'LodashEs',
           pinia: 'Pinia',
           vue: 'Vue',
           vuetify: 'Vuetify',
           'vuetify/components': 'VuetifyComponents',
-          '@herodotus/core': 'HerodotusCore',
           '@mdi/js': 'MdiJs',
+          '@herodotus/core': 'HerodotusCore',
           '@tsparticles/basic': 'TsparticlesBasic',
           '@tsparticles/engine': 'TsparticlesEngine',
           '@tsparticles/interaction-particles-links': 'TsparticlesInteractionParticlesLinkss',
