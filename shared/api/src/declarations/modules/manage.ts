@@ -49,6 +49,7 @@ export interface MgtCertificateRequest extends AbstractSysDto {
 export interface MgtCertificateResponse extends AbstractSysEntity {
   certId: string;
   alias: string;
+  commonName: string;
   password: string;
   certificateCategory: string;
   serialNumber: string;
@@ -73,13 +74,15 @@ export interface MgtCertificateFileRequest extends AbstractCertificateFileDto {
   encryptPrivateKey: boolean;
 }
 
-export interface MgtCertificateFileDeleteRequest extends AbstractCertificateFileDto {
+export interface MgtCertificateFileId extends AbstractCertificateFileDto {
   suffix: string;
 }
 
-export interface MgtCertificateFileResponse
-  extends MgtCertificateFileDeleteRequest, AbstractSysDto {
+export interface MgtCertificateFileResponse extends MgtCertificateFileId, AbstractSysDto {
   fileName: string;
+  fileSize: number;
+  bucketName: string;
+  creationTime: string;
   certificateCategory: string;
 }
 

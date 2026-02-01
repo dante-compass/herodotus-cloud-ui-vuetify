@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 0.4.4
+
+### Patch Changes
+
+- 重新调整证书相关定义
+
 ## 0.4.3
 
 ### Patch Changes

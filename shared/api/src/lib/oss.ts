@@ -49,15 +49,11 @@ class BucketService extends Service {
   }
 
   public createBucket(request: CreateBucketArgument): Promise<AxiosHttpResult<CreateBucketResult>> {
-    return this.getConfig()
-      .getHttp()
-      .post<CreateBucketResult, CreateBucketArgument>(this.getBaseAddress(), request);
+    return this.getConfig().getHttp().post<CreateBucketResult, CreateBucketArgument>(this.getBaseAddress(), request);
   }
 
   public deleteBucket(request: DeleteBucketArgument): Promise<AxiosHttpResult<DeleteBucketResult>> {
-    return this.getConfig()
-      .getHttp()
-      .delete<DeleteBucketResult, DeleteBucketArgument>(this.getBaseAddress(), request);
+    return this.getConfig().getHttp().delete<DeleteBucketResult, DeleteBucketArgument>(this.getBaseAddress(), request);
   }
 }
 
@@ -99,25 +95,15 @@ class ObjectService extends Service {
     return this.getBaseAddress() + '/upload';
   }
 
-  public listObjectsV2(
-    request: ListObjectsV2Argument,
-  ): Promise<AxiosHttpResult<ListObjectsV2Result>> {
-    return this.getConfig()
-      .getHttp()
-      .get<ListObjectsV2Result, ListObjectsV2Argument>(this.getListV2Address(), request);
+  public listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>> {
+    return this.getConfig().getHttp().get<ListObjectsV2Result, ListObjectsV2Argument>(this.getListV2Address(), request);
   }
 
   public delete(request: DeleteObjectArgument): Promise<AxiosHttpResult<DeleteObjectResult>> {
-    return this.getConfig()
-      .getHttp()
-      .delete<DeleteObjectResult, DeleteObjectArgument>(this.getBaseAddress(), request);
+    return this.getConfig().getHttp().delete<DeleteObjectResult, DeleteObjectArgument>(this.getBaseAddress(), request);
   }
 
-  public upload(
-    bucketName: string,
-    file: File,
-    onProgress: (progressEvent: AxiosProgressEvent) => void,
-  ): Promise<AxiosHttpResult<PutObjectResult>> {
+  public upload(bucketName: string, file: File, onProgress: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<PutObjectResult>> {
     return this.getConfig()
       .getHttp()
       .post<
@@ -126,33 +112,18 @@ class ObjectService extends Service {
       >(this.getUploadAddress(), { bucketName: bucketName, file: file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
   }
 
-  public download(
-    request: GetObjectArgument,
-    onProgress: (progressEvent: AxiosProgressEvent) => void,
-  ): Promise<AxiosHttpResult<Blob>> {
+  public download(request: GetObjectArgument, onProgress: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<Blob>> {
     return this.getConfig()
       .getHttp()
-      .post<
-        Blob,
-        any
-      >(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
+      .post<Blob, any>(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
   }
 
   public display(request: GetObjectArgument): Promise<AxiosHttpResult<Blob>> {
-    return this.getConfig()
-      .getHttp()
-      .post<
-        Blob,
-        any
-      >(this.getDisplayAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob' });
+    return this.getConfig().getHttp().post<Blob, any>(this.getDisplayAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob' });
   }
 
-  public batchDelete(
-    request: DeleteObjectsArgument,
-  ): Promise<AxiosHttpResult<DeleteObjectsResult>> {
-    return this.getConfig()
-      .getHttp()
-      .delete<DeleteObjectsResult, DeleteObjectsArgument>(this.getMultiDeleteAddress(), request);
+  public batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>> {
+    return this.getConfig().getHttp().delete<DeleteObjectsResult, DeleteObjectsArgument>(this.getMultiDeleteAddress(), request);
   }
 }
 
@@ -182,26 +153,12 @@ class MultipartUploadService extends Service {
     return this.getBaseAddress() + '/complete';
   }
 
-  public createChunkUpload(
-    request: CreateMultipartUploadArguments,
-  ): Promise<AxiosHttpResult<CreateMultipartUploadBusiness>> {
-    return this.getConfig()
-      .getHttp()
-      .post<
-        CreateMultipartUploadBusiness,
-        CreateMultipartUploadArguments
-      >(this.getCreateMultipartUploadAddress(), request);
+  public createChunkUpload(request: CreateMultipartUploadArguments): Promise<AxiosHttpResult<CreateMultipartUploadBusiness>> {
+    return this.getConfig().getHttp().post<CreateMultipartUploadBusiness, CreateMultipartUploadArguments>(this.getCreateMultipartUploadAddress(), request);
   }
 
-  public completeChunkUpload(
-    request: CompleteMultipartUploadArguments,
-  ): Promise<AxiosHttpResult<CompleteMultipartUploadDomain>> {
-    return this.getConfig()
-      .getHttp()
-      .post<
-        CompleteMultipartUploadDomain,
-        CompleteMultipartUploadArguments
-      >(this.getCompleteMultipartUploadAddress(), request);
+  public completeChunkUpload(request: CompleteMultipartUploadArguments): Promise<AxiosHttpResult<CompleteMultipartUploadDomain>> {
+    return this.getConfig().getHttp().post<CompleteMultipartUploadDomain, CompleteMultipartUploadArguments>(this.getCompleteMultipartUploadAddress(), request);
   }
 }
 
