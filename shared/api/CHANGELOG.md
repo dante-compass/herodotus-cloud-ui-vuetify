@@ -1,5 +1,21 @@
 # @herodotus/api
 
+## 0.4.6
+
+### Patch Changes
+
+- 升级依赖版本
+- Updated dependencies
+  - @herodotus/core@0.4.6
+
+## 0.4.5
+
+### Patch Changes
+
+- 优化 OSS 下载 API
+- Updated dependencies
+  - @herodotus/core@0.4.5
+
 ## 0.4.4
 
 ### Patch Changes

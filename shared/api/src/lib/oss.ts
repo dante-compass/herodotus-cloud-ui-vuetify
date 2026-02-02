@@ -103,19 +103,27 @@ class ObjectService extends Service {
     return this.getConfig().getHttp().delete<DeleteObjectResult, DeleteObjectArgument>(this.getBaseAddress(), request);
   }
 
-  public upload(bucketName: string, file: File, onProgress: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<PutObjectResult>> {
-    return this.getConfig()
-      .getHttp()
-      .post<
-        PutObjectResult,
-        any
-      >(this.getUploadAddress(), { bucketName: bucketName, file: file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
+  public upload(bucketName: string, file: File, onProgress?: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<PutObjectResult>> {
+    if (onProgress) {
+      return this.getConfig()
+        .getHttp()
+        .post<
+          PutObjectResult,
+          any
+        >(this.getUploadAddress(), { bucketName: bucketName, file: file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
+    } else {
+      return this.getConfig().getHttp().post<PutObjectResult, any>(this.getUploadAddress(), { bucketName: bucketName, file: file });
+    }
   }
 
-  public download(request: GetObjectArgument, onProgress: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<Blob>> {
-    return this.getConfig()
-      .getHttp()
-      .post<Blob, any>(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
+  public download(request: GetObjectArgument, onProgress?: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<Blob>> {
+    if (onProgress) {
+      return this.getConfig()
+        .getHttp()
+        .post<Blob, any>(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
+    } else {
+      return this.getConfig().getHttp().post<Blob, any>(this.getDownloadAddress(), request);
+    }
   }
 
   public display(request: GetObjectArgument): Promise<AxiosHttpResult<Blob>> {

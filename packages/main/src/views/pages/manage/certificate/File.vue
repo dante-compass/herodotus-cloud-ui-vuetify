@@ -31,13 +31,19 @@
 </template>
 
 <script setup lang="ts">
-import type { MgtCertificateFileRequest, MgtCertificateFileResponse, MgtCertificateFileConditions, MgtCertificateFileProps, MgtCertificateFileDeleteRequest } from '@herodotus/api';
+import type {
+  MgtCertificateFileRequest,
+  MgtCertificateFileResponse,
+  MgtCertificateFileConditions,
+  MgtCertificateFileProps,
+  MgtCertificateFileId,
+} from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable, useDictionary } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
-defineOptions({ name: PAGE_NAME.MGT_CERTIFICATE_FILE });
+defineOptions({ name: 'MgtCertificateFile' });
 
 const headers = ref([
   { key: 'alias', align: 'center', label: '证书名称' },
@@ -45,19 +51,19 @@ const headers = ref([
   { key: 'certificateFileCategory', align: 'center', title: '证书文件类别' },
   { key: 'fileName', align: 'center', title: '文件名' },
   { key: 'suffix', align: 'center', title: '文件后缀' },
+  { key: 'bucketName', align: 'center', title: '存储桶' },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
 const rowKey: MgtCertificateFileProps = 'certId';
 
-const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toCreate, deleteItemById, findItems } = useTable<
-  MgtCertificateFileConditions,
-  MgtCertificateFileRequest,
-  MgtCertificateFileResponse,
-  MgtCertificateFileDeleteRequest
->(API.core.mgtCertificateFile(), PAGE_NAME.MGT_CERTIFICATE);
+const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toCreate, deleteItemById, findItems } =
+  useTable<MgtCertificateFileConditions, MgtCertificateFileRequest, MgtCertificateFileResponse, MgtCertificateFileId>(
+    API.core.mgtCertificateFile(),
+    PAGE_NAME.MGT_CERTIFICATE,
+  );
 
-const createId = (item: MgtCertificateFileResponse): MgtCertificateFileDeleteRequest => {
+const createId = (item: MgtCertificateFileResponse): MgtCertificateFileId => {
   return {
     certId: item.certId,
     certificateFileCategory: item.certificateFileCategory,

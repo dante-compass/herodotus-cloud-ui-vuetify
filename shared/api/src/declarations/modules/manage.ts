@@ -67,11 +67,11 @@ interface AbstractCertificateFileDto extends Dto {
 }
 
 export interface MgtCertificateFileRequest extends AbstractCertificateFileDto {
-  keyStoreFormat: string;
-  keyStoreCategory: string;
-  pemPrivateKeyFormat: string;
-  pemCertificateFormat: string;
-  encryptPrivateKey: boolean;
+  keyStoreFormat?: string;
+  keyStoreCategory?: string;
+  pemPrivateKeyFormat?: string;
+  pemCertificateFormat?: string;
+  encryptPrivateKey?: boolean;
 }
 
 export interface MgtCertificateFileId extends AbstractCertificateFileDto {
