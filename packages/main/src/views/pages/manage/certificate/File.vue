@@ -1,33 +1,37 @@
 <template>
-  <h-data-table
-    v-model:page-size="pageSize"
-    v-model:page-number="pageNumber"
-    v-model:total-pages="totalPages"
-    v-model:total-items="totalItems"
-    :headers="headers"
-    :items="tableRows"
-    :item-value="rowKey"
-    :loading="loading"
-    select-strategy="single"
-    disable-sort
-    @update:options="findItems"
-  >
-    <template #item.certificateCategory="{ item }">
-      <v-chip density="compact" rounded="lg" color="orange" label>
-        {{ getDictionaryItemDisplay('CertificateCategory', item.certificateCategory) }}
-      </v-chip>
-    </template>
+  <h-full-width-layout title="证书文件管理">
+    <h-data-table
+      v-model:page-size="pageSize"
+      v-model:page-number="pageNumber"
+      v-model:total-pages="totalPages"
+      v-model:total-items="totalItems"
+      :headers="headers"
+      :items="tableRows"
+      :item-value="rowKey"
+      :loading="loading"
+      select-strategy="single"
+      disable-sort
+      @update:options="findItems"
+    >
+      <template #item.certificateCategory="{ item }">
+        <v-chip density="compact" rounded="lg" color="orange" label>
+          {{ getDictionaryItemDisplay('CertificateCategory', item.certificateCategory) }}
+        </v-chip>
+      </template>
 
-    <template #item.certificateFileCategory="{ item }">
-      <v-chip density="compact" rounded="lg" color="cyan" label>
-        {{ getDictionaryItemDisplay('CertificateFileCategory', item.certificateFileCategory) }}
-      </v-chip>
-    </template>
+      <template #item.certificateFileCategory="{ item }">
+        <v-chip density="compact" rounded="lg" color="cyan" label>
+          {{ getDictionaryItemDisplay('CertificateFileCategory', item.certificateFileCategory) }}
+        </v-chip>
+      </template>
 
-    <template #item.actions="{ item }">
-      <h-action-delete-button @click="deleteItemById(createId(item))"></h-action-delete-button>
-    </template>
-  </h-data-table>
+      <template #item.actions="{ item }">
+        <h-action-download-button @click="onDownload(item)"></h-action-download-button>
+        <h-action-delete-button @click="deleteItemById(createId(item))"></h-action-delete-button>
+      </template>
+    </h-data-table>
+    <h-oss-download-progress v-model="showProgress" :progress="loadProgress"></h-oss-download-progress>
+  </h-full-width-layout>
 </template>
 
 <script setup lang="ts">
@@ -40,7 +44,9 @@ import type {
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTable, useDictionary } from '@/composables/hooks';
+import { isEmpty } from 'lodash-es';
+
+import { useTable, useDictionary, useOssDownload } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'MgtCertificateFile' });
@@ -57,11 +63,12 @@ const headers = ref([
 
 const rowKey: MgtCertificateFileProps = 'certId';
 
-const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toCreate, deleteItemById, findItems } =
-  useTable<MgtCertificateFileConditions, MgtCertificateFileRequest, MgtCertificateFileResponse, MgtCertificateFileId>(
-    API.core.mgtCertificateFile(),
-    PAGE_NAME.MGT_CERTIFICATE,
-  );
+const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, deleteItemById, findItems } = useTable<
+  MgtCertificateFileConditions,
+  MgtCertificateFileRequest,
+  MgtCertificateFileResponse,
+  MgtCertificateFileId
+>(API.core.mgtCertificateFile(), PAGE_NAME.MGT_CERTIFICATE);
 
 const createId = (item: MgtCertificateFileResponse): MgtCertificateFileId => {
   return {
@@ -72,4 +79,11 @@ const createId = (item: MgtCertificateFileResponse): MgtCertificateFileId => {
 };
 
 const { getDictionaryItemDisplay } = useDictionary('CertificateCategory', 'CertificateFileCategory');
+const { download, loadProgress, showProgress } = useOssDownload();
+
+const onDownload = (item: MgtCertificateFileResponse) => {
+  if (!isEmpty(item)) {
+    download(item.bucketName, item.fileName, item.fileSize);
+  }
+};
 </script>

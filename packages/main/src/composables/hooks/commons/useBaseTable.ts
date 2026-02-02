@@ -97,6 +97,15 @@ export default function useBaseTable<C extends Conditions, I extends Domain, O e
     addRoutePushParam(componentName, OperationEnum.INVOKE, item, additional);
   };
 
+  const toFile = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
+    const componentName = appendSuffix(name, capitalize(OperationEnum.FILE), withSuffix);
+    addRoutePushParam(componentName, OperationEnum.FILE, item, additional);
+  };
+  const toRevocation = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
+    const componentName = appendSuffix(name, capitalize(OperationEnum.REVOCATION), withSuffix);
+    addRoutePushParam(componentName, OperationEnum.REVOCATION, item, additional);
+  };
+
   /**
    * 分页查询返回的结果数据
    * @param data
@@ -192,6 +201,8 @@ export default function useBaseTable<C extends Conditions, I extends Domain, O e
     toInfo,
     toSetup,
     toInvoke,
+    toFile,
+    toRevocation,
     createSort,
   };
 }

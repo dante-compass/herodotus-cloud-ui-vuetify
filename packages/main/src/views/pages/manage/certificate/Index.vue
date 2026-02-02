@@ -50,12 +50,7 @@
       </template>
 
       <template #item.actions="{ item }">
-        <h-action-button
-          color="blue"
-          icon="mdi-memory-arrow-down"
-          tooltip="下载证书"
-          @click="onShowDownloadDialog(item)"
-        ></h-action-button>
+        <h-action-download-button @click="onShowDownloadDialog(item)"></h-action-download-button>
         <h-action-delete-button @click="deleteItemById(item[rowKey])"></h-action-delete-button>
       </template>
     </h-data-table>

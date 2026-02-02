@@ -74,15 +74,12 @@ const selectedItems = ref<SysEmployeeEntity[]>([]);
 
 const { onFinish } = useEditFinish();
 const { getDictionaryItemDisplay } = useDictionary('Gender', 'Identity');
-const { editedItem, overlay } = useTableItem<SysEmployeeAllocatable>(
-  API.core.sysEmployeeAllocatable(),
-);
+const { editedItem, overlay } = useTableItem<SysEmployeeAllocatable>(API.core.sysEmployeeAllocatable());
 
-const { pageSize, pageNumber, totalItems, tableRows, totalPages, loading, conditions, findItems } =
-  useTable<SysEmployeeEntity, SysEmployeeConditions>(
-    API.core.sysEmployee(),
-    PAGE_NAME.SYS_EMPLOYEE,
-  );
+const { pageSize, pageNumber, totalItems, tableRows, totalPages, loading, conditions, findItems } = useTable<
+  SysEmployeeConditions,
+  SysEmployeeEntity
+>(API.core.sysEmployee(), PAGE_NAME.SYS_EMPLOYEE);
 
 const onSave = () => {
   if (isEmpty(selectedItems.value)) {
