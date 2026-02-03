@@ -51,6 +51,18 @@
 
       <template #item.actions="{ item }">
         <h-action-download-button @click="onShowDownloadDialog(item)"></h-action-download-button>
+        <h-action-button
+          color="amber"
+          icon="mdi-file-search"
+          tooltip="查看证书文件"
+          @click="toFile(item)"
+        ></h-action-button>
+        <h-action-button
+          color="red"
+          icon="mdi-file-lock"
+          tooltip="查看证书文件"
+          @click="toRevocation(item)"
+        ></h-action-button>
         <h-action-delete-button @click="deleteItemById(item[rowKey])"></h-action-delete-button>
       </template>
     </h-data-table>
@@ -86,17 +98,27 @@ const headers = ref([
   { key: 'password', align: 'center', title: '密码' },
   { key: 'ocsp', align: 'center', title: 'OCSP 证书' },
   { key: 'revocationReason', align: 'center', title: '证书吊销理由' },
-  { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
 const rowKey: MgtCertificateProps = 'certId';
 
-const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toCreate, deleteItemById, findItems } =
-  useTable<MgtCertificateConditions, MgtCertificateRequest, MgtCertificateResponse>(
-    API.core.mgtCertificate(),
-    PAGE_NAME.MGT_CERTIFICATE,
-  );
+const {
+  loading,
+  pageNumber,
+  pageSize,
+  tableRows,
+  totalPages,
+  totalItems,
+  toCreate,
+  toFile,
+  toRevocation,
+  deleteItemById,
+  findItems,
+} = useTable<MgtCertificateConditions, MgtCertificateRequest, MgtCertificateResponse>(
+  API.core.mgtCertificate(),
+  PAGE_NAME.MGT_CERTIFICATE,
+);
 
 const { defaultFormat } = useDateTime();
 const { getDictionaryItemDisplay } = useDictionary('CertificateCategory', 'RevocationReason');

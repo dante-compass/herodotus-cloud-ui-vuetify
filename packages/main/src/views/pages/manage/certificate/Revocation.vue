@@ -1,5 +1,5 @@
 <template>
-  <h-full-width-layout title="证书吊销列表"></h-full-width-layout>
+  <h-full-width-form-layout title="证书吊销列表"></h-full-width-form-layout>
 </template>
 
 <script setup lang="ts">

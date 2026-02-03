@@ -1,5 +1,5 @@
 <template>
-  <h-full-width-layout title="配置人员归属" :overlay="overlay">
+  <h-full-width-form-layout title="配置人员归属" :overlay="overlay">
     <h-data-table
       v-model="selectedItems"
       v-model:page-size="pageSize"
@@ -34,7 +34,7 @@
     <template #button>
       <v-btn class="ml-sm" @click="onSave()">保存</v-btn>
     </template>
-  </h-full-width-layout>
+  </h-full-width-form-layout>
 </template>
 
 <script setup lang="ts">

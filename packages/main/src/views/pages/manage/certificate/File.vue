@@ -1,5 +1,5 @@
 <template>
-  <h-full-width-layout title="证书文件管理">
+  <h-full-width-form-layout title="证书文件管理">
     <h-data-table
       v-model:page-size="pageSize"
       v-model:page-number="pageNumber"
@@ -11,6 +11,7 @@
       :loading="loading"
       select-strategy="single"
       disable-sort
+      flat
       @update:options="findItems"
     >
       <template #item.certificateCategory="{ item }">
@@ -27,11 +28,11 @@
 
       <template #item.actions="{ item }">
         <h-action-download-button @click="onDownload(item)"></h-action-download-button>
-        <h-action-delete-button @click="deleteItemById(createId(item))"></h-action-delete-button>
+        <h-action-delete-button @click="deleteItemById(item[rowKey])"></h-action-delete-button>
       </template>
     </h-data-table>
     <h-oss-download-progress v-model="showProgress" :progress="loadProgress"></h-oss-download-progress>
-  </h-full-width-layout>
+  </h-full-width-form-layout>
 </template>
 
 <script setup lang="ts">
@@ -40,7 +41,6 @@ import type {
   MgtCertificateFileResponse,
   MgtCertificateFileConditions,
   MgtCertificateFileProps,
-  MgtCertificateFileId,
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
@@ -61,22 +61,13 @@ const headers = ref([
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: MgtCertificateFileProps = 'certId';
+const rowKey: MgtCertificateFileProps = 'fileId';
 
 const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, deleteItemById, findItems } = useTable<
   MgtCertificateFileConditions,
   MgtCertificateFileRequest,
-  MgtCertificateFileResponse,
-  MgtCertificateFileId
+  MgtCertificateFileResponse
 >(API.core.mgtCertificateFile(), PAGE_NAME.MGT_CERTIFICATE);
-
-const createId = (item: MgtCertificateFileResponse): MgtCertificateFileId => {
-  return {
-    certId: item.certId,
-    certificateFileCategory: item.certificateFileCategory,
-    suffix: item.suffix,
-  };
-};
 
 const { getDictionaryItemDisplay } = useDictionary('CertificateCategory', 'CertificateFileCategory');
 const { download, loadProgress, showProgress } = useOssDownload();

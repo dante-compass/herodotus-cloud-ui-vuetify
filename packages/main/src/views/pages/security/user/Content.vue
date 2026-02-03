@@ -1,11 +1,5 @@
 <template>
-  <h-center-layout-container
-    :entity="editedItem"
-    :title="title"
-    :overlay="overlay"
-    :operation="operation"
-    @save="onSave()"
-  >
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
     <v-form ref="loginForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.username"
@@ -18,13 +12,9 @@
           (v: string) => isUniqueRule(v),
         ]"
       ></v-text-field>
-      <v-text-field
-        v-model="editedItem.nickname"
-        label="昵称"
-        placeholder="请输入用户昵称"
-      ></v-text-field>
+      <v-text-field v-model="editedItem.nickname" label="昵称" placeholder="请输入用户昵称"></v-text-field>
     </v-form>
-  </h-center-layout-container>
+  </h-center-form-layout>
 </template>
 
 <script setup lang="ts">
@@ -37,9 +27,7 @@ defineOptions({ name: 'SysUserContent' });
 
 const loginForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysUserEntity>(
-  API.core.sysUser(),
-);
+const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysUserEntity>(API.core.sysUser());
 
 const validateUsername = async (username: string) => {
   return await new Promise((resolve, reject) => {

@@ -18,11 +18,10 @@ import useBaseTable from './useBaseTable';
  * @param <C> 搜索条件类型
  * @param <I> 输入值类型。传递给三级路由页面操作数据类型。通常为输入和输出为相同的实体类型，也可为非实体的 Dto 类型。
  * @param <O> 输出值类型，数据表格显示接口返回内容数据类型。通常为输入和输出为相同的实体类型，也可为非实体的 Dto 类型。
- * @param <ID> ID 类型。默认为 string，主要用于特殊类型ID的删除操作
  * @returns
  */
-export default function useTable<C extends Conditions, I extends Domain, O extends Domain = I, ID = string>(
-  service: AbstractService<I, O, ID>,
+export default function useTable<C extends Conditions, I extends Domain, O extends Domain = I>(
+  service: AbstractService<I, O>,
   name: string,
   fetchAll = false,
   sorted = [] as Array<string>,
@@ -109,10 +108,10 @@ export default function useTable<C extends Conditions, I extends Domain, O exten
       });
   };
 
-  const deleteItemById = (id: ID) => {
+  const deleteItemById = (id: string) => {
     notify.standardDeleteNotify(() => {
       service
-        .delete(id)
+        .deleteById(id)
         .then((response) => {
           const result = response as HttpResult<string>;
           if (result.message) {

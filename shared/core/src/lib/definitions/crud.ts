@@ -25,7 +25,7 @@ export abstract class Service {
   }
 }
 
-export abstract class AbstractService<I extends Domain, O extends Domain = I, ID = string> extends Service {
+export abstract class AbstractService<I extends Domain, O extends Domain = I> extends Service {
   private getConditionAddress(): string {
     return this.getBaseAddress() + '/condition';
   }
@@ -59,12 +59,8 @@ export abstract class AbstractService<I extends Domain, O extends Domain = I, ID
     return this.getConfig().getHttp().get<Tree[], Conditions>(this.getTreeAddress(), params);
   }
 
-  public delete(id: ID): Promise<AxiosHttpResult<string>> {
-    if (typeof id === 'string') {
-      return this.getConfig().getHttp().delete<string, string>(this.getIdPath(id));
-    } else {
-      return this.getConfig().getHttp().delete<string, ID>(this.getBaseAddress(), id);
-    }
+  public deleteById(id: string): Promise<AxiosHttpResult<string>> {
+    return this.getConfig().getHttp().delete<string, string>(this.getIdPath(id));
   }
 
   public saveOrUpdate(data: I): Promise<AxiosHttpResult<O>> {

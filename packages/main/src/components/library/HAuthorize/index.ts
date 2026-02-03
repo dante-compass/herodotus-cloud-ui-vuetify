@@ -1,3 +1,3 @@
-import HAuthorizeLayout from './HAuthorizeLayout.vue';
+import HAuthorizeFormLayout from './HAuthorizeFormLayout.vue';
 
-export { HAuthorizeLayout };
+export { HAuthorizeFormLayout };

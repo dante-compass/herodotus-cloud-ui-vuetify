@@ -1,5 +1,37 @@
 # @herodotus/framework
 
+## 0.4.10
+
+### Patch Changes
+
+- 重新编译库
+- Updated dependencies
+  - @herodotus/core@0.4.10
+
+## 0.4.9
+
+### Patch Changes
+
+- 调整证书文件定义
+- Updated dependencies
+  - @herodotus/core@0.4.9
+
+## 0.4.8
+
+### Patch Changes
+
+- 变更证书文件接口
+- Updated dependencies
+  - @herodotus/core@0.4.8
+
+## 0.4.7
+
+### Patch Changes
+
+- 变更证书文件接口
+- Updated dependencies
+  - @herodotus/core@0.4.7
+
 ## 0.4.6
 
 ### Patch Changes

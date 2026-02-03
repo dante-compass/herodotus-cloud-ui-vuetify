@@ -1,11 +1,5 @@
 <template>
-  <h-center-layout-container
-    :entity="editedItem"
-    :title="title"
-    :overlay="overlay"
-    :operation="operation"
-    @save="onSave()"
-  >
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
     <v-form ref="scopeForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.scopeCode"
@@ -18,13 +12,9 @@
           (v: string) => isUniqueRule(v),
         ]"
       ></v-text-field>
-      <v-text-field
-        v-model="editedItem.scopeName"
-        label="范围名称"
-        placeholder="请输入范围名称"
-      ></v-text-field>
+      <v-text-field v-model="editedItem.scopeName" label="范围名称" placeholder="请输入范围名称"></v-text-field>
     </v-form>
-  </h-center-layout-container>
+  </h-center-form-layout>
 </template>
 
 <script setup lang="ts">
@@ -37,9 +27,7 @@ defineOptions({ name: 'OAuth2ScopeContent' });
 
 const scopeForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<OAuth2ScopeEntity>(
-  API.core.oauth2Scope(),
-);
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<OAuth2ScopeEntity>(API.core.oauth2Scope());
 
 const validateScopeCode = async (scopeCode: string) => {
   return await new Promise((resolve, reject) => {

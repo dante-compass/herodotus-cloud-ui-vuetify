@@ -1,13 +1,6 @@
 <template>
   <use-fullscreen v-slot="{ toggle, isFullscreen }">
-    <v-expansion-panels
-      v-if="$slots.search"
-      v-model="panel"
-      rounded="xl"
-      class="mb-2"
-      ripple
-      static
-    >
+    <v-expansion-panels v-if="$slots.search" v-model="panel" rounded="xl" class="mb-2" ripple static>
       <v-expansion-panel value="search">
         <v-expansion-panel-title expand-icon="mdi-menu-down" collapse-icon="mdi-menu-up">
           搜索：
@@ -18,7 +11,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <v-card rounded="xl">
+    <v-card rounded="xl" :flat="flat">
       <v-card-title class="d-flex align-center my-2">
         <slot name="control"></slot>
         <v-spacer></v-spacer>
@@ -62,11 +55,7 @@
           </template>
 
           <template v-if="!$slots['item.status']" #item.status="{ item }">
-            <h-column-status
-              v-if="options"
-              :type="item.status"
-              :options="options"
-            ></h-column-status>
+            <h-column-status v-if="options" :type="item.status" :options="options"></h-column-status>
           </template>
           <template v-else #item.status>
             <slot name="item.status"></slot>
@@ -112,6 +101,14 @@ import HColumnStatus from './HColumnStatus.vue';
 defineOptions({
   name: 'HDataTable',
   components: { UseFullscreen, HColumnReserved, HColumnStatus },
+});
+
+interface Props {
+  flat?: boolean;
+}
+
+withDefaults(defineProps<Props>(), {
+  flat: false,
 });
 
 const pageNumber = defineModel('pageNumber', { type: Number, default: 1, required: true });

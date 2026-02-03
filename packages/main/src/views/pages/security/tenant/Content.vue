@@ -1,11 +1,5 @@
 <template>
-  <h-center-layout-container
-    :entity="editedItem"
-    :title="title"
-    :overlay="overlay"
-    :operation="operation"
-    @save="onSave()"
-  >
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay"  @save="onSave()">
     <v-form ref="tenantForm" validate-on="blur lazy">
       <v-text-field
         v-model="editedItem.tenantId"
@@ -42,7 +36,7 @@
         :rules="[(v: string) => !!v || '数据库url不能为空']"
       ></v-text-field>
     </v-form>
-  </h-center-layout-container>
+  </h-center-form-layout>
 </template>
 
 <script setup lang="ts">
@@ -55,8 +49,9 @@ defineOptions({ name: 'SysTenantDataSourceContent' });
 
 const tenantForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } =
-  useTableItem<SysTenantDataSourceEntity>(API.core.sysTenantDataSource());
+const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysTenantDataSourceEntity>(
+  API.core.sysTenantDataSource(),
+);
 
 const validateTenantId = async (tenantId: string) => {
   return await new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 import { AxiosHttpResult, HttpConfig, AbstractService } from '@herodotus/core';
-import { MgtCertificateRequest, MgtCertificateResponse, MgtCertificateFileResponse, MgtCertificateFileRequest, MgtCertificateFileId } from '../../declarations';
+import { MgtCertificateRequest, MgtCertificateResponse, MgtCertificateFileResponse, MgtCertificateFileRequest } from '../../declarations';
 declare class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCertificateResponse> {
     private static instance;
     private constructor();
@@ -10,7 +10,7 @@ declare class MgtCertificateService extends AbstractService<MgtCertificateReques
     findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateResponse>>;
     findAllByCertificateCategory(certificateCategory: string): Promise<AxiosHttpResult<Array<MgtCertificateResponse>>>;
 }
-declare class MgtCertificateFileService extends AbstractService<MgtCertificateFileRequest, MgtCertificateFileResponse, MgtCertificateFileId> {
+declare class MgtCertificateFileService extends AbstractService<MgtCertificateFileRequest, MgtCertificateFileResponse> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): MgtCertificateFileService;

@@ -58,23 +58,22 @@ export interface MgtCertificateResponse extends AbstractSysEntity {
     ocsp: boolean;
     revocationReason: string;
 }
-interface AbstractCertificateFileDto extends Dto {
+export interface MgtCertificateFileRequest extends Dto {
     certId: string;
     certificateFileCategory: string;
-}
-export interface MgtCertificateFileRequest extends AbstractCertificateFileDto {
     keyStoreFormat?: string;
     keyStoreCategory?: string;
     pemPrivateKeyFormat?: string;
     pemCertificateFormat?: string;
     encryptPrivateKey?: boolean;
 }
-export interface MgtCertificateFileId extends AbstractCertificateFileDto {
-    suffix: string;
-}
-export interface MgtCertificateFileResponse extends MgtCertificateFileId, AbstractSysDto {
+export interface MgtCertificateFileResponse extends AbstractSysDto {
+    fileId: string;
+    certId: string;
+    certificateFileCategory: string;
     fileName: string;
     fileSize: number;
+    fileSuffix: string;
     bucketName: string;
     creationTime: string;
     certificateCategory: string;
@@ -85,4 +84,3 @@ export interface MgtCertificateFileConditions extends Conditions {
 }
 export type MgtCertificateProps = keyof MgtCertificateResponse;
 export type MgtCertificateFileProps = keyof MgtCertificateFileResponse;
-export {};

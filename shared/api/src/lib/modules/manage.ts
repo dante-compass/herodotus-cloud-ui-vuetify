@@ -4,7 +4,6 @@ import type {
   MgtCertificateResponse,
   MgtCertificateFileResponse,
   MgtCertificateFileRequest,
-  MgtCertificateFileId,
 } from '@/declarations';
 
 import { HttpConfig, AbstractService } from '@herodotus/core';
@@ -39,12 +38,19 @@ class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCe
     return this.getConfig().getHttp().get<MgtCertificateResponse, string>(this.getAliasAddress(), { alias: alias });
   }
 
-  public findAllByCertificateCategory(certificateCategory: string): Promise<AxiosHttpResult<Array<MgtCertificateResponse>>> {
-    return this.getConfig().getHttp().get<Array<MgtCertificateResponse>, string>(this.getCategoryAddress(), { certificateCategory: certificateCategory });
+  public findAllByCertificateCategory(
+    certificateCategory: string,
+  ): Promise<AxiosHttpResult<Array<MgtCertificateResponse>>> {
+    return this.getConfig()
+      .getHttp()
+      .get<
+        Array<MgtCertificateResponse>,
+        string
+      >(this.getCategoryAddress(), { certificateCategory: certificateCategory });
   }
 }
 
-class MgtCertificateFileService extends AbstractService<MgtCertificateFileRequest, MgtCertificateFileResponse, MgtCertificateFileId> {
+class MgtCertificateFileService extends AbstractService<MgtCertificateFileRequest, MgtCertificateFileResponse> {
   private static instance: MgtCertificateFileService;
 
   private constructor(config: HttpConfig) {
@@ -59,7 +65,7 @@ class MgtCertificateFileService extends AbstractService<MgtCertificateFileReques
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getManage() + '/manage/certificate/file';
+    return this.getConfig().getManage() + '/manage/certificate-file';
   }
 }
 
