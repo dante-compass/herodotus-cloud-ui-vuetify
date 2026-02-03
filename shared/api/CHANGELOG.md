@@ -1,5 +1,107 @@
 # @herodotus/api
 
+## 0.5.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@0.5.0
+
+## 0.4.10
+
+### Patch Changes
+
+- 重新编译库
+- Updated dependencies
+  - @herodotus/core@0.4.10
+
+## 0.4.9
+
+### Patch Changes
+
+- 调整证书文件定义
+- Updated dependencies
+  - @herodotus/core@0.4.9
+
+## 0.4.8
+
+### Patch Changes
+
+- 变更证书文件接口
+- Updated dependencies
+  - @herodotus/core@0.4.8
+
+## 0.4.7
+
+### Patch Changes
+
+- 变更证书文件接口
+- Updated dependencies
+  - @herodotus/core@0.4.7
+
+## 0.4.6
+
+### Patch Changes
+
+- 升级依赖版本
+- Updated dependencies
+  - @herodotus/core@0.4.6
+
+## 0.4.5
+
+### Patch Changes
+
+- 优化 OSS 下载 API
+- Updated dependencies
+  - @herodotus/core@0.4.5
+
+## 0.4.4
+
+### Patch Changes
+
+- 重新调整证书相关定义
+- Updated dependencies
+  - @herodotus/core@0.4.4
+
+## 0.4.3
+
+### Patch Changes
+
+- 重新编辑模块
+- Updated dependencies
+  - @herodotus/core@0.4.3
+
+## 0.4.2
+
+### Patch Changes
+
+- 重构] 前端接口 Service 基础定义，增加支持读写分离的定义，以便与后端丰富的 Rest 抽象定义保持一致
+- Updated dependencies
+  - @herodotus/core@0.4.2
+
+## 0.4.1
+
+### Patch Changes
+
+- [重构] 前端接口 Service 基础定义，增加支持读写分离的定义，以便与后端丰富的 Rest 抽象定义保持一致
+- Updated dependencies
+  - @herodotus/core@0.4.1
+
+## 0.4.0
+
+### Minor Changes
+
+- [修复] 修复组件库 Resolver 分析范围过宽，干扰主工程相同前缀组件的自动导入问题
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

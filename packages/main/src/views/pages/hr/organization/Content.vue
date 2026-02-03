@@ -1,11 +1,5 @@
 <template>
-  <h-center-layout-container
-    :entity="editedItem"
-    :title="title"
-    :overlay="overlay"
-    :operation="operation"
-    @save="onSave()"
-  >
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
     <v-form ref="organizationForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.organizationName"
@@ -22,11 +16,7 @@
         label="单位分区码"
         placeholder="请输入单位分区码名称"
       ></v-text-field>
-      <v-text-field
-        v-model="editedItem.shortName"
-        label="单位简称"
-        placeholder="请输入单位简称"
-      ></v-text-field>
+      <v-text-field v-model="editedItem.shortName" label="单位简称" placeholder="请输入单位简称"></v-text-field>
       <h-dictionary-select
         v-model="editedItem.category"
         dictionary="OrganizationCategory"
@@ -39,7 +29,7 @@
         placeholder="请设置所属上级单位"
       ></organization-select>
     </v-form>
-  </h-center-layout-container>
+  </h-center-form-layout>
 </template>
 
 <script setup lang="ts">
@@ -54,7 +44,7 @@ defineOptions({ name: 'SysOrganizationContent', components: { OrganizationSelect
 
 const organizationForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysOrganizationEntity>(
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysOrganizationEntity>(
   API.core.sysOrganization(),
 );
 

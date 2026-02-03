@@ -16,7 +16,7 @@ export declare abstract class AbstractService<I extends Domain, O extends Domain
     fetchByPage(params: Pageable, others?: {}): Promise<AxiosHttpResult<Page<O>>>;
     fetchAll(params?: Conditions): Promise<AxiosHttpResult<O[]>>;
     fetchTree(params?: Conditions): Promise<AxiosHttpResult<Tree[]>>;
-    delete(id: string): Promise<AxiosHttpResult<string>>;
+    deleteById(id: string): Promise<AxiosHttpResult<string>>;
     saveOrUpdate(data: I): Promise<AxiosHttpResult<O>>;
     assign(data: any): Promise<AxiosHttpResult<O>>;
 }

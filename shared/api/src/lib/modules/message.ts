@@ -1,8 +1,4 @@
-import type {
-  DialogueContactEntity,
-  DialogueDetailEntity,
-  NotificationEntity,
-} from '@/declarations';
+import type { DialogueContactEntity, DialogueDetailEntity, NotificationEntity } from '@/declarations';
 import type { AxiosHttpResult } from '@herodotus/core';
 
 import { ContentTypeEnum } from '@/enums';
@@ -115,9 +111,4 @@ class WebSocketMessageService {
   }
 }
 
-export {
-  DialogueContactService,
-  DialogueDetailService,
-  NotificationService,
-  WebSocketMessageService,
-};
+export { DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService };

@@ -5,17 +5,8 @@
         <v-col></v-col>
         <v-col>
           <slot></slot>
-          <v-text-field
-            v-model="entity.description"
-            label="备注"
-            placeholder="请输入备注"
-          ></v-text-field>
-          <v-text-field
-            v-model.number="entity.ranking"
-            label="排序值"
-            placeholder="请输入排序值"
-            type="number"
-          />
+          <v-text-field v-model="entity.description" label="备注" placeholder="请输入备注"></v-text-field>
+          <v-text-field v-model.number="entity.ranking" label="排序值" placeholder="请输入排序值" type="number" />
           <h-dictionary-select
             v-model="entity.status"
             dictionary="DataItemStatus"
@@ -44,7 +35,7 @@ import HDetailContainer from './HDetailContainer.vue';
 import { HDictionarySelect } from '../../library/HSelect';
 
 defineOptions({
-  name: 'HCenterLayoutContainer',
+  name: 'HCenterFormLayout',
   components: { HDetailContainer, HDictionarySelect },
 });
 

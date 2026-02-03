@@ -1,4 +1,4 @@
-import { AbstractSysEntity, AbstractSysDto, Conditions } from '@herodotus/core';
+import { AbstractSysEntity, AbstractSysDto, Conditions, Dto } from '@herodotus/core';
 export interface MgtCertificateRequest extends AbstractSysDto {
     alias: string;
     /**
@@ -47,6 +47,7 @@ export interface MgtCertificateRequest extends AbstractSysDto {
 export interface MgtCertificateResponse extends AbstractSysEntity {
     certId: string;
     alias: string;
+    commonName: string;
     password: string;
     certificateCategory: string;
     serialNumber: string;
@@ -57,6 +58,29 @@ export interface MgtCertificateResponse extends AbstractSysEntity {
     ocsp: boolean;
     revocationReason: string;
 }
+export interface MgtCertificateFileRequest extends Dto {
+    certId: string;
+    certificateFileCategory: string;
+    keyStoreFormat?: string;
+    keyStoreCategory?: string;
+    pemPrivateKeyFormat?: string;
+    pemCertificateFormat?: string;
+    encryptPrivateKey?: boolean;
+}
+export interface MgtCertificateFileResponse extends AbstractSysDto {
+    fileId: string;
+    certId: string;
+    certificateFileCategory: string;
+    fileName: string;
+    fileSize: number;
+    fileSuffix: string;
+    bucketName: string;
+    creationTime: string;
+    certificateCategory: string;
+}
 export interface MgtCertificateConditions extends Conditions {
 }
+export interface MgtCertificateFileConditions extends Conditions {
+}
 export type MgtCertificateProps = keyof MgtCertificateResponse;
+export type MgtCertificateFileProps = keyof MgtCertificateFileResponse;

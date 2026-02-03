@@ -40,4 +40,4 @@ declare class OAuth2CredentialRecordService extends AbstractService<OAuth2Creden
     static getInstance(config: HttpConfig): OAuth2CredentialRecordService;
     getBaseAddress(): string;
 }
-export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2CredentialRecordService, };
+export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2CredentialRecordService };

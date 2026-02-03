@@ -1,20 +1,11 @@
 <template>
-  <h-center-layout-container
-    :entity="editedItem"
-    :title="title"
-    :overlay="overlay"
-    :operation="operation"
-    @save="onSave()"
-  >
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay"  @save="onSave()">
     <v-form ref="roleForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.roleName"
         label="角色名称 *"
         placeholder="请输入角色名称"
-        :rules="[
-          (v: string) => !!v || '角色名称不能为空',
-          (v: string) => (v && v.length >= 5) || '角色至少5个字符',
-        ]"
+        :rules="[(v: string) => !!v || '角色名称不能为空', (v: string) => (v && v.length >= 5) || '角色至少5个字符']"
       ></v-text-field>
       <v-text-field
         v-model.lazy="editedItem.roleCode"
@@ -27,7 +18,7 @@
         ]"
       ></v-text-field>
     </v-form>
-  </h-center-layout-container>
+  </h-center-form-layout>
 </template>
 
 <script setup lang="ts">
@@ -40,9 +31,7 @@ defineOptions({ name: 'SysRoleContent' });
 
 const roleForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysRoleEntity>(
-  API.core.sysRole(),
-);
+const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysRoleEntity>(API.core.sysRole());
 
 const validateRoleCode = async (roleCode: string) => {
   return await new Promise((resolve, reject) => {

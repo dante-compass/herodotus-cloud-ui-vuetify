@@ -64,11 +64,13 @@ export enum BuildInScopeEnum {
 }
 
 export enum OperationEnum {
+  ALLOCATABLE = 'allocatable',
+  AUTHORIZE = 'authorize',
   CREATE = 'create',
   EDIT = 'edit',
-  AUTHORIZE = 'authorize',
+  FILE = 'file',
   INFO = 'info',
-  ALLOCATABLE = 'allocatable',
-  SETUP = 'setup',
   INVOKE = 'invoke',
+  REVOCATION = 'revocation',
+  SETUP = 'setup',
 }

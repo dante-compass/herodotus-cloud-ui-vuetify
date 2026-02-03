@@ -65,6 +65,7 @@ export const PAGE_NAME = {
   IOT_TSL_FUNCTION: 'IotTslFunction',
   IOT_TSL_UNIT: 'IotTslUnit',
   MGT_CERTIFICATE: 'MgtCertificate',
+  MGT_CERTIFICATE_FILE: 'MgtCertificateFile',
   FOUNDATION_ACCOUNT: 'FoundationAccount',
   FOUNDATION_PROFILE: 'FoundationProfile',
   MESSAGE_INFORMATION: 'MessageInformation',

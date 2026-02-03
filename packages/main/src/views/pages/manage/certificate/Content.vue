@@ -1,11 +1,5 @@
 <template>
-  <h-center-layout-container
-    :entity="editedItem"
-    :title="title"
-    :overlay="overlay"
-    :operation="operation"
-    @save="onSave()"
-  >
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay"  @save="onSave()">
     <v-form ref="certificateForm" validate-on="blur lazy">
       <v-text-field
         v-model="editedItem.alias"
@@ -87,7 +81,7 @@
       ></h-date-time>
       <v-switch v-if="showOcspSwitch" v-model="editedItem.ocsp" label="是否OCSP证书"></v-switch>
     </v-form>
-  </h-center-layout-container>
+  </h-center-form-layout>
 </template>
 
 <script setup lang="ts">
@@ -106,7 +100,7 @@ const showParentLoading = shallowRef(false);
 const showParentSelect = shallowRef(false);
 const showOcspSwitch = shallowRef(false);
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<
   MgtCertificateRequest,
   MgtCertificateResponse
 >(API.core.mgtCertificate());

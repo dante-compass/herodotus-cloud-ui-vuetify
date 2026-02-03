@@ -22,7 +22,6 @@ export const useDictionaryStore = defineStore('Dictionary', {
 
         if (items) {
           const item = find(items, { value: value });
-          console.log('---key---', item);
           return item as Dictionary;
         } else {
           return {} as Dictionary;

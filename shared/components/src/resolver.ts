@@ -1,5 +1,22 @@
 import type { ComponentResolver } from 'unplugin-vue-components';
 
+const components = [
+  'HButton',
+  'HDate',
+  'HDateTime',
+  'HDuration',
+  'HMdiIconSelect',
+  'HParticles',
+  'HLabel',
+  'HSignInBackground',
+  'HTime',
+  'HTreeSelect',
+];
+
+function isValidComponent(name: string) {
+  return components.includes(name);
+}
+
 /**
  * Herodotus UI 组件解析器
  */
@@ -8,7 +25,7 @@ export function HerodotusResolver(): ComponentResolver {
     type: 'component',
     resolve: (name: string) => {
       // 只处理指定前缀的组件
-      if (name.startsWith('H')) {
+      if (name.startsWith('H') && isValidComponent(name)) {
         const componentName = name;
         const from = '@herodotus/components';
 

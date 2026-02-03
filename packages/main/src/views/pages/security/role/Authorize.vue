@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-layout :title="title">
+  <h-authorize-from-layout :title="title" :overlay="overlay">
     <v-card rounded="lg">
       <v-data-table-server
         v-model="selectedItems"
@@ -31,16 +31,11 @@
         @save="onSave()"
       ></h-authorize-list>
     </template>
-  </h-authorize-layout>
+  </h-authorize-from-layout>
 </template>
 
 <script setup lang="ts">
-import type {
-  SysRoleEntity,
-  SysPermissionEntity,
-  SysPermissionProps,
-  SysPermissionConditions,
-} from '@herodotus/api';
+import type { SysRoleEntity, SysPermissionEntity, SysPermissionProps, SysPermissionConditions } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTableItem, useTable } from '@/composables/hooks';
@@ -48,7 +43,7 @@ import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'SysRoleAuthorize' });
 
-const { editedItem, title, assign } = useTableItem<SysRoleEntity>(API.core.sysRole());
+const { editedItem, overlay, title, assign } = useTableItem<SysRoleEntity>(API.core.sysRole());
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysPermissionConditions,
   SysPermissionEntity

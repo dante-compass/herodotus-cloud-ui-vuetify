@@ -1,5 +1,5 @@
 <template>
-  <h-detail-container :title="title">
+  <h-detail-container v-bind="$attrs">
     <v-container>
       <v-row>
         <v-col cols="8">
@@ -16,13 +16,5 @@
 <script setup lang="ts">
 import { HDetailContainer } from '../../layouts/form';
 
-defineOptions({ name: 'HAuthorizeLayout', components: { HDetailContainer } });
-
-interface Props {
-  title?: string;
-}
-
-withDefaults(defineProps<Props>(), {
-  title: '',
-});
+defineOptions({ name: 'HAuthorizeFormLayout', components: { HDetailContainer } });
 </script>

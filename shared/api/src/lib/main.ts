@@ -23,6 +23,7 @@ import {
   SocialBindingService,
   ExtendedTaskService,
   MgtCertificateService,
+  MgtCertificateFileService,
   DialogueContactService,
   DialogueDetailService,
   NotificationService,
@@ -147,6 +148,10 @@ export class ApiResources {
 
   public mgtCertificate(): MgtCertificateService {
     return MgtCertificateService.getInstance(this.config);
+  }
+
+    public mgtCertificateFile(): MgtCertificateFileService {
+    return MgtCertificateFileService.getInstance(this.config);
   }
 
   public ossBucket(): BucketService {

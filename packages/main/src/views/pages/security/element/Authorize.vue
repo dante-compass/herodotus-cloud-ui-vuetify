@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-layout :title="title">
+  <h-authorize-from-layout :title="title" :overlay="overlay">
     <v-card rounded="lg">
       <v-data-table-server
         v-model="selectedItems"
@@ -31,16 +31,11 @@
         @save="onSave()"
       ></h-authorize-list>
     </template>
-  </h-authorize-layout>
+  </h-authorize-from-layout>
 </template>
 
 <script setup lang="ts">
-import type {
-  SysElementEntity,
-  SysRoleEntity,
-  SysRoleProps,
-  SysRoleConditions,
-} from '@herodotus/api';
+import type { SysElementEntity, SysRoleEntity, SysRoleProps, SysRoleConditions } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTableItem, useTable } from '@/composables/hooks';
@@ -48,11 +43,12 @@ import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'SysElementAuthorize' });
 
-const { editedItem, title, assign } = useTableItem<SysElementEntity>(API.core.sysElement());
-const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
-  SysRoleConditions,
-  SysRoleEntity
->(API.core.sysRole(), PAGE_NAME.SYS_ROLE, true);
+const { editedItem, overlay, title, assign } = useTableItem<SysElementEntity>(API.core.sysElement());
+const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<SysRoleConditions, SysRoleEntity>(
+  API.core.sysRole(),
+  PAGE_NAME.SYS_ROLE,
+  true,
+);
 
 const selectedItems = ref([]) as Ref<Array<SysRoleEntity>>;
 const rowKey: SysRoleProps = 'roleId';

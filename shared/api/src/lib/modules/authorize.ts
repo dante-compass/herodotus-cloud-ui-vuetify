@@ -57,9 +57,7 @@ class OAuth2ScopeService extends AbstractService<OAuth2ScopeEntity> {
   }
 
   public fetchByScopeCode(scopeCode: string): Promise<AxiosHttpResult<OAuth2ScopeEntity>> {
-    return this.getConfig()
-      .getHttp()
-      .get<OAuth2ScopeEntity, string>(this.getScopeCodePath(scopeCode));
+    return this.getConfig().getHttp().get<OAuth2ScopeEntity, string>(this.getScopeCodePath(scopeCode));
   }
 
   public assigned(data: OAuth2ScopeAssignedBody): Promise<AxiosHttpResult<OAuth2ScopeEntity>> {
@@ -141,11 +139,4 @@ class OAuth2CredentialRecordService extends AbstractService<OAuth2CredentialReco
   }
 }
 
-export {
-  OAuth2ApplicationService,
-  OAuth2ScopeService,
-  OAuth2AuthorizationService,
-  OAuth2UserLoggingService,
-  OAuth2InterfaceAuditService,
-  OAuth2CredentialRecordService,
-};
+export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2CredentialRecordService };

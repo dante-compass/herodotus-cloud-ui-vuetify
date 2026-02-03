@@ -47,9 +47,7 @@ export abstract class AbstractService<I extends Domain, O extends Domain = I> ex
       return this.getConfig().getHttp().get<Page<O>, Pageable>(this.getBaseAddress(), params);
     } else {
       const fullParams = Object.assign(params, others);
-      return this.getConfig()
-        .getHttp()
-        .get<Page<O>, Pageable>(this.getConditionAddress(), fullParams);
+      return this.getConfig().getHttp().get<Page<O>, Pageable>(this.getConditionAddress(), fullParams);
     }
   }
 
@@ -61,7 +59,7 @@ export abstract class AbstractService<I extends Domain, O extends Domain = I> ex
     return this.getConfig().getHttp().get<Tree[], Conditions>(this.getTreeAddress(), params);
   }
 
-  public delete(id: string): Promise<AxiosHttpResult<string>> {
+  public deleteById(id: string): Promise<AxiosHttpResult<string>> {
     return this.getConfig().getHttp().delete<string, string>(this.getIdPath(id));
   }
 

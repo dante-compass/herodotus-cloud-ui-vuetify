@@ -1,11 +1,5 @@
 <template>
-  <h-center-layout-container
-    :entity="editedItem"
-    :title="title"
-    :overlay="overlay"
-    :operation="operation"
-    @save="onSave()"
-  >
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
     <v-form ref="employeeForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.employeeName"
@@ -14,38 +8,14 @@
         clearable
         :rules="[(v: string) => !!v || '人员姓名不能为空', (v: string) => isUniqueRule(v)]"
       ></v-text-field>
-      <v-text-field
-        v-model="editedItem.employeeNo"
-        label="人员编号"
-        placeholder="请输入人员编号"
-      ></v-text-field>
-      <h-dictionary-select
-        v-model="editedItem.gender"
-        dictionary="Gender"
-        label="性别"
-      ></h-dictionary-select>
-      <h-dictionary-select
-        v-model="editedItem.identity"
-        dictionary="Identity"
-        label="身份"
-      ></h-dictionary-select>
-      <v-text-field
-        v-model="editedItem.email"
-        label="电子邮件"
-        placeholder="请输入电子邮件"
-      ></v-text-field>
-      <v-text-field
-        v-model="editedItem.mobilePhoneNumber"
-        label="手机号码"
-        placeholder="请输入手机号码"
-      ></v-text-field>
-      <v-text-field
-        v-model="editedItem.officePhoneNumber"
-        label="办公电话"
-        placeholder="请输入办公电话"
-      ></v-text-field>
+      <v-text-field v-model="editedItem.employeeNo" label="人员编号" placeholder="请输入人员编号"></v-text-field>
+      <h-dictionary-select v-model="editedItem.gender" dictionary="Gender" label="性别"></h-dictionary-select>
+      <h-dictionary-select v-model="editedItem.identity" dictionary="Identity" label="身份"></h-dictionary-select>
+      <v-text-field v-model="editedItem.email" label="电子邮件" placeholder="请输入电子邮件"></v-text-field>
+      <v-text-field v-model="editedItem.mobilePhoneNumber" label="手机号码" placeholder="请输入手机号码"></v-text-field>
+      <v-text-field v-model="editedItem.officePhoneNumber" label="办公电话" placeholder="请输入办公电话"></v-text-field>
     </v-form>
-  </h-center-layout-container>
+  </h-center-form-layout>
 </template>
 
 <script setup lang="ts">
@@ -58,9 +28,7 @@ defineOptions({ name: 'SysUserContent' });
 
 const employeeForm = ref();
 
-const { editedItem, operation, title, overlay, saveOrUpdate } = useTableItem<SysEmployeeEntity>(
-  API.core.sysEmployee(),
-);
+const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysEmployeeEntity>(API.core.sysEmployee());
 
 const validateEmployeeName = async (employeeName: string) => {
   return await new Promise((resolve, reject) => {

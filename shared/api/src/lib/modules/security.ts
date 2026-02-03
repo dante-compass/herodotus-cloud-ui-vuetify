@@ -170,9 +170,7 @@ class SysElementService extends AbstractService<SysElementEntity> {
   }
 
   public findResourcesByRoles(roles: string[]): Promise<AxiosHttpResult<Elements>> {
-    return this.getConfig()
-      .getHttp()
-      .get<Elements, string>(this.getResourcesAddress(), { roles: roles });
+    return this.getConfig().getHttp().get<Elements, string>(this.getResourcesAddress(), { roles: roles });
   }
 }
 
@@ -198,9 +196,7 @@ class SysTenantDataSourceService extends AbstractService<SysTenantDataSourceEnti
   }
 
   public fetchByTenantId(tenantId: string): Promise<AxiosHttpResult<SysTenantDataSourceEntity>> {
-    return this.getConfig()
-      .getHttp()
-      .get<SysTenantDataSourceEntity, string>(this.getTenantIdPath(tenantId));
+    return this.getConfig().getHttp().get<SysTenantDataSourceEntity, string>(this.getTenantIdPath(tenantId));
   }
 }
 
@@ -230,20 +226,11 @@ class SysDictionaryService extends AbstractService<SysDictionaryEntity> {
   }
 
   public fetchByCategory(category: string): Promise<AxiosHttpResult<Array<SysDictionaryEntity>>> {
-    return this.getConfig()
-      .getHttp()
-      .get<Array<SysDictionaryEntity>, string>(this.getCategoryPath(category));
+    return this.getConfig().getHttp().get<Array<SysDictionaryEntity>, string>(this.getCategoryPath(category));
   }
 
-  public fetchCategories(
-    categories: string,
-  ): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>> {
-    return this.getConfig()
-      .getHttp()
-      .get<
-        Record<string, Array<SysDictionaryEntity>>,
-        string
-      >(this.getItemsAddress(), { categories: categories });
+  public fetchCategories(categories: string): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>> {
+    return this.getConfig().getHttp().get<Record<string, Array<SysDictionaryEntity>>, string>(this.getItemsAddress(), { categories: categories });
   }
 }
 

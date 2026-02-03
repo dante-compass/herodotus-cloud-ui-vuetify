@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-layout :title="title">
+  <h-authorize-from-layout :title="title" :overlay="overlay">
     <v-container>
       <v-row>
         <v-col cols="2"></v-col>
@@ -19,11 +19,7 @@
               label="应用简称(可选)"
               placeholder="请输入应用简称"
             ></v-text-field>
-            <v-text-field
-              v-model="editedItem.logo"
-              label="应用图标(可选)"
-              placeholder="请输入应用图标"
-            ></v-text-field>
+            <v-text-field v-model="editedItem.logo" label="应用图标(可选)" placeholder="请输入应用图标"></v-text-field>
             <v-text-field
               v-model="editedItem.homepage"
               label="应用主页(可选)"
@@ -64,16 +60,8 @@
             ></v-text-field>
             <h-text-divider label="客户端设置"></h-text-divider>
 
-            <v-switch
-              v-model="editedItem.requireProofKey"
-              label="是否需要 Proof Key"
-              hide-details
-            ></v-switch>
-            <v-switch
-              v-model="editedItem.requireAuthorizationConsent"
-              label="是否需要认证确认"
-              hide-details
-            ></v-switch>
+            <v-switch v-model="editedItem.requireProofKey" label="是否需要 Proof Key" hide-details></v-switch>
+            <v-switch v-model="editedItem.requireAuthorizationConsent" label="是否需要认证确认" hide-details></v-switch>
             <v-text-field
               v-model="editedItem.jwkSetUrl"
               label="客户端密钥集URL"
@@ -90,41 +78,20 @@
             <h-setting-label title="令牌有效期"></h-setting-label>
             <h-duration v-model="editedItem.accessTokenTimeToLive" label="令牌有效期"></h-duration>
             <h-setting-label title="刷新令牌有效期"></h-setting-label>
-            <h-duration
-              v-model="editedItem.refreshTokenTimeToLive"
-              label="刷新令牌有效期"
-            ></h-duration>
+            <h-duration v-model="editedItem.refreshTokenTimeToLive" label="刷新令牌有效期"></h-duration>
             <h-setting-label title="授权码有效期"></h-setting-label>
-            <h-duration
-              v-model="editedItem.authorizationCodeTimeToLive"
-              label="授权码有效期"
-            ></h-duration>
+            <h-duration v-model="editedItem.authorizationCodeTimeToLive" label="授权码有效期"></h-duration>
             <h-setting-label title="设备激活码有效期"></h-setting-label>
-            <h-duration
-              v-model="editedItem.deviceCodeTimeToLive"
-              label="设备激活码有效期"
-            ></h-duration>
-            <v-switch
-              v-model="editedItem.reuseRefreshTokens"
-              label="是否允许重用刷新令牌"
-            ></v-switch>
+            <h-duration v-model="editedItem.deviceCodeTimeToLive" label="设备激活码有效期"></h-duration>
+            <v-switch v-model="editedItem.reuseRefreshTokens" label="是否允许重用刷新令牌"></v-switch>
             <h-dictionary-select
               v-model="editedItem.idTokenSignatureAlgorithmJwsAlgorithm"
               dictionary="SignatureJwsAlgorithm"
               label="OIDC idToken 端点认证签名算法"
             ></h-dictionary-select>
             <h-text-divider label="数据条目设置"></h-text-divider>
-            <v-text-field
-              v-model="editedItem.description"
-              label="备注"
-              placeholder="请输入备注"
-            ></v-text-field>
-            <v-text-field
-              v-model.number="editedItem.ranking"
-              label="排序值"
-              placeholder="请输入排序值"
-              type="number"
-            />
+            <v-text-field v-model="editedItem.description" label="备注" placeholder="请输入备注"></v-text-field>
+            <v-text-field v-model.number="editedItem.ranking" label="排序值" placeholder="请输入排序值" type="number" />
             <h-dictionary-select
               v-model="editedItem.status"
               dictionary="DataItemStatus"
@@ -142,18 +109,8 @@
       </v-row>
     </v-container>
     <template #right>
-      <v-text-field
-        v-if="isEdit"
-        v-model="editedItem.clientId"
-        label="Client Id"
-        disabled
-      ></v-text-field>
-      <v-text-field
-        v-if="isEdit"
-        v-model="editedItem.clientSecret"
-        label="Client Secret"
-        disabled
-      ></v-text-field>
+      <v-text-field v-if="isEdit" v-model="editedItem.clientId" label="Client Id" disabled></v-text-field>
+      <v-text-field v-if="isEdit" v-model="editedItem.clientSecret" label="Client Secret" disabled></v-text-field>
 
       <v-data-table-server
         v-model="editedItem.scopes"
@@ -175,15 +132,11 @@
         @update:options="findItems"
       ></v-data-table-server>
     </template>
-  </h-authorize-layout>
+  </h-authorize-from-layout>
 </template>
 
 <script setup lang="ts">
-import type {
-  OAuth2ApplicationEntity,
-  OAuth2ScopeEntity,
-  OAuth2ScopeConditions,
-} from '@herodotus/api';
+import type { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2ScopeConditions } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useEditFinish } from '@herodotus/framework';

@@ -1,7 +1,8 @@
 <template>
   <h-detail-container v-bind="$attrs">
+    <slot></slot>
+
     <div>
-      <slot></slot>
       <h-button color="red" @click="onFinish()" class="mr-2">取消</h-button>
       <slot name="button"></slot>
     </div>
@@ -13,7 +14,7 @@ import { useEditFinish } from '@herodotus/framework';
 
 import HDetailContainer from './HDetailContainer.vue';
 
-defineOptions({ name: 'HFullWidthLayout' });
+defineOptions({ name: 'HFullWidthFormLayout' });
 
 const { onFinish } = useEditFinish();
 </script>

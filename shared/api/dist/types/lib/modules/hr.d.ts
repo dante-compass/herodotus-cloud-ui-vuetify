@@ -35,4 +35,4 @@ declare class SysEmployeeAllocatableService extends AbstractService<SysEmployeeA
     static getInstance(config: HttpConfig): SysEmployeeAllocatableService;
     getBaseAddress(): string;
 }
-export { SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, };
+export { SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService };

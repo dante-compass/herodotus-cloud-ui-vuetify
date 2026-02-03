@@ -1,11 +1,4 @@
-import type {
-  SysDepartmentEntity,
-  SysEmployeeEntity,
-  SysOrganizationEntity,
-  SysEmployeeAllocatable,
-  AllocatableRemove,
-  AllocatableDeploy,
-} from '@/declarations';
+import type { SysDepartmentEntity, SysEmployeeEntity, SysOrganizationEntity, SysEmployeeAllocatable, AllocatableRemove, AllocatableDeploy } from '@/declarations';
 import type { AxiosHttpResult, Conditions, Pageable, Page } from '@herodotus/core';
 
 import { HttpConfig, AbstractService } from '@herodotus/core';
@@ -80,19 +73,12 @@ class SysEmployeeService extends AbstractService<SysEmployeeEntity> {
   }
 
   public fetchByEmployeeName(employeeName: string): Promise<AxiosHttpResult<SysEmployeeEntity>> {
-    return this.getConfig()
-      .getHttp()
-      .get<SysEmployeeEntity, string>(this.getEmployeeNamePath(employeeName));
+    return this.getConfig().getHttp().get<SysEmployeeEntity, string>(this.getEmployeeNamePath(employeeName));
   }
 
-  public fetchAssignedByPage(
-    params: Pageable,
-    others: Conditions = {},
-  ): Promise<AxiosHttpResult<Page<SysEmployeeEntity>>> {
+  public fetchAssignedByPage(params: Pageable, others: Conditions = {}): Promise<AxiosHttpResult<Page<SysEmployeeEntity>>> {
     const fullParams = Object.assign(params, others);
-    return this.getConfig()
-      .getHttp()
-      .get<Page<SysEmployeeEntity>>(this.getAssignedAddress(), fullParams);
+    return this.getConfig().getHttp().get<Page<SysEmployeeEntity>>(this.getAssignedAddress(), fullParams);
   }
 
   public deleteAllocatable(data: AllocatableRemove): Promise<AxiosHttpResult<string>> {
@@ -132,9 +118,4 @@ class SysEmployeeAllocatableService extends AbstractService<SysEmployeeAllocatab
   }
 }
 
-export {
-  SysOrganizationService,
-  SysDepartmentService,
-  SysEmployeeService,
-  SysEmployeeAllocatableService,
-};
+export { SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService };

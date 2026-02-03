@@ -1,5 +1,5 @@
 import { HttpClientOptions, Axios, HttpConfig } from '@herodotus/core';
-import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService, DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './modules';
+import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService, MgtCertificateFileService, DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './modules';
 import { BucketService, ObjectService, MultipartUploadService } from './oss';
 export declare class ApiResources {
     private static instance;
@@ -32,6 +32,7 @@ export declare class ApiResources {
     webSocketMessage(): WebSocketMessageService;
     task(): ExtendedTaskService;
     mgtCertificate(): MgtCertificateService;
+    mgtCertificateFile(): MgtCertificateFileService;
     ossBucket(): BucketService;
     ossObject(): ObjectService;
     ossMultipartUpload(): MultipartUploadService;
