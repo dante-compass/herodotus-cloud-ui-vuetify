@@ -38,6 +38,8 @@ export interface DeleteBucketResult extends AbstractResult {}
 export interface ListBucketsResult extends AbstractResult {
   buckets: Array<BucketDomain>;
   owner: OwnerDomain;
+  continuationToken: string;
+  prefix: string;
 }
 
 export interface DeleteObjectResult extends AbstractObjectResult {}

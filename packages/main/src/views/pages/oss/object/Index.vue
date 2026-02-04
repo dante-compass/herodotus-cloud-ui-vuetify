@@ -1,36 +1,14 @@
 <template>
-  <h-data-table
-    v-model:page-size="pageSize"
-    v-model:page-number="pageNumber"
-    v-model:total-pages="totalPages"
-    v-model:total-items="totalItems"
-    :headers="headers"
-    :items="tableRows"
-    :item-value="rowKey"
-    :loading="loading"
-    disable-sort
-    select-strategy="single"
-    reserved
-    @update:options="findItems"
-  >
-    <template #control>
-      <v-btn>新建</v-btn>
-    </template>
-
-    <template #item.actions="{ item }">
-      <h-action-button
-        color="amber"
-        icon="mdi-shield-edit"
-        tooltip="配置角色"
-        @click="toAuthorize(item)"
-      ></h-action-button>
-      <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
-    </template>
-  </h-data-table>
+  <v-container class="pa-0">
+    <v-row>
+      <v-col xl="2" lg="2" md="4" sm="6" xs="12">
+        <h-oss-bucket-list v-model="currentBucketName"></h-oss-bucket-list>
+      </v-col>
+      <v-col xl="10" lg="10" md="8" sm="6" xs="12">
+        <h-oss-object-list v-if="currentBucketName" v-model="currentBucketName"></h-oss-object-list>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup lang="ts">
@@ -39,8 +17,9 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
+import { HOssBucketList, HOssObjectList } from '../components';
 
-defineOptions({ name: PAGE_NAME.OSS_OBJECT });
+defineOptions({ name: PAGE_NAME.OSS_OBJECT, components: { HOssBucketList, HOssObjectList } });
 
 const headers = ref([
   { key: 'roleName', align: 'center', title: '角色名称' },
@@ -65,4 +44,6 @@ const {
   deleteItemById,
   findItems,
 } = useTable<SysRoleConditions, SysRoleEntity>(API.core.sysRole(), PAGE_NAME.OSS_OBJECT);
+
+const currentBucketName = shallowRef();
 </script>

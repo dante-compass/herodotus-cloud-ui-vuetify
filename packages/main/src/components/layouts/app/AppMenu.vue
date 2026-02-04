@@ -14,6 +14,7 @@
     nav
     density="comfortable"
     active-class="active_item_border"
+    class="pa-0"
   >
     <template #header="{ props }">
       <v-list-item v-bind="props" class="rounded-e-xl"></v-list-item>
@@ -25,10 +26,7 @@
     <template #subheader="{ props: subheaderProps }">
       <slot name="subheader" v-bind="{ subheaderProps }" />
 
-      <v-list-subheader
-        v-if="!$slots.subheader"
-        class="text-high-emphasis text-uppercase font-weight-black"
-      >
+      <v-list-subheader v-if="!$slots.subheader" class="text-high-emphasis text-uppercase font-weight-black">
         {{ subheaderProps.title }}
       </v-list-subheader>
     </template>
@@ -52,7 +50,7 @@ const menuItems = computed(() => {
 
 <style lang="scss" scoped>
 .active_item_border {
-  border-left: 3px solid rgb(var(--v-theme-on-surface-variant));
+  border-left: 4px solid rgb(var(--v-theme-on-surface-variant));
   border-left-color: currentColor;
 }
 </style>
