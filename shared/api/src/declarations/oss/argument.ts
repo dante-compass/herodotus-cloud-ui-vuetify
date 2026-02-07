@@ -1,5 +1,5 @@
 import type { Entity } from '@herodotus/core';
-import type { DeleteDomain, SseCustomerDomain } from './domain';
+import type { DeleteDomain, SseCustomerDomain, ChecksumDomain, PutObjectDomain } from './domain';
 
 // ------------------------------ Argument ------------------------------
 
@@ -55,7 +55,19 @@ export interface CreateBucketArgument extends AbstractBucketArgument {
 
 export interface DeleteBucketArgument extends AbstractExpectedBucketOwnerArgument {}
 
-export interface ListBucketsArgument extends AbstractArgument {}
+export interface ListBucketsArgument extends AbstractArgument {
+  maxBuckets?: number;
+  continuationToken?: string;
+  prefix?: string;
+  bucketRegion?: string;
+}
+
+export interface PutBucketPolicyArgument extends AbstractExpectedBucketOwnerArgument {
+  bucketPolicy?: string;
+  contentMD5?: string;
+  checksumAlgorithm?: string;
+  confirmRemoveSelfBucketAccess?: string;
+}
 
 export interface DeleteObjectArgument extends AbstractObjectVersionArgument {
   mfa?: string;
@@ -82,29 +94,37 @@ export interface ListObjectsV2Argument extends AbstractObjectRequestPayerArgumen
 
 export interface GetObjectArgument extends AbstractGetObjectArgument {}
 
-// ------------------------------ 以下未整理，上面是新整的内容 ------------------------------
-
-export interface BaseArguments extends Entity {
-  extraHeaders?: Map<string, string>;
-  extraQueryParams?: Map<string, string>;
+export interface GetObjectAttributesArgument extends AbstractObjectVersionArgument {
+  maxParts?: string;
+  partNumberMarker?: string;
 }
 
-export interface BucketArguments extends BaseArguments {
-  bucketName: string;
-  region?: string;
+export interface PutObjectArgument extends AbstractObjectArgument {
+  acl?: string;
+  checksumAlgorithm?: string;
+  grantFullControl?: string;
+  grantRead?: string;
+  grantReadACP?: string;
+  grantWriteACP?: string;
+  websiteRedirectLocation?: string;
+  tagging?: string;
+  checksum?: ChecksumDomain;
+  metadata?: PutObjectDomain;
 }
 
-export interface ObjectArguments extends BucketArguments {
-  objectName: string;
+export interface PutObjectLegalHoldArgument extends AbstractObjectVersionArgument {
+  legalHoldEnabled?: boolean;
 }
 
-export interface BasePartArguments extends ObjectArguments {
-  uploadId: string;
+export interface PutObjectRetentionArgument extends AbstractObjectVersionArgument {
+  retentionMode?: string;
+  retainUntilDate: string;
 }
 
 // ------------------------------ Special ------------------------------
 
-export interface CreateMultipartUploadArguments extends ObjectArguments {
-  partNumber: number;
+export interface CreateMultipartUploadArgument extends PutObjectArgument {}
+export interface AbortMultipartUploadArgument extends AbstractObjectArgument {
+  uploadId: string;
 }
-export interface CompleteMultipartUploadArguments extends BasePartArguments {}
+export interface CompleteMultipartUploadArgument extends AbortMultipartUploadArgument {}

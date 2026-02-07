@@ -13,6 +13,14 @@ export interface BucketDomain extends Entity {
      */
     creationDate: Date;
 }
+export interface BucketDetailsDomain extends Entity {
+    bucketName: string;
+    creationDate: Date;
+    bucketRegion: string;
+    policy: string;
+    versioning: string;
+    objectLockEnabled: boolean;
+}
 export interface OwnerDomain extends Entity {
     /**
      * 所有者 ID
@@ -61,9 +69,30 @@ export interface ChecksumDomain extends Entity {
     checksumSHA1: string;
     checksumSHA256: string;
 }
-export type BucketDomainProps = keyof BucketDomain;
+export interface ObjectLockDomain extends Entity {
+    objectLockMode: string;
+    objectLockRetainUntilDate: Date;
+    objectLockLegalHoldStatus: string;
+}
+export interface PutObjectDomain extends Entity {
+    cacheControl: string;
+    contentDisposition: string;
+    contentEncoding: string;
+    contentLanguage: string;
+    contentLength: string;
+    contentRange: string;
+    contentType: string;
+    expires: Date;
+    metadata: Map<string, string>;
+    serverSideEncryption: string;
+    storageClass: string;
+    ssekms: SsekmsDomain;
+    bucketKeyEnabled: boolean;
+    objectLock?: ObjectLockDomain;
+}
+export type BucketDetailsDomainProps = keyof BucketDetailsDomain;
 export type ObjectDomainProps = keyof ObjectDomain;
-export interface BucketDomainConditions extends Conditions {
+export interface BucketDetailsDomainConditions extends Conditions {
 }
 export interface ObjectDomainConditions extends Conditions {
 }

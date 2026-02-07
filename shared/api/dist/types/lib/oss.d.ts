@@ -1,4 +1,4 @@
-import { CreateMultipartUploadArguments, CreateMultipartUploadBusiness, CompleteMultipartUploadArguments, CompleteMultipartUploadDomain, CreateBucketArgument, DeleteBucketArgument, DeleteObjectArgument, DeleteObjectsArgument, ListObjectsV2Argument, GetObjectArgument, CreateBucketResult, DeleteBucketResult, DeleteObjectResult, DeleteObjectsResult, ListObjectsV2Result, ListBucketsResult, PutObjectResult } from '../declarations';
+import { CreateMultipartUploadArgument, CreateMultipartUploadBusiness, CompleteMultipartUploadArgument, CompleteMultipartUploadResult, CreateBucketArgument, DeleteBucketArgument, DeleteObjectArgument, DeleteObjectsArgument, ListObjectsV2Argument, GetObjectAttributesArgument, GetObjectArgument, PutBucketPolicyArgument, PutObjectLegalHoldArgument, PutObjectRetentionArgument, CreateBucketResult, DeleteBucketResult, DeleteObjectResult, DeleteObjectsResult, ListObjectsV2Result, ListBucketDetailsResult, PutObjectResult, GetObjectAttributesResult, PutBucketPolicyResult, PutObjectLegalHoldResult, PutObjectRetentionResult } from '../declarations';
 import { AxiosHttpResult, AxiosProgressEvent, Service, HttpConfig } from '@herodotus/core';
 declare class BucketService extends Service {
     private static instance;
@@ -6,9 +6,11 @@ declare class BucketService extends Service {
     static getInstance(config: HttpConfig): BucketService;
     getBaseAddress(): string;
     private getListAddress;
-    listBuckets(): Promise<AxiosHttpResult<ListBucketsResult>>;
+    private getPolicyAddress;
+    listBuckets(): Promise<AxiosHttpResult<ListBucketDetailsResult>>;
     createBucket(request: CreateBucketArgument): Promise<AxiosHttpResult<CreateBucketResult>>;
     deleteBucket(request: DeleteBucketArgument): Promise<AxiosHttpResult<DeleteBucketResult>>;
+    setObjectRetention(request: PutBucketPolicyArgument): Promise<AxiosHttpResult<PutBucketPolicyResult>>;
 }
 declare class ObjectService extends Service {
     private static instance;
@@ -19,13 +21,19 @@ declare class ObjectService extends Service {
     private getMultiDeleteAddress;
     private getDownloadAddress;
     private getDisplayAddress;
-    getUploadAddress(): string;
+    private getUploadAddress;
+    private getAttributesAddress;
+    private getLegalHoldAddress;
+    private getRetentionAddress;
     listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>>;
     delete(request: DeleteObjectArgument): Promise<AxiosHttpResult<DeleteObjectResult>>;
     upload(bucketName: string, file: File, onProgress?: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<PutObjectResult>>;
     download(request: GetObjectArgument, onProgress?: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<Blob>>;
     display(request: GetObjectArgument): Promise<AxiosHttpResult<Blob>>;
     batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>>;
+    fetchObjectAttributes(request: GetObjectAttributesArgument): Promise<AxiosHttpResult<GetObjectAttributesResult>>;
+    setObjectLegalHold(request: PutObjectLegalHoldArgument): Promise<AxiosHttpResult<PutObjectLegalHoldResult>>;
+    setObjectRetention(request: PutObjectRetentionArgument): Promise<AxiosHttpResult<PutObjectRetentionResult>>;
 }
 declare class MultipartUploadService extends Service {
     private static instance;
@@ -34,7 +42,7 @@ declare class MultipartUploadService extends Service {
     getBaseAddress(): string;
     getCreateMultipartUploadAddress(): string;
     getCompleteMultipartUploadAddress(): string;
-    createChunkUpload(request: CreateMultipartUploadArguments): Promise<AxiosHttpResult<CreateMultipartUploadBusiness>>;
-    completeChunkUpload(request: CompleteMultipartUploadArguments): Promise<AxiosHttpResult<CompleteMultipartUploadDomain>>;
+    createChunkUpload(request: CreateMultipartUploadArgument): Promise<AxiosHttpResult<CreateMultipartUploadBusiness>>;
+    completeChunkUpload(request: CompleteMultipartUploadArgument): Promise<AxiosHttpResult<CompleteMultipartUploadResult>>;
 }
 export { BucketService, ObjectService, MultipartUploadService };
