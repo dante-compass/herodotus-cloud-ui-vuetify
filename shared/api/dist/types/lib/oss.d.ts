@@ -10,7 +10,7 @@ declare class BucketService extends Service {
     listBuckets(): Promise<AxiosHttpResult<ListBucketDetailsResult>>;
     createBucket(request: CreateBucketArgument): Promise<AxiosHttpResult<CreateBucketResult>>;
     deleteBucket(request: DeleteBucketArgument): Promise<AxiosHttpResult<DeleteBucketResult>>;
-    setObjectRetention(request: PutBucketPolicyArgument): Promise<AxiosHttpResult<PutBucketPolicyResult>>;
+    setBucketPolicy(request: PutBucketPolicyArgument): Promise<AxiosHttpResult<PutBucketPolicyResult>>;
 }
 declare class ObjectService extends Service {
     private static instance;

@@ -1,5 +1,6 @@
 import HCenterLayout from './HCenterFormLayout.vue';
 import HDetailContainer from './HDetailContainer.vue';
 import HFullWidthLayout from './HFullWidthFormLayout.vue';
+import HSimpleCenterFormLayout from './HSimpleCenterFormLayout.vue';
 
-export { HCenterLayout, HDetailContainer, HFullWidthLayout };
+export { HCenterLayout, HDetailContainer, HFullWidthLayout, HSimpleCenterFormLayout };

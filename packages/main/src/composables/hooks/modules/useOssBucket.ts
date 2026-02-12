@@ -1,4 +1,4 @@
-import type { BucketDomain, BucketDomainProps, BucketDomainConditions, DeleteBucketResult } from '@herodotus/api';
+import type { BucketDomain } from '@herodotus/api';
 
 import { API } from '@/configurations';
 

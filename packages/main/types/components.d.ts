@@ -56,6 +56,7 @@ declare module 'vue' {
     HParticles: typeof import('@herodotus/components')['HParticles']
     HSendMessageTextarea: typeof import('./../src/components/library/HMessage/HSendMessageTextarea.vue')['default']
     HSignInBackground: typeof import('@herodotus/components')['HSignInBackground']
+    HSimpleCenterFormLayout: typeof import('./../src/components/layouts/form/HSimpleCenterFormLayout.vue')['default']
     HSummaryBox: typeof import('./../src/components/library/HChart/HSummaryBox.vue')['default']
     HTextDivider: typeof import('./../src/components/library/HDivider/HTextDivider.vue')['default']
     HWordClickCaptcha: typeof import('./../src/components/captcha/HWordClickCaptcha.vue')['default']

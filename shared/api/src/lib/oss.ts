@@ -68,7 +68,7 @@ class BucketService extends Service {
     return this.getConfig().getHttp().delete<DeleteBucketResult, DeleteBucketArgument>(this.getBaseAddress(), request);
   }
 
-  public setObjectRetention(request: PutBucketPolicyArgument): Promise<AxiosHttpResult<PutBucketPolicyResult>> {
+  public setBucketPolicy(request: PutBucketPolicyArgument): Promise<AxiosHttpResult<PutBucketPolicyResult>> {
     return this.getConfig()
       .getHttp()
       .put<PutBucketPolicyResult, PutBucketPolicyArgument>(this.getPolicyAddress(), request);

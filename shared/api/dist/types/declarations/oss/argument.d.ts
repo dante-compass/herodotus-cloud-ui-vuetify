@@ -1,5 +1,5 @@
 import { Entity } from '@herodotus/core';
-import { DeleteDomain, SseCustomerDomain, ChecksumDomain, PutObjectDomain } from './domain';
+import { DeleteDomain, SseCustomerDomain, ChecksumDomain, PutObjectDomain, GrantDomain } from './domain';
 export interface AbstractArgument extends Entity {
 }
 export interface AbstractBucketArgument extends AbstractArgument {
@@ -34,13 +34,8 @@ export interface AbstractGetObjectArgument extends AbstractObjectVersionArgument
     checksumMode?: string;
 }
 export interface CreateBucketArgument extends AbstractBucketArgument {
-    acl?: string;
-    grantFullControl?: string;
-    grantRead?: string;
-    grantReadACP?: string;
-    grantWrite?: string;
-    grantWriteACP?: string;
-    objectLockEnabledForBucket?: boolean;
+    grantDetails?: GrantDomain;
+    objectLockEnabled?: boolean;
     objectOwnership?: string;
 }
 export interface DeleteBucketArgument extends AbstractExpectedBucketOwnerArgument {
@@ -52,7 +47,7 @@ export interface ListBucketsArgument extends AbstractArgument {
     bucketRegion?: string;
 }
 export interface PutBucketPolicyArgument extends AbstractExpectedBucketOwnerArgument {
-    bucketPolicy?: string;
+    doesPublic: boolean;
     contentMD5?: string;
     checksumAlgorithm?: string;
     confirmRemoveSelfBucketAccess?: string;

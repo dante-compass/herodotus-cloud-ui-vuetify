@@ -20,7 +20,7 @@ export interface BucketDetailsDomain extends Entity {
   bucketName: string;
   creationDate: Date;
   bucketRegion: string;
-  policy: string;
+  doesPublic: boolean;
   versioning: string;
   objectLockEnabled: boolean;
 }
@@ -102,6 +102,15 @@ export interface PutObjectDomain extends Entity {
   ssekms: SsekmsDomain;
   bucketKeyEnabled: boolean;
   objectLock?: ObjectLockDomain;
+}
+
+export interface GrantDomain extends Entity {
+  acl: string;
+  grantFullControl: string;
+  grantRead: string;
+  grantReadACP: string;
+  grantWrite: string;
+  grantWriteACP: string;
 }
 
 export type BucketDetailsDomainProps = keyof BucketDetailsDomain;
