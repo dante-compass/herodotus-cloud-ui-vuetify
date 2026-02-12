@@ -7,9 +7,10 @@ import type {
   ObjectDomain,
   SsekmsDomain,
   ChecksumDomain,
+  BucketDetailsDomain,
 } from './domain';
 
-export interface AbstractResult extends Entity {
+interface AbstractResult extends Entity {
   cloudFrontId: string;
   extendedRequestId: string;
   requestId: string;
@@ -18,15 +19,30 @@ export interface AbstractResult extends Entity {
   successful: boolean;
 }
 
-export interface AbstractObjectResult extends AbstractResult {
+interface AbstractObjectResult extends AbstractResult {
   deleteMarker: boolean;
   versionId: string;
   requestCharged: string;
 }
 
-export interface AbstractRequestChargedResult extends AbstractResult {
+interface AbstractRequestChargedResult extends AbstractResult {
   requestCharged: string;
   bucketKeyEnabled: boolean;
+}
+
+interface AbstractBucketKeyResult extends AbstractRequestChargedResult {
+  bucketKeyEnabled: boolean;
+}
+
+interface AbstractUploadResult extends AbstractBucketKeyResult {
+  bucketName: string;
+  objectName: string;
+}
+
+interface AbstractListBucketsResult extends AbstractResult {
+  owner: OwnerDomain;
+  continuationToken: string;
+  prefix: string;
 }
 
 export interface CreateBucketResult extends AbstractResult {
@@ -35,10 +51,15 @@ export interface CreateBucketResult extends AbstractResult {
 
 export interface DeleteBucketResult extends AbstractResult {}
 
-export interface ListBucketsResult extends AbstractResult {
+export interface ListBucketsResult extends AbstractListBucketsResult {
   buckets: Array<BucketDomain>;
-  owner: OwnerDomain;
 }
+
+export interface ListBucketDetailsResult extends AbstractListBucketsResult {
+  buckets: Array<BucketDetailsDomain>;
+}
+
+export interface PutBucketPolicyResult extends AbstractResult {}
 
 export interface DeleteObjectResult extends AbstractObjectResult {}
 
@@ -63,6 +84,24 @@ export interface ListObjectsV2Result extends AbstractResult {
   requestCharged: string;
 }
 
+export interface GetObjectAttributesResult extends AbstractResult {
+  bucketName: string;
+  objectName: string;
+  lockEnabled: boolean;
+  lockLegalHold: boolean;
+  retainUntilDate: Date;
+  retentionMode: string;
+  deleteMarker: boolean;
+  lastModified: Date;
+  versionId: string;
+  eTag: string;
+  size: number;
+}
+
+export interface PutObjectLegalHoldResult extends AbstractObjectResult {}
+
+export interface PutObjectRetentionResult extends AbstractObjectResult {}
+
 export interface UploadPartResult extends AbstractRequestChargedResult {
   serverSideEncryption: string;
   eTag: string;
@@ -75,20 +114,14 @@ export interface PutObjectResult extends UploadPartResult {
   versionId: string;
 }
 
-// ------------------------------ 以下未整理，上面是新整的内容 ------------------------------
-
-export interface BaseDomain extends Entity {
-  bucketName: string;
-  region?: string;
-  objectName: string;
-}
-
-export interface ObjectWriteDomain extends BaseDomain {
-  etag: string;
+export interface CompleteMultipartUploadResult extends AbstractUploadResult {
+  location: string;
+  expiration: string;
+  eTag: string;
+  checksum: ChecksumDomain;
+  serverSideEncryption: string;
   versionId: string;
 }
-
-export interface CompleteMultipartUploadDomain extends ObjectWriteDomain {}
 
 // ------------------------------ Business ------------------------------
 

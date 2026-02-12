@@ -1,5 +1,24 @@
 # @herodotus/api
 
+## 0.6.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@0.6.0
+
+## 0.5.1
+
+### Patch Changes
+
+- 存储桶管理功能完成
+- Updated dependencies
+  - @herodotus/core@0.5.1
+
 ## 0.5.0
 
 ### Minor Changes

@@ -113,8 +113,8 @@ withDefaults(defineProps<Props>(), {
 
 const pageNumber = defineModel('pageNumber', { type: Number, default: 1, required: true });
 const pageSize = defineModel('pageSize', { type: Number, default: 10, required: true });
-const totalPages = defineModel('totalPages', { type: Number, default: 0, required: true });
-const totalItems = defineModel('totalItems', { type: Number, default: 0, required: true });
+const totalPages = defineModel('totalPages', { type: Number, default: 0 });
+const totalItems = defineModel('totalItems', { type: Number, default: 10 });
 
 const settings = useSettingsStore();
 const { options } = useDictionary('DataItemStatus');

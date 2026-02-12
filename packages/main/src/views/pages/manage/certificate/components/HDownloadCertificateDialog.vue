@@ -69,7 +69,7 @@ import { toast } from '@herodotus/core';
 import { API } from '@/configurations';
 import { useOssDownload } from '@/composables/hooks';
 
-defineOptions({ name: 'DownloadCertificateDialog' });
+defineOptions({ name: 'HDownloadCertificateDialog' });
 
 interface Props {
   certId: string | undefined;
