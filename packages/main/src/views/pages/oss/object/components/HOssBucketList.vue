@@ -1,5 +1,8 @@
 <template>
-  <v-card rounded="xl">
+  <v-card :disabled="loading" :loading="loading" rounded="xl">
+    <template v-slot:loader="{ isActive }">
+      <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
+    </template>
     <v-list
       density="compact"
       activatable
@@ -10,7 +13,7 @@
       class="mx-2"
     >
       <v-list-subheader>存储桶列表：</v-list-subheader>
-      <v-list-item v-for="(item, i) in tableRows" :key="i" rounded="xl" @click="onSelected(item)">
+      <v-list-item v-for="(item, i) in tableRows" :key="i" rounded="xl" @click="onSelectItem(item)">
         <template #prepend>
           <v-icon icon="mdi-bucket-outline"></v-icon>
         </template>
@@ -21,27 +24,43 @@
         </template>
       </v-list-item>
     </v-list>
-    <v-overlay v-model="loading" class="align-center justify-center" contained>
-      <v-progress-circular color="primary" indeterminate></v-progress-circular>
-    </v-overlay>
   </v-card>
 </template>
 
 <script setup lang="ts">
 import type { BucketDomain } from '@herodotus/api';
 
-import { useOssBucket } from '@/composables/hooks';
+import { API } from '@/configurations';
 
 defineOptions({ name: 'HOssBucketList' });
 
-const { loading, tableRows, fetchAllBuckets } = useOssBucket();
-
 const selected = defineModel<string>();
+const key = defineModel<number>('version', {
+  default: 0,
+});
 
-const onSelected = (item: BucketDomain) => {
+const loading = shallowRef(false);
+const tableRows = ref([]) as Ref<Array<BucketDomain>>;
+
+const fetchAllBuckets = () => {
+  API.core
+    .ossBucket()
+    .listBuckets()
+    .then((result) => {
+      const data = result.data.buckets as Array<BucketDomain>;
+      tableRows.value = data;
+      loading.value = false;
+    })
+    .catch(() => {
+      loading.value = false;
+    });
+};
+
+const onSelectItem = (item: BucketDomain) => {
   if (item) {
     selected.value = item.bucketName;
   }
+  key.value = +new Date();
 };
 
 onMounted(() => {

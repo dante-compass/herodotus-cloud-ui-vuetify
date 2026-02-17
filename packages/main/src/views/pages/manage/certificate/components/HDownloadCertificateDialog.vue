@@ -67,7 +67,7 @@ import type { MgtCertificateFileRequest, MgtCertificateFileResponse } from '@her
 import { toast } from '@herodotus/core';
 
 import { API } from '@/configurations';
-import { useOssDownload } from '@/composables/hooks';
+import { useOss } from '@/composables/hooks';
 
 defineOptions({ name: 'HDownloadCertificateDialog' });
 
@@ -85,7 +85,7 @@ const openDialog = defineModel({
 
 const loading = shallowRef(false);
 
-const { download, loadProgress, showProgress } = useOssDownload();
+const { download, loadProgress, showProgress } = useOss();
 
 const editedItem = ref({}) as Ref<MgtCertificateFileRequest>;
 

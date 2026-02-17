@@ -62,6 +62,7 @@ const statusCode = (axiosInstance: AxiosInstance, response?: AxiosResponse<any>,
       case 408:
         break;
       case 412:
+        notify.warning(content, detail);
         break;
       case 500:
         if (content) {

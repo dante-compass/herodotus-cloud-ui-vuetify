@@ -27,6 +27,10 @@
         ></h-action-button>
       </v-card-title>
 
+      <div class="d-flex py-3 justify-space-between">
+        <slot name="extends"></slot>
+      </div>
+
       <v-card-text>
         <v-data-table-server
           v-model:items-per-page="pageSize"

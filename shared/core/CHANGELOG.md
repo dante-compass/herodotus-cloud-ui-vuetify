@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 0.6.1
+
+### Patch Changes
+
+- 对象管理 API 和类型定义完成
+
 ## 0.6.0
 
 ### Minor Changes

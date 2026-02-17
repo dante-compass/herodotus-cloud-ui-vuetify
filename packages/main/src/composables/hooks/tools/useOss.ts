@@ -1,9 +1,12 @@
 import type { AxiosProgressEvent } from '@herodotus/core';
 
+import { filesize } from 'filesize';
+import { endsWith, trimEnd, split } from 'lodash-es';
+
 import { toast } from '@herodotus/core';
 import { API } from '@/configurations';
 
-export default function useOssDownload() {
+export default function useOss() {
   const loadProgress = shallowRef(0);
   const showProgress = shallowRef(false);
 
@@ -69,9 +72,39 @@ export default function useOssDownload() {
     }, 500);
   };
 
+  const humanObjectSize = (size: number) => {
+    if (size) {
+      return filesize(size);
+    } else {
+      return '';
+    }
+  };
+
+  /**
+   * 对象存储对象名称显示处理。
+   *
+   * 将显示为层级目录的对象名称处理为更合理的显示名称。包括目录类型对象名称的处理。
+   * @param objectName 对象名称
+   * @returns
+   */
+  const displayedObjectName = (objectName: string) => {
+    if (endsWith(objectName, '/')) {
+      return trimEnd(objectName, '/');
+    } else {
+      if (objectName.indexOf('/') !== -1) {
+        const names = split(objectName, '/');
+        return names[names.length - 1];
+      } else {
+        return objectName;
+      }
+    }
+  };
+
   return {
     loadProgress,
     showProgress,
     download,
+    humanObjectSize,
+    displayedObjectName,
   };
 }

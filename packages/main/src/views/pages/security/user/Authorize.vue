@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-from-layout :title="title" :overlay="overlay">
+  <h-authorize-form-layout :title="title" :overlay="overlay">
     <v-card rounded="lg">
       <v-data-table-server
         v-model="selectedItems"
@@ -31,7 +31,7 @@
         @save="onSave()"
       ></h-authorize-list>
     </template>
-  </h-authorize-from-layout>
+  </h-authorize-form-layout>
 </template>
 
 <script setup lang="ts">

@@ -52,7 +52,7 @@ const openDialog = defineModel({
 });
 
 const loading = shallowRef(false);
-
+const createBucketForm = ref();
 const editedItem = ref({}) as Ref<CreateBucketArgument>;
 
 const regxRule = (content: string) => {
@@ -64,29 +64,33 @@ const clean = () => {
   editedItem.value = {} as CreateBucketArgument;
 };
 
-const onSave = () => {
-  loading.value = true;
-  API.core
-    .ossBucket()
-    .createBucket(editedItem.value)
-    .then((response) => {
-      const result = response.data as HttpResult<CreateBucketResult>;
-      loading.value = false;
-      openDialog.value = false;
-      if (result.successful) {
-        if (result.message) {
-          toast.success(result.message);
+const onSave = async () => {
+  const { valid } = await createBucketForm.value.validate();
+
+  if (valid) {
+    loading.value = true;
+    API.core
+      .ossBucket()
+      .createBucket(editedItem.value)
+      .then((response) => {
+        const result = response.data as HttpResult<CreateBucketResult>;
+        loading.value = false;
+        openDialog.value = false;
+        if (result.successful) {
+          if (result.message) {
+            toast.success(result.message);
+          } else {
+            toast.success('操作成功！');
+          }
+          emit('success');
         } else {
-          toast.success('操作成功！');
+          toast.warning('服务端异常！');
         }
-        emit('success');
-      } else {
-        toast.warning('服务端异常！');
-      }
-    })
-    .catch(() => {
-      loading.value = false;
-      openDialog.value = false;
-    });
+      })
+      .catch(() => {
+        loading.value = false;
+        openDialog.value = false;
+      });
+  }
 };
 </script>
