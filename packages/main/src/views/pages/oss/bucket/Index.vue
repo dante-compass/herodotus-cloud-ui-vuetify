@@ -51,13 +51,6 @@
       </template>
 
       <template #item.actions="{ item }">
-        <!-- <h-action-button
-        color="amber"
-        icon="mdi-shield-edit"
-        tooltip="配置角色"
-        @click="toAuthorize(item)"
-      ></h-action-button>
-      <h-action-edit-button @click="toEdit(item)"></h-action-edit-button> -->
         <h-action-delete-button v-if="!item.reserved" @click="onDeleteBucket(item[rowKey])"></h-action-delete-button>
       </template>
     </h-data-table>
@@ -69,15 +62,15 @@
 import type { HttpResult } from '@herodotus/core';
 import type {
   BucketDetailsDomain,
+  BucketDomain,
   BucketDetailsDomainProps,
-  BucketDetailsDomainConditions,
   PutBucketPolicyResult,
   DeleteBucketResult,
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { notify, toast } from '@herodotus/core';
-import { useBaseTable, useOssBucket, useDictionary, useDateTime } from '@/composables/hooks';
+import { useDictionary, useDateTime } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 import { HCreateBucketDialog } from './components';
@@ -95,15 +88,29 @@ const headers = ref([
 
 const rowKey: BucketDetailsDomainProps = 'bucketName';
 
-const { toCreate } = useBaseTable<BucketDetailsDomainConditions, BucketDetailsDomainProps>(PAGE_NAME.OSS_BUCKET);
 const { defaultFormat } = useDateTime();
-
-const { loading, tableRows, fetchAllBuckets } = useOssBucket();
 const { getDictionaryItemDisplay } = useDictionary('BucketVersioning');
 
 const pageNumber = shallowRef(1);
 const pageSize = shallowRef(10);
 const openDialog = shallowRef(false);
+
+const loading = shallowRef(false);
+const tableRows = ref([]) as Ref<Array<BucketDomain>>;
+
+const fetchAllBuckets = () => {
+  API.core
+    .ossBucket()
+    .listBuckets()
+    .then((result) => {
+      const data = result.data.buckets as Array<BucketDomain>;
+      tableRows.value = data;
+      loading.value = false;
+    })
+    .catch(() => {
+      loading.value = false;
+    });
+};
 
 const onRefresh = () => {
   fetchAllBuckets();

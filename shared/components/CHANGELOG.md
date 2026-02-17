@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 0.6.2
+
+### Patch Changes
+
+- 开放 OSS 上传 API 地址
+- Updated dependencies
+  - @herodotus/core@0.6.2
+
 ## 0.6.1
 
 ### Patch Changes
