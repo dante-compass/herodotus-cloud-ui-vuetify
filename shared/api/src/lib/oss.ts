@@ -144,17 +144,23 @@ class ObjectService extends Service {
     file: File,
     onProgress?: (progressEvent: AxiosProgressEvent) => void,
   ): Promise<AxiosHttpResult<PutObjectResult>> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('bucketName', bucketName);
     if (onProgress) {
       return this.getConfig()
         .getHttp()
         .post<
           PutObjectResult,
-          any
-        >(this.getUploadAddress(), { bucketName: bucketName, file: file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
+          FormData
+        >(this.getUploadAddress(), formData, { contentType: ContentTypeEnum.MULTI_PART }, { onUploadProgress: onProgress });
     } else {
       return this.getConfig()
         .getHttp()
-        .post<PutObjectResult, any>(this.getUploadAddress(), { bucketName: bucketName, file: file });
+        .post<
+          PutObjectResult,
+          FormData
+        >(this.getUploadAddress(), formData, { contentType: ContentTypeEnum.MULTI_PART });
     }
   }
 

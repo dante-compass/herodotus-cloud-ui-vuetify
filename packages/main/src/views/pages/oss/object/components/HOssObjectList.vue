@@ -19,19 +19,10 @@
         class="mr-2"
         @click="onPreviousFolder()"
       >
-        返回
+        返回上级
       </v-btn>
       <v-btn
-        color="primary"
-        label=""
-        prepend-icon="mdi-cloud-upload"
-        class="mr-2"
-        :disabled="isDisableUpload"
-        @click="openSimpleUploadDialog = true"
-      >
-        上传
-      </v-btn>
-      <v-btn
+        class="mr-4"
         color="red"
         prepend-icon="mdi-delete-forever"
         :disabled="isDisableBatchDelete"
@@ -39,6 +30,23 @@
       >
         批量删除
       </v-btn>
+      <v-file-input
+        v-model="uploadFiles"
+        :disabled="isDisableUpload"
+        label="上传文件"
+        icon-color="primary"
+        prepend-icon=""
+        prepend-inner-icon="mdi-cloud-upload"
+        hide-details
+        hide-spin-buttons
+        density="compact"
+        @update:model-value="onUpload"
+        max-width="300px"
+        :clearable="false"
+        rounded="xl"
+        show-size
+        :loading="uploading"
+      ></v-file-input>
     </template>
 
     <template #item.lastModified="{ value }">
@@ -76,7 +84,14 @@
 </template>
 
 <script setup lang="ts">
-import type { ObjectDomain, ObjectDomainProps, ObjectDomainConditions, DeletedObjectDomain } from '@herodotus/api';
+import type { HttpResult } from '@herodotus/core';
+import type {
+  ObjectDomain,
+  ObjectDomainProps,
+  ObjectDomainConditions,
+  DeletedObjectDomain,
+  PutObjectResult,
+} from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { isEmpty, split, dropRight, join, initial } from 'lodash-es';
@@ -114,12 +129,41 @@ const { humanObjectSize, displayedObjectName, download } = useOss();
 const pageNumber = shallowRef(1);
 const pageSize = shallowRef(10);
 const selected = ref([]) as Ref<Array<ObjectDomain>>;
-const openSimpleUploadDialog = shallowRef(false);
 const hasNewUploadedFiles = shallowRef(false);
 
 const loading = shallowRef(false);
+const uploading = shallowRef(false);
+const uploadFiles = ref(null) as Ref<File | File[] | null>;
 const tableRows = ref([]) as Ref<Array<ObjectDomain>>;
 const currentFolder = shallowRef('');
+
+const onUpload = (files: File | File[], folderName = '') => {
+  if (files) {
+    uploading.value = true;
+    API.core
+      .ossObject()
+      .upload(bucketName.value, files as File)
+      .then((response) => {
+        const result = response.data as HttpResult<PutObjectResult>;
+        if (result.successful) {
+          if (result.message) {
+            toast.success(result.message);
+          } else {
+            toast.success('操作成功！');
+          }
+          uploading.value = false;
+          uploadFiles.value = null;
+          fetchObjects(bucketName.value, folderName);
+        } else {
+          uploading.value = false;
+          toast.warning('服务端异常！');
+        }
+      })
+      .catch((error) => {
+        uploading.value = false;
+      });
+  }
+};
 
 const fetchObjects = (bucketName: string, folderName = '') => {
   loading.value = true;
