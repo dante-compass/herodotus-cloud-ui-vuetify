@@ -17,11 +17,7 @@
     </template>
 
     <template #item.requestMethod="{ item }">
-      <h-column-swagger
-        :method="item.requestMethod"
-        :url="item.url"
-        :description="item.description"
-      ></h-column-swagger>
+      <h-column-swagger :method="item.requestMethod" :url="item.url" :description="item.description"></h-column-swagger>
     </template>
     <template #item.actions="{ item }">
       <h-action-button
@@ -47,6 +43,7 @@ defineOptions({ name: PAGE_NAME.SYS_ATTRIBUTE });
 const headers = ref([
   { key: 'requestMethod', align: 'center', title: '权限接口' },
   { key: 'attributeCode', align: 'center', title: '默认权限代码' },
+  { key: 'version', align: 'center', title: '版本控制' },
   { key: 'webExpression', align: 'center', title: '特定表达式' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
@@ -54,21 +51,8 @@ const headers = ref([
 
 const rowKey: SysAttributeProps = 'attributeId';
 
-const {
-  loading,
-  pageNumber,
-  pageSize,
-  tableRows,
-  totalPages,
-  totalItems,
-  toEdit,
-  toAuthorize,
-  findItems,
-} = useTable<SysAttributeConditions, SysAttributeEntity>(
-  API.core.sysAttribute(),
-  PAGE_NAME.SYS_ATTRIBUTE,
-  false,
-  ['url'],
-  'ASC',
-);
+const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toEdit, toAuthorize, findItems } = useTable<
+  SysAttributeConditions,
+  SysAttributeEntity
+>(API.core.sysAttribute(), PAGE_NAME.SYS_ATTRIBUTE, false, ['url'], 'ASC');
 </script>

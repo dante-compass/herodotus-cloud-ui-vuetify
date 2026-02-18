@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 0.6.5
+
+### Patch Changes
+
+- [优化] 默认开启 API 版本控制支持，减少用户自己配置出现接口调用异常问题
+- Updated dependencies
+  - @herodotus/core@0.6.5
+
 ## 0.6.4
 
 ### Patch Changes
