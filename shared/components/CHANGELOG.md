@@ -1,5 +1,21 @@
 # @herodotus/components
 
+## 0.6.4
+
+### Patch Changes
+
+- [新增] 新增基于 AWS S3 对象存储的分页支持
+- Updated dependencies
+  - @herodotus/core@0.6.4
+
+## 0.6.3
+
+### Patch Changes
+
+- 新增 OSS 分页处理
+- Updated dependencies
+  - @herodotus/core@0.6.3
+
 ## 0.6.2
 
 ### Patch Changes

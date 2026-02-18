@@ -72,7 +72,7 @@
             <slot name="item.reserved"></slot>
           </template>
 
-          <template #bottom>
+          <template v-if="!$slots.bottom" #bottom>
             <v-container>
               <v-row justify="end">
                 <v-pagination
