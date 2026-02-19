@@ -14,7 +14,7 @@
         <h-binding-table class="mb-4"></h-binding-table>
         <h-passkey-table></h-passkey-table>
       </v-tabs-window-item>
-      <v-tabs-window-item value="realname">
+      <v-tabs-window-item value="realname" class="py-2">
         <v-card flat>
           <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit.</v-card-text>
         </v-card>

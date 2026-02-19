@@ -23,6 +23,7 @@
           <h-action-delete-button @click="onDelete(item[rowKey])"></h-action-delete-button>
         </template>
       </v-data-table-server>
+      <v-divider></v-divider>
     </v-card-text>
     <v-card-text>
       <h-passkey-register-dialog v-model="open" @save="onSave"></h-passkey-register-dialog>

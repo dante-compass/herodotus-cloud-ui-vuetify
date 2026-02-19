@@ -34,6 +34,7 @@
           <h-binding-button :item="item"></h-binding-button>
         </template>
       </v-data-table-server>
+      <v-divider></v-divider>
     </v-card-text>
   </v-card>
 </template>
