@@ -34,10 +34,6 @@
         </v-chip>
       </template>
 
-      <template #item.creationDate="{ value }">
-        {{ defaultFormat(value) }}
-      </template>
-
       <template #item.objectLockEnabled="{ item }">
         <h-column-boolean
           :value="item.objectLockEnabled"
@@ -79,7 +75,7 @@ defineOptions({ name: PAGE_NAME.OSS_BUCKET, components: { HCreateBucketDialog } 
 
 const headers = ref([
   { key: 'bucketName', align: 'center', title: '存储桶名称' },
-  { key: 'creationDate', align: 'center', title: '创建时间' },
+  { key: 'creationDate', align: 'center', title: '创建时间', value: (item) => defaultFormat(item.creationDate) },
   { key: 'doesPublic', align: 'center', title: '访问权限' },
   { key: 'versioning', align: 'center', title: '版本控制状态' },
   { key: 'objectLockEnabled', align: 'center', title: '对象锁定状态' },

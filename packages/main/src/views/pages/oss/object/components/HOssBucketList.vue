@@ -43,6 +43,7 @@ const loading = shallowRef(false);
 const tableRows = ref([]) as Ref<Array<BucketDomain>>;
 
 const fetchAllBuckets = () => {
+  loading.value = true;
   API.core
     .ossBucket()
     .listBuckets()

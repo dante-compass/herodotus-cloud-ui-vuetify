@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" rounded="xl" prepend-icon="mdi-warehouse" title="下设部门">
+  <v-card class="mx-auto" prepend-icon="mdi-warehouse" title="下设部门">
     <v-divider></v-divider>
 
     <v-sheet>

@@ -1,24 +1,7 @@
 <template>
-  <v-dialog v-model="open" max-width="500" persistent>
-    <v-card
-      :disabled="loading"
-      :loading="loading"
-      prepend-icon="mdi-hammer-screwdriver"
-      title="设置对象留存策略"
-      rounded="xl"
-    >
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
-      </template>
-      <v-card-text class="pb-2">
-        <v-switch v-model="editedItem.legalHoldEnabled" label="是否开启对象锁定"></v-switch>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text="取消" color="red" @click="open = !open" />
-        <v-btn text="确认" @click="onSave()" />
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+  <h-dialog v-model="open" prepend-icon="mdi-hammer-screwdriver" title="设置对象留存策略" @confirm="onSave">
+    <v-switch v-model="editedItem.legalHoldEnabled" label="是否开启对象锁定"></v-switch>
+  </h-dialog>
 </template>
 
 <script setup lang="ts">

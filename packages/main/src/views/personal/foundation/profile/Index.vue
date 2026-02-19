@@ -1,9 +1,27 @@
 <template>
-  <div>FOUNDATION_PROFILE</div>
+  <div>
+    <v-card class="mb-4">
+      <v-card-item>
+        <v-tabs v-model="tab" class="font-weight-bold">
+          <v-tab text="基本信息" value="baseinfo"></v-tab>
+        </v-tabs>
+      </v-card-item>
+    </v-card>
+
+    <v-tabs-window v-model="tab">
+      <v-tabs-window-item value="baseinfo">
+        <v-card flat title="基本信息">
+          <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit.</v-card-text>
+        </v-card>
+      </v-tabs-window-item>
+    </v-tabs-window>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.FOUNDATION_PROFILE });
+
+const tab = shallowRef('baseinfo');
 </script>

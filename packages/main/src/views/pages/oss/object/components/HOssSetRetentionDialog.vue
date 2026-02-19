@@ -1,35 +1,18 @@
 <template>
-  <v-dialog v-model="open" max-width="500" persistent>
-    <v-card
-      :disabled="loading"
-      :loading="loading"
-      prepend-icon="mdi-calendar-today"
-      title="设置文件保留策略"
-      rounded="xl"
-    >
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
-      </template>
-      <v-card-text class="pb-2">
-        <v-form ref="setRetentionForm">
-          <h-label title="类型:"></h-label>
-          <h-dictionary-toggle
-            v-model="editedItem.retentionMode"
-            dictionary="ObjectRetentionMode"
-            default-value="COMPLIANCE"
-          ></h-dictionary-toggle>
-          <h-label title="时间:"></h-label>
-          <h-date
-            v-model="editedItem.retainUntilDate"
-            :rules="[(v: string) => !!v || '到期时间不能为空，请输入到期时间！']"
-          ></h-date>
-        </v-form>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text="取消" color="red" @click="open = !open" />
-        <v-btn text="确认" @click="onSave()" />
-      </v-card-actions>
-    </v-card>
+  <v-dialog v-model="open" prepend-icon="mdi-calendar-today" title="设置文件保留策略" @confirm="onSave">
+    <v-form ref="setRetentionForm">
+      <h-label title="类型:"></h-label>
+      <h-dictionary-toggle
+        v-model="editedItem.retentionMode"
+        dictionary="ObjectRetentionMode"
+        default-value="COMPLIANCE"
+      ></h-dictionary-toggle>
+      <h-label title="时间:"></h-label>
+      <h-date
+        v-model="editedItem.retainUntilDate"
+        :rules="[(v: string) => !!v || '到期时间不能为空，请输入到期时间！']"
+      ></h-date>
+    </v-form>
   </v-dialog>
 </template>
 

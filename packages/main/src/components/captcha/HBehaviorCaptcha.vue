@@ -10,10 +10,10 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-container fluid class="pt-0">
+      <v-container fluid>
         <v-row>
           <v-col>
-            <v-card class="pa-2">
+            <v-card rounded="md" class="pa-2" border flat>
               <component
                 :is="type"
                 :schema="schema"

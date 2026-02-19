@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="mx-auto mb-4" rounded="xl" title="设置文件属性">
+    <v-card class="mx-auto mb-4" title="设置文件属性">
       <template #prepend>
         <h-button icon="mdi-arrow-left-box" tooltip="返回" variant="text" @click="onFinish()"></h-button>
       </template>
@@ -9,8 +9,8 @@
     <v-container class="pa-0">
       <v-row>
         <v-col xl="2" lg="2" md="4" sm="6" xs="12">
-          <v-sheet rounded="xl">
-            <v-card :disabled="loading" :loading="loading" rounded="xl" :subtitle="currentObjectName">
+          <v-sheet>
+            <v-card :disabled="loading" :loading="loading" :subtitle="currentObjectName">
               <template v-slot:loader="{ isActive }">
                 <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
               </template>

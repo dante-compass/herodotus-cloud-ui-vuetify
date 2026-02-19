@@ -43,14 +43,9 @@
         @update:model-value="onUpload"
         max-width="300px"
         :clearable="false"
-        rounded="xl"
         show-size
         :loading="uploading"
       ></v-file-input>
-    </template>
-
-    <template #item.lastModified="{ value }">
-      {{ defaultFormat(value) }}
     </template>
 
     <template #item.objectName="{ item }">
@@ -58,10 +53,6 @@
         {{ displayedObjectName(item.objectName) }}
       </v-btn>
       <template v-else>{{ displayedObjectName(item.objectName) }}</template>
-    </template>
-
-    <template #item.size="{ value }">
-      {{ humanObjectSize(value) }}
     </template>
 
     <template #item.actions="{ item }">
@@ -129,8 +120,8 @@ const bucketName = defineModel<string>({
 const headers = ref([
   { key: 'objectName', align: 'center', title: '文件(Object)名' },
   { key: 'eTag', align: 'center', title: 'ETAG' },
-  { key: 'size', align: 'center', title: '文件(Object)大小' },
-  { key: 'lastModified', align: 'center', title: '最后更新时间' },
+  { key: 'size', align: 'center', title: '文件(Object)大小', value: (item) => humanObjectSize(item.size) },
+  { key: 'lastModified', align: 'center', title: '最后更新时间', value: (item) => defaultFormat(item.lastModified) },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 

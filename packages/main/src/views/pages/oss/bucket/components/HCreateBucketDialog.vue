@@ -1,34 +1,29 @@
 <template>
-  <v-dialog v-model="openDialog" max-width="500" persistent @after-leave="clean">
-    <v-card :disabled="loading" :loading="loading" prepend-icon="mdi-memory-arrow-down" title="新建存储桶" rounded="xl">
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
-      </template>
-      <v-card-text class="pb-2">
-        <v-form ref="createBucketForm">
-          <v-text-field
-            v-model="editedItem.bucketName"
-            label="存储桶名称"
-            placeholder="请输入存储桶名称"
-            clearable
-            density="compact"
-            class="mt-2"
-            :rules="[
-              (v) => !!v || '存储桶不能为空，请输入新密码！',
-              (v) => regxRule(v) || '存储桶名称只能为小字母、数字、点或横线，最多60个字符',
-            ]"
-          ></v-text-field>
-          <h-label title="功能:"></h-label>
-          <v-divider></v-divider>
-          <v-switch v-model="editedItem.objectLockEnabled" label="是否开启对象锁定"></v-switch>
-        </v-form>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text="取消" color="red" @click="openDialog = !openDialog" />
-        <v-btn text="确认" @click="onSave()" />
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+  <h-dialog
+    v-model="openDialog"
+    prepend-icon="mdi-memory-arrow-down"
+    title="新建存储桶"
+    @confirm="onSave"
+    @after-leave="clean"
+  >
+    <v-form ref="createBucketForm">
+      <v-text-field
+        v-model="editedItem.bucketName"
+        label="存储桶名称"
+        placeholder="请输入存储桶名称"
+        clearable
+        density="compact"
+        class="mt-2"
+        :rules="[
+          (v) => !!v || '存储桶不能为空，请输入新密码！',
+          (v) => regxRule(v) || '存储桶名称只能为小字母、数字、点或横线，最多60个字符',
+        ]"
+      ></v-text-field>
+      <h-label title="功能:"></h-label>
+      <v-divider></v-divider>
+      <v-switch v-model="editedItem.objectLockEnabled" label="是否开启对象锁定"></v-switch>
+    </v-form>
+  </h-dialog>
 </template>
 
 <script setup lang="ts">

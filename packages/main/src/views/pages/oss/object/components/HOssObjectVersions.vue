@@ -1,5 +1,5 @@
 <template>
-  <v-card rounded="xl" prepend-icon="mdi-layers-triple" :title="objectName">
+  <v-card prepend-icon="mdi-layers-triple" :title="objectName">
     <v-card-text>
       <v-data-iterator :items="tableRows" :loading="loading">
         <template #no-data>NO Date</template>

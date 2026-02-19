@@ -11,7 +11,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <v-card rounded="xl" :flat="flat">
+    <v-card :flat="flat">
       <v-card-title class="d-flex align-center my-2">
         <slot name="control"></slot>
         <v-spacer></v-spacer>
