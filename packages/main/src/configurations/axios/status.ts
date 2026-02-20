@@ -62,6 +62,7 @@ const statusCode = (axiosInstance: AxiosInstance, response?: AxiosResponse<any>,
       case 408:
         break;
       case 412:
+        notify.warning(content, detail);
         break;
       case 500:
         if (content) {
@@ -97,7 +98,7 @@ export const processor = (axiosInstance: AxiosInstance, error: AxiosError) => {
 
   switch (code) {
     case 'ECONNABORTED':
-      SignOutUtilities.getInstance().tokenExpires('网络错误!', '响应超时，请稍后再试！', 'error');
+      SignOutUtilities.getInstance().tokenExpires('网络错误!', '后端服务无法访问或者尚未启动，请稍后再试！', 'error');
       break;
     case 'ERR_NETWORK':
       SignOutUtilities.getInstance().tokenExpires('网络错误!', '系统响应超时，请稍后再试！', 'error', true);

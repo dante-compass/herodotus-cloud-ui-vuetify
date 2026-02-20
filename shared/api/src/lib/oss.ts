@@ -8,6 +8,7 @@ import type {
   DeleteObjectArgument,
   DeleteObjectsArgument,
   ListObjectsV2Argument,
+  ListObjectVersionsArgument,
   GetObjectAttributesArgument,
   GetObjectArgument,
   PutBucketPolicyArgument,
@@ -17,8 +18,9 @@ import type {
   DeleteBucketResult,
   DeleteObjectResult,
   DeleteObjectsResult,
-  ListObjectsV2Result,
   ListBucketDetailsResult,
+  ListObjectsV2Result,
+  ListObjectVersionsResult,
   PutObjectResult,
   GetObjectAttributesResult,
   PutBucketPolicyResult,
@@ -109,7 +111,7 @@ class ObjectService extends Service {
     return this.getBaseAddress() + '/display';
   }
 
-  private getUploadAddress(): string {
+  public getUploadAddress(): string {
     return this.getBaseAddress() + '/upload';
   }
 
@@ -125,6 +127,10 @@ class ObjectService extends Service {
     return this.getBaseAddress() + '/retention';
   }
 
+  private getListVersionsAddress(): string {
+    return this.getBaseAddress() + '/versions';
+  }
+
   public listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>> {
     return this.getConfig().getHttp().get<ListObjectsV2Result, ListObjectsV2Argument>(this.getListV2Address(), request);
   }
@@ -138,17 +144,23 @@ class ObjectService extends Service {
     file: File,
     onProgress?: (progressEvent: AxiosProgressEvent) => void,
   ): Promise<AxiosHttpResult<PutObjectResult>> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('bucketName', bucketName);
     if (onProgress) {
       return this.getConfig()
         .getHttp()
         .post<
           PutObjectResult,
-          any
-        >(this.getUploadAddress(), { bucketName: bucketName, file: file }, { contentType: ContentTypeEnum.JSON }, { onUploadProgress: onProgress });
+          FormData
+        >(this.getUploadAddress(), formData, { contentType: ContentTypeEnum.MULTI_PART }, { onUploadProgress: onProgress });
     } else {
       return this.getConfig()
         .getHttp()
-        .post<PutObjectResult, any>(this.getUploadAddress(), { bucketName: bucketName, file: file });
+        .post<
+          PutObjectResult,
+          FormData
+        >(this.getUploadAddress(), formData, { contentType: ContentTypeEnum.MULTI_PART });
     }
   }
 
@@ -201,6 +213,12 @@ class ObjectService extends Service {
     return this.getConfig()
       .getHttp()
       .put<PutObjectRetentionResult, PutObjectRetentionArgument>(this.getRetentionAddress(), request);
+  }
+
+  public listObjectVersions(request: ListObjectVersionsArgument): Promise<AxiosHttpResult<ListObjectVersionsResult>> {
+    return this.getConfig()
+      .getHttp()
+      .get<ListObjectVersionsResult, ListObjectVersionsArgument>(this.getListVersionsAddress(), request);
   }
 }
 

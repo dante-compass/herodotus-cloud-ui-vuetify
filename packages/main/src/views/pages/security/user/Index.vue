@@ -31,15 +31,9 @@
           tooltip="设置/修改密码"
           @click="onChangePassword(item)"
         ></h-action-button>
-        <h-action-authorize-button
-          tooltip="配置角色"
-          @click="toAuthorize(item)"
-        ></h-action-authorize-button>
+        <h-action-authorize-button tooltip="配置角色" @click="toAuthorize(item)"></h-action-authorize-button>
         <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-        <h-action-delete-button
-          v-if="!item.reserved"
-          @click="deleteItemById(item[rowKey])"
-        ></h-action-delete-button>
+        <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
       </template>
     </h-data-table>
     <change-password-dialog
@@ -107,6 +101,7 @@ const store = useAuthenticationStore();
 const onChangePassword = (item: SysUserEntity) => {
   showChangePasswordDialog.value = true;
   currentUserId.value = item.userId;
+  currentUsername.value = item.username;
 };
 
 const onSendMessageToUser = (item: SysUserEntity) => {

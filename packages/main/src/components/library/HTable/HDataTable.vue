@@ -11,7 +11,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <v-card rounded="xl" :flat="flat">
+    <v-card :flat="flat">
       <v-card-title class="d-flex align-center my-2">
         <slot name="control"></slot>
         <v-spacer></v-spacer>
@@ -26,6 +26,10 @@
           @click="toggle()"
         ></h-action-button>
       </v-card-title>
+
+      <div class="d-flex py-3 justify-space-between">
+        <slot name="extends"></slot>
+      </div>
 
       <v-card-text>
         <v-data-table-server
@@ -68,7 +72,7 @@
             <slot name="item.reserved"></slot>
           </template>
 
-          <template #bottom>
+          <template v-if="!$slots.bottom" #bottom>
             <v-container>
               <v-row justify="end">
                 <v-pagination

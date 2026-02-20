@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" rounded="xl" prepend-icon="mdi-domain" title="单位列表">
+  <v-card class="mx-auto" prepend-icon="mdi-domain" title="单位列表">
     <v-divider inset></v-divider>
 
     <v-sheet class="pa-4">
@@ -65,8 +65,7 @@ const activated = computed({
   },
 });
 
-const { treeItems, conditions, loading } = useTreeItem<
-  SysOrganizationConditions,
-  SysOrganizationEntity
->(API.core.sysOrganization());
+const { treeItems, conditions, loading } = useTreeItem<SysOrganizationConditions, SysOrganizationEntity>(
+  API.core.sysOrganization(),
+);
 </script>

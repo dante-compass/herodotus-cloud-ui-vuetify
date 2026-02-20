@@ -1,5 +1,5 @@
 <template>
-  <v-card rounded="xl">
+  <v-card>
     <v-list lines="two">
       <v-list-item>
         <v-list-item-title class="text-h6">

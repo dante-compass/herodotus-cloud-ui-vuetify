@@ -1,26 +1,13 @@
 <template>
-  <v-dialog v-model="openDialog" max-width="500" persistent>
-    <v-card prepend-icon="mdi-email-edit" :title="`向【${name}】发送消息`" rounded="xl">
-      <template #append>
-        <h-button
-          icon="mdi-close"
-          tooltip="关闭"
-          @click="onCloseDialog"
-          size="x-small"
-          variant="text"
-        ></h-button>
-      </template>
-      <v-card-text>
-        <h-send-message-textarea
-          :receiver-id="id"
-          :receiver-name="name"
-          :dialogue-id="dialogueId"
-          :receiver-avatar="avatar"
-          @send="onCloseDialog"
-        ></h-send-message-textarea>
-      </v-card-text>
-    </v-card>
-  </v-dialog>
+  <h-dialog v-model="openDialog" prepend-icon="mdi-email-edit" :title="`向【${name}】发送消息`" closed hide-actions>
+    <h-send-message-textarea
+      :receiver-id="id"
+      :receiver-name="name"
+      :dialogue-id="dialogueId"
+      :receiver-avatar="avatar"
+      @send="onCloseDialog"
+    ></h-send-message-textarea>
+  </h-dialog>
 </template>
 
 <script setup lang="ts">

@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex mb-3 w-100">
     <div class="flex-1-1-0">
-      <v-label :text="title" class="mb-1 font-weight-medium">
+      <v-label :text="title" class="my-1 font-weight-medium">
         <slot name="title"></slot>
       </v-label>
       <v-messages v-if="showMessage" :messages="text" :active="showMessage" />

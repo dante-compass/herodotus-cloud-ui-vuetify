@@ -1,14 +1,7 @@
 <template>
   <v-card class="px-12" flat>
     <v-card-text class="ma-4">
-      <v-alert
-        v-if="prompt"
-        border="start"
-        type="error"
-        variant="outlined"
-        density="compact"
-        class="mb-4"
-      >
+      <v-alert v-if="prompt" border="start" type="error" variant="outlined" density="compact" class="mb-4">
         {{ promptMessage }}
       </v-alert>
       <v-form ref="loginForm">
@@ -43,13 +36,7 @@
               ></v-text-field>
             </v-col>
             <v-col cols="4">
-              <h-button
-                v-if="showPrompt"
-                size="x-large"
-                block
-                :disabled="!mobile"
-                @click="onGetVerificationCode()"
-              >
+              <h-button v-if="showPrompt" size="x-large" block :disabled="!mobile" @click="onGetVerificationCode()">
                 获取验证码
               </h-button>
               <h-button v-else size="x-large" disabled readonly block>{{ readSeconds }}</h-button>
@@ -67,10 +54,7 @@
       >
         登录
       </h-button>
-      <h-behavior-captcha
-        v-model="isShowCaptcha"
-        @verify="onCaptchaVerify($event)"
-      ></h-behavior-captcha>
+      <h-behavior-captcha v-model="isShowCaptcha" @verify="onCaptchaVerify($event)"></h-behavior-captcha>
 
       <h-text-divider label="OR"></h-text-divider>
 
@@ -103,8 +87,7 @@ defineOptions({ name: 'MobilePanel', components: { SocialSignInList } });
 
 const loginForm = ref();
 
-const { smsSignIn, passkeySignIn, onResetError, isSubmittingProtected, prompt, promptMessage } =
-  useSignIn();
+const { smsSignIn, passkeySignIn, onResetError, isSubmittingProtected, prompt, promptMessage } = useSignIn();
 
 const mobile = shallowRef('');
 const verificationCode = shallowRef('');

@@ -1,20 +1,7 @@
 <template>
-  <div>ApplicationContent</div>
+  <div>ApplicationAuthorize</div>
 </template>
 
 <script setup lang="ts">
-import type { SysAttributeEntity } from '@herodotus/api';
-
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
-
 defineOptions({ name: 'OssObjectAuthorize' });
-
-const { editedItem, operation, title, saveOrUpdate } = useTableItem<SysAttributeEntity>(
-  API.core.sysAttribute(),
-);
-
-const onSave = () => {
-  saveOrUpdate();
-};
 </script>

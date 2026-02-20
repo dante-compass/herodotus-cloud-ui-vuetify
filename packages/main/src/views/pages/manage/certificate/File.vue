@@ -46,7 +46,7 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { isEmpty } from 'lodash-es';
 
-import { useTable, useDictionary, useOssDownload } from '@/composables/hooks';
+import { useTable, useDictionary, useOss } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'MgtCertificateFile' });
@@ -70,7 +70,7 @@ const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, delete
 >(API.core.mgtCertificateFile(), PAGE_NAME.MGT_CERTIFICATE);
 
 const { getDictionaryItemDisplay } = useDictionary('CertificateCategory', 'CertificateFileCategory');
-const { download, loadProgress, showProgress } = useOssDownload();
+const { download, loadProgress, showProgress } = useOss();
 
 const onDownload = (item: MgtCertificateFileResponse) => {
   if (!isEmpty(item)) {

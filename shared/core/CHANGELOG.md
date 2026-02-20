@@ -1,5 +1,41 @@
 # @herodotus/core
 
+## 0.7.0
+
+### Minor Changes
+
+- 版本发布
+
+## 0.6.5
+
+### Patch Changes
+
+- [优化] 默认开启 API 版本控制支持，减少用户自己配置出现接口调用异常问题
+
+## 0.6.4
+
+### Patch Changes
+
+- [新增] 新增基于 AWS S3 对象存储的分页支持
+
+## 0.6.3
+
+### Patch Changes
+
+- 新增 OSS 分页处理
+
+## 0.6.2
+
+### Patch Changes
+
+- 开放 OSS 上传 API 地址
+
+## 0.6.1
+
+### Patch Changes
+
+- 对象管理 API 和类型定义完成
+
 ## 0.6.0
 
 ### Minor Changes

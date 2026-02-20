@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-from-layout :title="title" :overlay="overlay">
+  <h-authorize-form-layout :title="title" :overlay="overlay">
     <v-container>
       <v-row>
         <v-col cols="2"></v-col>
@@ -132,7 +132,7 @@
         @update:options="findItems"
       ></v-data-table-server>
     </template>
-  </h-authorize-from-layout>
+  </h-authorize-form-layout>
 </template>
 
 <script setup lang="ts">

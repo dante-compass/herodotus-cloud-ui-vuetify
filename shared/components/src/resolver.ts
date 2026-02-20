@@ -4,6 +4,7 @@ const components = [
   'HButton',
   'HDate',
   'HDateTime',
+  'HDialog',
   'HDuration',
   'HMdiIconSelect',
   'HParticles',

@@ -37,6 +37,9 @@ const vuetify = createVuetify({
     VBtnToggle: {
       color: 'primary',
     },
+    VCard: {
+      rounded: 'xl',
+    },
   },
 
   theme: {

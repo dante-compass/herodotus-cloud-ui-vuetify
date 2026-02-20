@@ -1,57 +1,37 @@
 <template>
-  <v-dialog v-model="openDialog" max-width="500" persistent>
-    <v-card
-      :disabled="loading"
-      :loading="loading"
-      prepend-icon="mdi-key-chain"
-      :title="`设置/修改【${username}】密码`"
-      rounded="xl"
-    >
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
-      </template>
-      <v-divider></v-divider>
-      <v-card-text class="pb-2">
-        <v-form ref="changePasswordForm">
-          <v-text-field
-            v-model="newPassword"
-            label="新密码"
-            placeholder="请输入新密码"
-            clearable
-            density="compact"
-            class="mt-2"
-            :append-inner-icon="newPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
-            :type="newPasswordVisible ? 'text' : 'password'"
-            :rules="[
-              (v) => !!v || '新密码不能为空，请输入新密码！',
-              (v) =>
-                regxRule(v) || '密码中必须包含大小字母、数字、特称字符，至少8个字符，最多30个字符',
-            ]"
-          ></v-text-field>
-          <v-text-field
-            v-model="confirmPassword"
-            label="确认密码"
-            placeholder="请再次输入新密码"
-            clearable
-            :append-inner-icon="confirmPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
-            :type="confirmPasswordVisible ? 'text' : 'password'"
-            density="compact"
-            class="mt-2"
-            :rules="[
-              (v) => !!v || '确认密码不能为空，请输入确认密码！',
-              (v) =>
-                regxRule(v) || '密码中必须包含大小字母、数字、特称字符，至少8个字符，最多30个字符',
-              (v) => sameAs(v) || '两次输入密码不一致',
-            ]"
-          ></v-text-field>
-        </v-form>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text="取消" color="red" @click="openDialog = !openDialog" />
-        <v-btn text="确认" @click="onSave()" />
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+  <h-dialog v-model="openDialog" prepend-icon="mdi-key-chain" :title="`设置/修改【${username}】密码`" @confirm="onSave">
+    <v-form ref="changePasswordForm">
+      <v-text-field
+        v-model="newPassword"
+        label="新密码"
+        placeholder="请输入新密码"
+        clearable
+        density="compact"
+        class="mt-2"
+        :append-inner-icon="newPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="newPasswordVisible ? 'text' : 'password'"
+        :rules="[
+          (v) => !!v || '新密码不能为空，请输入新密码！',
+          (v) => regxRule(v) || '密码中必须包含大小字母、数字、特称字符，至少8个字符，最多30个字符',
+        ]"
+      ></v-text-field>
+      <v-text-field
+        v-model="confirmPassword"
+        label="确认密码"
+        placeholder="请再次输入新密码"
+        clearable
+        :append-inner-icon="confirmPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
+        :type="confirmPasswordVisible ? 'text' : 'password'"
+        density="compact"
+        class="mt-2"
+        :rules="[
+          (v) => !!v || '确认密码不能为空，请输入确认密码！',
+          (v) => regxRule(v) || '密码中必须包含大小字母、数字、特称字符，至少8个字符，最多30个字符',
+          (v) => sameAs(v) || '两次输入密码不一致',
+        ]"
+      ></v-text-field>
+    </v-form>
+  </h-dialog>
 </template>
 
 <script setup lang="ts">
@@ -97,9 +77,7 @@ const onSave = async () => {
   const { valid } = await changePasswordForm.value.validate();
   if (valid) {
     loading.value = true;
-    const password = VARIABLES.isUseCrypto()
-      ? crypto.encrypt(confirmPassword.value)
-      : confirmPassword.value;
+    const password = VARIABLES.isUseCrypto() ? crypto.encrypt(confirmPassword.value) : confirmPassword.value;
     API.core
       .sysUser()
       .changePassword(props.userId, password)

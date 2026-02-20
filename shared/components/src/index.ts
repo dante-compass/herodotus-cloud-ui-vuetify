@@ -2,6 +2,7 @@ import type { App } from 'vue';
 
 import { HButton } from './HButton';
 import { HDate, HDateTime, HDuration, HTime } from './HDateTime';
+import { HDialog } from './HDialog';
 import { HParticles } from './HParticles';
 import { HLabel } from './HLabel';
 import { HMdiIconSelect, HTreeSelect } from './HSelect';
@@ -11,6 +12,7 @@ const components = [
   HButton,
   HDate,
   HDateTime,
+  HDialog,
   HDuration,
   HTime,
   HMdiIconSelect,
@@ -28,6 +30,7 @@ export {
   HButton,
   HDate,
   HDateTime,
+  HDialog,
   HDuration,
   HMdiIconSelect,
   HParticles,

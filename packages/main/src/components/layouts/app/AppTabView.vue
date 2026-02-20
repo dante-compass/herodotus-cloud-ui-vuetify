@@ -1,5 +1,5 @@
 <template>
-  <v-card rounded="xl" class="ma-4">
+  <v-card class="ma-4">
     <v-card-item>
       <v-tabs>
         <v-tab

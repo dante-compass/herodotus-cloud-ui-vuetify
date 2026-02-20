@@ -1,63 +1,52 @@
 <template>
-  <v-dialog v-model="openDialog" max-width="500" persistent @after-leave="clean">
-    <v-card
-      :disabled="loading"
-      :loading="loading"
-      prepend-icon="mdi-memory-arrow-down"
-      title="设置下载证书格式"
-      rounded="xl"
-    >
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
-      </template>
-      <v-card-text class="pb-2">
-        <h-label title="证书类别:"></h-label>
-        <h-dictionary-toggle
-          v-model="editedItem.certificateFileCategory"
-          dictionary="CertificateFileCategory"
-          default-value="KEY_STORE"
-        ></h-dictionary-toggle>
-        <v-divider class="mb-4"></v-divider>
-        <template v-if="showKeyStore">
-          <h-label title="KeyStore 文件格式:"></h-label>
-          <h-dictionary-toggle
-            v-model="editedItem.keyStoreFormat"
-            dictionary="KeyStoreFormat"
-            default-value="JKS"
-          ></h-dictionary-toggle>
-          <h-label title="KeyStore 类别:"></h-label>
-          <h-dictionary-select
-            v-model="editedItem.keyStoreCategory"
-            dictionary="KeyStoreCategory"
-            density="compact"
-          ></h-dictionary-select>
-        </template>
-        <template v-if="showPrivateKey">
-          <h-label title="私钥文件格式:"></h-label>
-          <h-dictionary-toggle
-            v-model="editedItem.pemPrivateKeyFormat"
-            dictionary="PEMPrivateKeyFormat"
-            default-value="KEY"
-          ></h-dictionary-toggle>
+  <h-dialog
+    v-model="openDialog"
+    prepend-icon="mdi-memory-arrow-down"
+    title="设置下载证书格式"
+    @confirm="onSave"
+    @after-leave="clean"
+  >
+    <h-label title="证书类别:"></h-label>
+    <h-dictionary-toggle
+      v-model="editedItem.certificateFileCategory"
+      dictionary="CertificateFileCategory"
+      default-value="KEY_STORE"
+    ></h-dictionary-toggle>
+    <v-divider class="mb-4"></v-divider>
+    <template v-if="showKeyStore">
+      <h-label title="KeyStore 文件格式:"></h-label>
+      <h-dictionary-toggle
+        v-model="editedItem.keyStoreFormat"
+        dictionary="KeyStoreFormat"
+        default-value="JKS"
+      ></h-dictionary-toggle>
+      <h-label title="KeyStore 类别:"></h-label>
+      <h-dictionary-select
+        v-model="editedItem.keyStoreCategory"
+        dictionary="KeyStoreCategory"
+        density="compact"
+      ></h-dictionary-select>
+    </template>
+    <template v-if="showPrivateKey">
+      <h-label title="私钥文件格式:"></h-label>
+      <h-dictionary-toggle
+        v-model="editedItem.pemPrivateKeyFormat"
+        dictionary="PEMPrivateKeyFormat"
+        default-value="KEY"
+      ></h-dictionary-toggle>
 
-          <v-switch v-model="editedItem.encryptPrivateKey" label="是否加密 PEM 中存储的私钥"></v-switch>
-        </template>
-        <template v-if="showCertificate">
-          <h-label title="证书文件格式:"></h-label>
-          <h-dictionary-toggle
-            class="mb-md"
-            v-model="editedItem.pemCertificateFormat"
-            dictionary="PEMCertificateFormat"
-            default-value="CRT"
-          ></h-dictionary-toggle>
-        </template>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text="取消" color="red" @click="openDialog = !openDialog" />
-        <v-btn text="确认" @click="onSave()" />
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+      <v-switch v-model="editedItem.encryptPrivateKey" label="是否加密 PEM 中存储的私钥"></v-switch>
+    </template>
+    <template v-if="showCertificate">
+      <h-label title="证书文件格式:"></h-label>
+      <h-dictionary-toggle
+        class="mb-md"
+        v-model="editedItem.pemCertificateFormat"
+        dictionary="PEMCertificateFormat"
+        default-value="CRT"
+      ></h-dictionary-toggle>
+    </template>
+  </h-dialog>
   <h-oss-download-progress v-model="showProgress" :progress="loadProgress"></h-oss-download-progress>
 </template>
 
@@ -67,7 +56,7 @@ import type { MgtCertificateFileRequest, MgtCertificateFileResponse } from '@her
 import { toast } from '@herodotus/core';
 
 import { API } from '@/configurations';
-import { useOssDownload } from '@/composables/hooks';
+import { useOss } from '@/composables/hooks';
 
 defineOptions({ name: 'HDownloadCertificateDialog' });
 
@@ -85,7 +74,7 @@ const openDialog = defineModel({
 
 const loading = shallowRef(false);
 
-const { download, loadProgress, showProgress } = useOssDownload();
+const { download, loadProgress, showProgress } = useOss();
 
 const editedItem = ref({}) as Ref<MgtCertificateFileRequest>;
 

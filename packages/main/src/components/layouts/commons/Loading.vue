@@ -2,7 +2,7 @@
   <v-container class="fill-height" fluid>
     <v-row justify="center" align="center" style="height: 100vh">
       <v-col cols="12" sm="8" md="6" lg="4" align-self="center">
-        <v-card class="py-12" flat rounded="xl">
+        <v-card class="py-12" flat>
           <v-card-text class="text-center">
             <v-progress-circular
               :size="70"

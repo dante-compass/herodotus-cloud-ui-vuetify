@@ -7,7 +7,7 @@ import { useAuthenticationStore } from '@herodotus/framework';
 import { API } from '@/configurations';
 import { useNotificationStore } from '../../stores';
 
-export default function useNotifications(category: NotificationCategoryEnum) {
+export default function useNotifications() {
   const sort: Sort = { direction: 'DESC', properties: ['createTime'] };
   const notificationStore = useNotificationStore();
 
@@ -15,11 +15,10 @@ export default function useNotifications(category: NotificationCategoryEnum) {
   const totalPages = shallowRef(0);
   const tableRows = ref<NotificationEntity[]>([]);
 
-  const { hasDialogue, hasAnnouncement, totalCount, dialogueCount, announcementCount } =
-    storeToRefs(notificationStore);
+  const { hasDialogue, hasAnnouncement, totalCount, dialogueCount, announcementCount } = storeToRefs(notificationStore);
   const authenticationStore = useAuthenticationStore();
 
-  const findItemsByPage = (pageNumber: number, pageSize: number) => {
+  const findItemsByPage = (category: NotificationCategoryEnum, pageNumber: number, pageSize: number) => {
     API.core
       .notification()
       .fetchByPage(
@@ -53,12 +52,16 @@ export default function useNotifications(category: NotificationCategoryEnum) {
       });
   };
 
-  const findByCategory = () => {
-    findItemsByPage(1, 5);
+  const findByCategory = (category: NotificationCategoryEnum, pageNumber = 1, pageSize = 5) => {
+    findItemsByPage(category, pageNumber, pageSize);
   };
 
   const convertDate = (date: Date): string => {
     return moment(date).fromNow();
+  };
+
+  const setAllRead = () => {
+    notificationStore.setAllRead();
   };
 
   return {
@@ -70,5 +73,6 @@ export default function useNotifications(category: NotificationCategoryEnum) {
     announcementCount,
     convertDate,
     findByCategory,
+    setAllRead,
   };
 }

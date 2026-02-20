@@ -16,12 +16,7 @@
       </template>
     </v-list-item>
   </v-list>
-  <v-empty-state
-    v-else
-    icon="mdi-message-text-outline"
-    title="暂没有新消息"
-    class="my-4"
-  ></v-empty-state>
+  <v-empty-state v-else icon="mdi-message-text-outline" title="暂没有新消息" class="my-4"></v-empty-state>
 </template>
 
 <script setup lang="ts">
@@ -30,11 +25,9 @@ import { useNotifications } from '@/composables/hooks';
 
 defineOptions({ name: 'NotificationAnnouncement' });
 
-const { tableRows, hasAnnouncement, convertDate, findByCategory } = useNotifications(
-  NotificationCategoryEnum.ANNOUNCEMENT,
-);
+const { tableRows, hasAnnouncement, convertDate, findByCategory } = useNotifications();
 
 onMounted(() => {
-  findByCategory();
+  findByCategory(NotificationCategoryEnum.ANNOUNCEMENT);
 });
 </script>

@@ -1,37 +1,36 @@
 <template>
-  <v-list
-    v-model:activated="active"
-    :lines="false"
-    :items="menuItems"
-    active-strategy="single-leaf"
-    open-strategy="list"
-    select-strategy="classic"
-    item-props
-    activatable
-    mandatory
-    slim
-    nav
-    density="comfortable"
-    active-class="active_item_border"
-  >
-    <template #header="{ props }">
-      <v-list-item v-bind="props" class="rounded-e-xl"></v-list-item>
-    </template>
-    <template #item="{ props }">
-      <v-list-item v-bind="props" class="rounded-e-xl"></v-list-item>
-    </template>
+  <v-card>
+    <v-list
+      v-model:activated="active"
+      :lines="false"
+      :items="menuItems"
+      active-strategy="single-leaf"
+      open-strategy="list"
+      select-strategy="classic"
+      item-props
+      activatable
+      mandatory
+      slim
+      nav
+      density="comfortable"
+      active-class="active_item_border"
+    >
+      <template #header="{ props }">
+        <v-list-item v-bind="props" class="rounded-e-xl"></v-list-item>
+      </template>
+      <template #item="{ props }">
+        <v-list-item v-bind="props" class="rounded-e-xl"></v-list-item>
+      </template>
 
-    <template #subheader="{ props: subheaderProps }">
-      <slot name="subheader" v-bind="{ subheaderProps }" />
+      <template #subheader="{ props: subheaderProps }">
+        <slot name="subheader" v-bind="{ subheaderProps }" />
 
-      <v-list-subheader
-        v-if="!$slots.subheader"
-        class="text-high-emphasis text-uppercase font-weight-black"
-      >
-        {{ subheaderProps.title }}
-      </v-list-subheader>
-    </template>
-  </v-list>
+        <v-list-subheader v-if="!$slots.subheader" class="text-high-emphasis text-uppercase font-weight-black">
+          {{ subheaderProps.title }}
+        </v-list-subheader>
+      </template>
+    </v-list>
+  </v-card>
 </template>
 
 <script lang="ts" setup>
