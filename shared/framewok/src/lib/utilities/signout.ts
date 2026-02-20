@@ -2,7 +2,7 @@ import type { SweetAlertIcon, SweetAlertResult } from '@herodotus/core';
 import { notify } from '@herodotus/core';
 import { RouterUtilities } from './router';
 
-import { useCryptoStore, useAuthenticationStore } from '../stores';
+import { useCryptoStore, useAuthenticationStore, useElementStore } from '../stores';
 
 export class SignOutUtilities {
   // 静态私有实例引用
@@ -53,6 +53,7 @@ export class SignOutUtilities {
     console.log('Clear Framework Kernel Data');
     useAuthenticationStore().$reset();
     useCryptoStore().$reset();
+    useElementStore().$reset();
 
     RouterUtilities.getInstance().toSignIn();
   }

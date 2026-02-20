@@ -75,11 +75,7 @@ class Notify {
     this.theme = convertThemeType(newTheme);
   }
 
-  public information(
-    title: string,
-    text: string,
-    icon: SweetAlertIcon,
-  ): Promise<SweetAlertResult<string>> {
+  public information(title: string, text: string, icon: SweetAlertIcon): Promise<SweetAlertResult<string>> {
     return Swal.fire({
       title: title,
       text: text,
@@ -165,12 +161,7 @@ class Notify {
     });
   }
 
-  public tokenExpiresNotify(
-    title: string,
-    text: string,
-    icon: SweetAlertIcon,
-    onClose: () => void,
-  ): void {
+  public tokenExpiresNotify(title: string, text: string, icon: SweetAlertIcon, onClose: () => void): void {
     Swal.fire({
       title: title,
       text: text,

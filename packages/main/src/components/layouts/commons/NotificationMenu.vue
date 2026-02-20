@@ -70,7 +70,7 @@ defineOptions({
 
 const tab = shallowRef('dialogue');
 
-const { totalCount, dialogueCount, announcementCount, setAllRead } = useNotifications(false);
+const { totalCount, dialogueCount, announcementCount, setAllRead } = useNotifications();
 const { connect, disconnect } = useWebSocketMessage();
 
 onMounted(() => {
