@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 0.7.1
+
+### Patch Changes
+
+- [优化] 优化前端请求 Canceler 缓存 Key 配置异常问题
+
 ## 0.7.0
 
 ### Minor Changes

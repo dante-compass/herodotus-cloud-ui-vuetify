@@ -32,7 +32,7 @@
     "lodash-es": "^4.17.23",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
-    "vue": "^3.5.28",
+    "vue": "^3.5.29",
     "vuetify": "^4.0.0"
   },
   "devDependencies": {
