@@ -21,6 +21,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         density: import('vuetify/lib/composables/density.mjs').Density;
         tile: boolean;
         hideSpinButtons: boolean;
+        indentDetails: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
         clearable: boolean;
@@ -163,6 +164,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             centerAffix: boolean;
             glow: boolean;
             hideSpinButtons: boolean;
+            indentDetails: boolean;
             persistentHint: boolean;
             messages: string | readonly string[];
             direction: "horizontal" | "vertical";
@@ -197,12 +199,13 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             hideDetails?: "auto" | boolean | undefined;
             hideSpinButtons: boolean;
             hint?: string | undefined;
+            indentDetails: boolean;
             persistentHint: boolean;
             messages: string | readonly string[];
             direction: "horizontal" | "vertical";
             "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
             "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
-        } & import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps, "centerAffix" | "density" | "direction" | "disabled" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "messages" | "persistentHint" | "readonly" | "rules" | "style">;
+        } & import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps, "centerAffix" | "density" | "direction" | "disabled" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "readonly" | "rules" | "style">;
         $attrs: {
             [x: string]: unknown;
         };
@@ -244,6 +247,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             centerAffix: boolean;
             glow: boolean;
             hideSpinButtons: boolean;
+            indentDetails: boolean;
             persistentHint: boolean;
             messages: string | readonly string[];
             direction: "horizontal" | "vertical";
@@ -289,6 +293,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             centerAffix: boolean;
             glow: boolean;
             hideSpinButtons: boolean;
+            indentDetails: boolean;
             persistentHint: boolean;
             messages: string | readonly string[];
             direction: "horizontal" | "vertical";
@@ -341,6 +346,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         centerAffix: boolean;
         glow: boolean;
         hideSpinButtons: boolean;
+        indentDetails: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
         direction: "horizontal" | "vertical";
@@ -357,6 +363,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         centerAffix: boolean;
         glow: boolean;
         hideSpinButtons: boolean;
+        indentDetails: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
         direction: "horizontal" | "vertical";
@@ -381,7 +388,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         hint?: string | undefined;
         "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
         "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
-    }, "disabled" | "style" | "density" | "readonly" | "isValid" | "reset" | "resetValidation" | "validate" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "messages" | "persistentHint" | "rules"> & import('vue').ShallowUnwrapRef<{
+    }, "disabled" | "style" | "density" | "readonly" | "isValid" | "reset" | "resetValidation" | "validate" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules"> & import('vue').ShallowUnwrapRef<{
         reset: () => Promise<void>;
         resetValidation: () => Promise<void>;
         validate: (silent?: boolean) => Promise<string[]>;
@@ -390,7 +397,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
         "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
-    }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "maxWidth" | "minWidth" | "width" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "color" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "messages" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "iconColor" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "v-slot:details" | "v-slot:message">, `$${any}`> & Omit<Omit<{
+    }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "maxWidth" | "minWidth" | "width" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "color" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "iconColor" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "v-slot:details" | "v-slot:message">, `$${any}`> & Omit<Omit<{
         $: import('vue').ComponentInternalInstance;
         $data: {};
         $props: Partial<{
@@ -681,6 +688,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         rounded: string | number | boolean;
         tile: boolean;
         hideSpinButtons: boolean;
+        indentDetails: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
         clearable: boolean;
@@ -758,6 +766,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         density: import('vuetify/lib/composables/density.mjs').Density;
         tile: boolean;
         hideSpinButtons: boolean;
+        indentDetails: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
         clearable: boolean;
@@ -900,6 +909,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             centerAffix: boolean;
             glow: boolean;
             hideSpinButtons: boolean;
+            indentDetails: boolean;
             persistentHint: boolean;
             messages: string | readonly string[];
             direction: "horizontal" | "vertical";
@@ -934,12 +944,13 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             hideDetails?: "auto" | boolean | undefined;
             hideSpinButtons: boolean;
             hint?: string | undefined;
+            indentDetails: boolean;
             persistentHint: boolean;
             messages: string | readonly string[];
             direction: "horizontal" | "vertical";
             "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
             "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
-        } & import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps, "centerAffix" | "density" | "direction" | "disabled" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "messages" | "persistentHint" | "readonly" | "rules" | "style">;
+        } & import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps, "centerAffix" | "density" | "direction" | "disabled" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "readonly" | "rules" | "style">;
         $attrs: {
             [x: string]: unknown;
         };
@@ -981,6 +992,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             centerAffix: boolean;
             glow: boolean;
             hideSpinButtons: boolean;
+            indentDetails: boolean;
             persistentHint: boolean;
             messages: string | readonly string[];
             direction: "horizontal" | "vertical";
@@ -1026,6 +1038,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             centerAffix: boolean;
             glow: boolean;
             hideSpinButtons: boolean;
+            indentDetails: boolean;
             persistentHint: boolean;
             messages: string | readonly string[];
             direction: "horizontal" | "vertical";
@@ -1078,6 +1091,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         centerAffix: boolean;
         glow: boolean;
         hideSpinButtons: boolean;
+        indentDetails: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
         direction: "horizontal" | "vertical";
@@ -1094,6 +1108,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         centerAffix: boolean;
         glow: boolean;
         hideSpinButtons: boolean;
+        indentDetails: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
         direction: "horizontal" | "vertical";
@@ -1118,7 +1133,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         hint?: string | undefined;
         "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
         "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
-    }, "disabled" | "style" | "density" | "readonly" | "isValid" | "reset" | "resetValidation" | "validate" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "messages" | "persistentHint" | "rules"> & import('vue').ShallowUnwrapRef<{
+    }, "disabled" | "style" | "density" | "readonly" | "isValid" | "reset" | "resetValidation" | "validate" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules"> & import('vue').ShallowUnwrapRef<{
         reset: () => Promise<void>;
         resetValidation: () => Promise<void>;
         validate: (silent?: boolean) => Promise<string[]>;
@@ -1127,7 +1142,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
         "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
-    }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "maxWidth" | "minWidth" | "width" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "color" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "maxErrors" | "messages" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "iconColor" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "v-slot:details" | "v-slot:message">, `$${any}`> & Omit<Omit<{
+    }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "disabled" | "modelValue" | "style" | "theme" | "class" | "maxWidth" | "minWidth" | "width" | "$children" | "v-slots" | "v-slot:default" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "color" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "iconColor" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "v-slot:details" | "v-slot:message">, `$${any}`> & Omit<Omit<{
         $: import('vue').ComponentInternalInstance;
         $data: {};
         $props: Partial<{
@@ -1413,6 +1428,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         rounded: string | number | boolean;
         tile: boolean;
         hideSpinButtons: boolean;
+        indentDetails: boolean;
         persistentHint: boolean;
         messages: string | readonly string[];
         clearable: boolean;

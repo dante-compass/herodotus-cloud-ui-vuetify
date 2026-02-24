@@ -15,6 +15,7 @@ import { compression } from 'vite-plugin-compression2';
 import { createHtmlPlugin } from 'vite-plugin-html';
 // import { viteVConsole } from 'vite-plugin-vconsole';
 import VueDevTools from 'vite-plugin-vue-devtools';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 // Utilities
 import { defineConfig, loadEnv } from 'vite';
@@ -29,6 +30,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     // 增加基础路径配置，修复在反向代理指向子路径的配置方式下，出现静态资源 404 问题
     base: env.VITE_BASE_PATH,
     plugins: [
+      nodePolyfills({
+        globals: {
+          Buffer: true,
+        },
+      }),
       VueDevTools(),
       Vue({
         template: { transformAssetUrls },
@@ -155,16 +161,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       rollupOptions: {
         output: {
           assetFileNames: (assetInfo) => {
-            if (
-              assetInfo.type === 'asset' &&
-              /\.(jpe?g|png|gif|svg)$/i.test(assetInfo.name as string)
-            ) {
+            if (assetInfo.type === 'asset' && /\.(jpe?g|png|gif|svg)$/i.test(assetInfo.name as string)) {
               return 'assets/images/[name]-[hash].[ext]';
             }
-            if (
-              assetInfo.type === 'asset' &&
-              /\.(ttf|woff|woff2|eot)$/i.test(assetInfo.name as string)
-            ) {
+            if (assetInfo.type === 'asset' && /\.(ttf|woff|woff2|eot)$/i.test(assetInfo.name as string)) {
               return 'assets/fonts/[name]-[hash].[ext]';
             }
             return 'assets/[ext]/[name]-[hash].[ext]';
