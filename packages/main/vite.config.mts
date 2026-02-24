@@ -104,6 +104,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     ],
     optimizeDeps: {
       exclude: [
+        'vite-plugin-node-polyfills/shims/buffer',
+        'vite-plugin-node-polyfills/shims/global',
+        'vite-plugin-node-polyfills/shims/process',
         'vuetify',
         'vuetify/components',
         'vuetify/directives',
@@ -137,7 +140,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           rewrite: (path) => path.replace(/^\/socket/, ''),
         },
         '/reactive': {
-          target: env.VITE_REACTIVE_WS_URL,
+          target: env.VITE_WS_URL,
           changeOrigin: true,
           ws: true,
           rewrite: (path) => path.replace(/^\/reactive/, ''),

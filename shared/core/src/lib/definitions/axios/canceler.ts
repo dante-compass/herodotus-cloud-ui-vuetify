@@ -1,19 +1,41 @@
 import type { AxiosRequestConfig, Canceler } from '@/declarations';
 
 import axios from 'axios';
-import { Md5 } from 'ts-md5';
+import qs from 'qs';
 import { isFunction, isEmpty } from 'lodash-es';
 
 // Used to store the identification and cancellation function of each request
 let pendingMap = new Map<string, Canceler>();
 
-export const getPendingUrl = (config: AxiosRequestConfig) => {
-  if (!isEmpty(config.params)) {
-    const param = Md5.hashStr(config.params);
-    return [config.method, config.url, param].join('&');
+const convertParams = (params: any) => {
+  let paramsString = '';
+  if (params) {
+    if (typeof params === 'string') {
+      paramsString = params;
+    } else if (params instanceof URLSearchParams) {
+      paramsString = params.toString();
+    } else if (typeof params === 'object') {
+      // 使用 qs 序列化，并按键排序
+      paramsString = qs.stringify(params, {
+        sort: (a, b) => a.localeCompare(b), // 保证顺序稳定
+        // 可添加其他选项与 Axios 默认行为对齐
+      });
+    } else {
+      // 其他类型按实际情况处理，或转为字符串
+      paramsString = String(params);
+    }
   }
 
-  return [config.method, config.url].join('&');
+  return paramsString;
+};
+
+export const getPendingUrl = (config: AxiosRequestConfig) => {
+  if (!isEmpty(config.params)) {
+    const params = convertParams(config.params);
+    return [config.method, config.url, params].join('|');
+  }
+
+  return [config.method, config.url].join('|');
 };
 
 export class AxiosCanceler {
