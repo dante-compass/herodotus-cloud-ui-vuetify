@@ -1,13 +1,13 @@
 <template>
   <v-alert :color="color(method)" variant="outlined" :density="settings.density" class="py-1">
-    <v-row no-gutters>
+    <v-row>
       <v-col cols="2">
         <div class="d-flex justify-center">
           <v-chip :color="color(method)" :density="settings.density">
             {{ method }}
           </v-chip>
-        </div></v-col
-      >
+        </div>
+      </v-col>
       <v-col cols="5" align-self="center">
         <div class="d-flex justify-start">{{ url }}</div>
       </v-col>

@@ -2,7 +2,7 @@
   <v-row justify="center">
     <h-button v-if="!hasConfig" icon="mdi-wechat" class="ma-2"></h-button>
     <template v-else>
-      <h-button
+      <v-btn
         icon
         color="accent"
         v-for="(value, key, index) in list"
@@ -14,15 +14,9 @@
         <v-avatar>
           <v-img :src="find(key)" />
         </v-avatar>
-      </h-button>
+      </v-btn>
     </template>
-    <h-button
-      icon="mdi-login-variant"
-      :href="authorizationCodeUrl"
-      tooltip="授权码模式登录"
-      class="ma-2"
-    >
-    </h-button>
+    <h-button icon="mdi-login-variant" :href="authorizationCodeUrl" tooltip="授权码模式登录" class="ma-2"></h-button>
   </v-row>
 </template>
 

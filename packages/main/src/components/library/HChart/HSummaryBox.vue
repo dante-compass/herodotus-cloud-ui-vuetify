@@ -2,7 +2,10 @@
   <v-card>
     <v-list>
       <v-list-item>
-        <v-list-item-title :class="['text-h4', `text-${color}`]" style="font-weight: 500; letter-spacing: 3px">
+        <v-list-item-title
+          :class="['text-display-small', `text-${color}`]"
+          style="font-weight: 500; letter-spacing: 3px"
+        >
           {{ numeric }}
         </v-list-item-title>
         <v-list-item-subtitle>

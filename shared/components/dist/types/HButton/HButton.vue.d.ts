@@ -1,6 +1,7 @@
-import { VTooltip } from 'vuetify/components';
+import { VIcon, VTooltip } from 'vuetify/components';
 interface Props {
-    icon?: string | boolean;
+    icon?: VIcon['icon'];
+    color?: string | undefined;
     tooltip?: string;
     location?: VTooltip['location'];
 }

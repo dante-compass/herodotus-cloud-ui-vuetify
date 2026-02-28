@@ -1,5 +1,5 @@
 <template>
-  <v-btn :icon="icon" v-bind="$attrs">
+  <v-btn :icon="isIcon" :color="buttonColor" v-bind="$attrs">
     <template #append>
       <slot name="append"></slot>
     </template>
@@ -13,7 +13,7 @@
     </template>
 
     <template v-if="!$slots.default && isIcon">
-      <v-icon>{{ icon }}</v-icon>
+      <v-icon :icon="icon" :color="color"></v-icon>
     </template>
     <slot v-else></slot>
 
@@ -24,10 +24,12 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import { VBtn, VIcon, VTooltip } from 'vuetify/components';
 
 interface Props {
-  icon?: string | boolean;
+  icon?: VIcon['icon'];
+  color?: string | undefined;
   tooltip?: string;
   location?: VTooltip['location'];
 }
@@ -36,5 +38,11 @@ defineOptions({ name: 'HButton', components: { VBtn, VIcon } });
 
 const props = withDefaults(defineProps<Props>(), { location: 'bottom' });
 
-const isIcon = !props.icon || props.icon !== true;
+const isIcon = computed(() => {
+  return props.icon ? true : false;
+});
+
+const buttonColor = computed(() => {
+  return isIcon ? undefined : props.color;
+});
 </script>
