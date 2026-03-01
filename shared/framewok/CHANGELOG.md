@@ -1,5 +1,16 @@
 # @herodotus/framework
 
+## 0.8.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@0.8.0
+
 ## 0.7.1
 
 ### Patch Changes
