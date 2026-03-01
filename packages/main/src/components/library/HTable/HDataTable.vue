@@ -73,8 +73,8 @@
           </template>
 
           <template v-if="!$slots.bottom" #bottom>
-            <v-container>
-              <v-row justify="end">
+            <v-container class="mr-0">
+              <v-row class="justify-end">
                 <v-pagination
                   v-model="pageNumber"
                   :length="totalPages"

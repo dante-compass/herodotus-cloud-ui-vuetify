@@ -13,6 +13,7 @@
             <h-app-logo height="10vh" class="mb-2"></h-app-logo>
             <v-card-text>
               <v-card variant="tonal" elevation="2" class="mx-auto" max-width="420">
+
                 <v-tabs v-model="tabs" align-tabs="center">
                   <v-tab value="account" class="font-weight-bold">账号密码登录</v-tab>
                   <v-tab value="mobile" class="font-weight-bold">手机短信登录</v-tab>

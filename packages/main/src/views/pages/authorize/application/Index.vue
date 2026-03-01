@@ -38,20 +38,13 @@
 
     <template #item.actions="{ item }">
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+      <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>
   </h-data-table>
 </template>
 
 <script setup lang="ts">
-import type {
-  OAuth2ApplicationEntity,
-  OAuth2ApplicationConditions,
-  OAuth2ApplicationProps,
-} from '@herodotus/api';
+import type { OAuth2ApplicationEntity, OAuth2ApplicationConditions, OAuth2ApplicationProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable, useDateTime } from '@/composables/hooks';

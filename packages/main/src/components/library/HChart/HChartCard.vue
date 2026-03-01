@@ -1,6 +1,7 @@
 <template>
   <v-card>
-    <v-card-item :title="title" :subtitle="subtitle"></v-card-item>
+    <v-card-title class="font-weight-semibold">{{ title }}</v-card-title>
+    <v-card-subtitle>{{ subtitle }}</v-card-subtitle>
     <v-card-text>
       <slot></slot>
     </v-card-text>

@@ -13,8 +13,8 @@
         <v-icon v-if="selection" :icon="selection" start />
       </v-expand-x-transition>
     </template>
-    <template #item="{ props, item }">
-      <v-list-item v-bind="props" :prepend-icon="item.value" :title="item.value"></v-list-item>
+    <template #item="{ props, internalItem }">
+      <v-list-item v-bind="props" :prepend-icon="internalItem.value" :title="internalItem.value"></v-list-item>
     </template>
   </v-autocomplete>
 </template>

@@ -3,12 +3,7 @@ import type { RouteRecordRaw, Router } from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-import {
-  useAuthenticationStore,
-  useApplicationStore,
-  useElementStore,
-  useSystemElement,
-} from '@herodotus/framework';
+import { useAuthenticationStore, useApplicationStore, useElementStore, useSystemElement } from '@herodotus/framework';
 import { DEAULT_ROUTER_LINK, API } from '@/configurations';
 
 NProgress.configure({
@@ -42,7 +37,7 @@ const { initBackendSecurity } = useSystemElement(vueModules, locate, getRoutesFr
 export const createRouterGuard = (router: Router) => {
   let isFirstNavigation = true;
 
-  router.beforeEach(async (to, from, next) => {
+  router.beforeEach(async (to, from) => {
     const applicationStore = useApplicationStore();
     // 跳过初始导航的进度条（如果需要）
     if (from.name === undefined && isFirstNavigation) {
@@ -61,8 +56,7 @@ export const createRouterGuard = (router: Router) => {
       // 如果已经在登录页，跳转到首页
       if (to.path === DEAULT_ROUTER_LINK.sign_in.path) {
         // 目的地址还是登录页面，直接跳转到首页。
-        next(DEAULT_ROUTER_LINK.home.path);
-        return;
+        return DEAULT_ROUTER_LINK.home.path;
       }
 
       // 需要初始化动态路由
@@ -72,32 +66,27 @@ export const createRouterGuard = (router: Router) => {
 
         // 重新导航到目标页面
         if (to.path !== from.path) {
-          next(to.fullPath);
+          return to.fullPath;
         } else {
-          next();
+          return;
         }
-        return;
       }
-      next();
       return;
     } else {
       // 没有 Token 的情况
       // 允许访问的无权限页面
       if (to.meta.isIgnoreAuth) {
-        next();
         return;
       } else {
         if (to.path === DEAULT_ROUTER_LINK.sign_in.path) {
           localStorage.clear();
-          next();
           return;
         }
         // 重定向到登录页，并携带重定向路径
-        next({
+        return {
           path: DEAULT_ROUTER_LINK.sign_in.path,
           query: { redirect: to.fullPath },
-        });
-        return;
+        };
       }
     }
   });

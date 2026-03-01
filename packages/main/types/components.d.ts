@@ -47,6 +47,7 @@ declare module 'vue' {
     HDialog: typeof import('@herodotus/components')['HDialog']
     HDictionarySelect: typeof import('./../src/components/library/HSelect/HDictionarySelect.vue')['default']
     HDictionaryToggle: typeof import('./../src/components/library/HSelect/HDictionaryToggle.vue')['default']
+    HDuration: typeof import('@herodotus/components')['HDuration']
     HErrorLayout: typeof import('./../src/components/error/HErrorLayout.vue')['default']
     HFullWidthFormLayout: typeof import('./../src/components/layouts/form/HFullWidthFormLayout.vue')['default']
     HGraphicCaptcha: typeof import('./../src/components/captcha/HGraphicCaptcha.vue')['default']

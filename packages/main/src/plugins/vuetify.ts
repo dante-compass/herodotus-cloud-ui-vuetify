@@ -23,6 +23,9 @@ const i18n = createI18n({
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 const vuetify = createVuetify({
   defaults: {
+    VBtn: {
+      color: 'primary',
+    },
     VTextField: {
       color: 'primary',
       clearable: true,
