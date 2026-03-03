@@ -22,7 +22,7 @@
           :class="['range-btn', { isDown: isMouseDown }]"
           :style="`width:${sliderSize}px`"
           @mousedown="onRangeMouseDown($event)"
-          @touchstart="onRangeMouseDown($event)"
+          @touchstart.passive="onRangeMouseDown($event)"
         >
           <div></div>
           <div></div>
@@ -83,17 +83,8 @@ const isMouseDown = shallowRef(false);
 // 为了解决Mac上的click BUG
 const isCloseDown = shallowRef(false);
 
-const {
-  getImage,
-  timeoutClear,
-  message,
-  canOperate,
-  isLoading,
-  isSuccess,
-  isShowMessage,
-  verifyCaptcha,
-  reset,
-} = useBehaviorCaptcha();
+const { getImage, timeoutClear, message, canOperate, isLoading, isSuccess, isShowMessage, verifyCaptcha, reset } =
+  useBehaviorCaptcha();
 
 onMounted(() => {
   addEventListener();
