@@ -79,6 +79,7 @@ export interface OAuth2InterfaceAuditEntity extends AbstractAuditRecord {
     requestMethod: string;
     url: string;
     serviceId: string;
+    action: string;
 }
 export interface OAuth2UserLoggingEntity extends AbstractAuditRecord {
     loggingId: string;

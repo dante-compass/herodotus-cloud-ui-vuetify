@@ -20,7 +20,7 @@ export declare const useElementStore: import('pinia').StoreDefinition<"SystemEle
      * @param key 组件名称
      * @returns Push 类型参数
      */
-    getRoutePushParam(key: string): PushParam | undefined;
+    getRoutePushParam(key: string): PushParam;
     /**
      * 将路由添加至缓存
      * @param route 路由
