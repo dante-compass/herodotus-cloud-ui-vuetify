@@ -8,7 +8,7 @@ import { createVuetify } from 'vuetify';
 import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n';
 import { createI18n, useI18n } from 'vue-i18n';
 import { md3 } from 'vuetify/blueprints';
-import { aliases, mdi } from 'vuetify/iconsets/mdi-unocss';
+import { aliases, mdi } from 'vuetify/iconsets/mdi';
 import * as VuetifyI18n from '@/i18n/vuetify';
 
 const i18n = createI18n({
@@ -22,29 +22,6 @@ const i18n = createI18n({
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 const vuetify = createVuetify({
-  defaults: {
-    VBtn: {
-      color: 'primary',
-    },
-    VTextField: {
-      color: 'primary',
-      clearable: true,
-    },
-    VSwitch: {
-      color: 'primary',
-      inset: true,
-    },
-    VList: {
-      color: 'primary',
-    },
-    VBtnToggle: {
-      color: 'primary',
-    },
-    VCard: {
-      rounded: 'xl',
-    },
-  },
-
   theme: {
     defaultTheme: 'system',
   },
@@ -60,6 +37,29 @@ const vuetify = createVuetify({
   },
 
   blueprint: md3,
+
+  defaults: {
+    VBtn: {
+      color: 'primary',
+    },
+    VBtnToggle: {
+      color: 'primary',
+    },
+    VCard: {
+      rounded: 'xl',
+    },
+    VList: {
+      color: 'primary',
+    },
+    VSwitch: {
+      color: 'primary',
+      inset: true,
+    },
+    VTextField: {
+      color: 'primary',
+      clearable: true,
+    },
+  },
 });
 
 export const setupVuetify = (app: App<Element>) => {
