@@ -51,6 +51,9 @@ const vuetify = createVuetify({
     VList: {
       color: 'primary',
     },
+    VPagination: {
+      color: 'primary',
+    },
     VSwitch: {
       color: 'primary',
       inset: true,
