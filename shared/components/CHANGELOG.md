@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 0.8.1
+
+### Patch Changes
+
+- 新增 REST API 审计功能描述
+- Updated dependencies
+  - @herodotus/core@0.8.1
+
 ## 0.8.0
 
 ### Minor Changes
