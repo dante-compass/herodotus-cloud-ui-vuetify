@@ -75,13 +75,13 @@
               label="令牌端点认证签名算法"
             ></v-select>
             <h-text-divider label="令牌设置"></h-text-divider>
-            <h-setting-label title="令牌有效期"></h-setting-label>
+            <h-label title="令牌有效期"></h-label>
             <h-duration v-model="editedItem.accessTokenTimeToLive" label="令牌有效期"></h-duration>
-            <h-setting-label title="刷新令牌有效期"></h-setting-label>
+            <h-label title="刷新令牌有效期"></h-label>
             <h-duration v-model="editedItem.refreshTokenTimeToLive" label="刷新令牌有效期"></h-duration>
-            <h-setting-label title="授权码有效期"></h-setting-label>
+            <h-label title="授权码有效期"></h-label>
             <h-duration v-model="editedItem.authorizationCodeTimeToLive" label="授权码有效期"></h-duration>
-            <h-setting-label title="设备激活码有效期"></h-setting-label>
+            <h-label title="设备激活码有效期"></h-label>
             <h-duration v-model="editedItem.deviceCodeTimeToLive" label="设备激活码有效期"></h-duration>
             <v-switch v-model="editedItem.reuseRefreshTokens" label="是否允许重用刷新令牌"></v-switch>
             <h-dictionary-select

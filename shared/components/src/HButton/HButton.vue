@@ -24,8 +24,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { useSlots, computed } from 'vue';
 import { VBtn, VIcon, VTooltip } from 'vuetify/components';
+
+import { isEmpty } from 'lodash-es';
 
 interface Props {
   icon?: VIcon['icon'];
@@ -38,11 +40,14 @@ defineOptions({ name: 'HButton', components: { VBtn, VIcon } });
 
 const props = withDefaults(defineProps<Props>(), { location: 'bottom' });
 
+const slots = useSlots() as ReturnType<typeof useSlots>;
+
 const isIcon = computed(() => {
-  return props.icon ? true : false;
+  return !isEmpty(props.icon) ? true : false;
 });
 
 const buttonColor = computed(() => {
-  return isIcon ? undefined : props.color;
+  // v-btn 默认通过 default slot 设置按钮的文字。设置文字则认为是普通 button 而不是 icon 类型 button
+  return !isEmpty(slots.default) ? props.color : undefined;
 });
 </script>

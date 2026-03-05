@@ -1,11 +1,7 @@
 import { defineStore } from 'pinia';
 import { nextTick } from 'vue';
 
-import type {
-  RouteLocationNormalizedLoaded,
-  RouteRecordName,
-  RouteRecordNormalized,
-} from 'vue-router';
+import type { RouteLocationNormalizedLoaded, RouteRecordName, RouteRecordNormalized } from 'vue-router';
 import type { Tab } from '@/declarations';
 
 import { findIndex, remove } from 'lodash-es';
@@ -91,10 +87,8 @@ export const useTabsViewStore = defineStore('TabsView', {
     },
 
     setActivatedTab(tab: Tab): void {
-      nextTick(() => {
-        this.activatedTab = tab;
-        this.activatedTabName = tab.name;
-      });
+      this.activatedTab = tab;
+      this.activatedTabName = tab.name;
     },
 
     isNotExistInStaticRoute(tab: Tab): boolean {
