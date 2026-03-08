@@ -26,7 +26,7 @@
       </template>
 
       <template #item.certificateCategory="{ value }">
-        <v-chip density="compact" rounded="lg" color="purple" label>
+        <v-chip density="compact" rounded="lg" color="orange" label>
           {{ getDictionaryItemDisplay('CertificateCategory', value) }}
         </v-chip>
       </template>

@@ -3,6 +3,7 @@
     v-model="openDialog"
     prepend-icon="mdi-memory-arrow-down"
     title="设置下载证书格式"
+    :loading="loading"
     @confirm="onSave"
     @after-leave="clean"
   >

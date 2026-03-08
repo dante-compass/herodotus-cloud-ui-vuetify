@@ -1,5 +1,11 @@
 <template>
-  <h-dialog v-model="openDialog" prepend-icon="mdi-key-chain" :title="`设置/修改【${username}】密码`" @confirm="onSave">
+  <h-dialog
+    v-model="openDialog"
+    prepend-icon="mdi-key-chain"
+    :title="`设置/修改【${username}】密码`"
+    :loading="loading"
+    @confirm="onSave"
+  >
     <v-form ref="changePasswordForm">
       <v-text-field
         v-model="newPassword"
