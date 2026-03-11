@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.0.0
+
+### Major Changes
+
+- 1.0 正式版发布
+
 ## 0.8.1
 
 ### Patch Changes
