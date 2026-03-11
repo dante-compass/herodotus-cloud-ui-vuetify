@@ -35,25 +35,24 @@ const ServiceErrorRoute: RouteRecordRaw = {
   meta: { title: 'Service Error' },
 };
 
-const MainPage: RouteRecordRaw = {
-  path: DEAULT_ROUTER_LINK.home.path,
-  name: 'Dashboard',
-  component: () => import('@/views/layouts/Index.vue'),
-  redirect: '/dashboard/console',
+const SocialSignInCallbackRoute: RouteRecordRaw = {
+  path: '/social/oauth2/callback/:source',
+  name: 'SocialSignInCallback',
+  component: () => import('../../views/sign-in/SocialSignInCallback.vue'),
   meta: {
-    title: 'Dashboard',
-    sort: 0,
-    icon: 'mdi-view-dashboard',
-    group: 'herodotus',
+    title: '社交登录 Callback',
+    isIgnoreAuth: true,
   },
-  children: [
-    {
-      path: '/dashboard/console',
-      name: 'DashboardConsole',
-      meta: { title: '主控台', icon: 'mdi-sign-text', isHideAllChild: true },
-      component: () => import('@/views/dashboard/console/Index.vue'),
-    },
-  ],
+};
+
+const AuthorizationCodeSignInRoute: RouteRecordRaw = {
+  path: '/authorization-code',
+  name: 'AuthorizationCodeSignIn',
+  component: () => import('../../views/sign-in/AuthorizationCodeSignIn.vue'),
+  meta: {
+    title: '授权码模式登录',
+    isIgnoreAuth: true,
+  },
 };
 
 //普通路由 无需验证权限
@@ -62,4 +61,6 @@ export const staticRoutes: Array<RouteRecordRaw> = [
   SignInRoute,
   NoPermissionRoute,
   ServiceErrorRoute,
+  SocialSignInCallbackRoute,
+  AuthorizationCodeSignInRoute,
 ];

@@ -57,21 +57,21 @@ export const createRouterGuard = (router: Router) => {
       if (to.path === DEAULT_ROUTER_LINK.sign_in.path) {
         // 目的地址还是登录页面，直接跳转到首页。
         return DEAULT_ROUTER_LINK.home.path;
-      }
+      } else {
+        // 需要初始化动态路由
+        if (!elementStore.isDynamicRouteAdded) {
+          await initBackendSecurity(router, authStore.roles);
+          router.addRoute(NotFoundRoute);
 
-      // 需要初始化动态路由
-      if (!elementStore.isDynamicRouteAdded) {
-        await initBackendSecurity(router, authStore.roles);
-        router.addRoute(NotFoundRoute);
-
-        // 重新导航到目标页面
-        if (to.path !== from.path) {
-          return to.fullPath;
-        } else {
-          return;
+          // 重新导航到目标页面
+          if (to.path !== from.path) {
+            return to.fullPath;
+          } else {
+            return;
+          }
         }
+        return;
       }
-      return;
     } else {
       // 没有 Token 的情况
       // 允许访问的无权限页面
