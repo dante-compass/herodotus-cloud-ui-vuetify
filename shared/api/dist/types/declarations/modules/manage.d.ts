@@ -71,6 +71,7 @@ export interface MgtCertificateFileResponse extends AbstractSysDto {
     fileId: string;
     certId: string;
     certificateFileCategory: string;
+    keyStoreCategory: string;
     fileName: string;
     fileSize: number;
     fileSuffix: string;

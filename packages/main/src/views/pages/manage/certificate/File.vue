@@ -26,6 +26,12 @@
         </v-chip>
       </template>
 
+      <template #item.keyStoreCategory="{ item }">
+        <v-chip density="compact" rounded="lg" color="purple" label>
+          {{ getDictionaryItemDisplay('KeyStoreCategory', item.keyStoreCategory) }}
+        </v-chip>
+      </template>
+
       <template #item.actions="{ item }">
         <h-action-download-button @click="onDownload(item)"></h-action-download-button>
         <h-action-delete-button @click="deleteItemById(item[rowKey])"></h-action-delete-button>
@@ -55,6 +61,7 @@ const headers = ref([
   { key: 'alias', align: 'center', label: '证书名称' },
   { key: 'certificateCategory', align: 'center', title: '证书类别' },
   { key: 'certificateFileCategory', align: 'center', title: '证书文件类别' },
+  { key: 'keyStoreCategory', align: 'center', title: 'KeyStore类别' },
   { key: 'fileName', align: 'center', title: '文件名' },
   { key: 'suffix', align: 'center', title: '文件后缀' },
   { key: 'bucketName', align: 'center', title: '存储桶' },
@@ -69,7 +76,11 @@ const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, delete
   MgtCertificateFileResponse
 >(API.core.mgtCertificateFile(), PAGE_NAME.MGT_CERTIFICATE);
 
-const { getDictionaryItemDisplay } = useDictionary('CertificateCategory', 'CertificateFileCategory');
+const { getDictionaryItemDisplay } = useDictionary(
+  'CertificateCategory',
+  'CertificateFileCategory',
+  'KeyStoreCategory',
+);
 const { download, loadProgress, showProgress } = useOss();
 
 const onDownload = (item: MgtCertificateFileResponse) => {

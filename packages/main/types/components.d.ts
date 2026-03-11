@@ -43,6 +43,7 @@ declare module 'vue' {
     HColumnSwagger: typeof import('./../src/components/library/HTable/HColumnSwagger.vue')['default']
     HDataTable: typeof import('./../src/components/library/HTable/HDataTable.vue')['default']
     HDate: typeof import('@herodotus/components')['HDate']
+    HDateTime: typeof import('@herodotus/components')['HDateTime']
     HDetailContainer: typeof import('./../src/components/layouts/form/HDetailContainer.vue')['default']
     HDialog: typeof import('@herodotus/components')['HDialog']
     HDictionarySelect: typeof import('./../src/components/library/HSelect/HDictionarySelect.vue')['default']

@@ -3,6 +3,7 @@
     v-model="open"
     prepend-icon="mdi-calendar-today"
     title="注册通行密钥"
+    :loading="loading"
     confirm-label="注册"
     @confirm="onSave"
   >

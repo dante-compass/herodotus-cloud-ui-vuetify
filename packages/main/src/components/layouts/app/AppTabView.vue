@@ -1,12 +1,12 @@
 <template>
   <v-card class="ma-4">
     <v-card-item>
-      <v-tabs>
+      <v-tabs v-model="current">
         <v-tab
           v-for="(tab, i) in tabs"
           :key="i"
           :tabindex="i"
-          :value="tab.path"
+          :value="tab.name"
           class="font-weight-bold"
           :text="getTitle(tab)"
           :prepend-icon="getIcon(tab)"
@@ -14,13 +14,7 @@
           exact
         >
           <template #append>
-            <v-icon
-              v-if="isNotLastTab(i)"
-              icon="mdi-close-circle"
-              class="q-ml-md"
-              end
-              @click="onCloseTab(tab)"
-            />
+            <v-icon v-if="isNotLastTab(i)" icon="mdi-close-circle" class="q-ml-md" end @click="onCloseTab(tab)" />
             <v-icon v-else size="xs" icon="mdi-lock" class="q-ml-md" end />
           </template>
         </v-tab>
@@ -81,17 +75,19 @@ defineOptions({ name: 'HAppTabView', components: { AppTabMenuItem } });
 
 const route = useRoute();
 
+const current = shallowRef();
+
 const store = useTabsViewStore();
 const {
   tabs,
+  activatedTab,
   isNotLastTab,
   disableCloseCurrentTab,
   disableCloseRightTabs,
   disableCloseLeftTabs,
   disableRefreshCurrentTab,
 } = storeToRefs(store);
-const { closeTab, smartTab, closeCurrentTab, closeOtherTabs, closeLeftTabs, closeRightTabs } =
-  store;
+const { closeTab, smartTab, closeCurrentTab, closeOtherTabs, closeLeftTabs, closeRightTabs } = store;
 
 const refreshTab = inject<Function>(refreshTabInjectionKey);
 
@@ -99,6 +95,7 @@ watch(
   () => route.path,
   () => {
     smartTab(route);
+    current.value = activatedTab.value.name;
   },
   { immediate: true },
 );

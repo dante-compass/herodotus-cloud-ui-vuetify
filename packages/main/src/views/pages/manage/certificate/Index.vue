@@ -18,23 +18,15 @@
       </template>
 
       <template #item.issuerDn="{ value }">
-        <h-action-button color="orange" icon="mdi-invoice-text-check" :tooltip="value"></h-action-button>
+        <h-action-button color="pink" icon="mdi-invoice-text-check" :tooltip="value"></h-action-button>
       </template>
 
       <template #item.subjectDn="{ value }">
-        <h-action-button color="teal" icon="mdi-invoice-text-edit" :tooltip="value"></h-action-button>
-      </template>
-
-      <template #item.startTime="{ value }">
-        {{ defaultFormat(value) }}
-      </template>
-
-      <template #item.endTime="{ value }">
-        {{ defaultFormat(value) }}
+        <h-action-button color="blue" icon="mdi-invoice-text-edit" :tooltip="value"></h-action-button>
       </template>
 
       <template #item.certificateCategory="{ value }">
-        <v-chip density="compact" rounded="lg" color="purple" label>
+        <v-chip density="compact" rounded="lg" color="orange" label>
           {{ getDictionaryItemDisplay('CertificateCategory', value) }}
         </v-chip>
       </template>
@@ -52,15 +44,15 @@
       <template #item.actions="{ item }">
         <h-action-download-button @click="onShowDownloadDialog(item)"></h-action-download-button>
         <h-action-button
-          color="amber"
+          color="teal"
           icon="mdi-file-search"
           tooltip="查看证书文件"
           @click="toFile(item)"
         ></h-action-button>
         <h-action-button
-          color="red"
+          color="orange"
           icon="mdi-file-lock"
-          tooltip="查看证书文件"
+          tooltip="查看吊销列表"
           @click="toRevocation(item)"
         ></h-action-button>
         <h-action-delete-button @click="deleteItemById(item[rowKey])"></h-action-delete-button>
@@ -93,8 +85,8 @@ const headers = ref([
   { key: 'serialNumber', align: 'center', title: '证书序列号' },
   { key: 'issuerDn', align: 'center', title: '颁发者 DN' },
   { key: 'subjectDn', align: 'center', title: '主题 DN' },
-  { key: 'startTime', align: 'center', title: '开始时间' },
-  { key: 'endTime', align: 'center', title: '结束时间' },
+  { key: 'startTime', align: 'center', title: '开始时间', value: (item) => defaultFormat(item.startTime) },
+  { key: 'endTime', align: 'center', title: '结束时间', value: (item) => defaultFormat(item.endTime) },
   { key: 'password', align: 'center', title: '密码' },
   { key: 'ocsp', align: 'center', title: 'OCSP 证书' },
   { key: 'revocationReason', align: 'center', title: '证书吊销理由' },

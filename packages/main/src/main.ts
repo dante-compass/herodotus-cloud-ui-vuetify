@@ -1,3 +1,10 @@
+// Styles
+import './styles/main.scss';
+import 'unfonts.css';
+import 'animate.css/animate.min.css';
+import '@herodotus/core/style.css';
+import '@herodotus/framework/style.css';
+
 import App from './App.vue';
 import { createApp } from 'vue';
 
@@ -7,12 +14,6 @@ import { IS_DEV, VARIABLES } from '@/configurations';
 // Plugins
 import { setupVuetify, setupPinia } from '@/plugins';
 import { setupRouter } from '@/routers';
-
-// Styles
-import 'unfonts.css';
-import 'animate.css/animate.min.css';
-import '@herodotus/core/style.css';
-import '@herodotus/framework/style.css';
 
 async function setupApp() {
   if (IS_DEV) {

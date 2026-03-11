@@ -1,5 +1,24 @@
 # @herodotus/components
 
+## 1.0.0
+
+### Major Changes
+
+- 1.0 正式版发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@1.0.0
+
+## 0.8.1
+
+### Patch Changes
+
+- 新增 REST API 审计功能描述
+- Updated dependencies
+  - @herodotus/core@0.8.1
+
 ## 0.8.0
 
 ### Minor Changes

@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" :title="title">
     <template #prepend>
-      <h-button icon="mdi-arrow-left-box" tooltip="返回" variant="text" @click="onFinish()"></h-button>
+      <h-button icon="mdi-arrow-left-box" tooltip="返回" color="primary" variant="text" @click="onFinish()"></h-button>
     </template>
 
     <v-card-text>

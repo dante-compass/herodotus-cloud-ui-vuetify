@@ -1,5 +1,11 @@
 <template>
-  <h-dialog v-model="open" prepend-icon="mdi-hammer-screwdriver" title="设置对象留存策略" @confirm="onSave">
+  <h-dialog
+    v-model="open"
+    prepend-icon="mdi-hammer-screwdriver"
+    title="设置对象留存策略"
+    :loading="loading"
+    @confirm="onSave"
+  >
     <v-switch v-model="editedItem.legalHoldEnabled" label="是否开启对象锁定"></v-switch>
   </h-dialog>
 </template>

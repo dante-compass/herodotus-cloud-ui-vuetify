@@ -3,6 +3,7 @@
     v-model="openDialog"
     prepend-icon="mdi-memory-arrow-down"
     title="新建存储桶"
+    :loading="loading"
     @confirm="onSave"
     @after-leave="clean"
   >

@@ -22,29 +22,6 @@ const i18n = createI18n({
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 const vuetify = createVuetify({
-  defaults: {
-    VBtn: {
-      color: 'primary',
-    },
-    VTextField: {
-      color: 'primary',
-      clearable: true,
-    },
-    VSwitch: {
-      color: 'primary',
-      inset: true,
-    },
-    VList: {
-      color: 'primary',
-    },
-    VBtnToggle: {
-      color: 'primary',
-    },
-    VCard: {
-      rounded: 'xl',
-    },
-  },
-
   theme: {
     defaultTheme: 'system',
   },
@@ -60,6 +37,32 @@ const vuetify = createVuetify({
   },
 
   blueprint: md3,
+
+  defaults: {
+    VBtn: {
+      color: 'primary',
+    },
+    VBtnToggle: {
+      color: 'primary',
+    },
+    VCard: {
+      rounded: 'xl',
+    },
+    VList: {
+      color: 'primary',
+    },
+    VPagination: {
+      color: 'primary',
+    },
+    VSwitch: {
+      color: 'primary',
+      inset: true,
+    },
+    VTextField: {
+      color: 'primary',
+      clearable: true,
+    },
+  },
 });
 
 export const setupVuetify = (app: App<Element>) => {

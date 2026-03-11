@@ -48,6 +48,7 @@ const headers = ref([
   { key: 'principalName', align: 'center', title: '用户名' },
   { key: 'clientId', align: 'center', title: '客户端ID' },
   { key: 'ip', align: 'center', title: 'IP地址' },
+  { key: 'action', align: 'center', title: '操作' },
   { key: 'requestMethod', align: 'center', title: '请求方法' },
   { key: 'url', align: 'center', title: '请求路径' },
   { key: 'serviceId', align: 'center', title: '服务' },

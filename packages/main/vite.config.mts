@@ -3,7 +3,7 @@ import type { ConfigEnv, UserConfigExport } from 'vite';
 // Plugins
 import Vue from '@vitejs/plugin-vue';
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
-import Fonts from 'unplugin-fonts/vite';
+import ViteFonts from 'unplugin-fonts/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import Icons from 'unplugin-icons/vite';
@@ -71,7 +71,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           herodotus: FileSystemIconLoader('./src/assets/svg'),
         },
       }),
-      Fonts({
+      ViteFonts({
         fontsource: {
           families: [
             {
