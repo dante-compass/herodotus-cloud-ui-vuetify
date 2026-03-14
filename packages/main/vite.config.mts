@@ -172,20 +172,41 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             }
             return 'assets/[ext]/[name]-[hash].[ext]';
           },
-          manualChunks(id, { getModuleInfo }) {
-            if (id.includes('tsparticles')) {
-              return 'js/npm-tsparticles';
-            } else if (id.includes('node_modules')) {
-              const indexes = id.toString().split('node_modules/')[2].split('/');
-              let name = indexes[0];
-              if (name.includes('@')) {
-                name = name + '-' + indexes[1];
-              }
-              return 'js/npm-' + name;
-            } else if (id.includes('src')) {
-              const path = id.toString().split('src/')[1].replace(/\//g, '-');
-              return 'js/' + path;
-            }
+          advancedChunks: {
+            groups: [
+              {
+                name: 'js/npm-tsparticles',
+                test: /[\\/]node_modules[\\/]tsparticles[\\/]/,
+              },
+              {
+                name: (module) => {
+                  // @ts-ignore
+                  const id = module.id;
+                  const match = id.match(/[\\/]node_modules[\\/](.+?)(?:[\\/]|$)/);
+                  if (match) {
+                    let packageName = match[1];
+                    if (packageName.startsWith('@')) {
+                      return 'js/npm-' + packageName.replace('/', '-');
+                    }
+                    return 'js/npm-' + packageName;
+                  }
+                  return null;
+                },
+                test: /[\\/]node_modules[\\/]/,
+              },
+              {
+                name: (module) => {
+                  // @ts-ignore
+                  const id = module.id;
+                  const match = id.match(/[\\/]src[\\/](.+)\.(?:js|jsx|ts|tsx|vue)$/);
+                  if (match) {
+                    return 'js/' + match[1].replace(/[\\/]/g, '-');
+                  }
+                  return null;
+                },
+                test: /[\\/]src[\\/]/,
+              },
+            ],
           },
         },
       },
