@@ -1,5 +1,16 @@
 # @herodotus/components
 
+## 1.1.0
+
+### Minor Changes
+
+- [升级] 前端工程 Vite 版本升级至 8.0.0，改用 Rolldown 和 Oxc 替代 esbuild 和 Rollup 编译代码
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

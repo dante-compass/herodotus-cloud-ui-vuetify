@@ -37,11 +37,11 @@ const showLoading = computed(() => {
   return application.loading;
 });
 
-const beforeUnloadHandler = (e: any) => {
+const beforeUnloadHandler = (e: BeforeUnloadEvent) => {
   beforeUnloadTime.value = new Date().getTime();
 };
 
-const unloadHandler = (e: any) => {
+const pageTransitionHandler = (e: PageTransitionEvent) => {
   gapTime.value = new Date().getTime() - beforeUnloadTime.value;
   // 刷新时onbeforeunload与onunload的时间差一般都远大于5
   // 浏览器关闭
@@ -64,7 +64,7 @@ onMounted(() => {
   if (!VARIABLES.isAutoRefreshToken()) {
     // 监听浏览器关闭
     window.addEventListener('beforeunload', (e) => beforeUnloadHandler(e));
-    window.addEventListener('unload', (e) => unloadHandler(e));
+    window.addEventListener('pagehide', (e) => pageTransitionHandler(e));
   }
 });
 
@@ -74,7 +74,7 @@ onUnmounted(() => {
   }
   if (!VARIABLES.isAutoRefreshToken()) {
     window.removeEventListener('beforeunload', (e) => beforeUnloadHandler(e));
-    window.removeEventListener('unload', (e) => unloadHandler(e));
+    window.removeEventListener('pagehide', (e) => pageTransitionHandler(e));
   }
 });
 </script>

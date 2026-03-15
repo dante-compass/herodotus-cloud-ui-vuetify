@@ -1,1 +1,796 @@
-import{computed as e,createBlock as l,createCommentVNode as o,createElementBlock as t,createElementVNode as a,createSlots as n,createTextVNode as i,createVNode as s,defineComponent as u,mergeModels as r,mergeProps as d,nextTick as m,onMounted as c,onUnmounted as p,openBlock as v,ref as f,renderSlot as V,shallowRef as _,toDisplayString as g,unref as h,useModel as H,useSlots as y,watch as k,withCtx as x}from"vue";import{VAutocomplete as b,VBtn as w,VCard as C,VCardActions as I,VCardText as M,VCol as T,VContainer as D,VDatePicker as S,VDialog as $,VDivider as U,VExpandXTransition as B,VIcon as P,VLabel as Y,VListItem as L,VMenu as A,VMessages as G,VNumberInput as z,VProgressLinear as F,VRow as q,VSelect as O,VTextField as j,VTimePicker as R,VTooltip as W,VTreeview as Z}from"vuetify/components";import{debounce as E,find as N,isArray as X,isEmpty as J,kebabCase as K}from"lodash-es";import{useDate as Q}from"vuetify";import{moment as ee}from"@herodotus/core";import{tsParticles as le}from"@tsparticles/engine";import{loadBasic as oe}from"@tsparticles/basic";import{loadParticlesLinksInteraction as te}from"@tsparticles/interaction-particles-links";import{defineStore as ae}from"pinia";import*as ne from"@mdi/js";var ie=/* @__PURE__ */u({name:"HButton",components:{VBtn:w,VIcon:P},__name:"HButton",props:{icon:{},color:{},tooltip:{},location:{default:"bottom"}},setup(t){const a=t,n=y(),s=e(()=>!J(a.icon)),u=e(()=>J(n.default)?void 0:a.color);return(e,a)=>(v(),l(h(w),d({icon:s.value,color:u.value},e.$attrs),{append:x(()=>[V(e.$slots,"append")]),prepend:x(()=>[V(e.$slots,"prepend")]),loader:x(()=>[V(e.$slots,"loader")]),default:x(()=>[!e.$slots.default&&s.value?(v(),l(h(P),{key:0,icon:t.icon,color:t.color},null,8,["icon","color"])):V(e.$slots,"default",{key:1}),t.tooltip?(v(),l(h(W),{key:2,location:t.location,activator:"parent"},{default:x(()=>[i(g(t.tooltip),1)]),_:1},8,["location"])):o("",!0)]),_:3},16,["icon","color"]))}});ie.install=e=>{e.component(ie.name,ie)};var se=/* @__PURE__ */u({name:"HDatePicker",components:{VMenu:A,VTooltip:W,VIcon:P,VDatePicker:S},__name:"HDatePicker",props:{modelValue:{type:String},modelModifiers:{}},emits:["update:modelValue"],setup(o){const t=H(o,"modelValue"),n=Q(),i=e({get:()=>t.value?n.parseISO(t.value):"",set:e=>{t.value=e?ee(e).format("YYYY-MM-DD"):e}});return(e,o)=>(v(),l(h(A),d({"close-on-content-click":!1,activator:"parent"},e.$attrs),{activator:x(({props:e})=>[s(h(W),{location:"bottom"},{activator:x(({props:l})=>[s(h(P),d({icon:"mdi-calendar"},d(e,l)),null,16)]),default:x(()=>[o[1]||(o[1]=a("span",null,"点击设置日期",-1))]),_:2},1024)]),default:x(()=>[s(h(S),{modelValue:i.value,"onUpdate:modelValue":o[0]||(o[0]=e=>i.value=e),"show-week":"","show-adjacent-months":"","first-day-of-week":"1","weeks-in-month":"dynamic"},null,8,["modelValue"])]),_:1},16))}}),ue=/* @__PURE__ */u({name:"HDate",components:{VTextField:j,HDatePicker:se},__name:"HDate",props:{modelValue:{type:String},modelModifiers:{}},emits:["update:modelValue"],setup(e){const o=H(e,"modelValue");return(e,t)=>(v(),l(h(j),d({modelValue:o.value,"onUpdate:modelValue":t[1]||(t[1]=e=>o.value=e),glow:""},e.$attrs),{"prepend-inner":x(()=>[s(se,{modelValue:o.value,"onUpdate:modelValue":t[0]||(t[0]=e=>o.value=e)},null,8,["modelValue"])]),_:1},16,["modelValue"]))}}),re=/* @__PURE__ */u({name:"HTimePicker",components:{VMenu:A,VTooltip:W,VIcon:P,VTimePicker:R},__name:"HTimePicker",props:{modelValue:{},modelModifiers:{}},emits:["update:modelValue"],setup(e){const o=H(e,"modelValue");return(e,t)=>(v(),l(h(A),d({"close-on-content-click":!1,activator:"parent","min-width":"0"},e.$attrs),{activator:x(({props:e})=>[s(h(W),{location:"bottom"},{activator:x(({props:l})=>[s(h(P),d({icon:"mdi-clock-time-four-outline"},d(e,l)),null,16)]),default:x(()=>[t[1]||(t[1]=a("span",null,"点击设置日期",-1))]),_:2},1024)]),default:x(()=>[s(h(R),{modelValue:o.value,"onUpdate:modelValue":t[0]||(t[0]=e=>o.value=e),"use-seconds":"",format:"24hr"},null,8,["modelValue"])]),_:1},16))}}),de=/* @__PURE__ */u({name:"HDateTime",components:{VTextField:j,HDatePicker:se,HTimePicker:re},__name:"HDateTime",props:{modelValue:{},modelModifiers:{}},emits:["update:modelValue"],setup(e){const o=H(e,"modelValue"),t=_(""),a=_("");return k(o,e=>{if(e){const l=ee(e);a.value=l.format("YYYY-MM-DD"),t.value=l.format("HH:mm:ss")}}),k([a,t],([e,l])=>{var t,a;o.value=(a=l,ee(`${(t=e)&&""!==t.trim()?t:"1970-01-01"} ${a&&""!==a.trim()?a:"00:00:00"}`).format("YYYY-MM-DD HH:mm:ss"))}),(e,n)=>(v(),l(h(j),d({modelValue:o.value,"onUpdate:modelValue":n[2]||(n[2]=e=>o.value=e),glow:""},e.$attrs),{"prepend-inner":x(()=>[s(se,{modelValue:a.value,"onUpdate:modelValue":n[0]||(n[0]=e=>a.value=e)},null,8,["modelValue"])]),"append-inner":x(()=>[s(re,{modelValue:t.value,"onUpdate:modelValue":n[1]||(n[1]=e=>t.value=e)},null,8,["modelValue"])]),_:1},16,["modelValue"]))}});const me=[{title:"天",value:"days"},{title:"小时",value:"hours"},{title:"分",value:"minutes"},{title:"秒",value:"seconds"}];var ce=/* @__PURE__ */u({name:"HDuration",components:{VContainer:D,VRow:q,VCol:T,VNumberInput:z,VSelect:O},__name:"HDuration",props:{modelValue:{required:!0},modelModifiers:{}},emits:["update:modelValue"],setup(e){const o=H(e,"modelValue"),t=_(0),a=_(),n=_(me),i=(e,l)=>{if(e&&l){const t=l;o.value=ee.duration(e,t).toISOString()}};return k(()=>o.value,e=>{e&&(e=>{if(e){let l=ee.duration(e,"second");if(l){const e=l._data;for(let l in e){let o=l,n=e[o];n&&(t.value=n,a.value=o)}}}})(e)},{immediate:!0}),k(a,e=>{e&&i(t.value,e)}),k(t,e=>{e&&i(e,a.value)}),(e,o)=>(v(),l(h(D),{fluid:"",class:"pa-0"},{default:x(()=>[s(h(q),null,{default:x(()=>[s(h(T),null,{default:x(()=>[s(h(z),{modelValue:t.value,"onUpdate:modelValue":o[0]||(o[0]=e=>t.value=e),label:"数值",placeholder:"请输入数值","control-variant":"split",inset:""},null,8,["modelValue"])]),_:1}),s(h(T),null,{default:x(()=>[s(h(O),{modelValue:a.value,"onUpdate:modelValue":o[1]||(o[1]=e=>a.value=e),items:n.value,label:"单位",clearable:""},null,8,["modelValue","items"])]),_:1})]),_:1})]),_:1}))}}),pe=/* @__PURE__ */u({name:"HTime",components:{VTextField:j,HTimePicker:re},__name:"HTime",props:{modelValue:{},modelModifiers:{}},emits:["update:modelValue"],setup(e){const o=H(e,"modelValue");return(e,t)=>(v(),l(h(j),d({modelValue:o.value,"onUpdate:modelValue":t[1]||(t[1]=e=>o.value=e),glow:""},e.$attrs),{"prepend-inner":x(()=>[s(re,{modelValue:o.value,"onUpdate:modelValue":t[0]||(t[0]=e=>o.value=e)},null,8,["modelValue"])]),_:1},16,["modelValue"]))}});ue.install=e=>{e.component(ue.name,ue)},de.install=e=>{e.component(de.name,de)},ce.install=e=>{e.component(ce.name,ce)},pe.install=e=>{e.component(pe.name,pe)};var ve=/* @__PURE__ */u({name:"HDialog",components:{VDialog:$,HButton:ie},__name:"HDialog",props:/* @__PURE__ */r({loading:{type:Boolean,default:!1},closed:{type:Boolean,default:!1},hideActions:{type:Boolean,default:!1},maxWidth:{default:500},confirmLabel:{default:"确认"}},{modelValue:{type:Boolean,default:!1,required:!0},modelModifiers:{}}),emits:/* @__PURE__ */r(["close","cancel","confirm"],["update:modelValue"]),setup(e,{emit:t}){const a=t,i=H(e,"modelValue"),u=()=>{i.value=!1,a("close")},r=()=>{i.value=!1,a("cancel")},m=()=>{a("confirm")};return(t,a)=>(v(),l(h($),{modelValue:i.value,"onUpdate:modelValue":a[0]||(a[0]=e=>i.value=e),"max-width":e.maxWidth,persistent:""},{default:x(()=>[s(h(C),d({disabled:e.loading,loading:e.loading},t.$attrs),n({loader:x(({isActive:e})=>[s(h(F),{active:e,height:"4",indeterminate:""},null,8,["active"])]),default:x(()=>[s(h(U)),s(h(M),{class:"pb-2"},{default:x(()=>[V(t.$slots,"default")]),_:3}),e.hideActions?o("",!0):(v(),l(h(I),{key:0},{default:x(()=>[s(h(w),{text:"取消",color:"red",onClick:r}),s(h(w),{text:e.confirmLabel,onClick:m},null,8,["text"])]),_:1}))]),_:2},[e.closed?{name:"append",fn:x(()=>[s(h(ie),{icon:"mdi-close",tooltip:"关闭",onClick:u,size:"x-small",variant:"text"})]),key:"0"}:void 0]),1040,["disabled","loading"])]),_:3},8,["modelValue","max-width"]))}});ve.install=e=>{e.component(ve.name,ve)};const fe={particles:{number:{density:{enable:!0,width:1920,height:1080},value:100},links:{distance:125,enable:!0,triangles:{enable:!0,opacity:.1}},move:{enable:!0,speed:5},size:{value:1},shape:{type:"circle"}}};var Ve=["id"],_e=/* @__PURE__ */u({name:"HParticles",__name:"HParticles",setup(e){const l=_("HParticles");let o;return c(()=>{m(async()=>{le.init(),await(async(e,l=!0)=>{await oe(e,!1),await te(e,!1),await e.addPreset("triangles",fe,l)})(le),o=await le.load({id:l.value,options:{fullScreen:{zIndex:1},preset:"triangles"}})})}),p(()=>{o&&(o.destroy(),o=void 0)}),(e,o)=>(v(),t("div",{id:l.value},[V(e.$slots,"default")],8,Ve))}});_e.install=e=>{e.component(_e.name,_e)};var ge={class:"d-flex mb-3 w-100"},he={class:"flex-1-1-0"},He=/* @__PURE__ */u({name:"HLabel",components:{VLabel:Y,VMessages:G},__name:"HLabel",props:{title:{},text:{}},setup(n){const i=n,u=e(()=>!!i.text);return(e,i)=>(v(),t("div",ge,[a("div",he,[s(h(Y),{text:n.title,class:"my-1 font-weight-medium"},{default:x(()=>[V(e.$slots,"title")]),_:3},8,["text"]),u.value?(v(),l(h(G),{key:0,messages:n.text,active:u.value},null,8,["messages","active"])):o("",!0)]),V(e.$slots,"default")]))}});He.install=e=>{e.component(He.name,He)};const ye=ae("MdiIcon",{state:()=>({icons:[]}),getters:{getAllIcons:e=>e.icons},actions:{initialize(){J(this.icons)&&(this.icons=Object.keys(ne).map(e=>K(e)))},search(e){if(J(e.trim()))return this.icons;const l=e.toLowerCase();return this.getAllIcons.filter(e=>e.toLowerCase().match(l))}}});var ke=/* @__PURE__ */u({name:"HMdiIconSelect",components:{VAutocomplete:b,VExpandXTransition:B,VListItem:L,VIcon:P},__name:"HMdiIconSelect",props:{modelValue:{required:!0},modelModifiers:{}},emits:["update:modelValue"],setup(e){const t=H(e,"modelValue"),a=_([]),n=_(!1),i=_(""),u=ye(),r=E((e,l)=>{n.value=!0,l(u.search(e)),n.value=!1},500);return c(()=>{n.value=!0,u.initialize(),a.value=u.getAllIcons,n.value=!1}),k(i,e=>{J(e)?a.value=u.getAllIcons:r(e,e=>{a.value=e})}),(e,u)=>(v(),l(h(b),d({modelValue:t.value,"onUpdate:modelValue":u[0]||(u[0]=e=>t.value=e),search:i.value,"onUpdate:search":u[1]||(u[1]=e=>i.value=e),items:a.value,loading:n.value,clearable:"","single-line":""},e.$attrs),{"prepend-inner":x(()=>[s(h(B),null,{default:x(()=>[t.value?(v(),l(h(P),{key:0,icon:t.value,start:""},null,8,["icon"])):o("",!0)]),_:1})]),item:x(({props:e,internalItem:l})=>[s(h(L),d(e,{"prepend-icon":l.value,title:l.value}),null,16,["prepend-icon","title"])]),_:1},16,["modelValue","search","items","loading"]))}}),xe=/* @__PURE__ */u({name:"HTreeSelect",components:{VMenu:A,VIcon:P,VTreeview:Z,VTextField:j},__name:"HTreeSelect",props:/* @__PURE__ */r({items:{}},{modelValue:{required:!0},modelModifiers:{}}),emits:["update:modelValue"],setup(o){const t=o,a=H(o,"modelValue"),n=f(),i=_(!1),u=_(!1),r=f([]),m=_(""),c=()=>{i.value=!0},p=e=>{i.value=!i.value},V=()=>{u.value&&n.value?.focus()},g=()=>{},y=e=>{let l=[];for(const o of e){const{children:e,...t}=o;e&&e.length&&(l=l.concat(y(e))),l.push(t)}return l},b=e=>{const l=N(r.value,l=>l.id==e);l&&(m.value=l.name)},w=e({get:()=>a.value?[a.value]:[],set:e=>{e&&X(e)&&e.length>0?a.value=e[0]:a.value=""}});return k(()=>t.items,e=>{var l;J(e)||!J(l=e)&&J(r.value)&&(r.value=y(l),!m.value&&a.value&&b(a.value))},{immediate:!0}),k(a,(e,l)=>{e&&(b(e),i.value&&(i.value=!1))},{immediate:!0}),k(u,(e,l)=>{e||e===l||(i.value=!1)}),(e,t)=>(v(),l(h(j),d({ref_key:"vTextFieldRef",ref:n,modelValue:m.value,"onUpdate:modelValue":t[3]||(t[3]=e=>m.value=e),focused:u.value,"onUpdate:focused":t[4]||(t[4]=e=>u.value=e),class:["v-combobox",{"v-combobox--active-menu":i.value}],"onMousedown:control":c,onAfterLeave:V},e.$attrs),{"append-inner":x(()=>[s(h(P),{icon:"mdi-menu-down",onMousedown:p,onClick:g,class:"v-combobox__menu-icon",tabindex:"-1"})]),default:x(()=>[s(h(A),{modelValue:i.value,"onUpdate:modelValue":t[2]||(t[2]=e=>i.value=e),activator:"parent","content-class":"v-combobox__content","open-on-click":!1,"close-on-content-click":!1,"max-height":"310"},{default:x(()=>[s(h(Z),{activated:w.value,"onUpdate:activated":t[0]||(t[0]=e=>w.value=e),items:o.items,"item-value":"id","item-title":"name",activatable:"","indent-lines":"default","separate-roots":"",onMousedown:t[1]||(t[1]=e=>e.preventDefault())},null,8,["activated","items"])]),_:1},8,["modelValue"])]),_:1},16,["modelValue","focused","class"]))}});ke.install=e=>{e.component(ke.name,ke)},xe.install=e=>{e.component(xe.name,xe)};var be={version:"1.1",xmlns:"http://www.w3.org/2000/svg","xmlns:xlink":"http://www.w3.org/1999/xlink",height:"896",width:"967.8852157128662"},we={id:"linearGradient-3",x1:"0.5",y1:"0",x2:"0.5",y2:"1"},Ce=["stop-color"],Ie=["stop-color"],Me=/* @__PURE__ */u({name:"HSignInCornerBottom",__name:"HSignInCornerBottom",props:{startColor:{default:"#28aff0"},endColor:{default:"#120fc4"}},setup:e=>(l,o)=>(v(),t("svg",be,[a("defs",null,[o[0]||(o[0]=a("path",{id:"path-2",opacity:"1","fill-rule":"evenodd",d:"M896,448 C1142.6325445712241,465.5747656464056 695.2579309733121,896 448,896\n\t\t\tC200.74206902668806,896 5.684341886080802e-14,695.2579309733121 0,448.0000000000001 C0,200.74206902668806\n\t\t\t200.74206902668791,5.684341886080802e-14 447.99999999999994,0 C695.2579309733121,0 475,418 896,448Z"},null,-1)),a("linearGradient",we,[a("stop",{offset:"0","stop-color":e.startColor,"stop-opacity":"1"},null,8,Ce),a("stop",{offset:"1","stop-color":e.endColor,"stop-opacity":"1"},null,8,Ie)])]),o[1]||(o[1]=a("g",{opacity:"1"},[a("use",{"xlink:href":"#path-2",fill:"url(#linearGradient-3)","fill-opacity":"1"})],-1))]))}),Te={height:"1337",width:"1337"},De={id:"linearGradient-2",x1:"0.79",y1:"0.62",x2:"0.21",y2:"0.86"},Se=["stop-color"],$e=["stop-color"],Ue=/* @__PURE__ */u({name:"HSignInCornerTop",__name:"HSignInCornerTop",props:{startColor:{default:"#28aff0"},endColor:{default:"#120fc4"}},setup:e=>(l,o)=>(v(),t("svg",Te,[a("defs",null,[o[0]||(o[0]=a("path",{id:"path-1",opacity:"1","fill-rule":"evenodd",d:"M1337,668.5 C1337,1037.455193874239 1037.455193874239,1337 668.5,1337 C523.6725684305388,1337 337,1236 370.50000000000006,1094 C434.03835568300906,824.6732385973953 6.906089672974592e-14,892.6277623047779 0,668.5000000000001 C0,299.5448061257611 299.5448061257609,1.1368683772161603e-13 668.4999999999999,0 C1037.455193874239,0 1337,299.544806125761 1337,668.5Z"},null,-1)),a("linearGradient",De,[a("stop",{offset:"0","stop-color":e.startColor,"stop-opacity":"1"},null,8,Se),a("stop",{offset:"1","stop-color":e.endColor,"stop-opacity":"1"},null,8,$e)])]),o[1]||(o[1]=a("g",{opacity:"1"},[a("use",{"xlink:href":"#path-1",fill:"url(#linearGradient-2)","fill-opacity":"1"})],-1))]))}),Be={class:"corner-top"},Pe={class:"corner-bottom"},Ye=/* @__PURE__ */((e,l)=>{const o=e.__vccOpts||e;for(const[t,a]of l)o[t]=a;return o})(/* @__PURE__ */u({name:"HSignInBackground",components:{HSignInCornerBottom:Me,HSignInCornerTop:Ue},__name:"HSignInBackground",props:{startColor:{},endColor:{}},setup:e=>(l,o)=>(v(),t("div",null,[a("div",Be,[s(Ue,{"start-color":e.startColor,"end-color":e.endColor},null,8,["start-color","end-color"])]),a("div",Pe,[s(Me,{"start-color":e.endColor,"end-color":e.startColor},null,8,["start-color","end-color"])])]))}),[["__scopeId","data-v-b2761882"]]);Ye.install=e=>{e.component(Ye.name,Ye)};var Le=[ie,ue,de,ve,ce,pe,ke,_e,He,Ye,xe],Ae={install:e=>{Le.map(l=>l.install(e))}};export{ie as HButton,ue as HDate,de as HDateTime,ve as HDialog,ce as HDuration,He as HLabel,ke as HMdiIconSelect,_e as HParticles,Ye as HSignInBackground,pe as HTime,xe as HTreeSelect,Ae as default};
+import { computed as e, createBlock as t, createCommentVNode as n, createElementBlock as r, createElementVNode as i, createSlots as a, createTextVNode as o, createVNode as s, defineComponent as c, mergeModels as l, mergeProps as u, nextTick as d, onMounted as f, onUnmounted as p, openBlock as m, ref as ee, renderSlot as h, shallowRef as g, toDisplayString as _, unref as v, useModel as y, useSlots as b, watch as x, withCtx as S } from "vue";
+import { VAutocomplete as C, VBtn as w, VCard as T, VCardActions as te, VCardText as ne, VCol as E, VContainer as D, VDatePicker as O, VDialog as k, VDivider as re, VExpandXTransition as ie, VIcon as A, VLabel as ae, VListItem as oe, VMenu as j, VMessages as se, VNumberInput as ce, VProgressLinear as le, VRow as M, VSelect as N, VTextField as P, VTimePicker as F, VTooltip as I, VTreeview as L } from "vuetify/components";
+import { debounce as ue, find as de, isArray as fe, isEmpty as R, kebabCase as pe } from "lodash-es";
+import { useDate as me } from "vuetify";
+import { moment as z } from "@herodotus/core";
+import { tsParticles as B } from "@tsparticles/engine";
+import { loadBasic as he } from "@tsparticles/basic";
+import { loadParticlesLinksInteraction as ge } from "@tsparticles/interaction-particles-links";
+import { defineStore as _e } from "pinia";
+import * as ve from "@mdi/js";
+//#endregion
+//#region src/HButton/HButton.vue
+var V = /* @__PURE__ */ c({
+	name: "HButton",
+	components: {
+		VBtn: w,
+		VIcon: A
+	},
+	__name: "HButton",
+	props: {
+		icon: {},
+		color: {},
+		tooltip: {},
+		location: { default: "bottom" }
+	},
+	setup(r) {
+		let i = r, a = b(), s = e(() => !R(i.icon)), c = e(() => R(a.default) ? void 0 : i.color);
+		return (e, i) => (m(), t(v(w), u({
+			icon: s.value,
+			color: c.value
+		}, e.$attrs), {
+			append: S(() => [h(e.$slots, "append")]),
+			prepend: S(() => [h(e.$slots, "prepend")]),
+			loader: S(() => [h(e.$slots, "loader")]),
+			default: S(() => [!e.$slots.default && s.value ? (m(), t(v(A), {
+				key: 0,
+				icon: r.icon,
+				color: r.color
+			}, null, 8, ["icon", "color"])) : h(e.$slots, "default", { key: 1 }), r.tooltip ? (m(), t(v(I), {
+				key: 2,
+				location: r.location,
+				activator: "parent"
+			}, {
+				default: S(() => [o(_(r.tooltip), 1)]),
+				_: 1
+			}, 8, ["location"])) : n("", !0)]),
+			_: 3
+		}, 16, ["icon", "color"]));
+	}
+});
+//#endregion
+//#region src/HButton/index.ts
+V.install = (e) => {
+	e.component(V.name, V);
+};
+//#endregion
+//#region src/HDateTime/HDatePicker.vue
+var H = /* @__PURE__ */ c({
+	name: "HDatePicker",
+	components: {
+		VMenu: j,
+		VTooltip: I,
+		VIcon: A,
+		VDatePicker: O
+	},
+	__name: "HDatePicker",
+	props: {
+		modelValue: { type: String },
+		modelModifiers: {}
+	},
+	emits: ["update:modelValue"],
+	setup(n) {
+		let r = y(n, "modelValue"), a = me(), o = e({
+			get: () => r.value ? a.parseISO(r.value) : "",
+			set: (e) => {
+				e ? r.value = z(e).format("YYYY-MM-DD") : r.value = e;
+			}
+		});
+		return (e, n) => (m(), t(v(j), u({
+			"close-on-content-click": !1,
+			activator: "parent"
+		}, e.$attrs), {
+			activator: S(({ props: e }) => [s(v(I), { location: "bottom" }, {
+				activator: S(({ props: t }) => [s(v(A), u({ icon: "mdi-calendar" }, u(e, t)), null, 16)]),
+				default: S(() => [n[1] ||= i("span", null, "点击设置日期", -1)]),
+				_: 2
+			}, 1024)]),
+			default: S(() => [s(v(O), {
+				modelValue: o.value,
+				"onUpdate:modelValue": n[0] ||= (e) => o.value = e,
+				"show-week": "",
+				"show-adjacent-months": "",
+				"first-day-of-week": "1",
+				"weeks-in-month": "dynamic"
+			}, null, 8, ["modelValue"])]),
+			_: 1
+		}, 16));
+	}
+}), U = /* @__PURE__ */ c({
+	name: "HDate",
+	components: {
+		VTextField: P,
+		HDatePicker: H
+	},
+	__name: "HDate",
+	props: {
+		modelValue: { type: String },
+		modelModifiers: {}
+	},
+	emits: ["update:modelValue"],
+	setup(e) {
+		let n = y(e, "modelValue");
+		return (e, r) => (m(), t(v(P), u({
+			modelValue: n.value,
+			"onUpdate:modelValue": r[1] ||= (e) => n.value = e,
+			glow: ""
+		}, e.$attrs), {
+			"prepend-inner": S(() => [s(H, {
+				modelValue: n.value,
+				"onUpdate:modelValue": r[0] ||= (e) => n.value = e
+			}, null, 8, ["modelValue"])]),
+			_: 1
+		}, 16, ["modelValue"]));
+	}
+}), W = /* @__PURE__ */ c({
+	name: "HTimePicker",
+	components: {
+		VMenu: j,
+		VTooltip: I,
+		VIcon: A,
+		VTimePicker: F
+	},
+	__name: "HTimePicker",
+	props: {
+		modelValue: {},
+		modelModifiers: {}
+	},
+	emits: ["update:modelValue"],
+	setup(e) {
+		let n = y(e, "modelValue");
+		return (e, r) => (m(), t(v(j), u({
+			"close-on-content-click": !1,
+			activator: "parent",
+			"min-width": "0"
+		}, e.$attrs), {
+			activator: S(({ props: e }) => [s(v(I), { location: "bottom" }, {
+				activator: S(({ props: t }) => [s(v(A), u({ icon: "mdi-clock-time-four-outline" }, u(e, t)), null, 16)]),
+				default: S(() => [r[1] ||= i("span", null, "点击设置日期", -1)]),
+				_: 2
+			}, 1024)]),
+			default: S(() => [s(v(F), {
+				modelValue: n.value,
+				"onUpdate:modelValue": r[0] ||= (e) => n.value = e,
+				"use-seconds": "",
+				format: "24hr"
+			}, null, 8, ["modelValue"])]),
+			_: 1
+		}, 16));
+	}
+}), G = /* @__PURE__ */ c({
+	name: "HDateTime",
+	components: {
+		VTextField: P,
+		HDatePicker: H,
+		HTimePicker: W
+	},
+	__name: "HDateTime",
+	props: {
+		modelValue: {},
+		modelModifiers: {}
+	},
+	emits: ["update:modelValue"],
+	setup(e) {
+		let n = y(e, "modelValue"), r = g(""), i = g(""), a = (e, t) => z(`${e && e.trim() !== "" ? e : "1970-01-01"} ${t && t.trim() !== "" ? t : "00:00:00"}`).format("YYYY-MM-DD HH:mm:ss");
+		return x(n, (e) => {
+			if (e) {
+				let t = z(e);
+				i.value = t.format("YYYY-MM-DD"), r.value = t.format("HH:mm:ss");
+			}
+		}), x([i, r], ([e, t]) => {
+			n.value = a(e, t);
+		}), (e, a) => (m(), t(v(P), u({
+			modelValue: n.value,
+			"onUpdate:modelValue": a[2] ||= (e) => n.value = e,
+			glow: ""
+		}, e.$attrs), {
+			"prepend-inner": S(() => [s(H, {
+				modelValue: i.value,
+				"onUpdate:modelValue": a[0] ||= (e) => i.value = e
+			}, null, 8, ["modelValue"])]),
+			"append-inner": S(() => [s(W, {
+				modelValue: r.value,
+				"onUpdate:modelValue": a[1] ||= (e) => r.value = e
+			}, null, 8, ["modelValue"])]),
+			_: 1
+		}, 16, ["modelValue"]));
+	}
+}), ye = [
+	{
+		title: "天",
+		value: "days"
+	},
+	{
+		title: "小时",
+		value: "hours"
+	},
+	{
+		title: "分",
+		value: "minutes"
+	},
+	{
+		title: "秒",
+		value: "seconds"
+	}
+], K = /* @__PURE__ */ c({
+	name: "HDuration",
+	components: {
+		VContainer: D,
+		VRow: M,
+		VCol: E,
+		VNumberInput: ce,
+		VSelect: N
+	},
+	__name: "HDuration",
+	props: {
+		modelValue: { required: !0 },
+		modelModifiers: {}
+	},
+	emits: ["update:modelValue"],
+	setup(e) {
+		let n = y(e, "modelValue"), r = g(0), i = g(), a = g(ye), o = (e) => {
+			if (e) {
+				let t = z.duration(e, "second");
+				if (t) {
+					let e = t._data;
+					for (let t in e) {
+						let n = t, a = e[n];
+						a && (r.value = a, i.value = n);
+					}
+				}
+			}
+		}, c = (e, t) => {
+			if (e && t) {
+				let r = t;
+				n.value = z.duration(e, r).toISOString();
+			}
+		};
+		return x(() => n.value, (e) => {
+			e && o(e);
+		}, { immediate: !0 }), x(i, (e) => {
+			e && c(r.value, e);
+		}), x(r, (e) => {
+			e && c(e, i.value);
+		}), (e, n) => (m(), t(v(D), {
+			fluid: "",
+			class: "pa-0"
+		}, {
+			default: S(() => [s(v(M), null, {
+				default: S(() => [s(v(E), null, {
+					default: S(() => [s(v(ce), {
+						modelValue: r.value,
+						"onUpdate:modelValue": n[0] ||= (e) => r.value = e,
+						label: "数值",
+						placeholder: "请输入数值",
+						"control-variant": "split",
+						inset: ""
+					}, null, 8, ["modelValue"])]),
+					_: 1
+				}), s(v(E), null, {
+					default: S(() => [s(v(N), {
+						modelValue: i.value,
+						"onUpdate:modelValue": n[1] ||= (e) => i.value = e,
+						items: a.value,
+						label: "单位",
+						clearable: ""
+					}, null, 8, ["modelValue", "items"])]),
+					_: 1
+				})]),
+				_: 1
+			})]),
+			_: 1
+		}));
+	}
+}), q = /* @__PURE__ */ c({
+	name: "HTime",
+	components: {
+		VTextField: P,
+		HTimePicker: W
+	},
+	__name: "HTime",
+	props: {
+		modelValue: {},
+		modelModifiers: {}
+	},
+	emits: ["update:modelValue"],
+	setup(e) {
+		let n = y(e, "modelValue");
+		return (e, r) => (m(), t(v(P), u({
+			modelValue: n.value,
+			"onUpdate:modelValue": r[1] ||= (e) => n.value = e,
+			glow: ""
+		}, e.$attrs), {
+			"prepend-inner": S(() => [s(W, {
+				modelValue: n.value,
+				"onUpdate:modelValue": r[0] ||= (e) => n.value = e
+			}, null, 8, ["modelValue"])]),
+			_: 1
+		}, 16, ["modelValue"]));
+	}
+});
+U.install = (e) => {
+	e.component(U.name, U);
+}, G.install = (e) => {
+	e.component(G.name, G);
+}, K.install = (e) => {
+	e.component(K.name, K);
+}, q.install = (e) => {
+	e.component(q.name, q);
+};
+//#endregion
+//#region src/HDialog/HDialog.vue
+var J = /* @__PURE__ */ c({
+	name: "HDialog",
+	components: {
+		VDialog: k,
+		HButton: V
+	},
+	__name: "HDialog",
+	props: /* @__PURE__ */ l({
+		loading: {
+			type: Boolean,
+			default: !1
+		},
+		closed: {
+			type: Boolean,
+			default: !1
+		},
+		hideActions: {
+			type: Boolean,
+			default: !1
+		},
+		maxWidth: { default: 500 },
+		confirmLabel: { default: "确认" }
+	}, {
+		modelValue: {
+			type: Boolean,
+			default: !1,
+			required: !0
+		},
+		modelModifiers: {}
+	}),
+	emits: /* @__PURE__ */ l([
+		"close",
+		"cancel",
+		"confirm"
+	], ["update:modelValue"]),
+	setup(e, { emit: r }) {
+		let i = r, o = y(e, "modelValue"), c = () => {
+			o.value = !1, i("close");
+		}, l = () => {
+			o.value = !1, i("cancel");
+		}, d = () => {
+			i("confirm");
+		};
+		return (r, i) => (m(), t(v(k), {
+			modelValue: o.value,
+			"onUpdate:modelValue": i[0] ||= (e) => o.value = e,
+			"max-width": e.maxWidth,
+			persistent: ""
+		}, {
+			default: S(() => [s(v(T), u({
+				disabled: e.loading,
+				loading: e.loading
+			}, r.$attrs), a({
+				loader: S(({ isActive: e }) => [s(v(le), {
+					active: e,
+					height: "4",
+					indeterminate: ""
+				}, null, 8, ["active"])]),
+				default: S(() => [
+					s(v(re)),
+					s(v(ne), { class: "pb-2" }, {
+						default: S(() => [h(r.$slots, "default")]),
+						_: 3
+					}),
+					e.hideActions ? n("", !0) : (m(), t(v(te), { key: 0 }, {
+						default: S(() => [s(v(w), {
+							text: "取消",
+							color: "red",
+							onClick: l
+						}), s(v(w), {
+							text: e.confirmLabel,
+							onClick: d
+						}, null, 8, ["text"])]),
+						_: 1
+					}))
+				]),
+				_: 2
+			}, [e.closed ? {
+				name: "append",
+				fn: S(() => [s(v(V), {
+					icon: "mdi-close",
+					tooltip: "关闭",
+					onClick: c,
+					size: "x-small",
+					variant: "text"
+				})]),
+				key: "0"
+			} : void 0]), 1040, ["disabled", "loading"])]),
+			_: 3
+		}, 8, ["modelValue", "max-width"]));
+	}
+});
+//#endregion
+//#region src/HDialog/index.ts
+J.install = (e) => {
+	e.component(J.name, J);
+};
+//#endregion
+//#region src/HParticles/particles.ts
+var be = { particles: {
+	number: {
+		density: {
+			enable: !0,
+			width: 1920,
+			height: 1080
+		},
+		value: 100
+	},
+	links: {
+		distance: 125,
+		enable: !0,
+		triangles: {
+			enable: !0,
+			opacity: .1
+		}
+	},
+	move: {
+		enable: !0,
+		speed: 5
+	},
+	size: { value: 1 },
+	shape: { type: "circle" }
+} }, xe = ["id"], Y = /* @__PURE__ */ c({
+	name: "HParticles",
+	__name: "HParticles",
+	setup(e) {
+		let t = g("HParticles"), n, i = async (e, t = !0) => {
+			await he(e, !1), await ge(e, !1), await e.addPreset("triangles", be, t);
+		};
+		return f(() => {
+			d(async () => {
+				B.init(), await i(B), n = await B.load({
+					id: t.value,
+					options: {
+						fullScreen: { zIndex: 1 },
+						preset: "triangles"
+					}
+				});
+			});
+		}), p(() => {
+			n &&= (n.destroy(), void 0);
+		}), (e, n) => (m(), r("div", { id: t.value }, [h(e.$slots, "default")], 8, xe));
+	}
+});
+//#endregion
+//#region src/HParticles/index.ts
+Y.install = (e) => {
+	e.component(Y.name, Y);
+};
+//#endregion
+//#region src/HLabel/HLabel.vue?vue&type=script&setup=true&lang.ts
+var Se = { class: "d-flex mb-3 w-100" }, Ce = { class: "flex-1-1-0" }, X = /* @__PURE__ */ c({
+	name: "HLabel",
+	components: {
+		VLabel: ae,
+		VMessages: se
+	},
+	__name: "HLabel",
+	props: {
+		title: {},
+		text: {}
+	},
+	setup(a) {
+		let o = a, c = e(() => !!o.text);
+		return (e, o) => (m(), r("div", Se, [i("div", Ce, [s(v(ae), {
+			text: a.title,
+			class: "my-1 font-weight-medium"
+		}, {
+			default: S(() => [h(e.$slots, "title")]),
+			_: 3
+		}, 8, ["text"]), c.value ? (m(), t(v(se), {
+			key: 0,
+			messages: a.text,
+			active: c.value
+		}, null, 8, ["messages", "active"])) : n("", !0)]), h(e.$slots, "default")]));
+	}
+});
+//#endregion
+//#region src/HLabel/index.ts
+X.install = (e) => {
+	e.component(X.name, X);
+};
+//#endregion
+//#region src/lib/stores/mdiicon.ts
+var we = _e("MdiIcon", {
+	state: () => ({ icons: [] }),
+	getters: { getAllIcons: (e) => e.icons },
+	actions: {
+		initialize() {
+			R(this.icons) && (this.icons = Object.keys(ve).map((e) => pe(e)));
+		},
+		search(e) {
+			if (R(e.trim())) return this.icons;
+			let t = e.toLowerCase();
+			return this.getAllIcons.filter((e) => e.toLowerCase().match(t));
+		}
+	}
+}), Z = /* @__PURE__ */ c({
+	name: "HMdiIconSelect",
+	components: {
+		VAutocomplete: C,
+		VExpandXTransition: ie,
+		VListItem: oe,
+		VIcon: A
+	},
+	__name: "HMdiIconSelect",
+	props: {
+		modelValue: { required: !0 },
+		modelModifiers: {}
+	},
+	emits: ["update:modelValue"],
+	setup(e) {
+		let r = y(e, "modelValue"), i = g([]), a = g(!1), o = g(""), c = we(), l = ue((e, t) => {
+			a.value = !0, t(c.search(e)), a.value = !1;
+		}, 500);
+		return f(() => {
+			a.value = !0, c.initialize(), i.value = c.getAllIcons, a.value = !1;
+		}), x(o, (e) => {
+			R(e) ? i.value = c.getAllIcons : l(e, (e) => {
+				i.value = e;
+			});
+		}), (e, c) => (m(), t(v(C), u({
+			modelValue: r.value,
+			"onUpdate:modelValue": c[0] ||= (e) => r.value = e,
+			search: o.value,
+			"onUpdate:search": c[1] ||= (e) => o.value = e,
+			items: i.value,
+			loading: a.value,
+			clearable: "",
+			"single-line": ""
+		}, e.$attrs), {
+			"prepend-inner": S(() => [s(v(ie), null, {
+				default: S(() => [r.value ? (m(), t(v(A), {
+					key: 0,
+					icon: r.value,
+					start: ""
+				}, null, 8, ["icon"])) : n("", !0)]),
+				_: 1
+			})]),
+			item: S(({ props: e, internalItem: t }) => [s(v(oe), u(e, {
+				"prepend-icon": t.value,
+				title: t.value
+			}), null, 16, ["prepend-icon", "title"])]),
+			_: 1
+		}, 16, [
+			"modelValue",
+			"search",
+			"items",
+			"loading"
+		]));
+	}
+}), Q = /* @__PURE__ */ c({
+	name: "HTreeSelect",
+	components: {
+		VMenu: j,
+		VIcon: A,
+		VTreeview: L,
+		VTextField: P
+	},
+	__name: "HTreeSelect",
+	props: /* @__PURE__ */ l({ items: {} }, {
+		modelValue: { required: !0 },
+		modelModifiers: {}
+	}),
+	emits: ["update:modelValue"],
+	setup(n) {
+		let r = n, i = y(n, "modelValue"), a = ee(), o = g(!1), c = g(!1), l = ee([]), d = g(""), f = () => {
+			o.value = !0;
+		}, p = (e) => {
+			o.value = !o.value;
+		}, h = () => {
+			c.value && a.value?.focus();
+		}, _ = () => {}, b = (e) => {
+			let t = [];
+			for (let n of e) {
+				let { children: e, ...r } = n;
+				e && e.length && (t = t.concat(b(e))), t.push(r);
+			}
+			return t;
+		}, C = (e) => {
+			let t = de(l.value, (t) => t.id == e);
+			t && (d.value = t.name);
+		}, w = (e) => {
+			!R(e) && R(l.value) && (l.value = b(e), !d.value && i.value && C(i.value));
+		}, T = e({
+			get: () => i.value ? [i.value] : [],
+			set: (e) => {
+				e && fe(e) && e.length > 0 ? i.value = e[0] : i.value = "";
+			}
+		});
+		return x(() => r.items, (e) => {
+			R(e) || w(e);
+		}, { immediate: !0 }), x(i, (e, t) => {
+			e && (C(e), o.value &&= !1);
+		}, { immediate: !0 }), x(c, (e, t) => {
+			e || e === t || (o.value = !1);
+		}), (e, r) => (m(), t(v(P), u({
+			ref_key: "vTextFieldRef",
+			ref: a,
+			modelValue: d.value,
+			"onUpdate:modelValue": r[3] ||= (e) => d.value = e,
+			focused: c.value,
+			"onUpdate:focused": r[4] ||= (e) => c.value = e,
+			class: ["v-combobox", { "v-combobox--active-menu": o.value }],
+			"onMousedown:control": f,
+			onAfterLeave: h
+		}, e.$attrs), {
+			"append-inner": S(() => [s(v(A), {
+				icon: "mdi-menu-down",
+				onMousedown: p,
+				onClick: _,
+				class: "v-combobox__menu-icon",
+				tabindex: "-1"
+			})]),
+			default: S(() => [s(v(j), {
+				modelValue: o.value,
+				"onUpdate:modelValue": r[2] ||= (e) => o.value = e,
+				activator: "parent",
+				"content-class": "v-combobox__content",
+				"open-on-click": !1,
+				"close-on-content-click": !1,
+				"max-height": "310"
+			}, {
+				default: S(() => [s(v(L), {
+					activated: T.value,
+					"onUpdate:activated": r[0] ||= (e) => T.value = e,
+					items: n.items,
+					"item-value": "id",
+					"item-title": "name",
+					activatable: "",
+					"indent-lines": "default",
+					"separate-roots": "",
+					onMousedown: r[1] ||= (e) => e.preventDefault()
+				}, null, 8, ["activated", "items"])]),
+				_: 1
+			}, 8, ["modelValue"])]),
+			_: 1
+		}, 16, [
+			"modelValue",
+			"focused",
+			"class"
+		]));
+	}
+});
+Z.install = (e) => {
+	e.component(Z.name, Z);
+}, Q.install = (e) => {
+	e.component(Q.name, Q);
+};
+//#endregion
+//#region src/HSignIn/HSignInCornerBottom.vue?vue&type=script&setup=true&lang.ts
+var Te = {
+	version: "1.1",
+	xmlns: "http://www.w3.org/2000/svg",
+	"xmlns:xlink": "http://www.w3.org/1999/xlink",
+	height: "896",
+	width: "967.8852157128662"
+}, Ee = {
+	id: "linearGradient-3",
+	x1: "0.5",
+	y1: "0",
+	x2: "0.5",
+	y2: "1"
+}, De = ["stop-color"], Oe = ["stop-color"], ke = /* @__PURE__ */ c({
+	name: "HSignInCornerBottom",
+	__name: "HSignInCornerBottom",
+	props: {
+		startColor: { default: "#28aff0" },
+		endColor: { default: "#120fc4" }
+	},
+	setup(e) {
+		return (t, n) => (m(), r("svg", Te, [i("defs", null, [n[0] ||= i("path", {
+			id: "path-2",
+			opacity: "1",
+			"fill-rule": "evenodd",
+			d: "M896,448 C1142.6325445712241,465.5747656464056 695.2579309733121,896 448,896\n			C200.74206902668806,896 5.684341886080802e-14,695.2579309733121 0,448.0000000000001 C0,200.74206902668806\n			200.74206902668791,5.684341886080802e-14 447.99999999999994,0 C695.2579309733121,0 475,418 896,448Z"
+		}, null, -1), i("linearGradient", Ee, [i("stop", {
+			offset: "0",
+			"stop-color": e.startColor,
+			"stop-opacity": "1"
+		}, null, 8, De), i("stop", {
+			offset: "1",
+			"stop-color": e.endColor,
+			"stop-opacity": "1"
+		}, null, 8, Oe)])]), n[1] ||= i("g", { opacity: "1" }, [i("use", {
+			"xlink:href": "#path-2",
+			fill: "url(#linearGradient-3)",
+			"fill-opacity": "1"
+		})], -1)]));
+	}
+}), Ae = {
+	height: "1337",
+	width: "1337"
+}, je = {
+	id: "linearGradient-2",
+	x1: "0.79",
+	y1: "0.62",
+	x2: "0.21",
+	y2: "0.86"
+}, Me = ["stop-color"], Ne = ["stop-color"], Pe = /* @__PURE__ */ c({
+	name: "HSignInCornerTop",
+	__name: "HSignInCornerTop",
+	props: {
+		startColor: { default: "#28aff0" },
+		endColor: { default: "#120fc4" }
+	},
+	setup(e) {
+		return (t, n) => (m(), r("svg", Ae, [i("defs", null, [n[0] ||= i("path", {
+			id: "path-1",
+			opacity: "1",
+			"fill-rule": "evenodd",
+			d: "M1337,668.5 C1337,1037.455193874239 1037.455193874239,1337 668.5,1337 C523.6725684305388,1337 337,1236 370.50000000000006,1094 C434.03835568300906,824.6732385973953 6.906089672974592e-14,892.6277623047779 0,668.5000000000001 C0,299.5448061257611 299.5448061257609,1.1368683772161603e-13 668.4999999999999,0 C1037.455193874239,0 1337,299.544806125761 1337,668.5Z"
+		}, null, -1), i("linearGradient", je, [i("stop", {
+			offset: "0",
+			"stop-color": e.startColor,
+			"stop-opacity": "1"
+		}, null, 8, Me), i("stop", {
+			offset: "1",
+			"stop-color": e.endColor,
+			"stop-opacity": "1"
+		}, null, 8, Ne)])]), n[1] ||= i("g", { opacity: "1" }, [i("use", {
+			"xlink:href": "#path-1",
+			fill: "url(#linearGradient-2)",
+			"fill-opacity": "1"
+		})], -1)]));
+	}
+}), Fe = { class: "corner-top" }, Ie = { class: "corner-bottom" }, $ = /* @__PURE__ */ ((e, t) => {
+	let n = e.__vccOpts || e;
+	for (let [e, r] of t) n[e] = r;
+	return n;
+})(/* @__PURE__ */ c({
+	name: "HSignInBackground",
+	components: {
+		HSignInCornerBottom: ke,
+		HSignInCornerTop: Pe
+	},
+	__name: "HSignInBackground",
+	props: {
+		startColor: {},
+		endColor: {}
+	},
+	setup(e) {
+		return (t, n) => (m(), r("div", null, [i("div", Fe, [s(Pe, {
+			"start-color": e.startColor,
+			"end-color": e.endColor
+		}, null, 8, ["start-color", "end-color"])]), i("div", Ie, [s(ke, {
+			"start-color": e.endColor,
+			"end-color": e.startColor
+		}, null, 8, ["start-color", "end-color"])])]));
+	}
+}), [["__scopeId", "data-v-b2761882"]]);
+//#endregion
+//#region src/HSignIn/index.ts
+$.install = (e) => {
+	e.component($.name, $);
+};
+//#endregion
+//#region src/index.ts
+var Le = [
+	V,
+	U,
+	G,
+	J,
+	K,
+	q,
+	Z,
+	Y,
+	X,
+	$,
+	Q
+], Re = { install: (e) => {
+	Le.map((t) => t.install(e));
+} };
+//#endregion
+export { V as HButton, U as HDate, G as HDateTime, J as HDialog, K as HDuration, X as HLabel, Z as HMdiIconSelect, Y as HParticles, $ as HSignInBackground, q as HTime, Q as HTreeSelect, Re as default };

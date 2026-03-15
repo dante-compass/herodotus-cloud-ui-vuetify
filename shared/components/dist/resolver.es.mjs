@@ -1,1 +1,34 @@
-var e=["HButton","HDate","HDateTime","HDialog","HDuration","HMdiIconSelect","HParticles","HLabel","HSignInBackground","HTime","HTreeSelect"];function t(){return{type:"component",resolve:t=>{if(t.startsWith("H")&&function(t){return e.includes(t)}(t)){const e=["@herodotus/components/style.css"];return{name:t,from:"@herodotus/components",sideEffects:e.length>0?e:void 0}}}}}var n=t;export{t as HerodotusResolver,n as default};
+//#region src/resolver.ts
+var e = [
+	"HButton",
+	"HDate",
+	"HDateTime",
+	"HDialog",
+	"HDuration",
+	"HMdiIconSelect",
+	"HParticles",
+	"HLabel",
+	"HSignInBackground",
+	"HTime",
+	"HTreeSelect"
+];
+function t(t) {
+	return e.includes(t);
+}
+function n() {
+	return {
+		type: "component",
+		resolve: (e) => {
+			if (e.startsWith("H") && t(e)) {
+				let t = e, n = ["@herodotus/components/style.css"];
+				return {
+					name: t,
+					from: "@herodotus/components",
+					sideEffects: n.length > 0 ? n : void 0
+				};
+			}
+		}
+	};
+}
+//#endregion
+export { n as HerodotusResolver, n as default };

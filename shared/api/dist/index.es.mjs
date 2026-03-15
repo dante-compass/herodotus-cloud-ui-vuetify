@@ -1,1 +1,654 @@
-import{AbstractService as t,ContentTypeEnum as e,HttpConfig as s,Service as n}from"@herodotus/core";let i=/* @__PURE__ */function(t){return t[t.OTHERS=0]="OTHERS",t[t.MAN=1]="MAN",t[t.WOMAN=2]="WOMAN",t}({}),r=/* @__PURE__ */function(t){return t[t.ANNOUNCEMENT=0]="ANNOUNCEMENT",t[t.DIALOGUE=1]="DIALOGUE",t}({});var a=class OAuth2ApplicationService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new OAuth2ApplicationService(t)),this.instance}getBaseAddress(){return this.getConfig().getUaa()+"/authorize/application"}},c=class OAuth2ScopeService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new OAuth2ScopeService(t)),this.instance}getBaseAddress(){return this.getConfig().getUaa()+"/authorize/scope"}getAssignedAddress(){return this.getBaseAddress()+"/assigned"}getScopeCodePath(t){return this.getParamPath(this.getBaseAddress(),t)}fetchByScopeCode(t){return this.getConfig().getHttp().get(this.getScopeCodePath(t))}assigned(t){return this.getConfig().getHttp().post(this.getAssignedAddress(),t)}},g=class OAuth2AuthorizationService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new OAuth2AuthorizationService(t)),this.instance}getBaseAddress(){return this.getConfig().getUaa()+"/authorize/authorization"}},o=class OAuth2UserLoggingService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new OAuth2UserLoggingService(t)),this.instance}getBaseAddress(){return this.getConfig().getUaa()+"/authorize/compliance"}},d=class OAuth2InterfaceAuditService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new OAuth2InterfaceAuditService(t)),this.instance}getBaseAddress(){return this.getConfig().getUaa()+"/authorize/audit"}},u=class OAuth2CredentialRecordService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new OAuth2CredentialRecordService(t)),this.instance}getBaseAddress(){return this.getConfig().getUaa()+"/authorize/passkey"}},h=class SysOrganizationService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysOrganizationService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/hr/organization"}},l=class SysDepartmentService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysDepartmentService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/hr/department"}},p=class SysEmployeeService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysEmployeeService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/hr/employee"}getAssignedAddress(){return this.getBaseAddress()+"/assigned"}getAllocatableAddress(){return this.getBaseAddress()+"/allocatable"}getEmployeeNamePath(t){return this.getParamPath(this.getBaseAddress(),t)}fetchByEmployeeName(t){return this.getConfig().getHttp().get(this.getEmployeeNamePath(t))}fetchAssignedByPage(t,e={}){const s=Object.assign(t,e);return this.getConfig().getHttp().get(this.getAssignedAddress(),s)}deleteAllocatable(t){return this.getConfig().getHttp().delete(this.getAllocatableAddress(),t)}saveAllocatable(t){return this.getConfig().getHttp().post(this.getAllocatableAddress(),t)}authorizeUser(t){return this.getConfig().getHttp().put(this.getBaseAddress(),t,{contentType:e.URL_ENCODED})}},A=class SysEmployeeAllocatableService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysEmployeeAllocatableService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/"}},f=class SysPermissionService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysPermissionService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/security/permission"}},C=class SysRoleService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysRoleService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/security/role"}getRoleCodePath(t){return this.getParamPath(this.getBaseAddress(),t)}fetchByRoleCode(t){return this.getConfig().getHttp().get(this.getRoleCodePath(t))}},S=class SysUserService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysUserService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/security/user"}getUsernameAddress(){return this.getBaseAddress()+"/sign-in"}getChangePasswordAddress(){return this.getBaseAddress()+"/change-password"}getUsernamePath(t){return this.getParamPath(this.getUsernameAddress(),t)}fetchByUsername(t){return this.getConfig().getHttp().get(this.getUsernamePath(t))}changePassword(t,s){return this.getConfig().getHttp().put(this.getChangePasswordAddress(),{userId:t,password:s},{contentType:e.URL_ENCODED})}},y=class SysAttributeService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysAttributeService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/security/attribute"}},B=class SysDefaultRoleService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysDefaultRoleService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/security/default-role"}},I=class SysElementService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysElementService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/security/element"}getResourcesAddress(){return this.getBaseAddress()+"/resources"}fetchById(t){return this.getConfig().getHttp().get(this.getIdPath(t))}findResourcesByRoles(t){return this.getConfig().getHttp().get(this.getResourcesAddress(),{roles:t})}},m=class SysTenantDataSourceService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysTenantDataSourceService(t)),this.instance}getBaseAddress(){return this.getConfig().getUaa()+"/security/tenant/datasource"}getTenantIdPath(t){return this.getParamPath(this.getBaseAddress(),t)}fetchByTenantId(t){return this.getConfig().getHttp().get(this.getTenantIdPath(t))}},v=class SysDictionaryService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SysDictionaryService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/security/dictionary"}getItemsAddress(){return this.getBaseAddress()+"/items"}getCategoryPath(t){return this.getParamPath(this.getItemsAddress(),t)}fetchByCategory(t){return this.getConfig().getHttp().get(this.getCategoryPath(t))}fetchCategories(t){return this.getConfig().getHttp().get(this.getItemsAddress(),{categories:t})}},U=class SocialBindingService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new SocialBindingService(t)),this.instance}getBaseAddress(){return this.getConfig().getUpms()+"/security/social/binding"}},w=class ExtendedTaskService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new ExtendedTaskService(t)),this.instance}getBaseAddress(){return this.getConfig().getBpmn(!0,!0)+"/task"}getToDoTasksAddress(){return this.getBaseAddress()+"/todo"}getCompletedTasksAddress(){return this.getBaseAddress()+"/completed"}fetchToDoTasksByPage(t,e={}){const s=Object.assign(t,e);return this.getConfig().getHttp().get(this.getToDoTasksAddress(),s)}fetchCompletedTasksByPage(t,e={}){const s=Object.assign(t,e);return this.getConfig().getHttp().get(this.getCompletedTasksAddress(),s)}},D=class MgtCertificateService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new MgtCertificateService(t)),this.instance}getBaseAddress(){return this.getConfig().getManage()+"/manage/certificate"}getAliasAddress(){return this.getBaseAddress()+"/alias"}getCategoryAddress(){return this.getBaseAddress()+"/category"}findByAlias(t){return this.getConfig().getHttp().get(this.getAliasAddress(),{alias:t})}findAllByCertificateCategory(t){return this.getConfig().getHttp().get(this.getCategoryAddress(),{certificateCategory:t})}},H=class MgtCertificateFileService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new MgtCertificateFileService(t)),this.instance}getBaseAddress(){return this.getConfig().getManage()+"/manage/certificate-file"}},P=class DialogueContactService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new DialogueContactService(t)),this.instance}getBaseAddress(){return this.getConfig().getMsg()+"/message/dialogue/contact"}},O=class DialogueDetailService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new DialogueDetailService(t)),this.instance}getBaseAddress(){return this.getConfig().getMsg()+"/message/dialogue/detail"}getDeleteDialoguePath(t){return this.getParamPath(this.getBaseAddress(),t)}deleteDialogueById(t){return this.getConfig().getHttp().delete(this.getDeleteDialoguePath(t))}},b=class NotificationService extends t{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new NotificationService(t)),this.instance}getBaseAddress(){return this.getConfig().getMsg()+"/message/notification"}getAllReadAddress(){return this.getBaseAddress()+"/all-read"}setAllRead(t){return this.getConfig().getHttp().put(this.getAllReadAddress(),{userId:t},{contentType:e.URL_ENCODED})}},T=class WebSocketMessageService{static instance;config={};constructor(t){this.config=t}static getInstance(t){return null==this.instance&&(this.instance=new WebSocketMessageService(t)),this.instance}getBaseAddress(){return this.config.getMsg()+"/message/websocket"}getStatAddress(){return this.getBaseAddress()+"/stat"}fetchAllStat(){return this.config.getHttp().get(this.getStatAddress())}},x=class BucketService extends n{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new BucketService(t)),this.instance}getBaseAddress(){return this.getConfig().getOss()+"/oss/bucket"}getListAddress(){return this.getBaseAddress()+"/list"}getPolicyAddress(){return this.getBaseAddress()+"/policy"}listBuckets(){return this.getConfig().getHttp().get(this.getListAddress())}createBucket(t){return this.getConfig().getHttp().post(this.getBaseAddress(),t)}deleteBucket(t){return this.getConfig().getHttp().delete(this.getBaseAddress(),t)}setBucketPolicy(t){return this.getConfig().getHttp().put(this.getPolicyAddress(),t)}},R=class ObjectService extends n{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new ObjectService(t)),this.instance}getBaseAddress(){return this.getConfig().getOss()+"/oss/object"}getListV2Address(){return this.getBaseAddress()+"/list"}getMultiDeleteAddress(){return this.getBaseAddress()+"/multi"}getDownloadAddress(){return this.getBaseAddress()+"/download"}getDisplayAddress(){return this.getBaseAddress()+"/display"}getUploadAddress(){return this.getBaseAddress()+"/upload"}getAttributesAddress(){return this.getBaseAddress()+"/attributes"}getLegalHoldAddress(){return this.getBaseAddress()+"/legalhold"}getRetentionAddress(){return this.getBaseAddress()+"/retention"}getListVersionsAddress(){return this.getBaseAddress()+"/versions"}listObjectsV2(t){return this.getConfig().getHttp().get(this.getListV2Address(),t)}delete(t){return this.getConfig().getHttp().delete(this.getBaseAddress(),t)}upload(t,s,n){const i=new FormData;return i.append("file",s),i.append("bucketName",t),n?this.getConfig().getHttp().post(this.getUploadAddress(),i,{contentType:e.MULTI_PART},{onUploadProgress:n}):this.getConfig().getHttp().post(this.getUploadAddress(),i,{contentType:e.MULTI_PART})}download(t,s){return s?this.getConfig().getHttp().post(this.getDownloadAddress(),t,{contentType:e.JSON},{responseType:"blob",onDownloadProgress:s}):this.getConfig().getHttp().post(this.getDownloadAddress(),t)}display(t){return this.getConfig().getHttp().post(this.getDisplayAddress(),t,{contentType:e.JSON},{responseType:"blob"})}batchDelete(t){return this.getConfig().getHttp().delete(this.getMultiDeleteAddress(),t)}fetchObjectAttributes(t){return this.getConfig().getHttp().get(this.getAttributesAddress(),t)}setObjectLegalHold(t){return this.getConfig().getHttp().put(this.getLegalHoldAddress(),t)}setObjectRetention(t){return this.getConfig().getHttp().put(this.getRetentionAddress(),t)}listObjectVersions(t){return this.getConfig().getHttp().get(this.getListVersionsAddress(),t)}},M=class MultipartUploadService extends n{static instance;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new MultipartUploadService(t)),this.instance}getBaseAddress(){return this.getConfig().getOss()+"/oss/multipart-upload"}getCreateMultipartUploadAddress(){return this.getBaseAddress()+"/create"}getCompleteMultipartUploadAddress(){return this.getBaseAddress()+"/complete"}createChunkUpload(t){return this.getConfig().getHttp().post(this.getCreateMultipartUploadAddress(),t)}completeChunkUpload(t){return this.getConfig().getHttp().post(this.getCompleteMultipartUploadAddress(),t)}},E=class ApiResources{static instance;config={};constructor(t){this.config=t}static getInstance(t){return null==this.instance&&(this.instance=new ApiResources(t)),this.instance}getConfig(){return this.config}oauth2Application(){return a.getInstance(this.config)}oauth2Scope(){return c.getInstance(this.config)}oauth2Authorization(){return g.getInstance(this.config)}oauth2CredentialRecord(){return u.getInstance(this.config)}oauth2UserLogging(){return o.getInstance(this.config)}oauth2InterfaceAudit(){return d.getInstance(this.config)}sysOrganization(){return h.getInstance(this.config)}sysDepartment(){return l.getInstance(this.config)}sysEmployee(){return p.getInstance(this.config)}sysEmployeeAllocatable(){return A.getInstance(this.config)}sysPermission(){return f.getInstance(this.config)}sysRole(){return C.getInstance(this.config)}sysUser(){return S.getInstance(this.config)}sysAttribute(){return y.getInstance(this.config)}sysDefaultRole(){return B.getInstance(this.config)}sysElement(){return I.getInstance(this.config)}sysDictionary(){return v.getInstance(this.config)}sysTenantDataSource(){return m.getInstance(this.config)}socialBinding(){return U.getInstance(this.config)}dialogueContact(){return P.getInstance(this.config)}dialogueDetail(){return O.getInstance(this.config)}notification(){return b.getInstance(this.config)}webSocketMessage(){return T.getInstance(this.config)}task(){return w.getInstance(this.config)}mgtCertificate(){return D.getInstance(this.config)}mgtCertificateFile(){return H.getInstance(this.config)}ossBucket(){return x.getInstance(this.config)}ossObject(){return R.getInstance(this.config)}ossMultipartUpload(){return M.getInstance(this.config)}},k=(t,e)=>{const n=new s(t,e);return E.getInstance(n)};export{E as ApiResources,x as BucketService,e as ContentTypeEnum,P as DialogueContactService,O as DialogueDetailService,w as ExtendedTaskService,i as GenderEnum,H as MgtCertificateFileService,D as MgtCertificateService,M as MultipartUploadService,r as NotificationCategoryEnum,b as NotificationService,a as OAuth2ApplicationService,g as OAuth2AuthorizationService,u as OAuth2CredentialRecordService,d as OAuth2InterfaceAuditService,c as OAuth2ScopeService,o as OAuth2UserLoggingService,R as ObjectService,U as SocialBindingService,y as SysAttributeService,B as SysDefaultRoleService,l as SysDepartmentService,v as SysDictionaryService,I as SysElementService,A as SysEmployeeAllocatableService,p as SysEmployeeService,h as SysOrganizationService,f as SysPermissionService,C as SysRoleService,m as SysTenantDataSourceService,S as SysUserService,T as WebSocketMessageService,k as createApi};
+import { AbstractService as e, ContentTypeEnum as t, HttpConfig as n, Service as r } from "@herodotus/core";
+//#region src/enums/application.ts
+var i = /* @__PURE__ */ function(e) {
+	return e[e.OTHERS = 0] = "OTHERS", e[e.MAN = 1] = "MAN", e[e.WOMAN = 2] = "WOMAN", e;
+}({}), a = /* @__PURE__ */ function(e) {
+	return e[e.ANNOUNCEMENT = 0] = "ANNOUNCEMENT", e[e.DIALOGUE = 1] = "DIALOGUE", e;
+}({}), o = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUaa() + "/authorize/application";
+	}
+}, s = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUaa() + "/authorize/scope";
+	}
+	getAssignedAddress() {
+		return this.getBaseAddress() + "/assigned";
+	}
+	getScopeCodePath(e) {
+		return this.getParamPath(this.getBaseAddress(), e);
+	}
+	fetchByScopeCode(e) {
+		return this.getConfig().getHttp().get(this.getScopeCodePath(e));
+	}
+	assigned(e) {
+		return this.getConfig().getHttp().post(this.getAssignedAddress(), e);
+	}
+}, c = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUaa() + "/authorize/authorization";
+	}
+}, l = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUaa() + "/authorize/compliance";
+	}
+}, u = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUaa() + "/authorize/audit";
+	}
+}, d = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUaa() + "/authorize/passkey";
+	}
+}, f = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/hr/organization";
+	}
+}, p = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/hr/department";
+	}
+}, m = class n extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new n(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/hr/employee";
+	}
+	getAssignedAddress() {
+		return this.getBaseAddress() + "/assigned";
+	}
+	getAllocatableAddress() {
+		return this.getBaseAddress() + "/allocatable";
+	}
+	getEmployeeNamePath(e) {
+		return this.getParamPath(this.getBaseAddress(), e);
+	}
+	fetchByEmployeeName(e) {
+		return this.getConfig().getHttp().get(this.getEmployeeNamePath(e));
+	}
+	fetchAssignedByPage(e, t = {}) {
+		let n = Object.assign(e, t);
+		return this.getConfig().getHttp().get(this.getAssignedAddress(), n);
+	}
+	deleteAllocatable(e) {
+		return this.getConfig().getHttp().delete(this.getAllocatableAddress(), e);
+	}
+	saveAllocatable(e) {
+		return this.getConfig().getHttp().post(this.getAllocatableAddress(), e);
+	}
+	authorizeUser(e) {
+		return this.getConfig().getHttp().put(this.getBaseAddress(), e, { contentType: t.URL_ENCODED });
+	}
+}, h = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/";
+	}
+}, g = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/security/permission";
+	}
+}, _ = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/security/role";
+	}
+	getRoleCodePath(e) {
+		return this.getParamPath(this.getBaseAddress(), e);
+	}
+	fetchByRoleCode(e) {
+		return this.getConfig().getHttp().get(this.getRoleCodePath(e));
+	}
+}, v = class n extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new n(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/security/user";
+	}
+	getUsernameAddress() {
+		return this.getBaseAddress() + "/sign-in";
+	}
+	getChangePasswordAddress() {
+		return this.getBaseAddress() + "/change-password";
+	}
+	getUsernamePath(e) {
+		return this.getParamPath(this.getUsernameAddress(), e);
+	}
+	fetchByUsername(e) {
+		return this.getConfig().getHttp().get(this.getUsernamePath(e));
+	}
+	changePassword(e, n) {
+		return this.getConfig().getHttp().put(this.getChangePasswordAddress(), {
+			userId: e,
+			password: n
+		}, { contentType: t.URL_ENCODED });
+	}
+}, y = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/security/attribute";
+	}
+}, b = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/security/default-role";
+	}
+}, x = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/security/element";
+	}
+	getResourcesAddress() {
+		return this.getBaseAddress() + "/resources";
+	}
+	fetchById(e) {
+		return this.getConfig().getHttp().get(this.getIdPath(e));
+	}
+	findResourcesByRoles(e) {
+		return this.getConfig().getHttp().get(this.getResourcesAddress(), { roles: e });
+	}
+}, S = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUaa() + "/security/tenant/datasource";
+	}
+	getTenantIdPath(e) {
+		return this.getParamPath(this.getBaseAddress(), e);
+	}
+	fetchByTenantId(e) {
+		return this.getConfig().getHttp().get(this.getTenantIdPath(e));
+	}
+}, C = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/security/dictionary";
+	}
+	getItemsAddress() {
+		return this.getBaseAddress() + "/items";
+	}
+	getCategoryPath(e) {
+		return this.getParamPath(this.getItemsAddress(), e);
+	}
+	fetchByCategory(e) {
+		return this.getConfig().getHttp().get(this.getCategoryPath(e));
+	}
+	fetchCategories(e) {
+		return this.getConfig().getHttp().get(this.getItemsAddress(), { categories: e });
+	}
+}, w = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUpms() + "/security/social/binding";
+	}
+}, T = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getBpmn(!0, !0) + "/task";
+	}
+	getToDoTasksAddress() {
+		return this.getBaseAddress() + "/todo";
+	}
+	getCompletedTasksAddress() {
+		return this.getBaseAddress() + "/completed";
+	}
+	fetchToDoTasksByPage(e, t = {}) {
+		let n = Object.assign(e, t);
+		return this.getConfig().getHttp().get(this.getToDoTasksAddress(), n);
+	}
+	fetchCompletedTasksByPage(e, t = {}) {
+		let n = Object.assign(e, t);
+		return this.getConfig().getHttp().get(this.getCompletedTasksAddress(), n);
+	}
+}, E = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getManage() + "/manage/certificate";
+	}
+	getAliasAddress() {
+		return this.getBaseAddress() + "/alias";
+	}
+	getCategoryAddress() {
+		return this.getBaseAddress() + "/category";
+	}
+	findByAlias(e) {
+		return this.getConfig().getHttp().get(this.getAliasAddress(), { alias: e });
+	}
+	findAllByCertificateCategory(e) {
+		return this.getConfig().getHttp().get(this.getCategoryAddress(), { certificateCategory: e });
+	}
+}, D = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getManage() + "/manage/certificate-file";
+	}
+}, O = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getMsg() + "/message/dialogue/contact";
+	}
+}, k = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getMsg() + "/message/dialogue/detail";
+	}
+	getDeleteDialoguePath(e) {
+		return this.getParamPath(this.getBaseAddress(), e);
+	}
+	deleteDialogueById(e) {
+		return this.getConfig().getHttp().delete(this.getDeleteDialoguePath(e));
+	}
+}, A = class n extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new n(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getMsg() + "/message/notification";
+	}
+	getAllReadAddress() {
+		return this.getBaseAddress() + "/all-read";
+	}
+	setAllRead(e) {
+		return this.getConfig().getHttp().put(this.getAllReadAddress(), { userId: e }, { contentType: t.URL_ENCODED });
+	}
+}, j = class e {
+	static instance;
+	config = {};
+	constructor(e) {
+		this.config = e;
+	}
+	static getInstance(t) {
+		return this.instance ??= new e(t), this.instance;
+	}
+	getBaseAddress() {
+		return this.config.getMsg() + "/message/websocket";
+	}
+	getStatAddress() {
+		return this.getBaseAddress() + "/stat";
+	}
+	fetchAllStat() {
+		return this.config.getHttp().get(this.getStatAddress());
+	}
+}, M = class e extends r {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(t) {
+		return this.instance ??= new e(t), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getOss() + "/oss/bucket";
+	}
+	getListAddress() {
+		return this.getBaseAddress() + "/list";
+	}
+	getPolicyAddress() {
+		return this.getBaseAddress() + "/policy";
+	}
+	listBuckets() {
+		return this.getConfig().getHttp().get(this.getListAddress());
+	}
+	createBucket(e) {
+		return this.getConfig().getHttp().post(this.getBaseAddress(), e);
+	}
+	deleteBucket(e) {
+		return this.getConfig().getHttp().delete(this.getBaseAddress(), e);
+	}
+	setBucketPolicy(e) {
+		return this.getConfig().getHttp().put(this.getPolicyAddress(), e);
+	}
+}, N = class e extends r {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(t) {
+		return this.instance ??= new e(t), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getOss() + "/oss/object";
+	}
+	getListV2Address() {
+		return this.getBaseAddress() + "/list";
+	}
+	getMultiDeleteAddress() {
+		return this.getBaseAddress() + "/multi";
+	}
+	getDownloadAddress() {
+		return this.getBaseAddress() + "/download";
+	}
+	getDisplayAddress() {
+		return this.getBaseAddress() + "/display";
+	}
+	getUploadAddress() {
+		return this.getBaseAddress() + "/upload";
+	}
+	getAttributesAddress() {
+		return this.getBaseAddress() + "/attributes";
+	}
+	getLegalHoldAddress() {
+		return this.getBaseAddress() + "/legalhold";
+	}
+	getRetentionAddress() {
+		return this.getBaseAddress() + "/retention";
+	}
+	getListVersionsAddress() {
+		return this.getBaseAddress() + "/versions";
+	}
+	listObjectsV2(e) {
+		return this.getConfig().getHttp().get(this.getListV2Address(), e);
+	}
+	delete(e) {
+		return this.getConfig().getHttp().delete(this.getBaseAddress(), e);
+	}
+	upload(e, n, r) {
+		let i = new FormData();
+		return i.append("file", n), i.append("bucketName", e), r ? this.getConfig().getHttp().post(this.getUploadAddress(), i, { contentType: t.MULTI_PART }, { onUploadProgress: r }) : this.getConfig().getHttp().post(this.getUploadAddress(), i, { contentType: t.MULTI_PART });
+	}
+	download(e, n) {
+		return n ? this.getConfig().getHttp().post(this.getDownloadAddress(), e, { contentType: t.JSON }, {
+			responseType: "blob",
+			onDownloadProgress: n
+		}) : this.getConfig().getHttp().post(this.getDownloadAddress(), e);
+	}
+	display(e) {
+		return this.getConfig().getHttp().post(this.getDisplayAddress(), e, { contentType: t.JSON }, { responseType: "blob" });
+	}
+	batchDelete(e) {
+		return this.getConfig().getHttp().delete(this.getMultiDeleteAddress(), e);
+	}
+	fetchObjectAttributes(e) {
+		return this.getConfig().getHttp().get(this.getAttributesAddress(), e);
+	}
+	setObjectLegalHold(e) {
+		return this.getConfig().getHttp().put(this.getLegalHoldAddress(), e);
+	}
+	setObjectRetention(e) {
+		return this.getConfig().getHttp().put(this.getRetentionAddress(), e);
+	}
+	listObjectVersions(e) {
+		return this.getConfig().getHttp().get(this.getListVersionsAddress(), e);
+	}
+}, P = class e extends r {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(t) {
+		return this.instance ??= new e(t), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getOss() + "/oss/multipart-upload";
+	}
+	getCreateMultipartUploadAddress() {
+		return this.getBaseAddress() + "/create";
+	}
+	getCompleteMultipartUploadAddress() {
+		return this.getBaseAddress() + "/complete";
+	}
+	createChunkUpload(e) {
+		return this.getConfig().getHttp().post(this.getCreateMultipartUploadAddress(), e);
+	}
+	completeChunkUpload(e) {
+		return this.getConfig().getHttp().post(this.getCompleteMultipartUploadAddress(), e);
+	}
+}, F = class e {
+	static instance;
+	config = {};
+	constructor(e) {
+		this.config = e;
+	}
+	static getInstance(t) {
+		return this.instance ??= new e(t), this.instance;
+	}
+	getConfig() {
+		return this.config;
+	}
+	oauth2Application() {
+		return o.getInstance(this.config);
+	}
+	oauth2Scope() {
+		return s.getInstance(this.config);
+	}
+	oauth2Authorization() {
+		return c.getInstance(this.config);
+	}
+	oauth2CredentialRecord() {
+		return d.getInstance(this.config);
+	}
+	oauth2UserLogging() {
+		return l.getInstance(this.config);
+	}
+	oauth2InterfaceAudit() {
+		return u.getInstance(this.config);
+	}
+	sysOrganization() {
+		return f.getInstance(this.config);
+	}
+	sysDepartment() {
+		return p.getInstance(this.config);
+	}
+	sysEmployee() {
+		return m.getInstance(this.config);
+	}
+	sysEmployeeAllocatable() {
+		return h.getInstance(this.config);
+	}
+	sysPermission() {
+		return g.getInstance(this.config);
+	}
+	sysRole() {
+		return _.getInstance(this.config);
+	}
+	sysUser() {
+		return v.getInstance(this.config);
+	}
+	sysAttribute() {
+		return y.getInstance(this.config);
+	}
+	sysDefaultRole() {
+		return b.getInstance(this.config);
+	}
+	sysElement() {
+		return x.getInstance(this.config);
+	}
+	sysDictionary() {
+		return C.getInstance(this.config);
+	}
+	sysTenantDataSource() {
+		return S.getInstance(this.config);
+	}
+	socialBinding() {
+		return w.getInstance(this.config);
+	}
+	dialogueContact() {
+		return O.getInstance(this.config);
+	}
+	dialogueDetail() {
+		return k.getInstance(this.config);
+	}
+	notification() {
+		return A.getInstance(this.config);
+	}
+	webSocketMessage() {
+		return j.getInstance(this.config);
+	}
+	task() {
+		return T.getInstance(this.config);
+	}
+	mgtCertificate() {
+		return E.getInstance(this.config);
+	}
+	mgtCertificateFile() {
+		return D.getInstance(this.config);
+	}
+	ossBucket() {
+		return M.getInstance(this.config);
+	}
+	ossObject() {
+		return N.getInstance(this.config);
+	}
+	ossMultipartUpload() {
+		return P.getInstance(this.config);
+	}
+}, I = (e, t) => {
+	let r = new n(e, t);
+	return F.getInstance(r);
+};
+//#endregion
+export { F as ApiResources, M as BucketService, t as ContentTypeEnum, O as DialogueContactService, k as DialogueDetailService, T as ExtendedTaskService, i as GenderEnum, D as MgtCertificateFileService, E as MgtCertificateService, P as MultipartUploadService, a as NotificationCategoryEnum, A as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, s as OAuth2ScopeService, l as OAuth2UserLoggingService, N as ObjectService, w as SocialBindingService, y as SysAttributeService, b as SysDefaultRoleService, p as SysDepartmentService, C as SysDictionaryService, x as SysElementService, h as SysEmployeeAllocatableService, m as SysEmployeeService, f as SysOrganizationService, g as SysPermissionService, _ as SysRoleService, S as SysTenantDataSourceService, v as SysUserService, j as WebSocketMessageService, I as createApi };
