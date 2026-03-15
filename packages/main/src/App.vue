@@ -78,3 +78,9 @@ onUnmounted(() => {
   }
 });
 </script>
+
+<style lang="scss">
+.swal2-container {
+  z-index: 10000 !important;
+}
+</style>
