@@ -14,7 +14,7 @@
         disable-sort
         hide-default-footer
         class="mb-2"
-        @update:options="findItems"
+        @update:options="fetchItems"
       >
         <template #item.source="{ item }">
           <v-avatar size="30px">
@@ -78,9 +78,13 @@ const getImage = (source: string) => {
   return `/images/social/${name}.png`;
 };
 
-onMounted(() => {
+const fetchItems = () => {
   conditions.value.userId = store.userId;
   findItems();
+};
+
+onMounted(() => {
+  fetchItems();
 });
 
 watch(tableRows, (newValue) => {

@@ -103,7 +103,7 @@ const onSave = async () => {
 };
 
 watch(openDialog, (newValue) => {
-  if (!newValue) {
+  if (newValue) {
     newPassword.value = '';
     confirmPassword.value = '';
     newPasswordVisible.value = false;
