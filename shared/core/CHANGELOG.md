@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.1.1
+
+### Patch Changes
+
+- 修复 SysAttribute 定义
+
 ## 1.1.0
 
 ### Minor Changes
