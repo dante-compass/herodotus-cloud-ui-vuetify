@@ -12,13 +12,16 @@
     reserved
     @update:options="findItems"
   >
-    <template #control>
-      <v-btn>新建</v-btn>
-    </template>
-
     <template #item.requestMethod="{ item }">
       <h-column-swagger :method="item.requestMethod" :url="item.url" :description="item.description"></h-column-swagger>
     </template>
+
+    <template #item.category="{ value }">
+      <v-chip density="compact" rounded="lg" :color="getCategoryColor(value)" label>
+        {{ getDictionaryItemDisplay('MappingCategory', value) }}
+      </v-chip>
+    </template>
+
     <template #item.actions="{ item }">
       <h-action-button
         color="amber"
@@ -35,7 +38,7 @@
 import type { SysAttributeEntity, SysAttributeProps, SysAttributeConditions } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTable } from '@/composables/hooks';
+import { useTable, useDictionary } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.SYS_ATTRIBUTE });
@@ -44,6 +47,7 @@ const headers = ref([
   { key: 'requestMethod', align: 'center', title: '权限接口' },
   { key: 'attributeCode', align: 'center', title: '默认权限代码' },
   { key: 'version', align: 'center', title: '版本控制' },
+  { key: 'category', align: 'center', title: '权限类型' },
   { key: 'webExpression', align: 'center', title: '特定表达式' },
   { key: 'status', align: 'center', title: '状态' },
   { key: 'actions', align: 'center', title: '操作' },
@@ -55,4 +59,10 @@ const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toEdit
   SysAttributeConditions,
   SysAttributeEntity
 >(API.core.sysAttribute(), PAGE_NAME.SYS_ATTRIBUTE, false, ['url'], 'ASC');
+
+const { getDictionaryItemDisplay } = useDictionary('MappingCategory');
+
+const getCategoryColor = (category: string) => {
+  return category === 'REST' ? 'cyan' : 'light-green';
+};
 </script>
