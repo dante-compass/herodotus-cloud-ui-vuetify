@@ -50,6 +50,7 @@ export interface SysAttributeEntity extends AbstractSysEntity {
     url: string;
     version: string;
     webExpression: string;
+    category: string;
     permissions: Array<SysPermissionEntity>;
 }
 export interface SysDefaultRoleEntity extends AbstractSysEntity {
