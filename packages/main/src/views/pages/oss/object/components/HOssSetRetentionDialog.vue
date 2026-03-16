@@ -1,5 +1,11 @@
 <template>
-  <v-dialog v-model="open" prepend-icon="mdi-calendar-today" title="设置文件保留策略" @confirm="onSave">
+  <h-dialog
+    v-model="open"
+    prepend-icon="mdi-calendar-today"
+    title="设置文件保留策略"
+    :loading="loading"
+    @confirm="onSave"
+  >
     <v-form ref="setRetentionForm">
       <h-label title="类型:"></h-label>
       <h-dictionary-toggle
@@ -13,7 +19,7 @@
         :rules="[(v: string) => !!v || '到期时间不能为空，请输入到期时间！']"
       ></h-date>
     </v-form>
-  </v-dialog>
+  </h-dialog>
 </template>
 
 <script setup lang="ts">
