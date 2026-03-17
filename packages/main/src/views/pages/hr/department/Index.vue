@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pa-0">
+  <v-container fluid class="pa-0">
     <v-row>
       <v-col xl="2" lg="2" md="4" sm="6" xs="12">
         <organization-tree v-model="currentOrganization"></organization-tree>
@@ -19,9 +19,7 @@
           @update:options="findItemsWithCondition"
         >
           <template #control>
-            <v-btn @click="toCreate(additionalData)" :disabled="!isContentAvailable">
-              新建部门
-            </v-btn>
+            <v-btn @click="toCreate(additionalData)" :disabled="!isContentAvailable">新建部门</v-btn>
           </template>
 
           <template #item.actions="{ item }">
@@ -39,11 +37,7 @@
 
 <script setup lang="ts">
 import type { Tree } from '@herodotus/core';
-import type {
-  SysDepartmentEntity,
-  SysDepartmentConditions,
-  SysDepartmentProps,
-} from '@herodotus/api';
+import type { SysDepartmentEntity, SysDepartmentConditions, SysDepartmentProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable } from '@/composables/hooks';
