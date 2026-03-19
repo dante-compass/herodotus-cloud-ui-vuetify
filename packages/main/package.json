@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "cross-env vite --force --host --mode development",
     "prod": "cross-env vite build --mode production",
+    "previewdev": "cross-env vite --force --host --mode previewdev",
+    "previewprod": "cross-env vite build --mode previewprod",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
