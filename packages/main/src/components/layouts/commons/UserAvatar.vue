@@ -20,12 +20,7 @@
     <v-divider></v-divider>
     <v-list density="compact" nav slim>
       <v-list-subheader>系统操作</v-list-subheader>
-      <v-list-item
-        slim
-        prepend-icon="mdi-logout-variant"
-        title="退出系统"
-        @click="signOut()"
-      ></v-list-item>
+      <v-list-item slim prepend-icon="mdi-logout-variant" title="退出系统" @click="signOut()"></v-list-item>
     </v-list>
   </user-menu>
 </template>
@@ -34,13 +29,15 @@
 import { AvatarUtils } from '@herodotus/core';
 import { SignOutUtilities, useAuthenticationStore } from '@herodotus/framework';
 
+import { useImage } from '@/composables/hooks';
+
 import UserMenu from './UserMenu.vue';
 
 defineOptions({ name: 'AppUserAvatar', components: { UserMenu } });
 
 const authenticationStore = useAuthenticationStore();
 
-const defaultAvatar = '/images/boy-avatar.png';
+const { getAssetsFile } = useImage();
 
 const readFromStore = () => {
   if (authenticationStore.avatar) {
@@ -50,7 +47,7 @@ const readFromStore = () => {
       const image = AvatarUtils.generate(authenticationStore.userId);
       return image;
     } else {
-      return defaultAvatar;
+      return getAssetsFile('boy-avatar.png');
     }
   }
 };

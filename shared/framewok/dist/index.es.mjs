@@ -1,1 +1,1088 @@
-import{notify as t,AuthorizationTokenEnum as e,ContentTypeEnum as i,AuthorizationGrantTypeEnum as s,BuildInScopeEnum as n,ClientAuthenticationMethodEnum as r,Service as o,SM2Utils as a,SM4Utils as c,moment as u,ThemeModeEnum as h,toast as l,changeSwalTheme as d}from"@herodotus/core";import{useRoute as p}from"vue-router";import{defineStore as g}from"pinia";import{jwtDecode as A}from"jwt-decode";import{extend as m,colord as T}from"colord";import I from"colord/plugins/mix";import{isEmpty as O,split as y,dropRight as f,join as E,merge as C,endsWith as R,has as S,remove as b,findIndex as _}from"lodash-es";import{shallowRef as v,ref as U,getCurrentInstance as w,inject as P,watchEffect as D,watch as N,computed as k,nextTick as L}from"vue";import{Base64 as H}from"js-base64";import{default as K}from"pinia-plugin-persistedstate";var z=/* @__PURE__ */(t=>(t.DEFAULT="defaults",t.CLASSIC="classic",t.TRANSVERSE="transverse",t.COLUMNS="transverse",t))(z||{}),M=/* @__PURE__ */(t=>(t.JIGSAW="JIGSAW",t.WORD_CLICK="WORD_CLICK",t.ARITHMETIC="ARITHMETIC",t.CHINESE="CHINESE",t.CHINESE_GIF="CHINESE_GIF",t.SPEC_GIF="SPEC_GIF",t.SPEC="SPEC",t.HUTOOL_LINE="HUTOOL_LINE",t.HUTOOL_CIRCLE="HUTOOL_CIRCLE",t.HUTOOL_SHEAR="HUTOOL_SHEAR",t.HUTOOL_GIF="HUTOOL_GIF",t))(M||{}),x=/* @__PURE__ */(t=>(t.INSTITUTION="INSTITUTION",t.SMS="SMS",t.WXAPP="WXAPP",t.QQ="QQ",t.WEIBO="WEIBO",t.BAIDU="BAIDU",t.WECHAT_OPEN="WECHAT_OPEN",t.WECHAT_MP="WECHAT_MP",t.WECHAT_ENTERPRISE="WECHAT_ENTERPRISE",t.WECHAT_ENTERPRISE_WEB="WECHAT_ENTERPRISE_WEB",t.DINGTALK="DINGTALK",t.DINGTALK_ACCOUNT="DINGTALK_ACCOUNT",t.ALIYUN="ALIYUN",t.TAOBAO="TAOBAO",t.ALIPAY="ALIPAY",t.TEAMBITION="TEAMBITION",t.HUAWEI_V2="HUAWEI_V2",t.FEISHU="FEISHU",t.JD="JD",t.DOUYIN="DOUYIN",t.TOUTIAO="TOUTIAO",t.MI="MI",t.RENREN="RENREN",t.MEITUAN="MEITUAN",t.ELEME="ELEME",t.KUJIALE="KUJIALE",t.XMLY="XMLY",t.GITEE="GITEE",t.OSCHINA="OSCHINA",t.CSDN="CSDN",t.GITHUB="GITHUB",t.GITLAB="GITLAB",t.STACK_OVERFLOW="STACK_OVERFLOW",t.CODING="CODING",t.GOOGLE="GOOGLE",t.MICROSOFT="MICROSOFT",t.FACEBOOK="FACEBOOK",t.LINKEDIN="LINKEDIN",t.TWITTER="TWITTER",t.AMAZON="AMAZON",t.SLACK="SLACK",t.LINE="LINE",t.OKTA="OKTA",t.PINTEREST="PINTEREST",t))(x||{}),B=/* @__PURE__ */(t=>(t.APP="APP",t.PERSONAL="PERSONAL",t))(B||{});const F=g("Application",{state:()=>({leftDrawer:!0,rightDrawer:!1,signInPanel:"account",loading:!1}),actions:{switchToMobilePanel(){this.signInPanel="mobile"},switchToScanPanel(){this.signInPanel="scan"},switchToAccountPanel(){this.signInPanel="account"},loadingStart(){this.loading=!0},loadingEnd(){this.loading=!1}}});m([I]);function W(t,e){if(6===e)return t;const i=e<6,s=T(t).toHsv(),n=i?6-e:e-5-1,r={h:V(s,n,i),s:Y(s,n,i),v:q(s,n,i)};return T(r).toHex()}function G(t){return[1,2,3,4,5,6,7,8,9,10].map(e=>W(t,e))}function V(t,e,i){let s;return s=t.h>=60&&t.h<=240?i?t.h-2*e:t.h+2*e:i?t.h+2*e:t.h-2*e,s<0?s+=360:s>=360&&(s-=360),s}function Y(t,e,i){let s;return s=i?t.s-16*e:4===e?t.s+16:t.s+5*e,s>100&&(s=100),i&&5===e&&s>10&&(s=10),s<6&&(s=6),s}function q(t,e,i){let s;return s=i?t.v+5*e:t.v-15*e,s>100&&(s=100),s}function J(t,e){return T(t).alpha(e).toHex()}function X(t,e,i){return T(t).mix(e,i).toHex()}function $(t){return T(t).isEqual("#ffffff")}class OptionsUtilities{static _instance=null;static _initialized=!1;options;constructor(t){this.options=t}static initialize(t){if(OptionsUtilities._initialized)throw new Error("RouterUtilities has already been initialized");return OptionsUtilities._instance=new OptionsUtilities(t),OptionsUtilities._initialized=!0,OptionsUtilities._instance}static getInstance(){if(!OptionsUtilities._instance)throw new Error("RouterUtilities not initialized. Call initialize() first.");return OptionsUtilities._instance}setOptions(t){this.options=t}getOptions(){return this.options}static axiosConfig(){return this.getInstance().getOptions().config}static getRouterOptions(){return this.getInstance().getOptions().router}static getRouter(){return this.getRouterOptions().instance}static getRoutes(){return this.getInstance().getOptions().staticRoutes}static getSecurityKey(){return this.getInstance().getOptions().variables.securityKey}static getRedirectUri(){return this.getInstance().getOptions().variables.redirectUri}static isUseCrypto(){return this.getInstance().getOptions().variables.isUseCrypto}static isAutoRefreshToken(){return this.getInstance().getOptions().variables.isAutoRefreshToken}static getTenantId(){return this.getInstance().getOptions().variables.tenantId}}class RouterUtilities{static _instance=null;static _initialized=!1;options;router={};constructor(t){this.options=t,this.router=t.instance}static initialize(t){if(RouterUtilities._initialized)throw new Error("RouterUtilities has already been initialized");return RouterUtilities._instance=new RouterUtilities(t),RouterUtilities._initialized=!0,RouterUtilities._instance}static getInstance(){if(!RouterUtilities._instance)throw new Error("RouterUtilities not initialized. Call initialize() first.");return RouterUtilities._instance}setRouter(t){this.router=t}getRouter(){return this.router}isRouterExist(){return!O(this.router)}hasParameter(t){return!O(t.params)||!O(t.query)}isDetailRoute(t){return!(!t.meta||!t.meta.isDetailContent)}isValidDetailRoute(t){return this.isDetailRoute(t)&&this.hasParameter(t)}push(t){return this.router.push(t)}replace(t){return this.router.replace(t)}to(t,e=!1){e?this.push(t):this.replace(t)}open(t){const e=this.router.resolve(t);window.open(e.href,"_blank")}goBack(){this.router.go(-1)}refresh(){this.isRouterExist()?this.router.go(0):window.location.reload()}toRoot(){this.isRouterExist()&&this.to(this.options.path.root)}toHome(){this.isRouterExist()&&this.to(this.options.path.home)}toSignIn(){this.isRouterExist()?this.to(this.options.path.signIn):this.refresh()}getParent(t){const e=y(t,"/"),i=f(e);return E(i,"/")}toPrev(t){if(t.path){const e=this.getParent(t.path);this.to({path:e})}else this.goBack()}}class SignOutUtilities{static _instance=null;static _initialized=!1;extension;constructor(t){this.extension=t}static initialize(t){if(SignOutUtilities._initialized)throw new Error("SignOutUtilities has already been initialized");return SignOutUtilities._instance=new SignOutUtilities(t),SignOutUtilities._initialized=!0,SignOutUtilities._instance}static getInstance(){if(!SignOutUtilities._instance)throw new Error("SignOutUtilities not initialized. Call initialize() first.");return SignOutUtilities._instance}signOut(t=!1){if(!t){Q().signOut()}this.extension(),Q().$reset(),j().$reset(),et().$reset(),RouterUtilities.getInstance().toSignIn()}signOutWithDialog(){t.signOutNotify(()=>this.signOut())}tokenExpires(e,i,s,n=!1){t.tokenExpiresNotify(e,i,s,()=>this.signOut(n))}}class OAuth2ApiService{static instance=null;config={};constructor(t){this.config=t}static getInstance(t){return null==this.instance&&(this.instance=new OAuth2ApiService(t)),this.instance}getOAuth2TokenAddress(){return this.config.getUaa()+"/oauth2/token"}getOAuth2RevokeAddress(){return this.config.getUaa()+"/oauth2/revoke"}getOAuth2SignOutAddress(){return this.config.getUaa()+"/oauth2/sign-out"}getOAuth2DeviceAuthorizationAddress(){return this.config.getUaa()+"/oauth2/device_authorization"}getOIDCConnectRegisterAddress(){return this.config.getUaa()+"/connect/register"}createBasicHeader(t="",i=""){let s=this.config.getClientId()+":"+this.config.getClientSecret();return t&&i&&(s=t+":"+i),e.BASIC+H.encode(s)}createClientData(t="",e="",i=""){const s={client_id:"",client_secret:""};return t&&e?(s.client_id=t,s.client_secret=e):(s.client_id=this.config.getClientId(),s.client_secret=this.config.getClientSecret()),i&&C(s,{scope:i}),s}createOAuth2Data(t,e,i=!1){const s={grant_type:t};return O(e)||C(s,e),i&&C(s,{scope:"openid"}),s}signOut(t,e="",s=""){return this.config.getHttp().put(this.getOAuth2SignOutAddress(),{accessToken:t},{contentType:i.URL_ENCODED},{headers:{Authorization:this.createBasicHeader(e,s)}})}revoke(t,e="",s=""){return this.config.getHttp().post(this.getOAuth2RevokeAddress(),{token:t},{contentType:i.URL_ENCODED},{headers:{Authorization:this.createBasicHeader(e,s)}})}refreshTokenFlow(t,e=!1,n="",r=""){return this.config.getHttp().post(this.getOAuth2TokenAddress(),this.createOAuth2Data(s.REFRESH_TOKEN,{refresh_token:t},e),{contentType:i.URL_ENCODED},{headers:{Authorization:this.createBasicHeader(n,r)}})}passwordFlow(t,e,n=!1,r="",o=""){return this.config.getHttp().post(this.getOAuth2TokenAddress(),this.createOAuth2Data(s.PASSWORD,{username:t,password:e},n),{contentType:i.URL_ENCODED},{headers:{Authorization:this.createBasicHeader(r,o)}})}authorizationCodeRequestFlow(t,e,i="openid"){const s=`?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${e}&scope=${i}`,n=this.config.getProject();let r=t;return R(r,"/")&&(r=r.substring(0,r.length-1)),!n||"dante"!==n&&"herodotus"!==n||(r+=this.config.getUaa(!1)),r+"/oauth2/authorize"+s}authorizationCodeFlow(t,e,n="",r=!1,o="",a=""){return this.config.getHttp().post(this.getOAuth2TokenAddress(),this.createOAuth2Data(s.AUTHORIZATION_CODE,{code:t,state:n,redirect_uri:e},r),{contentType:i.URL_ENCODED},{headers:{Authorization:this.createBasicHeader(o,a)}})}clientCredentialsFlow(t="",e="",n=""){return this.config.getHttp().post(this.getOAuth2TokenAddress(),this.createOAuth2Data(s.CLIENT_CREDENTIALS,{...this.createClientData(t,e,n)}),{contentType:i.URL_ENCODED})}deviceCodeFlow(t,e="",n="",r=""){return this.config.getHttp().post(this.getOAuth2TokenAddress(),this.createOAuth2Data(s.DEVICE_CODE,{device_code:t,...this.createClientData(e,n,r)}),{contentType:i.URL_ENCODED})}deviceAuthorizationFlow(t="",e="",s=n.EMAIL){return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(),this.createClientData(t,e,s),{contentType:i.URL_ENCODED})}socialCredentialsFlowBySms(t,e,n=!1,r="",o=""){return this.config.getHttp().post(this.getOAuth2TokenAddress(),this.createOAuth2Data(s.SOCIAL_CREDENTIALS,{mobile:t,code:e,source:x.SMS},n),{contentType:i.URL_ENCODED},{headers:{Authorization:this.createBasicHeader(r,o)}})}socialCredentialsFlowByJustAuth(t,e,n=!1,r="",o=""){return this.config.getHttp().post(this.getOAuth2TokenAddress(),this.createOAuth2Data(s.SOCIAL_CREDENTIALS,{...e,source:t},n),{contentType:i.URL_ENCODED},{headers:{Authorization:this.createBasicHeader(r,o)}})}webAuthnCredentialsFlow(t,e=!1,n="",r=""){return this.config.getHttp().postWithParams(this.getOAuth2TokenAddress(),this.createOAuth2Data(s.WEBAUTHN_CREDENTIALS,{},e),{...t},{contentType:i.JSON},{headers:{Authorization:this.createBasicHeader(n,r)}})}oidcClientRegistrationFlow(t,e){return this.config.getHttp().post(this.getOIDCConnectRegisterAddress(),{product_key:t,grant_types:[s.CLIENT_CREDENTIALS,s.DEVICE_CODE],redirect_uris:["http://192.168.101.10:3000"],client_name:e,scope:[n.OPENID,n.EMAIL,n.PROFILE].join(" "),response_types:["token"],token_endpoint_auth_method:r.CLIENT_SECRET_POST})}}class OpenApiService{static instance=null;config={};constructor(t){this.config=t}static getInstance(t){return null==this.instance&&(this.instance=new OpenApiService(t)),this.instance}createSession(t=""){const e=this.config.getUaa()+"/open/identity/session";return this.config.getHttp().post(e,{clientId:this.config.getClientId(),clientSecret:this.config.getClientSecret(),sessionId:t})}exchange(t="",e){const i=this.config.getUaa()+"/open/identity/exchange";return this.config.getHttp().post(i,{publicKey:e,sessionId:t})}getPrompt(t){const e=this.config.getUaa()+"/open/identity/prompt";return this.config.getHttp().post(e,{username:t})}createCaptcha(t,e){const i=this.config.getUaa()+"/open/captcha";return this.config.getHttp().get(i,{identity:t,category:e})}verifyCaptcha(t,e,i){const s=this.config.getUaa()+"/open/captcha",n={identity:t,category:e,coordinate:{x:0,y:0},coordinates:[],characters:""};return e===M.WORD_CLICK?n.coordinates=i:e===M.JIGSAW?n.coordinate=i:n.characters=i,this.config.getHttp().post(s,n)}createVerificationCode(t){const e=this.config.getUpms()+"/open/identity/verification-code";return this.config.getHttp().post(e,{mobile:t},{contentType:i.URL_ENCODED})}getSocialList(){const t=this.config.getUpms()+"/open/identity/sources";return this.config.getHttp().get(t)}}class PasskeyApiService extends o{static instance=null;constructor(t){super(t)}static getInstance(t){return null==this.instance&&(this.instance=new PasskeyApiService(t)),this.instance}getBaseAddress(){return this.getConfig().getUaa()+"/webauthn/register"}getPublicKeyCredentialCreationOptionsAddress(){return this.getBaseAddress()+"/options"}getWebAuthnAuthenticateAddress(){return this.getConfig().getUaa()+"/login/webauthn"}getPublicKeyCredentialRequestOptionsAddress(){return this.getConfig().getUaa()+"/webauthn/authenticate/options"}getIdPath(t){return this.getParamPath(this.getBaseAddress(),t)}getPublicKeyCredentialCreationOptions(){return this.getConfig().getHttp().post(this.getPublicKeyCredentialCreationOptionsAddress(),"")}webAuthnRegister(t){return this.getConfig().getHttp().post(this.getBaseAddress(),t)}getPublicKeyCredentialRequestOptions(){return this.getConfig().getHttp().post(this.getPublicKeyCredentialRequestOptionsAddress(),"")}webAuthnAuthenticate(t){return this.getConfig().getHttp().post(this.getWebAuthnAuthenticateAddress(),t)}delete(t){return this.getConfig().getHttp().delete(this.getIdPath(t))}}class SecurityApiResources{static _instance=null;static _initialized=!1;config={};constructor(t){this.config=t}static initialize(t){if(SecurityApiResources._initialized)throw new Error("SecurityApiResources has already been initialized");return SecurityApiResources._instance=new SecurityApiResources(t),SecurityApiResources._initialized=!0,SecurityApiResources._instance}static getInstance(){if(!SecurityApiResources._instance)throw new Error("SecurityApiResources not initialized. Call initialize() first.");return SecurityApiResources._instance}getConfig(){return this.config}open(){return OpenApiService.getInstance(this.config)}oauth2(){return OAuth2ApiService.getInstance(this.config)}passkey(){return PasskeyApiService.getInstance(this.config)}}const j=g("Crypto",{state:()=>({sessionId:"",key:"",state:""}),actions:{setSessionId(t){this.sessionId=t},setKey(t){this.key=c.encrypt(t,OptionsUtilities.getSecurityKey())},getKey(){return c.decrypt(this.key,OptionsUtilities.getSecurityKey())},encrypt(t){const e=this.getKey();return c.encrypt(t,e)},decrypt(t){const e=this.getKey();return c.decrypt(t,e)},exchange(t=""){return new Promise((e,i)=>{SecurityApiResources.getInstance().open().createSession(t).then(t=>{const i=t.data;if(i){const t=i.sessionId,s=i.publicKey;this.state=i.state;const n=a.createKeyPair(),r=a.encrypt(n.publicKey,s);SecurityApiResources.getInstance().open().exchange(t,r).then(i=>{const s=i.data,r=a.decrypt(s,n.privateKey);this.setSessionId(t),this.setKey(r),e(r)})}}).catch(t=>{i(t)})})}},persist:{storage:sessionStorage}}),Q=g("Authentication",{state:()=>({access_token:"",expires_in:0,refresh_token:"",license:"",openid:"",idToken:"",scope:"",token_type:"",errorTimes:0,remainTimes:0,locked:!1,userId:"",username:"",employeeId:"",avatar:"",roles:[]}),getters:{isNotExpired:t=>{const e=u().add(t.expires_in,"seconds").valueOf();return 0!==u(e).add(1,"seconds").diff(u(),"seconds")},token(){return OptionsUtilities.isAutoRefreshToken()||this.isNotExpired?this.access_token:""}},actions:{getBearerToken(){return e.BEARER+this.token},getAuthorizationHeader(){return{Authorization:this.getBearerToken(),"X-Herodotus-Open-Id":this.userId}},saveAccessToken(t){if(this.access_token=t.access_token,this.expires_in=t.expires_in,this.refresh_token=t.refresh_token?t.refresh_token:"",this.license=t.refresh_token?t.refresh_token:"",this.scope=t.scope,this.token_type=t.token_type,t.id_token){this.idToken=t.id_token;const e=A(this.idToken);this.userId=e.openid,this.username=e.sub,this.avatar=e.avatar,this.employeeId=e.employeeId,this.roles=e.roles}else if(t.openid){const e=j();this.openid=t.openid;const i=e.decrypt(this.openid),s=JSON.parse(i);this.userId=s.userId,this.username=s.username,this.roles=s.roles,this.avatar=s.avatar,this.employeeId=s.employeeId}},setUserErrorStatus(t){this.remainTimes=t.remainTimes,this.errorTimes=t.errorTimes,this.locked=t.locked},isAlertMessage:t=>t.code&&[40106,40111].includes(t.code),setErrorPrompt(t,e){this.isAlertMessage(t)&&SecurityApiResources.getInstance().open().getPrompt(e).then(t=>{this.setUserErrorStatus(t.data)})},signIn(t,e){const i=j();return OptionsUtilities.isUseCrypto()&&(t=i.encrypt(t),e=i.encrypt(e)),new Promise((i,s)=>{SecurityApiResources.getInstance().oauth2().passwordFlow(t,e,OptionsUtilities.isUseCrypto()).then(t=>{if(t){const e=t;this.saveAccessToken(e)}this.access_token?i(!0):i(!1)}).catch(e=>{this.setErrorPrompt(e,t),s(e)})})},refreshToken(){return new Promise((t,e)=>{SecurityApiResources.getInstance().oauth2().refreshTokenFlow(this.refresh_token,OptionsUtilities.isUseCrypto()).then(e=>{if(e){const t=e;this.saveAccessToken(t)}this.access_token?t(!0):t(!1)}).catch(t=>{e(t)})})},signOut(){this.access_token&&SecurityApiResources.getInstance().oauth2().signOut(this.access_token).then(()=>{}).catch(t=>{})},authorizationCode(t,e=""){return new Promise((i,s)=>{SecurityApiResources.getInstance().oauth2().authorizationCodeFlow(t,OptionsUtilities.getRedirectUri(),e,OptionsUtilities.isUseCrypto()).then(t=>{if(t){const e=t;this.saveAccessToken(e)}this.access_token?i(!0):i(!1)}).catch(t=>{s(t)})})},smsSignIn(t,e){const i=j();return OptionsUtilities.isUseCrypto()&&(t=i.encrypt(t),e=i.encrypt(e)),new Promise((i,s)=>{SecurityApiResources.getInstance().oauth2().socialCredentialsFlowBySms(t,e,OptionsUtilities.isUseCrypto()).then(t=>{if(t){const e=t;this.saveAccessToken(e)}this.access_token?i(!0):i(!1)}).catch(e=>{this.setErrorPrompt(e,t),s(e)})})},socialSignIn(t,e){return new Promise((i,s)=>{SecurityApiResources.getInstance().oauth2().socialCredentialsFlowByJustAuth(t,e,OptionsUtilities.isUseCrypto()).then(t=>{if(t){const e=t;this.saveAccessToken(e)}this.access_token?i(!0):i(!1)}).catch(t=>{t.code&&[40106,40111].includes(t.code)&&s(t)})})},passkey(t){return new Promise((e,i)=>{SecurityApiResources.getInstance().oauth2().webAuthnCredentialsFlow(t,OptionsUtilities.isUseCrypto()).then(t=>{if(t){const e=t;this.saveAccessToken(e)}this.access_token?e(!0):e(!1)}).catch(t=>{t.code&&[40106,40111].includes(t.code)&&i(t)})})}},persist:!0}),Z=()=>{const t=Q(),i=j(),s=t.access_token,n=i.sessionId,r={};s&&(r.Authorization=e.BEARER+s),n&&(r["X-Herodotus-Session-Id"]=n);const o=OptionsUtilities.getTenantId();return o&&(r["X-Herodotus-Tenant-Id"]=o),r["X-Herodotus-Api-Version"]="v1",r},tt=g("SystemSettings",{state:()=>({theme:{mode:h.SYSTEM,dark:{primary:"#2563eb"},light:{primary:"#6750A4"}},layout:z.DEFAULT,effect:{isUniqueOpened:!1},display:{isTabsView:!0,isActivateLeftTab:!0,showBreadcrumbs:!0,showBreadcrumbsIcon:!0,table:{dense:!1}}}),getters:{isDark:t=>t.theme.mode===h.DARK,isLight:t=>t.theme.mode===h.LIGHT,isSystem:t=>t.theme.mode===h.SYSTEM,isDarkenMode:t=>t.theme.mode!==h.LIGHT,isLightenMode:t=>t.theme.mode===h.LIGHT,density:t=>t.display.table.dense?"compact":"default",densitySwitch:t=>(e,i)=>t.display.table.dense?e:i},actions:{toDark(){this.theme.mode=h.DARK},toLight(){this.theme.mode=h.LIGHT},toSystem(){this.theme.mode=h.SYSTEM}},persist:!0}),et=g("SystemElement",{state:()=>({appMenus:[],personalMenus:[],cachedRoutes:[],details:new Map(/* @__PURE__ */new Map),pushParams:{}}),getters:{isDynamicRouteAdded(){return!O(this.appMenus)||!O(this.personalMenus)}},actions:{getDetailComponent(t){return this.details.get(t)},getRoutePushParam(t){return this.pushParams[t]},addCachedRoute(t){if(!t.meta?.isNotKeepAlive){const e=t.name;this.cachedRoutes.includes(e)||this.cachedRoutes.push(e)}},addDetailRoute(t){const e=t.name;e&&this.details.set(e,t.component)},addMenus(t,e){O(t)||(this.appMenus=t),O(e)||(this.personalMenus=e)},hasParameter(t){const e=t.name;return!(!e||!S(this.pushParams,e))},isDetailRoute:t=>!(!t.meta||!t.meta.isDetailContent),isValidDetailRoute(t){return this.isDetailRoute(t)&&this.hasParameter(t)},addRoutePushParam(t,e={}){t&&(this.pushParams[t]=e)},removeRoutePushParam(t){t&&delete this.pushParams[t]}}}),it=g("TabsView",{state:()=>({tabs:[],activatedTab:{},activatedTabName:""}),getters:{isNotLastTab:t=>e=>t.tabs.length-1!==e,getLastTabIndex:t=>t.tabs.length-1,getTabIndex:t=>e=>_(t.tabs,t=>t.name===e.name),getActivatedTabIndex(){return this.getTabIndex(this.activatedTab)},isLastTabActivated(){return this.getActivatedTabIndex===this.getLastTabIndex},isFirstTabActivated(){return 0===this.getActivatedTabIndex},disableCloseCurrentTab(){return this.isLastTabActivated||this.isFirstTabActivated},disableCloseLeftTabs(){return this.isFirstTabActivated},disableCloseRightTabs(){return this.isLastTabActivated},disableRefreshCurrentTab(){return!(!this.activatedTab.meta||!this.activatedTab.meta.isDetailContent)}},actions:{convertRouteToTab:t=>({name:t.name,path:t.path,meta:t.meta}),setActivatedTab(t){this.activatedTab=t,this.activatedTabName=t.name},isNotExistInStaticRoute:t=>-1===_(OptionsUtilities.getRoutes(),e=>e.path===t.path),isTabNotOpened(t){return-1===this.getTabIndex(t)},openTab(t,e=!1){this.isNotExistInStaticRoute(t)&&(this.isTabNotOpened(t)&&(e?this.isLastTabActivated?this.tabs.splice(this.getActivatedTabIndex,0,t):this.tabs.splice(this.getActivatedTabIndex+1,0,t):this.tabs.push(t)),this.setActivatedTab(t))},closeTab(t){b(this.tabs,e=>e.name===t.name)},smartTab(t){const e=et(),i=e.isDetailRoute(t),s=this.convertRouteToTab(t);i?e.hasParameter(t)?this.openTab(s,i):(this.closeTab(s),RouterUtilities.getInstance().goBack()):this.openTab(s,i)},deleteTab(t){const e=this.convertRouteToTab(t);this.closeTab(e)},closeCurrentTab(){this.closeTab(this.activatedTab)},closeOtherTabs(){b(this.tabs,t=>t.name!==this.activatedTab.name)},closeLeftTabs(){const t=this.getActivatedTabIndex;b(this.tabs,(e,i)=>i<t)},closeRightTabs(){const t=this.getActivatedTabIndex;b(this.tabs,(e,i)=>i>t)}},persist:!0});function st(){const t=p(),e=et(),i=it();return{onFinish:()=>{const s=t.name;e.removeRoutePushParam(s),i.deleteTab(t),RouterUtilities.getInstance().goBack()}}}function nt(t,e,i,s=""){const n=v(0),r=v(5),o=v(!1),a=v(!1),c=v({}),u=U([]),h=(t,e=!1)=>{const i=u.value.length+1;e?u.value.push({id:i,icon:"mdi-information",color:"green",text:t}):u.value.push({id:i,icon:"mdi-alert-circle",color:"error",text:t})},l=()=>{SecurityApiResources.getInstance().oauth2().deviceCodeFlow(t.value,e.value,i.value,s).then(t=>{h("Authorization successful",!0),p(),o.value=!0,c.value=t}).catch(t=>{var e;"authorization_pending"===(e=t.error)?h("Authorization pending, continuing to poll..."):"slow_down"===e?(h("Slowing down..."),g()):"token_expired"===e?(h("Token expired, stopping..."),p(),a.value=!0):"access_denied"===e&&(h("Access denied, stopping..."),p(),a.value=!0)})},d=()=>{n.value=window.setInterval(l,1e3*r.value)},p=()=>{window.clearInterval(n.value)},g=()=>{r.value+=5,p(),d()};return{pullingResponse:u,successResponse:c,isFailed:a,isSuccess:o,schedule:d,clear:p,slowDown:g}}function rt(){const t=Q();let e=null;const i=()=>{e&&(e=null)};return{isSupported:async()=>{if(window.PublicKeyCredential&&PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable&&PublicKeyCredential.isConditionalMediationAvailable){if((await Promise.all([PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(),PublicKeyCredential.isConditionalMediationAvailable()])).every(t=>!0===t))return!0}return!1},registration:t=>(e=new AbortController,new Promise((e,s)=>{SecurityApiResources.getInstance().passkey().getPublicKeyCredentialCreationOptions().then(t=>{const e=PublicKeyCredential.parseCreationOptionsFromJSON(t);return navigator.credentials.create({publicKey:e})}).then(e=>{const i={publicKey:{label:t,credential:e}};return SecurityApiResources.getInstance().passkey().webAuthnRegister(i)}).then(t=>{e(t)}).catch(t=>{s(t)}).finally(()=>{i()})})),authenticator:()=>(e=new AbortController,new Promise((s,n)=>{SecurityApiResources.getInstance().passkey().getPublicKeyCredentialRequestOptions().then(t=>{const i=PublicKeyCredential.parseRequestOptionsFromJSON(t);return navigator.credentials.get({publicKey:i,signal:e?.signal})}).then(i=>{if(e?.signal.aborted)return!1;if(i){const e=i;return t.passkey(e.toJSON())}return!1}).then(t=>{s(t)}).catch(t=>{n(t)}).finally(()=>{i()})}))}}function ot(t,e,i){const s=t=>t.meta?.title,n=t=>t.meta?.icon,r=t=>({title:s(t),prependIcon:n(t),to:{name:t.name,path:t.path}}),o=(t,i,a=!1)=>{const c=et(),u=[],h=[],l=[];return t.forEach(t=>{const d=((t,i)=>{const s={};return s.path=t.name,s.component=i[e(t.componentPath)],t.componentName&&(s.name=t.componentName),t.redirect&&(s.redirect=t.redirect),s.meta={icon:t.meta.icon,title:t.meta.title,...t.meta.sort&&{sort:t.meta.sort},...t.meta.isHaveChild&&{isHaveChild:t.meta.isHaveChild},...t.meta.isNotKeepAlive&&{isNotKeepAlive:t.meta.isNotKeepAlive},...t.meta.isHideAllChild&&{isHideAllChild:t.meta.isHideAllChild},...t.meta.isDetailContent&&{isDetailContent:t.meta.isDetailContent},...t.meta.isIgnoreAuth&&{isIgnoreAuth:t.meta.isIgnoreAuth}},s})(t,i);var p;p=d,p.meta?.isDetailContent&&c.addDetailRoute(d);let g={};if(t.children&&t.children.length>0){const e=o(t.children,i,t.meta.isHideAllChild);if(d.children=e.routeRecords,a)g=r(d);else{const t=O((A=e).appMenus)?O(A.personalMenus)?[]:A.personalMenus:A.appMenus;O(t)?g=r(d):(g=(t=>({title:s(t),prependIcon:n(t),children:[]}))(d),g.children=t)}}else a||(g=r(d));var A;u.push(d),O(g)||(t.scenario===B.APP?h.push(g):l.push(g))}),{routeRecords:u,appMenus:h,personalMenus:l}};return{initBackendSecurity:async(e,s)=>{const n=(await i(s)).data.menus;((t,e)=>{et().addMenus(e.appMenus,e.personalMenus),O(e.routeRecords)||e.routeRecords.forEach(e=>{t.addRoute(e)})})(e,o(n,t))}}}const at=/* @__PURE__ */Symbol.for("vuetify:theme");function ct(){!function(t){const e=w();if(!e)throw new Error(`[Vuetify] ${t} must be called from inside a setup function`)}("useTheme");const t=P(at,null);if(!t)throw new Error("Could not find Vuetify theme injection");return t}function ut(){const e=tt(),i=ct(),s=v(h.DARK),n=()=>{const t=performance.now();if(performance.now()-t>10)return;const e=document.querySelector("[data-v-app]");e.querySelectorAll("*").forEach(t=>{(t=>{if(!t||t.nodeType!==Node.ELEMENT_NODE)return!1;const e=window.getComputedStyle(t);return"scroll"===e.overflowY||"auto"===e.overflowY&&t.scrollHeight>t.clientHeight})(t)&&(t.dataset.scrollX=String(t.scrollLeft),t.dataset.scrollY=String(t.scrollTop))});const i=e.cloneNode(!0);i.classList.add("app-copy");const s=e.getBoundingClientRect();i.style.top=s.top+"px",i.style.left=s.left+"px",i.style.width=s.width+"px",i.style.height=s.height+"px";const n=document.activeElement.getBoundingClientRect(),r=n.left+n.width/2+window.scrollX,o=n.top+n.height/2+window.scrollY;function a(t){t.target===t.currentTarget&&(i.remove(),e.removeEventListener("transitionend",a),e.removeEventListener("transitioncancel",a),e.classList.remove("app-transition"),e.style.removeProperty("--clip-size"),e.style.removeProperty("--clip-pos"))}e.style.setProperty("--clip-pos",`${r}px ${o}px`),e.style.removeProperty("--clip-size"),L(()=>{e.classList.add("app-transition"),requestAnimationFrame(()=>{requestAnimationFrame(()=>{e.style.setProperty("--clip-size",Math.hypot(window.innerWidth,window.innerHeight)+"px")})})}),document.body.append(i),i.querySelectorAll("[data-scroll-x], [data-scroll-y]").forEach(t=>{t.scrollLeft=Number(t.dataset.scrollX),t.scrollTop=Number(t.dataset.scrollY)}),e.addEventListener("transitionend",a),e.addEventListener("transitioncancel",a)};D(()=>{i.change(e.isSystem?s.value:e.theme.mode)}),N(i.global.name,e=>{n();const i=e;l.setTheme(i),t.setTheme(i)});const r=k(()=>e.isDarkenMode?e.theme.dark.primary:e.theme.light.primary);return{lightColor:k(()=>W(r.value,3)),darkColor:k(()=>W(r.value,6)),backgroundColor:k(()=>{const t=e.isDarkenMode?.5:.2;return X("#ffffff",r.value,t)}),onCycleChangeTheme:()=>{e.isDark?e.toSystem():e.isSystem?e.toLight():e.isLight&&e.toDark()},currentTheme:k({get:()=>e.theme.mode,set(t){e.theme.mode=t}}),cycleChangeThemeIcon:k(()=>{switch(e.theme.mode){case h.SYSTEM:return"mdi-brightness-5";case h.DARK:return"mdi-brightness-auto";default:return"mdi-brightness-4"}}),systemTheme:s}}const ht=t=>{const e=tt();d(e.theme.mode),OptionsUtilities.initialize(t),RouterUtilities.initialize(t.router),SecurityApiResources.initialize(t.config),SignOutUtilities.initialize(t.signOutExtension)};export{M as CaptchaCategoryEnum,z as LayoutModeEnum,B as MenuScenario,OptionsUtilities,RouterUtilities,SecurityApiResources,SignOutUtilities,x as SocialSourceEnum,J as addColorAlpha,G as getAllColorPalette,W as getColorPalette,Z as getSystemHeaders,ht as initializer,$ as isWhiteColor,X as mixColor,K as piniaPluginPersistedstate,F as useApplicationStore,Q as useAuthenticationStore,j as useCryptoStore,nt as useDeviceAuthorize,st as useEditFinish,et as useElementStore,rt as usePasskey,tt as useSettingsStore,ot as useSystemElement,ut as useSystemTheme,it as useTabsViewStore};
+import { AuthorizationGrantTypeEnum as e, AuthorizationTokenEnum as t, BuildInScopeEnum as n, ClientAuthenticationMethodEnum as r, ContentTypeEnum as i, SM2Utils as a, SM4Utils as o, Service as s, ThemeModeEnum as c, changeSwalTheme as l, moment as u, notify as d, toast as f } from "@herodotus/core";
+import { useRoute as p } from "vue-router";
+import { defineStore as m } from "pinia";
+import { jwtDecode as h } from "jwt-decode";
+import { colord as g, extend as ee } from "colord";
+import _ from "colord/plugins/mix";
+import { dropRight as v, endsWith as te, findIndex as y, has as ne, isEmpty as b, join as x, merge as S, remove as C, split as re } from "lodash-es";
+import { Base64 as ie } from "js-base64";
+import { computed as w, getCurrentInstance as ae, inject as oe, nextTick as se, ref as T, shallowRef as E, watch as ce, watchEffect as D } from "vue";
+import le from "pinia-plugin-persistedstate";
+//#region src/declarations/enums.ts
+var O = /* @__PURE__ */ function(e) {
+	return e.DEFAULT = "defaults", e.CLASSIC = "classic", e.TRANSVERSE = "transverse", e.COLUMNS = "transverse", e;
+}({}), k = /* @__PURE__ */ function(e) {
+	return e.JIGSAW = "JIGSAW", e.WORD_CLICK = "WORD_CLICK", e.ARITHMETIC = "ARITHMETIC", e.CHINESE = "CHINESE", e.CHINESE_GIF = "CHINESE_GIF", e.SPEC_GIF = "SPEC_GIF", e.SPEC = "SPEC", e.HUTOOL_LINE = "HUTOOL_LINE", e.HUTOOL_CIRCLE = "HUTOOL_CIRCLE", e.HUTOOL_SHEAR = "HUTOOL_SHEAR", e.HUTOOL_GIF = "HUTOOL_GIF", e;
+}({}), A = /* @__PURE__ */ function(e) {
+	return e.INSTITUTION = "INSTITUTION", e.SMS = "SMS", e.WXAPP = "WXAPP", e.QQ = "QQ", e.WEIBO = "WEIBO", e.BAIDU = "BAIDU", e.WECHAT_OPEN = "WECHAT_OPEN", e.WECHAT_MP = "WECHAT_MP", e.WECHAT_ENTERPRISE = "WECHAT_ENTERPRISE", e.WECHAT_ENTERPRISE_WEB = "WECHAT_ENTERPRISE_WEB", e.DINGTALK = "DINGTALK", e.DINGTALK_ACCOUNT = "DINGTALK_ACCOUNT", e.ALIYUN = "ALIYUN", e.TAOBAO = "TAOBAO", e.ALIPAY = "ALIPAY", e.TEAMBITION = "TEAMBITION", e.HUAWEI_V2 = "HUAWEI_V2", e.FEISHU = "FEISHU", e.JD = "JD", e.DOUYIN = "DOUYIN", e.TOUTIAO = "TOUTIAO", e.MI = "MI", e.RENREN = "RENREN", e.MEITUAN = "MEITUAN", e.ELEME = "ELEME", e.KUJIALE = "KUJIALE", e.XMLY = "XMLY", e.GITEE = "GITEE", e.OSCHINA = "OSCHINA", e.CSDN = "CSDN", e.GITHUB = "GITHUB", e.GITLAB = "GITLAB", e.STACK_OVERFLOW = "STACK_OVERFLOW", e.CODING = "CODING", e.GOOGLE = "GOOGLE", e.MICROSOFT = "MICROSOFT", e.FACEBOOK = "FACEBOOK", e.LINKEDIN = "LINKEDIN", e.TWITTER = "TWITTER", e.AMAZON = "AMAZON", e.SLACK = "SLACK", e.LINE = "LINE", e.OKTA = "OKTA", e.PINTEREST = "PINTEREST", e;
+}({}), j = /* @__PURE__ */ function(e) {
+	return e.APP = "APP", e.PERSONAL = "PERSONAL", e;
+}({}), ue = m("Application", {
+	state: () => ({
+		leftDrawer: !0,
+		rightDrawer: !1,
+		signInPanel: "account",
+		loading: !1
+	}),
+	actions: {
+		switchToMobilePanel() {
+			this.signInPanel = "mobile";
+		},
+		switchToScanPanel() {
+			this.signInPanel = "scan";
+		},
+		switchToAccountPanel() {
+			this.signInPanel = "account";
+		},
+		loadingStart() {
+			this.loading = !0;
+		},
+		loadingEnd() {
+			this.loading = !1;
+		}
+	}
+});
+//#endregion
+//#region src/lib/utilities/color.ts
+ee([_]);
+var M = 2, N = 16, P = 5, F = 5, I = 15, L = 5, R = 4;
+function z(e, t) {
+	if (t === 6) return e;
+	let n = t < 6, r = g(e).toHsv(), i = n ? L + 1 - t : t - L - 1;
+	return g({
+		h: V(r, i, n),
+		s: H(r, i, n),
+		v: U(r, i, n)
+	}).toHex();
+}
+function B(e) {
+	return [
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		7,
+		8,
+		9,
+		10
+	].map((t) => z(e, t));
+}
+function V(e, t, n) {
+	let r;
+	return r = e.h >= 60 && e.h <= 240 ? n ? e.h - M * t : e.h + M * t : n ? e.h + M * t : e.h - M * t, r < 0 ? r += 360 : r >= 360 && (r -= 360), r;
+}
+function H(e, t, n) {
+	let r;
+	return r = n ? e.s - N * t : t === R ? e.s + N : e.s + P * t, r > 100 && (r = 100), n && t === L && r > 10 && (r = 10), r < 6 && (r = 6), r;
+}
+function U(e, t, n) {
+	let r;
+	return r = n ? e.v + F * t : e.v - I * t, r > 100 && (r = 100), r;
+}
+function de(e, t) {
+	return g(e).alpha(t).toHex();
+}
+function W(e, t, n) {
+	return g(e).mix(t, n).toHex();
+}
+function fe(e) {
+	return g(e).isEqual("#ffffff");
+}
+//#endregion
+//#region src/lib/utilities/options.ts
+var G = class e {
+	static _instance = null;
+	static _initialized = !1;
+	options;
+	constructor(e) {
+		this.options = e;
+	}
+	static initialize(t) {
+		if (e._initialized) throw Error("RouterUtilities has already been initialized");
+		return e._instance = new e(t), e._initialized = !0, e._instance;
+	}
+	static getInstance() {
+		if (!e._instance) throw Error("RouterUtilities not initialized. Call initialize() first.");
+		return e._instance;
+	}
+	setOptions(e) {
+		this.options = e;
+	}
+	getOptions() {
+		return this.options;
+	}
+	static axiosConfig() {
+		return this.getInstance().getOptions().config;
+	}
+	static getRouterOptions() {
+		return this.getInstance().getOptions().router;
+	}
+	static getRouter() {
+		return this.getRouterOptions().instance;
+	}
+	static getRoutes() {
+		return this.getInstance().getOptions().staticRoutes;
+	}
+	static getSecurityKey() {
+		return this.getInstance().getOptions().variables.securityKey;
+	}
+	static getRedirectUri() {
+		return this.getInstance().getOptions().variables.redirectUri;
+	}
+	static isUseCrypto() {
+		return this.getInstance().getOptions().variables.isUseCrypto;
+	}
+	static isAutoRefreshToken() {
+		return this.getInstance().getOptions().variables.isAutoRefreshToken;
+	}
+	static getTenantId() {
+		return this.getInstance().getOptions().variables.tenantId;
+	}
+}, K = class e {
+	static _instance = null;
+	static _initialized = !1;
+	options;
+	router = {};
+	constructor(e) {
+		this.options = e, this.router = e.instance;
+	}
+	static initialize(t) {
+		if (e._initialized) throw Error("RouterUtilities has already been initialized");
+		return e._instance = new e(t), e._initialized = !0, e._instance;
+	}
+	static getInstance() {
+		if (!e._instance) throw Error("RouterUtilities not initialized. Call initialize() first.");
+		return e._instance;
+	}
+	setRouter(e) {
+		this.router = e;
+	}
+	getRouter() {
+		return this.router;
+	}
+	isRouterExist() {
+		return !b(this.router);
+	}
+	hasParameter(e) {
+		return !b(e.params) || !b(e.query);
+	}
+	isDetailRoute(e) {
+		return !!(e.meta && e.meta.isDetailContent);
+	}
+	isValidDetailRoute(e) {
+		return this.isDetailRoute(e) && this.hasParameter(e);
+	}
+	push(e) {
+		return this.router.push(e);
+	}
+	replace(e) {
+		return this.router.replace(e);
+	}
+	to(e, t = !1) {
+		t ? this.push(e) : this.replace(e);
+	}
+	open(e) {
+		let t = this.router.resolve(e);
+		window.open(t.href, "_blank");
+	}
+	goBack() {
+		this.router.go(-1);
+	}
+	refresh() {
+		this.isRouterExist() ? this.router.go(0) : window.location.reload();
+	}
+	toRoot() {
+		this.isRouterExist() && this.to(this.options.path.root);
+	}
+	toHome() {
+		this.isRouterExist() && this.to(this.options.path.home);
+	}
+	toSignIn() {
+		this.isRouterExist() ? this.to(this.options.path.signIn) : this.refresh();
+	}
+	getParent(e) {
+		return x(v(re(e, "/")), "/");
+	}
+	toPrev(e) {
+		if (e.path) {
+			let t = this.getParent(e.path);
+			this.to({ path: t });
+		} else this.goBack();
+	}
+}, q = class e {
+	static _instance = null;
+	static _initialized = !1;
+	extension;
+	constructor(e) {
+		this.extension = e;
+	}
+	static initialize(t) {
+		if (e._initialized) throw Error("SignOutUtilities has already been initialized");
+		return e._instance = new e(t), e._initialized = !0, e._instance;
+	}
+	static getInstance() {
+		if (!e._instance) throw Error("SignOutUtilities not initialized. Call initialize() first.");
+		return e._instance;
+	}
+	signOut(e = !1) {
+		e || X().signOut(), this.extension(), console.log("Clear Framework Kernel Data"), X().$reset(), Y().$reset(), Q().$reset(), K.getInstance().toSignIn();
+	}
+	signOutWithDialog() {
+		d.signOutNotify(() => this.signOut());
+	}
+	tokenExpires(e, t, n, r = !1) {
+		d.tokenExpiresNotify(e, t, n, () => this.signOut(r));
+	}
+}, pe = class a {
+	static instance = null;
+	config = {};
+	constructor(e) {
+		this.config = e;
+	}
+	static getInstance(e) {
+		return this.instance ??= new a(e), this.instance;
+	}
+	getOAuth2TokenAddress() {
+		return this.config.getUaa() + "/oauth2/token";
+	}
+	getOAuth2RevokeAddress() {
+		return this.config.getUaa() + "/oauth2/revoke";
+	}
+	getOAuth2SignOutAddress() {
+		return this.config.getUaa() + "/oauth2/sign-out";
+	}
+	getOAuth2DeviceAuthorizationAddress() {
+		return this.config.getUaa() + "/oauth2/device_authorization";
+	}
+	getOIDCConnectRegisterAddress() {
+		return this.config.getUaa() + "/connect/register";
+	}
+	createBasicHeader(e = "", n = "") {
+		let r = this.config.getClientId() + ":" + this.config.getClientSecret();
+		return e && n && (r = e + ":" + n), t.BASIC + ie.encode(r);
+	}
+	createClientData(e = "", t = "", n = "") {
+		let r = {
+			client_id: "",
+			client_secret: ""
+		};
+		return e && t ? (r.client_id = e, r.client_secret = t) : (r.client_id = this.config.getClientId(), r.client_secret = this.config.getClientSecret()), n && S(r, { scope: n }), r;
+	}
+	createOAuth2Data(e, t, n = !1) {
+		let r = { grant_type: e };
+		return b(t) || S(r, t), n && S(r, { scope: "openid" }), r;
+	}
+	signOut(e, t = "", n = "") {
+		return this.config.getHttp().put(this.getOAuth2SignOutAddress(), { accessToken: e }, { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(t, n) } });
+	}
+	revoke(e, t = "", n = "") {
+		return this.config.getHttp().post(this.getOAuth2RevokeAddress(), { token: e }, { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(t, n) } });
+	}
+	refreshTokenFlow(t, n = !1, r = "", a = "") {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.REFRESH_TOKEN, { refresh_token: t }, n), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(r, a) } });
+	}
+	passwordFlow(t, n, r = !1, a = "", o = "") {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.PASSWORD, {
+			username: t,
+			password: n
+		}, r), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
+	}
+	authorizationCodeRequestFlow(e, t, n = "openid") {
+		let r = `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${t}&scope=${n}`, i = this.config.getProject(), a = e;
+		return te(a, "/") && (a = a.substring(0, a.length - 1)), i && (i === "dante" || i === "herodotus") && (a += this.config.getUaa(!1)), a + "/oauth2/authorize" + r;
+	}
+	authorizationCodeFlow(t, n, r = "", a = !1, o = "", s = "") {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.AUTHORIZATION_CODE, {
+			code: t,
+			state: r,
+			redirect_uri: n
+		}, a), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(o, s) } });
+	}
+	clientCredentialsFlow(t = "", n = "", r = "") {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, r) }), { contentType: i.URL_ENCODED });
+	}
+	deviceCodeFlow(t, n = "", r = "", a = "") {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.DEVICE_CODE, {
+			device_code: t,
+			...this.createClientData(n, r, a)
+		}), { contentType: i.URL_ENCODED });
+	}
+	deviceAuthorizationFlow(e = "", t = "", r = n.EMAIL) {
+		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), this.createClientData(e, t, r), { contentType: i.URL_ENCODED });
+	}
+	socialCredentialsFlowBySms(t, n, r = !1, a = "", o = "") {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.SOCIAL_CREDENTIALS, {
+			mobile: t,
+			code: n,
+			source: A.SMS
+		}, r), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
+	}
+	socialCredentialsFlowByJustAuth(t, n, r = !1, a = "", o = "") {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.SOCIAL_CREDENTIALS, {
+			...n,
+			source: t
+		}, r), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
+	}
+	webAuthnCredentialsFlow(t, n = !1, r = "", a = "") {
+		return this.config.getHttp().postWithParams(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.WEBAUTHN_CREDENTIALS, {}, n), { ...t }, { contentType: i.JSON }, { headers: { Authorization: this.createBasicHeader(r, a) } });
+	}
+	oidcClientRegistrationFlow(t, i) {
+		return this.config.getHttp().post(this.getOIDCConnectRegisterAddress(), {
+			product_key: t,
+			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
+			redirect_uris: ["http://192.168.101.10:3000"],
+			client_name: i,
+			scope: [
+				n.OPENID,
+				n.EMAIL,
+				n.PROFILE
+			].join(" "),
+			response_types: ["token"],
+			token_endpoint_auth_method: r.CLIENT_SECRET_POST
+		});
+	}
+}, me = class e {
+	static instance = null;
+	config = {};
+	constructor(e) {
+		this.config = e;
+	}
+	static getInstance(t) {
+		return this.instance ??= new e(t), this.instance;
+	}
+	createSession(e = "") {
+		let t = this.config.getUaa() + "/open/identity/session";
+		return this.config.getHttp().post(t, {
+			clientId: this.config.getClientId(),
+			clientSecret: this.config.getClientSecret(),
+			sessionId: e
+		});
+	}
+	exchange(e = "", t) {
+		let n = this.config.getUaa() + "/open/identity/exchange";
+		return this.config.getHttp().post(n, {
+			publicKey: t,
+			sessionId: e
+		});
+	}
+	getPrompt(e) {
+		let t = this.config.getUaa() + "/open/identity/prompt";
+		return this.config.getHttp().post(t, { username: e });
+	}
+	createCaptcha(e, t) {
+		let n = this.config.getUaa() + "/open/captcha";
+		return this.config.getHttp().get(n, {
+			identity: e,
+			category: t
+		});
+	}
+	verifyCaptcha(e, t, n) {
+		let r = this.config.getUaa() + "/open/captcha", i = {
+			identity: e,
+			category: t,
+			coordinate: {
+				x: 0,
+				y: 0
+			},
+			coordinates: [],
+			characters: ""
+		};
+		return t === k.WORD_CLICK ? i.coordinates = n : t === k.JIGSAW ? i.coordinate = n : i.characters = n, this.config.getHttp().post(r, i);
+	}
+	createVerificationCode(e) {
+		let t = this.config.getUpms() + "/open/identity/verification-code";
+		return this.config.getHttp().post(t, { mobile: e }, { contentType: i.URL_ENCODED });
+	}
+	getSocialList() {
+		let e = this.config.getUpms() + "/open/identity/sources";
+		return this.config.getHttp().get(e);
+	}
+}, he = class e extends s {
+	static instance = null;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(t) {
+		return this.instance ??= new e(t), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getUaa() + "/webauthn/register";
+	}
+	getPublicKeyCredentialCreationOptionsAddress() {
+		return this.getBaseAddress() + "/options";
+	}
+	getWebAuthnAuthenticateAddress() {
+		return this.getConfig().getUaa() + "/login/webauthn";
+	}
+	getPublicKeyCredentialRequestOptionsAddress() {
+		return this.getConfig().getUaa() + "/webauthn/authenticate/options";
+	}
+	getIdPath(e) {
+		return this.getParamPath(this.getBaseAddress(), e);
+	}
+	getPublicKeyCredentialCreationOptions() {
+		return this.getConfig().getHttp().post(this.getPublicKeyCredentialCreationOptionsAddress(), "");
+	}
+	webAuthnRegister(e) {
+		return this.getConfig().getHttp().post(this.getBaseAddress(), e);
+	}
+	getPublicKeyCredentialRequestOptions() {
+		return this.getConfig().getHttp().post(this.getPublicKeyCredentialRequestOptionsAddress(), "");
+	}
+	webAuthnAuthenticate(e) {
+		return this.getConfig().getHttp().post(this.getWebAuthnAuthenticateAddress(), e);
+	}
+	delete(e) {
+		return this.getConfig().getHttp().delete(this.getIdPath(e));
+	}
+}, J = class e {
+	static _instance = null;
+	static _initialized = !1;
+	config = {};
+	constructor(e) {
+		this.config = e;
+	}
+	static initialize(t) {
+		if (e._initialized) throw Error("SecurityApiResources has already been initialized");
+		return e._instance = new e(t), e._initialized = !0, e._instance;
+	}
+	static getInstance() {
+		if (!e._instance) throw Error("SecurityApiResources not initialized. Call initialize() first.");
+		return e._instance;
+	}
+	getConfig() {
+		return this.config;
+	}
+	open() {
+		return me.getInstance(this.config);
+	}
+	oauth2() {
+		return pe.getInstance(this.config);
+	}
+	passkey() {
+		return he.getInstance(this.config);
+	}
+}, Y = m("Crypto", {
+	state: () => ({
+		sessionId: "",
+		key: "",
+		state: ""
+	}),
+	actions: {
+		setSessionId(e) {
+			this.sessionId = e;
+		},
+		setKey(e) {
+			this.key = o.encrypt(e, G.getSecurityKey());
+		},
+		getKey() {
+			return o.decrypt(this.key, G.getSecurityKey());
+		},
+		encrypt(e) {
+			let t = this.getKey();
+			return o.encrypt(e, t);
+		},
+		decrypt(e) {
+			let t = this.getKey();
+			return o.decrypt(e, t);
+		},
+		exchange(e = "") {
+			return new Promise((t, n) => {
+				J.getInstance().open().createSession(e).then((e) => {
+					let n = e.data;
+					if (n) {
+						let e = n.sessionId, r = n.publicKey;
+						this.state = n.state;
+						let i = a.createKeyPair(), o = a.encrypt(i.publicKey, r);
+						J.getInstance().open().exchange(e, o).then((n) => {
+							let r = n.data, o = a.decrypt(r, i.privateKey);
+							this.setSessionId(e), this.setKey(o), t(o);
+						});
+					}
+				}).catch((e) => {
+					n(e);
+				});
+			});
+		}
+	},
+	persist: { storage: sessionStorage }
+}), X = m("Authentication", {
+	state: () => ({
+		access_token: "",
+		expires_in: 0,
+		refresh_token: "",
+		license: "",
+		openid: "",
+		idToken: "",
+		scope: "",
+		token_type: "",
+		errorTimes: 0,
+		remainTimes: 0,
+		locked: !1,
+		userId: "",
+		username: "",
+		employeeId: "",
+		avatar: "",
+		roles: []
+	}),
+	getters: {
+		isNotExpired: (e) => u(u().add(e.expires_in, "seconds").valueOf()).add(1, "seconds").diff(u(), "seconds") !== 0,
+		token() {
+			return G.isAutoRefreshToken() || this.isNotExpired ? this.access_token : "";
+		}
+	},
+	actions: {
+		getBearerToken() {
+			return t.BEARER + this.token;
+		},
+		getAuthorizationHeader() {
+			return {
+				Authorization: this.getBearerToken(),
+				"X-Herodotus-Open-Id": this.userId
+			};
+		},
+		saveAccessToken(e) {
+			if (this.access_token = e.access_token, this.expires_in = e.expires_in, this.refresh_token = e.refresh_token ? e.refresh_token : "", this.license = e.refresh_token ? e.refresh_token : "", this.scope = e.scope, this.token_type = e.token_type, e.id_token) {
+				this.idToken = e.id_token;
+				let t = h(this.idToken);
+				this.userId = t.openid, this.username = t.sub, this.avatar = t.avatar, this.employeeId = t.employeeId, this.roles = t.roles;
+			} else if (e.openid) {
+				let t = Y();
+				this.openid = e.openid;
+				let n = t.decrypt(this.openid), r = JSON.parse(n);
+				this.userId = r.userId, this.username = r.username, this.roles = r.roles, this.avatar = r.avatar, this.employeeId = r.employeeId;
+			} else console.warn("There is no id token or openid in the data.");
+		},
+		setUserErrorStatus(e) {
+			this.remainTimes = e.remainTimes, this.errorTimes = e.errorTimes, this.locked = e.locked;
+		},
+		isAlertMessage(e) {
+			return e.code && [40106, 40111].includes(e.code);
+		},
+		setErrorPrompt(e, t) {
+			this.isAlertMessage(e) && J.getInstance().open().getPrompt(t).then((e) => {
+				this.setUserErrorStatus(e.data);
+			});
+		},
+		signIn(e, t) {
+			let n = Y();
+			return G.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
+				J.getInstance().oauth2().passwordFlow(e, t, G.isUseCrypto()).then((e) => {
+					if (e) {
+						let t = e;
+						this.saveAccessToken(t);
+					}
+					this.access_token ? n(!0) : n(!1);
+				}).catch((t) => {
+					this.setErrorPrompt(t, e), r(t);
+				});
+			});
+		},
+		refreshToken() {
+			return new Promise((e, t) => {
+				J.getInstance().oauth2().refreshTokenFlow(this.refresh_token, G.isUseCrypto()).then((t) => {
+					if (t) {
+						let e = t;
+						this.saveAccessToken(e);
+					}
+					this.access_token ? e(!0) : e(!1);
+				}).catch((e) => {
+					t(e);
+				});
+			});
+		},
+		signOut() {
+			this.access_token && J.getInstance().oauth2().signOut(this.access_token).then(() => {
+				console.log("Server side sign out successfully.");
+			}).catch((e) => {
+				console.log("Server side sign out has error.", e);
+			});
+		},
+		authorizationCode(e, t = "") {
+			return new Promise((n, r) => {
+				J.getInstance().oauth2().authorizationCodeFlow(e, G.getRedirectUri(), t, G.isUseCrypto()).then((e) => {
+					if (e) {
+						let t = e;
+						this.saveAccessToken(t);
+					}
+					this.access_token ? n(!0) : n(!1);
+				}).catch((e) => {
+					r(e);
+				});
+			});
+		},
+		smsSignIn(e, t) {
+			let n = Y();
+			return G.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
+				J.getInstance().oauth2().socialCredentialsFlowBySms(e, t, G.isUseCrypto()).then((e) => {
+					if (e) {
+						let t = e;
+						this.saveAccessToken(t);
+					}
+					this.access_token ? n(!0) : n(!1);
+				}).catch((t) => {
+					this.setErrorPrompt(t, e), r(t);
+				});
+			});
+		},
+		socialSignIn(e, t) {
+			return new Promise((n, r) => {
+				J.getInstance().oauth2().socialCredentialsFlowByJustAuth(e, t, G.isUseCrypto()).then((e) => {
+					if (e) {
+						let t = e;
+						this.saveAccessToken(t);
+					}
+					this.access_token ? n(!0) : n(!1);
+				}).catch((e) => {
+					e.code && [40106, 40111].includes(e.code) && r(e);
+				});
+			});
+		},
+		passkey(e) {
+			return new Promise((t, n) => {
+				J.getInstance().oauth2().webAuthnCredentialsFlow(e, G.isUseCrypto()).then((e) => {
+					if (e) {
+						let t = e;
+						this.saveAccessToken(t);
+					}
+					this.access_token ? t(!0) : t(!1);
+				}).catch((e) => {
+					e.code && [40106, 40111].includes(e.code) && n(e);
+				});
+			});
+		}
+	},
+	persist: !0
+}), ge = () => {
+	let e = X(), n = Y(), r = e.access_token, i = n.sessionId, a = {};
+	r && (a.Authorization = t.BEARER + r), i && (a["X-Herodotus-Session-Id"] = i);
+	let o = G.getTenantId();
+	return o && (a["X-Herodotus-Tenant-Id"] = o), a["X-Herodotus-Api-Version"] = "v1", a;
+}, Z = m("SystemSettings", {
+	state: () => ({
+		theme: {
+			mode: c.SYSTEM,
+			dark: { primary: "#2563eb" },
+			light: { primary: "#6750A4" }
+		},
+		layout: O.DEFAULT,
+		effect: { isUniqueOpened: !1 },
+		display: {
+			isTabsView: !0,
+			isActivateLeftTab: !0,
+			showBreadcrumbs: !0,
+			showBreadcrumbsIcon: !0,
+			table: { dense: !1 }
+		}
+	}),
+	getters: {
+		isDark: (e) => e.theme.mode === c.DARK,
+		isLight: (e) => e.theme.mode === c.LIGHT,
+		isSystem: (e) => e.theme.mode === c.SYSTEM,
+		isDarkenMode: (e) => e.theme.mode !== c.LIGHT,
+		isLightenMode: (e) => e.theme.mode === c.LIGHT,
+		density: (e) => e.display.table.dense ? "compact" : "default",
+		densitySwitch: (e) => (t, n) => e.display.table.dense ? t : n
+	},
+	actions: {
+		toDark() {
+			this.theme.mode = c.DARK;
+		},
+		toLight() {
+			this.theme.mode = c.LIGHT;
+		},
+		toSystem() {
+			this.theme.mode = c.SYSTEM;
+		}
+	},
+	persist: !0
+}), Q = m("SystemElement", {
+	state: () => ({
+		appMenus: [],
+		personalMenus: [],
+		cachedRoutes: [],
+		details: /* @__PURE__ */ new Map(/* @__PURE__ */ new Map()),
+		pushParams: {}
+	}),
+	getters: { isDynamicRouteAdded() {
+		return !b(this.appMenus) || !b(this.personalMenus);
+	} },
+	actions: {
+		getDetailComponent(e) {
+			return this.details.get(e);
+		},
+		getRoutePushParam(e) {
+			return this.pushParams[e];
+		},
+		addCachedRoute(e) {
+			if (!e.meta?.isNotKeepAlive) {
+				let t = e.name;
+				this.cachedRoutes.includes(t) || this.cachedRoutes.push(t);
+			}
+		},
+		addDetailRoute(e) {
+			let t = e.name;
+			t && this.details.set(t, e.component);
+		},
+		addMenus(e, t) {
+			b(e) || (this.appMenus = e), b(t) || (this.personalMenus = t);
+		},
+		hasParameter(e) {
+			let t = e.name;
+			return !!(t && ne(this.pushParams, t));
+		},
+		isDetailRoute(e) {
+			return !!(e.meta && e.meta.isDetailContent);
+		},
+		isValidDetailRoute(e) {
+			return this.isDetailRoute(e) && this.hasParameter(e);
+		},
+		addRoutePushParam(e, t = {}) {
+			e && (this.pushParams[e] = t);
+		},
+		removeRoutePushParam(e) {
+			e && delete this.pushParams[e];
+		}
+	}
+}), $ = m("TabsView", {
+	state: () => ({
+		tabs: [],
+		activatedTab: {},
+		activatedTabName: ""
+	}),
+	getters: {
+		isNotLastTab: (e) => (t) => e.tabs.length - 1 !== t,
+		getLastTabIndex: (e) => e.tabs.length - 1,
+		getTabIndex: (e) => (t) => y(e.tabs, (e) => e.name === t.name),
+		getActivatedTabIndex() {
+			return this.getTabIndex(this.activatedTab);
+		},
+		isLastTabActivated() {
+			return this.getActivatedTabIndex === this.getLastTabIndex;
+		},
+		isFirstTabActivated() {
+			return this.getActivatedTabIndex === 0;
+		},
+		disableCloseCurrentTab() {
+			return this.isLastTabActivated || this.isFirstTabActivated;
+		},
+		disableCloseLeftTabs() {
+			return this.isFirstTabActivated;
+		},
+		disableCloseRightTabs() {
+			return this.isLastTabActivated;
+		},
+		disableRefreshCurrentTab() {
+			return !!(this.activatedTab.meta && this.activatedTab.meta.isDetailContent);
+		}
+	},
+	actions: {
+		convertRouteToTab(e) {
+			return {
+				name: e.name,
+				path: e.path,
+				meta: e.meta
+			};
+		},
+		setActivatedTab(e) {
+			this.activatedTab = e, this.activatedTabName = e.name;
+		},
+		isNotExistInStaticRoute(e) {
+			return y(G.getRoutes(), (t) => t.path === e.path) === -1;
+		},
+		isTabNotOpened(e) {
+			return this.getTabIndex(e) === -1;
+		},
+		openTab(e, t = !1) {
+			this.isNotExistInStaticRoute(e) && (this.isTabNotOpened(e) && (t ? this.isLastTabActivated ? this.tabs.splice(this.getActivatedTabIndex, 0, e) : this.tabs.splice(this.getActivatedTabIndex + 1, 0, e) : this.tabs.push(e)), this.setActivatedTab(e));
+		},
+		closeTab(e) {
+			C(this.tabs, (t) => t.name === e.name);
+		},
+		smartTab(e) {
+			let t = Q(), n = t.isDetailRoute(e), r = this.convertRouteToTab(e);
+			n ? t.hasParameter(e) ? this.openTab(r, n) : (this.closeTab(r), K.getInstance().goBack()) : this.openTab(r, n);
+		},
+		deleteTab(e) {
+			let t = this.convertRouteToTab(e);
+			this.closeTab(t);
+		},
+		closeCurrentTab() {
+			this.closeTab(this.activatedTab);
+		},
+		closeOtherTabs() {
+			C(this.tabs, (e) => e.name !== this.activatedTab.name);
+		},
+		closeLeftTabs() {
+			let e = this.getActivatedTabIndex;
+			C(this.tabs, (t, n) => n < e);
+		},
+		closeRightTabs() {
+			let e = this.getActivatedTabIndex;
+			C(this.tabs, (t, n) => n > e);
+		}
+	},
+	persist: !0
+});
+//#endregion
+//#region src/lib/hooks/useEditFinish.ts
+function _e() {
+	let e = p(), t = Q(), n = $();
+	return { onFinish: () => {
+		let r = e.name;
+		t.removeRoutePushParam(r), n.deleteTab(e), K.getInstance().goBack();
+	} };
+}
+//#endregion
+//#region src/lib/hooks/useDeviceAuthorize.ts
+function ve(e, t, n, r = "") {
+	let i = E(0), a = E(5), o = E(!1), s = E(!1), c = E({}), l = T([]), u = (e, t = !1) => {
+		let n = l.value.length + 1;
+		t ? l.value.push({
+			id: n,
+			icon: "mdi-information",
+			color: "green",
+			text: e
+		}) : l.value.push({
+			id: n,
+			icon: "mdi-alert-circle",
+			color: "error",
+			text: e
+		});
+	}, d = (e) => {
+		e === "authorization_pending" ? u("Authorization pending, continuing to poll...") : e === "slow_down" ? (u("Slowing down..."), h()) : e === "token_expired" ? (u("Token expired, stopping..."), m(), s.value = !0) : e === "access_denied" && (u("Access denied, stopping..."), m(), s.value = !0);
+	}, f = () => {
+		J.getInstance().oauth2().deviceCodeFlow(e.value, t.value, n.value, r).then((e) => {
+			u("Authorization successful", !0), m(), o.value = !0, c.value = e;
+		}).catch((e) => {
+			d(e.error);
+		});
+	}, p = () => {
+		i.value = window.setInterval(f, a.value * 1e3);
+	}, m = () => {
+		window.clearInterval(i.value);
+	}, h = () => {
+		a.value += 5, m(), p();
+	};
+	return {
+		pullingResponse: l,
+		successResponse: c,
+		isFailed: s,
+		isSuccess: o,
+		schedule: p,
+		clear: m,
+		slowDown: h
+	};
+}
+//#endregion
+//#region src/lib/hooks/usePasskey.ts
+function ye() {
+	let e = X(), t = null, n = () => {
+		t &&= null;
+	};
+	return {
+		isSupported: async () => !!(window.PublicKeyCredential && PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable && PublicKeyCredential.isConditionalMediationAvailable && (await Promise.all([PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(), PublicKeyCredential.isConditionalMediationAvailable()])).every((e) => e === !0)),
+		registration: (e) => (t = new AbortController(), new Promise((t, r) => {
+			J.getInstance().passkey().getPublicKeyCredentialCreationOptions().then((e) => {
+				let t = PublicKeyCredential.parseCreationOptionsFromJSON(e);
+				return navigator.credentials.create({ publicKey: t });
+			}).then((t) => {
+				let n = { publicKey: {
+					label: e,
+					credential: t
+				} };
+				return J.getInstance().passkey().webAuthnRegister(n);
+			}).then((e) => {
+				t(e);
+			}).catch((e) => {
+				r(e);
+			}).finally(() => {
+				n();
+			});
+		})),
+		authenticator: () => (t = new AbortController(), new Promise((r, i) => {
+			J.getInstance().passkey().getPublicKeyCredentialRequestOptions().then((e) => {
+				let n = PublicKeyCredential.parseRequestOptionsFromJSON(e);
+				return navigator.credentials.get({
+					publicKey: n,
+					signal: t?.signal
+				});
+			}).then((n) => {
+				if (t?.signal.aborted) return !1;
+				if (n) {
+					let t = n;
+					return e.passkey(t.toJSON());
+				}
+				return !1;
+			}).then((e) => {
+				r(e);
+			}).catch((e) => {
+				i(e);
+			}).finally(() => {
+				n();
+			});
+		}))
+	};
+}
+//#endregion
+//#region src/lib/hooks/useSystemElement.ts
+function be(e, t, n) {
+	let r = (e) => e.meta?.title, i = (e) => e.meta?.icon, a = (e) => e.meta?.isDetailContent, o = (e, n) => {
+		let r = {};
+		return r.path = e.name, r.component = n[t(e.componentPath)], e.componentName && (r.name = e.componentName), e.redirect && (r.redirect = e.redirect), r.meta = {
+			icon: e.meta.icon,
+			title: e.meta.title,
+			...e.meta.sort && { sort: e.meta.sort },
+			...e.meta.isHaveChild && { isHaveChild: e.meta.isHaveChild },
+			...e.meta.isNotKeepAlive && { isNotKeepAlive: e.meta.isNotKeepAlive },
+			...e.meta.isHideAllChild && { isHideAllChild: e.meta.isHideAllChild },
+			...e.meta.isDetailContent && { isDetailContent: e.meta.isDetailContent },
+			...e.meta.isIgnoreAuth && { isIgnoreAuth: e.meta.isIgnoreAuth }
+		}, r;
+	}, s = (e) => ({
+		title: r(e),
+		prependIcon: i(e),
+		to: {
+			name: e.name,
+			path: e.path
+		}
+	}), c = (e) => ({
+		title: r(e),
+		prependIcon: i(e),
+		children: []
+	}), l = (e) => b(e.appMenus) ? b(e.personalMenus) ? [] : e.personalMenus : e.appMenus, u = (e, t, n = !1) => {
+		let r = Q(), i = [], d = [], f = [];
+		return e.forEach((e) => {
+			let p = o(e, t);
+			a(p) && r.addDetailRoute(p);
+			let m = {};
+			if (e.children && e.children.length > 0) {
+				let r = u(e.children, t, e.meta.isHideAllChild);
+				if (p.children = r.routeRecords, n) m = s(p);
+				else {
+					let e = l(r);
+					b(e) ? m = s(p) : (m = c(p), m.children = e);
+				}
+			} else n || (m = s(p));
+			i.push(p), b(m) || (e.scenario === j.APP ? d.push(m) : f.push(m));
+		}), {
+			routeRecords: i,
+			appMenus: d,
+			personalMenus: f
+		};
+	}, d = (e, t) => {
+		console.log("[Herodotus] |- Begin add dynamic routes"), Q().addMenus(t.appMenus, t.personalMenus), b(t.routeRecords) ? console.warn("[Herodotus] |- Dynamic routes is empty, skip!") : (t.routeRecords.forEach((t) => {
+			e.addRoute(t);
+		}), console.log("[Herodotus] |- Dynamic routes add success!"));
+	};
+	return { initBackendSecurity: async (t, r) => {
+		let i = (await n(r)).data.menus;
+		d(t, u(i, e));
+	} };
+}
+//#endregion
+//#region ../../node_modules/.pnpm/vuetify@4.0.3_typescript@5._f68def5017cbe0105485f651169ddf34/node_modules/vuetify/lib/util/getCurrentInstance.js
+function xe(e, t) {
+	let n = ae();
+	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
+	return n;
+}
+//#endregion
+//#region ../../node_modules/.pnpm/vuetify@4.0.3_typescript@5._f68def5017cbe0105485f651169ddf34/node_modules/vuetify/lib/composables/theme.js
+var Se = Symbol.for("vuetify:theme");
+function Ce() {
+	xe("useTheme");
+	let e = oe(Se, null);
+	if (!e) throw Error("Could not find Vuetify theme injection");
+	return e;
+}
+//#endregion
+//#region src/lib/hooks/useSystemTheme.ts
+function we() {
+	let e = Z(), t = Ce(), n = E(c.DARK), r = (e) => {
+		if (!e || e.nodeType !== Node.ELEMENT_NODE) return !1;
+		let t = window.getComputedStyle(e);
+		return t.overflowY === "scroll" || t.overflowY === "auto" && e.scrollHeight > e.clientHeight;
+	}, i = () => {
+		let e = performance.now();
+		for (let e = 0; e++ < 1e7; e << 9 & 9);
+		if (performance.now() - e > 10) return;
+		let t = document.querySelector("[data-v-app]");
+		t.querySelectorAll("*").forEach((e) => {
+			r(e) && (e.dataset.scrollX = String(e.scrollLeft), e.dataset.scrollY = String(e.scrollTop));
+		});
+		let n = t.cloneNode(!0);
+		n.classList.add("app-copy");
+		let i = t.getBoundingClientRect();
+		n.style.top = i.top + "px", n.style.left = i.left + "px", n.style.width = i.width + "px", n.style.height = i.height + "px";
+		let a = document.activeElement.getBoundingClientRect(), o = a.left + a.width / 2 + window.scrollX, s = a.top + a.height / 2 + window.scrollY;
+		t.style.setProperty("--clip-pos", `${o}px ${s}px`), t.style.removeProperty("--clip-size"), se(() => {
+			t.classList.add("app-transition"), requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					t.style.setProperty("--clip-size", Math.hypot(window.innerWidth, window.innerHeight) + "px");
+				});
+			});
+		}), document.body.append(n), n.querySelectorAll("[data-scroll-x], [data-scroll-y]").forEach((e) => {
+			e.scrollLeft = Number(e.dataset.scrollX), e.scrollTop = Number(e.dataset.scrollY);
+		});
+		function c(e) {
+			e.target === e.currentTarget && (n.remove(), t.removeEventListener("transitionend", c), t.removeEventListener("transitioncancel", c), t.classList.remove("app-transition"), t.style.removeProperty("--clip-size"), t.style.removeProperty("--clip-pos"));
+		}
+		t.addEventListener("transitionend", c), t.addEventListener("transitioncancel", c);
+	};
+	D(() => {
+		t.change(e.isSystem ? n.value : e.theme.mode);
+	}), ce(t.global.name, (e) => {
+		i();
+		let t = e;
+		f.setTheme(t), d.setTheme(t);
+	});
+	let a = w(() => e.isDarkenMode ? e.theme.dark.primary : e.theme.light.primary);
+	return {
+		lightColor: w(() => z(a.value, 3)),
+		darkColor: w(() => z(a.value, 6)),
+		backgroundColor: w(() => {
+			let t = e.isDarkenMode ? .5 : .2;
+			return W("#ffffff", a.value, t);
+		}),
+		onCycleChangeTheme: () => {
+			if (e.isDark) {
+				e.toSystem();
+				return;
+			}
+			if (e.isSystem) {
+				e.toLight();
+				return;
+			}
+			if (e.isLight) {
+				e.toDark();
+				return;
+			}
+		},
+		currentTheme: w({
+			get() {
+				return e.theme.mode;
+			},
+			set(t) {
+				e.theme.mode = t;
+			}
+		}),
+		cycleChangeThemeIcon: w(() => {
+			switch (e.theme.mode) {
+				case c.SYSTEM: return "mdi-brightness-5";
+				case c.DARK: return "mdi-brightness-auto";
+				default: return "mdi-brightness-4";
+			}
+		}),
+		systemTheme: n
+	};
+}
+//#endregion
+//#region src/lib/main.ts
+var Te = (e) => {
+	l(Z().theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
+};
+//#endregion
+export { k as CaptchaCategoryEnum, O as LayoutModeEnum, j as MenuScenario, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, A as SocialSourceEnum, de as addColorAlpha, B as getAllColorPalette, z as getColorPalette, ge as getSystemHeaders, Te as initializer, fe as isWhiteColor, W as mixColor, le as piniaPluginPersistedstate, ue as useApplicationStore, X as useAuthenticationStore, Y as useCryptoStore, ve as useDeviceAuthorize, _e as useEditFinish, Q as useElementStore, ye as usePasskey, Z as useSettingsStore, be as useSystemElement, we as useSystemTheme, $ as useTabsViewStore };

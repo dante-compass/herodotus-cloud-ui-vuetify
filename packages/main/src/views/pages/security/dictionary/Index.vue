@@ -20,31 +20,24 @@
       <v-btn @click="toCreate">新建字典</v-btn>
     </template>
 
-    <template v-slot:item.name="{ value }">
+    <template v-slot:item.name="{ item }">
       <v-chip
-        :border="`${getColor(value)} thin opacity-25`"
-        :color="getColor(value)"
-        :text="value"
+        :border="`${getColor(item)} thin opacity-25`"
+        :color="getColor(item)"
+        :text="item.label"
         size="small"
       ></v-chip>
     </template>
 
     <template #item.actions="{ item }">
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+      <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>
   </h-data-table>
 </template>
 
 <script setup lang="ts">
-import type {
-  SysDictionaryEntity,
-  SysDictionaryConditions,
-  SysDictionaryProps,
-} from '@herodotus/api';
+import type { SysDictionaryEntity, SysDictionaryConditions, SysDictionaryProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable } from '@/composables/hooks';
@@ -81,12 +74,9 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<SysDictionaryConditions, SysDictionaryEntity>(
-  API.core.sysDictionary(),
-  PAGE_NAME.SYS_DICTIONARY,
-);
+} = useTable<SysDictionaryConditions, SysDictionaryEntity>(API.core.sysDictionary(), PAGE_NAME.SYS_DICTIONARY);
 
 const getColor = (item: SysDictionaryEntity) => {
-  return COLOR_LIST[item.ordinal];
+  return COLOR_LIST[item.ordinal];;
 };
 </script>

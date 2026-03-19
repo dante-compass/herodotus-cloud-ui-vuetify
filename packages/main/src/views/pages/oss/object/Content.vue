@@ -6,9 +6,9 @@
       </template>
     </v-card>
 
-    <v-container class="pa-0">
+    <v-container fluid class="pa-0">
       <v-row>
-        <v-col xl="2" lg="2" md="4" sm="6" xs="12">
+        <v-col xl="3" lg="3" md="4" sm="6" xs="12">
           <v-sheet>
             <v-card :disabled="loading" :loading="loading" :subtitle="currentObjectName">
               <template v-slot:loader="{ isActive }">
@@ -84,7 +84,7 @@
             </v-card>
           </v-sheet>
         </v-col>
-        <v-col xl="10" lg="10" md="8" sm="6" xs="12">
+        <v-col xl="9" lg="9" md="8" sm="6" xs="12">
           <h-oss-object-versions
             v-if="showVersions"
             :bucket-name="currentBucketName"

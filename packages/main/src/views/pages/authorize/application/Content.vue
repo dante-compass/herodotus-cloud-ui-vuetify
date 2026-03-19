@@ -68,6 +68,11 @@
               placeholder="请输入客户端密钥集URL"
               class="mt-2"
             ></v-text-field>
+            <h-date-time
+              v-model="editedItem.clientSecretExpiresAt"
+              label="客户端密钥过期时间"
+              placeholder="请输入客户端密钥过期时间"
+            ></h-date-time>
             <v-select
               v-if="isShowAuthenticationSigningAlgorithm"
               v-model="editedItem.authenticationSigningAlgorithm"

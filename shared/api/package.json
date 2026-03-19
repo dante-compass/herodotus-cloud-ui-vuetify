@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/api",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "",
   "keywords": [],
   "author": "",
@@ -13,7 +13,7 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
   },
-  "main": "dist/index.umd.js",
+  "main": "dist/index.cjs.js",
   "module": "dist/index.es.mjs",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -23,7 +23,7 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/index.es.mjs",
-      "require": "./dist/index.umd.js"
+      "require": "./dist/index.cjs.js"
     },
     "./style.css": "./dist/assets/css/apis.css",
     "./package.json": "./package.json"

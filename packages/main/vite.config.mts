@@ -15,7 +15,7 @@ import { compression } from 'vite-plugin-compression2';
 import { createHtmlPlugin } from 'vite-plugin-html';
 // import { viteVConsole } from 'vite-plugin-vconsole';
 import VueDevTools from 'vite-plugin-vue-devtools';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import nodePolyfills from '@rolldown/plugin-node-polyfills';
 
 // Utilities
 import { defineConfig, loadEnv } from 'vite';
@@ -24,17 +24,14 @@ import { fileURLToPath, URL } from 'node:url';
 // https://vitejs.dev/config/
 
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
+  // 这里的 env 只会显示 VITE_开头内容
   const env = loadEnv(mode, process.cwd());
   // https://vite.dev/config/
   return defineConfig({
     // 增加基础路径配置，修复在反向代理指向子路径的配置方式下，出现静态资源 404 问题
-    base: env.VITE_BASE_PATH,
+    base: env.VITE_BASE_URL,
     plugins: [
-      nodePolyfills({
-        globals: {
-          Buffer: true,
-        },
-      }),
+      nodePolyfills(),
       VueDevTools(),
       Vue({
         template: { transformAssetUrls },
@@ -104,9 +101,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     ],
     optimizeDeps: {
       exclude: [
-        'vite-plugin-node-polyfills/shims/buffer',
-        'vite-plugin-node-polyfills/shims/global',
-        'vite-plugin-node-polyfills/shims/process',
         'vuetify',
         'vuetify/components',
         'vuetify/directives',
@@ -152,16 +146,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       outDir: '../../build/dist',
       emptyOutDir: true,
       cssCodeSplit: false, // 因为使用了 Base './'，如果将该属性设置为 true，编译后 css 目录结构会产生变化，会导致 @quasar/extras 中样式找不到字体
-      minify: 'terser',
-      terserOptions: {
-        // 生产环境下移除console
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-        },
-        keep_classnames: true,
-      },
-      rollupOptions: {
+      rolldownOptions: {
         output: {
           assetFileNames: (assetInfo) => {
             if (assetInfo.type === 'asset' && /\.(jpe?g|png|gif|svg)$/i.test(assetInfo.name as string)) {
@@ -172,20 +157,44 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             }
             return 'assets/[ext]/[name]-[hash].[ext]';
           },
-          manualChunks(id, { getModuleInfo }) {
-            if (id.includes('tsparticles')) {
-              return 'js/npm-tsparticles';
-            } else if (id.includes('node_modules')) {
-              const indexes = id.toString().split('node_modules/')[2].split('/');
-              let name = indexes[0];
-              if (name.includes('@')) {
-                name = name + '-' + indexes[1];
-              }
-              return 'js/npm-' + name;
-            } else if (id.includes('src')) {
-              const path = id.toString().split('src/')[1].replace(/\//g, '-');
-              return 'js/' + path;
-            }
+          codeSplitting: {
+            groups: [
+              {
+                name: 'js/npm-tsparticles',
+                test: (id) => id.includes('tsparticles'),
+              },
+              {
+                name: (id) => {
+                  // 匹配 node_modules 中的库，生成类似 'js/npm-react' 的 chunk
+                  if (id.includes('node_modules')) {
+                    const parts = id.toString().split('node_modules/')[2].split('/');
+                    let name = parts[0];
+                    if (name.startsWith('@')) {
+                      name = name + '-' + parts[1];
+                    }
+                    return 'js/npm-' + name;
+                  }
+                  return null;
+                },
+                // 注意：如果使用函数作为 name，test 也需要定义。
+                // 上面的逻辑混合了 test 和 name，为了清晰，可以拆分为多个 group，
+                // 或者像下面 src 的示例一样，使用一个通用的 group 来覆盖 node_modules。
+                // 这里我们暂时将所有 node_modules 包都纳入这个动态命名的 group。
+                test: (id) => id.includes('node_modules'),
+                // 为了更精确地控制，建议将 tsparticles 单独拆出后，再定义一个通用的 node_modules group
+              },
+              {
+                name: (id) => {
+                  // 匹配 src 下的文件，生成类似 'js/pages-index' 的 chunk
+                  if (id.includes('src')) {
+                    const path = id.toString().split('src/')[1].replace(/\//g, '-');
+                    return 'js/' + path;
+                  }
+                  return null;
+                },
+                test: (id) => id.includes('src'), // 对应的 test 条件
+              },
+            ],
           },
         },
       },

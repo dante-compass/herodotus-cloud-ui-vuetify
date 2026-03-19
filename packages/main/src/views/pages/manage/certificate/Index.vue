@@ -49,12 +49,12 @@
           tooltip="查看证书文件"
           @click="toFile(item)"
         ></h-action-button>
-        <h-action-button
+        <!-- <h-action-button
           color="orange"
           icon="mdi-file-lock"
           tooltip="查看吊销列表"
           @click="toRevocation(item)"
-        ></h-action-button>
+        ></h-action-button> -->
         <h-action-delete-button @click="deleteItemById(item[rowKey])"></h-action-delete-button>
       </template>
     </h-data-table>

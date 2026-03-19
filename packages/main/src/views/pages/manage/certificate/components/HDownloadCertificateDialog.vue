@@ -5,7 +5,6 @@
     title="设置下载证书格式"
     :loading="loading"
     @confirm="onSave"
-    @after-leave="clean"
   >
     <h-label title="证书类别:"></h-label>
     <h-dictionary-toggle
@@ -74,10 +73,9 @@ const openDialog = defineModel({
 });
 
 const loading = shallowRef(false);
+const editedItem = ref({}) as Ref<MgtCertificateFileRequest>;
 
 const { download, loadProgress, showProgress } = useOss();
-
-const editedItem = ref({}) as Ref<MgtCertificateFileRequest>;
 
 const showKeyStore = computed(() => {
   return editedItem.value.certificateFileCategory === 'KEY_STORE';
@@ -90,10 +88,6 @@ const showPrivateKey = computed(() => {
 const showCertificate = computed(() => {
   return editedItem.value.certificateFileCategory === 'CERTIFICATE';
 });
-
-const clean = () => {
-  editedItem.value = {} as MgtCertificateFileRequest;
-};
 
 const onSave = () => {
   loading.value = true;
@@ -113,4 +107,11 @@ const onSave = () => {
       toast.error('下载失败');
     });
 };
+
+watch(openDialog, (newValue) => {
+  if (newValue) {
+    loading.value = false;
+    editedItem.value = {} as MgtCertificateFileRequest;
+  }
+});
 </script>

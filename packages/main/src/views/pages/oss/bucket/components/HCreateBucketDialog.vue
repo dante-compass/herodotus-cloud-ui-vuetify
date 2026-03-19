@@ -5,7 +5,6 @@
     title="新建存储桶"
     :loading="loading"
     @confirm="onSave"
-    @after-leave="clean"
   >
     <v-form ref="createBucketForm">
       <v-text-field
@@ -56,10 +55,6 @@ const regxRule = (content: string) => {
   return regx.test(content);
 };
 
-const clean = () => {
-  editedItem.value = {} as CreateBucketArgument;
-};
-
 const onSave = async () => {
   const { valid } = await createBucketForm.value.validate();
 
@@ -89,4 +84,11 @@ const onSave = async () => {
       });
   }
 };
+
+watch(openDialog, (newValue) => {
+  if (newValue) {
+    loading.value = false;
+    editedItem.value = {} as CreateBucketArgument;
+  }
+});
 </script>

@@ -1,5 +1,35 @@
 # @herodotus/api
 
+## 1.2.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@1.2.0
+
+## 1.1.1
+
+### Patch Changes
+
+- 修复 SysAttribute 定义
+- Updated dependencies
+  - @herodotus/core@1.1.1
+
+## 1.1.0
+
+### Minor Changes
+
+- [升级] 前端工程 Vite 版本升级至 8.0.0，改用 Rolldown 和 Oxc 替代 esbuild 和 Rollup 编译代码
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

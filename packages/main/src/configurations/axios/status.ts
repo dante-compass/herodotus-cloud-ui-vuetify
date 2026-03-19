@@ -75,6 +75,9 @@ const statusCode = (axiosInstance: AxiosInstance, response?: AxiosResponse<any>,
           notify.error('系统错误，请稍后再试！或者联系管理员');
         }
         break;
+      case 502:
+        notify.error('后端服务无法访问或者尚未启动！');
+        break;
       case 503:
         notify.warning('网络抖动，请稍后再试！');
         break;

@@ -54,4 +54,12 @@ const onSave = async () => {
     });
   }
 };
+
+// 每次打开对话框时重置
+watch(open, (newValue) => {
+  if (newValue) {
+    label.value = '';
+    loading.value = false;
+  }
+});
 </script>

@@ -4,7 +4,7 @@
 
     <v-container fluid>
       <v-row class="h-screen" justify="center">
-        <v-col></v-col>
+        <v-col xxl="4" xl="3" lg="2" md="1" sm="0" xs="0"></v-col>
         <v-col align-self="center">
           <v-card class="elevation-20 mx-auto rounded-xl" style="z-index: 5">
             <template v-slot:append>
@@ -13,7 +13,6 @@
             <h-app-logo height="10vh" class="mb-2"></h-app-logo>
             <v-card-text>
               <v-card variant="tonal" elevation="2" class="mx-auto" max-width="420">
-
                 <v-tabs v-model="tabs" align-tabs="center">
                   <v-tab value="account" class="font-weight-bold">账号密码登录</v-tab>
                   <v-tab value="mobile" class="font-weight-bold">手机短信登录</v-tab>
@@ -24,7 +23,7 @@
             <slot></slot>
           </v-card>
         </v-col>
-        <v-col></v-col>
+        <v-col xxl="4" xl="3" lg="2" md="1" sm="0" xs="0"></v-col>
       </v-row>
     </v-container>
     <h-sign-in-background :start-color="lightColor" :end-color="darkColor"></h-sign-in-background>
