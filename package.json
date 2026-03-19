@@ -2,7 +2,7 @@
   "name": "herodotus-cloud-ui-vuetify",
   "private": true,
   "type": "module",
-  "version": "4.0.3.0",
+  "version": "4.0.4.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "commit": "git add . && git status && git-cz",
@@ -71,7 +71,7 @@
     "vite-plugin-vconsole": "^2.1.1",
     "vite-plugin-vue-devtools": "^8.1.0",
     "vite-plugin-vuetify": "^2.1.3",
-    "vue-router": "^5.0.3",
+    "vue-router": "^5.0.4",
     "vue-tsc": "^3.2.6"
   }
 }

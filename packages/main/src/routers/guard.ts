@@ -65,7 +65,7 @@ export const createRouterGuard = (router: Router) => {
 
           // 重新导航到目标页面
           if (to.path !== from.path) {
-            return to.fullPath;
+            return to.path;
           } else {
             return;
           }
