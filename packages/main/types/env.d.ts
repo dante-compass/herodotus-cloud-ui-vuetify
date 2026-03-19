@@ -10,7 +10,6 @@ declare namespace NodeJS {
 }
 
 declare interface ImportMetaEnv {
-  readonly VITE_BASE_URL: string;
   readonly VITE_PROJECT;
   readonly VITE_APPLICATION_NAME;
   readonly VITE_API_URL;
