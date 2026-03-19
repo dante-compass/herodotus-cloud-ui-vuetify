@@ -8,6 +8,8 @@
 import { useAuthenticationStore } from '@herodotus/framework';
 import { AvatarUtils } from '@herodotus/core';
 
+import { useImage } from '@/composables/hooks';
+
 defineOptions({ name: 'HUserAvatar' });
 
 interface Props {
@@ -22,8 +24,8 @@ const props = withDefaults(defineProps<Props>(), {
   fromStore: false,
 });
 
-const defaultAvatar = '/images/boy-avatar.png';
 const authenticationStore = useAuthenticationStore();
+const { getAssetsFile } = useImage();
 
 const readFromStore = () => {
   if (authenticationStore.avatar) {
@@ -32,7 +34,7 @@ const readFromStore = () => {
     if (authenticationStore.userId) {
       return AvatarUtils.generate(authenticationStore.userId);
     } else {
-      return defaultAvatar;
+      return getAssetsFile('boy-avatar.png');
     }
   }
 };
@@ -44,7 +46,7 @@ const readFromProps = () => {
     if (props.id) {
       return AvatarUtils.generate(props.id);
     } else {
-      return defaultAvatar;
+      return getAssetsFile('boy-avatar.png');
     }
   }
 };

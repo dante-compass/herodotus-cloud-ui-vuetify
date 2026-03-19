@@ -25,8 +25,11 @@ import { isEmpty, toLower } from 'lodash-es';
 import { SecurityApiResources } from '@herodotus/framework';
 
 import { VARIABLES } from '@/configurations';
+import { useImage } from '@/composables/hooks';
 
 defineOptions({ name: 'SocialSignInList' });
+
+const { getSocialLogo } = useImage();
 
 const list = ref({}) as Ref<Record<string, string>>;
 
@@ -40,7 +43,7 @@ const init = () => {
 };
 
 const find = (name: string, suffix = 'png') => {
-  return `/images/social/${toLower(name)}.${suffix}`;
+  return getSocialLogo(toLower(name), suffix);
 };
 
 const hasConfig = computed(() => {

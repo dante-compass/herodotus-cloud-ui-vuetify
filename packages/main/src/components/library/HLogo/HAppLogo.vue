@@ -3,13 +3,13 @@
 </template>
 
 <script setup lang="ts">
-import { useTheme } from 'vuetify';
+import { useImage } from '@/composables/hooks';
 
 defineOptions({ name: 'HAppLogo' });
 
-const theme = useTheme();
+const { getSystemLogo } = useImage();
 
 const logo = computed(() => {
-  return `/images/layouts/dante-cloud-${theme.current.value.dark ? 'dark' : 'light'}.png`;
+  return getSystemLogo();
 });
 </script>
