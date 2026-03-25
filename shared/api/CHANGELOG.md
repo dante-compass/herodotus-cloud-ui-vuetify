@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 1.2.2
+
+### Patch Changes
+
+- Typescript 版本升级至 6.0.0
+- Updated dependencies
+  - @herodotus/core@1.2.2
+
 ## 1.2.1
 
 ### Patch Changes
