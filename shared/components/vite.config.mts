@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 
 import Vue from '@vitejs/plugin-vue';
 import { transformAssetUrls } from 'vite-plugin-vuetify';
-import dts from 'vite-plugin-dts';
+import dts from 'unplugin-dts/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,7 +13,7 @@ export default defineConfig({
     }),
     dts({
       insertTypesEntry: true,
-      outDir: './dist/types',
+      outDirs: './dist/types',
     }),
   ],
   resolve: {
