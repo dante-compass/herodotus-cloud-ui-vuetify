@@ -14,9 +14,7 @@ class EnvironmentVariable {
   private static USE_OIDC: string = import.meta.env.VITE_USE_OIDC;
   private static USE_WEBSOCKET: string = import.meta.env.VITE_USE_WEBSOCKET;
   private static USE_CRYPTO: string = import.meta.env.VITE_USE_CRYPTO;
-
   private static USE_DISABLE_DEVTOOL: string = import.meta.env.VITE_USE_DISABLE_DEVTOOL;
-
   private static instance = new EnvironmentVariable();
 
   public static getInstance(): EnvironmentVariable {

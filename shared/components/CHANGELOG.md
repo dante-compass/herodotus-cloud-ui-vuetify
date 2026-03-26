@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 1.2.3
+
+### Patch Changes
+
+- 授权码模式 API 补充参数
+- Updated dependencies
+  - @herodotus/core@1.2.3
+
 ## 1.2.2
 
 ### Patch Changes

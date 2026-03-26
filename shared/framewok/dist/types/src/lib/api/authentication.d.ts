@@ -17,7 +17,9 @@ export declare class OAuth2ApiService {
     revoke(token: string, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult>;
     refreshTokenFlow(refreshToken: string, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     passwordFlow(username: string, password: string, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
-    authorizationCodeRequestFlow(api: string, redirectUri: string, scope?: string): string;
+    private createAuthorizationCodeAddress;
+    private createAuthorizationCodeParams;
+    authorizationCodeRequestFlow(api: string, redirectUri: string, scope?: string, authorizeUri?: string): string;
     /**
      * 授权码模式
      * @param code 授权码

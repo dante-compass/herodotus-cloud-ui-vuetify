@@ -23,8 +23,10 @@ cat $ROOT_DIR/static/js/environment.js
 
 echo "--------------------------------------------------"
 
+# 原有的保护措施，最新版本通过配置 vite-plugin-compression2 直接避免 environment.js 压缩文件的生成
 # environment.js.gz 会影响环境变量的设置
 ENV_GZIP_FILE=$ROOT_DIR/static/js/environment.js.gz
+ENV_BR_FILE=$ROOT_DIR/static/js/environment.js.br
   
 # 检查文件是否存在  
 if [ -f "$ENV_GZIP_FILE" ]; then  
@@ -33,6 +35,15 @@ if [ -f "$ENV_GZIP_FILE" ]; then
   echo "Gzip file $ENV_GZIP_FILE deleted."  
 else  
   echo "Gzip file $ENV_GZIP_FILE not exist."  
+fi
+
+# 检查文件是否存在  
+if [ -f "$ENV_BR_FILE" ]; then  
+  # 文件存在，删除它  
+  rm "$ENV_BR_FILE"
+  echo "Gzip file $ENV_BR_FILE deleted."  
+else  
+  echo "Gzip file $ENV_BR_FILE not exist."  
 fi
 
 echo "Environment replace finished."
