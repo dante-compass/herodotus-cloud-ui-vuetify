@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.2.4
+
+### Patch Changes
+
+- 优化前端配置
+
 ## 1.2.3
 
 ### Patch Changes

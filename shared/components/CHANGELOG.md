@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 1.2.4
+
+### Patch Changes
+
+- 优化前端配置
+- Updated dependencies
+  - @herodotus/core@1.2.4
+
 ## 1.2.3
 
 ### Patch Changes
