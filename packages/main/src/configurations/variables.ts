@@ -6,15 +6,15 @@ class EnvironmentVariable {
   private static OAUTH2_CLIENT_ID: string = import.meta.env.VITE_OAUTH2_CLIENT_ID;
   private static OAUTH2_CLIENT_SECRET: string = import.meta.env.VITE_OAUTH2_CLIENT_SECRET;
   private static OAUTH2_REDIRECT_URI: string = import.meta.env.VITE_OAUTH2_REDIRECT_URI;
+  private static OAUTH2_AUTHORIZE_URI: string = import.meta.env.VITE_OAUTH2_AUTHORIZE_URI;
+  private static SECRET_KEY: string = import.meta.env.VITE_SECRET_KEY;
+  private static CAPTCHA: string = import.meta.env.VITE_CAPTCHA;
+  private static MULTI_TENANCY_ID: string = import.meta.env.VITE_MULTI_TENANCY_ID;
   private static AUTO_REFRESH_TOKEN: string = import.meta.env.VITE_AUTO_REFRESH_TOKEN;
   private static USE_OIDC: string = import.meta.env.VITE_USE_OIDC;
   private static USE_WEBSOCKET: string = import.meta.env.VITE_USE_WEBSOCKET;
   private static USE_CRYPTO: string = import.meta.env.VITE_USE_CRYPTO;
-  private static SECRET_KEY: string = import.meta.env.VITE_SECRET_KEY;
-  private static CAPTCHA: string = import.meta.env.VITE_CAPTCHA;
-  private static MULTI_TENANCY_ID: string = import.meta.env.VITE_MULTI_TENANCY_ID;
   private static USE_DISABLE_DEVTOOL: string = import.meta.env.VITE_USE_DISABLE_DEVTOOL;
-
   private static instance = new EnvironmentVariable();
 
   public static getInstance(): EnvironmentVariable {
@@ -120,6 +120,13 @@ class EnvironmentVariable {
     return this.getEnvironmentVariable(
       window.APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_REDIRECT_URI,
       EnvironmentVariable.OAUTH2_REDIRECT_URI,
+    );
+  }
+
+  public getAuthorizeUri(): string {
+    return this.getEnvironmentVariable(
+      window.APPLICATION_ENVIRONMENT_VARIABLES_OAUTH2_AUTHORIZE_URI,
+      EnvironmentVariable.OAUTH2_AUTHORIZE_URI,
     );
   }
 

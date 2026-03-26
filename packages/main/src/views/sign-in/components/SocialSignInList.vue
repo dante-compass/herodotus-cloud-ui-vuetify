@@ -53,7 +53,12 @@ const hasConfig = computed(() => {
 const authorizationCodeUrl = computed(() => {
   return SecurityApiResources.getInstance()
     .oauth2()
-    .authorizationCodeRequestFlow(VARIABLES.getApiUrl(), VARIABLES.getRedirectUri());
+    .authorizationCodeRequestFlow(
+      VARIABLES.getApiUrl(),
+      VARIABLES.getRedirectUri(),
+      'openid',
+      VARIABLES.getAuthorizeUri(),
+    );
 });
 
 onMounted(() => {

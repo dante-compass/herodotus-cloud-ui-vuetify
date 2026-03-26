@@ -1,9 +1,4 @@
-import type {
-  HttpConfig,
-  AxiosHttpResult,
-  AccessTokenResponse,
-  DeviceAuthorizationResponse,
-} from '@herodotus/core';
+import type { HttpConfig, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse } from '@herodotus/core';
 import type { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '@/declarations';
 
 import {
@@ -106,11 +101,7 @@ export class OAuth2ApiService {
     return data;
   }
 
-  public signOut(
-    token: string,
-    clientId = '',
-    clientSecret = '',
-  ): Promise<AxiosHttpResult<string>> {
+  public signOut(token: string, clientId = '', clientSecret = ''): Promise<AxiosHttpResult<string>> {
     return this.config.getHttp().put(
       this.getOAuth2SignOutAddress(),
       {
@@ -152,11 +143,7 @@ export class OAuth2ApiService {
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
-      this.createOAuth2Data(
-        AuthorizationGrantTypeEnum.REFRESH_TOKEN,
-        { refresh_token: refreshToken },
-        oidc,
-      ),
+      this.createOAuth2Data(AuthorizationGrantTypeEnum.REFRESH_TOKEN, { refresh_token: refreshToken }, oidc),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
       },
@@ -177,11 +164,7 @@ export class OAuth2ApiService {
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
-      this.createOAuth2Data(
-        AuthorizationGrantTypeEnum.PASSWORD,
-        { username: username, password: password },
-        oidc,
-      ),
+      this.createOAuth2Data(AuthorizationGrantTypeEnum.PASSWORD, { username: username, password: password }, oidc),
       {
         contentType: ContentTypeEnum.URL_ENCODED,
       },
@@ -193,20 +176,34 @@ export class OAuth2ApiService {
     );
   }
 
-  public authorizationCodeRequestFlow(api: string, redirectUri: string, scope = 'openid'): string {
-    const param = `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${redirectUri}&scope=${scope}`;
+  private createAuthorizationCodeAddress(api: string, authorizeUri = ''): string {
+    if (isEmpty(authorizeUri)) {
+      const project = this.config.getProject();
+      let address = api;
+      if (endsWith(address, '/')) {
+        address = address.substring(0, address.length - 1);
+      }
 
-    const project = this.config.getProject();
-    let address = api;
-    if (endsWith(address, '/')) {
-      address = address.substring(0, address.length - 1);
+      if (project && (project === 'dante' || project === 'herodotus')) {
+        address += this.config.getUaa(false);
+      }
+
+      return address;
+    } else {
+      return authorizeUri;
     }
+  }
 
-    if (project && (project === 'dante' || project === 'herodotus')) {
-      address += this.config.getUaa(false);
-    }
+  private createAuthorizationCodeParams(redirectUri: string, scope = 'openid'): string {
+    return `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${redirectUri}&scope=${scope}`;
+  }
 
-    return address + '/oauth2/authorize' + param;
+  public authorizationCodeRequestFlow(api: string, redirectUri: string, scope = 'openid', authorizeUri = ''): string {
+    return (
+      this.createAuthorizationCodeAddress(api, authorizeUri) +
+      '/oauth2/authorize' +
+      this.createAuthorizationCodeParams(redirectUri, scope)
+    );
   }
 
   /**
@@ -335,13 +332,9 @@ export class OAuth2ApiService {
   ): Promise<AxiosHttpResult<DeviceAuthorizationResponse>> {
     return this.config
       .getHttp()
-      .post(
-        this.getOAuth2DeviceAuthorizationAddress(),
-        this.createClientData(clientId, clientSecret, scope),
-        {
-          contentType: ContentTypeEnum.URL_ENCODED,
-        },
-      );
+      .post(this.getOAuth2DeviceAuthorizationAddress(), this.createClientData(clientId, clientSecret, scope), {
+        contentType: ContentTypeEnum.URL_ENCODED,
+      });
   }
 
   public socialCredentialsFlowBySms(
@@ -415,16 +408,10 @@ export class OAuth2ApiService {
     );
   }
 
-  public oidcClientRegistrationFlow(
-    productKey: string,
-    clientName: string,
-  ): Promise<AxiosHttpResult<any>> {
+  public oidcClientRegistrationFlow(productKey: string, clientName: string): Promise<AxiosHttpResult<any>> {
     return this.config.getHttp().post(this.getOIDCConnectRegisterAddress(), {
       product_key: productKey,
-      grant_types: [
-        AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS,
-        AuthorizationGrantTypeEnum.DEVICE_CODE,
-      ],
+      grant_types: [AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS, AuthorizationGrantTypeEnum.DEVICE_CODE],
       redirect_uris: ['http://192.168.101.10:3000'],
       client_name: clientName,
       // client_secret: '123456',

@@ -1,5 +1,48 @@
 # @herodotus/components
 
+## 1.3.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@1.3.0
+
+## 1.2.5
+
+### Patch Changes
+
+- 修复前端打包问题
+- Updated dependencies
+  - @herodotus/core@1.2.5
+
+## 1.2.4
+
+### Patch Changes
+
+- 优化前端配置
+- Updated dependencies
+  - @herodotus/core@1.2.4
+
+## 1.2.3
+
+### Patch Changes
+
+- 授权码模式 API 补充参数
+- Updated dependencies
+  - @herodotus/core@1.2.3
+
+## 1.2.2
+
+### Patch Changes
+
+- Typescript 版本升级至 6.0.0
+- Updated dependencies
+  - @herodotus/core@1.2.2
+
 ## 1.2.1
 
 ### Patch Changes

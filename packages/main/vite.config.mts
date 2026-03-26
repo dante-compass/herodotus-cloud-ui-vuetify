@@ -79,7 +79,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           ],
         },
       }),
-      compression(),
+      compression({
+        // environment.js 在打包时不生成 *.gz 或 *.br 文件，避免压缩文件影响环境变量的设置。
+        exclude: ['**/environment.js'],
+      }),
       // VConsole 调试工具配置，若没有此配置，则调试工具控制台不会打印日志
       // viteVConsole({
       //   entry: [fileURLToPath(new URL('./src/main.ts', import.meta.url))], // entry file

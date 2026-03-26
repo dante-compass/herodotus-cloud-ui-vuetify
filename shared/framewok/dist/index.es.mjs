@@ -289,9 +289,17 @@ var G = class e {
 			password: n
 		}, r), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
 	}
-	authorizationCodeRequestFlow(e, t, n = "openid") {
-		let r = `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${t}&scope=${n}`, i = this.config.getProject(), a = e;
-		return te(a, "/") && (a = a.substring(0, a.length - 1)), i && (i === "dante" || i === "herodotus") && (a += this.config.getUaa(!1)), a + "/oauth2/authorize" + r;
+	createAuthorizationCodeAddress(e, t = "") {
+		if (b(t)) {
+			let t = this.config.getProject(), n = e;
+			return te(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
+		} else return t;
+	}
+	createAuthorizationCodeParams(e, t = "openid") {
+		return `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${e}&scope=${t}`;
+	}
+	authorizationCodeRequestFlow(e, t, n = "openid", r = "") {
+		return this.createAuthorizationCodeAddress(e, r) + "/oauth2/authorize" + this.createAuthorizationCodeParams(t, n);
 	}
 	authorizationCodeFlow(t, n, r = "", a = !1, o = "", s = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.AUTHORIZATION_CODE, {
@@ -983,14 +991,14 @@ function be(e, t, n) {
 	} };
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.0.3_typescript@5._f68def5017cbe0105485f651169ddf34/node_modules/vuetify/lib/util/getCurrentInstance.js
+//#region ../../node_modules/.pnpm/vuetify@4.0.4_typescript@6._af396a6703ecbdacf185282928dbcc0e/node_modules/vuetify/lib/util/getCurrentInstance.js
 function xe(e, t) {
 	let n = ae();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.0.3_typescript@5._f68def5017cbe0105485f651169ddf34/node_modules/vuetify/lib/composables/theme.js
+//#region ../../node_modules/.pnpm/vuetify@4.0.4_typescript@6._af396a6703ecbdacf185282928dbcc0e/node_modules/vuetify/lib/composables/theme.js
 var Se = Symbol.for("vuetify:theme");
 function Ce() {
 	xe("useTheme");
