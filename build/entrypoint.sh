@@ -7,6 +7,7 @@ echo "Replacing env constants in JS"
 for file in $ROOT_DIR/static/js/environment.js;
 do
   echo "Processing $file ...";
+  // 以下参数为通过 environment.js 传递给 Vue 环境变量
   sed -i 's|HERODOTUS_SERVER_PROJECT|'${HERODOTUS_SERVER_PROJECT}'|g' $file
   sed -i 's|HERODOTUS_APPLICATION_NAME|'${HERODOTUS_APPLICATION_NAME}'|g' $file
   sed -i 's|HERODOTUS_OAUTH2_CLIENT_ID|'${HERODOTUS_OAUTH2_CLIENT_ID}'|g' $file

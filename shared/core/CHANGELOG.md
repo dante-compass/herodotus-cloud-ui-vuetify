@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.2.5
+
+### Patch Changes
+
+- 修复前端打包问题
+
 ## 1.2.4
 
 ### Patch Changes

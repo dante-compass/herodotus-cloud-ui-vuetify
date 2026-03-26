@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 1.2.5
+
+### Patch Changes
+
+- 修复前端打包问题
+- Updated dependencies
+  - @herodotus/core@1.2.5
+
 ## 1.2.4
 
 ### Patch Changes
