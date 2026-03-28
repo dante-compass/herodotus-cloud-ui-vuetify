@@ -15,7 +15,7 @@ import { compression } from 'vite-plugin-compression2';
 import { createHtmlPlugin } from 'vite-plugin-html';
 // import { viteVConsole } from 'vite-plugin-vconsole';
 import VueDevTools from 'vite-plugin-vue-devtools';
-import nodePolyfills from '@rolldown/plugin-node-polyfills';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 // Utilities
 import { defineConfig, loadEnv } from 'vite';
@@ -31,7 +31,13 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     // 增加基础路径配置，修复在反向代理指向子路径的配置方式下，出现静态资源 404 问题
     base: env.VITE_BASE_URL,
     plugins: [
-      nodePolyfills(),
+      nodePolyfills({
+        globals: {
+          Buffer: true,
+          global: true,
+          process: true,
+        },
+      }),
       VueDevTools(),
       Vue({
         template: { transformAssetUrls },
@@ -113,6 +119,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         '@mdi/js',
         '@vueuse/components',
         'echarts/theme/macarons',
+        'vite-plugin-node-polyfills/shims/buffer',
+        'vite-plugin-node-polyfills/shims/global',
+        'vite-plugin-node-polyfills/shims/process',
       ],
     },
     define: { 'process.env': { env } },
