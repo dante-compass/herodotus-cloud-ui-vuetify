@@ -37,7 +37,7 @@ defineOptions({ name: 'AppUserAvatar', components: { UserMenu } });
 
 const authenticationStore = useAuthenticationStore();
 
-const { getAssetsFile } = useImage();
+const { getStaticFile } = useImage();
 
 const readFromStore = () => {
   if (authenticationStore.avatar) {
@@ -47,7 +47,7 @@ const readFromStore = () => {
       const image = AvatarUtils.generate(authenticationStore.userId);
       return image;
     } else {
-      return getAssetsFile('boy-avatar.png');
+      return getStaticFile('boy-avatar.png');
     }
   }
 };

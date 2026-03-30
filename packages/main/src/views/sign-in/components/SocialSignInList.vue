@@ -12,7 +12,7 @@
         class="ma-2"
       >
         <v-avatar>
-          <v-img :src="find(key)" />
+          <v-img :src="getSocialLogo(key)" />
         </v-avatar>
       </v-btn>
     </template>
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { isEmpty, toLower } from 'lodash-es';
+import { isEmpty } from 'lodash-es';
 import { SecurityApiResources } from '@herodotus/framework';
 
 import { VARIABLES } from '@/configurations';
@@ -40,10 +40,6 @@ const init = () => {
     .then((result) => {
       list.value = result.data as Record<string, string>;
     });
-};
-
-const find = (name: string, suffix = 'png') => {
-  return getSocialLogo(toLower(name), suffix);
 };
 
 const hasConfig = computed(() => {

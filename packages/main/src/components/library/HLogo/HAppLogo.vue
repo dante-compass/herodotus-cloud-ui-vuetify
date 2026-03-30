@@ -9,7 +9,5 @@ defineOptions({ name: 'HAppLogo' });
 
 const { getSystemLogo } = useImage();
 
-const logo = computed(() => {
-  return getSystemLogo();
-});
+const logo = getSystemLogo();
 </script>

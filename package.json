@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "disable-devtool": "^0.3.9",
-    "filesize": "^11.0.14",
+    "filesize": "^11.0.15",
     "lodash-es": "^4.17.23",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
