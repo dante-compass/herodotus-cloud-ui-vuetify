@@ -1,0 +1,1 @@
+import{a as e}from"./views/personal/foundation/account/Index.vue-BzZuRx_f.js";export{e as default};

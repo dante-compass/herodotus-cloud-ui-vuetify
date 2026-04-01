@@ -1,0 +1,1 @@
+import{b as e,k as t,mt as n}from"../../../../../venders/vender-@vue-runtime-core-D_7fTKuV.js";var r=t({name:`OAuth2Application`,__name:`Index`,setup(t){return(t,r)=>(n(),e(`div`,null,`Application`))}});export{r as t};

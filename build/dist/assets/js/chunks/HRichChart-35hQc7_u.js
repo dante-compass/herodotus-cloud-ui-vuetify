@@ -1,0 +1,1 @@
+import{i as e}from"./views/dashboard/console/Index.vue--fcqtwMV.js";export{e as default};

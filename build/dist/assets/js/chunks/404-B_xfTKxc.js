@@ -1,0 +1,1 @@
+import{t as e}from"./components/error/404.vue-CP0FH1Fd.js";export{e as default};

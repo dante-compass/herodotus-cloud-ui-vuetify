@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/authorize/scope/Index.vue-CwZ294m7.js";export{e as default};
