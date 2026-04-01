@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.3.2
+
+### Patch Changes
+
+- [优化] 前端工程使用 oxfmt 替换 prettier
+
 ## 1.3.1
 
 ### Patch Changes
