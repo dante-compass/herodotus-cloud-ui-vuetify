@@ -61,11 +61,7 @@ export class OpenApiService {
     });
   }
 
-  public verifyCaptcha(
-    identity: string,
-    category: string,
-    data: CaptchaData,
-  ): Promise<AxiosHttpResult<boolean>> {
+  public verifyCaptcha(identity: string, category: string, data: CaptchaData): Promise<AxiosHttpResult<boolean>> {
     const SECURE_CAPTCHA = this.config.getUaa() + '/open/captcha';
     const verify: Verification = {
       identity: identity,

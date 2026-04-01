@@ -60,22 +60,10 @@ const headers = ref([
 
 const rowKey: OAuth2AuthorizationProps = 'id';
 
-const {
-  loading,
-  pageNumber,
-  pageSize,
-  tableRows,
-  totalPages,
-  totalItems,
-  deleteItemById,
-  findItems,
-} = useTable<OAuth2AuthorizationConditions, OAuth2AuthorizationEntity>(
-  API.core.oauth2Authorization(),
-  PAGE_NAME.OAUTH2_TOKEN,
-  false,
-  ['accessTokenIssuedAt'],
-  'DESC',
-);
+const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, deleteItemById, findItems } = useTable<
+  OAuth2AuthorizationConditions,
+  OAuth2AuthorizationEntity
+>(API.core.oauth2Authorization(), PAGE_NAME.OAUTH2_TOKEN, false, ['accessTokenIssuedAt'], 'DESC');
 
 const { defaultFormat } = useDateTime();
 </script>

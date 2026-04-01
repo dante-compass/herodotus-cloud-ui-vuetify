@@ -1,10 +1,5 @@
 <template>
-  <h-action-button
-    color="purple"
-    icon="mdi-pencil"
-    tooltip="编辑"
-    v-bind="$attrs"
-  ></h-action-button>
+  <h-action-button color="purple" icon="mdi-pencil" tooltip="编辑" v-bind="$attrs"></h-action-button>
 </template>
 
 <script setup lang="ts">

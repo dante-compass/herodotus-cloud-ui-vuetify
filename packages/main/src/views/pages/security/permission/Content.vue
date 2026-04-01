@@ -25,9 +25,7 @@ defineOptions({ name: 'SysPermissionContent' });
 
 const permissionForm = ref();
 
-const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysPermissionEntity>(
-  API.core.sysPermission(),
-);
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysPermissionEntity>(API.core.sysPermission());
 
 const onSave = async () => {
   const { valid } = await permissionForm.value.validate();

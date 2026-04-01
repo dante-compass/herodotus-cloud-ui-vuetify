@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay"  @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
     <h-label title="应用类型:"></h-label>
     <h-dictionary-toggle
       v-model="editedItem.applicationType"
@@ -57,7 +57,7 @@ import { API } from '@/configurations';
 
 defineOptions({ name: 'SysElementContent' });
 
-const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysElementEntity>(API.core.sysElement());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysElementEntity>(API.core.sysElement());
 const { treeItems } = useTreeItem<SysElementConditions, SysElementEntity>(API.core.sysElement());
 
 watch(

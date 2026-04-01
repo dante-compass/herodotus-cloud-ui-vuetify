@@ -18,12 +18,7 @@
       ></v-img>
       <div class="text-center mt-n9 mb-4">
         <div>
-          <v-avatar
-            v-ripple
-            :class="['border-md border-opacity-100 border-surface-light']"
-            color="surface"
-            size="72"
-          >
+          <v-avatar v-ripple :class="['border-md border-opacity-100 border-surface-light']" color="surface" size="72">
             <v-img :src="avatar"></v-img>
           </v-avatar>
           <div class="text-h6 mt-2">

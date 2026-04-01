@@ -769,7 +769,7 @@ var Te = {
 			"end-color": e.startColor
 		}, null, 8, ["start-color", "end-color"])])]));
 	}
-}), [["__scopeId", "data-v-b2761882"]]);
+}), [["__scopeId", "data-v-377dfbe6"]]);
 //#endregion
 //#region src/HSignIn/index.ts
 $.install = (e) => {

@@ -1,11 +1,5 @@
 <template>
-  <v-radio-group
-    v-model="currentTheme"
-    class="mb-2"
-    color="primary"
-    true-icon="mdi-check-circle-outline"
-    hide-details
-  >
+  <v-radio-group v-model="currentTheme" class="mb-2" color="primary" true-icon="mdi-check-circle-outline" hide-details>
     <v-radio v-for="(item, i) in items" :key="i" :value="item.value">
       <template #label>
         <v-icon :icon="item.icon" start />

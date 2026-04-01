@@ -18,20 +18,13 @@
 
     <template #item.actions="{ item }">
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+      <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>
   </h-data-table>
 </template>
 
 <script setup lang="ts">
-import type {
-  SysOrganizationEntity,
-  SysOrganizationConditions,
-  SysOrganizationProps,
-} from '@herodotus/api';
+import type { SysOrganizationEntity, SysOrganizationConditions, SysOrganizationProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable } from '@/composables/hooks';
@@ -62,8 +55,5 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<SysOrganizationConditions, SysOrganizationEntity>(
-  API.core.sysOrganization(),
-  PAGE_NAME.SYS_ORGANIZATION,
-);
+} = useTable<SysOrganizationConditions, SysOrganizationEntity>(API.core.sysOrganization(), PAGE_NAME.SYS_ORGANIZATION);
 </script>

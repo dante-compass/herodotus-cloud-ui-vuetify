@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay"  @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
     <v-form ref="tenantForm" validate-on="blur lazy">
       <v-text-field
         v-model="editedItem.tenantId"
@@ -49,7 +49,7 @@ defineOptions({ name: 'SysTenantDataSourceContent' });
 
 const tenantForm = ref();
 
-const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysTenantDataSourceEntity>(
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysTenantDataSourceEntity>(
   API.core.sysTenantDataSource(),
 );
 

@@ -9,7 +9,7 @@ class AvatarUtilities {
     return this.instance;
   }
 
-  public generate(id: string) : string {
+  public generate(id: string): string {
     return `data:image/svg+xml;utf8,${generateFromString(id)}`;
   }
 }

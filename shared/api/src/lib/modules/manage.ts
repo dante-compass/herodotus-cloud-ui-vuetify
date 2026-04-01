@@ -43,10 +43,9 @@ class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCe
   ): Promise<AxiosHttpResult<Array<MgtCertificateResponse>>> {
     return this.getConfig()
       .getHttp()
-      .get<
-        Array<MgtCertificateResponse>,
-        string
-      >(this.getCategoryAddress(), { certificateCategory: certificateCategory });
+      .get<Array<MgtCertificateResponse>, string>(this.getCategoryAddress(), {
+        certificateCategory: certificateCategory,
+      });
   }
 }
 

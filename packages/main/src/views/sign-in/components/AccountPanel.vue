@@ -12,15 +12,7 @@
       >
         {{ errorMessage }}
       </v-alert>
-      <v-alert
-        v-if="prompt"
-        border="start"
-        type="error"
-        variant="outlined"
-        density="compact"
-        class="mb-4"
-        rounded="lg"
-      >
+      <v-alert v-if="prompt" border="start" type="error" variant="outlined" density="compact" class="mb-4" rounded="lg">
         {{ promptMessage }}
       </v-alert>
       <v-form ref="loginForm">
@@ -66,10 +58,7 @@
       >
         登录
       </h-button>
-      <h-behavior-captcha
-        v-model="isShowCaptcha"
-        @verify="onCaptchaVerify($event)"
-      ></h-behavior-captcha>
+      <h-behavior-captcha v-model="isShowCaptcha" @verify="onCaptchaVerify($event)"></h-behavior-captcha>
 
       <h-text-divider label="OR"></h-text-divider>
 

@@ -13,12 +13,7 @@
       <v-tabs v-model="tab">
         <v-tab text="私信" value="dialogue">
           <template #prepend>
-            <v-badge
-              v-if="dialogueCount !== 0"
-              location="top right"
-              color="error"
-              :content="dialogueCount"
-            >
+            <v-badge v-if="dialogueCount !== 0" location="top right" color="error" :content="dialogueCount">
               <v-icon icon="mdi-lock"></v-icon>
             </v-badge>
             <v-icon v-else icon="mdi-lock"></v-icon>
@@ -26,12 +21,7 @@
         </v-tab>
         <v-tab prepend-icon="" text="公告" value="announcement">
           <template #prepend>
-            <v-badge
-              v-if="announcementCount !== 0"
-              location="top right"
-              color="error"
-              :content="announcementCount"
-            >
+            <v-badge v-if="announcementCount !== 0" location="top right" color="error" :content="announcementCount">
               <v-icon icon="mdi-access-point"></v-icon>
             </v-badge>
             <v-icon v-else icon="mdi-access-point"></v-icon>

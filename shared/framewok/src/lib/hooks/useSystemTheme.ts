@@ -18,10 +18,7 @@ export default function useSystemTheme() {
   const hasScrollbar = (el?: Element | null) => {
     if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
     const style = window.getComputedStyle(el);
-    return (
-      style.overflowY === 'scroll' ||
-      (style.overflowY === 'auto' && el.scrollHeight > el.clientHeight)
-    );
+    return style.overflowY === 'scroll' || (style.overflowY === 'auto' && el.scrollHeight > el.clientHeight);
   };
 
   const themeTransition = () => {
@@ -58,21 +55,16 @@ export default function useSystemTheme() {
       el.classList.add('app-transition');
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          el.style.setProperty(
-            '--clip-size',
-            Math.hypot(window.innerWidth, window.innerHeight) + 'px',
-          );
+          el.style.setProperty('--clip-size', Math.hypot(window.innerWidth, window.innerHeight) + 'px');
         });
       });
     });
 
     document.body.append(copy);
-    (copy.querySelectorAll('[data-scroll-x], [data-scroll-y]') as NodeListOf<HTMLElement>).forEach(
-      (el) => {
-        el.scrollLeft = Number(el.dataset.scrollX);
-        el.scrollTop = Number(el.dataset.scrollY);
-      },
-    );
+    (copy.querySelectorAll('[data-scroll-x], [data-scroll-y]') as NodeListOf<HTMLElement>).forEach((el) => {
+      el.scrollLeft = Number(el.dataset.scrollX);
+      el.scrollTop = Number(el.dataset.scrollY);
+    });
 
     function onTransitionend(e: TransitionEvent) {
       if (e.target === e.currentTarget) {

@@ -35,10 +35,7 @@ export default function useSystemElement(
    * @param modules 前端 Pages Vue 页面列表
    * @returns 路由记录
    */
-  const convertToRouteRecordRaw = (
-    item: ElementRouteTree,
-    modules: ModuleNamespace,
-  ): RouteRecordRaw => {
+  const convertToRouteRecordRaw = (item: ElementRouteTree, modules: ModuleNamespace): RouteRecordRaw => {
     const raw = {} as RouteRecordRaw;
     raw.path = item.name;
     raw.component = modules[locate(item.componentPath)];
@@ -92,11 +89,7 @@ export default function useSystemElement(
     }
   };
 
-  const convert = (
-    data: Array<ElementRouteTree>,
-    modules: ModuleNamespace,
-    isHideAllChild = false,
-  ): ElementMeta => {
+  const convert = (data: Array<ElementRouteTree>, modules: ModuleNamespace, isHideAllChild = false): ElementMeta => {
     const store = useElementStore();
 
     const routeRecords: RouteRecordRaw[] = [];

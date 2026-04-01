@@ -52,10 +52,10 @@ const selectedValue = defineModel({
   default: () => {},
 });
 
-const { treeItems, conditions, loading } = useTreeItem<
-  SysDepartmentConditions,
-  SysDepartmentEntity
->(API.core.sysDepartment(), false);
+const { treeItems, conditions, loading } = useTreeItem<SysDepartmentConditions, SysDepartmentEntity>(
+  API.core.sysDepartment(),
+  false,
+);
 
 const activated = computed({
   get: () => (!isEmpty(selectedValue.value) ? [selectedValue.value] : []),
