@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/hr/components/OrganizationSelect.vue-DP0g3eXY.js";export{e as default};

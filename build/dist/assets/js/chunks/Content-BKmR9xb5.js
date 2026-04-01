@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/hr/organization/Content.vue-BCqNrG0f.js";export{e as default};
