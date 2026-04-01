@@ -80,18 +80,12 @@ export interface AxiosInstanceHooks {
   /**
    * @description: 请求成功处理
    */
-  onResponseSuccessHook?: <T = any>(
-    response: AxiosHttpResult<T>,
-    options?: HttpRequestOptions,
-  ) => AxiosHttpResult<T>;
+  onResponseSuccessHook?: <T = any>(response: AxiosHttpResult<T>, options?: HttpRequestOptions) => AxiosHttpResult<T>;
 
   /**
    * @description: 请求失败处理
    */
-  onResponseErrorHook?: <T = unknown>(
-    error: AxiosError,
-    options?: HttpRequestOptions,
-  ) => AxiosHttpResult<T>;
+  onResponseErrorHook?: <T = unknown>(error: AxiosError, options?: HttpRequestOptions) => AxiosHttpResult<T>;
 
   /**
    * @description: 请求之前的拦截器

@@ -27,7 +27,7 @@ defineOptions({ name: 'SysUserContent' });
 
 const loginForm = ref();
 
-const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysUserEntity>(API.core.sysUser());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysUserEntity>(API.core.sysUser());
 
 const validateUsername = async (username: string) => {
   return await new Promise((resolve, reject) => {

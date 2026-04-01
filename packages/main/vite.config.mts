@@ -15,7 +15,7 @@ import { compression } from 'vite-plugin-compression2';
 import { createHtmlPlugin } from 'vite-plugin-html';
 // import { viteVConsole } from 'vite-plugin-vconsole';
 import VueDevTools from 'vite-plugin-vue-devtools';
-import nodePolyfills from '@rolldown/plugin-node-polyfills';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 // Utilities
 import { defineConfig, loadEnv } from 'vite';
@@ -31,7 +31,13 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     // 增加基础路径配置，修复在反向代理指向子路径的配置方式下，出现静态资源 404 问题
     base: env.VITE_BASE_URL,
     plugins: [
-      nodePolyfills(),
+      nodePolyfills({
+        globals: {
+          Buffer: true,
+          global: true,
+          process: true,
+        },
+      }),
       VueDevTools(),
       Vue({
         template: { transformAssetUrls },
@@ -63,10 +69,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       Icons({
         compiler: 'vue3',
         autoInstall: true,
-        customCollections: {
-          // 这里是存放svg图标的文件地址，herodotus是自定义图标库的名称
-          herodotus: FileSystemIconLoader('./src/assets/svg'),
-        },
+        // customCollections: {
+        //   // 这里是存放svg图标的文件地址，herodotus是自定义图标库的名称
+        //   herodotus: FileSystemIconLoader('./src/assets/svg'),
+        // },
       }),
       ViteFonts({
         fontsource: {
@@ -113,6 +119,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         '@mdi/js',
         '@vueuse/components',
         'echarts/theme/macarons',
+        'vite-plugin-node-polyfills/shims/buffer',
+        'vite-plugin-node-polyfills/shims/global',
+        'vite-plugin-node-polyfills/shims/process',
       ],
     },
     define: { 'process.env': { env } },
@@ -148,54 +157,63 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       // chunkSizeWarningLimit: 1000,
       outDir: '../../build/dist',
       emptyOutDir: true,
-      cssCodeSplit: false, // 因为使用了 Base './'，如果将该属性设置为 true，编译后 css 目录结构会产生变化，会导致 @quasar/extras 中样式找不到字体
+      cssCodeSplit: true,
       rolldownOptions: {
         output: {
+          // 入口文件单独放置在 js 目录下
+          entryFileNames: 'entry/[name]-[hash].js',
+
+          // codeSplitting 是对代码进行拆分并且进行命名
+          // assetFileNames 和 chunkFileNames 会根据 codeSplitting 拆分的结果进行重命名和文件放置。[name] 对应的就是codeSplitting 返回的名称
           assetFileNames: (assetInfo) => {
-            if (assetInfo.type === 'asset' && /\.(jpe?g|png|gif|svg)$/i.test(assetInfo.name as string)) {
-              return 'assets/images/[name]-[hash].[ext]';
+            if (/\.(css|scss|sass)$/i.test(assetInfo.names[0])) {
+              return 'assets/css/[name]-[hash][extname]';
             }
-            if (assetInfo.type === 'asset' && /\.(ttf|woff|woff2|eot)$/i.test(assetInfo.name as string)) {
-              return 'assets/fonts/[name]-[hash].[ext]';
+            if (/\.(jpg|jpeg|png|gif|svg)$/i.test(assetInfo.names[0])) {
+              return 'assets/images/[name]-[hash][extname]';
             }
-            return 'assets/[ext]/[name]-[hash].[ext]';
+            if (/\.(ttf|woff|woff2|eot)$/i.test(assetInfo.names[0])) {
+              return 'assets/fonts/[name]-[hash][extname]';
+            }
+            // 其他资源文件默认存放
+            return 'assets/[name]-[hash][extname]';
           },
+
+          chunkFileNames: (chunkInfo) => {
+            // vender 对应 node_modules 中的包
+            // chunk 对应自己实际开发的代码
+            if (chunkInfo.name.includes('vender-')) {
+              return 'assets/js/venders/[name]-[hash].js';
+            }
+
+            return 'assets/js/chunks/[name]-[hash].js';
+          },
+
           codeSplitting: {
             groups: [
               {
-                name: 'js/npm-tsparticles',
+                name: 'vender-tsparticles',
                 test: (id) => id.includes('tsparticles'),
               },
               {
                 name: (id) => {
                   // 匹配 node_modules 中的库，生成类似 'js/npm-react' 的 chunk
-                  if (id.includes('node_modules')) {
-                    const parts = id.toString().split('node_modules/')[2].split('/');
-                    let name = parts[0];
-                    if (name.startsWith('@')) {
-                      name = name + '-' + parts[1];
-                    }
-                    return 'js/npm-' + name;
+                  const parts = id.toString().split('node_modules/')[2].split('/');
+                  let name = parts[0];
+                  if (name.startsWith('@')) {
+                    name = name + '-' + parts[1];
                   }
-                  return null;
+                  return 'vender-' + name;
                 },
-                // 注意：如果使用函数作为 name，test 也需要定义。
-                // 上面的逻辑混合了 test 和 name，为了清晰，可以拆分为多个 group，
-                // 或者像下面 src 的示例一样，使用一个通用的 group 来覆盖 node_modules。
-                // 这里我们暂时将所有 node_modules 包都纳入这个动态命名的 group。
                 test: (id) => id.includes('node_modules'),
-                // 为了更精确地控制，建议将 tsparticles 单独拆出后，再定义一个通用的 node_modules group
               },
               {
                 name: (id) => {
                   // 匹配 src 下的文件，生成类似 'js/pages-index' 的 chunk
-                  if (id.includes('src')) {
-                    const path = id.toString().split('src/')[1].replace(/\//g, '-');
-                    return 'js/' + path;
-                  }
-                  return null;
+                  const path = id.toString().split('src/')[1];
+                  return path;
                 },
-                test: (id) => id.includes('src'), // 对应的 test 条件
+                test: (id) => id.includes('/src/'), // 对应的 test 条件
               },
             ],
           },

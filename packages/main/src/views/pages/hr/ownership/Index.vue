@@ -5,10 +5,7 @@
         <organization-tree v-model="currentOrganization"></organization-tree>
       </v-col>
       <v-col xl="2" lg="2" md="3" sm="6" xs="12">
-        <department-tree
-          v-model="currentDepartment"
-          :organization-id="organizationId"
-        ></department-tree>
+        <department-tree v-model="currentDepartment" :organization-id="organizationId"></department-tree>
       </v-col>
       <v-col xl="8" lg="8" md="6" sm="6" xs="12">
         <h-data-table

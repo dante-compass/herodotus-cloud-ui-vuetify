@@ -4,12 +4,7 @@
       <v-col cols="12" sm="8" md="6" lg="4" align-self="center">
         <v-card class="py-12" flat>
           <v-card-text class="text-center">
-            <v-progress-circular
-              :size="70"
-              :width="7"
-              color="primary"
-              indeterminate
-            ></v-progress-circular>
+            <v-progress-circular :size="70" :width="7" color="primary" indeterminate></v-progress-circular>
             <p class="text-h6 mt-6 mb-6">正在加载，请稍候...</p>
             <v-progress-linear
               indeterminate

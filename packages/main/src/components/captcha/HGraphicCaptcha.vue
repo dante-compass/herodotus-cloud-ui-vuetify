@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
-    <v-col cols="7"
-      ><v-text-field
+    <v-col cols="7">
+      <v-text-field
         v-model="code"
         id="captcha"
         label="验证码"
@@ -18,14 +18,16 @@
       >
         <template v-slot:append>
           <v-fade-transition>
-            <v-icon v-if="isShowIcon" :icon="icon" :color="color"> </v-icon>
+            <v-icon v-if="isShowIcon" :icon="icon" :color="color"></v-icon>
           </v-fade-transition>
-        </template> </v-text-field
-    ></v-col>
+        </template>
+      </v-text-field>
+    </v-col>
     <v-col cols="5">
       <v-card flat variant="outlined" height="40" @click="onRefresh()">
-        <v-img :src="graphicImageBase64" cover :transition="false"></v-img> </v-card
-    ></v-col>
+        <v-img :src="graphicImageBase64" cover :transition="false"></v-img>
+      </v-card>
+    </v-col>
   </v-row>
 </template>
 
@@ -58,8 +60,7 @@ const createCaptcha = async () => {
 
   if (
     !(
-      VARIABLES.getCaptcha() === CaptchaCategoryEnum.JIGSAW &&
-      VARIABLES.getCaptcha() === CaptchaCategoryEnum.WORD_CLICK
+      VARIABLES.getCaptcha() === CaptchaCategoryEnum.JIGSAW && VARIABLES.getCaptcha() === CaptchaCategoryEnum.WORD_CLICK
     )
   ) {
     const data = response.data as GraphicCaptcha;

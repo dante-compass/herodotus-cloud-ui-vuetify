@@ -28,7 +28,7 @@ defineOptions({ name: 'SysUserContent' });
 
 const employeeForm = ref();
 
-const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysEmployeeEntity>(API.core.sysEmployee());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysEmployeeEntity>(API.core.sysEmployee());
 
 const validateEmployeeName = async (employeeName: string) => {
   return await new Promise((resolve, reject) => {

@@ -29,12 +29,18 @@ class ExtendedTaskService extends AbstractService<ExtendedTaskEntity> {
     return this.getBaseAddress() + '/completed';
   }
 
-  public fetchToDoTasksByPage(params: Pageable, others: Conditions = {}): Promise<AxiosHttpResult<Page<ExtendedTaskEntity>>> {
+  public fetchToDoTasksByPage(
+    params: Pageable,
+    others: Conditions = {},
+  ): Promise<AxiosHttpResult<Page<ExtendedTaskEntity>>> {
     const fullParams = Object.assign(params, others);
     return this.getConfig().getHttp().get<Page<ExtendedTaskEntity>>(this.getToDoTasksAddress(), fullParams);
   }
 
-  public fetchCompletedTasksByPage(params: Pageable, others: Conditions = {}): Promise<AxiosHttpResult<Page<ExtendedTaskEntity>>> {
+  public fetchCompletedTasksByPage(
+    params: Pageable,
+    others: Conditions = {},
+  ): Promise<AxiosHttpResult<Page<ExtendedTaskEntity>>> {
     const fullParams = Object.assign(params, others);
     return this.getConfig().getHttp().get<Page<ExtendedTaskEntity>>(this.getCompletedTasksAddress(), fullParams);
   }

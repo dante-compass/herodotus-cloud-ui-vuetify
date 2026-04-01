@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay"  @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
     <v-form ref="roleForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.roleName"
@@ -31,7 +31,7 @@ defineOptions({ name: 'SysRoleContent' });
 
 const roleForm = ref();
 
-const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysRoleEntity>(API.core.sysRole());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysRoleEntity>(API.core.sysRole());
 
 const validateRoleCode = async (roleCode: string) => {
   return await new Promise((resolve, reject) => {

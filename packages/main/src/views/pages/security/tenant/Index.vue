@@ -18,10 +18,7 @@
 
     <template #item.actions="{ item }">
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+      <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>
   </h-data-table>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay"  @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
     <v-form ref="dictionaryForm" validate-on="blur lazy">
       <v-text-field v-model="editedItem.category" label="分类" disabled></v-text-field>
       <v-text-field
@@ -28,9 +28,7 @@ defineOptions({ name: 'SysDictionaryContent' });
 
 const dictionaryForm = ref();
 
-const { editedItem,  title, overlay, saveOrUpdate } = useTableItem<SysDictionaryEntity>(
-  API.core.sysDictionary(),
-);
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysDictionaryEntity>(API.core.sysDictionary());
 
 const onSave = async () => {
   const { valid } = await dictionaryForm.value.validate();

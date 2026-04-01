@@ -54,8 +54,7 @@ export const useSettingsStore = defineStore('SystemSettings', {
     isLightenMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
     density: (state) => (state.display.table.dense ? 'compact' : 'default'),
     densitySwitch: (state) => {
-      return (trueValue: string, falseValue: string) =>
-        state.display.table.dense ? trueValue : falseValue;
+      return (trueValue: string, falseValue: string) => (state.display.table.dense ? trueValue : falseValue);
     },
   },
 

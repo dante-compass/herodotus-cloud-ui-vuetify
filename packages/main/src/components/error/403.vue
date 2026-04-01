@@ -1,11 +1,9 @@
 <template>
   <h-error-layout>
-    <icon-no-permission height="80vh" width="100%" />
+    <v-img src="/static/images/svg/no-permission.svg" alt="Logo" height="80vh" width="100%" />
   </h-error-layout>
 </template>
 
 <script lang="ts" setup>
-import IconNoPermission from '~icons/herodotus/no-permission';
-
-defineOptions({ name: 'NoPermission', components: { IconNoPermission } });
+defineOptions({ name: 'NoPermission' });
 </script>

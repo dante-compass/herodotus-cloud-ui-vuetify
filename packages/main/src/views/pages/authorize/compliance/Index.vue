@@ -32,11 +32,7 @@
 
 <script setup lang="ts">
 import type { EntityTitle } from '@herodotus/core';
-import type {
-  OAuth2UserLoggingEntity,
-  OAuth2UserLoggingConditions,
-  OAuth2UserLoggingProps,
-} from '@herodotus/api';
+import type { OAuth2UserLoggingEntity, OAuth2UserLoggingConditions, OAuth2UserLoggingProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable, useXlsx, useDateTime } from '@/composables/hooks';

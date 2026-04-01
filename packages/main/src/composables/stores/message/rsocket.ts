@@ -107,6 +107,7 @@ export const useRSocketWebSocketStore = defineStore('RSocketWebSocket', {
     },
 
     createTransport(): WebsocketClientTransport {
+      const store = useAuthenticationStore();
       return new WebsocketClientTransport({
         url: this.getRSocketWebSocketAddress(),
         wsCreator: (url) => {

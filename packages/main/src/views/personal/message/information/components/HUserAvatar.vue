@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const authenticationStore = useAuthenticationStore();
-const { getAssetsFile } = useImage();
+const { getStaticFile } = useImage();
 
 const readFromStore = () => {
   if (authenticationStore.avatar) {
@@ -34,7 +34,7 @@ const readFromStore = () => {
     if (authenticationStore.userId) {
       return AvatarUtils.generate(authenticationStore.userId);
     } else {
-      return getAssetsFile('boy-avatar.png');
+      return getStaticFile('boy-avatar.png');
     }
   }
 };
@@ -46,7 +46,7 @@ const readFromProps = () => {
     if (props.id) {
       return AvatarUtils.generate(props.id);
     } else {
-      return getAssetsFile('boy-avatar.png');
+      return getStaticFile('boy-avatar.png');
     }
   }
 };

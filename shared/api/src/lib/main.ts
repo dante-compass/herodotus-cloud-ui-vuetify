@@ -150,7 +150,7 @@ export class ApiResources {
     return MgtCertificateService.getInstance(this.config);
   }
 
-    public mgtCertificateFile(): MgtCertificateFileService {
+  public mgtCertificateFile(): MgtCertificateFileService {
     return MgtCertificateFileService.getInstance(this.config);
   }
 

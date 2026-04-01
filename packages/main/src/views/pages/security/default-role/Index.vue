@@ -17,24 +17,14 @@
     </template>
 
     <template #item.actions="{ item }">
-      <h-action-authorize-button
-        tooltip="配置角色"
-        @click="toAuthorize(item)"
-      ></h-action-authorize-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+      <h-action-authorize-button tooltip="配置角色" @click="toAuthorize(item)"></h-action-authorize-button>
+      <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>
   </h-data-table>
 </template>
 
 <script setup lang="ts">
-import type {
-  SysDefaultRoleEntity,
-  SysDefaultRoleConditions,
-  SysDefaultRoleProps,
-} from '@herodotus/api';
+import type { SysDefaultRoleEntity, SysDefaultRoleConditions, SysDefaultRoleProps } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable } from '@/composables/hooks';
@@ -53,18 +43,6 @@ const headers = ref([
 
 const rowKey: SysDefaultRoleProps = 'defaultId';
 
-const {
-  loading,
-  pageNumber,
-  pageSize,
-  tableRows,
-  totalPages,
-  totalItems,
-  toAuthorize,
-  deleteItemById,
-  findItems,
-} = useTable<SysDefaultRoleConditions, SysDefaultRoleEntity>(
-  API.core.sysDefaultRole(),
-  PAGE_NAME.SYS_DEFAULT_ROLE,
-);
+const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toAuthorize, deleteItemById, findItems } =
+  useTable<SysDefaultRoleConditions, SysDefaultRoleEntity>(API.core.sysDefaultRole(), PAGE_NAME.SYS_DEFAULT_ROLE);
 </script>

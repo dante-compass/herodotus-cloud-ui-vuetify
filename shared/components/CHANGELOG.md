@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 1.3.1
+
+### Patch Changes
+
+- [优化] 优化前端图片放置目录以及读取方式，改进生产环境打包图片处理逻辑
+- Updated dependencies
+  - @herodotus/core@1.3.1
+
 ## 1.3.0
 
 ### Minor Changes

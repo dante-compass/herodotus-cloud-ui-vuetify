@@ -72,9 +72,7 @@ export const useDictionaryStore = defineStore('Dictionary', {
       }
     },
 
-    convertCategories(
-      categories: Record<string, Array<SysDictionaryEntity>>,
-    ): Record<string, Array<Dictionary>> {
+    convertCategories(categories: Record<string, Array<SysDictionaryEntity>>): Record<string, Array<Dictionary>> {
       const result: Record<string, Array<Dictionary>> = {};
       Object.keys(categories).map((key) => {
         const category = this.convertCategory(categories[key]);
@@ -113,10 +111,7 @@ export const useDictionaryStore = defineStore('Dictionary', {
       });
     },
 
-    fetchCategory(
-      category: string,
-      ...others: string[]
-    ): Promise<Record<string, Array<Dictionary>>> {
+    fetchCategory(category: string, ...others: string[]): Promise<Record<string, Array<Dictionary>>> {
       return new Promise((resolve, reject) => {
         const keys = this.getNotExist(category, ...others);
         if (isEmpty(keys)) {

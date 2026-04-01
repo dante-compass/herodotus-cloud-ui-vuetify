@@ -1,6 +1,7 @@
 // Styles
-import './styles/main.scss';
+import './styles/layers.scss';
 import 'unfonts.css';
+
 import 'animate.css/animate.min.css';
 import '@herodotus/core/style.css';
 import '@herodotus/framework/style.css';
@@ -15,7 +16,7 @@ import { IS_DEV, VARIABLES } from '@/configurations';
 import { setupVuetify, setupPinia } from '@/plugins';
 import { setupRouter } from '@/routers';
 
-async function setupApp() {
+function setupApp() {
   if (IS_DEV) {
     const view = document.createElement('div');
     document.body.appendChild(view);

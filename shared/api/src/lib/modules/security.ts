@@ -230,7 +230,9 @@ class SysDictionaryService extends AbstractService<SysDictionaryEntity> {
   }
 
   public fetchCategories(categories: string): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>> {
-    return this.getConfig().getHttp().get<Record<string, Array<SysDictionaryEntity>>, string>(this.getItemsAddress(), { categories: categories });
+    return this.getConfig()
+      .getHttp()
+      .get<Record<string, Array<SysDictionaryEntity>>, string>(this.getItemsAddress(), { categories: categories });
   }
 }
 

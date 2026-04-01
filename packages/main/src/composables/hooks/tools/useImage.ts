@@ -1,18 +1,26 @@
-import type { ModuleNamespace } from 'vite/types/hot.js';
-
 import { useTheme } from 'vuetify';
+import { isEmpty, toLower } from 'lodash-es';
 
 export default function useImage() {
-  const socialLogoModules = import.meta.glob('../../../assets/images/social/*', { eager: true });
+  const baseUrl = import.meta.env.VITE_BASE_URL;
   const theme = useTheme();
+  const getStaticFile = (name: string, folder = '') => {
+    const path = baseUrl + 'static/images/';
+
+    if (isEmpty(folder)) {
+      return path + name;
+    } else {
+      return path + folder + '/' + name;
+    }
+  };
+
+  const getStaticImage = (name: string, format = 'png', folder = '') => {
+    const fileName = name + '.' + format;
+    return getStaticFile(fileName, folder);
+  };
 
   const getSocialLogo = (name: string, suffix = 'png') => {
-    const modules = socialLogoModules as ModuleNamespace;
-
-    const index = `../../../assets/images/social/${name}.${suffix}`;
-    const item = modules[`${index}`];
-    const module = item.default || '';
-    return module;
+    return getStaticImage(toLower(name), suffix, 'social');
   };
 
   const getAssetsFile = (url: string) => {
@@ -21,12 +29,14 @@ export default function useImage() {
 
   const getSystemLogo = () => {
     const name = `dante-cloud-${theme.current.value.dark ? 'dark' : 'light'}.png`;
-    return new URL(`../../../assets/images/layouts/${name}`, import.meta.url).href;
+    return getStaticFile(name, 'layouts');
   };
 
   return {
     getSocialLogo,
     getAssetsFile,
     getSystemLogo,
+    getStaticFile,
+    getStaticImage,
   };
 }

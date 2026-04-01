@@ -5,9 +5,7 @@ export const useWebFluxWebSocketStore = defineStore('WebFluxWebSocket', {
 
   actions: {
     connect(): void {
-      this.webSocket = new WebSocket(
-        'http://192.168.101.10:8847/reactive/herodotus-cloud-reactive/echo',
-      );
+      this.webSocket = new WebSocket('http://192.168.101.10:8847/reactive/herodotus-cloud-reactive/echo');
       this.webSocket.onopen = this.onOpen;
       this.webSocket.onerror = this.onError;
       this.webSocket.onmessage = this.onMessage;

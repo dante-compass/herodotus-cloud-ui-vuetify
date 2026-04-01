@@ -61,15 +61,9 @@
     </template>
 
     <template #item.actions="{ item }">
-      <h-action-authorize-button
-        tooltip="配置角色"
-        @click="toAuthorize(item)"
-      ></h-action-authorize-button>
+      <h-action-authorize-button tooltip="配置角色" @click="toAuthorize(item)"></h-action-authorize-button>
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+      <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>
   </h-data-table>
 </template>
@@ -105,11 +99,7 @@ const headers = ref([
 
 const rowKey: SysElementProps = 'elementId';
 
-const { getDictionaryItemDisplay } = useDictionary(
-  'ApplicationType',
-  'ElementCategory',
-  'MenuScenario',
-);
+const { getDictionaryItemDisplay } = useDictionary('ApplicationType', 'ElementCategory', 'MenuScenario');
 
 const {
   loading,

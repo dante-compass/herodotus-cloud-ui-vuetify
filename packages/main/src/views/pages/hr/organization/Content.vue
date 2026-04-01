@@ -44,9 +44,7 @@ defineOptions({ name: 'SysOrganizationContent', components: { OrganizationSelect
 
 const organizationForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysOrganizationEntity>(
-  API.core.sysOrganization(),
-);
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysOrganizationEntity>(API.core.sysOrganization());
 
 const onSave = async () => {
   const { valid } = await organizationForm.value.validate();

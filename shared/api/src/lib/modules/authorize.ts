@@ -139,4 +139,11 @@ class OAuth2CredentialRecordService extends AbstractService<OAuth2CredentialReco
   }
 }
 
-export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2CredentialRecordService };
+export {
+  OAuth2ApplicationService,
+  OAuth2ScopeService,
+  OAuth2AuthorizationService,
+  OAuth2UserLoggingService,
+  OAuth2InterfaceAuditService,
+  OAuth2CredentialRecordService,
+};

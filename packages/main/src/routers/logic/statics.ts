@@ -25,14 +25,14 @@ const NoPermissionRoute: RouteRecordRaw = {
   path: '/403',
   name: 'NoPermission',
   component: () => import('@/components/error/403.vue'),
-  meta: { title: 'No Permission' },
+  meta: { title: 'No Permission', isIgnoreAuth: true },
 };
 
 const ServiceErrorRoute: RouteRecordRaw = {
   path: '/500',
   name: 'ServiceError',
   component: () => import('@/components/error/500.vue'),
-  meta: { title: 'Service Error' },
+  meta: { title: 'Service Error', isIgnoreAuth: true },
 };
 
 const SocialSignInCallbackRoute: RouteRecordRaw = {

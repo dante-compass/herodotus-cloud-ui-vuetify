@@ -77,6 +77,6 @@ const {
 } = useTable<SysDictionaryConditions, SysDictionaryEntity>(API.core.sysDictionary(), PAGE_NAME.SYS_DICTIONARY);
 
 const getColor = (item: SysDictionaryEntity) => {
-  return COLOR_LIST[item.ordinal];;
+  return COLOR_LIST[item.ordinal];
 };
 </script>

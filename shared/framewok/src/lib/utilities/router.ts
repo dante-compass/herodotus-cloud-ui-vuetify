@@ -1,9 +1,4 @@
-import type {
-  Router,
-  RouteLocationRaw,
-  RouteLocationNormalizedLoaded,
-  NavigationFailure,
-} from 'vue-router';
+import type { Router, RouteLocationRaw, RouteLocationNormalizedLoaded, NavigationFailure } from 'vue-router';
 
 import type { RouterOptions } from '@/declarations';
 

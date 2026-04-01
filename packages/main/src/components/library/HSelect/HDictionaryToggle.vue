@@ -9,12 +9,7 @@
     density="comfortable"
     class="mb-4"
   >
-    <v-btn
-      v-for="(option, index) in options"
-      :key="index"
-      :text="option.label"
-      :value="option.value"
-    ></v-btn>
+    <v-btn v-for="(option, index) in options" :key="index" :text="option.label" :value="option.value"></v-btn>
   </v-btn-toggle>
 </template>
 

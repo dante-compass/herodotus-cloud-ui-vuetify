@@ -2,12 +2,7 @@ import { defineStore } from 'pinia';
 
 import type { AccessTokenResponse, OidcIdTokenResponse } from '@herodotus/core';
 
-import type {
-  SignInErrorStatus,
-  WebAuthnAuthenticate,
-  SocialSource,
-  AccessPrincipal,
-} from '@/declarations';
+import type { SignInErrorStatus, WebAuthnAuthenticate, SocialSource, AccessPrincipal } from '@/declarations';
 
 import { moment, AuthorizationTokenEnum } from '@herodotus/core';
 import { jwtDecode } from 'jwt-decode';
@@ -191,12 +186,7 @@ export const useAuthenticationStore = defineStore('Authentication', {
       return new Promise<boolean>((resolve, reject) => {
         SecurityApiResources.getInstance()
           .oauth2()
-          .authorizationCodeFlow(
-            code,
-            OptionsUtilities.getRedirectUri(),
-            state,
-            OptionsUtilities.isUseCrypto(),
-          )
+          .authorizationCodeFlow(code, OptionsUtilities.getRedirectUri(), state, OptionsUtilities.isUseCrypto())
           .then((response) => {
             if (response) {
               const data = response as AccessTokenResponse;

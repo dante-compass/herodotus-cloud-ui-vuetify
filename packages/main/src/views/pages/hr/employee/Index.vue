@@ -35,10 +35,7 @@
 
     <template #item.actions="{ item }">
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
-      <h-action-delete-button
-        v-if="!item.reserved"
-        @click="deleteItemById(item[rowKey])"
-      ></h-action-delete-button>
+      <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>
   </h-data-table>
 </template>
@@ -80,8 +77,5 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<SysEmployeeConditions, SysEmployeeEntity>(
-  API.core.sysEmployee(),
-  PAGE_NAME.SYS_EMPLOYEE,
-);
+} = useTable<SysEmployeeConditions, SysEmployeeEntity>(API.core.sysEmployee(), PAGE_NAME.SYS_EMPLOYEE);
 </script>

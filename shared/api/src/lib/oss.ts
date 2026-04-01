@@ -150,17 +150,18 @@ class ObjectService extends Service {
     if (onProgress) {
       return this.getConfig()
         .getHttp()
-        .post<
-          PutObjectResult,
-          FormData
-        >(this.getUploadAddress(), formData, { contentType: ContentTypeEnum.MULTI_PART }, { onUploadProgress: onProgress });
+        .post<PutObjectResult, FormData>(
+          this.getUploadAddress(),
+          formData,
+          { contentType: ContentTypeEnum.MULTI_PART },
+          { onUploadProgress: onProgress },
+        );
     } else {
       return this.getConfig()
         .getHttp()
-        .post<
-          PutObjectResult,
-          FormData
-        >(this.getUploadAddress(), formData, { contentType: ContentTypeEnum.MULTI_PART });
+        .post<PutObjectResult, FormData>(this.getUploadAddress(), formData, {
+          contentType: ContentTypeEnum.MULTI_PART,
+        });
     }
   }
 
@@ -171,10 +172,12 @@ class ObjectService extends Service {
     if (onProgress) {
       return this.getConfig()
         .getHttp()
-        .post<
-          Blob,
-          any
-        >(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
+        .post<Blob, any>(
+          this.getDownloadAddress(),
+          request,
+          { contentType: ContentTypeEnum.JSON },
+          { responseType: 'blob', onDownloadProgress: onProgress },
+        );
     } else {
       return this.getConfig().getHttp().post<Blob, any>(this.getDownloadAddress(), request);
     }
@@ -183,10 +186,12 @@ class ObjectService extends Service {
   public display(request: GetObjectArgument): Promise<AxiosHttpResult<Blob>> {
     return this.getConfig()
       .getHttp()
-      .post<
-        Blob,
-        any
-      >(this.getDisplayAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob' });
+      .post<Blob, any>(
+        this.getDisplayAddress(),
+        request,
+        { contentType: ContentTypeEnum.JSON },
+        { responseType: 'blob' },
+      );
   }
 
   public batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>> {
@@ -253,10 +258,10 @@ class MultipartUploadService extends Service {
   ): Promise<AxiosHttpResult<CreateMultipartUploadBusiness>> {
     return this.getConfig()
       .getHttp()
-      .post<
-        CreateMultipartUploadBusiness,
-        CreateMultipartUploadArgument
-      >(this.getCreateMultipartUploadAddress(), request);
+      .post<CreateMultipartUploadBusiness, CreateMultipartUploadArgument>(
+        this.getCreateMultipartUploadAddress(),
+        request,
+      );
   }
 
   public completeChunkUpload(
@@ -264,10 +269,10 @@ class MultipartUploadService extends Service {
   ): Promise<AxiosHttpResult<CompleteMultipartUploadResult>> {
     return this.getConfig()
       .getHttp()
-      .post<
-        CompleteMultipartUploadResult,
-        CompleteMultipartUploadArgument
-      >(this.getCompleteMultipartUploadAddress(), request);
+      .post<CompleteMultipartUploadResult, CompleteMultipartUploadArgument>(
+        this.getCompleteMultipartUploadAddress(),
+        request,
+      );
   }
 }
 
