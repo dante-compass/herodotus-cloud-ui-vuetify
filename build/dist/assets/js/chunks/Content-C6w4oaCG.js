@@ -1,1 +1,0 @@
-import{t as e}from"./views/pages/hr/ownership/Content.vue-DyLWIXOT.js";export{e as default};

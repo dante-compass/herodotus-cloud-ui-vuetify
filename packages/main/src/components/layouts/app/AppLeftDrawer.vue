@@ -29,5 +29,5 @@ defineOptions({ name: 'AppLeftDrawer', components: { AppMenu } });
 
 const application = useApplicationStore();
 
-const version = shallowRef('4.0.5.1');
+const version = shallowRef('4.0.5.2');
 </script>

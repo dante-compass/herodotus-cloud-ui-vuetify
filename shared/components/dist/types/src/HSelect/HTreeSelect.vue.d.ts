@@ -43,7 +43,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     } & {
         theme?: string | undefined;
         class?: any;
-        "onUpdate:focused"?: ((args_0: boolean) => void) | undefined;
+        'onUpdate:focused'?: ((args_0: boolean) => void) | undefined;
         name?: string | undefined;
         modelValue?: any;
         validateOn?: ("blur eager" | "blur lazy" | "eager" | "eager blur" | "eager input" | "eager invalid-input" | "eager submit" | "input eager" | "input lazy" | "invalid-input eager" | "invalid-input lazy" | "lazy" | "lazy blur" | "lazy input" | "lazy invalid-input" | "lazy submit" | "submit eager" | "submit lazy" | ("blur" | "input" | "invalid-input" | "submit")) | undefined;
@@ -58,8 +58,8 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         prependIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
         hideDetails?: "auto" | boolean | undefined;
         hint?: string | undefined;
-        "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:prepend'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:append'?: ((args_0: MouseEvent) => void) | undefined;
         appendInnerIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
         bgColor?: string | undefined;
         centerAffix?: boolean | undefined;
@@ -68,9 +68,9 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         iconColor?: string | boolean | undefined;
         label?: string | undefined;
         prependInnerIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
-        "onClick:clear"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:appendInner"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:clear'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:appendInner'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:prependInner'?: ((args_0: MouseEvent) => void) | undefined;
         autocomplete?: string | undefined;
         counter?: string | number | boolean | undefined;
         counterValue?: number | ((value: any) => number) | undefined;
@@ -96,15 +96,15 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             }) => import('vue').VNodeChild) | undefined;
             loader?: ((arg: import('vuetify/lib/composables/loader.mjs').LoaderSlotProps) => import('vue').VNodeChild) | undefined;
             default?: ((arg: {
-                id: Readonly<import('vue').Ref<string, string>>;
+                id: Readonly<import('vue').Ref<string>>;
             }) => import('vue').VNodeChild) | undefined;
             counter?: ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         } | {
-            $stable?: boolean | undefined;
+            $stable?: boolean;
         } | ((arg: {
-            id: Readonly<import('vue').Ref<string, string>>;
+            id: Readonly<import('vue').Ref<string>>;
         }) => import('vue').VNodeChild) | import('vue').VNodeChild;
-        "v-slots"?: {
+        'v-slots'?: {
             prepend?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
             append?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
             details?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
@@ -120,7 +120,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             }) => import('vue').VNodeChild) | undefined;
             loader?: false | ((arg: import('vuetify/lib/composables/loader.mjs').LoaderSlotProps) => import('vue').VNodeChild) | undefined;
             default?: false | ((arg: {
-                id: Readonly<import('vue').Ref<string, string>>;
+                id: Readonly<import('vue').Ref<string>>;
             }) => import('vue').VNodeChild) | undefined;
             counter?: false | ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         } | undefined;
@@ -132,7 +132,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         }) => import('vue').VNodeChild) | undefined;
         "v-slot:counter"?: false | ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         "v-slot:default"?: false | ((arg: {
-            id: Readonly<import('vue').Ref<string, string>>;
+            id: Readonly<import('vue').Ref<string>>;
         }) => import('vue').VNodeChild) | undefined;
         "v-slot:details"?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
         "v-slot:label"?: false | ((arg: import('vuetify/lib/components/VField/VField.mjs').DefaultInputSlot & {
@@ -229,8 +229,8 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 [key: string]: any;
             }>[]) | undefined;
         }>;
-        $root: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null;
-        $parent: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null;
+        $root: import('vue').ComponentPublicInstance | null;
+        $parent: import('vue').ComponentPublicInstance | null;
         $host: Element | null;
         $emit: (event: string, ...args: any[]) => void;
         $el: any;
@@ -314,25 +314,25 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 [key: string]: any;
             }>[];
         }>>, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, import('vue').ComponentProvideOptions> & {
-            beforeCreate?: ((() => void)[] | (() => void)) | undefined;
-            created?: ((() => void)[] | (() => void)) | undefined;
-            beforeMount?: ((() => void)[] | (() => void)) | undefined;
-            mounted?: ((() => void)[] | (() => void)) | undefined;
-            beforeUpdate?: ((() => void)[] | (() => void)) | undefined;
-            updated?: ((() => void)[] | (() => void)) | undefined;
-            activated?: ((() => void)[] | (() => void)) | undefined;
-            deactivated?: ((() => void)[] | (() => void)) | undefined;
-            beforeDestroy?: ((() => void)[] | (() => void)) | undefined;
-            beforeUnmount?: ((() => void)[] | (() => void)) | undefined;
-            destroyed?: ((() => void)[] | (() => void)) | undefined;
-            unmounted?: ((() => void)[] | (() => void)) | undefined;
-            renderTracked?: (((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void)) | undefined;
-            renderTriggered?: (((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void)) | undefined;
-            errorCaptured?: (((err: unknown, instance: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null, info: string) => void | boolean)[] | ((err: unknown, instance: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null, info: string) => void | boolean)) | undefined;
+            beforeCreate?: (() => void)[] | (() => void);
+            created?: (() => void)[] | (() => void);
+            beforeMount?: (() => void)[] | (() => void);
+            mounted?: (() => void)[] | (() => void);
+            beforeUpdate?: (() => void)[] | (() => void);
+            updated?: (() => void)[] | (() => void);
+            activated?: (() => void)[] | (() => void);
+            deactivated?: (() => void)[] | (() => void);
+            beforeDestroy?: (() => void)[] | (() => void);
+            beforeUnmount?: (() => void)[] | (() => void);
+            destroyed?: (() => void)[] | (() => void);
+            unmounted?: (() => void)[] | (() => void);
+            renderTracked?: ((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void);
+            renderTriggered?: ((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void);
+            errorCaptured?: ((err: unknown, instance: import('vue').ComponentPublicInstance | null, info: string) => boolean | void)[] | ((err: unknown, instance: import('vue').ComponentPublicInstance | null, info: string) => boolean | void);
         };
         $forceUpdate: () => void;
         $nextTick: typeof import('vue').nextTick;
-        $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R, args_2: import('@vue/reactivity').OnCleanup) => any : (args_0: any, args_1: any, args_2: import('@vue/reactivity').OnCleanup) => any, options?: import('vue').WatchOptions<boolean> | undefined): import('vue').WatchStopHandle;
+        $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (...args: [R, R, import('@vue/reactivity').OnCleanup]) => any : (...args: [any, any, import('@vue/reactivity').OnCleanup]) => any, options?: import('vue').WatchOptions): import('vue').WatchStopHandle;
     } & Readonly<{
         style: import('vue').StyleValue;
         focused: boolean;
@@ -370,7 +370,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     } & {
         theme?: string | undefined;
         class?: any;
-        "onUpdate:focused"?: ((args_0: boolean) => void) | undefined;
+        'onUpdate:focused'?: ((args_0: boolean) => void) | undefined;
         name?: string | undefined;
         label?: string | undefined;
         validateOn?: ("blur eager" | "blur lazy" | "eager" | "eager blur" | "eager input" | "eager invalid-input" | "eager submit" | "input eager" | "input lazy" | "invalid-input eager" | "invalid-input lazy" | "lazy" | "lazy blur" | "lazy input" | "lazy invalid-input" | "lazy submit" | "submit eager" | "submit lazy" | ("blur" | "input" | "invalid-input" | "submit")) | undefined;
@@ -386,17 +386,17 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         prependIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
         hideDetails?: "auto" | boolean | undefined;
         hint?: string | undefined;
-        "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
-    }, "style" | "disabled" | "density" | "readonly" | "isValid" | "reset" | "resetValidation" | "validate" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules"> & import('vue').ShallowUnwrapRef<{
+        'onClick:prepend'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:append'?: ((args_0: MouseEvent) => void) | undefined;
+    }, "style" | "disabled" | "density" | "readonly" | "isValid" | "reset" | "resetValidation" | "validate" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules"> & {
         reset: () => Promise<void>;
         resetValidation: () => Promise<void>;
         validate: (silent?: boolean) => Promise<string[]>;
-        isValid: import('vue').ComputedRef<boolean | null>;
-        errorMessages: import('vue').ComputedRef<string[]>;
-    }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
+        isValid: boolean | null;
+        errorMessages: string[];
+    } & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
-        "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
+        'onUpdate:modelValue'?: ((value: unknown) => void) | undefined;
     }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "theme" | "class" | "style" | "color" | "disabled" | "$children" | "v-slots" | "v-slot:default" | "modelValue" | "maxWidth" | "minWidth" | "width" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "iconColor" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "v-slot:details" | "v-slot:message">, `$${any}`> & Omit<Omit<{
         $: import('vue').ComponentInternalInstance;
         $data: {};
@@ -486,8 +486,8 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 [key: string]: any;
             }>[]) | undefined;
         }>;
-        $root: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null;
-        $parent: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null;
+        $root: import('vue').ComponentPublicInstance | null;
+        $parent: import('vue').ComponentPublicInstance | null;
         $host: Element | null;
         $emit: (event: "update:focused", focused: boolean) => void;
         $el: any;
@@ -579,25 +579,25 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 [key: string]: any;
             }>[];
         }>>, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, import('vue').ComponentProvideOptions> & {
-            beforeCreate?: ((() => void)[] | (() => void)) | undefined;
-            created?: ((() => void)[] | (() => void)) | undefined;
-            beforeMount?: ((() => void)[] | (() => void)) | undefined;
-            mounted?: ((() => void)[] | (() => void)) | undefined;
-            beforeUpdate?: ((() => void)[] | (() => void)) | undefined;
-            updated?: ((() => void)[] | (() => void)) | undefined;
-            activated?: ((() => void)[] | (() => void)) | undefined;
-            deactivated?: ((() => void)[] | (() => void)) | undefined;
-            beforeDestroy?: ((() => void)[] | (() => void)) | undefined;
-            beforeUnmount?: ((() => void)[] | (() => void)) | undefined;
-            destroyed?: ((() => void)[] | (() => void)) | undefined;
-            unmounted?: ((() => void)[] | (() => void)) | undefined;
-            renderTracked?: (((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void)) | undefined;
-            renderTriggered?: (((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void)) | undefined;
-            errorCaptured?: (((err: unknown, instance: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null, info: string) => void | boolean)[] | ((err: unknown, instance: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null, info: string) => void | boolean)) | undefined;
+            beforeCreate?: (() => void)[] | (() => void);
+            created?: (() => void)[] | (() => void);
+            beforeMount?: (() => void)[] | (() => void);
+            mounted?: (() => void)[] | (() => void);
+            beforeUpdate?: (() => void)[] | (() => void);
+            updated?: (() => void)[] | (() => void);
+            activated?: (() => void)[] | (() => void);
+            deactivated?: (() => void)[] | (() => void);
+            beforeDestroy?: (() => void)[] | (() => void);
+            beforeUnmount?: (() => void)[] | (() => void);
+            destroyed?: (() => void)[] | (() => void);
+            unmounted?: (() => void)[] | (() => void);
+            renderTracked?: ((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void);
+            renderTriggered?: ((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void);
+            errorCaptured?: ((err: unknown, instance: import('vue').ComponentPublicInstance | null, info: string) => boolean | void)[] | ((err: unknown, instance: import('vue').ComponentPublicInstance | null, info: string) => boolean | void);
         };
         $forceUpdate: () => void;
         $nextTick: typeof import('vue').nextTick;
-        $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R, args_2: import('@vue/reactivity').OnCleanup) => any : (args_0: any, args_1: any, args_2: import('@vue/reactivity').OnCleanup) => any, options?: import('vue').WatchOptions<boolean> | undefined): import('vue').WatchStopHandle;
+        $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (...args: [R, R, import('@vue/reactivity').OnCleanup]) => any : (...args: [any, any, import('@vue/reactivity').OnCleanup]) => any, options?: import('vue').WatchOptions): import('vue').WatchStopHandle;
     } & Readonly<{
         style: import('vue').StyleValue;
         focused: boolean;
@@ -637,7 +637,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     } & {
         theme?: string | undefined;
         class?: any;
-        "onUpdate:focused"?: ((args_0: boolean) => void) | undefined;
+        'onUpdate:focused'?: ((args_0: boolean) => void) | undefined;
         rounded?: string | number | boolean | undefined;
         loading?: string | boolean | undefined;
         appendInnerIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
@@ -648,19 +648,19 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         iconColor?: string | boolean | undefined;
         label?: string | undefined;
         prependInnerIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
-        "onClick:clear"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:appendInner"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:clear'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:appendInner'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:prependInner'?: ((args_0: MouseEvent) => void) | undefined;
         id?: string | undefined;
         labelId?: string | undefined;
     } & {
         "onUpdate:focused"?: ((focused: boolean) => any) | undefined;
-    }, "style" | "disabled" | "reverse" | "flat" | "rounded" | "tile" | "variant" | "active" | "details" | "centerAffix" | "error" | "focused" | "glow" | "controlRef" | "fieldIconColor" | "clearIcon" | "clearable" | "dirty" | "persistentClear" | "singleLine"> & import('vue').ShallowUnwrapRef<{
-        controlRef: import('vue').Ref<HTMLElement | undefined, HTMLElement | undefined>;
-        fieldIconColor: import('vue').ComputedRef<string | undefined>;
-    }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
+    }, "style" | "disabled" | "reverse" | "flat" | "rounded" | "tile" | "variant" | "active" | "details" | "centerAffix" | "error" | "focused" | "glow" | "controlRef" | "fieldIconColor" | "clearIcon" | "clearable" | "dirty" | "persistentClear" | "singleLine"> & {
+        controlRef: HTMLElement | undefined;
+        fieldIconColor: string | undefined;
+    } & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
-        "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
+        'onUpdate:modelValue'?: ((value: unknown) => void) | undefined;
     }, import('vuetify/lib/components/VField/VField.mjs').VFieldSlots>, "theme" | "class" | "style" | "color" | "disabled" | "reverse" | "flat" | "$children" | "v-slots" | "v-slot:default" | "modelValue" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "rounded" | "tile" | "variant" | "loading" | "active" | "baseColor" | "v-slot:loader" | "details" | "label" | "bgColor" | "centerAffix" | "error" | "focused" | "glow" | "onUpdate:focused" | "iconColor" | "clearIcon" | "clearable" | "dirty" | "persistentClear" | "singleLine" | "appendInnerIcon" | "prependInnerIcon" | "onClick:clear" | "onClick:appendInner" | "onClick:prependInner" | "labelId" | "v-slot:append-inner" | "v-slot:clear" | "v-slot:label" | "v-slot:prepend-inner">, `$${any}`> & {
         _allExposed: {
             reset: () => Promise<void>;
@@ -673,10 +673,10 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             fieldIconColor: import('vue').ComputedRef<string | undefined>;
         } | {};
     }, unknown, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
-        "click:control": (e: MouseEvent) => true;
-        "mousedown:control": (e: MouseEvent) => true;
-        "update:focused": (focused: boolean) => true;
-        "update:modelValue": (val: string) => true;
+        'click:control': (e: MouseEvent) => true;
+        'mousedown:control': (e: MouseEvent) => true;
+        'update:focused': (focused: boolean) => true;
+        'update:modelValue': (val: string) => true;
     }, import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps, {
         style: import('vue').StyleValue;
         focused: boolean;
@@ -726,10 +726,10 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         }) => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
             [key: string]: any;
         }>[];
-        "prepend-inner": (arg: import('vuetify/lib/components/VField/VField.mjs').DefaultInputSlot) => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
+        'prepend-inner': (arg: import('vuetify/lib/components/VField/VField.mjs').DefaultInputSlot) => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
             [key: string]: any;
         }>[];
-        "append-inner": (arg: import('vuetify/lib/components/VField/VField.mjs').DefaultInputSlot) => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
+        'append-inner': (arg: import('vuetify/lib/components/VField/VField.mjs').DefaultInputSlot) => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
             [key: string]: any;
         }>[];
         label: (arg: import('vuetify/lib/components/VField/VField.mjs').DefaultInputSlot & {
@@ -742,7 +742,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             [key: string]: any;
         }>[];
         default: (arg: {
-            id: Readonly<import('vue').Ref<string, string>>;
+            id: Readonly<import('vue').Ref<string>>;
         }) => import('vue').VNode<import('vue').RendererNode, import('vue').RendererElement, {
             [key: string]: any;
         }>[];
@@ -788,7 +788,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     } & {
         theme?: string | undefined;
         class?: any;
-        "onUpdate:focused"?: ((args_0: boolean) => void) | undefined;
+        'onUpdate:focused'?: ((args_0: boolean) => void) | undefined;
         name?: string | undefined;
         modelValue?: any;
         validateOn?: ("blur eager" | "blur lazy" | "eager" | "eager blur" | "eager input" | "eager invalid-input" | "eager submit" | "input eager" | "input lazy" | "invalid-input eager" | "invalid-input lazy" | "lazy" | "lazy blur" | "lazy input" | "lazy invalid-input" | "lazy submit" | "submit eager" | "submit lazy" | ("blur" | "input" | "invalid-input" | "submit")) | undefined;
@@ -803,8 +803,8 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         prependIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
         hideDetails?: "auto" | boolean | undefined;
         hint?: string | undefined;
-        "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:prepend'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:append'?: ((args_0: MouseEvent) => void) | undefined;
         appendInnerIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
         bgColor?: string | undefined;
         centerAffix?: boolean | undefined;
@@ -813,9 +813,9 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         iconColor?: string | boolean | undefined;
         label?: string | undefined;
         prependInnerIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
-        "onClick:clear"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:appendInner"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:clear'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:appendInner'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:prependInner'?: ((args_0: MouseEvent) => void) | undefined;
         autocomplete?: string | undefined;
         counter?: string | number | boolean | undefined;
         counterValue?: number | ((value: any) => number) | undefined;
@@ -841,15 +841,15 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             }) => import('vue').VNodeChild) | undefined;
             loader?: ((arg: import('vuetify/lib/composables/loader.mjs').LoaderSlotProps) => import('vue').VNodeChild) | undefined;
             default?: ((arg: {
-                id: Readonly<import('vue').Ref<string, string>>;
+                id: Readonly<import('vue').Ref<string>>;
             }) => import('vue').VNodeChild) | undefined;
             counter?: ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         } | {
-            $stable?: boolean | undefined;
+            $stable?: boolean;
         } | ((arg: {
-            id: Readonly<import('vue').Ref<string, string>>;
+            id: Readonly<import('vue').Ref<string>>;
         }) => import('vue').VNodeChild) | import('vue').VNodeChild;
-        "v-slots"?: {
+        'v-slots'?: {
             prepend?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
             append?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
             details?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
@@ -865,7 +865,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
             }) => import('vue').VNodeChild) | undefined;
             loader?: false | ((arg: import('vuetify/lib/composables/loader.mjs').LoaderSlotProps) => import('vue').VNodeChild) | undefined;
             default?: false | ((arg: {
-                id: Readonly<import('vue').Ref<string, string>>;
+                id: Readonly<import('vue').Ref<string>>;
             }) => import('vue').VNodeChild) | undefined;
             counter?: false | ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         } | undefined;
@@ -877,7 +877,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         }) => import('vue').VNodeChild) | undefined;
         "v-slot:counter"?: false | ((arg: import('vuetify/lib/components/VCounter/VCounter.mjs').VCounterSlot) => import('vue').VNodeChild) | undefined;
         "v-slot:default"?: false | ((arg: {
-            id: Readonly<import('vue').Ref<string, string>>;
+            id: Readonly<import('vue').Ref<string>>;
         }) => import('vue').VNodeChild) | undefined;
         "v-slot:details"?: false | ((arg: import('vuetify/lib/components/VInput/VInput.mjs').VInputSlot) => import('vue').VNodeChild) | undefined;
         "v-slot:label"?: false | ((arg: import('vuetify/lib/components/VField/VField.mjs').DefaultInputSlot & {
@@ -974,8 +974,8 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 [key: string]: any;
             }>[]) | undefined;
         }>;
-        $root: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null;
-        $parent: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null;
+        $root: import('vue').ComponentPublicInstance | null;
+        $parent: import('vue').ComponentPublicInstance | null;
         $host: Element | null;
         $emit: (event: string, ...args: any[]) => void;
         $el: any;
@@ -1059,25 +1059,25 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 [key: string]: any;
             }>[];
         }>>, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, import('vue').ComponentProvideOptions> & {
-            beforeCreate?: ((() => void)[] | (() => void)) | undefined;
-            created?: ((() => void)[] | (() => void)) | undefined;
-            beforeMount?: ((() => void)[] | (() => void)) | undefined;
-            mounted?: ((() => void)[] | (() => void)) | undefined;
-            beforeUpdate?: ((() => void)[] | (() => void)) | undefined;
-            updated?: ((() => void)[] | (() => void)) | undefined;
-            activated?: ((() => void)[] | (() => void)) | undefined;
-            deactivated?: ((() => void)[] | (() => void)) | undefined;
-            beforeDestroy?: ((() => void)[] | (() => void)) | undefined;
-            beforeUnmount?: ((() => void)[] | (() => void)) | undefined;
-            destroyed?: ((() => void)[] | (() => void)) | undefined;
-            unmounted?: ((() => void)[] | (() => void)) | undefined;
-            renderTracked?: (((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void)) | undefined;
-            renderTriggered?: (((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void)) | undefined;
-            errorCaptured?: (((err: unknown, instance: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null, info: string) => void | boolean)[] | ((err: unknown, instance: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null, info: string) => void | boolean)) | undefined;
+            beforeCreate?: (() => void)[] | (() => void);
+            created?: (() => void)[] | (() => void);
+            beforeMount?: (() => void)[] | (() => void);
+            mounted?: (() => void)[] | (() => void);
+            beforeUpdate?: (() => void)[] | (() => void);
+            updated?: (() => void)[] | (() => void);
+            activated?: (() => void)[] | (() => void);
+            deactivated?: (() => void)[] | (() => void);
+            beforeDestroy?: (() => void)[] | (() => void);
+            beforeUnmount?: (() => void)[] | (() => void);
+            destroyed?: (() => void)[] | (() => void);
+            unmounted?: (() => void)[] | (() => void);
+            renderTracked?: ((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void);
+            renderTriggered?: ((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void);
+            errorCaptured?: ((err: unknown, instance: import('vue').ComponentPublicInstance | null, info: string) => boolean | void)[] | ((err: unknown, instance: import('vue').ComponentPublicInstance | null, info: string) => boolean | void);
         };
         $forceUpdate: () => void;
         $nextTick: typeof import('vue').nextTick;
-        $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R, args_2: import('@vue/reactivity').OnCleanup) => any : (args_0: any, args_1: any, args_2: import('@vue/reactivity').OnCleanup) => any, options?: import('vue').WatchOptions<boolean> | undefined): import('vue').WatchStopHandle;
+        $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (...args: [R, R, import('@vue/reactivity').OnCleanup]) => any : (...args: [any, any, import('@vue/reactivity').OnCleanup]) => any, options?: import('vue').WatchOptions): import('vue').WatchStopHandle;
     } & Readonly<{
         style: import('vue').StyleValue;
         focused: boolean;
@@ -1115,7 +1115,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     } & {
         theme?: string | undefined;
         class?: any;
-        "onUpdate:focused"?: ((args_0: boolean) => void) | undefined;
+        'onUpdate:focused'?: ((args_0: boolean) => void) | undefined;
         name?: string | undefined;
         label?: string | undefined;
         validateOn?: ("blur eager" | "blur lazy" | "eager" | "eager blur" | "eager input" | "eager invalid-input" | "eager submit" | "input eager" | "input lazy" | "invalid-input eager" | "invalid-input lazy" | "lazy" | "lazy blur" | "lazy input" | "lazy invalid-input" | "lazy submit" | "submit eager" | "submit lazy" | ("blur" | "input" | "invalid-input" | "submit")) | undefined;
@@ -1131,17 +1131,17 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         prependIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
         hideDetails?: "auto" | boolean | undefined;
         hint?: string | undefined;
-        "onClick:prepend"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:append"?: ((args_0: MouseEvent) => void) | undefined;
-    }, "style" | "disabled" | "density" | "readonly" | "isValid" | "reset" | "resetValidation" | "validate" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules"> & import('vue').ShallowUnwrapRef<{
+        'onClick:prepend'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:append'?: ((args_0: MouseEvent) => void) | undefined;
+    }, "style" | "disabled" | "density" | "readonly" | "isValid" | "reset" | "resetValidation" | "validate" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules"> & {
         reset: () => Promise<void>;
         resetValidation: () => Promise<void>;
         validate: (silent?: boolean) => Promise<string[]>;
-        isValid: import('vue').ComputedRef<boolean | null>;
-        errorMessages: import('vue').ComputedRef<string[]>;
-    }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
+        isValid: boolean | null;
+        errorMessages: string[];
+    } & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
-        "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
+        'onUpdate:modelValue'?: ((value: unknown) => void) | undefined;
     }, import('vuetify/lib/components/VInput/VInput.mjs').VInputSlots>, "theme" | "class" | "style" | "color" | "disabled" | "$children" | "v-slots" | "v-slot:default" | "modelValue" | "maxWidth" | "minWidth" | "width" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "name" | "density" | "baseColor" | "prependIcon" | "appendIcon" | "readonly" | "v-slot:append" | "v-slot:prepend" | "label" | "centerAffix" | "direction" | "error" | "errorMessages" | "focused" | "glow" | "hideSpinButtons" | "indentDetails" | "maxErrors" | "messages" | "persistentHint" | "rules" | "onUpdate:focused" | "validateOn" | "validationValue" | "iconColor" | "hideDetails" | "hint" | "onClick:prepend" | "onClick:append" | "v-slot:details" | "v-slot:message">, `$${any}`> & Omit<Omit<{
         $: import('vue').ComponentInternalInstance;
         $data: {};
@@ -1231,8 +1231,8 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 [key: string]: any;
             }>[]) | undefined;
         }>;
-        $root: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null;
-        $parent: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null;
+        $root: import('vue').ComponentPublicInstance | null;
+        $parent: import('vue').ComponentPublicInstance | null;
         $host: Element | null;
         $emit: (event: "update:focused", focused: boolean) => void;
         $el: any;
@@ -1324,25 +1324,25 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
                 [key: string]: any;
             }>[];
         }>>, import('vue').GlobalComponents, import('vue').GlobalDirectives, string, import('vue').ComponentProvideOptions> & {
-            beforeCreate?: ((() => void)[] | (() => void)) | undefined;
-            created?: ((() => void)[] | (() => void)) | undefined;
-            beforeMount?: ((() => void)[] | (() => void)) | undefined;
-            mounted?: ((() => void)[] | (() => void)) | undefined;
-            beforeUpdate?: ((() => void)[] | (() => void)) | undefined;
-            updated?: ((() => void)[] | (() => void)) | undefined;
-            activated?: ((() => void)[] | (() => void)) | undefined;
-            deactivated?: ((() => void)[] | (() => void)) | undefined;
-            beforeDestroy?: ((() => void)[] | (() => void)) | undefined;
-            beforeUnmount?: ((() => void)[] | (() => void)) | undefined;
-            destroyed?: ((() => void)[] | (() => void)) | undefined;
-            unmounted?: ((() => void)[] | (() => void)) | undefined;
-            renderTracked?: (((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void)) | undefined;
-            renderTriggered?: (((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void)) | undefined;
-            errorCaptured?: (((err: unknown, instance: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null, info: string) => void | boolean)[] | ((err: unknown, instance: import('vue').ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import('vue').ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}, {}, {}, string, import('vue').ComponentProvideOptions>, {}, {}, "", {}, any> | null, info: string) => void | boolean)) | undefined;
+            beforeCreate?: (() => void)[] | (() => void);
+            created?: (() => void)[] | (() => void);
+            beforeMount?: (() => void)[] | (() => void);
+            mounted?: (() => void)[] | (() => void);
+            beforeUpdate?: (() => void)[] | (() => void);
+            updated?: (() => void)[] | (() => void);
+            activated?: (() => void)[] | (() => void);
+            deactivated?: (() => void)[] | (() => void);
+            beforeDestroy?: (() => void)[] | (() => void);
+            beforeUnmount?: (() => void)[] | (() => void);
+            destroyed?: (() => void)[] | (() => void);
+            unmounted?: (() => void)[] | (() => void);
+            renderTracked?: ((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void);
+            renderTriggered?: ((e: import('vue').DebuggerEvent) => void)[] | ((e: import('vue').DebuggerEvent) => void);
+            errorCaptured?: ((err: unknown, instance: import('vue').ComponentPublicInstance | null, info: string) => boolean | void)[] | ((err: unknown, instance: import('vue').ComponentPublicInstance | null, info: string) => boolean | void);
         };
         $forceUpdate: () => void;
         $nextTick: typeof import('vue').nextTick;
-        $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R, args_2: import('@vue/reactivity').OnCleanup) => any : (args_0: any, args_1: any, args_2: import('@vue/reactivity').OnCleanup) => any, options?: import('vue').WatchOptions<boolean> | undefined): import('vue').WatchStopHandle;
+        $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (...args: [R, R, import('@vue/reactivity').OnCleanup]) => any : (...args: [any, any, import('@vue/reactivity').OnCleanup]) => any, options?: import('vue').WatchOptions): import('vue').WatchStopHandle;
     } & Readonly<{
         style: import('vue').StyleValue;
         focused: boolean;
@@ -1382,7 +1382,7 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
     } & {
         theme?: string | undefined;
         class?: any;
-        "onUpdate:focused"?: ((args_0: boolean) => void) | undefined;
+        'onUpdate:focused'?: ((args_0: boolean) => void) | undefined;
         rounded?: string | number | boolean | undefined;
         loading?: string | boolean | undefined;
         appendInnerIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
@@ -1393,19 +1393,19 @@ declare const _default: import('vue').DefineComponent<__VLS_PublicProps, {}, {},
         iconColor?: string | boolean | undefined;
         label?: string | undefined;
         prependInnerIcon?: import('vuetify/lib/composables/icons.mjs').IconValue | undefined;
-        "onClick:clear"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:appendInner"?: ((args_0: MouseEvent) => void) | undefined;
-        "onClick:prependInner"?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:clear'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:appendInner'?: ((args_0: MouseEvent) => void) | undefined;
+        'onClick:prependInner'?: ((args_0: MouseEvent) => void) | undefined;
         id?: string | undefined;
         labelId?: string | undefined;
     } & {
         "onUpdate:focused"?: ((focused: boolean) => any) | undefined;
-    }, "style" | "disabled" | "reverse" | "flat" | "rounded" | "tile" | "variant" | "active" | "details" | "centerAffix" | "error" | "focused" | "glow" | "controlRef" | "fieldIconColor" | "clearIcon" | "clearable" | "dirty" | "persistentClear" | "singleLine"> & import('vue').ShallowUnwrapRef<{
-        controlRef: import('vue').Ref<HTMLElement | undefined, HTMLElement | undefined>;
-        fieldIconColor: import('vue').ComputedRef<string | undefined>;
-    }> & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
+    }, "style" | "disabled" | "reverse" | "flat" | "rounded" | "tile" | "variant" | "active" | "details" | "centerAffix" | "error" | "focused" | "glow" | "controlRef" | "fieldIconColor" | "clearIcon" | "clearable" | "dirty" | "persistentClear" | "singleLine"> & {
+        controlRef: HTMLElement | undefined;
+        fieldIconColor: string | undefined;
+    } & import('vue').ComponentCustomProperties & import('vuetify/lib/util/defineComponent.mjs').GenericProps<{
         modelValue?: unknown;
-        "onUpdate:modelValue"?: ((value: unknown) => void) | undefined;
+        'onUpdate:modelValue'?: ((value: unknown) => void) | undefined;
     }, import('vuetify/lib/components/VField/VField.mjs').VFieldSlots>, "theme" | "class" | "style" | "color" | "disabled" | "reverse" | "flat" | "$children" | "v-slots" | "v-slot:default" | "modelValue" | "onUpdate:modelValue" | keyof import('vue').VNodeProps | "id" | "rounded" | "tile" | "variant" | "loading" | "active" | "baseColor" | "v-slot:loader" | "details" | "label" | "bgColor" | "centerAffix" | "error" | "focused" | "glow" | "onUpdate:focused" | "iconColor" | "clearIcon" | "clearable" | "dirty" | "persistentClear" | "singleLine" | "appendInnerIcon" | "prependInnerIcon" | "onClick:clear" | "onClick:appendInner" | "onClick:prependInner" | "labelId" | "v-slot:append-inner" | "v-slot:clear" | "v-slot:label" | "v-slot:prepend-inner">, `$${any}`> & {
         _allExposed: {
             reset: () => Promise<void>;

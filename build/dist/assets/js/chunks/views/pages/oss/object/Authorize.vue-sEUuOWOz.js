@@ -1,0 +1,1 @@
+import{b as e,k as t,mt as n}from"../../../../../venders/vender-@vue-runtime-core-BBCM1D99.js";var r=t({name:`OssObjectAuthorize`,__name:`Authorize`,setup(t){return(t,r)=>(n(),e(`div`,null,`ApplicationAuthorize`))}});export{r as t};

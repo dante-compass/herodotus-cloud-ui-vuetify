@@ -1,0 +1,1 @@
+import{l as e}from"./views/dashboard/console/Index.vue-BMGQ6C-b.js";export{e as default};

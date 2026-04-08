@@ -1,5 +1,16 @@
 # @herodotus/components
 
+## 1.4.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@1.4.0
+
 ## 1.3.3
 
 ### Patch Changes

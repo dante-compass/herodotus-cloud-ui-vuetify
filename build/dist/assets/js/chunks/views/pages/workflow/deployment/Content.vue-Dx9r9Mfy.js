@@ -1,1 +1,0 @@
-import{b as e,k as t,mt as n}from"../../../../../venders/vender-@vue-runtime-core-D_7fTKuV.js";var r=t({name:`OAuth2ApplicationContent`,__name:`Content`,setup(t){return(t,r)=>(n(),e(`div`,null,`ApplicationContent`))}});export{r as t};
