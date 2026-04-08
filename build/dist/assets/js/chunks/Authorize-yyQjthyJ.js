@@ -1,1 +1,0 @@
-import{t as e}from"./views/pages/authorize/scope/Authorize.vue-qcpxl-0F.js";export{e as default};

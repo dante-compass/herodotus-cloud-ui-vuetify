@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/hr/ownership/Index.vue-pjZBDX8m.js";export{e as default};

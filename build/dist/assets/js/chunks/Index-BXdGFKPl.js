@@ -1,1 +1,0 @@
-import{t as e}from"./views/pages/authorize/application/Index.vue-DTJloVsl.js";export{e as default};

@@ -12,8 +12,8 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.2.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.2.0"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.5.1-red.svg?logo=spring" alt="Version 4.0.5.1"></a>
-    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.5.1-red.svg?logo=spring" alt="Dante Engine 4.0.5.1"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.5.2-red.svg?logo=spring" alt="Version 4.0.5.2"></a>
+    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.5.2-red.svg?logo=spring" alt="Dante Engine 4.0.5.2"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-25%2B-green.svg?logo=openjdk" alt="Java 25"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -38,7 +38,7 @@
 
 Herodotus Cloud UI Vuetify 为 Dante Cloud 微服务项目新版前端项目。
 
-> 自 Dante Cloud v4.0.5.1 版本起，为了提升维护的效率，将企业版前端与开源版前端合并，新版本前端（Vuetify 版）也一并开源。
+> 自 Dante Cloud v4.0.5.2 版本起，为了提升维护的效率，将企业版前端与开源版前端合并，新版本前端（Vuetify 版）也一并开源。
 
 ## 项目特点
 

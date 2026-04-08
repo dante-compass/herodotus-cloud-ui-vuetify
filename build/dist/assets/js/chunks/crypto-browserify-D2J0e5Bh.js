@@ -1,1 +1,0 @@
-import{t as e}from"../venders/vender-brorand-BNEIB_4D.js";export default e();

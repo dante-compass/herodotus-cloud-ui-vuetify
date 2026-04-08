@@ -1,1 +1,0 @@
-import{t as e}from"./views/pages/authorize/compliance/Index.vue-DWnlg5R_.js";export{e as default};

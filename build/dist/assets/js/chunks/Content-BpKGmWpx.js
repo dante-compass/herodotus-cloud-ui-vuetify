@@ -1,1 +1,0 @@
-import{t as e}from"./views/pages/authorize/scope/Content.vue-PtUXRkE-.js";export{e as default};

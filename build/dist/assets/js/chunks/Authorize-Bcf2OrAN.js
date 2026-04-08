@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/security/default-role/Authorize.vue-CPUyidgQ.js";export{e as default};

@@ -1,0 +1,1 @@
+import{n as e}from"./views/pages/security/dictionary/Index.vue-BKT2h7NE.js";export{e as default};

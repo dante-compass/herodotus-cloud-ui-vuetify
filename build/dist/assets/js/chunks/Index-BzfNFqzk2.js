@@ -1,1 +1,0 @@
-import{t as e}from"./views/personal/message/information/Index.vue-DnHKvWGI.js";export{e as default};

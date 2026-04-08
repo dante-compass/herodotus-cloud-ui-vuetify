@@ -1,0 +1,1 @@
+import{B as e}from"../../../venders/vender-@vue-reactivity-BVY_UOfr.js";import{k as t,mt as n,v as r}from"../../../venders/vender-@vue-runtime-core-BBCM1D99.js";import{t as i}from"../../components/layouts/index.ts-C7exyYij.js";var a=t({name:`PersonalLayout`,components:{PersonalDefaultLayout:i},__name:`Personal`,setup(t){return(t,a)=>(n(),r(e(i)))}});export{a as t};
