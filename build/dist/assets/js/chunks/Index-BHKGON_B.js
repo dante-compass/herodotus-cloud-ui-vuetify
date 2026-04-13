@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/manage/certificate/Index.vue-Bvksak_p.js";export{e as default};

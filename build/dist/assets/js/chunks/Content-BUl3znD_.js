@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/authorize/scope/Content.vue-CtwD_xrq.js";export{e as default};

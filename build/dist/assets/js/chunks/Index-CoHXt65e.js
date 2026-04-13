@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/authorize/token/Index.vue-DBkhQ56f.js";export{e as default};

@@ -1,1 +1,0 @@
-import{t as e}from"./views/pages/authorize/scope/Content.vue-C7p4NYs6.js";export{e as default};

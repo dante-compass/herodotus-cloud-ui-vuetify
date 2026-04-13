@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.4.1
+
+### Patch Changes
+
+- 修复 Axios 漏洞
+
 ## 1.4.0
 
 ### Minor Changes

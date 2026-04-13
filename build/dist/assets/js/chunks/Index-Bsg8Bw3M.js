@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/authorize/compliance/Index.vue-BYwABoFe.js";export{e as default};
