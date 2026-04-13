@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/security/default-role/Authorize.vue-BfivpKBd.js";export{e as default};

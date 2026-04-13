@@ -1,1 +1,0 @@
-import{k as e,mt as t,v as n}from"../../../../../venders/vender-@vue-runtime-core-BBCM1D99.js";import{t as r}from"../../../../components/layouts/form/HFullWidthFormLayout.vue-727ImMHY.js";var i=e({name:`MgtCertificateRevocation`,__name:`Revocation`,setup(e){return(e,i)=>{let a=r;return t(),n(a,{title:`证书吊销列表`})}}});export{i as t};

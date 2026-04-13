@@ -1,1 +1,0 @@
-import{t as e}from"./views/pages/security/attribute/Content.vue-BWLfLcLF.js";export{e as default};

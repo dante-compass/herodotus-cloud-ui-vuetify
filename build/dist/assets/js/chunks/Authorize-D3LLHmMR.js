@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/authorize/scope/Authorize.vue-ClI06w32.js";export{e as default};

@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/security/attribute/Authorize.vue-DBA4aRF-.js";export{e as default};

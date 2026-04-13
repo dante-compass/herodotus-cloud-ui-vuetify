@@ -1,0 +1,1 @@
+import{t as e}from"./views/pages/security/attribute/Content.vue-DiXpnlkf.js";export{e as default};

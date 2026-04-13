@@ -1,1 +1,0 @@
-import{b as e,k as t,mt as n}from"../../../../../venders/vender-@vue-runtime-core-BBCM1D99.js";var r=t({name:`OAuth2Application`,__name:`WorkflowProcessApprove`,setup(t){return(t,r)=>(n(),e(`div`,null,`Application`))}});export{r as t};

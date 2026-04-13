@@ -1,0 +1,1 @@
+import{t as e}from"./views/personal/message/setting/Index.vue-DDcEEdDe.js";export{e as default};

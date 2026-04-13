@@ -1,1 +1,0 @@
-import{t as e}from"./views/pages/security/attribute/Index.vue-Bt6oGGE0.js";export{e as default};

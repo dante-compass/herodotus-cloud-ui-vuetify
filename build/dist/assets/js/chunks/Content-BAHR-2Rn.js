@@ -1,1 +1,0 @@
-import{t as e}from"./views/pages/hr/ownership/Content.vue-CQ_2AcO4.js";export{e as default};

@@ -1,0 +1,1 @@
+import{n as e}from"./views/pages/security/dictionary/Index.vue-301haFct.js";export{e as default};
