@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.4.2
+
+### Patch Changes
+
+- 新增IOT API
+
 ## 1.4.1
 
 ### Patch Changes

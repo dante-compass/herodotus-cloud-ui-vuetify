@@ -31,6 +31,14 @@ import {
 } from './modules';
 
 import { BucketService, ObjectService, MultipartUploadService } from './oss';
+import {
+  DeviceService,
+  ProductCategoryService,
+  ProductService,
+  TslUnitService,
+  TslArgumentService,
+  TslFunctionService,
+} from './iot';
 
 export class ApiResources {
   private static instance: ApiResources;
@@ -164,6 +172,30 @@ export class ApiResources {
 
   public ossMultipartUpload(): MultipartUploadService {
     return MultipartUploadService.getInstance(this.config);
+  }
+
+  public iotProductCategory(): ProductCategoryService {
+    return ProductCategoryService.getInstance(this.config);
+  }
+
+  public iotProduct(): ProductService {
+    return ProductService.getInstance(this.config);
+  }
+
+  public iotDevice(): DeviceService {
+    return DeviceService.getInstance(this.config);
+  }
+
+  public iotTslUnit(): TslUnitService {
+    return TslUnitService.getInstance(this.config);
+  }
+
+  public iotTslArgument(): TslArgumentService {
+    return TslArgumentService.getInstance(this.config);
+  }
+
+  public iotTslFunction(): TslFunctionService {
+    return TslFunctionService.getInstance(this.config);
   }
 }
 

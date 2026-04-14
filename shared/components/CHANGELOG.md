@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 1.4.2
+
+### Patch Changes
+
+- 新增IOT API
+- Updated dependencies
+  - @herodotus/core@1.4.2
+
 ## 1.4.1
 
 ### Patch Changes
