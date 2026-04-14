@@ -2,6 +2,6 @@
   <div>Product Content</div>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 defineOptions({ name: 'IotProductContent' });
 </script>

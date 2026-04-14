@@ -2,6 +2,6 @@
   <div>Device Info</div>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 defineOptions({ name: 'IotDeviceInfo' });
 </script>
