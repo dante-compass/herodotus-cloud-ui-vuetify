@@ -9,7 +9,7 @@
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.1.1-blue.svg?logo=springboot" alt="Spring Cloud 2025.1.1"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2025.1.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2025.1.0.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.1.1.0--2024.0.3-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.1.1.0-2024.0.3"></a>
-    <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.2.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.2.0"></a>
+    <a href="https://nacos.io/docs/latest/overview/" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.2.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.2.0"></a>
 </p>
 <p align="center">
     <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.5.2-red.svg?logo=spring" alt="Version 4.0.5.2"></a>
@@ -21,10 +21,10 @@
     <a href="https://github.com/dromara/dante-cloud"><img src="https://img.shields.io/github/forks/dromara/dante-cloud?style=flat&logo=github" alt="Github fork"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
-    <a href='https://gitcode.com/dromara/dante-cloud'><img src='https://gitcode.com/dromara/dante-cloud/star/badge.svg' alt='Gitcode star'></a>
+    <a href='https://atomgit.com/dromara/dante-cloud'><img src='https://atomgit.com/dromara/dante-cloud/star/badge.svg' alt='Atomgit star'></a>
 </p>
 <p align="center">
-    <a href="https://gitcode.com/dromara/dante-cloud">GitCode 仓库</a> &nbsp; | &nbsp;
+    <a href="https://atomgit.com/dromara/dante-cloud">Atomgit 仓库</a> &nbsp; | &nbsp;
     <a href="https://github.com/dromara/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.vip">在线文档</a>
