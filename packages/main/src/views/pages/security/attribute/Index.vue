@@ -17,7 +17,7 @@
     </template>
 
     <template #item.category="{ value }">
-      <v-chip density="compact" rounded="lg" :color="getCategoryColor(value)" label>
+      <v-chip v-if="value" density="compact" rounded="lg" :color="getCategoryColor(value)" label>
         {{ getDictionaryItemDisplay('MappingCategory', value) }}
       </v-chip>
     </template>

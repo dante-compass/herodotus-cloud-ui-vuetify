@@ -20,9 +20,9 @@
       <v-btn @click="toCreate">新建菜单</v-btn>
     </template>
 
-    <template #item.applicationType="{ item }">
-      <v-chip density="compact" rounded="lg" color="teal" label>
-        {{ getDictionaryItemDisplay('ApplicationType', item.applicationType) }}
+    <template #item.applicationType="{ value }">
+      <v-chip v-if="value" density="compact" rounded="lg" color="teal" label>
+        {{ getDictionaryItemDisplay('ApplicationType', value) }}
       </v-chip>
     </template>
 
@@ -30,9 +30,9 @@
       {{ getDictionaryItemDisplay('ElementCategory', item.elementCategory) }}
     </template> -->
 
-    <template #item.menuScenario="{ item }">
-      <v-chip density="compact" rounded="lg" color="cyan" label>
-        {{ getDictionaryItemDisplay('MenuScenario', item.menuScenario) }}
+    <template #item.menuScenario="{ value }">
+      <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
+        {{ getDictionaryItemDisplay('MenuScenario', value) }}
       </v-chip>
     </template>
 

@@ -14,21 +14,21 @@
       flat
       @update:options="findItems"
     >
-      <template #item.certificateCategory="{ item }">
-        <v-chip density="compact" rounded="lg" color="orange" label>
-          {{ getDictionaryItemDisplay('CertificateCategory', item.certificateCategory) }}
+      <template #item.certificateCategory="{ value }">
+        <v-chip v-if="value" density="compact" rounded="lg" color="orange" label>
+          {{ getDictionaryItemDisplay('CertificateCategory', value) }}
         </v-chip>
       </template>
 
-      <template #item.certificateFileCategory="{ item }">
-        <v-chip density="compact" rounded="lg" color="cyan" label>
-          {{ getDictionaryItemDisplay('CertificateFileCategory', item.certificateFileCategory) }}
+      <template #item.certificateFileCategory="{ value }">
+        <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
+          {{ getDictionaryItemDisplay('CertificateFileCategory', value) }}
         </v-chip>
       </template>
 
-      <template #item.keyStoreCategory="{ item }">
-        <v-chip density="compact" rounded="lg" color="purple" label>
-          {{ getDictionaryItemDisplay('KeyStoreCategory', item.keyStoreCategory) }}
+      <template #item.keyStoreCategory="{ value }">
+        <v-chip v-if="value" density="compact" rounded="lg" color="purple" label>
+          {{ getDictionaryItemDisplay('KeyStoreCategory', value) }}
         </v-chip>
       </template>
 

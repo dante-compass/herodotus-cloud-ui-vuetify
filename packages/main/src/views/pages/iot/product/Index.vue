@@ -25,25 +25,25 @@
     </template>
 
     <template #item.nodeType="{ value }">
-      <v-chip density="compact" rounded="lg" color="cyan" label>
+      <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
         {{ getDictionaryItemDisplay('NodeType', value) }}
       </v-chip>
     </template>
 
     <template #item.gatewayProtocol="{ value }">
-      <v-chip density="compact" rounded="lg" color="cyan" label>
+      <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
         {{ getDictionaryItemDisplay('GatewayProtocol', value) }}
       </v-chip>
     </template>
 
     <template #item.networkingMethod="{ value }">
-      <v-chip density="compact" rounded="lg" color="cyan" label>
+      <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
         {{ getDictionaryItemDisplay('NetworkingMethod', value) }}
       </v-chip>
     </template>
 
     <template #item.authenticationMode="{ value }">
-      <v-chip density="compact" rounded="lg" color="cyan" label>
+      <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
         {{ getDictionaryItemDisplay('AuthenticationMode', value) }}
       </v-chip>
     </template>

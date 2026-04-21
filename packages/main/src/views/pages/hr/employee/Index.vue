@@ -21,15 +21,15 @@
       <employee-search v-model="conditions"></employee-search>
     </template>
 
-    <template #item.gender="{ item }">
-      <v-chip density="compact" rounded="lg" color="blue" label>
-        {{ getDictionaryItemDisplay('Gender', item.gender) }}
+    <template #item.gender="{ value }">
+      <v-chip v-if="value" density="compact" rounded="lg" color="blue" label>
+        {{ getDictionaryItemDisplay('Gender', value) }}
       </v-chip>
     </template>
 
-    <template #item.identity="{ item }">
-      <v-chip density="compact" rounded="lg" color="orange" label>
-        {{ getDictionaryItemDisplay('Identity', item.identity) }}
+    <template #item.identity="{ value }">
+      <v-chip v-if="value" density="compact" rounded="lg" color="orange" label>
+        {{ getDictionaryItemDisplay('Identity', value) }}
       </v-chip>
     </template>
 
