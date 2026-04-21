@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import { useElementStore } from '@herodotus/framework';
-import { LayoutLeftDrawer } from '../commons';
+import { LayoutLeftDrawer } from '../common';
 
 defineOptions({ name: 'AppLeftDrawer', components: { LayoutLeftDrawer } });
 

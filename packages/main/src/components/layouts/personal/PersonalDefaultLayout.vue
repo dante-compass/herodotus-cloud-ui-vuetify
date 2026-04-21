@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { LayoutContent, LayoutBar, LayoutSettingDrawer } from '../commons';
+import { LayoutContent, LayoutBar, LayoutSettingDrawer } from '../common';
 
 import { useSettingsStore } from '@herodotus/framework';
 

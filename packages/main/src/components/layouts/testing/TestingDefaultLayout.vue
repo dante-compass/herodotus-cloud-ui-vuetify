@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { useSettingsStore } from '@herodotus/framework';
-import { LayoutContent, LayoutBar, LayoutSettingDrawer } from '../commons';
+import { LayoutContent, LayoutBar, LayoutSettingDrawer } from '../common';
 import TestingLeftDrawer from './TestingLeftDrawer.vue';
 
 defineOptions({

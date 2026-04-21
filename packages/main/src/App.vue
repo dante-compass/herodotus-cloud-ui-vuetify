@@ -12,7 +12,7 @@ import { useWebSocketMessage } from '@/composables/hooks';
 
 import { VARIABLES } from '@/configurations';
 import { refreshTabInjectionKey } from '@/composables/symbols';
-import { Loading } from '@/components/layouts/commons';
+import { Loading } from '@/components/layouts/common';
 
 defineOptions({ name: 'App' });
 

@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 import { useSettingsStore } from '@herodotus/framework';
 
-import { LayoutContent, LayoutSettingDrawer, LayoutBar } from '../commons';
+import { LayoutContent, LayoutSettingDrawer, LayoutBar } from '../common';
 import AppTabView from './AppTabView.vue';
 import AppLeftDrawer from './AppLeftDrawer.vue';
 
