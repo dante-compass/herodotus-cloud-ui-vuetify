@@ -1,5 +1,5 @@
 <template>
-  <v-app id="user">
+  <v-app id="personal">
     <layout-setting-drawer></layout-setting-drawer>
     <layout-bar personal></layout-bar>
 

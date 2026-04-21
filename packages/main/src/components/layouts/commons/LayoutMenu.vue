@@ -2,7 +2,7 @@
   <v-list
     v-model:activated="active"
     :lines="false"
-    :items="menuItems"
+    :items="items"
     active-strategy="single-leaf"
     open-strategy="multiple"
     select-strategy="classic"
@@ -33,19 +33,18 @@
   </v-list>
 </template>
 
-<script lang="ts" setup>
-import { computed, shallowRef } from 'vue';
-import { useElementStore } from '@herodotus/framework';
+<script setup lang="ts">
+import type { MenuItem } from '@herodotus/framework';
 
-defineOptions({ name: 'AppMenu' });
+defineOptions({ name: 'LayoutMenu' });
 
-const store = useElementStore();
+interface Props {
+  items: MenuItem[];
+}
 
-const active = shallowRef([]);
+defineProps<Props>();
 
-const menuItems = computed(() => {
-  return store.appMenus;
-});
+const active = ref([]);
 </script>
 
 <style lang="scss" scoped>

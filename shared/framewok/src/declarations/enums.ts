@@ -102,4 +102,5 @@ export enum SocialSourceEnum {
 export enum MenuScenario {
   APP = 'APP',
   PERSONAL = 'PERSONAL',
+  TESTING = 'TESTING',
 }

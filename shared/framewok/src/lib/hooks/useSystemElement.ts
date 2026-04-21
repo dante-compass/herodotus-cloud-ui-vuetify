@@ -95,6 +95,7 @@ export default function useSystemElement(
     const routeRecords: RouteRecordRaw[] = [];
     const appMenus: MenuItem[] = [];
     const personalMenus: MenuItem[] = [];
+    const testingMenus: MenuItem[] = [];
 
     data.forEach((node: ElementRouteTree) => {
       // 转换路由记录
@@ -129,21 +130,27 @@ export default function useSystemElement(
 
       routeRecords.push(raw);
       if (!isEmpty(menuItem)) {
-        if (node.scenario === MenuScenario.APP) {
-          appMenus.push(menuItem);
-        } else {
-          personalMenus.push(menuItem);
+        switch (node.scenario) {
+          case MenuScenario.PERSONAL:
+            personalMenus.push(menuItem);
+            break;
+          case MenuScenario.TESTING:
+            testingMenus.push(menuItem);
+            break;
+          default:
+            appMenus.push(menuItem);
+            break;
         }
       }
     });
 
-    return { routeRecords, appMenus, personalMenus };
+    return { routeRecords, appMenus, personalMenus, testingMenus };
   };
 
   const addRoutes = (router: Router, meta: ElementMeta) => {
     console.log('[Herodotus] |- Begin add dynamic routes');
     const store = useElementStore();
-    store.addMenus(meta.appMenus, meta.personalMenus);
+    store.addMenus(meta.appMenus, meta.personalMenus, meta.testingMenus);
 
     if (!isEmpty(meta.routeRecords)) {
       meta.routeRecords.forEach((item) => {

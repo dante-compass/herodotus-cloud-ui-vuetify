@@ -508,7 +508,10 @@ var we = _e("MdiIcon", {
 	getters: { getAllIcons: (e) => e.icons },
 	actions: {
 		initialize() {
-			R(this.icons) && (this.icons = Object.keys(ve).map((e) => pe(e)));
+			if (R(this.icons)) {
+				let e = Object.keys(ve).map((e) => pe(e));
+				this.icons = e;
+			}
 		},
 		search(e) {
 			if (R(e.trim())) return this.icons;

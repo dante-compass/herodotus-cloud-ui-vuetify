@@ -52,4 +52,5 @@ export interface ElementMeta {
   routeRecords: RouteRecordRaw[];
   appMenus: MenuItem[];
   personalMenus: MenuItem[];
+  testingMenus: MenuItem[];
 }

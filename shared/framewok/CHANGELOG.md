@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 1.4.3
+
+### Patch Changes
+
+- 新增 Test 用途独立页面及菜单
+- Updated dependencies
+  - @herodotus/core@1.4.3
+
 ## 1.4.2
 
 ### Patch Changes

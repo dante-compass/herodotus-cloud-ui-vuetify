@@ -6,11 +6,11 @@
 import { useElementStore } from '@herodotus/framework';
 import { LayoutLeftDrawer } from '../commons';
 
-defineOptions({ name: 'AppLeftDrawer', components: { LayoutLeftDrawer } });
+defineOptions({ name: 'TestLeftDrawer', components: { LayoutLeftDrawer } });
 
 const store = useElementStore();
 
 const menuItems = computed(() => {
-  return store.appMenus;
+  return store.testMenus;
 });
 </script>

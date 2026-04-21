@@ -34,8 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { useDisplay } from 'vuetify';
-
 import { useApplicationStore } from '@herodotus/framework';
 import { VARIABLES } from '@/configurations';
 
@@ -44,12 +42,8 @@ import LayoutBreadcrumbs from './LayoutBreadcrumbs.vue';
 import UserAvatar from './UserAvatar.vue';
 import NotificationMenu from './NotificationMenu.vue';
 
-defineOptions({
-  name: 'LayoutBar',
-  components: { HAppLogo, LayoutBreadcrumbs, UserAvatar, NotificationMenu },
-});
+defineOptions({ name: 'LayoutBar', components: { HAppLogo, LayoutBreadcrumbs, UserAvatar, NotificationMenu } });
 
-const { mdAndUp } = useDisplay();
 const application = useApplicationStore();
 
 interface Props {

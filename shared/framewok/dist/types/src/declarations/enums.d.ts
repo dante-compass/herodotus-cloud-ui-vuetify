@@ -98,5 +98,6 @@ export declare enum SocialSourceEnum {
 }
 export declare enum MenuScenario {
     APP = "APP",
-    PERSONAL = "PERSONAL"
+    PERSONAL = "PERSONAL",
+    TESTING = "TESTING"
 }

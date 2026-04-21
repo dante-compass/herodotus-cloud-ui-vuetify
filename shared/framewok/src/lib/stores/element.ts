@@ -9,6 +9,7 @@ export const useElementStore = defineStore('SystemElement', {
   state: () => ({
     appMenus: [] as MenuItem[],
     personalMenus: [] as MenuItem[],
+    testMenus: [] as MenuItem[],
     cachedRoutes: [] as string[],
     details: new Map<any, any>(new Map()),
     pushParams: {} as RoutePushParam,
@@ -63,13 +64,17 @@ export const useElementStore = defineStore('SystemElement', {
       }
     },
 
-    addMenus(app: MenuItem[], personal: MenuItem[]) {
+    addMenus(app: MenuItem[], personal: MenuItem[], testing: MenuItem[]) {
       if (!isEmpty(app)) {
         this.appMenus = app;
       }
 
       if (!isEmpty(personal)) {
         this.personalMenus = personal;
+      }
+
+      if (!isEmpty(testing)) {
+        this.testMenus = testing;
       }
     },
 
