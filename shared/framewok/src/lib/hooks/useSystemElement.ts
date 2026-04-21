@@ -77,16 +77,22 @@ export default function useSystemElement(
     } as MenuItem;
   };
 
-  const getMenuChildren = (meta: ElementMeta): MenuItem[] => {
-    if (!isEmpty(meta.appMenus)) {
-      return meta.appMenus;
-    } else {
-      if (!isEmpty(meta.personalMenus)) {
-        return meta.personalMenus;
-      } else {
-        return [];
-      }
+  const getMenuChildren = (node: ElementRouteTree, meta: ElementMeta): MenuItem[] => {
+    let result = [];
+
+    switch (node.scenario) {
+      case MenuScenario.PERSONAL:
+        result = meta.personalMenus;
+        break;
+      case MenuScenario.TESTING:
+        result = meta.testingMenus;
+        break;
+      default:
+        result = meta.appMenus;
+        break;
     }
+
+    return result;
   };
 
   const convert = (data: Array<ElementRouteTree>, modules: ModuleNamespace, isHideAllChild = false): ElementMeta => {
@@ -109,12 +115,13 @@ export default function useSystemElement(
 
       if (node.children && node.children.length > 0) {
         const children = convert(node.children, modules, node.meta.isHideAllChild);
+
         raw.children = children.routeRecords;
 
         if (isHideAllChild) {
           menuItem = convertToMenuLeaf(raw);
         } else {
-          const leaf = getMenuChildren(children);
+          const leaf = getMenuChildren(node, children);
           if (!isEmpty(leaf)) {
             menuItem = convertToMenuNode(raw);
             menuItem.children = leaf;

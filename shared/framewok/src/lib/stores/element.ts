@@ -9,7 +9,7 @@ export const useElementStore = defineStore('SystemElement', {
   state: () => ({
     appMenus: [] as MenuItem[],
     personalMenus: [] as MenuItem[],
-    testMenus: [] as MenuItem[],
+    testingMenus: [] as MenuItem[],
     cachedRoutes: [] as string[],
     details: new Map<any, any>(new Map()),
     pushParams: {} as RoutePushParam,
@@ -18,6 +18,9 @@ export const useElementStore = defineStore('SystemElement', {
   getters: {
     isDynamicRouteAdded(): boolean {
       return !isEmpty(this.appMenus) || !isEmpty(this.personalMenus);
+    },
+    supportTesting(): boolean {
+      return !isEmpty(this.testingMenus);
     },
   },
 
@@ -74,7 +77,7 @@ export const useElementStore = defineStore('SystemElement', {
       }
 
       if (!isEmpty(testing)) {
-        this.testMenus = testing;
+        this.testingMenus = testing;
       }
     },
 

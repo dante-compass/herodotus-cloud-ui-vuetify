@@ -2,7 +2,7 @@
   <v-app id="test">
     <layout-setting-drawer></layout-setting-drawer>
     <layout-bar></layout-bar>
-    <test-left-drawer></test-left-drawer>
+    <testing-left-drawer></testing-left-drawer>
 
     <v-main :class="backgroundColor">
       <v-container class="pt-0" fluid>

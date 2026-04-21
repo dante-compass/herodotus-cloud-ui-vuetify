@@ -710,14 +710,19 @@ var G = class e {
 	state: () => ({
 		appMenus: [],
 		personalMenus: [],
-		testMenus: [],
+		testingMenus: [],
 		cachedRoutes: [],
 		details: /* @__PURE__ */ new Map(/* @__PURE__ */ new Map()),
 		pushParams: {}
 	}),
-	getters: { isDynamicRouteAdded() {
-		return !b(this.appMenus) || !b(this.personalMenus);
-	} },
+	getters: {
+		isDynamicRouteAdded() {
+			return !b(this.appMenus) || !b(this.personalMenus);
+		},
+		supportTesting() {
+			return !b(this.testingMenus);
+		}
+	},
 	actions: {
 		getDetailComponent(e) {
 			return this.details.get(e);
@@ -736,7 +741,7 @@ var G = class e {
 			t && this.details.set(t, e.component);
 		},
 		addMenus(e, t, n) {
-			b(e) || (this.appMenus = e), b(t) || (this.personalMenus = t), b(n) || (this.testMenus = n);
+			b(e) || (this.appMenus = e), b(t) || (this.personalMenus = t), b(n) || (this.testingMenus = n);
 		},
 		hasParameter(e) {
 			let t = e.name;
@@ -961,7 +966,21 @@ function be(e, t, n) {
 		title: r(e),
 		prependIcon: i(e),
 		children: []
-	}), l = (e) => b(e.appMenus) ? b(e.personalMenus) ? [] : e.personalMenus : e.appMenus, u = (e, t, n = !1) => {
+	}), l = (e, t) => {
+		let n = [];
+		switch (e.scenario) {
+			case A.PERSONAL:
+				n = t.personalMenus;
+				break;
+			case A.TESTING:
+				n = t.testingMenus;
+				break;
+			default:
+				n = t.appMenus;
+				break;
+		}
+		return n;
+	}, u = (e, t, n = !1) => {
 		let r = Q(), i = [], d = [], f = [], p = [];
 		return e.forEach((e) => {
 			let m = o(e, t);
@@ -971,8 +990,8 @@ function be(e, t, n) {
 				let r = u(e.children, t, e.meta.isHideAllChild);
 				if (m.children = r.routeRecords, n) h = s(m);
 				else {
-					let e = l(r);
-					b(e) ? h = s(m) : (h = c(m), h.children = e);
+					let t = l(e, r);
+					b(t) ? h = s(m) : (h = c(m), h.children = t);
 				}
 			} else n || (h = s(m));
 			if (i.push(m), !b(h)) switch (e.scenario) {

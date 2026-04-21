@@ -11,6 +11,6 @@ defineOptions({ name: 'TestLeftDrawer', components: { LayoutLeftDrawer } });
 const store = useElementStore();
 
 const menuItems = computed(() => {
-  return store.testMenus;
+  return store.testingMenus;
 });
 </script>

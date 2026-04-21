@@ -52,6 +52,7 @@
 <script setup lang="ts">
 import type { SysElementEntity, SysElementConditions } from '@herodotus/api';
 
+import { isEmpty } from 'lodash-es';
 import { useTableItem, useTreeItem } from '@/composables/hooks';
 import { API } from '@/configurations';
 
@@ -62,14 +63,17 @@ const { treeItems } = useTreeItem<SysElementConditions, SysElementEntity>(API.co
 
 watch(
   () => editedItem.value.redirect,
-  (newValue) => {
-    if (newValue) {
+  (newValue, oldValue) => {
+    // 表示输入新值。当输入第二个字符时 newValue 和 oldValue 都有值
+    if (!isEmpty(newValue) && !isEmpty(oldValue)) {
       editedItem.value.isHaveChild = true;
-    } else {
+    }
+
+    // 表示删除了已有的值
+    if (isEmpty(newValue) && !isEmpty(oldValue)) {
       editedItem.value.isHaveChild = false;
     }
   },
-  { deep: true },
 );
 
 const onSave = () => {

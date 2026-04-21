@@ -3,12 +3,13 @@ import { RoutePushParam, PushParam, MenuItem } from '../../../declarations';
 export declare const useElementStore: import('pinia').StoreDefinition<"SystemElement", {
     appMenus: MenuItem[];
     personalMenus: MenuItem[];
-    testMenus: MenuItem[];
+    testingMenus: MenuItem[];
     cachedRoutes: string[];
     details: Map<any, any>;
     pushParams: RoutePushParam;
 }, {
     isDynamicRouteAdded(): boolean;
+    supportTesting(): boolean;
 }, {
     /**
      * 查询三级路由组件

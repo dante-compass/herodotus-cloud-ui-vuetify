@@ -4,7 +4,7 @@
 
     <template #append>
       <v-divider></v-divider>
-      <system-version></system-version>
+      <layout-version></layout-version>
     </template>
   </v-navigation-drawer>
 </template>

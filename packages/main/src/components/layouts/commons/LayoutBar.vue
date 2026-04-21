@@ -26,6 +26,13 @@
           color="medium-emphasis"
           @click.stop="application.rightDrawer = !application.rightDrawer"
         ></h-button>
+        <h-button
+          v-if="supportTesting"
+          icon="mdi-ab-testing"
+          tooltip="功能测试"
+          color="medium-emphasis"
+          to="/iot-testing"
+        ></h-button>
       </div>
       <v-divider class="align-self-center h-100 mx-2 mx-sm-4" vertical></v-divider>
       <user-avatar></user-avatar>
@@ -34,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { useApplicationStore } from '@herodotus/framework';
+import { useApplicationStore, useElementStore } from '@herodotus/framework';
 import { VARIABLES } from '@/configurations';
 
 import { HAppLogo } from '../../library/HLogo';
@@ -45,6 +52,7 @@ import NotificationMenu from './NotificationMenu.vue';
 defineOptions({ name: 'LayoutBar', components: { HAppLogo, LayoutBreadcrumbs, UserAvatar, NotificationMenu } });
 
 const application = useApplicationStore();
+const element = useElementStore();
 
 interface Props {
   personal?: boolean;
@@ -56,5 +64,9 @@ withDefaults(defineProps<Props>(), {
 
 const isMessageEnabled = computed(() => {
   return VARIABLES.isUseWebSocket();
+});
+
+const supportTesting = computed(() => {
+  return element.supportTesting;
 });
 </script>

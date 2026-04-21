@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 1.4.4
+
+### Patch Changes
+
+- 测试功能页面完成
+- Updated dependencies
+  - @herodotus/core@1.4.4
+
 ## 1.4.3
 
 ### Patch Changes
