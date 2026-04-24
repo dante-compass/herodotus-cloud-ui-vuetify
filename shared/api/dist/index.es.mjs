@@ -349,16 +349,25 @@ var i = /* @__PURE__ */ function(e) {
 	findAllByCertificateCategory(e) {
 		return this.getConfig().getHttp().get(this.getCategoryAddress(), { certificateCategory: e });
 	}
-}, D = class t extends e {
+}, D = class n extends e {
 	static instance;
 	constructor(e) {
 		super(e);
 	}
 	static getInstance(e) {
-		return this.instance ??= new t(e), this.instance;
+		return this.instance ??= new n(e), this.instance;
 	}
 	getBaseAddress() {
 		return this.getConfig().getManage() + "/manage/certificate-file";
+	}
+	getDownloadAddress() {
+		return this.getBaseAddress() + "/download";
+	}
+	download(e, n) {
+		return n ? this.getConfig().getHttp().post(this.getDownloadAddress(), e, { contentType: t.JSON }, {
+			responseType: "blob",
+			onDownloadProgress: n
+		}) : this.getConfig().getHttp().post(this.getDownloadAddress(), e);
 	}
 }, O = class t extends e {
 	static instance;

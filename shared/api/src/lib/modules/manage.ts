@@ -1,5 +1,6 @@
-import type { AxiosHttpResult } from '@herodotus/core';
+import type { AxiosHttpResult, AxiosProgressEvent } from '@herodotus/core';
 import type {
+  MgtCertificateDownloadRequest,
   MgtCertificateRequest,
   MgtCertificateResponse,
   MgtCertificateFileResponse,
@@ -7,6 +8,7 @@ import type {
 } from '@/declarations';
 
 import { HttpConfig, AbstractService } from '@herodotus/core';
+import { ContentTypeEnum } from '@/enums';
 
 class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCertificateResponse> {
   private static instance: MgtCertificateService;
@@ -41,11 +43,9 @@ class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCe
   public findAllByCertificateCategory(
     certificateCategory: string,
   ): Promise<AxiosHttpResult<Array<MgtCertificateResponse>>> {
-    return this.getConfig()
-      .getHttp()
-      .get<Array<MgtCertificateResponse>, string>(this.getCategoryAddress(), {
-        certificateCategory: certificateCategory,
-      });
+    return this.getConfig().getHttp().get<Array<MgtCertificateResponse>, string>(this.getCategoryAddress(), {
+      certificateCategory: certificateCategory,
+    });
   }
 }
 
@@ -65,6 +65,26 @@ class MgtCertificateFileService extends AbstractService<MgtCertificateFileReques
 
   public getBaseAddress(): string {
     return this.getConfig().getManage() + '/manage/certificate-file';
+  }
+
+  private getDownloadAddress(): string {
+    return this.getBaseAddress() + '/download';
+  }
+
+  public download(
+    request: MgtCertificateDownloadRequest,
+    onProgress?: (progressEvent: AxiosProgressEvent) => void,
+  ): Promise<AxiosHttpResult<Blob>> {
+    if (onProgress) {
+      return this.getConfig()
+        .getHttp()
+        .post<
+          Blob,
+          any
+        >(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
+    } else {
+      return this.getConfig().getHttp().post<Blob, any>(this.getDownloadAddress(), request);
+    }
   }
 }
 

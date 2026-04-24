@@ -4,6 +4,7 @@ var e = [
 	"HDate",
 	"HDateTime",
 	"HDialog",
+	"HDownloadProgress",
 	"HDuration",
 	"HMdiIconSelect",
 	"HParticles",

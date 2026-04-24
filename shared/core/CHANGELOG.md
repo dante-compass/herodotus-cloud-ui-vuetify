@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.4.5
+
+### Patch Changes
+
+- [修复] 修复前端证书文件下载在后端未配置 OSS 的情况下仍旧使用 OSS 文件下载问题
+
 ## 1.4.4
 
 ### Patch Changes

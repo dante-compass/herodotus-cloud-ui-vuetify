@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/components",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "",
   "keywords": [],
   "author": "",
@@ -44,7 +44,7 @@
     "@tsparticles/basic": "^3.9.1",
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/interaction-particles-links": "^3.9.1",
-    "vue": "^3.5.32",
-    "vuetify": "^4.0.5"
+    "vue": "^3.5.33",
+    "vuetify": "^4.0.6"
   }
 }

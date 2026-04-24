@@ -37,7 +37,7 @@
         <h-action-delete-button @click="deleteItemById(item[rowKey])"></h-action-delete-button>
       </template>
     </h-data-table>
-    <h-oss-download-progress v-model="showProgress" :progress="loadProgress"></h-oss-download-progress>
+    <h-download-progress v-model="showProgress" :progress="loadProgress"></h-download-progress>
   </h-full-width-form-layout>
 </template>
 
@@ -52,7 +52,7 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { isEmpty } from 'lodash-es';
 
-import { useTable, useDictionary, useOss } from '@/composables/hooks';
+import { useTable, useDictionary, useCertificateDownload } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: 'MgtCertificateFile' });
@@ -81,11 +81,12 @@ const { getDictionaryItemDisplay } = useDictionary(
   'CertificateFileCategory',
   'KeyStoreCategory',
 );
-const { download, loadProgress, showProgress } = useOss();
+
+const { download, loadProgress, showProgress } = useCertificateDownload();
 
 const onDownload = (item: MgtCertificateFileResponse) => {
   if (!isEmpty(item)) {
-    download(item.bucketName, item.fileName, item.fileSize);
+    download(item.fileName, item.fileSize);
   }
 };
 </script>

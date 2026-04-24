@@ -891,8 +891,27 @@ function ve(e, t, n, r = "") {
 	};
 }
 //#endregion
-//#region src/lib/hooks/usePasskey.ts
+//#region src/lib/hooks/useFileDownload.ts
 function ye() {
+	let e = T(0), t = T(!1);
+	return {
+		process: (e, t) => {
+			let n = new Blob([e], { type: "application/x-download" }), r = document.createElement("a");
+			r.style.display = "none", r.href = URL.createObjectURL(n), r.setAttribute("download", t), document.body.appendChild(r), r.click(), document.body.removeChild(r), window.URL.revokeObjectURL(r.href);
+		},
+		loadProgress: e,
+		showProgress: t,
+		showDownLoadProgress: () => {
+			t.value = !0, e.value = 0;
+			let n = setInterval(() => {
+				e.value === 100 && clearInterval(n);
+			}, 500);
+		}
+	};
+}
+//#endregion
+//#region src/lib/hooks/usePasskey.ts
+function be() {
 	let e = X(), t = null, n = () => {
 		t &&= null;
 	};
@@ -942,7 +961,7 @@ function ye() {
 }
 //#endregion
 //#region src/lib/hooks/useSystemElement.ts
-function be(e, t, n) {
+function xe(e, t, n) {
 	let r = (e) => e.meta?.title, i = (e) => e.meta?.icon, a = (e) => e.meta?.isDetailContent, o = (e, n) => {
 		let r = {};
 		return r.path = e.name, r.component = n[t(e.componentPath)], e.componentName && (r.name = e.componentName), e.redirect && (r.redirect = e.redirect), r.meta = {
@@ -1022,25 +1041,25 @@ function be(e, t, n) {
 	} };
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.0.5_typescript@6._aa67a2de62f226e16fad4648449afcbe/node_modules/vuetify/lib/util/getCurrentInstance.js
-function xe(e, t) {
+//#region ../../node_modules/.pnpm/vuetify@4.0.6_typescript@6._1b04bdfb0e7154abe2f57c1c9e34f63f/node_modules/vuetify/lib/util/getCurrentInstance.js
+function Se(e, t) {
 	let n = ae();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.0.5_typescript@6._aa67a2de62f226e16fad4648449afcbe/node_modules/vuetify/lib/composables/theme.js
-var Se = Symbol.for("vuetify:theme");
-function Ce() {
-	xe("useTheme");
-	let e = oe(Se, null);
+//#region ../../node_modules/.pnpm/vuetify@4.0.6_typescript@6._1b04bdfb0e7154abe2f57c1c9e34f63f/node_modules/vuetify/lib/composables/theme.js
+var Ce = Symbol.for("vuetify:theme");
+function we() {
+	Se("useTheme");
+	let e = oe(Ce, null);
 	if (!e) throw Error("Could not find Vuetify theme injection");
 	return e;
 }
 //#endregion
 //#region src/lib/hooks/useSystemTheme.ts
-function we() {
-	let e = Z(), t = Ce(), n = T(c.DARK), r = (e) => {
+function Te() {
+	let e = Z(), t = we(), n = T(c.DARK), r = (e) => {
 		if (!e || e.nodeType !== Node.ELEMENT_NODE) return !1;
 		let t = window.getComputedStyle(e);
 		return t.overflowY === "scroll" || t.overflowY === "auto" && e.scrollHeight > e.clientHeight;
@@ -1120,8 +1139,8 @@ function we() {
 }
 //#endregion
 //#region src/lib/main.ts
-var Te = (e) => {
+var Ee = (e) => {
 	l(Z().theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
 };
 //#endregion
-export { O as CaptchaCategoryEnum, D as LayoutModeEnum, A as MenuScenario, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, k as SocialSourceEnum, U as addColorAlpha, z as getAllColorPalette, R as getColorPalette, ge as getSystemHeaders, Te as initializer, fe as isWhiteColor, W as mixColor, E as piniaPluginPersistedstate, de as useApplicationStore, X as useAuthenticationStore, Y as useCryptoStore, ve as useDeviceAuthorize, _e as useEditFinish, Q as useElementStore, ye as usePasskey, Z as useSettingsStore, be as useSystemElement, we as useSystemTheme, $ as useTabsViewStore };
+export { O as CaptchaCategoryEnum, D as LayoutModeEnum, A as MenuScenario, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, k as SocialSourceEnum, U as addColorAlpha, z as getAllColorPalette, R as getColorPalette, ge as getSystemHeaders, Ee as initializer, fe as isWhiteColor, W as mixColor, E as piniaPluginPersistedstate, de as useApplicationStore, X as useAuthenticationStore, Y as useCryptoStore, ve as useDeviceAuthorize, _e as useEditFinish, Q as useElementStore, ye as useFileDownload, be as usePasskey, Z as useSettingsStore, xe as useSystemElement, Te as useSystemTheme, $ as useTabsViewStore };
