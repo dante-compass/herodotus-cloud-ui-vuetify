@@ -1,5 +1,5 @@
-import { AxiosHttpResult, HttpConfig, AbstractService } from '@herodotus/core';
-import { MgtCertificateRequest, MgtCertificateResponse, MgtCertificateFileResponse, MgtCertificateFileRequest } from '../../../declarations';
+import { AxiosHttpResult, AxiosProgressEvent, HttpConfig, AbstractService } from '@herodotus/core';
+import { MgtCertificateDownloadRequest, MgtCertificateRequest, MgtCertificateResponse, MgtCertificateFileResponse, MgtCertificateFileRequest } from '../../../declarations';
 declare class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCertificateResponse> {
     private static instance;
     private constructor();
@@ -15,5 +15,7 @@ declare class MgtCertificateFileService extends AbstractService<MgtCertificateFi
     private constructor();
     static getInstance(config: HttpConfig): MgtCertificateFileService;
     getBaseAddress(): string;
+    private getDownloadAddress;
+    download(request: MgtCertificateDownloadRequest, onProgress?: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<Blob>>;
 }
 export { MgtCertificateService, MgtCertificateFileService };

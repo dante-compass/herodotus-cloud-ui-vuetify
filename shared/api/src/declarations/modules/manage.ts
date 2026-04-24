@@ -61,6 +61,10 @@ export interface MgtCertificateResponse extends AbstractSysEntity {
   revocationReason: string;
 }
 
+export interface MgtCertificateDownloadRequest extends Dto {
+  filename: string;
+}
+
 export interface MgtCertificateFileRequest extends Dto {
   certId: string;
   certificateFileCategory: string;

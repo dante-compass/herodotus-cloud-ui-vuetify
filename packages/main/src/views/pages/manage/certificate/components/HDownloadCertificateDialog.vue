@@ -47,7 +47,7 @@
       ></h-dictionary-toggle>
     </template>
   </h-dialog>
-  <h-oss-download-progress v-model="showProgress" :progress="loadProgress"></h-oss-download-progress>
+  <h-download-progress v-model="showProgress" :progress="loadProgress"></h-download-progress>
 </template>
 
 <script setup lang="ts">
@@ -56,7 +56,7 @@ import type { MgtCertificateFileRequest, MgtCertificateFileResponse } from '@her
 import { toast } from '@herodotus/core';
 
 import { API } from '@/configurations';
-import { useOss } from '@/composables/hooks';
+import { useCertificateDownload } from '@/composables/hooks';
 
 defineOptions({ name: 'HDownloadCertificateDialog' });
 
@@ -75,7 +75,7 @@ const openDialog = defineModel({
 const loading = shallowRef(false);
 const editedItem = ref({}) as Ref<MgtCertificateFileRequest>;
 
-const { download, loadProgress, showProgress } = useOss();
+const { download, loadProgress, showProgress } = useCertificateDownload();
 
 const showKeyStore = computed(() => {
   return editedItem.value.certificateFileCategory === 'KEY_STORE';
@@ -100,7 +100,7 @@ const onSave = () => {
       loading.value = false;
       openDialog.value = false;
       if (data) {
-        download(data.bucketName, data.fileName, data.fileSize);
+        download(data.fileName, data.fileSize);
       }
     })
     .catch(() => {

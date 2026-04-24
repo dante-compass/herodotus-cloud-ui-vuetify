@@ -2,7 +2,7 @@
   "name": "@herodotus-cloud/main",
   "private": true,
   "type": "module",
-  "version": "4.0.5.2",
+  "version": "4.0.6.0",
   "scripts": {
     "dev": "cross-env vite --force --host --mode development",
     "prod": "cross-env vite build --mode production",
@@ -30,8 +30,8 @@
     "nprogress": "^0.2.0",
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",
-    "vue": "^3.5.32",
-    "vue-i18n": "^11.3.2",
+    "vue": "^3.5.33",
+    "vue-i18n": "^11.4.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

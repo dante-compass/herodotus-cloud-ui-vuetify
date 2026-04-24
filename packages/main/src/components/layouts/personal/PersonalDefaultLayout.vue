@@ -1,5 +1,5 @@
 <template>
-  <v-app id="user">
+  <v-app id="personal">
     <layout-setting-drawer></layout-setting-drawer>
     <layout-bar personal></layout-bar>
 
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { LayoutContent, LayoutBar, LayoutSettingDrawer } from '../commons';
+import { LayoutContent, LayoutBar, LayoutSettingDrawer } from '../common';
 
 import { useSettingsStore } from '@herodotus/framework';
 

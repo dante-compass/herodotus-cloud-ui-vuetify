@@ -26,9 +26,9 @@
             <v-btn v-if="isShowOperation" @click="toAllocatable">配置人员归属</v-btn>
           </template>
 
-          <template #item.identity="{ item }">
-            <v-chip density="compact" rounded="lg" color="orange" label>
-              {{ getDictionaryItemDisplay('Identity', item.identity) }}
+          <template #item.identity="{ value }">
+            <v-chip v-if="value" density="compact" rounded="lg" color="orange" label>
+              {{ getDictionaryItemDisplay('Identity', value) }}
             </v-chip>
           </template>
 

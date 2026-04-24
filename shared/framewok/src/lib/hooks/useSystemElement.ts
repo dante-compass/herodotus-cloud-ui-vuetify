@@ -77,16 +77,22 @@ export default function useSystemElement(
     } as MenuItem;
   };
 
-  const getMenuChildren = (meta: ElementMeta): MenuItem[] => {
-    if (!isEmpty(meta.appMenus)) {
-      return meta.appMenus;
-    } else {
-      if (!isEmpty(meta.personalMenus)) {
-        return meta.personalMenus;
-      } else {
-        return [];
-      }
+  const getMenuChildren = (node: ElementRouteTree, meta: ElementMeta): MenuItem[] => {
+    let result = [];
+
+    switch (node.scenario) {
+      case MenuScenario.PERSONAL:
+        result = meta.personalMenus;
+        break;
+      case MenuScenario.TESTING:
+        result = meta.testingMenus;
+        break;
+      default:
+        result = meta.appMenus;
+        break;
     }
+
+    return result;
   };
 
   const convert = (data: Array<ElementRouteTree>, modules: ModuleNamespace, isHideAllChild = false): ElementMeta => {
@@ -95,6 +101,7 @@ export default function useSystemElement(
     const routeRecords: RouteRecordRaw[] = [];
     const appMenus: MenuItem[] = [];
     const personalMenus: MenuItem[] = [];
+    const testingMenus: MenuItem[] = [];
 
     data.forEach((node: ElementRouteTree) => {
       // 转换路由记录
@@ -108,12 +115,13 @@ export default function useSystemElement(
 
       if (node.children && node.children.length > 0) {
         const children = convert(node.children, modules, node.meta.isHideAllChild);
+
         raw.children = children.routeRecords;
 
         if (isHideAllChild) {
           menuItem = convertToMenuLeaf(raw);
         } else {
-          const leaf = getMenuChildren(children);
+          const leaf = getMenuChildren(node, children);
           if (!isEmpty(leaf)) {
             menuItem = convertToMenuNode(raw);
             menuItem.children = leaf;
@@ -129,21 +137,27 @@ export default function useSystemElement(
 
       routeRecords.push(raw);
       if (!isEmpty(menuItem)) {
-        if (node.scenario === MenuScenario.APP) {
-          appMenus.push(menuItem);
-        } else {
-          personalMenus.push(menuItem);
+        switch (node.scenario) {
+          case MenuScenario.PERSONAL:
+            personalMenus.push(menuItem);
+            break;
+          case MenuScenario.TESTING:
+            testingMenus.push(menuItem);
+            break;
+          default:
+            appMenus.push(menuItem);
+            break;
         }
       }
     });
 
-    return { routeRecords, appMenus, personalMenus };
+    return { routeRecords, appMenus, personalMenus, testingMenus };
   };
 
   const addRoutes = (router: Router, meta: ElementMeta) => {
     console.log('[Herodotus] |- Begin add dynamic routes');
     const store = useElementStore();
-    store.addMenus(meta.appMenus, meta.personalMenus);
+    store.addMenus(meta.appMenus, meta.personalMenus, meta.testingMenus);
 
     if (!isEmpty(meta.routeRecords)) {
       meta.routeRecords.forEach((item) => {

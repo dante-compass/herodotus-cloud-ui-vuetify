@@ -5,26 +5,26 @@
 ---
 
 <p align="center">
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-4.0.5-blue.svg?logo=springboot" alt="Spring Boot 4.0.5"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-4.0.6-blue.svg?logo=springboot" alt="Spring Boot 4.0.6"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.1.1-blue.svg?logo=springboot" alt="Spring Cloud 2025.1.1"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2025.1.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2025.1.0.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.1.1.0--2024.0.3-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.1.1.0-2024.0.3"></a>
-    <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.2.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.2.0"></a>
+    <a href="https://nacos.io/docs/latest/overview/" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.2.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.2.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.5.2-red.svg?logo=spring" alt="Version 4.0.5.2"></a>
-    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.5.2-red.svg?logo=spring" alt="Dante Engine 4.0.5.2"></a>
+    <a href="https://gitee.com/dromara/dante-cloud" target="_blank"><img src="https://img.shields.io/badge/Dante%20Cloud-4.0.6.0-red.svg?logo=spring" alt="Dante Cloud 4.0.6.0"></a>
+    <a href="https://gitee.com/dante-compass/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.6.0-red.svg?logo=spring" alt="Dante Engine 4.0.6.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-25%2B-green.svg?logo=openjdk" alt="Java 25"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="https://github.com/dromara/dante-cloud"><img src="https://img.shields.io/github/stars/dromara/dante-cloud?style=flat&logo=github" alt="Github star"></a>
-    <a href="https://github.com/dromara/dante-cloud"><img src="https://img.shields.io/github/forks/dromara/dante-cloud?style=flat&logo=github" alt="Github fork"></a>
-    <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
-    <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
-    <a href='https://gitcode.com/dromara/dante-cloud'><img src='https://gitcode.com/dromara/dante-cloud/star/badge.svg' alt='Gitcode star'></a>
+    <a href="https://github.com/dante-compass/herodotus-cloud-ui-vuetify"><img src="https://img.shields.io/github/stars/dante-compass/herodotus-cloud-ui-vuetify?style=flat&logo=github" alt="Github star"></a>
+    <a href="https://github.com/dante-compass/herodotus-cloud-ui-vuetify"><img src="https://img.shields.io/github/forks/dante-compass/herodotus-cloud-ui-vuetify?style=flat&logo=github" alt="Github fork"></a>
+    <a href="https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify"><img src="https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify/badge/star.svg?theme=dark" alt="Gitee star"></a>
+    <a href="https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify"><img src="https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
+    <a href='https://atomgit.com/dante-compass/herodotus-cloud-ui-vuetify'><img src='https://atomgit.com/dromara/dante-compass/herodotus-cloud-ui-vuetify/star/badge.svg' alt='Atomgit star'></a>
 </p>
 <p align="center">
-    <a href="https://gitcode.com/dromara/dante-cloud">GitCode 仓库</a> &nbsp; | &nbsp;
+    <a href="https://atomgit.com/dromara/dante-cloud">Atomgit 仓库</a> &nbsp; | &nbsp;
     <a href="https://github.com/dromara/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.vip">在线文档</a>
@@ -51,7 +51,7 @@ Herodotus Cloud UI Vuetify 是 Dante Cloud 4.0.X 基于 Vuetify 组件全新构�
 5. 大幅提升前端代码 Tree shaking 能力和性能
 6. 前端组件库模块新增组件 Resolver 支持，方便 IDE 更好的识别组件及其定义
 
-## 项目地址
+## [一]、项目地址
 
 ### 1. Dante Cloud 主工程
 
@@ -76,7 +76,12 @@ Herodotus Cloud UI Vuetify 是 Dante Cloud 4.0.X 基于 Vuetify 组件全新构�
 - **Gitee**：[https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify](https://gitee.com/dante-compass/dante-cloud-ui)
 - **Github**：[https://github.com/dante-compass/herodotus-cloud-ui-vuetify](https://github.com/dante-compass/dante-cloud-ui)
 
-## 开发模式使用方法
+### 5. ThingsBrain 基于 Dante Cloud 的物联网平台（加速开发中...）
+
+- **Gitee**：[https://gitee.com/dante-compass/thingsbrain](https://gitee.com/dante-compass/thingsbrain)
+- **Github**：[https://github.com/dante-compass/thingsbrain](https://github.com/dante-compass/thingsbrain)
+
+## [二]、开发模式使用方法
 
 ### [1]检出代码
 
@@ -168,7 +173,7 @@ pnpm dev
 
 为了方便使用和部署，Dante Cloud 对企业版前端做了专门的改造。打包完成之后，可以直接部署至 Nginx 下，并以 Docker 的方式运行。一些应用相关的必要参数，例如：应用名称等，支持以 Docker 环境变量的方式，在 Docker 外部系统通过环境变量进行修改。
 
-## 生产模式使用方法(手动部署方式)
+## [三]、生产模式使用方法(手动部署方式)
 
 ### [1]编译代码
 
@@ -305,7 +310,7 @@ http {
 
 将在第一步编译好的代码，放置在 Nginx 对应目录中。例如：上一步 Nginx 配置的目录为 `/etc/nginx/html/ui`，将所有编译好的代码放置在该目录即可。
 
-## 生产模式使用方法(容器部署方式)
+## [四]、生产模式使用方法(容器部署方式)
 
 为了方便使用和部署，Dante Cloud 对企业版前端做了专门的改造。打包完成之后，可以直接部署至 Nginx 下，并以 Docker 的方式运行。一些应用相关的必要参数，例如：应用名称等，支持以 Docker 环境变量的方式，在 Docker 外部系统通过环境变量进行修改。
 

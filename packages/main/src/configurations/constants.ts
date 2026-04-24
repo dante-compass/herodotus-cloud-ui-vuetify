@@ -59,17 +59,17 @@ export const PAGE_NAME = {
   OSS_BUCKET: 'OssBucket',
   OSS_OBJECT: 'OssObject',
   SOCIAL_BINDING: 'SocialBinding',
-  IOT_PRODUCT_CATEGORY: 'IotProductCategory',
-  IOT_PRODUCT: 'IotProduct',
-  IOT_DEVICE: 'IotDevice',
-  IOT_TSL_FUNCTION: 'IotTslFunction',
-  IOT_TSL_UNIT: 'IotTslUnit',
   MGT_CERTIFICATE: 'MgtCertificate',
   MGT_CERTIFICATE_FILE: 'MgtCertificateFile',
   FOUNDATION_ACCOUNT: 'FoundationAccount',
   FOUNDATION_PROFILE: 'FoundationProfile',
   MESSAGE_INFORMATION: 'MessageInformation',
   MESSAGE_SETTING: 'MessageSetting',
+  IOT_PRODUCT_CATEGORY: 'IotProductCategory',
+  IOT_PRODUCT: 'IotProduct',
+  IOT_DEVICE: 'IotDevice',
+  IOT_TSL_FUNCTION: 'IotTslFunction',
+  IOT_TSL_UNIT: 'IotTslUnit',
 };
 
 export const DATA_ITEM_STATUS: Array<DisplayElement> = [

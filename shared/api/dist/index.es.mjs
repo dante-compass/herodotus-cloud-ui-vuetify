@@ -349,16 +349,25 @@ var i = /* @__PURE__ */ function(e) {
 	findAllByCertificateCategory(e) {
 		return this.getConfig().getHttp().get(this.getCategoryAddress(), { certificateCategory: e });
 	}
-}, D = class t extends e {
+}, D = class n extends e {
 	static instance;
 	constructor(e) {
 		super(e);
 	}
 	static getInstance(e) {
-		return this.instance ??= new t(e), this.instance;
+		return this.instance ??= new n(e), this.instance;
 	}
 	getBaseAddress() {
 		return this.getConfig().getManage() + "/manage/certificate-file";
+	}
+	getDownloadAddress() {
+		return this.getBaseAddress() + "/download";
+	}
+	download(e, n) {
+		return n ? this.getConfig().getHttp().post(this.getDownloadAddress(), e, { contentType: t.JSON }, {
+			responseType: "blob",
+			onDownloadProgress: n
+		}) : this.getConfig().getHttp().post(this.getDownloadAddress(), e);
 	}
 }, O = class t extends e {
 	static instance;
@@ -547,7 +556,91 @@ var i = /* @__PURE__ */ function(e) {
 	completeChunkUpload(e) {
 		return this.getConfig().getHttp().post(this.getCompleteMultipartUploadAddress(), e);
 	}
-}, F = class e {
+}, F = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getIot() + "/iot/product-category";
+	}
+}, I = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getIot() + "/iot/product";
+	}
+	getValidateProductKeyAddress() {
+		return this.getBaseAddress() + "/validation";
+	}
+	getToggleAddress() {
+		return this.getBaseAddress() + "/toggle";
+	}
+	getValidateProductKeyPath(e) {
+		return this.getParamPath(this.getValidateProductKeyAddress(), e);
+	}
+	validateProductKey(e) {
+		return this.getConfig().getHttp().get(this.getValidateProductKeyPath(e));
+	}
+	toggle(e) {
+		return this.getConfig().getHttp().put(this.getToggleAddress(), e);
+	}
+}, L = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getIot() + "/iot/device";
+	}
+	getToggleAddress() {
+		return this.getBaseAddress() + "/toggle";
+	}
+}, R = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getIot() + "/iot/tsl/unit";
+	}
+}, z = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getIot() + "/iot/tsl/argument";
+	}
+}, B = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getIot() + "/iot/tsl/function";
+	}
+}, V = class e {
 	static instance;
 	config = {};
 	constructor(e) {
@@ -646,9 +739,27 @@ var i = /* @__PURE__ */ function(e) {
 	ossMultipartUpload() {
 		return P.getInstance(this.config);
 	}
-}, I = (e, t) => {
+	iotProductCategory() {
+		return F.getInstance(this.config);
+	}
+	iotProduct() {
+		return I.getInstance(this.config);
+	}
+	iotDevice() {
+		return L.getInstance(this.config);
+	}
+	iotTslUnit() {
+		return R.getInstance(this.config);
+	}
+	iotTslArgument() {
+		return z.getInstance(this.config);
+	}
+	iotTslFunction() {
+		return B.getInstance(this.config);
+	}
+}, H = (e, t) => {
 	let r = new n(e, t);
-	return F.getInstance(r);
+	return V.getInstance(r);
 };
 //#endregion
-export { F as ApiResources, M as BucketService, t as ContentTypeEnum, O as DialogueContactService, k as DialogueDetailService, T as ExtendedTaskService, i as GenderEnum, D as MgtCertificateFileService, E as MgtCertificateService, P as MultipartUploadService, a as NotificationCategoryEnum, A as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, s as OAuth2ScopeService, l as OAuth2UserLoggingService, N as ObjectService, w as SocialBindingService, y as SysAttributeService, b as SysDefaultRoleService, p as SysDepartmentService, C as SysDictionaryService, x as SysElementService, h as SysEmployeeAllocatableService, m as SysEmployeeService, f as SysOrganizationService, g as SysPermissionService, _ as SysRoleService, S as SysTenantDataSourceService, v as SysUserService, j as WebSocketMessageService, I as createApi };
+export { V as ApiResources, M as BucketService, t as ContentTypeEnum, L as DeviceService, O as DialogueContactService, k as DialogueDetailService, T as ExtendedTaskService, i as GenderEnum, D as MgtCertificateFileService, E as MgtCertificateService, P as MultipartUploadService, a as NotificationCategoryEnum, A as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, s as OAuth2ScopeService, l as OAuth2UserLoggingService, N as ObjectService, F as ProductCategoryService, I as ProductService, w as SocialBindingService, y as SysAttributeService, b as SysDefaultRoleService, p as SysDepartmentService, C as SysDictionaryService, x as SysElementService, h as SysEmployeeAllocatableService, m as SysEmployeeService, f as SysOrganizationService, g as SysPermissionService, _ as SysRoleService, S as SysTenantDataSourceService, v as SysUserService, z as TslArgumentService, B as TslFunctionService, R as TslUnitService, j as WebSocketMessageService, H as createApi };

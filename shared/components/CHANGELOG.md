@@ -1,5 +1,48 @@
 # @herodotus/components
 
+## 1.5.0
+
+### Minor Changes
+
+- 版本发布
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@1.5.0
+
+## 1.4.5
+
+### Patch Changes
+
+- [修复] 修复前端证书文件下载在后端未配置 OSS 的情况下仍旧使用 OSS 文件下载问题
+- Updated dependencies
+  - @herodotus/core@1.4.5
+
+## 1.4.4
+
+### Patch Changes
+
+- 测试功能页面完成
+- Updated dependencies
+  - @herodotus/core@1.4.4
+
+## 1.4.3
+
+### Patch Changes
+
+- 新增 Test 用途独立页面及菜单
+- Updated dependencies
+  - @herodotus/core@1.4.3
+
+## 1.4.2
+
+### Patch Changes
+
+- 新增IOT API
+- Updated dependencies
+  - @herodotus/core@1.4.2
+
 ## 1.4.1
 
 ### Patch Changes

@@ -5,6 +5,7 @@ const components = [
   'HDate',
   'HDateTime',
   'HDialog',
+  'HDownloadProgress',
   'HDuration',
   'HMdiIconSelect',
   'HParticles',
