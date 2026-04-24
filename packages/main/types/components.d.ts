@@ -16,7 +16,6 @@ declare module 'vue' {
     500: typeof import('./../src/components/error/500.vue')['default']
     AppDefaultLayout: typeof import('./../src/components/layouts/app/AppDefaultLayout.vue')['default']
     AppLeftDrawer: typeof import('./../src/components/layouts/app/AppLeftDrawer.vue')['default']
-    AppMenu: typeof import('./../src/components/layouts/app/AppMenu.vue')['default']
     AppTabMenuItem: typeof import('./../src/components/layouts/app/AppTabMenuItem.vue')['default']
     AppTabView: typeof import('./../src/components/layouts/app/AppTabView.vue')['default']
     HActionAuthorizeButton: typeof import('./../src/components/library/HTable/HActionAuthorizeButton.vue')['default']

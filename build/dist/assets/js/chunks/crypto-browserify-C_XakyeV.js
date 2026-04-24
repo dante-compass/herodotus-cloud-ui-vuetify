@@ -1,1 +1,0 @@
-import{t as e}from"../venders/vender-brorand-BNB0-w1V.js";export default e();

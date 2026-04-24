@@ -17,5 +17,5 @@
 <script setup lang="ts">
 defineOptions({ name: 'SystemVersion' });
 
-const version = shallowRef('4.0.5.2');
+const version = shallowRef('4.0.6.0');
 </script>
