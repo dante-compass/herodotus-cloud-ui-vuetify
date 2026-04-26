@@ -10,6 +10,7 @@ var e = [
 	"HParticles",
 	"HLabel",
 	"HSignInBackground",
+	"HTextDivider",
 	"HTime",
 	"HTreeSelect"
 ];

@@ -9,7 +9,9 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'HTextDivider' });
+import { VContainer, VRow, VCol, VDivider } from 'vuetify/components';
+
+defineOptions({ name: 'HTextDivider', components: { VContainer, VRow, VCol, VDivider } });
 
 interface Props {
   label: string;
