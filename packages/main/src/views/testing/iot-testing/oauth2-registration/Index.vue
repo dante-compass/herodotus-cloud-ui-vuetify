@@ -3,7 +3,7 @@
     <v-col cols="9">
       <v-stepper v-model="step" :items="items" show-actions>
         <template #item.1>
-          <h-content-card
+          <h-testing-content-card
             flat
             border="dashed md"
             title="产品登录（使用“父”客户端获取 Token）"
@@ -19,8 +19,8 @@
               width="200px"
               @click="onInitialAccessToken"
             ></v-btn>
-          </h-content-card>
-          <h-content-card
+          </h-testing-content-card>
+          <h-testing-content-card
             flat
             border="dashed md"
             title="验证结果："
@@ -28,10 +28,10 @@
             class="mt-4"
           >
             <v-text-field v-model="productAccessToken" label="Access Token" disabled></v-text-field>
-          </h-content-card>
+          </h-testing-content-card>
         </template>
         <template #item.2>
-          <h-content-card
+          <h-testing-content-card
             flat
             border="dashed md"
             title="基于 OAuth2.0 协议的动态注册客户端"
@@ -44,9 +44,9 @@
               size="large"
               width="200px"
               @click="onDynamicRegistration"
-            ></v-btn
-          ></h-content-card>
-          <h-content-card
+            ></v-btn>
+          </h-testing-content-card>
+          <h-testing-content-card
             flat
             border="dashed md"
             title="注册结果"
@@ -64,10 +64,10 @@
               label="Device Secret（新注册的 Client Secret）"
               disabled
             ></v-text-field>
-          </h-content-card>
+          </h-testing-content-card>
         </template>
         <template #item.3>
-          <h-content-card
+          <h-testing-content-card
             title="第三步：验证新客户端"
             text="使用新客户端的 ClientId 和 ClientSecret 获取 AccessToken"
           >
@@ -90,30 +90,32 @@
               width="200px"
               @click="onNewClientSignIn"
             ></v-btn>
-          </h-content-card>
+          </h-testing-content-card>
 
-          <h-content-card title="验证结果：" subtitle="是否能够获取 Access Token" class="mt-4">
+          <h-testing-content-card title="验证结果：" subtitle="是否能够获取 Access Token" class="mt-4">
             <v-text-field v-model="deviceAccessToken" label="Access Token" disabled></v-text-field>
-          </h-content-card>
+          </h-testing-content-card>
         </template>
       </v-stepper>
     </v-col>
     <v-col cols="3">
-      <h-http-response v-model="responseResults"></h-http-response>
+      <h-testing-http-response v-model="responseResults"></h-testing-http-response>
     </v-col>
   </v-row>
 </template>
 
 <script setup lang="ts">
-import { shallowRef } from 'vue';
-
 import type { AccessTokenResponse } from '@herodotus/core';
 
-import { HResponseLayout, HContentCard } from '@/components/widgets';
-import { BuildInScopeEnum } from '@herodotus-cloud/core';
-import { SecurityApiResources, useAuthenticationStore } from '@herodotus-cloud/framework-kernel';
+import { BuildInScopeEnum } from '@herodotus/core';
+import { SecurityApiResources, useAuthenticationStore } from '@herodotus/framework';
 
-defineOptions({ name: 'HDeviceRegistration', components: { HResponseLayout, HContentCard } });
+import { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout } from '../../components';
+
+defineOptions({
+  name: 'HDeviceRegistration',
+  components: { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout },
+});
 
 const step = shallowRef(1);
 const items = ['第一步：验证产品信息', '第二步：设备动态注册', '第三步：验证新客户端'];
