@@ -1,7 +1,9 @@
 <template>
-  <h-testing-content-card title="请求响应结果：" subtitle="显示请求响应内容，方便调试和查看">
-    <vue-json-pretty :data="response"></vue-json-pretty>
-  </h-testing-content-card>
+  <v-card title="请求响应结果：" subtitle="显示请求响应内容，方便调试和查看">
+    <v-card-text>
+      <vue-json-pretty :data="response"></vue-json-pretty>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script setup lang="ts">

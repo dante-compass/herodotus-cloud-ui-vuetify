@@ -5,7 +5,7 @@
     <testing-left-drawer></testing-left-drawer>
 
     <v-main :class="backgroundColor">
-      <v-container class="pt-0" fluid>
+      <v-container fluid>
         <layout-content></layout-content>
       </v-container>
     </v-main>
