@@ -1,5 +1,5 @@
 import { SweetAlertIcon, SweetAlertResult, default as Swal } from 'sweetalert2';
-import { ThemeModeEnum } from '../../../enums';
+import { ThemeModeEnum } from '../../enums';
 /**
  * 这里使用单例模式，主要是因为将静态类，赋值给Vue.prototype会出现 Property '' is a static member of type '' 错误。
  * 参考以下文章

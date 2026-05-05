@@ -12,7 +12,7 @@ export default defineConfig({
       template: { transformAssetUrls },
     }),
     dts({
-      outDir: './dist/types',
+      outDirs: './dist/types',
     }),
   ],
   resolve: {

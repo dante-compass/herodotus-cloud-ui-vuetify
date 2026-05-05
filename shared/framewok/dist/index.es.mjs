@@ -256,6 +256,9 @@ var G = class e {
 	getOAuth2DeviceAuthorizationAddress() {
 		return this.config.getUaa() + "/oauth2/device_authorization";
 	}
+	getOAuth2RegisterAddress() {
+		return this.config.getUaa() + "/oauth2/register";
+	}
 	getOIDCConnectRegisterAddress() {
 		return this.config.getUaa() + "/connect/register";
 	}
@@ -342,11 +345,17 @@ var G = class e {
 			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
 			redirect_uris: ["http://192.168.101.10:3000"],
 			client_name: i,
-			scope: [
-				n.OPENID,
-				n.EMAIL,
-				n.PROFILE
-			].join(" "),
+			scope: [n.CLIENT_CREATE, n.CLIENT_READ].join(" "),
+			response_types: ["token"],
+			token_endpoint_auth_method: r.CLIENT_SECRET_POST
+		});
+	}
+	clientRegistrationFlow(t, n) {
+		return this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
+			product_key: t,
+			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
+			redirect_uris: ["http://192.168.101.10:3000"],
+			client_name: n,
 			response_types: ["token"],
 			token_endpoint_auth_method: r.CLIENT_SECRET_POST
 		});

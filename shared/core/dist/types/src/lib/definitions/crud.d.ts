@@ -1,4 +1,4 @@
-import { AxiosHttpResult, Conditions, Domain, Page, Pageable, Tree } from '../../../declarations';
+import { AxiosHttpResult, Conditions, Domain, Page, Pageable, Tree } from '../../declarations';
 import { HttpConfig } from './config';
 export declare abstract class Service {
     private config;
