@@ -7,19 +7,15 @@ interface Props {
 }
 type __VLS_Props = Props;
 declare const open: import('vue').ModelRef<boolean, string, boolean, boolean>;
-type __VLS_PublicProps = {
+type __VLS_ModelProps = {
     modelValue: typeof open['value'];
-} & __VLS_Props;
-declare function __VLS_template(): {
-    attrs: Partial<{}>;
-    slots: {
-        default?(_: {}): any;
-    };
-    refs: {};
-    rootEl: any;
 };
-type __VLS_TemplateResult = ReturnType<typeof __VLS_template>;
-declare const __VLS_component: import('vue').DefineComponent<__VLS_PublicProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
+type __VLS_PublicProps = __VLS_Props & __VLS_ModelProps;
+declare var __VLS_39: {};
+type __VLS_Slots = {} & {
+    default?: (props: typeof __VLS_39) => any;
+};
+declare const __VLS_base: import('vue').DefineComponent<__VLS_PublicProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     close: () => any;
     "update:modelValue": (value: boolean) => any;
     cancel: () => any;
@@ -36,9 +32,10 @@ declare const __VLS_component: import('vue').DefineComponent<__VLS_PublicProps, 
     hideActions: boolean;
     confirmLabel: string;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, any>;
-declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
+declare const __VLS_export: __VLS_WithSlots<typeof __VLS_base, __VLS_Slots>;
+declare const _default: typeof __VLS_export;
 export default _default;
-type __VLS_WithTemplateSlots<T, S> = T & {
+type __VLS_WithSlots<T, S> = T & {
     new (): {
         $slots: S;
     };

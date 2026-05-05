@@ -2,20 +2,17 @@ interface Props {
     title: string;
     text?: string;
 }
-declare function __VLS_template(): {
-    attrs: Partial<{}>;
-    slots: {
-        title?(_: {}): any;
-        default?(_: {}): any;
-    };
-    refs: {};
-    rootEl: HTMLDivElement;
+declare var __VLS_7: {}, __VLS_14: {};
+type __VLS_Slots = {} & {
+    title?: (props: typeof __VLS_7) => any;
+} & {
+    default?: (props: typeof __VLS_14) => any;
 };
-type __VLS_TemplateResult = ReturnType<typeof __VLS_template>;
-declare const __VLS_component: import('vue').DefineComponent<Props, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<Props> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, HTMLDivElement>;
-declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, __VLS_TemplateResult["slots"]>;
+declare const __VLS_base: import('vue').DefineComponent<Props, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<Props> & Readonly<{}>, {}, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, any>;
+declare const __VLS_export: __VLS_WithSlots<typeof __VLS_base, __VLS_Slots>;
+declare const _default: typeof __VLS_export;
 export default _default;
-type __VLS_WithTemplateSlots<T, S> = T & {
+type __VLS_WithSlots<T, S> = T & {
     new (): {
         $slots: S;
     };

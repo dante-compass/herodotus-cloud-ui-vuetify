@@ -1,5 +1,5 @@
 import { HttpConfig, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse, BuildInScopeEnum } from '@herodotus/core';
-import { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '../../../declarations';
+import { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '../../declarations';
 export declare class OAuth2ApiService {
     private static instance;
     private config;

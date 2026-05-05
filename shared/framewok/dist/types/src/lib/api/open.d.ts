@@ -1,5 +1,5 @@
 import { HttpConfig, AxiosHttpResult } from '@herodotus/core';
-import { CaptchaResource, CaptchaData, Session, SignInErrorStatus } from '../../../declarations';
+import { CaptchaResource, CaptchaData, Session, SignInErrorStatus } from '../../declarations';
 export declare class OpenApiService {
     private static instance;
     private config;
