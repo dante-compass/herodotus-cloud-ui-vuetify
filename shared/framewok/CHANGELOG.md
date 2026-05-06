@@ -1,5 +1,16 @@
 # @herodotus/framework
 
+## 1.6.0
+
+### Minor Changes
+
+- 升级 Vue3 版本
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@1.6.0
+
 ## 1.5.1
 
 ### Patch Changes

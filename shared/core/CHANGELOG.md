@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.6.0
+
+### Minor Changes
+
+- 升级 Vue3 版本
+
 ## 1.5.1
 
 ### Patch Changes
