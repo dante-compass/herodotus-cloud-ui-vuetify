@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 1.6.1
+
+### Patch Changes
+
+- 升级 Vite 版本
+- Updated dependencies
+  - @herodotus/core@1.6.1
+
 ## 1.6.0
 
 ### Minor Changes
