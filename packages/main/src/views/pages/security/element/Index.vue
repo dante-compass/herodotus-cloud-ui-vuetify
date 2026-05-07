@@ -17,12 +17,12 @@
     </template>
 
     <template #control>
-      <v-btn @click="toCreate">新建菜单</v-btn>
+      <v-btn prepend-icon="mdi-plus" text="新建菜单" @click="toCreate"></v-btn>
     </template>
 
     <template #item.applicationType="{ value }">
       <v-chip v-if="value" density="compact" rounded="lg" color="teal" label>
-        {{ getDictionaryItemDisplay('ApplicationType', value) }}
+        {{ getDictionaryItemDisplay("ApplicationType", value) }}
       </v-chip>
     </template>
 
@@ -32,7 +32,7 @@
 
     <template #item.menuScenario="{ value }">
       <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
-        {{ getDictionaryItemDisplay('MenuScenario', value) }}
+        {{ getDictionaryItemDisplay("MenuScenario", value) }}
       </v-chip>
     </template>
 
@@ -69,37 +69,37 @@
 </template>
 
 <script setup lang="ts">
-import type { SysElementEntity, SysElementConditions, SysElementProps } from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+import type { SysElementEntity, SysElementConditions, SysElementProps } from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable, useDictionary } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { useTable, useDictionary } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-import Search from './Search.vue';
+import Search from "./Search.vue";
 
 defineOptions({ name: PAGE_NAME.SYS_ELEMENT, components: { Search } });
 
 const headers = ref([
-  { key: 'title', align: 'center', title: '标题' },
-  { key: 'name', align: 'center', title: '组件名称' },
-  { key: 'path', align: 'center', title: '请求路径' },
-  { key: 'applicationType', align: 'center', title: '应用类型' },
-  { key: 'menuScenario', align: 'center', title: '菜单场景' },
-  { key: 'path', align: 'center', title: '请求路径' },
-  { key: 'icon', align: 'center', title: '图标' },
-  { key: 'isHaveChild', align: 'center', title: '有子节点' },
-  { key: 'isHideAllChild', align: 'center', title: '隐藏下级节点' },
-  { key: 'isDetailContent', align: 'center', title: '三级路由' },
-  { key: 'isNotKeepAlive', align: 'center', title: '不缓存' },
-  { key: 'isIgnoreAuth', align: 'center', title: '忽略认证' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
-  { key: 'status', align: 'center', title: '状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "title", align: "center", title: "标题" },
+  { key: "name", align: "center", title: "组件名称" },
+  { key: "path", align: "center", title: "请求路径" },
+  { key: "applicationType", align: "center", title: "应用类型" },
+  { key: "menuScenario", align: "center", title: "菜单场景" },
+  { key: "path", align: "center", title: "请求路径" },
+  { key: "icon", align: "center", title: "图标" },
+  { key: "isHaveChild", align: "center", title: "有子节点" },
+  { key: "isHideAllChild", align: "center", title: "隐藏下级节点" },
+  { key: "isDetailContent", align: "center", title: "三级路由" },
+  { key: "isNotKeepAlive", align: "center", title: "不缓存" },
+  { key: "isIgnoreAuth", align: "center", title: "忽略认证" },
+  { key: "reserved", align: "center", title: "保留数据" },
+  { key: "status", align: "center", title: "状态" },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysElementProps = 'elementId';
+const rowKey: SysElementProps = "elementId";
 
-const { getDictionaryItemDisplay } = useDictionary('ApplicationType', 'ElementCategory', 'MenuScenario');
+const { getDictionaryItemDisplay } = useDictionary("ApplicationType", "ElementCategory", "MenuScenario");
 
 const {
   loading,
@@ -118,7 +118,7 @@ const {
   API.core.sysElement(),
   PAGE_NAME.SYS_ELEMENT,
   false,
-  ['path'],
-  'ASC',
+  ["path"],
+  "ASC",
 );
 </script>

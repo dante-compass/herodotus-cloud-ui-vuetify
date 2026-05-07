@@ -17,7 +17,7 @@
     </template>
 
     <template #control>
-      <v-btn @click="toCreate">新建字典</v-btn>
+      <v-btn prepend-icon="mdi-plus" text="新建字典" @click="toCreate">新建字典</v-btn>
     </template>
 
     <template v-slot:item.name="{ item }">
@@ -37,30 +37,30 @@
 </template>
 
 <script setup lang="ts">
-import type { SysDictionaryEntity, SysDictionaryConditions, SysDictionaryProps } from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+import type { SysDictionaryEntity, SysDictionaryConditions, SysDictionaryProps } from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable } from '@/composables/hooks';
-import { API, PAGE_NAME, COLOR_LIST } from '@/configurations';
+import { useTable } from "@/composables/hooks";
+import { API, PAGE_NAME, COLOR_LIST } from "@/configurations";
 
-import Search from './Search.vue';
+import Search from "./Search.vue";
 
 defineOptions({ name: PAGE_NAME.SYS_DICTIONARY, components: { Search } });
 
 const headers = ref([
-  { key: 'category', align: 'center', title: '分类' },
-  { key: 'ordinal', align: 'center', title: '索引值' },
-  { key: 'name', align: 'center', title: '字面量' },
-  { key: 'label', align: 'center', title: '显示值' },
-  { key: 'value', align: 'center', title: '实际值' },
-  { key: 'ranking', align: 'center', title: '排序值' },
-  { key: 'valueType', align: 'center', title: '数据类型' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
-  { key: 'status', align: 'center', title: '状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "category", align: "center", title: "分类" },
+  { key: "ordinal", align: "center", title: "索引值" },
+  { key: "name", align: "center", title: "字面量" },
+  { key: "label", align: "center", title: "显示值" },
+  { key: "value", align: "center", title: "实际值" },
+  { key: "ranking", align: "center", title: "排序值" },
+  { key: "valueType", align: "center", title: "数据类型" },
+  { key: "reserved", align: "center", title: "保留数据" },
+  { key: "status", align: "center", title: "状态" },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysDictionaryProps = 'dictionaryId';
+const rowKey: SysDictionaryProps = "dictionaryId";
 
 const {
   loading,

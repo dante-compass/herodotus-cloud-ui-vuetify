@@ -13,7 +13,7 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn @click="toCreate">新建数据源</v-btn>
+      <v-btn prepend-icon="mdi-plus" text="新建数据源" @click="toCreate"></v-btn>
     </template>
 
     <template #item.actions="{ item }">
@@ -28,27 +28,27 @@ import type {
   SysTenantDataSourceEntity,
   SysTenantDataSourceConditions,
   SysTenantDataSourceProps,
-} from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+} from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { useTable } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.SYS_TENANT_DATA_SOURCE });
 
 const headers = ref([
-  { key: 'tenantId', align: 'center', title: '租户标识ID' },
-  { key: 'username', align: 'center', title: '数据库用户名' },
-  { key: 'password', align: 'center', title: '数据库密码' },
-  { key: 'driverClassName', align: 'center', title: '驱动' },
-  { key: 'url', align: 'center', title: 'url' },
-  { key: 'description', align: 'center', title: '备注' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
-  { key: 'status', align: 'center', title: '状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "tenantId", align: "center", title: "租户标识ID" },
+  { key: "username", align: "center", title: "数据库用户名" },
+  { key: "password", align: "center", title: "数据库密码" },
+  { key: "driverClassName", align: "center", title: "驱动" },
+  { key: "url", align: "center", title: "url" },
+  { key: "description", align: "center", title: "备注" },
+  { key: "reserved", align: "center", title: "保留数据" },
+  { key: "status", align: "center", title: "状态" },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysTenantDataSourceProps = 'datasourceId';
+const rowKey: SysTenantDataSourceProps = "datasourceId";
 
 const {
   loading,

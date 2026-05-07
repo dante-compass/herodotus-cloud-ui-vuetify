@@ -14,7 +14,7 @@
       @update:options="findItems"
     >
       <template #control>
-        <v-btn prepend-icon="mdi-plus" text="新建功能" @click="toCreate"> </v-btn>
+        <v-btn prepend-icon="mdi-plus" text="新建功能" @click="openDialog = !openDialog"> </v-btn>
       </template>
 
       <template #item.actions="{ item }">
@@ -23,7 +23,7 @@
         <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
       </template>
     </h-data-table>
-    <h-function-table v-model="openDialog"></h-function-table>
+    <h-add-function-dialog v-model="openDialog"></h-add-function-dialog>
   </div>
 </template>
 

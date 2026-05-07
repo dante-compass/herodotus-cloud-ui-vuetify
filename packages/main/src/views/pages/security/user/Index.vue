@@ -14,7 +14,7 @@
       @update:options="findItems"
     >
       <template #control>
-        <v-btn @click="toCreate">新建用户</v-btn>
+        <v-btn prepend-icon="mdi-plus" text="新建用户" @click="toCreate"></v-btn>
       </template>
 
       <template #item.actions="{ item }">
@@ -51,14 +51,14 @@
 </template>
 
 <script setup lang="ts">
-import type { SysUserEntity, SysUserProps, SysUserConditions } from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+import type { SysUserEntity, SysUserProps, SysUserConditions } from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useAuthenticationStore } from '@herodotus/framework';
-import { useTable } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { useAuthenticationStore } from "@herodotus/framework";
+import { useTable } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-import { ChangePasswordDialog, SendMessageDialog } from './components';
+import { ChangePasswordDialog, SendMessageDialog } from "./components";
 
 defineOptions({
   name: PAGE_NAME.SYS_USER,
@@ -66,15 +66,15 @@ defineOptions({
 });
 
 const headers = ref([
-  { key: 'username', align: 'center', title: '用户名' },
-  { key: 'nickname', align: 'center', title: '昵称' },
-  { key: 'description', align: 'center', title: '备注' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
-  { key: 'status', align: 'center', title: '状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "username", align: "center", title: "用户名" },
+  { key: "nickname", align: "center", title: "昵称" },
+  { key: "description", align: "center", title: "备注" },
+  { key: "reserved", align: "center", title: "保留数据" },
+  { key: "status", align: "center", title: "状态" },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysUserProps = 'userId';
+const rowKey: SysUserProps = "userId";
 
 const {
   loading,
@@ -92,9 +92,9 @@ const {
 
 const showChangePasswordDialog = shallowRef(false);
 const showSendMessageToUserDialog = shallowRef(false);
-const currentUserId = shallowRef('');
-const currentUsername = shallowRef('');
-const currentUserAvatar = shallowRef('');
+const currentUserId = shallowRef("");
+const currentUsername = shallowRef("");
+const currentUserAvatar = shallowRef("");
 
 const store = useAuthenticationStore();
 

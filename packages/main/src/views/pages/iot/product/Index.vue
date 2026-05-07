@@ -17,7 +17,7 @@
     </template>
 
     <template #control>
-      <v-btn @click="toCreate">新建产品</v-btn>
+      <v-btn prepend-icon="mdi-plus" text="新建产品" @click="toCreate"></v-btn>
     </template>
 
     <template #item.category="{ item }">
