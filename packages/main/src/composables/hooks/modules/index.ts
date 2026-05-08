@@ -1,4 +1,5 @@
-import useOssBucket from './useOssBucket';
-import useOssObject from './useOssObject';
+import useOssBucket from "./useOssBucket";
+import useOssObject from "./useOssObject";
+import useTslValidate from "./useTslValidate";
 
-export { useOssBucket, useOssObject };
+export { useOssBucket, useOssObject, useTslValidate };

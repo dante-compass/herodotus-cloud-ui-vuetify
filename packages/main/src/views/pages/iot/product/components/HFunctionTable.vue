@@ -23,7 +23,11 @@
         <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
       </template>
     </h-data-table>
-    <h-add-function-dialog v-model="openDialog"></h-add-function-dialog>
+    <h-add-function-dialog
+      v-model="openDialog"
+      :product-id="productId"
+      :product-key="productKey"
+    ></h-add-function-dialog>
   </div>
 </template>
 
@@ -37,6 +41,13 @@ import { API, PAGE_NAME } from "@/configurations";
 import HAddFunctionDialog from "./HAddFunctionDialog.vue";
 
 defineOptions({ name: PAGE_NAME.IOT_TSL_FUNCTION, components: { HAddFunctionDialog } });
+
+interface Props {
+  productKey: string;
+  productId: string;
+}
+
+const props = defineProps<Props>();
 
 const headers = ref([
   { key: "dimension", align: "center", title: "功能类型" },

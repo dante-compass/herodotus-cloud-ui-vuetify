@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h-label title="主题" text="自定义你的系统是明亮还是黑暗的主题，或者两者的结合"></h-label>
+    <h-label text="主题" message="自定义你的系统是明亮还是黑暗的主题，或者两者的结合"></h-label>
 
     <setting-theme-option></setting-theme-option>
 
@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import SettingThemeOption from './SettingThemeOption.vue';
+import SettingThemeOption from "./SettingThemeOption.vue";
 
-defineOptions({ name: 'SettingOptions', components: { SettingThemeOption } });
+defineOptions({ name: "SettingOptions", components: { SettingThemeOption } });
 </script>

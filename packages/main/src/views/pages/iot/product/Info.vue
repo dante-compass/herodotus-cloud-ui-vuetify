@@ -11,7 +11,7 @@
 
     <v-tabs-window v-model="tab">
       <v-tabs-window-item value="tsl">
-        <h-function-table></h-function-table>
+        <h-function-table :product-id="editedItem.id" :product-key="editedItem.productKey"></h-function-table>
       </v-tabs-window-item>
       <v-tabs-window-item value="realname">
         <v-card flat>
