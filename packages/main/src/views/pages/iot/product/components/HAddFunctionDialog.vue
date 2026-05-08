@@ -1,5 +1,5 @@
 <template>
-  <h-dialog v-model="openDialog" prepend-icon="mdi-email-edit">
+  <h-dialog v-model="openDialog" prepend-icon="mdi-function" title="添加物模型功能">
     <h-label text="功能类型：" required></h-label>
     <h-dictionary-toggle
       class="q-mb-md"

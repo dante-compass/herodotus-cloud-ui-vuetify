@@ -47,6 +47,7 @@ declare module 'vue' {
     HDateTime: typeof import('@herodotus/components')['HDateTime']
     HDetailContainer: typeof import('./../src/components/layouts/form/HDetailContainer.vue')['default']
     HDialog: typeof import('@herodotus/components')['HDialog']
+    HDictionaryOption: typeof import('./../src/components/library/HSelect/HDictionaryOption.vue')['default']
     HDictionarySelect: typeof import('./../src/components/library/HSelect/HDictionarySelect.vue')['default']
     HDictionaryToggle: typeof import('./../src/components/library/HSelect/HDictionaryToggle.vue')['default']
     HDownloadProgress: typeof import('@herodotus/components')['HDownloadProgress']

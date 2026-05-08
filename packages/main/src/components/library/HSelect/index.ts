@@ -1,4 +1,5 @@
-import HDictionarySelect from './HDictionarySelect.vue';
-import HDictionaryToggle from './HDictionaryToggle.vue';
+import HDictionaryOption from "./HDictionaryOption.vue";
+import HDictionarySelect from "./HDictionarySelect.vue";
+import HDictionaryToggle from "./HDictionaryToggle.vue";
 
-export { HDictionarySelect, HDictionaryToggle };
+export { HDictionaryOption, HDictionarySelect, HDictionaryToggle };
