@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h-argument-panel v-model="argument" ref="identifier"></h-argument-panel>
     <h-label text="读写类型" required></h-label>
     <h-dictionary-option
       v-model="entity.accessMode"
@@ -17,6 +18,7 @@ import { isEmpty } from "lodash-es";
 import { useTslEntity, useTslValidate } from "@/composables/hooks";
 
 import { HDictionaryOption } from "@/components/library/HSelect";
+import { HArgumentPanel } from "../arguments";
 
 defineOptions({ name: "HPropertiesPanel" });
 
