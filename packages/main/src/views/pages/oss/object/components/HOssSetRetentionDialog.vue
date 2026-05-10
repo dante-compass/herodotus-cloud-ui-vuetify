@@ -7,13 +7,13 @@
     @confirm="onSave"
   >
     <v-form ref="setRetentionForm">
-      <h-label title="类型:"></h-label>
+      <h-label text="类型:"></h-label>
       <h-dictionary-toggle
         v-model="editedItem.retentionMode"
         dictionary="ObjectRetentionMode"
         default-value="COMPLIANCE"
       ></h-dictionary-toggle>
-      <h-label title="时间:"></h-label>
+      <h-label text="时间:"></h-label>
       <h-date
         v-model="editedItem.retainUntilDate"
         :rules="[(v: string) => !!v || '到期时间不能为空，请输入到期时间！']"
@@ -23,15 +23,15 @@
 </template>
 
 <script setup lang="ts">
-import type { HttpResult } from '@herodotus/core';
-import type { GetObjectAttributesResult, PutObjectRetentionArgument, PutBucketPolicyResult } from '@herodotus/api';
+import type { HttpResult } from "@herodotus/core";
+import type { GetObjectAttributesResult, PutObjectRetentionArgument, PutBucketPolicyResult } from "@herodotus/api";
 
-import { isEmpty } from 'lodash-es';
-import { toast } from '@herodotus/core';
+import { isEmpty } from "lodash-es";
+import { toast } from "@herodotus/core";
 
-import { API } from '@/configurations';
+import { API } from "@/configurations";
 
-defineOptions({ name: 'HOssSetRetentionDialog' });
+defineOptions({ name: "HOssSetRetentionDialog" });
 
 interface Props {
   attributes: GetObjectAttributesResult;
@@ -64,10 +64,10 @@ const onSave = async () => {
           if (result.message) {
             toast.success(result.message);
           } else {
-            toast.success('操作成功！');
+            toast.success("操作成功！");
           }
         } else {
-          toast.warning('服务端异常！');
+          toast.warning("服务端异常！");
         }
       })
       .catch(() => {

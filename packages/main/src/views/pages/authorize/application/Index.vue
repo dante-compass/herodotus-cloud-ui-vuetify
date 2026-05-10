@@ -13,7 +13,7 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn @click="toCreate">新建应用</v-btn>
+      <v-btn prepend-icon="mdi-plus" text="新建应用" @click="toCreate"></v-btn>
     </template>
 
     <template #item.accessTokenTimeToLive="{ value }">
@@ -44,28 +44,28 @@
 </template>
 
 <script setup lang="ts">
-import type { OAuth2ApplicationEntity, OAuth2ApplicationConditions, OAuth2ApplicationProps } from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+import type { OAuth2ApplicationEntity, OAuth2ApplicationConditions, OAuth2ApplicationProps } from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable, useDateTime } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { useTable, useDateTime } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.OAUTH2_APPLICATION });
 
 const headers = ref([
-  { key: 'applicationName', align: 'center', title: '应用名称' },
-  { key: 'abbreviation', align: 'center', title: '应用简称' },
-  { key: 'authorizationGrantTypes', align: 'center', title: '认证模式' },
-  { key: 'accessTokenTimeToLive', align: 'center', title: '令牌有效期' },
-  { key: 'refreshTokenTimeToLive', align: 'center', title: '刷新令牌有效期' },
-  { key: 'authorizationCodeTimeToLive', align: 'center', title: '授权码有效期' },
-  { key: 'deviceCodeTimeToLive', align: 'center', title: '激活码有效期' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
-  { key: 'status', align: 'center', title: '状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "applicationName", align: "center", title: "应用名称" },
+  { key: "abbreviation", align: "center", title: "应用简称" },
+  { key: "authorizationGrantTypes", align: "center", title: "认证模式" },
+  { key: "accessTokenTimeToLive", align: "center", title: "令牌有效期" },
+  { key: "refreshTokenTimeToLive", align: "center", title: "刷新令牌有效期" },
+  { key: "authorizationCodeTimeToLive", align: "center", title: "授权码有效期" },
+  { key: "deviceCodeTimeToLive", align: "center", title: "激活码有效期" },
+  { key: "reserved", align: "center", title: "保留数据" },
+  { key: "status", align: "center", title: "状态" },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: OAuth2ApplicationProps = 'applicationId';
+const rowKey: OAuth2ApplicationProps = "applicationId";
 
 const {
   loading,

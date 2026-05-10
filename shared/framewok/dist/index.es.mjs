@@ -1050,14 +1050,14 @@ function xe(e, t, n) {
 	} };
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.0.6_typescript@6._1b04bdfb0e7154abe2f57c1c9e34f63f/node_modules/vuetify/lib/util/getCurrentInstance.js
+//#region ../../node_modules/.pnpm/vuetify@4.0.7_typescript@6._a5912fe0f711e705760d054432b9b047/node_modules/vuetify/lib/util/getCurrentInstance.js
 function Se(e, t) {
 	let n = ae();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.0.6_typescript@6._1b04bdfb0e7154abe2f57c1c9e34f63f/node_modules/vuetify/lib/composables/theme.js
+//#region ../../node_modules/.pnpm/vuetify@4.0.7_typescript@6._a5912fe0f711e705760d054432b9b047/node_modules/vuetify/lib/composables/theme.js
 var Ce = Symbol.for("vuetify:theme");
 function we() {
 	Se("useTheme");

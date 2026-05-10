@@ -89,21 +89,21 @@
 </template>
 
 <script setup lang="ts">
-import type { HttpResult } from '@herodotus/core';
+import type { HttpResult } from "@herodotus/core";
 import type {
   ObjectDomain,
   ObjectDomainProps,
   ObjectDomainConditions,
   DeletedObjectDomain,
   PutObjectResult,
-} from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+} from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { isEmpty, split, dropRight, join, initial } from 'lodash-es';
+import { isEmpty, split, dropRight, join, initial } from "lodash-es";
 
-import { notify, toast } from '@herodotus/core';
-import { useBaseTable, useDateTime, useOss } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { notify, toast } from "@herodotus/core";
+import { useBaseTable, useDateTime, useOss } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.OSS_BUCKET });
 
@@ -118,14 +118,14 @@ const bucketName = defineModel<string>({
 });
 
 const headers = ref([
-  { key: 'objectName', align: 'center', title: '文件(Object)名' },
-  { key: 'eTag', align: 'center', title: 'ETAG' },
-  { key: 'size', align: 'center', title: '文件(Object)大小', value: (item) => humanObjectSize(item.size) },
-  { key: 'lastModified', align: 'center', title: '最后更新时间', value: (item) => defaultFormat(item.lastModified) },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "objectName", align: "center", title: "文件(Object)名" },
+  { key: "eTag", align: "center", title: "ETAG" },
+  { key: "size", align: "center", title: "文件(Object)大小", value: (item) => humanObjectSize(item.size) },
+  { key: "lastModified", align: "center", title: "最后更新时间", value: (item) => defaultFormat(item.lastModified) },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: ObjectDomainProps = 'objectName';
+const rowKey: ObjectDomainProps = "objectName";
 
 const { toEdit } = useBaseTable<ObjectDomainConditions, ObjectDomain>(PAGE_NAME.OSS_OBJECT);
 const { defaultFormat } = useDateTime();
@@ -139,7 +139,7 @@ const loading = shallowRef(false);
 const uploading = shallowRef(false);
 const uploadFiles = ref(null) as Ref<File | File[] | null>;
 const tableRows = ref([]) as Ref<Array<ObjectDomain>>;
-const currentFolder = shallowRef('');
+const currentFolder = shallowRef("");
 const continuationToken = shallowRef();
 const isTruncated = shallowRef(false);
 
@@ -147,7 +147,7 @@ const nextEnabled = computed(() => {
   return !isTruncated.value && continuationToken.value;
 });
 
-const onUpload = (files: File | File[], folderName = '') => {
+const onUpload = (files: File | File[], folderName = "") => {
   if (files) {
     uploading.value = true;
     API.core
@@ -159,14 +159,14 @@ const onUpload = (files: File | File[], folderName = '') => {
           if (result.message) {
             toast.success(result.message);
           } else {
-            toast.success('操作成功！');
+            toast.success("操作成功！");
           }
           uploading.value = false;
           uploadFiles.value = null;
           fetchObjects(bucketName.value, folderName);
         } else {
           uploading.value = false;
-          toast.warning('服务端异常！');
+          toast.warning("服务端异常！");
         }
       })
       .catch((error) => {
@@ -175,7 +175,7 @@ const onUpload = (files: File | File[], folderName = '') => {
   }
 };
 
-const fetchObjects = (bucketName: string, folderName = '') => {
+const fetchObjects = (bucketName: string, folderName = "") => {
   loading.value = true;
 
   const argument = isTruncated.value
@@ -219,14 +219,14 @@ const toDeleteObjectDomain = (objects: Array<ObjectDomain>): Array<DeletedObject
 
 const getPreviousFolder = () => {
   if (currentFolder.value) {
-    const names = initial(split(currentFolder.value, '/'));
+    const names = initial(split(currentFolder.value, "/"));
     const previous = dropRight(names);
     if (!isEmpty(previous)) {
-      return join(previous, '/') + '/';
+      return join(previous, "/") + "/";
     }
   }
 
-  return '';
+  return "";
 };
 
 /**
@@ -235,20 +235,20 @@ const getPreviousFolder = () => {
  * @param objects 选中的、待删除对象
  * @param onSuccess 删除成功操作
  */
-const batchDeleteObjects = (bucketName: string, objects: Array<ObjectDomain>, folderName = '') => {
+const batchDeleteObjects = (bucketName: string, objects: Array<ObjectDomain>, folderName = "") => {
   notify.standardDeleteNotify(() => {
     API.core
       .ossObject()
       .batchDelete({ bucketName: bucketName, delete: toDeleteObjectDomain(objects) })
       .then(() => {
-        toast.success('删除成功');
+        toast.success("删除成功");
         fetchObjects(bucketName, folderName);
       })
       .catch((error) => {
         if (error.message) {
           toast.error(error.message);
         } else {
-          toast.error('删除失败');
+          toast.error("删除失败");
         }
       });
   });
@@ -259,20 +259,20 @@ const batchDeleteObjects = (bucketName: string, objects: Array<ObjectDomain>, fo
  * @param bucketName 存储桶名称
  * @param objectName 对象名称
  */
-const deleteObject = (bucketName: string, objectName: string, folderName = '') => {
+const deleteObject = (bucketName: string, objectName: string, folderName = "") => {
   notify.standardDeleteNotify(() => {
     API.core
       .ossObject()
       .delete({ bucketName: bucketName, objectName: objectName })
       .then(() => {
-        toast.success('删除成功');
+        toast.success("删除成功");
         fetchObjects(bucketName, folderName);
       })
       .catch((error) => {
         if (error.message) {
           toast.error(error.message);
         } else {
-          toast.error('删除失败');
+          toast.error("删除失败");
         }
       });
   });

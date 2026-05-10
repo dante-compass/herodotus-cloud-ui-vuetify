@@ -1,5 +1,29 @@
 # @herodotus/core
 
+## 1.6.3
+
+### Patch Changes
+
+- 版本发布
+
+## 1.6.2
+
+### Patch Changes
+
+- PNPM 版本升级至 v11
+
+## 1.6.1
+
+### Patch Changes
+
+- 升级 Vite 版本
+
+## 1.6.0
+
+### Minor Changes
+
+- 升级 Vue3 版本
+
 ## 1.5.1
 
 ### Patch Changes

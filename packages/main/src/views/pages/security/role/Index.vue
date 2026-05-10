@@ -13,7 +13,7 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn @click="toCreate">新建角色</v-btn>
+      <v-btn prepend-icon="mdi-plus" text="新建角色" @click="toCreate"></v-btn>
     </template>
 
     <template #item.actions="{ item }">
@@ -25,24 +25,24 @@
 </template>
 
 <script setup lang="ts">
-import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { useTable } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.SYS_ROLE });
 
 const headers = ref([
-  { key: 'roleName', align: 'center', title: '角色名称' },
-  { key: 'roleCode', align: 'center', title: '角色代码' },
-  { key: 'description', align: 'center', title: '备注' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
-  { key: 'status', align: 'center', title: '状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "roleName", align: "center", title: "角色名称" },
+  { key: "roleCode", align: "center", title: "角色代码" },
+  { key: "description", align: "center", title: "备注" },
+  { key: "reserved", align: "center", title: "保留数据" },
+  { key: "status", align: "center", title: "状态" },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysRoleProps = 'roleId';
+const rowKey: SysRoleProps = "roleId";
 
 const {
   loading,

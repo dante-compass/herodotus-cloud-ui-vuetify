@@ -6,7 +6,7 @@
     :loading="loading"
     @confirm="onSave"
   >
-    <h-label title="证书类别:"></h-label>
+    <h-label text="证书类别:"></h-label>
     <h-dictionary-toggle
       v-model="editedItem.certificateFileCategory"
       dictionary="CertificateFileCategory"
@@ -14,13 +14,13 @@
     ></h-dictionary-toggle>
     <v-divider class="mb-4"></v-divider>
     <template v-if="showKeyStore">
-      <h-label title="KeyStore 文件格式:"></h-label>
+      <h-label text="KeyStore 文件格式:"></h-label>
       <h-dictionary-toggle
         v-model="editedItem.keyStoreFormat"
         dictionary="KeyStoreFormat"
         default-value="JKS"
       ></h-dictionary-toggle>
-      <h-label title="KeyStore 类别:"></h-label>
+      <h-label text="KeyStore 类别:"></h-label>
       <h-dictionary-select
         v-model="editedItem.keyStoreCategory"
         dictionary="KeyStoreCategory"
@@ -28,7 +28,7 @@
       ></h-dictionary-select>
     </template>
     <template v-if="showPrivateKey">
-      <h-label title="私钥文件格式:"></h-label>
+      <h-label text="私钥文件格式:"></h-label>
       <h-dictionary-toggle
         v-model="editedItem.pemPrivateKeyFormat"
         dictionary="PEMPrivateKeyFormat"
@@ -38,7 +38,7 @@
       <v-switch v-model="editedItem.encryptPrivateKey" label="是否加密 PEM 中存储的私钥"></v-switch>
     </template>
     <template v-if="showCertificate">
-      <h-label title="证书文件格式:"></h-label>
+      <h-label text="证书文件格式:"></h-label>
       <h-dictionary-toggle
         class="mb-md"
         v-model="editedItem.pemCertificateFormat"
@@ -51,14 +51,14 @@
 </template>
 
 <script setup lang="ts">
-import type { MgtCertificateFileRequest, MgtCertificateFileResponse } from '@herodotus/api';
+import type { MgtCertificateFileRequest, MgtCertificateFileResponse } from "@herodotus/api";
 
-import { toast } from '@herodotus/core';
+import { toast } from "@herodotus/core";
 
-import { API } from '@/configurations';
-import { useCertificateDownload } from '@/composables/hooks';
+import { API } from "@/configurations";
+import { useCertificateDownload } from "@/composables/hooks";
 
-defineOptions({ name: 'HDownloadCertificateDialog' });
+defineOptions({ name: "HDownloadCertificateDialog" });
 
 interface Props {
   certId: string | undefined;
@@ -78,15 +78,15 @@ const editedItem = ref({}) as Ref<MgtCertificateFileRequest>;
 const { download, loadProgress, showProgress } = useCertificateDownload();
 
 const showKeyStore = computed(() => {
-  return editedItem.value.certificateFileCategory === 'KEY_STORE';
+  return editedItem.value.certificateFileCategory === "KEY_STORE";
 });
 
 const showPrivateKey = computed(() => {
-  return editedItem.value.certificateFileCategory === 'PRIVATE_KEY';
+  return editedItem.value.certificateFileCategory === "PRIVATE_KEY";
 });
 
 const showCertificate = computed(() => {
-  return editedItem.value.certificateFileCategory === 'CERTIFICATE';
+  return editedItem.value.certificateFileCategory === "CERTIFICATE";
 });
 
 const onSave = () => {
@@ -104,7 +104,7 @@ const onSave = () => {
       }
     })
     .catch(() => {
-      toast.error('下载失败');
+      toast.error("下载失败");
     });
 };
 

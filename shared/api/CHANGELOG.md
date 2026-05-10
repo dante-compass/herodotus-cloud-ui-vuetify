@@ -1,5 +1,40 @@
 # @herodotus/api
 
+## 1.6.3
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@1.6.3
+
+## 1.6.2
+
+### Patch Changes
+
+- PNPM 版本升级至 v11
+- Updated dependencies
+  - @herodotus/core@1.6.2
+
+## 1.6.1
+
+### Patch Changes
+
+- 升级 Vite 版本
+- Updated dependencies
+  - @herodotus/core@1.6.1
+
+## 1.6.0
+
+### Minor Changes
+
+- 升级 Vue3 版本
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@1.6.0
+
 ## 1.5.1
 
 ### Patch Changes

@@ -19,7 +19,7 @@
           (v) => regxRule(v) || '存储桶名称只能为小字母、数字、点或横线，最多60个字符',
         ]"
       ></v-text-field>
-      <h-label title="功能:"></h-label>
+      <h-label text="功能:"></h-label>
       <v-divider></v-divider>
       <v-switch v-model="editedItem.objectLockEnabled" label="是否开启对象锁定"></v-switch>
     </v-form>
@@ -27,14 +27,14 @@
 </template>
 
 <script setup lang="ts">
-import type { HttpResult } from '@herodotus/core';
-import type { CreateBucketArgument, CreateBucketResult } from '@herodotus/api';
+import type { HttpResult } from "@herodotus/core";
+import type { CreateBucketArgument, CreateBucketResult } from "@herodotus/api";
 
-import { toast } from '@herodotus/core';
+import { toast } from "@herodotus/core";
 
-import { API } from '@/configurations';
+import { API } from "@/configurations";
 
-defineOptions({ name: 'HCreateBucketDialog' });
+defineOptions({ name: "HCreateBucketDialog" });
 
 const emit = defineEmits<{
   success: [];
@@ -71,11 +71,11 @@ const onSave = async () => {
           if (result.message) {
             toast.success(result.message);
           } else {
-            toast.success('操作成功！');
+            toast.success("操作成功！");
           }
-          emit('success');
+          emit("success");
         } else {
-          toast.warning('服务端异常！');
+          toast.warning("服务端异常！");
         }
       })
       .catch(() => {

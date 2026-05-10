@@ -12,8 +12,8 @@
     <a href="https://nacos.io/docs/latest/overview/" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.2.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.2.1"></a>
 </p>
 <p align="center">
-    <a href="https://gitee.com/dromara/dante-cloud" target="_blank"><img src="https://img.shields.io/badge/Dante%20Cloud-4.0.6.1-red.svg?logo=spring" alt="Dante Cloud 4.0.6.1"></a>
-    <a href="https://gitee.com/dante-compass/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.6.1-red.svg?logo=spring" alt="Dante Engine 4.0.6.1"></a>
+    <a href="https://gitee.com/dromara/dante-cloud" target="_blank"><img src="https://img.shields.io/badge/Dante%20Cloud-4.0.6.2-red.svg?logo=spring" alt="Dante Cloud 4.0.6.2"></a>
+    <a href="https://gitee.com/dante-compass/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.6.2-red.svg?logo=spring" alt="Dante Engine 4.0.6.2"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-25%2B-green.svg?logo=openjdk" alt="Java 25"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -362,7 +362,7 @@ services:
       HERODOTUS_OAUTH2_CLIENT_SECRET: a05fe1fc50ed42a4990c6c6fc4bec398
       HERODOTUS_OAUTH2_REDIRECT_URI: http://192.168.101.10:4000/authorization-code
     ports:
-      - '8888:8000'
+      - "8888:8000"
 ```
 
 #### 3. 参数说明

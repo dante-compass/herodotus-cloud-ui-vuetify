@@ -2,5 +2,8 @@ packages:
   - packages/**
   - shared/**
 
-onlyBuiltDependencies:
-  - esbuild
+allowBuilds:
+  "@parcel/watcher": false
+  "@tsparticles/engine": false
+  core-js: false
+  esbuild: false

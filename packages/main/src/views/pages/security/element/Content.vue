@@ -1,12 +1,12 @@
 <template>
   <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
-    <h-label title="应用类型:"></h-label>
+    <h-label text="应用类型:"></h-label>
     <h-dictionary-toggle
       v-model="editedItem.applicationType"
       dictionary="ApplicationType"
       default-value="0"
     ></h-dictionary-toggle>
-    <h-label title="菜单场景:"></h-label>
+    <h-label text="菜单场景:"></h-label>
     <h-dictionary-toggle
       v-model="editedItem.menuScenario"
       dictionary="MenuScenario"
@@ -50,13 +50,13 @@
 </template>
 
 <script setup lang="ts">
-import type { SysElementEntity, SysElementConditions } from '@herodotus/api';
+import type { SysElementEntity, SysElementConditions } from "@herodotus/api";
 
-import { isEmpty } from 'lodash-es';
-import { useTableItem, useTreeItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { isEmpty } from "lodash-es";
+import { useTableItem, useTreeItem } from "@/composables/hooks";
+import { API } from "@/configurations";
 
-defineOptions({ name: 'SysElementContent' });
+defineOptions({ name: "SysElementContent" });
 
 const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysElementEntity>(API.core.sysElement());
 const { treeItems } = useTreeItem<SysElementConditions, SysElementEntity>(API.core.sysElement());
