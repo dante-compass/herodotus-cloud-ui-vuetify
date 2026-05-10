@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.6.2
+
+### Patch Changes
+
+- PNPM 版本升级至 v11
+
 ## 1.6.1
 
 ### Patch Changes

@@ -3,10 +3,7 @@ packages:
   - shared/**
 
 allowBuilds:
-  '@parcel/watcher': set this to true or false
-  '@tsparticles/engine': set this to true or false
-  core-js: set this to true or false
-  esbuild: set this to true or false
-
-onlyBuiltDependencies:
-  - esbuild
+  "@parcel/watcher": false
+  "@tsparticles/engine": false
+  core-js: false
+  esbuild: false

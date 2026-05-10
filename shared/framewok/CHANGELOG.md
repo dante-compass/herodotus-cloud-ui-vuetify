@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 1.6.2
+
+### Patch Changes
+
+- PNPM 版本升级至 v11
+- Updated dependencies
+  - @herodotus/core@1.6.2
+
 ## 1.6.1
 
 ### Patch Changes
