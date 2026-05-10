@@ -1,0 +1,1 @@
+import{et as e,k as t,mt as n,v as r}from"../../../../venders/vender-@vue-runtime-core-C8G274nT.js";import{n as i}from"./HActionAuthorizeButton.vue-CFTI9njJ.js";var a=t({name:`HActionDeleteButton`,components:{HActionButton:i},__name:`HActionDeleteButton`,setup(t){return(t,a)=>(n(),r(i,e({color:`red`,icon:`mdi-delete`,tooltip:`删除`},t.$attrs),null,16))}});export{a as t};

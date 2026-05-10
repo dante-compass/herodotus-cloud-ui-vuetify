@@ -1,1 +1,0 @@
-import{r as e}from"../../../../rolldown-runtime-7WAUHIGm.js";import{b as t,k as n,mt as r}from"../../../../../venders/vender-@vue-runtime-core-BDUJF16d.js";var i=n({name:`IotProductInfo`,__name:`Info`,setup(e){return(e,n)=>(r(),t(`div`,null,`Product Category Info`))}}),a=e({default:()=>o}),o=i;export{a as t};
