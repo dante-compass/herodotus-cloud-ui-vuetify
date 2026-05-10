@@ -2,7 +2,7 @@
   "name": "herodotus-cloud-ui-vuetify",
   "private": true,
   "type": "module",
-  "version": "4.0.6.1",
+  "version": "4.0.6.2",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "commit": "git add . && git status && git-cz",
