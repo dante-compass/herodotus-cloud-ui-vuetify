@@ -28,6 +28,12 @@
       "prettier --write"
     ]
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.15.0"
+    }
+  },
   "dependencies": {
     "disable-devtool": "^0.3.9",
     "filesize": "^11.0.17",
