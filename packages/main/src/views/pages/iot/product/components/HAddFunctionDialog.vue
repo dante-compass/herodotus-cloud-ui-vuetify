@@ -1,5 +1,5 @@
 <template>
-  <h-dialog v-model="openDialog" prepend-icon="mdi-function" title="添加物模型功能">
+  <h-dialog v-model="openDialog" prepend-icon="mdi-function" title="添加物模型功能" @confirm="onSave">
     <h-label text="功能类型：" required></h-label>
     <h-dictionary-toggle
       class="q-mb-md"
@@ -76,20 +76,20 @@ const isNotPropertiesPanel = computed(() => {
 const onSave = () => {
   const valid = getIdentifierValidator();
   valid.then((result) => {
-    if (result) {
-      API.core
-        .iotTslFunction()
-        .saveOrUpdate(entity.value)
-        .then((result) => {
-          openDialog.value = false;
-          emit("success");
-          toast.success("添加成功！");
-        })
-        .catch((error) => {
-          openDialog.value = false;
-          toast.error(error.message);
-        });
-    }
+    // if (result) {
+    //   API.core
+    //     .iotTslFunction()
+    //     .saveOrUpdate(entity.value)
+    //     .then((result) => {
+    //       openDialog.value = false;
+    //       emit("success");
+    //       toast.success("添加成功！");
+    //     })
+    //     .catch((error) => {
+    //       openDialog.value = false;
+    //       toast.error(error.message);
+    //     });
+    // }
   });
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="q-mb-md">
-    <h-characteristic-panel v-model="entity" ref="identifier"></h-characteristic-panel>
+  <div>
+    <h-characteristic-panel v-model="entity"></h-characteristic-panel>
     <h-label text="数据类型：" required></h-label>
     <h-dictionary-select
       v-model="entity.dataType.type"
@@ -19,10 +19,7 @@ const { createEmptyNormalArgument } = useTslEntity();
 <script setup lang="ts">
 import type { Specification, Specs } from "@herodotus/api";
 
-import { computed } from "vue";
-
 import { toUpper } from "lodash-es";
-import { useTslValidate } from "@/composables/hooks";
 import { HDictionarySelect } from "@/components/library/HSelect";
 
 import HBoolPanel from "./HBoolPanel.vue";
@@ -53,20 +50,11 @@ const entity = defineModel<Specification<Specs>>({
   default: () => createEmptyNormalArgument(),
 });
 
-const { identifier, validate } = useTslValidate();
-
 const currentPanel = computed(() => {
   if (entity.value.dataType.type) {
     return toUpper(entity.value.dataType.type) + "_PANEL";
   } else {
     return "INT_PANEL";
   }
-});
-
-/**
- * 对外暴露 validate() 方法，实现父组件调用子组件校验方法
- */
-defineExpose({
-  validate,
 });
 </script>

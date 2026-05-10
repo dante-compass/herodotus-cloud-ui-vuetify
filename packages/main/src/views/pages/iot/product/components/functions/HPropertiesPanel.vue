@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h-argument-panel v-model="argument" ref="identifier"></h-argument-panel>
+  <v-form ref="identifier">
+    <h-argument-panel v-model="argument"></h-argument-panel>
     <h-label text="读写类型" required></h-label>
     <h-dictionary-option
       v-model="entity.accessMode"
@@ -8,7 +8,7 @@
       default-value="rw"
       inline
     ></h-dictionary-option>
-  </div>
+  </v-form>
 </template>
 
 <script setup lang="ts">
@@ -53,5 +53,9 @@ onMounted(() => {
   if (!isEmpty(entity) && !isEmpty(entity.value.specs)) {
     argument.value = entity.value.specs;
   }
+});
+
+defineExpose({
+  validate,
 });
 </script>

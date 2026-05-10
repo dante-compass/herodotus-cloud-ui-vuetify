@@ -1,13 +1,15 @@
 <template>
-  <h-dialog v-model="isOpenDialog" title="添加参数" @confirm="onSave" external-close>
-    <h-characteristic-panel v-model="entity" ref="identifier"></h-characteristic-panel>
-    <h-label text="数据类型" required></h-label>
-    <h-dictionary-select
-      v-model="entity.dataType.type"
-      dictionary="ArgumentType"
-      :disable-items="['struct']"
-    ></h-dictionary-select>
-    <component :is="currentPanel" v-model="entity"></component>
+  <h-dialog v-model="openDialog" title="添加参数" @confirm="onSave">
+    <v-form ref="subArgumentForm">
+      <h-characteristic-panel v-model="entity"></h-characteristic-panel>
+      <h-label text="数据类型" required></h-label>
+      <h-dictionary-select
+        v-model="entity.dataType.type"
+        dictionary="ArgumentType"
+        :disable-items="['struct']"
+      ></h-dictionary-select>
+      <component :is="currentPanel" v-model="entity"></component>
+    </v-form>
   </h-dialog>
 </template>
 
@@ -42,14 +44,15 @@ defineOptions({
   },
 });
 
-const isOpenDialog = defineModel<boolean>({
+const openDialog = defineModel<boolean>({
   required: true,
 });
 
 const emit = defineEmits(["save"]);
 
 const { createEmptyNormalArgument } = useTslEntity();
-const { identifier, getIdentifierValidator } = useTslValidate();
+
+const subArgumentForm = ref();
 
 const entity = ref<Specification<Specs>>(createEmptyNormalArgument());
 
@@ -61,14 +64,12 @@ const currentPanel = computed(() => {
   }
 });
 
-const onSave = () => {
-  const validate = getIdentifierValidator();
-  validate.then((result) => {
-    if (result) {
-      isOpenDialog.value = false;
-      emit("save", entity.value);
-    }
-  });
+const onSave = async () => {
+  const { valid } = await subArgumentForm.value.validate();
+  if (valid) {
+    openDialog.value = false;
+    emit("save", entity.value);
+  }
 };
 
 onUpdated(() => {
