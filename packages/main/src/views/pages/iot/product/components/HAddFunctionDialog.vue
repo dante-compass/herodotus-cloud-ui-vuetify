@@ -76,20 +76,20 @@ const currentPanel = computed(() => {
 const onSave = () => {
   const valid = getValidator();
   valid.then((result) => {
-    // if (result) {
-    //   API.core
-    //     .iotTslFunction()
-    //     .saveOrUpdate(entity.value)
-    //     .then((result) => {
-    //       openDialog.value = false;
-    //       emit("success");
-    //       toast.success("添加成功！");
-    //     })
-    //     .catch((error) => {
-    //       openDialog.value = false;
-    //       toast.error(error.message);
-    //     });
-    // }
+    if (result) {
+      API.core
+        .iotTslFunction()
+        .saveOrUpdate(entity.value)
+        .then((result) => {
+          openDialog.value = false;
+          emit("success");
+          toast.success("添加成功！");
+        })
+        .catch((error) => {
+          openDialog.value = false;
+          toast.error(error.message);
+        });
+    }
   });
 };
 </script>

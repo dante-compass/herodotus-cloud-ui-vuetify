@@ -6,7 +6,7 @@
       <h-dictionary-select
         v-model="entity.dataType.type"
         dictionary="ArgumentType"
-        :disable-items="['struct']"
+        :disabled-items="['struct']"
       ></h-dictionary-select>
       <component :is="currentPanel" v-model="entity"></component>
     </v-form>

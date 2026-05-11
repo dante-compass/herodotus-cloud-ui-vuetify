@@ -7,20 +7,36 @@
     chips
     closable-chips
     v-bind="$attrs"
-  ></v-select>
+  >
+    <template v-slot:item="{ props: itemProps, item }">
+      <v-list-item v-if="showItem(item)" v-bind="itemProps"></v-list-item>
+    </template>
+  </v-select>
 </template>
 
 <script setup lang="ts">
-import { useDictionary } from '@/composables/hooks';
+import type { Dictionary } from "@herodotus/core";
 
-defineOptions({ name: 'HDictionarySelect' });
+import { isEmpty } from "lodash-es";
+import { useDictionary } from "@/composables/hooks";
+
+defineOptions({ name: "HDictionarySelect" });
 
 interface Props {
   dictionary: string;
+  disabledItems?: string[];
 }
 const props = defineProps<Props>();
 
 const selectedValue = defineModel();
 
 const { options } = useDictionary(props.dictionary);
+
+const showItem = (item: Dictionary) => {
+  if (isEmpty(props.disabledItems)) {
+    return true;
+  } else {
+    return !props.disabledItems?.includes(item.value);
+  }
+};
 </script>
