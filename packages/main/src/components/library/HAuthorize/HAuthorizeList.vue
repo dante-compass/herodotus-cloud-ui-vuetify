@@ -22,14 +22,14 @@
 </template>
 
 <script setup lang="ts">
-import type { AbstractSysEntity, HttpMethod } from '@herodotus/core';
+import type { AbstractSysEntity, HttpMethod } from "@herodotus/core";
 
-import { findIndex, remove } from 'lodash-es';
+import { findIndex, remove } from "lodash-es";
 
-import HAuthorizeHeader from './HAuthorizeHeader.vue';
-import HHttpMethodAvatar from './HHttpMethodAvatar.vue';
+import HAuthorizeHeader from "./HAuthorizeHeader.vue";
+import HHttpMethodAvatar from "./HHttpMethodAvatar.vue";
 
-defineOptions({ name: 'HAuthorizeList', components: { HAuthorizeHeader, HHttpMethodAvatar } });
+defineOptions({ name: "HAuthorizeList", components: { HAuthorizeHeader, HHttpMethodAvatar } });
 
 interface Props {
   rowKey: string;
@@ -50,8 +50,7 @@ const emit = defineEmits<{
   clear: [];
 }>();
 
-const selectedItems = defineModel({
-  type: Array as PropType<Array<AbstractSysEntity>>,
+const selectedItems = defineModel<Array<AbstractSysEntity>>({
   default: () => [],
   required: true,
 });
@@ -64,7 +63,7 @@ const getValueProperty = (item: AbstractSysEntity, property: string) => {
 const getTitle = (item: AbstractSysEntity) => {
   let title = getValueProperty(item, props.prependTitle);
   if (props.appendTitle) {
-    title += ' -- ' + getValueProperty(item, props.appendTitle);
+    title += " -- " + getValueProperty(item, props.appendTitle);
   }
 
   return title;
@@ -74,12 +73,12 @@ const getSubtitle = (item: AbstractSysEntity) => {
   if (props.prependSubtitle) {
     let subtitle = getValueProperty(item, props.prependSubtitle);
     if (props.appendSubtitle) {
-      subtitle += ' -- ' + getValueProperty(item, props.appendSubtitle);
+      subtitle += " -- " + getValueProperty(item, props.appendSubtitle);
     }
 
     return subtitle;
   } else {
-    return '';
+    return "";
   }
 };
 
@@ -87,7 +86,7 @@ const getHttpMethod = (item: AbstractSysEntity): HttpMethod => {
   if (props.httpMethodKey) {
     return getValueProperty(item, props.httpMethodKey) as HttpMethod;
   } else {
-    return 'GET';
+    return "GET";
   }
 };
 
@@ -100,7 +99,7 @@ const onRemoveItem = (item: AbstractSysEntity) => {
 };
 
 const onSave = () => {
-  emit('save');
+  emit("save");
 };
 
 const onClear = () => {

@@ -1,5 +1,5 @@
 <template>
-  <h-dialog v-model="openDialog" prepend-icon="mdi-email-edit" :title="`向【${name}】发送消息`" closed hide-actions>
+  <h-dialog v-model="model" prepend-icon="mdi-email-edit" :title="`向【${name}】发送消息`" closed hide-actions>
     <h-send-message-textarea
       :receiver-id="id"
       :receiver-name="name"
@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'SendMessageDialog' });
+defineOptions({ name: "SendMessageDialog" });
 
 interface Props {
   id: string;
@@ -22,13 +22,12 @@ interface Props {
 
 defineProps<Props>();
 
-const openDialog = defineModel({
-  type: Boolean,
+const model = defineModel<boolean>({
   default: false,
   required: true,
 });
 
 const onCloseDialog = () => {
-  openDialog.value = false;
+  model.value = false;
 };
 </script>

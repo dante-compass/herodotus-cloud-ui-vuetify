@@ -39,19 +39,18 @@
 </template>
 
 <script setup lang="ts">
-import type { Tree } from '@herodotus/core';
-import type { SysOrganizationEntity, SysOrganizationConditions } from '@herodotus/api';
+import type { Tree } from "@herodotus/core";
+import type { SysOrganizationEntity, SysOrganizationConditions } from "@herodotus/api";
 
-import { isArray, isEmpty } from 'lodash-es';
-import { useTreeItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { isArray, isEmpty } from "lodash-es";
+import { useTreeItem } from "@/composables/hooks";
+import { API } from "@/configurations";
 
-defineOptions({ name: 'OrganizationTree' });
+defineOptions({ name: "OrganizationTree" });
 
-const selectedValue = defineModel({
-  type: Object as PropType<Tree>,
+const selectedValue = defineModel<Tree>({
   required: true,
-  default: () => {},
+  default: () => ({}),
 });
 
 const activated = computed({

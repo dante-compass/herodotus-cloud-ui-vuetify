@@ -1,5 +1,5 @@
 <template>
-  <h-dialog v-model="openDialog" prepend-icon="mdi-function" title="添加物模型功能" @confirm="onSave">
+  <h-dialog v-model="model" prepend-icon="mdi-function" title="添加物模型功能" @confirm="onSave">
     <h-label text="功能类型：" required></h-label>
     <h-dictionary-toggle
       class="q-mb-md"
@@ -50,20 +50,18 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const openDialog = defineModel({
-  type: Boolean,
+const model = defineModel<boolean>({
   default: false,
+  required: true,
+});
+
+const entity = defineModel<TslFunctionEntity>("entity", {
+  default: () => ({ dimension: "properties" }),
   required: true,
 });
 
 const emit = defineEmits(["success"]);
 const { identifier, getValidator } = useTslValidation();
-
-const entity = ref({
-  dimension: "properties",
-  productId: props.productId,
-  productKey: props.productKey,
-}) as Ref<TslFunctionEntity>;
 
 const currentPanel = computed(() => {
   if (entity.value.dimension) {
@@ -81,12 +79,12 @@ const onSave = () => {
         .iotTslFunction()
         .saveOrUpdate(entity.value)
         .then((result) => {
-          openDialog.value = false;
+          model.value = false;
           emit("success");
           toast.success("添加成功！");
         })
         .catch((error) => {
-          openDialog.value = false;
+          model.value = false;
           toast.error(error.message);
         });
     }

@@ -1,5 +1,5 @@
 <template>
-  <h-dialog v-model="isOpenDialog" title="添加参数" @confirm="onSave" external-close>
+  <h-dialog v-model="model" title="添加参数" @confirm="onSave" external-close>
     <v-form ref="addArgumentForm">
       <h-argument-panel v-model="entity" ref="identifier"></h-argument-panel>
     </v-form>
@@ -22,7 +22,7 @@ defineOptions({
   },
 });
 
-const isOpenDialog = defineModel<boolean>({
+const model = defineModel<boolean>({
   required: true,
 });
 
@@ -37,7 +37,7 @@ const entity = ref<Specification<Specs>>(createEmptyNormalArgument());
 const onSave = async () => {
   const { valid } = await addArgumentForm.value.validate();
   if (valid) {
-    isOpenDialog.value = false;
+    model.value = false;
     emit("save", entity.value);
   }
 };

@@ -29,27 +29,26 @@
 </template>
 
 <script setup lang="ts">
-import type { Tree } from '@herodotus/core';
-import type { SysDepartmentEntity, SysDepartmentConditions } from '@herodotus/api';
+import type { Tree } from "@herodotus/core";
+import type { SysDepartmentEntity, SysDepartmentConditions } from "@herodotus/api";
 
-import { isArray, isEmpty } from 'lodash-es';
-import { useTreeItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { isArray, isEmpty } from "lodash-es";
+import { useTreeItem } from "@/composables/hooks";
+import { API } from "@/configurations";
 
-defineOptions({ name: 'DepartmentTree' });
+defineOptions({ name: "DepartmentTree" });
 
 interface Props {
   organizationId: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  organizationId: '',
+  organizationId: "",
 });
 
-const selectedValue = defineModel({
-  type: Object as PropType<Tree>,
+const selectedValue = defineModel<Tree>({
   required: true,
-  default: () => {},
+  default: () => ({}),
 });
 
 const { treeItems, conditions, loading } = useTreeItem<SysDepartmentConditions, SysDepartmentEntity>(

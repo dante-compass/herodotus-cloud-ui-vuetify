@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar v-model="showBar" :timeout="2000" location="center center" color="primary" v-bind="$attrs">
+  <v-snackbar v-model="model" :timeout="2000" location="center center" color="primary" v-bind="$attrs">
     <v-container>
       <v-row align-content="center" justify="center">
         <v-col class="text-subtitle-1 text-center" cols="12">文件下载 {{ `${progress}%` }}</v-col>
@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { VSnackbar, VContainer, VRow, VCol, VProgressLinear } from 'vuetify/components';
+import { VSnackbar, VContainer, VRow, VCol, VProgressLinear } from "vuetify/components";
 
-defineOptions({ name: 'HDownloadProgress', components: { VSnackbar, VContainer, VRow, VCol, VProgressLinear } });
+defineOptions({ name: "HDownloadProgress", components: { VSnackbar, VContainer, VRow, VCol, VProgressLinear } });
 
 interface Props {
   progress: number;
@@ -28,7 +28,7 @@ interface Props {
 
 defineProps<Props>();
 
-const showBar = defineModel<boolean>({
+const model = defineModel<boolean>({
   required: true,
 });
 </script>

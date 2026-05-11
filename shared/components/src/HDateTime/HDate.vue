@@ -7,13 +7,11 @@
 </template>
 
 <script setup lang="ts">
-import { VTextField } from 'vuetify/components';
+import { VTextField } from "vuetify/components";
 
-import HDatePicker from './HDatePicker.vue';
+import HDatePicker from "./HDatePicker.vue";
 
-defineOptions({ name: 'HDate', components: { VTextField, HDatePicker } });
+defineOptions({ name: "HDate", components: { VTextField, HDatePicker } });
 
-const date = defineModel({
-  type: String,
-});
+const date = defineModel<string>({});
 </script>

@@ -7,17 +7,16 @@
 </template>
 
 <script setup lang="ts">
-import type { JSONDataType } from '@/composables/declarations';
+import type { JSONDataType } from "@/composables/declarations";
 
-import VueJsonPretty from 'vue-json-pretty';
-import 'vue-json-pretty/lib/styles.css';
+import VueJsonPretty from "vue-json-pretty";
+import "vue-json-pretty/lib/styles.css";
 
-import HTesingContentCard from './HTesingContentCard.vue';
+import HTesingContentCard from "./HTesingContentCard.vue";
 
-defineOptions({ name: 'HTestingHttpResponse', components: { HTesingContentCard } });
+defineOptions({ name: "HTestingHttpResponse", components: { HTesingContentCard } });
 
-const response = defineModel({
-  type: Object as PropType<JSONDataType>,
+const response = defineModel<JSONDataType>({
   default: () => ({}),
   required: true,
 });

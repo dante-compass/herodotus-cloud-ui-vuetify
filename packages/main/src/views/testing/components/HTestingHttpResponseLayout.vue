@@ -11,14 +11,13 @@
 </template>
 
 <script setup lang="ts">
-import type { JSONDataType } from '@/composables/declarations';
+import type { JSONDataType } from "@/composables/declarations";
 
-import HTestingHttpResponse from './HTestingHttpResponse.vue';
+import HTestingHttpResponse from "./HTestingHttpResponse.vue";
 
-defineOptions({ name: 'HTestingHttpResponseLayout', components: { HTestingHttpResponse } });
+defineOptions({ name: "HTestingHttpResponseLayout", components: { HTestingHttpResponse } });
 
-const response = defineModel('response', {
-  type: Object as PropType<JSONDataType>,
+const response = defineModel<JSONDataType>("response", {
   default: () => ({}),
   required: true,
 });

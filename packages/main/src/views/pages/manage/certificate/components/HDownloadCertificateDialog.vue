@@ -1,6 +1,6 @@
 <template>
   <h-dialog
-    v-model="openDialog"
+    v-model="model"
     prepend-icon="mdi-memory-arrow-down"
     title="设置下载证书格式"
     :loading="loading"
@@ -66,8 +66,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const openDialog = defineModel({
-  type: Boolean,
+const model = defineModel<boolean>({
   default: false,
   required: true,
 });
@@ -98,7 +97,7 @@ const onSave = () => {
     .then((response) => {
       const data = response.data as MgtCertificateFileResponse;
       loading.value = false;
-      openDialog.value = false;
+      model.value = false;
       if (data) {
         download(data.fileName, data.fileSize);
       }
@@ -108,7 +107,7 @@ const onSave = () => {
     });
 };
 
-watch(openDialog, (newValue) => {
+watch(model, (newValue) => {
   if (newValue) {
     loading.value = false;
     editedItem.value = {} as MgtCertificateFileRequest;

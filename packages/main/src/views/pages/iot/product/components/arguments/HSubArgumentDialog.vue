@@ -1,5 +1,5 @@
 <template>
-  <h-dialog v-model="openDialog" title="添加参数" @confirm="onSave">
+  <h-dialog v-model="model" title="添加参数" @confirm="onSave">
     <v-form ref="subArgumentForm">
       <h-characteristic-panel v-model="entity"></h-characteristic-panel>
       <h-label text="数据类型" required></h-label>
@@ -44,7 +44,7 @@ defineOptions({
   },
 });
 
-const openDialog = defineModel<boolean>({
+const model = defineModel<boolean>({
   required: true,
 });
 
@@ -67,7 +67,7 @@ const currentPanel = computed(() => {
 const onSave = async () => {
   const { valid } = await subArgumentForm.value.validate();
   if (valid) {
-    openDialog.value = false;
+    model.value = false;
     emit("save", entity.value);
   }
 };

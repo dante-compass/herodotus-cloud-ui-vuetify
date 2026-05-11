@@ -19,22 +19,22 @@
 </template>
 
 <script setup lang="ts">
-import { mergeProps, computed } from 'vue';
-import { useDate } from 'vuetify';
-import { VMenu, VTooltip, VIcon, VDatePicker } from 'vuetify/components';
-import { moment } from '@herodotus/core';
+import { mergeProps, computed } from "vue";
+import { useDate } from "vuetify";
+import { VMenu, VTooltip, VIcon, VDatePicker } from "vuetify/components";
+import { moment } from "@herodotus/core";
 
-defineOptions({ name: 'HDatePicker', components: { VMenu, VTooltip, VIcon, VDatePicker } });
+defineOptions({ name: "HDatePicker", components: { VMenu, VTooltip, VIcon, VDatePicker } });
 
-const date = defineModel({ type: String });
+const date = defineModel<string>({});
 
 const adapter = useDate();
 
 const datePicker = computed({
-  get: () => (date.value ? adapter.parseISO(date.value) : ''),
+  get: () => (date.value ? adapter.parseISO(date.value) : ""),
   set: (value: string) => {
     if (value) {
-      date.value = moment(value).format('YYYY-MM-DD');
+      date.value = moment(value).format("YYYY-MM-DD");
     } else {
       date.value = value;
     }

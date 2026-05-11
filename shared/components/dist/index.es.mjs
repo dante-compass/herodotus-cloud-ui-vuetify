@@ -65,7 +65,7 @@ var z = /* @__PURE__ */ c({
 	},
 	__name: "HDatePicker",
 	props: {
-		modelValue: { type: String },
+		modelValue: {},
 		modelModifiers: {}
 	},
 	emits: ["update:modelValue"],
@@ -104,7 +104,7 @@ var z = /* @__PURE__ */ c({
 	},
 	__name: "HDate",
 	props: {
-		modelValue: { type: String },
+		modelValue: {},
 		modelModifiers: {}
 	},
 	emits: ["update:modelValue"],

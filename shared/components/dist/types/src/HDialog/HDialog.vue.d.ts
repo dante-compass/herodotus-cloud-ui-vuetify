@@ -6,9 +6,8 @@ interface Props {
     confirmLabel?: string;
 }
 type __VLS_Props = Props;
-declare const open: import('vue').ModelRef<boolean, string, boolean, boolean>;
 type __VLS_ModelProps = {
-    modelValue: typeof open['value'];
+    modelValue: boolean;
 };
 type __VLS_PublicProps = __VLS_Props & __VLS_ModelProps;
 declare var __VLS_39: {};

@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.6.4
+
+### Patch Changes
+
+- 物模型编辑页面完成
+
 ## 1.6.3
 
 ### Patch Changes
