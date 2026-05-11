@@ -1,7 +1,7 @@
 <template>
   <div>
     <h-label text="JSON 对象：" required></h-label>
-    <h-struct-param-list v-model="model.dataType.specs"></h-struct-param-list>
+    <h-tsl-param-list v-model="model.dataType.specs"></h-tsl-param-list>
     <h-tsl-button text="+ 新增参数" @click="openDialog = !openDialog" />
     <h-sub-argument-dialog v-model="openDialog" @save="onAddParameter"></h-sub-argument-dialog>
   </div>
@@ -12,11 +12,10 @@ import type { Specification, StructSpecs, Specs } from "@herodotus/api";
 
 import { isEmpty } from "lodash-es";
 
-import HStructParamList from "./HStructParamList.vue";
 import HSubArgumentDialog from "./HSubArgumentDialog.vue";
-import { HTslButton } from "../commons";
+import { HTslButton, HTslParamList } from "../commons";
 
-defineOptions({ name: "HStructPanel", components: { HStructParamList, HSubArgumentDialog, HTslButton } });
+defineOptions({ name: "HStructPanel", components: { HSubArgumentDialog, HTslButton, HTslParamList } });
 
 const model = defineModel<Specification<StructSpecs>>({
   default: () => ({}),

@@ -9,11 +9,11 @@
       inline
     ></h-dictionary-option>
     <h-label text="输入参数："></h-label>
-    <h-in-out-param-list v-if="isShowInput" v-model="input"></h-in-out-param-list>
+    <h-tsl-param-list v-if="isShowInput" v-model="input"></h-tsl-param-list>
     <h-tsl-button text="+ 添加参数" @click="isOpenInputDialog = !isOpenInputDialog" />
     <h-add-argument-dialog v-model="isOpenInputDialog" @save="onAddInputParameter"></h-add-argument-dialog>
     <h-label text="输出参数"></h-label>
-    <h-in-out-param-list v-if="isShowOutput" v-model="output"></h-in-out-param-list>
+    <h-tsl-param-list v-if="isShowOutput" v-model="output"></h-tsl-param-list>
     <h-tsl-button text="+ 添加参数" @click="isOpenOutDialog = !isOpenOutDialog" />
     <h-add-argument-dialog v-model="isOpenOutDialog" @save="onAddOutputParameter"></h-add-argument-dialog>
   </v-form>
@@ -29,8 +29,7 @@ import { useTslValidation } from "../../composables/hooks";
 
 import { HDictionaryOption } from "@/components/library/HDictionary";
 import { HCharacteristicPanel } from "../arguments";
-import { HTslButton } from "../commons";
-import HInOutParamList from "./HInOutParamList.vue";
+import { HTslButton, HTslParamList } from "../commons";
 import HAddArgumentDialog from "./HAddArgumentDialog.vue";
 
 defineOptions({
@@ -39,7 +38,7 @@ defineOptions({
     HDictionaryOption,
     HCharacteristicPanel,
     HTslButton,
-    HInOutParamList,
+    HTslParamList,
     HAddArgumentDialog,
   },
 });
