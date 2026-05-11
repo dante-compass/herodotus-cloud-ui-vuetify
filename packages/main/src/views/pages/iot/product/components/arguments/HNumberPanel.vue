@@ -34,7 +34,7 @@ import type { Specification, IntegerSpecs, FloatSpecs, DoubleSpecs, TslUnitEntit
 
 import { isEmpty } from "lodash-es";
 
-import { HDictionarySelect } from "@/components/library/HSelect";
+import { HDictionarySelect } from "@/components/library/HDictionary";
 import HUnitSelect from "./HUnitSelect.vue";
 
 defineOptions({

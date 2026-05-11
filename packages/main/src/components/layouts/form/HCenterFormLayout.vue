@@ -27,15 +27,15 @@
 </template>
 
 <script setup lang="ts">
-import type { AbstractSysDto, AbstractSysEntity } from '@herodotus/core';
+import type { AbstractSysDto, AbstractSysEntity } from "@herodotus/core";
 
-import { useEditFinish } from '@herodotus/framework';
+import { useEditFinish } from "@herodotus/framework";
 
-import HDetailContainer from './HDetailContainer.vue';
-import { HDictionarySelect } from '../../library/HSelect';
+import HDetailContainer from "./HDetailContainer.vue";
+import { HDictionarySelect } from "../../library/HDictionary";
 
 defineOptions({
-  name: 'HCenterFormLayout',
+  name: "HCenterFormLayout",
   components: { HDetailContainer, HDictionarySelect },
 });
 
@@ -54,6 +54,6 @@ const emit = defineEmits<{
 const { onFinish } = useEditFinish();
 
 const onSave = async () => {
-  emit('save');
+  emit("save");
 };
 </script>

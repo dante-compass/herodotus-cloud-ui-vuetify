@@ -18,7 +18,7 @@ import type { TslFunctionEntity, Specification, Specs } from "@herodotus/api";
 import { isEmpty } from "lodash-es";
 import { useTslEntity, useTslValidate } from "@/composables/hooks";
 
-import { HDictionaryOption } from "@/components/library/HSelect";
+import { HDictionaryOption } from "@/components/library/HDictionary";
 import { HArgumentPanel } from "../arguments";
 
 defineOptions({ name: "HPropertiesPanel" });

@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import type { Specification, BoolSpecs } from "@herodotus/api";
 
-import { HDictionarySelect } from "@/components/library/HSelect";
+import { HDictionarySelect } from "@/components/library/HDictionary";
 
 defineOptions({ name: "HBoolPanel", components: { HDictionarySelect } });
 

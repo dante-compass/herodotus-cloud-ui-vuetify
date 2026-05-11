@@ -9,7 +9,13 @@
     ></h-dictionary-toggle>
     <component :is="currentPanel" v-model="entity" ref="identifier"></component>
     <h-label text="描述："></h-label>
-    <v-textarea v-model="entity.description" placeholder="请输入描述内容" clearable></v-textarea>
+    <v-textarea
+      v-model="entity.description"
+      placeholder="请输入描述内容"
+      maxlength="100"
+      counter
+      single-line
+    ></v-textarea>
   </h-dialog>
 </template>
 
@@ -21,7 +27,7 @@ import { toast } from "@herodotus/core";
 
 import { useTslValidate } from "@/composables/hooks";
 import { API } from "@/configurations";
-import { HDictionaryToggle } from "@/components/library/HSelect";
+import { HDictionaryToggle } from "@/components/library/HDictionary";
 
 import HPropertiesPanel from "./functions/HPropertiesPanel.vue";
 import HEventsPanel from "./functions/HEventsPanel.vue";

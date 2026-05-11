@@ -21,7 +21,7 @@ import { computed, onUpdated, ref } from "vue";
 import { toUpper } from "lodash-es";
 import { useTslEntity } from "@/composables/hooks";
 
-import { HDictionarySelect } from "@/components/library/HSelect";
+import { HDictionarySelect } from "@/components/library/HDictionary";
 import HBoolPanel from "./HBoolPanel.vue";
 import HDatePanel from "./HDatePanel.vue";
 import HEnumPanel from "./HEnumPanel.vue";

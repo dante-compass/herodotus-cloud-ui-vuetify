@@ -33,7 +33,7 @@
 import type { Specification, EnumSpecs } from "@herodotus/api";
 
 import { isEmpty } from "lodash-es";
-import { HDictionarySelect } from "@/components/library/HSelect";
+import { HDictionarySelect } from "@/components/library/HDictionary";
 
 import HArgumentButton from "./HArgumentButton.vue";
 
