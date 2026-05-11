@@ -25,7 +25,7 @@ import type { TslFunctionEntity } from "@herodotus/api";
 import { toUpper } from "lodash-es";
 import { toast } from "@herodotus/core";
 
-import { useTslValidate } from "@/composables/hooks";
+import { useTslValidation } from "../composables/hooks";
 import { API } from "@/configurations";
 import { HDictionaryToggle } from "@/components/library/HDictionary";
 
@@ -57,7 +57,7 @@ const openDialog = defineModel({
 });
 
 const emit = defineEmits(["success"]);
-const { identifier, getIdentifierValidator } = useTslValidate();
+const { identifier, getValidator } = useTslValidation();
 
 const entity = ref({
   dimension: "properties",
@@ -74,7 +74,7 @@ const currentPanel = computed(() => {
 });
 
 const onSave = () => {
-  const valid = getIdentifierValidator();
+  const valid = getValidator();
   valid.then((result) => {
     // if (result) {
     //   API.core

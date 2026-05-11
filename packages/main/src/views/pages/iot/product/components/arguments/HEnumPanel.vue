@@ -8,6 +8,7 @@
             v-model="entry.key"
             density="compact"
             placeholder="编号如'0'"
+            hide-details
             :rules="[(v: string) => !!v || '枚举条目不能为空']"
           ></v-text-field
         ></v-col>
@@ -17,15 +18,16 @@
             v-model="entry.value"
             density="compact"
             placeholder="对该枚举项的描述"
+            hide-details
             :rules="[(v: string) => !!v || '枚举条目描述不能为空']"
           ></v-text-field
         ></v-col>
-        <v-col cols="1" class="text-center">
-          <h-argument-button v-if="isNotOnlyOneEntry()" variant="text" text="删除" @click="removeEntry(index)"
+        <v-col cols="1">
+          <v-btn variant="text" v-if="isNotOnlyOneEntry()" text="删除" @click="removeEntry(index)"
         /></v-col>
       </v-row>
     </v-container>
-    <h-argument-button variant="text" text="+ 添加条目" class="px-0 mb-2" @click="addEntry" />
+    <h-tsl-button text="+ 添加条目" @click="addEntry" />
   </div>
 </template>
 
@@ -35,9 +37,9 @@ import type { Specification, EnumSpecs } from "@herodotus/api";
 import { isEmpty } from "lodash-es";
 import { HDictionarySelect } from "@/components/library/HDictionary";
 
-import HArgumentButton from "./HArgumentButton.vue";
+import { HTslButton } from "../commons";
 
-defineOptions({ name: "HEnumPanel", components: { HDictionarySelect, HArgumentButton } });
+defineOptions({ name: "HEnumPanel", components: { HDictionarySelect, HTslButton } });
 
 const model = defineModel<Specification<EnumSpecs>>({
   default: () => ({}),

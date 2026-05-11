@@ -2,7 +2,7 @@
   <div>
     <h-label text="JSON 对象：" required></h-label>
     <h-struct-param-list v-model="model.dataType.specs"></h-struct-param-list>
-    <h-argument-button variant="text" text="+ 新增参数" class="px-0 mb-2" @click="openDialog = !openDialog" />
+    <h-tsl-button text="+ 新增参数" @click="openDialog = !openDialog" />
     <h-sub-argument-dialog v-model="openDialog" @save="onAddParameter"></h-sub-argument-dialog>
   </div>
 </template>
@@ -14,9 +14,9 @@ import { isEmpty } from "lodash-es";
 
 import HStructParamList from "./HStructParamList.vue";
 import HSubArgumentDialog from "./HSubArgumentDialog.vue";
-import HArgumentButton from "./HArgumentButton.vue";
+import { HTslButton } from "../commons";
 
-defineOptions({ name: "HStructPanel", components: { HStructParamList, HSubArgumentDialog, HArgumentButton } });
+defineOptions({ name: "HStructPanel", components: { HStructParamList, HSubArgumentDialog, HTslButton } });
 
 const model = defineModel<Specification<StructSpecs>>({
   default: () => ({}),

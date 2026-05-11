@@ -37,13 +37,7 @@ import { isEmpty } from "lodash-es";
 import { HDictionarySelect } from "@/components/library/HDictionary";
 import HUnitSelect from "./HUnitSelect.vue";
 
-defineOptions({
-  name: "HNumberPanel",
-  components: {
-    HDictionarySelect,
-    HUnitSelect,
-  },
-});
+defineOptions({ name: "HNumberPanel", components: { HDictionarySelect, HUnitSelect } });
 
 const model = defineModel<Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>>({
   default: () => ({}),

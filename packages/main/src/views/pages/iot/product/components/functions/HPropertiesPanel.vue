@@ -16,7 +16,7 @@
 import type { TslFunctionEntity, Specification, Specs } from "@herodotus/api";
 
 import { isEmpty } from "lodash-es";
-import { useTslEntity, useTslValidate } from "@/composables/hooks";
+import { useTslEmptyArgument, useTslValidation } from "../../composables/hooks";
 
 import { HDictionaryOption } from "@/components/library/HDictionary";
 import { HArgumentPanel } from "../arguments";
@@ -27,8 +27,8 @@ const entity = defineModel<TslFunctionEntity>({
   default: () => ({}),
 });
 
-const { createEmptyNormalArgument } = useTslEntity();
-const { identifier, validate } = useTslValidate();
+const { createEmptyNormalArgument } = useTslEmptyArgument();
+const { identifier, validate } = useTslValidation();
 const argument = ref<Specification<Specs>>(createEmptyNormalArgument());
 
 watch(

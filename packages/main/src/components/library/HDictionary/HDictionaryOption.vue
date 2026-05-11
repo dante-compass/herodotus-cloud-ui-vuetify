@@ -1,5 +1,5 @@
 <template>
-  <v-radio-group v-if="isShow" v-model="option" v-bind="$attrs" class="mb-4" color="primary">
+  <v-radio-group v-if="isShow" v-model="option" hide-details class="mb-4" color="primary" v-bind="$attrs">
     <v-radio v-for="(option, index) in options" :key="index" :label="option.label" :value="option.value"></v-radio>
   </v-radio-group>
 </template>

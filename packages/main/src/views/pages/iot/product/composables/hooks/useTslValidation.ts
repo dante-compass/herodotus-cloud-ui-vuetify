@@ -1,12 +1,10 @@
 import { ref } from "vue";
 
-export default function useTslValidate() {
-  const identifier = ref(null);
+export default function useTslValidation() {
+  const identifier = ref();
 
-  const getIdentifierValidator = (): Promise<boolean> => {
-    console.log(identifier.value);
+  const getValidator = (): Promise<boolean> => {
     if (identifier.value) {
-      //@ts-ignore
       return identifier.value.validate() as Promise<boolean>;
     } else {
       return Promise.reject();
@@ -14,7 +12,7 @@ export default function useTslValidate() {
   };
 
   const validate = (): Promise<boolean> => {
-    const valid = getIdentifierValidator();
+    const valid = getValidator();
     return new Promise<boolean>((resolve, reject) => {
       valid
         .then((result) => {
@@ -26,5 +24,5 @@ export default function useTslValidate() {
     });
   };
 
-  return { getIdentifierValidator, validate, identifier };
+  return { getValidator, validate, identifier };
 }

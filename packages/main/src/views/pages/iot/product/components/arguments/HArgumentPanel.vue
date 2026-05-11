@@ -12,14 +12,15 @@
 </template>
 
 <script lang="ts">
-import { useTslEntity } from "@/composables/hooks";
-const { createEmptyNormalArgument } = useTslEntity();
+import { useTslEmptyArgument } from "../../composables/hooks";
+const { createEmptyNormalArgument } = useTslEmptyArgument();
 </script>
 
 <script setup lang="ts">
 import type { Specification, Specs } from "@herodotus/api";
 
 import { toUpper } from "lodash-es";
+
 import { HDictionarySelect } from "@/components/library/HDictionary";
 
 import HBoolPanel from "./HBoolPanel.vue";

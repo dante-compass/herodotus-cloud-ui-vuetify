@@ -1,17 +1,22 @@
 <template>
-  <div>
-    <h-characteristic-panel v-model="entity" ref="identifier"></h-characteristic-panel>
-    <h-field-label text="调用方式" required></h-field-label>
-    <h-dictionary-option v-model="entity.callType" dictionary="CallType" default-value="async"></h-dictionary-option>
-    <h-field-label text="输入参数"></h-field-label>
+  <v-form ref="identifier">
+    <h-characteristic-panel v-model="entity"></h-characteristic-panel>
+    <h-label text="调用方式：" required></h-label>
+    <h-dictionary-option
+      v-model="entity.callType"
+      dictionary="CallType"
+      default-value="async"
+      inline
+    ></h-dictionary-option>
+    <h-label text="输入参数："></h-label>
     <h-in-out-param-list v-if="isShowInput" v-model="input"></h-in-out-param-list>
-    <q-btn flat color="primary" label="+添加参数" @click="isOpenInputDialog = !isOpenInputDialog" />
+    <h-tsl-button text="+ 添加参数" @click="isOpenInputDialog = !isOpenInputDialog" />
     <h-add-argument-dialog v-model="isOpenInputDialog" @save="onAddInputParameter"></h-add-argument-dialog>
-    <h-field-label text="输出参数"></h-field-label>
+    <h-label text="输出参数"></h-label>
     <h-in-out-param-list v-if="isShowOutput" v-model="output"></h-in-out-param-list>
-    <q-btn flat color="primary" label="+添加参数" @click="isOpenOutDialog = !isOpenOutDialog" />
+    <h-tsl-button text="+ 添加参数" @click="isOpenOutDialog = !isOpenOutDialog" />
     <h-add-argument-dialog v-model="isOpenOutDialog" @save="onAddOutputParameter"></h-add-argument-dialog>
-  </div>
+  </v-form>
 </template>
 
 <script setup lang="ts">
@@ -20,10 +25,11 @@ import type { TslFunctionEntity, TslArgumentEntity, Specification, Specs } from 
 import { computed, shallowRef } from "vue";
 
 import { isEmpty, filter, matches } from "lodash-es";
-import { useTslValidate } from "@/composables/hooks";
+import { useTslValidation } from "../../composables/hooks";
 
 import { HDictionaryOption } from "@/components/library/HDictionary";
 import { HCharacteristicPanel } from "../arguments";
+import { HTslButton } from "../commons";
 import HInOutParamList from "./HInOutParamList.vue";
 import HAddArgumentDialog from "./HAddArgumentDialog.vue";
 
@@ -32,6 +38,7 @@ defineOptions({
   components: {
     HDictionaryOption,
     HCharacteristicPanel,
+    HTslButton,
     HInOutParamList,
     HAddArgumentDialog,
   },
@@ -43,7 +50,7 @@ const entity = defineModel<TslFunctionEntity>({
 
 const isOpenInputDialog = shallowRef<boolean>(false);
 const isOpenOutDialog = shallowRef<boolean>(false);
-const { identifier, validate } = useTslValidate();
+const { identifier, validate } = useTslValidation();
 
 const output = computed(() => {
   return filter(entity.value.arguments, matches({ output: true }));

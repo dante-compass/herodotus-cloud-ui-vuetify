@@ -1,15 +1,18 @@
 <template>
   <h-dialog v-model="isOpenDialog" title="添加参数" @confirm="onSave" external-close>
-    <h-argument-panel v-model="entity" ref="identifier"></h-argument-panel>
+    <v-form ref="addArgumentForm">
+      <h-argument-panel v-model="entity" ref="identifier"></h-argument-panel>
+    </v-form>
   </h-dialog>
 </template>
 
 <script setup lang="ts">
 import type { Specification, Specs } from "@herodotus/api";
 
+import { useTslEmptyArgument } from "../../composables/hooks";
+
 import { HDictionarySelect } from "@/components/library/HDictionary";
 import { HArgumentPanel } from "../arguments";
-import { useTslEntity, useTslValidate } from "@/composables/hooks";
 
 defineOptions({
   name: "HAddArgumentDialog",
@@ -25,19 +28,18 @@ const isOpenDialog = defineModel<boolean>({
 
 const emit = defineEmits(["save"]);
 
-const { createEmptyNormalArgument } = useTslEntity();
-const { identifier, getIdentifierValidator } = useTslValidate();
+const { createEmptyNormalArgument } = useTslEmptyArgument();
+
+const addArgumentForm = ref();
 
 const entity = ref<Specification<Specs>>(createEmptyNormalArgument());
 
-const onSave = () => {
-  const valid = getIdentifierValidator();
-  valid.then((result) => {
-    if (result) {
-      isOpenDialog.value = false;
-      emit("save", entity.value);
-    }
-  });
+const onSave = async () => {
+  const { valid } = await addArgumentForm.value.validate();
+  if (valid) {
+    isOpenDialog.value = false;
+    emit("save", entity.value);
+  }
 };
 
 onUpdated(() => {

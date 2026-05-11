@@ -19,7 +19,7 @@ import type { Specification, Specs } from "@herodotus/api";
 import { computed, onUpdated, ref } from "vue";
 
 import { toUpper } from "lodash-es";
-import { useTslEntity } from "@/composables/hooks";
+import { useTslEmptyArgument } from "../../composables/hooks";
 
 import { HDictionarySelect } from "@/components/library/HDictionary";
 import HBoolPanel from "./HBoolPanel.vue";
@@ -50,7 +50,7 @@ const openDialog = defineModel<boolean>({
 
 const emit = defineEmits(["save"]);
 
-const { createEmptyNormalArgument } = useTslEntity();
+const { createEmptyNormalArgument } = useTslEmptyArgument();
 
 const subArgumentForm = ref();
 
