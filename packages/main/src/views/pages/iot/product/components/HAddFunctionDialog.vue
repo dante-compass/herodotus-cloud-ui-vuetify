@@ -8,10 +8,8 @@
       default-value="properties"
     ></h-dictionary-toggle>
     <component :is="currentPanel" v-model="entity" ref="identifier"></component>
-    <div v-if="isNotPropertiesPanel">
-      <h-label text="描述："></h-label>
-      <v-textarea v-model="entity.description" placeholder="请输入描述内容" clearable></v-textarea>
-    </div>
+    <h-label text="描述："></h-label>
+    <v-textarea v-model="entity.description" placeholder="请输入描述内容" clearable></v-textarea>
   </h-dialog>
 </template>
 
@@ -67,10 +65,6 @@ const currentPanel = computed(() => {
   } else {
     return "PROPERTIES_PANEL";
   }
-});
-
-const isNotPropertiesPanel = computed(() => {
-  return currentPanel.value !== "PROPERTIES_PANEL";
 });
 
 const onSave = () => {

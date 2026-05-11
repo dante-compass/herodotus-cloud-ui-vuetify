@@ -1,6 +1,6 @@
 <template>
   <v-autocomplete
-    v-model="selection"
+    v-model="model"
     v-model:search="search"
     :items="items"
     :loading="loading"
@@ -29,7 +29,7 @@ import { useIotTslUnitStore } from "./unit";
 
 defineOptions({ name: "HUnitSelect" });
 
-const selection = defineModel<TslUnitEntity | null | undefined>({
+const model = defineModel<TslUnitEntity | null | undefined>({
   required: true,
 });
 

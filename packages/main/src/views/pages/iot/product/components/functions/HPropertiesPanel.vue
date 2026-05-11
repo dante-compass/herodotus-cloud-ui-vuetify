@@ -1,12 +1,13 @@
 <template>
   <v-form ref="identifier">
     <h-argument-panel v-model="argument"></h-argument-panel>
-    <h-label text="读写类型" required></h-label>
+    <h-label text="读写类型:" required></h-label>
     <h-dictionary-option
       v-model="entity.accessMode"
       dictionary="AccessMode"
       default-value="rw"
       inline
+      hide-details
     ></h-dictionary-option>
   </v-form>
 </template>

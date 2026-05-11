@@ -11,14 +11,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import { useTslEntity } from "@/composables/hooks";
-const { createEmptyNormalArgument } = useTslEntity();
-</script>
-
 <script setup lang="ts">
 import type { Specification, Specs } from "@herodotus/api";
 
+import { useTslEntity } from "@/composables/hooks";
 import { toUpper } from "lodash-es";
 import { HDictionarySelect } from "@/components/library/HSelect";
 
@@ -45,6 +41,8 @@ defineOptions({
     STRUCT_PANEL: HStructPanel,
   },
 });
+
+const { createEmptyNormalArgument } = useTslEntity();
 
 const entity = defineModel<Specification<Specs>>({
   default: () => createEmptyNormalArgument(),

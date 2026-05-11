@@ -19,7 +19,7 @@ import type { Specification, Specs } from "@herodotus/api";
 import { computed, onUpdated, ref } from "vue";
 
 import { toUpper } from "lodash-es";
-import { useTslEntity, useTslValidate } from "@/composables/hooks";
+import { useTslEntity } from "@/composables/hooks";
 
 import { HDictionarySelect } from "@/components/library/HSelect";
 import HBoolPanel from "./HBoolPanel.vue";
