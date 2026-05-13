@@ -1,5 +1,5 @@
-import { HttpConfig, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse, BuildInScopeEnum } from '@herodotus/core';
-import { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '../../declarations';
+import { HttpConfig, HttpRequestOptions, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse, AxiosRequestConfig, BuildInScopeEnum } from '@herodotus/core';
+import { SocialSource, AccessPrincipal, WebAuthnAuthenticate, OAuth2ClientRegistration } from '../../declarations';
 export declare class OAuth2ApiService {
     private static instance;
     private config;
@@ -58,7 +58,7 @@ export declare class OAuth2ApiService {
      * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.5
      * @see https://datatracker.interface
      */
-    clientCredentialsFlow(clientId?: string, clientSecret?: string, scope?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
+    clientCredentialsFlow(clientId?: string, clientSecret?: string, scope?: string, options?: HttpRequestOptions): Promise<AxiosHttpResult<AccessTokenResponse>>;
     /**
      * 设备授权模式。获取访问令牌。
      * @param deviceCode 设备码
@@ -88,5 +88,5 @@ export declare class OAuth2ApiService {
     socialCredentialsFlowByJustAuth(source: SocialSource, accessPrincipal: AccessPrincipal, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     webAuthnCredentialsFlow(publicKey: WebAuthnAuthenticate, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     oidcClientRegistrationFlow(productKey: string, clientName: string): Promise<AxiosHttpResult<any>>;
-    clientRegistrationFlow(productKey: string, clientName: string): Promise<AxiosHttpResult<any>>;
+    clientRegistrationFlow(productKey: string, clientName: string, config?: AxiosRequestConfig<OAuth2ClientRegistration>): Promise<AxiosHttpResult<OAuth2ClientRegistration>>;
 }

@@ -1,5 +1,13 @@
-import type { HttpConfig, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse } from '@herodotus/core';
-import type { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '@/declarations';
+import type {
+  HttpConfig,
+  HttpRequestOptions,
+  AxiosHttpResult,
+  AccessTokenRequest,
+  AccessTokenResponse,
+  DeviceAuthorizationResponse,
+  AxiosRequestConfig,
+} from "@herodotus/core";
+import type { SocialSource, AccessPrincipal, WebAuthnAuthenticate, OAuth2ClientRegistration } from "@/declarations";
 
 import {
   ContentTypeEnum,
@@ -7,12 +15,12 @@ import {
   AuthorizationTokenEnum,
   BuildInScopeEnum,
   ClientAuthenticationMethodEnum,
-} from '@herodotus/core';
+} from "@herodotus/core";
 
-import { Base64 } from 'js-base64';
-import { merge, isEmpty, endsWith } from 'lodash-es';
+import { Base64 } from "js-base64";
+import { merge, isEmpty, endsWith } from "lodash-es";
 
-import { SocialSourceEnum } from '@/declarations';
+import { SocialSourceEnum } from "@/declarations";
 
 export class OAuth2ApiService {
   // 静态私有实例引用
@@ -32,42 +40,42 @@ export class OAuth2ApiService {
   }
 
   private getOAuth2TokenAddress(): string {
-    return this.config.getUaa() + '/oauth2/token';
+    return this.config.getUaa() + "/oauth2/token";
   }
 
   private getOAuth2RevokeAddress(): string {
-    return this.config.getUaa() + '/oauth2/revoke';
+    return this.config.getUaa() + "/oauth2/revoke";
   }
 
   private getOAuth2SignOutAddress(): string {
-    return this.config.getUaa() + '/oauth2/sign-out';
+    return this.config.getUaa() + "/oauth2/sign-out";
   }
 
   private getOAuth2DeviceAuthorizationAddress(): string {
-    return this.config.getUaa() + '/oauth2/device_authorization';
+    return this.config.getUaa() + "/oauth2/device_authorization";
   }
 
   private getOAuth2RegisterAddress(): string {
-    return this.config.getUaa() + '/oauth2/register';
+    return this.config.getUaa() + "/oauth2/register";
   }
 
   private getOIDCConnectRegisterAddress(): string {
-    return this.config.getUaa() + '/connect/register';
+    return this.config.getUaa() + "/connect/register";
   }
 
-  private createBasicHeader(clientId = '', clientSecret = ''): string {
-    let data = this.config.getClientId() + ':' + this.config.getClientSecret();
+  private createBasicHeader(clientId = "", clientSecret = ""): string {
+    let data = this.config.getClientId() + ":" + this.config.getClientSecret();
     if (clientId && clientSecret) {
-      data = clientId + ':' + clientSecret;
+      data = clientId + ":" + clientSecret;
     }
 
     return AuthorizationTokenEnum.BASIC + Base64.encode(data);
   }
 
-  private createClientData(clientId = '', clientSecret = '', scope = ''): Record<string, string> {
+  private createClientData(clientId = "", clientSecret = "", scope = ""): Record<string, string> {
     const data = {
-      client_id: '',
-      client_secret: '',
+      client_id: "",
+      client_secret: "",
     };
 
     if (clientId && clientSecret) {
@@ -89,7 +97,7 @@ export class OAuth2ApiService {
     grantType: AuthorizationGrantTypeEnum,
     params: Record<string, unknown>,
     oidc = false,
-  ): Record<string, unknown> {
+  ): AccessTokenRequest {
     const data = {
       grant_type: grantType,
     };
@@ -99,13 +107,13 @@ export class OAuth2ApiService {
     }
 
     if (oidc) {
-      merge(data, { scope: 'openid' });
+      merge(data, { scope: "openid" });
     }
 
     return data;
   }
 
-  public signOut(token: string, clientId = '', clientSecret = ''): Promise<AxiosHttpResult<string>> {
+  public signOut(token: string, clientId = "", clientSecret = ""): Promise<AxiosHttpResult<string>> {
     return this.config.getHttp().put(
       this.getOAuth2SignOutAddress(),
       {
@@ -122,7 +130,7 @@ export class OAuth2ApiService {
     );
   }
 
-  public revoke(token: string, clientId = '', clientSecret = ''): Promise<AxiosHttpResult> {
+  public revoke(token: string, clientId = "", clientSecret = ""): Promise<AxiosHttpResult> {
     return this.config.getHttp().post(
       this.getOAuth2RevokeAddress(),
       {
@@ -142,8 +150,8 @@ export class OAuth2ApiService {
   public refreshTokenFlow(
     refreshToken: string,
     oidc = false,
-    clientId = '',
-    clientSecret = '',
+    clientId = "",
+    clientSecret = "",
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
@@ -163,8 +171,8 @@ export class OAuth2ApiService {
     username: string,
     password: string,
     oidc = false,
-    clientId = '',
-    clientSecret = '',
+    clientId = "",
+    clientSecret = "",
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
@@ -180,15 +188,15 @@ export class OAuth2ApiService {
     );
   }
 
-  private createAuthorizationCodeAddress(api: string, authorizeUri = ''): string {
+  private createAuthorizationCodeAddress(api: string, authorizeUri = ""): string {
     if (isEmpty(authorizeUri)) {
       const project = this.config.getProject();
       let address = api;
-      if (endsWith(address, '/')) {
+      if (endsWith(address, "/")) {
         address = address.substring(0, address.length - 1);
       }
 
-      if (project && (project === 'dante' || project === 'herodotus')) {
+      if (project && (project === "dante" || project === "herodotus")) {
         address += this.config.getUaa(false);
       }
 
@@ -198,14 +206,14 @@ export class OAuth2ApiService {
     }
   }
 
-  private createAuthorizationCodeParams(redirectUri: string, scope = 'openid'): string {
+  private createAuthorizationCodeParams(redirectUri: string, scope = "openid"): string {
     return `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${redirectUri}&scope=${scope}`;
   }
 
-  public authorizationCodeRequestFlow(api: string, redirectUri: string, scope = 'openid', authorizeUri = ''): string {
+  public authorizationCodeRequestFlow(api: string, redirectUri: string, scope = "openid", authorizeUri = ""): string {
     return (
       this.createAuthorizationCodeAddress(api, authorizeUri) +
-      '/oauth2/authorize' +
+      "/oauth2/authorize" +
       this.createAuthorizationCodeParams(redirectUri, scope)
     );
   }
@@ -232,10 +240,10 @@ export class OAuth2ApiService {
   public authorizationCodeFlow(
     code: string,
     redirect_uri: string,
-    state = '',
+    state = "",
     oidc = false,
-    clientId = '',
-    clientSecret = '',
+    clientId = "",
+    clientSecret = "",
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
@@ -273,18 +281,21 @@ export class OAuth2ApiService {
    * @see https://datatracker.interface
    */
   public clientCredentialsFlow(
-    clientId = '',
-    clientSecret = '',
-    scope = '',
+    clientId = "",
+    clientSecret = "",
+    scope = "",
+    options?: HttpRequestOptions,
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
-    return this.config.getHttp().post(
+    return this.config.getHttp().post<AccessTokenResponse, AccessTokenRequest>(
       this.getOAuth2TokenAddress(),
       this.createOAuth2Data(AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS, {
         ...this.createClientData(clientId, clientSecret, scope),
       }),
-      {
-        contentType: ContentTypeEnum.URL_ENCODED,
-      },
+      isEmpty(options)
+        ? {
+            contentType: ContentTypeEnum.URL_ENCODED,
+          }
+        : options,
     );
   }
 
@@ -302,9 +313,9 @@ export class OAuth2ApiService {
    */
   public deviceCodeFlow(
     deviceCode: string,
-    clientId = '',
-    clientSecret = '',
-    scope = '',
+    clientId = "",
+    clientSecret = "",
+    scope = "",
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
@@ -330,8 +341,8 @@ export class OAuth2ApiService {
    * @see https://datatracker.ietf.org/doc/html/rfc8628#section-3.1
    */
   public deviceAuthorizationFlow(
-    clientId = '',
-    clientSecret = '',
+    clientId = "",
+    clientSecret = "",
     scope = BuildInScopeEnum.EMAIL,
   ): Promise<AxiosHttpResult<DeviceAuthorizationResponse>> {
     return this.config
@@ -345,8 +356,8 @@ export class OAuth2ApiService {
     mobile: string,
     code: string,
     oidc = false,
-    clientId = '',
-    clientSecret = '',
+    clientId = "",
+    clientSecret = "",
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
@@ -370,8 +381,8 @@ export class OAuth2ApiService {
     source: SocialSource,
     accessPrincipal: AccessPrincipal,
     oidc = false,
-    clientId = '',
-    clientSecret = '',
+    clientId = "",
+    clientSecret = "",
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
@@ -394,8 +405,8 @@ export class OAuth2ApiService {
   public webAuthnCredentialsFlow(
     publicKey: WebAuthnAuthenticate,
     oidc = false,
-    clientId = '',
-    clientSecret = '',
+    clientId = "",
+    clientSecret = "",
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().postWithParams(
       this.getOAuth2TokenAddress(),
@@ -416,10 +427,10 @@ export class OAuth2ApiService {
     return this.config.getHttp().post(this.getOIDCConnectRegisterAddress(), {
       product_key: productKey,
       grant_types: [AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS, AuthorizationGrantTypeEnum.DEVICE_CODE],
-      redirect_uris: ['http://192.168.101.10:3000'],
+      redirect_uris: ["http://192.168.101.10:3000"],
       client_name: clientName,
       // client_secret: '123456',
-      scope: [BuildInScopeEnum.CLIENT_CREATE, BuildInScopeEnum.CLIENT_READ].join(' '),
+      scope: [BuildInScopeEnum.CLIENT_CREATE, BuildInScopeEnum.CLIENT_READ].join(" "),
       // 如果 response_types 包含 code 则会添加 authorization_code 授权模式
       // token 是 OAuth2.0 规范中隐式模式的值，但是在 OAuth2.1 中隐式模式被取消。目前临时使用一下
       // 可以考虑使用 id_token
@@ -428,29 +439,27 @@ export class OAuth2ApiService {
       //   "code id_token",       // 允许：OIDC 混合流程（仅返回 code + id_token）
       //   "id_token"             // 允许但不推荐：纯 OIDC 流程（无访问令牌）
       // ],
-      response_types: ['token'],
+      response_types: ["token"],
       token_endpoint_auth_method: ClientAuthenticationMethodEnum.CLIENT_SECRET_POST,
     });
   }
 
-  public clientRegistrationFlow(productKey: string, clientName: string): Promise<AxiosHttpResult<any>> {
-    return this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
-      product_key: productKey,
-      grant_types: [AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS, AuthorizationGrantTypeEnum.DEVICE_CODE],
-      redirect_uris: ['http://192.168.101.10:3000'],
-      client_name: clientName,
-      // client_secret: '123456',
-      // scope: [BuildInScopeEnum.CLIENT_CREATE, BuildInScopeEnum.CLIENT_READ].join(' '),
-      // 如果 response_types 包含 code 则会添加 authorization_code 授权模式
-      // token 是 OAuth2.0 规范中隐式模式的值，但是在 OAuth2.1 中隐式模式被取消。目前临时使用一下
-      // 可以考虑使用 id_token
-      // "response_types": [
-      //   "code",                // 允许：标准授权码流程
-      //   "code id_token",       // 允许：OIDC 混合流程（仅返回 code + id_token）
-      //   "id_token"             // 允许但不推荐：纯 OIDC 流程（无访问令牌）
-      // ],
-      response_types: ['token'],
-      token_endpoint_auth_method: ClientAuthenticationMethodEnum.CLIENT_SECRET_POST,
-    });
+  public clientRegistrationFlow(
+    productKey: string,
+    clientName: string,
+    config?: AxiosRequestConfig<OAuth2ClientRegistration>,
+  ): Promise<AxiosHttpResult<OAuth2ClientRegistration>> {
+    console.log("---clientRegistrationFlow---", config);
+    return this.config.getHttp().post<OAuth2ClientRegistration, OAuth2ClientRegistration>(
+      this.getOAuth2RegisterAddress(),
+      {
+        product_key: productKey,
+        grant_types: [AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS, AuthorizationGrantTypeEnum.DEVICE_CODE],
+        client_name: clientName,
+        token_endpoint_auth_method: ClientAuthenticationMethodEnum.CLIENT_SECRET_POST,
+      },
+      { contentType: ContentTypeEnum.JSON },
+      config,
+    );
   }
 }

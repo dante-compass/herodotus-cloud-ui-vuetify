@@ -1,7 +1,7 @@
 <template>
   <v-card title="请求响应结果：" subtitle="显示请求响应内容，方便调试和查看">
     <v-card-text>
-      <vue-json-pretty :data="response"></vue-json-pretty>
+      <vue-json-pretty show-icon show-line-number :data="response"></vue-json-pretty>
     </v-card-text>
   </v-card>
 </template>

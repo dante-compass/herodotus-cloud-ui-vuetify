@@ -106,8 +106,8 @@ var m = /* @__PURE__ */ function(e) {
 		if (!e) return;
 		let { requestInterceptors: t, requestInterceptorsError: n, responseInterceptors: r, responseInterceptorsError: i } = e, a = new E();
 		this.getAxiosInstance().interceptors.request.use((e) => {
-			let { prohibitRepeatRequests: n } = this.getDefaultRequestOptions();
-			return n && a.addPending(e), t(e);
+			let n = e.effectiveConfig;
+			return n.prohibitRepeatRequests && a.addPending(e), t(e, n);
 		}, (e) => n(this.getAxiosInstance(), e)), this.getAxiosInstance().interceptors.response.use((e) => (e && a.removePending(e.config), r(e)), (e) => i(this.getAxiosInstance(), e));
 	}
 	mergeHttpRequestOptions(e) {
@@ -124,7 +124,7 @@ var m = /* @__PURE__ */ function(e) {
 		let { onRequestHook: o } = this.getAxiosInstanceHooks(), s = this.mergeHttpRequestOptions(a), c = this.mergeAxiosRequestConfigs(t);
 		o && r(o) && (c = o(c, s));
 		let l = this.createHttpHeaderPolicy(s.contentType);
-		return c.headers ? c.headers = i(c.headers, l.headers) : c.headers = l.headers, c.url = e, n(c.data) || (c.data = l.dataConvert(c.data)), {
+		return c.headers ? c.headers = i(c.headers, l.headers) : c.headers = l.headers, c.url = e, n(c.data) || (c.data = l.dataConvert(c.data)), c.effectiveOptions = s, {
 			config: c,
 			options: s
 		};

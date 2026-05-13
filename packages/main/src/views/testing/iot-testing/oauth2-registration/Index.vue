@@ -108,46 +108,46 @@
 </template>
 
 <script setup lang="ts">
-import type { AccessTokenResponse } from '@herodotus/core';
+import type { JSONDataType } from "@/composables/declarations";
+import type { AccessTokenResponse } from "@herodotus/core";
 
-import { BuildInScopeEnum } from '@herodotus/core';
-import { SecurityApiResources, useAuthenticationStore } from '@herodotus/framework';
+import { BuildInScopeEnum, ContentTypeEnum } from "@herodotus/core";
+import { SecurityApiResources, useAuthenticationStore, type OAuth2ClientRegistration } from "@herodotus/framework";
 
-import { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout } from '../../components';
+import { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout } from "../../components";
 
 defineOptions({
-  name: 'HDeviceRegistration',
+  name: "HDeviceRegistration",
   components: { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout },
 });
 
 const step = shallowRef(1);
-const items = ['第一步：验证产品信息', '第二步：设备动态注册', '第三步：验证新客户端'];
+const items = ["第一步：验证产品信息", "第二步：设备动态注册", "第三步：验证新客户端"];
 
-const responseResults = shallowRef({});
+const responseResults = ref({}) as Ref<JSONDataType>;
 
-const productKey = shallowRef('apktestadd');
-const productSecret = shallowRef('9f3026f4beddf8d29f3026f4beddf8d2');
-const productAccessToken = shallowRef('');
-const deviceName = shallowRef('');
-const deviceSecret = shallowRef('');
-const deviceAccessToken = shallowRef('');
+const productKey = shallowRef("apktestadd");
+const productSecret = shallowRef("9f3026f4beddf8d29f3026f4beddf8d2");
+const productAccessToken = shallowRef("");
+const deviceName = shallowRef("");
+const deviceSecret = shallowRef("");
+const deviceAccessToken = shallowRef("");
 
 const store = useAuthenticationStore();
 /**
  * 获取 "initial" Access token
  */
 const onInitialAccessToken = () => {
-  store.$reset();
   SecurityApiResources.getInstance()
     .oauth2()
-    .clientCredentialsFlow(productKey.value, productSecret.value, BuildInScopeEnum.CLIENT_CREATE)
+    .clientCredentialsFlow(productKey.value, productSecret.value, BuildInScopeEnum.CLIENT_CREATE, {
+      contentType: ContentTypeEnum.URL_ENCODED,
+      withToken: false,
+    })
     .then((response) => {
       const data = response as AccessTokenResponse;
-      responseResults.value = data;
+      responseResults.value = JSON.parse(JSON.stringify(data));
       productAccessToken.value = data.access_token;
-
-      // 保存到 Store 以便后续调用
-      store.saveAccessToken(data);
     })
     .catch((error) => {
       responseResults.value = error;
@@ -161,12 +161,16 @@ const onDynamicRegistration = () => {
   // 客户端注册需要使用到上面方法中的 "initial" Access token
   SecurityApiResources.getInstance()
     .oauth2()
-    .clientRegistrationFlow(productKey.value, 'aaaaaa')
+    .clientRegistrationFlow(productKey.value, "aaaaaa", {
+      headers: {
+        Authorization: productAccessToken.value,
+      },
+    })
     .then((response) => {
-      const data = response;
-      responseResults.value = data;
-      deviceName.value = data.client_id;
-      deviceSecret.value = data.client_secret;
+      const data = response as OAuth2ClientRegistration;
+      responseResults.value = JSON.parse(JSON.stringify(data));
+      deviceName.value = data.client_id as string;
+      deviceSecret.value = data.client_secret as string;
       // 客户端注册成功后，清理 access_token。防止下一步验证时，因携带了该 Token，导致验证失败。
       store.$reset();
     })
@@ -178,10 +182,10 @@ const onDynamicRegistration = () => {
 const onNewClientSignIn = () => {
   SecurityApiResources.getInstance()
     .oauth2()
-    .clientCredentialsFlow(deviceName.value, deviceSecret.value, 'email')
+    .clientCredentialsFlow(deviceName.value, deviceSecret.value, "email")
     .then((response) => {
       const data = response as AccessTokenResponse;
-      responseResults.value = data;
+      responseResults.value = JSON.parse(JSON.stringify(data));
       deviceAccessToken.value = data.access_token;
     })
     .catch((error) => {

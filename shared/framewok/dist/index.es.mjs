@@ -311,8 +311,8 @@ var G = class e {
 			redirect_uri: n
 		}, a), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(o, s) } });
 	}
-	clientCredentialsFlow(t = "", n = "", r = "") {
-		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, r) }), { contentType: i.URL_ENCODED });
+	clientCredentialsFlow(t = "", n = "", r = "", a) {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, r) }), b(a) ? { contentType: i.URL_ENCODED } : a);
 	}
 	deviceCodeFlow(t, n = "", r = "", a = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.DEVICE_CODE, {
@@ -350,15 +350,13 @@ var G = class e {
 			token_endpoint_auth_method: r.CLIENT_SECRET_POST
 		});
 	}
-	clientRegistrationFlow(t, n) {
-		return this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
+	clientRegistrationFlow(t, n, a) {
+		return console.log("---clientRegistrationFlow---", a), this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
 			product_key: t,
 			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
-			redirect_uris: ["http://192.168.101.10:3000"],
 			client_name: n,
-			response_types: ["token"],
 			token_endpoint_auth_method: r.CLIENT_SECRET_POST
-		});
+		}, { contentType: i.JSON }, a);
 	}
 }, me = class e {
 	static instance = null;

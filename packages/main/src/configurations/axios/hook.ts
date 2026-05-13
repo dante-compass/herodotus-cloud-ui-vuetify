@@ -6,17 +6,26 @@ import type {
   AxiosError,
   InternalAxiosRequestConfig,
   AxiosInstance,
-} from '@herodotus/core';
+} from "@herodotus/core";
 
-import { logResponse, isSuccess } from '@herodotus/core';
+import { unset } from "lodash-es";
 
-import { getSystemHeaders } from '@herodotus/framework';
-import { processor } from './status';
-import { IS_DEV } from '../constants';
+import { logResponse, isSuccess } from "@herodotus/core";
+
+import { getSystemHeaders } from "@herodotus/framework";
+import { processor } from "./status";
+import { IS_DEV } from "../constants";
 
 export const axiosInstanceHooks: AxiosInstanceHooks = {
   // 请求之前处理config
   onRequestHook(config, options) {
+    console.log("-----onRequestHook config -----", config);
+    console.log("-----onRequestHook options -----", options);
+    if (options.withToken === false && config.headers?.Authorization) {
+      console.log("-------", config);
+      unset(config, "headers.Authorization");
+      console.log("-------", config);
+    }
     return config;
   },
 
@@ -29,7 +38,7 @@ export const axiosInstanceHooks: AxiosInstanceHooks = {
         const { isTransformResponse } = options;
         // 不进行任何处理，直接返回
         // 用于页面代码可能需要直接获取code，data，message这些信息时开启
-        if (isTransformResponse && 'statusText' in response) {
+        if (isTransformResponse && "statusText" in response) {
           return response.data;
         }
       }
@@ -45,6 +54,7 @@ export const axiosInstanceHooks: AxiosInstanceHooks = {
    * @description: 请求拦截器处理
    */
   requestInterceptors(config: InternalAxiosRequestConfig) {
+    console.log("-----requestInterceptors -----", config);
     const headers = getSystemHeaders();
 
     Object.keys(headers).forEach((key) => {

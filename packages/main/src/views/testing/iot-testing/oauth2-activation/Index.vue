@@ -66,34 +66,35 @@
   </v-row>
 </template>
 <script setup lang="ts">
-import type { DeviceAuthorizationResponse } from '@herodotus/core';
+import type { JSONData } from "@/composables/declarations";
+import type { DeviceAuthorizationResponse } from "@herodotus/core";
 
-import { SecurityApiResources, useDeviceAuthorize } from '@herodotus/framework';
+import { SecurityApiResources, useDeviceAuthorize } from "@herodotus/framework";
 
-import { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout } from '../../components';
+import { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout } from "../../components";
 
 defineOptions({
-  name: 'HDeviceActivation',
+  name: "HDeviceActivation",
   components: { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout },
 });
 
 const step = shallowRef(1);
-const items = ['第一步：验证产品信息', '第二步：设备动态注册', '第三步：验证新客户端'];
+const items = ["第一步：验证产品信息", "第二步：设备动态注册", "第三步：验证新客户端"];
 
-const responseResults = shallowRef({});
+const responseResults = ref({}) as Ref<JSONData>;
 
-const productKey = shallowRef('apktestadd');
-const deviceName = shallowRef('aaaaaa');
-const deviceSecret = shallowRef('qZi8pyTKfcDNmjWxCz3ajPqj01nxRE7DBgmirargzMibv2C7f82JYFHyIwREj_IC');
+const productKey = shallowRef("apktestadd");
+const deviceName = shallowRef("aaaaaa");
+const deviceSecret = shallowRef("qZi8pyTKfcDNmjWxCz3ajPqj01nxRE7DBgmirargzMibv2C7f82JYFHyIwREj_IC");
 
 const clientId = computed(() => {
-  return productKey.value + '.' + deviceName.value;
+  return productKey.value + "." + deviceName.value;
 });
 
-const userCode = shallowRef('');
-const deviceCode = shallowRef('');
-const verificationUriComplete = shallowRef('');
-const verificationUri = shallowRef('');
+const userCode = shallowRef("");
+const deviceCode = shallowRef("");
+const verificationUriComplete = shallowRef("");
+const verificationUri = shallowRef("");
 const expiresIn = shallowRef(0);
 
 /**
@@ -141,13 +142,13 @@ watch(
 
 watch(isFailed, (newValue) => {
   if (newValue) {
-    console.log('failed');
+    console.log("failed");
   }
 });
 
 watch(isSuccess, (newValue) => {
   if (newValue) {
-    console.log('success');
+    console.log("success");
   }
 });
 </script>
