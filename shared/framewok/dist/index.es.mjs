@@ -320,8 +320,8 @@ var G = class e {
 			...this.createClientData(n, r, a)
 		}), { contentType: i.URL_ENCODED });
 	}
-	deviceAuthorizationFlow(e = "", t = "", r = n.EMAIL) {
-		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), this.createClientData(e, t, r), { contentType: i.URL_ENCODED });
+	deviceAuthorizationFlow(e = "", t = "", r = n.EMAIL, a) {
+		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), { ...this.createClientData(e, t, r) }, b(a) ? { contentType: i.URL_ENCODED } : a);
 	}
 	socialCredentialsFlowBySms(t, n, r = !1, a = "", o = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.SOCIAL_CREDENTIALS, {
@@ -348,7 +348,7 @@ var G = class e {
 		}, b(a) ? { contentType: i.JSON } : a, o);
 	}
 	clientRegistrationFlow(t, n, a, o) {
-		return console.log("---clientRegistrationFlow---", o), this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
+		return this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
 			product_key: t,
 			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
 			client_name: n,

@@ -344,12 +344,17 @@ export class OAuth2ApiService {
     clientId = "",
     clientSecret = "",
     scope = BuildInScopeEnum.EMAIL,
+    options?: HttpRequestOptions,
   ): Promise<AxiosHttpResult<DeviceAuthorizationResponse>> {
-    return this.config
-      .getHttp()
-      .post(this.getOAuth2DeviceAuthorizationAddress(), this.createClientData(clientId, clientSecret, scope), {
-        contentType: ContentTypeEnum.URL_ENCODED,
-      });
+    return this.config.getHttp().post(
+      this.getOAuth2DeviceAuthorizationAddress(),
+      { ...this.createClientData(clientId, clientSecret, scope) },
+      isEmpty(options)
+        ? {
+            contentType: ContentTypeEnum.URL_ENCODED,
+          }
+        : options,
+    );
   }
 
   public socialCredentialsFlowBySms(
@@ -452,7 +457,6 @@ export class OAuth2ApiService {
     options?: HttpRequestOptions,
     config?: AxiosRequestConfig<OAuth2ClientRegistration>,
   ): Promise<AxiosHttpResult<OAuth2ClientRegistration>> {
-    console.log("---clientRegistrationFlow---", config);
     return this.config.getHttp().post<OAuth2ClientRegistration, OAuth2ClientRegistration>(
       this.getOAuth2RegisterAddress(),
       {

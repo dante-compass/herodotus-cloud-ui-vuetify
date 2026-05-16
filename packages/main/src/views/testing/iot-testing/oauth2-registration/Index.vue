@@ -188,7 +188,10 @@ const onDynamicRegistration = () => {
 const onNewClientSignIn = () => {
   SecurityApiResources.getInstance()
     .oauth2()
-    .clientCredentialsFlow(deviceName.value, deviceSecret.value, "email")
+    .clientCredentialsFlow(deviceName.value, deviceSecret.value, "", {
+      contentType: ContentTypeEnum.URL_ENCODED,
+      withToken: false,
+    })
     .then((response) => {
       const data = response as AccessTokenResponse;
       responseResults.value = JSON.parse(JSON.stringify(data));

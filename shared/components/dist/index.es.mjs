@@ -556,7 +556,10 @@ var we = { particles: {
 	__name: "HParticles",
 	setup(e) {
 		let t = h("HParticles"), n, i = async (e, t = !0) => {
-			await ye(e, !1), await be(e, !1), await e.addPreset("triangles", we, t);
+			await ye(e), await be(e), await e.load({
+				id: "triangles",
+				options: we
+			});
 		};
 		return f(() => {
 			d(async () => {

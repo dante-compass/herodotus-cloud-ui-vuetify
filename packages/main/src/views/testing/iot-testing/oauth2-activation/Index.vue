@@ -66,9 +66,10 @@
   </v-row>
 </template>
 <script setup lang="ts">
-import type { JSONData } from "@/composables/declarations";
+import type { JSONDataType } from "@/composables/declarations";
 import type { DeviceAuthorizationResponse } from "@herodotus/core";
 
+import { BuildInScopeEnum, ContentTypeEnum } from "@herodotus/core";
 import { SecurityApiResources, useDeviceAuthorize } from "@herodotus/framework";
 
 import { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout } from "../../components";
@@ -78,10 +79,7 @@ defineOptions({
   components: { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout },
 });
 
-const step = shallowRef(1);
-const items = ["第一步：验证产品信息", "第二步：设备动态注册", "第三步：验证新客户端"];
-
-const responseResults = ref({}) as Ref<JSONData>;
+const responseResults = ref({}) as Ref<JSONDataType>;
 
 const productKey = shallowRef("apktestadd");
 const deviceName = shallowRef("aaaaaa");
@@ -103,10 +101,13 @@ const expiresIn = shallowRef(0);
 const onDeviceAuthorization = () => {
   SecurityApiResources.getInstance()
     .oauth2()
-    .deviceAuthorizationFlow(clientId.value, deviceSecret.value)
+    .deviceAuthorizationFlow(clientId.value, deviceSecret.value, BuildInScopeEnum.CLIENT_CREATE, {
+      contentType: ContentTypeEnum.URL_ENCODED,
+      withToken: false,
+    })
     .then((response) => {
       const data = response as DeviceAuthorizationResponse;
-      responseResults.value = data;
+      responseResults.value = JSON.parse(JSON.stringify(data));
       userCode.value = data.user_code;
       deviceCode.value = data.device_code;
       verificationUriComplete.value = data.verification_uri_complete;

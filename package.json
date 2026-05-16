@@ -57,7 +57,7 @@
     "cross-env": "^10.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv": "^17.4.2",
-    "eslint": "^10.3.0",
+    "eslint": "^10.4.0",
     "eslint-config-vuetify": "4.6.2",
     "husky": "^9.1.7",
     "npm-run-all2": "^8.0.4",

@@ -80,6 +80,12 @@
               label="令牌端点认证签名算法"
             ></v-select>
             <h-text-divider label="令牌设置"></h-text-divider>
+            <h-label text="令牌格式"></h-label>
+            <h-dictionary-toggle
+              v-model="editedItem.tokenFormat"
+              dictionary="TokenFormat"
+              default-value="reference"
+            ></h-dictionary-toggle>
             <h-label text="令牌有效期"></h-label>
             <h-duration v-model="editedItem.accessTokenTimeToLive" label="令牌有效期"></h-duration>
             <h-label text="刷新令牌有效期"></h-label>
@@ -149,7 +155,9 @@ import { includes } from "lodash-es";
 import { useDictionary, useTableItem, useTable } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: "OAuth2ApplicationContent" });
+import { HDictionaryToggle, HDictionarySelect } from "@/components/library/HDictionary";
+
+defineOptions({ name: "OAuth2ApplicationContent", components: { HDictionaryToggle, HDictionarySelect } });
 
 const { editedItem, isEdit, title, overlay, saveOrUpdate } = useTableItem<OAuth2ApplicationEntity>(
   API.core.oauth2Application(),
