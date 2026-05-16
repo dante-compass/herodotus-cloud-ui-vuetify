@@ -85,6 +85,25 @@ var m = /* @__PURE__ */ function(e) {
 	getAxiosInstance() {
 		return this.axiosInstance;
 	}
+	setupInterceptors() {
+		let e = this.getAxiosInstanceHooks();
+		if (!e) return;
+		let { requestInterceptors: t, requestInterceptorsError: n, responseInterceptors: r, responseInterceptorsError: i } = e, a = new E();
+		this.getAxiosInstance().interceptors.request.use((e) => {
+			let n = e.effectiveOptions;
+			return n.prohibitRepeatRequests && a.addPending(e), t(e, n);
+		}, (e) => n(this.getAxiosInstance(), e)), this.getAxiosInstance().interceptors.response.use((e) => (e && a.removePending(e.config), r(e)), (e) => i(this.getAxiosInstance(), e));
+	}
+	mergeWithDefaultOptions(e) {
+		let t = this.getDefaultRequestOptions();
+		return n(e) ? t : i({}, t, e);
+	}
+	mergeWithDefaultConfig(e) {
+		let r = i({}, this.getDefaultAxiosRequestConfig(), { paramsSerializer: { serialize(e) {
+			return t.stringify(e, { arrayFormat: "brackets" });
+		} } });
+		return n(e) ? r : i({}, r, e);
+	}
 	createHttpHeaderPolicy(e) {
 		switch (e) {
 			case h.URL_ENCODED: return {
@@ -101,30 +120,11 @@ var m = /* @__PURE__ */ function(e) {
 			};
 		}
 	}
-	setupInterceptors() {
-		let e = this.getAxiosInstanceHooks();
-		if (!e) return;
-		let { requestInterceptors: t, requestInterceptorsError: n, responseInterceptors: r, responseInterceptorsError: i } = e, a = new E();
-		this.getAxiosInstance().interceptors.request.use((e) => {
-			let n = e.effectiveConfig;
-			return n.prohibitRepeatRequests && a.addPending(e), t(e, n);
-		}, (e) => n(this.getAxiosInstance(), e)), this.getAxiosInstance().interceptors.response.use((e) => (e && a.removePending(e.config), r(e)), (e) => i(this.getAxiosInstance(), e));
-	}
-	mergeHttpRequestOptions(e) {
-		let t = this.getDefaultRequestOptions();
-		return n(e) ? t : i({}, t, e);
-	}
-	mergeAxiosRequestConfigs(e) {
-		let r = i({}, this.getDefaultAxiosRequestConfig(), { paramsSerializer: { serialize(e) {
-			return t.stringify(e, { arrayFormat: "brackets" });
-		} } });
-		return n(e) ? r : i({}, r, e);
-	}
-	setupRequestStrategy(e, t, a) {
-		let { onRequestHook: o } = this.getAxiosInstanceHooks(), s = this.mergeHttpRequestOptions(a), c = this.mergeAxiosRequestConfigs(t);
+	setupRequest(e, t, a) {
+		let { onRequestHook: o } = this.getAxiosInstanceHooks(), s = this.mergeWithDefaultOptions(a), c = this.mergeWithDefaultConfig(t);
 		o && r(o) && (c = o(c, s));
 		let l = this.createHttpHeaderPolicy(s.contentType);
-		return c.headers ? c.headers = i(c.headers, l.headers) : c.headers = l.headers, c.url = e, n(c.data) || (c.data = l.dataConvert(c.data)), c.effectiveOptions = s, {
+		return c.headers ? c.headers = i(c.headers, l.headers) : c.headers = l.headers, n(c.data) || (c.data = l.dataConvert(c.data)), c.url = e, c.effectiveOptions = s, {
 			config: c,
 			options: s
 		};
@@ -140,7 +140,7 @@ var m = /* @__PURE__ */ function(e) {
 		});
 	}
 	process(e, t, n = {}) {
-		let r = this.setupRequestStrategy(e, t, n);
+		let r = this.setupRequest(e, t, n);
 		return this.request(r.config, r.options);
 	}
 	get(e, t = {}, n = { contentType: h.JSON }) {

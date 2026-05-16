@@ -8,7 +8,6 @@ const excludedRequest = ["/api/open/captcha", "/api/oauth2/token"];
 
 const isIncluded = (response: AxiosResponse<any>) => {
   const request = response.config.url;
-  console.log("-------", request);
   return !(request && excludedRequest.includes(request));
 };
 

@@ -14,21 +14,21 @@ export declare class Axios {
     private getDefaultRequestOptions;
     private getAxiosInstanceHooks;
     private getAxiosInstance;
-    private createHttpHeaderPolicy;
     private setupInterceptors;
     /**
      * 把当前请求的 options 与全局 options 整合获得一个完整的 options
      * @param currentRequestOptions 当前请求的 options
      * @returns 合并后的 options
      */
-    private mergeHttpRequestOptions;
+    private mergeWithDefaultOptions;
     /**
      * 把当前请求的 AxiosRequestConfig 与全局 AxiosRequestConfig 整合获得一个完整的 AxiosRequestConfig
      * @param currentAxiosRequestConfig 当前请求的 AxiosRequestConfig
      * @returns 合并后的 AxiosRequestConfig
      */
-    private mergeAxiosRequestConfigs;
-    private setupRequestStrategy;
+    private mergeWithDefaultConfig;
+    private createHttpHeaderPolicy;
+    private setupRequest;
     /**
      * 请求核心方法
      * @param config axios request 必要参数

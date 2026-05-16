@@ -339,24 +339,21 @@ var G = class e {
 	webAuthnCredentialsFlow(t, n = !1, r = "", a = "") {
 		return this.config.getHttp().postWithParams(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.WEBAUTHN_CREDENTIALS, {}, n), { ...t }, { contentType: i.JSON }, { headers: { Authorization: this.createBasicHeader(r, a) } });
 	}
-	oidcClientRegistrationFlow(t, i) {
+	oidcClientRegistrationFlow(t, n, a, o) {
 		return this.config.getHttp().post(this.getOIDCConnectRegisterAddress(), {
-			product_key: t,
-			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
-			redirect_uris: ["http://192.168.101.10:3000"],
-			client_name: i,
-			scope: [n.CLIENT_CREATE, n.CLIENT_READ].join(" "),
-			response_types: ["token"],
-			token_endpoint_auth_method: r.CLIENT_SECRET_POST
-		});
-	}
-	clientRegistrationFlow(t, n, a) {
-		return console.log("---clientRegistrationFlow---", a), this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
 			product_key: t,
 			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
 			client_name: n,
 			token_endpoint_auth_method: r.CLIENT_SECRET_POST
-		}, { contentType: i.JSON }, a);
+		}, b(a) ? { contentType: i.JSON } : a, o);
+	}
+	clientRegistrationFlow(t, n, a, o) {
+		return console.log("---clientRegistrationFlow---", o), this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
+			product_key: t,
+			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
+			client_name: n,
+			token_endpoint_auth_method: r.CLIENT_SECRET_POST
+		}, b(a) ? { contentType: i.JSON } : a, o);
 	}
 }, me = class e {
 	static instance = null;

@@ -87,6 +87,6 @@ export declare class OAuth2ApiService {
     socialCredentialsFlowBySms(mobile: string, code: string, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     socialCredentialsFlowByJustAuth(source: SocialSource, accessPrincipal: AccessPrincipal, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     webAuthnCredentialsFlow(publicKey: WebAuthnAuthenticate, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
-    oidcClientRegistrationFlow(productKey: string, clientName: string): Promise<AxiosHttpResult<any>>;
-    clientRegistrationFlow(productKey: string, clientName: string, config?: AxiosRequestConfig<OAuth2ClientRegistration>): Promise<AxiosHttpResult<OAuth2ClientRegistration>>;
+    oidcClientRegistrationFlow(productKey: string, clientName: string, options?: HttpRequestOptions, config?: AxiosRequestConfig<OAuth2ClientRegistration>): Promise<AxiosHttpResult<any>>;
+    clientRegistrationFlow(productKey: string, clientName: string, options?: HttpRequestOptions, config?: AxiosRequestConfig<OAuth2ClientRegistration>): Promise<AxiosHttpResult<OAuth2ClientRegistration>>;
 }

@@ -78,7 +78,7 @@ export class Axios {
       (config: InternalAxiosRequestConfig<any>) => {
         // If cancel repeat request is turned on, then cancel repeat request is prohibited
         // @ts-ignore
-        const options = config.effectiveConfig;
+        const options = config.effectiveOptions;
 
         if (options.prohibitRepeatRequests) {
           axiosCanceler.addPending(config);

@@ -4,11 +4,10 @@ import type {
   AxiosInstanceHooks,
   HttpRequestOptions,
   AxiosError,
-  InternalAxiosRequestConfig,
+  AxiosRequestConfig,
   AxiosInstance,
+  InternalAxiosRequestConfig,
 } from "@herodotus/core";
-
-import { unset } from "lodash-es";
 
 import { logResponse, isSuccess } from "@herodotus/core";
 
@@ -18,14 +17,7 @@ import { IS_DEV } from "../constants";
 
 export const axiosInstanceHooks: AxiosInstanceHooks = {
   // 请求之前处理config
-  onRequestHook(config, options) {
-    console.log("-----onRequestHook config -----", config);
-    console.log("-----onRequestHook options -----", options);
-    if (options.withToken === false && config.headers?.Authorization) {
-      console.log("-------", config);
-      unset(config, "headers.Authorization");
-      console.log("-------", config);
-    }
+  onRequestHook(config: AxiosRequestConfig, options: HttpRequestOptions) {
     return config;
   },
 
@@ -53,16 +45,16 @@ export const axiosInstanceHooks: AxiosInstanceHooks = {
   /**
    * @description: 请求拦截器处理
    */
-  requestInterceptors(config: InternalAxiosRequestConfig) {
-    console.log("-----requestInterceptors -----", config);
-    const headers = getSystemHeaders();
+  requestInterceptors(config: InternalAxiosRequestConfig, options: HttpRequestOptions) {
+    if (options.withToken === undefined || options.withToken === true) {
+      const systemHeaders = getSystemHeaders();
 
-    Object.keys(headers).forEach((key) => {
-      if (config.headers && !config.headers[key]) {
-        config.headers[key] = headers[key];
-      }
-    });
-
+      Object.keys(systemHeaders).forEach((key) => {
+        if (config.headers && !config.headers[key]) {
+          config.headers[key] = systemHeaders[key];
+        }
+      });
+    }
     return config;
   },
 

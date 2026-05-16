@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 1.6.5
+
+### Patch Changes
+
+- 升级依赖，重新编译库
+- Updated dependencies
+  - @herodotus/core@1.6.5
+
 ## 1.6.4
 
 ### Patch Changes

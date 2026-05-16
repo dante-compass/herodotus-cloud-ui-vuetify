@@ -161,18 +161,24 @@ const onDynamicRegistration = () => {
   // 客户端注册需要使用到上面方法中的 "initial" Access token
   SecurityApiResources.getInstance()
     .oauth2()
-    .clientRegistrationFlow(productKey.value, "aaaaaa", {
-      headers: {
-        Authorization: productAccessToken.value,
+    .clientRegistrationFlow(
+      productKey.value,
+      "aaaaaa",
+      {
+        contentType: ContentTypeEnum.JSON,
+        withToken: false,
       },
-    })
+      {
+        headers: {
+          Authorization: "Bearer " + productAccessToken.value,
+        },
+      },
+    )
     .then((response) => {
       const data = response as OAuth2ClientRegistration;
       responseResults.value = JSON.parse(JSON.stringify(data));
       deviceName.value = data.client_id as string;
       deviceSecret.value = data.client_secret as string;
-      // 客户端注册成功后，清理 access_token。防止下一步验证时，因携带了该 Token，导致验证失败。
-      store.$reset();
     })
     .catch((error) => {
       responseResults.value = error;
