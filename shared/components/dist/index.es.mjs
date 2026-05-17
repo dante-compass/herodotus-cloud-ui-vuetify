@@ -589,8 +589,36 @@ J.install = (e) => {
 	e.component(J.name, J);
 };
 //#endregion
-//#region src/HParticles/HParticles.vue?vue&type=script&setup=true&lang.ts
-var Oe = ["id"], Y = /* @__PURE__ */ c({
+//#region src/HParticles/particles.ts
+var Oe = {
+	fullScreen: { zIndex: 1 },
+	preset: "triangles",
+	background: { color: "transparent" },
+	particles: {
+		number: {
+			density: {
+				enable: !0,
+				width: 1920,
+				height: 1080
+			},
+			value: 100
+		},
+		links: {
+			distance: 125,
+			enable: !0,
+			triangles: {
+				enable: !0,
+				opacity: .1
+			}
+		},
+		move: {
+			enable: !0,
+			speed: 5
+		},
+		size: { value: 1 },
+		shape: { type: "circle" }
+	}
+}, ke = ["id"], Y = /* @__PURE__ */ c({
 	name: "HParticles",
 	__name: "HParticles",
 	setup(e) {
@@ -599,40 +627,12 @@ var Oe = ["id"], Y = /* @__PURE__ */ c({
 			d(async () => {
 				await ye(L), n = await L.load({
 					id: t.value,
-					options: {
-						fullScreen: { zIndex: 1 },
-						preset: "triangles",
-						background: { color: "transparent" },
-						particles: {
-							number: {
-								density: {
-									enable: !0,
-									width: 1920,
-									height: 1080
-								},
-								value: 100
-							},
-							links: {
-								distance: 125,
-								enable: !0,
-								triangles: {
-									enable: !0,
-									opacity: .1
-								}
-							},
-							move: {
-								enable: !0,
-								speed: 5
-							},
-							size: { value: 1 },
-							shape: { type: "circle" }
-						}
-					}
+					options: Oe
 				});
 			});
 		}), ee(() => {
 			n &&= (n.destroy(), void 0);
-		}), (e, n) => (p(), r("div", { id: t.value }, [m(e.$slots, "default")], 8, Oe));
+		}), (e, n) => (p(), r("div", { id: t.value }, [m(e.$slots, "default")], 8, ke));
 	}
 });
 //#endregion
@@ -642,7 +642,7 @@ Y.install = (e) => {
 };
 //#endregion
 //#region src/lib/stores/mdiicon.ts
-var ke = be("MdiIcon", {
+var Ae = be("MdiIcon", {
 	state: () => ({ icons: [] }),
 	getters: { getAllIcons: (e) => e.icons },
 	actions: {
@@ -673,7 +673,7 @@ var ke = be("MdiIcon", {
 	},
 	emits: ["update:modelValue"],
 	setup(e) {
-		let r = v(e, "modelValue"), i = h([]), a = h(!1), o = h(""), c = ke(), l = me((e, t) => {
+		let r = v(e, "modelValue"), i = h([]), a = h(!1), o = h(""), c = Ae(), l = me((e, t) => {
 			a.value = !0, t(c.search(e)), a.value = !1;
 		}, 500);
 		return f(() => {
@@ -812,19 +812,19 @@ X.install = (e) => {
 };
 //#endregion
 //#region src/HSignIn/HSignInCornerBottom.vue?vue&type=script&setup=true&lang.ts
-var Ae = {
+var je = {
 	version: "1.1",
 	xmlns: "http://www.w3.org/2000/svg",
 	"xmlns:xlink": "http://www.w3.org/1999/xlink",
 	height: "896",
 	width: "967.8852157128662"
-}, je = {
+}, Me = {
 	id: "linearGradient-3",
 	x1: "0.5",
 	y1: "0",
 	x2: "0.5",
 	y2: "1"
-}, Me = ["stop-color"], Ne = ["stop-color"], Pe = /* @__PURE__ */ c({
+}, Ne = ["stop-color"], Pe = ["stop-color"], Fe = /* @__PURE__ */ c({
 	name: "HSignInCornerBottom",
 	__name: "HSignInCornerBottom",
 	props: {
@@ -832,35 +832,35 @@ var Ae = {
 		endColor: { default: "#120fc4" }
 	},
 	setup(e) {
-		return (t, n) => (p(), r("svg", Ae, [i("defs", null, [n[0] ||= i("path", {
+		return (t, n) => (p(), r("svg", je, [i("defs", null, [n[0] ||= i("path", {
 			id: "path-2",
 			opacity: "1",
 			"fill-rule": "evenodd",
 			d: "M896,448 C1142.6325445712241,465.5747656464056 695.2579309733121,896 448,896\n			C200.74206902668806,896 5.684341886080802e-14,695.2579309733121 0,448.0000000000001 C0,200.74206902668806\n			200.74206902668791,5.684341886080802e-14 447.99999999999994,0 C695.2579309733121,0 475,418 896,448Z"
-		}, null, -1), i("linearGradient", je, [i("stop", {
+		}, null, -1), i("linearGradient", Me, [i("stop", {
 			offset: "0",
 			"stop-color": e.startColor,
 			"stop-opacity": "1"
-		}, null, 8, Me), i("stop", {
+		}, null, 8, Ne), i("stop", {
 			offset: "1",
 			"stop-color": e.endColor,
 			"stop-opacity": "1"
-		}, null, 8, Ne)])]), n[1] ||= i("g", { opacity: "1" }, [i("use", {
+		}, null, 8, Pe)])]), n[1] ||= i("g", { opacity: "1" }, [i("use", {
 			"xlink:href": "#path-2",
 			fill: "url(#linearGradient-3)",
 			"fill-opacity": "1"
 		})], -1)]));
 	}
-}), Fe = {
+}), Ie = {
 	height: "1337",
 	width: "1337"
-}, Ie = {
+}, Le = {
 	id: "linearGradient-2",
 	x1: "0.79",
 	y1: "0.62",
 	x2: "0.21",
 	y2: "0.86"
-}, Le = ["stop-color"], Re = ["stop-color"], Q = /* @__PURE__ */ c({
+}, Re = ["stop-color"], ze = ["stop-color"], Q = /* @__PURE__ */ c({
 	name: "HSignInCornerTop",
 	__name: "HSignInCornerTop",
 	props: {
@@ -868,33 +868,33 @@ var Ae = {
 		endColor: { default: "#120fc4" }
 	},
 	setup(e) {
-		return (t, n) => (p(), r("svg", Fe, [i("defs", null, [n[0] ||= i("path", {
+		return (t, n) => (p(), r("svg", Ie, [i("defs", null, [n[0] ||= i("path", {
 			id: "path-1",
 			opacity: "1",
 			"fill-rule": "evenodd",
 			d: "M1337,668.5 C1337,1037.455193874239 1037.455193874239,1337 668.5,1337 C523.6725684305388,1337 337,1236 370.50000000000006,1094 C434.03835568300906,824.6732385973953 6.906089672974592e-14,892.6277623047779 0,668.5000000000001 C0,299.5448061257611 299.5448061257609,1.1368683772161603e-13 668.4999999999999,0 C1037.455193874239,0 1337,299.544806125761 1337,668.5Z"
-		}, null, -1), i("linearGradient", Ie, [i("stop", {
+		}, null, -1), i("linearGradient", Le, [i("stop", {
 			offset: "0",
 			"stop-color": e.startColor,
 			"stop-opacity": "1"
-		}, null, 8, Le), i("stop", {
+		}, null, 8, Re), i("stop", {
 			offset: "1",
 			"stop-color": e.endColor,
 			"stop-opacity": "1"
-		}, null, 8, Re)])]), n[1] ||= i("g", { opacity: "1" }, [i("use", {
+		}, null, 8, ze)])]), n[1] ||= i("g", { opacity: "1" }, [i("use", {
 			"xlink:href": "#path-1",
 			fill: "url(#linearGradient-2)",
 			"fill-opacity": "1"
 		})], -1)]));
 	}
-}), ze = { class: "corner-top" }, Be = { class: "corner-bottom" }, $ = /* @__PURE__ */ ((e, t) => {
+}), Be = { class: "corner-top" }, Ve = { class: "corner-bottom" }, $ = /* @__PURE__ */ ((e, t) => {
 	let n = e.__vccOpts || e;
 	for (let [e, r] of t) n[e] = r;
 	return n;
 })(/* @__PURE__ */ c({
 	name: "HSignInBackground",
 	components: {
-		HSignInCornerBottom: Pe,
+		HSignInCornerBottom: Fe,
 		HSignInCornerTop: Q
 	},
 	__name: "HSignInBackground",
@@ -903,10 +903,10 @@ var Ae = {
 		endColor: {}
 	},
 	setup(e) {
-		return (t, n) => (p(), r("div", null, [i("div", ze, [s(Q, {
+		return (t, n) => (p(), r("div", null, [i("div", Be, [s(Q, {
 			"start-color": e.startColor,
 			"end-color": e.endColor
-		}, null, 8, ["start-color", "end-color"])]), i("div", Be, [s(Pe, {
+		}, null, 8, ["start-color", "end-color"])]), i("div", Ve, [s(Fe, {
 			"start-color": e.endColor,
 			"end-color": e.startColor
 		}, null, 8, ["start-color", "end-color"])])]));
@@ -919,7 +919,7 @@ $.install = (e) => {
 };
 //#endregion
 //#region src/index.ts
-var Ve = [
+var He = [
 	R,
 	B,
 	H,
@@ -933,8 +933,8 @@ var Ve = [
 	K,
 	W,
 	Z
-], He = { install: (e) => {
-	Ve.map((t) => t.install(e));
+], Ue = { install: (e) => {
+	He.map((t) => t.install(e));
 } };
 //#endregion
-export { R as HButton, B as HDate, H as HDateTime, G as HDialog, q as HDownloadProgress, U as HDuration, J as HLabel, X as HMdiIconSelect, Y as HParticles, $ as HSignInBackground, K as HTextDivider, W as HTime, Z as HTreeSelect, He as default };
+export { R as HButton, B as HDate, H as HDateTime, G as HDialog, q as HDownloadProgress, U as HDuration, J as HLabel, X as HMdiIconSelect, Y as HParticles, $ as HSignInBackground, K as HTextDivider, W as HTime, Z as HTreeSelect, Ue as default };
