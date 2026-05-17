@@ -1,6 +1,5 @@
-declare const date: import('vue').ModelRef<string | undefined, string, string | undefined, string | undefined>;
 type __VLS_ModelProps = {
-    modelValue?: typeof date['value'];
+    modelValue?: string;
 };
 declare const __VLS_export: import('vue').DefineComponent<__VLS_ModelProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     "update:modelValue": (value: string | undefined) => any;

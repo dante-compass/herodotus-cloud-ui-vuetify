@@ -1,26 +1,27 @@
 <template>
   <div>
-    <h-characteristic-panel v-model="entity"></h-characteristic-panel>
+    <h-characteristic-panel v-model="model"></h-characteristic-panel>
     <h-label text="数据类型：" required></h-label>
     <h-dictionary-select
-      v-model="entity.dataType.type"
+      v-model="model.dataType.type"
       dictionary="ArgumentType"
       density="compact"
     ></h-dictionary-select>
-    <component :is="currentPanel" v-model="entity"></component>
+    <component :is="currentPanel" v-model="model"></component>
   </div>
 </template>
 
 <script lang="ts">
-import { useTslEntity } from "@/composables/hooks";
-const { createEmptyNormalArgument } = useTslEntity();
+import { useTslEmptyArgument } from "../../composables/hooks";
+const { createEmptyNormalArgument, createEmptyStructArgument } = useTslEmptyArgument();
 </script>
 
 <script setup lang="ts">
 import type { Specification, Specs } from "@herodotus/api";
 
-import { toUpper } from "lodash-es";
-import { HDictionarySelect } from "@/components/library/HSelect";
+import { toUpper, isEmpty } from "lodash-es";
+
+import { HDictionarySelect } from "@/components/library/HDictionary";
 
 import HBoolPanel from "./HBoolPanel.vue";
 import HDatePanel from "./HDatePanel.vue";
@@ -46,15 +47,43 @@ defineOptions({
   },
 });
 
-const entity = defineModel<Specification<Specs>>({
+const model = defineModel<Specification<Specs>>({
   default: () => createEmptyNormalArgument(),
 });
 
 const currentPanel = computed(() => {
-  if (entity.value.dataType.type) {
-    return toUpper(entity.value.dataType.type) + "_PANEL";
+  if (model.value.dataType.type) {
+    return toUpper(model.value.dataType.type) + "_PANEL";
   } else {
     return "INT_PANEL";
   }
 });
+
+/**
+ * 判断当前的 model 是否为默认值。是默认值则代表是新建操作，即 model 是默认的空对象。否则，代表是编辑操作，即外部给 model 传递具体的值
+ *
+ * 目前采用最简单的判断方式，即 model 中 identifier 和 name 都为空值
+ */
+const isModelEmpty = () => {
+  return isEmpty(model.value.identifier) && isEmpty(model.value.name);
+};
+
+watch(
+  () => model.value.dataType.type,
+  (newValue, oldValue) => {
+    // 类型未实际变化则跳过（避免初始化时重复触发）
+    if (newValue === oldValue) {
+      return;
+    }
+
+    // 仅在新创建的情况下，做此操作避免切换至 struts 面板时，抛出类型不匹配错误
+    if (isModelEmpty()) {
+      if (newValue === "struct") {
+        model.value = createEmptyStructArgument();
+      } else {
+        model.value = createEmptyNormalArgument();
+      }
+    }
+  },
+);
 </script>

@@ -11,7 +11,7 @@
           (v: string) => isUniqueRule(v),
         ]"
       ></v-text-field>
-      <h-text-field v-model="editedItem.productName" label="产品名称" placeholder="请输入产品名称"></h-text-field>
+      <v-text-field v-model="editedItem.productName" label="产品名称" placeholder="请输入产品名称"></v-text-field>
       <h-dictionary-select v-model="editedItem.nodeType" dictionary="NodeType" label="节点类型"></h-dictionary-select>
       <h-dictionary-select
         v-if="isShowGatewayProtocol"
@@ -35,12 +35,12 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductEntity } from '@herodotus/api';
+import type { ProductEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API } from "@/configurations";
 
-defineOptions({ name: 'IotProductContent' });
+defineOptions({ name: "IotProductContent" });
 
 const roleForm = ref();
 
@@ -72,20 +72,20 @@ const isUniqueRule = (roleCode: string) => {
       if (validate) {
         return true;
       } else {
-        return 'ProductKey已被占用，请改用其它ProductKey';
+        return "ProductKey已被占用，请改用其它ProductKey";
       }
     })
     .catch(() => {
-      return '后端服务暂时不可用';
+      return "后端服务暂时不可用";
     });
 };
 
 const isShowGatewayProtocol = computed(() => {
-  return editedItem.value.nodeType === '1';
+  return editedItem.value.nodeType === "1";
 });
 
 const isShowNetworkingMethod = computed(() => {
-  return editedItem.value.nodeType === '0' || editedItem.value.nodeType === '2';
+  return editedItem.value.nodeType === "0" || editedItem.value.nodeType === "2";
 });
 
 const onSave = async () => {

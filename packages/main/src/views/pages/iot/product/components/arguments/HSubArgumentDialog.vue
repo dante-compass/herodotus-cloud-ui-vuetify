@@ -1,12 +1,12 @@
 <template>
-  <h-dialog v-model="openDialog" title="添加参数" @confirm="onSave">
+  <h-dialog v-model="model" title="添加参数" @confirm="onSave">
     <v-form ref="subArgumentForm">
       <h-characteristic-panel v-model="entity"></h-characteristic-panel>
       <h-label text="数据类型" required></h-label>
       <h-dictionary-select
         v-model="entity.dataType.type"
         dictionary="ArgumentType"
-        :disable-items="['struct']"
+        :disabled-items="['struct']"
       ></h-dictionary-select>
       <component :is="currentPanel" v-model="entity"></component>
     </v-form>
@@ -19,9 +19,9 @@ import type { Specification, Specs } from "@herodotus/api";
 import { computed, onUpdated, ref } from "vue";
 
 import { toUpper } from "lodash-es";
-import { useTslEntity, useTslValidate } from "@/composables/hooks";
+import { useTslEmptyArgument } from "../../composables/hooks";
 
-import { HDictionarySelect } from "@/components/library/HSelect";
+import { HDictionarySelect } from "@/components/library/HDictionary";
 import HBoolPanel from "./HBoolPanel.vue";
 import HDatePanel from "./HDatePanel.vue";
 import HEnumPanel from "./HEnumPanel.vue";
@@ -44,13 +44,13 @@ defineOptions({
   },
 });
 
-const openDialog = defineModel<boolean>({
+const model = defineModel<boolean>({
   required: true,
 });
 
 const emit = defineEmits(["save"]);
 
-const { createEmptyNormalArgument } = useTslEntity();
+const { createEmptyNormalArgument } = useTslEmptyArgument();
 
 const subArgumentForm = ref();
 
@@ -67,7 +67,7 @@ const currentPanel = computed(() => {
 const onSave = async () => {
   const { valid } = await subArgumentForm.value.validate();
   if (valid) {
-    openDialog.value = false;
+    model.value = false;
     emit("save", entity.value);
   }
 };

@@ -311,8 +311,8 @@ var G = class e {
 			redirect_uri: n
 		}, a), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(o, s) } });
 	}
-	clientCredentialsFlow(t = "", n = "", r = "") {
-		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, r) }), { contentType: i.URL_ENCODED });
+	clientCredentialsFlow(t = "", n = "", r = "", a) {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, r) }), b(a) ? { contentType: i.URL_ENCODED } : a);
 	}
 	deviceCodeFlow(t, n = "", r = "", a = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.DEVICE_CODE, {
@@ -320,8 +320,8 @@ var G = class e {
 			...this.createClientData(n, r, a)
 		}), { contentType: i.URL_ENCODED });
 	}
-	deviceAuthorizationFlow(e = "", t = "", r = n.EMAIL) {
-		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), this.createClientData(e, t, r), { contentType: i.URL_ENCODED });
+	deviceAuthorizationFlow(e = "", t = "", r = n.EMAIL, a) {
+		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), { ...this.createClientData(e, t, r) }, b(a) ? { contentType: i.URL_ENCODED } : a);
 	}
 	socialCredentialsFlowBySms(t, n, r = !1, a = "", o = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.SOCIAL_CREDENTIALS, {
@@ -339,26 +339,21 @@ var G = class e {
 	webAuthnCredentialsFlow(t, n = !1, r = "", a = "") {
 		return this.config.getHttp().postWithParams(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.WEBAUTHN_CREDENTIALS, {}, n), { ...t }, { contentType: i.JSON }, { headers: { Authorization: this.createBasicHeader(r, a) } });
 	}
-	oidcClientRegistrationFlow(t, i) {
+	oidcClientRegistrationFlow(t, n, a, o) {
 		return this.config.getHttp().post(this.getOIDCConnectRegisterAddress(), {
 			product_key: t,
 			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
-			redirect_uris: ["http://192.168.101.10:3000"],
-			client_name: i,
-			scope: [n.CLIENT_CREATE, n.CLIENT_READ].join(" "),
-			response_types: ["token"],
+			client_name: n,
 			token_endpoint_auth_method: r.CLIENT_SECRET_POST
-		});
+		}, b(a) ? { contentType: i.JSON } : a, o);
 	}
-	clientRegistrationFlow(t, n) {
+	clientRegistrationFlow(t, n, a, o) {
 		return this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
 			product_key: t,
 			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
-			redirect_uris: ["http://192.168.101.10:3000"],
 			client_name: n,
-			response_types: ["token"],
 			token_endpoint_auth_method: r.CLIENT_SECRET_POST
-		});
+		}, b(a) ? { contentType: i.JSON } : a, o);
 	}
 }, me = class e {
 	static instance = null;

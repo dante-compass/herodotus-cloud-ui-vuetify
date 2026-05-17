@@ -5,7 +5,7 @@
       <v-row no-gutters>
         <v-col cols="5"
           ><v-text-field
-            v-model="entity.dataType.specs.min"
+            v-model="model.dataType.specs.min"
             density="compact"
             placeholder="请输入最小值"
             hide-details
@@ -14,7 +14,7 @@
         <v-col cols="2" align-self="center" class="text-center">~</v-col>
         <v-col cols="5"
           ><v-text-field
-            v-model="entity.dataType.specs.max"
+            v-model="model.dataType.specs.max"
             density="compact"
             placeholder="请输入最大值"
             hide-details
@@ -23,7 +23,7 @@
       </v-row>
     </v-container>
     <h-label text="步长："></h-label>
-    <v-text-field v-model="entity.dataType.specs.step" density="compact" placeholder="请输入步长" />
+    <v-text-field v-model="model.dataType.specs.step" density="compact" placeholder="请输入步长" />
     <h-label text="单位："></h-label>
     <h-unit-select v-model="unit" density="compact"></h-unit-select>
   </div>
@@ -34,18 +34,12 @@ import type { Specification, IntegerSpecs, FloatSpecs, DoubleSpecs, TslUnitEntit
 
 import { isEmpty } from "lodash-es";
 
-import { HDictionarySelect } from "@/components/library/HSelect";
+import { HDictionarySelect } from "@/components/library/HDictionary";
 import HUnitSelect from "./HUnitSelect.vue";
 
-defineOptions({
-  name: "HNumberPanel",
-  components: {
-    HDictionarySelect,
-    HUnitSelect,
-  },
-});
+defineOptions({ name: "HNumberPanel", components: { HDictionarySelect, HUnitSelect } });
 
-const entity = defineModel<Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>>({
+const model = defineModel<Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>>({
   default: () => ({}),
 });
 
@@ -53,8 +47,8 @@ const unit = ref<TslUnitEntity | null>(null);
 
 watch(unit, (newValue) => {
   if (!isEmpty(newValue)) {
-    entity.value.dataType.specs.unit = newValue.symbol;
-    entity.value.dataType.specs.unitName = newValue.name;
+    model.value.dataType.specs.unit = newValue.symbol;
+    model.value.dataType.specs.unitName = newValue.name;
   }
 });
 </script>

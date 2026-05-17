@@ -1,5 +1,29 @@
 # @herodotus/core
 
+## 1.6.7
+
+### Patch Changes
+
+- 版本发布
+
+## 1.6.6
+
+### Patch Changes
+
+- [新增] 可通过前端界面配置更改 OAuth2 Token 格式，无需再通过配置文件方式更改 Token 格式
+
+## 1.6.5
+
+### Patch Changes
+
+- 升级依赖，重新编译库
+
+## 1.6.4
+
+### Patch Changes
+
+- 物模型编辑页面完成
+
 ## 1.6.3
 
 ### Patch Changes

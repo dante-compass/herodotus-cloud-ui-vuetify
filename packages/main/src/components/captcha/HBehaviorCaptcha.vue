@@ -1,12 +1,12 @@
 <template>
-  <v-dialog v-model="dialog" width="auto">
+  <v-dialog v-model="model" width="auto">
     <v-card>
       <v-toolbar density="compact" class="pa-0">
         <v-spacer></v-spacer>
         <v-btn icon size="x-small" class="mr-2" @click="onReset()">
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
-        <v-btn icon size="x-small" class="mr-2" @click="dialog = false">
+        <v-btn icon size="x-small" class="mr-2" @click="model = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
@@ -32,13 +32,13 @@
 </template>
 
 <script setup lang="ts">
-import HJigsawCaptcha from './HJigsawCaptcha.vue';
-import HWordClickCaptcha from './HWordClickCaptcha.vue';
+import HJigsawCaptcha from "./HJigsawCaptcha.vue";
+import HWordClickCaptcha from "./HWordClickCaptcha.vue";
 
-import { useBehaviorCaptcha } from '@/composables/hooks';
+import { useBehaviorCaptcha } from "@/composables/hooks";
 
 defineOptions({
-  name: 'HBehaviorCaptcha',
+  name: "HBehaviorCaptcha",
   components: {
     WORD_CLICK: HWordClickCaptcha,
     JIGSAW: HJigsawCaptcha,
@@ -46,22 +46,20 @@ defineOptions({
 });
 
 interface Props {
-  type?: 'JIGSAW' | 'WORD_CLICK';
+  type?: "JIGSAW" | "WORD_CLICK";
   canvasWidth?: number;
   canvasHeight?: number;
   sliderSize?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: 'JIGSAW',
+  type: "JIGSAW",
   canvasWidth: 310,
   canvasHeight: 155,
   sliderSize: 30,
 });
 
-const dialog = defineModel({
-  type: Boolean,
-});
+const model = defineModel<boolean>({});
 
 const emit = defineEmits<{
   verify: [status: boolean];
@@ -74,7 +72,7 @@ const init = () => {
 };
 
 const onVerify = ($event: boolean) => {
-  emit('verify', $event);
+  emit("verify", $event);
 };
 
 const onReset = () => {
@@ -83,7 +81,7 @@ const onReset = () => {
 };
 
 watch(
-  dialog,
+  model,
   (newValue) => {
     if (newValue) {
       init();

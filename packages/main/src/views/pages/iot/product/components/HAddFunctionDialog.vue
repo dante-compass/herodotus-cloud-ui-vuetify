@@ -1,5 +1,5 @@
 <template>
-  <h-dialog v-model="openDialog" prepend-icon="mdi-function" title="添加物模型功能" @confirm="onSave">
+  <h-dialog v-model="model" prepend-icon="mdi-function" title="添加物模型功能" @confirm="onSave">
     <h-label text="功能类型：" required></h-label>
     <h-dictionary-toggle
       class="q-mb-md"
@@ -8,10 +8,14 @@
       default-value="properties"
     ></h-dictionary-toggle>
     <component :is="currentPanel" v-model="entity" ref="identifier"></component>
-    <div v-if="isNotPropertiesPanel">
-      <h-label text="描述："></h-label>
-      <v-textarea v-model="entity.description" placeholder="请输入描述内容" clearable></v-textarea>
-    </div>
+    <h-label text="描述："></h-label>
+    <v-textarea
+      v-model="entity.description"
+      placeholder="请输入描述内容"
+      maxlength="100"
+      counter
+      single-line
+    ></v-textarea>
   </h-dialog>
 </template>
 
@@ -21,9 +25,9 @@ import type { TslFunctionEntity } from "@herodotus/api";
 import { toUpper } from "lodash-es";
 import { toast } from "@herodotus/core";
 
-import { useTslValidate } from "@/composables/hooks";
+import { useTslValidation } from "../composables/hooks";
 import { API } from "@/configurations";
-import { HDictionaryToggle } from "@/components/library/HSelect";
+import { HDictionaryToggle } from "@/components/library/HDictionary";
 
 import HPropertiesPanel from "./functions/HPropertiesPanel.vue";
 import HEventsPanel from "./functions/HEventsPanel.vue";
@@ -46,20 +50,18 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const openDialog = defineModel({
-  type: Boolean,
+const model = defineModel<boolean>({
   default: false,
   required: true,
 });
 
-const emit = defineEmits(["success"]);
-const { identifier, getIdentifierValidator } = useTslValidate();
+const entity = defineModel<TslFunctionEntity>("entity", {
+  default: () => ({ dimension: "properties" }),
+  required: true,
+});
 
-const entity = ref({
-  dimension: "properties",
-  productId: props.productId,
-  productKey: props.productKey,
-}) as Ref<TslFunctionEntity>;
+const emit = defineEmits(["success"]);
+const { identifier, getValidator } = useTslValidation();
 
 const currentPanel = computed(() => {
   if (entity.value.dimension) {
@@ -69,27 +71,23 @@ const currentPanel = computed(() => {
   }
 });
 
-const isNotPropertiesPanel = computed(() => {
-  return currentPanel.value !== "PROPERTIES_PANEL";
-});
-
 const onSave = () => {
-  const valid = getIdentifierValidator();
+  const valid = getValidator();
   valid.then((result) => {
-    // if (result) {
-    //   API.core
-    //     .iotTslFunction()
-    //     .saveOrUpdate(entity.value)
-    //     .then((result) => {
-    //       openDialog.value = false;
-    //       emit("success");
-    //       toast.success("添加成功！");
-    //     })
-    //     .catch((error) => {
-    //       openDialog.value = false;
-    //       toast.error(error.message);
-    //     });
-    // }
+    if (result) {
+      API.core
+        .iotTslFunction()
+        .saveOrUpdate(entity.value)
+        .then((result) => {
+          model.value = false;
+          emit("success");
+          toast.success("添加成功！");
+        })
+        .catch((error) => {
+          model.value = false;
+          toast.error(error.message);
+        });
+    }
   });
 };
 </script>

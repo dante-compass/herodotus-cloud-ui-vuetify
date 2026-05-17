@@ -1,6 +1,6 @@
 <template>
   <h-dialog
-    v-model="open"
+    v-model="model"
     prepend-icon="mdi-calendar-today"
     title="设置文件保留策略"
     :loading="loading"
@@ -39,8 +39,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const open = defineModel({
-  type: Boolean,
+const model = defineModel<boolean>({
   default: false,
   required: true,
 });
@@ -59,7 +58,7 @@ const onSave = async () => {
       .then((response) => {
         const result = response.data as HttpResult<PutBucketPolicyResult>;
         loading.value = false;
-        open.value = false;
+        model.value = false;
         if (result.successful) {
           if (result.message) {
             toast.success(result.message);
@@ -72,7 +71,7 @@ const onSave = async () => {
       })
       .catch(() => {
         loading.value = false;
-        open.value = false;
+        model.value = false;
       });
   }
 };

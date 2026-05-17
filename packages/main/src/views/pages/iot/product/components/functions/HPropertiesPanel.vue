@@ -1,12 +1,13 @@
 <template>
   <v-form ref="identifier">
     <h-argument-panel v-model="argument"></h-argument-panel>
-    <h-label text="读写类型" required></h-label>
+    <h-label text="读写类型:" required></h-label>
     <h-dictionary-option
       v-model="entity.accessMode"
       dictionary="AccessMode"
       default-value="rw"
       inline
+      hide-details
     ></h-dictionary-option>
   </v-form>
 </template>
@@ -15,9 +16,9 @@
 import type { TslFunctionEntity, Specification, Specs } from "@herodotus/api";
 
 import { isEmpty } from "lodash-es";
-import { useTslEntity, useTslValidate } from "@/composables/hooks";
+import { useTslEmptyArgument, useTslValidation } from "../../composables/hooks";
 
-import { HDictionaryOption } from "@/components/library/HSelect";
+import { HDictionaryOption } from "@/components/library/HDictionary";
 import { HArgumentPanel } from "../arguments";
 
 defineOptions({ name: "HPropertiesPanel" });
@@ -26,8 +27,8 @@ const entity = defineModel<TslFunctionEntity>({
   default: () => ({}),
 });
 
-const { createEmptyNormalArgument } = useTslEntity();
-const { identifier, validate } = useTslValidate();
+const { createEmptyNormalArgument } = useTslEmptyArgument();
+const { identifier, validate } = useTslValidation();
 const argument = ref<Specification<Specs>>(createEmptyNormalArgument());
 
 watch(

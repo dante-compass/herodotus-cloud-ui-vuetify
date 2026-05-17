@@ -1,5 +1,5 @@
 <template>
-  <h-full-width-form-layout title="产品信息">
+  <h-full-width-form-layout :title="title">
     <v-card flat>
       <v-card-item>
         <v-tabs v-model="tab" class="font-weight-bold">
@@ -11,7 +11,11 @@
 
     <v-tabs-window v-model="tab">
       <v-tabs-window-item value="tsl">
-        <h-function-table :product-id="editedItem.id" :product-key="editedItem.productKey"></h-function-table>
+        <h-function-table
+          v-if="isShowTable"
+          :product-id="editedItem.id"
+          :product-key="editedItem.productKey"
+        ></h-function-table>
       </v-tabs-window-item>
       <v-tabs-window-item value="realname">
         <v-card flat>
@@ -35,4 +39,16 @@ defineOptions({ name: "IotProductInfo" });
 const tab = shallowRef("tsl");
 
 const { editedItem, operation, title } = useTableItem<ProductEntity>(API.core.iotProduct());
+
+const isShowTable = shallowRef(false);
+
+onMounted(() => {
+  console.log("-----ddd----", editedItem.value.id);
+  console.log("-----ddd----", editedItem.value.productKey);
+  if (editedItem.value.id && editedItem.value.productKey) {
+    isShowTable.value = true;
+  } else {
+    false;
+  }
+});
 </script>

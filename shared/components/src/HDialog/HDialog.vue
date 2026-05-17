@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="open" :max-width="maxWidth" persistent>
+  <v-dialog v-model="model" :max-width="maxWidth" persistent>
     <v-card :disabled="loading" :loading="loading" v-bind="$attrs">
       <template #loader="{ isActive }">
         <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
@@ -21,11 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import { VBtn, VCard, VCardText, VCardActions, VDialog, VDivider, VProgressLinear } from 'vuetify/components';
+import { VBtn, VCard, VCardText, VCardActions, VDialog, VDivider, VProgressLinear } from "vuetify/components";
 
-import { HButton } from '../HButton';
+import { HButton } from "../HButton";
 
-defineOptions({ name: 'HDialog', components: { VDialog, HButton } });
+defineOptions({ name: "HDialog", components: { VDialog, HButton } });
 
 interface Props {
   loading?: boolean;
@@ -46,26 +46,25 @@ withDefaults(defineProps<Props>(), {
   closed: false,
   hideActions: false,
   maxWidth: 500,
-  confirmLabel: '确认',
+  confirmLabel: "确认",
 });
 
-const open = defineModel({
-  type: Boolean,
+const model = defineModel<boolean>({
   default: false,
   required: true,
 });
 
 const onClose = () => {
-  open.value = false;
-  emit('close');
+  model.value = false;
+  emit("close");
 };
 
 const onCancel = () => {
-  open.value = false;
-  emit('cancel');
+  model.value = false;
+  emit("cancel");
 };
 
 const onConfirm = () => {
-  emit('confirm');
+  emit("confirm");
 };
 </script>

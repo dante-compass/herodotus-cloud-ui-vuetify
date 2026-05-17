@@ -1,4 +1,4 @@
-import { AuthorizationGrantTypeEnum } from '@/enums';
+import { AuthorizationGrantTypeEnum } from "@/enums";
 
 // ------------------------------ OAuth2 Flow Request Begin  ------------------------------
 
@@ -6,7 +6,7 @@ interface TokenRequest {
   grant_type: string;
 }
 
-interface AccessTokenRequest extends TokenRequest {
+export interface AccessTokenRequest extends TokenRequest {
   client_id?: string;
   client_secret?: string;
   scope?: string;

@@ -17,13 +17,12 @@
 </template>
 
 <script setup lang="ts">
-import type { SysDictionaryConditions } from '@herodotus/api';
+import type { SysDictionaryConditions } from "@herodotus/api";
 
-defineOptions({ name: 'SysDictionaryCondition' });
+defineOptions({ name: "SysDictionaryCondition" });
 
-const conditions = defineModel({
-  type: Object as PropType<SysDictionaryConditions>,
-  default: () => {},
+const conditions = defineModel<SysDictionaryConditions>({
+  default: () => ({}),
   required: true,
 });
 

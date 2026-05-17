@@ -11,15 +11,15 @@ import type {
   HttpRequestOptions,
   HttpRequestPolicy,
   HttpResult,
-} from '@/declarations';
+} from "@/declarations";
 
-import { ContentTypeEnum, HttpMethodEnum } from '@/enums';
+import { ContentTypeEnum, HttpMethodEnum } from "@/enums";
 
-import axios from 'axios';
-import qs from 'qs';
+import axios from "axios";
+import qs from "qs";
 
-import { AxiosCanceler } from './canceler';
-import { merge, isEmpty, isFunction } from 'lodash-es';
+import { AxiosCanceler } from "./canceler";
+import { merge, isEmpty, isFunction } from "lodash-es";
 
 /**
  * @description:  axios module
@@ -61,34 +61,6 @@ export class Axios {
     return this.axiosInstance;
   }
 
-  private createHttpHeaderPolicy<D = any>(contentType: ContentTypeEnum): HttpHeaderPolicy {
-    switch (contentType) {
-      case ContentTypeEnum.URL_ENCODED:
-        return {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          dataConvert: (data: D) => {
-            return qs.stringify(data, { arrayFormat: 'brackets' });
-          },
-        };
-      case ContentTypeEnum.MULTI_PART:
-        return {
-          headers: { 'Content-Type': 'multipart/form-data' },
-          dataConvert: (data: D) => {
-            return data;
-          },
-        };
-      default:
-        return {
-          headers: { 'Content-Type': 'application/json' },
-          dataConvert: (data: D) => {
-            return JSON.stringify(data);
-          },
-        };
-    }
-  }
-
   private setupInterceptors(): void {
     const instanceHooks = this.getAxiosInstanceHooks();
 
@@ -105,12 +77,13 @@ export class Axios {
     this.getAxiosInstance().interceptors.request.use(
       (config: InternalAxiosRequestConfig<any>) => {
         // If cancel repeat request is turned on, then cancel repeat request is prohibited
-        const { prohibitRepeatRequests } = this.getDefaultRequestOptions();
+        // @ts-ignore
+        const options = config.effectiveOptions;
 
-        if (prohibitRepeatRequests) {
+        if (options.prohibitRepeatRequests) {
           axiosCanceler.addPending(config);
         }
-        return requestInterceptors(config);
+        return requestInterceptors(config, options);
       },
       (error: AxiosError) => {
         return requestInterceptorsError(this.getAxiosInstance(), error);
@@ -134,7 +107,7 @@ export class Axios {
    * @param currentRequestOptions 当前请求的 options
    * @returns 合并后的 options
    */
-  private mergeHttpRequestOptions(currentRequestOptions?: HttpRequestOptions): HttpRequestOptions {
+  private mergeWithDefaultOptions(currentRequestOptions?: HttpRequestOptions): HttpRequestOptions {
     const defaultRequestOptions = this.getDefaultRequestOptions();
     if (!isEmpty(currentRequestOptions)) {
       return merge({}, defaultRequestOptions, currentRequestOptions);
@@ -148,7 +121,7 @@ export class Axios {
    * @param currentAxiosRequestConfig 当前请求的 AxiosRequestConfig
    * @returns 合并后的 AxiosRequestConfig
    */
-  private mergeAxiosRequestConfigs<D = unknown>(
+  private mergeWithDefaultConfig<D = unknown>(
     currentAxiosRequestConfig?: AxiosRequestConfig<D>,
   ): AxiosRequestConfig<D> {
     const defaultAxiosRequestConfig = this.getDefaultAxiosRequestConfig();
@@ -158,7 +131,7 @@ export class Axios {
         // return Object.keys(params)
         //   .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
         //   .join('&');
-        return qs.stringify(params, { arrayFormat: 'brackets' });
+        return qs.stringify(params, { arrayFormat: "brackets" });
       },
     };
 
@@ -171,39 +144,73 @@ export class Axios {
     }
   }
 
-  private setupRequestStrategy<D = any>(
+  private createHttpHeaderPolicy<D = any>(contentType: ContentTypeEnum): HttpHeaderPolicy {
+    switch (contentType) {
+      case ContentTypeEnum.URL_ENCODED:
+        return {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          dataConvert: (data: D) => {
+            return qs.stringify(data, { arrayFormat: "brackets" });
+          },
+        };
+      case ContentTypeEnum.MULTI_PART:
+        return {
+          headers: { "Content-Type": "multipart/form-data" },
+          dataConvert: (data: D) => {
+            return data;
+          },
+        };
+      default:
+        return {
+          headers: { "Content-Type": "application/json" },
+          dataConvert: (data: D) => {
+            return JSON.stringify(data);
+          },
+        };
+    }
+  }
+
+  private setupRequest<D = any>(
     url: string,
     currentAxiosRequestConfig: AxiosRequestConfig<D>,
     currentHttpRequestOptions: HttpRequestOptions,
   ): HttpRequestPolicy {
     const { onRequestHook } = this.getAxiosInstanceHooks();
 
-    // 合并 options。把当前请求的 options 与全局 options 整合获得一个完整的 options
-    const httpRequestOptions = this.mergeHttpRequestOptions(currentHttpRequestOptions);
+    // 1. 合并 options。把当前请求的 options 与全局 options 整合获得一个完整的 options
+    const effectiveOptions = this.mergeWithDefaultOptions(currentHttpRequestOptions);
 
-    // 合并 axios request config。把当前请求的 AxiosRequestConfig 与全局 AxiosRequestConfig 整合获得一个完整的 AxiosRequestConfig
-    let axiosRequestConfig: AxiosRequestConfig<D> = this.mergeAxiosRequestConfigs(currentAxiosRequestConfig);
+    // 2. 合并 axios request config。把当前请求的 AxiosRequestConfig 与全局 AxiosRequestConfig 整合获得一个完整的 AxiosRequestConfig
+    let effectiveConfig = this.mergeWithDefaultConfig(currentAxiosRequestConfig);
     if (onRequestHook && isFunction(onRequestHook)) {
       // 允许在 onRequestHook 中，对 AxiosRequestConfig 进行一些额外的设置
-      axiosRequestConfig = onRequestHook(axiosRequestConfig, httpRequestOptions);
+      effectiveConfig = onRequestHook(effectiveConfig, effectiveOptions);
     }
 
-    const httpHeaderPolicy = this.createHttpHeaderPolicy(httpRequestOptions.contentType);
-
-    if (axiosRequestConfig.headers) {
-      axiosRequestConfig.headers = merge(axiosRequestConfig.headers, httpHeaderPolicy.headers);
+    // 3. 合并 headers
+    const effectiveHeaders = this.createHttpHeaderPolicy(effectiveOptions.contentType);
+    if (effectiveConfig.headers) {
+      effectiveConfig.headers = merge(effectiveConfig.headers, effectiveHeaders.headers);
     } else {
-      axiosRequestConfig.headers = httpHeaderPolicy.headers;
+      effectiveConfig.headers = effectiveHeaders.headers;
     }
 
-    axiosRequestConfig.url = url;
-    if (!isEmpty(axiosRequestConfig.data)) {
-      axiosRequestConfig.data = httpHeaderPolicy.dataConvert(axiosRequestConfig.data);
+    // 4. 转换数据
+    if (!isEmpty(effectiveConfig.data)) {
+      effectiveConfig.data = effectiveHeaders.dataConvert(effectiveConfig.data);
     }
+
+    // 5. 设置 URL
+    effectiveConfig.url = url;
+
+    // 6. 挂在选项。注意此处的 effectiveOptions 要与 this.getAxiosInstance().interceptors.request.use 中的 effectiveOptions 命名保持一致
+    (effectiveConfig as any).effectiveOptions = effectiveOptions;
 
     return {
-      config: axiosRequestConfig,
-      options: httpRequestOptions,
+      config: effectiveConfig,
+      options: effectiveOptions,
     };
   }
 
@@ -252,7 +259,7 @@ export class Axios {
     config: AxiosRequestConfig<D>,
     options = {} as HttpRequestOptions,
   ): Promise<AxiosHttpResult<T>> {
-    let strategy = this.setupRequestStrategy<D>(url, config, options);
+    let strategy = this.setupRequest<D>(url, config, options);
     return this.request<T, D>(strategy.config, strategy.options);
   }
 

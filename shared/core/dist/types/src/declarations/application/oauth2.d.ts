@@ -2,7 +2,7 @@ import { AuthorizationGrantTypeEnum } from '../../enums';
 interface TokenRequest {
     grant_type: string;
 }
-interface AccessTokenRequest extends TokenRequest {
+export interface AccessTokenRequest extends TokenRequest {
     client_id?: string;
     client_secret?: string;
     scope?: string;

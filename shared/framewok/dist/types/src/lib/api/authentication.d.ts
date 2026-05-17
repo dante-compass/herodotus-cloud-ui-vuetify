@@ -1,5 +1,5 @@
-import { HttpConfig, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse, BuildInScopeEnum } from '@herodotus/core';
-import { SocialSource, AccessPrincipal, WebAuthnAuthenticate } from '../../declarations';
+import { HttpConfig, HttpRequestOptions, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse, AxiosRequestConfig, BuildInScopeEnum } from '@herodotus/core';
+import { SocialSource, AccessPrincipal, WebAuthnAuthenticate, OAuth2ClientRegistration } from '../../declarations';
 export declare class OAuth2ApiService {
     private static instance;
     private config;
@@ -58,7 +58,7 @@ export declare class OAuth2ApiService {
      * @see https://datatracker.ietf.org/doc/html/rfc6749#section-4.4.5
      * @see https://datatracker.interface
      */
-    clientCredentialsFlow(clientId?: string, clientSecret?: string, scope?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
+    clientCredentialsFlow(clientId?: string, clientSecret?: string, scope?: string, options?: HttpRequestOptions): Promise<AxiosHttpResult<AccessTokenResponse>>;
     /**
      * 设备授权模式。获取访问令牌。
      * @param deviceCode 设备码
@@ -83,10 +83,10 @@ export declare class OAuth2ApiService {
      * 用户需要在一个设备上输入设备码，然后在另一个设备上输入该设备码以完成授权。
      * @see https://datatracker.ietf.org/doc/html/rfc8628#section-3.1
      */
-    deviceAuthorizationFlow(clientId?: string, clientSecret?: string, scope?: BuildInScopeEnum): Promise<AxiosHttpResult<DeviceAuthorizationResponse>>;
+    deviceAuthorizationFlow(clientId?: string, clientSecret?: string, scope?: BuildInScopeEnum, options?: HttpRequestOptions): Promise<AxiosHttpResult<DeviceAuthorizationResponse>>;
     socialCredentialsFlowBySms(mobile: string, code: string, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     socialCredentialsFlowByJustAuth(source: SocialSource, accessPrincipal: AccessPrincipal, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
     webAuthnCredentialsFlow(publicKey: WebAuthnAuthenticate, oidc?: boolean, clientId?: string, clientSecret?: string): Promise<AxiosHttpResult<AccessTokenResponse>>;
-    oidcClientRegistrationFlow(productKey: string, clientName: string): Promise<AxiosHttpResult<any>>;
-    clientRegistrationFlow(productKey: string, clientName: string): Promise<AxiosHttpResult<any>>;
+    oidcClientRegistrationFlow(productKey: string, clientName: string, options?: HttpRequestOptions, config?: AxiosRequestConfig<OAuth2ClientRegistration>): Promise<AxiosHttpResult<any>>;
+    clientRegistrationFlow(productKey: string, clientName: string, options?: HttpRequestOptions, config?: AxiosRequestConfig<OAuth2ClientRegistration>): Promise<AxiosHttpResult<OAuth2ClientRegistration>>;
 }

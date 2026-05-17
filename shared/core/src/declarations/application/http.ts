@@ -5,9 +5,9 @@ import type {
   AxiosResponse,
   AxiosError,
   InternalAxiosRequestConfig,
-} from '../plugins';
+} from "../plugins";
 
-import { ContentTypeEnum } from '@/enums';
+import { ContentTypeEnum } from "@/enums";
 /**
  * Herodotus Cloud 后端 API 响应统一实体定义
  */
@@ -23,7 +23,7 @@ export type Result<T = unknown> = {
 /**
  * Http 请求错误信息提示模式
  */
-export type HttpErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
+export type HttpErrorMessageMode = "none" | "modal" | "message" | undefined;
 /**
  * 后端 API Http 请求返回数据类型定义
  */
@@ -90,7 +90,7 @@ export interface AxiosInstanceHooks {
   /**
    * @description: 请求之前的拦截器
    */
-  requestInterceptors: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig;
+  requestInterceptors: (config: InternalAxiosRequestConfig, options: HttpRequestOptions) => InternalAxiosRequestConfig;
 
   /**
    * @description: 请求之后的拦截器

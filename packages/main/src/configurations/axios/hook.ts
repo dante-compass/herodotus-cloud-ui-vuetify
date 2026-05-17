@@ -4,19 +4,20 @@ import type {
   AxiosInstanceHooks,
   HttpRequestOptions,
   AxiosError,
-  InternalAxiosRequestConfig,
+  AxiosRequestConfig,
   AxiosInstance,
-} from '@herodotus/core';
+  InternalAxiosRequestConfig,
+} from "@herodotus/core";
 
-import { logResponse, isSuccess } from '@herodotus/core';
+import { logResponse, isSuccess } from "@herodotus/core";
 
-import { getSystemHeaders } from '@herodotus/framework';
-import { processor } from './status';
-import { IS_DEV } from '../constants';
+import { getSystemHeaders } from "@herodotus/framework";
+import { processor } from "./status";
+import { IS_DEV } from "../constants";
 
 export const axiosInstanceHooks: AxiosInstanceHooks = {
   // 请求之前处理config
-  onRequestHook(config, options) {
+  onRequestHook(config: AxiosRequestConfig, options: HttpRequestOptions) {
     return config;
   },
 
@@ -29,7 +30,7 @@ export const axiosInstanceHooks: AxiosInstanceHooks = {
         const { isTransformResponse } = options;
         // 不进行任何处理，直接返回
         // 用于页面代码可能需要直接获取code，data，message这些信息时开启
-        if (isTransformResponse && 'statusText' in response) {
+        if (isTransformResponse && "statusText" in response) {
           return response.data;
         }
       }
@@ -44,15 +45,16 @@ export const axiosInstanceHooks: AxiosInstanceHooks = {
   /**
    * @description: 请求拦截器处理
    */
-  requestInterceptors(config: InternalAxiosRequestConfig) {
-    const headers = getSystemHeaders();
+  requestInterceptors(config: InternalAxiosRequestConfig, options: HttpRequestOptions) {
+    if (options.withToken === undefined || options.withToken === true) {
+      const systemHeaders = getSystemHeaders();
 
-    Object.keys(headers).forEach((key) => {
-      if (config.headers && !config.headers[key]) {
-        config.headers[key] = headers[key];
-      }
-    });
-
+      Object.keys(systemHeaders).forEach((key) => {
+        if (config.headers && !config.headers[key]) {
+          config.headers[key] = systemHeaders[key];
+        }
+      });
+    }
     return config;
   },
 

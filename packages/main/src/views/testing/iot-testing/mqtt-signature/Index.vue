@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col>
-      <h-testing-content-card title="填入设备信息:" subtitle="根据页面提示，输入对应信息">
+      <h-testing-card title="填入设备信息:" subtitle="根据页面提示，输入对应信息">
         <v-form ref="form">
           <v-text-field
             v-model="productKey"
@@ -45,46 +45,46 @@
         ></v-text-field>
 
         <v-btn color="purple" text="计算" variant="flat" size="large" width="200px" @click="onSignature"></v-btn>
-      </h-testing-content-card>
-      <h-tesing-content-card title="计算结果:" class="mt-4">
+      </h-testing-card>
+      <h-tesing-card title="计算结果:" class="mt-4">
         <v-text-field v-model="mqttClientId" label="Mqtt Client Id" readonly></v-text-field>
         <v-text-field v-model="mqttUsername" label="Mqtt Username" readonly></v-text-field>
         <v-text-field v-model="mqttPassword" label="Mqtt Password" readonly></v-text-field>
-      </h-tesing-content-card>
+      </h-tesing-card>
     </v-col>
     <v-col></v-col>
   </v-row>
 </template>
 
 <script setup lang="ts">
-import { HmacMD5, HmacSHA1, HmacSHA256, enc } from 'crypto-js';
-import { nanoid, customAlphabet } from 'nanoid';
-import { isEmpty, assignIn, get } from 'lodash-es';
+import { HmacMD5, HmacSHA1, HmacSHA256, enc } from "crypto-js";
+import { nanoid, customAlphabet } from "nanoid";
+import { isEmpty, assignIn, get } from "lodash-es";
 
-import { HTesingContentCard } from '../../components';
+import { HTestingCard } from "../../components";
 
-defineOptions({ name: 'HMqttSignature', components: { HTesingContentCard } });
+defineOptions({ name: "HMqttSignature", components: { HTestingCard } });
 
 const form = ref();
 
-const productKey = shallowRef('apktestadd');
-const deviceName = shallowRef('');
-const deviceSecret = shallowRef('9f3026f4beddf8d29f3026f4beddf8d2');
-const clientId = shallowRef('');
-const method = shallowRef('hmacmd5');
+const productKey = shallowRef("apktestadd");
+const deviceName = shallowRef("");
+const deviceSecret = shallowRef("9f3026f4beddf8d29f3026f4beddf8d2");
+const clientId = shallowRef("");
+const method = shallowRef("hmacmd5");
 const authType = shallowRef();
-const timestamp = shallowRef('');
-const random = shallowRef('');
+const timestamp = shallowRef("");
+const random = shallowRef("");
 
-const mqttClientId = shallowRef('');
-const mqttUsername = shallowRef('');
-const mqttPassword = shallowRef('');
+const mqttClientId = shallowRef("");
+const mqttUsername = shallowRef("");
+const mqttPassword = shallowRef("");
 
 const getClientId = () => {
   if (!isEmpty(clientId.value)) {
     return clientId.value;
   } else {
-    return productKey.value + '.' + deviceName.value;
+    return productKey.value + "." + deviceName.value;
   }
 };
 
@@ -103,12 +103,12 @@ const createMqttClientId = () => {
     result += `,authType=${authType.value}`;
   }
 
-  result += '|';
+  result += "|";
   return result;
 };
 
 const createMqttUsername = () => {
-  return deviceName.value + '&' + productKey.value;
+  return deviceName.value + "&" + productKey.value;
 };
 
 const createMqttPassword = () => {
@@ -123,17 +123,17 @@ const createMqttPassword = () => {
   }
 
   let keys = Object.keys(options).sort();
-  let content = '';
+  let content = "";
   for (const key of keys) {
     content += key + get(options, key);
   }
 
   let hash;
   switch (method.value) {
-    case 'hmacsha1':
+    case "hmacsha1":
       hash = HmacSHA1(content, deviceSecret.value);
       break;
-    case 'hmacsha256':
+    case "hmacsha256":
       hash = HmacSHA256(content, deviceSecret.value);
       break;
     default:
@@ -149,7 +149,7 @@ const onRenewTimestamp = () => {
 };
 
 const onRenewRandom = () => {
-  const result = customAlphabet('0123456789', 6);
+  const result = customAlphabet("0123456789", 6);
   random.value = result();
 };
 

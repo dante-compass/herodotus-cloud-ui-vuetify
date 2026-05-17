@@ -1,6 +1,6 @@
 <template>
   <h-dialog
-    v-model="openDialog"
+    v-model="model"
     prepend-icon="mdi-key-chain"
     :title="`设置/修改【${username}】密码`"
     :loading="loading"
@@ -41,11 +41,11 @@
 </template>
 
 <script setup lang="ts">
-import { useCryptoStore } from '@herodotus/framework';
-import { toast } from '@herodotus/core';
-import { VARIABLES, API } from '@/configurations';
+import { useCryptoStore } from "@herodotus/framework";
+import { toast } from "@herodotus/core";
+import { VARIABLES, API } from "@/configurations";
 
-defineOptions({ name: 'ChangePassoword' });
+defineOptions({ name: "ChangePassoword" });
 
 interface Props {
   userId: string;
@@ -54,8 +54,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const openDialog = defineModel({
-  type: Boolean,
+const model = defineModel<boolean>({
   default: false,
   required: true,
 });
@@ -64,8 +63,8 @@ const crypto = useCryptoStore();
 
 const changePasswordForm = ref();
 
-const newPassword = shallowRef('');
-const confirmPassword = shallowRef('');
+const newPassword = shallowRef("");
+const confirmPassword = shallowRef("");
 const newPasswordVisible = shallowRef(false);
 const confirmPasswordVisible = shallowRef(false);
 const loading = shallowRef(false);
@@ -90,22 +89,22 @@ const onSave = async () => {
       .then((response) => {
         if (response) {
           loading.value = false;
-          openDialog.value = false;
-          toast.success('设置/修改密码成功！');
+          model.value = false;
+          toast.success("设置/修改密码成功！");
         }
       })
       .catch((error) => {
         loading.value = false;
-        openDialog.value = false;
-        toast.error('设置/修改密码失败！');
+        model.value = false;
+        toast.error("设置/修改密码失败！");
       });
   }
 };
 
-watch(openDialog, (newValue) => {
+watch(model, (newValue) => {
   if (newValue) {
-    newPassword.value = '';
-    confirmPassword.value = '';
+    newPassword.value = "";
+    confirmPassword.value = "";
     newPasswordVisible.value = false;
     confirmPasswordVisible.value = false;
     loading.value = false;

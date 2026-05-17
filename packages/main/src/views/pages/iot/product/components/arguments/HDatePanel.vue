@@ -6,15 +6,10 @@
 </template>
 
 <script setup lang="ts">
-import type { Specification, DateSpecs } from "@herodotus/api";
 import { shallowRef } from "vue";
 
 defineOptions({
   name: "HTextPanel",
-});
-
-const entity = defineModel<Specification<DateSpecs>>({
-  default: () => ({}),
 });
 
 const format = shallowRef("String类型的UTC时间戳(毫秒)");

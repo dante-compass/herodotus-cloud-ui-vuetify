@@ -1,6 +1,6 @@
 <template>
   <v-autocomplete
-    v-model="selection"
+    v-model="model"
     v-model:search="search"
     :items="items"
     :loading="loading"
@@ -25,11 +25,11 @@
 import type { TslUnitEntity } from "@herodotus/api";
 
 import { isEmpty, debounce } from "lodash-es";
-import { useIotTslUnitStore } from "./unit";
+import { useIotTslUnitStore } from "../../composables/stores";
 
 defineOptions({ name: "HUnitSelect" });
 
-const selection = defineModel<TslUnitEntity | null | undefined>({
+const model = defineModel<TslUnitEntity | null | undefined>({
   required: true,
 });
 
