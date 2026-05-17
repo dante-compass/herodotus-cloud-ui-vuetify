@@ -6,6 +6,7 @@ import { HDialog } from "./HDialog";
 import { HTextDivider } from "./HDivider";
 import { HDownloadProgress } from "./HProgress";
 import { HLabel } from "./HLabel";
+import { HParticles } from "./HParticles";
 import { HMdiIconSelect, HTreeSelect } from "./HSelect";
 import { HSignInBackground } from "./HSignIn";
 
@@ -18,6 +19,7 @@ const components = [
   HDuration,
   HMdiIconSelect,
   HLabel,
+  HParticles,
   HSignInBackground,
   HTextDivider,
   HTime,
@@ -37,6 +39,7 @@ export {
   HDuration,
   HMdiIconSelect,
   HLabel,
+  HParticles,
   HSignInBackground,
   HTextDivider,
   HTime,

@@ -8,6 +8,7 @@ var e = [
 	"HDuration",
 	"HMdiIconSelect",
 	"HLabel",
+	"HParticles",
 	"HSignInBackground",
 	"HTextDivider",
 	"HTime",

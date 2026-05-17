@@ -119,6 +119,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         "vite-plugin-node-polyfills/shims/buffer",
         "vite-plugin-node-polyfills/shims/global",
         "vite-plugin-node-polyfills/shims/process",
+        "@tsparticles/engine",
+        "@tsparticles/preset-triangles",
       ],
     },
     define: { "process.env": { env } },

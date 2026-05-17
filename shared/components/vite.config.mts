@@ -41,6 +41,8 @@ export default defineConfig({
         "vuetify/components",
         "@mdi/js",
         "@herodotus/core",
+        "@tsparticles/engine",
+        "@tsparticles/preset-triangles",
       ],
       output: {
         exports: "named",
@@ -54,6 +56,8 @@ export default defineConfig({
           "vuetify/components": "VuetifyComponents",
           "@mdi/js": "MdiJs",
           "@herodotus/core": "HerodotusCore",
+          "@tsparticles/engine": "TsparticlesEngine",
+          "@tsparticles/preset-triangles": "TsparticlesPresetTriangles",
         },
       },
     },

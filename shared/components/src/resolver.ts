@@ -9,6 +9,7 @@ const components = [
   "HDuration",
   "HMdiIconSelect",
   "HLabel",
+  "HParticles",
   "HSignInBackground",
   "HTextDivider",
   "HTime",
