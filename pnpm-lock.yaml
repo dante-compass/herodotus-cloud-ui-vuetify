@@ -229,15 +229,6 @@ importers:
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
-      '@tsparticles/basic':
-        specifier: ^4.0.1
-        version: 4.0.1
-      '@tsparticles/engine':
-        specifier: ^4.0.1
-        version: 4.0.1
-      '@tsparticles/interaction-particles-links':
-        specifier: ^4.0.1
-        version: 4.0.1(@tsparticles/canvas-utils@4.0.1(@tsparticles/engine@4.0.1))(@tsparticles/engine@4.0.1)(@tsparticles/plugin-interactivity@4.0.1(@tsparticles/engine@4.0.1))
       vue:
         specifier: ^3.5.34
         version: 3.5.34(typescript@6.0.3)
@@ -1113,74 +1104,6 @@ packages:
   '@tsconfig/node22@22.0.5':
     resolution: {integrity: sha512-hLf2ld+sYN/BtOJjHUWOk568dvjFQkHnLNa6zce25GIH+vxKfvTgm3qpaH6ToF5tu/NN0IH66s+Bb5wElHrLcw==}
 
-  '@tsparticles/basic@4.0.1':
-    resolution: {integrity: sha512-iGShpHeRDsuYAtgPKkXKTpMJxALsKJ+qyaiPh3dGWeVeF5m6D3zWhmX4Bgx9GQkqIcySm8Vx5YAZErlDf5lQ8g==}
-
-  '@tsparticles/canvas-utils@4.0.1':
-    resolution: {integrity: sha512-ondW9+xw2GaFWJoDGFzD6qASR82RsGph9DkMszxv35EPi2GQeayOY5ks13W1Ck4FoceeFxqUqFbJiSUd7wVKhw==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/engine@4.0.1':
-    resolution: {integrity: sha512-QshPLBIaxt4kenOtyK6X8fFKYxP4gHLGVeNMMrHgvhZMZxbpRympon4j/GfoPMdoq0FDEmp8xhqaceL5UIUGAg==}
-
-  '@tsparticles/interaction-particles-links@4.0.1':
-    resolution: {integrity: sha512-2G88XyEb6nFrdudqEFlQdS3wprO2U9dnNGpUBmTuR/U18NNYf0ZYkRPEQL0Vpd7VtPmk99msju6gVRekeX6XCA==}
-    peerDependencies:
-      '@tsparticles/canvas-utils': 4.0.1
-      '@tsparticles/engine': 4.0.1
-      '@tsparticles/plugin-interactivity': 4.0.1
-
-  '@tsparticles/plugin-hex-color@4.0.1':
-    resolution: {integrity: sha512-x9YvQ5ROlphTU1EHO66PirYRwLxbkyOA/2Yxyhc6MZUP9C0T7VuHgooyzsIqjgtvs6TiFkh+6sr7TfY1fgYmog==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/plugin-hsl-color@4.0.1':
-    resolution: {integrity: sha512-tcTQ8e7c3fAIqeBa6s6BA704QJ7wEI8JrVgGiA3Njktd6jsAp07vQmVAIJ3jtxjXig0mSMxLaOWB/19vKVE0iw==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/plugin-interactivity@4.0.1':
-    resolution: {integrity: sha512-2YmsIRABH7DNSP2MLVJrmaHXLd34DQ9k+9euuedbVmaZcN68VTvKSe4XcfMaQWLrgdIj3E9RykJK6fFixEgzHA==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/plugin-move@4.0.1':
-    resolution: {integrity: sha512-KvcOrmdtOU2BKxaKBh/t77gqfSEaoWusw/lrFu+mV7ztTCZzr0Ninq19B9IcBjD6eRgqu4UkNBFqcoPIVnQunQ==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/plugin-rgb-color@4.0.1':
-    resolution: {integrity: sha512-r9ehTL2VxQQXVl3UwVtN4qrSdMvd+tOif2iV8DwiKlf9xKIxpZGkLBMi8vUVD+SbLhiDWaltxJuO25IGmEeuuQ==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/shape-circle@4.0.1':
-    resolution: {integrity: sha512-pyzQNywADS8dNGyHJpcg+7eTliB+F00ykpKKBQwEi+p4eLWRJrz/HJ1fUzOKIaYTyoMULezzA+ozE1wQoQTcdw==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/updater-opacity@4.0.1':
-    resolution: {integrity: sha512-9fap5x2OQFuwIDDwWAGAcpLFftb+o1NlzPFThUI2+Me/CgmviQkgqcynX9Lc6AsN/0WpBouNr+MWpHI1W6WdKA==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/updater-out-modes@4.0.1':
-    resolution: {integrity: sha512-Q1VnGjmSdAl0ZCvtZp2zygTJOlPWFfn3CBEddIIjfaHszKd6gy+s2VcX45OY78xxhPdYfZWzfUbJQZWo3eilEg==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/updater-paint@4.0.1':
-    resolution: {integrity: sha512-REySDfwL/r46G3aKeO1jJODU9PFBtO7Dm/29pYLFl5f4tx/MEc8z6aSXwlrlMim9LnRqV1y0N1ioVag6g/x45Q==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/updater-size@4.0.1':
-    resolution: {integrity: sha512-zl+4QkDjhf862RvfZCRo626EUmkyHuHrys5xwO+SA2Ck1j2XCxjPuOIggbWY1+oP5OBarhTG9QkF2rMDtRPR4w==}
-    peerDependencies:
-      '@tsparticles/engine': 4.0.1
-
   '@tybys/wasm-util@0.10.2':
     resolution: {integrity: sha512-RoBvJ2X0wuKlWFIjrwffGw1IqZHKQqzIchKaadZZfnNpsAYp2mM0h36JtPCjNDAHGgYez/15uMBpfGwchhiMgg==}
 
@@ -1542,8 +1465,8 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  baseline-browser-mapping@2.10.29:
-    resolution: {integrity: sha512-Asa2krT+XTPZINCS+2QcyS8WTkObE77RwkydwF7h6DmnKqbvlalz93m/dnphUyCa6SWSP51VgtEUf2FN+gelFQ==}
+  baseline-browser-mapping@2.10.30:
+    resolution: {integrity: sha512-xjOFN16Ha1+Rz4nFYKqHU/LSB+gx/Vi3yQLX7r7sAW+Wa+8hhF2h4pvqTrTMc8+WcDBEunnUurr46Jvv0jk3Vg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -2011,8 +1934,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  electron-to-chromium@1.5.356:
-    resolution: {integrity: sha512-9NgFd7m5t5MCJ5rUSjJITUXAH9mEGlrlofnMf4YEr+pz6JlP7cWmTAH+JFmbPnaSW8koVTkuW7pacORWAnA5Yw==}
+  electron-to-chromium@1.5.357:
+    resolution: {integrity: sha512-NHlTIQDK8fmVwHwuIzmXYEJ1Ewq3D9wDNc0cWXxDGysP6Pb21giwGNkxiTifyKy/4SoPuN5l6GLP1W9Sv7zB2g==}
 
   elliptic@6.6.1:
     resolution: {integrity: sha512-RaddvvMatK2LJHqFJ+YA4WysVN5Ita9E35botqIYspQ4TkRAlCicdzKOjlyv/1Za5RyTNn7di//eEV0uTAfe3g==}
@@ -5123,71 +5046,6 @@ snapshots:
 
   '@tsconfig/node22@22.0.5': {}
 
-  '@tsparticles/basic@4.0.1':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-      '@tsparticles/plugin-hex-color': 4.0.1(@tsparticles/engine@4.0.1)
-      '@tsparticles/plugin-hsl-color': 4.0.1(@tsparticles/engine@4.0.1)
-      '@tsparticles/plugin-move': 4.0.1(@tsparticles/engine@4.0.1)
-      '@tsparticles/plugin-rgb-color': 4.0.1(@tsparticles/engine@4.0.1)
-      '@tsparticles/shape-circle': 4.0.1(@tsparticles/engine@4.0.1)
-      '@tsparticles/updater-opacity': 4.0.1(@tsparticles/engine@4.0.1)
-      '@tsparticles/updater-out-modes': 4.0.1(@tsparticles/engine@4.0.1)
-      '@tsparticles/updater-paint': 4.0.1(@tsparticles/engine@4.0.1)
-      '@tsparticles/updater-size': 4.0.1(@tsparticles/engine@4.0.1)
-
-  '@tsparticles/canvas-utils@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/engine@4.0.1': {}
-
-  '@tsparticles/interaction-particles-links@4.0.1(@tsparticles/canvas-utils@4.0.1(@tsparticles/engine@4.0.1))(@tsparticles/engine@4.0.1)(@tsparticles/plugin-interactivity@4.0.1(@tsparticles/engine@4.0.1))':
-    dependencies:
-      '@tsparticles/canvas-utils': 4.0.1(@tsparticles/engine@4.0.1)
-      '@tsparticles/engine': 4.0.1
-      '@tsparticles/plugin-interactivity': 4.0.1(@tsparticles/engine@4.0.1)
-
-  '@tsparticles/plugin-hex-color@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/plugin-hsl-color@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/plugin-interactivity@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/plugin-move@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/plugin-rgb-color@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/shape-circle@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/updater-opacity@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/updater-out-modes@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/updater-paint@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
-  '@tsparticles/updater-size@4.0.1(@tsparticles/engine@4.0.1)':
-    dependencies:
-      '@tsparticles/engine': 4.0.1
-
   '@tybys/wasm-util@0.10.2':
     dependencies:
       tslib: 2.8.1
@@ -5637,7 +5495,7 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  baseline-browser-mapping@2.10.29: {}
+  baseline-browser-mapping@2.10.30: {}
 
   better-path-resolve@1.0.0:
     dependencies:
@@ -5726,9 +5584,9 @@ snapshots:
 
   browserslist@4.28.2:
     dependencies:
-      baseline-browser-mapping: 2.10.29
+      baseline-browser-mapping: 2.10.30
       caniuse-lite: 1.0.30001792
-      electron-to-chromium: 1.5.356
+      electron-to-chromium: 1.5.357
       node-releases: 2.0.44
       update-browserslist-db: 1.2.3(browserslist@4.28.2)
 
@@ -6139,7 +5997,7 @@ snapshots:
     dependencies:
       jake: 10.9.4
 
-  electron-to-chromium@1.5.356: {}
+  electron-to-chromium@1.5.357: {}
 
   elliptic@6.6.1:
     dependencies:

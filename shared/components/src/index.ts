@@ -1,14 +1,13 @@
-import type { App } from 'vue';
+import type { App } from "vue";
 
-import { HButton } from './HButton';
-import { HDate, HDateTime, HDuration, HTime } from './HDateTime';
-import { HDialog } from './HDialog';
-import { HTextDivider } from './HDivider';
-import { HDownloadProgress } from './HProgress';
-import { HParticles } from './HParticles';
-import { HLabel } from './HLabel';
-import { HMdiIconSelect, HTreeSelect } from './HSelect';
-import { HSignInBackground } from './HSignIn';
+import { HButton } from "./HButton";
+import { HDate, HDateTime, HDuration, HTime } from "./HDateTime";
+import { HDialog } from "./HDialog";
+import { HTextDivider } from "./HDivider";
+import { HDownloadProgress } from "./HProgress";
+import { HLabel } from "./HLabel";
+import { HMdiIconSelect, HTreeSelect } from "./HSelect";
+import { HSignInBackground } from "./HSignIn";
 
 const components = [
   HButton,
@@ -18,7 +17,6 @@ const components = [
   HDownloadProgress,
   HDuration,
   HMdiIconSelect,
-  HParticles,
   HLabel,
   HSignInBackground,
   HTextDivider,
@@ -38,7 +36,6 @@ export {
   HDownloadProgress,
   HDuration,
   HMdiIconSelect,
-  HParticles,
   HLabel,
   HSignInBackground,
   HTextDivider,
@@ -46,7 +43,7 @@ export {
   HTreeSelect,
 };
 
-export * from './lib';
+export * from "./lib";
 
 export default {
   install,

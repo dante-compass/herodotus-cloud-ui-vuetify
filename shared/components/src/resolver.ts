@@ -1,19 +1,18 @@
-import type { ComponentResolver } from 'unplugin-vue-components';
+import type { ComponentResolver } from "unplugin-vue-components";
 
 const components = [
-  'HButton',
-  'HDate',
-  'HDateTime',
-  'HDialog',
-  'HDownloadProgress',
-  'HDuration',
-  'HMdiIconSelect',
-  'HParticles',
-  'HLabel',
-  'HSignInBackground',
-  'HTextDivider',
-  'HTime',
-  'HTreeSelect',
+  "HButton",
+  "HDate",
+  "HDateTime",
+  "HDialog",
+  "HDownloadProgress",
+  "HDuration",
+  "HMdiIconSelect",
+  "HLabel",
+  "HSignInBackground",
+  "HTextDivider",
+  "HTime",
+  "HTreeSelect",
 ];
 
 function isValidComponent(name: string) {
@@ -25,15 +24,15 @@ function isValidComponent(name: string) {
  */
 export function HerodotusResolver(): ComponentResolver {
   return {
-    type: 'component',
+    type: "component",
     resolve: (name: string) => {
       // 只处理指定前缀的组件
-      if (name.startsWith('H') && isValidComponent(name)) {
+      if (name.startsWith("H") && isValidComponent(name)) {
         const componentName = name;
-        const from = '@herodotus/components';
+        const from = "@herodotus/components";
 
         // 构建 side effects 配置
-        const sideEffects: string[] = ['@herodotus/components/style.css'];
+        const sideEffects: string[] = ["@herodotus/components/style.css"];
 
         return {
           name: componentName,
