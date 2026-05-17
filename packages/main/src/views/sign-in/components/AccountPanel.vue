@@ -28,6 +28,7 @@
           autocomplete="username"
           :rules="[(v) => !!v || '用户名不能为空，请输入用户名！']"
           :disabled="isSubmittingProtected"
+          :loading="isSubmittingProtected"
           @change="onResetError()"
         ></v-text-field>
         <v-text-field
@@ -44,6 +45,7 @@
           :type="visible ? 'text' : 'password'"
           :rules="[(v) => !!v || '密码不能为空，请输入密码！']"
           :disabled="isSubmittingProtected"
+          :loading="isSubmittingProtected"
           autocomplete="password"
           @change="onResetError()"
         ></v-text-field>
@@ -80,11 +82,11 @@
 </template>
 
 <script setup lang="ts">
-import SocialSignInList from './SocialSignInList.vue';
+import SocialSignInList from "./SocialSignInList.vue";
 
-import { useSignIn } from '@/composables/hooks';
+import { useSignIn } from "@/composables/hooks";
 
-defineOptions({ name: 'AccountPanel', components: { SocialSignInList } });
+defineOptions({ name: "AccountPanel", components: { SocialSignInList } });
 
 const loginForm = ref();
 
@@ -99,8 +101,8 @@ const {
   errorMessage,
 } = useSignIn();
 
-const username = shallowRef('');
-const password = shallowRef('');
+const username = shallowRef("");
+const password = shallowRef("");
 const isShowCaptcha = shallowRef(false);
 const visible = shallowRef(false);
 
@@ -126,10 +128,10 @@ const enterKey = (e: any) => {
 };
 
 onMounted(() => {
-  window.addEventListener('keydown', (e) => enterKey(e));
+  window.addEventListener("keydown", (e) => enterKey(e));
 });
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', (e) => enterKey(e), false);
+  window.removeEventListener("keydown", (e) => enterKey(e), false);
 });
 </script>

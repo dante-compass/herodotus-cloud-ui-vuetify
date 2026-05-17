@@ -555,7 +555,7 @@ var we = { particles: {
 	name: "HParticles",
 	__name: "HParticles",
 	setup(e) {
-		let t = h("HParticles"), n, i = async (e, t = !0) => {
+		let t = h("HParticles"), n, i = async (e) => {
 			await ye(e), await be(e), await e.load({
 				id: "triangles",
 				options: we

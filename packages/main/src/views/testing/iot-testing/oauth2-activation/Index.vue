@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col>
-      <h-testing-content-card title="获取设备认证信息" subtitle="使用 OAuth2 DeviceFlow 需要先获取设备信息">
+      <h-testing-card title="获取设备认证信息" subtitle="使用 OAuth2 DeviceFlow 需要先获取设备信息">
         <v-text-field v-model="productKey" label="Product Key" required></v-text-field>
         <v-text-field v-model="deviceName" label="Device Name" required></v-text-field>
         <v-text-field v-model="deviceSecret" label="Device Secret" required></v-text-field>
@@ -13,14 +13,14 @@
           width="200px"
           @click="onDeviceAuthorization"
         ></v-btn>
-      </h-testing-content-card>
-      <h-testing-content-card title="获取设备结果" subtitle="显示 User Code 等信息则表示获取设备信息成功" class="mt-4">
+      </h-testing-card>
+      <h-testing-card title="获取设备结果" subtitle="显示 User Code 等信息则表示获取设备信息成功" class="mt-4">
         <v-text-field v-model="userCode" label="User Code" disabled></v-text-field>
         <v-text-field v-model="deviceCode" label="Device Code" disabled></v-text-field>
-      </h-testing-content-card>
+      </h-testing-card>
     </v-col>
     <v-col>
-      <h-testing-content-card title="设备校验结果" subtitle="轮询服务端直到从响应结果中可以获取到 Access Token">
+      <h-testing-card title="设备校验结果" subtitle="轮询服务端直到从响应结果中可以获取到 Access Token">
         <v-btn
           color="purple"
           text="打开验证页面"
@@ -48,7 +48,7 @@
           class="ml-4"
           @click="onDeviceVerificationStop"
         ></v-btn>
-      </h-testing-content-card>
+      </h-testing-card>
       <v-card class="mt-4">
         <v-card-title class="pb-5 font-weight-black">轮询响应结果：</v-card-title>
         <v-timeline side="end">
@@ -72,11 +72,11 @@ import type { DeviceAuthorizationResponse } from "@herodotus/core";
 import { BuildInScopeEnum, ContentTypeEnum } from "@herodotus/core";
 import { SecurityApiResources, useDeviceAuthorize } from "@herodotus/framework";
 
-import { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout } from "../../components";
+import { HTestingCard, HTestingHttpResponse, HTestingHttpResponseLayout } from "../../components";
 
 defineOptions({
   name: "HDeviceActivation",
-  components: { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout },
+  components: { HTestingCard, HTestingHttpResponse, HTestingHttpResponseLayout },
 });
 
 const responseResults = ref({}) as Ref<JSONDataType>;

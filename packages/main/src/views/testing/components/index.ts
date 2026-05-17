@@ -1,5 +1,5 @@
-import HTesingContentCard from './HTesingContentCard.vue';
-import HTestingHttpResponse from './HTestingHttpResponse.vue';
-import HTestingHttpResponseLayout from './HTestingHttpResponseLayout.vue';
+import HTestingCard from "./HTestingCard.vue";
+import HTestingHttpResponse from "./HTestingHttpResponse.vue";
+import HTestingHttpResponseLayout from "./HTestingHttpResponseLayout.vue";
 
-export { HTesingContentCard, HTestingHttpResponse, HTestingHttpResponseLayout };
+export { HTestingCard, HTestingHttpResponse, HTestingHttpResponseLayout };
