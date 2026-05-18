@@ -1,11 +1,6 @@
 import type { ISourceOptions } from "@tsparticles/engine";
 
 export const options: ISourceOptions = {
-  fullScreen: {
-    zIndex: 1,
-  },
-  preset: "triangles",
-  background: { color: "transparent" },
   particles: {
     number: {
       density: {
