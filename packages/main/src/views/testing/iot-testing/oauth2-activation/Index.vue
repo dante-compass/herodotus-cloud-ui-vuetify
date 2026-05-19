@@ -83,7 +83,7 @@ const responseResults = ref({}) as Ref<JSONDataType>;
 
 const productKey = shallowRef("apktestadd");
 const deviceName = shallowRef("aaaaaa");
-const deviceSecret = shallowRef("qZi8pyTKfcDNmjWxCz3ajPqj01nxRE7DBgmirargzMibv2C7f82JYFHyIwREj_IC");
+const deviceSecret = shallowRef("x6wCVTloFOygT_ilYqD96CBJ7hEFoT2K5JnYZQcL8rxBEE11ITKPuyZOSa6grEIO");
 
 const clientId = computed(() => {
   return productKey.value + "." + deviceName.value;
@@ -101,7 +101,7 @@ const expiresIn = shallowRef(0);
 const onDeviceAuthorization = () => {
   SecurityApiResources.getInstance()
     .oauth2()
-    .deviceAuthorizationFlow(clientId.value, deviceSecret.value, BuildInScopeEnum.CLIENT_CREATE, {
+    .deviceAuthorizationFlow(clientId.value, deviceSecret.value, BuildInScopeEnum.EMAIL, {
       contentType: ContentTypeEnum.URL_ENCODED,
       withToken: false,
     })

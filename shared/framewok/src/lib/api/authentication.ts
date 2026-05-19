@@ -316,6 +316,7 @@ export class OAuth2ApiService {
     clientId = "",
     clientSecret = "",
     scope = "",
+    options?: HttpRequestOptions,
   ): Promise<AxiosHttpResult<AccessTokenResponse>> {
     return this.config.getHttp().post(
       this.getOAuth2TokenAddress(),
@@ -323,9 +324,11 @@ export class OAuth2ApiService {
         device_code: deviceCode,
         ...this.createClientData(clientId, clientSecret, scope),
       }),
-      {
-        contentType: ContentTypeEnum.URL_ENCODED,
-      },
+      isEmpty(options)
+        ? {
+            contentType: ContentTypeEnum.URL_ENCODED,
+          }
+        : options,
     );
   }
 
@@ -343,7 +346,7 @@ export class OAuth2ApiService {
   public deviceAuthorizationFlow(
     clientId = "",
     clientSecret = "",
-    scope = BuildInScopeEnum.EMAIL,
+    scope = "",
     options?: HttpRequestOptions,
   ): Promise<AxiosHttpResult<DeviceAuthorizationResponse>> {
     return this.config.getHttp().post(
@@ -431,6 +434,8 @@ export class OAuth2ApiService {
   public oidcClientRegistrationFlow(
     productKey: string,
     clientName: string,
+    redirect_uris: string[],
+    scope: string,
     options?: HttpRequestOptions,
     config?: AxiosRequestConfig<OAuth2ClientRegistration>,
   ): Promise<AxiosHttpResult<any>> {
@@ -440,6 +445,8 @@ export class OAuth2ApiService {
         product_key: productKey,
         grant_types: [AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS, AuthorizationGrantTypeEnum.DEVICE_CODE],
         client_name: clientName,
+        redirect_uris: redirect_uris,
+        scope: scope,
         token_endpoint_auth_method: ClientAuthenticationMethodEnum.CLIENT_SECRET_POST,
       },
       isEmpty(options)
@@ -454,6 +461,8 @@ export class OAuth2ApiService {
   public clientRegistrationFlow(
     productKey: string,
     clientName: string,
+    redirect_uris: string[],
+    scope: string,
     options?: HttpRequestOptions,
     config?: AxiosRequestConfig<OAuth2ClientRegistration>,
   ): Promise<AxiosHttpResult<OAuth2ClientRegistration>> {
@@ -463,6 +472,8 @@ export class OAuth2ApiService {
         product_key: productKey,
         grant_types: [AuthorizationGrantTypeEnum.CLIENT_CREDENTIALS, AuthorizationGrantTypeEnum.DEVICE_CODE],
         client_name: clientName,
+        redirect_uris: redirect_uris,
+        scope: scope,
         token_endpoint_auth_method: ClientAuthenticationMethodEnum.CLIENT_SECRET_POST,
       },
       isEmpty(options)
