@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/components",
-  "version": "1.6.7",
+  "version": "1.6.9",
   "description": "",
   "keywords": [],
   "author": "",
@@ -41,9 +41,8 @@
   "dependencies": {
     "@herodotus/core": "workspace:^",
     "@mdi/js": "^7.4.47",
-    "@tsparticles/basic": "^4.0.1",
-    "@tsparticles/engine": "^4.0.1",
-    "@tsparticles/interaction-particles-links": "^4.0.1",
+    "@tsparticles/engine": "^4.0.5",
+    "@tsparticles/preset-triangles": "^4.0.5",
     "vue": "^3.5.34",
     "vuetify": "^4.0.7"
   }

@@ -1,5 +1,21 @@
 # @herodotus/api
 
+## 1.6.9
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@1.6.9
+
+## 1.6.8
+
+### Patch Changes
+
+- [修复] 前端修复 tsparticles 组件升级至 v4.0 之后不显示、控制台报错问题
+- Updated dependencies
+  - @herodotus/core@1.6.8
+
 ## 1.6.7
 
 ### Patch Changes

@@ -1,7 +1,6 @@
 <template>
   <v-parallax :style="{ backgroundColor: backgroundColor }">
     <h-particles></h-particles>
-
     <v-container fluid>
       <v-row class="h-screen" justify="center">
         <v-col xxl="4" xl="3" lg="2" md="1" sm="0" xs="0"></v-col>
@@ -31,12 +30,12 @@
 </template>
 
 <script setup lang="ts">
-import { useSystemTheme, useApplicationStore } from '@herodotus/framework';
+import { useSystemTheme, useApplicationStore } from "@herodotus/framework";
 
-import { HAppLogo } from '@/components/library/HLogo';
+import { HAppLogo } from "@/components/library/HLogo";
 
 defineOptions({
-  name: 'HSignInLayout',
+  name: "HSignInLayout",
   components: {
     HAppLogo,
   },
@@ -45,7 +44,7 @@ defineOptions({
 const { lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeThemeIcon } = useSystemTheme();
 const application = useApplicationStore();
 
-const tabs = shallowRef('account');
+const tabs = shallowRef("account");
 
 watch(tabs, (newValue) => {
   application.signInPanel = newValue;

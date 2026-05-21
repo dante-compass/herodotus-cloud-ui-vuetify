@@ -85,9 +85,10 @@
 <script setup lang="ts">
 import type { JSONDataType } from "@/composables/declarations";
 import type { AccessTokenResponse } from "@herodotus/core";
+import type { OAuth2ClientRegistration } from "@herodotus/framework";
 
 import { BuildInScopeEnum, ContentTypeEnum } from "@herodotus/core";
-import { SecurityApiResources, useAuthenticationStore, type OAuth2ClientRegistration } from "@herodotus/framework";
+import { SecurityApiResources } from "@herodotus/framework";
 
 import { HTestingCard, HTestingHttpResponse, HTestingHttpResponseLayout } from "../../components";
 
@@ -108,7 +109,6 @@ const deviceName = shallowRef("");
 const deviceSecret = shallowRef("");
 const deviceAccessToken = shallowRef("");
 
-const store = useAuthenticationStore();
 /**
  * 获取 "initial" Access token
  */
@@ -139,6 +139,8 @@ const onDynamicRegistration = () => {
     .clientRegistrationFlow(
       productKey.value,
       "aaaaaa",
+      ["http://192.168.101.10:8847"],
+      BuildInScopeEnum.EMAIL,
       {
         contentType: ContentTypeEnum.JSON,
         withToken: false,
@@ -163,7 +165,7 @@ const onDynamicRegistration = () => {
 const onNewClientSignIn = () => {
   SecurityApiResources.getInstance()
     .oauth2()
-    .clientCredentialsFlow(deviceName.value, deviceSecret.value, "", {
+    .clientCredentialsFlow(deviceName.value, deviceSecret.value, BuildInScopeEnum.EMAIL, {
       contentType: ContentTypeEnum.URL_ENCODED,
       withToken: false,
     })

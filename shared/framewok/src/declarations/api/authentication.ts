@@ -113,7 +113,7 @@ export interface OAuth2ClientRegistration {
    * 注意：在最新版本的 SAS 中，客户端动态注册时默认不需要传 scope 参数。如果传了 scope 参数，那么客户端动态注册时会抛出。参见：SAS {@code OAuth2ClientRegistrationAuthenticationValidator}
    * 当然，如果需要传递 scope，需要自己重新实现 {@code OAuth2ClientRegistrationAuthenticationValidator}
    */
-  scope?: string[];
+  scope?: string;
   /**
    * JWKS 地址。
    *

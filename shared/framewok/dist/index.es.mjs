@@ -1,12 +1,12 @@
-import { AuthorizationGrantTypeEnum as e, AuthorizationTokenEnum as t, BuildInScopeEnum as n, ClientAuthenticationMethodEnum as r, ContentTypeEnum as i, SM2Utils as a, SM4Utils as o, Service as s, ThemeModeEnum as c, changeSwalTheme as l, moment as u, notify as d, toast as f } from "@herodotus/core";
-import { useRoute as p } from "vue-router";
-import { defineStore as m } from "pinia";
-import { jwtDecode as h } from "jwt-decode";
-import { colord as g, extend as ee } from "colord";
-import _ from "colord/plugins/mix";
-import { dropRight as v, endsWith as te, findIndex as y, has as ne, isEmpty as b, join as re, merge as x, remove as S, split as C } from "lodash-es";
-import { Base64 as ie } from "js-base64";
-import { computed as w, getCurrentInstance as ae, inject as oe, nextTick as se, ref as ce, shallowRef as T, watch as le, watchEffect as ue } from "vue";
+import { AuthorizationGrantTypeEnum as e, AuthorizationTokenEnum as t, ClientAuthenticationMethodEnum as n, ContentTypeEnum as r, SM2Utils as i, SM4Utils as a, Service as o, ThemeModeEnum as s, changeSwalTheme as c, moment as l, notify as u, toast as d } from "@herodotus/core";
+import { useRoute as f } from "vue-router";
+import { defineStore as p } from "pinia";
+import { jwtDecode as m } from "jwt-decode";
+import { colord as h, extend as g } from "colord";
+import ee from "colord/plugins/mix";
+import { dropRight as te, endsWith as ne, findIndex as _, has as re, isEmpty as v, join as y, merge as b, remove as x, split as ie } from "lodash-es";
+import { Base64 as ae } from "js-base64";
+import { computed as S, getCurrentInstance as oe, inject as C, nextTick as se, ref as w, shallowRef as T, watch as ce, watchEffect as le } from "vue";
 import E from "pinia-plugin-persistedstate";
 //#region src/declarations/enums.ts
 var D = /* @__PURE__ */ function(e) {
@@ -17,7 +17,7 @@ var D = /* @__PURE__ */ function(e) {
 	return e.INSTITUTION = "INSTITUTION", e.SMS = "SMS", e.WXAPP = "WXAPP", e.QQ = "QQ", e.WEIBO = "WEIBO", e.BAIDU = "BAIDU", e.WECHAT_OPEN = "WECHAT_OPEN", e.WECHAT_MP = "WECHAT_MP", e.WECHAT_ENTERPRISE = "WECHAT_ENTERPRISE", e.WECHAT_ENTERPRISE_WEB = "WECHAT_ENTERPRISE_WEB", e.DINGTALK = "DINGTALK", e.DINGTALK_ACCOUNT = "DINGTALK_ACCOUNT", e.ALIYUN = "ALIYUN", e.TAOBAO = "TAOBAO", e.ALIPAY = "ALIPAY", e.TEAMBITION = "TEAMBITION", e.HUAWEI_V2 = "HUAWEI_V2", e.FEISHU = "FEISHU", e.JD = "JD", e.DOUYIN = "DOUYIN", e.TOUTIAO = "TOUTIAO", e.MI = "MI", e.RENREN = "RENREN", e.MEITUAN = "MEITUAN", e.ELEME = "ELEME", e.KUJIALE = "KUJIALE", e.XMLY = "XMLY", e.GITEE = "GITEE", e.OSCHINA = "OSCHINA", e.CSDN = "CSDN", e.GITHUB = "GITHUB", e.GITLAB = "GITLAB", e.STACK_OVERFLOW = "STACK_OVERFLOW", e.CODING = "CODING", e.GOOGLE = "GOOGLE", e.MICROSOFT = "MICROSOFT", e.FACEBOOK = "FACEBOOK", e.LINKEDIN = "LINKEDIN", e.TWITTER = "TWITTER", e.AMAZON = "AMAZON", e.SLACK = "SLACK", e.LINE = "LINE", e.OKTA = "OKTA", e.PINTEREST = "PINTEREST", e;
 }({}), A = /* @__PURE__ */ function(e) {
 	return e.APP = "APP", e.PERSONAL = "PERSONAL", e.TESTING = "TESTING", e;
-}({}), de = m("Application", {
+}({}), ue = p("Application", {
 	state: () => ({
 		leftDrawer: !0,
 		rightDrawer: !1,
@@ -44,12 +44,12 @@ var D = /* @__PURE__ */ function(e) {
 });
 //#endregion
 //#region src/lib/utilities/color.ts
-ee([_]);
+g([ee]);
 var j = 2, M = 16, N = 5, P = 5, F = 15, I = 5, L = 4;
 function R(e, t) {
 	if (t === 6) return e;
-	let n = t < 6, r = g(e).toHsv(), i = n ? I + 1 - t : t - I - 1;
-	return g({
+	let n = t < 6, r = h(e).toHsv(), i = n ? I + 1 - t : t - I - 1;
+	return h({
 		h: B(r, i, n),
 		s: V(r, i, n),
 		v: H(r, i, n)
@@ -82,13 +82,13 @@ function H(e, t, n) {
 	return r = n ? e.v + P * t : e.v - F * t, r > 100 && (r = 100), r;
 }
 function U(e, t) {
-	return g(e).alpha(t).toHex();
+	return h(e).alpha(t).toHex();
 }
 function W(e, t, n) {
-	return g(e).mix(t, n).toHex();
+	return h(e).mix(t, n).toHex();
 }
-function fe(e) {
-	return g(e).isEqual("#ffffff");
+function de(e) {
+	return h(e).isEqual("#ffffff");
 }
 //#endregion
 //#region src/lib/utilities/options.ts
@@ -163,10 +163,10 @@ var G = class e {
 		return this.router;
 	}
 	isRouterExist() {
-		return !b(this.router);
+		return !v(this.router);
 	}
 	hasParameter(e) {
-		return !b(e.params) || !b(e.query);
+		return !v(e.params) || !v(e.query);
 	}
 	isDetailRoute(e) {
 		return !!(e.meta && e.meta.isDetailContent);
@@ -203,7 +203,7 @@ var G = class e {
 		this.isRouterExist() ? this.to(this.options.path.signIn) : this.refresh();
 	}
 	getParent(e) {
-		return re(v(C(e, "/")), "/");
+		return y(te(ie(e, "/")), "/");
 	}
 	toPrev(e) {
 		if (e.path) {
@@ -230,19 +230,19 @@ var G = class e {
 		e || X().signOut(), this.extension(), console.log("Clear Framework Kernel Data"), X().$reset(), Y().$reset(), Q().$reset(), K.getInstance().toSignIn();
 	}
 	signOutWithDialog() {
-		d.signOutNotify(() => this.signOut());
+		u.signOutNotify(() => this.signOut());
 	}
 	tokenExpires(e, t, n, r = !1) {
-		d.tokenExpiresNotify(e, t, n, () => this.signOut(r));
+		u.tokenExpiresNotify(e, t, n, () => this.signOut(r));
 	}
-}, pe = class a {
+}, fe = class i {
 	static instance = null;
 	config = {};
 	constructor(e) {
 		this.config = e;
 	}
 	static getInstance(e) {
-		return this.instance ??= new a(e), this.instance;
+		return this.instance ??= new i(e), this.instance;
 	}
 	getOAuth2TokenAddress() {
 		return this.config.getUaa() + "/oauth2/token";
@@ -264,38 +264,38 @@ var G = class e {
 	}
 	createBasicHeader(e = "", n = "") {
 		let r = this.config.getClientId() + ":" + this.config.getClientSecret();
-		return e && n && (r = e + ":" + n), t.BASIC + ie.encode(r);
+		return e && n && (r = e + ":" + n), t.BASIC + ae.encode(r);
 	}
 	createClientData(e = "", t = "", n = "") {
 		let r = {
 			client_id: "",
 			client_secret: ""
 		};
-		return e && t ? (r.client_id = e, r.client_secret = t) : (r.client_id = this.config.getClientId(), r.client_secret = this.config.getClientSecret()), n && x(r, { scope: n }), r;
+		return e && t ? (r.client_id = e, r.client_secret = t) : (r.client_id = this.config.getClientId(), r.client_secret = this.config.getClientSecret()), n && b(r, { scope: n }), r;
 	}
 	createOAuth2Data(e, t, n = !1) {
 		let r = { grant_type: e };
-		return b(t) || x(r, t), n && x(r, { scope: "openid" }), r;
+		return v(t) || b(r, t), n && b(r, { scope: "openid" }), r;
 	}
 	signOut(e, t = "", n = "") {
-		return this.config.getHttp().put(this.getOAuth2SignOutAddress(), { accessToken: e }, { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(t, n) } });
+		return this.config.getHttp().put(this.getOAuth2SignOutAddress(), { accessToken: e }, { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(t, n) } });
 	}
 	revoke(e, t = "", n = "") {
-		return this.config.getHttp().post(this.getOAuth2RevokeAddress(), { token: e }, { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(t, n) } });
+		return this.config.getHttp().post(this.getOAuth2RevokeAddress(), { token: e }, { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(t, n) } });
 	}
-	refreshTokenFlow(t, n = !1, r = "", a = "") {
-		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.REFRESH_TOKEN, { refresh_token: t }, n), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(r, a) } });
+	refreshTokenFlow(t, n = !1, i = "", a = "") {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.REFRESH_TOKEN, { refresh_token: t }, n), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(i, a) } });
 	}
-	passwordFlow(t, n, r = !1, a = "", o = "") {
+	passwordFlow(t, n, i = !1, a = "", o = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.PASSWORD, {
 			username: t,
 			password: n
-		}, r), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
+		}, i), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
 	}
 	createAuthorizationCodeAddress(e, t = "") {
-		if (b(t)) {
+		if (v(t)) {
 			let t = this.config.getProject(), n = e;
-			return te(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
+			return ne(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
 		} else return t;
 	}
 	createAuthorizationCodeParams(e, t = "openid") {
@@ -304,58 +304,62 @@ var G = class e {
 	authorizationCodeRequestFlow(e, t, n = "openid", r = "") {
 		return this.createAuthorizationCodeAddress(e, r) + "/oauth2/authorize" + this.createAuthorizationCodeParams(t, n);
 	}
-	authorizationCodeFlow(t, n, r = "", a = !1, o = "", s = "") {
+	authorizationCodeFlow(t, n, i = "", a = !1, o = "", s = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.AUTHORIZATION_CODE, {
 			code: t,
-			state: r,
+			state: i,
 			redirect_uri: n
-		}, a), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(o, s) } });
+		}, a), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(o, s) } });
 	}
-	clientCredentialsFlow(t = "", n = "", r = "", a) {
-		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, r) }), b(a) ? { contentType: i.URL_ENCODED } : a);
+	clientCredentialsFlow(t = "", n = "", i = "", a) {
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, i) }), v(a) ? { contentType: r.URL_ENCODED } : a);
 	}
-	deviceCodeFlow(t, n = "", r = "", a = "") {
+	deviceCodeFlow(t, n = "", i = "", a = "", o) {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.DEVICE_CODE, {
 			device_code: t,
-			...this.createClientData(n, r, a)
-		}), { contentType: i.URL_ENCODED });
+			...this.createClientData(n, i, a)
+		}), v(o) ? { contentType: r.URL_ENCODED } : o);
 	}
-	deviceAuthorizationFlow(e = "", t = "", r = n.EMAIL, a) {
-		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), { ...this.createClientData(e, t, r) }, b(a) ? { contentType: i.URL_ENCODED } : a);
+	deviceAuthorizationFlow(e = "", t = "", n = "", i) {
+		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), { ...this.createClientData(e, t, n) }, v(i) ? { contentType: r.URL_ENCODED } : i);
 	}
-	socialCredentialsFlowBySms(t, n, r = !1, a = "", o = "") {
+	socialCredentialsFlowBySms(t, n, i = !1, a = "", o = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.SOCIAL_CREDENTIALS, {
 			mobile: t,
 			code: n,
 			source: k.SMS
-		}, r), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
+		}, i), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
 	}
-	socialCredentialsFlowByJustAuth(t, n, r = !1, a = "", o = "") {
+	socialCredentialsFlowByJustAuth(t, n, i = !1, a = "", o = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.SOCIAL_CREDENTIALS, {
 			...n,
 			source: t
-		}, r), { contentType: i.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
+		}, i), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
 	}
-	webAuthnCredentialsFlow(t, n = !1, r = "", a = "") {
-		return this.config.getHttp().postWithParams(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.WEBAUTHN_CREDENTIALS, {}, n), { ...t }, { contentType: i.JSON }, { headers: { Authorization: this.createBasicHeader(r, a) } });
+	webAuthnCredentialsFlow(t, n = !1, i = "", a = "") {
+		return this.config.getHttp().postWithParams(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.WEBAUTHN_CREDENTIALS, {}, n), { ...t }, { contentType: r.JSON }, { headers: { Authorization: this.createBasicHeader(i, a) } });
 	}
-	oidcClientRegistrationFlow(t, n, a, o) {
+	oidcClientRegistrationFlow(t, i, a, o, s, c) {
 		return this.config.getHttp().post(this.getOIDCConnectRegisterAddress(), {
 			product_key: t,
 			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
-			client_name: n,
-			token_endpoint_auth_method: r.CLIENT_SECRET_POST
-		}, b(a) ? { contentType: i.JSON } : a, o);
+			client_name: i,
+			redirect_uris: a,
+			scope: o,
+			token_endpoint_auth_method: n.CLIENT_SECRET_POST
+		}, v(s) ? { contentType: r.JSON } : s, c);
 	}
-	clientRegistrationFlow(t, n, a, o) {
+	clientRegistrationFlow(t, i, a, o, s, c) {
 		return this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
 			product_key: t,
 			grant_types: [e.CLIENT_CREDENTIALS, e.DEVICE_CODE],
-			client_name: n,
-			token_endpoint_auth_method: r.CLIENT_SECRET_POST
-		}, b(a) ? { contentType: i.JSON } : a, o);
+			client_name: i,
+			redirect_uris: a,
+			scope: o,
+			token_endpoint_auth_method: n.CLIENT_SECRET_POST
+		}, v(s) ? { contentType: r.JSON } : s, c);
 	}
-}, me = class e {
+}, pe = class e {
 	static instance = null;
 	config = {};
 	constructor(e) {
@@ -405,13 +409,13 @@ var G = class e {
 	}
 	createVerificationCode(e) {
 		let t = this.config.getUpms() + "/open/identity/verification-code";
-		return this.config.getHttp().post(t, { mobile: e }, { contentType: i.URL_ENCODED });
+		return this.config.getHttp().post(t, { mobile: e }, { contentType: r.URL_ENCODED });
 	}
 	getSocialList() {
 		let e = this.config.getUpms() + "/open/identity/sources";
 		return this.config.getHttp().get(e);
 	}
-}, he = class e extends s {
+}, me = class e extends o {
 	static instance = null;
 	constructor(e) {
 		super(e);
@@ -468,15 +472,15 @@ var G = class e {
 		return this.config;
 	}
 	open() {
-		return me.getInstance(this.config);
-	}
-	oauth2() {
 		return pe.getInstance(this.config);
 	}
-	passkey() {
-		return he.getInstance(this.config);
+	oauth2() {
+		return fe.getInstance(this.config);
 	}
-}, Y = m("Crypto", {
+	passkey() {
+		return me.getInstance(this.config);
+	}
+}, Y = p("Crypto", {
 	state: () => ({
 		sessionId: "",
 		key: "",
@@ -487,18 +491,18 @@ var G = class e {
 			this.sessionId = e;
 		},
 		setKey(e) {
-			this.key = o.encrypt(e, G.getSecurityKey());
+			this.key = a.encrypt(e, G.getSecurityKey());
 		},
 		getKey() {
-			return o.decrypt(this.key, G.getSecurityKey());
+			return a.decrypt(this.key, G.getSecurityKey());
 		},
 		encrypt(e) {
 			let t = this.getKey();
-			return o.encrypt(e, t);
+			return a.encrypt(e, t);
 		},
 		decrypt(e) {
 			let t = this.getKey();
-			return o.decrypt(e, t);
+			return a.decrypt(e, t);
 		},
 		exchange(e = "") {
 			return new Promise((t, n) => {
@@ -507,9 +511,9 @@ var G = class e {
 					if (n) {
 						let e = n.sessionId, r = n.publicKey;
 						this.state = n.state;
-						let i = a.createKeyPair(), o = a.encrypt(i.publicKey, r);
+						let a = i.createKeyPair(), o = i.encrypt(a.publicKey, r);
 						J.getInstance().open().exchange(e, o).then((n) => {
-							let r = n.data, o = a.decrypt(r, i.privateKey);
+							let r = n.data, o = i.decrypt(r, a.privateKey);
 							this.setSessionId(e), this.setKey(o), t(o);
 						});
 					}
@@ -520,7 +524,7 @@ var G = class e {
 		}
 	},
 	persist: { storage: sessionStorage }
-}), X = m("Authentication", {
+}), X = p("Authentication", {
 	state: () => ({
 		access_token: "",
 		expires_in: 0,
@@ -540,7 +544,7 @@ var G = class e {
 		roles: []
 	}),
 	getters: {
-		isNotExpired: (e) => u(u().add(e.expires_in, "seconds").valueOf()).add(1, "seconds").diff(u(), "seconds") !== 0,
+		isNotExpired: (e) => l(l().add(e.expires_in, "seconds").valueOf()).add(1, "seconds").diff(l(), "seconds") !== 0,
 		token() {
 			return G.isAutoRefreshToken() || this.isNotExpired ? this.access_token : "";
 		}
@@ -558,7 +562,7 @@ var G = class e {
 		saveAccessToken(e) {
 			if (this.access_token = e.access_token, this.expires_in = e.expires_in, this.refresh_token = e.refresh_token ? e.refresh_token : "", this.license = e.refresh_token ? e.refresh_token : "", this.scope = e.scope, this.token_type = e.token_type, e.id_token) {
 				this.idToken = e.id_token;
-				let t = h(this.idToken);
+				let t = m(this.idToken);
 				this.userId = t.openid, this.username = t.sub, this.avatar = t.avatar, this.employeeId = t.employeeId, this.roles = t.roles;
 			} else if (e.openid) {
 				let t = Y();
@@ -667,15 +671,15 @@ var G = class e {
 		}
 	},
 	persist: !0
-}), ge = () => {
+}), he = () => {
 	let e = X(), n = Y(), r = e.access_token, i = n.sessionId, a = {};
 	r && (a.Authorization = t.BEARER + r), i && (a["X-Herodotus-Session-Id"] = i);
 	let o = G.getTenantId();
 	return o && (a["X-Herodotus-Tenant-Id"] = o), a["X-Herodotus-Api-Version"] = "v1", a;
-}, Z = m("SystemSettings", {
+}, Z = p("SystemSettings", {
 	state: () => ({
 		theme: {
-			mode: c.SYSTEM,
+			mode: s.SYSTEM,
 			dark: { primary: "#2563eb" },
 			light: { primary: "#6750A4" }
 		},
@@ -690,27 +694,27 @@ var G = class e {
 		}
 	}),
 	getters: {
-		isDark: (e) => e.theme.mode === c.DARK,
-		isLight: (e) => e.theme.mode === c.LIGHT,
-		isSystem: (e) => e.theme.mode === c.SYSTEM,
-		isDarkenMode: (e) => e.theme.mode !== c.LIGHT,
-		isLightenMode: (e) => e.theme.mode === c.LIGHT,
+		isDark: (e) => e.theme.mode === s.DARK,
+		isLight: (e) => e.theme.mode === s.LIGHT,
+		isSystem: (e) => e.theme.mode === s.SYSTEM,
+		isDarkenMode: (e) => e.theme.mode !== s.LIGHT,
+		isLightenMode: (e) => e.theme.mode === s.LIGHT,
 		density: (e) => e.display.table.dense ? "compact" : "default",
 		densitySwitch: (e) => (t, n) => e.display.table.dense ? t : n
 	},
 	actions: {
 		toDark() {
-			this.theme.mode = c.DARK;
+			this.theme.mode = s.DARK;
 		},
 		toLight() {
-			this.theme.mode = c.LIGHT;
+			this.theme.mode = s.LIGHT;
 		},
 		toSystem() {
-			this.theme.mode = c.SYSTEM;
+			this.theme.mode = s.SYSTEM;
 		}
 	},
 	persist: !0
-}), Q = m("SystemElement", {
+}), Q = p("SystemElement", {
 	state: () => ({
 		appMenus: [],
 		personalMenus: [],
@@ -721,10 +725,10 @@ var G = class e {
 	}),
 	getters: {
 		isDynamicRouteAdded() {
-			return !b(this.appMenus) || !b(this.personalMenus);
+			return !v(this.appMenus) || !v(this.personalMenus);
 		},
 		supportTesting() {
-			return !b(this.testingMenus);
+			return !v(this.testingMenus);
 		}
 	},
 	actions: {
@@ -745,11 +749,11 @@ var G = class e {
 			t && this.details.set(t, e.component);
 		},
 		addMenus(e, t, n) {
-			b(e) || (this.appMenus = e), b(t) || (this.personalMenus = t), b(n) || (this.testingMenus = n);
+			v(e) || (this.appMenus = e), v(t) || (this.personalMenus = t), v(n) || (this.testingMenus = n);
 		},
 		hasParameter(e) {
 			let t = e.name;
-			return !!(t && ne(this.pushParams, t));
+			return !!(t && re(this.pushParams, t));
 		},
 		isDetailRoute(e) {
 			return !!(e.meta && e.meta.isDetailContent);
@@ -764,7 +768,7 @@ var G = class e {
 			e && delete this.pushParams[e];
 		}
 	}
-}), $ = m("TabsView", {
+}), $ = p("TabsView", {
 	state: () => ({
 		tabs: [],
 		activatedTab: {},
@@ -773,7 +777,7 @@ var G = class e {
 	getters: {
 		isNotLastTab: (e) => (t) => e.tabs.length - 1 !== t,
 		getLastTabIndex: (e) => e.tabs.length - 1,
-		getTabIndex: (e) => (t) => y(e.tabs, (e) => e.name === t.name),
+		getTabIndex: (e) => (t) => _(e.tabs, (e) => e.name === t.name),
 		getActivatedTabIndex() {
 			return this.getTabIndex(this.activatedTab);
 		},
@@ -808,7 +812,7 @@ var G = class e {
 			this.activatedTab = e, this.activatedTabName = e.name;
 		},
 		isNotExistInStaticRoute(e) {
-			return y(G.getRoutes(), (t) => t.path === e.path) === -1;
+			return _(G.getRoutes(), (t) => t.path === e.path) === -1;
 		},
 		isTabNotOpened(e) {
 			return this.getTabIndex(e) === -1;
@@ -817,7 +821,7 @@ var G = class e {
 			this.isNotExistInStaticRoute(e) && (this.isTabNotOpened(e) && (t ? this.isLastTabActivated ? this.tabs.splice(this.getActivatedTabIndex, 0, e) : this.tabs.splice(this.getActivatedTabIndex + 1, 0, e) : this.tabs.push(e)), this.setActivatedTab(e));
 		},
 		closeTab(e) {
-			S(this.tabs, (t) => t.name === e.name);
+			x(this.tabs, (t) => t.name === e.name);
 		},
 		smartTab(e) {
 			let t = Q(), n = t.isDetailRoute(e), r = this.convertRouteToTab(e);
@@ -831,23 +835,23 @@ var G = class e {
 			this.closeTab(this.activatedTab);
 		},
 		closeOtherTabs() {
-			S(this.tabs, (e) => e.name !== this.activatedTab.name);
+			x(this.tabs, (e) => e.name !== this.activatedTab.name);
 		},
 		closeLeftTabs() {
 			let e = this.getActivatedTabIndex;
-			S(this.tabs, (t, n) => n < e);
+			x(this.tabs, (t, n) => n < e);
 		},
 		closeRightTabs() {
 			let e = this.getActivatedTabIndex;
-			S(this.tabs, (t, n) => n > e);
+			x(this.tabs, (t, n) => n > e);
 		}
 	},
 	persist: !0
 });
 //#endregion
 //#region src/lib/hooks/useEditFinish.ts
-function _e() {
-	let e = p(), t = Q(), n = $();
+function ge() {
+	let e = f(), t = Q(), n = $();
 	return { onFinish: () => {
 		let r = e.name;
 		t.removeRoutePushParam(r), n.deleteTab(e), K.getInstance().goBack();
@@ -855,48 +859,51 @@ function _e() {
 }
 //#endregion
 //#region src/lib/hooks/useDeviceAuthorize.ts
-function ve(e, t, n, r = "") {
-	let i = T(0), a = T(5), o = T(!1), s = T(!1), c = T({}), l = ce([]), u = (e, t = !1) => {
-		let n = l.value.length + 1;
-		t ? l.value.push({
+function _e(e, t, n, i = "") {
+	let a = T(0), o = T(5), s = T(!1), c = T(!1), l = T({}), u = w([]), d = (e, t = !1) => {
+		let n = u.value.length + 1;
+		t ? u.value.push({
 			id: n,
 			icon: "mdi-information",
 			color: "green",
 			text: e
-		}) : l.value.push({
+		}) : u.value.push({
 			id: n,
 			icon: "mdi-alert-circle",
 			color: "error",
 			text: e
 		});
-	}, d = (e) => {
-		e === "authorization_pending" ? u("Authorization pending, continuing to poll...") : e === "slow_down" ? (u("Slowing down..."), h()) : e === "token_expired" ? (u("Token expired, stopping..."), m(), s.value = !0) : e === "access_denied" && (u("Access denied, stopping..."), m(), s.value = !0);
-	}, f = () => {
-		J.getInstance().oauth2().deviceCodeFlow(e.value, t.value, n.value, r).then((e) => {
-			u("Authorization successful", !0), m(), o.value = !0, c.value = e;
-		}).catch((e) => {
-			d(e.error);
-		});
+	}, f = (e) => {
+		e === "authorization_pending" ? d("Authorization pending, continuing to poll...") : e === "slow_down" ? (d("Slowing down..."), g()) : e === "token_expired" ? (d("Token expired, stopping..."), h(), c.value = !0) : e === "access_denied" && (d("Access denied, stopping..."), h(), c.value = !0);
 	}, p = () => {
-		i.value = window.setInterval(f, a.value * 1e3);
+		J.getInstance().oauth2().deviceCodeFlow(e.value, t.value, n.value, i, {
+			contentType: r.URL_ENCODED,
+			withToken: !1
+		}).then((e) => {
+			d("Authorization successful", !0), h(), s.value = !0, l.value = e;
+		}).catch((e) => {
+			f(e.error);
+		});
 	}, m = () => {
-		window.clearInterval(i.value);
+		a.value = window.setInterval(p, o.value * 1e3);
 	}, h = () => {
-		a.value += 5, m(), p();
+		window.clearInterval(a.value);
+	}, g = () => {
+		o.value += 5, h(), m();
 	};
 	return {
-		pullingResponse: l,
-		successResponse: c,
-		isFailed: s,
-		isSuccess: o,
-		schedule: p,
-		clear: m,
-		slowDown: h
+		pullingResponse: u,
+		successResponse: l,
+		isFailed: c,
+		isSuccess: s,
+		schedule: m,
+		clear: h,
+		slowDown: g
 	};
 }
 //#endregion
 //#region src/lib/hooks/useFileDownload.ts
-function ye() {
+function ve() {
 	let e = T(0), t = T(!1);
 	return {
 		process: (e, t) => {
@@ -915,7 +922,7 @@ function ye() {
 }
 //#endregion
 //#region src/lib/hooks/usePasskey.ts
-function be() {
+function ye() {
 	let e = X(), t = null, n = () => {
 		t &&= null;
 	};
@@ -965,7 +972,7 @@ function be() {
 }
 //#endregion
 //#region src/lib/hooks/useSystemElement.ts
-function xe(e, t, n) {
+function be(e, t, n) {
 	let r = (e) => e.meta?.title, i = (e) => e.meta?.icon, a = (e) => e.meta?.isDetailContent, o = (e, n) => {
 		let r = {};
 		return r.path = e.name, r.component = n[t(e.componentPath)], e.componentName && (r.name = e.componentName), e.redirect && (r.redirect = e.redirect), r.meta = {
@@ -1014,10 +1021,10 @@ function xe(e, t, n) {
 				if (m.children = r.routeRecords, n) h = s(m);
 				else {
 					let t = l(e, r);
-					b(t) ? h = s(m) : (h = c(m), h.children = t);
+					v(t) ? h = s(m) : (h = c(m), h.children = t);
 				}
 			} else n || (h = s(m));
-			if (i.push(m), !b(h)) switch (e.scenario) {
+			if (i.push(m), !v(h)) switch (e.scenario) {
 				case A.PERSONAL:
 					f.push(h);
 					break;
@@ -1035,7 +1042,7 @@ function xe(e, t, n) {
 			testingMenus: p
 		};
 	}, d = (e, t) => {
-		console.log("[Herodotus] |- Begin add dynamic routes"), Q().addMenus(t.appMenus, t.personalMenus, t.testingMenus), b(t.routeRecords) ? console.warn("[Herodotus] |- Dynamic routes is empty, skip!") : (t.routeRecords.forEach((t) => {
+		console.log("[Herodotus] |- Begin add dynamic routes"), Q().addMenus(t.appMenus, t.personalMenus, t.testingMenus), v(t.routeRecords) ? console.warn("[Herodotus] |- Dynamic routes is empty, skip!") : (t.routeRecords.forEach((t) => {
 			e.addRoute(t);
 		}), console.log("[Herodotus] |- Dynamic routes add success!"));
 	};
@@ -1046,24 +1053,24 @@ function xe(e, t, n) {
 }
 //#endregion
 //#region ../../node_modules/.pnpm/vuetify@4.0.7_typescript@6._a5912fe0f711e705760d054432b9b047/node_modules/vuetify/lib/util/getCurrentInstance.js
-function Se(e, t) {
-	let n = ae();
+function xe(e, t) {
+	let n = oe();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
 //#region ../../node_modules/.pnpm/vuetify@4.0.7_typescript@6._a5912fe0f711e705760d054432b9b047/node_modules/vuetify/lib/composables/theme.js
-var Ce = Symbol.for("vuetify:theme");
-function we() {
-	Se("useTheme");
-	let e = oe(Ce, null);
+var Se = Symbol.for("vuetify:theme");
+function Ce() {
+	xe("useTheme");
+	let e = C(Se, null);
 	if (!e) throw Error("Could not find Vuetify theme injection");
 	return e;
 }
 //#endregion
 //#region src/lib/hooks/useSystemTheme.ts
-function Te() {
-	let e = Z(), t = we(), n = T(c.DARK), r = (e) => {
+function we() {
+	let e = Z(), t = Ce(), n = T(s.DARK), r = (e) => {
 		if (!e || e.nodeType !== Node.ELEMENT_NODE) return !1;
 		let t = window.getComputedStyle(e);
 		return t.overflowY === "scroll" || t.overflowY === "auto" && e.scrollHeight > e.clientHeight;
@@ -1094,18 +1101,18 @@ function Te() {
 		}
 		t.addEventListener("transitionend", c), t.addEventListener("transitioncancel", c);
 	};
-	ue(() => {
+	le(() => {
 		t.change(e.isSystem ? n.value : e.theme.mode);
-	}), le(t.global.name, (e) => {
+	}), ce(t.global.name, (e) => {
 		i();
 		let t = e;
-		f.setTheme(t), d.setTheme(t);
+		d.setTheme(t), u.setTheme(t);
 	});
-	let a = w(() => e.isDarkenMode ? e.theme.dark.primary : e.theme.light.primary);
+	let a = S(() => e.isDarkenMode ? e.theme.dark.primary : e.theme.light.primary);
 	return {
-		lightColor: w(() => R(a.value, 3)),
-		darkColor: w(() => R(a.value, 6)),
-		backgroundColor: w(() => {
+		lightColor: S(() => R(a.value, 3)),
+		darkColor: S(() => R(a.value, 6)),
+		backgroundColor: S(() => {
 			let t = e.isDarkenMode ? .5 : .2;
 			return W("#ffffff", a.value, t);
 		}),
@@ -1123,7 +1130,7 @@ function Te() {
 				return;
 			}
 		},
-		currentTheme: w({
+		currentTheme: S({
 			get() {
 				return e.theme.mode;
 			},
@@ -1131,10 +1138,10 @@ function Te() {
 				e.theme.mode = t;
 			}
 		}),
-		cycleChangeThemeIcon: w(() => {
+		cycleChangeThemeIcon: S(() => {
 			switch (e.theme.mode) {
-				case c.SYSTEM: return "mdi-brightness-5";
-				case c.DARK: return "mdi-brightness-auto";
+				case s.SYSTEM: return "mdi-brightness-5";
+				case s.DARK: return "mdi-brightness-auto";
 				default: return "mdi-brightness-4";
 			}
 		}),
@@ -1143,8 +1150,8 @@ function Te() {
 }
 //#endregion
 //#region src/lib/main.ts
-var Ee = (e) => {
-	l(Z().theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
+var Te = (e) => {
+	c(Z().theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
 };
 //#endregion
-export { O as CaptchaCategoryEnum, D as LayoutModeEnum, A as MenuScenario, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, k as SocialSourceEnum, U as addColorAlpha, z as getAllColorPalette, R as getColorPalette, ge as getSystemHeaders, Ee as initializer, fe as isWhiteColor, W as mixColor, E as piniaPluginPersistedstate, de as useApplicationStore, X as useAuthenticationStore, Y as useCryptoStore, ve as useDeviceAuthorize, _e as useEditFinish, Q as useElementStore, ye as useFileDownload, be as usePasskey, Z as useSettingsStore, xe as useSystemElement, Te as useSystemTheme, $ as useTabsViewStore };
+export { O as CaptchaCategoryEnum, D as LayoutModeEnum, A as MenuScenario, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, k as SocialSourceEnum, U as addColorAlpha, z as getAllColorPalette, R as getColorPalette, he as getSystemHeaders, Te as initializer, de as isWhiteColor, W as mixColor, E as piniaPluginPersistedstate, ue as useApplicationStore, X as useAuthenticationStore, Y as useCryptoStore, _e as useDeviceAuthorize, ge as useEditFinish, Q as useElementStore, ve as useFileDownload, ye as usePasskey, Z as useSettingsStore, be as useSystemElement, we as useSystemTheme, $ as useTabsViewStore };
