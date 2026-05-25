@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.6.11
+
+### Patch Changes
+
+- 重新编译库
+
 ## 1.6.10
 
 ### Patch Changes
