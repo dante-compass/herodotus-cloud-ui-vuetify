@@ -86,6 +86,12 @@ export interface OAuth2UserLoggingEntity extends AbstractAuditRecord {
     operation: string;
     location: string;
 }
+export interface OAuth2PersistentTokenEntity extends Entity {
+    series: string;
+    username: string;
+    token: string;
+    lastUsed: Date;
+}
 export interface OAuth2ApplicationConditions extends Conditions {
 }
 export interface OAuth2PermissionCondition extends Conditions {
@@ -106,6 +112,8 @@ export interface OAuth2InterfaceAuditConditions extends OAuth2UserLoggingConditi
     requestMethod: string;
     url: string;
 }
+export interface OAuth2PersistentTokenConditions extends Conditions {
+}
 export type OAuth2ApplicationProps = keyof OAuth2ApplicationEntity;
 export type OAuth2PermissionProps = keyof OAuth2PermissionEntity;
 export type OAuth2ScopeProps = keyof OAuth2ScopeEntity;
@@ -113,6 +121,7 @@ export type OAuth2AuthorizationProps = keyof OAuth2AuthorizationEntity;
 export type OAuth2CredentialRecordProps = keyof OAuth2CredentialRecordEntity;
 export type OAuth2UserLoggingProps = keyof OAuth2UserLoggingEntity;
 export type OAuth2InterfaceAuditProps = keyof OAuth2InterfaceAuditEntity;
+export type OAuth2PersistentTokenProps = keyof OAuth2PersistentTokenEntity;
 export interface OAuth2PermissionBody extends Conditions {
     permissionId: string;
     permissionCode: string;

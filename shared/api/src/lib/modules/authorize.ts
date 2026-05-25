@@ -5,11 +5,12 @@ import type {
   OAuth2CredentialRecordEntity,
   OAuth2UserLoggingEntity,
   OAuth2InterfaceAuditEntity,
+  OAuth2PersistentTokenEntity,
   OAuth2ScopeAssignedBody,
-} from '@/declarations';
-import type { AxiosHttpResult } from '@herodotus/core';
+} from "@/declarations";
+import type { AxiosHttpResult } from "@herodotus/core";
 
-import { HttpConfig, AbstractService } from '@herodotus/core';
+import { HttpConfig, AbstractService } from "@herodotus/core";
 
 class OAuth2ApplicationService extends AbstractService<OAuth2ApplicationEntity> {
   private static instance: OAuth2ApplicationService;
@@ -26,7 +27,7 @@ class OAuth2ApplicationService extends AbstractService<OAuth2ApplicationEntity> 
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUaa() + '/authorize/application';
+    return this.getConfig().getUaa() + "/authorize/application";
   }
 }
 
@@ -45,11 +46,11 @@ class OAuth2ScopeService extends AbstractService<OAuth2ScopeEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUaa() + '/authorize/scope';
+    return this.getConfig().getUaa() + "/authorize/scope";
   }
 
   public getAssignedAddress(): string {
-    return this.getBaseAddress() + '/assigned';
+    return this.getBaseAddress() + "/assigned";
   }
 
   public getScopeCodePath(scopeCode: string): string {
@@ -80,7 +81,7 @@ class OAuth2AuthorizationService extends AbstractService<OAuth2AuthorizationEnti
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUaa() + '/authorize/authorization';
+    return this.getConfig().getUaa() + "/authorize/authorization";
   }
 }
 
@@ -98,7 +99,7 @@ class OAuth2UserLoggingService extends AbstractService<OAuth2UserLoggingEntity> 
     return this.instance;
   }
   public getBaseAddress(): string {
-    return this.getConfig().getUaa() + '/authorize/compliance';
+    return this.getConfig().getUaa() + "/authorize/compliance";
   }
 }
 
@@ -116,7 +117,7 @@ class OAuth2InterfaceAuditService extends AbstractService<OAuth2InterfaceAuditEn
     return this.instance;
   }
   public getBaseAddress(): string {
-    return this.getConfig().getUaa() + '/authorize/audit';
+    return this.getConfig().getUaa() + "/authorize/audit";
   }
 }
 
@@ -135,7 +136,26 @@ class OAuth2CredentialRecordService extends AbstractService<OAuth2CredentialReco
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUaa() + '/authorize/passkey';
+    return this.getConfig().getUaa() + "/authorize/passkey";
+  }
+}
+
+class OAuth2PersistentTokenService extends AbstractService<OAuth2PersistentTokenEntity> {
+  private static instance: OAuth2PersistentTokenService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): OAuth2PersistentTokenService {
+    if (this.instance == null) {
+      this.instance = new OAuth2PersistentTokenService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getUaa() + "/authorize/persistent";
   }
 }
 
@@ -146,4 +166,5 @@ export {
   OAuth2UserLoggingService,
   OAuth2InterfaceAuditService,
   OAuth2CredentialRecordService,
+  OAuth2PersistentTokenService,
 };

@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 1.6.10
+
+### Patch Changes
+
+- [新增] 前端新增 Remember Me 记住审计页面
+
 ## 1.6.9
 
 ### Patch Changes
