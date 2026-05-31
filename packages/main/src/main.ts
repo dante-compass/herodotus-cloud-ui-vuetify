@@ -1,24 +1,24 @@
 // Styles
-import './styles/layers.scss';
-import 'unfonts.css';
+import "./styles/layers.scss";
+import "unfonts.css";
 
-import 'animate.css/animate.min.css';
-import '@herodotus/core/style.css';
-import '@herodotus/framework/style.css';
+import "animate.css/animate.min.css";
+import "@herodotus/core/style.css";
+import "@herodotus/framework/style.css";
 
-import App from './App.vue';
-import { createApp } from 'vue';
+import App from "./App.vue";
+import { createApp } from "vue";
 
-import DisableDevtool from 'disable-devtool';
-import { IS_DEV, VARIABLES } from '@/configurations';
+import DisableDevtool from "disable-devtool";
+import { IS_DEV, VARIABLES } from "@/configurations";
 
 // Plugins
-import { setupVuetify, setupPinia } from '@/plugins';
-import { setupRouter } from '@/routers';
+import { setupVuetify, setupPinia } from "@/plugins";
+import { setupRouter } from "@/routers";
 
 function setupApp() {
   if (IS_DEV) {
-    const view = document.createElement('div');
+    const view = document.createElement("div");
     document.body.appendChild(view);
   }
 
@@ -33,14 +33,14 @@ function setupApp() {
   // 挂载路由
   setupRouter(app);
 
-  app.mount('#app', true);
+  app.mount("#app", true);
 
   if (!IS_DEV) {
     if (VARIABLES.isUseDisableDevtool()) {
       const url =
-        import.meta.env.VITE_BASE_URL === '/'
-          ? '/static/forbidden.html'
-          : import.meta.env.VITE_BASE_URL + 'static/forbidden.html';
+        import.meta.env.VITE_BASE_URL === "/"
+          ? "/static/forbidden.html"
+          : import.meta.env.VITE_BASE_URL + "static/forbidden.html";
 
       DisableDevtool({
         url: url,

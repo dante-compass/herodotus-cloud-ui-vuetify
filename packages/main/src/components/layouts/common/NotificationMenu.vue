@@ -30,10 +30,10 @@
       </v-tabs>
       <v-tabs-window v-model="tab">
         <v-tabs-window-item value="dialogue">
-          <notification-dialogue></notification-dialogue>
+          <notification-dialogue ref="dialogueMessage"></notification-dialogue>
         </v-tabs-window-item>
         <v-tabs-window-item value="announcement">
-          <notification-announcement></notification-announcement>
+          <notification-announcement ref="announcementMessage"></notification-announcement>
         </v-tabs-window-item>
       </v-tabs-window>
 
@@ -48,20 +48,32 @@
 </template>
 
 <script setup lang="ts">
-import NotificationDialogue from './NotificationDialogue.vue';
-import NotificationAnnouncement from './NotificationAnnouncement.vue';
+import NotificationDialogue from "./NotificationDialogue.vue";
+import NotificationAnnouncement from "./NotificationAnnouncement.vue";
 
-import { useWebSocketMessage, useNotifications } from '@/composables/hooks';
+import { useWebSocketMessage, useNotifications } from "@/composables/hooks";
 
 defineOptions({
-  name: 'NotificationMenu',
+  name: "NotificationMenu",
   components: { NotificationDialogue, NotificationAnnouncement },
 });
 
-const tab = shallowRef('dialogue');
+const tab = shallowRef("dialogue");
+const dialogueMessage = ref();
+const announcementMessage = ref();
 
 const { totalCount, dialogueCount, announcementCount, setAllRead } = useNotifications();
 const { connect, disconnect } = useWebSocketMessage();
+
+watch(
+  () => totalCount.value,
+  (newValue) => {
+    if (newValue !== 0) {
+      dialogueMessage.value?.loading();
+      announcementMessage.value?.loading();
+    }
+  },
+);
 
 onMounted(() => {
   connect();

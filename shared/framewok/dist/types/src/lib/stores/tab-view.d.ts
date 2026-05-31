@@ -1,4 +1,4 @@
-import { RouteLocationNormalizedLoaded, RouteRecordName, RouteRecordNormalized } from 'vue-router';
+import { RouteRecordName, RouteRecordNormalized, RouteLocationNormalizedLoaded } from 'vue-router';
 import { Tab } from '../../declarations';
 /**
  * TabView 目前完全基于 Quasar 的 QRouteTab 进行构建。

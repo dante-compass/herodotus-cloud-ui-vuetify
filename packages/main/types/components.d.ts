@@ -77,6 +77,7 @@ declare module 'vue' {
     Loading: typeof import('./../src/components/layouts/common/Loading.vue')['default']
     NotificationAnnouncement: typeof import('./../src/components/layouts/common/NotificationAnnouncement.vue')['default']
     NotificationDialogue: typeof import('./../src/components/layouts/common/NotificationDialogue.vue')['default']
+    NotificationList: typeof import('../src/components/layouts/common/NotificationAnnouncement.vue/index.js')['default']
     NotificationMenu: typeof import('./../src/components/layouts/common/NotificationMenu.vue')['default']
     PersonalDefaultLayout: typeof import('./../src/components/layouts/personal/PersonalDefaultLayout.vue')['default']
     PersonalMenu: typeof import('./../src/components/layouts/personal/PersonalMenu.vue')['default']

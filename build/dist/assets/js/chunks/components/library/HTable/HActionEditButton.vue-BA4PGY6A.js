@@ -1,0 +1,1 @@
+import{et as e,k as t,mt as n,v as r}from"../../../../venders/vender-@vue-runtime-core-ChRnWtXV.js";import{n as i}from"./HActionAuthorizeButton.vue-DEJlLCLO.js";var a=t({name:`HActionEditButton`,components:{HActionButton:i},__name:`HActionEditButton`,setup(t){return(t,a)=>(n(),r(i,e({color:`purple`,icon:`mdi-pencil`,tooltip:`编辑`},t.$attrs),null,16))}});export{a as t};

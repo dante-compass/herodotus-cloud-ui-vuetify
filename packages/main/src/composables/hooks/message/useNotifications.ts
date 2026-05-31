@@ -1,14 +1,14 @@
-import type { Sort, Page } from '@herodotus/core';
-import type { NotificationEntity } from '@herodotus/api';
+import type { Sort, Page } from "@herodotus/core";
+import type { NotificationEntity } from "@herodotus/api";
 
-import { NotificationCategoryEnum } from '@herodotus/api';
-import { moment } from '@herodotus/core';
-import { useAuthenticationStore } from '@herodotus/framework';
-import { API } from '@/configurations';
-import { useNotificationStore } from '../../stores';
+import { NotificationCategoryEnum } from "@herodotus/api";
+import { moment } from "@herodotus/core";
+import { useAuthenticationStore } from "@herodotus/framework";
+import { API } from "@/configurations";
+import { useNotificationStore } from "../../stores";
 
 export default function useNotifications() {
-  const sort: Sort = { direction: 'DESC', properties: ['createTime'] };
+  const sort: Sort = { direction: "DESC", properties: ["createTime"] };
   const notificationStore = useNotificationStore();
 
   const totalItems = shallowRef(0);
@@ -48,7 +48,7 @@ export default function useNotifications() {
         }
       })
       .catch((error) => {
-        console.log('----------------', error);
+        console.log("----------------", error);
       });
   };
 

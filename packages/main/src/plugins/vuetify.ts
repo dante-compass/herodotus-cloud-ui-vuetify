@@ -1,20 +1,20 @@
-import type { App } from 'vue';
+import type { App } from "vue";
 // Styles
-import '@mdi/font/css/materialdesignicons.css';
-import 'vuetify/styles';
+import "@mdi/font/css/materialdesignicons.css";
+import "vuetify/styles";
 
 // Composables
-import { createVuetify } from 'vuetify';
-import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n';
-import { createI18n, useI18n } from 'vue-i18n';
-import { md3 } from 'vuetify/blueprints';
-import { aliases, mdi } from 'vuetify/iconsets/mdi';
-import * as VuetifyI18n from '@/i18n/vuetify';
+import { createVuetify } from "vuetify";
+import { createVueI18nAdapter } from "vuetify/locale/adapters/vue-i18n";
+import { createI18n, useI18n } from "vue-i18n";
+import { md3 } from "vuetify/blueprints";
+import { aliases, mdi } from "vuetify/iconsets/mdi";
+import * as VuetifyI18n from "@/i18n/vuetify";
 
 const i18n = createI18n({
   legacy: false, // Vuetify does not support the legacy mode of vue-i18n
-  locale: 'zh',
-  fallbackLocale: 'en',
+  locale: "zh",
+  fallbackLocale: "en",
   messages: {
     ...VuetifyI18n,
   },
@@ -23,10 +23,10 @@ const i18n = createI18n({
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 const vuetify = createVuetify({
   theme: {
-    defaultTheme: 'system',
+    defaultTheme: "system",
   },
   icons: {
-    defaultSet: 'mdi',
+    defaultSet: "mdi",
     aliases,
     sets: {
       mdi,
@@ -40,26 +40,26 @@ const vuetify = createVuetify({
 
   defaults: {
     VBtn: {
-      color: 'primary',
+      color: "primary",
     },
     VBtnToggle: {
-      color: 'primary',
+      color: "primary",
     },
     VCard: {
-      rounded: 'xl',
+      rounded: "xl",
     },
     VList: {
-      color: 'primary',
+      color: "primary",
     },
     VPagination: {
-      color: 'primary',
+      color: "primary",
     },
     VSwitch: {
-      color: 'primary',
+      color: "primary",
       inset: true,
     },
     VTextField: {
-      color: 'primary',
+      color: "primary",
       clearable: true,
     },
   },
