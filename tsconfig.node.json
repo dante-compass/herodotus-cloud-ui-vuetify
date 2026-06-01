@@ -16,7 +16,6 @@
     "cypress.config.*",
     "nightwatch.conf.*",
     "playwright.config.*",
-    "eslint.config.*",
     "packages/**/*.config.*",
     "shared/**/*.config.*"
   ]

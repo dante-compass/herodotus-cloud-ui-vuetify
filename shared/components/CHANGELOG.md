@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 1.6.12
+
+### Patch Changes
+
+- [升级] Spring Cloud Tencent 版本升级至 2.1.2.0-2025.0.2-RC1
+- Updated dependencies
+  - @herodotus/core@1.6.12
+
 ## 1.6.11
 
 ### Patch Changes

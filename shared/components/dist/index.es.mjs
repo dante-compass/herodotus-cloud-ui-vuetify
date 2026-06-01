@@ -325,7 +325,7 @@ var G = /* @__PURE__ */ c({
 		HButton: R
 	},
 	__name: "HDialog",
-	props: /* @__PURE__ */ l({
+	props: /*@__PURE__*/ l({
 		loading: {
 			type: Boolean,
 			default: !1
@@ -348,7 +348,7 @@ var G = /* @__PURE__ */ c({
 		},
 		modelModifiers: {}
 	}),
-	emits: /* @__PURE__ */ l([
+	emits: /*@__PURE__*/ l([
 		"close",
 		"cancel",
 		"confirm"
@@ -474,7 +474,7 @@ var q = /* @__PURE__ */ c({
 		VProgressLinear: j
 	},
 	__name: "HDownloadProgress",
-	props: /* @__PURE__ */ l({ progress: {} }, {
+	props: /*@__PURE__*/ l({ progress: {} }, {
 		modelValue: {
 			type: Boolean,
 			required: !0
@@ -716,7 +716,7 @@ var Ae = be("MdiIcon", {
 		VTextField: N
 	},
 	__name: "HTreeSelect",
-	props: /* @__PURE__ */ l({ items: {} }, {
+	props: /*@__PURE__*/ l({ items: {} }, {
 		modelValue: { required: !0 },
 		modelModifiers: {}
 	}),
@@ -882,7 +882,7 @@ var je = {
 			"fill-opacity": "1"
 		})], -1)]));
 	}
-}), Be = { class: "corner-top" }, Ve = { class: "corner-bottom" }, $ = /* @__PURE__ */ ((e, t) => {
+}), Be = { class: "corner-top" }, Ve = { class: "corner-bottom" }, $ = /*#__PURE__*/ ((e, t) => {
 	let n = e.__vccOpts || e;
 	for (let [e, r] of t) n[e] = r;
 	return n;
