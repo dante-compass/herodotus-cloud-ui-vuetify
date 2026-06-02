@@ -1,0 +1,1 @@
+import{r as e}from"../../../../rolldown-runtime-CMxvf4Kt.js";import{b as t,k as n,mt as r}from"../../../../../venders/vender-@vue-runtime-core-Bs-LcV7X.js";var i=n({name:`MqttRegistration`,__name:`Index`,setup(e){return(e,n)=>(r(),t(`div`,null,`mqtt-registration`))}}),a=e({default:()=>o}),o=i;export{a as t};

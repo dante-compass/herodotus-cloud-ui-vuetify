@@ -1,5 +1,5 @@
 import { HttpClientOptions, Axios, HttpConfig } from '@herodotus/core';
-import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService, MgtCertificateFileService, DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './modules';
+import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2PersistentTokenService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService, MgtCertificateFileService, DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './modules';
 import { BucketService, ObjectService, MultipartUploadService } from './oss';
 import { DeviceService, ProductCategoryService, ProductService, TslUnitService, TslArgumentService, TslFunctionService } from './iot';
 export declare class ApiResources {
@@ -14,6 +14,7 @@ export declare class ApiResources {
     oauth2CredentialRecord(): OAuth2CredentialRecordService;
     oauth2UserLogging(): OAuth2UserLoggingService;
     oauth2InterfaceAudit(): OAuth2InterfaceAuditService;
+    oauth2PersistentToken(): OAuth2PersistentTokenService;
     sysOrganization(): SysOrganizationService;
     sysDepartment(): SysDepartmentService;
     sysEmployee(): SysEmployeeService;

@@ -20,14 +20,20 @@
 </template>
 
 <script setup lang="ts">
-import { NotificationCategoryEnum } from '@herodotus/api';
-import { useNotifications } from '@/composables/hooks';
+import { NotificationCategoryEnum } from "@herodotus/api";
+import { useNotifications } from "@/composables/hooks";
 
-defineOptions({ name: 'NotificationAnnouncement' });
+defineOptions({ name: "NotificationAnnouncement" });
 
 const { tableRows, hasAnnouncement, convertDate, findByCategory } = useNotifications();
 
+const loading = async () => {
+  await findByCategory(NotificationCategoryEnum.ANNOUNCEMENT);
+};
+
 onMounted(() => {
-  findByCategory(NotificationCategoryEnum.ANNOUNCEMENT);
+  loading();
 });
+
+defineExpose({ loading });
 </script>

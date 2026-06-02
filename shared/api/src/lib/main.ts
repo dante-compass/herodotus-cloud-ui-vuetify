@@ -1,6 +1,6 @@
-import type { HttpClientOptions } from '@herodotus/core';
+import type { HttpClientOptions } from "@herodotus/core";
 
-import { Axios, HttpConfig } from '@herodotus/core';
+import { Axios, HttpConfig } from "@herodotus/core";
 import {
   OAuth2ApplicationService,
   OAuth2ScopeService,
@@ -8,6 +8,7 @@ import {
   OAuth2CredentialRecordService,
   OAuth2UserLoggingService,
   OAuth2InterfaceAuditService,
+  OAuth2PersistentTokenService,
   SysOrganizationService,
   SysDepartmentService,
   SysEmployeeService,
@@ -28,9 +29,9 @@ import {
   DialogueDetailService,
   NotificationService,
   WebSocketMessageService,
-} from './modules';
+} from "./modules";
 
-import { BucketService, ObjectService, MultipartUploadService } from './oss';
+import { BucketService, ObjectService, MultipartUploadService } from "./oss";
 import {
   DeviceService,
   ProductCategoryService,
@@ -38,7 +39,7 @@ import {
   TslUnitService,
   TslArgumentService,
   TslFunctionService,
-} from './iot';
+} from "./iot";
 
 export class ApiResources {
   private static instance: ApiResources;
@@ -81,6 +82,10 @@ export class ApiResources {
 
   public oauth2InterfaceAudit(): OAuth2InterfaceAuditService {
     return OAuth2InterfaceAuditService.getInstance(this.config);
+  }
+
+  public oauth2PersistentToken(): OAuth2PersistentTokenService {
+    return OAuth2PersistentTokenService.getInstance(this.config);
   }
 
   public sysOrganization(): SysOrganizationService {

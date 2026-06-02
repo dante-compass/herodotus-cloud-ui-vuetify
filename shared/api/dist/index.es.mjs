@@ -91,7 +91,7 @@ var i = /* @__PURE__ */ function(e) {
 		return this.instance ??= new t(e), this.instance;
 	}
 	getBaseAddress() {
-		return this.getConfig().getUpms() + "/hr/organization";
+		return this.getConfig().getUaa() + "/authorize/persistent";
 	}
 }, p = class t extends e {
 	static instance;
@@ -102,9 +102,20 @@ var i = /* @__PURE__ */ function(e) {
 		return this.instance ??= new t(e), this.instance;
 	}
 	getBaseAddress() {
+		return this.getConfig().getUpms() + "/hr/organization";
+	}
+}, m = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
 		return this.getConfig().getUpms() + "/hr/department";
 	}
-}, m = class n extends e {
+}, h = class n extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -140,7 +151,7 @@ var i = /* @__PURE__ */ function(e) {
 	authorizeUser(e) {
 		return this.getConfig().getHttp().put(this.getBaseAddress(), e, { contentType: t.URL_ENCODED });
 	}
-}, h = class t extends e {
+}, g = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -151,7 +162,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getUpms() + "/";
 	}
-}, g = class t extends e {
+}, _ = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -162,7 +173,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getUpms() + "/security/permission";
 	}
-}, _ = class t extends e {
+}, v = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -179,7 +190,7 @@ var i = /* @__PURE__ */ function(e) {
 	fetchByRoleCode(e) {
 		return this.getConfig().getHttp().get(this.getRoleCodePath(e));
 	}
-}, v = class n extends e {
+}, y = class n extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -208,7 +219,7 @@ var i = /* @__PURE__ */ function(e) {
 			password: n
 		}, { contentType: t.URL_ENCODED });
 	}
-}, y = class t extends e {
+}, b = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -219,7 +230,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getUpms() + "/security/attribute";
 	}
-}, b = class t extends e {
+}, x = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -230,7 +241,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getUpms() + "/security/default-role";
 	}
-}, x = class t extends e {
+}, S = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -250,7 +261,7 @@ var i = /* @__PURE__ */ function(e) {
 	findResourcesByRoles(e) {
 		return this.getConfig().getHttp().get(this.getResourcesAddress(), { roles: e });
 	}
-}, S = class t extends e {
+}, C = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -267,7 +278,7 @@ var i = /* @__PURE__ */ function(e) {
 	fetchByTenantId(e) {
 		return this.getConfig().getHttp().get(this.getTenantIdPath(e));
 	}
-}, C = class t extends e {
+}, w = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -290,7 +301,7 @@ var i = /* @__PURE__ */ function(e) {
 	fetchCategories(e) {
 		return this.getConfig().getHttp().get(this.getItemsAddress(), { categories: e });
 	}
-}, w = class t extends e {
+}, T = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -301,7 +312,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getUpms() + "/security/social/binding";
 	}
-}, T = class t extends e {
+}, E = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -326,7 +337,7 @@ var i = /* @__PURE__ */ function(e) {
 		let n = Object.assign(e, t);
 		return this.getConfig().getHttp().get(this.getCompletedTasksAddress(), n);
 	}
-}, E = class t extends e {
+}, D = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -349,7 +360,7 @@ var i = /* @__PURE__ */ function(e) {
 	findAllByCertificateCategory(e) {
 		return this.getConfig().getHttp().get(this.getCategoryAddress(), { certificateCategory: e });
 	}
-}, D = class n extends e {
+}, O = class n extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -369,7 +380,7 @@ var i = /* @__PURE__ */ function(e) {
 			onDownloadProgress: n
 		}) : this.getConfig().getHttp().post(this.getDownloadAddress(), e);
 	}
-}, O = class t extends e {
+}, k = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -380,7 +391,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getMsg() + "/message/dialogue/contact";
 	}
-}, k = class t extends e {
+}, A = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -397,7 +408,7 @@ var i = /* @__PURE__ */ function(e) {
 	deleteDialogueById(e) {
 		return this.getConfig().getHttp().delete(this.getDeleteDialoguePath(e));
 	}
-}, A = class n extends e {
+}, j = class n extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -414,7 +425,7 @@ var i = /* @__PURE__ */ function(e) {
 	setAllRead(e) {
 		return this.getConfig().getHttp().put(this.getAllReadAddress(), { userId: e }, { contentType: t.URL_ENCODED });
 	}
-}, j = class e {
+}, M = class e {
 	static instance;
 	config = {};
 	constructor(e) {
@@ -432,7 +443,7 @@ var i = /* @__PURE__ */ function(e) {
 	fetchAllStat() {
 		return this.config.getHttp().get(this.getStatAddress());
 	}
-}, M = class e extends r {
+}, N = class e extends r {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -461,7 +472,7 @@ var i = /* @__PURE__ */ function(e) {
 	setBucketPolicy(e) {
 		return this.getConfig().getHttp().put(this.getPolicyAddress(), e);
 	}
-}, N = class e extends r {
+}, P = class e extends r {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -533,7 +544,7 @@ var i = /* @__PURE__ */ function(e) {
 	listObjectVersions(e) {
 		return this.getConfig().getHttp().get(this.getListVersionsAddress(), e);
 	}
-}, P = class e extends r {
+}, F = class e extends r {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -556,7 +567,7 @@ var i = /* @__PURE__ */ function(e) {
 	completeChunkUpload(e) {
 		return this.getConfig().getHttp().post(this.getCompleteMultipartUploadAddress(), e);
 	}
-}, F = class t extends e {
+}, I = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -567,7 +578,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getIot() + "/iot/product-category";
 	}
-}, I = class t extends e {
+}, L = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -593,7 +604,7 @@ var i = /* @__PURE__ */ function(e) {
 	toggle(e) {
 		return this.getConfig().getHttp().put(this.getToggleAddress(), e);
 	}
-}, L = class t extends e {
+}, R = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -607,7 +618,7 @@ var i = /* @__PURE__ */ function(e) {
 	getToggleAddress() {
 		return this.getBaseAddress() + "/toggle";
 	}
-}, R = class t extends e {
+}, z = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -618,7 +629,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getIot() + "/iot/tsl/unit";
 	}
-}, z = class t extends e {
+}, B = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -629,7 +640,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getIot() + "/iot/tsl/argument";
 	}
-}, B = class t extends e {
+}, V = class t extends e {
 	static instance;
 	constructor(e) {
 		super(e);
@@ -640,7 +651,7 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getIot() + "/iot/tsl/function";
 	}
-}, V = class e {
+}, H = class e {
 	static instance;
 	config = {};
 	constructor(e) {
@@ -670,96 +681,99 @@ var i = /* @__PURE__ */ function(e) {
 	oauth2InterfaceAudit() {
 		return u.getInstance(this.config);
 	}
-	sysOrganization() {
+	oauth2PersistentToken() {
 		return f.getInstance(this.config);
 	}
-	sysDepartment() {
+	sysOrganization() {
 		return p.getInstance(this.config);
 	}
-	sysEmployee() {
+	sysDepartment() {
 		return m.getInstance(this.config);
 	}
-	sysEmployeeAllocatable() {
+	sysEmployee() {
 		return h.getInstance(this.config);
 	}
-	sysPermission() {
+	sysEmployeeAllocatable() {
 		return g.getInstance(this.config);
 	}
-	sysRole() {
+	sysPermission() {
 		return _.getInstance(this.config);
 	}
-	sysUser() {
+	sysRole() {
 		return v.getInstance(this.config);
 	}
-	sysAttribute() {
+	sysUser() {
 		return y.getInstance(this.config);
 	}
-	sysDefaultRole() {
+	sysAttribute() {
 		return b.getInstance(this.config);
 	}
-	sysElement() {
+	sysDefaultRole() {
 		return x.getInstance(this.config);
 	}
-	sysDictionary() {
-		return C.getInstance(this.config);
-	}
-	sysTenantDataSource() {
+	sysElement() {
 		return S.getInstance(this.config);
 	}
-	socialBinding() {
+	sysDictionary() {
 		return w.getInstance(this.config);
 	}
-	dialogueContact() {
-		return O.getInstance(this.config);
+	sysTenantDataSource() {
+		return C.getInstance(this.config);
 	}
-	dialogueDetail() {
-		return k.getInstance(this.config);
-	}
-	notification() {
-		return A.getInstance(this.config);
-	}
-	webSocketMessage() {
-		return j.getInstance(this.config);
-	}
-	task() {
+	socialBinding() {
 		return T.getInstance(this.config);
 	}
-	mgtCertificate() {
-		return E.getInstance(this.config);
+	dialogueContact() {
+		return k.getInstance(this.config);
 	}
-	mgtCertificateFile() {
-		return D.getInstance(this.config);
+	dialogueDetail() {
+		return A.getInstance(this.config);
 	}
-	ossBucket() {
+	notification() {
+		return j.getInstance(this.config);
+	}
+	webSocketMessage() {
 		return M.getInstance(this.config);
 	}
-	ossObject() {
+	task() {
+		return E.getInstance(this.config);
+	}
+	mgtCertificate() {
+		return D.getInstance(this.config);
+	}
+	mgtCertificateFile() {
+		return O.getInstance(this.config);
+	}
+	ossBucket() {
 		return N.getInstance(this.config);
 	}
-	ossMultipartUpload() {
+	ossObject() {
 		return P.getInstance(this.config);
 	}
-	iotProductCategory() {
+	ossMultipartUpload() {
 		return F.getInstance(this.config);
 	}
-	iotProduct() {
+	iotProductCategory() {
 		return I.getInstance(this.config);
 	}
-	iotDevice() {
+	iotProduct() {
 		return L.getInstance(this.config);
 	}
-	iotTslUnit() {
+	iotDevice() {
 		return R.getInstance(this.config);
 	}
-	iotTslArgument() {
+	iotTslUnit() {
 		return z.getInstance(this.config);
 	}
-	iotTslFunction() {
+	iotTslArgument() {
 		return B.getInstance(this.config);
 	}
-}, H = (e, t) => {
+	iotTslFunction() {
+		return V.getInstance(this.config);
+	}
+}, U = (e, t) => {
 	let r = new n(e, t);
-	return V.getInstance(r);
+	return H.getInstance(r);
 };
 //#endregion
-export { V as ApiResources, M as BucketService, t as ContentTypeEnum, L as DeviceService, O as DialogueContactService, k as DialogueDetailService, T as ExtendedTaskService, i as GenderEnum, D as MgtCertificateFileService, E as MgtCertificateService, P as MultipartUploadService, a as NotificationCategoryEnum, A as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, s as OAuth2ScopeService, l as OAuth2UserLoggingService, N as ObjectService, F as ProductCategoryService, I as ProductService, w as SocialBindingService, y as SysAttributeService, b as SysDefaultRoleService, p as SysDepartmentService, C as SysDictionaryService, x as SysElementService, h as SysEmployeeAllocatableService, m as SysEmployeeService, f as SysOrganizationService, g as SysPermissionService, _ as SysRoleService, S as SysTenantDataSourceService, v as SysUserService, z as TslArgumentService, B as TslFunctionService, R as TslUnitService, j as WebSocketMessageService, H as createApi };
+export { H as ApiResources, N as BucketService, t as ContentTypeEnum, R as DeviceService, k as DialogueContactService, A as DialogueDetailService, E as ExtendedTaskService, i as GenderEnum, O as MgtCertificateFileService, D as MgtCertificateService, F as MultipartUploadService, a as NotificationCategoryEnum, j as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, f as OAuth2PersistentTokenService, s as OAuth2ScopeService, l as OAuth2UserLoggingService, P as ObjectService, I as ProductCategoryService, L as ProductService, T as SocialBindingService, b as SysAttributeService, x as SysDefaultRoleService, m as SysDepartmentService, w as SysDictionaryService, S as SysElementService, g as SysEmployeeAllocatableService, h as SysEmployeeService, p as SysOrganizationService, _ as SysPermissionService, v as SysRoleService, C as SysTenantDataSourceService, y as SysUserService, B as TslArgumentService, V as TslFunctionService, z as TslUnitService, M as WebSocketMessageService, U as createApi };

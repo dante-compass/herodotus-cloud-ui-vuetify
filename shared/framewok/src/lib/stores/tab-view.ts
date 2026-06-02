@@ -1,12 +1,11 @@
-import { defineStore } from 'pinia';
-import { nextTick } from 'vue';
+import { defineStore } from "pinia";
 
-import type { RouteLocationNormalizedLoaded, RouteRecordName, RouteRecordNormalized } from 'vue-router';
-import type { Tab } from '@/declarations';
+import type { RouteRecordName, RouteRecordNormalized, RouteLocationNormalizedLoaded } from "vue-router";
+import type { Tab } from "@/declarations";
 
-import { findIndex, remove } from 'lodash-es';
-import { RouterUtilities, OptionsUtilities } from '../utilities';
-import { useElementStore } from './element';
+import { findIndex, remove } from "lodash-es";
+import { RouterUtilities, OptionsUtilities } from "../utilities";
+import { useElementStore } from "./element";
 
 /**
  * TabView 目前完全基于 Quasar 的 QRouteTab 进行构建。
@@ -18,11 +17,11 @@ import { useElementStore } from './element';
  * 思考下来发现这个逻辑也符合常理，因为界面上还是始终要留一个Tab才好。
  */
 
-export const useTabsViewStore = defineStore('TabsView', {
+export const useTabsViewStore = defineStore("TabsView", {
   state: () => ({
     tabs: [] as Array<Tab>,
     activatedTab: {} as Tab,
-    activatedTabName: '' as RouteRecordName | null | undefined,
+    activatedTabName: "" as RouteRecordName | null | undefined,
   }),
 
   getters: {

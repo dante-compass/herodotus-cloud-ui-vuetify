@@ -1,5 +1,37 @@
 # @herodotus/components
 
+## 1.6.13
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@1.6.13
+
+## 1.6.12
+
+### Patch Changes
+
+- [升级] Spring Cloud Tencent 版本升级至 2.1.2.0-2025.0.2-RC1
+- Updated dependencies
+  - @herodotus/core@1.6.12
+
+## 1.6.11
+
+### Patch Changes
+
+- 重新编译库
+- Updated dependencies
+  - @herodotus/core@1.6.11
+
+## 1.6.10
+
+### Patch Changes
+
+- [新增] 前端新增 Remember Me 记住审计页面
+- Updated dependencies
+  - @herodotus/core@1.6.10
+
 ## 1.6.9
 
 ### Patch Changes

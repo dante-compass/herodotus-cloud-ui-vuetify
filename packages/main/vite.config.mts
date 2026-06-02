@@ -8,7 +8,6 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
-import { FileSystemIconLoader } from "unplugin-icons/loaders";
 import { HerodotusResolver } from "@herodotus/components/resolver";
 
 import { compression } from "vite-plugin-compression2";
@@ -39,16 +38,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         },
       }),
       VueDevTools(),
-      Vue({
-        template: { transformAssetUrls },
-      }),
-      // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
-      Vuetify({
-        autoImport: true,
-        styles: {
-          configFile: "src/styles/settings.scss",
-        },
-      }),
       Components({
         dts: "types/components.d.ts",
         resolvers: [
@@ -59,12 +48,22 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         ],
       }),
       AutoImport({
-        dts: "types/auto-imports.d.ts",
         imports: ["vue", "pinia"],
+        dts: "types/auto-imports.d.ts",
         eslintrc: {
           enabled: true,
         },
         vueTemplate: true,
+      }),
+      Vue({
+        template: { transformAssetUrls },
+      }),
+      // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
+      Vuetify({
+        autoImport: true,
+        styles: {
+          configFile: "src/styles/settings.scss",
+        },
       }),
       Icons({
         compiler: "vue3",
