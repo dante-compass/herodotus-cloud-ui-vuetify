@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 1.6.13
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@1.6.13
+
 ## 1.6.12
 
 ### Patch Changes
