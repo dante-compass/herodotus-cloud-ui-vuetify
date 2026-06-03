@@ -22,7 +22,7 @@ jobs:
           echo "##[set-output name=version;]SENTINEL_VERSION=${GITHUB_REF#$"refs/tags/v"}"
 
       - name: Check out the repo
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.3
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3.7.0
