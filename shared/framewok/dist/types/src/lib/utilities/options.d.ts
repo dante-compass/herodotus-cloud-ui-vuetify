@@ -1,5 +1,5 @@
 import { HttpConfig } from '@herodotus/core';
-import { KernelOptions } from '../../declarations';
+import { KernelOptions } from '../../../declarations';
 import { Router, RouteRecordRaw } from 'vue-router';
 /**
  * Framework Kernel Options 工具类，方便在代码中传递 Options

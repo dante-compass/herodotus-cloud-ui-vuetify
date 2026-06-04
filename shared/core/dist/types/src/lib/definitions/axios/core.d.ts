@@ -1,5 +1,5 @@
-import { AxiosHttpResult, AxiosInstanceHooks, AxiosRequestConfig, HttpRequestOptions } from '../../../declarations';
-import { ContentTypeEnum } from '../../../enums';
+import { AxiosHttpResult, AxiosInstanceHooks, AxiosRequestConfig, HttpRequestOptions } from '../../../../declarations';
+import { ContentTypeEnum } from '../../../../enums';
 /**
  * @description:  axios module
  */

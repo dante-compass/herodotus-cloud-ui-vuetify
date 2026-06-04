@@ -1,5 +1,5 @@
 import { AxiosHttpResult, AbstractService, HttpConfig } from '@herodotus/core';
-import { ProductEntity, ProductCategoryEntity, DeviceEntity, TslUnitEntity, TslArgumentEntity, TslFunctionEntity } from '../declarations';
+import { ProductEntity, ProductCategoryEntity, DeviceEntity, TslUnitEntity, TslArgumentEntity, TslFunctionEntity } from '../../declarations';
 declare class ProductCategoryService extends AbstractService<ProductCategoryEntity> {
     private static instance;
     private constructor();

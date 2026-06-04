@@ -1,5 +1,5 @@
 import { Router, RouteLocationRaw, RouteLocationNormalizedLoaded, NavigationFailure } from 'vue-router';
-import { RouterOptions } from '../../declarations';
+import { RouterOptions } from '../../../declarations';
 export declare class RouterUtilities {
     private static _instance;
     private static _initialized;

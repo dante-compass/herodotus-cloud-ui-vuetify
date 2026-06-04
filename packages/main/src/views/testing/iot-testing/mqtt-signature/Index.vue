@@ -46,11 +46,11 @@
 
         <v-btn color="purple" text="计算" variant="flat" size="large" width="200px" @click="onSignature"></v-btn>
       </h-testing-card>
-      <h-tesing-card title="计算结果:" class="mt-4">
+      <h-testing-card title="计算结果:" class="mt-4">
         <v-text-field v-model="mqttClientId" label="Mqtt Client Id" readonly></v-text-field>
         <v-text-field v-model="mqttUsername" label="Mqtt Username" readonly></v-text-field>
         <v-text-field v-model="mqttPassword" label="Mqtt Password" readonly></v-text-field>
-      </h-tesing-card>
+      </h-testing-card>
     </v-col>
     <v-col></v-col>
   </v-row>

@@ -1,5 +1,5 @@
 import { AxiosHttpResult, AxiosProgressEvent, HttpConfig, AbstractService } from '@herodotus/core';
-import { MgtCertificateDownloadRequest, MgtCertificateRequest, MgtCertificateResponse, MgtCertificateFileResponse, MgtCertificateFileRequest } from '../../declarations';
+import { MgtCertificateDownloadRequest, MgtCertificateRequest, MgtCertificateResponse, MgtCertificateFileResponse, MgtCertificateFileRequest } from '../../../declarations';
 declare class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCertificateResponse> {
     private static instance;
     private constructor();

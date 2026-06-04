@@ -1,5 +1,5 @@
 import { HttpConfig, AxiosHttpResult, Service } from '@herodotus/core';
-import { WebAuthnRegister, WebAuthnAuthenticate } from '../../declarations';
+import { WebAuthnRegister, WebAuthnAuthenticate } from '../../../declarations';
 export declare class PasskeyApiService extends Service {
     private static instance;
     private constructor();

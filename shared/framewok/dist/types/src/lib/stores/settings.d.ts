@@ -1,4 +1,4 @@
-import { SystemSetting, LayoutModeEnum } from '../../declarations';
+import { SystemSetting, LayoutModeEnum } from '../../../declarations';
 import { ThemeModeEnum } from '@herodotus/core';
 export declare const useSettingsStore: import('pinia').StoreDefinition<"SystemSettings", SystemSetting, {
     isDark: (state: {
