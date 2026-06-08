@@ -1,5 +1,4 @@
-import { RouteRecordName, RouteRecordNormalized, RouteLocationNormalizedLoaded } from 'vue-router';
-import { Tab } from '../../../declarations';
+import { RouteLocationNormalizedLoadedGeneric, Tab, TabName } from '../../../declarations';
 /**
  * TabView 目前完全基于 Quasar 的 QRouteTab 进行构建。
  * QRouteTab 可以和 VueRouter 完全融合。
@@ -12,58 +11,58 @@ import { Tab } from '../../../declarations';
 export declare const useTabsViewStore: import('pinia').StoreDefinition<"TabsView", {
     tabs: Array<Tab>;
     activatedTab: Tab;
-    activatedTabName: RouteRecordName | null | undefined;
+    activatedTabName: TabName;
 }, {
     isNotLastTab: (state: {
         tabs: {
-            name: import('vue-router').RouteRecordNameGeneric;
+            meta: import('../../../declarations').TabMeta;
+            name: import('vue-router').RouteRecordNameGeneric | null | undefined;
             path: string;
-            meta: import('vue-router').RouteMeta;
         }[];
         activatedTab: {
-            name: import('vue-router').RouteRecordNameGeneric;
+            meta: import('../../../declarations').TabMeta;
+            name: import('vue-router').RouteRecordNameGeneric | null | undefined;
             path: string;
-            meta: import('vue-router').RouteMeta;
         };
-        activatedTabName: RouteRecordName | null | undefined;
+        activatedTabName: TabName;
     } & import('pinia').PiniaCustomStateProperties<{
         tabs: Array<Tab>;
         activatedTab: Tab;
-        activatedTabName: RouteRecordName | null | undefined;
+        activatedTabName: TabName;
     }>) => (index: number) => boolean;
     getLastTabIndex: (state: {
         tabs: {
-            name: import('vue-router').RouteRecordNameGeneric;
+            meta: import('../../../declarations').TabMeta;
+            name: import('vue-router').RouteRecordNameGeneric | null | undefined;
             path: string;
-            meta: import('vue-router').RouteMeta;
         }[];
         activatedTab: {
-            name: import('vue-router').RouteRecordNameGeneric;
+            meta: import('../../../declarations').TabMeta;
+            name: import('vue-router').RouteRecordNameGeneric | null | undefined;
             path: string;
-            meta: import('vue-router').RouteMeta;
         };
-        activatedTabName: RouteRecordName | null | undefined;
+        activatedTabName: TabName;
     } & import('pinia').PiniaCustomStateProperties<{
         tabs: Array<Tab>;
         activatedTab: Tab;
-        activatedTabName: RouteRecordName | null | undefined;
+        activatedTabName: TabName;
     }>) => number;
     getTabIndex: (state: {
         tabs: {
-            name: import('vue-router').RouteRecordNameGeneric;
+            meta: import('../../../declarations').TabMeta;
+            name: import('vue-router').RouteRecordNameGeneric | null | undefined;
             path: string;
-            meta: import('vue-router').RouteMeta;
         }[];
         activatedTab: {
-            name: import('vue-router').RouteRecordNameGeneric;
+            meta: import('../../../declarations').TabMeta;
+            name: import('vue-router').RouteRecordNameGeneric | null | undefined;
             path: string;
-            meta: import('vue-router').RouteMeta;
         };
-        activatedTabName: RouteRecordName | null | undefined;
+        activatedTabName: TabName;
     } & import('pinia').PiniaCustomStateProperties<{
         tabs: Array<Tab>;
         activatedTab: Tab;
-        activatedTabName: RouteRecordName | null | undefined;
+        activatedTabName: TabName;
     }>) => (tab: Tab) => number;
     getActivatedTabIndex(): number;
     /**
@@ -76,14 +75,14 @@ export declare const useTabsViewStore: import('pinia').StoreDefinition<"TabsView
     disableCloseRightTabs(): boolean;
     disableRefreshCurrentTab(): boolean;
 }, {
-    convertRouteToTab(route: RouteRecordNormalized | RouteLocationNormalizedLoaded): Tab;
+    convertRouteToTab(route: RouteLocationNormalizedLoadedGeneric): Tab;
     setActivatedTab(tab: Tab): void;
     isNotExistInStaticRoute(tab: Tab): boolean;
     isTabNotOpened(tab: Tab): boolean;
     openTab(tab: Tab, isDetail?: boolean): void;
     closeTab(tab: Tab): void;
-    smartTab(route: RouteLocationNormalizedLoaded): void;
-    deleteTab(route: RouteLocationNormalizedLoaded): void;
+    smartTab(route: RouteLocationNormalizedLoadedGeneric): void;
+    deleteTab(route: RouteLocationNormalizedLoadedGeneric): void;
     closeCurrentTab(): void;
     closeOtherTabs(): void;
     closeLeftTabs(): void;

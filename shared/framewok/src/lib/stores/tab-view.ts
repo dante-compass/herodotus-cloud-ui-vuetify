@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 
-import type { RouteRecordName, RouteRecordNormalized, RouteLocationNormalizedLoaded } from "vue-router";
-import type { Tab } from "@/declarations";
+import type { RouteLocationNormalizedLoadedGeneric, Tab, TabName } from "@/declarations";
 
 import { findIndex, remove } from "lodash-es";
 import { RouterUtilities, OptionsUtilities } from "../utilities";
@@ -21,7 +20,7 @@ export const useTabsViewStore = defineStore("TabsView", {
   state: () => ({
     tabs: [] as Array<Tab>,
     activatedTab: {} as Tab,
-    activatedTabName: "" as RouteRecordName | null | undefined,
+    activatedTabName: "" as TabName,
   }),
 
   getters: {
@@ -77,7 +76,7 @@ export const useTabsViewStore = defineStore("TabsView", {
   },
 
   actions: {
-    convertRouteToTab(route: RouteRecordNormalized | RouteLocationNormalizedLoaded): Tab {
+    convertRouteToTab(route: RouteLocationNormalizedLoadedGeneric): Tab {
       return {
         name: route.name,
         path: route.path,
@@ -121,7 +120,7 @@ export const useTabsViewStore = defineStore("TabsView", {
       });
     },
 
-    smartTab(route: RouteLocationNormalizedLoaded) {
+    smartTab(route: RouteLocationNormalizedLoadedGeneric) {
       const store = useElementStore();
       const isDetailRoute = store.isDetailRoute(route);
 
@@ -139,7 +138,7 @@ export const useTabsViewStore = defineStore("TabsView", {
       }
     },
 
-    deleteTab(route: RouteLocationNormalizedLoaded) {
+    deleteTab(route: RouteLocationNormalizedLoadedGeneric) {
       const tab = this.convertRouteToTab(route);
       this.closeTab(tab);
     },
