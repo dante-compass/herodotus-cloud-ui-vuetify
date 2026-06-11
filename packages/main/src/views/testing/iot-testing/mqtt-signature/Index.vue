@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import { HmacMD5, HmacSHA1, HmacSHA256, enc } from "crypto-js";
-import { nanoid, customAlphabet } from "nanoid";
+import { customAlphabet } from "nanoid";
 import { isEmpty, assignIn, get } from "lodash-es";
 
 import { HTestingCard } from "../../components";
