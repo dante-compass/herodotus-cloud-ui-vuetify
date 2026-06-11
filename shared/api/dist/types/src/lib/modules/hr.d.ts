@@ -1,4 +1,4 @@
-import { SysDepartmentEntity, SysEmployeeEntity, SysOrganizationEntity, SysEmployeeAllocatable, AllocatableRemove, AllocatableDeploy } from '../../declarations';
+import { SysDepartmentEntity, SysEmployeeEntity, SysOrganizationEntity, SysEmployeeAllocatable, AllocatableRemove, AllocatableDeploy } from '../../../declarations';
 import { AxiosHttpResult, Conditions, Pageable, Page, HttpConfig, AbstractService } from '@herodotus/core';
 declare class SysOrganizationService extends AbstractService<SysOrganizationEntity> {
     private static instance;

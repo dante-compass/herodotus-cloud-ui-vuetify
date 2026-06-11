@@ -1,4 +1,4 @@
-import { DialogueContactEntity, DialogueDetailEntity, NotificationEntity } from '../../declarations';
+import { DialogueContactEntity, DialogueDetailEntity, NotificationEntity } from '../../../declarations';
 import { AxiosHttpResult, HttpConfig, AbstractService } from '@herodotus/core';
 declare class DialogueContactService extends AbstractService<DialogueContactEntity> {
     private static instance;

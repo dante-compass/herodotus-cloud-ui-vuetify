@@ -1,4 +1,4 @@
-import { ExtendedTaskEntity } from '../../declarations';
+import { ExtendedTaskEntity } from '../../../declarations';
 import { AxiosHttpResult, Page, Pageable, Conditions, HttpConfig, AbstractService } from '@herodotus/core';
 declare class ExtendedTaskService extends AbstractService<ExtendedTaskEntity> {
     private static instance;

@@ -1,4 +1,4 @@
-import { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2AuthorizationEntity, OAuth2CredentialRecordEntity, OAuth2UserLoggingEntity, OAuth2InterfaceAuditEntity, OAuth2PersistentTokenEntity, OAuth2ScopeAssignedBody } from '../../declarations';
+import { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2AuthorizationEntity, OAuth2CredentialRecordEntity, OAuth2UserLoggingEntity, OAuth2InterfaceAuditEntity, OAuth2PersistentTokenEntity, OAuth2ScopeAssignedBody } from '../../../declarations';
 import { AxiosHttpResult, HttpConfig, AbstractService } from '@herodotus/core';
 declare class OAuth2ApplicationService extends AbstractService<OAuth2ApplicationEntity> {
     private static instance;

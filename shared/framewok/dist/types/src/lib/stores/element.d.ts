@@ -1,5 +1,5 @@
 import { RouteRecordRaw, RouteLocationNormalizedLoaded } from 'vue-router';
-import { RoutePushParam, PushParam, MenuItem } from '../../declarations';
+import { RoutePushParam, PushParam, MenuItem } from '../../../declarations';
 export declare const useElementStore: import('pinia').StoreDefinition<"SystemElement", {
     appMenus: MenuItem[];
     personalMenus: MenuItem[];

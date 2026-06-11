@@ -1,4 +1,4 @@
-import { HttpClientOptions } from '../../declarations';
+import { HttpClientOptions } from '../../../declarations';
 import { Axios } from './axios';
 declare class HttpConfig {
     private http;

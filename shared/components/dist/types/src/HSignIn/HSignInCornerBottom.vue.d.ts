@@ -1,4 +1,4 @@
-import { BackgroundColorProps } from '../lib/declarations';
+import { BackgroundColorProps } from '../../lib/declarations';
 declare const __VLS_export: import('vue').DefineComponent<BackgroundColorProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<BackgroundColorProps> & Readonly<{}>, {
     startColor: string;
     endColor: string;

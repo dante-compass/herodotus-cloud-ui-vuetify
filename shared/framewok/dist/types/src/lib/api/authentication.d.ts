@@ -1,5 +1,5 @@
 import { HttpConfig, HttpRequestOptions, AxiosHttpResult, AccessTokenResponse, DeviceAuthorizationResponse, AxiosRequestConfig } from '@herodotus/core';
-import { SocialSource, AccessPrincipal, WebAuthnAuthenticate, OAuth2ClientRegistration } from '../../declarations';
+import { SocialSource, AccessPrincipal, WebAuthnAuthenticate, OAuth2ClientRegistration } from '../../../declarations';
 export declare class OAuth2ApiService {
     private static instance;
     private config;

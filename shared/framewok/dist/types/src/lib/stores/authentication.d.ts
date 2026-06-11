@@ -1,5 +1,5 @@
 import { AccessTokenResponse } from '@herodotus/core';
-import { SignInErrorStatus, WebAuthnAuthenticate, SocialSource, AccessPrincipal } from '../../declarations';
+import { SignInErrorStatus, WebAuthnAuthenticate, SocialSource, AccessPrincipal } from '../../../declarations';
 export declare const useAuthenticationStore: import('pinia').StoreDefinition<"Authentication", {
     access_token: string;
     expires_in: number;

@@ -1,5 +1,17 @@
 # @herodotus/core
 
+## 1.6.15
+
+### Patch Changes
+
+- 版本发布
+
+## 1.6.14
+
+### Patch Changes
+
+- 修复前端因 vue-router 升级至 5.1.0 引起的 error TS4023 错误
+
 ## 1.6.13
 
 ### Patch Changes

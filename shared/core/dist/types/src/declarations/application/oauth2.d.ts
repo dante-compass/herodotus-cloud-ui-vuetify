@@ -1,4 +1,4 @@
-import { AuthorizationGrantTypeEnum } from '../../enums';
+import { AuthorizationGrantTypeEnum } from '../../../enums';
 interface TokenRequest {
     grant_type: string;
 }
