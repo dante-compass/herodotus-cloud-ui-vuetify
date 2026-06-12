@@ -1,1 +1,0 @@
-import{r as e}from"../../../../rolldown-runtime-CMxvf4Kt.js";import{b as t,k as n,mt as r}from"../../../../../venders/vender-@vue-runtime-core-BulLjVek.js";import{U as i}from"../../../../App.vue-BBw007tB.js";var a=n({name:i.IOT_DEVICE,__name:`Index`,setup(e){return(e,n)=>(r(),t(`div`,null,`Device Index`))}}),o=e({default:()=>s}),s=a;export{o as t};
