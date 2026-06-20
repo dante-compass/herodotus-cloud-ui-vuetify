@@ -34,7 +34,7 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "axios": "^1.17.0",
+    "axios": "^1.18.0",
     "crypto-js": "^4.2.0",
     "generate-avatar": "^1.4.10",
     "moment": "^2.30.1",
