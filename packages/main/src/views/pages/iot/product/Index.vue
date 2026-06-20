@@ -95,7 +95,7 @@ const headers = ref([
   { key: "quantity", align: "center", title: "设备数量" },
   { key: "reserved", align: "center", title: "保留数据" },
   { key: "status", align: "center", title: "状态" },
-  { key: "actions", align: "center", labtitleel: "操作" },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
 const rowKey: ProductProps = "id";
