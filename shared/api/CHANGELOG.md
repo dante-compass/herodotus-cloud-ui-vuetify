@@ -1,5 +1,24 @@
 # @herodotus/api
 
+## 2.1.0
+
+### Minor Changes
+
+- 重新编译库
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@2.1.0
+
+## 2.0.1
+
+### Patch Changes
+
+- 发布新版组件
+- Updated dependencies
+  - @herodotus/core@2.0.1
+
 ## 2.0.0
 
 ### Major Changes

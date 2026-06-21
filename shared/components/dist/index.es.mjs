@@ -1,4 +1,4 @@
-import { computed as e, createBlock as t, createCommentVNode as n, createElementBlock as r, createElementVNode as i, createSlots as a, createTextVNode as o, createVNode as s, defineComponent as c, mergeModels as l, mergeProps as u, nextTick as d, onMounted as f, onUnmounted as ee, openBlock as p, ref as te, renderSlot as m, shallowRef as h, toDisplayString as g, unref as _, useModel as v, useSlots as y, watch as b, withCtx as x } from "vue";
+import { computed as e, createBlock as t, createCommentVNode as n, createElementBlock as r, createElementVNode as i, createSlots as a, createTextVNode as o, createVNode as s, defineComponent as c, mergeModels as l, mergeProps as u, onBeforeMount as d, onMounted as f, onUnmounted as ee, openBlock as p, ref as te, renderSlot as m, shallowRef as h, toDisplayString as g, unref as _, useModel as v, useSlots as y, watch as b, withCtx as x } from "vue";
 import { VAutocomplete as S, VBtn as C, VCard as w, VCardActions as ne, VCardText as re, VCol as T, VContainer as E, VDatePicker as ie, VDialog as ae, VDivider as D, VExpandXTransition as oe, VIcon as O, VLabel as se, VListItem as k, VMenu as A, VMessages as ce, VNumberInput as le, VProgressLinear as j, VRow as M, VSelect as ue, VSnackbar as de, VTextField as N, VTimePicker as fe, VTooltip as P, VTreeview as pe } from "vuetify/components";
 import { debounce as me, find as he, isArray as ge, isEmpty as F, kebabCase as _e } from "lodash-es";
 import { useDate as ve } from "vuetify";
@@ -590,43 +590,52 @@ J.install = (e) => {
 };
 //#endregion
 //#region src/HParticles/particles.ts
-var Oe = { particles: {
-	number: {
-		density: {
-			enable: !0,
-			width: 1920,
-			height: 1080
+var Oe = {
+	fullScreen: { zIndex: 1 },
+	particles: {
+		number: {
+			density: {
+				enable: !0,
+				width: 1920,
+				height: 1080
+			},
+			value: 100
 		},
-		value: 100
-	},
-	links: {
-		distance: 125,
-		enable: !0,
-		triangles: {
+		links: {
+			distance: 125,
 			enable: !0,
-			opacity: .1
-		}
-	},
-	move: {
-		enable: !0,
-		speed: 5
-	},
-	size: { value: 1 },
-	shape: { type: "circle" }
-} }, ke = ["id"], Y = /* @__PURE__ */ c({
+			triangles: {
+				enable: !0,
+				opacity: .1
+			}
+		},
+		move: {
+			enable: !0,
+			speed: 5
+		},
+		size: { value: 1 },
+		shape: { type: "circle" }
+	}
+}, ke = ["id"], Y = /* @__PURE__ */ c({
 	name: "HParticles",
 	__name: "HParticles",
 	setup(e) {
-		let t = h("HParticles"), n;
-		return f(() => {
-			d(async () => {
-				await ye(L), n = await L.load({
-					id: t.value,
-					options: Oe
-				});
+		let t = h("HParticles"), n, i = async () => {
+			await ye(L);
+		}, a = async () => {
+			n?.destroy(), n = await L.load({
+				id: t.value,
+				options: Oe
 			});
+		}, o = async () => {
+			n?.destroy();
+		};
+		return d(() => {
+			i();
+		}), f(() => {
+			a();
 		}), ee(() => {
-			n &&= (n.destroy(), void 0);
+			o();
 		}), (e, n) => (p(), r("div", { id: t.value }, [m(e.$slots, "default")], 8, ke));
 	}
 });
