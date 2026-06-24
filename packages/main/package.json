@@ -2,7 +2,7 @@
   "name": "@herodotus-cloud/main",
   "private": true,
   "type": "module",
-  "version": "4.1.0.1",
+  "version": "4.1.0.2",
   "scripts": {
     "dev": "cross-env vite --force --host --mode development",
     "prod": "cross-env vite build --mode production",
@@ -28,7 +28,7 @@
     "animate.css": "^4.1.1",
     "crypto-js": "^4.2.0",
     "echarts": "^6.1.0",
-    "nanoid": "^5.1.14",
+    "nanoid": "^5.1.15",
     "nprogress": "^0.2.0",
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",

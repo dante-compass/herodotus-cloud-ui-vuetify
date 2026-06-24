@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 2.1.1
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@2.1.1
+
 ## 2.1.0
 
 ### Minor Changes
