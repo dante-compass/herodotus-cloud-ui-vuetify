@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 2.1.2
+
+### Patch Changes
+
+- [修复] 修复新版本 vite-plugin-dts 生成 types 路径变化引起类型引用错误
+- Updated dependencies
+  - @herodotus/core@2.1.2
+
 ## 2.1.1
 
 ### Patch Changes
