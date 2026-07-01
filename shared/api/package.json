@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/api",
-  "version": "2.1.1",
+  "version": "2.1.3",
   "description": "",
   "keywords": [],
   "author": "",
@@ -15,13 +15,13 @@
   },
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.mjs",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "types": "./dist/types/src/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/index.es.mjs",
       "require": "./dist/index.cjs.js"
     },
