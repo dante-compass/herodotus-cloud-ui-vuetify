@@ -1047,19 +1047,19 @@ function be(e, t, n) {
 		}), console.log("[Herodotus] |- Dynamic routes add success!"));
 	};
 	return { initBackendSecurity: async (t, r) => {
-		let i = (await n(r)).data.menus;
-		d(t, u(i, e));
+		let i = (await n(r)).data.menus, a = u(i, e);
+		d(t, a);
 	} };
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.1.2_typescript@6._43c2d5d46c9c29dee8ae5ede071d5369/node_modules/vuetify/lib/util/getCurrentInstance.js
+//#region ../../node_modules/.pnpm/vuetify@4.1.3_typescript@6._9fbc2319d05588616722e1a5e433b2d5/node_modules/vuetify/lib/util/getCurrentInstance.js
 function xe(e, t) {
 	let n = ie();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.1.2_typescript@6._43c2d5d46c9c29dee8ae5ede071d5369/node_modules/vuetify/lib/composables/theme.js
+//#region ../../node_modules/.pnpm/vuetify@4.1.3_typescript@6._9fbc2319d05588616722e1a5e433b2d5/node_modules/vuetify/lib/composables/theme.js
 var Se = Symbol.for("vuetify:theme");
 function Ce() {
 	xe("useTheme");

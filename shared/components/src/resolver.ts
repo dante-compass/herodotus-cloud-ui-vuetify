@@ -11,6 +11,7 @@ const components = [
   "HLabel",
   "HParticles",
   "HSignInBackground",
+  "HSwitch",
   "HTextDivider",
   "HTime",
   "HTreeSelect",

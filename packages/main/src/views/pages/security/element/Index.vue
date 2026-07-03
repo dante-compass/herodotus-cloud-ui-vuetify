@@ -85,7 +85,6 @@ const headers = ref([
   { key: "path", align: "center", title: "请求路径" },
   { key: "applicationType", align: "center", title: "应用类型" },
   { key: "menuScenario", align: "center", title: "菜单场景" },
-  { key: "path", align: "center", title: "请求路径" },
   { key: "icon", align: "center", title: "图标" },
   { key: "isHaveChild", align: "center", title: "有子节点" },
   { key: "isHideAllChild", align: "center", title: "隐藏下级节点" },
