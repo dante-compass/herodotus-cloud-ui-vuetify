@@ -48,7 +48,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const selectedValue = defineModel<Tree>({
   required: true,
-  default: () => ({}),
+  default: () => ({}) as Tree,
 });
 
 const { treeItems, conditions, loading } = useTreeItem<SysDepartmentConditions, SysDepartmentEntity>(

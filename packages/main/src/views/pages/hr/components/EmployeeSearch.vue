@@ -52,7 +52,7 @@ import type { SysEmployeeConditions } from "@herodotus/api";
 defineOptions({ name: "SysElementCondition" });
 
 const conditions = defineModel<SysEmployeeConditions>({
-  default: () => ({}),
+  default: () => ({}) as SysEmployeeConditions,
   required: true,
 });
 

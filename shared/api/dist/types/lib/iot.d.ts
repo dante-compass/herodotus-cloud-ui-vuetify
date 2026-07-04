@@ -1,5 +1,5 @@
 import { AxiosHttpResult, AbstractService, HttpConfig } from '@herodotus/core';
-import { ProductEntity, ProductCategoryEntity, DeviceEntity, TslUnitEntity, TslArgumentEntity, TslFunctionEntity } from '../declarations';
+import { ProductEntity, ProductCategoryEntity, DeviceEntity, TslUnitEntity, TslArgumentEntity, TslFunctionEntity, MqttCategoryEntity, MqttAuthorityEntity } from '../declarations';
 declare class ProductCategoryService extends AbstractService<ProductCategoryEntity> {
     private static instance;
     private constructor();
@@ -42,4 +42,16 @@ declare class TslFunctionService extends AbstractService<TslFunctionEntity> {
     static getInstance(config: HttpConfig): TslFunctionService;
     getBaseAddress(): string;
 }
-export { DeviceService, ProductCategoryService, ProductService, TslUnitService, TslArgumentService, TslFunctionService, };
+declare class MqttCategoryService extends AbstractService<MqttCategoryEntity> {
+    private static instance;
+    private constructor();
+    static getInstance(config: HttpConfig): MqttCategoryService;
+    getBaseAddress(): string;
+}
+declare class MqttAuthorityService extends AbstractService<MqttAuthorityEntity> {
+    private static instance;
+    private constructor();
+    static getInstance(config: HttpConfig): MqttAuthorityService;
+    getBaseAddress(): string;
+}
+export { DeviceService, ProductCategoryService, ProductService, TslUnitService, TslArgumentService, TslFunctionService, MqttCategoryService, MqttAuthorityService, };
