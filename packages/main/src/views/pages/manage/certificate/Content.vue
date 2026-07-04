@@ -85,13 +85,13 @@
 </template>
 
 <script setup lang="ts">
-import type { MgtCertificateRequest, MgtCertificateResponse } from '@herodotus/api';
+import type { MgtCertificateRequest, MgtCertificateResponse } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
-import { isEmpty } from 'lodash-es';
+import { useTableItem } from "@/composables/hooks";
+import { API } from "@/configurations";
+import { isEmpty } from "lodash-es";
 
-defineOptions({ name: 'MgtCertificateContent' });
+defineOptions({ name: "MgtCertificateContent" });
 
 const certificateForm = ref();
 
@@ -130,11 +130,11 @@ const isUniqueRule = (alias: string) => {
       if (validate) {
         return true;
       } else {
-        return '证书别名已被占用，请改用其它证书别名';
+        return "证书别名已被占用，请改用其它证书别名";
       }
     })
     .catch(() => {
-      return '后端服务暂时不可用';
+      return "后端服务暂时不可用";
     });
 };
 
@@ -159,15 +159,15 @@ const loadOptionData = (category: string) => {
 watch(
   () => editedItem.value.certificateCategory,
   (newValue) => {
-    if (newValue === 'ROOT_CA') {
+    if (newValue === "ROOT_CA") {
       showParentSelect.value = false;
-      editedItem.value.parentId = '';
+      editedItem.value.parentId = "";
     } else {
       loadOptionData(newValue);
       showParentSelect.value = true;
     }
 
-    if (newValue === 'END_ENTITY') {
+    if (newValue === "END_ENTITY") {
       showOcspSwitch.value = true;
       editedItem.value.ocsp = false;
     } else {

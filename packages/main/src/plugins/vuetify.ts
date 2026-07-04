@@ -57,6 +57,8 @@ const vuetify = createVuetify({
     VSwitch: {
       color: "primary",
       inset: true,
+      trueIcon: "mdi-check",
+      falseIcon: "mdi-close",
     },
     VTextField: {
       color: "primary",
