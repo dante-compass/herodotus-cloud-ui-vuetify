@@ -19,7 +19,7 @@ import type { SysElementConditions } from "@herodotus/api";
 defineOptions({ name: "SysElementCondition" });
 
 const conditions = defineModel<SysElementConditions>({
-  default: () => ({}),
+  default: () => ({}) as SysElementConditions,
   required: true,
 });
 

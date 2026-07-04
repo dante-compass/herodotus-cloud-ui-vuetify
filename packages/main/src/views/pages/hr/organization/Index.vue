@@ -27,7 +27,7 @@
 import type { SysOrganizationEntity, SysOrganizationConditions, SysOrganizationProps } from "@herodotus/api";
 import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable } from "@/composables/hooks";
+import { useTable, useDateTime } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.SYS_ORGANIZATION });
@@ -37,6 +37,8 @@ const headers = ref([
   { key: "shortName", align: "center", title: "单位简称" },
   { key: "partitionCode", align: "center", title: "分区代码" },
   { key: "description", align: "center", title: "备注" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
   { key: "reserved", align: "center", title: "保留数据" },
   { key: "status", align: "center", title: "状态" },
   { key: "actions", align: "center", title: "操作" },
@@ -44,6 +46,7 @@ const headers = ref([
 
 const rowKey: SysOrganizationProps = "organizationId";
 
+const { defaultFormat } = useDateTime();
 const {
   loading,
   pageNumber,

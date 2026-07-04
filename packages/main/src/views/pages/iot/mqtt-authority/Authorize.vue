@@ -1,9 +1,9 @@
 <template>
-  <div>MqttCategoryAuthorize</div>
+  <div>MqttAuthorityAuthorize</div>
 </template>
 
 <script setup lang="ts">
 import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: "ThingsMqttCategoryContent" });
+defineOptions({ name: "ThingsMqttAutorityAuthorize" });
 </script>

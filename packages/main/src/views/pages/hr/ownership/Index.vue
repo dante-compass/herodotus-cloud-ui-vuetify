@@ -28,7 +28,7 @@
 
           <template #item.identity="{ value }">
             <v-chip v-if="value" density="compact" rounded="lg" color="orange" label>
-              {{ getDictionaryItemDisplay('Identity', value) }}
+              {{ getDictionaryItemDisplay("Identity", value) }}
             </v-chip>
           </template>
 
@@ -42,29 +42,31 @@
 </template>
 
 <script setup lang="ts">
-import type { Tree, Page } from '@herodotus/core';
-import type { SysEmployeeEntity, SysElementConditions, SysEmployeeProps } from '@herodotus/api';
-import type { VDataTableHeaders, SortItem } from '@/composables/declarations';
+import type { Tree, Page } from "@herodotus/core";
+import type { SysEmployeeEntity, SysElementConditions, SysEmployeeProps } from "@herodotus/api";
+import type { VDataTableHeaders, SortItem } from "@/composables/declarations";
 
-import { useDictionary } from '@/composables/hooks';
-import { PAGE_NAME } from '@/configurations';
+import { useDictionary } from "@/composables/hooks";
+import { PAGE_NAME } from "@/configurations";
 
-import { isEmpty } from 'lodash-es';
-import { notify, toast, OperationEnum } from '@herodotus/core';
-import { useBaseTable } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { isEmpty } from "lodash-es";
+import { notify, toast, OperationEnum } from "@herodotus/core";
+import { useBaseTable, useDateTime } from "@/composables/hooks";
+import { API } from "@/configurations";
 
-import { OrganizationTree, DepartmentTree } from '../components';
+import { OrganizationTree, DepartmentTree } from "../components";
 
 defineOptions({ name: PAGE_NAME.SYS_OWNERSHIP, components: { OrganizationTree, DepartmentTree } });
 
 const headers = ref([
-  { key: 'employeeName', align: 'center', title: '姓名' },
-  { key: 'identity', align: 'center', title: '身份' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "employeeName", align: "center", title: "姓名" },
+  { key: "identity", align: "center", title: "身份" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysEmployeeProps = 'employeeId';
+const rowKey: SysEmployeeProps = "employeeId";
 
 const currentOrganization = ref({}) as Ref<Tree>;
 const currentDepartment = ref({}) as Ref<Tree>;
@@ -72,8 +74,8 @@ const pageNumber = shallowRef(1);
 const pageSize = shallowRef(10);
 const sortBy = ref([]) as Ref<Array<SortItem>>;
 
-const { getDictionaryItemDisplay } = useDictionary('Identity');
-
+const { getDictionaryItemDisplay } = useDictionary("Identity");
+const { defaultFormat } = useDateTime();
 const {
   loading,
   tableRows,
@@ -101,7 +103,7 @@ const organizationId = computed(() => {
   if (!isEmpty(currentOrganization.value)) {
     return currentOrganization.value.id;
   } else {
-    return '';
+    return "";
   }
 });
 
@@ -149,7 +151,7 @@ const deleteAllocatable = (item: SysEmployeeEntity) => {
         if (error.message) {
           toast.error(error.message);
         } else {
-          toast.error('删除失败');
+          toast.error("删除失败");
         }
       });
   });
@@ -160,7 +162,7 @@ const isShowOperation = computed(() => {
 });
 
 const toAllocatable = () => {
-  const routeName = 'SysOwnershipContent';
+  const routeName = "SysOwnershipContent";
   routePushParam(routeName, OperationEnum.AUTHORIZE, {
     organizationId: currentOrganization.value.id,
     departmentId: currentDepartment.value.id,

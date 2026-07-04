@@ -40,7 +40,7 @@
 import type { SysDictionaryEntity, SysDictionaryConditions, SysDictionaryProps } from "@herodotus/api";
 import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable } from "@/composables/hooks";
+import { useTable, useDateTime } from "@/composables/hooks";
 import { API, PAGE_NAME, COLOR_LIST } from "@/configurations";
 
 import Search from "./Search.vue";
@@ -55,6 +55,8 @@ const headers = ref([
   { key: "value", align: "center", title: "实际值" },
   { key: "ranking", align: "center", title: "排序值" },
   { key: "valueType", align: "center", title: "数据类型" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
   { key: "reserved", align: "center", title: "保留数据" },
   { key: "status", align: "center", title: "状态" },
   { key: "actions", align: "center", title: "操作" },
@@ -62,6 +64,7 @@ const headers = ref([
 
 const rowKey: SysDictionaryProps = "dictionaryId";
 
+const { defaultFormat } = useDateTime();
 const {
   loading,
   pageNumber,

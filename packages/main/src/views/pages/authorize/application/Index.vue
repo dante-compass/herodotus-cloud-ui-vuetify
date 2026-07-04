@@ -60,6 +60,8 @@ const headers = ref([
   { key: "refreshTokenTimeToLive", align: "center", title: "刷新令牌有效期" },
   { key: "authorizationCodeTimeToLive", align: "center", title: "授权码有效期" },
   { key: "deviceCodeTimeToLive", align: "center", title: "激活码有效期" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
   { key: "reserved", align: "center", title: "保留数据" },
   { key: "status", align: "center", title: "状态" },
   { key: "actions", align: "center", title: "操作" },
@@ -67,6 +69,7 @@ const headers = ref([
 
 const rowKey: OAuth2ApplicationProps = "applicationId";
 
+const { defaultFormat } = useDateTime();
 const {
   loading,
   pageNumber,
