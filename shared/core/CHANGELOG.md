@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 2.1.4
+
+### Patch Changes
+
+- 物联平台管理界面完成
+
 ## 2.1.3
 
 ### Patch Changes
