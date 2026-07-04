@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import type { MqttAccountConditions } from "@herodotus/api";
 
-defineOptions({ name: "SysElementCondition" });
+defineOptions({ name: "MqttAccountConditions" });
 
 const conditions = defineModel<MqttAccountConditions>({
   default: () => ({}) as MqttAccountConditions,

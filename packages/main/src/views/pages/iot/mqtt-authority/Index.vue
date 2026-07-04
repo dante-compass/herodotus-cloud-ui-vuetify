@@ -45,7 +45,7 @@
     </template>
 
     <template #item.actions="{ item }">
-      <h-action-authorize-button tooltip="配置权限" @click="toAuthorize(item)"></h-action-authorize-button>
+      <h-action-authorize-button tooltip="配置类别" @click="toAuthorize(item)"></h-action-authorize-button>
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
       <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
     </template>

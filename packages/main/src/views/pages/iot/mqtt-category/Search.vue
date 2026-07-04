@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import type { MqttCategoryConditions } from "@herodotus/api";
 
-defineOptions({ name: "SysElementCondition" });
+defineOptions({ name: "MqttCategoryConditions" });
 
 const conditions = defineModel<MqttCategoryConditions>({
   default: () => ({}) as MqttCategoryConditions,
