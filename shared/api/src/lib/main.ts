@@ -39,6 +39,9 @@ import {
   TslUnitService,
   TslArgumentService,
   TslFunctionService,
+  MqttCategoryService,
+  MqttAuthorityService,
+  MqttAccountService,
 } from "./iot";
 
 export class ApiResources {
@@ -201,6 +204,18 @@ export class ApiResources {
 
   public iotTslFunction(): TslFunctionService {
     return TslFunctionService.getInstance(this.config);
+  }
+
+  public iotMqttCategory(): MqttCategoryService {
+    return MqttCategoryService.getInstance(this.config);
+  }
+
+  public iotMqttAuthority(): MqttAuthorityService {
+    return MqttAuthorityService.getInstance(this.config);
+  }
+
+  public iotMqttAccount(): MqttAccountService {
+    return MqttAccountService.getInstance(this.config);
   }
 }
 

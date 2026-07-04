@@ -1,10 +1,22 @@
 <template>
   <v-row>
     <v-col cols="2">
-      <v-text-field v-model="conditions.path" label="请求路径" density="compact" hide-details clearable></v-text-field>
+      <v-text-field
+        v-model="conditions.clientId"
+        label="Mqtt客户端ID"
+        density="compact"
+        hide-details
+        clearable
+      ></v-text-field>
     </v-col>
     <v-col cols="2">
-      <v-text-field v-model="conditions.title" label="组件标题" density="compact" hide-details clearable></v-text-field>
+      <v-text-field
+        v-model="conditions.username"
+        label="Mqtt用户名"
+        density="compact"
+        hide-details
+        clearable
+      ></v-text-field>
     </v-col>
     <v-col></v-col>
     <v-col cols="1" class="text-end pr-0">
@@ -14,16 +26,16 @@
 </template>
 
 <script setup lang="ts">
-import type { SysElementConditions } from "@herodotus/api";
+import type { MqttAccountConditions } from "@herodotus/api";
 
 defineOptions({ name: "SysElementCondition" });
 
-const conditions = defineModel<SysElementConditions>({
-  default: () => ({}) as SysElementConditions,
+const conditions = defineModel<MqttAccountConditions>({
+  default: () => ({}) as MqttAccountConditions,
   required: true,
 });
 
 const onClear = () => {
-  conditions.value = {} as SysElementConditions;
+  conditions.value = {} as MqttAccountConditions;
 };
 </script>

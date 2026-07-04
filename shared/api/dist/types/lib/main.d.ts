@@ -1,7 +1,7 @@
 import { HttpClientOptions, Axios, HttpConfig } from '@herodotus/core';
 import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2PersistentTokenService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService, MgtCertificateFileService, DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './modules';
 import { BucketService, ObjectService, MultipartUploadService } from './oss';
-import { DeviceService, ProductCategoryService, ProductService, TslUnitService, TslArgumentService, TslFunctionService } from './iot';
+import { DeviceService, ProductCategoryService, ProductService, TslUnitService, TslArgumentService, TslFunctionService, MqttCategoryService, MqttAuthorityService, MqttAccountService } from './iot';
 export declare class ApiResources {
     private static instance;
     private config;
@@ -44,6 +44,9 @@ export declare class ApiResources {
     iotTslUnit(): TslUnitService;
     iotTslArgument(): TslArgumentService;
     iotTslFunction(): TslFunctionService;
+    iotMqttCategory(): MqttCategoryService;
+    iotMqttAuthority(): MqttAuthorityService;
+    iotMqttAccount(): MqttAccountService;
 }
 declare const createApi: (http: Axios, options: HttpClientOptions) => ApiResources;
 export { createApi };

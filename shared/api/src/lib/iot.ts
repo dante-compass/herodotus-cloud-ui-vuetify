@@ -265,4 +265,5 @@ export {
   TslFunctionService,
   MqttCategoryService,
   MqttAuthorityService,
+  MqttAccountService,
 };

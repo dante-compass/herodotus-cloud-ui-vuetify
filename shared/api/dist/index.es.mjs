@@ -673,7 +673,18 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getIot() + "/iot/mqtt/authority";
 	}
-}, W = class e {
+}, W = class t extends e {
+	static instance;
+	constructor(e) {
+		super(e);
+	}
+	static getInstance(e) {
+		return this.instance ??= new t(e), this.instance;
+	}
+	getBaseAddress() {
+		return this.getConfig().getIot() + "/iot/mqtt/account";
+	}
+}, G = class e {
 	static instance;
 	config = {};
 	constructor(e) {
@@ -793,9 +804,18 @@ var i = /* @__PURE__ */ function(e) {
 	iotTslFunction() {
 		return V.getInstance(this.config);
 	}
-}, G = (e, t) => {
+	iotMqttCategory() {
+		return H.getInstance(this.config);
+	}
+	iotMqttAuthority() {
+		return U.getInstance(this.config);
+	}
+	iotMqttAccount() {
+		return W.getInstance(this.config);
+	}
+}, K = (e, t) => {
 	let r = new n(e, t);
-	return W.getInstance(r);
+	return G.getInstance(r);
 };
 //#endregion
-export { W as ApiResources, N as BucketService, t as ContentTypeEnum, R as DeviceService, k as DialogueContactService, A as DialogueDetailService, E as ExtendedTaskService, i as GenderEnum, O as MgtCertificateFileService, D as MgtCertificateService, U as MqttAuthorityService, H as MqttCategoryService, F as MultipartUploadService, a as NotificationCategoryEnum, j as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, f as OAuth2PersistentTokenService, s as OAuth2ScopeService, l as OAuth2UserLoggingService, P as ObjectService, I as ProductCategoryService, L as ProductService, T as SocialBindingService, b as SysAttributeService, x as SysDefaultRoleService, m as SysDepartmentService, w as SysDictionaryService, S as SysElementService, g as SysEmployeeAllocatableService, h as SysEmployeeService, p as SysOrganizationService, _ as SysPermissionService, v as SysRoleService, C as SysTenantDataSourceService, y as SysUserService, B as TslArgumentService, V as TslFunctionService, z as TslUnitService, M as WebSocketMessageService, G as createApi };
+export { G as ApiResources, N as BucketService, t as ContentTypeEnum, R as DeviceService, k as DialogueContactService, A as DialogueDetailService, E as ExtendedTaskService, i as GenderEnum, O as MgtCertificateFileService, D as MgtCertificateService, W as MqttAccountService, U as MqttAuthorityService, H as MqttCategoryService, F as MultipartUploadService, a as NotificationCategoryEnum, j as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, f as OAuth2PersistentTokenService, s as OAuth2ScopeService, l as OAuth2UserLoggingService, P as ObjectService, I as ProductCategoryService, L as ProductService, T as SocialBindingService, b as SysAttributeService, x as SysDefaultRoleService, m as SysDepartmentService, w as SysDictionaryService, S as SysElementService, g as SysEmployeeAllocatableService, h as SysEmployeeService, p as SysOrganizationService, _ as SysPermissionService, v as SysRoleService, C as SysTenantDataSourceService, y as SysUserService, B as TslArgumentService, V as TslFunctionService, z as TslUnitService, M as WebSocketMessageService, K as createApi };
