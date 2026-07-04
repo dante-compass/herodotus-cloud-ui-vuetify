@@ -6,7 +6,7 @@
       </template>
     </v-card>
 
-    <v-container fluid class="pa-0">
+    <v-container class="pa-0">
       <v-row>
         <v-col xl="3" lg="3" md="4" sm="6" xs="12">
           <v-sheet>
@@ -103,34 +103,34 @@
 </template>
 
 <script setup lang="ts">
-import type { ObjectDomain, GetObjectAttributesResult } from '@herodotus/api';
+import type { ObjectDomain, GetObjectAttributesResult } from "@herodotus/api";
 
-import { isEmpty } from 'lodash-es';
-import { notify, toast } from '@herodotus/core';
-import { useEditFinish } from '@herodotus/framework';
-import { useBaseTableItem, useDateTime, useDictionary, useOss } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { isEmpty } from "lodash-es";
+import { notify, toast } from "@herodotus/core";
+import { useEditFinish } from "@herodotus/framework";
+import { useBaseTableItem, useDateTime, useDictionary, useOss } from "@/composables/hooks";
+import { API } from "@/configurations";
 
-import { HOssObjectVersions, HOssSetLegalHoldDialog, HOssSetRetentionDialog } from './components';
+import { HOssObjectVersions, HOssSetLegalHoldDialog, HOssSetRetentionDialog } from "./components";
 
 defineOptions({
-  name: 'OssObjectContent',
+  name: "OssObjectContent",
   components: { HOssObjectVersions, HOssSetLegalHoldDialog, HOssSetRetentionDialog },
 });
 
 const { defaultFormat } = useDateTime();
 const { humanObjectSize } = useOss();
 const { onFinish } = useEditFinish();
-const { getDictionaryItemDisplay } = useDictionary('ObjectRetentionMode');
+const { getDictionaryItemDisplay } = useDictionary("ObjectRetentionMode");
 const { editedItem, additional } = useBaseTableItem<ObjectDomain>();
 
 const loading = shallowRef(false);
 const showVersions = shallowRef(false);
 const openSetLegalHoldDialog = shallowRef(false);
 const openSetRetentionDialog = shallowRef(false);
-const currentBucketName = shallowRef('');
-const currentObjectName = shallowRef('');
-const currentFolder = shallowRef('');
+const currentBucketName = shallowRef("");
+const currentObjectName = shallowRef("");
+const currentFolder = shallowRef("");
 const attributes = ref({}) as Ref<GetObjectAttributesResult>;
 
 const isDisableAction = computed(() => {
@@ -152,15 +152,15 @@ const fetchAttributes = (bucketName: string, objectName: string) => {
 };
 
 const humanLegalHold = (legalHold: boolean) => {
-  return legalHold ? 'ON' : 'OFF';
+  return legalHold ? "ON" : "OFF";
 };
 
 const humanRetentionMode = (retentionMode: string) => {
   if (retentionMode) {
-    return getDictionaryItemDisplay('ObjectRetentionMode', retentionMode);
+    return getDictionaryItemDisplay("ObjectRetentionMode", retentionMode);
   }
 
-  return 'NONE';
+  return "NONE";
 };
 
 /**
@@ -168,20 +168,20 @@ const humanRetentionMode = (retentionMode: string) => {
  * @param bucketName 存储桶名称
  * @param objectName 对象名称
  */
-const deleteObject = (bucketName: string, objectName: string, folderName = '') => {
+const deleteObject = (bucketName: string, objectName: string, folderName = "") => {
   notify.standardDeleteNotify(() => {
     API.core
       .ossObject()
       .delete({ bucketName: bucketName, objectName: objectName })
       .then(() => {
-        toast.success('删除成功');
+        toast.success("删除成功");
         onFinish();
       })
       .catch((error) => {
         if (error.message) {
           toast.error(error.message);
         } else {
-          toast.error('删除失败');
+          toast.error("删除失败");
         }
       });
   });

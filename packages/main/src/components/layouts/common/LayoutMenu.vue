@@ -20,7 +20,7 @@
       <v-list-item v-bind="props" class="rounded-e-xl"></v-list-item>
     </template>
     <template #item="{ props }">
-      <v-list-item v-bind="props" class="rounded-e-xl"></v-list-item>
+      <v-list-item v-bind="props" class="rounded-e-xl rounded-s-0"></v-list-item>
     </template>
 
     <template #subheader="{ props: subheaderProps }">
@@ -34,9 +34,9 @@
 </template>
 
 <script setup lang="ts">
-import type { MenuItem } from '@herodotus/framework';
+import type { MenuItem } from "@herodotus/framework";
 
-defineOptions({ name: 'LayoutMenu' });
+defineOptions({ name: "LayoutMenu" });
 
 interface Props {
   items: MenuItem[];

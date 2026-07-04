@@ -250,10 +250,7 @@ var z = /* @__PURE__ */ c({
 			e && c(r.value, e);
 		}), b(r, (e) => {
 			e && c(e, i.value);
-		}), (e, n) => (p(), t(_(E), {
-			fluid: "",
-			class: "pa-0"
-		}, {
+		}), (e, n) => (p(), t(_(E), { class: "pa-0" }, {
 			default: x(() => [s(_(N), null, {
 				default: x(() => [s(_(T), null, {
 					default: x(() => [s(_(ce), {

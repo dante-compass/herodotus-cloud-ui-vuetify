@@ -72,7 +72,7 @@ export const PAGE_NAME = {
   IOT_TSL_FUNCTION: "IotTslFunction",
   IOT_TSL_UNIT: "IotTslUnit",
   THINGS_MQTT_ACCOUNT: "ThingsMqttAccount",
-  THINGS_MQTT_AUTHORITY: "ThingsMqttAutority",
+  THINGS_MQTT_AUTHORITY: "ThingsMqttAuthority",
   THINGS_MQTT_CATEGORY: "ThingsMqttCategory",
 };
 

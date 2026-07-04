@@ -62,6 +62,9 @@ const vuetify = createVuetify({
       color: "primary",
       clearable: true,
     },
+    VContainer: {
+      fluid: true,
+    },
   },
 });
 

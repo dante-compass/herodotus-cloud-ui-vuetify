@@ -4,7 +4,7 @@
     <layout-bar personal></layout-bar>
 
     <v-main :class="backgroundColor">
-      <v-container fluid>
+      <v-container>
         <v-row>
           <v-col xxl="2" xl="2" lg="1" md="0" sm="0" xs="0"></v-col>
           <v-col xxl="8" xl="8" lg="10" md="12" sm="12" xs="12">

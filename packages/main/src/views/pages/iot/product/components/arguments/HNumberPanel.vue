@@ -40,7 +40,7 @@ import HUnitSelect from "./HUnitSelect.vue";
 defineOptions({ name: "HNumberPanel", components: { HDictionarySelect, HUnitSelect } });
 
 const model = defineModel<Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>>({
-  default: () => ({}),
+  default: () => ({}) as Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>,
 });
 
 const unit = ref<TslUnitEntity | null>(null);

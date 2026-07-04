@@ -21,7 +21,7 @@
     <v-col cols="2">
       <h-dictionary-select
         v-model="conditions.purpose"
-        dictionary="Retain"
+        dictionary="Purpose"
         label="主题用途"
         density="compact"
         hide-details

@@ -34,11 +34,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useApplicationStore } from '@herodotus/framework';
+import { useApplicationStore } from "@herodotus/framework";
 
-import { SettingOptions } from '../setting';
+import { SettingOptions } from "../setting";
 
-defineOptions({ name: 'LayoutSettingDrawer', components: { SettingOptions } });
+defineOptions({ name: "LayoutSettingDrawer", components: { SettingOptions } });
 
 const application = useApplicationStore();
 </script>

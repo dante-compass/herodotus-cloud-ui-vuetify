@@ -10,7 +10,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-container fluid>
+      <v-container>
         <v-row>
           <v-col>
             <v-card rounded="md" class="pa-2" border flat>
