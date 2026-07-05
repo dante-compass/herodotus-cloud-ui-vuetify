@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 2.1.5
+
+### Patch Changes
+
+- 重新编译模块
+
 ## 2.1.4
 
 ### Patch Changes
