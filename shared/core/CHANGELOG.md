@@ -1,5 +1,27 @@
 # @herodotus/core
 
+## 3.1.0
+
+### Minor Changes
+
+- 优化useEditFinish 支持手动指定 route，以避免不同环境下 useRoute() 会失效问题
+
+## 3.0.0
+
+### Major Changes
+
+- 修复 onFinish 方法在旧版前端异常
+
+### Patch Changes
+
+- 修复 onFinish 方法异常
+
+## 2.1.6
+
+### Patch Changes
+
+- 修复 route 错误
+
 ## 2.1.5
 
 ### Patch Changes
