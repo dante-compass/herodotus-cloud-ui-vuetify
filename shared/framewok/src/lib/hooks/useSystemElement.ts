@@ -5,7 +5,7 @@ import type { ModuleNamespace, MenuItem, ElementMeta } from '@/declarations';
 import { isEmpty } from 'lodash-es';
 
 import { useElementStore } from '../stores';
-import { MenuScenario } from '../../declarations';
+import { MenuScenarioEnum } from '@/declarations';
 
 export default function useSystemElement(
   vueModules: Record<string, unknown>,
@@ -81,10 +81,10 @@ export default function useSystemElement(
     let result = [];
 
     switch (node.scenario) {
-      case MenuScenario.PERSONAL:
+      case MenuScenarioEnum.PERSONAL:
         result = meta.personalMenus;
         break;
-      case MenuScenario.TESTING:
+      case MenuScenarioEnum.TESTING:
         result = meta.testingMenus;
         break;
       default:
@@ -138,10 +138,10 @@ export default function useSystemElement(
       routeRecords.push(raw);
       if (!isEmpty(menuItem)) {
         switch (node.scenario) {
-          case MenuScenario.PERSONAL:
+          case MenuScenarioEnum.PERSONAL:
             personalMenus.push(menuItem);
             break;
-          case MenuScenario.TESTING:
+          case MenuScenarioEnum.TESTING:
             testingMenus.push(menuItem);
             break;
           default:

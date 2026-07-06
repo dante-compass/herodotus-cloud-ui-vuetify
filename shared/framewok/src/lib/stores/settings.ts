@@ -1,12 +1,16 @@
-import type { SystemSetting } from '@/declarations';
+import type { SystemSetting } from "@/declarations";
 
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-import { ThemeModeEnum } from '@herodotus/core';
-import { LayoutModeEnum } from '@/declarations';
+import { ThemeModeEnum } from "@herodotus/core";
+import { LayoutModeEnum, LibraryEnum, TableStyleEnum } from "@/declarations";
 
-export const useSettingsStore = defineStore('SystemSettings', {
+export const useSettingsStore = defineStore("SystemSettings", {
   state: (): SystemSetting => ({
+    /**
+     * 组件库
+     */
+    library: LibraryEnum.VUETIFY,
     /**
      * 全局主题
      */
@@ -14,10 +18,10 @@ export const useSettingsStore = defineStore('SystemSettings', {
       mode: ThemeModeEnum.SYSTEM,
       // 默认 primary 主题颜色
       dark: {
-        primary: '#2563eb',
+        primary: "#2563eb",
       },
       light: {
-        primary: '#6750A4',
+        primary: "#6750A4",
       },
     },
     /**
@@ -42,6 +46,7 @@ export const useSettingsStore = defineStore('SystemSettings', {
       showBreadcrumbsIcon: true,
       table: {
         dense: false,
+        style: TableStyleEnum.LIST,
       },
     },
   }),
@@ -52,10 +57,12 @@ export const useSettingsStore = defineStore('SystemSettings', {
     isSystem: (state) => state.theme.mode === ThemeModeEnum.SYSTEM,
     isDarkenMode: (state) => state.theme.mode !== ThemeModeEnum.LIGHT,
     isLightenMode: (state) => state.theme.mode === ThemeModeEnum.LIGHT,
-    density: (state) => (state.display.table.dense ? 'compact' : 'default'),
+    density: (state) => (state.display.table.dense ? "compact" : "default"),
     densitySwitch: (state) => {
       return (trueValue: string, falseValue: string) => (state.display.table.dense ? trueValue : falseValue);
     },
+    displayAsCard: (state) => state.display.table.style === TableStyleEnum.CARD,
+    displayAsList: (state) => state.display.table.style === TableStyleEnum.LIST,
   },
 
   actions: {
@@ -69,6 +76,10 @@ export const useSettingsStore = defineStore('SystemSettings', {
 
     toSystem() {
       this.theme.mode = ThemeModeEnum.SYSTEM;
+    },
+
+    changeTableStyle(style: TableStyleEnum) {
+      this.display.table.style === style;
     },
   },
   persist: true,

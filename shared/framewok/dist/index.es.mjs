@@ -3,11 +3,11 @@ import { useRoute as f } from "vue-router";
 import { defineStore as p } from "pinia";
 import { jwtDecode as m } from "jwt-decode";
 import { colord as h, extend as g } from "colord";
-import _ from "colord/plugins/mix";
-import { dropRight as ee, endsWith as v, findIndex as y, has as te, isEmpty as b, join as ne, merge as x, remove as S, split as C } from "lodash-es";
-import { Base64 as re } from "js-base64";
-import { computed as w, getCurrentInstance as ie, inject as ae, nextTick as oe, ref as se, shallowRef as T, watch as E, watchEffect as ce } from "vue";
-import le from "pinia-plugin-persistedstate";
+import ee from "colord/plugins/mix";
+import { dropRight as te, endsWith as ne, findIndex as _, has as re, isEmpty as v, join as ie, merge as y, remove as b, split as x } from "lodash-es";
+import { Base64 as ae } from "js-base64";
+import { computed as S, getCurrentInstance as oe, inject as se, nextTick as ce, ref as le, shallowRef as C, watch as w, watchEffect as T } from "vue";
+import E from "pinia-plugin-persistedstate";
 //#region src/declarations/enums.ts
 var D = /* @__PURE__ */ function(e) {
 	return e.DEFAULT = "defaults", e.CLASSIC = "classic", e.TRANSVERSE = "transverse", e.COLUMNS = "transverse", e;
@@ -17,6 +17,10 @@ var D = /* @__PURE__ */ function(e) {
 	return e.INSTITUTION = "INSTITUTION", e.SMS = "SMS", e.WXAPP = "WXAPP", e.QQ = "QQ", e.WEIBO = "WEIBO", e.BAIDU = "BAIDU", e.WECHAT_OPEN = "WECHAT_OPEN", e.WECHAT_MP = "WECHAT_MP", e.WECHAT_ENTERPRISE = "WECHAT_ENTERPRISE", e.WECHAT_ENTERPRISE_WEB = "WECHAT_ENTERPRISE_WEB", e.DINGTALK = "DINGTALK", e.DINGTALK_ACCOUNT = "DINGTALK_ACCOUNT", e.ALIYUN = "ALIYUN", e.TAOBAO = "TAOBAO", e.ALIPAY = "ALIPAY", e.TEAMBITION = "TEAMBITION", e.HUAWEI_V2 = "HUAWEI_V2", e.FEISHU = "FEISHU", e.JD = "JD", e.DOUYIN = "DOUYIN", e.TOUTIAO = "TOUTIAO", e.MI = "MI", e.RENREN = "RENREN", e.MEITUAN = "MEITUAN", e.ELEME = "ELEME", e.KUJIALE = "KUJIALE", e.XMLY = "XMLY", e.GITEE = "GITEE", e.OSCHINA = "OSCHINA", e.CSDN = "CSDN", e.GITHUB = "GITHUB", e.GITLAB = "GITLAB", e.STACK_OVERFLOW = "STACK_OVERFLOW", e.CODING = "CODING", e.GOOGLE = "GOOGLE", e.MICROSOFT = "MICROSOFT", e.FACEBOOK = "FACEBOOK", e.LINKEDIN = "LINKEDIN", e.TWITTER = "TWITTER", e.AMAZON = "AMAZON", e.SLACK = "SLACK", e.LINE = "LINE", e.OKTA = "OKTA", e.PINTEREST = "PINTEREST", e;
 }({}), A = /* @__PURE__ */ function(e) {
 	return e.APP = "APP", e.PERSONAL = "PERSONAL", e.TESTING = "TESTING", e;
+}({}), j = /* @__PURE__ */ function(e) {
+	return e.LIST = "List", e.CARD = "Card", e;
+}({}), M = /* @__PURE__ */ function(e) {
+	return e.QUASAR = "Quasar", e.VUETIFY = "Vuetify", e;
 }({}), ue = p("Application", {
 	state: () => ({
 		leftDrawer: !0,
@@ -44,18 +48,18 @@ var D = /* @__PURE__ */ function(e) {
 });
 //#endregion
 //#region src/lib/utilities/color.ts
-g([_]);
-var j = 2, M = 16, N = 5, P = 5, F = 15, I = 5, L = 4;
-function R(e, t) {
+g([ee]);
+var N = 2, P = 16, F = 5, I = 5, L = 15, R = 5, z = 4;
+function B(e, t) {
 	if (t === 6) return e;
-	let n = t < 6, r = h(e).toHsv(), i = n ? 6 - t : t - I - 1;
+	let n = t < 6, r = h(e).toHsv(), i = n ? 6 - t : t - R - 1;
 	return h({
-		h: B(r, i, n),
-		s: V(r, i, n),
-		v: H(r, i, n)
+		h: H(r, i, n),
+		s: U(r, i, n),
+		v: de(r, i, n)
 	}).toHex();
 }
-function z(e) {
+function V(e) {
 	return [
 		1,
 		2,
@@ -67,27 +71,27 @@ function z(e) {
 		8,
 		9,
 		10
-	].map((t) => R(e, t));
-}
-function B(e, t, n) {
-	let r;
-	return r = e.h >= 60 && e.h <= 240 ? n ? e.h - j * t : e.h + j * t : n ? e.h + j * t : e.h - j * t, r < 0 ? r += 360 : r >= 360 && (r -= 360), r;
-}
-function V(e, t, n) {
-	let r;
-	return r = n ? e.s - M * t : t === L ? e.s + M : e.s + N * t, r > 100 && (r = 100), n && t === I && r > 10 && (r = 10), r < 6 && (r = 6), r;
+	].map((t) => B(e, t));
 }
 function H(e, t, n) {
 	let r;
-	return r = n ? e.v + P * t : e.v - F * t, r > 100 && (r = 100), r;
+	return r = e.h >= 60 && e.h <= 240 ? n ? e.h - N * t : e.h + N * t : n ? e.h + N * t : e.h - N * t, r < 0 ? r += 360 : r >= 360 && (r -= 360), r;
 }
-function U(e, t) {
+function U(e, t, n) {
+	let r;
+	return r = n ? e.s - P * t : t === z ? e.s + P : e.s + F * t, r > 100 && (r = 100), n && t === R && r > 10 && (r = 10), r < 6 && (r = 6), r;
+}
+function de(e, t, n) {
+	let r;
+	return r = n ? e.v + I * t : e.v - L * t, r > 100 && (r = 100), r;
+}
+function fe(e, t) {
 	return h(e).alpha(t).toHex();
 }
 function W(e, t, n) {
 	return h(e).mix(t, n).toHex();
 }
-function de(e) {
+function pe(e) {
 	return h(e).isEqual("#ffffff");
 }
 //#endregion
@@ -163,10 +167,10 @@ var G = class e {
 		return this.router;
 	}
 	isRouterExist() {
-		return !b(this.router);
+		return !v(this.router);
 	}
 	hasParameter(e) {
-		return !b(e.params) || !b(e.query);
+		return !v(e.params) || !v(e.query);
 	}
 	isDetailRoute(e) {
 		return !!(e.meta && e.meta.isDetailContent);
@@ -203,7 +207,7 @@ var G = class e {
 		this.isRouterExist() ? this.to(this.options.path.signIn) : this.refresh();
 	}
 	getParent(e) {
-		return ne(ee(C(e, "/")), "/");
+		return ie(te(x(e, "/")), "/");
 	}
 	toPrev(e) {
 		if (e.path) {
@@ -235,7 +239,7 @@ var G = class e {
 	tokenExpires(e, t, n, r = !1) {
 		u.tokenExpiresNotify(e, t, n, () => this.signOut(r));
 	}
-}, fe = class i {
+}, me = class i {
 	static instance = null;
 	config = {};
 	constructor(e) {
@@ -264,18 +268,18 @@ var G = class e {
 	}
 	createBasicHeader(e = "", n = "") {
 		let r = this.config.getClientId() + ":" + this.config.getClientSecret();
-		return e && n && (r = e + ":" + n), t.BASIC + re.encode(r);
+		return e && n && (r = e + ":" + n), t.BASIC + ae.encode(r);
 	}
 	createClientData(e = "", t = "", n = "") {
 		let r = {
 			client_id: "",
 			client_secret: ""
 		};
-		return e && t ? (r.client_id = e, r.client_secret = t) : (r.client_id = this.config.getClientId(), r.client_secret = this.config.getClientSecret()), n && x(r, { scope: n }), r;
+		return e && t ? (r.client_id = e, r.client_secret = t) : (r.client_id = this.config.getClientId(), r.client_secret = this.config.getClientSecret()), n && y(r, { scope: n }), r;
 	}
 	createOAuth2Data(e, t, n = !1) {
 		let r = { grant_type: e };
-		return b(t) || x(r, t), n && x(r, { scope: "openid" }), r;
+		return v(t) || y(r, t), n && y(r, { scope: "openid" }), r;
 	}
 	signOut(e, t = "", n = "") {
 		return this.config.getHttp().put(this.getOAuth2SignOutAddress(), { accessToken: e }, { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(t, n) } });
@@ -293,9 +297,9 @@ var G = class e {
 		}, i), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
 	}
 	createAuthorizationCodeAddress(e, t = "") {
-		if (b(t)) {
+		if (v(t)) {
 			let t = this.config.getProject(), n = e;
-			return v(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
+			return ne(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
 		} else return t;
 	}
 	createAuthorizationCodeParams(e, t = "openid") {
@@ -312,16 +316,16 @@ var G = class e {
 		}, a), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(o, s) } });
 	}
 	clientCredentialsFlow(t = "", n = "", i = "", a) {
-		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, i) }), b(a) ? { contentType: r.URL_ENCODED } : a);
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, i) }), v(a) ? { contentType: r.URL_ENCODED } : a);
 	}
 	deviceCodeFlow(t, n = "", i = "", a = "", o) {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.DEVICE_CODE, {
 			device_code: t,
 			...this.createClientData(n, i, a)
-		}), b(o) ? { contentType: r.URL_ENCODED } : o);
+		}), v(o) ? { contentType: r.URL_ENCODED } : o);
 	}
 	deviceAuthorizationFlow(e = "", t = "", n = "", i) {
-		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), { ...this.createClientData(e, t, n) }, b(i) ? { contentType: r.URL_ENCODED } : i);
+		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), { ...this.createClientData(e, t, n) }, v(i) ? { contentType: r.URL_ENCODED } : i);
 	}
 	socialCredentialsFlowBySms(t, n, i = !1, a = "", o = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.SOCIAL_CREDENTIALS, {
@@ -347,7 +351,7 @@ var G = class e {
 			redirect_uris: a,
 			scope: o,
 			token_endpoint_auth_method: n.CLIENT_SECRET_POST
-		}, b(s) ? { contentType: r.JSON } : s, c);
+		}, v(s) ? { contentType: r.JSON } : s, c);
 	}
 	clientRegistrationFlow(t, i, a, o, s, c) {
 		return this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
@@ -357,9 +361,9 @@ var G = class e {
 			redirect_uris: a,
 			scope: o,
 			token_endpoint_auth_method: n.CLIENT_SECRET_POST
-		}, b(s) ? { contentType: r.JSON } : s, c);
+		}, v(s) ? { contentType: r.JSON } : s, c);
 	}
-}, pe = class e {
+}, he = class e {
 	static instance = null;
 	config = {};
 	constructor(e) {
@@ -415,7 +419,7 @@ var G = class e {
 		let e = this.config.getUpms() + "/open/identity/sources";
 		return this.config.getHttp().get(e);
 	}
-}, me = class e extends o {
+}, ge = class e extends o {
 	static instance = null;
 	constructor(e) {
 		super(e);
@@ -472,13 +476,13 @@ var G = class e {
 		return this.config;
 	}
 	open() {
-		return pe.getInstance(this.config);
+		return he.getInstance(this.config);
 	}
 	oauth2() {
-		return fe.getInstance(this.config);
+		return me.getInstance(this.config);
 	}
 	passkey() {
-		return me.getInstance(this.config);
+		return ge.getInstance(this.config);
 	}
 }, Y = p("Crypto", {
 	state: () => ({
@@ -671,13 +675,14 @@ var G = class e {
 		}
 	},
 	persist: !0
-}), he = () => {
+}), _e = () => {
 	let e = X(), n = Y(), r = e.access_token, i = n.sessionId, a = {};
 	r && (a.Authorization = t.BEARER + r), i && (a["X-Herodotus-Session-Id"] = i);
 	let o = G.getTenantId();
 	return o && (a["X-Herodotus-Tenant-Id"] = o), a["X-Herodotus-Api-Version"] = "v1", a;
 }, Z = p("SystemSettings", {
 	state: () => ({
+		library: M.VUETIFY,
 		theme: {
 			mode: s.SYSTEM,
 			dark: { primary: "#2563eb" },
@@ -690,7 +695,10 @@ var G = class e {
 			isActivateLeftTab: !0,
 			showBreadcrumbs: !0,
 			showBreadcrumbsIcon: !0,
-			table: { dense: !1 }
+			table: {
+				dense: !1,
+				style: j.LIST
+			}
 		}
 	}),
 	getters: {
@@ -700,7 +708,9 @@ var G = class e {
 		isDarkenMode: (e) => e.theme.mode !== s.LIGHT,
 		isLightenMode: (e) => e.theme.mode === s.LIGHT,
 		density: (e) => e.display.table.dense ? "compact" : "default",
-		densitySwitch: (e) => (t, n) => e.display.table.dense ? t : n
+		densitySwitch: (e) => (t, n) => e.display.table.dense ? t : n,
+		displayAsCard: (e) => e.display.table.style === j.CARD,
+		displayAsList: (e) => e.display.table.style === j.LIST
 	},
 	actions: {
 		toDark() {
@@ -711,6 +721,9 @@ var G = class e {
 		},
 		toSystem() {
 			this.theme.mode = s.SYSTEM;
+		},
+		changeTableStyle(e) {
+			this.display.table.style;
 		}
 	},
 	persist: !0
@@ -725,10 +738,10 @@ var G = class e {
 	}),
 	getters: {
 		isDynamicRouteAdded() {
-			return !b(this.appMenus) || !b(this.personalMenus);
+			return !v(this.appMenus) || !v(this.personalMenus);
 		},
 		supportTesting() {
-			return !b(this.testingMenus);
+			return !v(this.testingMenus);
 		}
 	},
 	actions: {
@@ -749,11 +762,11 @@ var G = class e {
 			t && this.details.set(t, e.component);
 		},
 		addMenus(e, t, n) {
-			b(e) || (this.appMenus = e), b(t) || (this.personalMenus = t), b(n) || (this.testingMenus = n);
+			v(e) || (this.appMenus = e), v(t) || (this.personalMenus = t), v(n) || (this.testingMenus = n);
 		},
 		hasParameter(e) {
 			let t = e.name;
-			return !!(t && te(this.pushParams, t));
+			return !!(t && re(this.pushParams, t));
 		},
 		isDetailRoute(e) {
 			return !!(e.meta && e.meta.isDetailContent);
@@ -777,7 +790,7 @@ var G = class e {
 	getters: {
 		isNotLastTab: (e) => (t) => e.tabs.length - 1 !== t,
 		getLastTabIndex: (e) => e.tabs.length - 1,
-		getTabIndex: (e) => (t) => y(e.tabs, (e) => e.name === t.name),
+		getTabIndex: (e) => (t) => _(e.tabs, (e) => e.name === t.name),
 		getActivatedTabIndex() {
 			return this.getTabIndex(this.activatedTab);
 		},
@@ -812,7 +825,7 @@ var G = class e {
 			this.activatedTab = e, this.activatedTabName = e.name;
 		},
 		isNotExistInStaticRoute(e) {
-			return y(G.getRoutes(), (t) => t.path === e.path) === -1;
+			return _(G.getRoutes(), (t) => t.path === e.path) === -1;
 		},
 		isTabNotOpened(e) {
 			return this.getTabIndex(e) === -1;
@@ -821,7 +834,7 @@ var G = class e {
 			this.isNotExistInStaticRoute(e) && (this.isTabNotOpened(e) && (t ? this.isLastTabActivated ? this.tabs.splice(this.getActivatedTabIndex, 0, e) : this.tabs.splice(this.getActivatedTabIndex + 1, 0, e) : this.tabs.push(e)), this.setActivatedTab(e));
 		},
 		closeTab(e) {
-			S(this.tabs, (t) => t.name === e.name);
+			b(this.tabs, (t) => t.name === e.name);
 		},
 		smartTab(e) {
 			let t = Q(), n = t.isDetailRoute(e), r = this.convertRouteToTab(e);
@@ -835,22 +848,22 @@ var G = class e {
 			this.closeTab(this.activatedTab);
 		},
 		closeOtherTabs() {
-			S(this.tabs, (e) => e.name !== this.activatedTab.name);
+			b(this.tabs, (e) => e.name !== this.activatedTab.name);
 		},
 		closeLeftTabs() {
 			let e = this.getActivatedTabIndex;
-			S(this.tabs, (t, n) => n < e);
+			b(this.tabs, (t, n) => n < e);
 		},
 		closeRightTabs() {
 			let e = this.getActivatedTabIndex;
-			S(this.tabs, (t, n) => n > e);
+			b(this.tabs, (t, n) => n > e);
 		}
 	},
 	persist: !0
 });
 //#endregion
 //#region src/lib/hooks/useEditFinish.ts
-function ge(e) {
+function ve(e) {
 	let t = f(), n = Q(), r = $(), i = () => {
 		if (t) return t;
 		if (e) return e;
@@ -866,8 +879,8 @@ function ge(e) {
 }
 //#endregion
 //#region src/lib/hooks/useDeviceAuthorize.ts
-function _e(e, t, n, i = "") {
-	let a = T(0), o = T(5), s = T(!1), c = T(!1), l = T({}), u = se([]), d = (e, t = !1) => {
+function ye(e, t, n, i = "") {
+	let a = C(0), o = C(5), s = C(!1), c = C(!1), l = C({}), u = le([]), d = (e, t = !1) => {
 		let n = u.value.length + 1;
 		t ? u.value.push({
 			id: n,
@@ -910,8 +923,8 @@ function _e(e, t, n, i = "") {
 }
 //#endregion
 //#region src/lib/hooks/useFileDownload.ts
-function ve() {
-	let e = T(0), t = T(!1);
+function be() {
+	let e = C(0), t = C(!1);
 	return {
 		process: (e, t) => {
 			let n = new Blob([e], { type: "application/x-download" }), r = document.createElement("a");
@@ -929,7 +942,7 @@ function ve() {
 }
 //#endregion
 //#region src/lib/hooks/usePasskey.ts
-function ye() {
+function xe() {
 	let e = X(), t = null, n = () => {
 		t &&= null;
 	};
@@ -979,7 +992,7 @@ function ye() {
 }
 //#endregion
 //#region src/lib/hooks/useSystemElement.ts
-function be(e, t, n) {
+function Se(e, t, n) {
 	let r = (e) => e.meta?.title, i = (e) => e.meta?.icon, a = (e) => e.meta?.isDetailContent, o = (e, n) => {
 		let r = {};
 		return r.path = e.name, r.component = n[t(e.componentPath)], e.componentName && (r.name = e.componentName), e.redirect && (r.redirect = e.redirect), r.meta = {
@@ -1028,10 +1041,10 @@ function be(e, t, n) {
 				if (m.children = r.routeRecords, n) h = s(m);
 				else {
 					let t = l(e, r);
-					b(t) ? h = s(m) : (h = c(m), h.children = t);
+					v(t) ? h = s(m) : (h = c(m), h.children = t);
 				}
 			} else n || (h = s(m));
-			if (i.push(m), !b(h)) switch (e.scenario) {
+			if (i.push(m), !v(h)) switch (e.scenario) {
 				case A.PERSONAL:
 					f.push(h);
 					break;
@@ -1049,7 +1062,7 @@ function be(e, t, n) {
 			testingMenus: p
 		};
 	}, d = (e, t) => {
-		console.log("[Herodotus] |- Begin add dynamic routes"), Q().addMenus(t.appMenus, t.personalMenus, t.testingMenus), b(t.routeRecords) ? console.warn("[Herodotus] |- Dynamic routes is empty, skip!") : (t.routeRecords.forEach((t) => {
+		console.log("[Herodotus] |- Begin add dynamic routes"), Q().addMenus(t.appMenus, t.personalMenus, t.testingMenus), v(t.routeRecords) ? console.warn("[Herodotus] |- Dynamic routes is empty, skip!") : (t.routeRecords.forEach((t) => {
 			e.addRoute(t);
 		}), console.log("[Herodotus] |- Dynamic routes add success!"));
 	};
@@ -1060,24 +1073,24 @@ function be(e, t, n) {
 }
 //#endregion
 //#region ../../node_modules/.pnpm/vuetify@4.1.3_typescript@6._9fbc2319d05588616722e1a5e433b2d5/node_modules/vuetify/lib/util/getCurrentInstance.js
-function xe(e, t) {
-	let n = ie();
+function Ce(e, t) {
+	let n = oe();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
 //#region ../../node_modules/.pnpm/vuetify@4.1.3_typescript@6._9fbc2319d05588616722e1a5e433b2d5/node_modules/vuetify/lib/composables/theme.js
-var Se = Symbol.for("vuetify:theme");
-function Ce() {
-	xe("useTheme");
-	let e = ae(Se, null);
+var we = Symbol.for("vuetify:theme");
+function Te() {
+	Ce("useTheme");
+	let e = se(we, null);
 	if (!e) throw Error("Could not find Vuetify theme injection");
 	return e;
 }
 //#endregion
 //#region src/lib/hooks/useSystemTheme.ts
-function we() {
-	let e = Z(), t = Ce(), n = T(s.DARK), r = (e) => {
+function Ee() {
+	let e = Z(), t = Te(), n = C(s.DARK), r = (e) => {
 		if (!e || e.nodeType !== Node.ELEMENT_NODE) return !1;
 		let t = window.getComputedStyle(e);
 		return t.overflowY === "scroll" || t.overflowY === "auto" && e.scrollHeight > e.clientHeight;
@@ -1094,7 +1107,7 @@ function we() {
 		let i = t.getBoundingClientRect();
 		n.style.top = i.top + "px", n.style.left = i.left + "px", n.style.width = i.width + "px", n.style.height = i.height + "px";
 		let a = document.activeElement.getBoundingClientRect(), o = a.left + a.width / 2 + window.scrollX, s = a.top + a.height / 2 + window.scrollY;
-		t.style.setProperty("--clip-pos", `${o}px ${s}px`), t.style.removeProperty("--clip-size"), oe(() => {
+		t.style.setProperty("--clip-pos", `${o}px ${s}px`), t.style.removeProperty("--clip-size"), ce(() => {
 			t.classList.add("app-transition"), requestAnimationFrame(() => {
 				requestAnimationFrame(() => {
 					t.style.setProperty("--clip-size", Math.hypot(window.innerWidth, window.innerHeight) + "px");
@@ -1108,18 +1121,18 @@ function we() {
 		}
 		t.addEventListener("transitionend", c), t.addEventListener("transitioncancel", c);
 	};
-	ce(() => {
+	T(() => {
 		t.change(e.isSystem ? n.value : e.theme.mode);
-	}), E(t.global.name, (e) => {
+	}), w(t.global.name, (e) => {
 		i();
 		let t = e;
 		d.setTheme(t), u.setTheme(t);
 	});
-	let a = w(() => e.isDarkenMode ? e.theme.dark.primary : e.theme.light.primary);
+	let a = S(() => e.isDarkenMode ? e.theme.dark.primary : e.theme.light.primary);
 	return {
-		lightColor: w(() => R(a.value, 3)),
-		darkColor: w(() => R(a.value, 6)),
-		backgroundColor: w(() => {
+		lightColor: S(() => B(a.value, 3)),
+		darkColor: S(() => B(a.value, 6)),
+		backgroundColor: S(() => {
 			let t = e.isDarkenMode ? .5 : .2;
 			return W("#ffffff", a.value, t);
 		}),
@@ -1137,7 +1150,7 @@ function we() {
 				return;
 			}
 		},
-		currentTheme: w({
+		currentTheme: S({
 			get() {
 				return e.theme.mode;
 			},
@@ -1145,7 +1158,7 @@ function we() {
 				e.theme.mode = t;
 			}
 		}),
-		cycleChangeThemeIcon: w(() => {
+		cycleChangeThemeIcon: S(() => {
 			switch (e.theme.mode) {
 				case s.SYSTEM: return "mdi-brightness-5";
 				case s.DARK: return "mdi-brightness-auto";
@@ -1157,8 +1170,8 @@ function we() {
 }
 //#endregion
 //#region src/lib/main.ts
-var Te = (e) => {
+var De = (e) => {
 	c(Z().theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
 };
 //#endregion
-export { O as CaptchaCategoryEnum, D as LayoutModeEnum, A as MenuScenario, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, k as SocialSourceEnum, U as addColorAlpha, z as getAllColorPalette, R as getColorPalette, he as getSystemHeaders, Te as initializer, de as isWhiteColor, W as mixColor, le as piniaPluginPersistedstate, ue as useApplicationStore, X as useAuthenticationStore, Y as useCryptoStore, _e as useDeviceAuthorize, ge as useEditFinish, Q as useElementStore, ve as useFileDownload, ye as usePasskey, Z as useSettingsStore, be as useSystemElement, we as useSystemTheme, $ as useTabsViewStore };
+export { O as CaptchaCategoryEnum, D as LayoutModeEnum, M as LibraryEnum, A as MenuScenarioEnum, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, k as SocialSourceEnum, j as TableStyleEnum, fe as addColorAlpha, V as getAllColorPalette, B as getColorPalette, _e as getSystemHeaders, De as initializer, pe as isWhiteColor, W as mixColor, E as piniaPluginPersistedstate, ue as useApplicationStore, X as useAuthenticationStore, Y as useCryptoStore, ye as useDeviceAuthorize, ve as useEditFinish, Q as useElementStore, be as useFileDownload, xe as usePasskey, Z as useSettingsStore, Se as useSystemElement, Ee as useSystemTheme, $ as useTabsViewStore };

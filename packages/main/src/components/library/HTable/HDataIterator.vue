@@ -28,47 +28,25 @@
       </v-card-title>
 
       <v-card-text>
-        <v-data-table-server
-          v-model:items-per-page="pageSize"
-          v-model:page="pageNumber"
+        <v-data-iterator
+          :items-per-page="pageSize"
+          :page="pageNumber"
           :items-length="totalItems"
           :density="settings.density"
+          :items="items"
           show-select
-          striped="even"
-          hover
           v-bind="$attrs"
         >
-          <template v-for="slotName in Object.keys($slots)" v-slot:[slotName]="props">
-            <slot
-              v-if="!['loading', 'item.status', 'item.reserved'].includes(slotName)"
-              :name="slotName"
-              v-bind="props"
-            ></slot>
+          <template #default="{ items }">
+            <v-container class="pa-2" fluid>
+              <v-row density="comfortable">
+                <v-col v-for="(item, i) in items" :key="i" cols="12" sm="6" xl="3">
+                  <slot name="item" :item="item"></slot>
+                </v-col>
+              </v-row>
+            </v-container>
           </template>
-
-          <!-- 单独处理 loading 插槽 -->
-          <template v-if="!$slots.loading" #loading>
-            <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
-          </template>
-          <template v-else #loading>
-            <slot name="loading"></slot>
-          </template>
-
-          <template v-if="!$slots['item.status']" #item.status="{ item }">
-            <h-column-status v-if="options" :type="item.status" :options="options"></h-column-status>
-          </template>
-          <template v-else #item.status>
-            <slot name="item.status"></slot>
-          </template>
-
-          <template v-if="!$slots['item.reserved']" #item.reserved="{ item }">
-            <h-column-reserved :status="item.reserved"></h-column-reserved>
-          </template>
-          <template v-else #item.reserved>
-            <slot name="item.reserved"></slot>
-          </template>
-
-          <template v-if="!$slots.bottom" #bottom>
+          <template v-if="!$slots.footer" #footer>
             <v-container class="mr-0">
               <v-row class="justify-end">
                 <v-pagination
@@ -83,15 +61,14 @@
               </v-row>
             </v-container>
           </template>
-        </v-data-table-server>
+        </v-data-iterator>
       </v-card-text>
     </v-card>
   </use-fullscreen>
 </template>
 
-<script setup lang="ts">
-import { VDataTableServer } from "vuetify/components";
-import { useSettingsStore, LibraryEnum } from "@herodotus/framework";
+<script setup lang="ts" generic="T">
+import { useSettingsStore } from "@herodotus/framework";
 import { UseFullscreen } from "@vueuse/components";
 
 import { useDictionary } from "@/composables/hooks";
@@ -99,17 +76,20 @@ import HColumnReserved from "./HColumnReserved.vue";
 import HColumnStatus from "./HColumnStatus.vue";
 
 defineOptions({
-  name: "HDataTable",
+  name: "HDataIterator",
   components: { UseFullscreen, HColumnReserved, HColumnStatus },
 });
 
-interface Props {
-  flat?: boolean;
-}
-
-withDefaults(defineProps<Props>(), {
-  flat: false,
-});
+withDefaults(
+  defineProps<{
+    flat?: boolean;
+    items: T[];
+  }>(),
+  {
+    flat: false,
+    items: () => [],
+  },
+);
 
 const pageNumber = defineModel<number>("pageNumber", { default: 1, required: true });
 const pageSize = defineModel<number>("pageSize", { default: 10, required: true });

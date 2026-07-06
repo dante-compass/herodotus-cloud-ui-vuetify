@@ -96,8 +96,16 @@ export declare enum SocialSourceEnum {
     OKTA = "OKTA",
     PINTEREST = "PINTEREST"
 }
-export declare enum MenuScenario {
+export declare enum MenuScenarioEnum {
     APP = "APP",
     PERSONAL = "PERSONAL",
     TESTING = "TESTING"
+}
+export declare enum TableStyleEnum {
+    LIST = "List",
+    CARD = "Card"
+}
+export declare enum LibraryEnum {
+    QUASAR = "Quasar",
+    VUETIFY = "Vuetify"
 }
