@@ -1,7 +1,7 @@
 <template>
   <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
     <v-form ref="productForm" validate-on="blur lazy">
-      <!-- <v-text-field
+      <v-text-field
         v-model.lazy="editedItem.productKey"
         label="ProductKey *"
         placeholder="请输入 ProductKey"
@@ -29,7 +29,7 @@
         v-model="editedItem.authenticationMode"
         dictionary="AuthenticationMode"
         label="认证方式"
-      ></h-dictionary-select>-->
+      ></h-dictionary-select>
     </v-form>
   </h-center-form-layout>
 </template>
