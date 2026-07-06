@@ -18,7 +18,7 @@ import { HTslButton, HTslParamList } from "../commons";
 defineOptions({ name: "HStructPanel", components: { HSubArgumentDialog, HTslButton, HTslParamList } });
 
 const model = defineModel<Specification<StructSpecs>>({
-  default: () => ({}),
+  default: () => ({}) as Specification<StructSpecs>,
 });
 
 const openDialog = ref(false);

@@ -3,5 +3,7 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'IotDeviceContent' });
+import type { DeviceConditions } from "@herodotus/api";
+
+defineOptions({ name: "DeviceConditions" });
 </script>

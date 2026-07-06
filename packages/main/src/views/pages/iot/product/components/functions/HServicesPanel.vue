@@ -44,7 +44,7 @@ defineOptions({
 });
 
 const entity = defineModel<TslFunctionEntity>({
-  default: () => ({}),
+  default: () => ({}) as TslFunctionEntity,
 });
 
 const isOpenInputDialog = shallowRef<boolean>(false);

@@ -863,18 +863,11 @@ var G = class e {
 });
 //#endregion
 //#region src/lib/hooks/useEditFinish.ts
-function ve(e) {
-	let t = f(), n = Q(), r = $(), i = () => {
-		if (t) return t;
-		if (e) return e;
-	};
+function ve() {
+	let e = f(), t = Q(), n = $();
 	return { onFinish: () => {
-		let e = i();
-		if (e && e.name) {
-			let t = e.name;
-			n.removeRoutePushParam(t), r.deleteTab(e);
-		}
-		K.getInstance().goBack();
+		let r = e.name;
+		t.removeRoutePushParam(r), n.deleteTab(e), K.getInstance().goBack();
 	} };
 }
 //#endregion

@@ -23,6 +23,6 @@ import type { Characteristic } from "@herodotus/api";
 defineOptions({ name: "HCharacteristicPanel" });
 
 const model = defineModel<Characteristic>({
-  default: () => ({}),
+  default: () => ({}) as Characteristic,
 });
 </script>

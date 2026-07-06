@@ -24,7 +24,7 @@ import { HArgumentPanel } from "../arguments";
 defineOptions({ name: "HPropertiesPanel" });
 
 const entity = defineModel<TslFunctionEntity>({
-  default: () => ({}),
+  default: () => ({}) as TslFunctionEntity,
 });
 
 const { createEmptyNormalArgument } = useTslEmptyArgument();

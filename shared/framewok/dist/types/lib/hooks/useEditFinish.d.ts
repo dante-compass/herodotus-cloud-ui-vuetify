@@ -1,4 +1,3 @@
-import { RouteLocationNormalizedLoadedGeneric } from 'vue-router';
-export default function useEditFinish(currentRoute?: RouteLocationNormalizedLoadedGeneric): {
+export default function useEditFinish(): {
     onFinish: () => void;
 };

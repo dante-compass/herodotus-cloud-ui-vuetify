@@ -37,10 +37,10 @@
 <script setup lang="ts">
 import type { ProductConditions } from "@herodotus/api";
 
-defineOptions({ name: "SysElementCondition" });
+defineOptions({ name: "ProductConditions" });
 
 const conditions = defineModel<ProductConditions>({
-  default: () => ({}),
+  default: () => ({}) as ProductConditions,
   required: true,
 });
 

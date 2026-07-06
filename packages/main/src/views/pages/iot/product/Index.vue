@@ -1,6 +1,5 @@
 <template>
   <h-data-table
-    v-if="settings.displayAsCard"
     v-model:page-size="pageSize"
     v-model:page-number="pageNumber"
     v-model:total-pages="totalPages"
@@ -184,7 +183,6 @@ const { getDictionaryItemDisplay } = useDictionary(
   "NetworkingMethod",
   "AuthenticationMethod",
 );
-const settings = useSettingsStore();
 
 const {
   loading,
