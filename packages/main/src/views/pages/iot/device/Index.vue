@@ -39,7 +39,9 @@ import type { VDataTableHeaders } from "@/composables/declarations";
 import { useTable } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: PAGE_NAME.IOT_DEVICE });
+import Search from "./Search.vue";
+
+defineOptions({ name: PAGE_NAME.IOT_DEVICE, components: { Search } });
 
 const headers = ref([
   { key: "deviceName", align: "center", title: "设备名称" },
