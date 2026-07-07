@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'IotDeviceSetup' });
+defineOptions({ name: "IotDeviceSetup" });
 </script>

@@ -15,12 +15,12 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductCategoryEntity } from '@herodotus/api';
+import type { ProductCategoryEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API } from "@/configurations";
 
-defineOptions({ name: 'IotProductCategoryContent' });
+defineOptions({ name: "IotProductCategoryContent" });
 
 const productCategoryForm = ref();
 
