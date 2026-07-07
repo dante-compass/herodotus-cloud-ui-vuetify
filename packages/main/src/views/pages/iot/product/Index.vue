@@ -20,6 +20,47 @@
       <v-btn prepend-icon="mdi-plus" text="新建产品" @click="toCreate"></v-btn>
     </template>
 
+    <template #item.category="{ item }">
+      {{ item.category ? item.category.categoryName : "" }}
+    </template>
+
+    <template #item.nodeType="{ value }">
+      <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
+        {{ getDictionaryItemDisplay("NodeType", value) }}
+      </v-chip>
+    </template>
+
+    <template #item.gatewayProtocol="{ value }">
+      <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
+        {{ getDictionaryItemDisplay("GatewayProtocol", value) }}
+      </v-chip>
+    </template>
+
+    <template #item.networkingMethod="{ value }">
+      <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
+        {{ getDictionaryItemDisplay("NetworkingMethod", value) }}
+      </v-chip>
+    </template>
+
+    <template #item.authenticationMode="{ value }">
+      <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
+        {{ getDictionaryItemDisplay("AuthenticationMode", value) }}
+      </v-chip>
+    </template>
+
+    <template #item.registration="{ item }">
+      <div class="d-flex justify-center">
+        <v-switch
+          :model-value="item.registration"
+          :label="item.registration ? '开启' : '关闭'"
+          density="comfortable"
+          hide-details
+          inset
+          @update:model-value="onRegistrationChange(item, $event)"
+        ></v-switch>
+      </div>
+    </template>
+
     <template #item.actions="{ item }">
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
       <h-action-info-button @click="toInfo(item)"></h-action-info-button>
@@ -30,14 +71,16 @@
 
 <script setup lang="ts">
 import type { ProductEntity, ProductConditions, ProductProps } from "@herodotus/api";
+import type { HttpResult } from "@herodotus/core";
 import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable, useDateTime } from "@/composables/hooks";
+import { toast } from "@herodotus/core";
+import { useTable, useDateTime, useDictionary } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
 import Search from "./Search.vue";
 
-defineOptions({ name: PAGE_NAME.IOT_PRODUCT });
+defineOptions({ name: PAGE_NAME.IOT_PRODUCT, components: { Search } });
 
 const headers = ref([
   { key: "productKey", align: "center", title: "ProductKey" },
@@ -59,6 +102,12 @@ const headers = ref([
 
 const rowKey: ProductProps = "id";
 
+const { getDictionaryItemDisplay } = useDictionary(
+  "NodeType",
+  "GatewayProtocol",
+  "NetworkingMethod",
+  "AuthenticationMethod",
+);
 const { defaultFormat } = useDateTime();
 
 const {
@@ -75,4 +124,22 @@ const {
   deleteItemById,
   findItems,
 } = useTable<ProductConditions, ProductEntity>(API.core.iotProduct(), PAGE_NAME.IOT_PRODUCT);
+
+const onRegistrationChange = (item: ProductEntity, event: boolean) => {
+  item.registration = event as boolean;
+  API.core
+    .iotProduct()
+    .toggle(item)
+    .then((response) => {
+      const result = response as HttpResult<ProductEntity>;
+      if (result.message) {
+        toast.success(result.message);
+      } else {
+        toast.success("操作成功");
+      }
+    })
+    .catch((error) => {
+      toast.error("操作失败");
+    });
+};
 </script>
