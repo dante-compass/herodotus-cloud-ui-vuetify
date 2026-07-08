@@ -47,7 +47,6 @@ const displayContent = (item: TslUnitEntity) => {
 const debouncedSearch = debounce((query: string, callback: (results: TslUnitEntity[]) => void) => {
   loading.value = true;
   const results = store.search(query);
-  console.log("----------", results);
   callback(results);
   loading.value = false;
 }, 500);

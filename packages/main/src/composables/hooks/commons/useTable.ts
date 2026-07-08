@@ -157,10 +157,6 @@ export default function useTable<C extends Conditions, I extends Domain, O exten
     { debounce: 500, maxWait: 1000, deep: true },
   );
 
-  watch(loading, (newValue) => {
-    console.log("---loading---", newValue);
-  });
-
   return {
     loading,
     pageNumber,
