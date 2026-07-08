@@ -31,6 +31,7 @@ export interface DeviceEntity extends AbstractSysEntity {
     redirectUris: string;
 }
 export interface ProductCategoryConditions extends Conditions {
+    name: string;
 }
 export interface ProductConditions extends Conditions {
     productKey: string;

@@ -68,9 +68,7 @@ export default function useBaseTable<C extends Conditions, I extends Domain, O e
   };
 
   const toEdit = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
-    console.log("----item---", item);
     const componentName = appendSuffix(name, "Content", withSuffix);
-    console.log("----componentName---", componentName);
     addRoutePushParam(componentName, OperationEnum.EDIT, item, additional);
   };
 

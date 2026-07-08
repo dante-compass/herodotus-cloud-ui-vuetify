@@ -39,11 +39,7 @@
           v-bind="$attrs"
         >
           <template v-for="slotName in Object.keys($slots)" v-slot:[slotName]="props">
-            <slot
-              v-if="!['loading', 'item.status', 'item.reserved'].includes(slotName)"
-              :name="slotName"
-              v-bind="props"
-            ></slot>
+            <slot v-if="!['item.status', 'item.reserved'].includes(slotName)" :name="slotName" v-bind="props"></slot>
           </template>
 
           <!-- 单独处理 loading 插槽 -->
