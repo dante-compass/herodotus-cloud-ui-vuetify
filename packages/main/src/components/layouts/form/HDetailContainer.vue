@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" :title="title">
     <template #prepend>
-      <h-button icon="mdi-arrow-left-box" tooltip="返回" color="primary" variant="text" @click="onFinish()"></h-button>
+      <h-button icon="mdi-arrow-left-box" tooltip="返回" variant="text" @click="onFinish()"></h-button>
     </template>
 
     <v-card-text>
@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { useEditFinish } from '@herodotus/framework';
+import { useEditFinish } from "@herodotus/framework";
 
-defineOptions({ name: 'HDetailContainer' });
+defineOptions({ name: "HDetailContainer" });
 
 const { onFinish } = useEditFinish();
 

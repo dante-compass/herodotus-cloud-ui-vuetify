@@ -1,20 +1,20 @@
-// Styles
-import "./styles/layers.scss";
-import "unfonts.css";
-
 import "animate.css/animate.min.css";
 import "@herodotus/core/style.css";
 import "@herodotus/framework/style.css";
 
-import App from "./App.vue";
+// Composables
 import { createApp } from "vue";
-
-import DisableDevtool from "disable-devtool";
-import { IS_DEV, VARIABLES } from "@/configurations";
-
 // Plugins
 import { setupVuetify, setupPinia } from "@/plugins";
 import { setupRouter } from "@/routers";
+import DisableDevtool from "disable-devtool";
+import { IS_DEV, VARIABLES } from "@/configurations";
+
+// Components
+import App from "./App.vue";
+
+// Styles
+import "unfonts.css";
 
 function setupApp() {
   if (IS_DEV) {
