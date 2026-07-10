@@ -11,7 +11,7 @@
     </v-col>
     <v-col></v-col>
     <v-col cols="1" class="text-end pr-0">
-      <h-button color="red" icon="mdi-broom" tooltip="清空" variant="text" @click.stop="onClear()"></h-button>
+      <h-icon-button color="red" icon="mdi-broom" tooltip="清空" variant="text" @click.stop="onClear()"></h-icon-button>
     </v-col>
   </v-row>
 </template>
@@ -22,7 +22,7 @@ import type { SysDictionaryConditions } from "@herodotus/api";
 defineOptions({ name: "SysDictionaryCondition" });
 
 const conditions = defineModel<SysDictionaryConditions>({
-  default: () => ({}),
+  default: () => ({}) as SysDictionaryConditions,
   required: true,
 });
 

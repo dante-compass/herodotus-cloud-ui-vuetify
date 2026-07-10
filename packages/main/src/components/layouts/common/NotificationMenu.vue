@@ -1,12 +1,16 @@
 <template>
   <v-menu eager location="bottom end" :close-on-content-click="false">
     <template v-slot:activator="{ props }">
-      <v-btn icon v-bind="props" color="medium-emphasis">
-        <v-badge v-if="totalCount !== 0" location="top right" color="error" :content="totalCount">
-          <v-icon icon="mdi-bell-outline"></v-icon>
-        </v-badge>
-        <v-icon v-else icon="mdi-bell-outline"></v-icon>
-      </v-btn>
+      <v-badge v-if="totalCount !== 0" location="top right" color="error" :content="totalCount">
+        <h-icon-button icon="mdi-bell-outline" v-bind="props"></h-icon-button>
+      </v-badge>
+      <h-icon-button
+        v-else
+        icon="mdi-bell-outline"
+        v-bind="props"
+        variant="text"
+        color="medium-emphasis"
+      ></h-icon-button>
     </template>
 
     <v-card border rounded="lg" width="450">

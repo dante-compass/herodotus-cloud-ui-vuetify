@@ -1,6 +1,5 @@
 //#region src/resolver.ts
 var e = [
-	"HButton",
 	"HDate",
 	"HDateTime",
 	"HDialog",

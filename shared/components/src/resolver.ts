@@ -1,7 +1,6 @@
 import type { ComponentResolver } from "unplugin-vue-components";
 
 const components = [
-  "HButton",
   "HDate",
   "HDateTime",
   "HDialog",

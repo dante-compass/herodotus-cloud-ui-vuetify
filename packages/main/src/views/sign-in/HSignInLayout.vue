@@ -10,6 +10,7 @@
               <v-btn :icon="cycleChangeThemeIcon" @click="onCycleChangeTheme()" class="mx-2"></v-btn>
             </template>
             <h-app-logo height="10vh" class="mb-2"></h-app-logo>
+
             <v-card-text>
               <v-card variant="tonal" elevation="2" class="mx-auto" max-width="420">
                 <v-tabs v-model="tabs" align-tabs="center">

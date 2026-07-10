@@ -1,13 +1,13 @@
 <template>
   <v-toolbar color="primary">
     <v-toolbar-title>已配置</v-toolbar-title>
-    <h-button icon="mdi-content-save-cog" tooltip="保存" @click="onSave()"></h-button>
-    <h-button icon="mdi-delete-empty" tooltip="清空" @click="onClear()"></h-button>
+    <h-icon-button icon="mdi-content-save-cog" tooltip="保存" @click="onSave()"></h-icon-button>
+    <h-icon-button icon="mdi-delete-empty" tooltip="清空" @click="onClear()"></h-icon-button>
   </v-toolbar>
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'HAuthorizeHeader' });
+defineOptions({ name: "HAuthorizeHeader" });
 
 const emit = defineEmits<{
   save: [];
@@ -15,10 +15,10 @@ const emit = defineEmits<{
 }>();
 
 const onSave = () => {
-  emit('save');
+  emit("save");
 };
 
 const onClear = () => {
-  emit('clear');
+  emit("clear");
 };
 </script>

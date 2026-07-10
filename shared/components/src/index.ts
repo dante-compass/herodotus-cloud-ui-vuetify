@@ -1,6 +1,6 @@
 import type { App } from "vue";
 
-import { HButton, HIconButton } from "./HButton";
+import { HIconButton } from "./HButton";
 import { HDate, HDateTime, HDuration, HTime } from "./HDateTime";
 import { HDialog } from "./HDialog";
 import { HDivider } from "./HDivider";
@@ -11,7 +11,6 @@ import { HMdiIconSelect, HTreeSelect } from "./HSelect";
 import { HSignInBackground } from "./HSignIn";
 
 const components = [
-  HButton,
   HDate,
   HDateTime,
   HDialog,
@@ -32,7 +31,6 @@ const install = (app: App) => {
 };
 
 export {
-  HButton,
   HDate,
   HDateTime,
   HDialog,

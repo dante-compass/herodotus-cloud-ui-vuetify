@@ -36,15 +36,15 @@
               ></v-text-field>
             </v-col>
             <v-col cols="4">
-              <h-button v-if="showPrompt" size="x-large" block :disabled="!mobile" @click="onGetVerificationCode()">
+              <v-btn v-if="showPrompt" size="x-large" block :disabled="!mobile" @click="onGetVerificationCode()">
                 获取验证码
-              </h-button>
-              <h-button v-else size="x-large" disabled readonly block>{{ readSeconds }}</h-button>
+              </v-btn>
+              <v-btn v-else size="x-large" disabled readonly block>{{ readSeconds }}</v-btn>
             </v-col>
           </v-row>
         </v-container>
       </v-form>
-      <h-button
+      <v-btn
         tabindex="3"
         block
         class="mt-6"
@@ -53,12 +53,12 @@
         @keyup.enter="onShowCaptcha()"
       >
         登录
-      </h-button>
+      </v-btn>
       <h-behavior-captcha v-model="isShowCaptcha" @verify="onCaptchaVerify($event)"></h-behavior-captcha>
 
-      <h-divider label="OR" gradient></h-divider>
+      <h-divider label="OR" thickness="2" gradient></h-divider>
 
-      <h-button
+      <v-btn
         tabindex="4"
         block
         tooltip="Passkey 仅在服务为 localhost 或者 https 形式下才能正常使用"
@@ -67,9 +67,9 @@
         @keyup.enter="passkeySignIn()"
       >
         Passkey 快速登录
-      </h-button>
+      </v-btn>
 
-      <h-divider label="其它登录方式" gradient></h-divider>
+      <h-divider label="其它登录方式" thickness="2" gradient></h-divider>
 
       <social-sign-in-list></social-sign-in-list>
     </v-card-text>

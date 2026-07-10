@@ -8,7 +8,7 @@
               <h-label text="Product Key：" hide-details class="mr-2"></h-label>
             </template>
             <template #append>
-              <h-button icon="mdi-delete" tooltip="复制" variant="text"></h-button>
+              <v-btn icon="mdi-delete" tooltip="复制" variant="text"></v-btn>
             </template>
           </v-list-item>
         </v-col>
@@ -18,12 +18,12 @@
               <h-label text="Product Secret：" hide-details class="mr-2"></h-label>
             </template>
             <template #append>
-              <h-button
+              <v-btn
                 :icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
                 tooltip="显示"
                 variant="text"
                 @click="visible = !visible"
-              ></h-button>
+              ></v-btn>
             </template>
           </v-list-item>
         </v-col>
@@ -33,13 +33,13 @@
               <h-label text="设备数量：" hide-details class="mr-2"></h-label>
             </template>
             <template #append>
-              <h-button
+              <v-btn
                 :icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
                 tooltip="显示"
                 variant="text"
                 @click="visible = !visible"
-              ></h-button>
-              <h-button text="测试" tooltip="显示" @click="visible = !visible"></h-button>
+              ></v-btn>
+              <v-btn text="测试" tooltip="显示" @click="visible = !visible"></v-btn>
               <v-btn text="测试" tooltip="显示" @click="visible = !visible"></v-btn>
             </template>
           </v-list-item>

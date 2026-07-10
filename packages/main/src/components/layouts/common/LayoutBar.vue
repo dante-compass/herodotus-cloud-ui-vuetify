@@ -20,19 +20,19 @@
     <template #append>
       <div class="d-flex ga-1">
         <notification-menu v-if="isMessageEnabled"></notification-menu>
-        <h-button
+        <h-icon-button
           icon="mdi-cog-outline"
           tooltip="设置"
           color="medium-emphasis"
           @click.stop="application.rightDrawer = !application.rightDrawer"
-        ></h-button>
-        <h-button
+        ></h-icon-button>
+        <h-icon-button
           v-if="supportTesting"
           icon="mdi-ab-testing"
           tooltip="功能测试"
           color="medium-emphasis"
           to="/iot-testing"
-        ></h-button>
+        ></h-icon-button>
       </div>
       <v-divider class="align-self-center h-100 mx-2 mx-sm-4" vertical></v-divider>
       <user-avatar></user-avatar>
@@ -41,15 +41,15 @@
 </template>
 
 <script setup lang="ts">
-import { useApplicationStore, useElementStore } from '@herodotus/framework';
-import { VARIABLES } from '@/configurations';
+import { useApplicationStore, useElementStore } from "@herodotus/framework";
+import { VARIABLES } from "@/configurations";
 
-import { HAppLogo } from '../../library/HLogo';
-import LayoutBreadcrumbs from './LayoutBreadcrumbs.vue';
-import UserAvatar from './UserAvatar.vue';
-import NotificationMenu from './NotificationMenu.vue';
+import { HAppLogo } from "../../library/HLogo";
+import LayoutBreadcrumbs from "./LayoutBreadcrumbs.vue";
+import UserAvatar from "./UserAvatar.vue";
+import NotificationMenu from "./NotificationMenu.vue";
 
-defineOptions({ name: 'LayoutBar', components: { HAppLogo, LayoutBreadcrumbs, UserAvatar, NotificationMenu } });
+defineOptions({ name: "LayoutBar", components: { HAppLogo, LayoutBreadcrumbs, UserAvatar, NotificationMenu } });
 
 const application = useApplicationStore();
 const element = useElementStore();

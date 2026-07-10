@@ -1,7 +1,7 @@
 <template>
   <v-tooltip v-if="tooltip" interactive :location="location">
     <template v-slot:activator="{ props: activatorProps }">
-      <v-icon-btn v-bind="mergeProps($attrs, activatorProps)"></v-icon-btn>
+      <v-icon-btn v-bind="mergeProps(activatorProps, $attrs)"></v-icon-btn>
     </template>
     <span>{{ tooltip }}</span>
   </v-tooltip>

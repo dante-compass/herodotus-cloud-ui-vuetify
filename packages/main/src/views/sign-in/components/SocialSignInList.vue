@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <h-button v-if="!hasConfig" icon="mdi-wechat" class="ma-2"></h-button>
+    <v-btn v-if="!hasConfig" icon="mdi-wechat" variant="tonal"></v-btn>
     <template v-else>
       <v-btn
         icon
@@ -9,25 +9,31 @@
         :key="index"
         :href="value"
         target="_blank"
-        class="ma-2"
+        variant="tonal"
       >
         <v-avatar>
           <v-img :src="getSocialLogo(key)" />
         </v-avatar>
       </v-btn>
     </template>
-    <h-button icon="mdi-login-variant" :href="authorizationCodeUrl" tooltip="授权码模式登录" class="ma-2"></h-button>
+    <v-btn
+      color="accent"
+      icon="mdi-login-variant"
+      :href="authorizationCodeUrl"
+      tooltip="授权码模式登录"
+      variant="tonal"
+    ></v-btn>
   </v-row>
 </template>
 
 <script setup lang="ts">
-import { isEmpty } from 'lodash-es';
-import { SecurityApiResources } from '@herodotus/framework';
+import { isEmpty } from "lodash-es";
+import { SecurityApiResources } from "@herodotus/framework";
 
-import { VARIABLES } from '@/configurations';
-import { useImage } from '@/composables/hooks';
+import { VARIABLES } from "@/configurations";
+import { useImage } from "@/composables/hooks";
 
-defineOptions({ name: 'SocialSignInList' });
+defineOptions({ name: "SocialSignInList" });
 
 const { getSocialLogo } = useImage();
 
@@ -52,7 +58,7 @@ const authorizationCodeUrl = computed(() => {
     .authorizationCodeRequestFlow(
       VARIABLES.getApiUrl(),
       VARIABLES.getRedirectUri(),
-      'openid',
+      "openid",
       VARIABLES.getAuthorizeUri(),
     );
 });

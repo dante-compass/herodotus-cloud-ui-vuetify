@@ -6,7 +6,13 @@
       </template>
 
       <template v-if="closed" #append>
-        <h-button icon="mdi-close" tooltip="关闭" @click="onClose" size="x-small" variant="text"></h-button>
+        <h-icon-button
+          icon="mdi-close"
+          tooltip="关闭"
+          @click="onClose"
+          variant="text"
+          color="medium-emphasis"
+        ></h-icon-button>
       </template>
       <v-divider></v-divider>
       <v-card-text class="pb-2">
@@ -23,9 +29,9 @@
 <script setup lang="ts">
 import { VBtn, VCard, VCardText, VCardActions, VDialog, VDivider, VProgressLinear } from "vuetify/components";
 
-import { HButton } from "../HButton";
+import { HIconButton } from "../HButton";
 
-defineOptions({ name: "HDialog", components: { VDialog, HButton } });
+defineOptions({ name: "HDialog", components: { VDialog, HIconButton } });
 
 interface Props {
   loading?: boolean;

@@ -2,7 +2,7 @@
   <div>
     <v-card class="mx-auto mb-4" title="设置文件属性">
       <template #prepend>
-        <h-button icon="mdi-arrow-left-box" tooltip="返回" variant="text" @click="onFinish()"></h-button>
+        <h-icon-button icon="mdi-arrow-left-box" tooltip="返回" variant="text" @click="onFinish()"></h-icon-button>
       </template>
     </v-card>
 
