@@ -9,6 +9,7 @@ var e = [
 	"HMdiIconSelect",
 	"HIconButton",
 	"HLabel",
+	"HLabelItem",
 	"HParticles",
 	"HSignInBackground",
 	"HTime",

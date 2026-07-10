@@ -9,6 +9,7 @@ import { HLabel } from "./HLabel";
 import { HParticles } from "./HParticles";
 import { HMdiIconSelect, HTreeSelect } from "./HSelect";
 import { HSignInBackground } from "./HSignIn";
+import { HLabelItem } from "./HItem";
 
 const components = [
   HDate,
@@ -20,6 +21,7 @@ const components = [
   HMdiIconSelect,
   HIconButton,
   HLabel,
+  HLabelItem,
   HParticles,
   HSignInBackground,
   HTime,
@@ -40,6 +42,7 @@ export {
   HMdiIconSelect,
   HIconButton,
   HLabel,
+  HLabelItem,
   HParticles,
   HSignInBackground,
   HTime,

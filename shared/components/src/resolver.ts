@@ -10,6 +10,7 @@ const components = [
   "HMdiIconSelect",
   "HIconButton",
   "HLabel",
+  "HLabelItem",
   "HParticles",
   "HSignInBackground",
   "HTime",

@@ -61,6 +61,7 @@ declare module 'vue' {
     HInformationFormLayout: typeof import('./../src/components/layouts/form/HInformationFormLayout.vue')['default']
     HJigsawCaptcha: typeof import('./../src/components/captcha/HJigsawCaptcha.vue')['default']
     HLabel: typeof import('@herodotus/components')['HLabel']
+    HLabelItem: typeof import('@herodotus/components')['HLabelItem']
     HLinkBox: typeof import('./../src/components/library/HChart/HLinkBox.vue')['default']
     HMdiIconSelect: typeof import('@herodotus/components')['HMdiIconSelect']
     HParticles: typeof import('@herodotus/components')['HParticles']

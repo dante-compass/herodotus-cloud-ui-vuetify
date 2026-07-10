@@ -8,7 +8,8 @@ import { HLabel } from './HLabel';
 import { HParticles } from './HParticles';
 import { HMdiIconSelect, HTreeSelect } from './HSelect';
 import { HSignInBackground } from './HSignIn';
-export { HDate, HDateTime, HDialog, HDivider, HDownloadProgress, HDuration, HMdiIconSelect, HIconButton, HLabel, HParticles, HSignInBackground, HTime, HTreeSelect, };
+import { HLabelItem } from './HItem';
+export { HDate, HDateTime, HDialog, HDivider, HDownloadProgress, HDuration, HMdiIconSelect, HIconButton, HLabel, HLabelItem, HParticles, HSignInBackground, HTime, HTreeSelect, };
 export * from './lib';
 declare const _default: {
     install: (app: App) => void;
