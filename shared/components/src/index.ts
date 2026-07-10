@@ -3,7 +3,7 @@ import type { App } from "vue";
 import { HButton, HIconButton } from "./HButton";
 import { HDate, HDateTime, HDuration, HTime } from "./HDateTime";
 import { HDialog } from "./HDialog";
-import { HTextDivider } from "./HDivider";
+import { HDivider } from "./HDivider";
 import { HDownloadProgress } from "./HProgress";
 import { HLabel } from "./HLabel";
 import { HParticles } from "./HParticles";
@@ -15,6 +15,7 @@ const components = [
   HDate,
   HDateTime,
   HDialog,
+  HDivider,
   HDownloadProgress,
   HDuration,
   HMdiIconSelect,
@@ -22,7 +23,6 @@ const components = [
   HLabel,
   HParticles,
   HSignInBackground,
-  HTextDivider,
   HTime,
   HTreeSelect,
 ];
@@ -36,6 +36,7 @@ export {
   HDate,
   HDateTime,
   HDialog,
+  HDivider,
   HDownloadProgress,
   HDuration,
   HMdiIconSelect,
@@ -43,7 +44,6 @@ export {
   HLabel,
   HParticles,
   HSignInBackground,
-  HTextDivider,
   HTime,
   HTreeSelect,
 };

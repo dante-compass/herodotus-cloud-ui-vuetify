@@ -19,12 +19,12 @@
     <v-container class="px-3 py-3">
       <setting-options></setting-options>
       <v-divider class="mt-4 mb-3" />
-      <!-- <h-text-divider justify="start" label="界面效果"></h-text-divider>
+      <!-- <h-divider justify="start" label="界面效果"></h-divider>
       <h-setting-switch
         v-model="settings.effect.isUniqueOpened"
         label="菜单手风琴"
       ></h-setting-switch>
-      <h-text-divider justify="start" label="界面展示"></h-text-divider>
+      <h-divider justify="start" label="界面展示"></h-divider>
       <h-setting-switch
         v-model="settings.display.isTabsView"
         label="开启 TabsView"

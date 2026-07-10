@@ -5,6 +5,7 @@ const components = [
   "HDate",
   "HDateTime",
   "HDialog",
+  "HDivider",
   "HDownloadProgress",
   "HDuration",
   "HMdiIconSelect",
@@ -12,7 +13,6 @@ const components = [
   "HLabel",
   "HParticles",
   "HSignInBackground",
-  "HTextDivider",
   "HTime",
   "HTreeSelect",
 ];

@@ -50,6 +50,7 @@ declare module 'vue' {
     HDictionaryOption: typeof import('./../src/components/library/HDictionary/HDictionaryOption.vue')['default']
     HDictionarySelect: typeof import('./../src/components/library/HDictionary/HDictionarySelect.vue')['default']
     HDictionaryToggle: typeof import('./../src/components/library/HDictionary/HDictionaryToggle.vue')['default']
+    HDivider: typeof import('@herodotus/components')['HDivider']
     HDownloadProgress: typeof import('@herodotus/components')['HDownloadProgress']
     HDuration: typeof import('@herodotus/components')['HDuration']
     HErrorLayout: typeof import('./../src/components/error/HErrorLayout.vue')['default']

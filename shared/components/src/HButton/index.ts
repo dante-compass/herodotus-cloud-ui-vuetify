@@ -8,7 +8,7 @@ HButton.install = (app: App): void => {
 };
 
 HIconButton.install = (app: App): void => {
-  app.component(HButton.name as string, HButton);
+  app.component(HIconButton.name as string, HIconButton);
 };
 
 export { HButton, HIconButton };

@@ -62,7 +62,7 @@
       </h-button>
       <h-behavior-captcha v-model="isShowCaptcha" @verify="onCaptchaVerify($event)"></h-behavior-captcha>
 
-      <h-text-divider label="OR"></h-text-divider>
+      <h-divider label="OR" gradient></h-divider>
 
       <h-button
         tabindex="4"
@@ -74,7 +74,7 @@
       >
         Passkey 快速登录
       </h-button>
-      <h-text-divider label="其它登录方式"></h-text-divider>
+      <h-divider label="其它登录方式" gradient></h-divider>
 
       <social-sign-in-list></social-sign-in-list>
     </v-card-text>

@@ -58,7 +58,7 @@
               label="OIDC Logout 回调地址(可多个逗号分隔)"
               placeholder="请输入OIDC Logout 回调地址"
             ></v-text-field>
-            <h-text-divider label="客户端设置"></h-text-divider>
+            <h-divider label="客户端设置"></h-divider>
 
             <v-switch v-model="editedItem.requireProofKey" label="是否需要 Proof Key" hide-details></v-switch>
             <v-switch v-model="editedItem.requireAuthorizationConsent" label="是否需要认证确认" hide-details></v-switch>
@@ -79,7 +79,7 @@
               :options="authenticationSigningAlgorithmItem"
               label="令牌端点认证签名算法"
             ></v-select>
-            <h-text-divider label="令牌设置"></h-text-divider>
+            <h-divider label="令牌设置"></h-divider>
             <h-label text="令牌格式"></h-label>
             <h-dictionary-toggle
               v-model="editedItem.tokenFormat"
@@ -100,7 +100,7 @@
               dictionary="SignatureJwsAlgorithm"
               label="OIDC idToken 端点认证签名算法"
             ></h-dictionary-select>
-            <h-text-divider label="数据条目设置"></h-text-divider>
+            <h-divider label="数据条目设置"></h-divider>
             <v-text-field v-model="editedItem.description" label="备注" placeholder="请输入备注"></v-text-field>
             <v-text-field v-model.number="editedItem.ranking" label="排序值" placeholder="请输入排序值" type="number" />
             <h-dictionary-select

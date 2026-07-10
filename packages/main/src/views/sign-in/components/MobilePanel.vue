@@ -56,7 +56,7 @@
       </h-button>
       <h-behavior-captcha v-model="isShowCaptcha" @verify="onCaptchaVerify($event)"></h-behavior-captcha>
 
-      <h-text-divider label="OR"></h-text-divider>
+      <h-divider label="OR" gradient></h-divider>
 
       <h-button
         tabindex="4"
@@ -69,7 +69,7 @@
         Passkey 快速登录
       </h-button>
 
-      <h-text-divider label="其它登录方式"></h-text-divider>
+      <h-divider label="其它登录方式" gradient></h-divider>
 
       <social-sign-in-list></social-sign-in-list>
     </v-card-text>
@@ -77,20 +77,20 @@
 </template>
 
 <script setup lang="ts">
-import { SecurityApiResources } from '@herodotus/framework';
+import { SecurityApiResources } from "@herodotus/framework";
 
-import { useSignIn } from '@/composables/hooks';
+import { useSignIn } from "@/composables/hooks";
 
-import SocialSignInList from './SocialSignInList.vue';
+import SocialSignInList from "./SocialSignInList.vue";
 
-defineOptions({ name: 'MobilePanel', components: { SocialSignInList } });
+defineOptions({ name: "MobilePanel", components: { SocialSignInList } });
 
 const loginForm = ref();
 
 const { smsSignIn, passkeySignIn, onResetError, isSubmittingProtected, prompt, promptMessage } = useSignIn();
 
-const mobile = shallowRef('');
-const verificationCode = shallowRef('');
+const mobile = shallowRef("");
+const verificationCode = shallowRef("");
 const TIME_COUNT = shallowRef(120);
 const count = shallowRef();
 const timer = ref(null) as Ref<NodeJS.Timeout | null>;
@@ -99,7 +99,7 @@ const isShowCaptcha = shallowRef(false);
 const showPrompt = shallowRef(true);
 
 const readSeconds = computed(() => {
-  return count.value + ' 秒后获取';
+  return count.value + " 秒后获取";
 });
 
 //点击发送验证码

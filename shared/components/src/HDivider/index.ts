@@ -1,9 +1,9 @@
 import type { App } from 'vue';
 
-import HTextDivider from './HTextDivider.vue';
+import HDivider from './HDivider.vue';
 
-HTextDivider.install = (app: App): void => {
-  app.component(HTextDivider.name as string, HTextDivider);
+HDivider.install = (app: App): void => {
+  app.component(HDivider.name as string, HDivider);
 };
 
-export { HTextDivider };
+export { HDivider };
