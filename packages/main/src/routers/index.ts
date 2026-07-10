@@ -1,9 +1,8 @@
-import type { App } from 'vue';
+import type { App } from "vue";
 
-import { createRouter, createWebHistory } from 'vue-router';
-import { staticRoutes } from './logic';
-import { createRouterGuard } from './guard';
-import { setupKernel } from '@/configurations';
+import { createRouter, createWebHistory } from "vue-router";
+import { staticRoutes } from "./logic";
+import { createRouterGuard } from "./guard";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.VITE_BASE_URL),
@@ -13,8 +12,6 @@ const router = createRouter({
 
 export async function setupRouter(app: App) {
   app.use(router);
-
-  setupKernel(router);
 
   createRouterGuard(router);
   await router.isReady();

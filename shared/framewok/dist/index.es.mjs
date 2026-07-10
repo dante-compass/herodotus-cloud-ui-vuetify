@@ -900,16 +900,10 @@ var G = class e {
 });
 //#endregion
 //#region src/lib/hooks/useEditFinish.ts
-function be(e) {
-	let t = Q(), n = $(), r = () => {
-		if (x(e)) {
-			let e = ie();
-			return x(e) ? void 0 : e;
-		} else return e;
-	};
+function be() {
+	let e = ie(), t = Q(), n = $();
 	return { onFinish: () => {
-		let e = r();
-		if (console.log("---onFinish--", e), console.log("---onFinish--", e?.name), !x(e) && e.name) {
+		if (!x(e) && e.name) {
 			let r = e.name;
 			t.removeRoutePushParam(r), n.deleteTab(e);
 		}

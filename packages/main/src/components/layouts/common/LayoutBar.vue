@@ -31,7 +31,7 @@
           icon="mdi-ab-testing"
           tooltip="功能测试"
           color="medium-emphasis"
-          to="/iot-testing"
+          @click="goTo()"
         ></h-icon-button>
       </div>
       <v-divider class="align-self-center h-100 mx-2 mx-sm-4" vertical></v-divider>
@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { useApplicationStore, useElementStore } from "@herodotus/framework";
-import { VARIABLES } from "@/configurations";
+import { VARIABLES, RouterUtils } from "@/configurations";
 
 import { HAppLogo } from "../../library/HLogo";
 import LayoutBreadcrumbs from "./LayoutBreadcrumbs.vue";
@@ -69,4 +69,8 @@ const isMessageEnabled = computed(() => {
 const supportTesting = computed(() => {
   return element.supportTesting;
 });
+
+const goTo = () => {
+  RouterUtils.push("/iot-testing");
+};
 </script>

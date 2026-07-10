@@ -6,9 +6,9 @@ import "@herodotus/framework/style.css";
 import { createApp } from "vue";
 // Plugins
 import { setupVuetify, setupPinia } from "@/plugins";
-import { setupRouter } from "@/routers";
+import router, { setupRouter } from "@/routers";
 import DisableDevtool from "disable-devtool";
-import { IS_DEV, VARIABLES } from "@/configurations";
+import { IS_DEV, VARIABLES, setupKernel } from "@/configurations";
 
 // Components
 import App from "./App.vue";
@@ -32,6 +32,9 @@ function setupApp() {
 
   // 挂载路由
   setupRouter(app);
+
+  // 设置信息信息
+  setupKernel(router);
 
   app.mount("#app", true);
 
