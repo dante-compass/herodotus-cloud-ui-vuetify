@@ -48,6 +48,9 @@ const vuetify = createVuetify({
     VCard: {
       rounded: "xl",
     },
+    VIconBtn: {
+      color: "primary",
+    },
     VList: {
       color: "primary",
     },

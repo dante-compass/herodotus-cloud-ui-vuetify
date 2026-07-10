@@ -1,2 +1,3 @@
 import { default as HButton } from './HButton.vue';
-export { HButton };
+import { default as HIconButton } from './HIconButton.vue';
+export { HButton, HIconButton };

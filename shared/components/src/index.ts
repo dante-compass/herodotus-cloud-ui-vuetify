@@ -1,6 +1,6 @@
 import type { App } from "vue";
 
-import { HButton } from "./HButton";
+import { HButton, HIconButton } from "./HButton";
 import { HDate, HDateTime, HDuration, HTime } from "./HDateTime";
 import { HDialog } from "./HDialog";
 import { HTextDivider } from "./HDivider";
@@ -18,6 +18,7 @@ const components = [
   HDownloadProgress,
   HDuration,
   HMdiIconSelect,
+  HIconButton,
   HLabel,
   HParticles,
   HSignInBackground,
@@ -38,6 +39,7 @@ export {
   HDownloadProgress,
   HDuration,
   HMdiIconSelect,
+  HIconButton,
   HLabel,
   HParticles,
   HSignInBackground,

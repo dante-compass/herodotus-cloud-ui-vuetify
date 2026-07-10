@@ -23,6 +23,7 @@
         <h-action-button
           :icon="isFullscreen ? 'mdi-arrow-collapse-all' : 'mdi-arrow-expand-all'"
           :tooltip="isFullscreen ? '退出全屏' : '全屏显示'"
+          class="mr-2"
           @click="toggle()"
         ></h-action-button>
       </v-card-title>

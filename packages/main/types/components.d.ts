@@ -56,6 +56,8 @@ declare module 'vue' {
     HFullWidthFormLayout: typeof import('./../src/components/layouts/form/HFullWidthFormLayout.vue')['default']
     HGraphicCaptcha: typeof import('./../src/components/captcha/HGraphicCaptcha.vue')['default']
     HHttpMethodAvatar: typeof import('./../src/components/library/HAuthorize/HHttpMethodAvatar.vue')['default']
+    HIconButton: typeof import('@herodotus/components')['HIconButton']
+    HInformationFormLayout: typeof import('./../src/components/layouts/form/HInformationFormLayout.vue')['default']
     HJigsawCaptcha: typeof import('./../src/components/captcha/HJigsawCaptcha.vue')['default']
     HLabel: typeof import('@herodotus/components')['HLabel']
     HLinkBox: typeof import('./../src/components/library/HChart/HLinkBox.vue')['default']

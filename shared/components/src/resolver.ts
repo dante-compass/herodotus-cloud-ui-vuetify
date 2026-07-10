@@ -8,6 +8,7 @@ const components = [
   "HDownloadProgress",
   "HDuration",
   "HMdiIconSelect",
+  "HIconButton",
   "HLabel",
   "HParticles",
   "HSignInBackground",

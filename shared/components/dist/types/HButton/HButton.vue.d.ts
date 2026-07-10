@@ -1,9 +1,10 @@
 import { VIcon, VTooltip } from 'vuetify/components';
 interface Props {
-    icon?: VIcon['icon'];
+    icon?: VIcon["icon"];
     color?: string | undefined;
+    text?: string | number | boolean | undefined;
     tooltip?: string;
-    location?: VTooltip['location'];
+    location?: VTooltip["location"];
 }
 declare var __VLS_9: {}, __VLS_12: {}, __VLS_15: {}, __VLS_22: {};
 type __VLS_Slots = {} & {

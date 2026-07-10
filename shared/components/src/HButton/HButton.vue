@@ -1,5 +1,5 @@
 <template>
-  <v-btn :icon="isIcon" :color="buttonColor" v-bind="$attrs">
+  <v-btn :icon="hasIcon" :color="buttonColor" :text="text" v-bind="$attrs">
     <template #append>
       <slot name="append"></slot>
     </template>
@@ -12,10 +12,17 @@
       <slot name="loader"></slot>
     </template>
 
-    <template v-if="!$slots.default && isIcon">
+    <template v-if="!$slots.default && hasIcon">
       <v-icon :icon="icon" :color="color"></v-icon>
     </template>
-    <slot v-else></slot>
+    <template v-else>
+      <template v-if="text">
+        {{ text }}
+      </template>
+      <template v-else>
+        <slot></slot>
+      </template>
+    </template>
 
     <v-tooltip v-if="tooltip" :location="location" activator="parent">
       {{ tooltip }}
@@ -24,25 +31,26 @@
 </template>
 
 <script lang="ts" setup>
-import { useSlots, computed } from 'vue';
-import { VBtn, VIcon, VTooltip } from 'vuetify/components';
+import { useSlots, computed } from "vue";
+import { VBtn, VIcon, VTooltip } from "vuetify/components";
 
-import { isEmpty } from 'lodash-es';
+import { isEmpty } from "lodash-es";
 
 interface Props {
-  icon?: VIcon['icon'];
+  icon?: VIcon["icon"];
   color?: string | undefined;
+  text?: string | number | boolean | undefined;
   tooltip?: string;
-  location?: VTooltip['location'];
+  location?: VTooltip["location"];
 }
 
-defineOptions({ name: 'HButton', components: { VBtn, VIcon } });
+defineOptions({ name: "HButton", components: { VBtn, VIcon } });
 
-const props = withDefaults(defineProps<Props>(), { location: 'bottom' });
+const props = withDefaults(defineProps<Props>(), { location: "bottom" });
 
 const slots = useSlots() as ReturnType<typeof useSlots>;
 
-const isIcon = computed(() => {
+const hasIcon = computed(() => {
   return !isEmpty(props.icon) ? true : false;
 });
 

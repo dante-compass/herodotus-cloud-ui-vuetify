@@ -1,66 +1,98 @@
-import { computed as e, createBlock as t, createCommentVNode as n, createElementBlock as r, createElementVNode as i, createSlots as a, createTextVNode as o, createVNode as s, defineComponent as c, mergeModels as l, mergeProps as u, onBeforeMount as d, onMounted as f, onUnmounted as ee, openBlock as p, ref as te, renderSlot as m, shallowRef as h, toDisplayString as g, unref as _, useModel as v, useSlots as y, watch as b, withCtx as x } from "vue";
-import { VAutocomplete as S, VBtn as C, VCard as w, VCardActions as ne, VCardText as re, VCol as T, VContainer as E, VDatePicker as ie, VDialog as ae, VDivider as D, VExpandXTransition as oe, VIcon as O, VLabel as se, VListItem as k, VMenu as A, VMessages as ce, VNumberInput as le, VProgressLinear as j, VRow as M, VSelect as ue, VSnackbar as de, VTextField as N, VTimePicker as fe, VTooltip as P, VTreeview as pe } from "vuetify/components";
-import { debounce as me, find as he, isArray as ge, isEmpty as F, kebabCase as _e } from "lodash-es";
-import { useDate as ve } from "vuetify";
-import { moment as I } from "@herodotus/core";
-import { tsParticles as L } from "@tsparticles/engine";
-import { loadTrianglesPreset as ye } from "@tsparticles/preset-triangles";
-import { defineStore as be } from "pinia";
-import * as xe from "@mdi/js";
+import { Fragment as e, computed as t, createBlock as n, createCommentVNode as r, createElementBlock as i, createElementVNode as a, createSlots as o, createTextVNode as s, createVNode as c, defineComponent as l, guardReactiveProps as u, mergeModels as d, mergeProps as f, normalizeClass as ee, normalizeProps as p, onBeforeMount as te, onMounted as m, onUnmounted as h, openBlock as g, ref as ne, renderSlot as _, shallowRef as v, toDisplayString as y, unref as b, useModel as x, useSlots as re, watch as S, withCtx as C } from "vue";
+import { VAutocomplete as ie, VBtn as w, VCard as ae, VCardActions as oe, VCardText as se, VCol as T, VContainer as E, VDatePicker as ce, VDialog as le, VDivider as D, VExpandXTransition as ue, VIcon as O, VIconBtn as k, VLabel as de, VListItem as fe, VMenu as A, VMessages as pe, VNumberInput as me, VProgressLinear as j, VRow as M, VSelect as N, VSnackbar as he, VTextField as P, VTimePicker as ge, VTooltip as F, VTreeview as _e } from "vuetify/components";
+import { debounce as ve, find as ye, isArray as be, isEmpty as I, kebabCase as xe } from "lodash-es";
+import { useDate as Se } from "vuetify";
+import { moment as L } from "@herodotus/core";
+import { tsParticles as Ce } from "@tsparticles/engine";
+import { loadTrianglesPreset as we } from "@tsparticles/preset-triangles";
+import { defineStore as Te } from "pinia";
+import * as Ee from "@mdi/js";
 //#endregion
 //#region src/HButton/HButton.vue
-var R = /* @__PURE__ */ c({
+var R = /* @__PURE__ */ l({
 	name: "HButton",
 	components: {
-		VBtn: C,
+		VBtn: w,
 		VIcon: O
 	},
 	__name: "HButton",
 	props: {
 		icon: {},
 		color: {},
+		text: { type: [
+			String,
+			Number,
+			Boolean
+		] },
 		tooltip: {},
 		location: { default: "bottom" }
 	},
-	setup(r) {
-		let i = r, a = y(), s = e(() => !F(i.icon)), c = e(() => F(a.default) ? void 0 : i.color);
-		return (e, i) => (p(), t(_(C), u({
-			icon: s.value,
-			color: c.value
-		}, e.$attrs), {
-			append: x(() => [m(e.$slots, "append")]),
-			prepend: x(() => [m(e.$slots, "prepend")]),
-			loader: x(() => [m(e.$slots, "loader")]),
-			default: x(() => [!e.$slots.default && s.value ? (p(), t(_(O), {
+	setup(a) {
+		let o = a, c = re(), l = t(() => !I(o.icon)), u = t(() => I(c.default) ? void 0 : o.color);
+		return (t, o) => (g(), n(b(w), f({
+			icon: l.value,
+			color: u.value,
+			text: a.text
+		}, t.$attrs), {
+			append: C(() => [_(t.$slots, "append")]),
+			prepend: C(() => [_(t.$slots, "prepend")]),
+			loader: C(() => [_(t.$slots, "loader")]),
+			default: C(() => [!t.$slots.default && l.value ? (g(), n(b(O), {
 				key: 0,
-				icon: r.icon,
-				color: r.color
-			}, null, 8, ["icon", "color"])) : m(e.$slots, "default", { key: 1 }), r.tooltip ? (p(), t(_(P), {
+				icon: a.icon,
+				color: a.color
+			}, null, 8, ["icon", "color"])) : (g(), i(e, { key: 1 }, [a.text ? (g(), i(e, { key: 0 }, [s(y(a.text), 1)], 64)) : _(t.$slots, "default", { key: 1 })], 64)), a.tooltip ? (g(), n(b(F), {
 				key: 2,
-				location: r.location,
+				location: a.location,
 				activator: "parent"
 			}, {
-				default: x(() => [o(g(r.tooltip), 1)]),
+				default: C(() => [s(y(a.tooltip), 1)]),
 				_: 1
-			}, 8, ["location"])) : n("", !0)]),
+			}, 8, ["location"])) : r("", !0)]),
 			_: 3
-		}, 16, ["icon", "color"]));
+		}, 16, [
+			"icon",
+			"color",
+			"text"
+		]));
+	}
+}), z = /* @__PURE__ */ l({
+	name: "HIconButton",
+	components: {
+		VTooltip: F,
+		VIconBtn: k
+	},
+	__name: "HIconButton",
+	props: {
+		tooltip: {},
+		location: { default: "bottom" }
+	},
+	setup(e) {
+		return (t, r) => e.tooltip ? (g(), n(b(F), {
+			key: 0,
+			interactive: "",
+			location: e.location
+		}, {
+			activator: C(({ props: e }) => [c(b(k), p(u(f(t.$attrs, e))), null, 16)]),
+			default: C(() => [a("span", null, y(e.tooltip), 1)]),
+			_: 1
+		}, 8, ["location"])) : (g(), n(b(k), p(f({ key: 1 }, t.$attrs)), null, 16));
 	}
 });
-//#endregion
-//#region src/HButton/index.ts
 R.install = (e) => {
+	e.component(R.name, R);
+}, z.install = (e) => {
 	e.component(R.name, R);
 };
 //#endregion
 //#region src/HDateTime/HDatePicker.vue
-var z = /* @__PURE__ */ c({
+var B = /* @__PURE__ */ l({
 	name: "HDatePicker",
 	components: {
 		VMenu: A,
-		VTooltip: P,
+		VTooltip: F,
 		VIcon: O,
-		VDatePicker: ie
+		VDatePicker: ce
 	},
 	__name: "HDatePicker",
 	props: {
@@ -68,25 +100,25 @@ var z = /* @__PURE__ */ c({
 		modelModifiers: {}
 	},
 	emits: ["update:modelValue"],
-	setup(n) {
-		let r = v(n, "modelValue"), a = ve(), o = e({
-			get: () => r.value ? a.parseISO(r.value) : "",
+	setup(e) {
+		let r = x(e, "modelValue"), i = Se(), o = t({
+			get: () => r.value ? i.parseISO(r.value) : "",
 			set: (e) => {
-				e ? r.value = I(e).format("YYYY-MM-DD") : r.value = e;
+				e ? r.value = L(e).format("YYYY-MM-DD") : r.value = e;
 			}
 		});
-		return (e, n) => (p(), t(_(A), u({
+		return (e, t) => (g(), n(b(A), f({
 			"close-on-content-click": !1,
 			activator: "parent"
 		}, e.$attrs), {
-			activator: x(({ props: e }) => [s(_(P), { location: "bottom" }, {
-				activator: x(({ props: t }) => [s(_(O), u({ icon: "mdi-calendar" }, u(e, t)), null, 16)]),
-				default: x(() => [n[1] ||= i("span", null, "点击设置日期", -1)]),
+			activator: C(({ props: e }) => [c(b(F), { location: "bottom" }, {
+				activator: C(({ props: t }) => [c(b(O), f({ icon: "mdi-calendar" }, f(e, t)), null, 16)]),
+				default: C(() => [t[1] ||= a("span", null, "点击设置日期", -1)]),
 				_: 2
 			}, 1024)]),
-			default: x(() => [s(_(ie), {
+			default: C(() => [c(b(ce), {
 				modelValue: o.value,
-				"onUpdate:modelValue": n[0] ||= (e) => o.value = e,
+				"onUpdate:modelValue": t[0] ||= (e) => o.value = e,
 				"show-week": "",
 				"show-adjacent-months": "",
 				"first-day-of-week": "1",
@@ -95,11 +127,11 @@ var z = /* @__PURE__ */ c({
 			_: 1
 		}, 16));
 	}
-}), B = /* @__PURE__ */ c({
+}), V = /* @__PURE__ */ l({
 	name: "HDate",
 	components: {
-		VTextField: N,
-		HDatePicker: z
+		VTextField: P,
+		HDatePicker: B
 	},
 	__name: "HDate",
 	props: {
@@ -108,26 +140,26 @@ var z = /* @__PURE__ */ c({
 	},
 	emits: ["update:modelValue"],
 	setup(e) {
-		let n = v(e, "modelValue");
-		return (e, r) => (p(), t(_(N), u({
-			modelValue: n.value,
-			"onUpdate:modelValue": r[1] ||= (e) => n.value = e,
+		let t = x(e, "modelValue");
+		return (e, r) => (g(), n(b(P), f({
+			modelValue: t.value,
+			"onUpdate:modelValue": r[1] ||= (e) => t.value = e,
 			glow: ""
 		}, e.$attrs), {
-			"prepend-inner": x(() => [s(z, {
-				modelValue: n.value,
-				"onUpdate:modelValue": r[0] ||= (e) => n.value = e
+			"prepend-inner": C(() => [c(B, {
+				modelValue: t.value,
+				"onUpdate:modelValue": r[0] ||= (e) => t.value = e
 			}, null, 8, ["modelValue"])]),
 			_: 1
 		}, 16, ["modelValue"]));
 	}
-}), V = /* @__PURE__ */ c({
+}), H = /* @__PURE__ */ l({
 	name: "HTimePicker",
 	components: {
 		VMenu: A,
-		VTooltip: P,
+		VTooltip: F,
 		VIcon: O,
-		VTimePicker: fe
+		VTimePicker: ge
 	},
 	__name: "HTimePicker",
 	props: {
@@ -136,32 +168,32 @@ var z = /* @__PURE__ */ c({
 	},
 	emits: ["update:modelValue"],
 	setup(e) {
-		let n = v(e, "modelValue");
-		return (e, r) => (p(), t(_(A), u({
+		let t = x(e, "modelValue");
+		return (e, r) => (g(), n(b(A), f({
 			"close-on-content-click": !1,
 			activator: "parent",
 			"min-width": "0"
 		}, e.$attrs), {
-			activator: x(({ props: e }) => [s(_(P), { location: "bottom" }, {
-				activator: x(({ props: t }) => [s(_(O), u({ icon: "mdi-clock-time-four-outline" }, u(e, t)), null, 16)]),
-				default: x(() => [r[1] ||= i("span", null, "点击设置日期", -1)]),
+			activator: C(({ props: e }) => [c(b(F), { location: "bottom" }, {
+				activator: C(({ props: t }) => [c(b(O), f({ icon: "mdi-clock-time-four-outline" }, f(e, t)), null, 16)]),
+				default: C(() => [r[1] ||= a("span", null, "点击设置日期", -1)]),
 				_: 2
 			}, 1024)]),
-			default: x(() => [s(_(fe), {
-				modelValue: n.value,
-				"onUpdate:modelValue": r[0] ||= (e) => n.value = e,
+			default: C(() => [c(b(ge), {
+				modelValue: t.value,
+				"onUpdate:modelValue": r[0] ||= (e) => t.value = e,
 				"use-seconds": "",
 				format: "24hr"
 			}, null, 8, ["modelValue"])]),
 			_: 1
 		}, 16));
 	}
-}), H = /* @__PURE__ */ c({
+}), U = /* @__PURE__ */ l({
 	name: "HDateTime",
 	components: {
-		VTextField: N,
-		HDatePicker: z,
-		HTimePicker: V
+		VTextField: P,
+		HDatePicker: B,
+		HTimePicker: H
 	},
 	__name: "HDateTime",
 	props: {
@@ -170,31 +202,31 @@ var z = /* @__PURE__ */ c({
 	},
 	emits: ["update:modelValue"],
 	setup(e) {
-		let n = v(e, "modelValue"), r = h(""), i = h(""), a = (e, t) => I(`${e && e.trim() !== "" ? e : "1970-01-01"} ${t && t.trim() !== "" ? t : "00:00:00"}`).format("YYYY-MM-DD HH:mm:ss");
-		return b(n, (e) => {
+		let t = x(e, "modelValue"), r = v(""), i = v(""), a = (e, t) => L(`${e && e.trim() !== "" ? e : "1970-01-01"} ${t && t.trim() !== "" ? t : "00:00:00"}`).format("YYYY-MM-DD HH:mm:ss");
+		return S(t, (e) => {
 			if (e) {
-				let t = I(e);
+				let t = L(e);
 				i.value = t.format("YYYY-MM-DD"), r.value = t.format("HH:mm:ss");
 			}
-		}), b([i, r], ([e, t]) => {
-			n.value = a(e, t);
-		}), (e, a) => (p(), t(_(N), u({
-			modelValue: n.value,
-			"onUpdate:modelValue": a[2] ||= (e) => n.value = e,
+		}), S([i, r], ([e, n]) => {
+			t.value = a(e, n);
+		}), (e, a) => (g(), n(b(P), f({
+			modelValue: t.value,
+			"onUpdate:modelValue": a[2] ||= (e) => t.value = e,
 			glow: ""
 		}, e.$attrs), {
-			"prepend-inner": x(() => [s(z, {
+			"prepend-inner": C(() => [c(B, {
 				modelValue: i.value,
 				"onUpdate:modelValue": a[0] ||= (e) => i.value = e
 			}, null, 8, ["modelValue"])]),
-			"append-inner": x(() => [s(V, {
+			"append-inner": C(() => [c(H, {
 				modelValue: r.value,
 				"onUpdate:modelValue": a[1] ||= (e) => r.value = e
 			}, null, 8, ["modelValue"])]),
 			_: 1
 		}, 16, ["modelValue"]));
 	}
-}), Se = [
+}), De = [
 	{
 		title: "天",
 		value: "days"
@@ -211,14 +243,14 @@ var z = /* @__PURE__ */ c({
 		title: "秒",
 		value: "seconds"
 	}
-], U = /* @__PURE__ */ c({
+], W = /* @__PURE__ */ l({
 	name: "HDuration",
 	components: {
 		VContainer: E,
 		VRow: M,
 		VCol: T,
-		VNumberInput: le,
-		VSelect: ue
+		VNumberInput: me,
+		VSelect: N
 	},
 	__name: "HDuration",
 	props: {
@@ -227,9 +259,9 @@ var z = /* @__PURE__ */ c({
 	},
 	emits: ["update:modelValue"],
 	setup(e) {
-		let n = v(e, "modelValue"), r = h(0), i = h(), a = h(Se), o = (e) => {
+		let t = x(e, "modelValue"), r = v(0), i = v(), a = v(De), o = (e) => {
 			if (e) {
-				let t = I.duration(e, "second");
+				let t = L.duration(e, "second");
 				if (t) {
 					let e = t._data;
 					for (let t in e) {
@@ -238,34 +270,34 @@ var z = /* @__PURE__ */ c({
 					}
 				}
 			}
-		}, c = (e, t) => {
-			if (e && t) {
-				let r = t, i = I.duration(e, r).toISOString();
-				n.value = i;
+		}, s = (e, n) => {
+			if (e && n) {
+				let r = n, i = L.duration(e, r).toISOString();
+				t.value = i;
 			}
 		};
-		return b(() => n.value, (e) => {
+		return S(() => t.value, (e) => {
 			e && o(e);
-		}, { immediate: !0 }), b(i, (e) => {
-			e && c(r.value, e);
-		}), b(r, (e) => {
-			e && c(e, i.value);
-		}), (e, n) => (p(), t(_(E), { class: "pa-0" }, {
-			default: x(() => [s(_(M), null, {
-				default: x(() => [s(_(T), null, {
-					default: x(() => [s(_(le), {
+		}, { immediate: !0 }), S(i, (e) => {
+			e && s(r.value, e);
+		}), S(r, (e) => {
+			e && s(e, i.value);
+		}), (e, t) => (g(), n(b(E), { class: "pa-0" }, {
+			default: C(() => [c(b(M), null, {
+				default: C(() => [c(b(T), null, {
+					default: C(() => [c(b(me), {
 						modelValue: r.value,
-						"onUpdate:modelValue": n[0] ||= (e) => r.value = e,
+						"onUpdate:modelValue": t[0] ||= (e) => r.value = e,
 						label: "数值",
 						placeholder: "请输入数值",
 						"control-variant": "split",
 						inset: ""
 					}, null, 8, ["modelValue"])]),
 					_: 1
-				}), s(_(T), null, {
-					default: x(() => [s(_(ue), {
+				}), c(b(T), null, {
+					default: C(() => [c(b(N), {
 						modelValue: i.value,
-						"onUpdate:modelValue": n[1] ||= (e) => i.value = e,
+						"onUpdate:modelValue": t[1] ||= (e) => i.value = e,
 						items: a.value,
 						label: "单位",
 						clearable: ""
@@ -277,11 +309,11 @@ var z = /* @__PURE__ */ c({
 			_: 1
 		}));
 	}
-}), W = /* @__PURE__ */ c({
+}), G = /* @__PURE__ */ l({
 	name: "HTime",
 	components: {
-		VTextField: N,
-		HTimePicker: V
+		VTextField: P,
+		HTimePicker: H
 	},
 	__name: "HTime",
 	props: {
@@ -290,39 +322,39 @@ var z = /* @__PURE__ */ c({
 	},
 	emits: ["update:modelValue"],
 	setup(e) {
-		let n = v(e, "modelValue");
-		return (e, r) => (p(), t(_(N), u({
-			modelValue: n.value,
-			"onUpdate:modelValue": r[1] ||= (e) => n.value = e,
+		let t = x(e, "modelValue");
+		return (e, r) => (g(), n(b(P), f({
+			modelValue: t.value,
+			"onUpdate:modelValue": r[1] ||= (e) => t.value = e,
 			glow: ""
 		}, e.$attrs), {
-			"prepend-inner": x(() => [s(V, {
-				modelValue: n.value,
-				"onUpdate:modelValue": r[0] ||= (e) => n.value = e
+			"prepend-inner": C(() => [c(H, {
+				modelValue: t.value,
+				"onUpdate:modelValue": r[0] ||= (e) => t.value = e
 			}, null, 8, ["modelValue"])]),
 			_: 1
 		}, 16, ["modelValue"]));
 	}
 });
-B.install = (e) => {
-	e.component(B.name, B);
-}, H.install = (e) => {
-	e.component(H.name, H);
+V.install = (e) => {
+	e.component(V.name, V);
 }, U.install = (e) => {
 	e.component(U.name, U);
 }, W.install = (e) => {
 	e.component(W.name, W);
+}, G.install = (e) => {
+	e.component(G.name, G);
 };
 //#endregion
 //#region src/HDialog/HDialog.vue
-var G = /* @__PURE__ */ c({
+var K = /* @__PURE__ */ l({
 	name: "HDialog",
 	components: {
-		VDialog: ae,
+		VDialog: le,
 		HButton: R
 	},
 	__name: "HDialog",
-	props: /*@__PURE__*/ l({
+	props: /*@__PURE__*/ d({
 		loading: {
 			type: Boolean,
 			default: !1
@@ -345,48 +377,48 @@ var G = /* @__PURE__ */ c({
 		},
 		modelModifiers: {}
 	}),
-	emits: /*@__PURE__*/ l([
+	emits: /*@__PURE__*/ d([
 		"close",
 		"cancel",
 		"confirm"
 	], ["update:modelValue"]),
-	setup(e, { emit: r }) {
-		let i = r, o = v(e, "modelValue"), c = () => {
-			o.value = !1, i("close");
+	setup(e, { emit: t }) {
+		let i = t, a = x(e, "modelValue"), s = () => {
+			a.value = !1, i("close");
 		}, l = () => {
-			o.value = !1, i("cancel");
-		}, d = () => {
+			a.value = !1, i("cancel");
+		}, u = () => {
 			i("confirm");
 		};
-		return (r, i) => (p(), t(_(ae), {
-			modelValue: o.value,
-			"onUpdate:modelValue": i[0] ||= (e) => o.value = e,
+		return (t, i) => (g(), n(b(le), {
+			modelValue: a.value,
+			"onUpdate:modelValue": i[0] ||= (e) => a.value = e,
 			"max-width": e.maxWidth,
 			persistent: ""
 		}, {
-			default: x(() => [s(_(w), u({
+			default: C(() => [c(b(ae), f({
 				disabled: e.loading,
 				loading: e.loading
-			}, r.$attrs), a({
-				loader: x(({ isActive: e }) => [s(_(j), {
+			}, t.$attrs), o({
+				loader: C(({ isActive: e }) => [c(b(j), {
 					active: e,
 					height: "4",
 					indeterminate: ""
 				}, null, 8, ["active"])]),
-				default: x(() => [
-					s(_(D)),
-					s(_(re), { class: "pb-2" }, {
-						default: x(() => [m(r.$slots, "default")]),
+				default: C(() => [
+					c(b(D)),
+					c(b(se), { class: "pb-2" }, {
+						default: C(() => [_(t.$slots, "default")]),
 						_: 3
 					}),
-					e.hideActions ? n("", !0) : (p(), t(_(ne), { key: 0 }, {
-						default: x(() => [s(_(C), {
+					e.hideActions ? r("", !0) : (g(), n(b(oe), { key: 0 }, {
+						default: C(() => [c(b(w), {
 							text: "取消",
 							color: "red",
 							onClick: l
-						}), s(_(C), {
+						}), c(b(w), {
 							text: e.confirmLabel,
-							onClick: d
+							onClick: u
 						}, null, 8, ["text"])]),
 						_: 1
 					}))
@@ -394,10 +426,10 @@ var G = /* @__PURE__ */ c({
 				_: 2
 			}, [e.closed ? {
 				name: "append",
-				fn: x(() => [s(_(R), {
+				fn: C(() => [c(b(R), {
 					icon: "mdi-close",
 					tooltip: "关闭",
-					onClick: c,
+					onClick: s,
 					size: "x-small",
 					variant: "text"
 				})]),
@@ -409,12 +441,12 @@ var G = /* @__PURE__ */ c({
 });
 //#endregion
 //#region src/HDialog/index.ts
-G.install = (e) => {
-	e.component(G.name, G);
+K.install = (e) => {
+	e.component(K.name, K);
 };
 //#endregion
 //#region src/HDivider/HTextDivider.vue
-var K = /* @__PURE__ */ c({
+var q = /* @__PURE__ */ l({
 	name: "HTextDivider",
 	components: {
 		VContainer: E,
@@ -425,26 +457,26 @@ var K = /* @__PURE__ */ c({
 	__name: "HTextDivider",
 	props: { label: {} },
 	setup(e) {
-		return (n, r) => (p(), t(_(E), { class: "px-0" }, {
-			default: x(() => [s(_(M), {
+		return (t, r) => (g(), n(b(E), { class: "px-0" }, {
+			default: C(() => [c(b(M), {
 				align: "center",
 				justify: "center"
 			}, {
-				default: x(() => [
-					s(_(T), { cols: "5" }, {
-						default: x(() => [s(_(D))]),
+				default: C(() => [
+					c(b(T), { cols: "5" }, {
+						default: C(() => [c(b(D))]),
 						_: 1
 					}),
-					s(_(T), {
+					c(b(T), {
 						cols: "2",
 						"align-self": "center",
 						class: "text-center"
 					}, {
-						default: x(() => [o(g(e.label), 1)]),
+						default: C(() => [s(y(e.label), 1)]),
 						_: 1
 					}),
-					s(_(T), { cols: "5" }, {
-						default: x(() => [s(_(D))]),
+					c(b(T), { cols: "5" }, {
+						default: C(() => [c(b(D))]),
 						_: 1
 					})
 				]),
@@ -456,22 +488,22 @@ var K = /* @__PURE__ */ c({
 });
 //#endregion
 //#region src/HDivider/index.ts
-K.install = (e) => {
-	e.component(K.name, K);
+q.install = (e) => {
+	e.component(q.name, q);
 };
 //#endregion
 //#region src/HProgress/HDownloadProgress.vue
-var q = /* @__PURE__ */ c({
+var J = /* @__PURE__ */ l({
 	name: "HDownloadProgress",
 	components: {
-		VSnackbar: de,
+		VSnackbar: he,
 		VContainer: E,
 		VRow: M,
 		VCol: T,
 		VProgressLinear: j
 	},
 	__name: "HDownloadProgress",
-	props: /*@__PURE__*/ l({ progress: {} }, {
+	props: /*@__PURE__*/ d({ progress: {} }, {
 		modelValue: {
 			type: Boolean,
 			required: !0
@@ -480,27 +512,27 @@ var q = /* @__PURE__ */ c({
 	}),
 	emits: ["update:modelValue"],
 	setup(e) {
-		let n = v(e, "modelValue");
-		return (r, i) => (p(), t(_(de), u({
-			modelValue: n.value,
-			"onUpdate:modelValue": i[0] ||= (e) => n.value = e,
+		let t = x(e, "modelValue");
+		return (r, i) => (g(), n(b(he), f({
+			modelValue: t.value,
+			"onUpdate:modelValue": i[0] ||= (e) => t.value = e,
 			timeout: 2e3,
 			location: "center center",
 			color: "primary"
 		}, r.$attrs), {
-			default: x(() => [s(_(E), null, {
-				default: x(() => [s(_(M), {
+			default: C(() => [c(b(E), null, {
+				default: C(() => [c(b(M), {
 					"align-content": "center",
 					justify: "center"
 				}, {
-					default: x(() => [s(_(T), {
+					default: C(() => [c(b(T), {
 						class: "text-subtitle-1 text-center",
 						cols: "12"
 					}, {
-						default: x(() => [o("文件下载 " + g(`${e.progress}%`), 1)]),
+						default: C(() => [s("文件下载 " + y(`${e.progress}%`), 1)]),
 						_: 1
-					}), s(_(T), { cols: "6" }, {
-						default: x(() => [s(_(j), {
+					}), c(b(T), { cols: "6" }, {
+						default: C(() => [c(b(j), {
 							"model-value": e.progress,
 							"chunk-width": "4",
 							color: "purple",
@@ -519,25 +551,25 @@ var q = /* @__PURE__ */ c({
 });
 //#endregion
 //#region src/HProgress/index.ts
-q.install = (e) => {
-	e.component(q.name, q);
+J.install = (e) => {
+	e.component(J.name, J);
 };
 //#endregion
 //#region src/HLabel/HLabel.vue?vue&type=script&setup=true&lang.ts
-var Ce = { class: "d-flex mb-3 w-100" }, we = { class: "flex-1-1-0" }, Te = { class: "d-flex" }, Ee = {
+var Oe = { class: "flex-1-1-0" }, ke = { class: "d-flex" }, Ae = {
 	key: 0,
 	class: "d-flex align-self-center mr-1"
-}, De = {
+}, je = {
 	key: 1,
 	class: "d-flex align-self-center"
-}, J = /* @__PURE__ */ c({
+}, Y = /* @__PURE__ */ l({
 	name: "HLabel",
 	components: {
 		VIcon: O,
-		VBtn: C,
-		VTooltip: P,
-		VLabel: se,
-		VMessages: ce
+		VBtn: w,
+		VTooltip: F,
+		VLabel: de,
+		VMessages: pe
 	},
 	__name: "HLabel",
 	props: {
@@ -547,47 +579,51 @@ var Ce = { class: "d-flex mb-3 w-100" }, we = { class: "flex-1-1-0" }, Te = { cl
 		},
 		text: {},
 		message: {},
-		tooltip: {}
+		tooltip: {},
+		hideDetails: {
+			type: Boolean,
+			default: !1
+		}
 	},
-	setup(a) {
-		let o = a, c = e(() => !!o.message);
-		return (e, o) => (p(), r("div", Ce, [i("div", we, [i("div", Te, [
-			a.required ? (p(), r("div", Ee, [s(_(O), {
+	setup(e) {
+		let o = e, s = t(() => !!o.message);
+		return (t, o) => (g(), i("div", { class: ee(["d-flex w-100", { "mb-3": !e.hideDetails }]) }, [a("div", Oe, [a("div", ke, [
+			e.required ? (g(), i("div", Ae, [c(b(O), {
 				size: "x-small",
 				icon: "mdi-star",
 				color: "red"
-			})])) : n("", !0),
-			s(_(se), {
-				text: a.text,
+			})])) : r("", !0),
+			c(b(de), {
+				text: e.text,
 				class: "font-weight-medium"
 			}, {
-				default: x(() => [m(e.$slots, "text")]),
+				default: C(() => [_(t.$slots, "text")]),
 				_: 3
 			}, 8, ["text"]),
-			a.tooltip ? (p(), r("div", De, [s(_(P), { location: "bottom" }, {
-				activator: x(({ props: e }) => [s(_(O), u({
+			e.tooltip ? (g(), i("div", je, [c(b(F), { location: "bottom" }, {
+				activator: C(({ props: e }) => [c(b(O), f({
 					size: "x-small",
 					icon: "mdi-progress-question",
 					color: "grey"
 				}, e), null, 16)]),
-				default: x(() => [o[0] ||= i("span", null, "点击设置日期", -1)]),
+				default: C(() => [o[0] ||= a("span", null, "点击设置日期", -1)]),
 				_: 1
-			})])) : n("", !0)
-		]), c.value ? (p(), t(_(ce), {
+			})])) : r("", !0)
+		]), s.value ? (g(), n(b(pe), {
 			key: 0,
-			messages: a.message,
-			active: c.value
-		}, null, 8, ["messages", "active"])) : n("", !0)]), m(e.$slots, "default")]));
+			messages: e.message,
+			active: s.value
+		}, null, 8, ["messages", "active"])) : r("", !0)])], 2));
 	}
 });
 //#endregion
 //#region src/HLabel/index.ts
-J.install = (e) => {
-	e.component(J.name, J);
+Y.install = (e) => {
+	e.component(Y.name, Y);
 };
 //#endregion
 //#region src/HParticles/particles.ts
-var Oe = { particles: {
+var Me = { particles: {
 	number: {
 		density: {
 			enable: !0,
@@ -610,58 +646,58 @@ var Oe = { particles: {
 	},
 	size: { value: 1 },
 	shape: { type: "circle" }
-} }, ke = ["id"], Y = /* @__PURE__ */ c({
+} }, Ne = ["id"], X = /* @__PURE__ */ l({
 	name: "HParticles",
 	__name: "HParticles",
 	setup(e) {
-		let t = h("HParticles"), n, i = async () => {
-			await ye(L);
+		let t = v("HParticles"), n, r = async () => {
+			await we(Ce);
 		}, a = async () => {
-			n?.destroy(), n = await L.load({
+			n?.destroy(), n = await Ce.load({
 				id: t.value,
-				options: Oe
+				options: Me
 			});
 		}, o = async () => {
 			n?.destroy();
 		};
-		return d(() => {
-			i();
-		}), f(() => {
+		return te(() => {
+			r();
+		}), m(() => {
 			a();
-		}), ee(() => {
+		}), h(() => {
 			o();
-		}), (e, n) => (p(), r("div", { id: t.value }, [m(e.$slots, "default")], 8, ke));
+		}), (e, n) => (g(), i("div", { id: t.value }, [_(e.$slots, "default")], 8, Ne));
 	}
 });
 //#endregion
 //#region src/HParticles/index.ts
-Y.install = (e) => {
-	e.component(Y.name, Y);
+X.install = (e) => {
+	e.component(X.name, X);
 };
 //#endregion
 //#region src/lib/stores/mdiicon.ts
-var Ae = be("MdiIcon", {
+var Pe = Te("MdiIcon", {
 	state: () => ({ icons: [] }),
 	getters: { getAllIcons: (e) => e.icons },
 	actions: {
 		initialize() {
-			if (F(this.icons)) {
-				let e = Object.keys(xe).map((e) => _e(e));
+			if (I(this.icons)) {
+				let e = Object.keys(Ee).map((e) => xe(e));
 				this.icons = e;
 			}
 		},
 		search(e) {
-			if (F(e.trim())) return this.icons;
+			if (I(e.trim())) return this.icons;
 			let t = e.toLowerCase();
 			return this.getAllIcons.filter((e) => e.toLowerCase().match(t));
 		}
 	}
-}), X = /* @__PURE__ */ c({
+}), Z = /* @__PURE__ */ l({
 	name: "HMdiIconSelect",
 	components: {
-		VAutocomplete: S,
-		VExpandXTransition: oe,
-		VListItem: k,
+		VAutocomplete: ie,
+		VExpandXTransition: ue,
+		VListItem: fe,
 		VIcon: O
 	},
 	__name: "HMdiIconSelect",
@@ -671,34 +707,34 @@ var Ae = be("MdiIcon", {
 	},
 	emits: ["update:modelValue"],
 	setup(e) {
-		let r = v(e, "modelValue"), i = h([]), a = h(!1), o = h(""), c = Ae(), l = me((e, t) => {
-			a.value = !0, t(c.search(e)), a.value = !1;
+		let t = x(e, "modelValue"), i = v([]), a = v(!1), o = v(""), s = Pe(), l = ve((e, t) => {
+			a.value = !0, t(s.search(e)), a.value = !1;
 		}, 500);
-		return f(() => {
-			a.value = !0, c.initialize(), i.value = c.getAllIcons, a.value = !1;
-		}), b(o, (e) => {
-			F(e) ? i.value = c.getAllIcons : l(e, (e) => {
+		return m(() => {
+			a.value = !0, s.initialize(), i.value = s.getAllIcons, a.value = !1;
+		}), S(o, (e) => {
+			I(e) ? i.value = s.getAllIcons : l(e, (e) => {
 				i.value = e;
 			});
-		}), (e, c) => (p(), t(_(S), u({
-			modelValue: r.value,
-			"onUpdate:modelValue": c[0] ||= (e) => r.value = e,
+		}), (e, s) => (g(), n(b(ie), f({
+			modelValue: t.value,
+			"onUpdate:modelValue": s[0] ||= (e) => t.value = e,
 			search: o.value,
-			"onUpdate:search": c[1] ||= (e) => o.value = e,
+			"onUpdate:search": s[1] ||= (e) => o.value = e,
 			items: i.value,
 			loading: a.value,
 			clearable: "",
 			"single-line": ""
 		}, e.$attrs), {
-			"prepend-inner": x(() => [s(_(oe), null, {
-				default: x(() => [r.value ? (p(), t(_(O), {
+			"prepend-inner": C(() => [c(b(ue), null, {
+				default: C(() => [t.value ? (g(), n(b(O), {
 					key: 0,
-					icon: r.value,
+					icon: t.value,
 					start: ""
-				}, null, 8, ["icon"])) : n("", !0)]),
+				}, null, 8, ["icon"])) : r("", !0)]),
 				_: 1
 			})]),
-			item: x(({ props: e, internalItem: t }) => [s(_(k), u(e, {
+			item: C(({ props: e, internalItem: t }) => [c(b(fe), f(e, {
 				"prepend-icon": t.value,
 				title: t.value
 			}), null, 16, ["prepend-icon", "title"])]),
@@ -710,70 +746,70 @@ var Ae = be("MdiIcon", {
 			"loading"
 		]));
 	}
-}), Z = /* @__PURE__ */ c({
+}), Q = /* @__PURE__ */ l({
 	name: "HTreeSelect",
 	components: {
 		VMenu: A,
 		VIcon: O,
-		VTreeview: pe,
-		VTextField: N
+		VTreeview: _e,
+		VTextField: P
 	},
 	__name: "HTreeSelect",
-	props: /*@__PURE__*/ l({ items: {} }, {
+	props: /*@__PURE__*/ d({ items: {} }, {
 		modelValue: { required: !0 },
 		modelModifiers: {}
 	}),
 	emits: ["update:modelValue"],
-	setup(n) {
-		let r = n, i = v(n, "modelValue"), a = te(), o = h(!1), c = h(!1), l = te([]), d = h(""), f = () => {
+	setup(e) {
+		let r = e, i = x(e, "modelValue"), a = ne(), o = v(!1), s = v(!1), l = ne([]), u = v(""), d = () => {
 			o.value = !0;
 		}, ee = (e) => {
 			o.value = !o.value;
-		}, m = () => {
-			c.value && a.value?.focus();
-		}, g = () => {}, y = (e) => {
+		}, p = () => {
+			s.value && a.value?.focus();
+		}, te = () => {}, m = (e) => {
 			let t = [];
 			for (let n of e) {
 				let { children: e, ...r } = n;
-				e && e.length && (t = t.concat(y(e))), t.push(r);
+				e && e.length && (t = t.concat(m(e))), t.push(r);
 			}
 			return t;
-		}, S = (e) => {
-			let t = he(l.value, (t) => t.id == e);
-			t && (d.value = t.name);
-		}, C = (e) => {
-			!F(e) && F(l.value) && (l.value = y(e), !d.value && i.value && S(i.value));
-		}, w = e({
+		}, h = (e) => {
+			let t = ye(l.value, (t) => t.id == e);
+			t && (u.value = t.name);
+		}, _ = (e) => {
+			!I(e) && I(l.value) && (l.value = m(e), !u.value && i.value && h(i.value));
+		}, y = t({
 			get: () => i.value ? [i.value] : [],
 			set: (e) => {
-				e && ge(e) && e.length > 0 ? i.value = e[0] : i.value = "";
+				e && be(e) && e.length > 0 ? i.value = e[0] : i.value = "";
 			}
 		});
-		return b(() => r.items, (e) => {
-			F(e) || C(e);
-		}, { immediate: !0 }), b(i, (e, t) => {
-			e && (S(e), o.value &&= !1);
-		}, { immediate: !0 }), b(c, (e, t) => {
+		return S(() => r.items, (e) => {
+			I(e) || _(e);
+		}, { immediate: !0 }), S(i, (e, t) => {
+			e && (h(e), o.value &&= !1);
+		}, { immediate: !0 }), S(s, (e, t) => {
 			e || e === t || (o.value = !1);
-		}), (e, r) => (p(), t(_(N), u({
+		}), (t, r) => (g(), n(b(P), f({
 			ref_key: "vTextFieldRef",
 			ref: a,
-			modelValue: d.value,
-			"onUpdate:modelValue": r[3] ||= (e) => d.value = e,
-			focused: c.value,
-			"onUpdate:focused": r[4] ||= (e) => c.value = e,
+			modelValue: u.value,
+			"onUpdate:modelValue": r[3] ||= (e) => u.value = e,
+			focused: s.value,
+			"onUpdate:focused": r[4] ||= (e) => s.value = e,
 			class: ["v-combobox", { "v-combobox--active-menu": o.value }],
-			"onMousedown:control": f,
-			onAfterLeave: m
-		}, e.$attrs), {
-			"append-inner": x(() => [s(_(O), {
+			"onMousedown:control": d,
+			onAfterLeave: p
+		}, t.$attrs), {
+			"append-inner": C(() => [c(b(O), {
 				icon: "mdi-menu-down",
 				onMousedown: ee,
-				onClick: g,
+				onClick: te,
 				class: "v-combobox__menu-icon",
 				tabindex: "-1"
 			})]),
-			default: x(() => [s(_(A), {
+			default: C(() => [c(b(A), {
 				modelValue: o.value,
 				"onUpdate:modelValue": r[2] ||= (e) => o.value = e,
 				activator: "parent",
@@ -782,10 +818,10 @@ var Ae = be("MdiIcon", {
 				"close-on-content-click": !1,
 				"max-height": "310"
 			}, {
-				default: x(() => [s(_(pe), {
-					activated: w.value,
-					"onUpdate:activated": r[0] ||= (e) => w.value = e,
-					items: n.items,
+				default: C(() => [c(b(_e), {
+					activated: y.value,
+					"onUpdate:activated": r[0] ||= (e) => y.value = e,
+					items: e.items,
 					"item-value": "id",
 					"item-title": "name",
 					activatable: "",
@@ -803,26 +839,26 @@ var Ae = be("MdiIcon", {
 		]));
 	}
 });
-X.install = (e) => {
-	e.component(X.name, X);
-}, Z.install = (e) => {
+Z.install = (e) => {
 	e.component(Z.name, Z);
+}, Q.install = (e) => {
+	e.component(Q.name, Q);
 };
 //#endregion
 //#region src/HSignIn/HSignInCornerBottom.vue?vue&type=script&setup=true&lang.ts
-var je = {
+var Fe = {
 	version: "1.1",
 	xmlns: "http://www.w3.org/2000/svg",
 	"xmlns:xlink": "http://www.w3.org/1999/xlink",
 	height: "896",
 	width: "967.8852157128662"
-}, Me = {
+}, Ie = {
 	id: "linearGradient-3",
 	x1: "0.5",
 	y1: "0",
 	x2: "0.5",
 	y2: "1"
-}, Ne = ["stop-color"], Pe = ["stop-color"], Fe = /* @__PURE__ */ c({
+}, Le = ["stop-color"], Re = ["stop-color"], ze = /* @__PURE__ */ l({
 	name: "HSignInCornerBottom",
 	__name: "HSignInCornerBottom",
 	props: {
@@ -830,35 +866,35 @@ var je = {
 		endColor: { default: "#120fc4" }
 	},
 	setup(e) {
-		return (t, n) => (p(), r("svg", je, [i("defs", null, [n[0] ||= i("path", {
+		return (t, n) => (g(), i("svg", Fe, [a("defs", null, [n[0] ||= a("path", {
 			id: "path-2",
 			opacity: "1",
 			"fill-rule": "evenodd",
 			d: "M896,448 C1142.6325445712241,465.5747656464056 695.2579309733121,896 448,896\n			C200.74206902668806,896 5.684341886080802e-14,695.2579309733121 0,448.0000000000001 C0,200.74206902668806\n			200.74206902668791,5.684341886080802e-14 447.99999999999994,0 C695.2579309733121,0 475,418 896,448Z"
-		}, null, -1), i("linearGradient", Me, [i("stop", {
+		}, null, -1), a("linearGradient", Ie, [a("stop", {
 			offset: "0",
 			"stop-color": e.startColor,
 			"stop-opacity": "1"
-		}, null, 8, Ne), i("stop", {
+		}, null, 8, Le), a("stop", {
 			offset: "1",
 			"stop-color": e.endColor,
 			"stop-opacity": "1"
-		}, null, 8, Pe)])]), n[1] ||= i("g", { opacity: "1" }, [i("use", {
+		}, null, 8, Re)])]), n[1] ||= a("g", { opacity: "1" }, [a("use", {
 			"xlink:href": "#path-2",
 			fill: "url(#linearGradient-3)",
 			"fill-opacity": "1"
 		})], -1)]));
 	}
-}), Ie = {
+}), Be = {
 	height: "1337",
 	width: "1337"
-}, Le = {
+}, Ve = {
 	id: "linearGradient-2",
 	x1: "0.79",
 	y1: "0.62",
 	x2: "0.21",
 	y2: "0.86"
-}, Re = ["stop-color"], ze = ["stop-color"], Q = /* @__PURE__ */ c({
+}, He = ["stop-color"], Ue = ["stop-color"], We = /* @__PURE__ */ l({
 	name: "HSignInCornerTop",
 	__name: "HSignInCornerTop",
 	props: {
@@ -866,34 +902,34 @@ var je = {
 		endColor: { default: "#120fc4" }
 	},
 	setup(e) {
-		return (t, n) => (p(), r("svg", Ie, [i("defs", null, [n[0] ||= i("path", {
+		return (t, n) => (g(), i("svg", Be, [a("defs", null, [n[0] ||= a("path", {
 			id: "path-1",
 			opacity: "1",
 			"fill-rule": "evenodd",
 			d: "M1337,668.5 C1337,1037.455193874239 1037.455193874239,1337 668.5,1337 C523.6725684305388,1337 337,1236 370.50000000000006,1094 C434.03835568300906,824.6732385973953 6.906089672974592e-14,892.6277623047779 0,668.5000000000001 C0,299.5448061257611 299.5448061257609,1.1368683772161603e-13 668.4999999999999,0 C1037.455193874239,0 1337,299.544806125761 1337,668.5Z"
-		}, null, -1), i("linearGradient", Le, [i("stop", {
+		}, null, -1), a("linearGradient", Ve, [a("stop", {
 			offset: "0",
 			"stop-color": e.startColor,
 			"stop-opacity": "1"
-		}, null, 8, Re), i("stop", {
+		}, null, 8, He), a("stop", {
 			offset: "1",
 			"stop-color": e.endColor,
 			"stop-opacity": "1"
-		}, null, 8, ze)])]), n[1] ||= i("g", { opacity: "1" }, [i("use", {
+		}, null, 8, Ue)])]), n[1] ||= a("g", { opacity: "1" }, [a("use", {
 			"xlink:href": "#path-1",
 			fill: "url(#linearGradient-2)",
 			"fill-opacity": "1"
 		})], -1)]));
 	}
-}), Be = { class: "corner-top" }, Ve = { class: "corner-bottom" }, $ = /*#__PURE__*/ ((e, t) => {
+}), Ge = { class: "corner-top" }, Ke = { class: "corner-bottom" }, $ = /*#__PURE__*/ ((e, t) => {
 	let n = e.__vccOpts || e;
 	for (let [e, r] of t) n[e] = r;
 	return n;
-})(/* @__PURE__ */ c({
+})(/* @__PURE__ */ l({
 	name: "HSignInBackground",
 	components: {
-		HSignInCornerBottom: Fe,
-		HSignInCornerTop: Q
+		HSignInCornerBottom: ze,
+		HSignInCornerTop: We
 	},
 	__name: "HSignInBackground",
 	props: {
@@ -901,10 +937,10 @@ var je = {
 		endColor: {}
 	},
 	setup(e) {
-		return (t, n) => (p(), r("div", null, [i("div", Be, [s(Q, {
+		return (t, n) => (g(), i("div", null, [a("div", Ge, [c(We, {
 			"start-color": e.startColor,
 			"end-color": e.endColor
-		}, null, 8, ["start-color", "end-color"])]), i("div", Ve, [s(Fe, {
+		}, null, 8, ["start-color", "end-color"])]), a("div", Ke, [c(ze, {
 			"start-color": e.endColor,
 			"end-color": e.startColor
 		}, null, 8, ["start-color", "end-color"])])]));
@@ -917,22 +953,23 @@ $.install = (e) => {
 };
 //#endregion
 //#region src/index.ts
-var He = [
+var qe = [
 	R,
-	B,
-	H,
-	G,
-	q,
+	V,
 	U,
-	X,
-	J,
-	Y,
-	$,
 	K,
+	J,
 	W,
-	Z
-], Ue = { install: (e) => {
-	He.map((t) => t.install(e));
+	Z,
+	z,
+	Y,
+	X,
+	$,
+	q,
+	G,
+	Q
+], Je = { install: (e) => {
+	qe.map((t) => t.install(e));
 } };
 //#endregion
-export { R as HButton, B as HDate, H as HDateTime, G as HDialog, q as HDownloadProgress, U as HDuration, J as HLabel, X as HMdiIconSelect, Y as HParticles, $ as HSignInBackground, K as HTextDivider, W as HTime, Z as HTreeSelect, Ue as default };
+export { R as HButton, V as HDate, U as HDateTime, K as HDialog, J as HDownloadProgress, W as HDuration, z as HIconButton, Y as HLabel, Z as HMdiIconSelect, X as HParticles, $ as HSignInBackground, q as HTextDivider, G as HTime, Q as HTreeSelect, Je as default };

@@ -7,6 +7,7 @@ var e = [
 	"HDownloadProgress",
 	"HDuration",
 	"HMdiIconSelect",
+	"HIconButton",
 	"HLabel",
 	"HParticles",
 	"HSignInBackground",
