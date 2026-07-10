@@ -2,7 +2,7 @@
   <div>
     <v-card v-if="$slots.header" :flat="flat" :title="title">
       <template #prepend>
-        <h-icon-button icon="mdi-arrow-left-box" variant="text" @click="onFinish()"></h-icon-button>
+        <h-icon-button icon="mdi-arrow-left-box" variant="text" @click="onFinish"></h-icon-button>
       </template>
 
       <v-card-text>
@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import { useEditFinish } from "@herodotus/framework";
+import { useRoute } from "vue-router";
 
 defineOptions({ name: "HInformationFormLayout" });
 
@@ -33,5 +34,6 @@ withDefaults(defineProps<Props>(), {
   flat: false,
 });
 
-const { onFinish } = useEditFinish();
+const route = useRoute();
+const { onFinish } = useEditFinish(route);
 </script>

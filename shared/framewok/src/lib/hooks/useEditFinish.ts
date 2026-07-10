@@ -26,6 +26,9 @@ export default function useEditFinish(realRoute?: RouteLocationNormalizedGeneric
   const onFinish = () => {
     const route = getRoute();
 
+    console.log("---onFinish--", route);
+
+    console.log("---onFinish--", route?.name);
     if (!isEmpty(route) && route.name) {
       const name = route.name as string;
       routeStore.removeRoutePushParam(name);
