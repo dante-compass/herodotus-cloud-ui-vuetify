@@ -1,7 +1,7 @@
 <template>
   <v-tooltip v-if="tooltip" interactive :location="location">
     <template v-slot:activator="{ props: activatorProps }">
-      <v-icon-btn v-bind="mergeProps(activatorProps, $attrs)"></v-icon-btn>
+      <v-icon-btn :color="color" v-bind="mergeProps(activatorProps, $attrs)"></v-icon-btn>
     </template>
     <span>{{ tooltip }}</span>
   </v-tooltip>
@@ -15,6 +15,7 @@ import { VTooltip, VIconBtn } from "vuetify/components";
 defineOptions({ name: "HIconButton", components: { VTooltip, VIconBtn } });
 
 interface Props {
+  color?: string;
   tooltip?: string;
   location?: VTooltip["location"];
 }

@@ -1,5 +1,6 @@
 import { VTooltip } from 'vuetify/components';
 interface Props {
+    color?: string;
     tooltip?: string;
     location?: VTooltip["location"];
 }
