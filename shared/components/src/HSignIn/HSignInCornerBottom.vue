@@ -26,13 +26,13 @@
   </svg>
 </template>
 
-<script lang="ts" setup>
-import type { BackgroundColorProps } from '@/lib/declarations';
+<script setup lang="ts">
+defineOptions({ name: "HSignInCornerBottom" });
 
-defineOptions({ name: 'HSignInCornerBottom' });
+interface Props {
+  startColor: string;
+  endColor: string;
+}
 
-withDefaults(defineProps<BackgroundColorProps>(), {
-  startColor: '#28aff0',
-  endColor: '#120fc4',
-});
+defineProps<Props>()
 </script>

@@ -788,8 +788,8 @@ var Fe = {
 	name: "HSignInCornerBottom",
 	__name: "HSignInCornerBottom",
 	props: {
-		startColor: { default: "#28aff0" },
-		endColor: { default: "#120fc4" }
+		startColor: {},
+		endColor: {}
 	},
 	setup(e) {
 		return (t, n) => (h(), i("svg", Fe, [a("defs", null, [n[0] ||= a("path", {
@@ -824,8 +824,8 @@ var Fe = {
 	name: "HSignInCornerTop",
 	__name: "HSignInCornerTop",
 	props: {
-		startColor: { default: "#28aff0" },
-		endColor: { default: "#120fc4" }
+		startColor: {},
+		endColor: {}
 	},
 	setup(e) {
 		return (t, n) => (h(), i("svg", Be, [a("defs", null, [n[0] ||= a("path", {
@@ -859,8 +859,8 @@ var Fe = {
 	},
 	__name: "HSignInBackground",
 	props: {
-		startColor: {},
-		endColor: {}
+		startColor: { default: "#28aff0" },
+		endColor: { default: "#120fc4" }
 	},
 	setup(e) {
 		return (t, n) => (h(), i("div", null, [a("div", We, [c(Z, {
@@ -871,7 +871,7 @@ var Fe = {
 			"end-color": e.startColor
 		}, null, 8, ["start-color", "end-color"])])]));
 	}
-}), [["__scopeId", "data-v-377dfbe6"]]);
+}), [["__scopeId", "data-v-7774e47e"]]);
 //#endregion
 //#region src/HSignIn/index.ts
 Q.install = (e) => {

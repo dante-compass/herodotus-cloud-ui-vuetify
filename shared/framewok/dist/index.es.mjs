@@ -909,7 +909,7 @@ function be(e) {
 	};
 	return { onFinish: () => {
 		let e = r();
-		if (!x(e) && e.name) {
+		if (console.log("---onFinish--", e), console.log("---onFinish--", e?.name), !x(e) && e.name) {
 			let r = e.name;
 			t.removeRoutePushParam(r), n.deleteTab(e);
 		}
