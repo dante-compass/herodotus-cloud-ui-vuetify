@@ -189,7 +189,6 @@ export default function useBaseTable<C extends Conditions, I extends Domain, O e
     tableRows,
     totalPages,
     totalItems,
-    addRoutePushParam,
     routePushParam,
     setAllData,
     setPageData,

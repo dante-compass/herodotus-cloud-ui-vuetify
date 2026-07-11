@@ -23,9 +23,9 @@ export default function useBaseTableItem<I extends Domain>(componentName: string
   const editedItem = ref({}) as Ref<I>;
   const operation = shallowRef(OperationEnum.CREATE) as ShallowRef<OperationEnum>;
   const additional = ref({}) as Ref<Record<string, unknown>>;
-  const parentComponentName = shallowRef("");
   const title = shallowRef("");
   const overlay = shallowRef(false);
+  const parentComponentName = shallowRef("");
   const currentComponentName = shallowRef(componentName);
 
   onMounted(() => {

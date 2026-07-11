@@ -16,7 +16,7 @@ import { PAGE_NAME } from "@/configurations";
 
 import { HOssBucketList, HOssObjectList } from "./components";
 
-defineOptions({ name: PAGE_NAME.OSS_BUCKET, components: { HOssBucketList, HOssObjectList } });
+defineOptions({ name: PAGE_NAME.OSS_OBJECT, components: { HOssBucketList, HOssObjectList } });
 
 const currentBucketName = shallowRef("");
 const version = shallowRef(0);

@@ -162,7 +162,7 @@ const isShowOperation = computed(() => {
 });
 
 const toAllocatable = () => {
-  const routeName = "SysOwnershipContent";
+  const routeName = PAGE_NAME.SYS_OWNERSHIP_CONTENT;
   routePushParam(routeName, OperationEnum.AUTHORIZE, {
     organizationId: currentOrganization.value.id,
     departmentId: currentDepartment.value.id,

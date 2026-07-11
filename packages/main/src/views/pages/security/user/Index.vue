@@ -60,10 +60,7 @@ import { API, PAGE_NAME } from "@/configurations";
 
 import { ChangePasswordDialog, SendMessageDialog } from "./components";
 
-defineOptions({
-  name: PAGE_NAME.SYS_USER,
-  components: { ChangePasswordDialog, SendMessageDialog },
-});
+defineOptions({ name: PAGE_NAME.SYS_USER, components: { ChangePasswordDialog, SendMessageDialog } });
 
 const headers = ref([
   { key: "username", align: "center", title: "用户名" },
