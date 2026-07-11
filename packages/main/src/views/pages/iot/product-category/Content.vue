@@ -18,13 +18,16 @@
 import type { ProductCategoryEntity } from "@herodotus/api";
 
 import { useTableItem } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: "IotProductCategoryContent" });
+defineOptions({ name: PAGE_NAME.IOT_PRODUCT_CATEGORY_CONTENT });
 
 const productCategoryForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<ProductCategoryEntity>(API.core.iotProductCategory());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<ProductCategoryEntity>(
+  API.core.iotProductCategory(),
+  PAGE_NAME.IOT_PRODUCT_CATEGORY_CONTENT,
+);
 
 const onSave = async () => {
   const { valid } = await productCategoryForm.value.validate();

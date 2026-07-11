@@ -21,13 +21,13 @@
 
       <template #item.gender="{ value }">
         <v-chip v-if="value" density="compact" rounded="lg" color="blue" label>
-          {{ getDictionaryItemDisplay('Gender', value) }}
+          {{ getDictionaryItemDisplay("Gender", value) }}
         </v-chip>
       </template>
 
       <template #item.identity="{ value }">
         <v-chip v-if="value" density="compact" rounded="lg" color="orange" label>
-          {{ getDictionaryItemDisplay('Identity', value) }}
+          {{ getDictionaryItemDisplay("Identity", value) }}
         </v-chip>
       </template>
     </h-data-table>
@@ -38,43 +38,46 @@
 </template>
 
 <script setup lang="ts">
-import type { VDataTableHeaders } from '@/composables/declarations';
-import type { HttpResult } from '@herodotus/core';
+import type { VDataTableHeaders } from "@/composables/declarations";
+import type { HttpResult } from "@herodotus/core";
 import type {
   SysEmployeeEntity,
   SysEmployeeConditions,
   SysEmployeeProps,
   SysEmployeeAllocatable,
-} from '@herodotus/api';
+} from "@herodotus/api";
 
-import { isEmpty } from 'lodash-es';
-import { toast } from '@herodotus/core';
-import { useTableItem } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
-import { useEditFinish } from '@herodotus/framework';
-import { useTable, useDictionary } from '@/composables/hooks';
+import { isEmpty } from "lodash-es";
+import { toast } from "@herodotus/core";
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
+import { useEditFinish } from "@herodotus/framework";
+import { useTable, useDictionary } from "@/composables/hooks";
 
-import { EmployeeSearch } from '../components';
+import { EmployeeSearch } from "../components";
 
-defineOptions({ name: 'SysOwnershipContent', components: { EmployeeSearch } });
+defineOptions({ name: PAGE_NAME.SYS_OWNERSHIP_CONTENT, components: { EmployeeSearch } });
 
 const headers = ref([
-  { key: 'employeeName', align: 'center', title: '人员姓名' },
-  { key: 'identity', align: 'center', title: '身份' },
-  { key: 'gender', align: 'center', title: '性别' },
-  { key: 'description', align: 'center', title: '备注' },
-  { key: 'reserved', align: 'center', title: '保留数据' },
-  { key: 'status', align: 'center', title: '状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "employeeName", align: "center", title: "人员姓名" },
+  { key: "identity", align: "center", title: "身份" },
+  { key: "gender", align: "center", title: "性别" },
+  { key: "description", align: "center", title: "备注" },
+  { key: "reserved", align: "center", title: "保留数据" },
+  { key: "status", align: "center", title: "状态" },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: SysEmployeeProps = 'employeeId';
+const rowKey: SysEmployeeProps = "employeeId";
 
 const selectedItems = ref<SysEmployeeEntity[]>([]);
 
 const { onFinish } = useEditFinish();
-const { getDictionaryItemDisplay } = useDictionary('Gender', 'Identity');
-const { editedItem, overlay } = useTableItem<SysEmployeeAllocatable>(API.core.sysEmployeeAllocatable());
+const { getDictionaryItemDisplay } = useDictionary("Gender", "Identity");
+const { editedItem, overlay, onReturn } = useTableItem<SysEmployeeAllocatable>(
+  API.core.sysEmployeeAllocatable(),
+  PAGE_NAME.SYS_OWNERSHIP_CONTENT,
+);
 
 const { pageSize, pageNumber, totalItems, tableRows, totalPages, loading, conditions, findItems } = useTable<
   SysEmployeeConditions,
@@ -83,7 +86,7 @@ const { pageSize, pageNumber, totalItems, tableRows, totalPages, loading, condit
 
 const onSave = () => {
   if (isEmpty(selectedItems.value)) {
-    toast.warning('您还没有选择任何人员！');
+    toast.warning("您还没有选择任何人员！");
   } else {
     overlay.value = true;
     API.core
@@ -96,17 +99,17 @@ const onSave = () => {
       .then((response) => {
         const result = response as HttpResult<string>;
         overlay.value = false;
-        onFinish();
+        onReturn();
         if (result.message) {
           toast.success(result.message);
         } else {
-          toast.success('保存成功');
+          toast.success("保存成功");
         }
       })
       .catch(() => {
         overlay.value = false;
-        onFinish();
-        toast.error('保存失败');
+        onReturn();
+        toast.error("保存失败");
       });
   }
 };

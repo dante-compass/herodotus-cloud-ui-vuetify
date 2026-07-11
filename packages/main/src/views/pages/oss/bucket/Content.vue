@@ -24,11 +24,11 @@ import type { CreateBucketArgument, CreateBucketResult } from "@herodotus/api";
 
 import { toast } from "@herodotus/core";
 import { useBaseTableItem } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: "OssBucketContent" });
+defineOptions({ name: PAGE_NAME.OSS_BUCKET_CONTENT });
 
-const { title, overlay } = useBaseTableItem<CreateBucketArgument>();
+const { title, overlay } = useBaseTableItem<CreateBucketArgument>(PAGE_NAME.OSS_BUCKET_CONTENT);
 
 const editedItem = ref({}) as Ref<CreateBucketArgument>;
 

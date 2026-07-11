@@ -23,14 +23,17 @@
 </template>
 
 <script setup lang="ts">
-import type { SysAttributeEntity } from '@herodotus/api';
+import type { SysAttributeEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysAttributeContent' });
+defineOptions({ name: PAGE_NAME.SYS_ATTRIBUTE_CONTENT });
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysAttributeEntity>(API.core.sysAttribute());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysAttributeEntity>(
+  API.core.sysAttribute(),
+  PAGE_NAME.SYS_ATTRIBUTE_CONTENT,
+);
 
 const onSave = () => {
   saveOrUpdate();

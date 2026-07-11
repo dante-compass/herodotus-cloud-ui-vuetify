@@ -39,13 +39,16 @@
 import type { MqttCategoryEntity } from "@herodotus/api";
 
 import { useTableItem } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: "ThingsMqttCategoryContent" });
+defineOptions({ name: PAGE_NAME.THINGS_MQTT_CATEGORY_CONTENT });
 
 const mqttCategoryForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<MqttCategoryEntity>(API.core.iotMqttCategory());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<MqttCategoryEntity>(
+  API.core.iotMqttCategory(),
+  PAGE_NAME.THINGS_MQTT_CATEGORY_CONTENT,
+);
 
 const onSave = async () => {
   const { valid } = await mqttCategoryForm.value.validate();

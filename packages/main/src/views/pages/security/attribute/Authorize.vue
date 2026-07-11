@@ -40,27 +40,30 @@ import type {
   SysPermissionEntity,
   SysPermissionProps,
   SysPermissionConditions,
-} from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+} from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { isEmpty } from 'lodash-es';
-import { useTableItem, useTable } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { isEmpty } from "lodash-es";
+import { useTableItem, useTable } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysAttributeAuthorize' });
+defineOptions({ name: PAGE_NAME.SYS_ATTRIBUTE_AUTHORIZE });
 
-const { editedItem, overlay, title, assign } = useTableItem<SysAttributeEntity>(API.core.sysAttribute());
+const { editedItem, overlay, title, assign } = useTableItem<SysAttributeEntity>(
+  API.core.sysAttribute(),
+  PAGE_NAME.SYS_ATTRIBUTE_AUTHORIZE,
+);
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysPermissionConditions,
   SysPermissionEntity
 >(API.core.sysPermission(), PAGE_NAME.SYS_PERMISSION, true);
 
 const selectedItems = ref([]) as Ref<Array<SysPermissionEntity>>;
-const rowKey: SysPermissionProps = 'permissionId';
+const rowKey: SysPermissionProps = "permissionId";
 
 const headers = ref([
-  { key: 'permissionName', align: 'center', title: '权限名称' },
-  { key: 'permissionCode', align: 'center', title: '权限代码' },
+  { key: "permissionName", align: "center", title: "权限名称" },
+  { key: "permissionCode", align: "center", title: "权限代码" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
 onMounted(() => {
@@ -70,7 +73,7 @@ onMounted(() => {
 const onSave = () => {
   let attributeId = editedItem.value.attributeId;
   let permissions = selectedItems.value.map((item) => item[rowKey]);
-  const items = !isEmpty(permissions) ? permissions : [''];
+  const items = !isEmpty(permissions) ? permissions : [""];
   assign({ attributeId: attributeId, permissions: items });
 };
 </script>

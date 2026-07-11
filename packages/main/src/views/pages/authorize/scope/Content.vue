@@ -18,16 +18,19 @@
 </template>
 
 <script setup lang="ts">
-import type { OAuth2ScopeEntity } from '@herodotus/api';
+import type { OAuth2ScopeEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'OAuth2ScopeContent' });
+defineOptions({ name: PAGE_NAME.OAUTH2_SCOPE_CONTENT });
 
 const scopeForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<OAuth2ScopeEntity>(API.core.oauth2Scope());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<OAuth2ScopeEntity>(
+  API.core.oauth2Scope(),
+  PAGE_NAME.OAUTH2_SCOPE_CONTENT,
+);
 
 const validateScopeCode = async (scopeCode: string) => {
   return await new Promise((resolve, reject) => {
@@ -57,11 +60,11 @@ const isUniqueRule = (scopeCode: string) => {
       if (validate) {
         return true;
       } else {
-        return '用户名已被占用，请改用其它用户名';
+        return "用户名已被占用，请改用其它用户名";
       }
     })
     .catch(() => {
-      return '后端服务暂时不可用';
+      return "后端服务暂时不可用";
     });
 };
 

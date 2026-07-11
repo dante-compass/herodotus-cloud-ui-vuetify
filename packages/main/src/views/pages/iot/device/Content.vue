@@ -46,13 +46,16 @@ import type { DeviceEntity, ProductConditions, ProductEntity } from "@herodotus/
 
 import { useAutocomplete } from "@herodotus/framework";
 import { useTableItem } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: "IotProductCategoryContent" });
+defineOptions({ name: PAGE_NAME.IOT_DEVICE_CONTENT });
 
 const deviceForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<DeviceEntity>(API.core.iotDevice());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<DeviceEntity>(
+  API.core.iotDevice(),
+  PAGE_NAME.IOT_DEVICE_CONTENT,
+);
 const { loading, items, search } = useAutocomplete<ProductConditions, ProductEntity>(
   "productKey",
   API.core.iotProduct(),

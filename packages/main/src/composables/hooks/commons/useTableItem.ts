@@ -5,7 +5,7 @@ import useBaseTableItem from "./useBaseTableItem";
 
 export default function useTableItem<I extends Domain, O extends Domain = I>(
   service: AbstractService<I, O>,
-  componentName = "",
+  componentName: string,
 ) {
   const { editedItem, operation, overlay, title, additional, onFinish, onReturn } = useBaseTableItem<I>(componentName);
 
@@ -41,7 +41,7 @@ export default function useTableItem<I extends Domain, O extends Domain = I>(
       .then((response) => {
         const result = response as HttpResult<O>;
         overlay.value = false;
-        onFinish();
+        onReturn();
         if (result.message) {
           toast.success(result.message);
         } else {

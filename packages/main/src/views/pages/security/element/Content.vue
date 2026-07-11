@@ -54,11 +54,14 @@ import type { SysElementEntity, SysElementConditions } from "@herodotus/api";
 
 import { isEmpty } from "lodash-es";
 import { useTableItem, useTreeItem } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: "SysElementContent" });
+defineOptions({ name: PAGE_NAME.SYS_ELEMENT_CONTENT });
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysElementEntity>(API.core.sysElement());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysElementEntity>(
+  API.core.sysElement(),
+  PAGE_NAME.SYS_ELEMENT_CONTENT,
+);
 const { treeItems } = useTreeItem<SysElementConditions, SysElementEntity>(API.core.sysElement());
 
 watch(

@@ -3,5 +3,7 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'OssObjectAuthorize' });
+import { PAGE_NAME } from "@/configurations";
+
+defineOptions({ name: PAGE_NAME.OSS_OBJECT_AUTHORIZE });
 </script>

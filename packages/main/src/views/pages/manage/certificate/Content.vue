@@ -88,10 +88,10 @@
 import type { MgtCertificateRequest, MgtCertificateResponse } from "@herodotus/api";
 
 import { useTableItem } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
 import { isEmpty } from "lodash-es";
 
-defineOptions({ name: "MgtCertificateContent" });
+defineOptions({ name: PAGE_NAME.MGT_CERTIFICATE_CONTENT });
 
 const certificateForm = ref();
 
@@ -102,6 +102,7 @@ const showOcspSwitch = shallowRef(false);
 
 const { editedItem, title, overlay, saveOrUpdate } = useTableItem<MgtCertificateRequest, MgtCertificateResponse>(
   API.core.mgtCertificate(),
+  PAGE_NAME.MGT_CERTIFICATE_CONTENT,
 );
 
 const validateAlias = async (alias: string) => {

@@ -109,12 +109,12 @@ import { isEmpty } from "lodash-es";
 import { notify, toast } from "@herodotus/core";
 import { useEditFinish } from "@herodotus/framework";
 import { useBaseTableItem, useDateTime, useDictionary, useOss } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
 
 import { HOssObjectVersions, HOssSetLegalHoldDialog, HOssSetRetentionDialog } from "./components";
 
 defineOptions({
-  name: "OssObjectContent",
+  name: PAGE_NAME.OSS_OBJECT_CONTENT,
   components: { HOssObjectVersions, HOssSetLegalHoldDialog, HOssSetRetentionDialog },
 });
 
@@ -122,7 +122,7 @@ const { defaultFormat } = useDateTime();
 const { humanObjectSize } = useOss();
 const { onFinish } = useEditFinish();
 const { getDictionaryItemDisplay } = useDictionary("ObjectRetentionMode");
-const { editedItem, additional } = useBaseTableItem<ObjectDomain>();
+const { editedItem, additional } = useBaseTableItem<ObjectDomain>(PAGE_NAME.OSS_OBJECT_CONTENT);
 
 const loading = shallowRef(false);
 const showVersions = shallowRef(false);

@@ -157,10 +157,11 @@ import { API, PAGE_NAME } from "@/configurations";
 
 import { HDictionaryToggle, HDictionarySelect } from "@/components/library/HDictionary";
 
-defineOptions({ name: "OAuth2ApplicationContent", components: { HDictionaryToggle, HDictionarySelect } });
+defineOptions({ name: PAGE_NAME.OAUTH2_APPLICATION_CONTENT, components: { HDictionaryToggle, HDictionarySelect } });
 
 const { editedItem, isEdit, title, overlay, saveOrUpdate } = useTableItem<OAuth2ApplicationEntity>(
   API.core.oauth2Application(),
+  PAGE_NAME.OAUTH2_APPLICATION_CONTENT,
 );
 const { tableRows, loading, pageNumber, pageSize, totalItems, findItems } = useTable<
   OAuth2ScopeConditions,

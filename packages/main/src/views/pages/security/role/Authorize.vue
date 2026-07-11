@@ -35,26 +35,29 @@
 </template>
 
 <script setup lang="ts">
-import type { SysRoleEntity, SysPermissionEntity, SysPermissionProps, SysPermissionConditions } from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+import type { SysRoleEntity, SysPermissionEntity, SysPermissionProps, SysPermissionConditions } from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTableItem, useTable } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { useTableItem, useTable } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysRoleAuthorize' });
+defineOptions({ name: PAGE_NAME.SYS_ROLE_AUTHORIZE });
 
-const { editedItem, overlay, title, assign } = useTableItem<SysRoleEntity>(API.core.sysRole());
+const { editedItem, overlay, title, assign } = useTableItem<SysRoleEntity>(
+  API.core.sysRole(),
+  PAGE_NAME.SYS_ROLE_AUTHORIZE,
+);
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysPermissionConditions,
   SysPermissionEntity
 >(API.core.sysPermission(), PAGE_NAME.SYS_PERMISSION, true);
 
 const selectedItems = ref([]) as Ref<Array<SysPermissionEntity>>;
-const rowKey: SysPermissionProps = 'permissionId';
+const rowKey: SysPermissionProps = "permissionId";
 
 const headers = ref([
-  { key: 'permissionName', align: 'center', title: '权限名称' },
-  { key: 'permissionCode', align: 'center', title: '权限代码' },
+  { key: "permissionName", align: "center", title: "权限名称" },
+  { key: "permissionCode", align: "center", title: "权限代码" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
 onMounted(() => {

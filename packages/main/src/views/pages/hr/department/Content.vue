@@ -28,22 +28,20 @@
 </template>
 
 <script setup lang="ts">
-import type { SysDepartmentEntity } from '@herodotus/api';
+import type { SysDepartmentEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-import { DepartmentSelect } from '../components';
+import { DepartmentSelect } from "../components";
 
-defineOptions({
-  name: 'SysDepartmentContent',
-  components: { DepartmentSelect },
-});
+defineOptions({ name: PAGE_NAME.SYS_DEPARTMENT_CONTENT, components: { DepartmentSelect } });
 
 const departmentForm = ref();
 
 const { editedItem, title, overlay, additional, saveOrUpdate } = useTableItem<SysDepartmentEntity>(
   API.core.sysDepartment(),
+  PAGE_NAME.SYS_DEPARTMENT_CONTENT,
 );
 
 const onSave = async () => {
