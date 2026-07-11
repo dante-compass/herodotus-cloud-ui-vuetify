@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-form-layout :title="title" :overlay="overlay">
+  <h-authorize-form-layout :title="title" :overlay="overlay" @cancel="onReturn">
     <v-card rounded="lg">
       <v-data-table-server
         v-model="selectedItems"
@@ -47,13 +47,12 @@ import type {
 import type { VDataTableHeaders } from "@/composables/declarations";
 
 import { toast } from "@herodotus/core";
-import { useEditFinish } from "@herodotus/framework";
 import { useTableItem, useTable } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.OAUTH2_SCOPE_AUTHORIZE });
 
-const { editedItem, title, overlay } = useTableItem<OAuth2ScopeEntity>(
+const { editedItem, title, overlay, onReturn } = useTableItem<OAuth2ScopeEntity>(
   API.core.oauth2Scope(),
   PAGE_NAME.OAUTH2_SCOPE_AUTHORIZE,
 );
@@ -69,8 +68,6 @@ const headers = ref([
   { key: "permissionName", align: "center", title: "权限名称" },
   { key: "permissionCode", align: "center", title: "权限代码" },
 ]) as Ref<Array<VDataTableHeaders>>;
-
-const { onFinish } = useEditFinish();
 
 onMounted(() => {
   selectedItems.value = editedItem.value.permissions;
@@ -92,7 +89,7 @@ const onSave = () => {
     .then((response) => {
       const result = response as HttpResult<OAuth2ScopeEntity>;
       overlay.value = false;
-      onFinish();
+      onReturn();
       if (result.message) {
         toast.success(result.message);
       } else {
@@ -101,7 +98,7 @@ const onSave = () => {
     })
     .catch(() => {
       overlay.value = false;
-      onFinish();
+      onReturn();
       toast.error("保存失败");
     });
 };

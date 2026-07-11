@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-form-layout :title="title" :overlay="overlay">
+  <h-authorize-form-layout :title="title" :overlay="overlay" @cancel="onReturn">
     <v-card rounded="lg">
       <v-data-table-server
         v-model="selectedItems"
@@ -43,7 +43,7 @@ import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.SYS_ATTRIBUTE_AUTHORIZE });
 
-const { editedItem, overlay, title, assign } = useTableItem<SysElementEntity>(
+const { editedItem, overlay, title, assign, onReturn } = useTableItem<SysElementEntity>(
   API.core.sysElement(),
   PAGE_NAME.SYS_ATTRIBUTE_AUTHORIZE,
 );

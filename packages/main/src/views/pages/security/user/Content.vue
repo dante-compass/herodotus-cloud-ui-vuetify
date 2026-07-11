@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="loginForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.username"
@@ -25,7 +25,7 @@ import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.SYS_USER_CONTENT });
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysUserEntity>(
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<SysUserEntity>(
   API.core.sysUser(),
   PAGE_NAME.SYS_USER_CONTENT,
 );

@@ -2,7 +2,7 @@
   <div>
     <v-card v-if="$slots.header" :flat="flat" :title="title" class="mb-4">
       <template #prepend>
-        <h-icon-button icon="mdi-arrow-left-box" variant="text" @click="onFinish()"></h-icon-button>
+        <h-icon-button icon="mdi-arrow-left-box" variant="text" @click="onCancel()"></h-icon-button>
       </template>
 
       <v-card-text>
@@ -32,10 +32,10 @@ withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  finish: [];
+  cancel: [];
 }>();
 
-const onFinish = async () => {
-  emit("finish");
+const onCancel = async () => {
+  emit("cancel");
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="organizationForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.organizationName"
@@ -44,7 +44,7 @@ defineOptions({ name: PAGE_NAME.SYS_ORGANIZATION_CONTENT, components: { Organiza
 
 const organizationForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysOrganizationEntity>(
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<SysOrganizationEntity>(
   API.core.sysOrganization(),
   PAGE_NAME.SYS_ORGANIZATION_CONTENT,
 );

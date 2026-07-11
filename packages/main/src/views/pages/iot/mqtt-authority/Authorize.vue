@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-form-layout :title="title" :overlay="overlay">
+  <h-authorize-form-layout :title="title" :overlay="overlay" @cancel="onReturn">
     <v-card rounded="lg">
       <v-data-table-server
         v-model="selectedItems"
@@ -48,7 +48,7 @@ import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.THINGS_MQTT_AUTHORITY_AUTHORIZE });
 
-const { editedItem, overlay, title, assign } = useTableItem<MqttAuthorityEntity>(
+const { editedItem, overlay, title, assign, onReturn } = useTableItem<MqttAuthorityEntity>(
   API.core.iotMqttAuthority(),
   PAGE_NAME.THINGS_MQTT_AUTHORITY_AUTHORIZE,
 );

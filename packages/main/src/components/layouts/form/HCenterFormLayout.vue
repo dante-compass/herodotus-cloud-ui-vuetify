@@ -1,5 +1,5 @@
 <template>
-  <h-detail-container v-bind="$attrs">
+  <h-detail-container v-bind="$attrs" @cancel="onCancel">
     <v-container>
       <v-row>
         <v-col></v-col>
@@ -15,7 +15,7 @@
           <v-divider></v-divider>
           <v-switch v-model="entity.reserved" label="是否为保留数据"></v-switch>
           <div>
-            <v-btn color="red" @click="onFinish()">取消</v-btn>
+            <v-btn color="red" @click="onCancel()">取消</v-btn>
             <v-btn class="ml-2" @click="onSave()">保存</v-btn>
             <slot name="button"></slot>
           </div>
@@ -29,15 +29,10 @@
 <script setup lang="ts">
 import type { AbstractSysDto, AbstractSysEntity } from "@herodotus/core";
 
-import { useEditFinish } from "@herodotus/framework";
-
 import HDetailContainer from "./HDetailContainer.vue";
 import { HDictionarySelect } from "../../library/HDictionary";
 
-defineOptions({
-  name: "HCenterFormLayout",
-  components: { HDetailContainer, HDictionarySelect },
-});
+defineOptions({ name: "HCenterFormLayout", components: { HDetailContainer, HDictionarySelect } });
 
 interface Props {
   entity: AbstractSysEntity | AbstractSysDto;
@@ -49,11 +44,14 @@ withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   save: [];
+  cancel: [];
 }>();
-
-const { onFinish } = useEditFinish();
 
 const onSave = async () => {
   emit("save");
+};
+
+const onCancel = async () => {
+  emit("cancel");
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="productCategoryForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.name"
@@ -24,7 +24,7 @@ defineOptions({ name: PAGE_NAME.IOT_PRODUCT_CATEGORY_CONTENT });
 
 const productCategoryForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<ProductCategoryEntity>(
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<ProductCategoryEntity>(
   API.core.iotProductCategory(),
   PAGE_NAME.IOT_PRODUCT_CATEGORY_CONTENT,
 );

@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="scopeForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.scopeCode"
@@ -27,7 +27,7 @@ defineOptions({ name: PAGE_NAME.OAUTH2_SCOPE_CONTENT });
 
 const scopeForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<OAuth2ScopeEntity>(
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<OAuth2ScopeEntity>(
   API.core.oauth2Scope(),
   PAGE_NAME.OAUTH2_SCOPE_CONTENT,
 );

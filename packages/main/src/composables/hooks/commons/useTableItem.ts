@@ -7,7 +7,7 @@ export default function useTableItem<I extends Domain, O extends Domain = I>(
   service: AbstractService<I, O>,
   componentName: string,
 ) {
-  const { editedItem, operation, overlay, title, additional, onFinish, onReturn } = useBaseTableItem<I>(componentName);
+  const { editedItem, operation, overlay, title, additional, onReturn } = useBaseTableItem<I>(componentName);
 
   const isEdit = computed(() => {
     return operation.value === OperationEnum.EDIT;
@@ -61,7 +61,6 @@ export default function useTableItem<I extends Domain, O extends Domain = I>(
     overlay,
     title,
     additional,
-    onFinish,
     onReturn,
     saveOrUpdate,
     assign,

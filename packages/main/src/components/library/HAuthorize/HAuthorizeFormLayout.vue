@@ -1,5 +1,5 @@
 <template>
-  <h-detail-container v-bind="$attrs">
+  <h-detail-container v-bind="$attrs" @cancel="onCancel">
     <v-container>
       <v-row>
         <v-col cols="8">
@@ -14,7 +14,15 @@
 </template>
 
 <script setup lang="ts">
-import { HDetailContainer } from '../../layouts/form';
+import { HDetailContainer } from "../../layouts/form";
 
-defineOptions({ name: 'HAuthorizeFormLayout', components: { HDetailContainer } });
+defineOptions({ name: "HAuthorizeFormLayout", components: { HDetailContainer } });
+
+const emit = defineEmits<{
+  cancel: [];
+}>();
+
+const onCancel = async () => {
+  emit("cancel");
+};
 </script>

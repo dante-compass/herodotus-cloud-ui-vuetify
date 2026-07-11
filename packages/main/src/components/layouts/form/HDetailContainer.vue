@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" :title="title">
     <template #prepend>
-      <h-icon-button icon="mdi-arrow-left-box" variant="text" @click="onFinish()"></h-icon-button>
+      <h-icon-button icon="mdi-arrow-left-box" variant="text" @click="onCancel()"></h-icon-button>
     </template>
 
     <v-card-text>
@@ -14,11 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { useEditFinish } from "@herodotus/framework";
-
 defineOptions({ name: "HDetailContainer" });
-
-const { onFinish } = useEditFinish();
 
 interface Props {
   title?: string;
@@ -28,4 +24,12 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   overlay: false,
 });
+
+const emit = defineEmits<{
+  cancel: [];
+}>();
+
+const onCancel = async () => {
+  emit("cancel");
+};
 </script>

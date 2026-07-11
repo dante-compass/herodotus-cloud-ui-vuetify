@@ -1,5 +1,5 @@
 <template>
-  <h-simple-center-form-layout :title="title" :overlay="overlay" @save="onSave()">
+  <h-simple-center-form-layout :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="createBucketForm">
       <v-text-field
         v-model="editedItem.bucketName"
@@ -28,7 +28,7 @@ import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.OSS_BUCKET_CONTENT });
 
-const { title, overlay } = useBaseTableItem<CreateBucketArgument>(PAGE_NAME.OSS_BUCKET_CONTENT);
+const { title, overlay, onReturn } = useBaseTableItem<CreateBucketArgument>(PAGE_NAME.OSS_BUCKET_CONTENT);
 
 const editedItem = ref({}) as Ref<CreateBucketArgument>;
 

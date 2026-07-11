@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="deviceForm" validate-on="blur lazy">
       <v-autocomplete
         v-model="editedItem.product"
@@ -52,7 +52,7 @@ defineOptions({ name: PAGE_NAME.IOT_DEVICE_CONTENT });
 
 const deviceForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<DeviceEntity>(
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<DeviceEntity>(
   API.core.iotDevice(),
   PAGE_NAME.IOT_DEVICE_CONTENT,
 );

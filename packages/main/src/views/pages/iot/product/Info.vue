@@ -1,5 +1,5 @@
 <template>
-  <h-information-form-layout :title="title" :overlay="overlay" @finish="onReturn">
+  <h-information-form-layout :title="title" :overlay="overlay" @cancel="onReturn">
     <template #header>
       <v-row>
         <v-col cols="3">

@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="certificateForm" validate-on="blur lazy">
       <v-text-field
         v-model="editedItem.alias"
@@ -100,10 +100,10 @@ const showParentLoading = shallowRef(false);
 const showParentSelect = shallowRef(false);
 const showOcspSwitch = shallowRef(false);
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<MgtCertificateRequest, MgtCertificateResponse>(
-  API.core.mgtCertificate(),
-  PAGE_NAME.MGT_CERTIFICATE_CONTENT,
-);
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<
+  MgtCertificateRequest,
+  MgtCertificateResponse
+>(API.core.mgtCertificate(), PAGE_NAME.MGT_CERTIFICATE_CONTENT);
 
 const validateAlias = async (alias: string) => {
   return await new Promise((resolve, reject) => {

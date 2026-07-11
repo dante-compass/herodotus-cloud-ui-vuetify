@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 3.1.2
+
+### Patch Changes
+
+- [优化] 删除前端工程无用代码
+- Updated dependencies
+  - @herodotus/core@3.1.2
+
 ## 3.1.1
 
 ### Patch Changes

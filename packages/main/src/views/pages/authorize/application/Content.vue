@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-form-layout :title="title" :overlay="overlay">
+  <h-authorize-form-layout :title="title" :overlay="overlay" @cancel="onReturn">
     <v-container>
       <v-row>
         <v-col cols="2"></v-col>
@@ -111,7 +111,7 @@
             <v-divider></v-divider>
             <v-switch v-model="editedItem.reserved" label="是否为保留数据"></v-switch>
             <div>
-              <v-btn color="red" @click="onFinish()">取消</v-btn>
+              <v-btn color="red" @click="onReturn()">取消</v-btn>
               <v-btn class="ml-2" @click="onSave()">保存</v-btn>
             </div>
           </v-form>
@@ -150,7 +150,6 @@
 import type { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2ScopeConditions } from "@herodotus/api";
 import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useEditFinish } from "@herodotus/framework";
 import { includes } from "lodash-es";
 import { useDictionary, useTableItem, useTable } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
@@ -159,7 +158,7 @@ import { HDictionaryToggle, HDictionarySelect } from "@/components/library/HDict
 
 defineOptions({ name: PAGE_NAME.OAUTH2_APPLICATION_CONTENT, components: { HDictionaryToggle, HDictionarySelect } });
 
-const { editedItem, isEdit, title, overlay, saveOrUpdate } = useTableItem<OAuth2ApplicationEntity>(
+const { editedItem, isEdit, title, overlay, saveOrUpdate, onReturn } = useTableItem<OAuth2ApplicationEntity>(
   API.core.oauth2Application(),
   PAGE_NAME.OAUTH2_APPLICATION_CONTENT,
 );
@@ -175,7 +174,6 @@ const headers = ref([
 ]) as Ref<Array<VDataTableHeaders>>;
 
 const { options } = useDictionary("AllJwsAlgorithm");
-const { onFinish } = useEditFinish();
 
 const applicationForm = ref();
 

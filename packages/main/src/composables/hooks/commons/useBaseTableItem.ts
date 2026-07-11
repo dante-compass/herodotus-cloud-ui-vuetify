@@ -3,7 +3,7 @@ import type { Domain } from "@herodotus/core";
 import { useRoute } from "vue-router";
 import { OperationEnum } from "@herodotus/core";
 
-import { useEditFinish, useElementStore, useDetailPage } from "@herodotus/framework";
+import { useElementStore, useDetailPage } from "@herodotus/framework";
 
 /**
  * 表格条目基础定义
@@ -15,7 +15,6 @@ import { useEditFinish, useElementStore, useDetailPage } from "@herodotus/framew
  * @returns
  */
 export default function useBaseTableItem<I extends Domain>(componentName: string) {
-  const { onFinish } = useEditFinish();
   const { parseComponentName, goBack } = useDetailPage();
 
   const route = useRoute();
@@ -87,7 +86,6 @@ export default function useBaseTableItem<I extends Domain>(componentName: string
     additional,
     title,
     overlay,
-    onFinish,
     onReturn,
   };
 }

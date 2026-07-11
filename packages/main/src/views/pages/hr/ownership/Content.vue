@@ -1,5 +1,5 @@
 <template>
-  <h-full-width-form-layout title="配置人员归属" :overlay="overlay">
+  <h-full-width-form-layout title="配置人员归属" :overlay="overlay" @cancel="onReturn">
     <h-data-table
       v-model="selectedItems"
       v-model:page-size="pageSize"
@@ -51,7 +51,6 @@ import { isEmpty } from "lodash-es";
 import { toast } from "@herodotus/core";
 import { useTableItem } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
-import { useEditFinish } from "@herodotus/framework";
 import { useTable, useDictionary } from "@/composables/hooks";
 
 import { EmployeeSearch } from "../components";
@@ -72,7 +71,6 @@ const rowKey: SysEmployeeProps = "employeeId";
 
 const selectedItems = ref<SysEmployeeEntity[]>([]);
 
-const { onFinish } = useEditFinish();
 const { getDictionaryItemDisplay } = useDictionary("Gender", "Identity");
 const { editedItem, overlay, onReturn } = useTableItem<SysEmployeeAllocatable>(
   API.core.sysEmployeeAllocatable(),

@@ -1,4 +1,6 @@
-import { useRoute, type RouteLocationNormalizedGeneric, type RouteLocationNormalizedLoaded } from "vue-router";
+import type { RouteLocationNormalizedLoadedGeneric } from "vue-router";
+
+import { useRoute } from "vue-router";
 import { useTabsViewStore, useElementStore } from "../stores";
 import { RouterUtilities } from "../utilities";
 
@@ -8,7 +10,7 @@ export default function useDetailPage() {
   const routeStore = useElementStore();
   const tabsViewStore = useTabsViewStore();
 
-  const parseComponentName = (name: string, route?: RouteLocationNormalizedLoaded): string => {
+  const parseComponentName = (name: string, route?: RouteLocationNormalizedLoadedGeneric): string => {
     if (name) {
       return name;
     } else {
@@ -26,8 +28,6 @@ export default function useDetailPage() {
   };
 
   const goBack = (parentName: string, currentName: string) => {
-    console.log("----aaa---", parentName);
-    console.log("----bbb---", currentName);
     if (!isEmpty(parentName) && !isEmpty(currentName)) {
       routeStore.removeRoutePushParam(currentName);
       tabsViewStore.deleteTabByName(currentName);

@@ -1,5 +1,5 @@
 <template>
-  <h-full-width-form-layout title="证书文件管理">
+  <h-full-width-form-layout title="证书文件管理" @cancel="onReturn">
     <h-data-table
       v-model:page-size="pageSize"
       v-model:page-number="pageNumber"
@@ -43,6 +43,8 @@
 
 <script setup lang="ts">
 import type {
+  MgtCertificateRequest,
+  MgtCertificateResponse,
   MgtCertificateFileRequest,
   MgtCertificateFileResponse,
   MgtCertificateFileConditions,
@@ -52,7 +54,7 @@ import type { VDataTableHeaders } from "@/composables/declarations";
 
 import { isEmpty } from "lodash-es";
 
-import { useTable, useDictionary, useCertificateDownload } from "@/composables/hooks";
+import { useTable, useTableItem, useDictionary, useCertificateDownload } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.MGT_CERTIFICATE_FILE });
@@ -75,6 +77,11 @@ const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, delete
   MgtCertificateFileRequest,
   MgtCertificateFileResponse
 >(API.core.mgtCertificateFile(), PAGE_NAME.MGT_CERTIFICATE);
+
+const { onReturn } = useTableItem<MgtCertificateRequest, MgtCertificateResponse>(
+  API.core.mgtCertificate(),
+  PAGE_NAME.MGT_CERTIFICATE_FILE,
+);
 
 const { getDictionaryItemDisplay } = useDictionary(
   "CertificateCategory",

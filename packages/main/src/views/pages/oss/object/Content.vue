@@ -2,7 +2,7 @@
   <div>
     <v-card class="mx-auto mb-4" title="设置文件属性">
       <template #prepend>
-        <h-icon-button icon="mdi-arrow-left-box" tooltip="返回" variant="text" @click="onFinish()"></h-icon-button>
+        <h-icon-button icon="mdi-arrow-left-box" tooltip="返回" variant="text" @click="onReturn"></h-icon-button>
       </template>
     </v-card>
 
@@ -107,7 +107,6 @@ import type { ObjectDomain, GetObjectAttributesResult } from "@herodotus/api";
 
 import { isEmpty } from "lodash-es";
 import { notify, toast } from "@herodotus/core";
-import { useEditFinish } from "@herodotus/framework";
 import { useBaseTableItem, useDateTime, useDictionary, useOss } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
@@ -120,9 +119,8 @@ defineOptions({
 
 const { defaultFormat } = useDateTime();
 const { humanObjectSize } = useOss();
-const { onFinish } = useEditFinish();
 const { getDictionaryItemDisplay } = useDictionary("ObjectRetentionMode");
-const { editedItem, additional } = useBaseTableItem<ObjectDomain>(PAGE_NAME.OSS_OBJECT_CONTENT);
+const { editedItem, additional, onReturn } = useBaseTableItem<ObjectDomain>(PAGE_NAME.OSS_OBJECT_CONTENT);
 
 const loading = shallowRef(false);
 const showVersions = shallowRef(false);
@@ -175,7 +173,7 @@ const deleteObject = (bucketName: string, objectName: string, folderName = "") =
       .delete({ bucketName: bucketName, objectName: objectName })
       .then(() => {
         toast.success("删除成功");
-        onFinish();
+        onReturn();
       })
       .catch((error) => {
         if (error.message) {
