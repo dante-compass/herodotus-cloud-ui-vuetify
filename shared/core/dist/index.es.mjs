@@ -25,7 +25,7 @@ var m = /* @__PURE__ */ function(e) {
 }({}), x = /* @__PURE__ */ function(e) {
 	return e.OPENID = "openid", e.EMAIL = "email", e.PROFILE = "profile", e.PHONE = "phone", e.ADDRESS = "address", e.ROLES = "roles", e.CLIENT_CREATE = "client.create", e.CLIENT_READ = "client.read", e;
 }({}), S = /* @__PURE__ */ function(e) {
-	return e.ALLOCATABLE = "allocatable", e.AUTHORIZE = "authorize", e.CREATE = "create", e.EDIT = "edit", e.FILE = "file", e.INFO = "info", e.INVOKE = "invoke", e.REVOCATION = "revocation", e.SETUP = "setup", e;
+	return e.ALLOCATABLE = "Allocatable", e.AUTHORIZE = "Authorize", e.CREATE = "Create", e.CONTENT = "Content", e.EDIT = "Edit", e.FILE = "File", e.INFO = "Info", e.INVOKE = "Invoke", e.REVOCATION = "Revocation", e.SETUP = "Setup", e;
 }({}), C = /* @__PURE__ */ new Map(), w = (e) => {
 	let n = "";
 	return e && (n = typeof e == "string" ? e : e instanceof URLSearchParams ? e.toString() : typeof e == "object" ? t.stringify(e, { sort: (e, t) => e.localeCompare(t) }) : String(e)), n;

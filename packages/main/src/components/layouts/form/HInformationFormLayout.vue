@@ -18,8 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import { useEditFinish } from "@herodotus/framework";
-
 defineOptions({ name: "HInformationFormLayout" });
 
 interface Props {
@@ -33,5 +31,11 @@ withDefaults(defineProps<Props>(), {
   flat: false,
 });
 
-const { onFinish } = useEditFinish();
+const emit = defineEmits<{
+  finish: [];
+}>();
+
+const onFinish = async () => {
+  emit("finish");
+};
 </script>

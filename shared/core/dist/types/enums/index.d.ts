@@ -56,13 +56,14 @@ export declare enum BuildInScopeEnum {
     CLIENT_READ = "client.read"
 }
 export declare enum OperationEnum {
-    ALLOCATABLE = "allocatable",
-    AUTHORIZE = "authorize",
-    CREATE = "create",
-    EDIT = "edit",
-    FILE = "file",
-    INFO = "info",
-    INVOKE = "invoke",
-    REVOCATION = "revocation",
-    SETUP = "setup"
+    ALLOCATABLE = "Allocatable",
+    AUTHORIZE = "Authorize",
+    CREATE = "Create",
+    CONTENT = "Content",
+    EDIT = "Edit",
+    FILE = "File",
+    INFO = "Info",
+    INVOKE = "Invoke",
+    REVOCATION = "Revocation",
+    SETUP = "Setup"
 }

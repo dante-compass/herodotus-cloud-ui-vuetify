@@ -1,5 +1,5 @@
 <template>
-  <!-- <h-information-form-layout :title="title" :overlay="overlay">
+  <h-information-form-layout :title="title" :overlay="overlay" @finish="onReturn">
     <template #header>
       <v-row>
         <v-col cols="3">
@@ -40,31 +40,29 @@
         <v-col></v-col>
       </v-row>
     </template>
-  </h-information-form-layout> -->
-
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay">
-    <div>IotProductInfo</div>
-  </h-center-form-layout>
+  </h-information-form-layout>
 </template>
 
 <script setup lang="ts">
 import type { ProductEntity } from "@herodotus/api";
 
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
 import { useTableItem } from "@/composables/hooks";
 
 import { useClipboard } from "@vueuse/core";
 import { HFunctionTable } from "./components";
+import { OperationEnum } from "@herodotus/core";
 
-defineOptions({ name: "IotProductInfo" });
+defineOptions({ name: PAGE_NAME.IOT_PRODUCT_INFO });
 
 // const tab = shallowRef("tsl");
 
-// const { copy, copied, isSupported } = useClipboard({ legacy: true });
-const { editedItem, overlay, title } = useTableItem<ProductEntity>(API.core.iotProduct());
+const { copy, copied, isSupported } = useClipboard({ legacy: true });
+const { editedItem, overlay, title, onReturn } = useTableItem<ProductEntity>(
+  API.core.iotProduct(),
+  PAGE_NAME.IOT_PRODUCT_INFO,
+);
 
-// const visible = shallowRef(false);
+const visible = shallowRef(false);
 // const isShowTable = shallowRef(false);
-
-onMounted(() => {});
 </script>

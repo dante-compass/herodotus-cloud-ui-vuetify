@@ -1,8 +1,8 @@
-import type { Router, RouteLocationRaw, RouteLocationNormalizedLoaded, NavigationFailure } from 'vue-router';
+import type { Router, RouteLocationRaw, RouteLocationNormalizedLoaded, NavigationFailure } from "vue-router";
 
-import type { RouterOptions } from '@/declarations';
+import type { RouterOptions } from "@/declarations";
 
-import { isEmpty, split, dropRight, join } from 'lodash-es';
+import { isEmpty, split, dropRight, join } from "lodash-es";
 
 export class RouterUtilities {
   // 静态私有实例引用
@@ -27,7 +27,7 @@ export class RouterUtilities {
    */
   public static initialize(options: RouterOptions): RouterUtilities {
     if (RouterUtilities._initialized) {
-      throw new Error('RouterUtilities has already been initialized');
+      throw new Error("RouterUtilities has already been initialized");
     }
 
     RouterUtilities._instance = new RouterUtilities(options);
@@ -41,7 +41,7 @@ export class RouterUtilities {
    */
   public static getInstance(): RouterUtilities {
     if (!RouterUtilities._instance) {
-      throw new Error('RouterUtilities not initialized. Call initialize() first.');
+      throw new Error("RouterUtilities not initialized. Call initialize() first.");
     }
     return RouterUtilities._instance;
   }
@@ -107,7 +107,7 @@ export class RouterUtilities {
    */
   public open(to: RouteLocationRaw): void {
     const route = this.router.resolve(to);
-    window.open(route.href, '_blank');
+    window.open(route.href, "_blank");
   }
 
   /**
@@ -150,9 +150,9 @@ export class RouterUtilities {
   }
 
   private getParent(path: string): string {
-    const array = split(path, '/');
+    const array = split(path, "/");
     const result = dropRight(array);
-    return join(result, '/');
+    return join(result, "/");
   }
 
   public toPrev(route: RouteLocationNormalizedLoaded): void {

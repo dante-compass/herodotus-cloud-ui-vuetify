@@ -38,6 +38,11 @@ function setupApp() {
 
   app.mount("#app", true);
 
+  app.config.errorHandler = (err, vm, info) => {
+    console.error("全局错误:", err, info);
+    // 可尝试恢复渲染（如强制刷新路由）
+  };
+
   if (!IS_DEV) {
     if (VARIABLES.isUseDisableDevtool()) {
       const url =

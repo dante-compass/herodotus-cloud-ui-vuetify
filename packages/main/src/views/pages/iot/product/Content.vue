@@ -52,13 +52,17 @@ import type { ProductEntity, ProductCategoryEntity, ProductCategoryConditions } 
 
 import { useAutocomplete } from "@herodotus/framework";
 import { useTableItem } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
+import { OperationEnum } from "@herodotus/core";
 
-defineOptions({ name: "IotProductContent" });
+defineOptions({ name: PAGE_NAME.IOT_PRODUCT_CONTENT });
 
 const productForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<ProductEntity>(API.core.iotProduct());
+const { editedItem, title, overlay, saveOrUpdate } = useTableItem<ProductEntity>(
+  API.core.iotProduct(),
+  PAGE_NAME.IOT_PRODUCT_CONTENT,
+);
 const { loading, items, search } = useAutocomplete<ProductCategoryConditions, ProductCategoryEntity>(
   "name",
   API.core.iotProductCategory(),

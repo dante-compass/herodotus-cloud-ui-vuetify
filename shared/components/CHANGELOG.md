@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 3.1.1
+
+### Patch Changes
+
+- [重构] 前端三级路由页面重构为指定名称和 useRoute() 混合模式，提升页面返回稳定性，规避单独使用 useRoute() 偶发出现 inject() inject() can only be used inside setup() or functional components. 问题
+- Updated dependencies
+  - @herodotus/core@3.1.1
+
 ## 3.1.0
 
 ### Minor Changes

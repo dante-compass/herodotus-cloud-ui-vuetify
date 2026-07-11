@@ -41,9 +41,12 @@ import type { VDataTableHeaders } from "@/composables/declarations";
 import { useTableItem, useTable } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: "ThingsMqttAccountAuthorize" });
+defineOptions({ name: PAGE_NAME.THINGS_MQTT_ACCOUNT_AUTHORIZE });
 
-const { editedItem, overlay, title, assign } = useTableItem<MqttAccountEntity>(API.core.iotMqttAccount());
+const { editedItem, overlay, title, assign } = useTableItem<MqttAccountEntity>(
+  API.core.iotMqttAccount(),
+  PAGE_NAME.THINGS_MQTT_ACCOUNT_AUTHORIZE,
+);
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   MqttCategoryConditions,
   MqttCategoryEntity

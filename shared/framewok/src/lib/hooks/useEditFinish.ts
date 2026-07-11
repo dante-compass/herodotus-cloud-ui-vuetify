@@ -10,6 +10,8 @@ export default function useEditFinish() {
   const routeStore = useElementStore();
   const tabsViewStore = useTabsViewStore();
 
+  console.log("--------route-----", route);
+
   const onFinish = () => {
     if (!isEmpty(route) && route.name) {
       const name = route.name as string;

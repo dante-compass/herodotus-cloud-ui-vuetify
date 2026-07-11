@@ -83,6 +83,7 @@ export declare const useTabsViewStore: import('pinia').StoreDefinition<"TabsView
     closeTab(tab: Tab): void;
     smartTab(route: RouteLocationNormalizedLoadedGeneric): void;
     deleteTab(route: RouteLocationNormalizedLoadedGeneric): void;
+    deleteTabByName(name: string): void;
     closeCurrentTab(): void;
     closeOtherTabs(): void;
     closeLeftTabs(): void;
