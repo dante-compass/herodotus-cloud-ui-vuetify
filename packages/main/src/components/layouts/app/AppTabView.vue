@@ -14,8 +14,8 @@
           exact
         >
           <template #append>
-            <v-icon v-if="isNotLastTab(i)" icon="mdi-close-circle" class="q-ml-md" end @click="onCloseTab(tab)" />
-            <v-icon v-else icon="mdi-lock" class="q-ml-md" end />
+            <v-icon v-if="isNotLastTab(i)" icon="mdi-close-circle" end @click="onCloseTab(tab)" />
+            <v-icon v-else icon="mdi-lock" />
           </template>
         </v-tab>
       </v-tabs>
