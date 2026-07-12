@@ -53,7 +53,6 @@ import type { ProductEntity, ProductCategoryEntity, ProductCategoryConditions } 
 import { useAutocomplete } from "@herodotus/framework";
 import { useTableItem } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
-import { OperationEnum } from "@herodotus/core";
 
 defineOptions({ name: PAGE_NAME.IOT_PRODUCT_CONTENT });
 

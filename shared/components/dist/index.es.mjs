@@ -879,9 +879,12 @@ Q.install = (e) => {
 };
 //#endregion
 //#region src/HItem/HLabelItem.vue?vue&type=script&setup=true&lang.ts
-var Ke = { class: "d-flex justify-center align-center ga-4" }, qe = { class: "w-33" }, $ = /* @__PURE__ */ l({
+var Ke = { class: "w-20" }, qe = { class: "w-50" }, $ = /* @__PURE__ */ l({
 	name: "HLabelItem",
-	components: { HLabel: q },
+	components: {
+		HLabel: q,
+		HIconButton: L
+	},
 	__name: "HLabelItem",
 	props: {
 		label: {},
@@ -889,25 +892,36 @@ var Ke = { class: "d-flex justify-center align-center ga-4" }, qe = { class: "w-
 			type: Boolean,
 			default: !1
 		},
-		justify: { default: "default" }
+		justify: { default: "center" },
+		align: { default: "center" },
+		right: {
+			type: Boolean,
+			default: !1
+		}
 	},
 	setup(e) {
-		let t = e, n = () => t.justify === "end";
-		return (t, r) => (h(), i("div", Ke, [
-			c(y(q), {
+		let n = e, r = t(() => {
+			let e = [];
+			return n.justify && e.push(`justify-${n.justify}`), n.align && e.push(`align-${n.align}`), e;
+		});
+		return (t, n) => (h(), i("div", { class: f([
+			"d-flex",
+			...r.value,
+			"ga-4"
+		]) }, [
+			a("div", Ke, [c(y(q), {
 				text: e.label,
 				required: e.required,
 				"hide-details": "",
-				class: f(["d-flex", { "justify-end": n }]),
-				style: { width: "100px" }
+				class: f([{ "justify-end": e.right }])
 			}, null, 8, [
 				"text",
 				"required",
 				"class"
-			]),
+			])]),
 			a("div", qe, [g(t.$slots, "default")]),
 			a("div", null, [g(t.$slots, "append")])
-		]));
+		], 2));
 	}
 });
 //#endregion
