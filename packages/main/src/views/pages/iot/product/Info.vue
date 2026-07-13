@@ -19,7 +19,7 @@
           </v-col>
           <v-col cols="3">
             <h-label-item label="Product Secret：" justify="start">
-              {{ visible ? editedItem.productSecret : "************" }}
+              {{ visible ? editedItem.productSecret : '************' }}
               <template #append>
                 <h-icon-button
                   :icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
@@ -48,7 +48,6 @@
         <v-tabs v-model="tab" class="font-weight-bold">
           <v-tab text="产品信息" value="details"></v-tab>
           <v-tab text="物模型" value="tsl"></v-tab>
-          <v-tab text="实名认证" value="realname"></v-tab>
         </v-tabs>
       </v-card-item>
 
@@ -63,28 +62,23 @@
             :product-key="editedItem.productKey"
           ></h-function-table>
         </v-tabs-window-item>
-        <v-tabs-window-item value="realname">
-          <v-card flat>
-            <v-card-text>Lorem ipsum dolor sit amet consectetur adipisicing elit.</v-card-text>
-          </v-card>
-        </v-tabs-window-item>
       </v-tabs-window>
     </v-card>
   </h-information-form-layout>
 </template>
 
 <script setup lang="ts">
-import type { ProductEntity } from "@herodotus/api";
+import type { ProductEntity } from '@herodotus/api';
 
-import { API, PAGE_NAME } from "@/configurations";
-import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from '@/configurations';
+import { useTableItem } from '@/composables/hooks';
 
-import { useClipboard } from "@vueuse/core";
-import { HFunctionTable, HInformationTab } from "./components";
+import { useClipboard } from '@vueuse/core';
+import { HFunctionTable, HInformationTab } from './components';
 
 defineOptions({ name: PAGE_NAME.IOT_PRODUCT_INFO, components: { HFunctionTable, HInformationTab } });
 
-const tab = shallowRef("details");
+const tab = shallowRef('details');
 
 const { copy, copied, isSupported } = useClipboard({ legacy: true });
 const { editedItem, overlay, title, onReturn } = useTableItem<ProductEntity>(
@@ -96,8 +90,8 @@ const visible = shallowRef(false);
 const isShowTable = shallowRef(false);
 
 onMounted(() => {
-  console.log("-----ddd----", editedItem.value.id);
-  console.log("-----ddd----", editedItem.value.productKey);
+  console.log('-----ddd----', editedItem.value.id);
+  console.log('-----ddd----', editedItem.value.productKey);
   if (editedItem.value.id && editedItem.value.productKey) {
     isShowTable.value = true;
   } else {
