@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-card v-if="$slots.header" :flat="flat" :title="title" class="mb-4">
+    <v-card :flat="flat" :title="title" class="mb-4">
       <template #prepend>
         <h-icon-button icon="mdi-arrow-left-box" variant="text" @click="onCancel()"></h-icon-button>
       </template>
 
-      <v-card-text>
+      <v-card-text v-if="$slots.header">
         <slot name="header"></slot>
       </v-card-text>
       <v-overlay :model-value="overlay" class="align-center justify-center" contained>
@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: "HInformationFormLayout" });
+defineOptions({ name: 'HInformationFormLayout' });
 
 interface Props {
   title?: string;
@@ -36,6 +36,6 @@ const emit = defineEmits<{
 }>();
 
 const onCancel = async () => {
-  emit("cancel");
+  emit('cancel');
 };
 </script>
