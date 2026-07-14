@@ -1,6 +1,6 @@
 <template>
   <v-breadcrumbs :items="items" density="compact">
-    <template v-slot:title="{ item }">
+    <template #title="{ item }">
       <v-icon :icon="parseIcon(item.title)" class="mb-1"></v-icon>
       {{ parseTitle(item.title) }}
     </template>
@@ -8,14 +8,14 @@
 </template>
 
 <script setup lang="ts">
-import type { RouteLocationMatched, RouteLocationRaw } from "vue-router";
-import type { BreadcrumbItem } from "vuetify/lib/components/VBreadcrumbs/VBreadcrumbs.mjs";
-import { useRoute } from "vue-router";
-import { isEmpty, split } from "lodash-es";
+import type { RouteLocationMatched, RouteLocationRaw } from 'vue-router';
+import type { BreadcrumbItem } from 'vuetify/lib/components/VBreadcrumbs/VBreadcrumbs.mjs';
+import { useRoute } from 'vue-router';
+import { isEmpty, split } from 'lodash-es';
 
-import { DEAULT_ROUTER_LINK } from "@/configurations";
+import { DEAULT_ROUTER_LINK } from '@/configurations';
 
-defineOptions({ name: "LayoutBreadcrumbs" });
+defineOptions({ name: 'LayoutBreadcrumbs' });
 
 const route = useRoute();
 
@@ -52,16 +52,16 @@ const getItem = (item: RouteLocationMatched, matched: RouteLocationMatched): Bre
 };
 
 const createTitle = (item: RouteLocationMatched) => {
-  return item.meta.title + "_" + item.meta.icon;
+  return item.meta.title + '_' + item.meta.icon;
 };
 
 const parseTitle = (title: string) => {
-  const result = split(title, "_");
+  const result = split(title, '_');
   return result[0];
 };
 
 const parseIcon = (title: string) => {
-  const result = split(title, "_");
+  const result = split(title, '_');
   return result[1];
 };
 
@@ -72,9 +72,9 @@ const getHome = (matched: RouteLocationMatched[]) => {
   }
 
   return {
-    title: DEAULT_ROUTER_LINK.home.title + "_mdi-home",
+    title: DEAULT_ROUTER_LINK.home.title + '_mdi-home',
     disabled: disabled,
-    to: { name: "DashboardConsole", path: "/dashboard/console" },
+    to: { name: 'DashboardConsole', path: '/dashboard/console' },
   };
 };
 

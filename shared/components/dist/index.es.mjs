@@ -348,7 +348,8 @@ var W = /* @__PURE__ */ l({
 			modelValue: a.value,
 			"onUpdate:modelValue": i[0] ||= (e) => a.value = e,
 			"max-width": e.maxWidth,
-			persistent: ""
+			persistent: "",
+			"z-index": 1900
 		}, {
 			default: S(() => [c(y(re), d({
 				disabled: e.loading,

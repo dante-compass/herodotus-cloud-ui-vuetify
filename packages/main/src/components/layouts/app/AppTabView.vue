@@ -21,7 +21,7 @@
       </v-tabs>
       <template #append>
         <v-menu>
-          <template v-slot:activator="{ props }">
+          <template #activator="{ props }">
             <v-btn icon="mdi-dots-vertical" variant="text" v-bind="props"></v-btn>
           </template>
 
@@ -63,15 +63,15 @@
 </template>
 
 <script setup lang="ts">
-import type { Tab } from "@herodotus/framework";
+import type { Tab } from '@herodotus/framework';
 
-import { useRoute } from "vue-router";
-import { useTabsViewStore } from "@herodotus/framework";
-import { refreshTabInjectionKey } from "@/composables/symbols";
+import { useRoute } from 'vue-router';
+import { useTabsViewStore } from '@herodotus/framework';
+import { refreshTabInjectionKey } from '@/composables/symbols';
 
-import AppTabMenuItem from "./AppTabMenuItem.vue";
+import AppTabMenuItem from './AppTabMenuItem.vue';
 
-defineOptions({ name: "HAppTabView", components: { AppTabMenuItem } });
+defineOptions({ name: 'HAppTabView', components: { AppTabMenuItem } });
 
 const route = useRoute();
 

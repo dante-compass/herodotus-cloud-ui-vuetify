@@ -1,6 +1,6 @@
 <template>
   <v-card :disabled="loading" :loading="loading" rounded="xl">
-    <template v-slot:loader="{ isActive }">
+    <template #loader="{ isActive }">
       <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
     </template>
     <v-list

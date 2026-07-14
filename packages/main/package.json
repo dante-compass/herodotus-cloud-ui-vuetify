@@ -28,7 +28,7 @@
     "animate.css": "^4.1.1",
     "crypto-js": "^4.2.0",
     "echarts": "^6.1.0",
-    "nanoid": "^5.1.16",
+    "nanoid": "^6.0.0",
     "nprogress": "^0.2.0",
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",

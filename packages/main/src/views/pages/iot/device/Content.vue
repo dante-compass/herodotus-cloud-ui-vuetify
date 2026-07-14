@@ -15,7 +15,7 @@
         hide-no-data
         :rules="[(v: string) => !!v || '产品不能为空']"
       >
-        <template v-slot:item="{ props: itemProps, item }">
+        <template #item="{ props: itemProps, item }">
           <v-list-item v-bind="itemProps" :title="item.productKey + ' -- ' + item.productName"></v-list-item>
         </template>
       </v-autocomplete>
@@ -42,11 +42,11 @@
 </template>
 
 <script setup lang="ts">
-import type { DeviceEntity, ProductConditions, ProductEntity } from "@herodotus/api";
+import type { DeviceEntity, ProductConditions, ProductEntity } from '@herodotus/api';
 
-import { useAutocomplete } from "@herodotus/framework";
-import { useTableItem } from "@/composables/hooks";
-import { API, PAGE_NAME } from "@/configurations";
+import { useAutocomplete } from '@herodotus/framework';
+import { useTableItem } from '@/composables/hooks';
+import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.IOT_DEVICE_CONTENT });
 
@@ -57,7 +57,7 @@ const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<Devi
   PAGE_NAME.IOT_DEVICE_CONTENT,
 );
 const { loading, items, search } = useAutocomplete<ProductConditions, ProductEntity>(
-  "productKey",
+  'productKey',
   API.core.iotProduct(),
 );
 

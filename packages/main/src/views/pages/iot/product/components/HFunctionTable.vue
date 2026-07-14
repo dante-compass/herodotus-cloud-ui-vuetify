@@ -48,13 +48,13 @@
         </template>
       </h-data-table>
     </v-card-text>
-    <h-add-function-dialog
-      v-model="openDialog"
-      v-model:entity="entity"
-      :product-id="productId"
-      :product-key="productKey"
-    ></h-add-function-dialog>
   </v-card>
+  <h-add-function-dialog
+    v-model="openDialog"
+    v-model:entity="entity"
+    :product-id="productId"
+    :product-key="productKey"
+  ></h-add-function-dialog>
 </template>
 
 <script setup lang="ts">

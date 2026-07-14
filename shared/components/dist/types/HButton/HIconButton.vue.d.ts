@@ -2,7 +2,7 @@ import { VTooltip } from 'vuetify/components';
 interface Props {
     color?: string;
     tooltip?: string;
-    location?: VTooltip["location"];
+    location?: VTooltip['location'];
 }
 declare const __VLS_export: import('vue').DefineComponent<Props, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<Props> & Readonly<{}>, {
     location: import('vuetify/lib/types.mjs').Anchor;

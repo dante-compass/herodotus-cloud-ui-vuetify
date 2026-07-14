@@ -6,7 +6,7 @@
         <v-col xxl="4" xl="3" lg="2" md="1" sm="0" xs="0"></v-col>
         <v-col align-self="center">
           <v-card class="elevation-20 mx-auto rounded-xl" style="z-index: 5">
-            <template v-slot:append>
+            <template #append>
               <v-btn :icon="cycleChangeThemeIcon" @click="onCycleChangeTheme()" class="mx-2"></v-btn>
             </template>
             <h-app-logo height="10vh" class="mb-2"></h-app-logo>
@@ -31,12 +31,12 @@
 </template>
 
 <script setup lang="ts">
-import { useSystemTheme, useApplicationStore } from "@herodotus/framework";
+import { useSystemTheme, useApplicationStore } from '@herodotus/framework';
 
-import { HAppLogo } from "@/components/library/HLogo";
+import { HAppLogo } from '@/components/library/HLogo';
 
 defineOptions({
-  name: "HSignInLayout",
+  name: 'HSignInLayout',
   components: {
     HAppLogo,
   },
@@ -45,7 +45,7 @@ defineOptions({
 const { lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeThemeIcon } = useSystemTheme();
 const application = useApplicationStore();
 
-const tabs = shallowRef("account");
+const tabs = shallowRef('account');
 
 watch(tabs, (newValue) => {
   application.signInPanel = newValue;

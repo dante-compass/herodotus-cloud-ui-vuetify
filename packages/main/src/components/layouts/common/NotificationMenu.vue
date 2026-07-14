@@ -1,6 +1,6 @@
 <template>
   <v-menu eager location="bottom end" :close-on-content-click="false">
-    <template v-slot:activator="{ props }">
+    <template #activator="{ props }">
       <v-icon-btn v-bind="props" color="medium-emphasis">
         <v-badge v-if="totalCount !== 0" location="top right" color="error" :content="totalCount">
           <v-icon icon="mdi-bell-outline"></v-icon>
@@ -48,17 +48,17 @@
 </template>
 
 <script setup lang="ts">
-import NotificationDialogue from "./NotificationDialogue.vue";
-import NotificationAnnouncement from "./NotificationAnnouncement.vue";
+import NotificationDialogue from './NotificationDialogue.vue';
+import NotificationAnnouncement from './NotificationAnnouncement.vue';
 
-import { useWebSocketMessage, useNotifications } from "@/composables/hooks";
+import { useWebSocketMessage, useNotifications } from '@/composables/hooks';
 
 defineOptions({
-  name: "NotificationMenu",
+  name: 'NotificationMenu',
   components: { NotificationDialogue, NotificationAnnouncement },
 });
 
-const tab = shallowRef("dialogue");
+const tab = shallowRef('dialogue');
 const menu = shallowRef(false);
 const dialogueMessage = ref();
 const announcementMessage = ref();

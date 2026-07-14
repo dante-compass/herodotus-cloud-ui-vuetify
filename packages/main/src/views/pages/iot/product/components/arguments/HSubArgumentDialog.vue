@@ -14,23 +14,22 @@
 </template>
 
 <script setup lang="ts">
-import type { Specification, Specs } from "@herodotus/api";
+import type { Specification, Specs } from '@herodotus/api';
 
-import { computed, onUpdated, ref } from "vue";
+import { computed, onUpdated, ref } from 'vue';
 
-import { toUpper } from "lodash-es";
-import { useTslEmptyArgument } from "../../composables/hooks";
+import { toUpper } from 'lodash-es';
 
-import { HDictionarySelect } from "@/components/library/HDictionary";
-import HBoolPanel from "./HBoolPanel.vue";
-import HDatePanel from "./HDatePanel.vue";
-import HEnumPanel from "./HEnumPanel.vue";
-import HNumberPanel from "./HNumberPanel.vue";
-import HTextPanel from "./HTextPanel.vue";
-import HCharacteristicPanel from "./HCharacteristicPanel.vue";
+import { HDictionarySelect } from '@/components/library/HDictionary';
+import HBoolPanel from './HBoolPanel.vue';
+import HDatePanel from './HDatePanel.vue';
+import HEnumPanel from './HEnumPanel.vue';
+import HNumberPanel from './HNumberPanel.vue';
+import HTextPanel from './HTextPanel.vue';
+import HCharacteristicPanel from './HCharacteristicPanel.vue';
 
 defineOptions({
-  name: "HSubArgumentDialog",
+  name: 'HSubArgumentDialog',
   components: {
     HCharacteristicPanel,
     HDictionarySelect,
@@ -48,19 +47,21 @@ const model = defineModel<boolean>({
   required: true,
 });
 
-const emit = defineEmits(["save"]);
-
-const { createEmptyNormalArgument } = useTslEmptyArgument();
+const emit = defineEmits(['save']);
 
 const subArgumentForm = ref();
 
-const entity = ref<Specification<Specs>>(createEmptyNormalArgument());
+const entity = ref({
+  identifier: '',
+  name: '',
+  dataType: { type: 'int', specs: {} },
+}) as Ref<Specification<Specs>>;
 
 const currentPanel = computed(() => {
   if (entity.value.dataType.type) {
-    return toUpper(entity.value.dataType.type) + "_PANEL";
+    return toUpper(entity.value.dataType.type) + '_PANEL';
   } else {
-    return "INT_PANEL";
+    return 'INT_PANEL';
   }
 });
 
@@ -68,12 +69,16 @@ const onSave = async () => {
   const { valid } = await subArgumentForm.value.validate();
   if (valid) {
     model.value = false;
-    emit("save", entity.value);
+    emit('save', entity.value);
   }
 };
 
 onUpdated(() => {
   // 每次重新打开 Dialog，清除上次操作遗留数据
-  entity.value = createEmptyNormalArgument();
+  entity.value = {
+    identifier: '',
+    name: '',
+    dataType: { type: 'int', specs: {} },
+  } as Specification<Specs>;
 });
 </script>

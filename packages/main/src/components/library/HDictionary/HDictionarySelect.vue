@@ -8,19 +8,19 @@
     closable-chips
     v-bind="$attrs"
   >
-    <template v-slot:item="{ props: itemProps, item }">
+    <template #item="{ props: itemProps, item }">
       <v-list-item v-if="showItem(item)" v-bind="itemProps"></v-list-item>
     </template>
   </v-select>
 </template>
 
 <script setup lang="ts">
-import type { Dictionary } from "@herodotus/core";
+import type { Dictionary } from '@herodotus/core';
 
-import { isEmpty } from "lodash-es";
-import { useDictionary } from "@/composables/hooks";
+import { isEmpty } from 'lodash-es';
+import { useDictionary } from '@/composables/hooks';
 
-defineOptions({ name: "HDictionarySelect" });
+defineOptions({ name: 'HDictionarySelect' });
 
 interface Props {
   dictionary: string;
