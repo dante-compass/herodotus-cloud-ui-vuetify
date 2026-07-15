@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="employeeForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.employeeName"
@@ -19,16 +19,19 @@
 </template>
 
 <script setup lang="ts">
-import type { SysEmployeeEntity } from '@herodotus/api';
+import type { SysEmployeeEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysUserContent' });
+defineOptions({ name: PAGE_NAME.SYS_EMPLOYEE_CONTENT });
+
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<SysEmployeeEntity>(
+  API.core.sysEmployee(),
+  PAGE_NAME.SYS_EMPLOYEE_CONTENT,
+);
 
 const employeeForm = ref();
-
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysEmployeeEntity>(API.core.sysEmployee());
 
 const validateEmployeeName = async (employeeName: string) => {
   return await new Promise((resolve, reject) => {
@@ -56,11 +59,11 @@ const isUniqueRule = (username: string) => {
       if (validate) {
         return true;
       } else {
-        return '人员姓名已存在用，请改用其它姓名用以区分';
+        return "人员姓名已存在用，请改用其它姓名用以区分";
       }
     })
     .catch(() => {
-      return '后端服务暂时不可用';
+      return "后端服务暂时不可用";
     });
 };
 

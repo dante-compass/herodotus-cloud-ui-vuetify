@@ -42,7 +42,7 @@ import { HTslButton } from "../commons";
 defineOptions({ name: "HEnumPanel", components: { HDictionarySelect, HTslButton } });
 
 const model = defineModel<Specification<EnumSpecs>>({
-  default: () => ({}),
+  default: () => ({}) as Specification<EnumSpecs>,
 });
 
 // 内部维护的条目列表

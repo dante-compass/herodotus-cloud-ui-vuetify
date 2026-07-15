@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height" fluid>
+  <v-container class="fill-height">
     <v-row justify="center" align="center" style="height: 100vh">
       <v-col cols="12" sm="8" md="6" lg="4" align-self="center">
         <v-card class="py-12" flat>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'loading' });
+defineOptions({ name: "loading" });
 </script>
 
 <style scoped>

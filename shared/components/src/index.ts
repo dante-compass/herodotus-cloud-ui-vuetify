@@ -1,27 +1,29 @@
 import type { App } from "vue";
 
-import { HButton } from "./HButton";
+import { HIconButton } from "./HButton";
 import { HDate, HDateTime, HDuration, HTime } from "./HDateTime";
 import { HDialog } from "./HDialog";
-import { HTextDivider } from "./HDivider";
+import { HDivider } from "./HDivider";
 import { HDownloadProgress } from "./HProgress";
 import { HLabel } from "./HLabel";
 import { HParticles } from "./HParticles";
 import { HMdiIconSelect, HTreeSelect } from "./HSelect";
 import { HSignInBackground } from "./HSignIn";
+import { HLabelItem } from "./HItem";
 
 const components = [
-  HButton,
   HDate,
   HDateTime,
   HDialog,
+  HDivider,
   HDownloadProgress,
   HDuration,
   HMdiIconSelect,
+  HIconButton,
   HLabel,
+  HLabelItem,
   HParticles,
   HSignInBackground,
-  HTextDivider,
   HTime,
   HTreeSelect,
 ];
@@ -31,17 +33,18 @@ const install = (app: App) => {
 };
 
 export {
-  HButton,
   HDate,
   HDateTime,
   HDialog,
+  HDivider,
   HDownloadProgress,
   HDuration,
   HMdiIconSelect,
+  HIconButton,
   HLabel,
+  HLabelItem,
   HParticles,
   HSignInBackground,
-  HTextDivider,
   HTime,
   HTreeSelect,
 };

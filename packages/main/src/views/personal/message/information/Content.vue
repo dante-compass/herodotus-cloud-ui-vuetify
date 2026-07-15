@@ -1,5 +1,5 @@
 <template>
-  <h-detail-container :title="receiverName">
+  <h-detail-container :title="receiverName" @cancel="onReturn">
     <v-data-iterator v-model:items-per-page="pageSize" v-model:page="pageNumber" :items="tableRows" :loading="loading">
       <template #default="{ items }">
         <v-list>
@@ -38,35 +38,33 @@
 </template>
 
 <script setup lang="ts">
-import type { DialogueDetailEntity, DialogueDetailConditions } from '@herodotus/api';
+import type { DialogueDetailEntity, DialogueDetailConditions } from "@herodotus/api";
 
-import { useEditFinish } from '@herodotus/framework';
-import { moment } from '@herodotus/core';
-import { useTable, useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { moment } from "@herodotus/core";
+import { useTable, useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-import { HUserAvatar } from './components';
+import { HUserAvatar } from "./components";
 
-defineOptions({ name: 'MessageInformationContent', components: { HUserAvatar } });
+defineOptions({ name: PAGE_NAME.MESSAGE_INFORMATION_CONTENT, components: { HUserAvatar } });
 
-const { onFinish } = useEditFinish();
-const { editedItem } = useTableItem(API.core.dialogueContact());
+const { editedItem, onReturn } = useTableItem(API.core.dialogueContact(), PAGE_NAME.MESSAGE_INFORMATION_CONTENT);
 const { loading, pageNumber, pageSize, tableRows, totalPages, toEdit, findItems, conditions } = useTable<
   DialogueDetailConditions,
   DialogueDetailEntity
->(API.core.dialogueDetail(), 'MessageDialogueDetail', false, ['createTime'], 'ASC', false);
+>(API.core.dialogueDetail(), "MessageDialogueDetail", false, ["createTime"], "ASC", false);
 
-const receiverId = shallowRef('');
-const receiverName = shallowRef('');
-const receiverAvatar = shallowRef('');
-const dialogueId = shallowRef('');
+const receiverId = shallowRef("");
+const receiverName = shallowRef("");
+const receiverAvatar = shallowRef("");
+const dialogueId = shallowRef("");
 
 const humanUpdateTimte = (updateTime: Date | undefined) => {
   return moment(updateTime).fromNow();
 };
 
 const onSendMessage = () => {
-  onFinish();
+  onReturn();
 };
 
 onMounted(() => {

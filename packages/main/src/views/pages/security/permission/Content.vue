@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="permissionForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.permissionName"
@@ -16,16 +16,19 @@
 </template>
 
 <script setup lang="ts">
-import type { SysPermissionEntity } from '@herodotus/api';
+import type { SysPermissionEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysPermissionContent' });
+defineOptions({ name: PAGE_NAME.SYS_PERMISSION_CONTENT });
+
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<SysPermissionEntity>(
+  API.core.sysPermission(),
+  PAGE_NAME.SYS_PERMISSION_CONTENT,
+);
 
 const permissionForm = ref();
-
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysPermissionEntity>(API.core.sysPermission());
 
 const onSave = async () => {
   const { valid } = await permissionForm.value.validate();

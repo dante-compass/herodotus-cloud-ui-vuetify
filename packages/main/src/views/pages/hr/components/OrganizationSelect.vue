@@ -50,7 +50,6 @@ watch(
   () => props.category,
   (newValue) => {
     if (newValue !== undefined) {
-      console.log('-----watch-----', newValue);
       loadData(newValue);
     }
   },

@@ -11,28 +11,23 @@
   </div>
 </template>
 
-<script lang="ts">
-import { useTslEmptyArgument } from "../../composables/hooks";
-const { createEmptyNormalArgument, createEmptyStructArgument } = useTslEmptyArgument();
-</script>
-
 <script setup lang="ts">
-import type { Specification, Specs } from "@herodotus/api";
+import type { Specification, Specs, StructSpecs } from '@herodotus/api';
 
-import { toUpper, isEmpty } from "lodash-es";
+import { toUpper, isEmpty } from 'lodash-es';
 
-import { HDictionarySelect } from "@/components/library/HDictionary";
+import { HDictionarySelect } from '@/components/library/HDictionary';
 
-import HBoolPanel from "./HBoolPanel.vue";
-import HDatePanel from "./HDatePanel.vue";
-import HEnumPanel from "./HEnumPanel.vue";
-import HNumberPanel from "./HNumberPanel.vue";
-import HTextPanel from "./HTextPanel.vue";
-import HStructPanel from "./HStructPanel.vue";
-import HCharacteristicPanel from "./HCharacteristicPanel.vue";
+import HBoolPanel from './HBoolPanel.vue';
+import HDatePanel from './HDatePanel.vue';
+import HEnumPanel from './HEnumPanel.vue';
+import HNumberPanel from './HNumberPanel.vue';
+import HTextPanel from './HTextPanel.vue';
+import HStructPanel from './HStructPanel.vue';
+import HCharacteristicPanel from './HCharacteristicPanel.vue';
 
 defineOptions({
-  name: "HArgumentPanel",
+  name: 'HArgumentPanel',
   components: {
     HCharacteristicPanel,
     HDictionarySelect,
@@ -48,14 +43,14 @@ defineOptions({
 });
 
 const model = defineModel<Specification<Specs>>({
-  default: () => createEmptyNormalArgument(),
+  default: () => ({ identifier: '', name: '', dataType: { type: 'int', specs: {} } }) as Specification<Specs>,
 });
 
 const currentPanel = computed(() => {
   if (model.value.dataType.type) {
-    return toUpper(model.value.dataType.type) + "_PANEL";
+    return toUpper(model.value.dataType.type) + '_PANEL';
   } else {
-    return "INT_PANEL";
+    return 'INT_PANEL';
   }
 });
 
@@ -72,17 +67,19 @@ watch(
   () => model.value.dataType.type,
   (newValue, oldValue) => {
     // 类型未实际变化则跳过（避免初始化时重复触发）
+
+    console.log('--------', newValue);
     if (newValue === oldValue) {
       return;
     }
 
     // 仅在新创建的情况下，做此操作避免切换至 struts 面板时，抛出类型不匹配错误
     if (isModelEmpty()) {
-      if (newValue === "struct") {
-        model.value = createEmptyStructArgument();
-      } else {
-        model.value = createEmptyNormalArgument();
-      }
+      model.value = {
+        identifier: '',
+        name: '',
+        dataType: { type: newValue, specs: newValue === 'struct' ? [] : {} },
+      } as Specification<Specs>;
     }
   },
 );

@@ -143,6 +143,12 @@ export const useTabsViewStore = defineStore("TabsView", {
       this.closeTab(tab);
     },
 
+    deleteTabByName(name: string) {
+      if (name) {
+        this.closeTab({ name: name, path: "", meta: {} });
+      }
+    },
+
     closeCurrentTab(): void {
       this.closeTab(this.activatedTab);
     },

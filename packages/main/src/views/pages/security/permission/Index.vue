@@ -27,7 +27,7 @@
 import type { SysPermissionEntity, SysPermissionConditions, SysPermissionProps } from "@herodotus/api";
 import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable } from "@/composables/hooks";
+import { useTable, useDateTime } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.SYS_PERMISSION });
@@ -36,6 +36,8 @@ const headers = ref([
   { key: "permissionName", align: "center", title: "权限名称" },
   { key: "permissionCode", align: "center", title: "权限代码" },
   { key: "description", align: "center", title: "备注" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
   { key: "reserved", align: "center", title: "保留数据" },
   { key: "status", align: "center", title: "状态" },
   { key: "actions", align: "center", title: "操作" },
@@ -43,6 +45,7 @@ const headers = ref([
 
 const rowKey: SysPermissionProps = "permissionId";
 
+const { defaultFormat } = useDateTime();
 const {
   loading,
   pageNumber,

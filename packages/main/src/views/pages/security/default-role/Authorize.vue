@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-form-layout :title="title" :overlay="overlay">
+  <h-authorize-form-layout :title="title" :overlay="overlay" @cancel="onReturn">
     <v-card rounded="lg">
       <v-data-table-server
         v-model="selectedItems"
@@ -35,15 +35,18 @@
 </template>
 
 <script setup lang="ts">
-import type { SysDefaultRoleEntity, SysRoleEntity, SysRoleProps, SysRoleConditions } from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+import type { SysDefaultRoleEntity, SysRoleEntity, SysRoleProps, SysRoleConditions } from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTableItem, useTable } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { useTableItem, useTable } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysDefaultRoleAuthorize' });
+defineOptions({ name: PAGE_NAME.SYS_DEFAULT_ROLE_AUTHORIZE });
 
-const { editedItem, overlay, title, assign } = useTableItem<SysDefaultRoleEntity>(API.core.sysDefaultRole());
+const { editedItem, overlay, title, assign, onReturn } = useTableItem<SysDefaultRoleEntity>(
+  API.core.sysDefaultRole(),
+  PAGE_NAME.SYS_DEFAULT_ROLE_AUTHORIZE,
+);
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<SysRoleConditions, SysRoleEntity>(
   API.core.sysRole(),
   PAGE_NAME.SYS_ROLE,
@@ -51,11 +54,11 @@ const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useT
 );
 
 const selectedItems = ref([]) as Ref<Array<SysRoleEntity>>;
-const rowKey: SysRoleProps = 'roleId';
+const rowKey: SysRoleProps = "roleId";
 
 const headers = ref([
-  { key: 'roleName', align: 'center', title: '角色名称' },
-  { key: 'roleCode', align: 'center', title: '角色代码' },
+  { key: "roleName", align: "center", title: "角色名称" },
+  { key: "roleCode", align: "center", title: "角色代码" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
 onMounted(() => {

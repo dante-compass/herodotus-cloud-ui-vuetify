@@ -50,7 +50,7 @@ defineOptions({ name: "OrganizationTree" });
 
 const selectedValue = defineModel<Tree>({
   required: true,
-  default: () => ({}),
+  default: () => ({}) as Tree,
 });
 
 const activated = computed({

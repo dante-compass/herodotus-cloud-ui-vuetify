@@ -13,23 +13,26 @@
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity, Specification, Specs } from "@herodotus/api";
+import type { TslFunctionEntity, Specification, Specs } from '@herodotus/api';
 
-import { isEmpty } from "lodash-es";
-import { useTslEmptyArgument, useTslValidation } from "../../composables/hooks";
+import { isEmpty } from 'lodash-es';
+import { useTslValidation } from '../../composables/hooks';
 
-import { HDictionaryOption } from "@/components/library/HDictionary";
-import { HArgumentPanel } from "../arguments";
+import { HDictionaryOption } from '@/components/library/HDictionary';
+import { HArgumentPanel } from '../arguments';
 
-defineOptions({ name: "HPropertiesPanel" });
+defineOptions({ name: 'HPropertiesPanel' });
 
 const entity = defineModel<TslFunctionEntity>({
-  default: () => ({}),
+  default: () => ({}) as TslFunctionEntity,
 });
 
-const { createEmptyNormalArgument } = useTslEmptyArgument();
 const { identifier, validate } = useTslValidation();
-const argument = ref<Specification<Specs>>(createEmptyNormalArgument());
+const argument = ref({
+  identifier: '',
+  name: '',
+  dataType: { type: 'int', specs: {} },
+}) as Ref<Specification<Specs>>;
 
 watch(
   argument,

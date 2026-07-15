@@ -1,7 +1,7 @@
 <template>
   <v-breadcrumbs :items="items" density="compact">
-    <template v-slot:title="{ item }">
-      <v-icon :icon="parseIcon(item.title)" size="small"></v-icon>
+    <template #title="{ item }">
+      <v-icon :icon="parseIcon(item.title)" class="mb-1"></v-icon>
       {{ parseTitle(item.title) }}
     </template>
   </v-breadcrumbs>
@@ -36,11 +36,11 @@ const matchedToRaw = (item: RouteLocationMatched): RouteLocationRaw => {
   };
 };
 
-const getItem = (item: RouteLocationMatched): BreadcrumbItem => {
+const getItem = (item: RouteLocationMatched, matched: RouteLocationMatched): BreadcrumbItem => {
   let disabled = false;
   let to = matchedToRaw(item);
 
-  if (!isEmpty(item.children)) {
+  if (item.path === matched.path) {
     disabled = true;
   }
 
@@ -79,7 +79,7 @@ const getHome = (matched: RouteLocationMatched[]) => {
 };
 
 const getItems = (matched: RouteLocationMatched[]) => {
-  return matched.map((item) => getItem(item));
+  return matched.map((item) => getItem(item, matched[matched.length - 1]));
 };
 
 const items = computed(() => {

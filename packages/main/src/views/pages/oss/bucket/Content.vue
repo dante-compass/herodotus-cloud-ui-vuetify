@@ -1,5 +1,5 @@
 <template>
-  <h-simple-center-form-layout :title="title" :overlay="overlay" @save="onSave()">
+  <h-simple-center-form-layout :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="createBucketForm">
       <v-text-field
         v-model="editedItem.bucketName"
@@ -19,16 +19,16 @@
 </template>
 
 <script setup lang="ts">
-import type { HttpResult } from '@herodotus/core';
-import type { CreateBucketArgument, CreateBucketResult } from '@herodotus/api';
+import type { HttpResult } from "@herodotus/core";
+import type { CreateBucketArgument, CreateBucketResult } from "@herodotus/api";
 
-import { toast } from '@herodotus/core';
-import { useBaseTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { toast } from "@herodotus/core";
+import { useBaseTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'OssBucketContent' });
+defineOptions({ name: PAGE_NAME.OSS_BUCKET_CONTENT });
 
-const { title, overlay } = useBaseTableItem<CreateBucketArgument>();
+const { title, overlay, onReturn } = useBaseTableItem<CreateBucketArgument>(PAGE_NAME.OSS_BUCKET_CONTENT);
 
 const editedItem = ref({}) as Ref<CreateBucketArgument>;
 
@@ -49,15 +49,15 @@ const onSave = () => {
         if (result.message) {
           toast.success(result.message);
         } else {
-          toast.success('操作成功！');
+          toast.success("操作成功！");
         }
       } else {
-        toast.warning('服务端异常！');
+        toast.warning("服务端异常！");
       }
     })
     .catch(() => {
       overlay.value = false;
-      toast.error('删除失败');
+      toast.error("删除失败");
     });
 };
 </script>

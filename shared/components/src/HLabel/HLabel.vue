@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex mb-3 w-100">
+  <div :class="['d-flex w-100', { 'mb-3': !hideDetails }]">
     <div class="flex-1-1-0">
       <div class="d-flex">
         <div v-if="required" class="d-flex align-self-center mr-1">
@@ -19,7 +19,6 @@
       </div>
       <v-messages v-if="showMessage" :messages="message" :active="showMessage" />
     </div>
-    <slot></slot>
   </div>
 </template>
 
@@ -34,10 +33,12 @@ interface Props {
   text: string;
   message?: string;
   tooltip?: string;
+  hideDetails?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   required: false,
+  hideDetails: false,
 });
 
 const showMessage = computed(() => {

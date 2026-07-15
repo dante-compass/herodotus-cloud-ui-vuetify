@@ -7,15 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Specification, Specs } from "@herodotus/api";
+import type { Specification, Specs } from '@herodotus/api';
 
-import { useTslEmptyArgument } from "../../composables/hooks";
-
-import { HDictionarySelect } from "@/components/library/HDictionary";
-import { HArgumentPanel } from "../arguments";
+import { HDictionarySelect } from '@/components/library/HDictionary';
+import { HArgumentPanel } from '../arguments';
 
 defineOptions({
-  name: "HAddArgumentDialog",
+  name: 'HAddArgumentDialog',
   components: {
     HDictionarySelect,
     HArgumentPanel,
@@ -26,24 +24,30 @@ const model = defineModel<boolean>({
   required: true,
 });
 
-const emit = defineEmits(["save"]);
-
-const { createEmptyNormalArgument } = useTslEmptyArgument();
+const emit = defineEmits(['save']);
 
 const addArgumentForm = ref();
 
-const entity = ref<Specification<Specs>>(createEmptyNormalArgument());
+const entity = ref({
+  identifier: '',
+  name: '',
+  dataType: { type: 'int', specs: {} },
+}) as Ref<Specification<Specs>>;
 
 const onSave = async () => {
   const { valid } = await addArgumentForm.value.validate();
   if (valid) {
     model.value = false;
-    emit("save", entity.value);
+    emit('save', entity.value);
   }
 };
 
 onUpdated(() => {
   // 每次重新打开 Dialog，清除上次操作遗留数据
-  entity.value = createEmptyNormalArgument();
+  entity.value = {
+    identifier: '',
+    name: '',
+    dataType: { type: 'int', specs: {} },
+  } as Specification<Specs>;
 });
 </script>

@@ -74,7 +74,7 @@
 
     <template #bottom>
       <div class="row text-end">
-        <h-button
+        <v-btn
           :disabled="nextEnabled"
           density="comfortable"
           icon="mdi-arrow-right"
@@ -82,7 +82,7 @@
           tooltip="下一页"
           rounded
           @click="onFetchNextPageObjects"
-        ></h-button>
+        ></v-btn>
       </div>
     </template>
   </h-data-table>

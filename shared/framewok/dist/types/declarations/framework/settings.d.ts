@@ -1,5 +1,5 @@
 import { ThemeModeEnum } from '@herodotus/core';
-import { LayoutModeEnum } from '../enums';
+import { LayoutModeEnum, LibraryEnum, TableStyleEnum } from '../enums';
 export interface ThemeColor {
     primary: string;
 }
@@ -13,6 +13,7 @@ export interface Effect {
 }
 export interface TableDisplay {
     dense: boolean;
+    style: TableStyleEnum;
 }
 export interface Display {
     isTabsView: boolean;
@@ -22,6 +23,7 @@ export interface Display {
     table: TableDisplay;
 }
 export interface SystemSetting {
+    library: LibraryEnum;
     theme: Theme;
     layout: LayoutModeEnum;
     effect: Effect;

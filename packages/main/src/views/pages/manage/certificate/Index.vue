@@ -90,6 +90,8 @@ const headers = ref([
   { key: "password", align: "center", title: "密码" },
   { key: "ocsp", align: "center", title: "OCSP 证书" },
   { key: "revocationReason", align: "center", title: "证书吊销理由" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
   { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 

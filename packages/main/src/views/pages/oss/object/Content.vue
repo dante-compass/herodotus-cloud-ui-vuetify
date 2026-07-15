@@ -2,16 +2,16 @@
   <div>
     <v-card class="mx-auto mb-4" title="设置文件属性">
       <template #prepend>
-        <h-button icon="mdi-arrow-left-box" tooltip="返回" variant="text" @click="onFinish()"></h-button>
+        <h-icon-button icon="mdi-arrow-left-box" tooltip="返回" variant="text" @click="onReturn"></h-icon-button>
       </template>
     </v-card>
 
-    <v-container fluid class="pa-0">
+    <v-container class="pa-0">
       <v-row>
         <v-col xl="3" lg="3" md="4" sm="6" xs="12">
           <v-sheet>
             <v-card :disabled="loading" :loading="loading" :subtitle="currentObjectName">
-              <template v-slot:loader="{ isActive }">
+              <template #loader="{ isActive }">
                 <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
               </template>
               <v-card-text>
@@ -107,22 +107,20 @@ import type { ObjectDomain, GetObjectAttributesResult } from '@herodotus/api';
 
 import { isEmpty } from 'lodash-es';
 import { notify, toast } from '@herodotus/core';
-import { useEditFinish } from '@herodotus/framework';
 import { useBaseTableItem, useDateTime, useDictionary, useOss } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { API, PAGE_NAME } from '@/configurations';
 
 import { HOssObjectVersions, HOssSetLegalHoldDialog, HOssSetRetentionDialog } from './components';
 
 defineOptions({
-  name: 'OssObjectContent',
+  name: PAGE_NAME.OSS_OBJECT_CONTENT,
   components: { HOssObjectVersions, HOssSetLegalHoldDialog, HOssSetRetentionDialog },
 });
 
 const { defaultFormat } = useDateTime();
 const { humanObjectSize } = useOss();
-const { onFinish } = useEditFinish();
 const { getDictionaryItemDisplay } = useDictionary('ObjectRetentionMode');
-const { editedItem, additional } = useBaseTableItem<ObjectDomain>();
+const { editedItem, additional, onReturn } = useBaseTableItem<ObjectDomain>(PAGE_NAME.OSS_OBJECT_CONTENT);
 
 const loading = shallowRef(false);
 const showVersions = shallowRef(false);
@@ -175,7 +173,7 @@ const deleteObject = (bucketName: string, objectName: string, folderName = '') =
       .delete({ bucketName: bucketName, objectName: objectName })
       .then(() => {
         toast.success('删除成功');
-        onFinish();
+        onReturn();
       })
       .catch((error) => {
         if (error.message) {

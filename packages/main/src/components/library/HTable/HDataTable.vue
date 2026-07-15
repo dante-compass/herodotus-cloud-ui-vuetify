@@ -23,13 +23,10 @@
         <h-action-button
           :icon="isFullscreen ? 'mdi-arrow-collapse-all' : 'mdi-arrow-expand-all'"
           :tooltip="isFullscreen ? '退出全屏' : '全屏显示'"
+          class="mr-2"
           @click="toggle()"
         ></h-action-button>
       </v-card-title>
-
-      <div class="d-flex py-3 justify-space-between">
-        <slot name="extends"></slot>
-      </div>
 
       <v-card-text>
         <v-data-table-server
@@ -42,12 +39,8 @@
           hover
           v-bind="$attrs"
         >
-          <template v-for="slotName in Object.keys($slots)" v-slot:[slotName]="props">
-            <slot
-              v-if="!['loading', 'item.status', 'item.reserved'].includes(slotName)"
-              :name="slotName"
-              v-bind="props"
-            ></slot>
+          <template v-for="slotName in Object.keys($slots)" #[slotName]="props">
+            <slot v-if="!['item.status', 'item.reserved'].includes(slotName)" :name="slotName" v-bind="props"></slot>
           </template>
 
           <!-- 单独处理 loading 插槽 -->
@@ -94,16 +87,16 @@
 </template>
 
 <script setup lang="ts">
-import { VDataTableServer } from "vuetify/components";
-import { useSettingsStore } from "@herodotus/framework";
-import { UseFullscreen } from "@vueuse/components";
+import { VDataTableServer } from 'vuetify/components';
+import { useSettingsStore, LibraryEnum } from '@herodotus/framework';
+import { UseFullscreen } from '@vueuse/components';
 
-import { useDictionary } from "@/composables/hooks";
-import HColumnReserved from "./HColumnReserved.vue";
-import HColumnStatus from "./HColumnStatus.vue";
+import { useDictionary } from '@/composables/hooks';
+import HColumnReserved from './HColumnReserved.vue';
+import HColumnStatus from './HColumnStatus.vue';
 
 defineOptions({
-  name: "HDataTable",
+  name: 'HDataTable',
   components: { UseFullscreen, HColumnReserved, HColumnStatus },
 });
 
@@ -115,13 +108,13 @@ withDefaults(defineProps<Props>(), {
   flat: false,
 });
 
-const pageNumber = defineModel<number>("pageNumber", { default: 1, required: true });
-const pageSize = defineModel<number>("pageSize", { default: 10, required: true });
-const totalPages = defineModel<number>("totalPages", { default: 0 });
-const totalItems = defineModel<number>("totalItems", { default: 10 });
+const pageNumber = defineModel<number>('pageNumber', { default: 1, required: true });
+const pageSize = defineModel<number>('pageSize', { default: 10, required: true });
+const totalPages = defineModel<number>('totalPages', { default: 0 });
+const totalItems = defineModel<number>('totalItems', { default: 10 });
 
 const settings = useSettingsStore();
-const { options } = useDictionary("DataItemStatus");
+const { options } = useDictionary('DataItemStatus');
 
-const panel = shallowRef("search");
+const panel = shallowRef('search');
 </script>

@@ -16,7 +16,7 @@ defineOptions({ name: "SendMessageDialog" });
 interface Props {
   id: string;
   name: string;
-  avatar: string;
+  avatar?: string;
   dialogueId?: string;
 }
 

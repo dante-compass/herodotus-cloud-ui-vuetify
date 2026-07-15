@@ -1,17 +1,18 @@
 import type { ComponentResolver } from "unplugin-vue-components";
 
 const components = [
-  "HButton",
   "HDate",
   "HDateTime",
   "HDialog",
+  "HDivider",
   "HDownloadProgress",
   "HDuration",
   "HMdiIconSelect",
+  "HIconButton",
   "HLabel",
+  "HLabelItem",
   "HParticles",
   "HSignInBackground",
-  "HTextDivider",
   "HTime",
   "HTreeSelect",
 ];

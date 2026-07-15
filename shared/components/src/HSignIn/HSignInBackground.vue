@@ -9,21 +9,21 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import type { BackgroundColorProps } from '@/lib/declarations';
+<script setup lang="ts">
+import HSignInCornerBottom from "./HSignInCornerBottom.vue";
+import HSignInCornerTop from "./HSignInCornerTop.vue";
 
-import HSignInCornerBottom from './HSignInCornerBottom.vue';
-import HSignInCornerTop from './HSignInCornerTop.vue';
+defineOptions({ name: "HSignInBackground", components: { HSignInCornerBottom, HSignInCornerTop } });
 
-defineOptions({
-  name: 'HSignInBackground',
-  components: {
-    HSignInCornerBottom,
-    HSignInCornerTop,
-  },
+interface Props {
+  startColor?: string;
+  endColor?: string;
+}
+
+withDefaults(defineProps<Props>(), {
+  startColor: "#28aff0",
+  endColor: "#120fc4",
 });
-
-defineProps<BackgroundColorProps>();
 </script>
 
 <style scoped>

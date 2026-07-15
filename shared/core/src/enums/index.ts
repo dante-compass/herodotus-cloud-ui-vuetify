@@ -1,7 +1,7 @@
 export enum ThemeModeEnum {
-  DARK = 'dark',
-  LIGHT = 'light',
-  SYSTEM = 'system',
+  DARK = "dark",
+  LIGHT = "light",
+  SYSTEM = "system",
 }
 
 export enum ContentTypeEnum {
@@ -12,10 +12,10 @@ export enum ContentTypeEnum {
 }
 
 export enum HttpMethodEnum {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  DELETE = 'DELETE',
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
 }
 
 export enum StatusEnum {
@@ -26,51 +26,52 @@ export enum StatusEnum {
 }
 
 export enum AuthorizationTokenEnum {
-  BASIC = 'Basic ',
-  BEARER = 'Bearer ',
+  BASIC = "Basic ",
+  BEARER = "Bearer ",
 }
 
 export enum AuthorizationGrantTypeEnum {
-  AUTHORIZATION_CODE = 'authorization_code',
-  REFRESH_TOKEN = 'refresh_token',
-  CLIENT_CREDENTIALS = 'client_credentials',
-  PASSWORD = 'password',
-  SOCIAL_CREDENTIALS = 'social_credentials',
-  WEBAUTHN_CREDENTIALS = 'webauthn_credentials',
-  DEVICE_CODE = 'urn:ietf:params:oauth:grant-type:device_code',
-  JWT_BEARER = 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-  TOKEN_EXCHANGE = 'urn:ietf:params:oauth:grant-type:token-exchange',
+  AUTHORIZATION_CODE = "authorization_code",
+  REFRESH_TOKEN = "refresh_token",
+  CLIENT_CREDENTIALS = "client_credentials",
+  PASSWORD = "password",
+  SOCIAL_CREDENTIALS = "social_credentials",
+  WEBAUTHN_CREDENTIALS = "webauthn_credentials",
+  DEVICE_CODE = "urn:ietf:params:oauth:grant-type:device_code",
+  JWT_BEARER = "urn:ietf:params:oauth:grant-type:jwt-bearer",
+  TOKEN_EXCHANGE = "urn:ietf:params:oauth:grant-type:token-exchange",
 }
 
 export enum ClientAuthenticationMethodEnum {
-  CLIENT_SECRET_BASIC = 'client_secret_basic',
-  CLIENT_SECRET_POST = 'client_secret_post',
-  CLIENT_SECRET_JWT = 'client_secret_jwt',
-  PRIVATE_KEY_JWT = 'private_key_jwt',
-  NONE = 'none',
-  TLS_CLIENT_AUTH = 'tls_client_auth',
-  SELF_SIGNED_TLS_CLIENT_AUTH = 'self_signed_tls_client_auth',
+  CLIENT_SECRET_BASIC = "client_secret_basic",
+  CLIENT_SECRET_POST = "client_secret_post",
+  CLIENT_SECRET_JWT = "client_secret_jwt",
+  PRIVATE_KEY_JWT = "private_key_jwt",
+  NONE = "none",
+  TLS_CLIENT_AUTH = "tls_client_auth",
+  SELF_SIGNED_TLS_CLIENT_AUTH = "self_signed_tls_client_auth",
 }
 
 export enum BuildInScopeEnum {
-  OPENID = 'openid',
-  EMAIL = 'email',
-  PROFILE = 'profile',
-  PHONE = 'phone',
-  ADDRESS = 'address',
-  ROLES = 'roles',
-  CLIENT_CREATE = 'client.create',
-  CLIENT_READ = 'client.read',
+  OPENID = "openid",
+  EMAIL = "email",
+  PROFILE = "profile",
+  PHONE = "phone",
+  ADDRESS = "address",
+  ROLES = "roles",
+  CLIENT_CREATE = "client.create",
+  CLIENT_READ = "client.read",
 }
 
 export enum OperationEnum {
-  ALLOCATABLE = 'allocatable',
-  AUTHORIZE = 'authorize',
-  CREATE = 'create',
-  EDIT = 'edit',
-  FILE = 'file',
-  INFO = 'info',
-  INVOKE = 'invoke',
-  REVOCATION = 'revocation',
-  SETUP = 'setup',
+  ALLOCATABLE = "Allocatable",
+  AUTHORIZE = "Authorize",
+  CREATE = "Create",
+  CONTENT = "Content",
+  EDIT = "Edit",
+  FILE = "File",
+  INFO = "Info",
+  INVOKE = "Invoke",
+  REVOCATION = "Revocation",
+  SETUP = "Setup",
 }

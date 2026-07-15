@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="tenantForm" validate-on="blur lazy">
       <v-text-field
         v-model="editedItem.tenantId"
@@ -40,18 +40,19 @@
 </template>
 
 <script setup lang="ts">
-import type { SysTenantDataSourceEntity } from '@herodotus/api';
+import type { SysTenantDataSourceEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysTenantDataSourceContent' });
+defineOptions({ name: PAGE_NAME.SYS_TENANT_DATA_SOURCE_CONTENT });
+
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<SysTenantDataSourceEntity>(
+  API.core.sysTenantDataSource(),
+  PAGE_NAME.SYS_TENANT_DATA_SOURCE_CONTENT,
+);
 
 const tenantForm = ref();
-
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysTenantDataSourceEntity>(
-  API.core.sysTenantDataSource(),
-);
 
 const validateTenantId = async (tenantId: string) => {
   return await new Promise((resolve, reject) => {
@@ -79,11 +80,11 @@ const isUniqueRule = (tenantId: string) => {
       if (validate) {
         return true;
       } else {
-        return '租户ID已被占用，请改用其它租户ID';
+        return "租户ID已被占用，请改用其它租户ID";
       }
     })
     .catch(() => {
-      return '后端服务暂时不可用';
+      return "后端服务暂时不可用";
     });
 };
 

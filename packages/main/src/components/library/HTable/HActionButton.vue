@@ -1,7 +1,7 @@
 <template>
-  <h-button variant="text" size="small" v-bind="$attrs"></h-button>
+  <h-icon-button variant="text" size="small" v-bind="$attrs"></h-icon-button>
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'HActionButton' });
+defineOptions({ name: "HActionButton" });
 </script>

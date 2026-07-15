@@ -72,7 +72,7 @@
 import type { SysElementEntity, SysElementConditions, SysElementProps } from "@herodotus/api";
 import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable, useDictionary } from "@/composables/hooks";
+import { useTable, useDictionary, useDateTime } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
 import Search from "./Search.vue";
@@ -85,13 +85,14 @@ const headers = ref([
   { key: "path", align: "center", title: "请求路径" },
   { key: "applicationType", align: "center", title: "应用类型" },
   { key: "menuScenario", align: "center", title: "菜单场景" },
-  { key: "path", align: "center", title: "请求路径" },
   { key: "icon", align: "center", title: "图标" },
   { key: "isHaveChild", align: "center", title: "有子节点" },
   { key: "isHideAllChild", align: "center", title: "隐藏下级节点" },
   { key: "isDetailContent", align: "center", title: "三级路由" },
   { key: "isNotKeepAlive", align: "center", title: "不缓存" },
   { key: "isIgnoreAuth", align: "center", title: "忽略认证" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
   { key: "reserved", align: "center", title: "保留数据" },
   { key: "status", align: "center", title: "状态" },
   { key: "actions", align: "center", title: "操作" },
@@ -101,6 +102,7 @@ const rowKey: SysElementProps = "elementId";
 
 const { getDictionaryItemDisplay } = useDictionary("ApplicationType", "ElementCategory", "MenuScenario");
 
+const { defaultFormat } = useDateTime();
 const {
   loading,
   pageNumber,

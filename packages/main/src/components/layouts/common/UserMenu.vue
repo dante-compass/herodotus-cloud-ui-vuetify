@@ -1,6 +1,6 @@
 <template>
   <v-menu eager location="bottom end">
-    <template v-slot:activator="{ props }">
+    <template #activator="{ props }">
       <v-btn icon v-bind="props">
         <v-avatar>
           <v-img :src="avatar"></v-img>

@@ -1,11 +1,11 @@
-import type { Conditions, Domain, Page } from '@herodotus/core';
-import type { Sort, Direction } from '@herodotus/core';
-import type { SortItem } from '../../declarations';
+import type { Conditions, Domain, Page } from "@herodotus/core";
+import type { Sort, Direction } from "@herodotus/core";
+import type { SortItem } from "../../declarations";
 
-import { useRouter } from 'vue-router';
-import { capitalize, isBoolean, isString, isEmpty, concat, map } from 'lodash-es';
-import { OperationEnum } from '@herodotus/core';
-import { useElementStore } from '@herodotus/framework';
+import { useRouter } from "vue-router";
+import { capitalize, isBoolean, isString, isEmpty, concat, map } from "lodash-es";
+import { OperationEnum } from "@herodotus/core";
+import { useElementStore } from "@herodotus/framework";
 
 /**
  * 数据表格基础定义。
@@ -23,7 +23,7 @@ import { useElementStore } from '@herodotus/framework';
 export default function useBaseTable<C extends Conditions, I extends Domain, O extends Domain = I>(
   name: string,
   sorted = [] as Array<string>,
-  direction = 'DESC' as Direction,
+  direction = "DESC" as Direction,
 ) {
   const loading = shallowRef(false);
   const totalPages = shallowRef(0);
@@ -44,6 +44,7 @@ export default function useBaseTable<C extends Conditions, I extends Domain, O e
       item: JSON.stringify(item),
       operation: operation,
       additional: JSON.stringify(additional),
+      parentName: name,
     });
     router.push({ name: componentName });
   };
@@ -68,41 +69,41 @@ export default function useBaseTable<C extends Conditions, I extends Domain, O e
   };
 
   const toEdit = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
-    const componentName = appendSuffix(name, 'Content', withSuffix);
+    const componentName = appendSuffix(name, OperationEnum.CONTENT, withSuffix);
     addRoutePushParam(componentName, OperationEnum.EDIT, item, additional);
   };
 
   const toCreate = (additional: Record<string, unknown> = {}, withSuffix = true) => {
-    const componentName = appendSuffix(name, 'Content', withSuffix);
+    const componentName = appendSuffix(name, OperationEnum.CONTENT, withSuffix);
     addRoutePushParam(componentName, OperationEnum.CREATE, {} as I, additional);
   };
 
   const toAuthorize = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
-    const componentName = appendSuffix(name, capitalize(OperationEnum.AUTHORIZE), withSuffix);
+    const componentName = appendSuffix(name, OperationEnum.AUTHORIZE, withSuffix);
     addRoutePushParam(componentName, OperationEnum.AUTHORIZE, item, additional);
   };
 
   const toInfo = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
-    const componentName = appendSuffix(name, capitalize(OperationEnum.INFO), withSuffix);
+    const componentName = appendSuffix(name, OperationEnum.INFO, withSuffix);
     addRoutePushParam(componentName, OperationEnum.INFO, item, additional);
   };
 
   const toSetup = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
-    const componentName = appendSuffix(name, capitalize(OperationEnum.SETUP), withSuffix);
+    const componentName = appendSuffix(name, OperationEnum.SETUP, withSuffix);
     addRoutePushParam(componentName, OperationEnum.SETUP, item, additional);
   };
 
   const toInvoke = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
-    const componentName = appendSuffix(name, capitalize(OperationEnum.INVOKE), withSuffix);
+    const componentName = appendSuffix(name, OperationEnum.INVOKE, withSuffix);
     addRoutePushParam(componentName, OperationEnum.INVOKE, item, additional);
   };
 
   const toFile = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
-    const componentName = appendSuffix(name, capitalize(OperationEnum.FILE), withSuffix);
+    const componentName = appendSuffix(name, OperationEnum.FILE, withSuffix);
     addRoutePushParam(componentName, OperationEnum.FILE, item, additional);
   };
   const toRevocation = (item: I, additional: Record<string, unknown> = {}, withSuffix = true) => {
-    const componentName = appendSuffix(name, capitalize(OperationEnum.REVOCATION), withSuffix);
+    const componentName = appendSuffix(name, OperationEnum.REVOCATION, withSuffix);
     addRoutePushParam(componentName, OperationEnum.REVOCATION, item, additional);
   };
 
@@ -153,21 +154,21 @@ export default function useBaseTable<C extends Conditions, I extends Domain, O e
     const flag = sortBy[0];
     if (flag && flag.order) {
       if (isBoolean(flag.order)) {
-        return flag.order ? 'DESC' : 'ASC';
+        return flag.order ? "DESC" : "ASC";
       }
 
       if (isString(flag.order)) {
-        return flag.order.toUpperCase() as 'DESC' | 'ASC';
+        return flag.order.toUpperCase() as "DESC" | "ASC";
       }
     }
 
-    return 'DESC';
+    return "DESC";
   };
 
   const createSort = (sortBy: Array<SortItem>): Sort => {
     if (!isEmpty(sortBy)) {
       return {
-        properties: concat(map(sortBy, 'key'), 'updateTime'),
+        properties: concat(map(sortBy, "key"), "updateTime"),
         direction: parseDirection(sortBy),
       };
     } else {
@@ -177,7 +178,7 @@ export default function useBaseTable<C extends Conditions, I extends Domain, O e
           direction: direction,
         };
       } else {
-        return { properties: ['updateTime'], direction: 'DESC' };
+        return { properties: ["updateTime"], direction: "DESC" };
       }
     }
   };
@@ -188,7 +189,6 @@ export default function useBaseTable<C extends Conditions, I extends Domain, O e
     tableRows,
     totalPages,
     totalItems,
-    addRoutePushParam,
     routePushParam,
     setAllData,
     setPageData,

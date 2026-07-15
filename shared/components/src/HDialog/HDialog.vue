@@ -1,12 +1,18 @@
 <template>
-  <v-dialog v-model="model" :max-width="maxWidth" persistent>
+  <v-dialog v-model="model" :max-width="maxWidth" persistent :z-index="1900">
     <v-card :disabled="loading" :loading="loading" v-bind="$attrs">
       <template #loader="{ isActive }">
         <v-progress-linear :active="isActive" height="4" indeterminate></v-progress-linear>
       </template>
 
       <template v-if="closed" #append>
-        <h-button icon="mdi-close" tooltip="关闭" @click="onClose" size="x-small" variant="text"></h-button>
+        <h-icon-button
+          icon="mdi-close"
+          tooltip="关闭"
+          @click="onClose"
+          variant="text"
+          color="medium-emphasis"
+        ></h-icon-button>
       </template>
       <v-divider></v-divider>
       <v-card-text class="pb-2">
@@ -21,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import { VBtn, VCard, VCardText, VCardActions, VDialog, VDivider, VProgressLinear } from "vuetify/components";
+import { VBtn, VCard, VCardText, VCardActions, VDialog, VDivider, VProgressLinear } from 'vuetify/components';
 
-import { HButton } from "../HButton";
+import { HIconButton } from '../HButton';
 
-defineOptions({ name: "HDialog", components: { VDialog, HButton } });
+defineOptions({ name: 'HDialog', components: { VDialog, HIconButton } });
 
 interface Props {
   loading?: boolean;
@@ -46,7 +52,7 @@ withDefaults(defineProps<Props>(), {
   closed: false,
   hideActions: false,
   maxWidth: 500,
-  confirmLabel: "确认",
+  confirmLabel: '确认',
 });
 
 const model = defineModel<boolean>({
@@ -56,15 +62,15 @@ const model = defineModel<boolean>({
 
 const onClose = () => {
   model.value = false;
-  emit("close");
+  emit('close');
 };
 
 const onCancel = () => {
   model.value = false;
-  emit("cancel");
+  emit('cancel');
 };
 
 const onConfirm = () => {
-  emit("confirm");
+  emit('confirm');
 };
 </script>

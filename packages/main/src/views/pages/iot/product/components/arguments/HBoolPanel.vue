@@ -32,6 +32,6 @@ import { HDictionarySelect } from "@/components/library/HDictionary";
 defineOptions({ name: "HBoolPanel", components: { HDictionarySelect } });
 
 const model = defineModel<Specification<BoolSpecs>>({
-  default: () => ({}),
+  default: () => ({}) as Specification<BoolSpecs>,
 });
 </script>

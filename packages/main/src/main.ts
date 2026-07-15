@@ -1,20 +1,20 @@
-// Styles
-import "./styles/layers.scss";
-import "unfonts.css";
-
 import "animate.css/animate.min.css";
 import "@herodotus/core/style.css";
 import "@herodotus/framework/style.css";
 
-import App from "./App.vue";
+// Composables
 import { createApp } from "vue";
-
-import DisableDevtool from "disable-devtool";
-import { IS_DEV, VARIABLES } from "@/configurations";
-
 // Plugins
 import { setupVuetify, setupPinia } from "@/plugins";
-import { setupRouter } from "@/routers";
+import router, { setupRouter } from "@/routers";
+import DisableDevtool from "disable-devtool";
+import { IS_DEV, VARIABLES, setupKernel } from "@/configurations";
+
+// Components
+import App from "./App.vue";
+
+// Styles
+import "unfonts.css";
 
 function setupApp() {
   if (IS_DEV) {
@@ -33,7 +33,15 @@ function setupApp() {
   // 挂载路由
   setupRouter(app);
 
+  // 设置信息信息
+  setupKernel(router);
+
   app.mount("#app", true);
+
+  app.config.errorHandler = (err, vm, info) => {
+    console.error("全局错误:", err, info);
+    // 可尝试恢复渲染（如强制刷新路由）
+  };
 
   if (!IS_DEV) {
     if (VARIABLES.isUseDisableDevtool()) {

@@ -30,7 +30,7 @@
 
       <template #item.versioning="{ value }">
         <v-chip v-if="value" density="compact" rounded="lg" color="purple" label>
-          {{ getDictionaryItemDisplay('BucketVersioning', value) }}
+          {{ getDictionaryItemDisplay("BucketVersioning", value) }}
         </v-chip>
       </template>
 
@@ -55,37 +55,37 @@
 </template>
 
 <script setup lang="ts">
-import type { HttpResult } from '@herodotus/core';
+import type { HttpResult } from "@herodotus/core";
 import type {
   BucketDetailsDomain,
   BucketDomain,
   BucketDetailsDomainProps,
   PutBucketPolicyResult,
   DeleteBucketResult,
-} from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+} from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { notify, toast } from '@herodotus/core';
-import { useDictionary, useDateTime } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { notify, toast } from "@herodotus/core";
+import { useDictionary, useDateTime } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-import { HCreateBucketDialog } from './components';
+import { HCreateBucketDialog } from "./components";
 
 defineOptions({ name: PAGE_NAME.OSS_BUCKET, components: { HCreateBucketDialog } });
 
 const headers = ref([
-  { key: 'bucketName', align: 'center', title: '存储桶名称' },
-  { key: 'creationDate', align: 'center', title: '创建时间', value: (item) => defaultFormat(item.creationDate) },
-  { key: 'doesPublic', align: 'center', title: '访问权限' },
-  { key: 'versioning', align: 'center', title: '版本控制状态' },
-  { key: 'objectLockEnabled', align: 'center', title: '对象锁定状态' },
-  { key: 'actions', align: 'center', title: '操作' },
+  { key: "bucketName", align: "center", title: "存储桶名称" },
+  { key: "creationDate", align: "center", title: "创建时间", value: (item) => defaultFormat(item.creationDate) },
+  { key: "doesPublic", align: "center", title: "访问权限" },
+  { key: "versioning", align: "center", title: "版本控制状态" },
+  { key: "objectLockEnabled", align: "center", title: "对象锁定状态" },
+  { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: BucketDetailsDomainProps = 'bucketName';
+const rowKey: BucketDetailsDomainProps = "bucketName";
 
 const { defaultFormat } = useDateTime();
-const { getDictionaryItemDisplay } = useDictionary('BucketVersioning');
+const { getDictionaryItemDisplay } = useDictionary("BucketVersioning");
 
 const pageNumber = shallowRef(1);
 const pageSize = shallowRef(10);
@@ -123,12 +123,12 @@ const onDeleteBucket = (bucketName: string) => {
           if (result.message) {
             toast.success(result.message);
           } else {
-            toast.success('操作成功！');
+            toast.success("操作成功！");
           }
 
           fetchAllBuckets();
         } else {
-          toast.warning('服务端异常！');
+          toast.warning("服务端异常！");
         }
       });
   });
@@ -144,11 +144,11 @@ const onChangePolicy = (item: BucketDetailsDomain, event: boolean) => {
         if (result.message) {
           toast.success(result.message);
         } else {
-          toast.success('操作成功！');
+          toast.success("操作成功！");
         }
         fetchAllBuckets();
       } else {
-        toast.warning('服务端异常！');
+        toast.warning("服务端异常！");
       }
     });
 };

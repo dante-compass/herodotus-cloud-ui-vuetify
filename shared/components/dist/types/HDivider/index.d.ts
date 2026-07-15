@@ -1,2 +1,2 @@
-import { default as HTextDivider } from './HTextDivider.vue';
-export { HTextDivider };
+import { default as HDivider } from './HDivider.vue';
+export { HDivider };

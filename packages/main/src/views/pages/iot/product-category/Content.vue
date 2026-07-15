@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="productCategoryForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.name"
@@ -15,16 +15,19 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductCategoryEntity } from '@herodotus/api';
+import type { ProductCategoryEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'IotProductCategoryContent' });
+defineOptions({ name: PAGE_NAME.IOT_PRODUCT_CATEGORY_CONTENT });
 
 const productCategoryForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<ProductCategoryEntity>(API.core.iotProductCategory());
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<ProductCategoryEntity>(
+  API.core.iotProductCategory(),
+  PAGE_NAME.IOT_PRODUCT_CATEGORY_CONTENT,
+);
 
 const onSave = async () => {
   const { valid } = await productCategoryForm.value.validate();

@@ -1,11 +1,11 @@
-import type { Page, Domain, Conditions, HttpResult, AbstractService, Direction } from '@herodotus/core';
-import type { SortItem } from '../../declarations';
+import type { Page, Domain, Conditions, HttpResult, AbstractService, Direction } from "@herodotus/core";
+import type { SortItem } from "../../declarations";
 
-import { watchDebounced } from '@vueuse/core';
-import { isEmpty, pickBy, isNil } from 'lodash-es';
-import { toast, notify } from '@herodotus/core';
+import { watchDebounced } from "@vueuse/core";
+import { isEmpty, pickBy, isNil } from "lodash-es";
+import { toast, notify } from "@herodotus/core";
 
-import useBaseTable from './useBaseTable';
+import useBaseTable from "./useBaseTable";
 
 /**
  * 数据表格通用操作定义
@@ -25,8 +25,8 @@ export default function useTable<C extends Conditions, I extends Domain, O exten
   name: string,
   fetchAll = false,
   sorted = [] as Array<string>,
-  direction = 'DESC' as Direction,
-  loadOnMount = true,
+  direction = "DESC" as Direction,
+  loadOnMount = false,
 ) {
   const {
     loading,
@@ -117,7 +117,7 @@ export default function useTable<C extends Conditions, I extends Domain, O exten
           if (result.message) {
             toast.success(result.message);
           } else {
-            toast.success('删除成功');
+            toast.success("删除成功");
           }
 
           findItemsByPage(pageNumber.value, pageSize.value, conditions.value);
@@ -126,7 +126,7 @@ export default function useTable<C extends Conditions, I extends Domain, O exten
           if (error.message) {
             toast.error(error.message);
           } else {
-            toast.error('删除失败');
+            toast.error("删除失败");
           }
         });
     });
@@ -137,7 +137,7 @@ export default function useTable<C extends Conditions, I extends Domain, O exten
   };
 
   const removeEmptyProperties = (conditions: C) => {
-    return pickBy(conditions, (value) => !isNil(value) && value !== '');
+    return pickBy(conditions, (value) => !isNil(value) && value !== "");
   };
 
   onMounted(() => {

@@ -18,7 +18,7 @@ import type { Specification, TextSpecs } from "@herodotus/api";
 defineOptions({ name: "HTextPanel" });
 
 const model = defineModel<Specification<TextSpecs>>({
-  default: () => ({}),
+  default: () => ({}) as Specification<TextSpecs>,
 });
 
 onMounted(() => {

@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="dictionaryForm" validate-on="blur lazy">
       <v-text-field v-model="editedItem.category" label="分类" disabled></v-text-field>
       <v-text-field
@@ -19,16 +19,19 @@
 </template>
 
 <script setup lang="ts">
-import type { SysDictionaryEntity } from '@herodotus/api';
+import type { SysDictionaryEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysDictionaryContent' });
+defineOptions({ name: PAGE_NAME.SYS_DICTIONARY_CONTENT });
 
 const dictionaryForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysDictionaryEntity>(API.core.sysDictionary());
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<SysDictionaryEntity>(
+  API.core.sysDictionary(),
+  PAGE_NAME.SYS_DICTIONARY_CONTENT,
+);
 
 const onSave = async () => {
   const { valid } = await dictionaryForm.value.validate();

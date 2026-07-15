@@ -1,5 +1,5 @@
 <template>
-  <h-authorize-form-layout :title="title" :overlay="overlay">
+  <h-authorize-form-layout :title="title" :overlay="overlay" @cancel="onReturn">
     <v-card rounded="lg">
       <v-data-table-server
         v-model="selectedItems"
@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import type { HttpResult } from '@herodotus/core';
+import type { HttpResult } from "@herodotus/core";
 import type {
   OAuth2ScopeEntity,
   OAuth2ScopeAssignedBody,
@@ -43,31 +43,31 @@ import type {
   SysPermissionProps,
   SysPermissionConditions,
   OAuth2PermissionBody,
-} from '@herodotus/api';
-import type { VDataTableHeaders } from '@/composables/declarations';
+} from "@herodotus/api";
+import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { toast } from '@herodotus/core';
-import { useEditFinish } from '@herodotus/framework';
-import { useTableItem, useTable } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { toast } from "@herodotus/core";
+import { useTableItem, useTable } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'OAuth2ScopeAuthorize' });
+defineOptions({ name: PAGE_NAME.OAUTH2_SCOPE_AUTHORIZE });
 
-const { editedItem, title, overlay } = useTableItem<OAuth2ScopeEntity>(API.core.oauth2Scope());
+const { editedItem, title, overlay, onReturn } = useTableItem<OAuth2ScopeEntity>(
+  API.core.oauth2Scope(),
+  PAGE_NAME.OAUTH2_SCOPE_AUTHORIZE,
+);
 const { loading, pageNumber, pageSize, tableRows, totalItems, findItems } = useTable<
   SysPermissionConditions,
   SysPermissionEntity
 >(API.core.sysPermission(), PAGE_NAME.SYS_PERMISSION, true);
 
 const selectedItems = ref([]) as Ref<Array<SysPermissionEntity>>;
-const rowKey: SysPermissionProps = 'permissionId';
+const rowKey: SysPermissionProps = "permissionId";
 
 const headers = ref([
-  { key: 'permissionName', align: 'center', title: '权限名称' },
-  { key: 'permissionCode', align: 'center', title: '权限代码' },
+  { key: "permissionName", align: "center", title: "权限名称" },
+  { key: "permissionCode", align: "center", title: "权限代码" },
 ]) as Ref<Array<VDataTableHeaders>>;
-
-const { onFinish } = useEditFinish();
 
 onMounted(() => {
   selectedItems.value = editedItem.value.permissions;
@@ -89,17 +89,17 @@ const onSave = () => {
     .then((response) => {
       const result = response as HttpResult<OAuth2ScopeEntity>;
       overlay.value = false;
-      onFinish();
+      onReturn();
       if (result.message) {
         toast.success(result.message);
       } else {
-        toast.success('保存成功');
+        toast.success("保存成功");
       }
     })
     .catch(() => {
       overlay.value = false;
-      onFinish();
-      toast.error('保存失败');
+      onReturn();
+      toast.error("保存失败");
     });
 };
 </script>

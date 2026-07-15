@@ -48,19 +48,6 @@
       </v-chip>
     </template>
 
-    <template #item.registration="{ item }">
-      <div class="d-flex justify-center">
-        <v-switch
-          :model-value="item.registration"
-          :label="item.registration ? '开启' : '关闭'"
-          density="comfortable"
-          hide-details
-          inset
-          @update:model-value="onRegistrationChange(item, $event)"
-        ></v-switch>
-      </div>
-    </template>
-
     <template #item.actions="{ item }">
       <h-action-edit-button @click="toEdit(item)"></h-action-edit-button>
       <h-action-info-button @click="toInfo(item)"></h-action-info-button>
@@ -71,11 +58,9 @@
 
 <script setup lang="ts">
 import type { ProductEntity, ProductConditions, ProductProps } from "@herodotus/api";
-import type { HttpResult } from "@herodotus/core";
 import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { toast } from "@herodotus/core";
-import { useTable, useDictionary } from "@/composables/hooks";
+import { useTable, useDateTime, useDictionary } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
 import Search from "./Search.vue";
@@ -93,6 +78,8 @@ const headers = ref([
   { key: "registration", align: "center", title: "开启动态注册" },
   { key: "release", align: "center", title: "是否发布" },
   { key: "quantity", align: "center", title: "设备数量" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
   { key: "reserved", align: "center", title: "保留数据" },
   { key: "status", align: "center", title: "状态" },
   { key: "actions", align: "center", title: "操作" },
@@ -106,6 +93,7 @@ const { getDictionaryItemDisplay } = useDictionary(
   "NetworkingMethod",
   "AuthenticationMethod",
 );
+const { defaultFormat } = useDateTime();
 
 const {
   loading,
@@ -121,22 +109,4 @@ const {
   deleteItemById,
   findItems,
 } = useTable<ProductConditions, ProductEntity>(API.core.iotProduct(), PAGE_NAME.IOT_PRODUCT);
-
-const onRegistrationChange = (item: ProductEntity, event: boolean) => {
-  item.registration = event as boolean;
-  API.core
-    .iotProduct()
-    .toggle(item)
-    .then((response) => {
-      const result = response as HttpResult<ProductEntity>;
-      if (result.message) {
-        toast.success(result.message);
-      } else {
-        toast.success("操作成功");
-      }
-    })
-    .catch((error) => {
-      toast.error("操作失败");
-    });
-};
 </script>

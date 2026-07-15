@@ -1,5 +1,77 @@
 # @herodotus/components
 
+## 3.1.3
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@3.1.3
+
+## 3.1.2
+
+### Patch Changes
+
+- [优化] 删除前端工程无用代码
+- Updated dependencies
+  - @herodotus/core@3.1.2
+
+## 3.1.1
+
+### Patch Changes
+
+- [重构] 前端三级路由页面重构为指定名称和 useRoute() 混合模式，提升页面返回稳定性，规避单独使用 useRoute() 偶发出现 inject() inject() can only be used inside setup() or functional components. 问题
+- Updated dependencies
+  - @herodotus/core@3.1.1
+
+## 3.1.0
+
+### Minor Changes
+
+- 优化useEditFinish 支持手动指定 route，以避免不同环境下 useRoute() 会失效问题
+
+### Patch Changes
+
+- Updated dependencies
+  - @herodotus/core@3.1.0
+
+## 3.0.0
+
+### Major Changes
+
+- 修复 onFinish 方法在旧版前端异常
+
+### Patch Changes
+
+- 修复 onFinish 方法异常
+- Updated dependencies
+- Updated dependencies
+  - @herodotus/core@3.0.0
+
+## 2.1.6
+
+### Patch Changes
+
+- 修复 route 错误
+- Updated dependencies
+  - @herodotus/core@2.1.6
+
+## 2.1.5
+
+### Patch Changes
+
+- 重新编译模块
+- Updated dependencies
+  - @herodotus/core@2.1.5
+
+## 2.1.4
+
+### Patch Changes
+
+- 物联平台管理界面完成
+- Updated dependencies
+  - @herodotus/core@2.1.4
+
 ## 2.1.3
 
 ### Patch Changes

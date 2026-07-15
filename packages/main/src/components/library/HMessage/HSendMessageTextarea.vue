@@ -14,24 +14,24 @@
 </template>
 
 <script setup lang="ts">
-import type { DialogueDetailEntity } from '@herodotus/api';
+import type { DialogueDetailEntity } from "@herodotus/api";
 
-import { isEmpty } from 'lodash-es';
+import { isEmpty } from "lodash-es";
 
-import { useAuthenticationStore } from '@herodotus/framework';
-import { useWebSocketMessage } from '@/composables/hooks';
+import { useAuthenticationStore } from "@herodotus/framework";
+import { useWebSocketMessage } from "@/composables/hooks";
 
-defineOptions({ name: 'HSendMessageTextarea' });
+defineOptions({ name: "HSendMessageTextarea" });
 
 interface Props {
   receiverId: string;
   receiverName: string;
-  receiverAvatar: string;
+  receiverAvatar?: string;
   dialogueId?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  dialogueId: '',
+  dialogueId: "",
 });
 
 const emit = defineEmits<{
@@ -39,7 +39,7 @@ const emit = defineEmits<{
 }>();
 
 const sendMessageForm = ref();
-const text = shallowRef('');
+const text = shallowRef("");
 
 const { sendToUser } = useWebSocketMessage();
 const authentication = useAuthenticationStore();
@@ -66,7 +66,7 @@ const onSend = async () => {
   const { valid } = await sendMessageForm.value.validate();
   if (valid) {
     sendMessage();
-    emit('send');
+    emit("send");
   }
 };
 </script>

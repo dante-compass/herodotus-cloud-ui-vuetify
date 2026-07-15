@@ -48,6 +48,9 @@ const vuetify = createVuetify({
     VCard: {
       rounded: "xl",
     },
+    VIconBtn: {
+      color: "primary",
+    },
     VList: {
       color: "primary",
     },
@@ -57,10 +60,15 @@ const vuetify = createVuetify({
     VSwitch: {
       color: "primary",
       inset: true,
+      trueIcon: "mdi-check",
+      falseIcon: "mdi-close",
     },
     VTextField: {
       color: "primary",
       clearable: true,
+    },
+    VContainer: {
+      fluid: true,
     },
   },
 });

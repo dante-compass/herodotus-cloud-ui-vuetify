@@ -34,6 +34,10 @@ export interface PushParam {
      * 操作类型
      */
     operation?: OperationEnum;
+    /**
+     * 二级路由组件名称，方便返回操作
+     */
+    parentName: string;
 }
 export type RoutePushParam = Record<string, PushParam>;
 export type ModuleNamespace = Record<string, any> & {

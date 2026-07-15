@@ -28,7 +28,7 @@
 import type { SysRoleEntity, SysRoleConditions, SysRoleProps } from "@herodotus/api";
 import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable } from "@/composables/hooks";
+import { useTable, useDateTime } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
 defineOptions({ name: PAGE_NAME.SYS_ROLE });
@@ -37,6 +37,8 @@ const headers = ref([
   { key: "roleName", align: "center", title: "角色名称" },
   { key: "roleCode", align: "center", title: "角色代码" },
   { key: "description", align: "center", title: "备注" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
   { key: "reserved", align: "center", title: "保留数据" },
   { key: "status", align: "center", title: "状态" },
   { key: "actions", align: "center", title: "操作" },
@@ -44,6 +46,7 @@ const headers = ref([
 
 const rowKey: SysRoleProps = "roleId";
 
+const { defaultFormat } = useDateTime();
 const {
   loading,
   pageNumber,

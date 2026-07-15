@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="organizationForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.organizationName"
@@ -33,18 +33,21 @@
 </template>
 
 <script setup lang="ts">
-import type { SysOrganizationEntity } from '@herodotus/api';
+import type { SysOrganizationEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-import { OrganizationSelect } from '../components';
+import { OrganizationSelect } from "../components";
 
-defineOptions({ name: 'SysOrganizationContent', components: { OrganizationSelect } });
+defineOptions({ name: PAGE_NAME.SYS_ORGANIZATION_CONTENT, components: { OrganizationSelect } });
 
 const organizationForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysOrganizationEntity>(API.core.sysOrganization());
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<SysOrganizationEntity>(
+  API.core.sysOrganization(),
+  PAGE_NAME.SYS_ORGANIZATION_CONTENT,
+);
 
 const onSave = async () => {
   const { valid } = await organizationForm.value.validate();

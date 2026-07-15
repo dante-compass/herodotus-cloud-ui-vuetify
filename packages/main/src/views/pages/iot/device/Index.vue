@@ -36,10 +36,12 @@
 import type { DeviceEntity, DeviceConditions, DeviceProps } from "@herodotus/api";
 import type { VDataTableHeaders } from "@/composables/declarations";
 
-import { useTable } from "@/composables/hooks";
+import { useTable, useDateTime } from "@/composables/hooks";
 import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: PAGE_NAME.IOT_DEVICE });
+import Search from "./Search.vue";
+
+defineOptions({ name: PAGE_NAME.IOT_DEVICE, components: { Search } });
 
 const headers = ref([
   { key: "deviceName", align: "center", title: "设备名称" },
@@ -47,11 +49,15 @@ const headers = ref([
   { key: "clientId", align: "center", title: "Client ID" },
   { key: "enabled", align: "center", title: "启用/禁用" },
   { key: "activated", align: "center", title: "是否激活" },
+  { key: "updateBy", align: "center", title: "最后修改人" },
+  { key: "updateTime", align: "center", title: "修改时间", value: (item) => defaultFormat(item.updateTime) },
   { key: "reserved", align: "center", title: "保留数据" },
   { key: "actions", align: "center", title: "操作" },
 ]) as Ref<Array<VDataTableHeaders>>;
 
 const rowKey: DeviceProps = "id";
+
+const { defaultFormat } = useDateTime();
 
 const {
   loading,

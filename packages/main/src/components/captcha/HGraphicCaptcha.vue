@@ -16,7 +16,7 @@
         @click:clear="onClear()"
         @blur.native.capture="verifyCaptcha()"
       >
-        <template v-slot:append>
+        <template #append>
           <v-fade-transition>
             <v-icon v-if="isShowIcon" :icon="icon" :color="color"></v-icon>
           </v-fade-transition>

@@ -1,4 +1,4 @@
-import type { AxiosHttpResult } from '@herodotus/core';
+import type { AxiosHttpResult } from "@herodotus/core";
 import type {
   ProductEntity,
   ProductCategoryEntity,
@@ -6,9 +6,12 @@ import type {
   TslUnitEntity,
   TslArgumentEntity,
   TslFunctionEntity,
-} from '@/declarations';
+  MqttCategoryEntity,
+  MqttAuthorityEntity,
+  MqttAccountEntity,
+} from "@/declarations";
 
-import { AbstractService, HttpConfig } from '@herodotus/core';
+import { AbstractService, HttpConfig } from "@herodotus/core";
 
 class ProductCategoryService extends AbstractService<ProductCategoryEntity> {
   private static instance: ProductCategoryService;
@@ -25,7 +28,7 @@ class ProductCategoryService extends AbstractService<ProductCategoryEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getIot() + '/iot/product-category';
+    return this.getConfig().getIot() + "/iot/product-category";
   }
 }
 
@@ -44,15 +47,15 @@ class ProductService extends AbstractService<ProductEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getIot() + '/iot/product';
+    return this.getConfig().getIot() + "/iot/product";
   }
 
   public getValidateProductKeyAddress(): string {
-    return this.getBaseAddress() + '/validation';
+    return this.getBaseAddress() + "/validation";
   }
 
   public getToggleAddress(): string {
-    return this.getBaseAddress() + '/toggle';
+    return this.getBaseAddress() + "/toggle";
   }
 
   public getValidateProductKeyPath(productKey: string): string {
@@ -83,11 +86,11 @@ class DeviceService extends AbstractService<DeviceEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getIot() + '/iot/device';
+    return this.getConfig().getIot() + "/iot/device";
   }
 
   public getToggleAddress(): string {
-    return this.getBaseAddress() + '/toggle';
+    return this.getBaseAddress() + "/toggle";
   }
 
   // public toggle(entity: IotDeviceEntity): Promise<AxiosHttpResult<IotDeviceEntity>> {
@@ -112,7 +115,7 @@ class TslUnitService extends AbstractService<TslUnitEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getIot() + '/iot/tsl/unit';
+    return this.getConfig().getIot() + "/iot/tsl/unit";
   }
 }
 
@@ -131,7 +134,7 @@ class TslArgumentService extends AbstractService<TslArgumentEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getIot() + '/iot/tsl/argument';
+    return this.getConfig().getIot() + "/iot/tsl/argument";
   }
 }
 
@@ -150,7 +153,7 @@ class TslFunctionService extends AbstractService<TslFunctionEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getIot() + '/iot/tsl/function';
+    return this.getConfig().getIot() + "/iot/tsl/function";
   }
 
   // public getSettableAddress(): string {
@@ -196,6 +199,63 @@ class TslFunctionService extends AbstractService<TslFunctionEntity> {
   // }
 }
 
+class MqttCategoryService extends AbstractService<MqttCategoryEntity> {
+  private static instance: MqttCategoryService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): MqttCategoryService {
+    if (this.instance == null) {
+      this.instance = new MqttCategoryService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getIot() + "/iot/mqtt/category";
+  }
+}
+
+class MqttAuthorityService extends AbstractService<MqttAuthorityEntity> {
+  private static instance: MqttAuthorityService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): MqttAuthorityService {
+    if (this.instance == null) {
+      this.instance = new MqttAuthorityService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getIot() + "/iot/mqtt/authority";
+  }
+}
+
+class MqttAccountService extends AbstractService<MqttAccountEntity> {
+  private static instance: MqttAccountService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): MqttAccountService {
+    if (this.instance == null) {
+      this.instance = new MqttAccountService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getIot() + "/iot/mqtt/account";
+  }
+}
+
 export {
   DeviceService,
   ProductCategoryService,
@@ -203,4 +263,7 @@ export {
   TslUnitService,
   TslArgumentService,
   TslFunctionService,
+  MqttCategoryService,
+  MqttAuthorityService,
+  MqttAccountService,
 };

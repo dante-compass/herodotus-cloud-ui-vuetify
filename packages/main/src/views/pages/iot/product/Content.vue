@@ -1,6 +1,19 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
-    <v-form ref="roleForm" validate-on="blur lazy">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
+    <v-form ref="productForm" validate-on="blur lazy">
+      <v-autocomplete
+        v-model="editedItem.category"
+        v-model:search="search"
+        label="产品类别"
+        :items="items"
+        :loading="loading"
+        item-title="name"
+        item-value="id"
+        return-object
+        autocomplete="off"
+        placeholder="输入产品类别关键字搜索..."
+        :rules="[(v: string) => !!v || '产品类别不能为空']"
+      ></v-autocomplete>
       <v-text-field
         v-model.lazy="editedItem.productKey"
         label="ProductKey *"
@@ -35,16 +48,24 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductEntity } from "@herodotus/api";
+import type { ProductEntity, ProductCategoryEntity, ProductCategoryConditions } from "@herodotus/api";
 
+import { useAutocomplete } from "@herodotus/framework";
 import { useTableItem } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: "IotProductContent" });
+defineOptions({ name: PAGE_NAME.IOT_PRODUCT_CONTENT });
 
-const roleForm = ref();
+const productForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<ProductEntity>(API.core.iotProduct());
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<ProductEntity>(
+  API.core.iotProduct(),
+  PAGE_NAME.IOT_PRODUCT_CONTENT,
+);
+const { loading, items, search } = useAutocomplete<ProductCategoryConditions, ProductCategoryEntity>(
+  "name",
+  API.core.iotProductCategory(),
+);
 
 const validateProductKey = async (productKey: string) => {
   return await new Promise((resolve, reject) => {
@@ -89,7 +110,7 @@ const isShowNetworkingMethod = computed(() => {
 });
 
 const onSave = async () => {
-  const { valid } = await roleForm.value.validate();
+  const { valid } = await productForm.value.validate();
   if (valid) {
     saveOrUpdate();
   }

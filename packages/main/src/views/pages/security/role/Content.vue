@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="roleForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.roleName"
@@ -22,16 +22,19 @@
 </template>
 
 <script setup lang="ts">
-import type { SysRoleEntity } from '@herodotus/api';
+import type { SysRoleEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysRoleContent' });
+defineOptions({ name: PAGE_NAME.SYS_ROLE_CONTENT });
 
 const roleForm = ref();
 
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysRoleEntity>(API.core.sysRole());
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<SysRoleEntity>(
+  API.core.sysRole(),
+  PAGE_NAME.SYS_ROLE_CONTENT,
+);
 
 const validateRoleCode = async (roleCode: string) => {
   return await new Promise((resolve, reject) => {
@@ -59,11 +62,11 @@ const isUniqueRule = (roleCode: string) => {
       if (validate) {
         return true;
       } else {
-        return '角色代码已被占用，请改用其它角色代码';
+        return "角色代码已被占用，请改用其它角色代码";
       }
     })
     .catch(() => {
-      return '后端服务暂时不可用';
+      return "后端服务暂时不可用";
     });
 };
 

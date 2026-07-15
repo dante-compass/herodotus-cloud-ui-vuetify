@@ -1,5 +1,5 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()">
+  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <v-form ref="loginForm" validate-on="blur lazy">
       <v-text-field
         v-model.lazy="editedItem.username"
@@ -18,16 +18,17 @@
 </template>
 
 <script setup lang="ts">
-import type { SysUserEntity } from '@herodotus/api';
+import type { SysUserEntity } from "@herodotus/api";
 
-import { useTableItem } from '@/composables/hooks';
-import { API } from '@/configurations';
+import { useTableItem } from "@/composables/hooks";
+import { API, PAGE_NAME } from "@/configurations";
 
-defineOptions({ name: 'SysUserContent' });
+defineOptions({ name: PAGE_NAME.SYS_USER_CONTENT });
 
-const loginForm = ref();
-
-const { editedItem, title, overlay, saveOrUpdate } = useTableItem<SysUserEntity>(API.core.sysUser());
+const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<SysUserEntity>(
+  API.core.sysUser(),
+  PAGE_NAME.SYS_USER_CONTENT,
+);
 
 const validateUsername = async (username: string) => {
   return await new Promise((resolve, reject) => {
@@ -55,13 +56,15 @@ const isUniqueRule = (username: string) => {
       if (validate) {
         return true;
       } else {
-        return '用户名已被占用，请改用其它用户名';
+        return "用户名已被占用，请改用其它用户名";
       }
     })
     .catch(() => {
-      return '后端服务暂时不可用';
+      return "后端服务暂时不可用";
     });
 };
+
+const loginForm = ref();
 
 const onSave = async () => {
   const { valid } = await loginForm.value.validate();
