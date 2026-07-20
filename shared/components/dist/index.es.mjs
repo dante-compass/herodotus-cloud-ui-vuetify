@@ -408,7 +408,7 @@ var De = { class: "d-flex flex-column gr-4 py-4" }, G = /* @__PURE__ */ l({
 	props: { label: {} },
 	setup(t) {
 		return (n, r) => (h(), i("div", De, [c(y(D), d({ opacity: ".7" }, n.$attrs), {
-			default: S(() => [t.label ? (h(), i(e, { key: 0 }, [s(v(t.label), 1)], 64)) : g(n.$slots, "default", { key: 1 })]),
+			default: S(() => [t.label ? (h(), i(e, { key: 0 }, [s(v(t.label), 1)], 64)) : g(n.$slots, "default", {}, void 0, void 0, 1)]),
 			_: 3
 		}, 16)]));
 	}
