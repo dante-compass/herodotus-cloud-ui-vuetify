@@ -1,3 +1,4 @@
-import useTslValidation from './useTslValidation';
+import useTslEntity from "./useTslEntity";
+import useTslValidation from "./useTslValidation";
 
-export { useTslValidation };
+export { useTslEntity, useTslValidation };

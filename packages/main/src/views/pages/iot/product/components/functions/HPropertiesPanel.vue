@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity, Specification, Specs } from '@herodotus/api';
+import type { TslFunctionEntity, TslArgumentEntity, Specification, Specs } from '@herodotus/api';
 
 import { isEmpty } from 'lodash-es';
 import { useTslValidation } from '../../composables/hooks';
@@ -24,7 +24,13 @@ import { HArgumentPanel } from '../arguments';
 defineOptions({ name: 'HPropertiesPanel' });
 
 const entity = defineModel<TslFunctionEntity>({
-  default: () => ({}) as TslFunctionEntity,
+  default: () =>
+    ({
+      dimension: 'properties',
+      required: false,
+      arguments: { property: {} as TslArgumentEntity },
+    }) as TslFunctionEntity,
+  required: true,
 });
 
 const { identifier, validate } = useTslValidation();
@@ -37,8 +43,7 @@ const argument = ref({
 watch(
   argument,
   (newValue) => {
-    entity.value.type = newValue.dataType.type;
-    entity.value.specs = newValue;
+    console.log('----newValue---', newValue);
     if (newValue.identifier !== entity.value.identifier) {
       entity.value.identifier = newValue.identifier;
     }
@@ -46,6 +51,11 @@ watch(
     if (newValue.name !== entity.value.name) {
       entity.value.name = newValue.name;
     }
+
+    entity.value.arguments.property.specs = newValue;
+    entity.value.arguments.property.type = newValue.dataType.type;
+
+    console.log('----entity---', entity.value);
   },
   {
     immediate: true,
@@ -54,8 +64,8 @@ watch(
 );
 
 onMounted(() => {
-  if (!isEmpty(entity) && !isEmpty(entity.value.specs)) {
-    argument.value = entity.value.specs;
+  if (!isEmpty(entity.value) && !isEmpty(entity.value.arguments) && !isEmpty(entity.value.arguments.property)) {
+    argument.value = entity.value.arguments.property.specs;
   }
 });
 

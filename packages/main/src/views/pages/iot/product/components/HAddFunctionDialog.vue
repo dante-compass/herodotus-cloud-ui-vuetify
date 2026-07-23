@@ -20,21 +20,21 @@
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity } from "@herodotus/api";
+import type { TslFunctionEntity, TslArgumentEntity } from '@herodotus/api';
 
-import { toUpper } from "lodash-es";
-import { toast } from "@herodotus/core";
+import { toUpper } from 'lodash-es';
+import { toast } from '@herodotus/core';
 
-import { useTslValidation } from "../composables/hooks";
-import { API } from "@/configurations";
-import { HDictionaryToggle } from "@/components/library/HDictionary";
+import { useTslValidation } from '../composables/hooks';
+import { API } from '@/configurations';
+import { HDictionaryToggle } from '@/components/library/HDictionary';
 
-import HPropertiesPanel from "./functions/HPropertiesPanel.vue";
-import HEventsPanel from "./functions/HEventsPanel.vue";
-import HServicesPanel from "./functions/HServicesPanel.vue";
+import HPropertiesPanel from './functions/HPropertiesPanel.vue';
+import HEventsPanel from './functions/HEventsPanel.vue';
+import HServicesPanel from './functions/HServicesPanel.vue';
 
 defineOptions({
-  name: "HAddFunctionDialog",
+  name: 'HAddFunctionDialog',
   components: {
     HDictionaryToggle,
     EVENTS_PANEL: HEventsPanel,
@@ -55,19 +55,29 @@ const model = defineModel<boolean>({
   required: true,
 });
 
-const entity = defineModel<TslFunctionEntity>("entity", {
-  default: () => ({ dimension: "properties" }) as TslFunctionEntity,
+const entity = defineModel<TslFunctionEntity>('entity', {
+  default: () =>
+    ({
+      dimension: 'properties',
+      required: false,
+      arguments: {
+        property: {} as TslArgumentEntity,
+        eventOutputData: [] as TslArgumentEntity[],
+        serviceOutputData: [] as TslArgumentEntity[],
+        serviceInputData: [] as TslArgumentEntity[],
+      },
+    }) as TslFunctionEntity,
   required: true,
 });
 
-const emit = defineEmits(["success"]);
+const emit = defineEmits(['success']);
 const { identifier, getValidator } = useTslValidation();
 
 const currentPanel = computed(() => {
   if (entity.value.dimension) {
-    return toUpper(entity.value.dimension) + "_PANEL";
+    return toUpper(entity.value.dimension) + '_PANEL';
   } else {
-    return "PROPERTIES_PANEL";
+    return 'PROPERTIES_PANEL';
   }
 });
 
@@ -80,8 +90,8 @@ const onSave = () => {
         .saveOrUpdate(entity.value)
         .then((result) => {
           model.value = false;
-          emit("success");
-          toast.success("添加成功！");
+          emit('success');
+          toast.success('添加成功！');
         })
         .catch((error) => {
           model.value = false;

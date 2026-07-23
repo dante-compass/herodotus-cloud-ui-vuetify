@@ -9,28 +9,28 @@
       inline
     ></h-dictionary-option>
     <h-label text="输出参数:"></h-label>
-    <h-tsl-param-list v-if="showParameters" v-model="entity.arguments"></h-tsl-param-list>
+    <h-tsl-param-list v-if="showParameters" v-model="entity.arguments.eventOutputData"></h-tsl-param-list>
     <h-tsl-button text="+ 添加参数" @click="isOpenDialog = !isOpenDialog" />
     <h-add-argument-dialog v-model="isOpenDialog" @save="onAddParameter"></h-add-argument-dialog>
   </v-form>
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity, TslArgumentEntity, Specification, Specs } from "@herodotus/api";
+import type { TslFunctionEntity, TslArgumentEntity, Specification, Specs } from '@herodotus/api';
 
-import { computed, shallowRef } from "vue";
+import { computed, shallowRef } from 'vue';
 
-import { isEmpty } from "lodash-es";
-import { useTslValidation } from "../../composables/hooks";
+import { isEmpty } from 'lodash-es';
+import { useTslValidation } from '../../composables/hooks';
 
-import { HDictionaryOption } from "@/components/library/HDictionary";
-import { HTslButton, HTslParamList } from "../commons";
+import { HDictionaryOption } from '@/components/library/HDictionary';
+import { HTslButton, HTslParamList } from '../commons';
 
-import { HCharacteristicPanel } from "../arguments";
-import HAddArgumentDialog from "./HAddArgumentDialog.vue";
+import { HCharacteristicPanel } from '../arguments';
+import HAddArgumentDialog from './HAddArgumentDialog.vue';
 
 defineOptions({
-  name: "HEventsPanel",
+  name: 'HEventsPanel',
   components: {
     HDictionaryOption,
     HCharacteristicPanel,
@@ -41,14 +41,19 @@ defineOptions({
 });
 
 const entity = defineModel<TslFunctionEntity>({
-  default: () => ({}) as TslFunctionEntity,
+  default: () =>
+    ({
+      dimension: 'events',
+      required: false,
+      arguments: { eventOutputData: [] as TslArgumentEntity[] },
+    }) as TslFunctionEntity,
 });
 
 const isOpenDialog = shallowRef<boolean>(false);
 const { identifier, validate } = useTslValidation();
 
 const showParameters = computed(() => {
-  return !isEmpty(entity.value.arguments);
+  return !isEmpty(entity.value.arguments.eventOutputData);
 });
 
 const onAddParameter = (item: Specification<Specs>) => {
@@ -59,10 +64,10 @@ const onAddParameter = (item: Specification<Specs>) => {
     specs: item,
   } as TslArgumentEntity;
 
-  if (isEmpty(entity.value.arguments)) {
-    entity.value.arguments = [];
+  if (isEmpty(entity.value.arguments.eventOutputData)) {
+    entity.value.arguments.eventOutputData = [];
   }
-  entity.value.arguments.push(attribute);
+  entity.value.arguments.eventOutputData.push(attribute);
 };
 
 /**

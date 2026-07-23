@@ -1,4 +1,4 @@
-import type { Conditions, AbstractEntity, AbstractAuditEntity } from '@herodotus/core';
+import type { Conditions, AbstractEntity, AbstractAuditEntity } from "@herodotus/core";
 
 export interface Characteristic {
   identifier: string;
@@ -18,44 +18,44 @@ type NumberSpecs = {
 };
 
 export type IntegerSpecs = {
-  type: 'int';
+  type: "int";
   specs: NumberSpecs;
 };
 
 export type FloatSpecs = {
-  type: 'float';
+  type: "float";
   specs: NumberSpecs;
 };
 
 export type DoubleSpecs = {
-  type: 'double';
+  type: "double";
   specs: NumberSpecs;
 };
 
 export type TextSpecs = {
-  type: 'text';
+  type: "text";
   specs: {
     length: string;
   };
 };
 
 export type DateSpecs = {
-  type: 'date';
+  type: "date";
   specs: {};
 };
 
 export type BoolSpecs = {
-  type: 'bool';
-  specs: { '0': string; '1': string };
+  type: "bool";
+  specs: { "0": string; "1": string };
 };
 
 export type EnumSpecs = {
-  type: 'enum';
+  type: "enum";
   specs: Record<string, string>;
 };
 
 export type StructSpecs = {
-  type: 'struct';
+  type: "struct";
   specs: Array<Specification<Specs>>;
 };
 
@@ -77,17 +77,22 @@ export interface TslUnitEntity extends AbstractEntity {
   symbol: string;
 }
 
-interface AbstractTslArgument extends AbstractAuditEntity, Characteristic {
+interface AbstractTslEntity extends AbstractAuditEntity, Characteristic {}
+
+export interface TslArgumentEntity extends AbstractTslEntity {
+  id: string;
   type: string;
   specs: Specification<Specs>;
 }
 
-export interface TslArgumentEntity extends AbstractTslArgument {
-  id: string;
-  output: boolean;
+export interface TslFunctionArgument extends AbstractAuditEntity {
+  property: TslArgumentEntity;
+  eventOutputData: TslArgumentEntity[];
+  serviceOutputData: TslArgumentEntity[];
+  serviceInputData: TslArgumentEntity[];
 }
 
-export interface TslFunctionEntity extends AbstractTslArgument {
+export interface TslFunctionEntity extends AbstractTslEntity {
   id: string;
   productId: string;
   productKey: string;
@@ -96,10 +101,9 @@ export interface TslFunctionEntity extends AbstractTslArgument {
   eventType: string;
   callType: string;
   required: boolean;
-  correlationId: string;
   method: string;
   description: string;
-  arguments: Array<TslArgumentEntity>;
+  arguments: TslFunctionArgument;
 }
 
 export interface TslUnitConditions extends Conditions {}
