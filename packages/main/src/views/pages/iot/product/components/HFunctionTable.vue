@@ -52,6 +52,7 @@
     v-model:entity="entity"
     :product-id="productId"
     :product-key="productKey"
+    @success="fetchItems"
   ></h-add-function-dialog>
 </template>
 
@@ -95,18 +96,10 @@ const headers = ref([
 
 const rowKey: TslFunctionProps = 'id';
 
-const {
-  loading,
-  pageNumber,
-  pageSize,
-  tableRows,
-  totalPages,
-  totalItems,
-  conditions,
-  deleteItemById,
-  findItems,
-  findItemsByPage,
-} = useTable<TslFunctionConditions, TslFunctionEntity>(API.core.iotTslFunction(), PAGE_NAME.IOT_TSL_FUNCTION);
+const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, deleteItemById, findItemsByPage } = useTable<
+  TslFunctionConditions,
+  TslFunctionEntity
+>(API.core.iotTslFunction(), PAGE_NAME.IOT_TSL_FUNCTION);
 
 const { getDictionaryItemDisplay } = useDictionary('Dimension', 'ArgumentType', 'CallType', 'EventType');
 const { getArgumentSpecs, getArgumentType } = useTslEntity();

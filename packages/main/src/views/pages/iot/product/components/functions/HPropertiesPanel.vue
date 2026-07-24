@@ -43,7 +43,6 @@ const argument = ref({
 watch(
   argument,
   (newValue) => {
-    console.log('----newValue---', newValue);
     if (newValue.identifier !== entity.value.identifier) {
       entity.value.identifier = newValue.identifier;
     }
@@ -54,8 +53,8 @@ watch(
 
     entity.value.arguments.property.specs = newValue;
     entity.value.arguments.property.type = newValue.dataType.type;
-
-    console.log('----entity---', entity.value);
+    entity.value.arguments.property.identifier = newValue.identifier;
+    entity.value.arguments.property.name = newValue.name;
   },
   {
     immediate: true,
