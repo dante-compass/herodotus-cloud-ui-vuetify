@@ -89,7 +89,7 @@ const headers = ref([
   { key: 'dimension', align: 'center', title: '功能类型' },
   { key: 'name', align: 'center', title: '功能名称' },
   { key: 'identifier', align: 'center', title: '标识符' },
-  { key: 'type', align: 'center', title: '数据类型' },
+  { key: 'type', align: 'left', title: '数据类型' },
   { key: 'specs', align: 'left', title: '数据定义' },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
@@ -152,7 +152,6 @@ const getType = (item: TslFunctionEntity) => {
 };
 
 const getDimensionColor = (dimension: string) => {
-  console.log(dimension);
   switch (dimension) {
     case 'services':
       return 'green';
@@ -181,7 +180,9 @@ const openDialogForCreate = () => {
 };
 
 const openDialogForEdit = (item: TslFunctionEntity) => {
-  entity.value = item;
+  // entity.value = item;
+
+  console.log('-----item--------', item);
   openDialog.value = true;
 };
 

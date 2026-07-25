@@ -70,7 +70,7 @@ const confirmPasswordVisible = shallowRef(false);
 const loading = shallowRef(false);
 
 const regexRule = (content: string) => {
-  const regex = /(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,25}/;
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])(?!.*\s).{8,30}$/;
   return regex.test(content);
 };
 

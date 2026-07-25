@@ -3,7 +3,7 @@
     <v-list-item v-for="(item, i) in model" :key="i">
       <v-list-item-subtitle v-text="'参数名称：' + item.name"></v-list-item-subtitle>
       <template #append>
-        <h-tsl-button text="删除" @click="onDelete(item)"></h-tsl-button>
+        <h-parameter-button text="删除" @click="onDelete(item)"></h-parameter-button>
       </template>
     </v-list-item>
   </v-list>
@@ -14,9 +14,9 @@ import type { TslArgumentEntity } from '@herodotus/api';
 
 import { remove, isEmpty } from 'lodash-es';
 
-import { HTslButton } from '../commons';
+import HParameterButton from './HParameterButton.vue';
 
-defineOptions({ name: 'HTslParamList', components: { HTslButton } });
+defineOptions({ name: 'HParameterList', components: { HParameterButton } });
 
 const model = defineModel<Array<TslArgumentEntity>>({
   default: () => [],

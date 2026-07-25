@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h-characteristic-panel v-model="model"></h-characteristic-panel>
+    <h-characteristic-panel v-model="argument"></h-characteristic-panel>
     <h-label text="数据类型：" required></h-label>
     <h-dictionary-select
-      v-model="model.dataType.type"
+      v-model="argument.dataType.type"
       dictionary="ArgumentType"
       density="compact"
     ></h-dictionary-select>
-    <component :is="currentPanel" v-model="model"></component>
+    <component :is="currentPanel" v-model="argument"></component>
   </div>
 </template>
 
@@ -42,13 +42,13 @@ defineOptions({
   },
 });
 
-const model = defineModel<Specification<Specs>>({
+const argument = defineModel<Specification<Specs>>({
   default: () => ({ identifier: '', name: '', dataType: { type: 'int', specs: {} } }) as Specification<Specs>,
 });
 
 const currentPanel = computed(() => {
-  if (model.value.dataType.type) {
-    return toUpper(model.value.dataType.type) + '_PANEL';
+  if (argument.value.dataType.type) {
+    return toUpper(argument.value.dataType.type) + '_PANEL';
   } else {
     return 'INT_PANEL';
   }
@@ -60,22 +60,20 @@ const currentPanel = computed(() => {
  * 目前采用最简单的判断方式，即 model 中 identifier 和 name 都为空值
  */
 const isModelEmpty = () => {
-  return isEmpty(model.value.identifier) && isEmpty(model.value.name);
+  return isEmpty(argument.value.identifier) && isEmpty(argument.value.name);
 };
 
 watch(
-  () => model.value.dataType.type,
+  () => argument.value.dataType.type,
   (newValue, oldValue) => {
     // 类型未实际变化则跳过（避免初始化时重复触发）
-
-    console.log('--------', newValue);
     if (newValue === oldValue) {
       return;
     }
 
     // 仅在新创建的情况下，做此操作避免切换至 struts 面板时，抛出类型不匹配错误
     if (isModelEmpty()) {
-      model.value = {
+      argument.value = {
         identifier: '',
         name: '',
         dataType: { type: newValue, specs: newValue === 'struct' ? [] : {} },

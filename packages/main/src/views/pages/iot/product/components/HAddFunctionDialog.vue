@@ -56,17 +56,7 @@ const model = defineModel<boolean>({
 });
 
 const entity = defineModel<TslFunctionEntity>('entity', {
-  default: () =>
-    ({
-      dimension: 'properties',
-      required: false,
-      arguments: {
-        property: {} as TslArgumentEntity,
-        eventOutputData: [] as TslArgumentEntity[],
-        serviceOutputData: [] as TslArgumentEntity[],
-        serviceInputData: [] as TslArgumentEntity[],
-      },
-    }) as TslFunctionEntity,
+  default: () => ({}) as TslFunctionEntity,
   required: true,
 });
 

@@ -30,7 +30,7 @@ const model = defineModel<Characteristic>({
 });
 
 const regexRule = (content: string) => {
-  const regex = /(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{5,50}/;
+  const regex = /^(?=.*[a-zA-Z])(?!.*\s).{5,50}$/;
   return regex.test(content);
 };
 </script>

@@ -1,14 +1,14 @@
 <template>
   <h-dialog v-model="model" title="添加参数" @confirm="onSave">
     <v-form ref="subArgumentForm">
-      <h-characteristic-panel v-model="entity"></h-characteristic-panel>
+      <h-characteristic-panel v-model="argument"></h-characteristic-panel>
       <h-label text="数据类型" required></h-label>
       <h-dictionary-select
-        v-model="entity.dataType.type"
+        v-model="argument.dataType.type"
         dictionary="ArgumentType"
         :disabled-items="['struct']"
       ></h-dictionary-select>
-      <component :is="currentPanel" v-model="entity"></component>
+      <component :is="currentPanel" v-model="argument"></component>
     </v-form>
   </h-dialog>
 </template>
@@ -51,15 +51,15 @@ const emit = defineEmits(['save']);
 
 const subArgumentForm = ref();
 
-const entity = ref({
+const argument = ref({
   identifier: '',
   name: '',
   dataType: { type: 'int', specs: {} },
 }) as Ref<Specification<Specs>>;
 
 const currentPanel = computed(() => {
-  if (entity.value.dataType.type) {
-    return toUpper(entity.value.dataType.type) + '_PANEL';
+  if (argument.value.dataType.type) {
+    return toUpper(argument.value.dataType.type) + '_PANEL';
   } else {
     return 'INT_PANEL';
   }
@@ -69,13 +69,13 @@ const onSave = async () => {
   const { valid } = await subArgumentForm.value.validate();
   if (valid) {
     model.value = false;
-    emit('save', entity.value);
+    emit('save', argument.value);
   }
 };
 
 onUpdated(() => {
   // 每次重新打开 Dialog，清除上次操作遗留数据
-  entity.value = {
+  argument.value = {
     identifier: '',
     name: '',
     dataType: { type: 'int', specs: {} },

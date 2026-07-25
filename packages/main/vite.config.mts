@@ -13,7 +13,7 @@ import { HerodotusResolver } from "@herodotus/components/resolver";
 import { compression } from "vite-plugin-compression2";
 import { createHtmlPlugin } from "vite-plugin-html";
 // import { viteVConsole } from 'vite-plugin-vconsole';
-import VueDevTools from "vite-plugin-vue-devtools";
+// import VueDevTools from "vite-plugin-vue-devtools";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 // Utilities
@@ -37,7 +37,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           process: true,
         },
       }),
-      VueDevTools(),
+      // VueDevTools(),
       Components({
         dts: "types/components.d.ts",
         resolvers: [
