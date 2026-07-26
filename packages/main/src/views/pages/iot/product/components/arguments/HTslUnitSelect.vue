@@ -28,7 +28,7 @@ import type { TslUnitEntity } from '@herodotus/api';
 import { isEmpty, debounce } from 'lodash-es';
 import { useIotTslUnitStore } from '../../composables/stores';
 
-defineOptions({ name: 'HUnitSelect' });
+defineOptions({ name: 'HTslUnitSelect' });
 
 const model = defineModel<TslUnitEntity | null | undefined>({
   required: true,

@@ -25,11 +25,11 @@
           ></v-text-field>
         </v-col>
         <v-col cols="1">
-          <h-parameter-button v-if="isNotOnlyOneEntry()" text="删除" @click="removeEntry(index)"></h-parameter-button>
+          <h-tsl-button v-if="isNotOnlyOneEntry()" text="删除" @click="removeEntry(index)"></h-tsl-button>
         </v-col>
       </v-row>
     </v-container>
-    <h-parameter-button text="+ 添加条目" @click="addEntry" />
+    <h-tsl-button text="+ 添加条目" @click="addEntry" />
   </div>
 </template>
 
@@ -37,13 +37,13 @@
 import type { TslStatus, Specification, EnumSpecs } from '@herodotus/api';
 
 import { isEmpty } from 'lodash-es';
-import { HDictionarySelect } from '@/components/library/HDictionary';
 
 import { useTslStatus } from '../../composables/hooks';
 
-import { HParameterButton } from '../commons';
+import { HDictionarySelect } from '@/components/library/HDictionary';
+import HTslButton from './HTslButton.vue';
 
-defineOptions({ name: 'HEnumPanel', components: { HDictionarySelect, HParameterButton } });
+defineOptions({ name: 'HArgumentEnumPanel', components: { HDictionarySelect, HTslButton } });
 
 interface Props {
   status?: TslStatus;

@@ -21,11 +21,11 @@ import { computed, onUpdated, ref } from 'vue';
 import { toUpper } from 'lodash-es';
 
 import { HDictionarySelect } from '@/components/library/HDictionary';
-import HBoolPanel from './HBoolPanel.vue';
-import HDatePanel from './HDatePanel.vue';
-import HEnumPanel from './HEnumPanel.vue';
-import HNumberPanel from './HNumberPanel.vue';
-import HTextPanel from './HTextPanel.vue';
+import HArgumentBoolPanel from './HArgumentBoolPanel.vue';
+import HArgumentDatePanel from './HArgumentDatePanel.vue';
+import HArgumentEnumPanel from './HArgumentEnumPanel.vue';
+import HArgumentNumberPanel from './HArgumentNumberPanel.vue';
+import HArgumentTextPanel from './HArgumentTextPanel.vue';
 import HCharacteristicPanel from './HCharacteristicPanel.vue';
 
 defineOptions({
@@ -33,13 +33,13 @@ defineOptions({
   components: {
     HCharacteristicPanel,
     HDictionarySelect,
-    INT_PANEL: HNumberPanel,
-    FLOAT_PANEL: HNumberPanel,
-    DOUBLE_PANEL: HNumberPanel,
-    DATE_PANEL: HDatePanel,
-    BOOL_PANEL: HBoolPanel,
-    ENUM_PANEL: HEnumPanel,
-    TEXT_PANEL: HTextPanel,
+    INT_PANEL: HArgumentNumberPanel,
+    FLOAT_PANEL: HArgumentNumberPanel,
+    DOUBLE_PANEL: HArgumentNumberPanel,
+    DATE_PANEL: HArgumentDatePanel,
+    BOOL_PANEL: HArgumentBoolPanel,
+    ENUM_PANEL: HArgumentEnumPanel,
+    TEXT_PANEL: HArgumentTextPanel,
   },
 });
 

@@ -14,9 +14,9 @@ import type { TslArgumentEntity, Specification, Specs } from '@herodotus/api';
 
 import { remove, isEmpty } from 'lodash-es';
 
-import HParameterButton from './HParameterButton.vue';
+import HArgumentButton from './HArgumentButton.vue';
 
-defineOptions({ name: 'HParameterList', components: { HParameterButton } });
+defineOptions({ name: 'HParameterList', components: { HArgumentButton } });
 
 const model = defineModel<Array<TslArgumentEntity | Specification<Specs>>>({
   default: () => [],

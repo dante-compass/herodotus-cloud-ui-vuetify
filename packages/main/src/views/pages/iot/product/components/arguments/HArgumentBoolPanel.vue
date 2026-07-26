@@ -33,7 +33,7 @@ import { useTslStatus } from '../../composables/hooks';
 
 import { HDictionarySelect } from '@/components/library/HDictionary';
 
-defineOptions({ name: 'HBoolPanel', components: { HDictionarySelect } });
+defineOptions({ name: 'HArgumentBoolPanel', components: { HDictionarySelect } });
 
 interface Props {
   status?: TslStatus;

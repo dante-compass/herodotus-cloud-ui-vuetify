@@ -8,9 +8,7 @@
 <script setup lang="ts">
 import type { TslStatus } from '@herodotus/api';
 
-defineOptions({
-  name: 'HTextPanel',
-});
+defineOptions({ name: 'HArgumentTextPanel' });
 
 const format = shallowRef('String类型的UTC时间戳(毫秒)');
 

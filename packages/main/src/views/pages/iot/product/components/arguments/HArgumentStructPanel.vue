@@ -17,7 +17,7 @@ import { useTslStatus } from '../../composables/hooks';
 import HSubArgumentDialog from './HSubArgumentDialog.vue';
 import { HParameterButton, HParameterList } from '../commons';
 
-defineOptions({ name: 'HStructPanel', components: { HSubArgumentDialog, HParameterButton, HParameterList } });
+defineOptions({ name: 'HArgumentStructPanel', components: { HSubArgumentDialog, HParameterButton, HParameterList } });
 
 interface Props {
   status?: TslStatus;

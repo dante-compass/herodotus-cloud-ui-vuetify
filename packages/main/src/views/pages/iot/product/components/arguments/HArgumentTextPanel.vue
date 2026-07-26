@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import type { TslStatus, Specification, TextSpecs } from '@herodotus/api';
 
-defineOptions({ name: 'HTextPanel' });
+defineOptions({ name: 'HArgumentTextPanel' });
 
 import { useTslEntity, useTslStatus } from '../../composables/hooks';
 
