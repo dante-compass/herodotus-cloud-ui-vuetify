@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Specification, Specs, StructSpecs } from '@herodotus/api';
+import type { Specification, Specs } from '@herodotus/api';
 
 import { toUpper, isEmpty } from 'lodash-es';
 

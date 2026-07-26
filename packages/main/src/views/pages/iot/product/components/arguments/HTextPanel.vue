@@ -1,29 +1,50 @@
 <template>
   <div>
     <h-label text="数据长度" required></h-label>
-    <v-text-field
-      v-model="model.dataType.specs.length"
+    <v-number-input
+      v-model="content"
       density="comfortable"
-      type="number"
-      suffix="丨字节"
-      :clearable="false"
-      :rules="[(v: string) => !!v || '数据长度不能为空']"
-    ></v-text-field>
+      :disabled="disabled"
+      :min="0"
+      :max="max"
+      :step="10"
+    ></v-number-input>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Specification, TextSpecs } from "@herodotus/api";
+import type { TslStatus, Specification, TextSpecs } from '@herodotus/api';
 
-defineOptions({ name: "HTextPanel" });
+defineOptions({ name: 'HTextPanel' });
+
+import { useTslEntity, useTslStatus } from '../../composables/hooks';
+
+interface Props {
+  status?: TslStatus;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  status: 'create',
+});
 
 const model = defineModel<Specification<TextSpecs>>({
   default: () => ({}) as Specification<TextSpecs>,
 });
 
-onMounted(() => {
-  if (!model.value.dataType.specs.length) {
-    model.value.dataType.specs.length = "10240";
-  }
+const { disabled } = useTslStatus(props.status);
+const { hasSpecs } = useTslEntity();
+
+const max = shallowRef(10240);
+
+const content = computed({
+  get: () =>
+    hasSpecs(model.value) && model.value.dataType.specs.length ? Number(model.value.dataType.specs.length) : max.value,
+  set: (value: number) => {
+    if (value) {
+      model.value.dataType.specs.length = String(value);
+    } else {
+      model.value.dataType.specs.length = String(max.value);
+    }
+  },
 });
 </script>

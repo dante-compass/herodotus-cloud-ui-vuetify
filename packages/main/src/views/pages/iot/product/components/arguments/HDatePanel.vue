@@ -6,11 +6,19 @@
 </template>
 
 <script setup lang="ts">
-import { shallowRef } from "vue";
+import type { TslStatus } from '@herodotus/api';
 
 defineOptions({
-  name: "HTextPanel",
+  name: 'HTextPanel',
 });
 
-const format = shallowRef("String类型的UTC时间戳(毫秒)");
+const format = shallowRef('String类型的UTC时间戳(毫秒)');
+
+interface Props {
+  status?: TslStatus;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  status: 'create',
+});
 </script>

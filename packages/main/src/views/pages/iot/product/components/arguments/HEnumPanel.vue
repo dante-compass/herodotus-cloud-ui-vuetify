@@ -2,48 +2,62 @@
   <div>
     <h-label text="枚举项：" required></h-label>
     <v-container class="pa-0 mt-4">
-      <v-row no-gutters v-for="(entry, index) in entries" :key="index">
-        <v-col cols="5"
-          ><v-text-field
+      <v-row v-for="(entry, index) in entries" :key="index">
+        <v-col cols="5">
+          <v-text-field
             v-model="entry.key"
             density="compact"
             placeholder="编号如'0'"
+            :disabled="disabled"
             hide-details
             :rules="[(v: string) => !!v || '枚举条目不能为空']"
-          ></v-text-field
-        ></v-col>
+          ></v-text-field>
+        </v-col>
         <v-col cols="1" align-self="center" class="text-center">~</v-col>
-        <v-col cols="5"
-          ><v-text-field
+        <v-col cols="5">
+          <v-text-field
             v-model="entry.value"
             density="compact"
             placeholder="对该枚举项的描述"
+            :disabled="disabled"
             hide-details
             :rules="[(v: string) => !!v || '枚举条目描述不能为空']"
-          ></v-text-field
-        ></v-col>
+          ></v-text-field>
+        </v-col>
         <v-col cols="1">
-          <v-btn variant="text" v-if="isNotOnlyOneEntry()" text="删除" @click="removeEntry(index)"
-        /></v-col>
+          <h-parameter-button v-if="isNotOnlyOneEntry()" text="删除" @click="removeEntry(index)"></h-parameter-button>
+        </v-col>
       </v-row>
     </v-container>
-    <h-tsl-button text="+ 添加条目" @click="addEntry" />
+    <h-parameter-button text="+ 添加条目" @click="addEntry" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Specification, EnumSpecs } from "@herodotus/api";
+import type { TslStatus, Specification, EnumSpecs } from '@herodotus/api';
 
-import { isEmpty } from "lodash-es";
-import { HDictionarySelect } from "@/components/library/HDictionary";
+import { isEmpty } from 'lodash-es';
+import { HDictionarySelect } from '@/components/library/HDictionary';
 
-import { HTslButton } from "../commons";
+import { useTslStatus } from '../../composables/hooks';
 
-defineOptions({ name: "HEnumPanel", components: { HDictionarySelect, HTslButton } });
+import { HParameterButton } from '../commons';
+
+defineOptions({ name: 'HEnumPanel', components: { HDictionarySelect, HParameterButton } });
+
+interface Props {
+  status?: TslStatus;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  status: 'create',
+});
 
 const model = defineModel<Specification<EnumSpecs>>({
   default: () => ({}) as Specification<EnumSpecs>,
 });
+
+const { disabled } = useTslStatus(props.status);
 
 // 内部维护的条目列表
 interface Entry {
@@ -59,7 +73,7 @@ const syncFromModel = (data: Record<string, string>) => {
   isSyncingFromModel = true;
 
   if (isEmpty(data)) {
-    entries.value = [{ key: "", value: "" }];
+    entries.value = [{ key: '', value: '' }];
   } else {
     // 将对象转为条目数组，过滤掉空 key
     const list: Entry[] = Object.entries(data)
@@ -99,7 +113,7 @@ const isNotOnlyOneEntry = () => {
 
 // 添加新空条目
 const addEntry = () => {
-  entries.value.push({ key: "", value: "" });
+  entries.value.push({ key: '', value: '' });
 };
 
 // 删除指定条目

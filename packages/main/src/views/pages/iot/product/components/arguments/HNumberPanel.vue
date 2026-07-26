@@ -27,7 +27,7 @@
     <h-label text="步长："></h-label>
     <v-text-field v-model="model.dataType.specs.step" density="compact" placeholder="请输入步长" :disabled="disabled" />
     <h-label text="单位："></h-label>
-    <h-unit-select v-model="unit" density="compact"></h-unit-select>
+    <h-unit-select v-model="unit" density="compact" :disabled="disabled"></h-unit-select>
   </div>
 </template>
 
@@ -55,26 +55,28 @@ const model = defineModel<Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>
   default: () => ({}) as Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>,
 });
 
-const { isCreate, isEdit, isView, disabled } = useTslStatus(props.status);
+const { disabled } = useTslStatus(props.status);
 const { hasSpecs } = useTslEntity();
 
-const unit = ref<TslUnitEntity | null>(null);
-
-watch(unit, (newValue, oldValue) => {
-  if (!isEmpty(newValue)) {
-    model.value.dataType.specs.unit = newValue.symbol;
-    model.value.dataType.specs.unitName = newValue.name;
-  }
-});
-
-onMounted(() => {
-  if (hasSpecs(model.value)) {
-    const symbol = model.value.dataType.specs.unit;
-
-    const name = model.value.dataType.specs.unitName;
-    if (symbol && name) {
-      unit.value = { name: name, symbol: symbol } as TslUnitEntity;
+const unit = computed({
+  get: () => {
+    if (hasSpecs(model.value)) {
+      const symbol = model.value.dataType.specs.unit;
+      const name = model.value.dataType.specs.unitName;
+      if (symbol && name) {
+        unit.value = { name: name, symbol: symbol } as TslUnitEntity;
+      }
     }
-  }
+    return null;
+  },
+  set: (value: TslUnitEntity) => {
+    if (!isEmpty(value)) {
+      model.value.dataType.specs.unit = value.symbol;
+      model.value.dataType.specs.unitName = value.name;
+    } else {
+      model.value.dataType.specs.unit = '';
+      model.value.dataType.specs.unitName = '';
+    }
+  },
 });
 </script>

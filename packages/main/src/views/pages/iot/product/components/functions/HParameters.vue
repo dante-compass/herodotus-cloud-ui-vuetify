@@ -22,8 +22,7 @@ import type { TslArgumentEntity, Specification, Specs } from '@herodotus/api';
 
 import { isEmpty } from 'lodash-es';
 
-import HParameterButton from './HParameterButton.vue';
-import HParameterList from './HParameterList.vue';
+import { HParameterButton, HParameterList } from '../commons';
 import HAddArgumentDialog from './HAddArgumentDialog.vue';
 
 defineOptions({ name: 'HParameters', components: { HParameterButton, HParameterList, HAddArgumentDialog } });

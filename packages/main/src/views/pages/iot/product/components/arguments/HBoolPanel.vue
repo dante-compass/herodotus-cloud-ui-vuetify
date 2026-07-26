@@ -5,33 +5,47 @@
       v-model="model.dataType.specs['0']"
       density="compact"
       placeholder="如：关"
+      :disabled="disabled"
       :rules="[(v: string) => !!v || '布尔值不能为空']"
     >
       <template #prepend>
-        <div class="text-subtitle1">{{ "0 - " }}</div>
+        <div class="text-subtitle1">{{ ' 0 - ' }}</div>
       </template>
     </v-text-field>
     <v-text-field
       v-model="model.dataType.specs['1']"
       density="compact"
       placeholder="如：开"
+      :disabled="disabled"
       :rules="[(v: string) => !!v || '布尔值不能为空']"
     >
       <template #prepend>
-        <div class="text-subtitle1">{{ "1 - " }}</div>
+        <div class="text-subtitle1">{{ ' 1 - ' }}</div>
       </template>
     </v-text-field>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Specification, BoolSpecs } from "@herodotus/api";
+import type { TslStatus, Specification, BoolSpecs } from '@herodotus/api';
 
-import { HDictionarySelect } from "@/components/library/HDictionary";
+import { useTslStatus } from '../../composables/hooks';
 
-defineOptions({ name: "HBoolPanel", components: { HDictionarySelect } });
+import { HDictionarySelect } from '@/components/library/HDictionary';
+
+defineOptions({ name: 'HBoolPanel', components: { HDictionarySelect } });
+
+interface Props {
+  status?: TslStatus;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  status: 'create',
+});
 
 const model = defineModel<Specification<BoolSpecs>>({
   default: () => ({}) as Specification<BoolSpecs>,
 });
+
+const { disabled } = useTslStatus(props.status);
 </script>

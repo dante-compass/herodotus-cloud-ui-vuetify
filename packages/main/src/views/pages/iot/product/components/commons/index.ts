@@ -1,4 +1,4 @@
-import HTslButton from "./HTslButton.vue";
-import HTslParamList from "./HTslParamList.vue";
+import HParameterButton from "./HParameterButton.vue";
+import HParameterList from "./HParameterList.vue";
 
-export { HTslButton, HTslParamList };
+export { HParameterButton, HParameterList };

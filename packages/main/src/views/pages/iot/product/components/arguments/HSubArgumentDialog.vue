@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Specification, Specs } from '@herodotus/api';
+import type { TslStatus, Specification, Specs } from '@herodotus/api';
 
 import { computed, onUpdated, ref } from 'vue';
 
@@ -43,6 +43,14 @@ defineOptions({
   },
 });
 
+interface Props {
+  status?: TslStatus;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  status: 'create',
+});
+
 const model = defineModel<boolean>({
   required: true,
 });
@@ -50,7 +58,6 @@ const model = defineModel<boolean>({
 const emit = defineEmits(['save']);
 
 const subArgumentForm = ref();
-
 const argument = ref({
   identifier: '',
   name: '',
