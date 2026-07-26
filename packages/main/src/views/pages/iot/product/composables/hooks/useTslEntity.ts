@@ -35,9 +35,14 @@ export default function useTslEntity() {
     return {} as Specification<Specs>;
   };
 
+  const hasSpecs = (entity: Specification<Specs>) => {
+    return !isEmpty(entity) && !isEmpty(entity.dataType) && !isEmpty(entity.dataType.specs);
+  };
+
   return {
     hasArguments,
     getArgumentSpecs,
     getArgumentType,
+    hasSpecs,
   };
 }

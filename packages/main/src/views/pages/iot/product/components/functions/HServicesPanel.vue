@@ -8,8 +8,8 @@
       default-value="async"
       inline
     ></h-dictionary-option>
-    <h-parameters v-model="entity.arguments.serviceInputData" label="输入参数："></h-parameters>
-    <h-parameters v-model="entity.arguments.serviceOutputData"></h-parameters>
+    <h-parameters v-model="entity.arguments.serviceInputData" :for-create="forCreate" label="输入参数："></h-parameters>
+    <h-parameters v-model="entity.arguments.serviceOutputData" :for-create="forCreate"></h-parameters>
   </v-form>
 </template>
 
@@ -31,6 +31,14 @@ defineOptions({
   },
 });
 
+interface Props {
+  forCreate: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  forCreate: true,
+});
+
 const entity = defineModel<TslFunctionEntity>({
   default: () =>
     ({
@@ -44,6 +52,14 @@ const entity = defineModel<TslFunctionEntity>({
 });
 
 const { identifier, validate } = useTslValidation();
+
+watch(
+  entity,
+  (newValue) => {
+    console.log('---services---', newValue);
+  },
+  { deep: true },
+);
 
 /**
  * 对外暴露 validate() 方法，实现父组件调用子组件校验方法

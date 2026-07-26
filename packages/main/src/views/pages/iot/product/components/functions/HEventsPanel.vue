@@ -8,7 +8,7 @@
       default-value="info"
       inline
     ></h-dictionary-option>
-    <h-parameters v-model="entity.arguments.eventOutputData"></h-parameters>
+    <h-parameters v-model="entity.arguments.eventOutputData" :for-create="forCreate"></h-parameters>
   </v-form>
 </template>
 
@@ -31,6 +31,14 @@ defineOptions({
   },
 });
 
+interface Props {
+  forCreate: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  forCreate: true,
+});
+
 const entity = defineModel<TslFunctionEntity>({
   default: () =>
     ({
@@ -41,6 +49,14 @@ const entity = defineModel<TslFunctionEntity>({
 });
 
 const { identifier, validate } = useTslValidation();
+
+watch(
+  entity,
+  (newValue) => {
+    console.log('---events---', newValue);
+  },
+  { deep: true },
+);
 
 /**
  * 对外暴露 validate() 方法，实现父组件调用子组件校验方法

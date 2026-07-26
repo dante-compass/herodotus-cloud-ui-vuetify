@@ -21,9 +21,17 @@
 </template>
 
 <script setup lang="ts">
-import type { Characteristic } from '@herodotus/api';
+import type { Characteristic, TslStatus } from '@herodotus/api';
 
 defineOptions({ name: 'HCharacteristicPanel' });
+
+interface Props {
+  status?: TslStatus;
+}
+
+withDefaults(defineProps<Props>(), {
+  status: 'create',
+});
 
 const model = defineModel<Characteristic>({
   default: () => ({}) as Characteristic,

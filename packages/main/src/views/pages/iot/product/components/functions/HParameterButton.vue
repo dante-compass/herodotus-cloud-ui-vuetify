@@ -1,5 +1,5 @@
 <template>
-  <v-btn variant="text" class="px-0" v-bind="$attrs"></v-btn>
+  <v-btn variant="tonal" density="compact" v-bind="$attrs"></v-btn>
 </template>
 
 <script setup lang="ts">

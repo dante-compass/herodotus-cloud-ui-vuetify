@@ -92,4 +92,5 @@ export interface TslFunctionConditions extends Conditions {
 export type TslUnitProps = keyof TslUnitEntity;
 export type TslArgumentProps = keyof TslArgumentEntity;
 export type TslFunctionProps = keyof TslFunctionEntity;
+export type TslStatus = "create" | "edit" | "view";
 export {};

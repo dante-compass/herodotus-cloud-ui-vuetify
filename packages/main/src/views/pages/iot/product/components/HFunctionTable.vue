@@ -52,6 +52,7 @@
     v-model:entity="entity"
     :product-id="productId"
     :product-key="productKey"
+    :for-create="forCreate"
     @success="fetchItems"
   ></h-add-function-dialog>
 </template>
@@ -105,6 +106,7 @@ const { getDictionaryItemDisplay } = useDictionary('Dimension', 'ArgumentType', 
 const { getArgumentSpecs, getArgumentType } = useTslEntity();
 
 const openDialog = shallowRef(false);
+const forCreate = shallowRef(true);
 const entity = ref({}) as Ref<TslFunctionEntity>;
 
 const isBoolSpec = (item: TslFunctionEntity) => {
@@ -177,12 +179,12 @@ const openDialogForCreate = () => {
     },
   } as TslFunctionEntity;
   openDialog.value = true;
+  forCreate.value = true;
 };
 
 const openDialogForEdit = (item: TslFunctionEntity) => {
-  // entity.value = item;
-
-  console.log('-----item--------', item);
+  forCreate.value = false;
+  entity.value = item;
   openDialog.value = true;
 };
 

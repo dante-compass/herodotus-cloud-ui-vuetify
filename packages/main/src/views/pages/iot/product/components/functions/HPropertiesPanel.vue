@@ -23,6 +23,14 @@ import { HArgumentPanel } from '../arguments';
 
 defineOptions({ name: 'HPropertiesPanel' });
 
+interface Props {
+  forCreate: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  forCreate: true,
+});
+
 const entity = defineModel<TslFunctionEntity>({
   default: () =>
     ({
@@ -41,32 +49,40 @@ const argument = ref({
 }) as Ref<Specification<Specs>>;
 
 watch(
+  entity,
+  (newValue) => {
+    if (!props.forCreate) {
+      if (!isEmpty(newValue) && !isEmpty(newValue.arguments) && !isEmpty(newValue.arguments.property)) {
+        argument.value = newValue.arguments.property.specs;
+      }
+    }
+  },
+  { deep: true, immediate: true },
+);
+
+watch(
   argument,
   (newValue) => {
-    if (newValue.identifier !== entity.value.identifier) {
-      entity.value.identifier = newValue.identifier;
-    }
+    if (newValue.identifier && newValue.name) {
+      if (newValue.identifier !== entity.value.identifier) {
+        entity.value.identifier = newValue.identifier;
+      }
 
-    if (newValue.name !== entity.value.name) {
-      entity.value.name = newValue.name;
-    }
+      if (newValue.name !== entity.value.name) {
+        entity.value.name = newValue.name;
+      }
 
-    entity.value.arguments.property.specs = newValue;
-    entity.value.arguments.property.type = newValue.dataType.type;
-    entity.value.arguments.property.identifier = newValue.identifier;
-    entity.value.arguments.property.name = newValue.name;
+      entity.value.arguments.property.specs = newValue;
+      entity.value.arguments.property.type = newValue.dataType.type;
+      entity.value.arguments.property.identifier = newValue.identifier;
+      entity.value.arguments.property.name = newValue.name;
+    }
   },
   {
     immediate: true,
     deep: true,
   },
 );
-
-onMounted(() => {
-  if (!isEmpty(entity.value) && !isEmpty(entity.value.arguments) && !isEmpty(entity.value.arguments.property)) {
-    argument.value = entity.value.arguments.property.specs;
-  }
-});
 
 defineExpose({
   validate,

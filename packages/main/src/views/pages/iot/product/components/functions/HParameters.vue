@@ -1,9 +1,19 @@
 <template>
   <div>
-    <h-label :text="label"></h-label>
-    <h-parameter-list v-if="isShowList" v-model="model"></h-parameter-list>
-    <h-parameter-button text="+ 添加参数" @click="isOpenDialog = !isOpenDialog"></h-parameter-button>
-    <h-add-argument-dialog v-model="isOpenDialog" @save="onAddParameter"></h-add-argument-dialog>
+    <v-row>
+      <v-col cols="3"><h-label :text="label"></h-label></v-col>
+      <v-col cols="9" class="align-self-start">
+        <h-parameter-button text="+ 添加参数" @click="isOpenDialog = !isOpenDialog"></h-parameter-button>
+      </v-col>
+    </v-row>
+
+    <h-parameter-list v-if="isShowList" v-model="model" class="mb-4"></h-parameter-list>
+
+    <h-add-argument-dialog
+      v-model="isOpenDialog"
+      :for-create="forCreate"
+      @save="onAddParameter"
+    ></h-add-argument-dialog>
   </div>
 </template>
 
@@ -20,10 +30,12 @@ defineOptions({ name: 'HParameters', components: { HParameterButton, HParameterL
 
 interface Props {
   label?: string;
+  forCreate: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
   label: '输出参数：',
+  forCreate: true,
 });
 
 const model = defineModel<Array<TslArgumentEntity>>({

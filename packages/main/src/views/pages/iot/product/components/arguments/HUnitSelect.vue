@@ -5,7 +5,8 @@
     :items="items"
     :loading="loading"
     item-title="name"
-    item-value="id"
+    item-value="name"
+    return-object
     chips
     closable-chips
     placeholder="请选择单位"
@@ -22,12 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import type { TslUnitEntity } from "@herodotus/api";
+import type { TslUnitEntity } from '@herodotus/api';
 
-import { isEmpty, debounce } from "lodash-es";
-import { useIotTslUnitStore } from "../../composables/stores";
+import { isEmpty, debounce } from 'lodash-es';
+import { useIotTslUnitStore } from '../../composables/stores';
 
-defineOptions({ name: "HUnitSelect" });
+defineOptions({ name: 'HUnitSelect' });
 
 const model = defineModel<TslUnitEntity | null | undefined>({
   required: true,
@@ -35,12 +36,12 @@ const model = defineModel<TslUnitEntity | null | undefined>({
 
 const items = shallowRef<TslUnitEntity[]>([]);
 const loading = shallowRef(false);
-const search = shallowRef("");
+const search = shallowRef('');
 
 const store = useIotTslUnitStore();
 
 const displayContent = (item: TslUnitEntity) => {
-  return item.name + " - " + item.symbol;
+  return item.name + ' - ' + item.symbol;
 };
 
 // 防抖搜索，适合实时搜索

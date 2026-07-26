@@ -6,8 +6,9 @@
       v-model="entity.dimension"
       dictionary="Dimension"
       default-value="properties"
+      :disabled="!forCreate"
     ></h-dictionary-toggle>
-    <component :is="currentPanel" v-model="entity" ref="identifier"></component>
+    <component :is="currentPanel" v-model="entity" :for-create="forCreate" ref="identifier"></component>
     <h-label text="描述："></h-label>
     <v-textarea
       v-model="entity.description"
@@ -20,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity, TslArgumentEntity } from '@herodotus/api';
+import type { TslArgumentEntity, TslFunctionEntity } from '@herodotus/api';
 
 import { toUpper } from 'lodash-es';
 import { toast } from '@herodotus/core';
@@ -46,9 +47,12 @@ defineOptions({
 interface Props {
   productKey: string;
   productId: string;
+  forCreate: boolean;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  forCreate: true,
+});
 
 const model = defineModel<boolean>({
   default: false,
@@ -70,6 +74,35 @@ const currentPanel = computed(() => {
     return 'PROPERTIES_PANEL';
   }
 });
+
+watch(
+  () => entity.value.dimension,
+  (newValue) => {
+    if (props.forCreate) {
+      switch (newValue) {
+        case 'events':
+          entity.value.arguments.eventOutputData = [];
+          break;
+        case 'services':
+          entity.value.arguments.serviceInputData = [];
+          entity.value.arguments.serviceOutputData = [];
+          break;
+        default:
+          entity.value.arguments.property = {
+            identifier: '',
+            name: '',
+            type: 'int',
+            specs: {
+              identifier: '',
+              name: '',
+              dataType: { type: 'int', specs: {} },
+            },
+          } as TslArgumentEntity;
+          break;
+      }
+    }
+  },
+);
 
 const onSave = () => {
   const valid = getValidator();
