@@ -64,7 +64,7 @@ const unit = computed({
       const symbol = model.value.dataType.specs.unit;
       const name = model.value.dataType.specs.unitName;
       if (symbol && name) {
-        unit.value = { name: name, symbol: symbol } as TslUnitEntity;
+        return { name: name, symbol: symbol } as TslUnitEntity;
       }
     }
     return null;

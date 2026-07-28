@@ -7,20 +7,20 @@
       dictionary="CallType"
       default-value="async"
       inline
+      :disabled="disabled"
     ></h-dictionary-option>
-    <h-parameters v-model="entity.arguments.serviceInputData" :for-create="forCreate" label="输入参数："></h-parameters>
-    <h-parameters v-model="entity.arguments.serviceOutputData" :for-create="forCreate"></h-parameters>
+    <h-parameters v-model="entity.arguments.serviceInputData" :status="status" label="输入参数："></h-parameters>
+    <h-parameters v-model="entity.arguments.serviceOutputData" :status="status"></h-parameters>
   </v-form>
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity, TslArgumentEntity } from '@herodotus/api';
+import type { TslStatus, TslFunctionEntity, TslArgumentEntity } from '@herodotus/api';
 
-import { useTslValidation } from '../../composables/hooks';
+import { useTslValidation, useTslStatus } from '../../composables/hooks';
 
 import { HDictionaryOption } from '@/components/library/HDictionary';
-import { HCharacteristicPanel } from '../arguments';
-import HParameters from './HParameters.vue';
+import { HCharacteristicPanel, HParameters } from '../arguments';
 
 defineOptions({
   name: 'HServicePanel',
@@ -32,11 +32,11 @@ defineOptions({
 });
 
 interface Props {
-  forCreate: boolean;
+  status?: TslStatus;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  forCreate: true,
+  status: 'create',
 });
 
 const entity = defineModel<TslFunctionEntity>({
@@ -52,14 +52,7 @@ const entity = defineModel<TslFunctionEntity>({
 });
 
 const { identifier, validate } = useTslValidation();
-
-watch(
-  entity,
-  (newValue) => {
-    console.log('---services---', newValue);
-  },
-  { deep: true },
-);
+const { disabled } = useTslStatus(props.status);
 
 /**
  * 对外暴露 validate() 方法，实现父组件调用子组件校验方法

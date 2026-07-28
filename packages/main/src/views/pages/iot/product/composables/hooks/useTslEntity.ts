@@ -7,12 +7,12 @@ export default function useTslEntity() {
     return !isEmpty(item) && !isEmpty(item.arguments);
   };
 
-  const propertyIsNotEmpty = (item: TslFunctionEntity) => {
+  const hasProperties = (item: TslFunctionEntity) => {
     return hasArguments(item) && !isEmpty(item.arguments.property);
   };
 
   const getPropertyArgument = (item: TslFunctionEntity): TslArgumentEntity | undefined => {
-    if (propertyIsNotEmpty(item)) {
+    if (hasProperties(item)) {
       return item.arguments.property;
     }
 
@@ -41,6 +41,7 @@ export default function useTslEntity() {
 
   return {
     hasArguments,
+    hasProperties,
     getArgumentSpecs,
     getArgumentType,
     hasSpecs,

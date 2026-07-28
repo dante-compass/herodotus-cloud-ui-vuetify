@@ -13,10 +13,10 @@
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity, TslArgumentEntity, Specification, Specs } from '@herodotus/api';
+import type { TslStatus, TslFunctionEntity, TslArgumentEntity, Specification, Specs } from '@herodotus/api';
 
-import { isEmpty } from 'lodash-es';
-import { useTslValidation } from '../../composables/hooks';
+import { isEmpty, isEqual } from 'lodash-es';
+import { useTslValidation, useTslEntity } from '../../composables/hooks';
 
 import { HDictionaryOption } from '@/components/library/HDictionary';
 import { HArgumentPanel } from '../arguments';
@@ -24,14 +24,14 @@ import { HArgumentPanel } from '../arguments';
 defineOptions({ name: 'HPropertiesPanel' });
 
 interface Props {
-  forCreate: boolean;
+  status?: TslStatus;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  forCreate: true,
+  status: 'create',
 });
 
-const entity = defineModel<TslFunctionEntity>({
+const model = defineModel<TslFunctionEntity>({
   default: () =>
     ({
       dimension: 'properties',
@@ -42,14 +42,45 @@ const entity = defineModel<TslFunctionEntity>({
 });
 
 const { identifier, validate } = useTslValidation();
+const { hasProperties } = useTslEntity();
+
 const argument = ref({
   identifier: '',
   name: '',
   dataType: { type: 'int', specs: {} },
 }) as Ref<Specification<Specs>>;
 
+const argument = computed({
+  get: () => {
+    if (hasProperties(model.value)) {
+      return model.value.arguments.property.specs;
+    }
+    return {
+      identifier: '',
+      name: '',
+      dataType: { type: 'int', specs: {} },
+    } as Specification<Specs>;
+  },
+  set: (value: Specification<Specs>) => {
+    if (!isEmpty(value)) {
+      if (model.value.identifier !== value.identifier) {
+        model.value.identifier = value.identifier;
+        model.value.arguments.property.identifier = value.identifier;
+      }
+
+      if (model.value.name !== value.name) {
+        model.value.name = value.name;
+        model.value.arguments.property.name = value.name;
+      }
+
+      model.value.arguments.property.specs = value;
+      model.value.arguments.property.type = value.dataType.type;
+    }
+  },
+});
+
 watch(
-  entity,
+  model,
   (newValue) => {
     if (!props.forCreate) {
       if (!isEmpty(newValue) && !isEmpty(newValue.arguments) && !isEmpty(newValue.arguments.property)) {
@@ -64,19 +95,19 @@ watch(
   argument,
   (newValue) => {
     if (newValue.identifier && newValue.name) {
-      if (newValue.identifier !== entity.value.identifier) {
-        entity.value.identifier = newValue.identifier;
+      if (newValue.identifier !== model.value.identifier) {
+        model.value.identifier = newValue.identifier;
       }
 
-      if (newValue.name !== entity.value.name) {
-        entity.value.name = newValue.name;
+      if (newValue.name !== model.value.name) {
+        model.value.name = newValue.name;
       }
-
-      entity.value.arguments.property.specs = newValue;
-      entity.value.arguments.property.type = newValue.dataType.type;
-      entity.value.arguments.property.identifier = newValue.identifier;
-      entity.value.arguments.property.name = newValue.name;
+      model.value.arguments.property.identifier = newValue.identifier;
+      model.value.arguments.property.name = newValue.name;
     }
+
+    model.value.arguments.property.specs = newValue;
+    model.value.arguments.property.type = newValue.dataType.type;
   },
   {
     immediate: true,

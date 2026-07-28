@@ -2,8 +2,8 @@
   <div>
     <h-label text="JSON 对象：" required></h-label>
     <h-parameter-list v-model="model.dataType.specs"></h-parameter-list>
-    <h-parameter-button v-if="!isView" text="+ 新增参数" @click="openDialog = !openDialog" />
-    <h-sub-argument-dialog v-model="openDialog" @save="onAddParameter"></h-sub-argument-dialog>
+    <h-tsl-button v-if="!isView" text="+ 新增参数" @click="openDialog = !openDialog" />
+    <h-secondary-adding-dialog v-model="openDialog" @save="onAddParameter"></h-secondary-adding-dialog>
   </div>
 </template>
 
@@ -14,10 +14,11 @@ import { isEmpty } from 'lodash-es';
 
 import { useTslStatus } from '../../composables/hooks';
 
-import HSubArgumentDialog from './HSubArgumentDialog.vue';
-import { HParameterButton, HParameterList } from '../commons';
+import HSecondaryAddingDialog from './HSecondaryAddingDialog.vue';
+import HParameterList from './HParameterList.vue';
+import HTslButton from './HTslButton.vue';
 
-defineOptions({ name: 'HArgumentStructPanel', components: { HSubArgumentDialog, HParameterButton, HParameterList } });
+defineOptions({ name: 'HArgumentStructPanel', components: { HSecondaryAddingDialog, HTslButton, HParameterList } });
 
 interface Props {
   status?: TslStatus;

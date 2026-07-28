@@ -1,20 +1,23 @@
 <template>
   <div>
-    <h-characteristic-panel v-model="argument"></h-characteristic-panel>
+    <h-characteristic-panel v-model="argument" :status="status"></h-characteristic-panel>
     <h-label text="数据类型：" required></h-label>
     <h-dictionary-select
       v-model="argument.dataType.type"
       dictionary="ArgumentType"
       density="compact"
+      :disabled="disabled"
     ></h-dictionary-select>
-    <component :is="currentPanel" v-model="argument"></component>
+    <component :is="currentPanel" v-model="argument" :status="status"></component>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Specification, Specs } from '@herodotus/api';
+import type { TslStatus, Specification, Specs } from '@herodotus/api';
 
 import { toUpper, isEmpty } from 'lodash-es';
+
+import { useTslStatus } from '../../composables/hooks';
 
 import { HDictionarySelect } from '@/components/library/HDictionary';
 
@@ -42,9 +45,19 @@ defineOptions({
   },
 });
 
+interface Props {
+  status?: TslStatus;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  status: 'create',
+});
+
 const argument = defineModel<Specification<Specs>>({
   default: () => ({ identifier: '', name: '', dataType: { type: 'int', specs: {} } }) as Specification<Specs>,
 });
+
+const { disabled } = useTslStatus(props.status);
 
 const currentPanel = computed(() => {
   if (argument.value.dataType.type) {

@@ -14,9 +14,7 @@ export default function useTslStatus(status: TslStatus) {
   });
 
   const disabled = computed(() => {
-    const value = isView.value;
-    console.log("-----------", value);
-    return value;
+    return isView.value;
   });
 
   return {

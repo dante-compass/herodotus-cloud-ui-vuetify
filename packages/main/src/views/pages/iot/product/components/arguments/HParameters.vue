@@ -3,38 +3,35 @@
     <v-row>
       <v-col cols="3"><h-label :text="label"></h-label></v-col>
       <v-col cols="9" class="align-self-start">
-        <h-parameter-button text="+ 添加参数" @click="isOpenDialog = !isOpenDialog"></h-parameter-button>
+        <h-tsl-button text="+ 添加参数" @click="isOpenDialog = !isOpenDialog"></h-tsl-button>
       </v-col>
     </v-row>
 
     <h-parameter-list v-if="isShowList" v-model="model" class="mb-4"></h-parameter-list>
 
-    <h-add-argument-dialog
-      v-model="isOpenDialog"
-      :for-create="forCreate"
-      @save="onAddParameter"
-    ></h-add-argument-dialog>
+    <h-primary-adding-dialog v-model="isOpenDialog" :status="status" @save="onAddParameter"></h-primary-adding-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { TslArgumentEntity, Specification, Specs } from '@herodotus/api';
+import type { TslStatus, TslArgumentEntity, Specification, Specs } from '@herodotus/api';
 
 import { isEmpty } from 'lodash-es';
 
-import { HParameterButton, HParameterList } from '../commons';
-import HAddArgumentDialog from './HAddArgumentDialog.vue';
+import HPrimaryAddingDialog from './HPrimaryAddingDialog.vue';
+import HParameterList from './HParameterList.vue';
+import HTslButton from './HTslButton.vue';
 
-defineOptions({ name: 'HParameters', components: { HParameterButton, HParameterList, HAddArgumentDialog } });
+defineOptions({ name: 'HParameters', components: { HParameterList, HTslButton, HPrimaryAddingDialog } });
 
 interface Props {
   label?: string;
-  forCreate: boolean;
+  status?: TslStatus;
 }
 
 withDefaults(defineProps<Props>(), {
   label: '输出参数：',
-  forCreate: true,
+  status: 'create',
 });
 
 const model = defineModel<Array<TslArgumentEntity>>({

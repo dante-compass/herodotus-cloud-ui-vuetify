@@ -5,7 +5,7 @@
     :items="items"
     :loading="loading"
     item-title="name"
-    item-value="name"
+    item-value="id"
     return-object
     chips
     closable-chips
