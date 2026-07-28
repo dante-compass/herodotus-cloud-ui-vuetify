@@ -1,4 +1,4 @@
-import type { Conditions, AbstractEntity, AbstractAuditEntity } from "@herodotus/core";
+import type { Entity, Conditions, AbstractEntity, AbstractAuditEntity } from "@herodotus/core";
 
 export interface Characteristic {
   identifier: string;
@@ -85,7 +85,7 @@ export interface TslArgumentEntity extends AbstractTslEntity {
   specs: Specification<Specs>;
 }
 
-export interface TslFunctionArgument extends AbstractAuditEntity {
+export interface TslFunctionArgumentEntity extends Entity {
   property: TslArgumentEntity;
   eventOutputData: TslArgumentEntity[];
   serviceOutputData: TslArgumentEntity[];
@@ -103,7 +103,7 @@ export interface TslFunctionEntity extends AbstractTslEntity {
   required: boolean;
   method: string;
   description: string;
-  arguments: TslFunctionArgument;
+  arguments: TslFunctionArgumentEntity;
 }
 
 export interface TslUnitConditions extends Conditions {}

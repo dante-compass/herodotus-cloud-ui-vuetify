@@ -1,18 +1,18 @@
-import type { TslFunctionEntity, TslArgumentEntity, Specification, Specs } from "@herodotus/api";
+import type { TslFunctionEntity, TslFunctionArgument, TslArgumentEntity, Specification, Specs } from "@herodotus/api";
 
 import { isEmpty } from "lodash-es";
 
 export default function useTslEntity() {
-  const hasArguments = (item: TslFunctionEntity) => {
+  const hasArguments = (item: TslFunctionEntity): boolean => {
     return !isEmpty(item) && !isEmpty(item.arguments);
   };
 
-  const hasProperties = (item: TslFunctionEntity) => {
+  const hasProperty = (item: TslFunctionEntity) => {
     return hasArguments(item) && !isEmpty(item.arguments.property);
   };
 
   const getPropertyArgument = (item: TslFunctionEntity): TslArgumentEntity | undefined => {
-    if (hasProperties(item)) {
+    if (hasProperty(item)) {
       return item.arguments.property;
     }
 
