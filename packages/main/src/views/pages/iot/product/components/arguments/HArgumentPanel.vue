@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import type { TslStatus, Specification, Specs } from '@herodotus/api';
 
-import { toUpper, isEmpty } from 'lodash-es';
+import { toUpper } from 'lodash-es';
 
 import { useTslStatus } from '../../composables/hooks';
 
@@ -57,13 +57,26 @@ const argument = defineModel<Specification<Specs>>({
   default: () => ({ identifier: '', name: '', dataType: { type: 'int', specs: {} } }) as Specification<Specs>,
 });
 
-const { disabled } = useTslStatus(() => props.status);
+const { isCreate, disabled } = useTslStatus(() => props.status);
 
 const currentPanel = computed(() => {
   if (argument.value.dataType.type) {
     return toUpper(argument.value.dataType.type) + '_PANEL';
   } else {
     return 'INT_PANEL';
+  }
+});
+
+watch(currentPanel, (newValue) => {
+  if (isCreate.value) {
+    switch (newValue) {
+      case 'STRUCT_PANEL':
+        argument.value.dataType.specs = [];
+        break;
+      default:
+        argument.value.dataType.specs = {};
+        break;
+    }
   }
 });
 </script>

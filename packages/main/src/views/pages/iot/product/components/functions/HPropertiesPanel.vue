@@ -1,6 +1,6 @@
 <template>
   <v-form ref="identifier">
-    <h-argument-panel v-model="argument"></h-argument-panel>
+    <h-argument-panel v-model="argument" :status="status"></h-argument-panel>
     <h-label text="读写类型:" required></h-label>
     <h-dictionary-option
       v-model="model.accessMode"

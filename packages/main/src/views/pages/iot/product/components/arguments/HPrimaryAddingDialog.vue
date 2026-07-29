@@ -12,13 +12,7 @@ import type { TslStatus, Specification, Specs } from '@herodotus/api';
 import { HDictionarySelect } from '@/components/library/HDictionary';
 import { HArgumentPanel } from '../arguments';
 
-defineOptions({
-  name: 'HPrimaryAddingDialog',
-  components: {
-    HDictionarySelect,
-    HArgumentPanel,
-  },
-});
+defineOptions({ name: 'HPrimaryAddingDialog', components: { HDictionarySelect, HArgumentPanel } });
 
 interface Props {
   status?: TslStatus;
@@ -39,11 +33,9 @@ const emit = defineEmits<{
 
 const primaryAddingForm = ref();
 
-const argument = ref({
-  identifier: '',
-  name: '',
-  dataType: { type: 'int', specs: {} },
-}) as Ref<Specification<Specs>>;
+const argument = defineModel<Specification<Specs>>({
+  default: () => ({ identifier: '', name: '', dataType: { type: 'int', specs: {} } }) as Specification<Specs>,
+});
 
 const onSave = async () => {
   const { valid } = await primaryAddingForm.value.validate();
@@ -57,13 +49,4 @@ const onCancel = () => {
   model.value = false;
   emit('cancel');
 };
-
-onUpdated(() => {
-  // 每次重新打开 Dialog，清除上次操作遗留数据
-  argument.value = {
-    identifier: '',
-    name: '',
-    dataType: { type: 'int', specs: {} },
-  } as Specification<Specs>;
-});
 </script>
