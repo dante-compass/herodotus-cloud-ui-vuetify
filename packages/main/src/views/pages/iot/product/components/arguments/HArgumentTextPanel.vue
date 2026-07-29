@@ -1,14 +1,15 @@
 <template>
   <div>
     <h-label text="数据长度" required></h-label>
-    <v-number-input
-      v-model="content"
+    <v-text-field
+      v-model="model.dataType.specs.length"
       density="comfortable"
+      type="number"
+      suffix="丨字节"
+      :clearable="false"
       :disabled="disabled"
-      :min="0"
-      :max="max"
-      :step="10"
-    ></v-number-input>
+      :rules="[(v: string) => !!v || '数据长度不能为空']"
+    ></v-text-field>
   </div>
 </template>
 
@@ -32,21 +33,10 @@ const model = defineModel<Specification<TextSpecs>>({
 });
 
 const { disabled } = useTslStatus(() => props.status);
-const { isSpecificationNotEmpty } = useTslEntity();
 
-const max = shallowRef(10240);
-
-const content = computed({
-  get: () =>
-    isSpecificationNotEmpty(model.value) && model.value.dataType.specs.length
-      ? Number(model.value.dataType.specs.length)
-      : max.value,
-  set: (value: number) => {
-    if (value) {
-      model.value.dataType.specs.length = String(value);
-    } else {
-      model.value.dataType.specs.length = String(max.value);
-    }
-  },
+onMounted(() => {
+  if (!model.value.dataType.specs.length) {
+    model.value.dataType.specs.length = '10240';
+  }
 });
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <h-dialog v-model="model" title="添加参数" @confirm="onSave" @cancel="onCancel" external-close>
+  <h-dialog v-model="openDialog" title="添加参数" @confirm="onSave" @cancel="onCancel" external-close>
     <v-form ref="primaryAddingForm">
-      <h-argument-panel v-model="argument" ref="identifier" :status="status"></h-argument-panel>
+      <h-primary-argument-panel v-model="currentArgument" ref="identifier" :status="status"></h-primary-argument-panel>
     </v-form>
   </h-dialog>
 </template>
@@ -9,21 +9,21 @@
 <script setup lang="ts">
 import type { TslStatus, Specification, Specs } from '@herodotus/api';
 
-import { HDictionarySelect } from '@/components/library/HDictionary';
-import { HArgumentPanel } from '../arguments';
+import { isEmpty } from 'lodash-es';
 
-defineOptions({ name: 'HPrimaryAddingDialog', components: { HDictionarySelect, HArgumentPanel } });
+import { useTslEntity } from '../../composables/hooks';
+
+import HArgumentPanel from './HArgumentPanel.vue';
+
+defineOptions({ name: 'HPrimaryAddingDialog', components: { HArgumentPanel } });
 
 interface Props {
   status?: TslStatus;
+  argument?: Specification<Specs>;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   status: 'create',
-});
-
-const model = defineModel<boolean>({
-  required: true,
 });
 
 const emit = defineEmits<{
@@ -31,22 +31,37 @@ const emit = defineEmits<{
   cancel: [];
 }>();
 
-const primaryAddingForm = ref();
-
-const argument = defineModel<Specification<Specs>>({
-  default: () => ({ identifier: '', name: '', dataType: { type: 'int', specs: {} } }) as Specification<Specs>,
+const openDialog = defineModel<boolean>({
+  required: true,
 });
+
+const { createEmptyNormalSpecification } = useTslEntity();
+
+const primaryAddingForm = ref();
+const currentArgument = ref(createEmptyNormalSpecification()) as Ref<Specification<Specs>>;
+
+watch(
+  () => props.argument,
+  (newValue) => {
+    if (isEmpty(newValue)) {
+      currentArgument.value = createEmptyNormalSpecification();
+    } else {
+      currentArgument.value = { ...newValue };
+    }
+  },
+  { immediate: true },
+);
 
 const onSave = async () => {
   const { valid } = await primaryAddingForm.value.validate();
   if (valid) {
-    model.value = false;
-    emit('save', argument.value);
+    openDialog.value = false;
+    emit('save', currentArgument.value);
   }
 };
 
 const onCancel = () => {
-  model.value = false;
+  openDialog.value = false;
   emit('cancel');
 };
 </script>

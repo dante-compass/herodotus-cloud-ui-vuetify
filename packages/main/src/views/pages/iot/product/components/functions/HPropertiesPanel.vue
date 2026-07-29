@@ -21,7 +21,7 @@ import { HDictionaryOption } from '@/components/library/HDictionary';
 import { HArgumentPanel } from '../arguments';
 import { isEmpty } from 'lodash-es';
 
-defineOptions({ name: 'HPropertiesPanel' });
+defineOptions({ name: 'HPropertiesPanel', components: { HArgumentPanel } });
 
 interface Props {
   status?: TslStatus;
@@ -44,9 +44,9 @@ const model = defineModel<TslFunctionEntity>({
 });
 
 const { identifier, validate } = useTslValidation();
-const { hasProperty, getPropertyArgumentSpecs, EMPTY_NORMAL_SPECIFICATION } = useTslEntity();
+const { hasProperty, getPropertyArgumentSpecs, createEmptyNormalSpecification } = useTslEntity();
 
-const argument = ref(EMPTY_NORMAL_SPECIFICATION) as Ref<Specification<Specs>>;
+const argument = ref(createEmptyNormalSpecification()) as Ref<Specification<Specs>>;
 
 // Watch 控制标识，防止 model 和 argument 循环调用
 const isUpdating = shallowRef(false);

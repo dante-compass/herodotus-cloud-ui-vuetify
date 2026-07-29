@@ -1,15 +1,16 @@
 <template>
-  <h-dialog v-model="model" title="添加参数" @confirm="onSave">
+  <h-dialog v-model="openDialog" title="添加参数" @confirm="onSave" @cancel="onCancel">
     <v-form ref="secondaryAddingForm">
-      <h-characteristic-panel v-model="argument" :status="status"></h-characteristic-panel>
+      <h-characteristic-panel v-model="currentArgument" :status="status"></h-characteristic-panel>
       <h-label text="数据类型" required></h-label>
       <h-dictionary-select
-        v-model="argument.dataType.type"
+        v-model="currentArgument.dataType.type"
         dictionary="ArgumentType"
+        density="compact"
         :disabled-items="['struct']"
         :disabled="disabled"
       ></h-dictionary-select>
-      <component :is="currentPanel" v-model="argument" :status="status"></component>
+      <component :is="currentPanel" v-model="currentArgument" :status="status"></component>
     </v-form>
   </h-dialog>
 </template>
@@ -17,9 +18,9 @@
 <script setup lang="ts">
 import type { TslStatus, Specification, Specs } from '@herodotus/api';
 
-import { toUpper } from 'lodash-es';
+import { isEmpty, toUpper } from 'lodash-es';
 
-import { useTslStatus } from '../../composables/hooks';
+import { useTslStatus, useTslEntity } from '../../composables/hooks';
 
 import { HDictionarySelect } from '@/components/library/HDictionary';
 import HArgumentBoolPanel from './HArgumentBoolPanel.vue';
@@ -46,49 +47,65 @@ defineOptions({
 
 interface Props {
   status?: TslStatus;
+  argument?: Specification<Specs>;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   status: 'create',
 });
 
-const model = defineModel<boolean>({
+const openDialog = defineModel<boolean>({
   required: true,
 });
 
-const emit = defineEmits(['save']);
+const emit = defineEmits<{
+  save: [item: Specification<Specs>];
+  cancel: [];
+}>();
 
-const { disabled } = useTslStatus(() => props.status);
+const { isCreate, disabled } = useTslStatus(() => props.status);
+const { createEmptyNormalSpecification } = useTslEntity();
 
 const secondaryAddingForm = ref();
-const argument = ref({
-  identifier: '',
-  name: '',
-  dataType: { type: 'int', specs: {} },
-}) as Ref<Specification<Specs>>;
+const currentArgument = ref(createEmptyNormalSpecification()) as Ref<Specification<Specs>>;
+
+watch(
+  () => props.argument,
+  (newValue) => {
+    if (isEmpty(newValue)) {
+      currentArgument.value = createEmptyNormalSpecification();
+    } else {
+      currentArgument.value = { ...newValue };
+    }
+  },
+  { immediate: true },
+);
 
 const currentPanel = computed(() => {
-  if (argument.value.dataType.type) {
-    return toUpper(argument.value.dataType.type) + '_PANEL';
+  if (currentArgument.value.dataType.type) {
+    return toUpper(currentArgument.value.dataType.type) + '_PANEL';
   } else {
     return 'INT_PANEL';
+  }
+});
+
+// 如果是新建状态，那么在切换面板时要重置参数的值，以防
+watch(currentPanel, () => {
+  if (isCreate.value) {
+    currentArgument.value.dataType.specs = {};
   }
 });
 
 const onSave = async () => {
   const { valid } = await secondaryAddingForm.value.validate();
   if (valid) {
-    model.value = false;
-    emit('save', argument.value);
+    openDialog.value = false;
+    emit('save', currentArgument.value);
   }
 };
 
-onUpdated(() => {
-  // 每次重新打开 Dialog，清除上次操作遗留数据
-  argument.value = {
-    identifier: '',
-    name: '',
-    dataType: { type: 'int', specs: {} },
-  } as Specification<Specs>;
-});
+const onCancel = () => {
+  openDialog.value = false;
+  emit('cancel');
+};
 </script>
