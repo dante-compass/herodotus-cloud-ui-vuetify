@@ -6,9 +6,9 @@
       v-model="entity.dimension"
       dictionary="Dimension"
       default-value="properties"
-      :disabled="!forCreate"
+      :disabled="disabled"
     ></h-dictionary-toggle>
-    <component :is="currentPanel" v-model="entity" :for-create="forCreate" ref="identifier"></component>
+    <component :is="currentPanel" v-model="entity" :status="status" ref="identifier"></component>
     <h-label text="描述："></h-label>
     <v-textarea
       v-model="entity.description"
@@ -21,12 +21,12 @@
 </template>
 
 <script setup lang="ts">
-import type { TslArgumentEntity, TslFunctionEntity } from '@herodotus/api';
+import type { TslStatus, TslFunctionEntity } from '@herodotus/api';
 
 import { toUpper } from 'lodash-es';
 import { toast } from '@herodotus/core';
 
-import { useTslValidation } from '../composables/hooks';
+import { useTslValidation, useTslStatus, useTslEntity } from '../composables/hooks';
 import { API } from '@/configurations';
 import { HDictionaryToggle } from '@/components/library/HDictionary';
 
@@ -47,11 +47,11 @@ defineOptions({
 interface Props {
   productKey: string;
   productId: string;
-  forCreate: boolean;
+  status?: TslStatus;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  forCreate: true,
+  status: 'create',
 });
 
 const model = defineModel<boolean>({
@@ -66,6 +66,8 @@ const entity = defineModel<TslFunctionEntity>('entity', {
 
 const emit = defineEmits(['success']);
 const { identifier, getValidator } = useTslValidation();
+const { isCreate, disabled } = useTslStatus(props.status);
+const { createEmptyNormalArgument } = useTslEntity();
 
 const currentPanel = computed(() => {
   if (entity.value.dimension) {
@@ -78,7 +80,7 @@ const currentPanel = computed(() => {
 watch(
   () => entity.value.dimension,
   (newValue) => {
-    if (props.forCreate) {
+    if (isCreate) {
       switch (newValue) {
         case 'events':
           entity.value.arguments.eventOutputData = [];
@@ -88,16 +90,7 @@ watch(
           entity.value.arguments.serviceOutputData = [];
           break;
         default:
-          entity.value.arguments.property = {
-            identifier: '',
-            name: '',
-            type: 'int',
-            specs: {
-              identifier: '',
-              name: '',
-              dataType: { type: 'int', specs: {} },
-            },
-          } as TslArgumentEntity;
+          entity.value.arguments.property = createEmptyNormalArgument();
           break;
       }
     }

@@ -32,13 +32,15 @@ const model = defineModel<Specification<TextSpecs>>({
 });
 
 const { disabled } = useTslStatus(props.status);
-const { hasSpecs } = useTslEntity();
+const { isSpecificationNotEmpty } = useTslEntity();
 
 const max = shallowRef(10240);
 
 const content = computed({
   get: () =>
-    hasSpecs(model.value) && model.value.dataType.specs.length ? Number(model.value.dataType.specs.length) : max.value,
+    isSpecificationNotEmpty(model.value) && model.value.dataType.specs.length
+      ? Number(model.value.dataType.specs.length)
+      : max.value,
   set: (value: number) => {
     if (value) {
       model.value.dataType.specs.length = String(value);

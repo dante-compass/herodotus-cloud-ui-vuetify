@@ -32,11 +32,11 @@
       <template #item.specs="{ item }">
         <div v-if="isBoolSpec(item)">
           布尔值：
-          <h-spec-chip :spec="getSpecs(item)"></h-spec-chip>
+          <h-spec-chip :spec="getItemsSpecs(item)"></h-spec-chip>
         </div>
         <div v-else-if="isEnumSpec(item)">
           枚举值：
-          <h-spec-chip :spec="getSpecs(item)"></h-spec-chip>
+          <h-spec-chip :spec="getItemsSpecs(item)"></h-spec-chip>
         </div>
         <div v-else>{{ displayDataType(item) }}</div>
       </template>
@@ -52,7 +52,7 @@
     v-model:entity="entity"
     :product-id="productId"
     :product-key="productKey"
-    :for-create="forCreate"
+    :status="status"
     @success="fetchItems"
   ></h-add-function-dialog>
 </template>
@@ -62,10 +62,10 @@ import type {
   TslFunctionEntity,
   TslFunctionConditions,
   TslFunctionProps,
-  TslArgumentEntity,
   Specification,
   BoolSpecs,
   EnumSpecs,
+  TslStatus,
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
@@ -75,7 +75,6 @@ import { API, PAGE_NAME } from '@/configurations';
 
 import HAddFunctionDialog from './HAddFunctionDialog.vue';
 import HSpecChip from './HSpecChip.vue';
-import { isEmpty } from 'lodash-es';
 
 defineOptions({ name: PAGE_NAME.IOT_TSL_FUNCTION, components: { HAddFunctionDialog, HSpecChip } });
 
@@ -90,7 +89,7 @@ const headers = ref([
   { key: 'dimension', align: 'center', title: '功能类型' },
   { key: 'name', align: 'center', title: '功能名称' },
   { key: 'identifier', align: 'center', title: '标识符' },
-  { key: 'type', align: 'left', title: '数据类型' },
+  { key: 'type', align: 'center', title: '数据类型' },
   { key: 'specs', align: 'left', title: '数据定义' },
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
@@ -103,25 +102,26 @@ const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, delete
 >(API.core.iotTslFunction(), PAGE_NAME.IOT_TSL_FUNCTION);
 
 const { getDictionaryItemDisplay } = useDictionary('Dimension', 'ArgumentType', 'CallType', 'EventType');
-const { getArgumentSpecs, getArgumentType } = useTslEntity();
+const { getPropertyArgumentType, getPropertyArgumentSpecs, createEmptyFunction } = useTslEntity();
 
 const openDialog = shallowRef(false);
-const forCreate = shallowRef(true);
+
 const entity = ref({}) as Ref<TslFunctionEntity>;
+const status = shallowRef('create') as Ref<TslStatus>;
 
 const isBoolSpec = (item: TslFunctionEntity) => {
-  const specs = getArgumentSpecs(item);
-  return !isEmpty(specs) && specs.dataType.type === 'bool';
+  const specs = getPropertyArgumentSpecs(item);
+  return specs.dataType.type === 'bool';
 };
 
 const isEnumSpec = (item: TslFunctionEntity) => {
-  const specs = getArgumentSpecs(item);
-  return !isEmpty(specs) && specs.dataType.type === 'enum';
+  const specs = getPropertyArgumentSpecs(item);
+  return specs.dataType.type === 'enum';
 };
 
 const displayDataType = (item: TslFunctionEntity) => {
-  const specs = getArgumentSpecs(item);
-  if (!isEmpty(specs)) {
+  if (item.dimension === 'properties') {
+    const specs = getPropertyArgumentSpecs(item);
     switch (specs.dataType.type) {
       case 'int':
       case 'float':
@@ -136,21 +136,21 @@ const displayDataType = (item: TslFunctionEntity) => {
       default:
         return '-';
     }
+  } else {
+    return '';
   }
-
-  return '-';
 };
 
-const getSpecs = (item: TslFunctionEntity) => {
-  return getArgumentSpecs(item) as Specification<BoolSpecs> | Specification<EnumSpecs>;
+const getItemsSpecs = (item: TslFunctionEntity) => {
+  return getPropertyArgumentSpecs(item) as Specification<BoolSpecs> | Specification<EnumSpecs>;
 };
 
 const getType = (item: TslFunctionEntity) => {
-  const type = getArgumentType(item);
-  if (!isEmpty(type)) {
+  if (item.dimension === 'properties') {
+    const type = getPropertyArgumentType(item);
     return getDictionaryItemDisplay('ArgumentType', type);
   }
-  return null;
+  return '';
 };
 
 const getDimensionColor = (dimension: string) => {
@@ -166,26 +166,17 @@ const getDimensionColor = (dimension: string) => {
 };
 
 const openDialogForCreate = () => {
-  entity.value = {
-    dimension: 'properties',
-    productId: props.productId,
-    productKey: props.productKey,
-    required: false,
-    arguments: {
-      property: {} as TslArgumentEntity,
-      eventOutputData: [] as TslArgumentEntity[],
-      serviceOutputData: [] as TslArgumentEntity[],
-      serviceInputData: [] as TslArgumentEntity[],
-    },
-  } as TslFunctionEntity;
+  entity.value = createEmptyFunction(props.productId, props.productKey);
   openDialog.value = true;
-  forCreate.value = true;
+  status.value = 'create';
 };
 
 const openDialogForEdit = (item: TslFunctionEntity) => {
-  forCreate.value = false;
   entity.value = item;
+  console.log('---item---', item);
+  console.log('---entity---', entity.value);
   openDialog.value = true;
+  status.value = 'edit';
 };
 
 const fetchItems = () => {

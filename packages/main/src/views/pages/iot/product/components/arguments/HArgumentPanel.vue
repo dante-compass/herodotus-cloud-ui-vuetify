@@ -66,32 +66,4 @@ const currentPanel = computed(() => {
     return 'INT_PANEL';
   }
 });
-
-/**
- * 判断当前的 model 是否为默认值。是默认值则代表是新建操作，即 model 是默认的空对象。否则，代表是编辑操作，即外部给 model 传递具体的值
- *
- * 目前采用最简单的判断方式，即 model 中 identifier 和 name 都为空值
- */
-const isModelEmpty = () => {
-  return isEmpty(argument.value.identifier) && isEmpty(argument.value.name);
-};
-
-watch(
-  () => argument.value.dataType.type,
-  (newValue, oldValue) => {
-    // 类型未实际变化则跳过（避免初始化时重复触发）
-    if (newValue === oldValue) {
-      return;
-    }
-
-    // 仅在新创建的情况下，做此操作避免切换至 struts 面板时，抛出类型不匹配错误
-    if (isModelEmpty()) {
-      argument.value = {
-        identifier: '',
-        name: '',
-        dataType: { type: newValue, specs: newValue === 'struct' ? [] : {} },
-      } as Specification<Specs>;
-    }
-  },
-);
 </script>

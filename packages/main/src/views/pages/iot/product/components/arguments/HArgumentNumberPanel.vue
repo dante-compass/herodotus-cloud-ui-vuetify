@@ -56,11 +56,11 @@ const model = defineModel<Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>
 });
 
 const { disabled } = useTslStatus(props.status);
-const { hasSpecs } = useTslEntity();
+const { isSpecificationNotEmpty } = useTslEntity();
 
 const unit = computed({
   get: () => {
-    if (hasSpecs(model.value)) {
+    if (isSpecificationNotEmpty(model.value)) {
       const symbol = model.value.dataType.specs.unit;
       const name = model.value.dataType.specs.unitName;
       if (symbol && name) {

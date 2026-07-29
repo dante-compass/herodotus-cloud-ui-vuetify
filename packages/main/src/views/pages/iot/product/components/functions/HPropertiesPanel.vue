@@ -3,7 +3,7 @@
     <h-argument-panel v-model="argument"></h-argument-panel>
     <h-label text="读写类型:" required></h-label>
     <h-dictionary-option
-      v-model="entity.accessMode"
+      v-model="model.accessMode"
       dictionary="AccessMode"
       default-value="rw"
       inline
@@ -15,11 +15,11 @@
 <script setup lang="ts">
 import type { TslStatus, TslFunctionEntity, TslArgumentEntity, Specification, Specs } from '@herodotus/api';
 
-import { isEmpty, isEqual } from 'lodash-es';
 import { useTslValidation, useTslEntity } from '../../composables/hooks';
 
 import { HDictionaryOption } from '@/components/library/HDictionary';
 import { HArgumentPanel } from '../arguments';
+import { isEmpty } from 'lodash-es';
 
 defineOptions({ name: 'HPropertiesPanel' });
 
@@ -34,6 +34,8 @@ const props = withDefaults(defineProps<Props>(), {
 const model = defineModel<TslFunctionEntity>({
   default: () =>
     ({
+      identifier: '',
+      name: '',
       dimension: 'properties',
       required: false,
       arguments: { property: {} as TslArgumentEntity },
@@ -42,72 +44,67 @@ const model = defineModel<TslFunctionEntity>({
 });
 
 const { identifier, validate } = useTslValidation();
-const { hasProperties } = useTslEntity();
+const { hasProperty, getPropertyArgumentSpecs, isSpecificationNotEmpty, EMPTY_NORMAL_SPECIFICATION } = useTslEntity();
 
-const argument = ref({
-  identifier: '',
-  name: '',
-  dataType: { type: 'int', specs: {} },
-}) as Ref<Specification<Specs>>;
+const argument = ref(EMPTY_NORMAL_SPECIFICATION) as Ref<Specification<Specs>>;
+const isUpdating = shallowRef(false);
 
-const argument = computed({
-  get: () => {
-    if (hasProperties(model.value)) {
-      return model.value.arguments.property.specs;
-    }
-    return {
-      identifier: '',
-      name: '',
-      dataType: { type: 'int', specs: {} },
-    } as Specification<Specs>;
-  },
-  set: (value: Specification<Specs>) => {
-    if (!isEmpty(value)) {
-      if (model.value.identifier !== value.identifier) {
-        model.value.identifier = value.identifier;
-        model.value.arguments.property.identifier = value.identifier;
-      }
+// const argument1 = computed({
+//   get: () => {
+//     return getPropertyArgumentSpecs(model.value);
+//   },
+//   set: (specification: Specification<Specs>) => {
+//     model.value.identifier = specification.identifier;
+//     model.value.name = specification.name;
 
-      if (model.value.name !== value.name) {
-        model.value.name = value.name;
-        model.value.arguments.property.name = value.name;
-      }
+//     model.value.arguments.property.identifier = specification.identifier;
+//     model.value.arguments.property.name = specification.name;
+//     model.value.arguments.property.specs = specification;
+//     model.value.arguments.property.type = specification.dataType.type;
 
-      model.value.arguments.property.specs = value;
-      model.value.arguments.property.type = value.dataType.type;
-    }
-  },
-});
+//     console.log('-----proeprty model-----', model.value);
+//   },
+// });
 
 watch(
   model,
   (newValue) => {
-    if (!props.forCreate) {
-      if (!isEmpty(newValue) && !isEmpty(newValue.arguments) && !isEmpty(newValue.arguments.property)) {
-        argument.value = newValue.arguments.property.specs;
+    if (isUpdating.value) return;
+
+    if (hasProperty(newValue)) {
+      isUpdating.value = true;
+      const specs = getPropertyArgumentSpecs(newValue);
+      console.log('---specs---', specs);
+      if (isSpecificationNotEmpty(specs)) {
+        argument.value = specs;
       }
+      isUpdating.value = false;
     }
   },
-  { deep: true, immediate: true },
+  {
+    immediate: true,
+    deep: true,
+  },
 );
 
 watch(
   argument,
   (newValue) => {
-    if (newValue.identifier && newValue.name) {
-      if (newValue.identifier !== model.value.identifier) {
+    if (!isEmpty(newValue)) {
+      if (isUpdating.value) return;
+
+      if (newValue.identifier && newValue.name) {
+        isUpdating.value = true;
         model.value.identifier = newValue.identifier;
-      }
-
-      if (newValue.name !== model.value.name) {
         model.value.name = newValue.name;
-      }
-      model.value.arguments.property.identifier = newValue.identifier;
-      model.value.arguments.property.name = newValue.name;
-    }
 
-    model.value.arguments.property.specs = newValue;
-    model.value.arguments.property.type = newValue.dataType.type;
+        model.value.arguments.property.identifier = newValue.identifier;
+        model.value.arguments.property.name = newValue.name;
+        model.value.arguments.property.specs = newValue;
+        model.value.arguments.property.type = newValue.dataType.type;
+        isUpdating.value = false;
+      }
+    }
   },
   {
     immediate: true,

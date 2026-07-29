@@ -36,7 +36,7 @@
   "dependencies": {
     "@herodotus/core": "workspace:^",
     "colord": "^2.9.3",
-    "js-base64": "^3.9.1",
+    "js-base64": "^3.9.2",
     "jwt-decode": "^4.0.0"
   }
 }
