@@ -71,13 +71,18 @@ watch(
   (newValue) => {
     if (isUpdating.value) return;
 
+    console.log('----panel model----', newValue);
+    console.log('----panel model----', hasProperty(newValue));
+
     if (hasProperty(newValue)) {
       isUpdating.value = true;
       const specs = getPropertyArgumentSpecs(newValue);
-      console.log('---specs---', specs);
-      if (isSpecificationNotEmpty(specs)) {
+
+      if (specs) {
         argument.value = specs;
       }
+
+      console.log('---argument---', argument.value);
       isUpdating.value = false;
     }
   },

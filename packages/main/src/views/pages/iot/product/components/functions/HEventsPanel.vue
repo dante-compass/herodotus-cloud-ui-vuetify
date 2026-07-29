@@ -49,7 +49,7 @@ const entity = defineModel<TslFunctionEntity>({
 });
 
 const { identifier, validate } = useTslValidation();
-const { disabled } = useTslStatus(props.status);
+const { disabled } = useTslStatus(() => props.status);
 
 /**
  * 对外暴露 validate() 方法，实现父组件调用子组件校验方法

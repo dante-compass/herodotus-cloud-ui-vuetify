@@ -32,7 +32,7 @@ const model = defineModel<Specification<StructSpecs>>({
   default: () => ({}) as Specification<StructSpecs>,
 });
 
-const { isView } = useTslStatus(props.status);
+const { isView } = useTslStatus(() => props.status);
 
 const openDialog = ref(false);
 

@@ -57,7 +57,7 @@ const argument = defineModel<Specification<Specs>>({
   default: () => ({ identifier: '', name: '', dataType: { type: 'int', specs: {} } }) as Specification<Specs>,
 });
 
-const { disabled } = useTslStatus(props.status);
+const { disabled } = useTslStatus(() => props.status);
 
 const currentPanel = computed(() => {
   if (argument.value.dataType.type) {

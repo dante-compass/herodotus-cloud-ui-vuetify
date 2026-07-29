@@ -41,7 +41,7 @@ const model = defineModel<Characteristic>({
   default: () => ({}) as Characteristic,
 });
 
-const { disabled } = useTslStatus(props.status);
+const { disabled } = useTslStatus(() => props.status);
 
 const regexRule = (content: string) => {
   const regex = /^(?=.*[a-zA-Z])(?!.*\s).{5,50}$/;

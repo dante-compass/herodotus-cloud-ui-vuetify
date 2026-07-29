@@ -31,7 +31,7 @@ const model = defineModel<Specification<TextSpecs>>({
   default: () => ({}) as Specification<TextSpecs>,
 });
 
-const { disabled } = useTslStatus(props.status);
+const { disabled } = useTslStatus(() => props.status);
 const { isSpecificationNotEmpty } = useTslEntity();
 
 const max = shallowRef(10240);

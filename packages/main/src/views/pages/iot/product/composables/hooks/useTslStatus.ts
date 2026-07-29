@@ -1,20 +1,22 @@
 import type { TslStatus } from "@herodotus/api";
 
-export default function useTslStatus(status: TslStatus) {
+export default function useTslStatus(status: () => TslStatus) {
+  const currentStatus = computed(status);
+
   const isCreate = computed(() => {
-    return status === "create";
+    return currentStatus.value === "create";
   });
 
   const isEdit = computed(() => {
-    return status === "edit";
+    return currentStatus.value === "edit";
   });
 
   const isView = computed(() => {
-    return status === "view";
+    return currentStatus.value === "view";
   });
 
   const disabled = computed(() => {
-    return isView.value;
+    return currentStatus.value === "view";
   });
 
   return {

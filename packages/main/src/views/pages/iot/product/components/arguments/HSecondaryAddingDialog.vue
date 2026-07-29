@@ -58,7 +58,7 @@ const model = defineModel<boolean>({
 
 const emit = defineEmits(['save']);
 
-const { disabled } = useTslStatus(props.status);
+const { disabled } = useTslStatus(() => props.status);
 
 const secondaryAddingForm = ref();
 const argument = ref({

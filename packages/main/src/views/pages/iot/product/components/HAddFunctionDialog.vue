@@ -6,7 +6,7 @@
       v-model="entity.dimension"
       dictionary="Dimension"
       default-value="properties"
-      :disabled="disabled"
+      :disabled="!isCreate"
     ></h-dictionary-toggle>
     <component :is="currentPanel" v-model="entity" :status="status" ref="identifier"></component>
     <h-label text="描述："></h-label>
@@ -66,7 +66,7 @@ const entity = defineModel<TslFunctionEntity>('entity', {
 
 const emit = defineEmits(['success']);
 const { identifier, getValidator } = useTslValidation();
-const { isCreate, disabled } = useTslStatus(props.status);
+const { isCreate, disabled } = useTslStatus(() => props.status);
 const { createEmptyNormalArgument } = useTslEntity();
 
 const currentPanel = computed(() => {
@@ -80,7 +80,7 @@ const currentPanel = computed(() => {
 watch(
   () => entity.value.dimension,
   (newValue) => {
-    if (isCreate) {
+    if (isCreate.value) {
       switch (newValue) {
         case 'events':
           entity.value.arguments.eventOutputData = [];

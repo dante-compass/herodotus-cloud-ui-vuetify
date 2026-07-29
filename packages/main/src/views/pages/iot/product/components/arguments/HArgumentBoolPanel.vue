@@ -47,5 +47,5 @@ const model = defineModel<Specification<BoolSpecs>>({
   default: () => ({}) as Specification<BoolSpecs>,
 });
 
-const { disabled } = useTslStatus(props.status);
+const { disabled } = useTslStatus(() => props.status);
 </script>

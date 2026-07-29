@@ -57,7 +57,7 @@ const model = defineModel<Specification<EnumSpecs>>({
   default: () => ({}) as Specification<EnumSpecs>,
 });
 
-const { disabled } = useTslStatus(props.status);
+const { disabled } = useTslStatus(() => props.status);
 
 // 内部维护的条目列表
 interface Entry {

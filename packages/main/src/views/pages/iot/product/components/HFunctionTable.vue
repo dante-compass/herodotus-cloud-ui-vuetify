@@ -111,30 +111,32 @@ const status = shallowRef('create') as Ref<TslStatus>;
 
 const isBoolSpec = (item: TslFunctionEntity) => {
   const specs = getPropertyArgumentSpecs(item);
-  return specs.dataType.type === 'bool';
+  return specs && specs.dataType.type === 'bool';
 };
 
 const isEnumSpec = (item: TslFunctionEntity) => {
   const specs = getPropertyArgumentSpecs(item);
-  return specs.dataType.type === 'enum';
+  return specs && specs.dataType.type === 'enum';
 };
 
 const displayDataType = (item: TslFunctionEntity) => {
   if (item.dimension === 'properties') {
     const specs = getPropertyArgumentSpecs(item);
-    switch (specs.dataType.type) {
-      case 'int':
-      case 'float':
-      case 'double':
-        if (specs.dataType.specs.min && specs.dataType.specs.max) {
-          return '取值范围：' + specs.dataType.specs.min + '~' + specs.dataType.specs.max;
-        } else {
-          return '取值范围：- ';
-        }
-      case 'text':
-        return '数据长度：' + specs.dataType.specs.length;
-      default:
-        return '-';
+    if (specs) {
+      switch (specs.dataType.type) {
+        case 'int':
+        case 'float':
+        case 'double':
+          if (specs.dataType.specs.min && specs.dataType.specs.max) {
+            return '取值范围：' + specs.dataType.specs.min + '~' + specs.dataType.specs.max;
+          } else {
+            return '取值范围：- ';
+          }
+        case 'text':
+          return '数据长度：' + specs.dataType.specs.length;
+        default:
+          return '-';
+      }
     }
   } else {
     return '';
@@ -142,13 +144,17 @@ const displayDataType = (item: TslFunctionEntity) => {
 };
 
 const getItemsSpecs = (item: TslFunctionEntity) => {
-  return getPropertyArgumentSpecs(item) as Specification<BoolSpecs> | Specification<EnumSpecs>;
+  const specs = getPropertyArgumentSpecs(item) as Specification<BoolSpecs> | Specification<EnumSpecs>;
+  console.log('-----getItemsSpecs----', item.name, item.arguments.property, specs);
+  return specs;
 };
 
 const getType = (item: TslFunctionEntity) => {
   if (item.dimension === 'properties') {
     const type = getPropertyArgumentType(item);
-    return getDictionaryItemDisplay('ArgumentType', type);
+    if (type) {
+      return getDictionaryItemDisplay('ArgumentType', type);
+    }
   }
   return '';
 };
@@ -172,8 +178,9 @@ const openDialogForCreate = () => {
 };
 
 const openDialogForEdit = (item: TslFunctionEntity) => {
-  entity.value = item;
   console.log('---item---', item);
+  entity.value = item;
+
   console.log('---entity---', entity.value);
   openDialog.value = true;
   status.value = 'edit';

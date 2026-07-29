@@ -25,7 +25,7 @@ export default function useTslEntity() {
   } as TslArgumentEntity;
 
   const EMPTY_NORMAL_FUNCTION_ARGUMENTS = {
-    property: EMPTY_NORMAL_ARGUMENT,
+    property: {} as TslArgumentEntity,
     eventOutputData: [] as TslArgumentEntity[],
     serviceOutputData: [] as TslArgumentEntity[],
     serviceInputData: [] as TslArgumentEntity[],
@@ -47,27 +47,29 @@ export default function useTslEntity() {
     if (hasArguments(item)) {
       return item.arguments;
     }
+    console.log("----getFunctionArguments----");
     return cloneDeep(EMPTY_NORMAL_FUNCTION_ARGUMENTS);
   };
 
   const getProperty = (item: TslFunctionEntity): TslArgumentEntity => {
-    let functionArguments = getFunctionArguments(item);
-    if (!isEmpty(functionArguments.property)) {
-      return functionArguments.property;
+    const functionArguments = getFunctionArguments(item);
+    return functionArguments.property;
+  };
+
+  const getPropertyArgumentType = (item: TslFunctionEntity): string | undefined => {
+    const property = getProperty(item);
+    if (!isEmpty(property) && property.type) {
+      return property.type;
     }
-    return createEmptyNormalArgument();
+    return undefined;
   };
 
-  const getPropertyArgumentType = (item: TslFunctionEntity): string => {
+  const getPropertyArgumentSpecs = (item: TslFunctionEntity): Specification<Specs> | undefined => {
     const property = getProperty(item);
-    // getProperty 不管怎么样都会返回一个对象，所以不会为空
-    return property.type;
-  };
-
-  const getPropertyArgumentSpecs = (item: TslFunctionEntity): Specification<Specs> => {
-    const property = getProperty(item);
-    // getProperty 不管怎么样都会返回一个对象，所以不会为空
-    return property.specs;
+    if (!isEmpty(property) && property.specs) {
+      return property.specs;
+    }
+    return undefined;
   };
 
   const isSpecificationNotEmpty = (specification: Specification<Specs>) => {

@@ -55,7 +55,7 @@ const model = defineModel<Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>
   default: () => ({}) as Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>,
 });
 
-const { disabled } = useTslStatus(props.status);
+const { disabled } = useTslStatus(() => props.status);
 const { isSpecificationNotEmpty } = useTslEntity();
 
 const unit = computed({
