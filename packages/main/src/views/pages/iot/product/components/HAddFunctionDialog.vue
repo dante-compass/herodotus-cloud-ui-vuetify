@@ -66,7 +66,7 @@ const entity = defineModel<TslFunctionEntity>('entity', {
 
 const emit = defineEmits(['success']);
 const { identifier, getValidator } = useTslValidation();
-const { isCreate, disabled } = useTslStatus(() => props.status);
+const { isCreate } = useTslStatus(() => props.status);
 const { createEmptyNormalArgument } = useTslEntity();
 
 const currentPanel = computed(() => {

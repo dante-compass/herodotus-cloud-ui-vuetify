@@ -44,35 +44,17 @@ const model = defineModel<TslFunctionEntity>({
 });
 
 const { identifier, validate } = useTslValidation();
-const { hasProperty, getPropertyArgumentSpecs, isSpecificationNotEmpty, EMPTY_NORMAL_SPECIFICATION } = useTslEntity();
+const { hasProperty, getPropertyArgumentSpecs, EMPTY_NORMAL_SPECIFICATION } = useTslEntity();
 
 const argument = ref(EMPTY_NORMAL_SPECIFICATION) as Ref<Specification<Specs>>;
+
+// Watch 控制标识，防止 model 和 argument 循环调用
 const isUpdating = shallowRef(false);
-
-// const argument1 = computed({
-//   get: () => {
-//     return getPropertyArgumentSpecs(model.value);
-//   },
-//   set: (specification: Specification<Specs>) => {
-//     model.value.identifier = specification.identifier;
-//     model.value.name = specification.name;
-
-//     model.value.arguments.property.identifier = specification.identifier;
-//     model.value.arguments.property.name = specification.name;
-//     model.value.arguments.property.specs = specification;
-//     model.value.arguments.property.type = specification.dataType.type;
-
-//     console.log('-----proeprty model-----', model.value);
-//   },
-// });
 
 watch(
   model,
   (newValue) => {
     if (isUpdating.value) return;
-
-    console.log('----panel model----', newValue);
-    console.log('----panel model----', hasProperty(newValue));
 
     if (hasProperty(newValue)) {
       isUpdating.value = true;
@@ -82,14 +64,10 @@ watch(
         argument.value = specs;
       }
 
-      console.log('---argument---', argument.value);
       isUpdating.value = false;
     }
   },
-  {
-    immediate: true,
-    deep: true,
-  },
+  { immediate: true, deep: true },
 );
 
 watch(
@@ -111,10 +89,7 @@ watch(
       }
     }
   },
-  {
-    immediate: true,
-    deep: true,
-  },
+  { immediate: true, deep: true },
 );
 
 defineExpose({
