@@ -53,7 +53,7 @@
 
       <v-tabs-window v-model="tab">
         <v-tabs-window-item value="details">
-          <h-information-tab v-model="editedItem"></h-information-tab>
+          <h-product-information-tab v-model="editedItem"></h-product-information-tab>
         </v-tabs-window-item>
         <v-tabs-window-item value="tsl">
           <h-function-table
@@ -74,11 +74,9 @@ import { API, PAGE_NAME } from '@/configurations';
 import { useTableItem } from '@/composables/hooks';
 
 import { useClipboard } from '@vueuse/core';
-import { HFunctionTable, HInformationTab } from './components';
+import { HFunctionTable, HProductInformationTab } from './components';
 
-defineOptions({ name: PAGE_NAME.IOT_PRODUCT_INFO, components: { HFunctionTable, HInformationTab } });
-
-const tab = shallowRef('details');
+defineOptions({ name: PAGE_NAME.IOT_PRODUCT_INFO, components: { HFunctionTable, HProductInformationTab } });
 
 const { copy, copied, isSupported } = useClipboard({ legacy: true });
 const { editedItem, overlay, title, onReturn } = useTableItem<ProductEntity>(
@@ -86,6 +84,7 @@ const { editedItem, overlay, title, onReturn } = useTableItem<ProductEntity>(
   PAGE_NAME.IOT_PRODUCT_INFO,
 );
 
+const tab = shallowRef('details');
 const visible = shallowRef(false);
 const isShowTable = shallowRef(false);
 

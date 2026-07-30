@@ -7,22 +7,22 @@
             <th style="text-align: right; width: 10%">产品名称：</th>
             <td style="width: 15%">{{ entity.productName }}</td>
             <th style="text-align: right; width: 10%">节点类型：</th>
-            <td style="width: 15%">{{ getDictionaryItemDisplay("NodeType", entity.nodeType) }}</td>
+            <td style="width: 15%">{{ getDictionaryItemDisplay('NodeType', entity.nodeType) }}</td>
             <th style="text-align: right; width: 10%">创建时间：</th>
-            <td style="width: 15%">{{ entity.createTime ? defaultFormat(String(entity.createTime)) : "" }}</td>
+            <td style="width: 15%">{{ entity.createTime ? defaultFormat(String(entity.createTime)) : '' }}</td>
             <th style="width: 10%"></th>
             <td style="width: 15%"></td>
           </tr>
 
           <tr>
             <th style="text-align: right; width: 10%">所属品类：</th>
-            <td style="width: 15%">{{ entity.category ? entity.category.name : "" }}</td>
+            <td style="width: 15%">{{ entity.category ? entity.category.name : '' }}</td>
             <th style="text-align: right; width: 10%">认证方式：</th>
             <td style="width: 15%">
-              {{ getDictionaryItemDisplay("AuthenticationMethod", entity.authenticationMode) }}
+              {{ getDictionaryItemDisplay('AuthenticationMethod', entity.authenticationMode) }}
             </td>
             <th style="text-align: right; width: 10%">联网协议：</th>
-            <td style="width: 15%">{{ getDictionaryItemDisplay("NetworkingMethod", entity.networkingMethod) }}</td>
+            <td style="width: 15%">{{ getDictionaryItemDisplay('NetworkingMethod', entity.networkingMethod) }}</td>
             <th style="width: 10%"></th>
             <td style="width: 15%"></td>
           </tr>
@@ -43,7 +43,7 @@
             <th style="text-align: right; width: 10%">产品状态：</th>
             <td style="width: 15%">{{ entity.release }}</td>
             <th style="text-align: right; width: 10%">产品描述：</th>
-            <td style="width: 15%">{{ entity.description ? entity.description : "-" }}</td>
+            <td style="width: 15%">{{ entity.description ? entity.description : '-' }}</td>
             <th style="width: 10%"></th>
             <td style="width: 15%"></td>
           </tr>
@@ -55,16 +55,16 @@
 
 <script setup lang="ts">
 // Type Import
-import type { HttpResult } from "@herodotus/core";
-import type { ProductEntity } from "@herodotus/api";
+import type { HttpResult } from '@herodotus/core';
+import type { ProductEntity } from '@herodotus/api';
 
 // Import
-import { toast } from "@herodotus/core";
-import { useDictionary, useDateTime } from "@/composables/hooks";
-import { API } from "@/configurations";
+import { toast } from '@herodotus/core';
+import { useDictionary, useDateTime } from '@/composables/hooks';
+import { API } from '@/configurations';
 
 // Vue Define
-defineOptions({ name: "HInformationTab" });
+defineOptions({ name: 'HProductInformationTab' });
 
 const entity = defineModel<ProductEntity>({
   default: () => ({}) as ProductEntity,
@@ -74,10 +74,10 @@ const entity = defineModel<ProductEntity>({
 // Hooks
 const { defaultFormat } = useDateTime();
 const { getDictionaryItemDisplay } = useDictionary(
-  "NodeType",
-  "GatewayProtocol",
-  "NetworkingMethod",
-  "AuthenticationMethod",
+  'NodeType',
+  'GatewayProtocol',
+  'NetworkingMethod',
+  'AuthenticationMethod',
 );
 
 // Methods
@@ -91,11 +91,11 @@ const onRegistrationChange = (item: ProductEntity, event: boolean | null) => {
       if (result.message) {
         toast.success(result.message);
       } else {
-        toast.success("操作成功");
+        toast.success('操作成功');
       }
     })
     .catch((error) => {
-      toast.error("操作失败");
+      toast.error('操作失败');
     });
 };
 </script>
