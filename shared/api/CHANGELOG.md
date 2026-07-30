@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 3.1.4
+
+### Patch Changes
+
+- 物模型编辑完成
+- Updated dependencies
+  - @herodotus/core@3.1.4
+
 ## 3.1.3
 
 ### Patch Changes

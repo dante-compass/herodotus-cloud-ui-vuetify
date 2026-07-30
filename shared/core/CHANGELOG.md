@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.4
+
+### Patch Changes
+
+- 物模型编辑完成
+
 ## 3.1.3
 
 ### Patch Changes
