@@ -50,19 +50,21 @@
           <v-tab text="物模型数据" value="specification"></v-tab>
           <v-tab text="设备影子" value="shadow"></v-tab>
         </v-tabs>
-      </v-card-item>
 
-      <v-tabs-window v-model="tab">
-        <v-tabs-window-item value="details">
-          <h-device-information-tab v-model="editedItem"></h-device-information-tab>
-        </v-tabs-window-item>
-        <v-tabs-window-item value="specification">
-          <h-device-specification-tab v-model="editedItem"></h-device-specification-tab>
-        </v-tabs-window-item>
-        <v-tabs-window-item value="shadow">
-          <h-device-shadow-tab v-model="editedItem"></h-device-shadow-tab>
-        </v-tabs-window-item>
-      </v-tabs-window>
+        <v-divider></v-divider>
+
+        <v-tabs-window v-model="tab">
+          <v-tabs-window-item value="details">
+            <h-device-information-tab v-model="editedItem"></h-device-information-tab>
+          </v-tabs-window-item>
+          <v-tabs-window-item value="specification">
+            <h-device-specification-tab v-model="editedItem"></h-device-specification-tab>
+          </v-tabs-window-item>
+          <v-tabs-window-item value="shadow">
+            <h-device-shadow-tab v-model="editedItem"></h-device-shadow-tab>
+          </v-tabs-window-item>
+        </v-tabs-window>
+      </v-card-item>
     </v-card>
   </h-information-form-layout>
 </template>

@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import type { Characteristic, TslStatus } from '@herodotus/api';
 
-import { useTslStatus } from '../../composables/hooks';
+import { useTslStatus } from '../../../composables/hooks';
 
 defineOptions({ name: 'HCharacteristicPanel' });
 

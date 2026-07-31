@@ -24,8 +24,8 @@
       </template>
 
       <template #item.type="{ item }">
-        <v-chip v-if="getType(item)" density="compact" rounded="lg" color="purple" label>
-          {{ getType(item) }}
+        <v-chip v-if="getPropertyType(item)" density="compact" rounded="lg" color="purple" label>
+          {{ getPropertyType(item) }}
         </v-chip>
       </template>
 
@@ -60,7 +60,6 @@
 <script setup lang="ts">
 import type {
   TslFunctionEntity,
-  TslFunctionConditions,
   TslFunctionProps,
   Specification,
   BoolSpecs,
@@ -69,9 +68,9 @@ import type {
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTable, useDictionary } from '@/composables/hooks';
-import { useTslEntity } from '../composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { useDictionary } from '@/composables/hooks';
+import { useTslEntity, useTslFunctionTable } from '../../composables/hooks';
+import { PAGE_NAME } from '@/configurations';
 
 import HAddFunctionDialog from './HAddFunctionDialog.vue';
 import HSpecChip from './HSpecChip.vue';
@@ -85,6 +84,20 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const {
+  loading,
+  pageNumber,
+  pageSize,
+  tableRows,
+  totalPages,
+  totalItems,
+  deleteItemById,
+  findFunctionsByPage,
+  getPropertyType,
+} = useTslFunctionTable();
+const { getDictionaryItemDisplay } = useDictionary('Dimension', 'ArgumentType', 'CallType', 'EventType');
+const { getPropertyArgumentSpecs, createEmptyFunction } = useTslEntity();
+
 const headers = ref([
   { key: 'dimension', align: 'center', title: '功能类型' },
   { key: 'name', align: 'center', title: '功能名称' },
@@ -96,16 +109,7 @@ const headers = ref([
 
 const rowKey: TslFunctionProps = 'id';
 
-const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, deleteItemById, findItemsByPage } = useTable<
-  TslFunctionConditions,
-  TslFunctionEntity
->(API.core.iotTslFunction(), PAGE_NAME.IOT_TSL_FUNCTION);
-
-const { getDictionaryItemDisplay } = useDictionary('Dimension', 'ArgumentType', 'CallType', 'EventType');
-const { getPropertyArgumentType, getPropertyArgumentSpecs, createEmptyFunction } = useTslEntity();
-
 const openDialog = shallowRef(false);
-
 const entity = ref({}) as Ref<TslFunctionEntity>;
 const status = shallowRef('create') as Ref<TslStatus>;
 
@@ -144,19 +148,7 @@ const displayDataType = (item: TslFunctionEntity) => {
 };
 
 const getItemsSpecs = (item: TslFunctionEntity) => {
-  const specs = getPropertyArgumentSpecs(item) as Specification<BoolSpecs> | Specification<EnumSpecs>;
-  console.log('-----getItemsSpecs----', item.name, item.arguments.property, specs);
-  return specs;
-};
-
-const getType = (item: TslFunctionEntity) => {
-  if (item.dimension === 'properties') {
-    const type = getPropertyArgumentType(item);
-    if (type) {
-      return getDictionaryItemDisplay('ArgumentType', type);
-    }
-  }
-  return '';
+  return getPropertyArgumentSpecs(item) as Specification<BoolSpecs> | Specification<EnumSpecs>;
 };
 
 const getDimensionColor = (dimension: string) => {
@@ -165,7 +157,6 @@ const getDimensionColor = (dimension: string) => {
       return 'green';
     case 'events':
       return 'yellow';
-
     default:
       return 'blue';
   }
@@ -178,17 +169,19 @@ const openDialogForCreate = () => {
 };
 
 const openDialogForEdit = (item: TslFunctionEntity) => {
-  console.log('---item---', item);
   entity.value = item;
-
-  console.log('---entity---', entity.value);
   openDialog.value = true;
   status.value = 'edit';
 };
 
+watch(
+  () => props.productId,
+  (newValue) => {
+    findFunctionsByPage(newValue);
+  },
+);
+
 const fetchItems = () => {
-  if (props.productId) {
-    findItemsByPage(pageNumber.value, pageSize.value, { productId: props.productId });
-  }
+  findFunctionsByPage(props.productId);
 };
 </script>

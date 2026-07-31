@@ -99,10 +99,10 @@ var m = /* @__PURE__ */ function(e) {
 		return n(e) ? t : i({}, t, e);
 	}
 	mergeWithDefaultConfig(e) {
-		let r = i({}, this.getDefaultAxiosRequestConfig(), { paramsSerializer: { serialize(e) {
+		let r = this.getDefaultAxiosRequestConfig(), a = i({}, r, { paramsSerializer: { serialize(e) {
 			return t.stringify(e, { arrayFormat: "brackets" });
 		} } });
-		return n(e) ? r : i({}, r, e);
+		return n(e) ? a : i({}, a, e);
 	}
 	createHttpHeaderPolicy(e) {
 		switch (e) {

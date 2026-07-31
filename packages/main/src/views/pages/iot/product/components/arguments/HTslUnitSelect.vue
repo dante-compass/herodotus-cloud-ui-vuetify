@@ -26,7 +26,7 @@
 import type { TslUnitEntity } from '@herodotus/api';
 
 import { isEmpty, debounce } from 'lodash-es';
-import { useIotTslUnitStore } from '../../composables/stores';
+import { useIotTslUnitStore } from '../../../composables/stores';
 
 defineOptions({ name: 'HTslUnitSelect' });
 

@@ -18,7 +18,7 @@ import type { TslStatus, Specification, TextSpecs } from '@herodotus/api';
 
 defineOptions({ name: 'HArgumentTextPanel' });
 
-import { useTslEntity, useTslStatus } from '../../composables/hooks';
+import { useTslStatus } from '../../../composables/hooks';
 
 interface Props {
   status?: TslStatus;

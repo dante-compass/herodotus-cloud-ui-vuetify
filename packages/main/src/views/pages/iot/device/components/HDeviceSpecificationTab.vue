@@ -6,25 +6,27 @@
         <v-tab text="事件管理" value="events"></v-tab>
         <v-tab text="服务调用" value="services"></v-tab>
       </v-tabs>
-    </v-card-item>
 
-    <v-tabs-window v-model="tab">
-      <v-tabs-window-item value="properties">
-        <h-specification-property-tab
-          :product-id="entity.product.id"
-          :device-id="entity.id"
-        ></h-specification-property-tab>
-      </v-tabs-window-item>
-      <v-tabs-window-item value="events">
-        <h-specification-event-tab :product-id="entity.product.id" :device-id="entity.id"></h-specification-event-tab>
-      </v-tabs-window-item>
-      <v-tabs-window-item value="services">
-        <h-specification-service-tab
-          :product-id="entity.product.id"
-          :device-id="entity.id"
-        ></h-specification-service-tab>
-      </v-tabs-window-item>
-    </v-tabs-window>
+      <v-divider></v-divider>
+
+      <v-tabs-window v-model="tab">
+        <v-tabs-window-item value="properties">
+          <h-specification-property-tab
+            :product-id="entity.product.id"
+            :device-id="entity.id"
+          ></h-specification-property-tab>
+        </v-tabs-window-item>
+        <v-tabs-window-item value="events">
+          <h-specification-event-tab :product-id="entity.product.id" :device-id="entity.id"></h-specification-event-tab>
+        </v-tabs-window-item>
+        <v-tabs-window-item value="services">
+          <h-specification-service-tab
+            :product-id="entity.product.id"
+            :device-id="entity.id"
+          ></h-specification-service-tab>
+        </v-tabs-window-item>
+      </v-tabs-window>
+    </v-card-item>
   </v-card>
 </template>
 

@@ -11,7 +11,7 @@ import type { TslStatus, Specification, Specs } from '@herodotus/api';
 
 import { isEmpty } from 'lodash-es';
 
-import { useTslEntity } from '../../composables/hooks';
+import { useTslEntity } from '../../../composables/hooks';
 
 import HArgumentPanel from './HArgumentPanel.vue';
 

@@ -36,7 +36,7 @@ import type { Specification, IntegerSpecs, FloatSpecs, DoubleSpecs, TslUnitEntit
 
 import { isEmpty } from 'lodash-es';
 
-import { useTslStatus, useTslEntity } from '../../composables/hooks';
+import { useTslStatus, useTslEntity } from '../../../composables/hooks';
 
 import { HDictionarySelect } from '@/components/library/HDictionary';
 import HTslUnitSelect from './HTslUnitSelect.vue';

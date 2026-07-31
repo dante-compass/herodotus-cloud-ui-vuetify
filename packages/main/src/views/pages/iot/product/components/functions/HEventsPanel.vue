@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import type { TslStatus, TslFunctionEntity, TslArgumentEntity } from '@herodotus/api';
 
-import { useTslValidation, useTslStatus } from '../../composables/hooks';
+import { useTslValidation, useTslStatus } from '../../../composables/hooks';
 
 import { HDictionaryOption } from '@/components/library/HDictionary';
 

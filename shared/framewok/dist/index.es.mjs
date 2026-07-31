@@ -89,12 +89,12 @@ oe([se]);
 var P = 2, F = 16, I = 5, L = 5, R = 15, z = 5, B = 4;
 function V(e, t) {
 	if (t === 6) return e;
-	let n = t < 6, r = D(e).toHsv(), i = n ? 6 - t : t - z - 1;
-	return D({
+	let n = t < 6, r = D(e).toHsv(), i = n ? 6 - t : t - z - 1, a = {
 		h: fe(r, i, n),
 		s: pe(r, i, n),
 		v: me(r, i, n)
-	}).toHex();
+	};
+	return D(a).toHex();
 }
 function H(e) {
 	return [
@@ -244,7 +244,8 @@ var G = class e {
 		this.isRouterExist() ? this.to(this.options.path.signIn) : this.refresh();
 	}
 	getParent(e) {
-		return S(ee(T(e, "/")), "/");
+		let t = T(e, "/"), n = ee(t);
+		return S(n, "/");
 	}
 	toPrev(e) {
 		if (e.path) {
@@ -337,7 +338,8 @@ var G = class e {
 		if (x(t)) {
 			let t = this.config.getProject(), n = e;
 			return te(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
-		} else return t;
+		}
+		return t;
 	}
 	createAuthorizationCodeParams(e, t = "openid") {
 		return `?response_type=code&client_id=${this.config.getClientId()}&client_secret=${this.config.getClientSecret()}&redirect_uri=${e}&scope=${t}`;
@@ -585,7 +587,10 @@ var G = class e {
 		roles: []
 	}),
 	getters: {
-		isNotExpired: (e) => l(l().add(e.expires_in, "seconds").valueOf()).add(1, "seconds").diff(l(), "seconds") !== 0,
+		isNotExpired: (e) => {
+			let t = l().add(e.expires_in, "seconds").valueOf();
+			return l(t).add(1, "seconds").diff(l(), "seconds") !== 0;
+		},
 		token() {
 			return G.isAutoRefreshToken() || this.isNotExpired ? this.access_token : "";
 		}
@@ -1070,9 +1075,7 @@ function we(e, t, n) {
 			case j.TESTING:
 				n = t.testingMenus;
 				break;
-			default:
-				n = t.appMenus;
-				break;
+			default: n = t.appMenus;
 		}
 		return n;
 	}, u = (e, t, n = !1) => {
@@ -1096,9 +1099,7 @@ function we(e, t, n) {
 				case j.TESTING:
 					p.push(h);
 					break;
-				default:
-					d.push(h);
-					break;
+				default: d.push(h);
 			}
 		}), {
 			routeRecords: i,
@@ -1117,14 +1118,14 @@ function we(e, t, n) {
 	} };
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.1.6_typescript@6._faa73f3a7f971f5c9c73dfacaaf11391/node_modules/vuetify/lib/util/getCurrentInstance.js
+//#region ../../node_modules/.pnpm/vuetify@4.1.7_typescript@6._81d95b3772063ef946687682dfbcecfb/node_modules/vuetify/lib/util/getCurrentInstance.js
 function Te(e, t) {
 	let n = p();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.1.6_typescript@6._faa73f3a7f971f5c9c73dfacaaf11391/node_modules/vuetify/lib/composables/theme.js
+//#region ../../node_modules/.pnpm/vuetify@4.1.7_typescript@6._81d95b3772063ef946687682dfbcecfb/node_modules/vuetify/lib/composables/theme.js
 var Ee = Symbol.for("vuetify:theme");
 function De() {
 	Te("useTheme");
@@ -1216,7 +1217,8 @@ function Oe() {
 //#endregion
 //#region src/lib/main.ts
 var ke = (e) => {
-	c(Z().theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
+	let t = Z();
+	c(t.theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
 };
 //#endregion
 export { k as CaptchaCategoryEnum, O as LayoutModeEnum, N as LibraryEnum, j as MenuScenarioEnum, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, A as SocialSourceEnum, M as TableStyleEnum, he as addColorAlpha, H as getAllColorPalette, V as getColorPalette, ye as getSystemHeaders, ke as initializer, W as isWhiteColor, U as mixColor, le as piniaPluginPersistedstate, de as useApplicationStore, X as useAuthenticationStore, ue as useAutocomplete, Y as useCryptoStore, be as useDetailPage, xe as useDeviceAuthorize, Q as useElementStore, Se as useFileDownload, Ce as usePasskey, Z as useSettingsStore, we as useSystemElement, Oe as useSystemTheme, $ as useTabsViewStore };

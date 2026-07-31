@@ -17,7 +17,7 @@ import type { TslStatus, Specification, Specs } from '@herodotus/api';
 
 import { toUpper } from 'lodash-es';
 
-import { useTslStatus } from '../../composables/hooks';
+import { useTslStatus } from '../../../composables/hooks';
 
 import { HDictionarySelect } from '@/components/library/HDictionary';
 

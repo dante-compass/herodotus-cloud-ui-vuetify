@@ -71,6 +71,9 @@ export type Specs =
 
 // ------------------------------ 定义主体 ------------------------------
 
+export type TslStatus = "create" | "edit" | "view";
+export type Dimension = "properties" | "events" | "services";
+
 export interface TslUnitEntity extends AbstractEntity {
   id: string;
   name: string;
@@ -96,7 +99,7 @@ export interface TslFunctionEntity extends AbstractTslEntity {
   id: string;
   productId: string;
   productKey: string;
-  dimension: string;
+  dimension: Dimension;
   accessMode: string;
   eventType: string;
   callType: string;
@@ -110,9 +113,9 @@ export interface TslUnitConditions extends Conditions {}
 export interface TslArgumentConditions extends Conditions {}
 export interface TslFunctionConditions extends Conditions {
   productId: string;
+  dimension: string;
 }
 
 export type TslUnitProps = keyof TslUnitEntity;
 export type TslArgumentProps = keyof TslArgumentEntity;
 export type TslFunctionProps = keyof TslFunctionEntity;
-export type TslStatus = "create" | "edit" | "view";

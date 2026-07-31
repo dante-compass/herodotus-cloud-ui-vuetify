@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import type { TslStatus, Specification, BoolSpecs } from '@herodotus/api';
 
-import { useTslStatus } from '../../composables/hooks';
+import { useTslStatus } from '../../../composables/hooks';
 
 import { HDictionarySelect } from '@/components/library/HDictionary';
 

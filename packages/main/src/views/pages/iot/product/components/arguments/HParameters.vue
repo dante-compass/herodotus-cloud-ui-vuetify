@@ -33,13 +33,12 @@ import type { TslStatus, TslArgumentEntity, Specification, Specs } from '@herodo
 
 import { isEmpty, remove, findIndex } from 'lodash-es';
 
-import { useTslStatus, useTslEntity } from '../../composables/hooks';
+import { useTslStatus, useTslEntity } from '../../../composables/hooks';
 
 import HPrimaryAddingDialog from './HPrimaryAddingDialog.vue';
-import HParameterList from './HParameterList.vue';
 import HTslButton from './HTslButton.vue';
 
-defineOptions({ name: 'HParameters', components: { HParameterList, HTslButton, HPrimaryAddingDialog } });
+defineOptions({ name: 'HParameters', components: { HTslButton, HPrimaryAddingDialog } });
 
 interface Props {
   label?: string;

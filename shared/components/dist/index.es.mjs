@@ -156,7 +156,10 @@ var R = /* @__PURE__ */ l({
 	},
 	emits: ["update:modelValue"],
 	setup(e) {
-		let t = b(e, "modelValue"), r = _(""), i = _(""), a = (e, t) => F(`${e && e.trim() !== "" ? e : "1970-01-01"} ${t && t.trim() !== "" ? t : "00:00:00"}`).format("YYYY-MM-DD HH:mm:ss");
+		let t = b(e, "modelValue"), r = _(""), i = _(""), a = (e, t) => {
+			let n = e && e.trim() !== "" ? e : "1970-01-01", r = t && t.trim() !== "" ? t : "00:00:00";
+			return F(`${n} ${r}`).format("YYYY-MM-DD HH:mm:ss");
+		};
 		return x(t, (e) => {
 			if (e) {
 				let t = F(e);

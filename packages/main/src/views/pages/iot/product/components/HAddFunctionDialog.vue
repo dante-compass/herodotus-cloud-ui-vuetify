@@ -26,7 +26,7 @@ import type { TslStatus, TslFunctionEntity } from '@herodotus/api';
 import { toUpper } from 'lodash-es';
 import { toast } from '@herodotus/core';
 
-import { useTslValidation, useTslStatus, useTslEntity } from '../composables/hooks';
+import { useTslValidation, useTslStatus, useTslEntity } from '../../composables/hooks';
 import { API } from '@/configurations';
 import { HDictionaryToggle } from '@/components/library/HDictionary';
 

@@ -38,7 +38,7 @@ import type { TslStatus, Specification, EnumSpecs } from '@herodotus/api';
 
 import { isEmpty } from 'lodash-es';
 
-import { useTslStatus } from '../../composables/hooks';
+import { useTslStatus } from '../../../composables/hooks';
 
 import { HDictionarySelect } from '@/components/library/HDictionary';
 import HTslButton from './HTslButton.vue';

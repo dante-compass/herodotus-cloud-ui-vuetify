@@ -31,13 +31,12 @@ import type { TslStatus, Specification, StructSpecs, Specs } from '@herodotus/ap
 
 import { isEmpty, remove, findIndex } from 'lodash-es';
 
-import { useTslStatus, useTslEntity } from '../../composables/hooks';
+import { useTslStatus, useTslEntity } from '../../../composables/hooks';
 
 import HSecondaryAddingDialog from './HSecondaryAddingDialog.vue';
-import HParameterList from './HParameterList.vue';
 import HTslButton from './HTslButton.vue';
 
-defineOptions({ name: 'HArgumentStructPanel', components: { HSecondaryAddingDialog, HTslButton, HParameterList } });
+defineOptions({ name: 'HArgumentStructPanel', components: { HSecondaryAddingDialog, HTslButton } });
 
 interface Props {
   status?: TslStatus;

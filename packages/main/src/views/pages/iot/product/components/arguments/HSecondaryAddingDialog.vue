@@ -20,7 +20,7 @@ import type { TslStatus, Specification, Specs } from '@herodotus/api';
 
 import { isEmpty, toUpper } from 'lodash-es';
 
-import { useTslStatus, useTslEntity } from '../../composables/hooks';
+import { useTslStatus, useTslEntity } from '../../../composables/hooks';
 
 import { HDictionarySelect } from '@/components/library/HDictionary';
 import HArgumentBoolPanel from './HArgumentBoolPanel.vue';

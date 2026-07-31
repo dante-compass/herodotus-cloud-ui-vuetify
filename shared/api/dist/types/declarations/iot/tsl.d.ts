@@ -51,6 +51,8 @@ export type StructSpecs = {
     specs: Array<Specification<Specs>>;
 };
 export type Specs = IntegerSpecs | FloatSpecs | DoubleSpecs | TextSpecs | DateSpecs | BoolSpecs | EnumSpecs | StructSpecs;
+export type TslStatus = "create" | "edit" | "view";
+export type Dimension = "properties" | "events" | "services";
 export interface TslUnitEntity extends AbstractEntity {
     id: string;
     name: string;
@@ -73,7 +75,7 @@ export interface TslFunctionEntity extends AbstractTslEntity {
     id: string;
     productId: string;
     productKey: string;
-    dimension: string;
+    dimension: Dimension;
     accessMode: string;
     eventType: string;
     callType: string;
@@ -88,9 +90,9 @@ export interface TslArgumentConditions extends Conditions {
 }
 export interface TslFunctionConditions extends Conditions {
     productId: string;
+    dimension: string;
 }
 export type TslUnitProps = keyof TslUnitEntity;
 export type TslArgumentProps = keyof TslArgumentEntity;
 export type TslFunctionProps = keyof TslFunctionEntity;
-export type TslStatus = "create" | "edit" | "view";
 export {};
