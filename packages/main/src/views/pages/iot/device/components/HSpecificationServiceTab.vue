@@ -8,6 +8,7 @@
     :items="tableRows"
     :item-value="rowKey"
     :loading="loading"
+    :show-select="false"
     select-strategy="single"
     disable-sort
     @update:options="fetchItems"
