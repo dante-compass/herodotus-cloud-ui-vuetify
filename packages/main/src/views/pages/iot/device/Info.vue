@@ -7,7 +7,7 @@
             <h-label-item label="产品：" justify="start">
               {{ editedItem.product.productName }}
               <template #append>
-                <v-btn variant="plain" text="查看"></v-btn>
+                <h-icon-button icon="mdi-feature-search" tooltip="查看" variant="text"></h-icon-button>
               </template>
             </h-label-item>
           </v-col>

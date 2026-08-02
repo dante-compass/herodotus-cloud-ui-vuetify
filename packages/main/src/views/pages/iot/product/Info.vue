@@ -34,7 +34,7 @@
             <h-label-item label="设备数量：" justify="start">
               {{ editedItem.quantity ? editedItem.quantity : 0 }}
               <template #append>
-                <v-btn variant="plain" text="查看详情"></v-btn>
+                <h-icon-button icon="mdi-feature-search" tooltip="查看详情" variant="text"></h-icon-button>
               </template>
             </h-label-item>
           </v-col>
