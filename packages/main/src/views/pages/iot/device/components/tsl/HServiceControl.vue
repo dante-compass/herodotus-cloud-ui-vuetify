@@ -1,11 +1,11 @@
 <template>
   <v-card flat>
-    <v-table class="text-body-small" density="compact" striped="odd" hover>
+    <v-table class="text-body-small" density="compact">
       <tbody>
         <tr align="right" v-for="(item, index) in arguments" :key="index">
           <th style="width: 30%">{{ item.name }}（{{ item.identifier }}）：</th>
 
-          <td style="width: 70%">
+          <td style="width: 70%" :class="[{ 'pr-0': isStruct(item) }]">
             <component :is="getComponent(item.type)" v-model="entity[item.identifier]" :specs="item.specs"></component>
           </td>
         </tr>
@@ -62,6 +62,10 @@ const componentMap: Record<string, Component> = {
 const entity = ref({}) as Ref<Record<string, any>>;
 
 const getComponent = (type: string) => componentMap[type];
+
+const isStruct = (item: TslArgumentEntity) => {
+  return item.type === 'struct';
+};
 
 watch(
   () => props.arguments,

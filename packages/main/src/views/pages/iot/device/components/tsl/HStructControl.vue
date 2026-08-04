@@ -1,5 +1,5 @@
 <template>
-  <v-table class="text-body-small" density="compact" striped="odd" hover>
+  <v-table class="text-body-small" density="compact">
     <tbody>
       <tr align="right" v-for="(specs, i) in props.specs.dataType.specs" :key="i">
         <th style="width: 30%">{{ specs.name }}（{{ specs.identifier }}）：</th>
