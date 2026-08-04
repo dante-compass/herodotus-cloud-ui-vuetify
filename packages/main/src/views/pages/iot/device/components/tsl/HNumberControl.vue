@@ -5,17 +5,16 @@
     :min="min"
     :step="step"
     :precision="precision"
-    density="comfortable"
+    density="compact"
   ></v-number-input>
 </template>
 
 <script setup lang="ts">
 import type { Specification, IntegerSpecs, FloatSpecs, DoubleSpecs } from '@herodotus/api';
-import { isEmpty } from 'lodash-es';
+
+import { useTslEntity } from '../../../composables/hooks';
 
 defineOptions({ name: 'HNumberControl' });
-
-const model = defineModel<number>();
 
 interface Props {
   specs: Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>;
@@ -23,44 +22,68 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const min = computed(() => {
-  if (!isEmpty(props.specs) && !isEmpty(props.specs.dataType)) {
-    if (props.specs.dataType.type === 'int') {
-      return Number.parseInt(props.specs.dataType.specs.min);
-    } else {
-      return Number.parseFloat(props.specs.dataType.specs.min);
-    }
-  }
-  return undefined;
-});
+const model = defineModel<number>();
 
-const max = computed(() => {
-  if (!isEmpty(props.specs) && !isEmpty(props.specs.dataType)) {
-    if (props.specs.dataType.type === 'int') {
-      return Number.parseInt(props.specs.dataType.specs.max);
-    } else {
-      return Number.parseFloat(props.specs.dataType.specs.max);
-    }
-  }
-  return undefined;
-});
-const step = computed(() => {
-  if (!isEmpty(props.specs) && !isEmpty(props.specs.dataType)) {
-    if (props.specs.dataType.type === 'int') {
-      return Number.parseInt(props.specs.dataType.specs.step);
-    } else {
-      return Number.parseFloat(props.specs.dataType.specs.step);
-    }
-  }
-  return undefined;
-});
+const { isSpecificationNotEmpty } = useTslEntity();
 
-const precision = computed(() => {
-  if (!isEmpty(props.specs) && !isEmpty(props.specs.dataType)) {
-    if (props.specs.dataType.type !== 'int') {
+const min = shallowRef();
+const max = shallowRef();
+const step = shallowRef();
+const precision = shallowRef(0);
+
+watch(
+  () => props.specs,
+  (newValue) => {
+    if (isSpecificationNotEmpty(newValue)) {
+      min.value = getMin(newValue);
+      max.value = getMax(newValue);
+      step.value = getStep(newValue);
+      precision.value = getPrecision(newValue);
+    }
+  },
+);
+
+const getMin = (specs: Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>) => {
+  if (specs.dataType.specs.min) {
+    if (specs.dataType.type === 'int') {
+      return Number.parseInt(specs.dataType.specs.min);
+    } else {
+      return Number.parseFloat(specs.dataType.specs.min);
+    }
+  }
+  return undefined;
+};
+
+const getMax = (specs: Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>) => {
+  if (specs.dataType.specs.max) {
+    if (specs.dataType.type === 'int') {
+      return Number.parseInt(specs.dataType.specs.max);
+    } else {
+      return Number.parseFloat(specs.dataType.specs.max);
+    }
+  }
+  return undefined;
+};
+
+const getStep = (specs: Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>) => {
+  if (specs.dataType.specs.step) {
+    if (specs.dataType.type === 'int') {
+      return Number.parseInt(specs.dataType.specs.step);
+    } else {
+      return Number.parseFloat(specs.dataType.specs.step);
+    }
+  }
+  return undefined;
+};
+
+const getPrecision = (specs: Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>) => {
+  switch (specs.dataType.type) {
+    case 'float':
+      return 1;
+    case 'double':
       return 2;
-    }
+    default:
+      return 0;
   }
-  return 0;
-});
+};
 </script>

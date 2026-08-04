@@ -1,4 +1,5 @@
 import { Entity, Conditions, AbstractEntity, AbstractAuditEntity } from '@herodotus/core';
+export type TslDataType = "int" | "float" | "double" | "enum" | "bool" | "text" | "date" | "struct" | "array";
 export interface Characteristic {
     identifier: string;
     name: string;
@@ -62,7 +63,7 @@ interface AbstractTslEntity extends AbstractAuditEntity, Characteristic {
 }
 export interface TslArgumentEntity extends AbstractTslEntity {
     id: string;
-    type: string;
+    type: TslDataType;
     specs: Specification<Specs>;
 }
 export interface TslFunctionArgumentEntity extends Entity {

@@ -125,7 +125,7 @@ const getIcon = (tab: Tab): string => {
 };
 
 const getTitle = (tab: Tab): string => {
-  return tab.meta.title as string;
+  return tab.meta.title as unknown as string;
 };
 
 const onRefresh = () => {

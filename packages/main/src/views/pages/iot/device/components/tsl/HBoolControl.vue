@@ -1,40 +1,44 @@
 <template>
-  <v-switch v-model="model" :label="model ? trueLabel : falseLabel" density="compact" hide-details></v-switch>
+  <h-switch v-model="model" :label="label" :true-value="1" :false-value="0" density="compact" hide-details></h-switch>
 </template>
 
 <script setup lang="ts">
 import type { Specification, BoolSpecs } from '@herodotus/api';
-import { isEmpty } from 'lodash-es';
+
+import { useTslEntity } from '../../../composables/hooks';
 
 defineOptions({ name: 'HBoolControl' });
 
 interface Props {
-  form?: boolean;
   specs: Specification<BoolSpecs>;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  form: true,
+const props = defineProps<Props>();
+
+const model = defineModel<number>({
+  default: 0,
 });
 
-const model = defineModel<boolean>({
-  default: false,
-});
+const { isSpecificationNotEmpty } = useTslEntity();
 
-const getLabel = (key: '0' | '1') => {
-  if (!isEmpty(props.specs) && !isEmpty(props.specs.dataType)) {
-    if (!isEmpty(props.specs.dataType.specs)) {
-      return props.specs.dataType.specs[key];
+const trueLabel = shallowRef();
+const falseLabel = shallowRef();
+
+watch(
+  () => props.specs,
+  (newValue) => {
+    if (isSpecificationNotEmpty(newValue)) {
+      trueLabel.value = newValue.dataType.specs['1'];
+      falseLabel.value = newValue.dataType.specs['0'];
     }
+  },
+);
+
+const label = computed(() => {
+  if (trueLabel.value && falseLabel.value) {
+    return model.value === 1 ? trueLabel.value : falseLabel.value;
   }
-  return '';
-};
 
-const trueLabel = computed(() => {
-  return getLabel('1');
-});
-
-const falseLabel = computed(() => {
-  return getLabel('0');
+  return undefined;
 });
 </script>

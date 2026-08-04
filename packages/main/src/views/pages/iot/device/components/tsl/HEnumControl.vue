@@ -1,31 +1,44 @@
 <template>
-  <v-select v-model="model" :items="items" :rules="[(v: string) => !!v || '请选择值']"></v-select>
+  <v-btn-toggle v-model="model" mandatory border divided density="compact">
+    <v-btn v-for="(option, index) in options" :key="index" :text="option.label" :value="option.value"></v-btn>
+  </v-btn-toggle>
 </template>
 
 <script setup lang="ts">
-import type { Specification, BoolSpecs } from '@herodotus/api';
-import { isEmpty } from 'lodash-es';
+import type { Specification, EnumSpecs } from '@herodotus/api';
+
+import { useTslEntity } from '../../../composables/hooks';
 
 defineOptions({ name: 'HEnumControl' });
 
 interface Props {
-  specs: Specification<BoolSpecs>;
+  specs: Specification<EnumSpecs>;
+}
+
+interface Option {
+  label: string;
+  value: number;
 }
 
 const props = defineProps<Props>();
 
-const model = defineModel<number>({});
+const model = defineModel<number>({
+  default: 0,
+});
 
-const items = computed(() => {
-  if (!isEmpty(props.specs) && !isEmpty(props.specs.dataType)) {
-    if (!isEmpty(props.specs.dataType.specs)) {
-      return Object.entries(props.specs.dataType.specs).map(([key, value]) => ({
-        title: key,
+const { isSpecificationNotEmpty } = useTslEntity();
+
+const options = ref([]) as Ref<Option[]>;
+
+watch(
+  () => props.specs,
+  (newValue) => {
+    if (isSpecificationNotEmpty(newValue)) {
+      options.value = Object.entries(newValue.dataType.specs).map(([key, value]) => ({
+        label: key,
         value: Number(value),
       }));
     }
-  }
-
-  return [];
-});
+  },
+);
 </script>

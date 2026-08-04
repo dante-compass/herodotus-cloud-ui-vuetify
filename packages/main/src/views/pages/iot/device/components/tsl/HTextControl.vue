@@ -1,64 +1,41 @@
 <template>
-  <v-form v-if="form" ref="textControlForm">
-    <v-row>
-      <v-col cols="9">
-        <v-text-field
-          v-model="model"
-          :counter="counter"
-          density="comfortable"
-          :rules="[(v: string) => !!v || '不能输入空值']"
-        ></v-text-field>
-      </v-col>
-      <v-col cols="3">
-        <v-btn prepend-icon="mdi-send" variant="tonal" @click="onSave">设置</v-btn>
-      </v-col>
-    </v-row>
-  </v-form>
   <v-text-field
-    v-else
     v-model="model"
     :counter="counter"
-    density="comfortable"
+    density="compact"
     :rules="[(v: string) => !!v || '不能输入空值']"
   ></v-text-field>
 </template>
 
 <script setup lang="ts">
 import type { Specification, TextSpecs } from '@herodotus/api';
-import { isEmpty } from 'lodash-es';
+
+import { useTslEntity } from '../../../composables/hooks';
 
 defineOptions({ name: 'HTextControl' });
 
-const model = defineModel<string>();
-
 interface Props {
-  form?: boolean;
   specs: Specification<TextSpecs>;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  form: false,
-});
+const props = defineProps<Props>();
 
-const emit = defineEmits<{
-  save: [];
-}>();
+const model = defineModel<string>();
 
-const textControlForm = ref();
+const { isSpecificationNotEmpty } = useTslEntity();
 
-const counter = computed(() => {
-  if (!isEmpty(props.specs) && !isEmpty(props.specs.dataType)) {
-    return props.specs.dataType.specs.length;
-  }
-  return false;
-});
+const counter = shallowRef<string | number | boolean>(false);
 
-const onSave = async () => {
-  if (props.form) {
-    const { valid } = await textControlForm.value.validate();
-    if (valid) {
-      emit('save');
+watch(
+  () => props.specs,
+  (newValue) => {
+    if (isSpecificationNotEmpty(newValue)) {
+      counter.value = getCounter(newValue);
     }
-  }
+  },
+);
+
+const getCounter = (specs: Specification<TextSpecs>) => {
+  return specs.dataType.specs.length;
 };
 </script>

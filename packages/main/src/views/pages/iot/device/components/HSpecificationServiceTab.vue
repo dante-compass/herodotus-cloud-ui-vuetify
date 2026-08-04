@@ -1,27 +1,36 @@
 <template>
-  <h-data-table
-    v-model:page-size="pageSize"
-    v-model:page-number="pageNumber"
-    v-model:total-pages="totalPages"
-    v-model:total-items="totalItems"
-    :headers="headers"
-    :items="tableRows"
-    :item-value="rowKey"
-    :loading="loading"
-    :show-select="false"
-    select-strategy="single"
-    disable-sort
-    @update:options="fetchItems"
-  ></h-data-table>
+  <div>
+    <h-data-table
+      v-model:page-size="pageSize"
+      v-model:page-number="pageNumber"
+      v-model:total-pages="totalPages"
+      v-model:total-items="totalItems"
+      :headers="headers"
+      :items="tableRows"
+      :item-value="rowKey"
+      :loading="loading"
+      :show-select="false"
+      select-strategy="single"
+      disable-sort
+      @update:options="fetchItems"
+    >
+      <template #item.actions="{ item }">
+        <h-action-button tooltip="调用服务" icon="mdi-function" @click="invoke(item)"></h-action-button>
+      </template>
+    </h-data-table>
+    <h-device-service-dialog v-model="openDialog" :arguments="entities"></h-device-service-dialog>
+  </div>
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionProps } from '@herodotus/api';
+import type { TslFunctionEntity, TslFunctionProps, TslArgumentEntity } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTslFunctionTable } from '../../composables/hooks';
 
-defineOptions({ name: 'HSpecificationPropertyTab' });
+import HDeviceServiceDialog from './HDeviceServiceDialog.vue';
+
+defineOptions({ name: 'HSpecificationPropertyTab', components: { HDeviceServiceDialog } });
 
 interface Props {
   productId: string;
@@ -40,6 +49,9 @@ const headers = ref([
 
 const rowKey: TslFunctionProps = 'id';
 
+const entities = ref([]) as Ref<TslArgumentEntity[]>;
+const openDialog = shallowRef(false);
+
 watch(
   () => props.productId,
   (newValue) => {
@@ -49,5 +61,10 @@ watch(
 
 const fetchItems = () => {
   findServicesByPage(props.productId);
+};
+
+const invoke = (item: TslFunctionEntity) => {
+  entities.value = item.arguments.serviceInputData;
+  openDialog.value = true;
 };
 </script>

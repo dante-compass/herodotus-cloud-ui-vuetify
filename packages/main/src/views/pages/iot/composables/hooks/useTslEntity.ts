@@ -90,6 +90,25 @@ export default function useTslEntity() {
     return undefined;
   };
 
+  const createDefaultValue = (type: string) => {
+    switch (type) {
+      case "int":
+        return 0;
+      case "float":
+        return 0.0;
+      case "double":
+        return 0.0;
+      case "enum":
+        return 0;
+      case "bool":
+        return 0;
+      case "struct":
+        return {};
+      default:
+        return null;
+    }
+  };
+
   return {
     EMPTY_NORMAL_FUNCTION_ARGUMENTS,
     hasArguments,
@@ -100,5 +119,6 @@ export default function useTslEntity() {
     createEmptyNormalSpecification,
     createEmptyFunction,
     createEmptyNormalArgument,
+    createDefaultValue,
   };
 }
