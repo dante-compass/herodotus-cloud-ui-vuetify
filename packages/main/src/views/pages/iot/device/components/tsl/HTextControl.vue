@@ -3,6 +3,8 @@
     v-model="model"
     :counter="counter"
     density="compact"
+    hide-details="auto"
+    class="my-2"
     :rules="[(v: string) => !!v || '不能输入空值']"
   ></v-text-field>
 </template>

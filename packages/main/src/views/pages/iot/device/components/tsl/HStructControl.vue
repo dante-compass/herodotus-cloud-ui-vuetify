@@ -1,15 +1,19 @@
 <template>
-  <v-list-group :value="identifier">
-    <template v-slot:activator="{ props }">
-      <v-list-item v-bind="props" :title="identifier"></v-list-item>
-    </template>
+  <v-table class="text-body-small" density="compact" striped="odd" hover>
+    <tbody>
+      <tr align="right" v-for="(specs, i) in props.specs.dataType.specs" :key="i">
+        <th style="width: 30%">{{ specs.name }}（{{ specs.identifier }}）：</th>
 
-    <v-list-item v-for="(specs, i) in props.specs.dataType.specs" :key="i">
-      <template #append>
-        <component :is="getComponent(specs.dataType.type)" v-model="model[specs.identifier]" :specs="specs"></component>
-      </template>
-    </v-list-item>
-  </v-list-group>
+        <td style="width: 70%">
+          <component
+            :is="getComponent(specs.dataType.type)"
+            v-model="model[specs.identifier]"
+            :specs="specs"
+          ></component>
+        </td>
+      </tr>
+    </tbody>
+  </v-table>
 </template>
 
 <script setup lang="ts">
@@ -31,13 +35,10 @@ defineOptions({
 });
 
 interface Props {
-  identifier?: string;
   specs: Specification<StructSpecs>;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  identifier: 'Struct',
-});
+const props = withDefaults(defineProps<Props>(), {});
 
 const model = defineModel<Record<string, any>>({
   default: () => ({}),

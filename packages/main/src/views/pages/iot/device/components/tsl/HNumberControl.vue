@@ -6,6 +6,8 @@
     :step="step"
     :precision="precision"
     density="compact"
+    hide-details="auto"
+    class="my-2"
   ></v-number-input>
 </template>
 
@@ -30,18 +32,6 @@ const min = shallowRef();
 const max = shallowRef();
 const step = shallowRef();
 const precision = shallowRef(0);
-
-watch(
-  () => props.specs,
-  (newValue) => {
-    if (isSpecificationNotEmpty(newValue)) {
-      min.value = getMin(newValue);
-      max.value = getMax(newValue);
-      step.value = getStep(newValue);
-      precision.value = getPrecision(newValue);
-    }
-  },
-);
 
 const getMin = (specs: Specification<IntegerSpecs | FloatSpecs | DoubleSpecs>) => {
   if (specs.dataType.specs.min) {
@@ -86,4 +76,18 @@ const getPrecision = (specs: Specification<IntegerSpecs | FloatSpecs | DoubleSpe
       return 0;
   }
 };
+
+watch(
+  () => props.specs,
+  (newValue) => {
+    if (isSpecificationNotEmpty(newValue)) {
+      min.value = getMin(newValue);
+      max.value = getMax(newValue);
+      step.value = getStep(newValue);
+      precision.value = getPrecision(newValue);
+      model.value = min.value;
+    }
+  },
+  { immediate: true, deep: true },
+);
 </script>

@@ -1,19 +1,17 @@
 <template>
-  <v-list>
-    <v-list-item v-for="(item, index) in arguments" :key="index">
-      <v-list-item-title>{{ item.identifier }}</v-list-item-title>
-      <template v-if="!isStruct(item)" #append>
-        <component :is="getComponent(item.type)" v-model="entity[item.identifier]" :specs="item.specs"></component>
-      </template>
-      <component
-        v-else
-        :is="getComponent(item.type)"
-        v-model="entity[item.identifier]"
-        :identifier="item.identifier"
-        :specs="item.specs"
-      ></component>
-    </v-list-item>
-  </v-list>
+  <v-card flat>
+    <v-table class="text-body-small" density="compact" striped="odd" hover>
+      <tbody>
+        <tr align="right" v-for="(item, index) in arguments" :key="index">
+          <th style="width: 30%">{{ item.name }}（{{ item.identifier }}）：</th>
+
+          <td style="width: 70%">
+            <component :is="getComponent(item.type)" v-model="entity[item.identifier]" :specs="item.specs"></component>
+          </td>
+        </tr>
+      </tbody>
+    </v-table>
+  </v-card>
 </template>
 
 <script setup lang="ts">
@@ -65,10 +63,6 @@ const entity = ref({}) as Ref<Record<string, any>>;
 
 const getComponent = (type: string) => componentMap[type];
 
-const isStruct = (item: TslArgumentEntity) => {
-  return item.type === 'struct';
-};
-
 watch(
   () => props.arguments,
   (newValue) => {
@@ -84,5 +78,6 @@ watch(
       }
     }
   },
+  { immediate: true, deep: true },
 );
 </script>

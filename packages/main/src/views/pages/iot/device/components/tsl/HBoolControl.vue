@@ -1,5 +1,13 @@
 <template>
-  <h-switch v-model="model" :label="label" :true-value="1" :false-value="0" density="compact" hide-details></h-switch>
+  <v-switch
+    v-model="model"
+    :label="label"
+    :true-value="1"
+    :false-value="0"
+    density="compact"
+    hide-details
+    class="my-2"
+  ></v-switch>
 </template>
 
 <script setup lang="ts">
@@ -32,6 +40,7 @@ watch(
       falseLabel.value = newValue.dataType.specs['0'];
     }
   },
+  { immediate: true, deep: true },
 );
 
 const label = computed(() => {

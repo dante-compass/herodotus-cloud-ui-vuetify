@@ -1,5 +1,5 @@
 <template>
-  <h-dialog v-model="openDialog" title="调用设备服务" @confirm="onSave">
+  <h-dialog v-model="openDialog" title="调用设备服务" max-width="40%" @confirm="onSave" @cancel="onCancel">
     <v-form ref="deviceServiceForm">
       <h-service-control v-model="entity" :arguments="arguments"></h-service-control>
     </v-form>
@@ -30,5 +30,10 @@ const onSave = async () => {
   const { valid } = await primaryAddingForm.value.validate();
   if (valid) {
   }
+};
+
+const onCancel = () => {
+  entity.value = {};
+  openDialog.value = false;
 };
 </script>
