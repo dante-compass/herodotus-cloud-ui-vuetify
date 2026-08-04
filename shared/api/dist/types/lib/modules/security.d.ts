@@ -11,7 +11,7 @@ declare class SysRoleService extends AbstractService<SysRoleEntity> {
     private constructor();
     static getInstance(config: HttpConfig): SysRoleService;
     getBaseAddress(): string;
-    getRoleCodePath(roleCode: string): string;
+    private getRoleCodePath;
     fetchByRoleCode(roleCode: string): Promise<AxiosHttpResult<SysRoleEntity>>;
 }
 declare class SysUserService extends AbstractService<SysUserEntity> {
@@ -19,9 +19,9 @@ declare class SysUserService extends AbstractService<SysUserEntity> {
     private constructor();
     static getInstance(config: HttpConfig): SysUserService;
     getBaseAddress(): string;
-    getUsernameAddress(): string;
-    getChangePasswordAddress(): string;
-    getUsernamePath(username: string): string;
+    private getUsernameAddress;
+    private getChangePasswordAddress;
+    private getUsernamePath;
     fetchByUsername(username: string): Promise<AxiosHttpResult<SysUserEntity>>;
     changePassword(userId: string, password: string): Promise<AxiosHttpResult<SysUserEntity>>;
 }
@@ -42,7 +42,7 @@ declare class SysElementService extends AbstractService<SysElementEntity> {
     private constructor();
     static getInstance(config: HttpConfig): SysElementService;
     getBaseAddress(): string;
-    getResourcesAddress(): string;
+    private getResourcesAddress;
     fetchById(id: string): Promise<AxiosHttpResult<SysElementEntity>>;
     findResourcesByRoles(roles: string[]): Promise<AxiosHttpResult<Elements>>;
 }
@@ -51,7 +51,7 @@ declare class SysTenantDataSourceService extends AbstractService<SysTenantDataSo
     private constructor();
     static getInstance(config: HttpConfig): SysTenantDataSourceService;
     getBaseAddress(): string;
-    getTenantIdPath(tenantId: string): string;
+    private getTenantIdPath;
     fetchByTenantId(tenantId: string): Promise<AxiosHttpResult<SysTenantDataSourceEntity>>;
 }
 declare class SysDictionaryService extends AbstractService<SysDictionaryEntity> {
@@ -59,8 +59,8 @@ declare class SysDictionaryService extends AbstractService<SysDictionaryEntity> 
     private constructor();
     static getInstance(config: HttpConfig): SysDictionaryService;
     getBaseAddress(): string;
-    getItemsAddress(): string;
-    getCategoryPath(category: string): string;
+    private getItemsAddress;
+    private getCategoryPath;
     fetchByCategory(category: string): Promise<AxiosHttpResult<Array<SysDictionaryEntity>>>;
     fetchCategories(categories: string): Promise<AxiosHttpResult<Record<string, Array<SysDictionaryEntity>>>>;
 }

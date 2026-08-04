@@ -1,8 +1,8 @@
-import type { DialogueContactEntity, DialogueDetailEntity, NotificationEntity } from '@/declarations';
-import type { AxiosHttpResult } from '@herodotus/core';
+import type { DialogueContactEntity, DialogueDetailEntity, NotificationEntity } from "@/declarations";
+import type { AxiosHttpResult } from "@herodotus/core";
 
-import { ContentTypeEnum } from '@/enums';
-import { HttpConfig, AbstractService } from '@herodotus/core';
+import { ContentTypeEnum } from "@/enums";
+import { HttpConfig, AbstractService } from "@herodotus/core";
 
 class DialogueContactService extends AbstractService<DialogueContactEntity> {
   private static instance: DialogueContactService;
@@ -19,7 +19,7 @@ class DialogueContactService extends AbstractService<DialogueContactEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getMsg() + '/message/dialogue/contact';
+    return this.getConfig().getMsg() + "/message/dialogue/contact";
   }
 }
 
@@ -38,10 +38,10 @@ class DialogueDetailService extends AbstractService<DialogueDetailEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getMsg() + '/message/dialogue/detail';
+    return this.getConfig().getMsg() + "/message/dialogue/detail";
   }
 
-  public getDeleteDialoguePath(id: string): string {
+  private getDeleteDialoguePath(id: string): string {
     return this.getParamPath(this.getBaseAddress(), id);
   }
 
@@ -65,11 +65,11 @@ class NotificationService extends AbstractService<NotificationEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getMsg() + '/message/notification';
+    return this.getConfig().getMsg() + "/message/notification";
   }
 
-  public getAllReadAddress(): string {
-    return this.getBaseAddress() + '/all-read';
+  private getAllReadAddress(): string {
+    return this.getBaseAddress() + "/all-read";
   }
 
   public setAllRead(userId: string): Promise<AxiosHttpResult<string>> {
@@ -99,11 +99,11 @@ class WebSocketMessageService {
   }
 
   public getBaseAddress(): string {
-    return this.config.getMsg() + '/message/websocket';
+    return this.config.getMsg() + "/message/websocket";
   }
 
-  public getStatAddress(): string {
-    return this.getBaseAddress() + '/stat';
+  private getStatAddress(): string {
+    return this.getBaseAddress() + "/stat";
   }
 
   public fetchAllStat(): Promise<AxiosHttpResult<Record<string, any>>> {

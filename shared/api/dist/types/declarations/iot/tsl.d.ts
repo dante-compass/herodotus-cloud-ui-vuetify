@@ -1,4 +1,4 @@
-import { Entity, Conditions, AbstractEntity, AbstractAuditEntity } from '@herodotus/core';
+import { Entity, Conditions, AbstractEntity, AbstractAuditEntity, Dto } from '@herodotus/core';
 export type TslDataType = "int" | "float" | "double" | "enum" | "bool" | "text" | "date" | "struct" | "array";
 export interface Characteristic {
     identifier: string;
@@ -96,4 +96,12 @@ export interface TslFunctionConditions extends Conditions {
 export type TslUnitProps = keyof TslUnitEntity;
 export type TslArgumentProps = keyof TslArgumentEntity;
 export type TslFunctionProps = keyof TslFunctionEntity;
+export interface TslSetPropertyRequest extends Dto {
+    productKey: string;
+    deviceName: string;
+    params: Record<string, any>;
+}
+export interface TslInvokeServiceRequest extends TslSetPropertyRequest {
+    identifier: string;
+}
 export {};

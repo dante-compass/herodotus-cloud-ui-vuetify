@@ -26,11 +26,11 @@ import type {
   PutBucketPolicyResult,
   PutObjectLegalHoldResult,
   PutObjectRetentionResult,
-} from '@/declarations';
-import type { AxiosHttpResult, AxiosProgressEvent } from '@herodotus/core';
+} from "@/declarations";
+import type { AxiosHttpResult, AxiosProgressEvent } from "@herodotus/core";
 
-import { Service, HttpConfig } from '@herodotus/core';
-import { ContentTypeEnum } from '@/enums';
+import { Service, HttpConfig } from "@herodotus/core";
+import { ContentTypeEnum } from "@/enums";
 
 class BucketService extends Service {
   private static instance: BucketService;
@@ -47,15 +47,15 @@ class BucketService extends Service {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getOss() + '/oss/bucket';
+    return this.getConfig().getOss() + "/oss/bucket";
   }
 
   private getListAddress(): string {
-    return this.getBaseAddress() + '/list';
+    return this.getBaseAddress() + "/list";
   }
 
   private getPolicyAddress(): string {
-    return this.getBaseAddress() + '/policy';
+    return this.getBaseAddress() + "/policy";
   }
 
   public listBuckets(): Promise<AxiosHttpResult<ListBucketDetailsResult>> {
@@ -92,43 +92,43 @@ class ObjectService extends Service {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getOss() + '/oss/object';
+    return this.getConfig().getOss() + "/oss/object";
   }
 
   private getListV2Address(): string {
-    return this.getBaseAddress() + '/list';
+    return this.getBaseAddress() + "/list";
   }
 
   private getMultiDeleteAddress(): string {
-    return this.getBaseAddress() + '/multi';
+    return this.getBaseAddress() + "/multi";
   }
 
   private getDownloadAddress(): string {
-    return this.getBaseAddress() + '/download';
+    return this.getBaseAddress() + "/download";
   }
 
   private getDisplayAddress(): string {
-    return this.getBaseAddress() + '/display';
+    return this.getBaseAddress() + "/display";
   }
 
   public getUploadAddress(): string {
-    return this.getBaseAddress() + '/upload';
+    return this.getBaseAddress() + "/upload";
   }
 
   private getAttributesAddress(): string {
-    return this.getBaseAddress() + '/attributes';
+    return this.getBaseAddress() + "/attributes";
   }
 
   private getLegalHoldAddress(): string {
-    return this.getBaseAddress() + '/legalhold';
+    return this.getBaseAddress() + "/legalhold";
   }
 
   private getRetentionAddress(): string {
-    return this.getBaseAddress() + '/retention';
+    return this.getBaseAddress() + "/retention";
   }
 
   private getListVersionsAddress(): string {
-    return this.getBaseAddress() + '/versions';
+    return this.getBaseAddress() + "/versions";
   }
 
   public listObjectsV2(request: ListObjectsV2Argument): Promise<AxiosHttpResult<ListObjectsV2Result>> {
@@ -145,23 +145,19 @@ class ObjectService extends Service {
     onProgress?: (progressEvent: AxiosProgressEvent) => void,
   ): Promise<AxiosHttpResult<PutObjectResult>> {
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('bucketName', bucketName);
+    formData.append("file", file);
+    formData.append("bucketName", bucketName);
     if (onProgress) {
       return this.getConfig()
         .getHttp()
-        .post<PutObjectResult, FormData>(
-          this.getUploadAddress(),
-          formData,
-          { contentType: ContentTypeEnum.MULTI_PART },
-          { onUploadProgress: onProgress },
-        );
+        .post<
+          PutObjectResult,
+          FormData
+        >(this.getUploadAddress(), formData, { contentType: ContentTypeEnum.MULTI_PART }, { onUploadProgress: onProgress });
     } else {
-      return this.getConfig()
-        .getHttp()
-        .post<PutObjectResult, FormData>(this.getUploadAddress(), formData, {
-          contentType: ContentTypeEnum.MULTI_PART,
-        });
+      return this.getConfig().getHttp().post<PutObjectResult, FormData>(this.getUploadAddress(), formData, {
+        contentType: ContentTypeEnum.MULTI_PART,
+      });
     }
   }
 
@@ -172,12 +168,10 @@ class ObjectService extends Service {
     if (onProgress) {
       return this.getConfig()
         .getHttp()
-        .post<Blob, any>(
-          this.getDownloadAddress(),
-          request,
-          { contentType: ContentTypeEnum.JSON },
-          { responseType: 'blob', onDownloadProgress: onProgress },
-        );
+        .post<
+          Blob,
+          any
+        >(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: "blob", onDownloadProgress: onProgress });
     } else {
       return this.getConfig().getHttp().post<Blob, any>(this.getDownloadAddress(), request);
     }
@@ -186,12 +180,10 @@ class ObjectService extends Service {
   public display(request: GetObjectArgument): Promise<AxiosHttpResult<Blob>> {
     return this.getConfig()
       .getHttp()
-      .post<Blob, any>(
-        this.getDisplayAddress(),
-        request,
-        { contentType: ContentTypeEnum.JSON },
-        { responseType: 'blob' },
-      );
+      .post<
+        Blob,
+        any
+      >(this.getDisplayAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: "blob" });
   }
 
   public batchDelete(request: DeleteObjectsArgument): Promise<AxiosHttpResult<DeleteObjectsResult>> {
@@ -242,15 +234,15 @@ class MultipartUploadService extends Service {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getOss() + '/oss/multipart-upload';
+    return this.getConfig().getOss() + "/oss/multipart-upload";
   }
 
   public getCreateMultipartUploadAddress(): string {
-    return this.getBaseAddress() + '/create';
+    return this.getBaseAddress() + "/create";
   }
 
   public getCompleteMultipartUploadAddress(): string {
-    return this.getBaseAddress() + '/complete';
+    return this.getBaseAddress() + "/complete";
   }
 
   public createChunkUpload(
@@ -258,10 +250,10 @@ class MultipartUploadService extends Service {
   ): Promise<AxiosHttpResult<CreateMultipartUploadBusiness>> {
     return this.getConfig()
       .getHttp()
-      .post<CreateMultipartUploadBusiness, CreateMultipartUploadArgument>(
-        this.getCreateMultipartUploadAddress(),
-        request,
-      );
+      .post<
+        CreateMultipartUploadBusiness,
+        CreateMultipartUploadArgument
+      >(this.getCreateMultipartUploadAddress(), request);
   }
 
   public completeChunkUpload(
@@ -269,10 +261,10 @@ class MultipartUploadService extends Service {
   ): Promise<AxiosHttpResult<CompleteMultipartUploadResult>> {
     return this.getConfig()
       .getHttp()
-      .post<CompleteMultipartUploadResult, CompleteMultipartUploadArgument>(
-        this.getCompleteMultipartUploadAddress(),
-        request,
-      );
+      .post<
+        CompleteMultipartUploadResult,
+        CompleteMultipartUploadArgument
+      >(this.getCompleteMultipartUploadAddress(), request);
   }
 }
 

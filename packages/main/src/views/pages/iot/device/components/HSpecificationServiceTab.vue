@@ -18,7 +18,13 @@
         <h-action-button tooltip="调用服务" icon="mdi-function" @click="invoke(item)"></h-action-button>
       </template>
     </h-data-table>
-    <h-device-service-dialog v-model="openDialog" :arguments="entities"></h-device-service-dialog>
+    <h-device-service-dialog
+      v-model="openDialog"
+      :product-key="productKey"
+      :device-name="deviceName"
+      :identifier="identifier"
+      :arguments="entities"
+    ></h-device-service-dialog>
   </div>
 </template>
 
@@ -34,7 +40,8 @@ defineOptions({ name: 'HSpecificationPropertyTab', components: { HDeviceServiceD
 
 interface Props {
   productId: string;
-  deviceId: string;
+  productKey: string;
+  deviceName: string;
 }
 
 const props = defineProps<Props>();
@@ -50,6 +57,7 @@ const headers = ref([
 const rowKey: TslFunctionProps = 'id';
 
 const entities = ref([]) as Ref<TslArgumentEntity[]>;
+const identifier = shallowRef('');
 const openDialog = shallowRef(false);
 
 watch(
@@ -65,6 +73,7 @@ const fetchItems = () => {
 
 const invoke = (item: TslFunctionEntity) => {
   entities.value = item.arguments.serviceInputData;
+  identifier.value = item.identifier;
   openDialog.value = true;
 };
 </script>

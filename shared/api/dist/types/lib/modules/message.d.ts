@@ -11,7 +11,7 @@ declare class DialogueDetailService extends AbstractService<DialogueDetailEntity
     private constructor();
     static getInstance(config: HttpConfig): DialogueDetailService;
     getBaseAddress(): string;
-    getDeleteDialoguePath(id: string): string;
+    private getDeleteDialoguePath;
     deleteDialogueById(id: string): Promise<AxiosHttpResult<string>>;
 }
 declare class NotificationService extends AbstractService<NotificationEntity> {
@@ -19,7 +19,7 @@ declare class NotificationService extends AbstractService<NotificationEntity> {
     private constructor();
     static getInstance(config: HttpConfig): NotificationService;
     getBaseAddress(): string;
-    getAllReadAddress(): string;
+    private getAllReadAddress;
     setAllRead(userId: string): Promise<AxiosHttpResult<string>>;
 }
 declare class WebSocketMessageService {
@@ -28,7 +28,7 @@ declare class WebSocketMessageService {
     private constructor();
     static getInstance(config: HttpConfig): WebSocketMessageService;
     getBaseAddress(): string;
-    getStatAddress(): string;
+    private getStatAddress;
     fetchAllStat(): Promise<AxiosHttpResult<Record<string, any>>>;
 }
 export { DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService };

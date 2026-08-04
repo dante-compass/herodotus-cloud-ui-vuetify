@@ -9,6 +9,8 @@ import type {
   MqttCategoryEntity,
   MqttAuthorityEntity,
   MqttAccountEntity,
+  TslInvokeServiceRequest,
+  TslSetPropertyRequest,
 } from "@/declarations";
 
 import { AbstractService, HttpConfig } from "@herodotus/core";
@@ -50,15 +52,15 @@ class ProductService extends AbstractService<ProductEntity> {
     return this.getConfig().getIot() + "/iot/product";
   }
 
-  public getValidateProductKeyAddress(): string {
+  private getValidateProductKeyAddress(): string {
     return this.getBaseAddress() + "/validation";
   }
 
-  public getToggleAddress(): string {
+  private getToggleAddress(): string {
     return this.getBaseAddress() + "/toggle";
   }
 
-  public getValidateProductKeyPath(productKey: string): string {
+  private getValidateProductKeyPath(productKey: string): string {
     return this.getParamPath(this.getValidateProductKeyAddress(), productKey);
   }
 
@@ -89,7 +91,7 @@ class DeviceService extends AbstractService<DeviceEntity> {
     return this.getConfig().getIot() + "/iot/device";
   }
 
-  public getToggleAddress(): string {
+  private getToggleAddress(): string {
     return this.getBaseAddress() + "/toggle";
   }
 
@@ -156,47 +158,21 @@ class TslFunctionService extends AbstractService<TslFunctionEntity> {
     return this.getConfig().getIot() + "/iot/tsl/function";
   }
 
-  // public getSettableAddress(): string {
-  //   return this.getBaseAddress() + '/settable';
-  // }
+  private getSetAddress(): string {
+    return this.getBaseAddress() + "/set";
+  }
 
-  // public getCallableAddress(): string {
-  //   return this.getBaseAddress() + '/callable';
-  // }
+  private getInvokeAddress(): string {
+    return this.getBaseAddress() + "/invoke";
+  }
 
-  // public fetchAllSettable(
-  //   productKey: string,
-  // ): Promise<AxiosHttpResult<Array<IotTslFunctionEntity>>> {
-  //   return this.getConfig()
-  //     .getHttp()
-  //     .get<
-  //       Array<IotTslFunctionEntity>,
-  //       string
-  //     >(this.getSettableAddress(), { productKey: productKey });
-  // }
+  public set(data: TslSetPropertyRequest): Promise<AxiosHttpResult<string>> {
+    return this.getConfig().getHttp().put<string, TslSetPropertyRequest>(this.getSetAddress(), data);
+  }
 
-  // public fetchAllCallable(
-  //   productKey: string,
-  // ): Promise<AxiosHttpResult<Array<IotTslFunctionEntity>>> {
-  //   return this.getConfig()
-  //     .getHttp()
-  //     .get<
-  //       Array<IotTslFunctionEntity>,
-  //       string
-  //     >(this.getCallableAddress(), { productKey: productKey });
-  // }
-
-  // public setup(data: IotTslSetupProperty): Promise<AxiosHttpResult<string>> {
-  //   return this.getConfig()
-  //     .getHttp()
-  //     .put<string, IotTslSetupProperty>(this.getSettableAddress(), data);
-  // }
-
-  // public invoke(data: IotTslInvokeService): Promise<AxiosHttpResult<string>> {
-  //   return this.getConfig()
-  //     .getHttp()
-  //     .put<string, IotTslInvokeService>(this.getCallableAddress(), data);
-  // }
+  public invoke(data: TslInvokeServiceRequest): Promise<AxiosHttpResult<string>> {
+    return this.getConfig().getHttp().put<string, TslInvokeServiceRequest>(this.getInvokeAddress(), data);
+  }
 }
 
 class MqttCategoryService extends AbstractService<MqttCategoryEntity> {

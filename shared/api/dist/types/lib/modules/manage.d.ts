@@ -5,8 +5,8 @@ declare class MgtCertificateService extends AbstractService<MgtCertificateReques
     private constructor();
     static getInstance(config: HttpConfig): MgtCertificateService;
     getBaseAddress(): string;
-    getAliasAddress(): string;
-    getCategoryAddress(): string;
+    private getAliasAddress;
+    private getCategoryAddress;
     findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateResponse>>;
     findAllByCertificateCategory(certificateCategory: string): Promise<AxiosHttpResult<Array<MgtCertificateResponse>>>;
 }

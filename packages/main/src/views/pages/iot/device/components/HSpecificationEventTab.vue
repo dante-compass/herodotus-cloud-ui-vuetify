@@ -32,7 +32,8 @@ defineOptions({ name: 'HSpecificationEventTab' });
 
 interface Props {
   productId: string;
-  deviceId: string;
+  productKey: string;
+  deviceName: string;
 }
 
 const props = defineProps<Props>();
