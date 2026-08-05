@@ -5,7 +5,7 @@
         <v-row>
           <v-col cols="3">
             <h-label-item label="产品：" justify="start">
-              {{ editedItem.product.productName }}
+              {{ editedItem.product ? editedItem.product.productName : '' }}
               <template #append>
                 <h-icon-button icon="mdi-feature-search" tooltip="查看" variant="text"></h-icon-button>
               </template>
@@ -13,7 +13,7 @@
           </v-col>
           <v-col cols="3">
             <h-label-item label="ProductKey：" justify="start">
-              {{ editedItem.product.productKey }}
+              {{ editedItem.product ? editedItem.product.productKey : '' }}
               <template #append>
                 <h-icon-button
                   :disable="!isSupported"

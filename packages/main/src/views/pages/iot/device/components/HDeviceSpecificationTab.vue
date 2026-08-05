@@ -59,11 +59,15 @@ const productId = shallowRef('');
 const productKey = shallowRef('');
 const deviceName = shallowRef('');
 
-watch(entity, (newValue) => {
-  if (!isEmpty(newValue) && !isEmpty(newValue.product)) {
-    productId.value = newValue.product.id;
-    productKey.value = newValue.product.productKey;
-    deviceName.value = newValue.deviceName;
-  }
-});
+watch(
+  entity,
+  (newValue) => {
+    if (!isEmpty(newValue) && !isEmpty(newValue.product)) {
+      productId.value = newValue.product.id;
+      productKey.value = newValue.product.productKey;
+      deviceName.value = newValue.deviceName;
+    }
+  },
+  { immediate: true },
+);
 </script>
