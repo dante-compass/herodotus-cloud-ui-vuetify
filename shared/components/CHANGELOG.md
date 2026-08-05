@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 3.1.5
+
+### Patch Changes
+
+- 物模型管理完成
+- Updated dependencies
+  - @herodotus/core@3.1.5
+
 ## 3.1.4
 
 ### Patch Changes
