@@ -1,17 +1,20 @@
 import type { App } from "vue";
 
+import { HBitsGalaxy, HBitsPrismaticBurst, HBitsThreads, HParticles } from "./HAnimate";
 import { HIconButton } from "./HButton";
 import { HDate, HDateTime, HDuration, HTime } from "./HDateTime";
 import { HDialog } from "./HDialog";
 import { HDivider } from "./HDivider";
 import { HDownloadProgress } from "./HProgress";
 import { HLabel } from "./HLabel";
-import { HParticles } from "./HParticles";
 import { HMdiIconSelect, HTreeSelect } from "./HSelect";
 import { HSignInBackground } from "./HSignIn";
 import { HLabelItem } from "./HItem";
 
 const components = [
+  HBitsGalaxy,
+  HBitsPrismaticBurst,
+  HBitsThreads,
   HDate,
   HDateTime,
   HDialog,
@@ -33,6 +36,9 @@ const install = (app: App) => {
 };
 
 export {
+  HBitsGalaxy,
+  HBitsPrismaticBurst,
+  HBitsThreads,
   HDate,
   HDateTime,
   HDialog,

@@ -109,6 +109,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     ],
     optimizeDeps: {
       exclude: [
+        "ogl",
         "vuetify",
         "vuetify/components",
         "vuetify/directives",

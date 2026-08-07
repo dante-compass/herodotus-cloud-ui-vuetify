@@ -15,14 +15,14 @@ type __VLS_Slots = {} & {
     default?: (props: typeof __VLS_39) => any;
 };
 declare const __VLS_base: import('vue').DefineComponent<__VLS_PublicProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
+    cancel: () => any;
     close: () => any;
     "update:modelValue": (value: boolean) => any;
-    cancel: () => any;
     confirm: () => any;
 }, string, import('vue').PublicProps, Readonly<__VLS_PublicProps> & Readonly<{
+    onCancel?: (() => any) | undefined;
     onClose?: (() => any) | undefined;
     "onUpdate:modelValue"?: ((value: boolean) => any) | undefined;
-    onCancel?: (() => any) | undefined;
     onConfirm?: (() => any) | undefined;
 }>, {
     maxWidth: string | number;

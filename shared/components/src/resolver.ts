@@ -1,6 +1,9 @@
 import type { ComponentResolver } from "unplugin-vue-components";
 
 const components = [
+  "HBitsGalaxy",
+  "HBitsPrismaticBurst",
+  "HBitsThreads",
   "HDate",
   "HDateTime",
   "HDialog",

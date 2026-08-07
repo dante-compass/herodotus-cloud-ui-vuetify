@@ -1,5 +1,6 @@
 import { ThemeModeEnum } from '@herodotus/core';
 export default function useSystemTheme(): {
+    isLightenMode: import('vue').ComputedRef<boolean>;
     lightColor: import('vue').ComputedRef<string>;
     darkColor: import('vue').ComputedRef<string>;
     backgroundColor: import('vue').ComputedRef<string>;

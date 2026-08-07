@@ -1,48 +1,31 @@
 <template>
-  <v-parallax :style="{ backgroundColor: backgroundColor }">
+  <v-parallax v-if="isLightenMode" :style="{ backgroundColor: backgroundColor }">
     <h-particles></h-particles>
-    <v-container>
-      <v-row class="h-screen" justify="center">
-        <v-col xxl="4" xl="3" lg="2" md="1" sm="0" xs="0"></v-col>
-        <v-col align-self="center">
-          <v-card class="elevation-20 mx-auto rounded-xl" style="z-index: 5">
-            <template #append>
-              <v-btn :icon="cycleChangeThemeIcon" @click="onCycleChangeTheme()" class="mx-2"></v-btn>
-            </template>
-            <h-app-logo height="10vh" class="mb-2"></h-app-logo>
-
-            <v-card-text>
-              <v-card variant="tonal" elevation="2" class="mx-auto" max-width="420">
-                <v-tabs v-model="tabs" align-tabs="center">
-                  <v-tab value="account" class="font-weight-bold">账号密码登录</v-tab>
-                  <v-tab value="mobile" class="font-weight-bold">手机短信登录</v-tab>
-                  <!-- <v-tab value="scan" class="font-weight-bold">微信扫码登录</v-tab> -->
-                </v-tabs>
-              </v-card>
-            </v-card-text>
-            <slot></slot>
-          </v-card>
-        </v-col>
-        <v-col xxl="4" xl="3" lg="2" md="1" sm="0" xs="0"></v-col>
-      </v-row>
-    </v-container>
+    <h-sign-in-container>
+      <slot></slot>
+    </h-sign-in-container>
     <h-sign-in-background :start-color="lightColor" :end-color="darkColor"></h-sign-in-background>
   </v-parallax>
+  <div v-else>
+    <h-bits-galaxy :transparent="false" :saturation="1" :auto-center-repulsion="1" :hue-shift="200"></h-bits-galaxy>
+    <!-- <h-bits-threads></h-bits-threads> -->
+    <!-- <h-bits-prismatic-burst></h-bits-prismatic-burst> -->
+
+    <h-sign-in-container>
+      <slot></slot>
+    </h-sign-in-container>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { useSystemTheme, useApplicationStore } from '@herodotus/framework';
 
-import { HAppLogo } from '@/components/library/HLogo';
+import HSignInContainer from './HSignInContainer.vue';
 
-defineOptions({
-  name: 'HSignInLayout',
-  components: {
-    HAppLogo,
-  },
-});
+defineOptions({ name: 'HSignInLayout', components: { HSignInContainer } });
 
-const { lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeThemeIcon } = useSystemTheme();
+const { isLightenMode, lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeThemeIcon } =
+  useSystemTheme();
 const application = useApplicationStore();
 
 const tabs = shallowRef('account');

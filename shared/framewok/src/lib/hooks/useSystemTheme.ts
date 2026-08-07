@@ -1,12 +1,12 @@
-import type { ThemeMode } from '@herodotus/core';
+import type { ThemeMode } from "@herodotus/core";
 
-import { watch, shallowRef, computed, nextTick, watchEffect } from 'vue';
-import { useTheme } from 'vuetify';
+import { watch, shallowRef, computed, nextTick, watchEffect } from "vue";
+import { useTheme } from "vuetify";
 
-import { toast, notify } from '@herodotus/core';
-import { ThemeModeEnum } from '@herodotus/core';
-import { useSettingsStore } from '../stores';
-import { getColorPalette, mixColor } from '@/lib/utilities';
+import { toast, notify } from "@herodotus/core";
+import { ThemeModeEnum } from "@herodotus/core";
+import { useSettingsStore } from "../stores";
+import { getColorPalette, mixColor } from "@/lib/utilities";
 
 export default function useSystemTheme() {
   const settings = useSettingsStore();
@@ -18,7 +18,7 @@ export default function useSystemTheme() {
   const hasScrollbar = (el?: Element | null) => {
     if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
     const style = window.getComputedStyle(el);
-    return style.overflowY === 'scroll' || (style.overflowY === 'auto' && el.scrollHeight > el.clientHeight);
+    return style.overflowY === "scroll" || (style.overflowY === "auto" && el.scrollHeight > el.clientHeight);
   };
 
   const themeTransition = () => {
@@ -26,8 +26,8 @@ export default function useSystemTheme() {
     for (let i = 0; i++ < 1e7; (i << 9) & ((9 % 9) * 9 + 9));
     if (performance.now() - x > 10) return;
 
-    const el: HTMLElement = document.querySelector('[data-v-app]')!;
-    const children = el.querySelectorAll('*') as NodeListOf<HTMLElement>;
+    const el: HTMLElement = document.querySelector("[data-v-app]")!;
+    const children = el.querySelectorAll("*") as NodeListOf<HTMLElement>;
 
     children.forEach((el) => {
       if (hasScrollbar(el)) {
@@ -37,31 +37,31 @@ export default function useSystemTheme() {
     });
 
     const copy = el.cloneNode(true) as HTMLElement;
-    copy.classList.add('app-copy');
+    copy.classList.add("app-copy");
     const rect = el.getBoundingClientRect();
-    copy.style.top = rect.top + 'px';
-    copy.style.left = rect.left + 'px';
-    copy.style.width = rect.width + 'px';
-    copy.style.height = rect.height + 'px';
+    copy.style.top = rect.top + "px";
+    copy.style.left = rect.left + "px";
+    copy.style.width = rect.width + "px";
+    copy.style.height = rect.height + "px";
 
     const targetEl = document.activeElement as HTMLElement;
     const targetRect = targetEl.getBoundingClientRect();
     const left = targetRect.left + targetRect.width / 2 + window.scrollX;
     const top = targetRect.top + targetRect.height / 2 + window.scrollY;
-    el.style.setProperty('--clip-pos', `${left}px ${top}px`);
-    el.style.removeProperty('--clip-size');
+    el.style.setProperty("--clip-pos", `${left}px ${top}px`);
+    el.style.removeProperty("--clip-size");
 
     nextTick(() => {
-      el.classList.add('app-transition');
+      el.classList.add("app-transition");
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          el.style.setProperty('--clip-size', Math.hypot(window.innerWidth, window.innerHeight) + 'px');
+          el.style.setProperty("--clip-size", Math.hypot(window.innerWidth, window.innerHeight) + "px");
         });
       });
     });
 
     document.body.append(copy);
-    (copy.querySelectorAll('[data-scroll-x], [data-scroll-y]') as NodeListOf<HTMLElement>).forEach((el) => {
+    (copy.querySelectorAll("[data-scroll-x], [data-scroll-y]") as NodeListOf<HTMLElement>).forEach((el) => {
       el.scrollLeft = Number(el.dataset.scrollX);
       el.scrollTop = Number(el.dataset.scrollY);
     });
@@ -69,15 +69,15 @@ export default function useSystemTheme() {
     function onTransitionend(e: TransitionEvent) {
       if (e.target === e.currentTarget) {
         copy.remove();
-        el.removeEventListener('transitionend', onTransitionend);
-        el.removeEventListener('transitioncancel', onTransitionend);
-        el.classList.remove('app-transition');
-        el.style.removeProperty('--clip-size');
-        el.style.removeProperty('--clip-pos');
+        el.removeEventListener("transitionend", onTransitionend);
+        el.removeEventListener("transitioncancel", onTransitionend);
+        el.classList.remove("app-transition");
+        el.style.removeProperty("--clip-size");
+        el.style.removeProperty("--clip-pos");
       }
     }
-    el.addEventListener('transitionend', onTransitionend);
-    el.addEventListener('transitioncancel', onTransitionend);
+    el.addEventListener("transitionend", onTransitionend);
+    el.addEventListener("transitioncancel", onTransitionend);
   };
 
   watchEffect(() => {
@@ -105,7 +105,7 @@ export default function useSystemTheme() {
   });
 
   const backgroundColor = computed(() => {
-    const COLOR_WHITE = '#ffffff';
+    const COLOR_WHITE = "#ffffff";
     const ratio = settings.isDarkenMode ? 0.5 : 0.2;
     return mixColor(COLOR_WHITE, backgroundThemeColor.value, ratio);
   });
@@ -145,15 +145,20 @@ export default function useSystemTheme() {
   const cycleChangeThemeIcon = computed((): string => {
     switch (settings.theme.mode) {
       case ThemeModeEnum.SYSTEM:
-        return 'mdi-brightness-5';
+        return "mdi-brightness-5";
       case ThemeModeEnum.DARK:
-        return 'mdi-brightness-auto';
+        return "mdi-brightness-auto";
       default:
-        return 'mdi-brightness-4';
+        return "mdi-brightness-4";
     }
   });
 
+  const isLightenMode = computed(() => {
+    return settings.isLightenMode;
+  });
+
   return {
+    isLightenMode,
     lightColor,
     darkColor,
     backgroundColor,
