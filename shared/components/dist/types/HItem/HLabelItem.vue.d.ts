@@ -1,8 +1,8 @@
 interface Props {
     label: string;
     required?: boolean;
-    justify?: "start" | "center" | "end" | null;
-    align?: "start" | "center" | "end" | null;
+    justify?: 'start' | 'center' | 'end' | null;
+    align?: 'start' | 'center' | 'end' | null;
     right?: boolean;
 }
 declare var __VLS_6: {}, __VLS_8: {};

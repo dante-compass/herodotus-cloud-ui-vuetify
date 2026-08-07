@@ -885,10 +885,7 @@ Q.install = (e) => {
 //#region src/HItem/HLabelItem.vue?vue&type=script&setup=true&lang.ts
 var Ke = { class: "w-20" }, qe = { class: "w-50" }, $ = /* @__PURE__ */ l({
 	name: "HLabelItem",
-	components: {
-		HLabel: q,
-		HIconButton: L
-	},
+	components: { HLabel: q },
 	__name: "HLabelItem",
 	props: {
 		label: {},
