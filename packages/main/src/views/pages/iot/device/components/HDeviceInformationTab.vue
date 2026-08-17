@@ -39,16 +39,16 @@
               {{ entity.createTime ? defaultFormat(String(entity.createTime)) : '' }}
             </td>
             <th style="text-align: right; width: 10%">激活时间：</th>
-            <td style="width: 15%">-</td>
+            <td style="width: 15%">{{ entity.updateTime ? defaultFormat(String(entity.updateTime)) : '' }}</td>
             <th style="text-align: right; width: 10%">最后上线时间：</th>
-            <td style="width: 15%">-</td>
+            <td style="width: 15%">{{ entity.connectedAt ? defaultFormat(String(entity.connectedAt)) : '' }}</td>
             <th style="width: 10%"></th>
             <td style="width: 15%"></td>
           </tr>
 
           <tr>
             <th style="text-align: right; width: 10%">最后离线时间：</th>
-            <td style="width: 15%">-</td>
+            <td style="width: 15%">{{ entity.disconnectedAt ? defaultFormat(String(entity.disconnectedAt)) : '' }}</td>
             <th style="text-align: right; width: 10%">当前状态：</th>
             <td style="width: 15%">-</td>
             <th style="text-align: right; width: 10%"></th>
