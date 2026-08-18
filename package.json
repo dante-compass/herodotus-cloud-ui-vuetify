@@ -42,7 +42,7 @@
     "pinia": "^4.0.3",
     "pinia-plugin-persistedstate": "^4.7.1",
     "vue": "^3.5.41",
-    "vuetify": "^4.1.9"
+    "vuetify": "^4.1.10"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.0",

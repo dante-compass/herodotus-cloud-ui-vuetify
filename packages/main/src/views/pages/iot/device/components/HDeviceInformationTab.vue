@@ -52,7 +52,10 @@
             <th style="text-align: right; width: 10%">当前状态：</th>
             <td style="width: 15%">-</td>
             <th style="text-align: right; width: 10%"></th>
-            <td style="width: 15%">-</td>
+            <td style="width: 15%">
+              <v-chip v-if="entity.activated" color="success" variant="outlined">已激活</v-chip>
+              <v-chip v-else color="warning" variant="outlined">未激活</v-chip>
+            </td>
             <th style="width: 10%"></th>
             <td style="width: 15%"></td>
           </tr>
