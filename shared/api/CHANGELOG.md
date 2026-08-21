@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 3.1.7
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@3.1.7
+
 ## 3.1.6
 
 ### Patch Changes
