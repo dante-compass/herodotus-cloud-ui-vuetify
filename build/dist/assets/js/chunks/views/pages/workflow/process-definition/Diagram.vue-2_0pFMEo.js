@@ -1,0 +1,1 @@
+import{r as e}from"../../../../rolldown-runtime-C0FnF6B9.js";import{b as t,k as n,mt as r}from"../../../../../venders/vender-@vue-runtime-core-BARV17tT.js";var i=n({name:`OAuth2Application`,__name:`Diagram`,setup(e){return(e,n)=>(r(),t(`div`,null,`Application`))}}),a=e({default:()=>o}),o=i;export{a as t};

@@ -15,23 +15,22 @@
 </template>
 
 <script setup lang="ts">
-import { HLabel } from "../HLabel";
-import { HIconButton } from "../HButton";
-import { computed } from "vue";
+import { HLabel } from '../HLabel';
+import { computed } from 'vue';
 
-defineOptions({ name: "HLabelItem", components: { HLabel, HIconButton } });
+defineOptions({ name: 'HLabelItem', components: { HLabel } });
 
 interface Props {
   label: string;
   required?: boolean;
-  justify?: "start" | "center" | "end" | null;
-  align?: "start" | "center" | "end" | null;
+  justify?: 'start' | 'center' | 'end' | null;
+  align?: 'start' | 'center' | 'end' | null;
   right?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  justify: "center",
-  align: "center",
+  justify: 'center',
+  align: 'center',
   required: false,
   right: false,
 });

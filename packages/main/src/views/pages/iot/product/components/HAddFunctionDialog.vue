@@ -6,8 +6,9 @@
       v-model="entity.dimension"
       dictionary="Dimension"
       default-value="properties"
+      :disabled="!isCreate"
     ></h-dictionary-toggle>
-    <component :is="currentPanel" v-model="entity" ref="identifier"></component>
+    <component :is="currentPanel" v-model="entity" :status="status" ref="identifier"></component>
     <h-label text="描述："></h-label>
     <v-textarea
       v-model="entity.description"
@@ -20,21 +21,21 @@
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity } from "@herodotus/api";
+import type { TslStatus, TslFunctionEntity } from '@herodotus/api';
 
-import { toUpper } from "lodash-es";
-import { toast } from "@herodotus/core";
+import { toUpper } from 'lodash-es';
+import { toast } from '@herodotus/core';
 
-import { useTslValidation } from "../composables/hooks";
-import { API } from "@/configurations";
-import { HDictionaryToggle } from "@/components/library/HDictionary";
+import { useTslValidation, useTslStatus, useTslEntity } from '../../composables/hooks';
+import { API } from '@/configurations';
+import { HDictionaryToggle } from '@/components/library/HDictionary';
 
-import HPropertiesPanel from "./functions/HPropertiesPanel.vue";
-import HEventsPanel from "./functions/HEventsPanel.vue";
-import HServicesPanel from "./functions/HServicesPanel.vue";
+import HPropertiesPanel from './functions/HPropertiesPanel.vue';
+import HEventsPanel from './functions/HEventsPanel.vue';
+import HServicesPanel from './functions/HServicesPanel.vue';
 
 defineOptions({
-  name: "HAddFunctionDialog",
+  name: 'HAddFunctionDialog',
   components: {
     HDictionaryToggle,
     EVENTS_PANEL: HEventsPanel,
@@ -46,30 +47,55 @@ defineOptions({
 interface Props {
   productKey: string;
   productId: string;
+  status?: TslStatus;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  status: 'create',
+});
 
 const model = defineModel<boolean>({
   default: false,
   required: true,
 });
 
-const entity = defineModel<TslFunctionEntity>("entity", {
-  default: () => ({ dimension: "properties" }) as TslFunctionEntity,
+const entity = defineModel<TslFunctionEntity>('entity', {
+  default: () => ({}) as TslFunctionEntity,
   required: true,
 });
 
-const emit = defineEmits(["success"]);
+const emit = defineEmits(['success']);
 const { identifier, getValidator } = useTslValidation();
+const { isCreate } = useTslStatus(() => props.status);
+const { createEmptyNormalArgument } = useTslEntity();
 
 const currentPanel = computed(() => {
   if (entity.value.dimension) {
-    return toUpper(entity.value.dimension) + "_PANEL";
+    return toUpper(entity.value.dimension) + '_PANEL';
   } else {
-    return "PROPERTIES_PANEL";
+    return 'PROPERTIES_PANEL';
   }
 });
+
+watch(
+  () => entity.value.dimension,
+  (newValue) => {
+    if (isCreate.value) {
+      switch (newValue) {
+        case 'events':
+          entity.value.arguments.eventOutputData = [];
+          break;
+        case 'services':
+          entity.value.arguments.serviceInputData = [];
+          entity.value.arguments.serviceOutputData = [];
+          break;
+        default:
+          entity.value.arguments.property = createEmptyNormalArgument();
+          break;
+      }
+    }
+  },
+);
 
 const onSave = () => {
   const valid = getValidator();
@@ -80,8 +106,8 @@ const onSave = () => {
         .saveOrUpdate(entity.value)
         .then((result) => {
           model.value = false;
-          emit("success");
-          toast.success("添加成功！");
+          emit('success');
+          toast.success('添加成功！');
         })
         .catch((error) => {
           model.value = false;

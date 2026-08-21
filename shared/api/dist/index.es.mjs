@@ -651,6 +651,18 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getIot() + "/iot/tsl/function";
 	}
+	getSetAddress() {
+		return this.getBaseAddress() + "/set";
+	}
+	getInvokeAddress() {
+		return this.getBaseAddress() + "/invoke";
+	}
+	set(e) {
+		return this.getConfig().getHttp().put(this.getSetAddress(), e);
+	}
+	invoke(e) {
+		return this.getConfig().getHttp().put(this.getInvokeAddress(), e);
+	}
 }, H = class t extends e {
 	static instance;
 	constructor(e) {

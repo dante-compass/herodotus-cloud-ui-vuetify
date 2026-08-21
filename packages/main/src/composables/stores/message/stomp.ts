@@ -1,13 +1,14 @@
-import type { DialogueDetailEntity } from '@herodotus/api';
-import type { WebSocketOperations } from '../../declarations';
+import type { DialogueDetailEntity } from "@herodotus/api";
+import type { WebSocketOperations } from "../../declarations";
 
-import { Client } from '@stomp/stompjs';
-import { isEmpty } from 'lodash-es';
+import { Client } from "@stomp/stompjs";
+import { isEmpty } from "lodash-es";
 
-import { VARIABLES, API } from '@/configurations';
-import { useAuthenticationStore } from '@herodotus/framework';
+import { VARIABLES, API } from "@/configurations";
+import { toast } from "@herodotus/core";
+import { useAuthenticationStore } from "@herodotus/framework";
 
-export const useStompWebSocketStore = defineStore('StompWebSocket', {
+export const useStompWebSocketStore = defineStore("StompWebSocket", {
   state: () => ({
     client: {} as Client,
     operation: {} as WebSocketOperations,
@@ -28,7 +29,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
 
     getWebSocketAddress(): string {
       const store = useAuthenticationStore();
-      return `ws://${location.host}/socket` + API.core.getConfig().getMsg(false) + '/stomp/ws?openid=' + store.userId;
+      return `ws://${location.host}/socket` + API.core.getConfig().getMsg(false) + "/stomp/ws?openid=" + store.userId;
       // return `ws://${location.host}/socket` + API.getConfig().getMsg(false) + '/stomp/ws';
     },
 
@@ -58,8 +59,8 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
           // Bad login/passcode typically will cause an error
           // Complaint brokers will set `message` header with a brief message. Body may contain details.
           // Compliant brokers will terminate the connection after any error
-          console.log('Broker reported error: ', frame.headers);
-          console.log('Additional details: ', frame.body);
+          console.log("Broker reported error: ", frame.headers);
+          console.log("Additional details: ", frame.body);
         },
 
         onWebSocketError: () => {
@@ -69,30 +70,34 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
         },
 
         webSocketFactory: () => {
-          return new WebSocket(this.getWebSocketAddress(), [store.token, 'v10.stomp']);
+          return new WebSocket(this.getWebSocketAddress(), [store.token, "v10.stomp"]);
         },
       });
     },
 
     subscribe(): void {
       this.client.onConnect = (frame) => {
-        console.log('WebSocket connected: ' + frame.headers['message']);
-        this.client.subscribe('/broadcast/notice', (res) => {
+        console.log("WebSocket connected: " + frame.headers["message"]);
+        this.client.subscribe("/broadcast/notice", (res) => {
           console.log(res);
           // toast.info(res.body);
           this.pullNotifications();
         });
 
-        this.client.subscribe('/broadcast/online', (res) => {
+        this.client.subscribe("/broadcast/online", (res) => {
           // toast.info(res.body);
           const count = res.body as unknown as number;
           this.syncOnlineUserCount(count);
         });
 
-        this.client.subscribe('/user/personal/message', (res) => {
-          // console.log(res);
-          // toast.info(res.body);
+        this.client.subscribe("/user/personal/message", (res) => {
+          console.log(res);
+          toast.info(res.body);
           this.pullNotifications();
+        });
+
+        this.client.subscribe("/user/personal/notify", (res) => {
+          toast.info(res.body);
         });
 
         this.pullStat();
@@ -102,7 +107,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
 
     sendNotice(content: string): void {
       this.client.publish({
-        destination: '/app/public/notice',
+        destination: "/app/public/notice",
         body: content,
         headers: this.getAuthorizationHeader(),
       });
@@ -110,7 +115,7 @@ export const useStompWebSocketStore = defineStore('StompWebSocket', {
 
     sendToUser(detail: DialogueDetailEntity) {
       this.client.publish({
-        destination: '/app/private/message',
+        destination: "/app/private/message",
         body: JSON.stringify(detail),
         headers: this.getAuthorizationHeader(),
       });

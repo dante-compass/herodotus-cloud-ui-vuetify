@@ -5,11 +5,11 @@ import type {
   SysEmployeeAllocatable,
   AllocatableRemove,
   AllocatableDeploy,
-} from '@/declarations';
-import type { AxiosHttpResult, Conditions, Pageable, Page } from '@herodotus/core';
+} from "@/declarations";
+import type { AxiosHttpResult, Conditions, Pageable, Page } from "@herodotus/core";
 
-import { HttpConfig, AbstractService } from '@herodotus/core';
-import { ContentTypeEnum } from '@/enums';
+import { HttpConfig, AbstractService } from "@herodotus/core";
+import { ContentTypeEnum } from "@/enums";
 
 class SysOrganizationService extends AbstractService<SysOrganizationEntity> {
   private static instance: SysOrganizationService;
@@ -26,7 +26,7 @@ class SysOrganizationService extends AbstractService<SysOrganizationEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/hr/organization';
+    return this.getConfig().getUpms() + "/hr/organization";
   }
 }
 
@@ -45,7 +45,7 @@ class SysDepartmentService extends AbstractService<SysDepartmentEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/hr/department';
+    return this.getConfig().getUpms() + "/hr/department";
   }
 }
 
@@ -64,18 +64,18 @@ class SysEmployeeService extends AbstractService<SysEmployeeEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/hr/employee';
+    return this.getConfig().getUpms() + "/hr/employee";
   }
 
-  public getAssignedAddress(): string {
-    return this.getBaseAddress() + '/assigned';
+  private getAssignedAddress(): string {
+    return this.getBaseAddress() + "/assigned";
   }
 
-  public getAllocatableAddress(): string {
-    return this.getBaseAddress() + '/allocatable';
+  private getAllocatableAddress(): string {
+    return this.getBaseAddress() + "/allocatable";
   }
 
-  public getEmployeeNamePath(employeeName: string): string {
+  private getEmployeeNamePath(employeeName: string): string {
     return this.getParamPath(this.getBaseAddress(), employeeName);
   }
 
@@ -124,7 +124,7 @@ class SysEmployeeAllocatableService extends AbstractService<SysEmployeeAllocatab
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/';
+    return this.getConfig().getUpms() + "/";
   }
 }
 

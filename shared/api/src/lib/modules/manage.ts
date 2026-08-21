@@ -1,14 +1,14 @@
-import type { AxiosHttpResult, AxiosProgressEvent } from '@herodotus/core';
+import type { AxiosHttpResult, AxiosProgressEvent } from "@herodotus/core";
 import type {
   MgtCertificateDownloadRequest,
   MgtCertificateRequest,
   MgtCertificateResponse,
   MgtCertificateFileResponse,
   MgtCertificateFileRequest,
-} from '@/declarations';
+} from "@/declarations";
 
-import { HttpConfig, AbstractService } from '@herodotus/core';
-import { ContentTypeEnum } from '@/enums';
+import { HttpConfig, AbstractService } from "@herodotus/core";
+import { ContentTypeEnum } from "@/enums";
 
 class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCertificateResponse> {
   private static instance: MgtCertificateService;
@@ -25,15 +25,15 @@ class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCe
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getManage() + '/manage/certificate';
+    return this.getConfig().getManage() + "/manage/certificate";
   }
 
-  public getAliasAddress(): string {
-    return this.getBaseAddress() + '/alias';
+  private getAliasAddress(): string {
+    return this.getBaseAddress() + "/alias";
   }
 
-  public getCategoryAddress(): string {
-    return this.getBaseAddress() + '/category';
+  private getCategoryAddress(): string {
+    return this.getBaseAddress() + "/category";
   }
 
   public findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateResponse>> {
@@ -64,11 +64,11 @@ class MgtCertificateFileService extends AbstractService<MgtCertificateFileReques
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getManage() + '/manage/certificate-file';
+    return this.getConfig().getManage() + "/manage/certificate-file";
   }
 
   private getDownloadAddress(): string {
-    return this.getBaseAddress() + '/download';
+    return this.getBaseAddress() + "/download";
   }
 
   public download(
@@ -81,7 +81,7 @@ class MgtCertificateFileService extends AbstractService<MgtCertificateFileReques
         .post<
           Blob,
           any
-        >(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: 'blob', onDownloadProgress: onProgress });
+        >(this.getDownloadAddress(), request, { contentType: ContentTypeEnum.JSON }, { responseType: "blob", onDownloadProgress: onProgress });
     } else {
       return this.getConfig().getHttp().post<Blob, any>(this.getDownloadAddress(), request);
     }

@@ -28,6 +28,13 @@ export interface DeviceEntity extends AbstractSysEntity {
     clientId: string;
     product: ProductEntity;
     activated: boolean;
+    connectionId: string;
+    online: boolean;
+    ipAddress: string;
+    connectedAt: Date;
+    disconnectedAt: Date;
+    shadowId: string;
+    shadowVersion: string;
     redirectUris: string;
 }
 export interface ProductCategoryConditions extends Conditions {

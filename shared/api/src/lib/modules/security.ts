@@ -8,11 +8,11 @@ import type {
   SysDictionaryEntity,
   SysTenantDataSourceEntity,
   AccessSourceEntity,
-} from '@/declarations';
-import type { AxiosHttpResult, Elements } from '@herodotus/core';
+} from "@/declarations";
+import type { AxiosHttpResult, Elements } from "@herodotus/core";
 
-import { ContentTypeEnum } from '@/enums';
-import { HttpConfig, AbstractService } from '@herodotus/core';
+import { ContentTypeEnum } from "@/enums";
+import { HttpConfig, AbstractService } from "@herodotus/core";
 
 class SysPermissionService extends AbstractService<SysPermissionEntity> {
   private static instance: SysPermissionService;
@@ -29,7 +29,7 @@ class SysPermissionService extends AbstractService<SysPermissionEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/security/permission';
+    return this.getConfig().getUpms() + "/security/permission";
   }
 }
 
@@ -48,10 +48,10 @@ class SysRoleService extends AbstractService<SysRoleEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/security/role';
+    return this.getConfig().getUpms() + "/security/role";
   }
 
-  public getRoleCodePath(roleCode: string): string {
+  private getRoleCodePath(roleCode: string): string {
     return this.getParamPath(this.getBaseAddress(), roleCode);
   }
 
@@ -75,18 +75,18 @@ class SysUserService extends AbstractService<SysUserEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/security/user';
+    return this.getConfig().getUpms() + "/security/user";
   }
 
-  public getUsernameAddress(): string {
-    return this.getBaseAddress() + '/sign-in';
+  private getUsernameAddress(): string {
+    return this.getBaseAddress() + "/sign-in";
   }
 
-  public getChangePasswordAddress(): string {
-    return this.getBaseAddress() + '/change-password';
+  private getChangePasswordAddress(): string {
+    return this.getBaseAddress() + "/change-password";
   }
 
-  public getUsernamePath(username: string): string {
+  private getUsernamePath(username: string): string {
     return this.getParamPath(this.getUsernameAddress(), username);
   }
 
@@ -120,7 +120,7 @@ class SysAttributeService extends AbstractService<SysAttributeEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/security/attribute';
+    return this.getConfig().getUpms() + "/security/attribute";
   }
 }
 
@@ -139,7 +139,7 @@ class SysDefaultRoleService extends AbstractService<SysDefaultRoleEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/security/default-role';
+    return this.getConfig().getUpms() + "/security/default-role";
   }
 }
 
@@ -158,11 +158,11 @@ class SysElementService extends AbstractService<SysElementEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/security/element';
+    return this.getConfig().getUpms() + "/security/element";
   }
 
-  public getResourcesAddress(): string {
-    return this.getBaseAddress() + '/resources';
+  private getResourcesAddress(): string {
+    return this.getBaseAddress() + "/resources";
   }
 
   public fetchById(id: string): Promise<AxiosHttpResult<SysElementEntity>> {
@@ -188,10 +188,10 @@ class SysTenantDataSourceService extends AbstractService<SysTenantDataSourceEnti
     return this.instance;
   }
   public getBaseAddress(): string {
-    return this.getConfig().getUaa() + '/security/tenant/datasource';
+    return this.getConfig().getUaa() + "/security/tenant/datasource";
   }
 
-  public getTenantIdPath(tenantId: string): string {
+  private getTenantIdPath(tenantId: string): string {
     return this.getParamPath(this.getBaseAddress(), tenantId);
   }
 
@@ -214,14 +214,14 @@ class SysDictionaryService extends AbstractService<SysDictionaryEntity> {
     return this.instance;
   }
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/security/dictionary';
+    return this.getConfig().getUpms() + "/security/dictionary";
   }
 
-  public getItemsAddress(): string {
-    return this.getBaseAddress() + '/items';
+  private getItemsAddress(): string {
+    return this.getBaseAddress() + "/items";
   }
 
-  public getCategoryPath(category: string): string {
+  private getCategoryPath(category: string): string {
     return this.getParamPath(this.getItemsAddress(), category);
   }
 
@@ -251,7 +251,7 @@ class SocialBindingService extends AbstractService<AccessSourceEntity> {
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUpms() + '/security/social/binding';
+    return this.getConfig().getUpms() + "/security/social/binding";
   }
 }
 

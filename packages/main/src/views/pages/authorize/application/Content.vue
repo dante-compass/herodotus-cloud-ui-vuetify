@@ -76,7 +76,7 @@
             <v-select
               v-if="isShowAuthenticationSigningAlgorithm"
               v-model="editedItem.authenticationSigningAlgorithm"
-              :options="authenticationSigningAlgorithmItem"
+              :items="authenticationSigningAlgorithmItem"
               label="令牌端点认证签名算法"
             ></v-select>
             <h-divider label="令牌设置"></h-divider>
@@ -147,14 +147,14 @@
 </template>
 
 <script setup lang="ts">
-import type { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2ScopeConditions } from "@herodotus/api";
-import type { VDataTableHeaders } from "@/composables/declarations";
+import type { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2ScopeConditions } from '@herodotus/api';
+import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { includes } from "lodash-es";
-import { useDictionary, useTableItem, useTable } from "@/composables/hooks";
-import { API, PAGE_NAME } from "@/configurations";
+import { includes } from 'lodash-es';
+import { useDictionary, useTableItem, useTable } from '@/composables/hooks';
+import { API, PAGE_NAME } from '@/configurations';
 
-import { HDictionaryToggle, HDictionarySelect } from "@/components/library/HDictionary";
+import { HDictionaryToggle, HDictionarySelect } from '@/components/library/HDictionary';
 
 defineOptions({ name: PAGE_NAME.OAUTH2_APPLICATION_CONTENT, components: { HDictionaryToggle, HDictionarySelect } });
 
@@ -168,21 +168,21 @@ const { tableRows, loading, pageNumber, pageSize, totalItems, findItems } = useT
 >(API.core.oauth2Scope(), PAGE_NAME.OAUTH2_SCOPE, true);
 
 const headers = ref([
-  { key: "scopeCode", align: "center", title: "范围代码" },
-  { key: "scopeName", align: "center", title: "范围名称" },
-  { key: "description", align: "center", title: "说明" },
+  { key: 'scopeCode', align: 'center', title: '范围代码' },
+  { key: 'scopeName', align: 'center', title: '范围名称' },
+  { key: 'description', align: 'center', title: '说明' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const { options } = useDictionary("AllJwsAlgorithm");
+const { options } = useDictionary('AllJwsAlgorithm');
 
 const applicationForm = ref();
 
 const includePrivateKeyJwt = () => {
-  return includes(editedItem.value.clientAuthenticationMethods, "private_key_jwt");
+  return includes(editedItem.value.clientAuthenticationMethods, 'private_key_jwt');
 };
 
 const includeClientSecretJwt = () => {
-  return includes(editedItem.value.clientAuthenticationMethods, "client_secret_jwt");
+  return includes(editedItem.value.clientAuthenticationMethods, 'client_secret_jwt');
 };
 
 const onlyHasPrivateKeyJwt = () => {

@@ -1,9 +1,9 @@
 <template>
   <v-form ref="identifier">
-    <h-argument-panel v-model="argument"></h-argument-panel>
+    <h-argument-panel v-model="argument" :status="status"></h-argument-panel>
     <h-label text="读写类型:" required></h-label>
     <h-dictionary-option
-      v-model="entity.accessMode"
+      v-model="model.accessMode"
       dictionary="AccessMode"
       default-value="rw"
       inline
@@ -13,51 +13,84 @@
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity, Specification, Specs } from '@herodotus/api';
+import type { TslStatus, TslFunctionEntity, TslArgumentEntity, Specification, Specs } from '@herodotus/api';
 
-import { isEmpty } from 'lodash-es';
-import { useTslValidation } from '../../composables/hooks';
+import { useTslValidation, useTslEntity } from '../../../composables/hooks';
 
 import { HDictionaryOption } from '@/components/library/HDictionary';
 import { HArgumentPanel } from '../arguments';
+import { isEmpty } from 'lodash-es';
 
-defineOptions({ name: 'HPropertiesPanel' });
+defineOptions({ name: 'HPropertiesPanel', components: { HArgumentPanel } });
 
-const entity = defineModel<TslFunctionEntity>({
-  default: () => ({}) as TslFunctionEntity,
+interface Props {
+  status?: TslStatus;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  status: 'create',
+});
+
+const model = defineModel<TslFunctionEntity>({
+  default: () =>
+    ({
+      identifier: '',
+      name: '',
+      dimension: 'properties',
+      required: false,
+      arguments: { property: {} as TslArgumentEntity },
+    }) as TslFunctionEntity,
+  required: true,
 });
 
 const { identifier, validate } = useTslValidation();
-const argument = ref({
-  identifier: '',
-  name: '',
-  dataType: { type: 'int', specs: {} },
-}) as Ref<Specification<Specs>>;
+const { hasProperty, getPropertyArgumentSpecs, createEmptyNormalSpecification } = useTslEntity();
+
+const argument = ref(createEmptyNormalSpecification()) as Ref<Specification<Specs>>;
+
+// Watch 控制标识，防止 model 和 argument 循环调用
+const isUpdating = shallowRef(false);
+
+watch(
+  model,
+  (newValue) => {
+    if (isUpdating.value) return;
+
+    if (hasProperty(newValue)) {
+      isUpdating.value = true;
+      const specs = getPropertyArgumentSpecs(newValue);
+
+      if (specs) {
+        argument.value = specs;
+      }
+
+      isUpdating.value = false;
+    }
+  },
+  { immediate: true, deep: true },
+);
 
 watch(
   argument,
   (newValue) => {
-    entity.value.type = newValue.dataType.type;
-    entity.value.specs = newValue;
-    if (newValue.identifier !== entity.value.identifier) {
-      entity.value.identifier = newValue.identifier;
-    }
+    if (!isEmpty(newValue)) {
+      if (isUpdating.value) return;
 
-    if (newValue.name !== entity.value.name) {
-      entity.value.name = newValue.name;
+      if (newValue.identifier && newValue.name) {
+        isUpdating.value = true;
+        model.value.identifier = newValue.identifier;
+        model.value.name = newValue.name;
+
+        model.value.arguments.property.identifier = newValue.identifier;
+        model.value.arguments.property.name = newValue.name;
+        model.value.arguments.property.specs = newValue;
+        model.value.arguments.property.type = newValue.dataType.type;
+        isUpdating.value = false;
+      }
     }
   },
-  {
-    immediate: true,
-    deep: true,
-  },
+  { immediate: true, deep: true },
 );
-
-onMounted(() => {
-  if (!isEmpty(entity) && !isEmpty(entity.value.specs)) {
-    argument.value = entity.value.specs;
-  }
-});
 
 defineExpose({
   validate,

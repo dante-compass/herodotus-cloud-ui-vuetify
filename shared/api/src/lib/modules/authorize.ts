@@ -49,11 +49,11 @@ class OAuth2ScopeService extends AbstractService<OAuth2ScopeEntity> {
     return this.getConfig().getUaa() + "/authorize/scope";
   }
 
-  public getAssignedAddress(): string {
+  private getAssignedAddress(): string {
     return this.getBaseAddress() + "/assigned";
   }
 
-  public getScopeCodePath(scopeCode: string): string {
+  private getScopeCodePath(scopeCode: string): string {
     return this.getParamPath(this.getBaseAddress(), scopeCode);
   }
 

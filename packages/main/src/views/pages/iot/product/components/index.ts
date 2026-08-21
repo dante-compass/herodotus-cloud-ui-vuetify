@@ -1,4 +1,4 @@
 import HFunctionTable from "./HFunctionTable.vue";
-import HInformationTab from "./HInformationTab.vue";
+import HProductInformationTab from "./HProductInformationTab.vue";
 
-export { HFunctionTable, HInformationTab };
+export { HFunctionTable, HProductInformationTab };

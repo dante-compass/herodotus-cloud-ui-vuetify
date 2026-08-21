@@ -17,9 +17,9 @@ declare class SysEmployeeService extends AbstractService<SysEmployeeEntity> {
     private constructor();
     static getInstance(config: HttpConfig): SysEmployeeService;
     getBaseAddress(): string;
-    getAssignedAddress(): string;
-    getAllocatableAddress(): string;
-    getEmployeeNamePath(employeeName: string): string;
+    private getAssignedAddress;
+    private getAllocatableAddress;
+    private getEmployeeNamePath;
     fetchByEmployeeName(employeeName: string): Promise<AxiosHttpResult<SysEmployeeEntity>>;
     fetchAssignedByPage(params: Pageable, others?: Conditions): Promise<AxiosHttpResult<Page<SysEmployeeEntity>>>;
     deleteAllocatable(data: AllocatableRemove): Promise<AxiosHttpResult<string>>;

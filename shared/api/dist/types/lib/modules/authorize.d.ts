@@ -11,8 +11,8 @@ declare class OAuth2ScopeService extends AbstractService<OAuth2ScopeEntity> {
     private constructor();
     static getInstance(config: HttpConfig): OAuth2ScopeService;
     getBaseAddress(): string;
-    getAssignedAddress(): string;
-    getScopeCodePath(scopeCode: string): string;
+    private getAssignedAddress;
+    private getScopeCodePath;
     fetchByScopeCode(scopeCode: string): Promise<AxiosHttpResult<OAuth2ScopeEntity>>;
     assigned(data: OAuth2ScopeAssignedBody): Promise<AxiosHttpResult<OAuth2ScopeEntity>>;
 }

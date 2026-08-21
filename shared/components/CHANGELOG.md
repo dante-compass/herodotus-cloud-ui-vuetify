@@ -1,5 +1,37 @@
 # @herodotus/components
 
+## 3.1.7
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@3.1.7
+
+## 3.1.6
+
+### Patch Changes
+
+- 升级依赖包，重新编译库。
+- Updated dependencies
+  - @herodotus/core@3.1.6
+
+## 3.1.5
+
+### Patch Changes
+
+- 物模型管理完成
+- Updated dependencies
+  - @herodotus/core@3.1.5
+
+## 3.1.4
+
+### Patch Changes
+
+- 物模型编辑完成
+- Updated dependencies
+  - @herodotus/core@3.1.4
+
 ## 3.1.3
 
 ### Patch Changes

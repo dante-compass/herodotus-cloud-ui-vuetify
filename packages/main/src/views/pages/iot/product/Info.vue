@@ -34,7 +34,7 @@
             <h-label-item label="设备数量：" justify="start">
               {{ editedItem.quantity ? editedItem.quantity : 0 }}
               <template #append>
-                <v-btn variant="plain" text="查看详情"></v-btn>
+                <h-icon-button icon="mdi-feature-search" tooltip="查看详情" variant="text"></h-icon-button>
               </template>
             </h-label-item>
           </v-col>
@@ -49,20 +49,20 @@
           <v-tab text="产品信息" value="details"></v-tab>
           <v-tab text="物模型" value="tsl"></v-tab>
         </v-tabs>
-      </v-card-item>
 
-      <v-tabs-window v-model="tab">
-        <v-tabs-window-item value="details">
-          <h-information-tab v-model="editedItem"></h-information-tab>
-        </v-tabs-window-item>
-        <v-tabs-window-item value="tsl">
-          <h-function-table
-            v-if="isShowTable"
-            :product-id="editedItem.id"
-            :product-key="editedItem.productKey"
-          ></h-function-table>
-        </v-tabs-window-item>
-      </v-tabs-window>
+        <v-tabs-window v-model="tab">
+          <v-tabs-window-item value="details">
+            <h-product-information-tab v-model="editedItem"></h-product-information-tab>
+          </v-tabs-window-item>
+          <v-tabs-window-item value="tsl">
+            <h-function-table
+              v-if="isShowTable"
+              :product-id="editedItem.id"
+              :product-key="editedItem.productKey"
+            ></h-function-table>
+          </v-tabs-window-item>
+        </v-tabs-window>
+      </v-card-item>
     </v-card>
   </h-information-form-layout>
 </template>
@@ -74,11 +74,9 @@ import { API, PAGE_NAME } from '@/configurations';
 import { useTableItem } from '@/composables/hooks';
 
 import { useClipboard } from '@vueuse/core';
-import { HFunctionTable, HInformationTab } from './components';
+import { HFunctionTable, HProductInformationTab } from './components';
 
-defineOptions({ name: PAGE_NAME.IOT_PRODUCT_INFO, components: { HFunctionTable, HInformationTab } });
-
-const tab = shallowRef('details');
+defineOptions({ name: PAGE_NAME.IOT_PRODUCT_INFO, components: { HFunctionTable, HProductInformationTab } });
 
 const { copy, copied, isSupported } = useClipboard({ legacy: true });
 const { editedItem, overlay, title, onReturn } = useTableItem<ProductEntity>(
@@ -86,16 +84,15 @@ const { editedItem, overlay, title, onReturn } = useTableItem<ProductEntity>(
   PAGE_NAME.IOT_PRODUCT_INFO,
 );
 
+const tab = shallowRef('details');
 const visible = shallowRef(false);
 const isShowTable = shallowRef(false);
 
 onMounted(() => {
-  console.log('-----ddd----', editedItem.value.id);
-  console.log('-----ddd----', editedItem.value.productKey);
   if (editedItem.value.id && editedItem.value.productKey) {
     isShowTable.value = true;
   } else {
-    false;
+    isShowTable.value = false;
   }
 });
 </script>

@@ -20,6 +20,17 @@
           :tooltip="settings.densitySwitch('宽松', '紧凑')"
           @click="settings.display.table.dense = !settings.display.table.dense"
         ></h-action-button>
+        <v-menu transition="slide-x-transition">
+          <template v-slot:activator="{ props }">
+            <v-icon-btn icon="mdi-view-grid-outline" variant="text" size="small" v-bind="props"></v-icon-btn>
+          </template>
+          <v-list v-model:selected="selectedGridlines" density="compact">
+            <v-list-item title="显示水平边框" value="horizontal" prepend-icon="mdi-reorder-horizontal"></v-list-item>
+            <v-list-item title="显示垂直边框" value="vertical" prepend-icon="mdi-reorder-vertical"></v-list-item>
+            <v-list-item title="显示所有边框" value="all" prepend-icon="mdi-grid"></v-list-item>
+            <v-list-item title="不显示边框" :value="false" prepend-icon="mdi-grid-off"></v-list-item>
+          </v-list>
+        </v-menu>
         <h-action-button
           :icon="isFullscreen ? 'mdi-arrow-collapse-all' : 'mdi-arrow-expand-all'"
           :tooltip="isFullscreen ? '退出全屏' : '全屏显示'"
@@ -34,6 +45,7 @@
           v-model:page="pageNumber"
           :items-length="totalItems"
           :density="settings.density"
+          :gridlines="gridlines"
           show-select
           striped="even"
           hover
@@ -91,6 +103,8 @@ import { VDataTableServer } from 'vuetify/components';
 import { useSettingsStore, LibraryEnum } from '@herodotus/framework';
 import { UseFullscreen } from '@vueuse/components';
 
+import { first } from 'lodash-es';
+
 import { useDictionary } from '@/composables/hooks';
 import HColumnReserved from './HColumnReserved.vue';
 import HColumnStatus from './HColumnStatus.vue';
@@ -103,6 +117,8 @@ defineOptions({
 interface Props {
   flat?: boolean;
 }
+
+type Gridline = boolean | 'horizontal' | 'vertical' | 'all';
 
 withDefaults(defineProps<Props>(), {
   flat: false,
@@ -117,4 +133,15 @@ const settings = useSettingsStore();
 const { options } = useDictionary('DataItemStatus');
 
 const panel = shallowRef('search');
+const gridlines = shallowRef<Gridline>('horizontal');
+const selectedGridlines = ref<Array<Gridline>>(['horizontal']);
+
+watch(selectedGridlines, (newValue) => {
+  const value = first(newValue);
+  if (value) {
+    gridlines.value = value;
+  } else {
+    gridlines.value = 'horizontal';
+  }
+});
 </script>

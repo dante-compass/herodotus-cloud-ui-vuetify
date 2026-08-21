@@ -1,68 +1,76 @@
 <template>
-  <v-card>
-    <v-card-text>
-      <h-data-table
-        v-model:page-size="pageSize"
-        v-model:page-number="pageNumber"
-        v-model:total-pages="totalPages"
-        v-model:total-items="totalItems"
-        :headers="headers"
-        :items="tableRows"
-        :item-value="rowKey"
-        :loading="loading"
-        select-strategy="single"
-        disable-sort
-        @update:options="findItems"
-      >
-        <template #control>
-          <v-btn prepend-icon="mdi-plus" text="新建功能" @click="openDialogForCreate"></v-btn>
-        </template>
+  <div>
+    <h-data-table
+      v-model:page-size="pageSize"
+      v-model:page-number="pageNumber"
+      v-model:total-pages="totalPages"
+      v-model:total-items="totalItems"
+      :headers="headers"
+      :items="tableRows"
+      :item-value="rowKey"
+      :loading="loading"
+      select-strategy="single"
+      disable-sort
+      @update:options="fetchItems"
+    >
+      <template #control>
+        <v-btn prepend-icon="mdi-plus" text="新建功能" @click="openDialogForCreate"></v-btn>
+      </template>
 
-        <template #item.dimension="{ value }">
-          <v-chip v-if="value" density="compact" rounded="lg" :color="getDimensionColor(value)" label>
-            {{ getDictionaryItemDisplay('Dimension', value) }}
-          </v-chip>
-        </template>
+      <template #item.dimension="{ value }">
+        <v-chip v-if="value" density="compact" rounded="lg" :color="getDimensionColor(value)" label>
+          {{ getDictionaryItemDisplay('Dimension', value) }}
+        </v-chip>
+      </template>
 
-        <template #item.type="{ value }">
-          <v-chip v-if="value" density="compact" rounded="lg" color="purple" label>
-            {{ getDictionaryItemDisplay('ArgumentType', value) }}
-          </v-chip>
-        </template>
+      <template #item.type="{ item }">
+        <v-chip v-if="getPropertyType(item)" density="compact" rounded="lg" color="purple" label>
+          {{ getPropertyType(item) }}
+        </v-chip>
+      </template>
 
-        <template #item.specs="{ value }">
-          <div v-if="isBoolSpec(value)">
-            布尔值：
-            <h-spec-chip :spec="value"></h-spec-chip>
-          </div>
-          <div v-else-if="isEnumSpec(value)">
-            枚举值：
-            <h-spec-chip :spec="value"></h-spec-chip>
-          </div>
-          <div v-else>{{ displayDataType(value) }}</div>
-        </template>
+      <template #item.specs="{ item }">
+        <div v-if="isBoolSpec(item)">
+          布尔值：
+          <h-spec-chip :spec="getItemsSpecs(item)"></h-spec-chip>
+        </div>
+        <div v-else-if="isEnumSpec(item)">
+          枚举值：
+          <h-spec-chip :spec="getItemsSpecs(item)"></h-spec-chip>
+        </div>
+        <div v-else>{{ displayDataType(item) }}</div>
+      </template>
 
-        <template #item.actions="{ item }">
-          <h-action-edit-button @click="openDialogForEdit(item)"></h-action-edit-button>
-          <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
-        </template>
-      </h-data-table>
-    </v-card-text>
-  </v-card>
+      <template #item.actions="{ item }">
+        <h-action-edit-button @click="openDialogForEdit(item)"></h-action-edit-button>
+        <h-action-delete-button v-if="!item.reserved" @click="deleteItemById(item[rowKey])"></h-action-delete-button>
+      </template>
+    </h-data-table>
+  </div>
   <h-add-function-dialog
     v-model="openDialog"
     v-model:entity="entity"
     :product-id="productId"
     :product-key="productKey"
+    :status="status"
+    @success="fetchItems"
   ></h-add-function-dialog>
 </template>
 
 <script setup lang="ts">
-import type { TslFunctionEntity, TslFunctionConditions, TslFunctionProps, Specification, Specs } from '@herodotus/api';
+import type {
+  TslFunctionEntity,
+  TslFunctionProps,
+  Specification,
+  BoolSpecs,
+  EnumSpecs,
+  TslStatus,
+} from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { useTable, useDictionary } from '@/composables/hooks';
-import { API, PAGE_NAME } from '@/configurations';
+import { useDictionary } from '@/composables/hooks';
+import { useTslEntity, useTslFunctionTable } from '../../composables/hooks';
+import { PAGE_NAME } from '@/configurations';
 
 import HAddFunctionDialog from './HAddFunctionDialog.vue';
 import HSpecChip from './HSpecChip.vue';
@@ -76,6 +84,20 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const {
+  loading,
+  pageNumber,
+  pageSize,
+  tableRows,
+  totalPages,
+  totalItems,
+  deleteItemById,
+  findFunctionsByPage,
+  getPropertyType,
+} = useTslFunctionTable();
+const { getDictionaryItemDisplay } = useDictionary('Dimension', 'ArgumentType', 'CallType', 'EventType');
+const { getPropertyArgumentSpecs, createEmptyFunction } = useTslEntity();
+
 const headers = ref([
   { key: 'dimension', align: 'center', title: '功能类型' },
   { key: 'name', align: 'center', title: '功能名称' },
@@ -87,65 +109,79 @@ const headers = ref([
 
 const rowKey: TslFunctionProps = 'id';
 
-const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, deleteItemById, findItems } = useTable<
-  TslFunctionConditions,
-  TslFunctionEntity
->(API.core.iotTslFunction(), PAGE_NAME.IOT_TSL_FUNCTION);
-
-const { getDictionaryItemDisplay } = useDictionary('Dimension', 'ArgumentType', 'CallType', 'EventType');
-
 const openDialog = shallowRef(false);
 const entity = ref({}) as Ref<TslFunctionEntity>;
+const status = shallowRef('create') as Ref<TslStatus>;
 
-const isBoolSpec = (specs: Specification<Specs>) => {
-  return specs.dataType.type === 'bool';
+const isBoolSpec = (item: TslFunctionEntity) => {
+  const specs = getPropertyArgumentSpecs(item);
+  return specs && specs.dataType.type === 'bool';
 };
 
-const isEnumSpec = (specs: Specification<Specs>) => {
-  return specs.dataType.type === 'enum';
+const isEnumSpec = (item: TslFunctionEntity) => {
+  const specs = getPropertyArgumentSpecs(item);
+  return specs && specs.dataType.type === 'enum';
 };
 
-const displayDataType = (specs: Specification<Specs>) => {
-  switch (specs.dataType.type) {
-    case 'int':
-    case 'float':
-    case 'double':
-      if (specs.dataType.specs.min && specs.dataType.specs.max) {
-        return '取值范围：' + specs.dataType.specs.min + '~' + specs.dataType.specs.max;
-      } else {
-        return '取值范围：- ';
+const displayDataType = (item: TslFunctionEntity) => {
+  if (item.dimension === 'properties') {
+    const specs = getPropertyArgumentSpecs(item);
+    if (specs) {
+      switch (specs.dataType.type) {
+        case 'int':
+        case 'float':
+        case 'double':
+          if (specs.dataType.specs.min && specs.dataType.specs.max) {
+            return '取值范围：' + specs.dataType.specs.min + '~' + specs.dataType.specs.max;
+          } else {
+            return '取值范围：- ';
+          }
+        case 'text':
+          return '数据长度：' + specs.dataType.specs.length;
+        default:
+          return '-';
       }
-    case 'text':
-      return '数据长度：' + specs.dataType.specs.length;
-    default:
-      return '-';
+    }
+  } else {
+    return '';
   }
 };
 
+const getItemsSpecs = (item: TslFunctionEntity) => {
+  return getPropertyArgumentSpecs(item) as Specification<BoolSpecs> | Specification<EnumSpecs>;
+};
+
 const getDimensionColor = (dimension: string) => {
-  console.log(dimension);
   switch (dimension) {
     case 'services':
       return 'green';
     case 'events':
       return 'yellow';
-
     default:
       return 'blue';
   }
 };
 
 const openDialogForCreate = () => {
-  entity.value = {
-    dimension: 'properties',
-    productId: props.productId,
-    productKey: props.productKey,
-  } as TslFunctionEntity;
+  entity.value = createEmptyFunction(props.productId, props.productKey);
   openDialog.value = true;
+  status.value = 'create';
 };
 
 const openDialogForEdit = (item: TslFunctionEntity) => {
   entity.value = item;
   openDialog.value = true;
+  status.value = 'edit';
+};
+
+watch(
+  () => props.productId,
+  (newValue) => {
+    findFunctionsByPage(newValue);
+  },
+);
+
+const fetchItems = () => {
+  findFunctionsByPage(props.productId);
 };
 </script>

@@ -1,4 +1,5 @@
-import { Conditions, AbstractEntity, AbstractAuditEntity } from '@herodotus/core';
+import { Entity, Conditions, AbstractEntity, AbstractAuditEntity, Dto } from '@herodotus/core';
+export type TslDataType = "int" | "float" | "double" | "enum" | "bool" | "text" | "date" | "struct" | "array";
 export interface Characteristic {
     identifier: string;
     name: string;
@@ -14,69 +15,75 @@ type NumberSpecs = {
     step: string;
 };
 export type IntegerSpecs = {
-    type: 'int';
+    type: "int";
     specs: NumberSpecs;
 };
 export type FloatSpecs = {
-    type: 'float';
+    type: "float";
     specs: NumberSpecs;
 };
 export type DoubleSpecs = {
-    type: 'double';
+    type: "double";
     specs: NumberSpecs;
 };
 export type TextSpecs = {
-    type: 'text';
+    type: "text";
     specs: {
         length: string;
     };
 };
 export type DateSpecs = {
-    type: 'date';
+    type: "date";
     specs: {};
 };
 export type BoolSpecs = {
-    type: 'bool';
+    type: "bool";
     specs: {
-        '0': string;
-        '1': string;
+        "0": string;
+        "1": string;
     };
 };
 export type EnumSpecs = {
-    type: 'enum';
+    type: "enum";
     specs: Record<string, string>;
 };
 export type StructSpecs = {
-    type: 'struct';
+    type: "struct";
     specs: Array<Specification<Specs>>;
 };
 export type Specs = IntegerSpecs | FloatSpecs | DoubleSpecs | TextSpecs | DateSpecs | BoolSpecs | EnumSpecs | StructSpecs;
+export type TslStatus = "create" | "edit" | "view";
+export type Dimension = "properties" | "events" | "services";
 export interface TslUnitEntity extends AbstractEntity {
     id: string;
     name: string;
     symbol: string;
 }
-interface AbstractTslArgument extends AbstractAuditEntity, Characteristic {
-    type: string;
+interface AbstractTslEntity extends AbstractAuditEntity, Characteristic {
+}
+export interface TslArgumentEntity extends AbstractTslEntity {
+    id: string;
+    type: TslDataType;
     specs: Specification<Specs>;
 }
-export interface TslArgumentEntity extends AbstractTslArgument {
-    id: string;
-    output: boolean;
+export interface TslFunctionArgumentEntity extends Entity {
+    property: TslArgumentEntity;
+    eventOutputData: TslArgumentEntity[];
+    serviceOutputData: TslArgumentEntity[];
+    serviceInputData: TslArgumentEntity[];
 }
-export interface TslFunctionEntity extends AbstractTslArgument {
+export interface TslFunctionEntity extends AbstractTslEntity {
     id: string;
     productId: string;
     productKey: string;
-    dimension: string;
+    dimension: Dimension;
     accessMode: string;
     eventType: string;
     callType: string;
     required: boolean;
-    correlationId: string;
     method: string;
     description: string;
-    arguments: Array<TslArgumentEntity>;
+    arguments: TslFunctionArgumentEntity;
 }
 export interface TslUnitConditions extends Conditions {
 }
@@ -84,8 +91,17 @@ export interface TslArgumentConditions extends Conditions {
 }
 export interface TslFunctionConditions extends Conditions {
     productId: string;
+    dimension: string;
 }
 export type TslUnitProps = keyof TslUnitEntity;
 export type TslArgumentProps = keyof TslArgumentEntity;
 export type TslFunctionProps = keyof TslFunctionEntity;
+export interface TslSetPropertyRequest extends Dto {
+    productKey: string;
+    deviceName: string;
+    params: Record<string, any>;
+}
+export interface TslInvokeServiceRequest extends TslSetPropertyRequest {
+    identifier: string;
+}
 export {};
