@@ -335,7 +335,7 @@ var Ne = "\nattribute vec2 uv;\nattribute vec2 position;\n\nvarying vec2 vUv;\n\
 		}, p = () => {
 			u = [.5, .5];
 		}, m = (e) => {
-			if (!(!o || !r || !s)) {
+			if (o && r && s) {
 				if (t.enableMouseInteraction) {
 					let e = .05;
 					l[0] += e * (u[0] - l[0]), l[1] += e * (u[1] - l[1]), o.uniforms.uMouse.value[0] = l[0], o.uniforms.uMouse.value[1] = l[1];
