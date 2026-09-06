@@ -58,8 +58,8 @@
               label="OIDC Logout 回调地址(可多个逗号分隔)"
               placeholder="请输入OIDC Logout 回调地址"
             ></v-text-field>
-            <h-divider label="客户端设置"></h-divider>
 
+            <h-divider label="客户端设置"></h-divider>
             <v-switch v-model="editedItem.requireProofKey" label="是否需要 Proof Key" hide-details></v-switch>
             <v-switch v-model="editedItem.requireAuthorizationConsent" label="是否需要认证确认" hide-details></v-switch>
             <v-text-field
@@ -67,6 +67,11 @@
               label="客户端密钥集URL"
               placeholder="请输入客户端密钥集URL"
               class="mt-2"
+            ></v-text-field>
+            <v-text-field
+              v-model="editedItem.resourceIds"
+              label="Resource Indicator 资源指示器 (可多个逗号分隔)"
+              placeholder="请输入Resource Indicator 资源指示器"
             ></v-text-field>
             <h-date-time
               v-model="editedItem.clientSecretExpiresAt"

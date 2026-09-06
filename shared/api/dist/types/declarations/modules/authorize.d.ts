@@ -13,6 +13,7 @@ export interface BaseRegisteredClientEntity extends AbstractSysEntity {
     jwkSetUrl: string;
     authenticationSigningAlgorithm: string;
     x509CertificateSubjectDN: string;
+    resourceIds: string;
     authorizationCodeTimeToLive: string;
     deviceCodeTimeToLive: string;
     accessTokenTimeToLive: string;
