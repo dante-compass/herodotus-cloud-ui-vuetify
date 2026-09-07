@@ -82,6 +82,8 @@
               v-if="isShowAuthenticationSigningAlgorithm"
               v-model="editedItem.authenticationSigningAlgorithm"
               :items="authenticationSigningAlgorithmItem"
+              item-value="value"
+              item-title="label"
               label="令牌端点认证签名算法"
             ></v-select>
             <h-divider label="令牌设置"></h-divider>

@@ -636,8 +636,8 @@ packages:
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
-  '@iconify/utils@3.1.5':
-    resolution: {integrity: sha512-nT+AWyh5caHY6xa0PdLXpUooIz6l7qsT+adqsCTYBfbdn5Q18VrWs2fvuTa7KEoJnPBfEPqWkmAIht0EHtCi2A==}
+  '@iconify/utils@3.1.6':
+    resolution: {integrity: sha512-9n9RQsMcfgXa8aXrHIMGAFwlm+YpY/HxRqBgCQzeMMimdOBA7hvfqDdWE/Zg5sr5SinaY78zYTPkSfG7Sy+moA==}
 
   '@inquirer/external-editor@1.0.3':
     resolution: {integrity: sha512-RWbSrDiYmO4LbejWY7ttpxczuwQyZLBUyygsA9Nsv95hpzUWwnNTVQmAq3xuh7vNwCp07UTmE5i11XAEExx4RA==}
@@ -2145,8 +2145,8 @@ packages:
     peerDependencies:
       eslint: '>=9.38.0'
 
-  eslint-plugin-vue@10.10.0:
-    resolution: {integrity: sha512-dL9x9rBHqqNcByWiLOHK6L0SB97V82/NC0cZRn9cXPjM7pCuWlpQQP9bFH4vjBv80ej1ZpzAkuD8zWH1o9bZbA==}
+  eslint-plugin-vue@10.11.0:
+    resolution: {integrity: sha512-fGt38SsaPCZ2FmA3bX/3vOW2qdsPNx0/9x+7Aab6NMX++PhynMtK4LWC4vzXgfQBCqpUAler18H38GA+NBAd0Q==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       '@stylistic/eslint-plugin': ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
@@ -4629,7 +4629,7 @@ snapshots:
 
   '@iconify/types@2.0.0': {}
 
-  '@iconify/utils@3.1.5':
+  '@iconify/utils@3.1.6':
     dependencies:
       '@antfu/install-pkg': 2.0.1
       '@iconify/types': 2.0.0
@@ -6004,7 +6004,7 @@ snapshots:
       eslint-plugin-pnpm: 1.9.1(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))
       eslint-plugin-regexp: 3.3.0(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))
       eslint-plugin-unicorn: 65.0.1(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))
-      eslint-plugin-vue: 10.10.0(@stylistic/eslint-plugin@5.10.0(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1)))(@typescript-eslint/parser@8.69.0(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(vue-eslint-parser@10.4.1(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1))
+      eslint-plugin-vue: 10.11.0(@stylistic/eslint-plugin@5.10.0(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1)))(@typescript-eslint/parser@8.69.0(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(vue-eslint-parser@10.4.1(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1))
       eslint-typegen: 2.3.1(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))
       exsolve: 1.1.1
       globals: 17.12.0
@@ -6109,7 +6109,7 @@ snapshots:
       semver: 7.8.5
       strip-indent: 4.1.1
 
-  eslint-plugin-vue@10.10.0(@stylistic/eslint-plugin@5.10.0(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1)))(@typescript-eslint/parser@8.69.0(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(vue-eslint-parser@10.4.1(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)):
+  eslint-plugin-vue@10.11.0(@stylistic/eslint-plugin@5.10.0(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1)))(@typescript-eslint/parser@8.69.0(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(vue-eslint-parser@10.4.1(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)):
     dependencies:
       '@eslint-community/eslint-utils': 4.10.1(eslint@10.10.0(jiti@2.6.1)(supports-color@8.1.1))
       eslint: 10.10.0(jiti@2.6.1)(supports-color@8.1.1)
@@ -7819,7 +7819,7 @@ snapshots:
   unplugin-icons@23.0.1(@vue/compiler-sfc@3.5.42):
     dependencies:
       '@antfu/install-pkg': 1.1.0
-      '@iconify/utils': 3.1.5
+      '@iconify/utils': 3.1.6
       local-pkg: 1.2.1
       obug: 2.1.4
       unplugin: 2.3.11

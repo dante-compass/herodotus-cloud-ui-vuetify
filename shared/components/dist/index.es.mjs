@@ -628,6 +628,18 @@ var Ve = /* @__PURE__ */ l({
 	}
 }), Ue = [
 	{
+		title: "年",
+		value: "years"
+	},
+	{
+		title: "月",
+		value: "months"
+	},
+	{
+		title: "周",
+		value: "weeks"
+	},
+	{
 		title: "天",
 		value: "days"
 	},
