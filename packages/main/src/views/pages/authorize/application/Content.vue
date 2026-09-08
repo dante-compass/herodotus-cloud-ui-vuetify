@@ -26,8 +26,8 @@
               placeholder="请输入应用主页"
             ></v-text-field>
             <h-dictionary-select
-              v-model="editedItem.applicationType"
-              dictionary="ApplicationType"
+              v-model="editedItem.clientType"
+              dictionary="ClientType"
               label="应用类型"
             ></h-dictionary-select>
             <h-dictionary-select

@@ -32,7 +32,7 @@ export interface OAuth2ApplicationEntity extends BaseRegisteredClientEntity {
   abbreviation: string;
   logo: string;
   homepage: string;
-  applicationType: string;
+  clientType: string;
 }
 
 export interface OAuth2PermissionEntity extends AbstractSysEntity {

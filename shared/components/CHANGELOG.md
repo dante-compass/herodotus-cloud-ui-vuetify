@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 3.1.8
+
+### Patch Changes
+
+- [重构] OAuth2Application 原 ApplicationType 字段修改为 ClientType，以规避与 MCP OAuth2 协议中 application_type 产生冲突
+- Updated dependencies
+  - @herodotus/core@3.1.8
+
 ## 3.1.7
 
 ### Patch Changes
