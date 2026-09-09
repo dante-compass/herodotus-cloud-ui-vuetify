@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.9
+
+### Patch Changes
+
+- Node 版本升级至 24.21.0
+
 ## 3.1.8
 
 ### Patch Changes

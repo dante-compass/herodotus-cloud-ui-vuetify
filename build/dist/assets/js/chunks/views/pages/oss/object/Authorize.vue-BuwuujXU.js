@@ -1,0 +1,1 @@
+import{r as e}from"../../../../rolldown-runtime-C0FnF6B9.js";import{b as t,k as n,mt as r}from"../../../../../venders/vender-@vue-runtime-core-B4BMKH5v.js";import{at as i}from"../../../../App.vue-awBYWFwJ.js";var a=n({name:i.OSS_OBJECT_AUTHORIZE,__name:`Authorize`,setup(e){return(e,n)=>(r(),t(`div`,null,`ApplicationAuthorize`))}}),o=e({default:()=>s}),s=a;export{o as t};

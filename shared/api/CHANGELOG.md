@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 3.1.9
+
+### Patch Changes
+
+- Node 版本升级至 24.21.0
+- Updated dependencies
+  - @herodotus/core@3.1.9
+
 ## 3.1.8
 
 ### Patch Changes
