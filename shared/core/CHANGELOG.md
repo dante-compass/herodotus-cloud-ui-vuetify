@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.10
+
+### Patch Changes
+
+- 升级依赖包，重新编译库
+
 ## 3.1.9
 
 ### Patch Changes

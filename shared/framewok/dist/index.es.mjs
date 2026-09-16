@@ -1143,14 +1143,14 @@ function we(e, t, n) {
 	Œ: "Oe"
 }).join("")}`;
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.2.0_typescript@6._72b57381f96c7c19db92015ac7fcf716/node_modules/vuetify/lib/util/getCurrentInstance.js
+//#region ../../node_modules/.pnpm/vuetify@4.2.1_typescript@6._8f21774bb8c34f4154fdd968c76ef6c9/node_modules/vuetify/lib/util/getCurrentInstance.js
 function Te(e, t) {
 	let n = p();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.2.0_typescript@6._72b57381f96c7c19db92015ac7fcf716/node_modules/vuetify/lib/composables/theme.js
+//#region ../../node_modules/.pnpm/vuetify@4.2.1_typescript@6._8f21774bb8c34f4154fdd968c76ef6c9/node_modules/vuetify/lib/composables/theme.js
 var Ee = Symbol.for("vuetify:theme");
 function De() {
 	Te("useTheme");
