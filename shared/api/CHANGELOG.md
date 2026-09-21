@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 3.1.12
+
+### Patch Changes
+
+- 升级 Github Action 版本
+- Updated dependencies
+  - @herodotus/core@3.1.12
+
 ## 3.1.11
 
 ### Patch Changes

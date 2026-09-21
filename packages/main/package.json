@@ -23,8 +23,8 @@
     "@mdi/font": "7.4.47",
     "@rsocket/composite-metadata": "1.0.0-alpha.3",
     "@stomp/stompjs": "^7.3.0",
-    "@vueuse/components": "^14.4.0",
-    "@vueuse/core": "^14.4.0",
+    "@vueuse/components": "^15.0.0",
+    "@vueuse/core": "^15.0.0",
     "animate.css": "^4.1.1",
     "crypto-js": "^4.2.0",
     "echarts": "^6.1.0",
@@ -32,8 +32,8 @@
     "nprogress": "^0.2.0",
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",
-    "vue": "^3.5.42",
-    "vue-i18n": "^11.4.10",
+    "vue": "^3.5.43",
+    "vue-i18n": "^11.4.12",
     "vue-json-pretty": "^2.6.0",
     "xlsx": "^0.18.5"
   },
@@ -41,6 +41,6 @@
     "@mdi/js": "^7.4.47",
     "@types/crypto-js": "^4.2.2",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^26.6.0"
+    "@types/node": "^26.6.2"
   }
 }

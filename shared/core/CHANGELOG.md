@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.12
+
+### Patch Changes
+
+- 升级 Github Action 版本
+
 ## 3.1.11
 
 ### Patch Changes
