@@ -60,7 +60,7 @@
     "eslint-config-vuetify": "4.7.2",
     "husky": "^9.1.7",
     "npm-run-all2": "^9.0.3",
-    "oxfmt": "^0.68.0",
+    "oxfmt": "^0.69.0",
     "sass-embedded": "^1.104.1",
     "typescript": "^6.0.3",
     "unplugin-auto-import": "^21.1.0",
