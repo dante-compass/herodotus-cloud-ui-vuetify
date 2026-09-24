@@ -104,6 +104,12 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getUaa() + "/authorize/indicator";
 	}
+	getIndicatorValuePath(e) {
+		return this.getParamPath(this.getBaseAddress(), e);
+	}
+	fetchByIndicatorValue(e) {
+		return this.getConfig().getHttp().get(this.getIndicatorValuePath(e));
+	}
 }, m = class t extends e {
 	static instance;
 	constructor(e) {
@@ -114,6 +120,12 @@ var i = /* @__PURE__ */ function(e) {
 	}
 	getBaseAddress() {
 		return this.getConfig().getUaa() + "/authorize/prm";
+	}
+	getMetadataCodePath(e) {
+		return this.getParamPath(this.getBaseAddress(), e);
+	}
+	fetchByMetadataCode(e) {
+		return this.getConfig().getHttp().get(this.getMetadataCodePath(e));
 	}
 }, h = class t extends e {
 	static instance;

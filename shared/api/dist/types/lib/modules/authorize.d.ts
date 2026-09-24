@@ -51,11 +51,15 @@ declare class OAuth2ResourceIndicatorService extends AbstractService<OAuth2Resou
     private constructor();
     static getInstance(config: HttpConfig): OAuth2ResourceIndicatorService;
     getBaseAddress(): string;
+    private getIndicatorValuePath;
+    fetchByIndicatorValue(indicatorValue: string): Promise<AxiosHttpResult<OAuth2ResourceIndicatorEntity>>;
 }
 declare class OAuth2ProtectedResourceMetadataService extends AbstractService<OAuth2ProtectedResourceMetadataEntity> {
     private static instance;
     private constructor();
     static getInstance(config: HttpConfig): OAuth2ProtectedResourceMetadataService;
     getBaseAddress(): string;
+    private getMetadataCodePath;
+    fetchByMetadataCode(metadataCode: string): Promise<AxiosHttpResult<OAuth2ProtectedResourceMetadataEntity>>;
 }
 export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2CredentialRecordService, OAuth2PersistentTokenService, OAuth2ResourceIndicatorService, OAuth2ProtectedResourceMetadataService, };

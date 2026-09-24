@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 3.1.14
+
+### Patch Changes
+
+- [新增] 新增 OAuth2 资源标识和 OAuth2 保护资源元数据管理功能菜单及数据初始化脚本
+- Updated dependencies
+  - @herodotus/core@3.1.14
+
 ## 3.1.13
 
 ### Patch Changes

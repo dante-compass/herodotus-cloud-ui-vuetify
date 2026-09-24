@@ -178,6 +178,16 @@ class OAuth2ResourceIndicatorService extends AbstractService<OAuth2ResourceIndic
   public getBaseAddress(): string {
     return this.getConfig().getUaa() + "/authorize/indicator";
   }
+
+  private getIndicatorValuePath(indicatorValue: string): string {
+    return this.getParamPath(this.getBaseAddress(), indicatorValue);
+  }
+
+  public fetchByIndicatorValue(indicatorValue: string): Promise<AxiosHttpResult<OAuth2ResourceIndicatorEntity>> {
+    return this.getConfig()
+      .getHttp()
+      .get<OAuth2ResourceIndicatorEntity, string>(this.getIndicatorValuePath(indicatorValue));
+  }
 }
 
 class OAuth2ProtectedResourceMetadataService extends AbstractService<OAuth2ProtectedResourceMetadataEntity> {
@@ -196,6 +206,16 @@ class OAuth2ProtectedResourceMetadataService extends AbstractService<OAuth2Prote
 
   public getBaseAddress(): string {
     return this.getConfig().getUaa() + "/authorize/prm";
+  }
+
+  private getMetadataCodePath(metadataCode: string): string {
+    return this.getParamPath(this.getBaseAddress(), metadataCode);
+  }
+
+  public fetchByMetadataCode(metadataCode: string): Promise<AxiosHttpResult<OAuth2ProtectedResourceMetadataEntity>> {
+    return this.getConfig()
+      .getHttp()
+      .get<OAuth2ProtectedResourceMetadataEntity, string>(this.getMetadataCodePath(metadataCode));
   }
 }
 

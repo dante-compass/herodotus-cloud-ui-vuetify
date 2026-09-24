@@ -36,6 +36,7 @@ export default function useTableItem<I extends Domain, O extends Domain = I>(
 
   const assign = (data: any) => {
     overlay.value = true;
+    console.log("-----data-----", data);
     service
       .assign(data)
       .then((response) => {
