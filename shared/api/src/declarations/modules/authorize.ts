@@ -104,6 +104,19 @@ export interface OAuth2PersistentTokenEntity extends Entity {
   lastUsed: Date;
 }
 
+export interface OAuth2ResourceIndicatorEntity extends AbstractSysEntity {
+  indicatorId: string;
+  indicatorValue: string;
+  indicatorName: string;
+}
+
+export interface OAuth2ProtectedResourceMetadataEntity extends AbstractSysEntity {
+  metadataId: string;
+  metadataCode: string;
+  metadataName: string;
+  indicator: OAuth2ResourceIndicatorEntity;
+}
+
 export interface OAuth2ApplicationConditions extends Conditions {}
 export interface OAuth2PermissionCondition extends Conditions {}
 export interface OAuth2ScopeConditions extends Conditions {}
@@ -121,6 +134,8 @@ export interface OAuth2InterfaceAuditConditions extends OAuth2UserLoggingConditi
   url: string;
 }
 export interface OAuth2PersistentTokenConditions extends Conditions {}
+export interface OAuth2ResourceIndicatorConditions extends Conditions {}
+export interface OAuth2ProtectedResourceMetadataConditions extends Conditions {}
 
 export type OAuth2ApplicationProps = keyof OAuth2ApplicationEntity;
 export type OAuth2PermissionProps = keyof OAuth2PermissionEntity;
@@ -130,6 +145,8 @@ export type OAuth2CredentialRecordProps = keyof OAuth2CredentialRecordEntity;
 export type OAuth2UserLoggingProps = keyof OAuth2UserLoggingEntity;
 export type OAuth2InterfaceAuditProps = keyof OAuth2InterfaceAuditEntity;
 export type OAuth2PersistentTokenProps = keyof OAuth2PersistentTokenEntity;
+export type OAuth2ResourceIndicatorProps = keyof OAuth2ResourceIndicatorEntity;
+export type OAuth2ProtectedResourceMetadataProps = keyof OAuth2ProtectedResourceMetadataEntity;
 
 export interface OAuth2PermissionBody extends Conditions {
   permissionId: string;

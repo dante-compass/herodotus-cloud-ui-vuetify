@@ -2,7 +2,7 @@ import { Fragment as e, computed as t, createBlock as n, createCommentVNode as r
 import { Color as D, Mesh as ee, Program as te, Renderer as ne, Texture as re, Triangle as ie } from "ogl";
 import { tsParticles as ae } from "@tsparticles/engine";
 import { loadTrianglesPreset as oe } from "@tsparticles/preset-triangles";
-import { VAutocomplete as O, VBtn as se, VCard as ce, VCardActions as le, VCardText as ue, VCol as k, VContainer as de, VDatePicker as fe, VDialog as pe, VDivider as me, VExpandXTransition as he, VIcon as A, VIconBtn as ge, VLabel as _e, VListItem as ve, VMenu as j, VMessages as ye, VNumberInput as be, VProgressLinear as xe, VRow as M, VSelect as Se, VSnackbar as Ce, VTextField as N, VTimePicker as we, VTooltip as P, VTreeview as Te } from "vuetify/components";
+import { VAutocomplete as O, VBtn as se, VCard as ce, VCardActions as le, VCardText as ue, VCol as k, VContainer as A, VDatePicker as de, VDialog as fe, VDivider as pe, VExpandXTransition as me, VIcon as j, VIconBtn as he, VLabel as ge, VListItem as _e, VMenu as M, VMessages as ve, VNumberInput as ye, VProgressLinear as be, VRow as xe, VSelect as Se, VSnackbar as Ce, VTextField as N, VTimePicker as we, VTooltip as P, VTreeview as Te } from "vuetify/components";
 import { useDate as Ee } from "vuetify";
 import { moment as F } from "@herodotus/core";
 import { debounce as De, find as Oe, isArray as ke, isEmpty as I, kebabCase as Ae } from "lodash-es";
@@ -456,7 +456,7 @@ var V = /* @__PURE__ */ l({
 	name: "HIconButton",
 	components: {
 		VTooltip: P,
-		VIconBtn: ge
+		VIconBtn: he
 	},
 	__name: "HIconButton",
 	props: {
@@ -470,10 +470,10 @@ var V = /* @__PURE__ */ l({
 			interactive: "",
 			location: e.location
 		}, {
-			activator: E(({ props: n }) => [c(S(ge), d({ color: e.color }, d(n, t.$attrs)), null, 16, ["color"])]),
+			activator: E(({ props: n }) => [c(S(he), d({ color: e.color }, d(n, t.$attrs)), null, 16, ["color"])]),
 			default: E(() => [a("span", null, x(e.tooltip), 1)]),
 			_: 1
-		}, 8, ["location"])) : (_(), n(S(ge), p(d({ key: 1 }, t.$attrs)), null, 16));
+		}, 8, ["location"])) : (_(), n(S(he), p(d({ key: 1 }, t.$attrs)), null, 16));
 	}
 });
 //#endregion
@@ -486,10 +486,10 @@ V.install = (e) => {
 var Ve = /* @__PURE__ */ l({
 	name: "HDatePicker",
 	components: {
-		VMenu: j,
+		VMenu: M,
 		VTooltip: P,
-		VIcon: A,
-		VDatePicker: fe
+		VIcon: j,
+		VDatePicker: de
 	},
 	__name: "HDatePicker",
 	props: {
@@ -504,16 +504,16 @@ var Ve = /* @__PURE__ */ l({
 				e ? r.value = F(e).format("YYYY-MM-DD") : r.value = e;
 			}
 		});
-		return (e, t) => (_(), n(S(j), d({
+		return (e, t) => (_(), n(S(M), d({
 			"close-on-content-click": !1,
 			activator: "parent"
 		}, e.$attrs), {
 			activator: E(({ props: e }) => [c(S(P), { location: "bottom" }, {
-				activator: E(({ props: t }) => [c(S(A), d({ icon: "mdi-calendar" }, d(e, t)), null, 16)]),
+				activator: E(({ props: t }) => [c(S(j), d({ icon: "mdi-calendar" }, d(e, t)), null, 16)]),
 				default: E(() => [t[1] ||= a("span", null, "点击设置日期", -1)]),
 				_: 2
 			}, 1024)]),
-			default: E(() => [c(S(fe), {
+			default: E(() => [c(S(de), {
 				modelValue: o.value,
 				"onUpdate:modelValue": t[0] ||= (e) => o.value = e,
 				"show-week": "",
@@ -553,9 +553,9 @@ var Ve = /* @__PURE__ */ l({
 }), He = /* @__PURE__ */ l({
 	name: "HTimePicker",
 	components: {
-		VMenu: j,
+		VMenu: M,
 		VTooltip: P,
-		VIcon: A,
+		VIcon: j,
 		VTimePicker: we
 	},
 	__name: "HTimePicker",
@@ -566,13 +566,13 @@ var Ve = /* @__PURE__ */ l({
 	emits: ["update:modelValue"],
 	setup(e) {
 		let t = C(e, "modelValue");
-		return (e, r) => (_(), n(S(j), d({
+		return (e, r) => (_(), n(S(M), d({
 			"close-on-content-click": !1,
 			activator: "parent",
 			"min-width": "0"
 		}, e.$attrs), {
 			activator: E(({ props: e }) => [c(S(P), { location: "bottom" }, {
-				activator: E(({ props: t }) => [c(S(A), d({ icon: "mdi-clock-time-four-outline" }, d(e, t)), null, 16)]),
+				activator: E(({ props: t }) => [c(S(j), d({ icon: "mdi-clock-time-four-outline" }, d(e, t)), null, 16)]),
 				default: E(() => [r[1] ||= a("span", null, "点击设置日期", -1)]),
 				_: 2
 			}, 1024)]),
@@ -628,18 +628,6 @@ var Ve = /* @__PURE__ */ l({
 	}
 }), Ue = [
 	{
-		title: "年",
-		value: "years"
-	},
-	{
-		title: "月",
-		value: "months"
-	},
-	{
-		title: "周",
-		value: "weeks"
-	},
-	{
 		title: "天",
 		value: "days"
 	},
@@ -658,10 +646,10 @@ var Ve = /* @__PURE__ */ l({
 ], W = /* @__PURE__ */ l({
 	name: "HDuration",
 	components: {
-		VContainer: de,
-		VRow: M,
+		VContainer: A,
+		VRow: xe,
 		VCol: k,
-		VNumberInput: be,
+		VNumberInput: ye,
 		VSelect: Se
 	},
 	__name: "HDuration",
@@ -673,7 +661,7 @@ var Ve = /* @__PURE__ */ l({
 	setup(e) {
 		let t = C(e, "modelValue"), r = b(0), i = b(), a = b(Ue), o = (e) => {
 			if (e) {
-				let t = F.duration(e, "second");
+				let t = F.duration(e, "seconds");
 				if (t) {
 					let e = t._data;
 					for (let t in e) {
@@ -684,17 +672,8 @@ var Ve = /* @__PURE__ */ l({
 			}
 		}, s = (e, n) => {
 			if (e && n) {
-				if ([
-					"weeks",
-					"months",
-					"years"
-				].includes(n)) {
-					let r = n, i = F.duration(e, r).asDays(), a = F.duration(i, "days").toISOString();
-					t.value = a;
-				} else {
-					let r = n, i = F.duration(e, r).toISOString();
-					t.value = i;
-				}
+				let r = n, i = F.duration(e, r).toISOString();
+				t.value = i;
 			}
 		};
 		return T(() => t.value, (e) => {
@@ -703,10 +682,10 @@ var Ve = /* @__PURE__ */ l({
 			e && s(r.value, e);
 		}), T(r, (e) => {
 			e && s(e, i.value);
-		}), (e, t) => (_(), n(S(de), { class: "pa-0" }, {
-			default: E(() => [c(S(M), null, {
+		}), (e, t) => (_(), n(S(A), { class: "pa-0" }, {
+			default: E(() => [c(S(xe), null, {
 				default: E(() => [c(S(k), null, {
-					default: E(() => [c(S(be), {
+					default: E(() => [c(S(ye), {
 						modelValue: r.value,
 						"onUpdate:modelValue": t[0] ||= (e) => r.value = e,
 						label: "数值",
@@ -771,7 +750,7 @@ H.install = (e) => {
 var K = /* @__PURE__ */ l({
 	name: "HDialog",
 	components: {
-		VDialog: pe,
+		VDialog: fe,
 		HIconButton: V
 	},
 	__name: "HDialog",
@@ -811,7 +790,7 @@ var K = /* @__PURE__ */ l({
 		}, u = () => {
 			i("confirm");
 		};
-		return (t, i) => (_(), n(S(pe), {
+		return (t, i) => (_(), n(S(fe), {
 			modelValue: a.value,
 			"onUpdate:modelValue": i[0] ||= (e) => a.value = e,
 			"max-width": e.maxWidth,
@@ -822,13 +801,13 @@ var K = /* @__PURE__ */ l({
 				disabled: e.loading,
 				loading: e.loading
 			}, t.$attrs), o({
-				loader: E(({ isActive: e }) => [c(S(xe), {
+				loader: E(({ isActive: e }) => [c(S(be), {
 					active: e,
 					height: "4",
 					indeterminate: ""
 				}, null, 8, ["active"])]),
 				default: E(() => [
-					c(S(me)),
+					c(S(pe)),
 					c(S(ue), { class: "pb-2" }, {
 						default: E(() => [y(t.$slots, "default")]),
 						_: 3
@@ -870,11 +849,11 @@ K.install = (e) => {
 //#region src/HDivider/HDivider.vue?vue&type=script&setup=true&lang.ts
 var We = { class: "d-flex flex-column gr-4 py-4" }, q = /* @__PURE__ */ l({
 	name: "HDivider",
-	components: { VDivider: me },
+	components: { VDivider: pe },
 	__name: "HDivider",
 	props: { label: {} },
 	setup(t) {
-		return (n, r) => (_(), i("div", We, [c(S(me), d({ opacity: ".7" }, n.$attrs), {
+		return (n, r) => (_(), i("div", We, [c(S(pe), d({ opacity: ".7" }, n.$attrs), {
 			default: E(() => [t.label ? (_(), i(e, { key: 0 }, [s(x(t.label), 1)], 64)) : y(n.$slots, "default", {}, void 0, void 0, 1)]),
 			_: 3
 		}, 16)]));
@@ -891,10 +870,10 @@ var J = /* @__PURE__ */ l({
 	name: "HDownloadProgress",
 	components: {
 		VSnackbar: Ce,
-		VContainer: de,
-		VRow: M,
+		VContainer: A,
+		VRow: xe,
 		VCol: k,
-		VProgressLinear: xe
+		VProgressLinear: be
 	},
 	__name: "HDownloadProgress",
 	props: /*@__PURE__*/ u({ progress: {} }, {
@@ -914,8 +893,8 @@ var J = /* @__PURE__ */ l({
 			location: "center center",
 			color: "primary"
 		}, r.$attrs), {
-			default: E(() => [c(S(de), null, {
-				default: E(() => [c(S(M), {
+			default: E(() => [c(S(A), null, {
+				default: E(() => [c(S(xe), {
 					"align-content": "center",
 					justify: "center"
 				}, {
@@ -926,7 +905,7 @@ var J = /* @__PURE__ */ l({
 						default: E(() => [s("文件下载 " + x(`${e.progress}%`), 1)]),
 						_: 1
 					}), c(S(k), { cols: "6" }, {
-						default: E(() => [c(S(xe), {
+						default: E(() => [c(S(be), {
 							"model-value": e.progress,
 							"chunk-width": "4",
 							color: "purple",
@@ -959,11 +938,11 @@ var Ge = { class: "flex-1-1-0" }, Ke = { class: "d-flex" }, qe = {
 }, Y = /* @__PURE__ */ l({
 	name: "HLabel",
 	components: {
-		VIcon: A,
+		VIcon: j,
 		VBtn: se,
 		VTooltip: P,
-		VLabel: _e,
-		VMessages: ye
+		VLabel: ge,
+		VMessages: ve
 	},
 	__name: "HLabel",
 	props: {
@@ -982,12 +961,12 @@ var Ge = { class: "flex-1-1-0" }, Ke = { class: "d-flex" }, qe = {
 	setup(e) {
 		let o = e, s = t(() => !!o.message);
 		return (t, o) => (_(), i("div", { class: f(["d-flex w-100", { "mb-3": !e.hideDetails }]) }, [a("div", Ge, [a("div", Ke, [
-			e.required ? (_(), i("div", qe, [c(S(A), {
+			e.required ? (_(), i("div", qe, [c(S(j), {
 				size: "x-small",
 				icon: "mdi-star",
 				color: "red"
 			})])) : r("", !0),
-			c(S(_e), {
+			c(S(ge), {
 				text: e.text,
 				class: "font-weight-medium"
 			}, {
@@ -995,7 +974,7 @@ var Ge = { class: "flex-1-1-0" }, Ke = { class: "d-flex" }, qe = {
 				_: 3
 			}, 8, ["text"]),
 			e.tooltip ? (_(), i("div", Je, [c(S(P), { location: "bottom" }, {
-				activator: E(({ props: e }) => [c(S(A), d({
+				activator: E(({ props: e }) => [c(S(j), d({
 					size: "x-small",
 					icon: "mdi-progress-question",
 					color: "grey"
@@ -1003,7 +982,7 @@ var Ge = { class: "flex-1-1-0" }, Ke = { class: "d-flex" }, qe = {
 				default: E(() => [o[0] ||= a("span", null, "点击设置日期", -1)]),
 				_: 1
 			})])) : r("", !0)
-		]), s.value ? (_(), n(S(ye), {
+		]), s.value ? (_(), n(S(ve), {
 			key: 0,
 			messages: e.message,
 			active: s.value
@@ -1037,9 +1016,9 @@ var Ye = je("MdiIcon", {
 	name: "HMdiIconSelect",
 	components: {
 		VAutocomplete: O,
-		VExpandXTransition: he,
-		VListItem: ve,
-		VIcon: A
+		VExpandXTransition: me,
+		VListItem: _e,
+		VIcon: j
 	},
 	__name: "HMdiIconSelect",
 	props: {
@@ -1067,15 +1046,15 @@ var Ye = je("MdiIcon", {
 			clearable: "",
 			"single-line": ""
 		}, e.$attrs), {
-			"prepend-inner": E(() => [c(S(he), null, {
-				default: E(() => [t.value ? (_(), n(S(A), {
+			"prepend-inner": E(() => [c(S(me), null, {
+				default: E(() => [t.value ? (_(), n(S(j), {
 					key: 0,
 					icon: t.value,
 					start: ""
 				}, null, 8, ["icon"])) : r("", !0)]),
 				_: 1
 			})]),
-			item: E(({ props: e, internalItem: t }) => [c(S(ve), d(e, {
+			item: E(({ props: e, internalItem: t }) => [c(S(_e), d(e, {
 				"prepend-icon": t.value,
 				title: t.value
 			}), null, 16, ["prepend-icon", "title"])]),
@@ -1090,8 +1069,8 @@ var Ye = je("MdiIcon", {
 }), Z = /* @__PURE__ */ l({
 	name: "HTreeSelect",
 	components: {
-		VMenu: j,
-		VIcon: A,
+		VMenu: M,
+		VIcon: j,
 		VTreeview: Te,
 		VTextField: N
 	},
@@ -1143,14 +1122,14 @@ var Ye = je("MdiIcon", {
 			"onMousedown:control": f,
 			onAfterLeave: m
 		}, t.$attrs), {
-			"append-inner": E(() => [c(S(A), {
+			"append-inner": E(() => [c(S(j), {
 				icon: "mdi-menu-down",
 				onMousedown: p,
 				onClick: h,
 				class: "v-combobox__menu-icon",
 				tabindex: "-1"
 			})]),
-			default: E(() => [c(S(j), {
+			default: E(() => [c(S(M), {
 				modelValue: o.value,
 				"onUpdate:modelValue": r[2] ||= (e) => o.value = e,
 				activator: "parent",

@@ -6,6 +6,8 @@ import type {
   OAuth2UserLoggingEntity,
   OAuth2InterfaceAuditEntity,
   OAuth2PersistentTokenEntity,
+  OAuth2ResourceIndicatorEntity,
+  OAuth2ProtectedResourceMetadataEntity,
   OAuth2ScopeAssignedBody,
 } from "@/declarations";
 import type { AxiosHttpResult } from "@herodotus/core";
@@ -159,6 +161,44 @@ class OAuth2PersistentTokenService extends AbstractService<OAuth2PersistentToken
   }
 }
 
+class OAuth2ResourceIndicatorService extends AbstractService<OAuth2ResourceIndicatorEntity> {
+  private static instance: OAuth2ResourceIndicatorService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): OAuth2ResourceIndicatorService {
+    if (this.instance == null) {
+      this.instance = new OAuth2ResourceIndicatorService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getUaa() + "/authorize/indicator";
+  }
+}
+
+class OAuth2ProtectedResourceMetadataService extends AbstractService<OAuth2ProtectedResourceMetadataEntity> {
+  private static instance: OAuth2ProtectedResourceMetadataService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): OAuth2ProtectedResourceMetadataService {
+    if (this.instance == null) {
+      this.instance = new OAuth2ProtectedResourceMetadataService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getUaa() + "/authorize/prm";
+  }
+}
+
 export {
   OAuth2ApplicationService,
   OAuth2ScopeService,
@@ -167,4 +207,6 @@ export {
   OAuth2InterfaceAuditService,
   OAuth2CredentialRecordService,
   OAuth2PersistentTokenService,
+  OAuth2ResourceIndicatorService,
+  OAuth2ProtectedResourceMetadataService,
 };

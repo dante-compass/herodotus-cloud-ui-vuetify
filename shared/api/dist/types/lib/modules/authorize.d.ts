@@ -1,4 +1,4 @@
-import { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2AuthorizationEntity, OAuth2CredentialRecordEntity, OAuth2UserLoggingEntity, OAuth2InterfaceAuditEntity, OAuth2PersistentTokenEntity, OAuth2ScopeAssignedBody } from '../../declarations';
+import { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2AuthorizationEntity, OAuth2CredentialRecordEntity, OAuth2UserLoggingEntity, OAuth2InterfaceAuditEntity, OAuth2PersistentTokenEntity, OAuth2ResourceIndicatorEntity, OAuth2ProtectedResourceMetadataEntity, OAuth2ScopeAssignedBody } from '../../declarations';
 import { AxiosHttpResult, HttpConfig, AbstractService } from '@herodotus/core';
 declare class OAuth2ApplicationService extends AbstractService<OAuth2ApplicationEntity> {
     private static instance;
@@ -46,4 +46,16 @@ declare class OAuth2PersistentTokenService extends AbstractService<OAuth2Persist
     static getInstance(config: HttpConfig): OAuth2PersistentTokenService;
     getBaseAddress(): string;
 }
-export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2CredentialRecordService, OAuth2PersistentTokenService, };
+declare class OAuth2ResourceIndicatorService extends AbstractService<OAuth2ResourceIndicatorEntity> {
+    private static instance;
+    private constructor();
+    static getInstance(config: HttpConfig): OAuth2ResourceIndicatorService;
+    getBaseAddress(): string;
+}
+declare class OAuth2ProtectedResourceMetadataService extends AbstractService<OAuth2ProtectedResourceMetadataEntity> {
+    private static instance;
+    private constructor();
+    static getInstance(config: HttpConfig): OAuth2ProtectedResourceMetadataService;
+    getBaseAddress(): string;
+}
+export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2CredentialRecordService, OAuth2PersistentTokenService, OAuth2ResourceIndicatorService, OAuth2ProtectedResourceMetadataService, };

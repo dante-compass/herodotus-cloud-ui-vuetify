@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.13
+
+### Patch Changes
+
+- 新增管理 API
+
 ## 3.1.12
 
 ### Patch Changes

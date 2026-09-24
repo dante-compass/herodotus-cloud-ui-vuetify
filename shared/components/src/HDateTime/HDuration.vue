@@ -36,7 +36,8 @@ const options = shallowRef(DURATION_UNITS);
 
 const convertDurationToData = (value: number | string) => {
   if (value) {
-    let duration = moment.duration(value, 'second');
+
+    let duration = moment.duration(value, 'seconds');
     if (duration) {
       // @ts-ignore
       const data = duration._data;
@@ -54,25 +55,16 @@ const convertDurationToData = (value: number | string) => {
 
 const convertDataToDuration = (amount: number, unit: string) => {
   if (amount && unit) {
-    if (['weeks', 'months', 'years'].includes(unit)) {
-      // 修复后端 Java Duration 不支持 moment 周、月、年 问题。
-      // 先将 moment 周、月、年转换为 天，后端接收到天再转换为 Duration
-      const u = unit as moment.unitOfTime.DurationConstructor;
-      const days = moment.duration(amount, u).asDays();
-      const result = moment.duration(days, 'days').toISOString();
-      durationValue.value = result;
-    } else {
-      const u = unit as moment.unitOfTime.DurationConstructor;
-      const result = moment.duration(amount, u).toISOString();
-      durationValue.value = result;
-    }
+    const u = unit as moment.unitOfTime.DurationConstructor;
+    const result = moment.duration(amount, u).toISOString();
+    durationValue.value = result;
   }
 };
 
 watch(
   () => durationValue.value,
   (newValue) => {
-    if (newValue) {
+     if (newValue) {
       convertDurationToData(newValue);
     }
   },
