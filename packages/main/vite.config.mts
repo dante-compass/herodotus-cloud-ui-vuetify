@@ -201,6 +201,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
                   return "vender-" + name;
                 },
                 test: (id) => id.includes("node_modules"),
+                debugName: "vendor-node-modules",
               },
               {
                 name: (id) => {
@@ -209,6 +210,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
                   return path;
                 },
                 test: (id) => id.includes("/src/"), // 对应的 test 条件
+                debugName: "vendor-src",
               },
             ],
           },

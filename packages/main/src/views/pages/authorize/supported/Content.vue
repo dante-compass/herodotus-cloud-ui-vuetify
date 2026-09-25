@@ -41,14 +41,14 @@ import { API, PAGE_NAME } from '@/configurations';
 
 defineOptions({ name: PAGE_NAME.OAUTH2_SUPPORTED_SCOPE_CONTENT });
 
-const supportedScopeForm = ref();
-const resourcesLoading = shallowRef(false);
-const resources = ref([]) as Ref<Array<OAuth2ResourceEntity>>;
-
 const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<OAuth2SupportedScopeEntity>(
   API.core.oauth2SupportedScope(),
   PAGE_NAME.OAUTH2_SUPPORTED_SCOPE_CONTENT,
 );
+
+const supportedScopeForm = ref();
+const resourcesLoading = shallowRef(false);
+const resources = ref([]) as Ref<Array<OAuth2ResourceEntity>>;
 
 const validateScopeCode = async (scopeCode: string) => {
   return await new Promise((resolve, reject) => {

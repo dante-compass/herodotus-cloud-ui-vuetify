@@ -203,7 +203,7 @@ class OAuth2SupportedScopeService extends AbstractService<OAuth2SupportedScopeEn
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUaa() + "/authorize/prm";
+    return this.getConfig().getUaa() + "/authorize/supported";
   }
 
   private getScopeCodePath(supportedCode: string): string {

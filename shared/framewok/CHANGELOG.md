@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 3.1.17
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@3.1.17
+
 ## 3.1.16
 
 ### Patch Changes

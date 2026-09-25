@@ -119,7 +119,7 @@ var i = /* @__PURE__ */ function(e) {
 		return this.instance ??= new t(e), this.instance;
 	}
 	getBaseAddress() {
-		return this.getConfig().getUaa() + "/authorize/prm";
+		return this.getConfig().getUaa() + "/authorize/supported";
 	}
 	getScopeCodePath(e) {
 		return this.getParamPath(this.getBaseAddress(), e);
