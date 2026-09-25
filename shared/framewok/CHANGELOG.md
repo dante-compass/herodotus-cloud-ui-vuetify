@@ -1,5 +1,21 @@
 # @herodotus/framework
 
+## 3.1.16
+
+### Patch Changes
+
+- [重构] 重命名 OAuth2 资源标识和 OAuth2 保护资源元数据相关类命名，明晰代码用途减少理解困难
+- Updated dependencies
+  - @herodotus/core@3.1.16
+
+## 3.1.15
+
+### Patch Changes
+
+- [重构] 重命名 OAuth2 资源标识和 OAuth2 保护资源元数据相关类命名，明晰代码用途减少理解困难
+- Updated dependencies
+  - @herodotus/core@3.1.15
+
 ## 3.1.14
 
 ### Patch Changes

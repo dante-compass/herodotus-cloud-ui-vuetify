@@ -13,7 +13,7 @@
     @update:options="findItems"
   >
     <template #control>
-      <v-btn prepend-icon="mdi-plus" text="新建保护资源" @click="toCreate"></v-btn>
+      <v-btn prepend-icon="mdi-plus" text="新建支持范围" @click="toCreate"></v-btn>
     </template>
 
     <template #item.actions="{ item }">
@@ -25,20 +25,20 @@
 
 <script setup lang="ts">
 import type {
-  OAuth2ProtectedResourceMetadataEntity,
-  OAuth2ProtectedResourceMetadataConditions,
-  OAuth2ProtectedResourceMetadataProps,
+  OAuth2SupportedScopeEntity,
+  OAuth2SupportedScopeConditions,
+  OAuth2SupportedScopeProps,
 } from '@herodotus/api';
 import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable, useDateTime } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
-defineOptions({ name: PAGE_NAME.OAUTH2_PROTECTED_RESOURCE_METADATA });
+defineOptions({ name: PAGE_NAME.OAUTH2_SUPPORTED_SCOPE });
 
 const headers = ref([
-  { key: 'metadataName', align: 'center', title: 'PRM 名称' },
-  { key: 'metadataCode', align: 'center', title: 'PRM 代码' },
+  { key: 'scopeName', align: 'center', title: '范围名称' },
+  { key: 'scopeCode', align: 'center', title: '范围代码' },
   { key: 'description', align: 'center', title: '备注' },
   { key: 'updateBy', align: 'center', title: '最后修改人' },
   { key: 'updateTime', align: 'center', title: '修改时间', value: (item) => defaultFormat(item.updateTime) },
@@ -47,7 +47,7 @@ const headers = ref([
   { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: OAuth2ProtectedResourceMetadataProps = 'metadataId';
+const rowKey: OAuth2SupportedScopeProps = 'scopeId';
 
 const { defaultFormat } = useDateTime();
 const {
@@ -61,8 +61,8 @@ const {
   toCreate,
   deleteItemById,
   findItems,
-} = useTable<OAuth2ProtectedResourceMetadataConditions, OAuth2ProtectedResourceMetadataEntity>(
-  API.core.oauth2ProtectedResourceMetadata(),
-  PAGE_NAME.OAUTH2_PROTECTED_RESOURCE_METADATA,
+} = useTable<OAuth2SupportedScopeConditions, OAuth2SupportedScopeEntity>(
+  API.core.oauth2SupportedScope(),
+  PAGE_NAME.OAUTH2_SUPPORTED_SCOPE,
 );
 </script>

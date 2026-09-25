@@ -9,8 +9,8 @@ import {
   OAuth2UserLoggingService,
   OAuth2InterfaceAuditService,
   OAuth2PersistentTokenService,
-  OAuth2ResourceIndicatorService,
-  OAuth2ProtectedResourceMetadataService,
+  OAuth2ResourceService,
+  OAuth2SupportedScopeService,
   SysOrganizationService,
   SysDepartmentService,
   SysEmployeeService,
@@ -93,12 +93,12 @@ export class ApiResources {
     return OAuth2PersistentTokenService.getInstance(this.config);
   }
 
-  public oauth2ResourceIndicator(): OAuth2ResourceIndicatorService {
-    return OAuth2ResourceIndicatorService.getInstance(this.config);
+  public oauth2Resource(): OAuth2ResourceService {
+    return OAuth2ResourceService.getInstance(this.config);
   }
 
-  public oauth2ProtectedResourceMetadata(): OAuth2ProtectedResourceMetadataService {
-    return OAuth2ProtectedResourceMetadataService.getInstance(this.config);
+  public oauth2SupportedScope(): OAuth2SupportedScopeService {
+    return OAuth2SupportedScopeService.getInstance(this.config);
   }
 
   public sysOrganization(): SysOrganizationService {

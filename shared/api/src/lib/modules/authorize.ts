@@ -6,8 +6,8 @@ import type {
   OAuth2UserLoggingEntity,
   OAuth2InterfaceAuditEntity,
   OAuth2PersistentTokenEntity,
-  OAuth2ResourceIndicatorEntity,
-  OAuth2ProtectedResourceMetadataEntity,
+  OAuth2ResourceEntity,
+  OAuth2SupportedScopeEntity,
   OAuth2ScopeAssignedBody,
 } from "@/declarations";
 import type { AxiosHttpResult } from "@herodotus/core";
@@ -161,45 +161,43 @@ class OAuth2PersistentTokenService extends AbstractService<OAuth2PersistentToken
   }
 }
 
-class OAuth2ResourceIndicatorService extends AbstractService<OAuth2ResourceIndicatorEntity> {
-  private static instance: OAuth2ResourceIndicatorService;
+class OAuth2ResourceService extends AbstractService<OAuth2ResourceEntity> {
+  private static instance: OAuth2ResourceService;
 
   private constructor(config: HttpConfig) {
     super(config);
   }
 
-  public static getInstance(config: HttpConfig): OAuth2ResourceIndicatorService {
+  public static getInstance(config: HttpConfig): OAuth2ResourceService {
     if (this.instance == null) {
-      this.instance = new OAuth2ResourceIndicatorService(config);
+      this.instance = new OAuth2ResourceService(config);
     }
     return this.instance;
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getUaa() + "/authorize/indicator";
+    return this.getConfig().getUaa() + "/authorize/resource";
   }
 
-  private getIndicatorValuePath(indicatorValue: string): string {
-    return this.getParamPath(this.getBaseAddress(), indicatorValue);
+  private getResourceCodePath(resourceCode: string): string {
+    return this.getParamPath(this.getBaseAddress(), resourceCode);
   }
 
-  public fetchByIndicatorValue(indicatorValue: string): Promise<AxiosHttpResult<OAuth2ResourceIndicatorEntity>> {
-    return this.getConfig()
-      .getHttp()
-      .get<OAuth2ResourceIndicatorEntity, string>(this.getIndicatorValuePath(indicatorValue));
+  public fetchByResourceCode(resourceCode: string): Promise<AxiosHttpResult<OAuth2ResourceEntity>> {
+    return this.getConfig().getHttp().get<OAuth2ResourceEntity, string>(this.getResourceCodePath(resourceCode));
   }
 }
 
-class OAuth2ProtectedResourceMetadataService extends AbstractService<OAuth2ProtectedResourceMetadataEntity> {
-  private static instance: OAuth2ProtectedResourceMetadataService;
+class OAuth2SupportedScopeService extends AbstractService<OAuth2SupportedScopeEntity> {
+  private static instance: OAuth2SupportedScopeService;
 
   private constructor(config: HttpConfig) {
     super(config);
   }
 
-  public static getInstance(config: HttpConfig): OAuth2ProtectedResourceMetadataService {
+  public static getInstance(config: HttpConfig): OAuth2SupportedScopeService {
     if (this.instance == null) {
-      this.instance = new OAuth2ProtectedResourceMetadataService(config);
+      this.instance = new OAuth2SupportedScopeService(config);
     }
     return this.instance;
   }
@@ -208,14 +206,12 @@ class OAuth2ProtectedResourceMetadataService extends AbstractService<OAuth2Prote
     return this.getConfig().getUaa() + "/authorize/prm";
   }
 
-  private getMetadataCodePath(metadataCode: string): string {
-    return this.getParamPath(this.getBaseAddress(), metadataCode);
+  private getScopeCodePath(supportedCode: string): string {
+    return this.getParamPath(this.getBaseAddress(), supportedCode);
   }
 
-  public fetchByMetadataCode(metadataCode: string): Promise<AxiosHttpResult<OAuth2ProtectedResourceMetadataEntity>> {
-    return this.getConfig()
-      .getHttp()
-      .get<OAuth2ProtectedResourceMetadataEntity, string>(this.getMetadataCodePath(metadataCode));
+  public fetchByScopeCode(supportedCode: string): Promise<AxiosHttpResult<OAuth2SupportedScopeEntity>> {
+    return this.getConfig().getHttp().get<OAuth2SupportedScopeEntity, string>(this.getScopeCodePath(supportedCode));
   }
 }
 
@@ -227,6 +223,6 @@ export {
   OAuth2InterfaceAuditService,
   OAuth2CredentialRecordService,
   OAuth2PersistentTokenService,
-  OAuth2ResourceIndicatorService,
-  OAuth2ProtectedResourceMetadataService,
+  OAuth2ResourceService,
+  OAuth2SupportedScopeService,
 };

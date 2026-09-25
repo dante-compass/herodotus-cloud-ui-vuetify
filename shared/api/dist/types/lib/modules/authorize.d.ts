@@ -1,4 +1,4 @@
-import { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2AuthorizationEntity, OAuth2CredentialRecordEntity, OAuth2UserLoggingEntity, OAuth2InterfaceAuditEntity, OAuth2PersistentTokenEntity, OAuth2ResourceIndicatorEntity, OAuth2ProtectedResourceMetadataEntity, OAuth2ScopeAssignedBody } from '../../declarations';
+import { OAuth2ApplicationEntity, OAuth2ScopeEntity, OAuth2AuthorizationEntity, OAuth2CredentialRecordEntity, OAuth2UserLoggingEntity, OAuth2InterfaceAuditEntity, OAuth2PersistentTokenEntity, OAuth2ResourceEntity, OAuth2SupportedScopeEntity, OAuth2ScopeAssignedBody } from '../../declarations';
 import { AxiosHttpResult, HttpConfig, AbstractService } from '@herodotus/core';
 declare class OAuth2ApplicationService extends AbstractService<OAuth2ApplicationEntity> {
     private static instance;
@@ -46,20 +46,20 @@ declare class OAuth2PersistentTokenService extends AbstractService<OAuth2Persist
     static getInstance(config: HttpConfig): OAuth2PersistentTokenService;
     getBaseAddress(): string;
 }
-declare class OAuth2ResourceIndicatorService extends AbstractService<OAuth2ResourceIndicatorEntity> {
+declare class OAuth2ResourceService extends AbstractService<OAuth2ResourceEntity> {
     private static instance;
     private constructor();
-    static getInstance(config: HttpConfig): OAuth2ResourceIndicatorService;
+    static getInstance(config: HttpConfig): OAuth2ResourceService;
     getBaseAddress(): string;
-    private getIndicatorValuePath;
-    fetchByIndicatorValue(indicatorValue: string): Promise<AxiosHttpResult<OAuth2ResourceIndicatorEntity>>;
+    private getResourceCodePath;
+    fetchByResourceCode(resourceCode: string): Promise<AxiosHttpResult<OAuth2ResourceEntity>>;
 }
-declare class OAuth2ProtectedResourceMetadataService extends AbstractService<OAuth2ProtectedResourceMetadataEntity> {
+declare class OAuth2SupportedScopeService extends AbstractService<OAuth2SupportedScopeEntity> {
     private static instance;
     private constructor();
-    static getInstance(config: HttpConfig): OAuth2ProtectedResourceMetadataService;
+    static getInstance(config: HttpConfig): OAuth2SupportedScopeService;
     getBaseAddress(): string;
-    private getMetadataCodePath;
-    fetchByMetadataCode(metadataCode: string): Promise<AxiosHttpResult<OAuth2ProtectedResourceMetadataEntity>>;
+    private getScopeCodePath;
+    fetchByScopeCode(supportedCode: string): Promise<AxiosHttpResult<OAuth2SupportedScopeEntity>>;
 }
-export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2CredentialRecordService, OAuth2PersistentTokenService, OAuth2ResourceIndicatorService, OAuth2ProtectedResourceMetadataService, };
+export { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2CredentialRecordService, OAuth2PersistentTokenService, OAuth2ResourceService, OAuth2SupportedScopeService, };

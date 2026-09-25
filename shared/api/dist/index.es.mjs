@@ -102,13 +102,13 @@ var i = /* @__PURE__ */ function(e) {
 		return this.instance ??= new t(e), this.instance;
 	}
 	getBaseAddress() {
-		return this.getConfig().getUaa() + "/authorize/indicator";
+		return this.getConfig().getUaa() + "/authorize/resource";
 	}
-	getIndicatorValuePath(e) {
+	getResourceCodePath(e) {
 		return this.getParamPath(this.getBaseAddress(), e);
 	}
-	fetchByIndicatorValue(e) {
-		return this.getConfig().getHttp().get(this.getIndicatorValuePath(e));
+	fetchByResourceCode(e) {
+		return this.getConfig().getHttp().get(this.getResourceCodePath(e));
 	}
 }, m = class t extends e {
 	static instance;
@@ -121,11 +121,11 @@ var i = /* @__PURE__ */ function(e) {
 	getBaseAddress() {
 		return this.getConfig().getUaa() + "/authorize/prm";
 	}
-	getMetadataCodePath(e) {
+	getScopeCodePath(e) {
 		return this.getParamPath(this.getBaseAddress(), e);
 	}
-	fetchByMetadataCode(e) {
-		return this.getConfig().getHttp().get(this.getMetadataCodePath(e));
+	fetchByScopeCode(e) {
+		return this.getConfig().getHttp().get(this.getScopeCodePath(e));
 	}
 }, h = class t extends e {
 	static instance;
@@ -763,10 +763,10 @@ var i = /* @__PURE__ */ function(e) {
 	oauth2PersistentToken() {
 		return f.getInstance(this.config);
 	}
-	oauth2ResourceIndicator() {
+	oauth2Resource() {
 		return p.getInstance(this.config);
 	}
-	oauth2ProtectedResourceMetadata() {
+	oauth2SupportedScope() {
 		return m.getInstance(this.config);
 	}
 	sysOrganization() {
@@ -870,4 +870,4 @@ var i = /* @__PURE__ */ function(e) {
 	return q.getInstance(r);
 };
 //#endregion
-export { q as ApiResources, F as BucketService, t as ContentTypeEnum, B as DeviceService, j as DialogueContactService, M as DialogueDetailService, O as ExtendedTaskService, i as GenderEnum, A as MgtCertificateFileService, k as MgtCertificateService, K as MqttAccountService, G as MqttAuthorityService, W as MqttCategoryService, L as MultipartUploadService, a as NotificationCategoryEnum, N as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, f as OAuth2PersistentTokenService, m as OAuth2ProtectedResourceMetadataService, p as OAuth2ResourceIndicatorService, s as OAuth2ScopeService, l as OAuth2UserLoggingService, I as ObjectService, R as ProductCategoryService, z as ProductService, D as SocialBindingService, S as SysAttributeService, C as SysDefaultRoleService, g as SysDepartmentService, E as SysDictionaryService, w as SysElementService, v as SysEmployeeAllocatableService, _ as SysEmployeeService, h as SysOrganizationService, y as SysPermissionService, b as SysRoleService, T as SysTenantDataSourceService, x as SysUserService, H as TslArgumentService, U as TslFunctionService, V as TslUnitService, P as WebSocketMessageService, J as createApi };
+export { q as ApiResources, F as BucketService, t as ContentTypeEnum, B as DeviceService, j as DialogueContactService, M as DialogueDetailService, O as ExtendedTaskService, i as GenderEnum, A as MgtCertificateFileService, k as MgtCertificateService, K as MqttAccountService, G as MqttAuthorityService, W as MqttCategoryService, L as MultipartUploadService, a as NotificationCategoryEnum, N as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, f as OAuth2PersistentTokenService, p as OAuth2ResourceService, s as OAuth2ScopeService, m as OAuth2SupportedScopeService, l as OAuth2UserLoggingService, I as ObjectService, R as ProductCategoryService, z as ProductService, D as SocialBindingService, S as SysAttributeService, C as SysDefaultRoleService, g as SysDepartmentService, E as SysDictionaryService, w as SysElementService, v as SysEmployeeAllocatableService, _ as SysEmployeeService, h as SysOrganizationService, y as SysPermissionService, b as SysRoleService, T as SysTenantDataSourceService, x as SysUserService, H as TslArgumentService, U as TslFunctionService, V as TslUnitService, P as WebSocketMessageService, J as createApi };

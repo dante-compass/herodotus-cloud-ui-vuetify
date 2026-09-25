@@ -1656,8 +1656,8 @@ packages:
   camel-case@4.1.2:
     resolution: {integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==}
 
-  caniuse-lite@1.0.30001810:
-    resolution: {integrity: sha512-TITQPUkaz+aVk5GL6NhOdwk1aEaNTSDPsGFWrTuhKGtjTF70jL/Oht2W4c6rXUe5fu7Ie19VIahAXHIIiWWNeg==}
+  caniuse-lite@1.0.30001812:
+    resolution: {integrity: sha512-qN+QNNBr93TCmFrmte0bBCjSDMuRvt78VlHT99qIGPszm4QsqCX8lnyWUFkHi8B7ZBAPq8SH+UqyXNy/odMdng==}
 
   cfb@1.2.2:
     resolution: {integrity: sha512-KfdUZsSOw19/ObEWasvBP/Ac4reZvAGauZhs6S/gqNhXhI7cKwvlH7ulj+dOEYnca4bm4SGo8C1bTAQvnTjgQA==}
@@ -2127,11 +2127,14 @@ packages:
     peerDependencies:
       eslint: '>=9.38.0'
 
-  eslint-plugin-perfectionist@5.12.0:
-    resolution: {integrity: sha512-1S1Vgb9b3AIxlJoVMbGKB5PwOCtA0PTvDIiGhIoT9CzZa5aZ6BhgGywIj3ONJ5vrH7gTDjgsLgJ1gPUbDI6UUQ==}
+  eslint-plugin-perfectionist@5.12.1:
+    resolution: {integrity: sha512-krdSE7Dz+TCtcVr2+rfNhlOIFFBJcUdoRvjaN7JQnsaVnxJw+BZh9wMkY3MSLCJat+yW+UPTQLKS82Epc7MGZA==}
     engines: {node: ^20.0.0 || >=22.0.0}
     peerDependencies:
       eslint: ^8.45.0 || ^9.0.0 || ^10.0.0
+    peerDependenciesMeta:
+      eslint:
+        optional: true
 
   eslint-plugin-pnpm@1.9.1:
     resolution: {integrity: sha512-8++1Egww2cqc9Wylmt7P+xXNMQVCosAZ4m4W4Gc0V5lGea8HFByHTRvUI+ZvvpO8fLXGg2O4MQc90EhuI3mMdQ==}
@@ -2150,8 +2153,8 @@ packages:
     peerDependencies:
       eslint: '>=9.38.0'
 
-  eslint-plugin-vue@10.11.0:
-    resolution: {integrity: sha512-fGt38SsaPCZ2FmA3bX/3vOW2qdsPNx0/9x+7Aab6NMX++PhynMtK4LWC4vzXgfQBCqpUAler18H38GA+NBAd0Q==}
+  eslint-plugin-vue@10.11.1:
+    resolution: {integrity: sha512-pasVXhl7wUmIvhujoqs/m0mJ9r59QW1IR9XXYKGR0FETzSM+Hhlf4qKIYgWiDDP+9YKv4YfbwskD7LqIdVcgQw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       '@stylistic/eslint-plugin': ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
@@ -5528,7 +5531,7 @@ snapshots:
   browserslist@4.29.0:
     dependencies:
       baseline-browser-mapping: 2.11.25
-      caniuse-lite: 1.0.30001810
+      caniuse-lite: 1.0.30001812
       electron-to-chromium: 1.5.438
       node-releases: 2.0.57
       update-browserslist-db: 1.3.3(browserslist@4.29.0)
@@ -5586,7 +5589,7 @@ snapshots:
       pascal-case: 3.1.2
       tslib: 2.8.1
 
-  caniuse-lite@1.0.30001810: {}
+  caniuse-lite@1.0.30001812: {}
 
   cfb@1.2.2:
     dependencies:
@@ -6011,11 +6014,11 @@ snapshots:
       eslint-plugin-antfu: 3.2.3(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))
       eslint-plugin-import-lite: 0.6.0(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))
       eslint-plugin-jsonc: 3.4.2(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))
-      eslint-plugin-perfectionist: 5.12.0(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
+      eslint-plugin-perfectionist: 5.12.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
       eslint-plugin-pnpm: 1.9.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))
       eslint-plugin-regexp: 3.3.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))
       eslint-plugin-unicorn: 65.0.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))
-      eslint-plugin-vue: 10.11.0(@stylistic/eslint-plugin@5.10.0(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1)))(@typescript-eslint/parser@8.70.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(vue-eslint-parser@10.4.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1))
+      eslint-plugin-vue: 10.11.1(@stylistic/eslint-plugin@5.10.0(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1)))(@typescript-eslint/parser@8.70.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(vue-eslint-parser@10.4.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1))
       eslint-typegen: 2.3.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))
       exsolve: 1.1.1
       globals: 17.12.0
@@ -6067,12 +6070,13 @@ snapshots:
     transitivePeerDependencies:
       - '@eslint/json'
 
-  eslint-plugin-perfectionist@5.12.0(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3):
+  eslint-plugin-perfectionist@5.12.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3):
     dependencies:
       '@typescript-eslint/types': 8.70.1
       '@typescript-eslint/utils': 8.70.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
-      eslint: 10.11.0(jiti@2.6.1)(supports-color@8.1.1)
       natural-orderby: 5.0.0
+    optionalDependencies:
+      eslint: 10.11.0(jiti@2.6.1)(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -6121,7 +6125,7 @@ snapshots:
       semver: 7.8.5
       strip-indent: 4.1.1
 
-  eslint-plugin-vue@10.11.0(@stylistic/eslint-plugin@5.10.0(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1)))(@typescript-eslint/parser@8.70.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(vue-eslint-parser@10.4.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)):
+  eslint-plugin-vue@10.11.1(@stylistic/eslint-plugin@5.10.0(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1)))(@typescript-eslint/parser@8.70.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3))(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(vue-eslint-parser@10.4.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))(supports-color@8.1.1)):
     dependencies:
       '@eslint-community/eslint-utils': 4.10.1(eslint@10.11.0(jiti@2.6.1)(supports-color@8.1.1))
       eslint: 10.11.0(jiti@2.6.1)(supports-color@8.1.1)

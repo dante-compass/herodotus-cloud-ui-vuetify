@@ -39,10 +39,10 @@ export const PAGE_NAME = (() => {
   const OAUTH2_SCOPE_CONTENT = OAUTH2_SCOPE + OperationEnum.CONTENT;
   const OAUTH2_SCOPE_AUTHORIZE = OAUTH2_SCOPE + OperationEnum.AUTHORIZE;
   const OAUTH2_TOKEN = "OAuth2Token";
-  const OAUTH2_RESOURCE_INDICATOR = "OAuth2ResourceIndicator";
-  const OAUTH2_RESOURCE_INDICATORE_CONTENT = OAUTH2_RESOURCE_INDICATOR + OperationEnum.CONTENT;
-  const OAUTH2_PROTECTED_RESOURCE_METADATA = "OAuth2ProtectedResourceMetadata";
-  const OAUTH2_PROTECTED_RESOURCE_METADATA_CONTENT = OAUTH2_PROTECTED_RESOURCE_METADATA + OperationEnum.CONTENT;
+  const OAUTH2_RESOURCE = "OAuth2Resource";
+  const OAUTH2_RESOURCE_CONTENT = OAUTH2_RESOURCE + OperationEnum.CONTENT;
+  const OAUTH2_SUPPORTED_SCOPE = "OAuth2SupportedScope";
+  const OAUTH2_SUPPORTED_SCOPE_CONTENT = OAUTH2_SUPPORTED_SCOPE + OperationEnum.CONTENT;
   const SYS_ATTRIBUTE = "SysAttribute";
   const SYS_ATTRIBUTE_CONTENT = SYS_ATTRIBUTE + OperationEnum.CONTENT;
   const SYS_ATTRIBUTE_AUTHORIZE = SYS_ATTRIBUTE + OperationEnum.AUTHORIZE;
@@ -125,10 +125,10 @@ export const PAGE_NAME = (() => {
     OAUTH2_SCOPE_CONTENT,
     OAUTH2_SCOPE_AUTHORIZE,
     OAUTH2_TOKEN,
-    OAUTH2_RESOURCE_INDICATOR,
-    OAUTH2_RESOURCE_INDICATORE_CONTENT,
-    OAUTH2_PROTECTED_RESOURCE_METADATA,
-    OAUTH2_PROTECTED_RESOURCE_METADATA_CONTENT,
+    OAUTH2_RESOURCE,
+    OAUTH2_RESOURCE_CONTENT,
+    OAUTH2_SUPPORTED_SCOPE,
+    OAUTH2_SUPPORTED_SCOPE_CONTENT,
     SYS_ATTRIBUTE,
     SYS_ATTRIBUTE_CONTENT,
     SYS_ATTRIBUTE_AUTHORIZE,
@@ -214,6 +214,10 @@ export const HTTP_METHOD_STYLE_GROUP: DisplayElementGroup = {
   DELETE: { color: "red", icon: "mdi-book-minus-multiple" },
   POST: { color: "green", icon: "mdi-book-plus-multiple" },
   GET: { color: "blue", icon: "mdi-book-multiple" },
+  MCP_TOOL: { color: "orange", icon: "mdi-book-remove-multiple" },
+  MCP_RESOURCE: { color: "red", icon: "mdi-book-minus-multiple" },
+  MCP_PROMPT: { color: "green", icon: "mdi-book-plus-multiple" },
+  MCP_COMPLETE: { color: "blue", icon: "mdi-book-multiple" },
   ALL: { color: "brown", icon: "mdi-book-cog" },
 };
 
