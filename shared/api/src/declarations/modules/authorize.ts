@@ -14,6 +14,7 @@ export interface BaseRegisteredClientEntity extends AbstractSysEntity {
   jwkSetUrl: string;
   authenticationSigningAlgorithm: string;
   x509CertificateSubjectDN: string;
+  resourceIds: string;
   authorizationCodeTimeToLive: string;
   deviceCodeTimeToLive: string;
   accessTokenTimeToLive: string;
@@ -31,7 +32,7 @@ export interface OAuth2ApplicationEntity extends BaseRegisteredClientEntity {
   abbreviation: string;
   logo: string;
   homepage: string;
-  applicationType: string;
+  clientType: string;
 }
 
 export interface OAuth2PermissionEntity extends AbstractSysEntity {
@@ -103,6 +104,19 @@ export interface OAuth2PersistentTokenEntity extends Entity {
   lastUsed: Date;
 }
 
+export interface OAuth2ResourceEntity extends AbstractSysEntity {
+  resourceId: string;
+  resourceCode: string;
+  resourceName: string;
+}
+
+export interface OAuth2SupportedScopeEntity extends AbstractSysEntity {
+  scopeId: string;
+  scopeCode: string;
+  scopeName: string;
+  resource: OAuth2ResourceEntity;
+}
+
 export interface OAuth2ApplicationConditions extends Conditions {}
 export interface OAuth2PermissionCondition extends Conditions {}
 export interface OAuth2ScopeConditions extends Conditions {}
@@ -120,6 +134,8 @@ export interface OAuth2InterfaceAuditConditions extends OAuth2UserLoggingConditi
   url: string;
 }
 export interface OAuth2PersistentTokenConditions extends Conditions {}
+export interface OAuth2ResourceConditions extends Conditions {}
+export interface OAuth2SupportedScopeConditions extends Conditions {}
 
 export type OAuth2ApplicationProps = keyof OAuth2ApplicationEntity;
 export type OAuth2PermissionProps = keyof OAuth2PermissionEntity;
@@ -129,6 +145,8 @@ export type OAuth2CredentialRecordProps = keyof OAuth2CredentialRecordEntity;
 export type OAuth2UserLoggingProps = keyof OAuth2UserLoggingEntity;
 export type OAuth2InterfaceAuditProps = keyof OAuth2InterfaceAuditEntity;
 export type OAuth2PersistentTokenProps = keyof OAuth2PersistentTokenEntity;
+export type OAuth2ResourceProps = keyof OAuth2ResourceEntity;
+export type OAuth2SupportedScopeProps = keyof OAuth2SupportedScopeEntity;
 
 export interface OAuth2PermissionBody extends Conditions {
   permissionId: string;

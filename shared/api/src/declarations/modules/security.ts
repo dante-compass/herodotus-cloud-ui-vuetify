@@ -24,7 +24,7 @@ export interface SysElementEntity extends AbstractSysEntity {
   isIgnoreAuth: boolean;
   elementCategory: string;
   menuScenario: string;
-  applicationType: string;
+  clientType: string;
   roles: Array<SysRoleEntity>;
 }
 

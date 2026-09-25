@@ -20,9 +20,9 @@
       <v-btn prepend-icon="mdi-plus" text="新建菜单" @click="toCreate"></v-btn>
     </template>
 
-    <template #item.applicationType="{ value }">
+    <template #item.clientType="{ value }">
       <v-chip v-if="value" density="compact" rounded="lg" color="teal" label>
-        {{ getDictionaryItemDisplay("ApplicationType", value) }}
+        {{ getDictionaryItemDisplay("ClientType", value) }}
       </v-chip>
     </template>
 
@@ -83,7 +83,7 @@ const headers = ref([
   { key: "title", align: "center", title: "标题" },
   { key: "name", align: "center", title: "组件名称" },
   { key: "path", align: "center", title: "请求路径" },
-  { key: "applicationType", align: "center", title: "应用类型" },
+  { key: "clientType", align: "center", title: "客户端类型" },
   { key: "menuScenario", align: "center", title: "菜单场景" },
   { key: "icon", align: "center", title: "图标" },
   { key: "isHaveChild", align: "center", title: "有子节点" },
@@ -100,7 +100,7 @@ const headers = ref([
 
 const rowKey: SysElementProps = "elementId";
 
-const { getDictionaryItemDisplay } = useDictionary("ApplicationType", "ElementCategory", "MenuScenario");
+const { getDictionaryItemDisplay } = useDictionary("ClientType", "ElementCategory", "MenuScenario");
 
 const { defaultFormat } = useDateTime();
 const {

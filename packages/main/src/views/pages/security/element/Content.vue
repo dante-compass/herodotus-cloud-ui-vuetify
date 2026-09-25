@@ -2,8 +2,8 @@
   <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
     <h-label text="应用类型:"></h-label>
     <h-dictionary-toggle
-      v-model="editedItem.applicationType"
-      dictionary="ApplicationType"
+      v-model="editedItem.clientType"
+      dictionary="ClientType"
       default-value="0"
     ></h-dictionary-toggle>
     <h-label text="菜单场景:"></h-label>

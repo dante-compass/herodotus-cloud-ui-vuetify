@@ -21,4 +21,4 @@ minimumReleaseAgeExclude:
   - "@vue/runtime-dom"
   - "@vue/server-renderer"
   - "@vue/shared"
-
+  - '@vuetify/v0@1.2.1'

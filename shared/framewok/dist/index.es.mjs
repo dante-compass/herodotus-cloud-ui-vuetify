@@ -1117,15 +1117,40 @@ function we(e, t, n) {
 		d(t, a);
 	} };
 }
+`${Object.keys({
+	ł: "l",
+	ø: "o",
+	đ: "d",
+	ð: "d",
+	þ: "th",
+	ħ: "h",
+	ŧ: "t",
+	ŋ: "n",
+	ß: "ss",
+	æ: "ae",
+	œ: "oe",
+	ı: "i",
+	Ł: "L",
+	Ø: "O",
+	Đ: "D",
+	Ð: "D",
+	Þ: "Th",
+	Ħ: "H",
+	Ŧ: "T",
+	Ŋ: "N",
+	ẞ: "Ss",
+	Æ: "Ae",
+	Œ: "Oe"
+}).join("")}`;
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.1.11_typescript@6_98c7bd8e907fdb3d93f94104ca5b58bb/node_modules/vuetify/lib/util/getCurrentInstance.js
+//#region ../../node_modules/.pnpm/vuetify@4.2.2_typescript@6._49fddcf8c993d52d78d8c6ab1ffb3819/node_modules/vuetify/lib/util/getCurrentInstance.js
 function Te(e, t) {
 	let n = p();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.1.11_typescript@6_98c7bd8e907fdb3d93f94104ca5b58bb/node_modules/vuetify/lib/composables/theme.js
+//#region ../../node_modules/.pnpm/vuetify@4.2.2_typescript@6._49fddcf8c993d52d78d8c6ab1ffb3819/node_modules/vuetify/lib/composables/theme.js
 var Ee = Symbol.for("vuetify:theme");
 function De() {
 	Te("useTheme");

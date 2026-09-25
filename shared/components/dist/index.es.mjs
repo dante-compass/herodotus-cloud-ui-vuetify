@@ -335,7 +335,7 @@ var Ne = "\nattribute vec2 uv;\nattribute vec2 position;\n\nvarying vec2 vUv;\n\
 		}, p = () => {
 			u = [.5, .5];
 		}, m = (e) => {
-			if (!(!o || !r || !s)) {
+			if (o && r && s) {
 				if (t.enableMouseInteraction) {
 					let e = .05;
 					l[0] += e * (u[0] - l[0]), l[1] += e * (u[1] - l[1]), o.uniforms.uMouse.value[0] = l[0], o.uniforms.uMouse.value[1] = l[1];
@@ -661,7 +661,7 @@ var Ve = /* @__PURE__ */ l({
 	setup(e) {
 		let t = C(e, "modelValue"), r = b(0), i = b(), a = b(Ue), o = (e) => {
 			if (e) {
-				let t = F.duration(e, "second");
+				let t = F.duration(e, "seconds");
 				if (t) {
 					let e = t._data;
 					for (let t in e) {

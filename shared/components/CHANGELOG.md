@@ -1,5 +1,85 @@
 # @herodotus/components
 
+## 3.1.17
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@3.1.17
+
+## 3.1.16
+
+### Patch Changes
+
+- [重构] 重命名 OAuth2 资源标识和 OAuth2 保护资源元数据相关类命名，明晰代码用途减少理解困难
+- Updated dependencies
+  - @herodotus/core@3.1.16
+
+## 3.1.15
+
+### Patch Changes
+
+- [重构] 重命名 OAuth2 资源标识和 OAuth2 保护资源元数据相关类命名，明晰代码用途减少理解困难
+- Updated dependencies
+  - @herodotus/core@3.1.15
+
+## 3.1.14
+
+### Patch Changes
+
+- [新增] 新增 OAuth2 资源标识和 OAuth2 保护资源元数据管理功能菜单及数据初始化脚本
+- Updated dependencies
+  - @herodotus/core@3.1.14
+
+## 3.1.13
+
+### Patch Changes
+
+- 新增管理 API
+- Updated dependencies
+  - @herodotus/core@3.1.13
+
+## 3.1.12
+
+### Patch Changes
+
+- 升级 Github Action 版本
+- Updated dependencies
+  - @herodotus/core@3.1.12
+
+## 3.1.11
+
+### Patch Changes
+
+- 升级依赖包，重新编译库
+- Updated dependencies
+  - @herodotus/core@3.1.11
+
+## 3.1.10
+
+### Patch Changes
+
+- 升级依赖包，重新编译库
+- Updated dependencies
+  - @herodotus/core@3.1.10
+
+## 3.1.9
+
+### Patch Changes
+
+- Node 版本升级至 24.21.0
+- Updated dependencies
+  - @herodotus/core@3.1.9
+
+## 3.1.8
+
+### Patch Changes
+
+- [重构] OAuth2Application 原 ApplicationType 字段修改为 ClientType，以规避与 MCP OAuth2 协议中 application_type 产生冲突
+- Updated dependencies
+  - @herodotus/core@3.1.8
+
 ## 3.1.7
 
 ### Patch Changes

@@ -6,6 +6,8 @@ import type {
   OAuth2UserLoggingEntity,
   OAuth2InterfaceAuditEntity,
   OAuth2PersistentTokenEntity,
+  OAuth2ResourceEntity,
+  OAuth2SupportedScopeEntity,
   OAuth2ScopeAssignedBody,
 } from "@/declarations";
 import type { AxiosHttpResult } from "@herodotus/core";
@@ -159,6 +161,60 @@ class OAuth2PersistentTokenService extends AbstractService<OAuth2PersistentToken
   }
 }
 
+class OAuth2ResourceService extends AbstractService<OAuth2ResourceEntity> {
+  private static instance: OAuth2ResourceService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): OAuth2ResourceService {
+    if (this.instance == null) {
+      this.instance = new OAuth2ResourceService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getUaa() + "/authorize/resource";
+  }
+
+  private getResourceCodePath(resourceCode: string): string {
+    return this.getParamPath(this.getBaseAddress(), resourceCode);
+  }
+
+  public fetchByResourceCode(resourceCode: string): Promise<AxiosHttpResult<OAuth2ResourceEntity>> {
+    return this.getConfig().getHttp().get<OAuth2ResourceEntity, string>(this.getResourceCodePath(resourceCode));
+  }
+}
+
+class OAuth2SupportedScopeService extends AbstractService<OAuth2SupportedScopeEntity> {
+  private static instance: OAuth2SupportedScopeService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): OAuth2SupportedScopeService {
+    if (this.instance == null) {
+      this.instance = new OAuth2SupportedScopeService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getUaa() + "/authorize/supported";
+  }
+
+  private getScopeCodePath(supportedCode: string): string {
+    return this.getParamPath(this.getBaseAddress(), supportedCode);
+  }
+
+  public fetchByScopeCode(supportedCode: string): Promise<AxiosHttpResult<OAuth2SupportedScopeEntity>> {
+    return this.getConfig().getHttp().get<OAuth2SupportedScopeEntity, string>(this.getScopeCodePath(supportedCode));
+  }
+}
+
 export {
   OAuth2ApplicationService,
   OAuth2ScopeService,
@@ -167,4 +223,6 @@ export {
   OAuth2InterfaceAuditService,
   OAuth2CredentialRecordService,
   OAuth2PersistentTokenService,
+  OAuth2ResourceService,
+  OAuth2SupportedScopeService,
 };

@@ -18,13 +18,13 @@
 </template>
 
 <script setup lang="ts">
-import { watch, shallowRef } from "vue";
-import { VContainer, VRow, VCol, VNumberInput, VSelect } from "vuetify/components";
+import { watch, shallowRef } from 'vue';
+import { VContainer, VRow, VCol, VNumberInput, VSelect } from 'vuetify/components';
 
-import { moment } from "@herodotus/core";
-import { DURATION_UNITS } from "@/lib/utils";
+import { moment } from '@herodotus/core';
+import { DURATION_UNITS } from '@/lib/utils';
 
-defineOptions({ name: "HDuration", components: { VContainer, VRow, VCol, VNumberInput, VSelect } });
+defineOptions({ name: 'HDuration', components: { VContainer, VRow, VCol, VNumberInput, VSelect } });
 
 const durationValue = defineModel<string | number>({
   required: true,
@@ -36,7 +36,8 @@ const options = shallowRef(DURATION_UNITS);
 
 const convertDurationToData = (value: number | string) => {
   if (value) {
-    let duration = moment.duration(value, "second");
+
+    let duration = moment.duration(value, 'seconds');
     if (duration) {
       // @ts-ignore
       const data = duration._data;
@@ -63,7 +64,7 @@ const convertDataToDuration = (amount: number, unit: string) => {
 watch(
   () => durationValue.value,
   (newValue) => {
-    if (newValue) {
+     if (newValue) {
       convertDurationToData(newValue);
     }
   },

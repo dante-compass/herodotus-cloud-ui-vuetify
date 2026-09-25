@@ -9,6 +9,8 @@ import {
   OAuth2UserLoggingService,
   OAuth2InterfaceAuditService,
   OAuth2PersistentTokenService,
+  OAuth2ResourceService,
+  OAuth2SupportedScopeService,
   SysOrganizationService,
   SysDepartmentService,
   SysEmployeeService,
@@ -89,6 +91,14 @@ export class ApiResources {
 
   public oauth2PersistentToken(): OAuth2PersistentTokenService {
     return OAuth2PersistentTokenService.getInstance(this.config);
+  }
+
+  public oauth2Resource(): OAuth2ResourceService {
+    return OAuth2ResourceService.getInstance(this.config);
+  }
+
+  public oauth2SupportedScope(): OAuth2SupportedScopeService {
+    return OAuth2SupportedScopeService.getInstance(this.config);
   }
 
   public sysOrganization(): SysOrganizationService {
