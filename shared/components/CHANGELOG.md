@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 3.1.18
+
+### Patch Changes
+
+- 升级 PNPM 版本，重新编译库。
+- Updated dependencies
+  - @herodotus/core@3.1.18
+
 ## 3.1.17
 
 ### Patch Changes
