@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.19
+
+### Patch Changes
+
+- 升级 Vite 和 Vuetify 版本
+
 ## 3.1.18
 
 ### Patch Changes
