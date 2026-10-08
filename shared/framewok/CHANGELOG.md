@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 3.1.20
+
+### Patch Changes
+
+- [重构] 重构证书关联模块代码及数据表命名，统一使用 pki 作为命名前缀
+- Updated dependencies
+  - @herodotus/core@3.1.20
+
 ## 3.1.19
 
 ### Patch Changes

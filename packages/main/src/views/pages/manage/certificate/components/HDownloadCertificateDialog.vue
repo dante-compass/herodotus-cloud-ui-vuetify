@@ -51,14 +51,14 @@
 </template>
 
 <script setup lang="ts">
-import type { MgtCertificateFileRequest, MgtCertificateFileResponse } from "@herodotus/api";
+import type { PkiCertificateFileRequest, PkiCertificateFileResponse } from '@herodotus/api';
 
-import { toast } from "@herodotus/core";
+import { toast } from '@herodotus/core';
 
-import { API } from "@/configurations";
-import { useCertificateDownload } from "@/composables/hooks";
+import { API } from '@/configurations';
+import { useCertificateDownload } from '@/composables/hooks';
 
-defineOptions({ name: "HDownloadCertificateDialog" });
+defineOptions({ name: 'HDownloadCertificateDialog' });
 
 interface Props {
   certId: string | undefined;
@@ -72,30 +72,30 @@ const model = defineModel<boolean>({
 });
 
 const loading = shallowRef(false);
-const editedItem = ref({}) as Ref<MgtCertificateFileRequest>;
+const editedItem = ref({}) as Ref<PkiCertificateFileRequest>;
 
 const { download, loadProgress, showProgress } = useCertificateDownload();
 
 const showKeyStore = computed(() => {
-  return editedItem.value.certificateFileCategory === "KEY_STORE";
+  return editedItem.value.certificateFileCategory === 'KEY_STORE';
 });
 
 const showPrivateKey = computed(() => {
-  return editedItem.value.certificateFileCategory === "PRIVATE_KEY";
+  return editedItem.value.certificateFileCategory === 'PRIVATE_KEY';
 });
 
 const showCertificate = computed(() => {
-  return editedItem.value.certificateFileCategory === "CERTIFICATE";
+  return editedItem.value.certificateFileCategory === 'CERTIFICATE';
 });
 
 const onSave = () => {
   loading.value = true;
   editedItem.value.certId = props.certId as string;
   API.core
-    .mgtCertificateFile()
+    .pkiCertificateFile()
     .saveOrUpdate(editedItem.value)
     .then((response) => {
-      const data = response.data as MgtCertificateFileResponse;
+      const data = response.data as PkiCertificateFileResponse;
       loading.value = false;
       model.value = false;
       if (data) {
@@ -103,14 +103,14 @@ const onSave = () => {
       }
     })
     .catch(() => {
-      toast.error("下载失败");
+      toast.error('下载失败');
     });
 };
 
 watch(model, (newValue) => {
   if (newValue) {
     loading.value = false;
-    editedItem.value = {} as MgtCertificateFileRequest;
+    editedItem.value = {} as PkiCertificateFileRequest;
   }
 });
 </script>

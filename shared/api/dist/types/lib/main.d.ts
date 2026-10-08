@@ -1,5 +1,5 @@
 import { HttpClientOptions, Axios, HttpConfig } from '@herodotus/core';
-import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2PersistentTokenService, OAuth2ResourceService, OAuth2SupportedScopeService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, MgtCertificateService, MgtCertificateFileService, DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './modules';
+import { OAuth2ApplicationService, OAuth2ScopeService, OAuth2AuthorizationService, OAuth2CredentialRecordService, OAuth2UserLoggingService, OAuth2InterfaceAuditService, OAuth2PersistentTokenService, OAuth2ResourceService, OAuth2SupportedScopeService, SysOrganizationService, SysDepartmentService, SysEmployeeService, SysEmployeeAllocatableService, SysPermissionService, SysRoleService, SysUserService, SysAttributeService, SysDefaultRoleService, SysElementService, SysTenantDataSourceService, SysDictionaryService, SocialBindingService, ExtendedTaskService, PkiCertificateService, PkiCertificateFileService, DialogueContactService, DialogueDetailService, NotificationService, WebSocketMessageService } from './modules';
 import { BucketService, ObjectService, MultipartUploadService } from './oss';
 import { DeviceService, ProductCategoryService, ProductService, TslUnitService, TslArgumentService, TslFunctionService, MqttCategoryService, MqttAuthorityService, MqttAccountService } from './iot';
 export declare class ApiResources {
@@ -35,8 +35,8 @@ export declare class ApiResources {
     notification(): NotificationService;
     webSocketMessage(): WebSocketMessageService;
     task(): ExtendedTaskService;
-    mgtCertificate(): MgtCertificateService;
-    mgtCertificateFile(): MgtCertificateFileService;
+    pkiCertificate(): PkiCertificateService;
+    pkiCertificateFile(): PkiCertificateFileService;
     ossBucket(): BucketService;
     ossObject(): ObjectService;
     ossMultipartUpload(): MultipartUploadService;

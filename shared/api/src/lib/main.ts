@@ -25,8 +25,8 @@ import {
   SysDictionaryService,
   SocialBindingService,
   ExtendedTaskService,
-  MgtCertificateService,
-  MgtCertificateFileService,
+  PkiCertificateService,
+  PkiCertificateFileService,
   DialogueContactService,
   DialogueDetailService,
   NotificationService,
@@ -172,12 +172,12 @@ export class ApiResources {
     return ExtendedTaskService.getInstance(this.config);
   }
 
-  public mgtCertificate(): MgtCertificateService {
-    return MgtCertificateService.getInstance(this.config);
+  public pkiCertificate(): PkiCertificateService {
+    return PkiCertificateService.getInstance(this.config);
   }
 
-  public mgtCertificateFile(): MgtCertificateFileService {
-    return MgtCertificateFileService.getInstance(this.config);
+  public pkiCertificateFile(): PkiCertificateFileService {
+    return PkiCertificateFileService.getInstance(this.config);
   }
 
   public ossBucket(): BucketService {

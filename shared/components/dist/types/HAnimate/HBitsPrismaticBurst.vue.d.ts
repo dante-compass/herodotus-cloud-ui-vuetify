@@ -23,7 +23,7 @@ declare const __VLS_export: import('vue').DefineComponent<PrismaticBurstProps, {
     paused: boolean;
     offset: Offset;
     hoverDampness: number;
-    mixBlendMode: "normal" | "multiply" | "screen" | "overlay" | "darken" | "lighten" | "color-dodge" | "color-burn" | "hard-light" | "soft-light" | "difference" | "exclusion" | "hue" | "saturation" | "color" | "luminosity" | "none";
+    mixBlendMode: "saturation" | "normal" | "multiply" | "screen" | "overlay" | "darken" | "lighten" | "color-dodge" | "color-burn" | "hard-light" | "soft-light" | "difference" | "exclusion" | "hue" | "color" | "luminosity" | "none";
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, any>;
 declare const _default: typeof __VLS_export;
 export default _default;

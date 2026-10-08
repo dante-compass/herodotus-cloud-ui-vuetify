@@ -10,9 +10,9 @@ type __VLS_ModelProps = {
     modelValue: boolean;
 };
 type __VLS_PublicProps = __VLS_Props & __VLS_ModelProps;
-declare var __VLS_39: {};
+declare var __VLS_38: {};
 type __VLS_Slots = {} & {
-    default?: (props: typeof __VLS_39) => any;
+    default?: (props: typeof __VLS_38) => any;
 };
 declare const __VLS_base: import('vue').DefineComponent<__VLS_PublicProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     cancel: () => any;

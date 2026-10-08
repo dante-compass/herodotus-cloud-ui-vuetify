@@ -380,7 +380,7 @@ var i = /* @__PURE__ */ function(e) {
 		return this.instance ??= new t(e), this.instance;
 	}
 	getBaseAddress() {
-		return this.getConfig().getManage() + "/manage/certificate";
+		return this.getConfig().getManage() + "/manage/pki/certificate";
 	}
 	getAliasAddress() {
 		return this.getBaseAddress() + "/alias";
@@ -403,7 +403,7 @@ var i = /* @__PURE__ */ function(e) {
 		return this.instance ??= new n(e), this.instance;
 	}
 	getBaseAddress() {
-		return this.getConfig().getManage() + "/manage/certificate-file";
+		return this.getConfig().getManage() + "/manage/pki/certificate-file";
 	}
 	getDownloadAddress() {
 		return this.getBaseAddress() + "/download";
@@ -823,10 +823,10 @@ var i = /* @__PURE__ */ function(e) {
 	task() {
 		return O.getInstance(this.config);
 	}
-	mgtCertificate() {
+	pkiCertificate() {
 		return k.getInstance(this.config);
 	}
-	mgtCertificateFile() {
+	pkiCertificateFile() {
 		return A.getInstance(this.config);
 	}
 	ossBucket() {
@@ -870,4 +870,4 @@ var i = /* @__PURE__ */ function(e) {
 	return q.getInstance(r);
 };
 //#endregion
-export { q as ApiResources, F as BucketService, t as ContentTypeEnum, B as DeviceService, j as DialogueContactService, M as DialogueDetailService, O as ExtendedTaskService, i as GenderEnum, A as MgtCertificateFileService, k as MgtCertificateService, K as MqttAccountService, G as MqttAuthorityService, W as MqttCategoryService, L as MultipartUploadService, a as NotificationCategoryEnum, N as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, f as OAuth2PersistentTokenService, p as OAuth2ResourceService, s as OAuth2ScopeService, m as OAuth2SupportedScopeService, l as OAuth2UserLoggingService, I as ObjectService, R as ProductCategoryService, z as ProductService, D as SocialBindingService, S as SysAttributeService, C as SysDefaultRoleService, g as SysDepartmentService, E as SysDictionaryService, w as SysElementService, v as SysEmployeeAllocatableService, _ as SysEmployeeService, h as SysOrganizationService, y as SysPermissionService, b as SysRoleService, T as SysTenantDataSourceService, x as SysUserService, H as TslArgumentService, U as TslFunctionService, V as TslUnitService, P as WebSocketMessageService, J as createApi };
+export { q as ApiResources, F as BucketService, t as ContentTypeEnum, B as DeviceService, j as DialogueContactService, M as DialogueDetailService, O as ExtendedTaskService, i as GenderEnum, K as MqttAccountService, G as MqttAuthorityService, W as MqttCategoryService, L as MultipartUploadService, a as NotificationCategoryEnum, N as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, f as OAuth2PersistentTokenService, p as OAuth2ResourceService, s as OAuth2ScopeService, m as OAuth2SupportedScopeService, l as OAuth2UserLoggingService, I as ObjectService, A as PkiCertificateFileService, k as PkiCertificateService, R as ProductCategoryService, z as ProductService, D as SocialBindingService, S as SysAttributeService, C as SysDefaultRoleService, g as SysDepartmentService, E as SysDictionaryService, w as SysElementService, v as SysEmployeeAllocatableService, _ as SysEmployeeService, h as SysOrganizationService, y as SysPermissionService, b as SysRoleService, T as SysTenantDataSourceService, x as SysUserService, H as TslArgumentService, U as TslFunctionService, V as TslUnitService, P as WebSocketMessageService, J as createApi };
