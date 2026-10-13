@@ -1143,14 +1143,14 @@ function we(e, t, n) {
 	Œ: "Oe"
 }).join("")}`;
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.2.4_typescript@6._0b141630e68280ae9c1e94f9b6259565/node_modules/vuetify/lib/util/getCurrentInstance.js
+//#region ../../node_modules/.pnpm/vuetify@4.2.4_typescript@6._d3c21057d66aa72d92612fe36188ec7b/node_modules/vuetify/lib/util/getCurrentInstance.js
 function Te(e, t) {
 	let n = p();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
 //#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.2.4_typescript@6._0b141630e68280ae9c1e94f9b6259565/node_modules/vuetify/lib/composables/theme.js
+//#region ../../node_modules/.pnpm/vuetify@4.2.4_typescript@6._d3c21057d66aa72d92612fe36188ec7b/node_modules/vuetify/lib/composables/theme.js
 var Ee = Symbol.for("vuetify:theme");
 function De() {
 	Te("useTheme");
@@ -1203,18 +1203,7 @@ function Oe() {
 		let t = e.isDarkenMode ? .5 : .2;
 		return W("#ffffff", a.value, t);
 	}), p = () => {
-		if (e.isDark) {
-			e.toSystem();
-			return;
-		}
-		if (e.isSystem) {
-			e.toLight();
-			return;
-		}
-		if (e.isLight) {
-			e.toDark();
-			return;
-		}
+		e.isDark ? e.toSystem() : e.isSystem ? e.toLight() : e.isLight && e.toDark();
 	}, m = f({
 		get() {
 			return e.theme.mode;
