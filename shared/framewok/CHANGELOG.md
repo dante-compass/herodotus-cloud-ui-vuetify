@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 3.1.23
+
+### Patch Changes
+
+- 修复 Task API 定义错误
+- Updated dependencies
+  - @herodotus/core@3.1.23
+
 ## 3.1.22
 
 ### Patch Changes

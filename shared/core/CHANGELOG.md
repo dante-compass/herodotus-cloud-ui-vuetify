@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.23
+
+### Patch Changes
+
+- 修复 Task API 定义错误
+
 ## 3.1.22
 
 ### Patch Changes

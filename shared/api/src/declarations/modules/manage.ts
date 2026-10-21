@@ -142,4 +142,4 @@ export interface TaskExecutionHistoryConditions extends Conditions {
 export type PkiCertificateProps = keyof PkiCertificateResponse;
 export type PkiCertificateFileProps = keyof PkiCertificateFileResponse;
 export type TaskDefinitionProps = keyof TaskDefinitionEntity;
-export type TaskExecutionHistoryEntityProps = keyof TaskExecutionHistoryEntity;
+export type TaskExecutionHistoryProps = keyof TaskExecutionHistoryEntity;
