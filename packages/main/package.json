@@ -22,7 +22,7 @@
     "@herodotus/framework": "workspace:^",
     "@mdi/font": "7.4.47",
     "@rsocket/composite-metadata": "1.0.0-alpha.3",
-    "@stomp/stompjs": "^7.4.0",
+    "@stomp/stompjs": "^7.5.0",
     "@vueuse/components": "^15.0.0",
     "@vueuse/core": "^15.0.0",
     "animate.css": "^4.1.1",
@@ -33,7 +33,7 @@
     "rsocket-core": "1.0.0-alpha.3",
     "rsocket-websocket-client": "1.0.0-alpha.3",
     "vue": "^3.5.44",
-    "vue-i18n": "^11.4.14",
+    "vue-i18n": "^11.4.16",
     "vue-json-pretty": "^2.6.0",
     "xlsx": "^0.18.5"
   },

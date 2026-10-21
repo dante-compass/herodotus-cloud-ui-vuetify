@@ -5,6 +5,8 @@ import type {
   PkiCertificateResponse,
   PkiCertificateFileResponse,
   PkiCertificateFileRequest,
+  TaskDefinitionEntity,
+  TaskExecutionHistoryEntity,
 } from "@/declarations";
 
 import { HttpConfig, AbstractService } from "@herodotus/core";
@@ -88,4 +90,50 @@ class PkiCertificateFileService extends AbstractService<PkiCertificateFileReques
   }
 }
 
-export { PkiCertificateService, PkiCertificateFileService };
+class TaskDefinitionService extends AbstractService<TaskDefinitionEntity> {
+  private static instance: TaskDefinitionService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): TaskDefinitionService {
+    if (this.instance == null) {
+      this.instance = new TaskDefinitionService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getManage() + "/manage/task/definition";
+  }
+
+  private getToggleAddress(): string {
+    return this.getBaseAddress() + "/toggle";
+  }
+
+  public toggle(entity: TaskDefinitionEntity): Promise<AxiosHttpResult<TaskDefinitionEntity>> {
+    return this.getConfig().getHttp().put<TaskDefinitionEntity, TaskDefinitionEntity>(this.getToggleAddress(), entity);
+  }
+}
+
+class TaskExecutionHistoryService extends AbstractService<TaskExecutionHistoryEntity> {
+  private static instance: TaskExecutionHistoryService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): TaskExecutionHistoryService {
+    if (this.instance == null) {
+      this.instance = new TaskExecutionHistoryService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getManage() + "/manage/task/execution-history";
+  }
+}
+
+export { PkiCertificateService, PkiCertificateFileService, TaskDefinitionService, TaskExecutionHistoryService };

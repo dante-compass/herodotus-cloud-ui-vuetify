@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 3.1.22
+
+### Patch Changes
+
+- 任务调度后端主体定义完成
+- Updated dependencies
+  - @herodotus/core@3.1.22
+
 ## 3.1.21
 
 ### Patch Changes

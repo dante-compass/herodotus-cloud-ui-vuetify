@@ -1,5 +1,5 @@
 import { AxiosHttpResult, AxiosProgressEvent, HttpConfig, AbstractService } from '@herodotus/core';
-import { PkiCertificateDownloadRequest, PkiCertificateRequest, PkiCertificateResponse, PkiCertificateFileResponse, PkiCertificateFileRequest } from '../../declarations';
+import { PkiCertificateDownloadRequest, PkiCertificateRequest, PkiCertificateResponse, PkiCertificateFileResponse, PkiCertificateFileRequest, TaskDefinitionEntity, TaskExecutionHistoryEntity } from '../../declarations';
 declare class PkiCertificateService extends AbstractService<PkiCertificateRequest, PkiCertificateResponse> {
     private static instance;
     private constructor();
@@ -18,4 +18,18 @@ declare class PkiCertificateFileService extends AbstractService<PkiCertificateFi
     private getDownloadAddress;
     download(request: PkiCertificateDownloadRequest, onProgress?: (progressEvent: AxiosProgressEvent) => void): Promise<AxiosHttpResult<Blob>>;
 }
-export { PkiCertificateService, PkiCertificateFileService };
+declare class TaskDefinitionService extends AbstractService<TaskDefinitionEntity> {
+    private static instance;
+    private constructor();
+    static getInstance(config: HttpConfig): TaskDefinitionService;
+    getBaseAddress(): string;
+    private getToggleAddress;
+    toggle(entity: TaskDefinitionEntity): Promise<AxiosHttpResult<TaskDefinitionEntity>>;
+}
+declare class TaskExecutionHistoryService extends AbstractService<TaskExecutionHistoryEntity> {
+    private static instance;
+    private constructor();
+    static getInstance(config: HttpConfig): TaskExecutionHistoryService;
+    getBaseAddress(): string;
+}
+export { PkiCertificateService, PkiCertificateFileService, TaskDefinitionService, TaskExecutionHistoryService };

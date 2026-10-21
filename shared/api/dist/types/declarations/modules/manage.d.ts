@@ -82,9 +82,57 @@ export interface PkiCertificateFileResponse extends AbstractSysDto {
     creationTime: string;
     certificateCategory: string;
 }
+export interface TaskDefinitionEntity extends AbstractSysEntity {
+    taskId: string;
+    taskName: string;
+    taskType: string;
+    timezone: string;
+    interval: string;
+    initialDelay: string;
+    timeout: string;
+    serviceId: string;
+    beanName: string;
+    className: string;
+    methodName: string;
+    methodParams: string;
+    maxAttempts: number;
+    retryInterval: string;
+    backoff: string;
+    maxInterval: string;
+    paused: boolean;
+}
+export interface TaskExecutionHistoryEntity extends AbstractSysEntity {
+    executionId: string;
+    serviceId: string;
+    taskId: string;
+    taskName: string;
+    taskType: string;
+    startTime: Date;
+    endTime: Date;
+    duration: string;
+    succeeded: boolean;
+    errorMessage: string;
+}
 export interface PkiCertificateConditions extends Conditions {
 }
 export interface PkiCertificateFileConditions extends Conditions {
 }
+export interface TaskDefinitionConditions extends Conditions {
+    serviceId: string;
+    taskId: string;
+    taskName: string;
+    taskType: string;
+    paused: boolean;
+}
+export interface TaskExecutionHistoryConditions extends Conditions {
+    serviceId: string;
+    executionId: string;
+    taskId: string;
+    taskName: string;
+    taskType: string;
+    succeeded: boolean;
+}
 export type PkiCertificateProps = keyof PkiCertificateResponse;
 export type PkiCertificateFileProps = keyof PkiCertificateFileResponse;
+export type TaskDefinitionProps = keyof TaskDefinitionEntity;
+export type TaskExecutionHistoryEntityProps = keyof TaskExecutionHistoryEntity;

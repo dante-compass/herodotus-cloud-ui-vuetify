@@ -31,6 +31,8 @@ import {
   DialogueDetailService,
   NotificationService,
   WebSocketMessageService,
+  TaskDefinitionService,
+  TaskExecutionHistoryService,
 } from "./modules";
 
 import { BucketService, ObjectService, MultipartUploadService } from "./oss";
@@ -226,6 +228,14 @@ export class ApiResources {
 
   public iotMqttAccount(): MqttAccountService {
     return MqttAccountService.getInstance(this.config);
+  }
+
+  public taskDefinition(): TaskDefinitionService {
+    return TaskDefinitionService.getInstance(this.config);
+  }
+
+  public taskExecutionHistory(): TaskExecutionHistoryService {
+    return TaskExecutionHistoryService.getInstance(this.config);
   }
 }
 
