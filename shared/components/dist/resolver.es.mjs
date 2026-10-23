@@ -1,4 +1,4 @@
-//#region src/resolver.ts
+// src/resolver.ts
 var e = [
 	"HBitsGalaxy",
 	"HBitsPrismaticBurst",
@@ -36,5 +36,4 @@ function n() {
 		}
 	};
 }
-//#endregion
 export { n as HerodotusResolver, n as default };

@@ -7,7 +7,7 @@ import { generateFromString as s } from "generate-avatar";
 import { sm2 as c, sm4 as l } from "sm-crypto-v2";
 import u from "sweetalert2";
 import { SHA256 as d, enc as f, lib as p } from "crypto-js";
-//#region src/enums/index.ts
+// src/enums/index.ts
 var m = /* @__PURE__ */ function(e) {
 	return e.DARK = "dark", e.LIGHT = "light", e.SYSTEM = "system", e;
 }({}), h = /* @__PURE__ */ function(e) {
@@ -329,8 +329,7 @@ var m = /* @__PURE__ */ function(e) {
 		return this.getConfig().getHttp().put(this.getBaseAddress(), e, { contentType: h.URL_ENCODED });
 	}
 }, P = typeof window < "u";
-//#endregion
-//#region src/lib/utils/moment.ts
+// src/lib/utils/moment.ts
 o.locale("zh-cn");
 var F = class e {
 	static instance = new e();
@@ -563,5 +562,4 @@ var F = class e {
 		return this.generateChallenge(e) === t;
 	}
 }.getInstance();
-//#endregion
 export { N as AbstractService, y as AuthorizationGrantTypeEnum, v as AuthorizationTokenEnum, F as AvatarUtils, D as Axios, x as BuildInScopeEnum, b as ClientAuthenticationMethodEnum, h as ContentTypeEnum, j as HttpConfig, g as HttpMethodEnum, P as IN_BROWSER, S as OperationEnum, G as PKCE, R as SM2Utils, z as SM4Utils, M as Service, _ as StatusEnum, u as Swal, m as ThemeModeEnum, W as changeSwalTheme, A as isSuccess, k as logResponse, o as moment, H as notify, O as parseResponseStatus, U as toast };

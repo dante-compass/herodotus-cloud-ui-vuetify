@@ -9,7 +9,7 @@ import { colord as D, extend as oe } from "colord";
 import se from "colord/plugins/mix";
 import { Base64 as ce } from "js-base64";
 import le from "pinia-plugin-persistedstate";
-//#region src/declarations/enums.ts
+// src/declarations/enums.ts
 var O = /* @__PURE__ */ function(e) {
 	return e.DEFAULT = "defaults", e.CLASSIC = "classic", e.TRANSVERSE = "transverse", e.COLUMNS = "transverse", e;
 }({}), k = /* @__PURE__ */ function(e) {
@@ -23,8 +23,7 @@ var O = /* @__PURE__ */ function(e) {
 }({}), N = /* @__PURE__ */ function(e) {
 	return e.QUASAR = "Quasar", e.VUETIFY = "Vuetify", e;
 }({});
-//#endregion
-//#region src/lib/hooks/useAutocomplete.ts
+// src/lib/hooks/useAutocomplete.ts
 function ue(e, t) {
 	let n = _(""), r = _(!1), i = g([]), a = {}, o = (e) => {
 		i.value = e;
@@ -56,8 +55,7 @@ function ue(e, t) {
 		items: i
 	};
 }
-//#endregion
-//#region src/lib/stores/application.ts
+// src/lib/stores/application.ts
 var de = E("Application", {
 	state: () => ({
 		leftDrawer: !0,
@@ -83,8 +81,7 @@ var de = E("Application", {
 		}
 	}
 });
-//#endregion
-//#region src/lib/utilities/color.ts
+// src/lib/utilities/color.ts
 oe([se]);
 var P = 2, F = 16, I = 5, L = 5, R = 15, z = 5, B = 4;
 function V(e, t) {
@@ -131,8 +128,7 @@ function W(e, t, n) {
 function he(e) {
 	return D(e).isEqual("#ffffff");
 }
-//#endregion
-//#region src/lib/utilities/options.ts
+// src/lib/utilities/options.ts
 var G = class e {
 	static _instance = null;
 	static _initialized = !1;
@@ -910,8 +906,7 @@ var G = class e {
 	},
 	persist: !0
 });
-//#endregion
-//#region src/lib/hooks/useDetailPage.ts
+// src/lib/hooks/useDetailPage.ts
 function be() {
 	let e = Q(), t = $();
 	return {
@@ -927,8 +922,7 @@ function be() {
 		}
 	};
 }
-//#endregion
-//#region src/lib/hooks/useDeviceAuthorize.ts
+// src/lib/hooks/useDeviceAuthorize.ts
 function xe(e, t, n, i = "") {
 	let a = _(0), o = _(5), s = _(!1), c = _(!1), l = _({}), u = g([]), d = (e, t = !1) => {
 		let n = u.value.length + 1;
@@ -971,8 +965,7 @@ function xe(e, t, n, i = "") {
 		slowDown: v
 	};
 }
-//#endregion
-//#region src/lib/hooks/useFileDownload.ts
+// src/lib/hooks/useFileDownload.ts
 function Se() {
 	let e = _(0), t = _(!1);
 	return {
@@ -990,8 +983,7 @@ function Se() {
 		}
 	};
 }
-//#endregion
-//#region src/lib/hooks/usePasskey.ts
+// src/lib/hooks/usePasskey.ts
 function Ce() {
 	let e = X(), t = null, n = () => {
 		t &&= null;
@@ -1040,8 +1032,7 @@ function Ce() {
 		}))
 	};
 }
-//#endregion
-//#region src/lib/hooks/useSystemElement.ts
+// src/lib/hooks/useSystemElement.ts
 function we(e, t, n) {
 	let r = (e) => e.meta?.title, i = (e) => e.meta?.icon, a = (e) => e.meta?.isDetailContent, o = (e, n) => {
 		let r = {};
@@ -1117,40 +1108,13 @@ function we(e, t, n) {
 		d(t, a);
 	} };
 }
-`${Object.keys({
-	ł: "l",
-	ø: "o",
-	đ: "d",
-	ð: "d",
-	þ: "th",
-	ħ: "h",
-	ŧ: "t",
-	ŋ: "n",
-	ß: "ss",
-	æ: "ae",
-	œ: "oe",
-	ı: "i",
-	Ł: "L",
-	Ø: "O",
-	Đ: "D",
-	Ð: "D",
-	Þ: "Th",
-	Ħ: "H",
-	Ŧ: "T",
-	Ŋ: "N",
-	ẞ: "Ss",
-	Æ: "Ae",
-	Œ: "Oe"
-}).join("")}`;
-//#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.3.0_typescript@6._fc8db9ecf3eef68cf8465747c50e748a/node_modules/vuetify/lib/util/getCurrentInstance.js
+// ../../node_modules/.pnpm/vuetify@4.3.0_@vue+devtools_78af55f0fc69a0ff73a085666a0413e7/node_modules/vuetify/lib/util/getCurrentInstance.js
 function Te(e, t) {
 	let n = p();
 	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
 	return n;
 }
-//#endregion
-//#region ../../node_modules/.pnpm/vuetify@4.3.0_typescript@6._fc8db9ecf3eef68cf8465747c50e748a/node_modules/vuetify/lib/composables/theme.js
+// ../../node_modules/.pnpm/vuetify@4.3.0_@vue+devtools_78af55f0fc69a0ff73a085666a0413e7/node_modules/vuetify/lib/composables/theme.js
 var Ee = Symbol.for("vuetify:theme");
 function De() {
 	Te("useTheme");
@@ -1158,8 +1122,7 @@ function De() {
 	if (!e) throw Error("Could not find Vuetify theme injection");
 	return e;
 }
-//#endregion
-//#region src/lib/hooks/useSystemTheme.ts
+// src/lib/hooks/useSystemTheme.ts
 function Oe() {
 	let e = Z(), t = De(), n = _(s.DARK), r = (e) => {
 		if (!e || e.nodeType !== Node.ELEMENT_NODE) return !1;
@@ -1229,11 +1192,9 @@ function Oe() {
 		systemTheme: n
 	};
 }
-//#endregion
-//#region src/lib/main.ts
+// src/lib/main.ts
 var ke = (e) => {
 	let t = Z();
 	c(t.theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
 };
-//#endregion
 export { k as CaptchaCategoryEnum, O as LayoutModeEnum, N as LibraryEnum, j as MenuScenarioEnum, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, A as SocialSourceEnum, M as TableStyleEnum, me as addColorAlpha, H as getAllColorPalette, V as getColorPalette, ye as getSystemHeaders, ke as initializer, he as isWhiteColor, W as mixColor, le as piniaPluginPersistedstate, de as useApplicationStore, X as useAuthenticationStore, ue as useAutocomplete, Y as useCryptoStore, be as useDetailPage, xe as useDeviceAuthorize, Q as useElementStore, Se as useFileDownload, Ce as usePasskey, Z as useSettingsStore, we as useSystemElement, Oe as useSystemTheme, $ as useTabsViewStore };

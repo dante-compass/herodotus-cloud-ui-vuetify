@@ -1,5 +1,5 @@
 import { AbstractService as e, ContentTypeEnum as t, HttpConfig as n, Service as r } from "@herodotus/core";
-//#region src/enums/application.ts
+// src/enums/application.ts
 var i = /* @__PURE__ */ function(e) {
 	return e[e.OTHERS = 0] = "OTHERS", e[e.MAN = 1] = "MAN", e[e.WOMAN = 2] = "WOMAN", e;
 }({}), a = /* @__PURE__ */ function(e) {
@@ -903,5 +903,4 @@ var i = /* @__PURE__ */ function(e) {
 	let r = new n(e, t);
 	return Y.getInstance(r);
 };
-//#endregion
 export { Y as ApiResources, L as BucketService, t as ContentTypeEnum, H as DeviceService, N as DialogueContactService, P as DialogueDetailService, O as ExtendedTaskService, i as GenderEnum, J as MqttAccountService, q as MqttAuthorityService, K as MqttCategoryService, z as MultipartUploadService, a as NotificationCategoryEnum, F as NotificationService, o as OAuth2ApplicationService, c as OAuth2AuthorizationService, d as OAuth2CredentialRecordService, u as OAuth2InterfaceAuditService, f as OAuth2PersistentTokenService, p as OAuth2ResourceService, s as OAuth2ScopeService, m as OAuth2SupportedScopeService, l as OAuth2UserLoggingService, R as ObjectService, A as PkiCertificateFileService, k as PkiCertificateService, B as ProductCategoryService, V as ProductService, D as SocialBindingService, S as SysAttributeService, C as SysDefaultRoleService, g as SysDepartmentService, E as SysDictionaryService, w as SysElementService, v as SysEmployeeAllocatableService, _ as SysEmployeeService, h as SysOrganizationService, y as SysPermissionService, b as SysRoleService, T as SysTenantDataSourceService, x as SysUserService, j as TaskDefinitionService, M as TaskExecutionHistoryService, W as TslArgumentService, G as TslFunctionService, U as TslUnitService, I as WebSocketMessageService, X as createApi };

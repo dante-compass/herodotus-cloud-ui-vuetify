@@ -96,6 +96,7 @@ export interface TaskDefinitionEntity extends AbstractSysEntity {
     methodName: string;
     methodParams: string;
     maxAttempts: number;
+    expression: string;
     retryInterval: string;
     backoff: string;
     maxInterval: string;

@@ -8,7 +8,7 @@ import { moment as F } from "@herodotus/core";
 import { debounce as De, find as Oe, isArray as ke, isEmpty as I, kebabCase as Ae } from "lodash-es";
 import { defineStore as je } from "pinia";
 import * as Me from "@mdi/js";
-//#region src/HAnimate/HBitsGalaxy.vue?vue&type=script&setup=true&lang.ts
+// src/HAnimate/HBitsGalaxy.vue?vue&type=script&setup=true&lang.ts
 var Ne = "\nattribute vec2 uv;\nattribute vec2 position;\n\nvarying vec2 vUv;\n\nvoid main() {\n  vUv = uv;\n  gl_Position = vec4(position, 0, 1);\n}\n", Pe = "\nprecision highp float;\n\nuniform float uTime;\nuniform vec3 uResolution;\nuniform vec2 uFocal;\nuniform vec2 uRotation;\nuniform float uStarSpeed;\nuniform float uDensity;\nuniform float uHueShift;\nuniform float uSpeed;\nuniform vec2 uMouse;\nuniform float uGlowIntensity;\nuniform float uSaturation;\nuniform bool uMouseRepulsion;\nuniform float uTwinkleIntensity;\nuniform float uRotationSpeed;\nuniform float uRepulsionStrength;\nuniform float uMouseActiveFactor;\nuniform float uAutoCenterRepulsion;\nuniform bool uTransparent;\n\nvarying vec2 vUv;\n\n#define NUM_LAYER 4.0\n#define STAR_COLOR_CUTOFF 0.2\n#define MAT45 mat2(0.7071, -0.7071, 0.7071, 0.7071)\n#define PERIOD 3.0\n\nfloat Hash21(vec2 p) {\n  p = fract(p * vec2(123.34, 456.21));\n  p += dot(p, p + 45.32);\n  return fract(p.x * p.y);\n}\n\nfloat tri(float x) {\n  return abs(fract(x) * 2.0 - 1.0);\n}\n\nfloat tris(float x) {\n  float t = fract(x);\n  return 1.0 - smoothstep(0.0, 1.0, abs(2.0 * t - 1.0));\n}\n\nfloat trisn(float x) {\n  float t = fract(x);\n  return 2.0 * (1.0 - smoothstep(0.0, 1.0, abs(2.0 * t - 1.0))) - 1.0;\n}\n\nvec3 hsv2rgb(vec3 c) {\n  vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);\n  vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);\n  return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);\n}\n\nfloat Star(vec2 uv, float flare) {\n  float d = length(uv);\n  float m = (0.05 * uGlowIntensity) / d;\n  float rays = smoothstep(0.0, 1.0, 1.0 - abs(uv.x * uv.y * 1000.0));\n  m += rays * flare * uGlowIntensity;\n  uv *= MAT45;\n  rays = smoothstep(0.0, 1.0, 1.0 - abs(uv.x * uv.y * 1000.0));\n  m += rays * 0.3 * flare * uGlowIntensity;\n  m *= smoothstep(1.0, 0.2, d);\n  return m;\n}\n\nvec3 StarLayer(vec2 uv) {\n  vec3 col = vec3(0.0);\n\n  vec2 gv = fract(uv) - 0.5;\n  vec2 id = floor(uv);\n\n  for (int y = -1; y <= 1; y++) {\n    for (int x = -1; x <= 1; x++) {\n      vec2 offset = vec2(float(x), float(y));\n      vec2 si = id + vec2(float(x), float(y));\n      float seed = Hash21(si);\n      float size = fract(seed * 345.32);\n      float glossLocal = tri(uStarSpeed / (PERIOD * seed + 1.0));\n      float flareSize = smoothstep(0.9, 1.0, size) * glossLocal;\n\n      float red = smoothstep(STAR_COLOR_CUTOFF, 1.0, Hash21(si + 1.0)) + STAR_COLOR_CUTOFF;\n      float blu = smoothstep(STAR_COLOR_CUTOFF, 1.0, Hash21(si + 3.0)) + STAR_COLOR_CUTOFF;\n      float grn = min(red, blu) * seed;\n      vec3 base = vec3(red, grn, blu);\n\n      float hue = atan(base.g - base.r, base.b - base.r) / (2.0 * 3.14159) + 0.5;\n      hue = fract(hue + uHueShift / 360.0);\n      float sat = length(base - vec3(dot(base, vec3(0.299, 0.587, 0.114)))) * uSaturation;\n      float val = max(max(base.r, base.g), base.b);\n      base = hsv2rgb(vec3(hue, sat, val));\n\n      vec2 pad = vec2(tris(seed * 34.0 + uTime * uSpeed / 10.0), tris(seed * 38.0 + uTime * uSpeed / 30.0)) - 0.5;\n\n      float star = Star(gv - offset - pad, flareSize);\n      vec3 color = base;\n\n      float twinkle = trisn(uTime * uSpeed + seed * 6.2831) * 0.5 + 1.0;\n      twinkle = mix(1.0, twinkle, uTwinkleIntensity);\n      star *= twinkle;\n\n      col += star * size * color;\n    }\n  }\n\n  return col;\n}\n\nvoid main() {\n  vec2 focalPx = uFocal * uResolution.xy;\n  vec2 uv = (vUv * uResolution.xy - focalPx) / uResolution.y;\n\n  vec2 mouseNorm = uMouse - vec2(0.5);\n\n  if (uAutoCenterRepulsion > 0.0) {\n    vec2 centerUV = vec2(0.0, 0.0); // Center in UV space\n    float centerDist = length(uv - centerUV);\n    vec2 repulsion = normalize(uv - centerUV) * (uAutoCenterRepulsion / (centerDist + 0.1));\n    uv += repulsion * 0.05;\n  } else if (uMouseRepulsion) {\n    vec2 mousePosUV = (uMouse * uResolution.xy - focalPx) / uResolution.y;\n    float mouseDist = length(uv - mousePosUV);\n    vec2 repulsion = normalize(uv - mousePosUV) * (uRepulsionStrength / (mouseDist + 0.1));\n    uv += repulsion * 0.05 * uMouseActiveFactor;\n  } else {\n    vec2 mouseOffset = mouseNorm * 0.1 * uMouseActiveFactor;\n    uv += mouseOffset;\n  }\n\n  float autoRotAngle = uTime * uRotationSpeed;\n  mat2 autoRot = mat2(cos(autoRotAngle), -sin(autoRotAngle), sin(autoRotAngle), cos(autoRotAngle));\n  uv = autoRot * uv;\n\n  uv = mat2(uRotation.x, -uRotation.y, uRotation.y, uRotation.x) * uv;\n\n  vec3 col = vec3(0.0);\n\n  for (float i = 0.0; i < 1.0; i += 1.0 / NUM_LAYER) {\n    float depth = fract(i + uStarSpeed * uSpeed);\n    float scale = mix(20.0 * uDensity, 0.5 * uDensity, depth);\n    float fade = depth * smoothstep(1.0, 0.9, depth);\n    col += StarLayer(uv * scale + i * 453.32) * fade;\n  }\n\n  if (uTransparent) {\n    float alpha = length(col);\n    alpha = smoothstep(0.0, 0.3, alpha); // Enhance contrast\n    alpha = min(alpha, 1.0); // Clamp to maximum 1.0\n    gl_FragColor = vec4(col, alpha);\n  } else {\n    gl_FragColor = vec4(col, 1.0);\n  }\n}\n", L = /* @__PURE__ */ l({
 	name: "HBitsGalaxy",
 	__name: "HBitsGalaxy",
@@ -450,8 +450,7 @@ L.install = (e) => {
 }, B.install = (e) => {
 	e.component(B.name, B);
 };
-//#endregion
-//#region src/HButton/HIconButton.vue
+// src/HButton/HIconButton.vue
 var V = /* @__PURE__ */ l({
 	name: "HIconButton",
 	components: {
@@ -476,13 +475,11 @@ var V = /* @__PURE__ */ l({
 		}, 8, ["location"])) : (_(), n(S(he), p(d({ key: 1 }, t.$attrs)), null, 16));
 	}
 });
-//#endregion
-//#region src/HButton/index.ts
+// src/HButton/index.ts
 V.install = (e) => {
 	e.component(V.name, V);
 };
-//#endregion
-//#region src/HDateTime/HDatePicker.vue
+// src/HDateTime/HDatePicker.vue
 var Ve = /* @__PURE__ */ l({
 	name: "HDatePicker",
 	components: {
@@ -745,8 +742,7 @@ H.install = (e) => {
 }, G.install = (e) => {
 	e.component(G.name, G);
 };
-//#endregion
-//#region src/HDialog/HDialog.vue
+// src/HDialog/HDialog.vue
 var K = /* @__PURE__ */ l({
 	name: "HDialog",
 	components: {
@@ -840,13 +836,11 @@ var K = /* @__PURE__ */ l({
 		}, 8, ["modelValue", "max-width"]));
 	}
 });
-//#endregion
-//#region src/HDialog/index.ts
+// src/HDialog/index.ts
 K.install = (e) => {
 	e.component(K.name, K);
 };
-//#endregion
-//#region src/HDivider/HDivider.vue?vue&type=script&setup=true&lang.ts
+// src/HDivider/HDivider.vue?vue&type=script&setup=true&lang.ts
 var We = { class: "d-flex flex-column gr-4 py-4" }, q = /* @__PURE__ */ l({
 	name: "HDivider",
 	components: { VDivider: pe },
@@ -859,13 +853,11 @@ var We = { class: "d-flex flex-column gr-4 py-4" }, q = /* @__PURE__ */ l({
 		}, 16)]));
 	}
 });
-//#endregion
-//#region src/HDivider/index.ts
+// src/HDivider/index.ts
 q.install = (e) => {
 	e.component(q.name, q);
 };
-//#endregion
-//#region src/HProgress/HDownloadProgress.vue
+// src/HProgress/HDownloadProgress.vue
 var J = /* @__PURE__ */ l({
 	name: "HDownloadProgress",
 	components: {
@@ -922,13 +914,11 @@ var J = /* @__PURE__ */ l({
 		}, 16, ["modelValue"]));
 	}
 });
-//#endregion
-//#region src/HProgress/index.ts
+// src/HProgress/index.ts
 J.install = (e) => {
 	e.component(J.name, J);
 };
-//#endregion
-//#region src/HLabel/HLabel.vue?vue&type=script&setup=true&lang.ts
+// src/HLabel/HLabel.vue?vue&type=script&setup=true&lang.ts
 var Ge = { class: "flex-1-1-0" }, Ke = { class: "d-flex" }, qe = {
 	key: 0,
 	class: "d-flex align-self-center mr-1"
@@ -989,13 +979,11 @@ var Ge = { class: "flex-1-1-0" }, Ke = { class: "d-flex" }, qe = {
 		}, null, 8, ["messages", "active"])) : r("", !0)])], 2));
 	}
 });
-//#endregion
-//#region src/HLabel/index.ts
+// src/HLabel/index.ts
 Y.install = (e) => {
 	e.component(Y.name, Y);
 };
-//#endregion
-//#region src/lib/stores/mdiicon.ts
+// src/lib/stores/mdiicon.ts
 var Ye = je("MdiIcon", {
 	state: () => ({ icons: [] }),
 	getters: { getAllIcons: (e) => e.icons },
@@ -1164,8 +1152,7 @@ X.install = (e) => {
 }, Z.install = (e) => {
 	e.component(Z.name, Z);
 };
-//#endregion
-//#region src/HSignIn/HSignInCornerBottom.vue?vue&type=script&setup=true&lang.ts
+// src/HSignIn/HSignInCornerBottom.vue?vue&type=script&setup=true&lang.ts
 var Xe = {
 	version: "1.1",
 	xmlns: "http://www.w3.org/2000/svg",
@@ -1266,13 +1253,11 @@ var Xe = {
 		}, null, 8, ["start-color", "end-color"])])]));
 	}
 }), [["__scopeId", "data-v-7774e47e"]]);
-//#endregion
-//#region src/HSignIn/index.ts
+// src/HSignIn/index.ts
 Q.install = (e) => {
 	e.component(Q.name, Q);
 };
-//#endregion
-//#region src/HItem/HLabelItem.vue?vue&type=script&setup=true&lang.ts
+// src/HItem/HLabelItem.vue?vue&type=script&setup=true&lang.ts
 var ct = { class: "w-20" }, lt = { class: "w-50" }, $ = /* @__PURE__ */ l({
 	name: "HLabelItem",
 	components: { HLabel: Y },
@@ -1315,13 +1300,11 @@ var ct = { class: "w-20" }, lt = { class: "w-50" }, $ = /* @__PURE__ */ l({
 		], 2));
 	}
 });
-//#endregion
-//#region src/HItem/index.ts
+// src/HItem/index.ts
 $.install = (e) => {
 	e.component($.name, $);
 };
-//#endregion
-//#region src/index.ts
+// src/index.ts
 var ut = [
 	L,
 	R,
@@ -1343,5 +1326,4 @@ var ut = [
 ], dt = { install: (e) => {
 	ut.map((t) => t.install(e));
 } };
-//#endregion
 export { L as HBitsGalaxy, R as HBitsPrismaticBurst, z as HBitsThreads, H as HDate, U as HDateTime, K as HDialog, q as HDivider, J as HDownloadProgress, W as HDuration, V as HIconButton, Y as HLabel, $ as HLabelItem, X as HMdiIconSelect, B as HParticles, Q as HSignInBackground, G as HTime, Z as HTreeSelect, dt as default };
