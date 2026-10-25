@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.24
+
+### Patch Changes
+
+- 完善任务功能定义
+
 ## 3.1.23
 
 ### Patch Changes

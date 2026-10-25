@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 3.1.24
+
+### Patch Changes
+
+- 完善任务功能定义
+- Updated dependencies
+  - @herodotus/core@3.1.24
+
 ## 3.1.23
 
 ### Patch Changes
