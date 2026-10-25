@@ -12,6 +12,10 @@
     disable-sort
     @update:options="findItems"
   >
+    <template #search>
+      <search v-model="conditions"></search>
+    </template>
+
     <template #item.succeeded="{ value }">
       <h-column-boolean :value="value"></h-column-boolean>
     </template>
@@ -32,6 +36,8 @@ import type { VDataTableHeaders } from '@/composables/declarations';
 
 import { useTable, useDateTime } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
+
+import Search from './Search.vue';
 
 defineOptions({ name: PAGE_NAME.TASK_EXECUTION_HISTORY });
 
@@ -54,7 +60,7 @@ const headers = ref([
 const rowKey: TaskExecutionHistoryProps = 'executionId';
 
 const { defaultFormat, humanize } = useDateTime();
-const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toAuthorize, deleteItemById, findItems } =
+const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, conditions, deleteItemById, findItems } =
   useTable<TaskExecutionHistoryConditions, TaskExecutionHistoryEntity>(
     API.core.taskExecutionHistory(),
     PAGE_NAME.TASK_EXECUTION_HISTORY,

@@ -12,6 +12,10 @@
     disable-sort
     @update:options="findItems"
   >
+    <template #search>
+      <search v-model="conditions"></search>
+    </template>
+
     <template #item.taskType="{ value }">
       <v-chip v-if="value" density="compact" rounded="lg" color="teal" label>
         {{ getDictionaryItemDisplay('TaskType', value) }}
@@ -51,6 +55,8 @@ import { toast } from '@herodotus/core';
 import { useTable, useDateTime, useDictionary } from '@/composables/hooks';
 import { API, PAGE_NAME } from '@/configurations';
 
+import Search from './Search.vue';
+
 defineOptions({ name: PAGE_NAME.TASK_DEFINITION });
 
 const headers = ref([
@@ -77,8 +83,18 @@ const rowKey: TaskDefinitionProps = 'taskId';
 
 const { getDictionaryItemDisplay } = useDictionary('TaskType', 'Backoff');
 const { defaultFormat, humanize } = useDateTime();
-const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, toEdit, deleteItemById, findItems } =
-  useTable<TaskDefinitionConditions, TaskDefinitionEntity>(API.core.taskDefinition(), PAGE_NAME.TASK_DEFINITION);
+const {
+  loading,
+  pageNumber,
+  pageSize,
+  tableRows,
+  totalPages,
+  totalItems,
+  conditions,
+  toEdit,
+  deleteItemById,
+  findItems,
+} = useTable<TaskDefinitionConditions, TaskDefinitionEntity>(API.core.taskDefinition(), PAGE_NAME.TASK_DEFINITION);
 
 const toggle = (item: TaskDefinitionEntity) => {
   API.core
