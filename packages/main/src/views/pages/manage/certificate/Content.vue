@@ -85,34 +85,34 @@
 </template>
 
 <script setup lang="ts">
-import type { MgtCertificateRequest, MgtCertificateResponse } from "@herodotus/api";
+import type { PkiCertificateRequest, PkiCertificateResponse } from '@herodotus/api';
 
-import { useTableItem } from "@/composables/hooks";
-import { API, PAGE_NAME } from "@/configurations";
-import { isEmpty } from "lodash-es";
+import { useTableItem } from '@/composables/hooks';
+import { API, PAGE_NAME } from '@/configurations';
+import { isEmpty } from 'lodash-es';
 
-defineOptions({ name: PAGE_NAME.MGT_CERTIFICATE_CONTENT });
+defineOptions({ name: PAGE_NAME.PKI_CERTIFICATE_CONTENT });
 
 const certificateForm = ref();
 
-const parentOptions = ref([]) as Ref<Array<MgtCertificateResponse>>;
+const parentOptions = ref([]) as Ref<Array<PkiCertificateResponse>>;
 const showParentLoading = shallowRef(false);
 const showParentSelect = shallowRef(false);
 const showOcspSwitch = shallowRef(false);
 
 const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<
-  MgtCertificateRequest,
-  MgtCertificateResponse
->(API.core.mgtCertificate(), PAGE_NAME.MGT_CERTIFICATE_CONTENT);
+  PkiCertificateRequest,
+  PkiCertificateResponse
+>(API.core.pkiCertificate(), PAGE_NAME.PKI_CERTIFICATE_CONTENT);
 
 const validateAlias = async (alias: string) => {
   return await new Promise((resolve, reject) => {
     if (alias) {
       API.core
-        .mgtCertificate()
+        .pkiCertificate()
         .findByAlias(alias)
         .then((result) => {
-          let cert = result.data as MgtCertificateResponse;
+          let cert = result.data as PkiCertificateResponse;
           // 如果能够查询到roleCode
           // 如果该roleCode 对应的 roleId 与当前 editedItem中的roleId相同
           // 则认为是编辑状态，而且employeeName 没有变化，那么就校验通过。
@@ -131,11 +131,11 @@ const isUniqueRule = (alias: string) => {
       if (validate) {
         return true;
       } else {
-        return "证书别名已被占用，请改用其它证书别名";
+        return '证书别名已被占用，请改用其它证书别名';
       }
     })
     .catch(() => {
-      return "后端服务暂时不可用";
+      return '后端服务暂时不可用';
     });
 };
 
@@ -143,7 +143,7 @@ const loadOptionData = (category: string) => {
   showParentLoading.value = true;
   if (category) {
     API.core
-      .mgtCertificate()
+      .pkiCertificate()
       .findAllByCertificateCategory(category)
       .then((result) => {
         if (result.data) {
@@ -160,15 +160,15 @@ const loadOptionData = (category: string) => {
 watch(
   () => editedItem.value.certificateCategory,
   (newValue) => {
-    if (newValue === "ROOT_CA") {
+    if (newValue === 'ROOT_CA') {
       showParentSelect.value = false;
-      editedItem.value.parentId = "";
+      editedItem.value.parentId = '';
     } else {
       loadOptionData(newValue);
       showParentSelect.value = true;
     }
 
-    if (newValue === "END_ENTITY") {
+    if (newValue === 'END_ENTITY') {
       showOcspSwitch.value = true;
       editedItem.value.ocsp = false;
     } else {

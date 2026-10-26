@@ -16,19 +16,19 @@
     >
       <template #item.certificateCategory="{ value }">
         <v-chip v-if="value" density="compact" rounded="lg" color="orange" label>
-          {{ getDictionaryItemDisplay("CertificateCategory", value) }}
+          {{ getDictionaryItemDisplay('CertificateCategory', value) }}
         </v-chip>
       </template>
 
       <template #item.certificateFileCategory="{ value }">
         <v-chip v-if="value" density="compact" rounded="lg" color="cyan" label>
-          {{ getDictionaryItemDisplay("CertificateFileCategory", value) }}
+          {{ getDictionaryItemDisplay('CertificateFileCategory', value) }}
         </v-chip>
       </template>
 
       <template #item.keyStoreCategory="{ value }">
         <v-chip v-if="value" density="compact" rounded="lg" color="purple" label>
-          {{ getDictionaryItemDisplay("KeyStoreCategory", value) }}
+          {{ getDictionaryItemDisplay('KeyStoreCategory', value) }}
         </v-chip>
       </template>
 
@@ -43,55 +43,55 @@
 
 <script setup lang="ts">
 import type {
-  MgtCertificateRequest,
-  MgtCertificateResponse,
-  MgtCertificateFileRequest,
-  MgtCertificateFileResponse,
-  MgtCertificateFileConditions,
-  MgtCertificateFileProps,
-} from "@herodotus/api";
-import type { VDataTableHeaders } from "@/composables/declarations";
+  PkiCertificateRequest,
+  PkiCertificateResponse,
+  PkiCertificateFileRequest,
+  PkiCertificateFileResponse,
+  PkiCertificateFileConditions,
+  PkiCertificateFileProps,
+} from '@herodotus/api';
+import type { VDataTableHeaders } from '@/composables/declarations';
 
-import { isEmpty } from "lodash-es";
+import { isEmpty } from 'lodash-es';
 
-import { useTable, useTableItem, useDictionary, useCertificateDownload } from "@/composables/hooks";
-import { API, PAGE_NAME } from "@/configurations";
+import { useTable, useTableItem, useDictionary, useCertificateDownload } from '@/composables/hooks';
+import { API, PAGE_NAME } from '@/configurations';
 
-defineOptions({ name: PAGE_NAME.MGT_CERTIFICATE_FILE });
+defineOptions({ name: PAGE_NAME.PKI_CERTIFICATE_FILE });
 
 const headers = ref([
-  { key: "alias", align: "center", label: "证书名称" },
-  { key: "certificateCategory", align: "center", title: "证书类别" },
-  { key: "certificateFileCategory", align: "center", title: "证书文件类别" },
-  { key: "keyStoreCategory", align: "center", title: "KeyStore类别" },
-  { key: "fileName", align: "center", title: "文件名" },
-  { key: "suffix", align: "center", title: "文件后缀" },
-  { key: "bucketName", align: "center", title: "存储桶" },
-  { key: "actions", align: "center", title: "操作" },
+  { key: 'alias', align: 'center', label: '证书名称' },
+  { key: 'certificateCategory', align: 'center', title: '证书类别' },
+  { key: 'certificateFileCategory', align: 'center', title: '证书文件类别' },
+  { key: 'keyStoreCategory', align: 'center', title: 'KeyStore类别' },
+  { key: 'fileName', align: 'center', title: '文件名' },
+  { key: 'suffix', align: 'center', title: '文件后缀' },
+  { key: 'bucketName', align: 'center', title: '存储桶' },
+  { key: 'actions', align: 'center', title: '操作' },
 ]) as Ref<Array<VDataTableHeaders>>;
 
-const rowKey: MgtCertificateFileProps = "fileId";
+const rowKey: PkiCertificateFileProps = 'fileId';
 
 const { loading, pageNumber, pageSize, tableRows, totalPages, totalItems, deleteItemById, findItems } = useTable<
-  MgtCertificateFileConditions,
-  MgtCertificateFileRequest,
-  MgtCertificateFileResponse
->(API.core.mgtCertificateFile(), PAGE_NAME.MGT_CERTIFICATE);
+  PkiCertificateFileConditions,
+  PkiCertificateFileRequest,
+  PkiCertificateFileResponse
+>(API.core.pkiCertificateFile(), PAGE_NAME.PKI_CERTIFICATE);
 
-const { onReturn } = useTableItem<MgtCertificateRequest, MgtCertificateResponse>(
-  API.core.mgtCertificate(),
-  PAGE_NAME.MGT_CERTIFICATE_FILE,
+const { onReturn } = useTableItem<PkiCertificateRequest, PkiCertificateResponse>(
+  API.core.pkiCertificate(),
+  PAGE_NAME.PKI_CERTIFICATE_FILE,
 );
 
 const { getDictionaryItemDisplay } = useDictionary(
-  "CertificateCategory",
-  "CertificateFileCategory",
-  "KeyStoreCategory",
+  'CertificateCategory',
+  'CertificateFileCategory',
+  'KeyStoreCategory',
 );
 
 const { download, loadProgress, showProgress } = useCertificateDownload();
 
-const onDownload = (item: MgtCertificateFileResponse) => {
+const onDownload = (item: PkiCertificateFileResponse) => {
   if (!isEmpty(item)) {
     download(item.fileName, item.fileSize);
   }

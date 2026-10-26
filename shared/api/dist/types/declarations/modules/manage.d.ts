@@ -1,5 +1,5 @@
 import { AbstractSysEntity, AbstractSysDto, Conditions, Dto } from '@herodotus/core';
-export interface MgtCertificateRequest extends AbstractSysDto {
+export interface PkiCertificateRequest extends AbstractSysDto {
     alias: string;
     /**
      * 证书所有者的公共名称
@@ -44,7 +44,7 @@ export interface MgtCertificateRequest extends AbstractSysDto {
     certificateCategory: string;
     ocsp: boolean;
 }
-export interface MgtCertificateResponse extends AbstractSysEntity {
+export interface PkiCertificateResponse extends AbstractSysEntity {
     certId: string;
     alias: string;
     commonName: string;
@@ -58,10 +58,10 @@ export interface MgtCertificateResponse extends AbstractSysEntity {
     ocsp: boolean;
     revocationReason: string;
 }
-export interface MgtCertificateDownloadRequest extends Dto {
+export interface PkiCertificateDownloadRequest extends Dto {
     filename: string;
 }
-export interface MgtCertificateFileRequest extends Dto {
+export interface PkiCertificateFileRequest extends Dto {
     certId: string;
     certificateFileCategory: string;
     keyStoreFormat?: string;
@@ -70,7 +70,7 @@ export interface MgtCertificateFileRequest extends Dto {
     pemCertificateFormat?: string;
     encryptPrivateKey?: boolean;
 }
-export interface MgtCertificateFileResponse extends AbstractSysDto {
+export interface PkiCertificateFileResponse extends AbstractSysDto {
     fileId: string;
     certId: string;
     certificateFileCategory: string;
@@ -82,9 +82,58 @@ export interface MgtCertificateFileResponse extends AbstractSysDto {
     creationTime: string;
     certificateCategory: string;
 }
-export interface MgtCertificateConditions extends Conditions {
+export interface TaskDefinitionEntity extends AbstractSysEntity {
+    taskId: string;
+    taskName: string;
+    taskType: string;
+    timezone: string;
+    interval: string;
+    initialDelay: string;
+    timeout: string;
+    serviceId: string;
+    beanName: string;
+    className: string;
+    methodName: string;
+    methodParams: string;
+    maxAttempts: number;
+    expression: string;
+    retryInterval: string;
+    backoff: string;
+    maxInterval: string;
+    paused: boolean;
 }
-export interface MgtCertificateFileConditions extends Conditions {
+export interface TaskExecutionHistoryEntity extends AbstractSysEntity {
+    executionId: string;
+    serviceId: string;
+    taskId: string;
+    taskName: string;
+    taskType: string;
+    startTime: Date;
+    endTime: Date;
+    duration: string;
+    succeeded: boolean;
+    errorMessage: string;
 }
-export type MgtCertificateProps = keyof MgtCertificateResponse;
-export type MgtCertificateFileProps = keyof MgtCertificateFileResponse;
+export interface PkiCertificateConditions extends Conditions {
+}
+export interface PkiCertificateFileConditions extends Conditions {
+}
+export interface TaskDefinitionConditions extends Conditions {
+    serviceId: string;
+    taskId: string;
+    taskName: string;
+    taskType: string;
+    paused: boolean;
+}
+export interface TaskExecutionHistoryConditions extends Conditions {
+    serviceId: string;
+    executionId: string;
+    taskId: string;
+    taskName: string;
+    taskType: string;
+    succeeded: boolean;
+}
+export type PkiCertificateProps = keyof PkiCertificateResponse;
+export type PkiCertificateFileProps = keyof PkiCertificateFileResponse;
+export type TaskDefinitionProps = keyof TaskDefinitionEntity;
+export type TaskExecutionHistoryProps = keyof TaskExecutionHistoryEntity;

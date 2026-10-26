@@ -1,5 +1,53 @@
 # @herodotus/core
 
+## 3.1.25
+
+### Patch Changes
+
+- 版本发布
+
+## 3.1.24
+
+### Patch Changes
+
+- 完善任务功能定义
+
+## 3.1.23
+
+### Patch Changes
+
+- 修复 Task API 定义错误
+
+## 3.1.22
+
+### Patch Changes
+
+- 任务调度后端主体定义完成
+
+## 3.1.21
+
+### Patch Changes
+
+- 升级依赖包，重新编译库。
+
+## 3.1.20
+
+### Patch Changes
+
+- [重构] 重构证书关联模块代码及数据表命名，统一使用 pki 作为命名前缀
+
+## 3.1.19
+
+### Patch Changes
+
+- 升级 Vite 和 Vuetify 版本
+
+## 3.1.18
+
+### Patch Changes
+
+- 升级 PNPM 版本，重新编译库。
+
 ## 3.1.17
 
 ### Patch Changes

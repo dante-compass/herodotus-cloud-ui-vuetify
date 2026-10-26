@@ -1,31 +1,33 @@
 import type { AxiosHttpResult, AxiosProgressEvent } from "@herodotus/core";
 import type {
-  MgtCertificateDownloadRequest,
-  MgtCertificateRequest,
-  MgtCertificateResponse,
-  MgtCertificateFileResponse,
-  MgtCertificateFileRequest,
+  PkiCertificateDownloadRequest,
+  PkiCertificateRequest,
+  PkiCertificateResponse,
+  PkiCertificateFileResponse,
+  PkiCertificateFileRequest,
+  TaskDefinitionEntity,
+  TaskExecutionHistoryEntity,
 } from "@/declarations";
 
 import { HttpConfig, AbstractService } from "@herodotus/core";
 import { ContentTypeEnum } from "@/enums";
 
-class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCertificateResponse> {
-  private static instance: MgtCertificateService;
+class PkiCertificateService extends AbstractService<PkiCertificateRequest, PkiCertificateResponse> {
+  private static instance: PkiCertificateService;
 
   private constructor(config: HttpConfig) {
     super(config);
   }
 
-  public static getInstance(config: HttpConfig): MgtCertificateService {
+  public static getInstance(config: HttpConfig): PkiCertificateService {
     if (this.instance == null) {
-      this.instance = new MgtCertificateService(config);
+      this.instance = new PkiCertificateService(config);
     }
     return this.instance;
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getManage() + "/manage/certificate";
+    return this.getConfig().getManage() + "/manage/pki/certificate";
   }
 
   private getAliasAddress(): string {
@@ -36,35 +38,35 @@ class MgtCertificateService extends AbstractService<MgtCertificateRequest, MgtCe
     return this.getBaseAddress() + "/category";
   }
 
-  public findByAlias(alias: string): Promise<AxiosHttpResult<MgtCertificateResponse>> {
-    return this.getConfig().getHttp().get<MgtCertificateResponse, string>(this.getAliasAddress(), { alias: alias });
+  public findByAlias(alias: string): Promise<AxiosHttpResult<PkiCertificateResponse>> {
+    return this.getConfig().getHttp().get<PkiCertificateResponse, string>(this.getAliasAddress(), { alias: alias });
   }
 
   public findAllByCertificateCategory(
     certificateCategory: string,
-  ): Promise<AxiosHttpResult<Array<MgtCertificateResponse>>> {
-    return this.getConfig().getHttp().get<Array<MgtCertificateResponse>, string>(this.getCategoryAddress(), {
+  ): Promise<AxiosHttpResult<Array<PkiCertificateResponse>>> {
+    return this.getConfig().getHttp().get<Array<PkiCertificateResponse>, string>(this.getCategoryAddress(), {
       certificateCategory: certificateCategory,
     });
   }
 }
 
-class MgtCertificateFileService extends AbstractService<MgtCertificateFileRequest, MgtCertificateFileResponse> {
-  private static instance: MgtCertificateFileService;
+class PkiCertificateFileService extends AbstractService<PkiCertificateFileRequest, PkiCertificateFileResponse> {
+  private static instance: PkiCertificateFileService;
 
   private constructor(config: HttpConfig) {
     super(config);
   }
 
-  public static getInstance(config: HttpConfig): MgtCertificateFileService {
+  public static getInstance(config: HttpConfig): PkiCertificateFileService {
     if (this.instance == null) {
-      this.instance = new MgtCertificateFileService(config);
+      this.instance = new PkiCertificateFileService(config);
     }
     return this.instance;
   }
 
   public getBaseAddress(): string {
-    return this.getConfig().getManage() + "/manage/certificate-file";
+    return this.getConfig().getManage() + "/manage/pki/certificate-file";
   }
 
   private getDownloadAddress(): string {
@@ -72,7 +74,7 @@ class MgtCertificateFileService extends AbstractService<MgtCertificateFileReques
   }
 
   public download(
-    request: MgtCertificateDownloadRequest,
+    request: PkiCertificateDownloadRequest,
     onProgress?: (progressEvent: AxiosProgressEvent) => void,
   ): Promise<AxiosHttpResult<Blob>> {
     if (onProgress) {
@@ -88,4 +90,50 @@ class MgtCertificateFileService extends AbstractService<MgtCertificateFileReques
   }
 }
 
-export { MgtCertificateService, MgtCertificateFileService };
+class TaskDefinitionService extends AbstractService<TaskDefinitionEntity> {
+  private static instance: TaskDefinitionService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): TaskDefinitionService {
+    if (this.instance == null) {
+      this.instance = new TaskDefinitionService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getManage() + "/manage/task/definition";
+  }
+
+  private getToggleAddress(): string {
+    return this.getBaseAddress() + "/toggle";
+  }
+
+  public toggle(entity: TaskDefinitionEntity): Promise<AxiosHttpResult<TaskDefinitionEntity>> {
+    return this.getConfig().getHttp().put<TaskDefinitionEntity, TaskDefinitionEntity>(this.getToggleAddress(), entity);
+  }
+}
+
+class TaskExecutionHistoryService extends AbstractService<TaskExecutionHistoryEntity> {
+  private static instance: TaskExecutionHistoryService;
+
+  private constructor(config: HttpConfig) {
+    super(config);
+  }
+
+  public static getInstance(config: HttpConfig): TaskExecutionHistoryService {
+    if (this.instance == null) {
+      this.instance = new TaskExecutionHistoryService(config);
+    }
+    return this.instance;
+  }
+
+  public getBaseAddress(): string {
+    return this.getConfig().getManage() + "/manage/task/execution-history";
+  }
+}
+
+export { PkiCertificateService, PkiCertificateFileService, TaskDefinitionService, TaskExecutionHistoryService };

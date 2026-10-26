@@ -25,12 +25,14 @@ import {
   SysDictionaryService,
   SocialBindingService,
   ExtendedTaskService,
-  MgtCertificateService,
-  MgtCertificateFileService,
+  PkiCertificateService,
+  PkiCertificateFileService,
   DialogueContactService,
   DialogueDetailService,
   NotificationService,
   WebSocketMessageService,
+  TaskDefinitionService,
+  TaskExecutionHistoryService,
 } from "./modules";
 
 import { BucketService, ObjectService, MultipartUploadService } from "./oss";
@@ -172,12 +174,12 @@ export class ApiResources {
     return ExtendedTaskService.getInstance(this.config);
   }
 
-  public mgtCertificate(): MgtCertificateService {
-    return MgtCertificateService.getInstance(this.config);
+  public pkiCertificate(): PkiCertificateService {
+    return PkiCertificateService.getInstance(this.config);
   }
 
-  public mgtCertificateFile(): MgtCertificateFileService {
-    return MgtCertificateFileService.getInstance(this.config);
+  public pkiCertificateFile(): PkiCertificateFileService {
+    return PkiCertificateFileService.getInstance(this.config);
   }
 
   public ossBucket(): BucketService {
@@ -226,6 +228,14 @@ export class ApiResources {
 
   public iotMqttAccount(): MqttAccountService {
     return MqttAccountService.getInstance(this.config);
+  }
+
+  public taskDefinition(): TaskDefinitionService {
+    return TaskDefinitionService.getInstance(this.config);
+  }
+
+  public taskExecutionHistory(): TaskExecutionHistoryService {
+    return TaskExecutionHistoryService.getInstance(this.config);
   }
 }
 
