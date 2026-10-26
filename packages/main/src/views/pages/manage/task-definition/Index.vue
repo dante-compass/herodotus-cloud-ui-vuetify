@@ -57,7 +57,7 @@ import { API, PAGE_NAME } from '@/configurations';
 
 import Search from './Search.vue';
 
-defineOptions({ name: PAGE_NAME.TASK_DEFINITION });
+defineOptions({ name: PAGE_NAME.TASK_DEFINITION, components: { Search } });
 
 const headers = ref([
   { key: 'taskId', align: 'start', title: '任务ID' },

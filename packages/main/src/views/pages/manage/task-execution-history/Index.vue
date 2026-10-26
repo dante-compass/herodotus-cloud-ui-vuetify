@@ -39,7 +39,7 @@ import { API, PAGE_NAME } from '@/configurations';
 
 import Search from './Search.vue';
 
-defineOptions({ name: PAGE_NAME.TASK_EXECUTION_HISTORY });
+defineOptions({ name: PAGE_NAME.TASK_EXECUTION_HISTORY, components: { Search } });
 
 const headers = ref([
   { key: 'serviceId', align: 'start', title: '服务' },

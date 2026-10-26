@@ -3,7 +3,7 @@
     <h-divider label="基础设置"></h-divider>
     <v-text-field v-model="editedItem.taskName" label="任务名称" placeholder="请输入任务名称" disabled></v-text-field>
     <h-dictionary-toggle v-model="editedItem.taskType" dictionary="TaskType" default-value="CRON"></h-dictionary-toggle>
-    <v-text-field v-model="editedItem.ex" label="任务名称" placeholder="请输入任务名称" disabled></v-text-field>
+    <v-text-field v-model="editedItem.taskName" label="任务名称" placeholder="请输入任务名称" disabled></v-text-field>
     <v-number-input
       v-model="editedItem.maxAttempts"
       label="最大重试次数"
@@ -34,51 +34,10 @@ const { editedItem, title, overlay, saveOrUpdate, onReturn } = useTableItem<Task
   API.core.taskDefinition(),
   PAGE_NAME.TASK_DEFINITION_CONTENT,
 );
-const { treeItems } = useTreeItem<TaskDefinitionConditions, TaskDefinitionEntity>(API.core.taskDefinition());
 
 const isExponential = computed(() => {
   return editedItem.value.backoff === 'EXPONENTIAL';
 });
-
-watch(
-  () => editedItem.value.taskType,
-  (newValue) => {
-    if (isCreate.value) {
-      switch (newValue) {
-        case 'CRON':
-          entity.value.arguments.eventOutputData = [];
-          break;
-        case 'services':
-          entity.value.arguments.serviceInputData = [];
-          entity.value.arguments.serviceOutputData = [];
-          break;
-        default:
-          entity.value.arguments.property = createEmptyNormalArgument();
-          break;
-      }
-    }
-  },
-);
-
-watch(
-  () => editedItem.value.backoff,
-  (newValue) => {
-    if (isCreate.value) {
-      switch (newValue) {
-        case 'CRON':
-          entity.value.arguments.eventOutputData = [];
-          break;
-        case 'services':
-          entity.value.arguments.serviceInputData = [];
-          entity.value.arguments.serviceOutputData = [];
-          break;
-        default:
-          entity.value.arguments.property = createEmptyNormalArgument();
-          break;
-      }
-    }
-  },
-);
 
 const onSave = () => {
   saveOrUpdate();
