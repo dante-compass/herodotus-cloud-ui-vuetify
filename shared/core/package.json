@@ -34,12 +34,12 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
-    "axios": "^1.20.0",
+    "axios": "^1.21.0",
     "crypto-js": "^4.2.0",
     "generate-avatar": "^1.4.10",
     "moment": "^2.31.0",
-    "qs": "^6.16.1",
-    "sm-crypto-v2": "^1.15.1",
+    "qs": "^6.17.0",
+    "sm-crypto-v2": "^2.0.0",
     "sweetalert2": "^11.26.25",
     "ts-md5": "^2.0.1"
   },

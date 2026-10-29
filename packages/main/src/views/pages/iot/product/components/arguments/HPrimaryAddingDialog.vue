@@ -1,7 +1,7 @@
 <template>
   <h-dialog v-model="openDialog" title="添加参数" @confirm="onSave" @cancel="onCancel" external-close>
     <v-form ref="primaryAddingForm">
-      <h-primary-argument-panel v-model="currentArgument" ref="identifier" :status="status"></h-primary-argument-panel>
+      <h-argument-panel v-model="currentArgument" ref="identifier" :status="status"></h-argument-panel>
     </v-form>
   </h-dialog>
 </template>

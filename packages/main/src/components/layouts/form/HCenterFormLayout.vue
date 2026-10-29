@@ -6,7 +6,13 @@
         <v-col>
           <slot></slot>
           <v-text-field v-model="entity.description" label="备注" placeholder="请输入备注"></v-text-field>
-          <v-text-field v-model.number="entity.ranking" label="排序值" placeholder="请输入排序值" type="number" />
+          <v-number-input
+            v-model="entity.ranking"
+            label="排序值"
+            placeholder="请输入排序值"
+            control-variant="split"
+            inset
+          ></v-number-input>
           <h-dictionary-select
             v-model="entity.status"
             dictionary="DataItemStatus"
@@ -27,12 +33,12 @@
 </template>
 
 <script setup lang="ts">
-import type { AbstractSysDto, AbstractSysEntity } from "@herodotus/core";
+import type { AbstractSysDto, AbstractSysEntity } from '@herodotus/core';
 
-import HDetailContainer from "./HDetailContainer.vue";
-import { HDictionarySelect } from "../../library/HDictionary";
+import HDetailContainer from './HDetailContainer.vue';
+import { HDictionarySelect } from '../../library/HDictionary';
 
-defineOptions({ name: "HCenterFormLayout", components: { HDetailContainer, HDictionarySelect } });
+defineOptions({ name: 'HCenterFormLayout', components: { HDetailContainer, HDictionarySelect } });
 
 interface Props {
   entity: AbstractSysEntity | AbstractSysDto;
@@ -48,10 +54,10 @@ const emit = defineEmits<{
 }>();
 
 const onSave = async () => {
-  emit("save");
+  emit('save');
 };
 
 const onCancel = async () => {
-  emit("cancel");
+  emit('cancel');
 };
 </script>
