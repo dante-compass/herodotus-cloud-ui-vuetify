@@ -16,7 +16,7 @@
       :disabled="disabled"
       :rules="[
         (v: string) => !!v || '标识符不能为空',
-        (v) => regexRule(v) || '标识符仅允许包含大小字母、数字、特称字符，至少5个字符，最多50个字符',
+        (v: string) => regexRule(v) || '标识符仅允许包含大小字母、数字、特称字符，至少5个字符，最多50个字符',
       ]"
     ></v-text-field>
   </div>
