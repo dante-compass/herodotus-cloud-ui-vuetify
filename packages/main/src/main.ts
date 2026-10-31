@@ -15,7 +15,6 @@ import App from "./App.vue";
 
 // Styles
 import "unfonts.css";
-import "virtual:uno.css";
 
 function setupApp() {
   if (IS_DEV) {
