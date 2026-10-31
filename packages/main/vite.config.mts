@@ -3,6 +3,7 @@ import type { ConfigEnv, UserConfigExport } from "vite";
 // Plugins
 import Vue from "@vitejs/plugin-vue";
 import Vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+import UnoCSS from "unocss/vite";
 import ViteFonts from "unplugin-fonts/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
@@ -77,6 +78,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         fontsource: {
           families: [
             {
+              name: "Roboto Mono",
+              weights: [400, 700],
+            },
+            {
               name: "Roboto",
               weights: [100, 300, 400, 500, 700, 900],
               styles: ["normal", "italic"],
@@ -84,6 +89,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           ],
         },
       }),
+      UnoCSS(),
       compression({
         // environment.js 在打包时不生成 *.gz 或 *.br 文件，避免压缩文件影响环境变量的设置。
         exclude: ["**/environment.js"],
