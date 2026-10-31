@@ -101,12 +101,13 @@ export interface TaskDefinitionEntity extends AbstractSysEntity {
   className: string;
   methodName: string;
   methodParams: string;
-  maxAttempts: number;
   expression: string;
-  retryInterval: string;
-  backoff: string;
-  maxInterval: string;
+  maxAttempts: number | null;
+  retryInterval: string | null;
+  backoff: string | null;
+  maxInterval: string | null;
   paused: boolean;
+  available: boolean;
 }
 
 export interface TaskExecutionHistoryEntity extends AbstractSysEntity {

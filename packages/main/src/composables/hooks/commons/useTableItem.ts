@@ -29,14 +29,12 @@ export default function useTableItem<I extends Domain, O extends Domain = I>(
       })
       .catch(() => {
         overlay.value = false;
-        toast.error("保存失败");
-        onReturn();
+        // 此处不弹出消息框，错误信息由 Axios 拦截器统一处理
       });
   };
 
   const assign = (data: any) => {
     overlay.value = true;
-    console.log("-----data-----", data);
     service
       .assign(data)
       .then((response) => {
@@ -51,8 +49,7 @@ export default function useTableItem<I extends Domain, O extends Domain = I>(
       })
       .catch(() => {
         overlay.value = false;
-        onReturn();
-        toast.error("保存失败");
+        // 此处不弹出消息框，错误信息由 Axios 拦截器统一处理
       });
   };
 

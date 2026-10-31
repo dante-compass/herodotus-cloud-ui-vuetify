@@ -38,7 +38,7 @@
     "crypto-js": "^4.2.0",
     "generate-avatar": "^1.4.10",
     "moment": "^2.31.0",
-    "qs": "^6.17.0",
+    "qs": "^6.17.1",
     "sm-crypto-v2": "^2.0.0",
     "sweetalert2": "^11.26.25",
     "ts-md5": "^2.0.1"

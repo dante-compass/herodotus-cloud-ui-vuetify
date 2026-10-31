@@ -6,20 +6,16 @@
         <v-col>
           <slot></slot>
           <v-text-field v-model="entity.description" label="备注" placeholder="请输入备注"></v-text-field>
-          <v-number-input
-            v-model="entity.ranking"
-            label="排序值"
-            placeholder="请输入排序值"
-            control-variant="split"
-            inset
-          ></v-number-input>
-          <h-dictionary-select
-            v-model="entity.status"
-            dictionary="DataItemStatus"
-            label="数据状态"
-          ></h-dictionary-select>
-          <v-divider></v-divider>
-          <v-switch v-model="entity.reserved" label="是否为保留数据"></v-switch>
+          <div v-if="!hideDetail">
+            <v-number-input v-model="entity.ranking" label="排序值" placeholder="请输入排序值" inset></v-number-input>
+            <h-dictionary-select
+              v-model="entity.status"
+              dictionary="DataItemStatus"
+              label="数据状态"
+            ></h-dictionary-select>
+            <v-divider></v-divider>
+            <v-switch v-model="entity.reserved" label="是否为保留数据"></v-switch>
+          </div>
           <div>
             <v-btn color="red" @click="onCancel()">取消</v-btn>
             <v-btn class="ml-2" @click="onSave()">保存</v-btn>
@@ -42,10 +38,12 @@ defineOptions({ name: 'HCenterFormLayout', components: { HDetailContainer, HDict
 
 interface Props {
   entity: AbstractSysEntity | AbstractSysDto;
+  hideDetail?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
   entity: () => ({}) as AbstractSysEntity | AbstractSysDto,
+  hideDetail: false,
 });
 
 const emit = defineEmits<{

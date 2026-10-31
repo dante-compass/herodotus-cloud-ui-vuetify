@@ -1,7 +1,13 @@
 <template>
-  <h-center-form-layout :entity="editedItem" :title="title" :overlay="overlay" @save="onSave()" @cancel="onReturn">
+  <h-center-form-layout
+    :entity="editedItem"
+    :title="title"
+    :overlay="overlay"
+    hide-detail
+    @save="onSave()"
+    @cancel="onReturn"
+  >
     <v-form ref="taskDefinitionForm">
-      <h-divider label="基础设置"></h-divider>
       <v-text-field v-model="editedItem.taskName" label="任务名称" placeholder="请输入任务名称" disabled></v-text-field>
       <h-dictionary-toggle
         v-model="editedItem.taskType"
