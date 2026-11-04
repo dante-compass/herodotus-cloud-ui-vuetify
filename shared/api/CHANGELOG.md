@@ -1,5 +1,13 @@
 # @herodotus/api
 
+## 3.1.27
+
+### Patch Changes
+
+- [重构] 前端主题列表定义数组迁移至 framework 模块中，方便代码共享
+- Updated dependencies
+  - @herodotus/core@3.1.27
+
 ## 3.1.26
 
 ### Patch Changes

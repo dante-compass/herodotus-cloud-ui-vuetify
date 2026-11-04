@@ -8,4 +8,9 @@ export default function useSystemTheme(): {
     systemTheme: import('vue').ComputedRef<ThemeModeEnum>;
     cycleChangeThemeIcon: import('vue').ComputedRef<string>;
     onCycleThemeChanged: () => void;
+    themeItems: {
+        text: string;
+        icon: string;
+        value: string;
+    }[];
 };

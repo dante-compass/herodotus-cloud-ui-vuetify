@@ -93,6 +93,24 @@ export default function useSystemTheme() {
     return settings.isLightenMode;
   });
 
+  const themeItems = [
+    {
+      text: "浅色主题",
+      icon: "mdi-white-balance-sunny",
+      value: "light",
+    },
+    {
+      text: "深色主题",
+      icon: "mdi-weather-night",
+      value: "dark",
+    },
+    {
+      text: "跟随系统",
+      icon: "mdi-desktop-tower-monitor",
+      value: "system",
+    },
+  ];
+
   return {
     isLightenMode,
     lightColor,
@@ -102,5 +120,6 @@ export default function useSystemTheme() {
     systemTheme,
     cycleChangeThemeIcon,
     onCycleThemeChanged,
+    themeItems,
   };
 }
