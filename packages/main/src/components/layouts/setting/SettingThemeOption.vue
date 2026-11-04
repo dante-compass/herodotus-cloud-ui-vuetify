@@ -1,6 +1,6 @@
 <template>
   <v-radio-group v-model="currentTheme" class="mb-2" color="primary" true-icon="mdi-check-circle-outline" hide-details>
-    <v-radio v-for="(item, i) in items" :key="i" :value="item.value">
+    <v-radio v-for="(item, i) in items" :key="i" :value="item.value" @click="theme.setTransitionOrigin($event.target)">
       <template #label>
         <v-icon :icon="item.icon" start />
         {{ item.text }}
@@ -10,11 +10,13 @@
 </template>
 
 <script setup lang="ts">
+import { useTheme } from 'vuetify';
 import { useSystemTheme } from '@herodotus/framework';
 
 defineOptions({ name: 'SettingThemeOption' });
 
-const { currentTheme } = useSystemTheme();
+const { currentTheme, systemTheme } = useSystemTheme();
+const theme = useTheme();
 
 const items = [
   {
@@ -33,4 +35,8 @@ const items = [
     value: 'system',
   },
 ];
+
+watchEffect(() => {
+  theme.change(systemTheme.value);
+});
 </script>

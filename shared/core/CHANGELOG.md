@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.26
+
+### Patch Changes
+
+- [重构] 重构前端主题切换动画效果，改用 Vuetify 自身提供特效，消除 framework 模块无效代码和依赖引用
+
 ## 3.1.25
 
 ### Patch Changes

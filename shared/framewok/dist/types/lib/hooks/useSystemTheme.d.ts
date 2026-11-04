@@ -5,6 +5,7 @@ export default function useSystemTheme(): {
     darkColor: import('vue').ComputedRef<string>;
     backgroundColor: import('vue').ComputedRef<string>;
     currentTheme: import('vue').WritableComputedRef<ThemeModeEnum, ThemeModeEnum>;
+    systemTheme: import('vue').ComputedRef<ThemeModeEnum>;
     cycleChangeThemeIcon: import('vue').ComputedRef<string>;
-    supportedThemes: ThemeModeEnum[];
+    onCycleThemeChanged: () => void;
 };

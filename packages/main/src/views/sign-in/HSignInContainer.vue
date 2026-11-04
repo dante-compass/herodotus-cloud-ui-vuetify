@@ -10,7 +10,7 @@
             :class="['elevation-20 mx-auto rounded-xl', isHovering ? 'opacity-100' : 'opacity-70']"
           >
             <template #append>
-              <v-btn :icon="cycleChangeThemeIcon" @click="onCycleChangeTheme()" class="mx-2"></v-btn>
+              <v-btn :icon="cycleChangeThemeIcon" @click="onChangeTheme($event.target)" class="mx-2"></v-btn>
             </template>
             <h-app-logo height="10vh" class="mb-2"></h-app-logo>
 
@@ -33,23 +33,29 @@
 </template>
 
 <script setup lang="ts">
+import type { ThemeMode } from '@herodotus/core';
+
 import { useTheme } from 'vuetify';
-import { ThemeModeEnum } from "@herodotus/core";
 import { useSystemTheme, useApplicationStore } from '@herodotus/framework';
 
 import { HAppLogo } from '@/components/library/HLogo';
 
 defineOptions({ name: 'HSignInContainer', components: { HAppLogo } });
 
-const { currentTheme,  onCycleChangeTheme, cycleChangeThemeIcon } = useSystemTheme();
+const { systemTheme, cycleChangeThemeIcon, onCycleThemeChanged } = useSystemTheme();
 const application = useApplicationStore();
 
 const tabs = shallowRef('account');
 const theme = useTheme();
 
-watch(currentTheme, (newValue) => {
-  theme.cycle([], { origin: '90% 10%' });
-})
+const onChangeTheme = (e: any) => {
+  theme.setTransitionOrigin(e);
+  onCycleThemeChanged();
+};
+
+watchEffect(() => {
+  theme.change(systemTheme.value);
+});
 
 watch(tabs, (newValue) => {
   application.signInPanel = newValue;

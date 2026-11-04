@@ -1,4 +1,4 @@
-import { computed } from "vue";
+import { computed, watch, shallowRef } from "vue";
 
 import { toast, notify } from "@herodotus/core";
 import { ThemeModeEnum } from "@herodotus/core";
@@ -7,6 +7,8 @@ import { getColorPalette, mixColor } from "@/lib/utilities";
 
 export default function useSystemTheme() {
   const settings = useSettingsStore();
+
+  const darkTheme = shallowRef(ThemeModeEnum.DARK);
 
   // ---------- 登录页面 Theme ----------
   const backgroundThemeColor = computed(() => {
@@ -27,18 +29,51 @@ export default function useSystemTheme() {
     return mixColor(COLOR_WHITE, backgroundThemeColor.value, ratio);
   });
 
+  /**
+   * 登录页面循环切换系统主题按钮事件
+   */
+  const onCycleThemeChanged = () => {
+    if (settings.isDark) {
+      settings.toSystem();
+      return;
+    }
+
+    if (settings.isSystem) {
+      settings.toLight();
+      return;
+    }
+
+    if (settings.isLight) {
+      settings.toDark();
+      return;
+    }
+  };
+
   const currentTheme = computed({
     get() {
       return settings.theme.mode;
     },
     set(newValue) {
       settings.theme.mode = newValue;
-      toast.setTheme(newValue);
-      notify.setTheme(newValue);
     },
   });
 
-  const supportedThemes = [ThemeModeEnum.LIGHT, ThemeModeEnum.DARK, ThemeModeEnum.SYSTEM];
+  const systemTheme = computed(() => {
+    return settings.isSystem ? darkTheme.value : settings.theme.mode;
+  });
+
+  watch(
+    () => settings.theme.mode,
+    (newValue) => {
+      if (newValue === ThemeModeEnum.SYSTEM) {
+        toast.setTheme(ThemeModeEnum.DARK);
+        notify.setTheme(ThemeModeEnum.DARK);
+      } else {
+        toast.setTheme(newValue);
+        notify.setTheme(newValue);
+      }
+    },
+  );
 
   /**
    * 登录页面循环切换系统主题按钮 Icon
@@ -64,7 +99,8 @@ export default function useSystemTheme() {
     darkColor,
     backgroundColor,
     currentTheme,
+    systemTheme,
     cycleChangeThemeIcon,
-    supportedThemes,
+    onCycleThemeChanged,
   };
 }

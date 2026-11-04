@@ -1,14 +1,14 @@
 import { AuthorizationGrantTypeEnum as e, AuthorizationTokenEnum as t, ClientAuthenticationMethodEnum as n, ContentTypeEnum as r, SM2Utils as i, SM4Utils as a, Service as o, ThemeModeEnum as s, changeSwalTheme as c, moment as l, notify as u, toast as d } from "@herodotus/core";
-import { computed as f, ref as p, shallowRef as m } from "vue";
-import { dropRight as h, endsWith as g, findIndex as _, has as v, isEmpty as y, join as ee, merge as b, remove as x, split as S } from "lodash-es";
-import { watchDebounced as te } from "@vueuse/core";
-import { useRoute as C } from "vue-router";
-import { defineStore as w } from "pinia";
-import { jwtDecode as ne } from "jwt-decode";
-import { colord as T, extend as re } from "colord";
-import ie from "colord/plugins/mix";
-import { Base64 as ae } from "js-base64";
-import oe from "pinia-plugin-persistedstate";
+import { computed as f, ref as p, shallowRef as m, watch as h } from "vue";
+import { dropRight as g, endsWith as _, findIndex as v, has as ee, isEmpty as y, join as te, merge as b, remove as x, split as ne } from "lodash-es";
+import { watchDebounced as S } from "@vueuse/core";
+import { useRoute as re } from "vue-router";
+import { defineStore as C } from "pinia";
+import { jwtDecode as ie } from "jwt-decode";
+import { colord as w, extend as ae } from "colord";
+import oe from "colord/plugins/mix";
+import { Base64 as se } from "js-base64";
+import T from "pinia-plugin-persistedstate";
 // src/declarations/enums.ts
 var E = /* @__PURE__ */ function(e) {
 	return e.DEFAULT = "defaults", e.CLASSIC = "classic", e.TRANSVERSE = "transverse", e.COLUMNS = "transverse", e;
@@ -24,7 +24,7 @@ var E = /* @__PURE__ */ function(e) {
 	return e.QUASAR = "Quasar", e.VUETIFY = "Vuetify", e;
 }({});
 // src/lib/hooks/useAutocomplete.ts
-function se(e, t) {
+function M(e, t) {
 	let n = m(""), r = m(!1), i = p([]), a = {}, o = (e) => {
 		i.value = e;
 	}, s = () => {
@@ -43,7 +43,7 @@ function se(e, t) {
 			l();
 		});
 	};
-	return te(n, (e) => {
+	return S(n, (e) => {
 		y(e) ? s() : d(e);
 	}, {
 		debounce: 1e3,
@@ -56,7 +56,7 @@ function se(e, t) {
 	};
 }
 // src/lib/stores/application.ts
-var ce = w("Application", {
+var ce = C("Application", {
 	state: () => ({
 		leftDrawer: !0,
 		rightDrawer: !1,
@@ -82,18 +82,18 @@ var ce = w("Application", {
 	}
 });
 // src/lib/utilities/color.ts
-re([ie]);
-var M = 2, N = 16, le = 5, ue = 5, P = 15, F = 5, I = 4;
-function L(e, t) {
+ae([oe]);
+var N = 2, P = 16, le = 5, F = 5, I = 15, L = 5, R = 4;
+function z(e, t) {
 	if (t === 6) return e;
-	let n = t < 6, r = T(e).toHsv(), i = n ? 6 - t : t - F - 1, a = {
-		h: z(r, i, n),
-		s: B(r, i, n),
-		v: V(r, i, n)
+	let n = t < 6, r = w(e).toHsv(), i = n ? 6 - t : t - L - 1, a = {
+		h: V(r, i, n),
+		s: H(r, i, n),
+		v: U(r, i, n)
 	};
-	return T(a).toHex();
+	return w(a).toHex();
 }
-function R(e) {
+function B(e) {
 	return [
 		1,
 		2,
@@ -105,31 +105,31 @@ function R(e) {
 		8,
 		9,
 		10
-	].map((t) => L(e, t));
-}
-function z(e, t, n) {
-	let r;
-	return r = e.h >= 60 && e.h <= 240 ? n ? e.h - M * t : e.h + M * t : n ? e.h + M * t : e.h - M * t, r < 0 ? r += 360 : r >= 360 && (r -= 360), r;
-}
-function B(e, t, n) {
-	let r;
-	return r = n ? e.s - N * t : t === I ? e.s + N : e.s + le * t, r > 100 && (r = 100), n && t === F && r > 10 && (r = 10), r < 6 && (r = 6), r;
+	].map((t) => z(e, t));
 }
 function V(e, t, n) {
 	let r;
-	return r = n ? e.v + ue * t : e.v - P * t, r > 100 && (r = 100), r;
+	return r = e.h >= 60 && e.h <= 240 ? n ? e.h - N * t : e.h + N * t : n ? e.h + N * t : e.h - N * t, r < 0 ? r += 360 : r >= 360 && (r -= 360), r;
 }
-function H(e, t) {
-	return T(e).alpha(t).toHex();
+function H(e, t, n) {
+	let r;
+	return r = n ? e.s - P * t : t === R ? e.s + P : e.s + le * t, r > 100 && (r = 100), n && t === L && r > 10 && (r = 10), r < 6 && (r = 6), r;
 }
 function U(e, t, n) {
-	return T(e).mix(t, n).toHex();
+	let r;
+	return r = n ? e.v + F * t : e.v - I * t, r > 100 && (r = 100), r;
+}
+function ue(e, t) {
+	return w(e).alpha(t).toHex();
+}
+function W(e, t, n) {
+	return w(e).mix(t, n).toHex();
 }
 function de(e) {
-	return T(e).isEqual("#ffffff");
+	return w(e).isEqual("#ffffff");
 }
 // src/lib/utilities/options.ts
-var W = class e {
+var G = class e {
 	static _instance = null;
 	static _initialized = !1;
 	options;
@@ -177,7 +177,7 @@ var W = class e {
 	static getTenantId() {
 		return this.getInstance().getOptions().variables.tenantId;
 	}
-}, G = class e {
+}, K = class e {
 	static _instance = null;
 	static _initialized = !1;
 	options;
@@ -240,8 +240,8 @@ var W = class e {
 		this.isRouterExist() ? this.to(this.options.path.signIn) : this.refresh();
 	}
 	getParent(e) {
-		let t = S(e, "/"), n = h(t);
-		return ee(n, "/");
+		let t = ne(e, "/"), n = g(t);
+		return te(n, "/");
 	}
 	toPrev(e) {
 		if (e.path) {
@@ -249,7 +249,7 @@ var W = class e {
 			this.to({ path: t });
 		} else this.goBack();
 	}
-}, K = class e {
+}, q = class e {
 	static _instance = null;
 	static _initialized = !1;
 	extension;
@@ -265,7 +265,7 @@ var W = class e {
 		return e._instance;
 	}
 	signOut(e = !1) {
-		e || Y().signOut(), this.extension(), console.log("Clear Framework Kernel Data"), Y().$reset(), J().$reset(), Z().$reset(), G.getInstance().toSignIn();
+		e || X().signOut(), this.extension(), console.log("Clear Framework Kernel Data"), X().$reset(), Y().$reset(), Q().$reset(), K.getInstance().toSignIn();
 	}
 	signOutWithDialog() {
 		u.signOutNotify(() => this.signOut());
@@ -302,7 +302,7 @@ var W = class e {
 	}
 	createBasicHeader(e = "", n = "") {
 		let r = this.config.getClientId() + ":" + this.config.getClientSecret();
-		return e && n && (r = e + ":" + n), t.BASIC + ae.encode(r);
+		return e && n && (r = e + ":" + n), t.BASIC + se.encode(r);
 	}
 	createClientData(e = "", t = "", n = "") {
 		let r = {
@@ -333,7 +333,7 @@ var W = class e {
 	createAuthorizationCodeAddress(e, t = "") {
 		if (y(t)) {
 			let t = this.config.getProject(), n = e;
-			return g(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
+			return _(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
 		}
 		return t;
 	}
@@ -492,7 +492,7 @@ var W = class e {
 	delete(e) {
 		return this.getConfig().getHttp().delete(this.getIdPath(e));
 	}
-}, q = class e {
+}, J = class e {
 	static _instance = null;
 	static _initialized = !1;
 	config = {};
@@ -519,7 +519,7 @@ var W = class e {
 	passkey() {
 		return me.getInstance(this.config);
 	}
-}, J = w("Crypto", {
+}, Y = C("Crypto", {
 	state: () => ({
 		sessionId: "",
 		key: "",
@@ -530,10 +530,10 @@ var W = class e {
 			this.sessionId = e;
 		},
 		setKey(e) {
-			this.key = a.encrypt(e, W.getSecurityKey());
+			this.key = a.encrypt(e, G.getSecurityKey());
 		},
 		getKey() {
-			return a.decrypt(this.key, W.getSecurityKey());
+			return a.decrypt(this.key, G.getSecurityKey());
 		},
 		encrypt(e) {
 			let t = this.getKey();
@@ -545,13 +545,13 @@ var W = class e {
 		},
 		exchange(e = "") {
 			return new Promise((t, n) => {
-				q.getInstance().open().createSession(e).then((e) => {
+				J.getInstance().open().createSession(e).then((e) => {
 					let n = e.data;
 					if (n) {
 						let e = n.sessionId, r = n.publicKey;
 						this.state = n.state;
 						let a = i.createKeyPair(), o = i.encrypt(a.publicKey, r);
-						q.getInstance().open().exchange(e, o).then((n) => {
+						J.getInstance().open().exchange(e, o).then((n) => {
 							let r = n.data, o = i.decrypt(r, a.privateKey);
 							this.setSessionId(e), this.setKey(o), t(o);
 						});
@@ -563,7 +563,7 @@ var W = class e {
 		}
 	},
 	persist: { storage: sessionStorage }
-}), Y = w("Authentication", {
+}), X = C("Authentication", {
 	state: () => ({
 		access_token: "",
 		expires_in: 0,
@@ -588,7 +588,7 @@ var W = class e {
 			return l(t).add(1, "seconds").diff(l(), "seconds") !== 0;
 		},
 		token() {
-			return W.isAutoRefreshToken() || this.isNotExpired ? this.access_token : "";
+			return G.isAutoRefreshToken() || this.isNotExpired ? this.access_token : "";
 		}
 	},
 	actions: {
@@ -604,10 +604,10 @@ var W = class e {
 		saveAccessToken(e) {
 			if (this.access_token = e.access_token, this.expires_in = e.expires_in, this.refresh_token = e.refresh_token ? e.refresh_token : "", this.license = e.refresh_token ? e.refresh_token : "", this.scope = e.scope, this.token_type = e.token_type, e.id_token) {
 				this.idToken = e.id_token;
-				let t = ne(this.idToken);
+				let t = ie(this.idToken);
 				this.userId = t.openid, this.username = t.sub, this.avatar = t.avatar, this.employeeId = t.employeeId, this.roles = t.roles;
 			} else if (e.openid) {
-				let t = J();
+				let t = Y();
 				this.openid = e.openid;
 				let n = t.decrypt(this.openid), r = JSON.parse(n);
 				this.userId = r.userId, this.username = r.username, this.roles = r.roles, this.avatar = r.avatar, this.employeeId = r.employeeId;
@@ -620,14 +620,14 @@ var W = class e {
 			return e.code && [40106, 40111].includes(e.code);
 		},
 		setErrorPrompt(e, t) {
-			this.isAlertMessage(e) && q.getInstance().open().getPrompt(t).then((e) => {
+			this.isAlertMessage(e) && J.getInstance().open().getPrompt(t).then((e) => {
 				this.setUserErrorStatus(e.data);
 			});
 		},
 		signIn(e, t) {
-			let n = J();
-			return W.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
-				q.getInstance().oauth2().passwordFlow(e, t, W.isUseCrypto()).then((e) => {
+			let n = Y();
+			return G.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
+				J.getInstance().oauth2().passwordFlow(e, t, G.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -640,7 +640,7 @@ var W = class e {
 		},
 		refreshToken() {
 			return new Promise((e, t) => {
-				q.getInstance().oauth2().refreshTokenFlow(this.refresh_token, W.isUseCrypto()).then((t) => {
+				J.getInstance().oauth2().refreshTokenFlow(this.refresh_token, G.isUseCrypto()).then((t) => {
 					if (t) {
 						let e = t;
 						this.saveAccessToken(e);
@@ -652,7 +652,7 @@ var W = class e {
 			});
 		},
 		signOut() {
-			this.access_token && q.getInstance().oauth2().signOut(this.access_token).then(() => {
+			this.access_token && J.getInstance().oauth2().signOut(this.access_token).then(() => {
 				console.log("Server side sign out successfully.");
 			}).catch((e) => {
 				console.log("Server side sign out has error.", e);
@@ -660,7 +660,7 @@ var W = class e {
 		},
 		authorizationCode(e, t = "") {
 			return new Promise((n, r) => {
-				q.getInstance().oauth2().authorizationCodeFlow(e, W.getRedirectUri(), t, W.isUseCrypto()).then((e) => {
+				J.getInstance().oauth2().authorizationCodeFlow(e, G.getRedirectUri(), t, G.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -672,9 +672,9 @@ var W = class e {
 			});
 		},
 		smsSignIn(e, t) {
-			let n = J();
-			return W.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
-				q.getInstance().oauth2().socialCredentialsFlowBySms(e, t, W.isUseCrypto()).then((e) => {
+			let n = Y();
+			return G.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
+				J.getInstance().oauth2().socialCredentialsFlowBySms(e, t, G.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -687,7 +687,7 @@ var W = class e {
 		},
 		socialSignIn(e, t) {
 			return new Promise((n, r) => {
-				q.getInstance().oauth2().socialCredentialsFlowByJustAuth(e, t, W.isUseCrypto()).then((e) => {
+				J.getInstance().oauth2().socialCredentialsFlowByJustAuth(e, t, G.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -700,7 +700,7 @@ var W = class e {
 		},
 		passkey(e) {
 			return new Promise((t, n) => {
-				q.getInstance().oauth2().webAuthnCredentialsFlow(e, W.isUseCrypto()).then((e) => {
+				J.getInstance().oauth2().webAuthnCredentialsFlow(e, G.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -714,11 +714,11 @@ var W = class e {
 	},
 	persist: !0
 }), he = () => {
-	let e = Y(), n = J(), r = e.access_token, i = n.sessionId, a = {};
+	let e = X(), n = Y(), r = e.access_token, i = n.sessionId, a = {};
 	r && (a.Authorization = t.BEARER + r), i && (a["X-Herodotus-Session-Id"] = i);
-	let o = W.getTenantId();
+	let o = G.getTenantId();
 	return o && (a["X-Herodotus-Tenant-Id"] = o), a["X-Herodotus-Api-Version"] = "v1", a;
-}, X = w("SystemSettings", {
+}, Z = C("SystemSettings", {
 	state: () => ({
 		library: j.VUETIFY,
 		theme: {
@@ -765,7 +765,7 @@ var W = class e {
 		}
 	},
 	persist: !0
-}), Z = w("SystemElement", {
+}), Q = C("SystemElement", {
 	state: () => ({
 		appMenus: [],
 		personalMenus: [],
@@ -804,7 +804,7 @@ var W = class e {
 		},
 		hasParameter(e) {
 			let t = e.name;
-			return !!(t && v(this.pushParams, t));
+			return !!(t && ee(this.pushParams, t));
 		},
 		isDetailRoute(e) {
 			return !!(e.meta && e.meta.isDetailContent);
@@ -819,7 +819,7 @@ var W = class e {
 			e && delete this.pushParams[e];
 		}
 	}
-}), Q = w("TabsView", {
+}), $ = C("TabsView", {
 	state: () => ({
 		tabs: [],
 		activatedTab: {},
@@ -828,7 +828,7 @@ var W = class e {
 	getters: {
 		isNotLastTab: (e) => (t) => e.tabs.length - 1 !== t,
 		getLastTabIndex: (e) => e.tabs.length - 1,
-		getTabIndex: (e) => (t) => _(e.tabs, (e) => e.name === t.name),
+		getTabIndex: (e) => (t) => v(e.tabs, (e) => e.name === t.name),
 		getActivatedTabIndex() {
 			return this.getTabIndex(this.activatedTab);
 		},
@@ -863,7 +863,7 @@ var W = class e {
 			this.activatedTab = e, this.activatedTabName = e.name;
 		},
 		isNotExistInStaticRoute(e) {
-			return _(W.getRoutes(), (t) => t.path === e.path) === -1;
+			return v(G.getRoutes(), (t) => t.path === e.path) === -1;
 		},
 		isTabNotOpened(e) {
 			return this.getTabIndex(e) === -1;
@@ -875,8 +875,8 @@ var W = class e {
 			x(this.tabs, (t) => t.name === e.name);
 		},
 		smartTab(e) {
-			let t = Z(), n = t.isDetailRoute(e), r = this.convertRouteToTab(e);
-			n ? t.hasParameter(e) ? this.openTab(r, n) : (this.closeTab(r), G.getInstance().goBack()) : this.openTab(r, n);
+			let t = Q(), n = t.isDetailRoute(e), r = this.convertRouteToTab(e);
+			n ? t.hasParameter(e) ? this.openTab(r, n) : (this.closeTab(r), K.getInstance().goBack()) : this.openTab(r, n);
 		},
 		deleteTab(e) {
 			let t = this.convertRouteToTab(e);
@@ -907,23 +907,23 @@ var W = class e {
 	persist: !0
 });
 // src/lib/hooks/useDetailPage.ts
-function $() {
-	let e = Z(), t = Q();
+function ge() {
+	let e = Q(), t = $();
 	return {
 		parseComponentName: (e, t) => {
 			if (e) return e;
 			{
 				let e = t;
-				return y(e) && (e = C()), e && e.name ? e.name : "";
+				return y(e) && (e = re()), e && e.name ? e.name : "";
 			}
 		},
 		goBack: (n, r) => {
-			!y(n) && !y(r) ? (e.removeRoutePushParam(r), t.deleteTabByName(r), G.getInstance().push({ name: n })) : G.getInstance().goBack();
+			!y(n) && !y(r) ? (e.removeRoutePushParam(r), t.deleteTabByName(r), K.getInstance().push({ name: n })) : K.getInstance().goBack();
 		}
 	};
 }
 // src/lib/hooks/useDeviceAuthorize.ts
-function ge(e, t, n, i = "") {
+function _e(e, t, n, i = "") {
 	let a = m(0), o = m(5), s = m(!1), c = m(!1), l = m({}), u = p([]), d = (e, t = !1) => {
 		let n = u.value.length + 1;
 		t ? u.value.push({
@@ -940,7 +940,7 @@ function ge(e, t, n, i = "") {
 	}, f = (e) => {
 		e === "authorization_pending" ? d("Authorization pending, continuing to poll...") : e === "slow_down" ? (d("Slowing down..."), v()) : e === "token_expired" ? (d("Token expired, stopping..."), _(), c.value = !0) : e === "access_denied" && (d("Access denied, stopping..."), _(), c.value = !0);
 	}, h = () => {
-		q.getInstance().oauth2().deviceCodeFlow(e.value, t.value, n.value, i, {
+		J.getInstance().oauth2().deviceCodeFlow(e.value, t.value, n.value, i, {
 			contentType: r.URL_ENCODED,
 			withToken: !1
 		}).then((e) => {
@@ -966,7 +966,7 @@ function ge(e, t, n, i = "") {
 	};
 }
 // src/lib/hooks/useFileDownload.ts
-function _e() {
+function ve() {
 	let e = m(0), t = m(!1);
 	return {
 		process: (e, t) => {
@@ -984,14 +984,14 @@ function _e() {
 	};
 }
 // src/lib/hooks/usePasskey.ts
-function ve() {
-	let e = Y(), t = null, n = () => {
+function ye() {
+	let e = X(), t = null, n = () => {
 		t &&= null;
 	};
 	return {
 		isSupported: async () => !!(window.PublicKeyCredential && PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable && PublicKeyCredential.isConditionalMediationAvailable && (await Promise.all([PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(), PublicKeyCredential.isConditionalMediationAvailable()])).every((e) => e === !0)),
 		registration: (e) => (t = new AbortController(), new Promise((t, r) => {
-			q.getInstance().passkey().getPublicKeyCredentialCreationOptions().then((e) => {
+			J.getInstance().passkey().getPublicKeyCredentialCreationOptions().then((e) => {
 				let t = PublicKeyCredential.parseCreationOptionsFromJSON(e);
 				return navigator.credentials.create({ publicKey: t });
 			}).then((t) => {
@@ -999,7 +999,7 @@ function ve() {
 					label: e,
 					credential: t
 				} };
-				return q.getInstance().passkey().webAuthnRegister(n);
+				return J.getInstance().passkey().webAuthnRegister(n);
 			}).then((e) => {
 				t(e);
 			}).catch((e) => {
@@ -1009,7 +1009,7 @@ function ve() {
 			});
 		})),
 		authenticator: () => (t = new AbortController(), new Promise((r, i) => {
-			q.getInstance().passkey().getPublicKeyCredentialRequestOptions().then((e) => {
+			J.getInstance().passkey().getPublicKeyCredentialRequestOptions().then((e) => {
 				let n = PublicKeyCredential.parseRequestOptionsFromJSON(e);
 				return navigator.credentials.get({
 					publicKey: n,
@@ -1033,7 +1033,7 @@ function ve() {
 	};
 }
 // src/lib/hooks/useSystemElement.ts
-function ye(e, t, n) {
+function be(e, t, n) {
 	let r = (e) => e.meta?.title, i = (e) => e.meta?.icon, a = (e) => e.meta?.isDetailContent, o = (e, n) => {
 		let r = {};
 		return r.path = e.name, r.component = n[t(e.componentPath)], e.componentName && (r.name = e.componentName), e.redirect && (r.redirect = e.redirect), r.meta = {
@@ -1070,7 +1070,7 @@ function ye(e, t, n) {
 		}
 		return n;
 	}, u = (e, t, n = !1) => {
-		let r = Z(), i = [], d = [], f = [], p = [];
+		let r = Q(), i = [], d = [], f = [], p = [];
 		return e.forEach((e) => {
 			let m = o(e, t);
 			a(m) && r.addDetailRoute(m);
@@ -1099,7 +1099,7 @@ function ye(e, t, n) {
 			testingMenus: p
 		};
 	}, d = (e, t) => {
-		console.log("[Herodotus] |- Begin add dynamic routes"), Z().addMenus(t.appMenus, t.personalMenus, t.testingMenus), y(t.routeRecords) ? console.warn("[Herodotus] |- Dynamic routes is empty, skip!") : (t.routeRecords.forEach((t) => {
+		console.log("[Herodotus] |- Begin add dynamic routes"), Q().addMenus(t.appMenus, t.personalMenus, t.testingMenus), y(t.routeRecords) ? console.warn("[Herodotus] |- Dynamic routes is empty, skip!") : (t.routeRecords.forEach((t) => {
 			e.addRoute(t);
 		}), console.log("[Herodotus] |- Dynamic routes add success!"));
 	};
@@ -1109,22 +1109,24 @@ function ye(e, t, n) {
 	} };
 }
 // src/lib/hooks/useSystemTheme.ts
-function be() {
-	let e = X(), t = f(() => e.isDarkenMode ? e.theme.dark.primary : e.theme.light.primary), n = f(() => L(t.value, 3)), r = f(() => L(t.value, 6)), i = f(() => {
-		let n = e.isDarkenMode ? .5 : .2;
-		return U("#ffffff", t.value, n);
-	}), a = f({
+function xe() {
+	let e = Z(), t = m(s.DARK), n = f(() => e.isDarkenMode ? e.theme.dark.primary : e.theme.light.primary), r = f(() => z(n.value, 3)), i = f(() => z(n.value, 6)), a = f(() => {
+		let t = e.isDarkenMode ? .5 : .2;
+		return W("#ffffff", n.value, t);
+	}), o = () => {
+		e.isDark ? e.toSystem() : e.isSystem ? e.toLight() : e.isLight && e.toDark();
+	}, c = f({
 		get() {
 			return e.theme.mode;
 		},
 		set(t) {
-			e.theme.mode = t, d.setTheme(t), u.setTheme(t);
+			e.theme.mode = t;
 		}
-	}), o = [
-		s.LIGHT,
-		s.DARK,
-		s.SYSTEM
-	], c = f(() => {
+	}), l = f(() => e.isSystem ? t.value : e.theme.mode);
+	h(() => e.theme.mode, (e) => {
+		e === s.SYSTEM ? (d.setTheme(s.DARK), u.setTheme(s.DARK)) : (d.setTheme(e), u.setTheme(e));
+	});
+	let p = f(() => {
 		switch (e.theme.mode) {
 			case s.SYSTEM: return "mdi-brightness-5";
 			case s.DARK: return "mdi-brightness-auto";
@@ -1133,17 +1135,18 @@ function be() {
 	});
 	return {
 		isLightenMode: f(() => e.isLightenMode),
-		lightColor: n,
-		darkColor: r,
-		backgroundColor: i,
-		currentTheme: a,
-		cycleChangeThemeIcon: c,
-		supportedThemes: o
+		lightColor: r,
+		darkColor: i,
+		backgroundColor: a,
+		currentTheme: c,
+		systemTheme: l,
+		cycleChangeThemeIcon: p,
+		onCycleThemeChanged: o
 	};
 }
 // src/lib/main.ts
-var xe = (e) => {
-	let t = X();
-	c(t.theme.mode), W.initialize(e), G.initialize(e.router), q.initialize(e.config), K.initialize(e.signOutExtension);
+var Se = (e) => {
+	let t = Z();
+	c(t.theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
 };
-export { D as CaptchaCategoryEnum, E as LayoutModeEnum, j as LibraryEnum, k as MenuScenarioEnum, W as OptionsUtilities, G as RouterUtilities, q as SecurityApiResources, K as SignOutUtilities, O as SocialSourceEnum, A as TableStyleEnum, H as addColorAlpha, R as getAllColorPalette, L as getColorPalette, he as getSystemHeaders, xe as initializer, de as isWhiteColor, U as mixColor, oe as piniaPluginPersistedstate, ce as useApplicationStore, Y as useAuthenticationStore, se as useAutocomplete, J as useCryptoStore, $ as useDetailPage, ge as useDeviceAuthorize, Z as useElementStore, _e as useFileDownload, ve as usePasskey, X as useSettingsStore, ye as useSystemElement, be as useSystemTheme, Q as useTabsViewStore };
+export { D as CaptchaCategoryEnum, E as LayoutModeEnum, j as LibraryEnum, k as MenuScenarioEnum, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, O as SocialSourceEnum, A as TableStyleEnum, ue as addColorAlpha, B as getAllColorPalette, z as getColorPalette, he as getSystemHeaders, Se as initializer, de as isWhiteColor, W as mixColor, T as piniaPluginPersistedstate, ce as useApplicationStore, X as useAuthenticationStore, M as useAutocomplete, Y as useCryptoStore, ge as useDetailPage, _e as useDeviceAuthorize, Q as useElementStore, ve as useFileDownload, ye as usePasskey, Z as useSettingsStore, be as useSystemElement, xe as useSystemTheme, $ as useTabsViewStore };
