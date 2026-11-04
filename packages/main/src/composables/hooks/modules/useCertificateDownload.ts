@@ -12,7 +12,7 @@ export default function useCertificateDownload() {
     if (size && size !== 0) {
       showDownLoadProgress();
       API.core
-        .mgtCertificateFile()
+        .pkiCertificateFile()
         .download({ filename: filename }, (progressEvent: AxiosProgressEvent) => {
           loadProgress.value = (progressEvent.loaded / size) * 100;
         })
@@ -25,7 +25,7 @@ export default function useCertificateDownload() {
         });
     } else {
       API.core
-        .mgtCertificateFile()
+        .pkiCertificateFile()
         .download({ filename: filename })
         .then((response) => {
           const data = response as Blob;

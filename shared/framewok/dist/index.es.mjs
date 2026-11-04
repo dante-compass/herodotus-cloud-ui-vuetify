@@ -1,31 +1,31 @@
 import { AuthorizationGrantTypeEnum as e, AuthorizationTokenEnum as t, ClientAuthenticationMethodEnum as n, ContentTypeEnum as r, SM2Utils as i, SM4Utils as a, Service as o, ThemeModeEnum as s, changeSwalTheme as c, moment as l, notify as u, toast as d } from "@herodotus/core";
-import { computed as f, getCurrentInstance as p, inject as m, nextTick as h, ref as g, shallowRef as _, watch as v, watchEffect as ee } from "vue";
-import { dropRight as y, endsWith as te, findIndex as b, has as ne, isEmpty as x, join as S, merge as C, remove as w, split as re } from "lodash-es";
-import { watchDebounced as T } from "@vueuse/core";
-import { useRoute as ie } from "vue-router";
-import { defineStore as E } from "pinia";
-import { jwtDecode as ae } from "jwt-decode";
-import { colord as D, extend as oe } from "colord";
-import se from "colord/plugins/mix";
-import { Base64 as ce } from "js-base64";
-import le from "pinia-plugin-persistedstate";
+import { computed as f, ref as p, shallowRef as m } from "vue";
+import { dropRight as h, endsWith as g, findIndex as _, has as v, isEmpty as y, join as ee, merge as b, remove as x, split as S } from "lodash-es";
+import { watchDebounced as te } from "@vueuse/core";
+import { useRoute as C } from "vue-router";
+import { defineStore as w } from "pinia";
+import { jwtDecode as ne } from "jwt-decode";
+import { colord as T, extend as re } from "colord";
+import ie from "colord/plugins/mix";
+import { Base64 as ae } from "js-base64";
+import oe from "pinia-plugin-persistedstate";
 // src/declarations/enums.ts
-var O = /* @__PURE__ */ function(e) {
+var E = /* @__PURE__ */ function(e) {
 	return e.DEFAULT = "defaults", e.CLASSIC = "classic", e.TRANSVERSE = "transverse", e.COLUMNS = "transverse", e;
-}({}), k = /* @__PURE__ */ function(e) {
+}({}), D = /* @__PURE__ */ function(e) {
 	return e.JIGSAW = "JIGSAW", e.WORD_CLICK = "WORD_CLICK", e.ARITHMETIC = "ARITHMETIC", e.CHINESE = "CHINESE", e.CHINESE_GIF = "CHINESE_GIF", e.SPEC_GIF = "SPEC_GIF", e.SPEC = "SPEC", e.HUTOOL_LINE = "HUTOOL_LINE", e.HUTOOL_CIRCLE = "HUTOOL_CIRCLE", e.HUTOOL_SHEAR = "HUTOOL_SHEAR", e.HUTOOL_GIF = "HUTOOL_GIF", e;
-}({}), A = /* @__PURE__ */ function(e) {
+}({}), O = /* @__PURE__ */ function(e) {
 	return e.INSTITUTION = "INSTITUTION", e.SMS = "SMS", e.WXAPP = "WXAPP", e.QQ = "QQ", e.WEIBO = "WEIBO", e.BAIDU = "BAIDU", e.WECHAT_OPEN = "WECHAT_OPEN", e.WECHAT_MP = "WECHAT_MP", e.WECHAT_ENTERPRISE = "WECHAT_ENTERPRISE", e.WECHAT_ENTERPRISE_WEB = "WECHAT_ENTERPRISE_WEB", e.DINGTALK = "DINGTALK", e.DINGTALK_ACCOUNT = "DINGTALK_ACCOUNT", e.ALIYUN = "ALIYUN", e.TAOBAO = "TAOBAO", e.ALIPAY = "ALIPAY", e.TEAMBITION = "TEAMBITION", e.HUAWEI_V2 = "HUAWEI_V2", e.FEISHU = "FEISHU", e.JD = "JD", e.DOUYIN = "DOUYIN", e.TOUTIAO = "TOUTIAO", e.MI = "MI", e.RENREN = "RENREN", e.MEITUAN = "MEITUAN", e.ELEME = "ELEME", e.KUJIALE = "KUJIALE", e.XMLY = "XMLY", e.GITEE = "GITEE", e.OSCHINA = "OSCHINA", e.CSDN = "CSDN", e.GITHUB = "GITHUB", e.GITLAB = "GITLAB", e.STACK_OVERFLOW = "STACK_OVERFLOW", e.CODING = "CODING", e.GOOGLE = "GOOGLE", e.MICROSOFT = "MICROSOFT", e.FACEBOOK = "FACEBOOK", e.LINKEDIN = "LINKEDIN", e.TWITTER = "TWITTER", e.AMAZON = "AMAZON", e.SLACK = "SLACK", e.LINE = "LINE", e.OKTA = "OKTA", e.PINTEREST = "PINTEREST", e;
-}({}), j = /* @__PURE__ */ function(e) {
+}({}), k = /* @__PURE__ */ function(e) {
 	return e.APP = "APP", e.PERSONAL = "PERSONAL", e.TESTING = "TESTING", e;
-}({}), M = /* @__PURE__ */ function(e) {
+}({}), A = /* @__PURE__ */ function(e) {
 	return e.LIST = "List", e.CARD = "Card", e;
-}({}), N = /* @__PURE__ */ function(e) {
+}({}), j = /* @__PURE__ */ function(e) {
 	return e.QUASAR = "Quasar", e.VUETIFY = "Vuetify", e;
 }({});
 // src/lib/hooks/useAutocomplete.ts
-function ue(e, t) {
-	let n = _(""), r = _(!1), i = g([]), a = {}, o = (e) => {
+function se(e, t) {
+	let n = m(""), r = m(!1), i = p([]), a = {}, o = (e) => {
 		i.value = e;
 	}, s = () => {
 		i.value = [];
@@ -38,13 +38,13 @@ function ue(e, t) {
 	}, d = (e) => {
 		c(), u(e), t.fetchAll({ ...a }).then((e) => {
 			let t = e.data;
-			x(t) ? s() : o(t), l();
+			y(t) ? s() : o(t), l();
 		}).catch((e) => {
 			l();
 		});
 	};
-	return T(n, (e) => {
-		x(e) ? s() : d(e);
+	return te(n, (e) => {
+		y(e) ? s() : d(e);
 	}, {
 		debounce: 1e3,
 		maxWait: 1e3,
@@ -56,7 +56,7 @@ function ue(e, t) {
 	};
 }
 // src/lib/stores/application.ts
-var de = E("Application", {
+var ce = w("Application", {
 	state: () => ({
 		leftDrawer: !0,
 		rightDrawer: !1,
@@ -82,18 +82,18 @@ var de = E("Application", {
 	}
 });
 // src/lib/utilities/color.ts
-oe([se]);
-var P = 2, F = 16, I = 5, L = 5, R = 15, z = 5, B = 4;
-function V(e, t) {
+re([ie]);
+var M = 2, N = 16, le = 5, ue = 5, P = 15, F = 5, I = 4;
+function L(e, t) {
 	if (t === 6) return e;
-	let n = t < 6, r = D(e).toHsv(), i = n ? 6 - t : t - z - 1, a = {
-		h: fe(r, i, n),
-		s: pe(r, i, n),
-		v: U(r, i, n)
+	let n = t < 6, r = T(e).toHsv(), i = n ? 6 - t : t - F - 1, a = {
+		h: z(r, i, n),
+		s: B(r, i, n),
+		v: V(r, i, n)
 	};
-	return D(a).toHex();
+	return T(a).toHex();
 }
-function H(e) {
+function R(e) {
 	return [
 		1,
 		2,
@@ -105,31 +105,31 @@ function H(e) {
 		8,
 		9,
 		10
-	].map((t) => V(e, t));
+	].map((t) => L(e, t));
 }
-function fe(e, t, n) {
+function z(e, t, n) {
 	let r;
-	return r = e.h >= 60 && e.h <= 240 ? n ? e.h - P * t : e.h + P * t : n ? e.h + P * t : e.h - P * t, r < 0 ? r += 360 : r >= 360 && (r -= 360), r;
+	return r = e.h >= 60 && e.h <= 240 ? n ? e.h - M * t : e.h + M * t : n ? e.h + M * t : e.h - M * t, r < 0 ? r += 360 : r >= 360 && (r -= 360), r;
 }
-function pe(e, t, n) {
+function B(e, t, n) {
 	let r;
-	return r = n ? e.s - F * t : t === B ? e.s + F : e.s + I * t, r > 100 && (r = 100), n && t === z && r > 10 && (r = 10), r < 6 && (r = 6), r;
+	return r = n ? e.s - N * t : t === I ? e.s + N : e.s + le * t, r > 100 && (r = 100), n && t === F && r > 10 && (r = 10), r < 6 && (r = 6), r;
+}
+function V(e, t, n) {
+	let r;
+	return r = n ? e.v + ue * t : e.v - P * t, r > 100 && (r = 100), r;
+}
+function H(e, t) {
+	return T(e).alpha(t).toHex();
 }
 function U(e, t, n) {
-	let r;
-	return r = n ? e.v + L * t : e.v - R * t, r > 100 && (r = 100), r;
+	return T(e).mix(t, n).toHex();
 }
-function me(e, t) {
-	return D(e).alpha(t).toHex();
-}
-function W(e, t, n) {
-	return D(e).mix(t, n).toHex();
-}
-function he(e) {
-	return D(e).isEqual("#ffffff");
+function de(e) {
+	return T(e).isEqual("#ffffff");
 }
 // src/lib/utilities/options.ts
-var G = class e {
+var W = class e {
 	static _instance = null;
 	static _initialized = !1;
 	options;
@@ -177,7 +177,7 @@ var G = class e {
 	static getTenantId() {
 		return this.getInstance().getOptions().variables.tenantId;
 	}
-}, K = class e {
+}, G = class e {
 	static _instance = null;
 	static _initialized = !1;
 	options;
@@ -200,10 +200,10 @@ var G = class e {
 		return this.router;
 	}
 	isRouterExist() {
-		return !x(this.router);
+		return !y(this.router);
 	}
 	hasParameter(e) {
-		return !x(e.params) || !x(e.query);
+		return !y(e.params) || !y(e.query);
 	}
 	isDetailRoute(e) {
 		return !!(e.meta && e.meta.isDetailContent);
@@ -240,8 +240,8 @@ var G = class e {
 		this.isRouterExist() ? this.to(this.options.path.signIn) : this.refresh();
 	}
 	getParent(e) {
-		let t = re(e, "/"), n = y(t);
-		return S(n, "/");
+		let t = S(e, "/"), n = h(t);
+		return ee(n, "/");
 	}
 	toPrev(e) {
 		if (e.path) {
@@ -249,7 +249,7 @@ var G = class e {
 			this.to({ path: t });
 		} else this.goBack();
 	}
-}, q = class e {
+}, K = class e {
 	static _instance = null;
 	static _initialized = !1;
 	extension;
@@ -265,7 +265,7 @@ var G = class e {
 		return e._instance;
 	}
 	signOut(e = !1) {
-		e || X().signOut(), this.extension(), console.log("Clear Framework Kernel Data"), X().$reset(), Y().$reset(), Q().$reset(), K.getInstance().toSignIn();
+		e || Y().signOut(), this.extension(), console.log("Clear Framework Kernel Data"), Y().$reset(), J().$reset(), Z().$reset(), G.getInstance().toSignIn();
 	}
 	signOutWithDialog() {
 		u.signOutNotify(() => this.signOut());
@@ -273,7 +273,7 @@ var G = class e {
 	tokenExpires(e, t, n, r = !1) {
 		u.tokenExpiresNotify(e, t, n, () => this.signOut(r));
 	}
-}, ge = class i {
+}, fe = class i {
 	static instance = null;
 	config = {};
 	constructor(e) {
@@ -302,18 +302,18 @@ var G = class e {
 	}
 	createBasicHeader(e = "", n = "") {
 		let r = this.config.getClientId() + ":" + this.config.getClientSecret();
-		return e && n && (r = e + ":" + n), t.BASIC + ce.encode(r);
+		return e && n && (r = e + ":" + n), t.BASIC + ae.encode(r);
 	}
 	createClientData(e = "", t = "", n = "") {
 		let r = {
 			client_id: "",
 			client_secret: ""
 		};
-		return e && t ? (r.client_id = e, r.client_secret = t) : (r.client_id = this.config.getClientId(), r.client_secret = this.config.getClientSecret()), n && C(r, { scope: n }), r;
+		return e && t ? (r.client_id = e, r.client_secret = t) : (r.client_id = this.config.getClientId(), r.client_secret = this.config.getClientSecret()), n && b(r, { scope: n }), r;
 	}
 	createOAuth2Data(e, t, n = !1) {
 		let r = { grant_type: e };
-		return x(t) || C(r, t), n && C(r, { scope: "openid" }), r;
+		return y(t) || b(r, t), n && b(r, { scope: "openid" }), r;
 	}
 	signOut(e, t = "", n = "") {
 		return this.config.getHttp().put(this.getOAuth2SignOutAddress(), { accessToken: e }, { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(t, n) } });
@@ -331,9 +331,9 @@ var G = class e {
 		}, i), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
 	}
 	createAuthorizationCodeAddress(e, t = "") {
-		if (x(t)) {
+		if (y(t)) {
 			let t = this.config.getProject(), n = e;
-			return te(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
+			return g(n, "/") && (n = n.substring(0, n.length - 1)), t && (t === "dante" || t === "herodotus") && (n += this.config.getUaa(!1)), n;
 		}
 		return t;
 	}
@@ -351,22 +351,22 @@ var G = class e {
 		}, a), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(o, s) } });
 	}
 	clientCredentialsFlow(t = "", n = "", i = "", a) {
-		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, i) }), x(a) ? { contentType: r.URL_ENCODED } : a);
+		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.CLIENT_CREDENTIALS, { ...this.createClientData(t, n, i) }), y(a) ? { contentType: r.URL_ENCODED } : a);
 	}
 	deviceCodeFlow(t, n = "", i = "", a = "", o) {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.DEVICE_CODE, {
 			device_code: t,
 			...this.createClientData(n, i, a)
-		}), x(o) ? { contentType: r.URL_ENCODED } : o);
+		}), y(o) ? { contentType: r.URL_ENCODED } : o);
 	}
 	deviceAuthorizationFlow(e = "", t = "", n = "", i) {
-		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), { ...this.createClientData(e, t, n) }, x(i) ? { contentType: r.URL_ENCODED } : i);
+		return this.config.getHttp().post(this.getOAuth2DeviceAuthorizationAddress(), { ...this.createClientData(e, t, n) }, y(i) ? { contentType: r.URL_ENCODED } : i);
 	}
 	socialCredentialsFlowBySms(t, n, i = !1, a = "", o = "") {
 		return this.config.getHttp().post(this.getOAuth2TokenAddress(), this.createOAuth2Data(e.SOCIAL_CREDENTIALS, {
 			mobile: t,
 			code: n,
-			source: A.SMS
+			source: O.SMS
 		}, i), { contentType: r.URL_ENCODED }, { headers: { Authorization: this.createBasicHeader(a, o) } });
 	}
 	socialCredentialsFlowByJustAuth(t, n, i = !1, a = "", o = "") {
@@ -386,7 +386,7 @@ var G = class e {
 			redirect_uris: a,
 			scope: o,
 			token_endpoint_auth_method: n.CLIENT_SECRET_POST
-		}, x(s) ? { contentType: r.JSON } : s, c);
+		}, y(s) ? { contentType: r.JSON } : s, c);
 	}
 	clientRegistrationFlow(t, i, a, o, s, c) {
 		return this.config.getHttp().post(this.getOAuth2RegisterAddress(), {
@@ -396,9 +396,9 @@ var G = class e {
 			redirect_uris: a,
 			scope: o,
 			token_endpoint_auth_method: n.CLIENT_SECRET_POST
-		}, x(s) ? { contentType: r.JSON } : s, c);
+		}, y(s) ? { contentType: r.JSON } : s, c);
 	}
-}, _e = class e {
+}, pe = class e {
 	static instance = null;
 	config = {};
 	constructor(e) {
@@ -444,7 +444,7 @@ var G = class e {
 			coordinates: [],
 			characters: ""
 		};
-		return t === k.WORD_CLICK ? i.coordinates = n : t === k.JIGSAW ? i.coordinate = n : i.characters = n, this.config.getHttp().post(r, i);
+		return t === D.WORD_CLICK ? i.coordinates = n : t === D.JIGSAW ? i.coordinate = n : i.characters = n, this.config.getHttp().post(r, i);
 	}
 	createVerificationCode(e) {
 		let t = this.config.getUpms() + "/open/identity/verification-code";
@@ -454,7 +454,7 @@ var G = class e {
 		let e = this.config.getUpms() + "/open/identity/sources";
 		return this.config.getHttp().get(e);
 	}
-}, ve = class e extends o {
+}, me = class e extends o {
 	static instance = null;
 	constructor(e) {
 		super(e);
@@ -492,7 +492,7 @@ var G = class e {
 	delete(e) {
 		return this.getConfig().getHttp().delete(this.getIdPath(e));
 	}
-}, J = class e {
+}, q = class e {
 	static _instance = null;
 	static _initialized = !1;
 	config = {};
@@ -511,15 +511,15 @@ var G = class e {
 		return this.config;
 	}
 	open() {
-		return _e.getInstance(this.config);
+		return pe.getInstance(this.config);
 	}
 	oauth2() {
-		return ge.getInstance(this.config);
+		return fe.getInstance(this.config);
 	}
 	passkey() {
-		return ve.getInstance(this.config);
+		return me.getInstance(this.config);
 	}
-}, Y = E("Crypto", {
+}, J = w("Crypto", {
 	state: () => ({
 		sessionId: "",
 		key: "",
@@ -530,10 +530,10 @@ var G = class e {
 			this.sessionId = e;
 		},
 		setKey(e) {
-			this.key = a.encrypt(e, G.getSecurityKey());
+			this.key = a.encrypt(e, W.getSecurityKey());
 		},
 		getKey() {
-			return a.decrypt(this.key, G.getSecurityKey());
+			return a.decrypt(this.key, W.getSecurityKey());
 		},
 		encrypt(e) {
 			let t = this.getKey();
@@ -545,13 +545,13 @@ var G = class e {
 		},
 		exchange(e = "") {
 			return new Promise((t, n) => {
-				J.getInstance().open().createSession(e).then((e) => {
+				q.getInstance().open().createSession(e).then((e) => {
 					let n = e.data;
 					if (n) {
 						let e = n.sessionId, r = n.publicKey;
 						this.state = n.state;
 						let a = i.createKeyPair(), o = i.encrypt(a.publicKey, r);
-						J.getInstance().open().exchange(e, o).then((n) => {
+						q.getInstance().open().exchange(e, o).then((n) => {
 							let r = n.data, o = i.decrypt(r, a.privateKey);
 							this.setSessionId(e), this.setKey(o), t(o);
 						});
@@ -563,7 +563,7 @@ var G = class e {
 		}
 	},
 	persist: { storage: sessionStorage }
-}), X = E("Authentication", {
+}), Y = w("Authentication", {
 	state: () => ({
 		access_token: "",
 		expires_in: 0,
@@ -588,7 +588,7 @@ var G = class e {
 			return l(t).add(1, "seconds").diff(l(), "seconds") !== 0;
 		},
 		token() {
-			return G.isAutoRefreshToken() || this.isNotExpired ? this.access_token : "";
+			return W.isAutoRefreshToken() || this.isNotExpired ? this.access_token : "";
 		}
 	},
 	actions: {
@@ -604,10 +604,10 @@ var G = class e {
 		saveAccessToken(e) {
 			if (this.access_token = e.access_token, this.expires_in = e.expires_in, this.refresh_token = e.refresh_token ? e.refresh_token : "", this.license = e.refresh_token ? e.refresh_token : "", this.scope = e.scope, this.token_type = e.token_type, e.id_token) {
 				this.idToken = e.id_token;
-				let t = ae(this.idToken);
+				let t = ne(this.idToken);
 				this.userId = t.openid, this.username = t.sub, this.avatar = t.avatar, this.employeeId = t.employeeId, this.roles = t.roles;
 			} else if (e.openid) {
-				let t = Y();
+				let t = J();
 				this.openid = e.openid;
 				let n = t.decrypt(this.openid), r = JSON.parse(n);
 				this.userId = r.userId, this.username = r.username, this.roles = r.roles, this.avatar = r.avatar, this.employeeId = r.employeeId;
@@ -620,14 +620,14 @@ var G = class e {
 			return e.code && [40106, 40111].includes(e.code);
 		},
 		setErrorPrompt(e, t) {
-			this.isAlertMessage(e) && J.getInstance().open().getPrompt(t).then((e) => {
+			this.isAlertMessage(e) && q.getInstance().open().getPrompt(t).then((e) => {
 				this.setUserErrorStatus(e.data);
 			});
 		},
 		signIn(e, t) {
-			let n = Y();
-			return G.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
-				J.getInstance().oauth2().passwordFlow(e, t, G.isUseCrypto()).then((e) => {
+			let n = J();
+			return W.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
+				q.getInstance().oauth2().passwordFlow(e, t, W.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -640,7 +640,7 @@ var G = class e {
 		},
 		refreshToken() {
 			return new Promise((e, t) => {
-				J.getInstance().oauth2().refreshTokenFlow(this.refresh_token, G.isUseCrypto()).then((t) => {
+				q.getInstance().oauth2().refreshTokenFlow(this.refresh_token, W.isUseCrypto()).then((t) => {
 					if (t) {
 						let e = t;
 						this.saveAccessToken(e);
@@ -652,7 +652,7 @@ var G = class e {
 			});
 		},
 		signOut() {
-			this.access_token && J.getInstance().oauth2().signOut(this.access_token).then(() => {
+			this.access_token && q.getInstance().oauth2().signOut(this.access_token).then(() => {
 				console.log("Server side sign out successfully.");
 			}).catch((e) => {
 				console.log("Server side sign out has error.", e);
@@ -660,7 +660,7 @@ var G = class e {
 		},
 		authorizationCode(e, t = "") {
 			return new Promise((n, r) => {
-				J.getInstance().oauth2().authorizationCodeFlow(e, G.getRedirectUri(), t, G.isUseCrypto()).then((e) => {
+				q.getInstance().oauth2().authorizationCodeFlow(e, W.getRedirectUri(), t, W.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -672,9 +672,9 @@ var G = class e {
 			});
 		},
 		smsSignIn(e, t) {
-			let n = Y();
-			return G.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
-				J.getInstance().oauth2().socialCredentialsFlowBySms(e, t, G.isUseCrypto()).then((e) => {
+			let n = J();
+			return W.isUseCrypto() && (e = n.encrypt(e), t = n.encrypt(t)), new Promise((n, r) => {
+				q.getInstance().oauth2().socialCredentialsFlowBySms(e, t, W.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -687,7 +687,7 @@ var G = class e {
 		},
 		socialSignIn(e, t) {
 			return new Promise((n, r) => {
-				J.getInstance().oauth2().socialCredentialsFlowByJustAuth(e, t, G.isUseCrypto()).then((e) => {
+				q.getInstance().oauth2().socialCredentialsFlowByJustAuth(e, t, W.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -700,7 +700,7 @@ var G = class e {
 		},
 		passkey(e) {
 			return new Promise((t, n) => {
-				J.getInstance().oauth2().webAuthnCredentialsFlow(e, G.isUseCrypto()).then((e) => {
+				q.getInstance().oauth2().webAuthnCredentialsFlow(e, W.isUseCrypto()).then((e) => {
 					if (e) {
 						let t = e;
 						this.saveAccessToken(t);
@@ -713,20 +713,20 @@ var G = class e {
 		}
 	},
 	persist: !0
-}), ye = () => {
-	let e = X(), n = Y(), r = e.access_token, i = n.sessionId, a = {};
+}), he = () => {
+	let e = Y(), n = J(), r = e.access_token, i = n.sessionId, a = {};
 	r && (a.Authorization = t.BEARER + r), i && (a["X-Herodotus-Session-Id"] = i);
-	let o = G.getTenantId();
+	let o = W.getTenantId();
 	return o && (a["X-Herodotus-Tenant-Id"] = o), a["X-Herodotus-Api-Version"] = "v1", a;
-}, Z = E("SystemSettings", {
+}, X = w("SystemSettings", {
 	state: () => ({
-		library: N.VUETIFY,
+		library: j.VUETIFY,
 		theme: {
 			mode: s.SYSTEM,
 			dark: { primary: "#2563eb" },
 			light: { primary: "#6750A4" }
 		},
-		layout: O.DEFAULT,
+		layout: E.DEFAULT,
 		effect: { isUniqueOpened: !1 },
 		display: {
 			isTabsView: !0,
@@ -735,7 +735,7 @@ var G = class e {
 			showBreadcrumbsIcon: !0,
 			table: {
 				dense: !1,
-				style: M.LIST
+				style: A.LIST
 			}
 		}
 	}),
@@ -747,8 +747,8 @@ var G = class e {
 		isLightenMode: (e) => e.theme.mode === s.LIGHT,
 		density: (e) => e.display.table.dense ? "compact" : "default",
 		densitySwitch: (e) => (t, n) => e.display.table.dense ? t : n,
-		displayAsCard: (e) => e.display.table.style === M.CARD,
-		displayAsList: (e) => e.display.table.style === M.LIST
+		displayAsCard: (e) => e.display.table.style === A.CARD,
+		displayAsList: (e) => e.display.table.style === A.LIST
 	},
 	actions: {
 		toDark() {
@@ -765,7 +765,7 @@ var G = class e {
 		}
 	},
 	persist: !0
-}), Q = E("SystemElement", {
+}), Z = w("SystemElement", {
 	state: () => ({
 		appMenus: [],
 		personalMenus: [],
@@ -776,10 +776,10 @@ var G = class e {
 	}),
 	getters: {
 		isDynamicRouteAdded() {
-			return !x(this.appMenus) || !x(this.personalMenus);
+			return !y(this.appMenus) || !y(this.personalMenus);
 		},
 		supportTesting() {
-			return !x(this.testingMenus);
+			return !y(this.testingMenus);
 		}
 	},
 	actions: {
@@ -800,11 +800,11 @@ var G = class e {
 			t && this.details.set(t, e.component);
 		},
 		addMenus(e, t, n) {
-			x(e) || (this.appMenus = e), x(t) || (this.personalMenus = t), x(n) || (this.testingMenus = n);
+			y(e) || (this.appMenus = e), y(t) || (this.personalMenus = t), y(n) || (this.testingMenus = n);
 		},
 		hasParameter(e) {
 			let t = e.name;
-			return !!(t && ne(this.pushParams, t));
+			return !!(t && v(this.pushParams, t));
 		},
 		isDetailRoute(e) {
 			return !!(e.meta && e.meta.isDetailContent);
@@ -819,7 +819,7 @@ var G = class e {
 			e && delete this.pushParams[e];
 		}
 	}
-}), $ = E("TabsView", {
+}), Q = w("TabsView", {
 	state: () => ({
 		tabs: [],
 		activatedTab: {},
@@ -828,7 +828,7 @@ var G = class e {
 	getters: {
 		isNotLastTab: (e) => (t) => e.tabs.length - 1 !== t,
 		getLastTabIndex: (e) => e.tabs.length - 1,
-		getTabIndex: (e) => (t) => b(e.tabs, (e) => e.name === t.name),
+		getTabIndex: (e) => (t) => _(e.tabs, (e) => e.name === t.name),
 		getActivatedTabIndex() {
 			return this.getTabIndex(this.activatedTab);
 		},
@@ -863,7 +863,7 @@ var G = class e {
 			this.activatedTab = e, this.activatedTabName = e.name;
 		},
 		isNotExistInStaticRoute(e) {
-			return b(G.getRoutes(), (t) => t.path === e.path) === -1;
+			return _(W.getRoutes(), (t) => t.path === e.path) === -1;
 		},
 		isTabNotOpened(e) {
 			return this.getTabIndex(e) === -1;
@@ -872,11 +872,11 @@ var G = class e {
 			this.isNotExistInStaticRoute(e) && (this.isTabNotOpened(e) && (t ? this.isLastTabActivated ? this.tabs.splice(this.getActivatedTabIndex, 0, e) : this.tabs.splice(this.getActivatedTabIndex + 1, 0, e) : this.tabs.push(e)), this.setActivatedTab(e));
 		},
 		closeTab(e) {
-			w(this.tabs, (t) => t.name === e.name);
+			x(this.tabs, (t) => t.name === e.name);
 		},
 		smartTab(e) {
-			let t = Q(), n = t.isDetailRoute(e), r = this.convertRouteToTab(e);
-			n ? t.hasParameter(e) ? this.openTab(r, n) : (this.closeTab(r), K.getInstance().goBack()) : this.openTab(r, n);
+			let t = Z(), n = t.isDetailRoute(e), r = this.convertRouteToTab(e);
+			n ? t.hasParameter(e) ? this.openTab(r, n) : (this.closeTab(r), G.getInstance().goBack()) : this.openTab(r, n);
 		},
 		deleteTab(e) {
 			let t = this.convertRouteToTab(e);
@@ -893,38 +893,38 @@ var G = class e {
 			this.closeTab(this.activatedTab);
 		},
 		closeOtherTabs() {
-			w(this.tabs, (e) => e.name !== this.activatedTab.name);
+			x(this.tabs, (e) => e.name !== this.activatedTab.name);
 		},
 		closeLeftTabs() {
 			let e = this.getActivatedTabIndex;
-			w(this.tabs, (t, n) => n < e);
+			x(this.tabs, (t, n) => n < e);
 		},
 		closeRightTabs() {
 			let e = this.getActivatedTabIndex;
-			w(this.tabs, (t, n) => n > e);
+			x(this.tabs, (t, n) => n > e);
 		}
 	},
 	persist: !0
 });
 // src/lib/hooks/useDetailPage.ts
-function be() {
-	let e = Q(), t = $();
+function $() {
+	let e = Z(), t = Q();
 	return {
 		parseComponentName: (e, t) => {
 			if (e) return e;
 			{
 				let e = t;
-				return x(e) && (e = ie()), e && e.name ? e.name : "";
+				return y(e) && (e = C()), e && e.name ? e.name : "";
 			}
 		},
 		goBack: (n, r) => {
-			!x(n) && !x(r) ? (e.removeRoutePushParam(r), t.deleteTabByName(r), K.getInstance().push({ name: n })) : K.getInstance().goBack();
+			!y(n) && !y(r) ? (e.removeRoutePushParam(r), t.deleteTabByName(r), G.getInstance().push({ name: n })) : G.getInstance().goBack();
 		}
 	};
 }
 // src/lib/hooks/useDeviceAuthorize.ts
-function xe(e, t, n, i = "") {
-	let a = _(0), o = _(5), s = _(!1), c = _(!1), l = _({}), u = g([]), d = (e, t = !1) => {
+function ge(e, t, n, i = "") {
+	let a = m(0), o = m(5), s = m(!1), c = m(!1), l = m({}), u = p([]), d = (e, t = !1) => {
 		let n = u.value.length + 1;
 		t ? u.value.push({
 			id: n,
@@ -938,36 +938,36 @@ function xe(e, t, n, i = "") {
 			text: e
 		});
 	}, f = (e) => {
-		e === "authorization_pending" ? d("Authorization pending, continuing to poll...") : e === "slow_down" ? (d("Slowing down..."), v()) : e === "token_expired" ? (d("Token expired, stopping..."), h(), c.value = !0) : e === "access_denied" && (d("Access denied, stopping..."), h(), c.value = !0);
-	}, p = () => {
-		J.getInstance().oauth2().deviceCodeFlow(e.value, t.value, n.value, i, {
+		e === "authorization_pending" ? d("Authorization pending, continuing to poll...") : e === "slow_down" ? (d("Slowing down..."), v()) : e === "token_expired" ? (d("Token expired, stopping..."), _(), c.value = !0) : e === "access_denied" && (d("Access denied, stopping..."), _(), c.value = !0);
+	}, h = () => {
+		q.getInstance().oauth2().deviceCodeFlow(e.value, t.value, n.value, i, {
 			contentType: r.URL_ENCODED,
 			withToken: !1
 		}).then((e) => {
-			d("Authorization successful", !0), h(), s.value = !0, l.value = e;
+			d("Authorization successful", !0), _(), s.value = !0, l.value = e;
 		}).catch((e) => {
 			f(e.error);
 		});
-	}, m = () => {
-		a.value = window.setInterval(p, o.value * 1e3);
-	}, h = () => {
+	}, g = () => {
+		a.value = window.setInterval(h, o.value * 1e3);
+	}, _ = () => {
 		window.clearInterval(a.value);
 	}, v = () => {
-		o.value += 5, h(), m();
+		o.value += 5, _(), g();
 	};
 	return {
 		pullingResponse: u,
 		successResponse: l,
 		isFailed: c,
 		isSuccess: s,
-		schedule: m,
-		clear: h,
+		schedule: g,
+		clear: _,
 		slowDown: v
 	};
 }
 // src/lib/hooks/useFileDownload.ts
-function Se() {
-	let e = _(0), t = _(!1);
+function _e() {
+	let e = m(0), t = m(!1);
 	return {
 		process: (e, t) => {
 			let n = new Blob([e], { type: "application/x-download" }), r = document.createElement("a");
@@ -984,14 +984,14 @@ function Se() {
 	};
 }
 // src/lib/hooks/usePasskey.ts
-function Ce() {
-	let e = X(), t = null, n = () => {
+function ve() {
+	let e = Y(), t = null, n = () => {
 		t &&= null;
 	};
 	return {
 		isSupported: async () => !!(window.PublicKeyCredential && PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable && PublicKeyCredential.isConditionalMediationAvailable && (await Promise.all([PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(), PublicKeyCredential.isConditionalMediationAvailable()])).every((e) => e === !0)),
 		registration: (e) => (t = new AbortController(), new Promise((t, r) => {
-			J.getInstance().passkey().getPublicKeyCredentialCreationOptions().then((e) => {
+			q.getInstance().passkey().getPublicKeyCredentialCreationOptions().then((e) => {
 				let t = PublicKeyCredential.parseCreationOptionsFromJSON(e);
 				return navigator.credentials.create({ publicKey: t });
 			}).then((t) => {
@@ -999,7 +999,7 @@ function Ce() {
 					label: e,
 					credential: t
 				} };
-				return J.getInstance().passkey().webAuthnRegister(n);
+				return q.getInstance().passkey().webAuthnRegister(n);
 			}).then((e) => {
 				t(e);
 			}).catch((e) => {
@@ -1009,7 +1009,7 @@ function Ce() {
 			});
 		})),
 		authenticator: () => (t = new AbortController(), new Promise((r, i) => {
-			J.getInstance().passkey().getPublicKeyCredentialRequestOptions().then((e) => {
+			q.getInstance().passkey().getPublicKeyCredentialRequestOptions().then((e) => {
 				let n = PublicKeyCredential.parseRequestOptionsFromJSON(e);
 				return navigator.credentials.get({
 					publicKey: n,
@@ -1033,7 +1033,7 @@ function Ce() {
 	};
 }
 // src/lib/hooks/useSystemElement.ts
-function we(e, t, n) {
+function ye(e, t, n) {
 	let r = (e) => e.meta?.title, i = (e) => e.meta?.icon, a = (e) => e.meta?.isDetailContent, o = (e, n) => {
 		let r = {};
 		return r.path = e.name, r.component = n[t(e.componentPath)], e.componentName && (r.name = e.componentName), e.redirect && (r.redirect = e.redirect), r.meta = {
@@ -1060,17 +1060,17 @@ function we(e, t, n) {
 	}), l = (e, t) => {
 		let n = [];
 		switch (e.scenario) {
-			case j.PERSONAL:
+			case k.PERSONAL:
 				n = t.personalMenus;
 				break;
-			case j.TESTING:
+			case k.TESTING:
 				n = t.testingMenus;
 				break;
 			default: n = t.appMenus;
 		}
 		return n;
 	}, u = (e, t, n = !1) => {
-		let r = Q(), i = [], d = [], f = [], p = [];
+		let r = Z(), i = [], d = [], f = [], p = [];
 		return e.forEach((e) => {
 			let m = o(e, t);
 			a(m) && r.addDetailRoute(m);
@@ -1080,14 +1080,14 @@ function we(e, t, n) {
 				if (m.children = r.routeRecords, n) h = s(m);
 				else {
 					let t = l(e, r);
-					x(t) ? h = s(m) : (h = c(m), h.children = t);
+					y(t) ? h = s(m) : (h = c(m), h.children = t);
 				}
 			} else n || (h = s(m));
-			if (i.push(m), !x(h)) switch (e.scenario) {
-				case j.PERSONAL:
+			if (i.push(m), !y(h)) switch (e.scenario) {
+				case k.PERSONAL:
 					f.push(h);
 					break;
-				case j.TESTING:
+				case k.TESTING:
 					p.push(h);
 					break;
 				default: d.push(h);
@@ -1099,7 +1099,7 @@ function we(e, t, n) {
 			testingMenus: p
 		};
 	}, d = (e, t) => {
-		console.log("[Herodotus] |- Begin add dynamic routes"), Q().addMenus(t.appMenus, t.personalMenus, t.testingMenus), x(t.routeRecords) ? console.warn("[Herodotus] |- Dynamic routes is empty, skip!") : (t.routeRecords.forEach((t) => {
+		console.log("[Herodotus] |- Begin add dynamic routes"), Z().addMenus(t.appMenus, t.personalMenus, t.testingMenus), y(t.routeRecords) ? console.warn("[Herodotus] |- Dynamic routes is empty, skip!") : (t.routeRecords.forEach((t) => {
 			e.addRoute(t);
 		}), console.log("[Herodotus] |- Dynamic routes add success!"));
 	};
@@ -1108,73 +1108,23 @@ function we(e, t, n) {
 		d(t, a);
 	} };
 }
-// ../../node_modules/.pnpm/vuetify@4.3.1_@vue+devtools_50e992595579d856845fbd44f52057c2/node_modules/vuetify/lib/util/getCurrentInstance.js
-function Te(e, t) {
-	let n = p();
-	if (!n) throw Error(`[Vuetify] ${e} ${t || "must be called from inside a setup function"}`);
-	return n;
-}
-// ../../node_modules/.pnpm/vuetify@4.3.1_@vue+devtools_50e992595579d856845fbd44f52057c2/node_modules/vuetify/lib/composables/theme.js
-var Ee = Symbol.for("vuetify:theme");
-function De() {
-	Te("useTheme");
-	let e = m(Ee, null);
-	if (!e) throw Error("Could not find Vuetify theme injection");
-	return e;
-}
 // src/lib/hooks/useSystemTheme.ts
-function Oe() {
-	let e = Z(), t = De(), n = _(s.DARK), r = (e) => {
-		if (!e || e.nodeType !== Node.ELEMENT_NODE) return !1;
-		let t = window.getComputedStyle(e);
-		return t.overflowY === "scroll" || t.overflowY === "auto" && e.scrollHeight > e.clientHeight;
-	}, i = () => {
-		let e = performance.now();
-		for (let e = 0; e++ < 1e7; e << 9 & 9);
-		if (performance.now() - e > 10) return;
-		let t = document.querySelector("[data-v-app]");
-		t.querySelectorAll("*").forEach((e) => {
-			r(e) && (e.dataset.scrollX = String(e.scrollLeft), e.dataset.scrollY = String(e.scrollTop));
-		});
-		let n = t.cloneNode(!0);
-		n.classList.add("app-copy");
-		let i = t.getBoundingClientRect();
-		n.style.top = i.top + "px", n.style.left = i.left + "px", n.style.width = i.width + "px", n.style.height = i.height + "px";
-		let a = document.activeElement.getBoundingClientRect(), o = a.left + a.width / 2 + window.scrollX, s = a.top + a.height / 2 + window.scrollY;
-		t.style.setProperty("--clip-pos", `${o}px ${s}px`), t.style.removeProperty("--clip-size"), h(() => {
-			t.classList.add("app-transition"), requestAnimationFrame(() => {
-				requestAnimationFrame(() => {
-					t.style.setProperty("--clip-size", Math.hypot(window.innerWidth, window.innerHeight) + "px");
-				});
-			});
-		}), document.body.append(n), n.querySelectorAll("[data-scroll-x], [data-scroll-y]").forEach((e) => {
-			e.scrollLeft = Number(e.dataset.scrollX), e.scrollTop = Number(e.dataset.scrollY);
-		});
-		function c(e) {
-			e.target === e.currentTarget && (n.remove(), t.removeEventListener("transitionend", c), t.removeEventListener("transitioncancel", c), t.classList.remove("app-transition"), t.style.removeProperty("--clip-size"), t.style.removeProperty("--clip-pos"));
-		}
-		t.addEventListener("transitionend", c), t.addEventListener("transitioncancel", c);
-	};
-	ee(() => {
-		t.change(e.isSystem ? n.value : e.theme.mode);
-	}), v(t.global.name, (e) => {
-		i();
-		let t = e;
-		d.setTheme(t), u.setTheme(t);
-	});
-	let a = f(() => e.isDarkenMode ? e.theme.dark.primary : e.theme.light.primary), o = f(() => V(a.value, 3)), c = f(() => V(a.value, 6)), l = f(() => {
-		let t = e.isDarkenMode ? .5 : .2;
-		return W("#ffffff", a.value, t);
-	}), p = () => {
-		e.isDark ? e.toSystem() : e.isSystem ? e.toLight() : e.isLight && e.toDark();
-	}, m = f({
+function be() {
+	let e = X(), t = f(() => e.isDarkenMode ? e.theme.dark.primary : e.theme.light.primary), n = f(() => L(t.value, 3)), r = f(() => L(t.value, 6)), i = f(() => {
+		let n = e.isDarkenMode ? .5 : .2;
+		return U("#ffffff", t.value, n);
+	}), a = f({
 		get() {
 			return e.theme.mode;
 		},
 		set(t) {
-			e.theme.mode = t;
+			e.theme.mode = t, d.setTheme(t), u.setTheme(t);
 		}
-	}), g = f(() => {
+	}), o = [
+		s.LIGHT,
+		s.DARK,
+		s.SYSTEM
+	], c = f(() => {
 		switch (e.theme.mode) {
 			case s.SYSTEM: return "mdi-brightness-5";
 			case s.DARK: return "mdi-brightness-auto";
@@ -1183,18 +1133,17 @@ function Oe() {
 	});
 	return {
 		isLightenMode: f(() => e.isLightenMode),
-		lightColor: o,
-		darkColor: c,
-		backgroundColor: l,
-		onCycleChangeTheme: p,
-		currentTheme: m,
-		cycleChangeThemeIcon: g,
-		systemTheme: n
+		lightColor: n,
+		darkColor: r,
+		backgroundColor: i,
+		currentTheme: a,
+		cycleChangeThemeIcon: c,
+		supportedThemes: o
 	};
 }
 // src/lib/main.ts
-var ke = (e) => {
-	let t = Z();
-	c(t.theme.mode), G.initialize(e), K.initialize(e.router), J.initialize(e.config), q.initialize(e.signOutExtension);
+var xe = (e) => {
+	let t = X();
+	c(t.theme.mode), W.initialize(e), G.initialize(e.router), q.initialize(e.config), K.initialize(e.signOutExtension);
 };
-export { k as CaptchaCategoryEnum, O as LayoutModeEnum, N as LibraryEnum, j as MenuScenarioEnum, G as OptionsUtilities, K as RouterUtilities, J as SecurityApiResources, q as SignOutUtilities, A as SocialSourceEnum, M as TableStyleEnum, me as addColorAlpha, H as getAllColorPalette, V as getColorPalette, ye as getSystemHeaders, ke as initializer, he as isWhiteColor, W as mixColor, le as piniaPluginPersistedstate, de as useApplicationStore, X as useAuthenticationStore, ue as useAutocomplete, Y as useCryptoStore, be as useDetailPage, xe as useDeviceAuthorize, Q as useElementStore, Se as useFileDownload, Ce as usePasskey, Z as useSettingsStore, we as useSystemElement, Oe as useSystemTheme, $ as useTabsViewStore };
+export { D as CaptchaCategoryEnum, E as LayoutModeEnum, j as LibraryEnum, k as MenuScenarioEnum, W as OptionsUtilities, G as RouterUtilities, q as SecurityApiResources, K as SignOutUtilities, O as SocialSourceEnum, A as TableStyleEnum, H as addColorAlpha, R as getAllColorPalette, L as getColorPalette, he as getSystemHeaders, xe as initializer, de as isWhiteColor, U as mixColor, oe as piniaPluginPersistedstate, ce as useApplicationStore, Y as useAuthenticationStore, se as useAutocomplete, J as useCryptoStore, $ as useDetailPage, ge as useDeviceAuthorize, Z as useElementStore, _e as useFileDownload, ve as usePasskey, X as useSettingsStore, ye as useSystemElement, be as useSystemTheme, Q as useTabsViewStore };

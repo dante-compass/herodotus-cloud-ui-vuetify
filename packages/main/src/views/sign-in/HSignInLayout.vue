@@ -24,8 +24,7 @@ import HSignInContainer from './HSignInContainer.vue';
 
 defineOptions({ name: 'HSignInLayout', components: { HSignInContainer } });
 
-const { isLightenMode, lightColor, darkColor, backgroundColor, onCycleChangeTheme, cycleChangeThemeIcon } =
-  useSystemTheme();
+const { isLightenMode, lightColor, darkColor, backgroundColor } = useSystemTheme();
 const application = useApplicationStore();
 
 const tabs = shallowRef('account');

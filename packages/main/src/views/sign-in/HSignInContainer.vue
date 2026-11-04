@@ -33,16 +33,23 @@
 </template>
 
 <script setup lang="ts">
+import { useTheme } from 'vuetify';
+import { ThemeModeEnum } from "@herodotus/core";
 import { useSystemTheme, useApplicationStore } from '@herodotus/framework';
 
 import { HAppLogo } from '@/components/library/HLogo';
 
 defineOptions({ name: 'HSignInContainer', components: { HAppLogo } });
 
-const { onCycleChangeTheme, cycleChangeThemeIcon } = useSystemTheme();
+const { currentTheme,  onCycleChangeTheme, cycleChangeThemeIcon } = useSystemTheme();
 const application = useApplicationStore();
 
 const tabs = shallowRef('account');
+const theme = useTheme();
+
+watch(currentTheme, (newValue) => {
+  theme.cycle([], { origin: '90% 10%' });
+})
 
 watch(tabs, (newValue) => {
   application.signInPanel = newValue;

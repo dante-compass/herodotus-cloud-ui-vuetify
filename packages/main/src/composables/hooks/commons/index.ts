@@ -1,5 +1,6 @@
 import useBaseTable from "./useBaseTable";
 import useBaseTableItem from "./useBaseTableItem";
+import useDateTime from "./useDateTime";
 import useDictionary from "./useDictionary";
 import useDisplayElement from "./useDisplayElement";
 import useTable from "./useTable";
@@ -9,6 +10,7 @@ import useTreeItem from "./useTreeItem";
 export {
   useBaseTable,
   useBaseTableItem,
+  useDateTime,
   useDictionary,
   useDisplayElement,
   useTable,
