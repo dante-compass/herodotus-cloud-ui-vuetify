@@ -1,5 +1,13 @@
 # @herodotus/framework
 
+## 3.1.28
+
+### Patch Changes
+
+- [修复] 修复前端在切换主题时，tsparticles 粒子效果会抛出 Register plugins can only be done before calling tsParticles.load() 异常问题
+- Updated dependencies
+  - @herodotus/core@3.1.28
+
 ## 3.1.27
 
 ### Patch Changes

@@ -1,8 +1,8 @@
 import { Fragment as e, computed as t, createBlock as n, createCommentVNode as r, createElementBlock as i, createElementVNode as a, createSlots as o, createTextVNode as s, createVNode as c, defineComponent as l, mergeModels as u, mergeProps as d, normalizeClass as f, normalizeProps as p, onBeforeMount as m, onMounted as h, onUnmounted as g, openBlock as _, ref as v, renderSlot as y, shallowRef as b, toDisplayString as x, unref as S, useModel as C, useTemplateRef as w, watch as T, withCtx as E } from "vue";
 import { Color as D, Mesh as ee, Program as te, Renderer as ne, Texture as re, Triangle as ie } from "ogl";
-import { tsParticles as ae } from "@tsparticles/engine";
-import { loadTrianglesPreset as oe } from "@tsparticles/preset-triangles";
-import { VAutocomplete as O, VBtn as se, VCard as ce, VCardActions as le, VCardText as ue, VCol as k, VContainer as A, VDatePicker as de, VDialog as fe, VDivider as pe, VExpandXTransition as me, VIcon as j, VIconBtn as he, VLabel as ge, VListItem as _e, VMenu as M, VMessages as ve, VNumberInput as ye, VProgressLinear as be, VRow as xe, VSelect as Se, VSnackbar as Ce, VTextField as N, VTimePicker as we, VTooltip as P, VTreeview as Te } from "vuetify/components";
+import { tsParticles as O } from "@tsparticles/engine";
+import { loadTrianglesPreset as ae } from "@tsparticles/preset-triangles";
+import { VAutocomplete as k, VBtn as oe, VCard as se, VCardActions as ce, VCardText as le, VCol as A, VContainer as ue, VDatePicker as de, VDialog as fe, VDivider as pe, VExpandXTransition as me, VIcon as j, VIconBtn as he, VLabel as ge, VListItem as _e, VMenu as M, VMessages as ve, VNumberInput as ye, VProgressLinear as be, VRow as xe, VSelect as Se, VSnackbar as Ce, VTextField as N, VTimePicker as we, VTooltip as P, VTreeview as Te } from "vuetify/components";
 import { useDate as Ee } from "vuetify";
 import { moment as F } from "@herodotus/core";
 import { debounce as De, find as Oe, isArray as ke, isEmpty as I, kebabCase as Ae } from "lodash-es";
@@ -238,18 +238,18 @@ var Ne = "\nattribute vec2 uv;\nattribute vec2 position;\n\nvarying vec2 vUv;\n\
 			}), T.observe(e));
 			let E = () => {};
 			document.addEventListener("visibilitychange", E);
-			let D = 0, ae = performance.now(), oe = 0, O = (e) => {
-				let t = Math.max(0, e - ae) * .001;
-				ae = e;
+			let D = 0, O = performance.now(), ae = 0, k = (e) => {
+				let t = Math.max(0, e - O) * .001;
+				O = e;
 				let r = p.value && !document.hidden;
-				if (u.value || (oe += t), !r) {
-					D = requestAnimationFrame(O);
+				if (u.value || (ae += t), !r) {
+					D = requestAnimationFrame(k);
 					return;
 				}
 				let i = .02 + Math.max(0, Math.min(1, f.value)) * .5, a = 1 - Math.exp(-t / i), o = c.value, s = l.value;
-				s[0] += (o[0] - s[0]) * a, s[1] += (o[1] - s[1]) * a, v.uniforms.uMouse.value = s, v.uniforms.uTime.value = oe, n.render({ scene: m.value }), D = requestAnimationFrame(O);
+				s[0] += (o[0] - s[0]) * a, s[1] += (o[1] - s[1]) * a, v.uniforms.uMouse.value = s, v.uniforms.uTime.value = ae, n.render({ scene: m.value }), D = requestAnimationFrame(k);
 			};
-			D = requestAnimationFrame(O), g(() => {
+			D = requestAnimationFrame(k), g(() => {
 				cancelAnimationFrame(D), e.removeEventListener("pointermove", w), C?.disconnect(), C || window.removeEventListener("resize", S), T?.disconnect(), document.removeEventListener("visibilitychange", E);
 				try {
 					e.removeChild(i.canvas);
@@ -422,22 +422,22 @@ var Ne = "\nattribute vec2 uv;\nattribute vec2 position;\n\nvarying vec2 vUv;\n\
 	name: "HParticles",
 	__name: "HParticles",
 	setup(e) {
-		let t = b("HParticles"), n, r = async () => {
-			await oe(ae);
-		}, a = async () => {
-			n?.destroy(), n = await ae.load({
+		let t = b("HParticles"), n, r = () => O.pluginManager.presets.has("triangles"), a = async () => {
+			r() || await ae(O);
+		}, o = async () => {
+			n?.destroy(), n = await O.load({
 				id: t.value,
 				options: ze
 			});
-		}, o = async () => {
+		}, s = async () => {
 			n?.destroy();
 		};
 		return m(() => {
-			r();
-		}), h(() => {
 			a();
-		}), g(() => {
+		}), h(() => {
 			o();
+		}), g(() => {
+			s();
 		}), (e, n) => (_(), i("div", { id: t.value }, [y(e.$slots, "default")], 8, Be));
 	}
 });
@@ -643,9 +643,9 @@ var Ve = /* @__PURE__ */ l({
 ], W = /* @__PURE__ */ l({
 	name: "HDuration",
 	components: {
-		VContainer: A,
+		VContainer: ue,
 		VRow: xe,
-		VCol: k,
+		VCol: A,
 		VNumberInput: ye,
 		VSelect: Se
 	},
@@ -679,9 +679,9 @@ var Ve = /* @__PURE__ */ l({
 			e && s(r.value, e);
 		}), T(r, (e) => {
 			e && s(e, i.value);
-		}), (e, t) => (_(), n(S(A), { class: "pa-0" }, {
+		}), (e, t) => (_(), n(S(ue), { class: "pa-0" }, {
 			default: E(() => [c(S(xe), null, {
-				default: E(() => [c(S(k), null, {
+				default: E(() => [c(S(A), null, {
 					default: E(() => [c(S(ye), {
 						modelValue: r.value,
 						"onUpdate:modelValue": t[0] ||= (e) => r.value = e,
@@ -691,7 +691,7 @@ var Ve = /* @__PURE__ */ l({
 						inset: ""
 					}, null, 8, ["modelValue"])]),
 					_: 1
-				}), c(S(k), null, {
+				}), c(S(A), null, {
 					default: E(() => [c(S(Se), {
 						modelValue: i.value,
 						"onUpdate:modelValue": t[1] ||= (e) => i.value = e,
@@ -793,7 +793,7 @@ var K = /* @__PURE__ */ l({
 			persistent: "",
 			"z-index": 1900
 		}, {
-			default: E(() => [c(S(ce), d({
+			default: E(() => [c(S(se), d({
 				disabled: e.loading,
 				loading: e.loading
 			}, t.$attrs), o({
@@ -804,16 +804,16 @@ var K = /* @__PURE__ */ l({
 				}, null, 8, ["active"])]),
 				default: E(() => [
 					c(S(pe)),
-					c(S(ue), { class: "pb-2" }, {
+					c(S(le), { class: "pb-2" }, {
 						default: E(() => [y(t.$slots, "default")]),
 						_: 3
 					}),
-					e.hideActions ? r("", !0) : (_(), n(S(le), { key: 0 }, {
-						default: E(() => [c(S(se), {
+					e.hideActions ? r("", !0) : (_(), n(S(ce), { key: 0 }, {
+						default: E(() => [c(S(oe), {
 							text: "取消",
 							color: "red",
 							onClick: l
-						}), c(S(se), {
+						}), c(S(oe), {
 							text: e.confirmLabel,
 							onClick: u
 						}, null, 8, ["text"])]),
@@ -862,9 +862,9 @@ var J = /* @__PURE__ */ l({
 	name: "HDownloadProgress",
 	components: {
 		VSnackbar: Ce,
-		VContainer: A,
+		VContainer: ue,
 		VRow: xe,
-		VCol: k,
+		VCol: A,
 		VProgressLinear: be
 	},
 	__name: "HDownloadProgress",
@@ -885,18 +885,18 @@ var J = /* @__PURE__ */ l({
 			location: "center center",
 			color: "primary"
 		}, r.$attrs), {
-			default: E(() => [c(S(A), null, {
+			default: E(() => [c(S(ue), null, {
 				default: E(() => [c(S(xe), {
 					"align-content": "center",
 					justify: "center"
 				}, {
-					default: E(() => [c(S(k), {
+					default: E(() => [c(S(A), {
 						class: "text-subtitle-1 text-center",
 						cols: "12"
 					}, {
 						default: E(() => [s("文件下载 " + x(`${e.progress}%`), 1)]),
 						_: 1
-					}), c(S(k), { cols: "6" }, {
+					}), c(S(A), { cols: "6" }, {
 						default: E(() => [c(S(be), {
 							"model-value": e.progress,
 							"chunk-width": "4",
@@ -929,7 +929,7 @@ var Ge = { class: "flex-1-1-0" }, Ke = { class: "d-flex" }, qe = {
 	name: "HLabel",
 	components: {
 		VIcon: j,
-		VBtn: se,
+		VBtn: oe,
 		VTooltip: P,
 		VLabel: ge,
 		VMessages: ve
@@ -1003,7 +1003,7 @@ var Ye = je("MdiIcon", {
 }), X = /* @__PURE__ */ l({
 	name: "HMdiIconSelect",
 	components: {
-		VAutocomplete: O,
+		VAutocomplete: k,
 		VExpandXTransition: me,
 		VListItem: _e,
 		VIcon: j
@@ -1024,7 +1024,7 @@ var Ye = je("MdiIcon", {
 			I(e) ? i.value = s.getAllIcons : l(e, (e) => {
 				i.value = e;
 			});
-		}), (e, s) => (_(), n(S(O), d({
+		}), (e, s) => (_(), n(S(k), d({
 			modelValue: t.value,
 			"onUpdate:modelValue": s[0] ||= (e) => t.value = e,
 			search: o.value,
