@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/core",
-  "version": "3.1.28",
+  "version": "3.1.29",
   "description": "",
   "keywords": [],
   "author": "",
@@ -34,17 +34,16 @@
     "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
   },
   "dependencies": {
+    "@noble/hashes": "^2.4.0",
+    "@scure/base": "^2.4.0",
     "axios": "^1.21.0",
-    "crypto-js": "^4.2.0",
     "generate-avatar": "^1.4.10",
     "moment": "^2.31.0",
     "qs": "^6.17.1",
     "sm-crypto-v2": "^2.0.0",
-    "sweetalert2": "^11.26.25",
-    "ts-md5": "^2.0.1"
+    "sweetalert2": "^11.26.25"
   },
   "devDependencies": {
-    "@types/crypto-js": "^4.2.2",
     "@types/qs": "^6.15.1"
   }
 }

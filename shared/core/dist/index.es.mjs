@@ -6,32 +6,32 @@ import "moment/dist/locale/zh-cn";
 import { generateFromString as s } from "generate-avatar";
 import { sm2 as c, sm4 as l } from "sm-crypto-v2";
 import u from "sweetalert2";
-import { SHA256 as d, enc as f, lib as p } from "crypto-js";
+import { base64urlnopad as d } from "@scure/base";
 // src/enums/index.ts
-var m = /* @__PURE__ */ function(e) {
+var f = /* @__PURE__ */ function(e) {
 	return e.DARK = "dark", e.LIGHT = "light", e.SYSTEM = "system", e;
-}({}), h = /* @__PURE__ */ function(e) {
+}({}), p = /* @__PURE__ */ function(e) {
 	return e[e.URL_ENCODED = 0] = "URL_ENCODED", e[e.MULTI_PART = 1] = "MULTI_PART", e[e.TEXT = 2] = "TEXT", e[e.JSON = 3] = "JSON", e;
-}({}), g = /* @__PURE__ */ function(e) {
+}({}), m = /* @__PURE__ */ function(e) {
 	return e.GET = "GET", e.POST = "POST", e.PUT = "PUT", e.DELETE = "DELETE", e;
-}({}), _ = /* @__PURE__ */ function(e) {
+}({}), h = /* @__PURE__ */ function(e) {
 	return e[e.FORBIDDEN = 0] = "FORBIDDEN", e[e.ENABLE = 1] = "ENABLE", e[e.LOCKING = 2] = "LOCKING", e[e.EXPIRED = 3] = "EXPIRED", e;
-}({}), v = /* @__PURE__ */ function(e) {
+}({}), g = /* @__PURE__ */ function(e) {
 	return e.BASIC = "Basic ", e.BEARER = "Bearer ", e;
-}({}), y = /* @__PURE__ */ function(e) {
+}({}), ee = /* @__PURE__ */ function(e) {
 	return e.AUTHORIZATION_CODE = "authorization_code", e.REFRESH_TOKEN = "refresh_token", e.CLIENT_CREDENTIALS = "client_credentials", e.PASSWORD = "password", e.SOCIAL_CREDENTIALS = "social_credentials", e.WEBAUTHN_CREDENTIALS = "webauthn_credentials", e.DEVICE_CODE = "urn:ietf:params:oauth:grant-type:device_code", e.JWT_BEARER = "urn:ietf:params:oauth:grant-type:jwt-bearer", e.TOKEN_EXCHANGE = "urn:ietf:params:oauth:grant-type:token-exchange", e;
-}({}), b = /* @__PURE__ */ function(e) {
+}({}), _ = /* @__PURE__ */ function(e) {
 	return e.CLIENT_SECRET_BASIC = "client_secret_basic", e.CLIENT_SECRET_POST = "client_secret_post", e.CLIENT_SECRET_JWT = "client_secret_jwt", e.PRIVATE_KEY_JWT = "private_key_jwt", e.NONE = "none", e.TLS_CLIENT_AUTH = "tls_client_auth", e.SELF_SIGNED_TLS_CLIENT_AUTH = "self_signed_tls_client_auth", e;
-}({}), x = /* @__PURE__ */ function(e) {
+}({}), v = /* @__PURE__ */ function(e) {
 	return e.OPENID = "openid", e.EMAIL = "email", e.PROFILE = "profile", e.PHONE = "phone", e.ADDRESS = "address", e.ROLES = "roles", e.CLIENT_CREATE = "client.create", e.CLIENT_READ = "client.read", e;
-}({}), S = /* @__PURE__ */ function(e) {
+}({}), y = /* @__PURE__ */ function(e) {
 	return e.ALLOCATABLE = "Allocatable", e.AUTHORIZE = "Authorize", e.CREATE = "Create", e.CONTENT = "Content", e.EDIT = "Edit", e.FILE = "File", e.INFO = "Info", e.INVOKE = "Invoke", e.REVOCATION = "Revocation", e.SETUP = "Setup", e;
-}({}), C = /* @__PURE__ */ new Map(), w = (e) => {
+}({}), b = /* @__PURE__ */ new Map(), x = (e) => {
 	let n = "";
 	return e && (n = typeof e == "string" ? e : e instanceof URLSearchParams ? e.toString() : typeof e == "object" ? t.stringify(e, { sort: (e, t) => e.localeCompare(t) }) : String(e)), n;
-}, T = (e) => {
+}, S = (e) => {
 	if (!n(e.params)) {
-		let t = w(e.params);
+		let t = x(e.params);
 		return [
 			e.method,
 			e.url,
@@ -39,30 +39,30 @@ var m = /* @__PURE__ */ function(e) {
 		].join("|");
 	}
 	return [e.method, e.url].join("|");
-}, E = class {
+}, C = class {
 	addPending(t) {
 		this.removePending(t);
-		let n = T(t);
+		let n = S(t);
 		t.cancelToken = t.cancelToken || new e.CancelToken((e) => {
-			C.has(n) || C.set(n, e);
+			b.has(n) || b.set(n, e);
 		});
 	}
 	removeAllPending() {
-		C.forEach((e) => {
+		b.forEach((e) => {
 			e && r(e) && e();
-		}), C.clear();
+		}), b.clear();
 	}
 	removePending(e) {
-		let t = T(e);
-		if (C.has(t)) {
-			let e = C.get(t);
-			e && e(t), C.delete(t);
+		let t = S(e);
+		if (b.has(t)) {
+			let e = b.get(t);
+			e && e(t), b.delete(t);
 		}
 	}
 	reset() {
-		C = /* @__PURE__ */ new Map();
+		b = /* @__PURE__ */ new Map();
 	}
-}, D = class {
+}, w = class {
 	axiosInstance;
 	defaultAxiosRequestConfig;
 	defaultRequestOptions;
@@ -88,7 +88,7 @@ var m = /* @__PURE__ */ function(e) {
 	setupInterceptors() {
 		let e = this.getAxiosInstanceHooks();
 		if (!e) return;
-		let { requestInterceptors: t, requestInterceptorsError: n, responseInterceptors: r, responseInterceptorsError: i } = e, a = new E();
+		let { requestInterceptors: t, requestInterceptorsError: n, responseInterceptors: r, responseInterceptorsError: i } = e, a = new C();
 		this.getAxiosInstance().interceptors.request.use((e) => {
 			let n = e.effectiveOptions;
 			return n.prohibitRepeatRequests && a.addPending(e), t(e, n);
@@ -106,11 +106,11 @@ var m = /* @__PURE__ */ function(e) {
 	}
 	createHttpHeaderPolicy(e) {
 		switch (e) {
-			case h.URL_ENCODED: return {
+			case p.URL_ENCODED: return {
 				headers: { "Content-Type": "application/x-www-form-urlencoded" },
 				dataConvert: (e) => t.stringify(e, { arrayFormat: "brackets" })
 			};
-			case h.MULTI_PART: return {
+			case p.MULTI_PART: return {
 				headers: { "Content-Type": "multipart/form-data" },
 				dataConvert: (e) => e
 			};
@@ -143,56 +143,56 @@ var m = /* @__PURE__ */ function(e) {
 		let r = this.setupRequest(e, t, n);
 		return this.request(r.config, r.options);
 	}
-	get(e, t = {}, n = { contentType: h.JSON }) {
+	get(e, t = {}, n = { contentType: p.JSON }) {
 		return this.process(e, {
 			params: t,
-			method: g.GET
+			method: m.GET
 		}, n);
 	}
-	post(e, t, n = { contentType: h.JSON }, r) {
+	post(e, t, n = { contentType: p.JSON }, r) {
 		return this.process(e, {
 			...r,
 			data: t,
-			method: g.POST
+			method: m.POST
 		}, n);
 	}
-	postWithParams(e, t, n = {}, r = { contentType: h.JSON }, i) {
+	postWithParams(e, t, n = {}, r = { contentType: p.JSON }, i) {
 		return this.process(e, {
 			...i,
 			params: t,
 			data: n,
-			method: g.POST
+			method: m.POST
 		}, r);
 	}
-	put(e, t, n = { contentType: h.JSON }, r) {
+	put(e, t, n = { contentType: p.JSON }, r) {
 		return this.process(e, {
 			...r,
 			data: t,
-			method: g.PUT
+			method: m.PUT
 		}, n);
 	}
-	putWithParams(e, t, n = {}, r = { contentType: h.JSON }, i) {
+	putWithParams(e, t, n = {}, r = { contentType: p.JSON }, i) {
 		return this.process(e, {
 			...i,
 			params: t,
 			data: n,
-			method: g.PUT
+			method: m.PUT
 		}, r);
 	}
-	delete(e, t = {}, n = { contentType: h.JSON }) {
+	delete(e, t = {}, n = { contentType: p.JSON }) {
 		return this.process(e, {
 			data: t,
-			method: g.DELETE
+			method: m.DELETE
 		}, n);
 	}
-	deleteWithParams(e, t, n = {}, r = { contentType: h.JSON }) {
+	deleteWithParams(e, t, n = {}, r = { contentType: p.JSON }) {
 		return this.process(e, {
 			params: t,
 			data: n,
-			method: g.DELETE
+			method: m.DELETE
 		}, r);
 	}
-}, O = (e, t) => {
+}, te = (e, t) => {
 	let n = {};
 	n = "statusText" in e ? e.data : e;
 	let r = {
@@ -201,10 +201,10 @@ var m = /* @__PURE__ */ function(e) {
 		detail: ""
 	};
 	return r.code = n && n.code ? n.code : 0, r.detail = n.error && n.error.detail ? n.error.detail : "", n.message ? r.message = n.message : n.error && n.error.message ? r.message = n.error.message : t && (r.message = t), r;
-}, k = (e) => {
+}, T = (e) => {
 	let n = `rgba(${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)},${Math.round(Math.random() * 255)})`;
 	console.log("%c┍------------------------------------------------------------------------------------------┑", `color:${n};`), "config" in e ? (console.log("| 请求地址：", e.config.url), console.log("| 请求类型：", e.config.method ? e.config.method.toUpperCase() : ""), console.log("| 请求参数：", t.parse(e.config.params)), console.log("| 响应数据：", e.data)) : "status" in e ? console.log("| 响应数据：", e.data) : console.log("| 响应数据：", e), console.log("%c┕------------------------------------------------------------------------------------------┙", `color:${n};`);
-}, A = (e) => e && "statusText" in e ? /^(2|3)\d{2}$/.test(String(e.status)) : !1, j = class {
+}, ne = (e) => e && "statusText" in e ? /^(2|3)\d{2}$/.test(String(e.status)) : !1, re = class {
 	http = {};
 	project = "";
 	clientId = "";
@@ -279,7 +279,7 @@ var m = /* @__PURE__ */ function(e) {
 	getManage(e = !0) {
 		return this.processProxy(this.manageAddress, e);
 	}
-}, M = class {
+}, E = class {
 	config;
 	constructor(e) {
 		this.config = e;
@@ -293,7 +293,7 @@ var m = /* @__PURE__ */ function(e) {
 	getIdPath(e) {
 		return this.getParamPath(this.getBaseAddress(), e);
 	}
-}, N = class extends M {
+}, ie = class extends E {
 	getConditionAddress() {
 		return this.getBaseAddress() + "/condition";
 	}
@@ -326,12 +326,12 @@ var m = /* @__PURE__ */ function(e) {
 		return this.getConfig().getHttp().post(this.getBaseAddress(), e);
 	}
 	assign(e) {
-		return this.getConfig().getHttp().put(this.getBaseAddress(), e, { contentType: h.URL_ENCODED });
+		return this.getConfig().getHttp().put(this.getBaseAddress(), e, { contentType: p.URL_ENCODED });
 	}
-}, P = typeof window < "u";
+}, D = typeof window < "u";
 // src/lib/utils/moment.ts
 o.locale("zh-cn");
-var F = class e {
+var O = class e {
 	static instance = new e();
 	constructor() {}
 	static getInstance() {
@@ -340,7 +340,7 @@ var F = class e {
 	generate(e) {
 		return `data:image/svg+xml;utf8,${s(e)}`;
 	}
-}.getInstance(), I = class e {
+}.getInstance(), k = class e {
 	static instance = new e();
 	cipherMode = 1;
 	constructor() {}
@@ -357,7 +357,7 @@ var F = class e {
 		let n = e.substring(2).toLocaleLowerCase();
 		return c.doDecrypt(n, t, this.cipherMode, { output: "string" });
 	}
-}, L = class e {
+}, A = class e {
 	static instance = new e();
 	constructor() {}
 	static getInstance() {
@@ -369,7 +369,7 @@ var F = class e {
 	decrypt(e, t) {
 		return l.decrypt(e, t, { output: "string" });
 	}
-}, R = I.getInstance(), z = L.getInstance(), B = u.mixin({
+}, j = k.getInstance(), M = A.getInstance(), N = u.mixin({
 	toast: !0,
 	position: "top",
 	showConfirmButton: !1,
@@ -378,12 +378,12 @@ var F = class e {
 	didOpen: (e) => {
 		e.addEventListener("mouseenter", u.stopTimer), e.addEventListener("mouseleave", u.resumeTimer);
 	}
-}), V = (e) => e === m.SYSTEM ? "auto" : e, H = class e {
+}), P = (e) => e === f.SYSTEM ? "auto" : e, F = class e {
 	static _instance = null;
 	static _initialized = !1;
 	theme;
 	constructor(e) {
-		this.theme = V(e);
+		this.theme = P(e);
 	}
 	static initialize(t) {
 		if (e._initialized) throw Error("RouterUtilities has already been initialized");
@@ -394,7 +394,7 @@ var F = class e {
 		return e._instance;
 	}
 	setTheme(e) {
-		this.theme = V(e);
+		this.theme = P(e);
 	}
 	information(e, t, n) {
 		return u.fire({
@@ -471,12 +471,12 @@ var F = class e {
 			}
 		});
 	}
-}.initialize(m.LIGHT), U = class e {
+}.initialize(f.LIGHT), I = class e {
 	static _instance = null;
 	static _initialized = !1;
 	theme;
 	constructor(e) {
-		this.theme = V(e);
+		this.theme = P(e);
 	}
 	static initialize(t) {
 		if (e._initialized) throw Error("RouterUtilities has already been initialized");
@@ -487,10 +487,10 @@ var F = class e {
 		return e._instance;
 	}
 	setTheme(e) {
-		this.theme = V(e);
+		this.theme = P(e);
 	}
 	information(e, t) {
-		return B.fire({
+		return N.fire({
 			icon: t,
 			title: e,
 			theme: this.theme
@@ -511,44 +511,295 @@ var F = class e {
 	question(e) {
 		return this.information(e, "question");
 	}
-}.initialize(m.LIGHT), W = (e) => {
-	H.setTheme(e), U.setTheme(e);
-}, G = class e {
+}.initialize(f.LIGHT), L = (e) => {
+	F.setTheme(e), I.setTheme(e);
+}, R = (e) => e / 2 ** 32 | 0, z = (e) => e >>> 0;
+function B(e, t, n, r) {
+	let i = R(n), a = z(n);
+	e.setUint32(t, r ? a : i, r), e.setUint32(t + 4, r ? i : a, r);
+}
+// ../../node_modules/.pnpm/@noble+hashes@2.4.0/node_modules/@noble/hashes/utils.js
+function V(e) {
+	return e instanceof Uint8Array || ArrayBuffer.isView(e) && e.constructor.name === "Uint8Array" && "BYTES_PER_ELEMENT" in e && e.BYTES_PER_ELEMENT === 1;
+}
+var H = (e) => e ? `"${e}" ` : "";
+function U(e, t = "") {
+	if (typeof e != "number") throw TypeError(H(t) + "expected number, got " + typeof e);
+	if (!Number.isSafeInteger(e) || e < 0) throw RangeError(H(t) + "expected integer >= 0, got " + e);
+	return e;
+}
+function W(e, t, n = "") {
+	if (V(e) && (t === void 0 || e.length === t)) return e;
+	t !== void 0 && U(t, "length");
+	let r = V(e), i = t === void 0 ? "" : ` of length ${t}`, a = r ? `length=${e.length}` : `type=${typeof e}`, o = H(n) + "expected Uint8Array" + i + ", got " + a;
+	throw r ? RangeError(o) : TypeError(o);
+}
+var G = (e, t) => {
+	if (typeof e != "object" || !e || Array.isArray(e)) throw TypeError((t === "object" ? "" : `"${t}" `) + "expected object, got type=" + typeof e);
+}, K = (e, t) => {
+	G(e, t);
+	let n = Object.getPrototypeOf(e);
+	if (n !== Object.prototype && n !== null) throw TypeError(`"${t}" expected plain object`);
+	if (Object.hasOwn(e, "__proto__")) throw TypeError(`"${t}.__proto__" is not allowed`);
+};
+function q(e, t = !0) {
+	if (e.destroyed) throw Error("hash was destroyed");
+	if (t && e.finished) throw Error("digest() was already called");
+}
+function J(e, t) {
+	W(e, void 0, "output");
+	let n = t.outputLen;
+	if (!(e.length >= n)) throw RangeError("\"output\" expected length >= " + n);
+}
+function Y(...e) {
+	for (let t = 0; t < e.length; t++) e[t].fill(0);
+}
+function X(e) {
+	return new DataView(e.buffer, e.byteOffset, e.byteLength);
+}
+function Z(e, t) {
+	return e << 32 - t | e >>> t;
+}
+function ae(e) {
+	if (typeof e != "string") throw TypeError("string expected");
+	let t = new TextEncoder().encode(e);
+	try {
+		return new Uint8Array(t);
+	} finally {
+		Y(t);
+	}
+}
+function oe(e, t, n = "opts") {
+	return K(e, "defaults"), t !== void 0 && K(t, n), Object.assign(Object.create(null), e, t);
+}
+function se(e, t = {}) {
+	if (typeof e != "function") throw TypeError("\"hashCons\" expected function, got type=" + typeof e);
+	t = oe({}, t, "info");
+	let n = (t, n) => e(n).update(t).digest(), r = e(void 0);
+	return n.outputLen = r.outputLen, n.blockLen = r.blockLen, n.canXOF = r.canXOF, n.create = (t) => e(t), Object.assign(n, t), Object.freeze(n);
+}
+function ce(e = 32) {
+	U(e, "bytesLength");
+	let t = typeof globalThis == "object" ? globalThis.crypto : null;
+	if (typeof t?.getRandomValues != "function") throw Error("crypto.getRandomValues must be defined");
+	if (e > 65536) throw RangeError(`"bytesLength" expected <= 65536, got ${e}`);
+	return t.getRandomValues(new Uint8Array(e));
+}
+var le = (e) => ({ oid: Uint8Array.from([
+	6,
+	9,
+	96,
+	134,
+	72,
+	1,
+	101,
+	3,
+	4,
+	2,
+	e
+]) });
+// ../../node_modules/.pnpm/@noble+hashes@2.4.0/node_modules/@noble/hashes/_md.js
+function ue(e, t, n) {
+	return e & t ^ ~e & n;
+}
+function de(e, t, n) {
+	return e & t ^ e & n ^ t & n;
+}
+var fe = class {
+	blockLen;
+	outputLen;
+	canXOF = !1;
+	padOffset;
+	isLE;
+	buffer;
+	view;
+	finished = !1;
+	length = 0;
+	pos = 0;
+	destroyed = !1;
+	constructor(e, t, n, r) {
+		this.blockLen = e, this.outputLen = t, this.padOffset = n, this.isLE = r, this.buffer = new Uint8Array(e), this.view = X(this.buffer);
+	}
+	update(e) {
+		q(this), W(e);
+		let { view: t, buffer: n, blockLen: r } = this, i = e.length, a = !1;
+		for (let o = 0; o < i;) {
+			let s = Math.min(r - this.pos, i - o);
+			if (s === r) {
+				let t = X(e);
+				for (; r <= i - o; o += r) this.process(t, o);
+				a = !0;
+			} else n.set(o === 0 && s === i ? e : e.subarray(o, o + s), this.pos), this.pos += s, o += s, this.pos === r && (this.process(t, 0), this.pos = 0, a = !0);
+		}
+		return this.length += e.length, a && this.roundClean(), this;
+	}
+	digestInto(e) {
+		q(this), J(e, this), this.finished = !0;
+		let { buffer: t, view: n, blockLen: r, isLE: i } = this, { pos: a } = this;
+		t[a++] = 128, t.fill(0, a), this.padOffset > r - a && (this.process(n, 0), t.fill(0)), B(n, r - 8, this.length * 8, i), this.process(n, 0), this.roundClean();
+		let o = e === t ? n : X(e), s = this.outputLen, c = s / 4, l = this.get();
+		if (s % 4 || c > l.length) throw Error("invalid outputLen");
+		for (let e = 0; e < c; e++) o.setUint32(4 * e, l[e], i);
+	}
+	digest() {
+		let { buffer: e, outputLen: t } = this;
+		this.digestInto(e);
+		let n = e.slice(0, t);
+		return this.destroy(), n;
+	}
+	_cloneIntoMeta(e) {
+		let { buffer: t, length: n, finished: r, destroyed: i, pos: a } = this;
+		return e.destroyed = i, e.finished = r, e.length = n, e.pos = a, a && e.buffer.set(t), e;
+	}
+	clone() {
+		return this._cloneInto();
+	}
+}, pe = /* @__PURE__ */ Uint32Array.from([
+	1779033703,
+	3144134277,
+	1013904242,
+	2773480762,
+	1359893119,
+	2600822924,
+	528734635,
+	1541459225
+]), me = /* @__PURE__ */ Uint32Array.from([
+	1116352408,
+	1899447441,
+	3049323471,
+	3921009573,
+	961987163,
+	1508970993,
+	2453635748,
+	2870763221,
+	3624381080,
+	310598401,
+	607225278,
+	1426881987,
+	1925078388,
+	2162078206,
+	2614888103,
+	3248222580,
+	3835390401,
+	4022224774,
+	264347078,
+	604807628,
+	770255983,
+	1249150122,
+	1555081692,
+	1996064986,
+	2554220882,
+	2821834349,
+	2952996808,
+	3210313671,
+	3336571891,
+	3584528711,
+	113926993,
+	338241895,
+	666307205,
+	773529912,
+	1294757372,
+	1396182291,
+	1695183700,
+	1986661051,
+	2177026350,
+	2456956037,
+	2730485921,
+	2820302411,
+	3259730800,
+	3345764771,
+	3516065817,
+	3600352804,
+	4094571909,
+	275423344,
+	430227734,
+	506948616,
+	659060556,
+	883997877,
+	958139571,
+	1322822218,
+	1537002063,
+	1747873779,
+	1955562222,
+	2024104815,
+	2227730452,
+	2361852424,
+	2428436474,
+	2756734187,
+	3204031479,
+	3329325298
+]), Q = /* @__PURE__ */ new Uint32Array(64), he = class extends fe {
+	A = 0;
+	B = 0;
+	C = 0;
+	D = 0;
+	E = 0;
+	F = 0;
+	G = 0;
+	H = 0;
+	constructor(e, t) {
+		super(64, e, 8, !1), this.A = t[0] | 0, this.B = t[1] | 0, this.C = t[2] | 0, this.D = t[3] | 0, this.E = t[4] | 0, this.F = t[5] | 0, this.G = t[6] | 0, this.H = t[7] | 0;
+	}
+	get() {
+		let { A: e, B: t, C: n, D: r, E: i, F: a, G: o, H: s } = this;
+		return [
+			e,
+			t,
+			n,
+			r,
+			i,
+			a,
+			o,
+			s
+		];
+	}
+	set(e, t, n, r, i, a, o, s) {
+		this.A = e | 0, this.B = t | 0, this.C = n | 0, this.D = r | 0, this.E = i | 0, this.F = a | 0, this.G = o | 0, this.H = s | 0;
+	}
+	_cloneInto(e) {
+		return (e ||= new this.constructor()).set(...this.get()), this._cloneIntoMeta(e);
+	}
+	process(e, t) {
+		for (let n = 0; n < 16; n++, t += 4) Q[n] = e.getUint32(t, !1);
+		for (let e = 16; e < 64; e++) {
+			let t = Q[e - 15], n = Q[e - 2], r = Z(t, 7) ^ Z(t, 18) ^ t >>> 3, i = Z(n, 17) ^ Z(n, 19) ^ n >>> 10;
+			Q[e] = i + Q[e - 7] + r + Q[e - 16] | 0;
+		}
+		let { A: n, B: r, C: i, D: a, E: o, F: s, G: c, H: l } = this;
+		for (let e = 0; e < 64; e++) {
+			let t = Z(o, 6) ^ Z(o, 11) ^ Z(o, 25), u = l + t + ue(o, s, c) + me[e] + Q[e] | 0, d = (Z(n, 2) ^ Z(n, 13) ^ Z(n, 22)) + de(n, r, i) | 0;
+			l = c, c = s, s = o, o = a + u | 0, a = i, i = r, r = n, n = u + d | 0;
+		}
+		n = n + this.A | 0, r = r + this.B | 0, i = i + this.C | 0, a = a + this.D | 0, o = o + this.E | 0, s = s + this.F | 0, c = c + this.G | 0, l = l + this.H | 0, this.set(n, r, i, a, o, s, c, l);
+	}
+	roundClean() {
+		Y(Q);
+	}
+	destroy() {
+		this.destroyed = !0, this.set(0, 0, 0, 0, 0, 0, 0, 0), Y(this.buffer);
+	}
+}, ge = class extends he {
+	constructor() {
+		super(32, pe);
+	}
+}, $ = /* @__PURE__ */ se(() => new ge(), /* @__PURE__ */ le(1)), _e = class e {
 	static instance = new e();
 	constructor() {}
 	static getInstance() {
 		return this.instance;
 	}
-	toBytesInt32(e) {
-		let t = /* @__PURE__ */ new ArrayBuffer(4);
-		return new DataView(t).setUint32(0, e, !1), t;
-	}
-	getRandomValues(e) {
-		let t = p.WordArray.random(e), n = [];
-		return t.words.forEach((e) => {
-			let t = this.toBytesInt32(e), r = new Uint8Array(t);
-			for (let e = 0; e < 4; e++) {
-				let t = r[e];
-				t !== void 0 && n.push(t);
-			}
-		}), n;
-	}
-	random(e) {
-		let t = "", n = this.getRandomValues(e);
-		for (let r = 0; r < e; r++) {
-			let e = n[r];
-			if (e !== void 0) {
-				let n = e % 66;
-				t += "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~"[n];
-			}
-		}
+	bytesToVerifierString(e) {
+		let t = "";
+		for (let n = 0; n < e.length; n++) t += "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~"[e[n] % 66];
 		return t;
 	}
 	generateVerifier(e) {
-		return this.random(e);
+		let t = ce(e);
+		return this.bytesToVerifierString(t);
 	}
 	generateChallenge(e) {
-		return d(e).toString(f.Base64url);
+		let t = $(ae(e));
+		return d.encode(t);
 	}
 	generateCodePair(e = 43) {
 		if (e < 43 || e > 128) throw `Expected a length between 43 and 128. Received ${e}.`;
@@ -562,4 +813,4 @@ var F = class e {
 		return this.generateChallenge(e) === t;
 	}
 }.getInstance();
-export { N as AbstractService, y as AuthorizationGrantTypeEnum, v as AuthorizationTokenEnum, F as AvatarUtils, D as Axios, x as BuildInScopeEnum, b as ClientAuthenticationMethodEnum, h as ContentTypeEnum, j as HttpConfig, g as HttpMethodEnum, P as IN_BROWSER, S as OperationEnum, G as PKCE, R as SM2Utils, z as SM4Utils, M as Service, _ as StatusEnum, u as Swal, m as ThemeModeEnum, W as changeSwalTheme, A as isSuccess, k as logResponse, o as moment, H as notify, O as parseResponseStatus, U as toast };
+export { ie as AbstractService, ee as AuthorizationGrantTypeEnum, g as AuthorizationTokenEnum, O as AvatarUtils, w as Axios, v as BuildInScopeEnum, _ as ClientAuthenticationMethodEnum, p as ContentTypeEnum, re as HttpConfig, m as HttpMethodEnum, D as IN_BROWSER, y as OperationEnum, _e as PKCE, j as SM2Utils, M as SM4Utils, E as Service, h as StatusEnum, u as Swal, f as ThemeModeEnum, L as changeSwalTheme, ne as isSuccess, T as logResponse, o as moment, F as notify, te as parseResponseStatus, I as toast };
