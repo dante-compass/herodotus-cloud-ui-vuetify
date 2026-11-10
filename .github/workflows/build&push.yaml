@@ -7,9 +7,12 @@ name: Publish Docker image
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "v*"
+    inputs:
+      release_tag:
+        description: "要发布的 Git 标签（例如 v1.0.0）"
+        required: true
+        type: string
+        default: "v" # 可设置默认值，但仍需用户填写
 
 jobs:
   push_to_docker_hub:
