@@ -1,4 +1,3 @@
 export * from './avatar';
-export * from './crypto';
+export * from './secure';
 export * from './message';
-export * from './pkce';

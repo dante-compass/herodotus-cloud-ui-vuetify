@@ -42,7 +42,9 @@ export default defineConfig({
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           "@noble/hashes": "NobleHashes",
+          "@noble/hashes/hmac.js": "NobleHashesHmac",
           "@noble/hashes/sha2.js": "NobleHashesSha2",
+          "@noble/hashes/legacy.js": "NobleHashesLegacy",
           "@noble/hashes/utils.js": "NobleHashesUtils",
           "@scure/base": "ScureBase",
           axios: "Axios",

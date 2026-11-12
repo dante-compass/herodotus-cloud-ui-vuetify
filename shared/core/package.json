@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/core",
-  "version": "3.1.29",
+  "version": "3.1.30",
   "description": "",
   "keywords": [],
   "author": "",
@@ -36,7 +36,7 @@
   "dependencies": {
     "@noble/hashes": "^2.4.0",
     "@scure/base": "^2.4.0",
-    "axios": "^1.21.0",
+    "axios": "^1.21.1",
     "generate-avatar": "^1.4.10",
     "moment": "^2.31.0",
     "qs": "^6.17.1",

@@ -1,6 +1,6 @@
 {
   "name": "@herodotus/framework",
-  "version": "3.1.29",
+  "version": "3.1.30",
   "description": "",
   "keywords": [],
   "author": "",
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@herodotus/core": "workspace:^",
-    "colord": "^2.10.0",
+    "colord": "^2.12.0",
     "js-base64": "^3.9.6",
     "jwt-decode": "^4.0.0"
   }

@@ -57,34 +57,34 @@
 </template>
 
 <script setup lang="ts">
-import { HmacMD5, HmacSHA1, HmacSHA256, enc } from "crypto-js";
-import { customAlphabet } from "nanoid";
-import { isEmpty, assignIn, get } from "lodash-es";
+import { SignatureUtils } from '@herodotus/core';
+import { customAlphabet } from 'nanoid';
+import { isEmpty, assignIn, get } from 'lodash-es';
 
-import { HTestingCard } from "../../components";
+import { HTestingCard } from '../../components';
 
-defineOptions({ name: "HMqttSignature", components: { HTestingCard } });
+defineOptions({ name: 'HMqttSignature', components: { HTestingCard } });
 
 const form = ref();
 
-const productKey = shallowRef("apktestadd");
-const deviceName = shallowRef("");
-const deviceSecret = shallowRef("9f3026f4beddf8d29f3026f4beddf8d2");
-const clientId = shallowRef("");
-const method = shallowRef("hmacmd5");
+const productKey = shallowRef('apktestadd');
+const deviceName = shallowRef('');
+const deviceSecret = shallowRef('9f3026f4beddf8d29f3026f4beddf8d2');
+const clientId = shallowRef('');
+const method = shallowRef('hmacmd5');
 const authType = shallowRef();
-const timestamp = shallowRef("");
-const random = shallowRef("");
+const timestamp = shallowRef('');
+const random = shallowRef('');
 
-const mqttClientId = shallowRef("");
-const mqttUsername = shallowRef("");
-const mqttPassword = shallowRef("");
+const mqttClientId = shallowRef('');
+const mqttUsername = shallowRef('');
+const mqttPassword = shallowRef('');
 
 const getClientId = () => {
   if (!isEmpty(clientId.value)) {
     return clientId.value;
   } else {
-    return productKey.value + "." + deviceName.value;
+    return productKey.value + '.' + deviceName.value;
   }
 };
 
@@ -103,12 +103,12 @@ const createMqttClientId = () => {
     result += `,authType=${authType.value}`;
   }
 
-  result += "|";
+  result += '|';
   return result;
 };
 
 const createMqttUsername = () => {
-  return deviceName.value + "&" + productKey.value;
+  return deviceName.value + '&' + productKey.value;
 };
 
 const createMqttPassword = () => {
@@ -123,25 +123,12 @@ const createMqttPassword = () => {
   }
 
   let keys = Object.keys(options).sort();
-  let content = "";
+  let content = '';
   for (const key of keys) {
     content += key + get(options, key);
   }
 
-  let hash;
-  switch (method.value) {
-    case "hmacsha1":
-      hash = HmacSHA1(content, deviceSecret.value);
-      break;
-    case "hmacsha256":
-      hash = HmacSHA256(content, deviceSecret.value);
-      break;
-    default:
-      hash = HmacMD5(content, deviceSecret.value);
-      break;
-  }
-
-  return hash.toString(enc.Hex);
+  return SignatureUtils.calculate(method.value, deviceSecret.value, content);
 };
 
 const onRenewTimestamp = () => {
@@ -149,7 +136,7 @@ const onRenewTimestamp = () => {
 };
 
 const onRenewRandom = () => {
-  const result = customAlphabet("0123456789", 6);
+  const result = customAlphabet('0123456789', 6);
   random.value = result();
 };
 
