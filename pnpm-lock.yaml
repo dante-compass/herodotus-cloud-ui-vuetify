@@ -220,15 +220,6 @@ importers:
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
-      '@tsparticles/engine':
-        specifier: ^4.6.0
-        version: 4.6.0
-      '@tsparticles/preset-triangles':
-        specifier: ^4.6.0
-        version: 4.6.0
-      ogl:
-        specifier: ^1.0.11
-        version: 1.0.11
       vue:
         specifier: ^3.5.45
         version: 3.5.45(typescript@6.0.3)
@@ -266,6 +257,21 @@ importers:
       '@types/qs':
         specifier: ^6.15.1
         version: 6.15.1
+
+  shared/extensions:
+    dependencies:
+      '@tsparticles/engine':
+        specifier: ^4.6.0
+        version: 4.6.0
+      '@tsparticles/preset-triangles':
+        specifier: ^4.6.0
+        version: 4.6.0
+      ogl:
+        specifier: ^1.0.11
+        version: 1.0.11
+      vue:
+        specifier: ^3.5.45
+        version: 3.5.45(typescript@6.0.3)
 
   shared/framewok:
     dependencies:

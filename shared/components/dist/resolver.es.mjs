@@ -1,8 +1,5 @@
 // src/resolver.ts
 var e = [
-	"HBitsGalaxy",
-	"HBitsPrismaticBurst",
-	"HBitsThreads",
 	"HDate",
 	"HDateTime",
 	"HDialog",
@@ -13,8 +10,6 @@ var e = [
 	"HIconButton",
 	"HLabel",
 	"HLabelItem",
-	"HParticles",
-	"HSignInBackground",
 	"HTime",
 	"HTreeSelect"
 ];

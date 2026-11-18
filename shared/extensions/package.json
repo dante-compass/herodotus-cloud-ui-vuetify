@@ -1,0 +1,47 @@
+{
+  "name": "@herodotus/extensions",
+  "version": "3.1.30",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --fix"
+  },
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.mjs",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.es.mjs",
+      "require": "./dist/index.cjs.js"
+    },
+    "./resolver": {
+      "types": "./dist/types/resolver.d.ts",
+      "import": "./dist/resolver.es.mjs",
+      "require": "./dist/resolver.cjs.js"
+    },
+    "./style.css": "./dist/assets/css/extensions.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://packages.aliyun.com/6652f3b6ced1b9e566e189fa/npm/npm-registry/"
+  },
+  "dependencies": {
+    "@tsparticles/engine": "^4.6.0",
+    "@tsparticles/preset-triangles": "^4.6.0",
+    "ogl": "^1.0.11",
+    "vue": "^3.5.45"
+  }
+}

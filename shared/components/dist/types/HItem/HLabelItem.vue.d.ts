@@ -16,8 +16,8 @@ type __VLS_Slots = ReturnType<typeof __VLS_template>['__VLS_Slots'];
 declare const __VLS_base: import('vue').DefineComponent<Props, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<Props> & Readonly<{}>, {
     right: boolean;
     required: boolean;
-    align: "center" | "start" | "end" | null;
-    justify: "center" | "start" | "end" | null;
+    align: "start" | "end" | "center" | null;
+    justify: "start" | "end" | "center" | null;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, any>;
 declare const __VLS_export: __VLS_WithSlots<typeof __VLS_base, __VLS_Slots>;
 declare const _default: typeof __VLS_export;
