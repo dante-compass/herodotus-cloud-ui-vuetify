@@ -24,4 +24,4 @@ function n() {
 		}
 	};
 }
-export { n as HerodotusResolver, n as default };
+export { n as HerodotusExtensionResolver, n as default };

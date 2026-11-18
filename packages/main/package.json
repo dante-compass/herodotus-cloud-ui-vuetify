@@ -19,6 +19,7 @@
     "@herodotus/api": "workspace:^",
     "@herodotus/components": "workspace:^",
     "@herodotus/core": "workspace:^",
+    "@herodotus/extensions": "workspace:*",
     "@herodotus/framework": "workspace:^",
     "@mdi/font": "7.4.47",
     "@noble/hashes": "^2.4.0",

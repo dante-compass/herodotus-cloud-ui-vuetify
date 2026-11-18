@@ -9,7 +9,7 @@ function isValidComponent(name: string) {
 /**
  * Herodotus UI 组件解析器
  */
-export function HerodotusResolver(): ComponentResolver {
+export function HerodotusExtensionResolver(): ComponentResolver {
   return {
     type: "component",
     resolve: (name: string) => {
@@ -31,4 +31,4 @@ export function HerodotusResolver(): ComponentResolver {
   };
 }
 
-export default HerodotusResolver;
+export default HerodotusExtensionResolver;

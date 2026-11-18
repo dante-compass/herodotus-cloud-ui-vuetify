@@ -147,6 +147,9 @@ importers:
       '@herodotus/core':
         specifier: workspace:^
         version: link:../../shared/core
+      '@herodotus/extensions':
+        specifier: workspace:*
+        version: link:../../shared/extensions
       '@herodotus/framework':
         specifier: workspace:^
         version: link:../../shared/framewok

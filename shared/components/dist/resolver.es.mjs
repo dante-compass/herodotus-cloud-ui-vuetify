@@ -21,7 +21,7 @@ function n() {
 		type: "component",
 		resolve: (e) => {
 			if (e.startsWith("H") && t(e)) {
-				let t = e, n = ["@herodotus/components/style.css"];
+				let t = e, n = [];
 				return {
 					name: t,
 					from: "@herodotus/components",
@@ -31,4 +31,4 @@ function n() {
 		}
 	};
 }
-export { n as HerodotusResolver, n as default };
+export { n as HerodotusComponentResolver, n as default };
