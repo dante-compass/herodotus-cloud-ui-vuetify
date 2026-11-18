@@ -10,9 +10,11 @@ lerna-debug.log*
 node_modules
 .DS_Store
 dist
+dist/*
 dist-ssr
 coverage
 *.local
+!shared/extensions/dist
 
 # Editor directories and files
 .vscode/*
