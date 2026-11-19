@@ -1,5 +1,11 @@
 # @herodotus/core
 
+## 3.1.32
+
+### Patch Changes
+
+- 调整 TaskDefinition 定义适配新版本后端
+
 ## 3.1.31
 
 ### Patch Changes

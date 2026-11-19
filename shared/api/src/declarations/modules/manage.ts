@@ -106,6 +106,8 @@ export interface TaskDefinitionEntity extends AbstractSysEntity {
   retryInterval: string | null;
   backoff: string | null;
   maxInterval: string | null;
+  misfire: string | null;
+  threshold: string | null;
   paused: boolean;
   available: boolean;
 }
