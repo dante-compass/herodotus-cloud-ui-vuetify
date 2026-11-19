@@ -1,5 +1,11 @@
 # @herodotus/extensions
 
+## 3.1.33
+
+### Patch Changes
+
+- [新增] 分布式任务调度新增 Misfire 错误触发补偿执行策略
+
 ## 3.1.32
 
 ### Patch Changes

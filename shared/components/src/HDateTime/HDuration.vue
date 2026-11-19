@@ -26,7 +26,7 @@ import { DURATION_UNITS } from '@/lib/utils';
 
 defineOptions({ name: 'HDuration', components: { VContainer, VRow, VCol, VNumberInput, VSelect } });
 
-const durationValue = defineModel<string | number>({
+const durationValue = defineModel<string | number | null>({
   required: true,
 });
 
@@ -34,9 +34,8 @@ const amount = shallowRef(0);
 const unit = shallowRef();
 const options = shallowRef(DURATION_UNITS);
 
-const convertDurationToData = (value: number | string) => {
+const convertDurationToData = (value: number | string | null) => {
   if (value) {
-
     let duration = moment.duration(value, 'seconds');
     if (duration) {
       // @ts-ignore
@@ -64,7 +63,7 @@ const convertDataToDuration = (amount: number, unit: string) => {
 watch(
   () => durationValue.value,
   (newValue) => {
-     if (newValue) {
+    if (newValue) {
       convertDurationToData(newValue);
     }
   },

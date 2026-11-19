@@ -4,23 +4,14 @@
 
     <v-switch v-model="enabled" :label="enabled ? '已开启错误触发' : '已关闭错误触发'"></v-switch>
     <template v-if="enabled">
-      <v-number-input
-        v-model="editedItem.maxAttempts"
-        label="最大重试次数"
-        placeholder="请输入最大重试次数"
-        inset
-      ></v-number-input>
-      <h-label text="错误触发阈值"></h-label>
-      <h-duration v-model="editedItem.retryInterval as string"></h-duration>
+      <h-label text="错误触发策略"></h-label>
       <h-dictionary-toggle
-        v-model="editedItem.backoff as string"
-        dictionary="Backoff"
-        default-value="FIXED"
+        v-model="editedItem.misfire"
+        dictionary="Misfire"
+        default-value="FIRE_ONCE"
       ></h-dictionary-toggle>
-      <template v-if="isExponential">
-        <h-label text="最大重试间隔"></h-label>
-        <h-duration v-model="editedItem.maxInterval as string"></h-duration>
-      </template>
+      <h-label text="错误触发阈值"></h-label>
+      <h-duration v-model="editedItem.threshold"></h-duration>
     </template>
   </div>
 </template>
@@ -28,7 +19,7 @@
 <script setup lang="ts">
 import type { TaskDefinitionEntity } from '@herodotus/api';
 
-defineOptions({ name: 'HRetryPolicyPanel' });
+defineOptions({ name: 'HMisfireRolicyPanel' });
 
 const editedItem = defineModel<TaskDefinitionEntity>({
   default: () => ({}) as TaskDefinitionEntity,
@@ -36,21 +27,15 @@ const editedItem = defineModel<TaskDefinitionEntity>({
 
 const enabled = shallowRef(false);
 
-const isExponential = computed(() => {
-  return editedItem.value.backoff === 'EXPONENTIAL';
-});
-
 watch(enabled, (newValue) => {
   if (!newValue) {
-    editedItem.value.maxAttempts = null;
-    editedItem.value.maxInterval = null;
-    editedItem.value.backoff = null;
-    editedItem.value.retryInterval = null;
+    editedItem.value.misfire = null;
+    editedItem.value.threshold = null;
   }
 });
 
 onMounted(() => {
-  if (editedItem.value.maxAttempts || editedItem.value.retryInterval || editedItem.value.backoff) {
+  if (editedItem.value.misfire && editedItem.value.threshold) {
     enabled.value = true;
   }
 });

@@ -25,7 +25,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const toggle = defineModel<string | undefined>({
+const toggle = defineModel<string | null>({
   required: true,
 });
 

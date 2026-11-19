@@ -1,5 +1,13 @@
 # @herodotus/components
 
+## 3.1.33
+
+### Patch Changes
+
+- [新增] 分布式任务调度新增 Misfire 错误触发补偿执行策略
+- Updated dependencies
+  - @herodotus/core@3.1.33
+
 ## 3.1.32
 
 ### Patch Changes
