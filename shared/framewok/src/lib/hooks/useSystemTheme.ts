@@ -1,7 +1,4 @@
-import type { ThemeMode } from "@herodotus/core";
-
-import { watch, shallowRef, computed, nextTick, watchEffect } from "vue";
-import { useTheme } from "vuetify";
+import { computed, watch, shallowRef } from "vue";
 
 import { toast, notify } from "@herodotus/core";
 import { ThemeModeEnum } from "@herodotus/core";
@@ -10,86 +7,8 @@ import { getColorPalette, mixColor } from "@/lib/utilities";
 
 export default function useSystemTheme() {
   const settings = useSettingsStore();
-  const vuetifyTheme = useTheme();
 
-  // ---------- Theme 切换效果 ----------
-  const systemTheme = shallowRef(ThemeModeEnum.DARK);
-
-  const hasScrollbar = (el?: Element | null) => {
-    if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
-    const style = window.getComputedStyle(el);
-    return style.overflowY === "scroll" || (style.overflowY === "auto" && el.scrollHeight > el.clientHeight);
-  };
-
-  const themeTransition = () => {
-    const x = performance.now();
-    for (let i = 0; i++ < 1e7; (i << 9) & ((9 % 9) * 9 + 9));
-    if (performance.now() - x > 10) return;
-
-    const el: HTMLElement = document.querySelector("[data-v-app]")!;
-    const children = el.querySelectorAll("*") as NodeListOf<HTMLElement>;
-
-    children.forEach((el) => {
-      if (hasScrollbar(el)) {
-        el.dataset.scrollX = String(el.scrollLeft);
-        el.dataset.scrollY = String(el.scrollTop);
-      }
-    });
-
-    const copy = el.cloneNode(true) as HTMLElement;
-    copy.classList.add("app-copy");
-    const rect = el.getBoundingClientRect();
-    copy.style.top = rect.top + "px";
-    copy.style.left = rect.left + "px";
-    copy.style.width = rect.width + "px";
-    copy.style.height = rect.height + "px";
-
-    const targetEl = document.activeElement as HTMLElement;
-    const targetRect = targetEl.getBoundingClientRect();
-    const left = targetRect.left + targetRect.width / 2 + window.scrollX;
-    const top = targetRect.top + targetRect.height / 2 + window.scrollY;
-    el.style.setProperty("--clip-pos", `${left}px ${top}px`);
-    el.style.removeProperty("--clip-size");
-
-    nextTick(() => {
-      el.classList.add("app-transition");
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          el.style.setProperty("--clip-size", Math.hypot(window.innerWidth, window.innerHeight) + "px");
-        });
-      });
-    });
-
-    document.body.append(copy);
-    (copy.querySelectorAll("[data-scroll-x], [data-scroll-y]") as NodeListOf<HTMLElement>).forEach((el) => {
-      el.scrollLeft = Number(el.dataset.scrollX);
-      el.scrollTop = Number(el.dataset.scrollY);
-    });
-
-    function onTransitionend(e: TransitionEvent) {
-      if (e.target === e.currentTarget) {
-        copy.remove();
-        el.removeEventListener("transitionend", onTransitionend);
-        el.removeEventListener("transitioncancel", onTransitionend);
-        el.classList.remove("app-transition");
-        el.style.removeProperty("--clip-size");
-        el.style.removeProperty("--clip-pos");
-      }
-    }
-    el.addEventListener("transitionend", onTransitionend);
-    el.addEventListener("transitioncancel", onTransitionend);
-  };
-
-  watchEffect(() => {
-    vuetifyTheme.change(settings.isSystem ? systemTheme.value : settings.theme.mode);
-  });
-
-  watch(vuetifyTheme.global.name, (newValue) => {
-    themeTransition();
-    const current = newValue as ThemeMode;
-    toast.setTheme(current);
-    notify.setTheme(current);
-  });
+  const darkTheme = shallowRef(ThemeModeEnum.DARK);
 
   // ---------- 登录页面 Theme ----------
   const backgroundThemeColor = computed(() => {
@@ -113,7 +32,7 @@ export default function useSystemTheme() {
   /**
    * 登录页面循环切换系统主题按钮事件
    */
-  const onCycleChangeTheme = () => {
+  const onCycleThemeChanged = () => {
     if (settings.isDark) {
       settings.toSystem();
       return;
@@ -139,6 +58,23 @@ export default function useSystemTheme() {
     },
   });
 
+  const systemTheme = computed(() => {
+    return settings.isSystem ? darkTheme.value : settings.theme.mode;
+  });
+
+  watch(
+    () => settings.theme.mode,
+    (newValue) => {
+      if (newValue === ThemeModeEnum.SYSTEM) {
+        toast.setTheme(ThemeModeEnum.DARK);
+        notify.setTheme(ThemeModeEnum.DARK);
+      } else {
+        toast.setTheme(newValue);
+        notify.setTheme(newValue);
+      }
+    },
+  );
+
   /**
    * 登录页面循环切换系统主题按钮 Icon
    */
@@ -157,14 +93,33 @@ export default function useSystemTheme() {
     return settings.isLightenMode;
   });
 
+  const themeItems = [
+    {
+      text: "浅色主题",
+      icon: "mdi-white-balance-sunny",
+      value: "light",
+    },
+    {
+      text: "深色主题",
+      icon: "mdi-weather-night",
+      value: "dark",
+    },
+    {
+      text: "跟随系统",
+      icon: "mdi-desktop-tower-monitor",
+      value: "system",
+    },
+  ];
+
   return {
     isLightenMode,
     lightColor,
     darkColor,
     backgroundColor,
-    onCycleChangeTheme,
     currentTheme,
-    cycleChangeThemeIcon,
     systemTheme,
+    cycleChangeThemeIcon,
+    onCycleThemeChanged,
+    themeItems,
   };
 }

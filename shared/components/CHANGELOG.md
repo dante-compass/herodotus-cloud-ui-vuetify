@@ -1,5 +1,77 @@
 # @herodotus/components
 
+## 3.1.34
+
+### Patch Changes
+
+- 版本发布
+- Updated dependencies
+  - @herodotus/core@3.1.34
+
+## 3.1.33
+
+### Patch Changes
+
+- [新增] 分布式任务调度新增 Misfire 错误触发补偿执行策略
+- Updated dependencies
+  - @herodotus/core@3.1.33
+
+## 3.1.32
+
+### Patch Changes
+
+- 调整 TaskDefinition 定义适配新版本后端
+- Updated dependencies
+  - @herodotus/core@3.1.32
+
+## 3.1.31
+
+### Patch Changes
+
+- [重构] 将不依赖于任何组件库的通用组件单独提取为组件，方便 Vuetify 和 Quasar 工程共享代码
+- Updated dependencies
+  - @herodotus/core@3.1.31
+
+## 3.1.30
+
+### Patch Changes
+
+- [重构] 前端改用 @noble/hashes 和 @scure/base 重构 PKCE 代码，替代已过时的 crypto-js
+- Updated dependencies
+  - @herodotus/core@3.1.30
+
+## 3.1.29
+
+### Patch Changes
+
+- [重构] 前端改用 @noble/hashes 和 @scure/base 重构 PKCE 代码，替代已过时的 crypto-js
+- Updated dependencies
+  - @herodotus/core@3.1.29
+
+## 3.1.28
+
+### Patch Changes
+
+- [修复] 修复前端在切换主题时，tsparticles 粒子效果会抛出 Register plugins can only be done before calling tsParticles.load() 异常问题
+- Updated dependencies
+  - @herodotus/core@3.1.28
+
+## 3.1.27
+
+### Patch Changes
+
+- [重构] 前端主题列表定义数组迁移至 framework 模块中，方便代码共享
+- Updated dependencies
+  - @herodotus/core@3.1.27
+
+## 3.1.26
+
+### Patch Changes
+
+- [重构] 重构前端主题切换动画效果，改用 Vuetify 自身提供特效，消除 framework 模块无效代码和依赖引用
+- Updated dependencies
+  - @herodotus/core@3.1.26
+
 ## 3.1.25
 
 ### Patch Changes

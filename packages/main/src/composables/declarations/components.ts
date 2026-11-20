@@ -1,6 +1,6 @@
 export interface DisplayElement {
   color: string;
-  icon: string;
+  icon?: string;
   text?: string;
 }
 

@@ -34,7 +34,7 @@ const model = defineModel<TslUnitEntity | null | undefined>({
   required: true,
 });
 
-const items = shallowRef<TslUnitEntity[]>([]);
+const items = ref<TslUnitEntity[]>([]);
 const loading = shallowRef(false);
 const search = shallowRef('');
 

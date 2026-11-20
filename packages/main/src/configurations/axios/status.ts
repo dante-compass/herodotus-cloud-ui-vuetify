@@ -1,6 +1,6 @@
 import type { AxiosResponse, AxiosInstance, AxiosError } from "@herodotus/core";
 
-import { notify, parseResponseStatus } from "@herodotus/core";
+import { notify, Swal, parseResponseStatus } from "@herodotus/core";
 
 import { SignOutUtilities } from "@herodotus/framework";
 
@@ -62,7 +62,7 @@ const statusCode = (axiosInstance: AxiosInstance, response?: AxiosResponse<any>,
       case 408:
         break;
       case 412:
-        notify.warning(content, detail);
+        notify.warning(content);
         break;
       case 500:
         if (content) {

@@ -33,33 +33,19 @@ export default defineConfig({
     },
     rolldownOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
-      external: [
-        "lodash-es",
-        "ogl",
-        "pinia",
-        "vue",
-        "vuetify",
-        "vuetify/components",
-        "@mdi/js",
-        "@herodotus/core",
-        "@tsparticles/engine",
-        "@tsparticles/preset-triangles",
-      ],
+      external: ["lodash-es", "pinia", "vue", "vuetify", "vuetify/components", "@mdi/js", "@herodotus/core"],
       output: {
         exports: "named",
         assetFileNames: `assets/[ext]/[name][extname]`,
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           "lodash-es": "LodashEs",
-          ogl: "Ogl",
           pinia: "Pinia",
           vue: "Vue",
           vuetify: "Vuetify",
           "vuetify/components": "VuetifyComponents",
           "@mdi/js": "MdiJs",
           "@herodotus/core": "HerodotusCore",
-          "@tsparticles/engine": "TsparticlesEngine",
-          "@tsparticles/preset-triangles": "TsparticlesPresetTriangles",
         },
       },
     },

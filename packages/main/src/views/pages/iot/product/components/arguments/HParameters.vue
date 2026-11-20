@@ -17,8 +17,6 @@
       </v-list-item>
     </v-list>
 
-    <h-parameter-list v-if="isShowList" v-model="model" class="mb-4"></h-parameter-list>
-
     <h-primary-adding-dialog
       v-model="openDialog"
       :argument="originalArgument.specs"

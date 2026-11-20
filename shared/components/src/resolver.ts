@@ -1,9 +1,6 @@
 import type { ComponentResolver } from "unplugin-vue-components";
 
 const components = [
-  "HBitsGalaxy",
-  "HBitsPrismaticBurst",
-  "HBitsThreads",
   "HDate",
   "HDateTime",
   "HDialog",
@@ -14,8 +11,6 @@ const components = [
   "HIconButton",
   "HLabel",
   "HLabelItem",
-  "HParticles",
-  "HSignInBackground",
   "HTime",
   "HTreeSelect",
 ];
@@ -27,7 +22,7 @@ function isValidComponent(name: string) {
 /**
  * Herodotus UI 组件解析器
  */
-export function HerodotusResolver(): ComponentResolver {
+export function HerodotusComponentResolver(): ComponentResolver {
   return {
     type: "component",
     resolve: (name: string) => {
@@ -37,7 +32,8 @@ export function HerodotusResolver(): ComponentResolver {
         const from = "@herodotus/components";
 
         // 构建 side effects 配置
-        const sideEffects: string[] = ["@herodotus/components/style.css"];
+        // const sideEffects: string[] = ["@herodotus/components/style.css"];
+        const sideEffects: string[] = [];
 
         return {
           name: componentName,
@@ -49,4 +45,4 @@ export function HerodotusResolver(): ComponentResolver {
   };
 }
 
-export default HerodotusResolver;
+export default HerodotusComponentResolver;
