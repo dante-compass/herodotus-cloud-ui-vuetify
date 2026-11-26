@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="fill-height d-flex flex-column pa-0" fluid>
     <v-row class="h-screen" justify="center">
       <v-col xxl="4" xl="3" lg="2" md="1" sm="0" xs="0"></v-col>
       <v-col align-self="center">

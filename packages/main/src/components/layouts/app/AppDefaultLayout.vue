@@ -6,7 +6,7 @@
 
     <v-main :class="backgroundColor">
       <app-tab-view></app-tab-view>
-      <v-container class="pt-0">
+      <v-container class="fill-height d-flex flex-column pt-0">
         <layout-content></layout-content>
       </v-container>
     </v-main>

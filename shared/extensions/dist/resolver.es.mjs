@@ -1,6 +1,7 @@
 // src/resolver.ts
 var e = [
 	"HBitsGalaxy",
+	"HBitsGhostFibers",
 	"HBitsPrismaticBurst",
 	"HBitsThreads",
 	"HParticles",

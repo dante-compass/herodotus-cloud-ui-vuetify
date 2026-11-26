@@ -1,3 +1,5 @@
+import { CSSProperties } from 'vue';
+export type GalaxyDirection = 'forward' | 'backward';
 interface GalaxyProps {
     focal?: [number, number];
     rotation?: [number, number];
@@ -10,11 +12,24 @@ interface GalaxyProps {
     glowIntensity?: number;
     saturation?: number;
     mouseRepulsion?: boolean;
+    repulsionStrength?: number;
     twinkleIntensity?: number;
     rotationSpeed?: number;
-    repulsionStrength?: number;
     autoCenterRepulsion?: number;
     transparent?: boolean;
+    lightMode?: boolean;
+    starColors?: string[];
+    starSize?: number;
+    flareIntensity?: number;
+    layers?: number;
+    direction?: GalaxyDirection;
+    clickWarp?: boolean;
+    intro?: boolean;
+    backgroundColor?: string;
+    opacity?: number;
+    dpr?: number;
+    className?: string;
+    style?: CSSProperties;
 }
 declare const __VLS_export: import('vue').DefineComponent<GalaxyProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<GalaxyProps> & Readonly<{}>, {
     focal: [number, number];
@@ -28,11 +43,24 @@ declare const __VLS_export: import('vue').DefineComponent<GalaxyProps, {}, {}, {
     glowIntensity: number;
     saturation: number;
     mouseRepulsion: boolean;
+    repulsionStrength: number;
     twinkleIntensity: number;
     rotationSpeed: number;
-    repulsionStrength: number;
     autoCenterRepulsion: number;
     transparent: boolean;
+    lightMode: boolean;
+    starColors: string[];
+    starSize: number;
+    flareIntensity: number;
+    layers: number;
+    direction: GalaxyDirection;
+    clickWarp: boolean;
+    intro: boolean;
+    backgroundColor: string;
+    opacity: number;
+    dpr: number;
+    className: string;
+    style: CSSProperties;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, any>;
 declare const _default: typeof __VLS_export;
 export default _default;

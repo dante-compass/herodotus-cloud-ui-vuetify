@@ -7,9 +7,10 @@
     <h-sign-in-background :start-color="lightColor" :end-color="darkColor"></h-sign-in-background>
   </v-parallax>
   <div v-else>
-    <h-bits-galaxy :transparent="false" :saturation="1" :auto-center-repulsion="1" :hue-shift="200"></h-bits-galaxy>
+    <!-- <h-bits-galaxy :transparent="false" :saturation="1" :auto-center-repulsion="1" :hue-shift="200"></h-bits-galaxy> -->
     <!-- <h-bits-threads></h-bits-threads> -->
     <!-- <h-bits-prismatic-burst></h-bits-prismatic-burst> -->
+    <h-bits-ghost-fibers glow-color="#3b82f6" line-color="#caebdc" secondary-color="#6366f1" />
 
     <h-sign-in-container>
       <slot></slot>

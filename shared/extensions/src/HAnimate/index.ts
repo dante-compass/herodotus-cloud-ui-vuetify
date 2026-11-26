@@ -1,12 +1,17 @@
 import type { App } from "vue";
 
 import HBitsGalaxy from "./HBitsGalaxy.vue";
+import HBitsGhostFibers from "./HBitsGhostFibers.vue";
 import HBitsPrismaticBurst from "./HBitsPrismaticBurst.vue";
 import HBitsThreads from "./HBitsThreads.vue";
 import HParticles from "./HParticles.vue";
 
 HBitsGalaxy.install = (app: App): void => {
   app.component(HBitsGalaxy.name as string, HBitsGalaxy);
+};
+
+HBitsGhostFibers.install = (app: App): void => {
+  app.component(HBitsGhostFibers.name as string, HBitsGhostFibers);
 };
 
 HBitsPrismaticBurst.install = (app: App): void => {
@@ -21,4 +26,4 @@ HParticles.install = (app: App): void => {
   app.component(HParticles.name as string, HParticles);
 };
 
-export { HBitsThreads, HBitsPrismaticBurst, HBitsGalaxy, HParticles };
+export { HBitsThreads, HBitsGhostFibers, HBitsPrismaticBurst, HBitsGalaxy, HParticles };

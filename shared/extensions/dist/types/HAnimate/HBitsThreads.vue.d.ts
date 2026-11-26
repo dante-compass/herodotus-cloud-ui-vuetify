@@ -1,14 +1,48 @@
-interface Props {
-    color?: [number, number, number];
+interface ThreadsProps {
+    color?: string | [number, number, number];
+    accentColor?: string | [number, number, number];
     amplitude?: number;
     distance?: number;
     enableMouseInteraction?: boolean;
+    lineCount?: number;
+    thickness?: number;
+    softness?: number;
+    speed?: number;
+    waves?: number;
+    split?: number;
+    fray?: number;
+    angle?: number;
+    seed?: number;
+    parting?: number;
+    taper?: number;
+    brightness?: number;
+    fade?: number;
+    opacity?: number;
+    paused?: boolean;
+    className?: string;
 }
-declare const __VLS_export: import('vue').DefineComponent<Props, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<Props> & Readonly<{}>, {
-    color: [number, number, number];
+declare const __VLS_export: import('vue').DefineComponent<ThreadsProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<ThreadsProps> & Readonly<{}>, {
+    speed: number;
+    opacity: number;
+    className: string;
+    split: number;
+    waves: number;
+    thickness: number;
+    brightness: number;
+    paused: boolean;
+    color: string | [number, number, number];
     distance: number;
+    angle: number;
+    accentColor: string | [number, number, number];
     amplitude: number;
     enableMouseInteraction: boolean;
+    lineCount: number;
+    softness: number;
+    fray: number;
+    seed: number;
+    parting: number;
+    taper: number;
+    fade: number;
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, any>;
 declare const _default: typeof __VLS_export;
 export default _default;

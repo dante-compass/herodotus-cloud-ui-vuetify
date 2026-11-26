@@ -1,6 +1,13 @@
 import type { ComponentResolver } from "unplugin-vue-components";
 
-const components = ["HBitsGalaxy", "HBitsPrismaticBurst", "HBitsThreads", "HParticles", "HSignInBackground"];
+const components = [
+  "HBitsGalaxy",
+  "HBitsGhostFibers",
+  "HBitsPrismaticBurst",
+  "HBitsThreads",
+  "HParticles",
+  "HSignInBackground",
+];
 
 function isValidComponent(name: string) {
   return components.includes(name);

@@ -1,7 +1,7 @@
 import { App } from 'vue';
-import { HBitsGalaxy, HBitsPrismaticBurst, HBitsThreads, HParticles } from './HAnimate';
+import { HBitsGalaxy, HBitsGhostFibers, HBitsPrismaticBurst, HBitsThreads, HParticles } from './HAnimate';
 import { HSignInBackground } from './HSignIn';
-export { HBitsGalaxy, HBitsPrismaticBurst, HBitsThreads, HParticles, HSignInBackground };
+export { HBitsGalaxy, HBitsGhostFibers, HBitsPrismaticBurst, HBitsThreads, HParticles, HSignInBackground };
 declare const _default: {
     install: (app: App) => void;
 };

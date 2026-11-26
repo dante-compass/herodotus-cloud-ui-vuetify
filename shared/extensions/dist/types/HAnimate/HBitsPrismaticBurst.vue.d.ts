@@ -17,13 +17,13 @@ export type PrismaticBurstProps = {
 };
 declare const __VLS_export: import('vue').DefineComponent<PrismaticBurstProps, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {}, string, import('vue').PublicProps, Readonly<PrismaticBurstProps> & Readonly<{}>, {
     speed: number;
+    paused: boolean;
     intensity: number;
     animationType: AnimationType;
     distort: number;
-    paused: boolean;
     offset: Offset;
     hoverDampness: number;
-    mixBlendMode: "saturation" | "normal" | "multiply" | "screen" | "overlay" | "darken" | "lighten" | "color-dodge" | "color-burn" | "hard-light" | "soft-light" | "difference" | "exclusion" | "hue" | "color" | "luminosity" | "none";
+    mixBlendMode: "saturation" | "none" | "normal" | "multiply" | "screen" | "overlay" | "darken" | "lighten" | "color-dodge" | "color-burn" | "hard-light" | "soft-light" | "difference" | "exclusion" | "hue" | "color" | "luminosity";
 }, {}, {}, {}, string, import('vue').ComponentProvideOptions, false, {}, any>;
 declare const _default: typeof __VLS_export;
 export default _default;
