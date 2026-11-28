@@ -542,7 +542,7 @@ void main() {
 			.5,
 			.55
 		], h = Math.PI / 180, _ = 1 / (2 * Math.tan(N / 2)), v = `${F}
-${`
+
 uniform float uTime;
 uniform float uTwist;
 uniform float uRoll;
@@ -587,7 +587,7 @@ vec3 ribbonPoint(float s, float v, float n, float layer, out vec3 normal) {
   normal = uOrient * sheet;
   return uOrient * (local * uScale);
 }
-`}
+
 uniform mat4 uViewProj;
 uniform vec3 uEye;
 uniform vec2 uViewport;

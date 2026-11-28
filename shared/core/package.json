@@ -41,7 +41,7 @@
     "moment": "^2.31.0",
     "qs": "^6.17.1",
     "sm-crypto-v2": "^2.0.2",
-    "sweetalert2": "^11.26.25"
+    "sweetalert2": "^11.26.26"
   },
   "devDependencies": {
     "@types/qs": "^6.15.1"
